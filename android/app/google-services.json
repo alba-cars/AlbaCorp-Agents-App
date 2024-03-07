@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "496432202958",
+    "project_id": "agent-app-2cc24",
+    "storage_bucket": "agent-app-2cc24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496432202958:android:188bdc214daf3c6802fc9f",
+        "android_client_info": {
+          "package_name": "com.alba.agent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8_oi6oScWnZksXUAa3_efkGXVDDXTug4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
