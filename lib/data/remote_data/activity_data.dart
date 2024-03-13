@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
@@ -59,17 +61,193 @@ class ActivityData implements ActivityRepo {
 
   @override
   Future<Result<List<Activity>>> fetchActivities(
-      {LeadStatus? status, Paginator? paginator}) async {
+      {required int filterCode,
+      LeadStatus? status,
+      Paginator? paginator}) async {
     try {
-      String url = '/v1/activities?status=[Pending,Overdue]';
+      String url = 'v1/activities/query-activities';
+      Map<String, dynamic> query = {
+        "status": ["Pending", "Overdue"]
+      };
       if (status != null) {
-        url += "&leadStatus=${status.name}";
+        query["leadStatus"] = status.name;
       }
       if (paginator != null) {
-        url += '&page=${paginator.currentPage + 1}';
+        query['page'] = paginator.currentPage + 1;
+      }
+      final d = DateTime.now();
+      if (filterCode == 0) {
+        query = {
+          "leadSource": [
+            "Ask a Question",
+            "Get Matched Assistance",
+            "Register",
+            "New Listing",
+            "Viewing",
+            "Newsletter",
+            "Imported",
+            "Facebook Chat",
+            "Facebook Call",
+            "Facebook Campaign",
+            "Instagram Chat",
+            "Instagram Call",
+            "Instagram Campaign",
+            "TikTok",
+            "Twitter",
+            "Taboola",
+            "Snapchat",
+            "Whatsapp",
+            "Email",
+            "LinkedIn",
+            "Youtube",
+            "Pinterest",
+            "Meta",
+            "Google Ads",
+            "Off-Plan",
+            "Bayut",
+            "James Edition",
+            "Luxury Estates",
+            "Wall Street",
+            "Right Move",
+            "Lefigaro",
+            "Property Finder",
+            "Dubizzle",
+            "Referral",
+            "Alba Cars",
+            "Unkown Inbound Call",
+            "Saqib",
+            "Watti",
+            "Research",
+            "Bilal",
+          ],
+          "leadStatus": "Fresh",
+          "status": ["Pending" "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}',
+        };
+      } else if (filterCode == 1) {
+        query = {
+          "leadSource": [
+            "Call Center",
+            "Call Center 1",
+            "Call Center 2",
+            "Call Center 3"
+          ],
+          'leadStatus': [
+            "Fresh",
+            "Prospect",
+            "For Listing",
+            "Appointment",
+            "Viewing",
+            "Negotiating",
+            "Deal",
+            "Won",
+            "Lost",
+            "Disqualified"
+          ],
+          "status": ["Pending", "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}'
+        };
+      } else if (filterCode == 2) {
+        query = {
+          "leadSource": "Hot  Confidential",
+          'leadStatus': [
+            "Fresh",
+            "Prospect",
+            "For  Listing",
+            "Appointment",
+            "Viewing",
+            "Negotiating",
+            "Deal",
+            "Won",
+            "Lost",
+            "Disqualified"
+          ],
+          "status": ["Pending", "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}'
+        };
+      } else if (filterCode == 3) {
+        query = {
+          'leadSource': [
+            "Ask  a  Question",
+            "Get  Matched  Assistance",
+            "Register",
+            "New  Listing",
+            "Viewing",
+            "Newsletter",
+            "Imported",
+            "Facebook  Chat",
+            "Facebook  Call",
+            "Facebook  Campaign",
+            "Instagram  Chat",
+            "Instagram  Call",
+            "Instagram  Campaign",
+            "TikTok",
+            "Twitter",
+            "Taboola",
+            "Snapchat",
+            "Whatsapp",
+            "Email",
+            "LinkedIn",
+            "Youtube",
+            "Pinterest",
+            "Meta",
+            "Google  Ads",
+            "Off-Plan",
+            "Bayut",
+            "James  Edition",
+            "Luxury  Estates",
+            "Wall  Street",
+            "Right  Move",
+            "Lefigaro",
+            "Property  Finder",
+            "Dubizzle",
+            "Referral",
+            "Alba  Cars",
+            "Unkown  Inbound  Call",
+            "Call  Center",
+            "Call  Center  1",
+            "Call  Center  2",
+            "Call  Center  3",
+            "Hot  Confidential",
+            "Saqib",
+            "Watti",
+            "Research",
+            "Bilal"
+          ],
+          "leadStatus": "Follow  up",
+          "status": ["Pending", "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}'
+        };
+      } else if (filterCode == 4) {
+        query = {
+          'leadStatus': [
+            "Prospect",
+            "For  Listing",
+            "Appointment",
+            "Viewing",
+            "Negotiating",
+            "Deal"
+          ],
+          "status": ["Pending", "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}'
+        };
+      } else if (filterCode == 5) {
+        query = {
+          "leadSource": ["External", "DLD", "Dubizzle  Listing", "Imported"],
+          "leadStatus": "Follow  up",
+          "status": ["Pending", "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}'
+        };
+      } else if (filterCode == 6) {
+        query = {
+          "leadSource": ["External", "DLD", "Dubizzle  Listing", "Imported"],
+          'leadStatus': "Fresh",
+          "status": ["Pending", "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}'
+        };
       }
       final response = await _dio.get(url);
-      final data = response.data['activities'] as List;
+      final data = response.data['items'] as List;
       final list = data.map((e) => Activity.fromJson(e)).toList();
       return Success(list,
           paginator: Paginator(

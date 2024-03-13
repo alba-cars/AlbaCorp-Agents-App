@@ -202,7 +202,8 @@ class InfoTabView extends StatelessWidget {
                   ],
                 ),
               ),
-              if (deal?.category == 'Primary Off Plan Property')
+              if (deal?.category == 'Primary Off Plan Property' ||
+                  deal?.category == 'Listing Acquired')
                 PrimaryClientInfo(deal: deal!),
               if (deal?.category == 'Secondary Market Property')
                 (deal?.buyerClientType == 'Alba')
@@ -289,6 +290,65 @@ class InfoTabView extends StatelessWidget {
                         valueOne: deal.propertyList?.size?.toString(),
                         labelTwo: 'ID',
                         valueTwo: deal.propertyList?.referNo,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+              if (deal?.newListingRequest != null) ...[
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Container(
+                      //     height: 200,
+                      //     width: double.maxFinite,
+                      //     clipBehavior: Clip.hardEdge,
+                      //     decoration: BoxDecoration(
+                      //         color: Colors.grey[100],
+                      //         borderRadius: BorderRadius.circular(4)),
+                      //     child: S3Image(
+                      //       url: deal!.propertyList!.image,
+                      //       fit: BoxFit.contain,
+                      //     )),
+                      // VerticalSmallGap(),
+                      // BlockTitleText(
+                      //   text: deal.propertyList!.propertyTitle,
+                      // ),
+                      VerticalSmallGap(),
+                      LabelText(
+                        text: 'AED ${deal?.agreedSalePrice}',
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      VerticalSmallGap(),
+                      BlocSelector<DealDetailsCubit, DealDetailsState,
+                          List<PropertyType>>(
+                        selector: (state) {
+                          return state.propertyTypeList;
+                        },
+                        builder: (context, propertyTypeList) {
+                          return InfoLabelValue(
+                            labelOne: 'Type',
+                            valueOne: deal!
+                                .newListingRequest?.propertyType.propertyType,
+                            labelTwo: 'Listing Type',
+                            valueTwo: deal.propertyList?.listingType,
+                          );
+                        },
+                      ),
+                      InfoLabelValue(
+                        labelOne: 'Beds',
+                        valueOne: deal!.newListingRequest?.beds,
+                        labelTwo: 'Baths',
+                        valueTwo: deal.newListingRequest?.baths,
+                      ),
+                      InfoLabelValue(
+                        labelOne: 'Area',
+                        valueOne: deal.newListingRequest?.size.toString(),
+                        labelTwo: 'Community',
+                        valueTwo: deal.newListingRequest?.community.community,
                       ),
                     ],
                   ),

@@ -16,11 +16,14 @@ part 'home_cubit.freezed.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._activityRepo) : super(HomeState());
+  HomeCubit(this._activityRepo) : super(HomeState()) {
+    Future.wait(List.generate(7, (index) => getActivities(filterCode: index)));
+  }
 
   final ActivityRepo _activityRepo;
 
-  Future<void> getActivities({bool refresh = false}) async {
+  Future<void> getActivities(
+      {required int filterCode, bool refresh = false}) async {
     if (state.getActivitiesStatus == Status.loading ||
         state.getActivitiesStatus == Status.loadingMore) {
       return;
@@ -37,6 +40,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
 
     final result = await _activityRepo.fetchActivities(
+        filterCode: 0,
         status: switch (state.selectedCategory.name) {
           'Fresh Hot' => LeadStatus.Fresh,
           'Prospect' => LeadStatus.Disqualified,
@@ -60,6 +64,6 @@ class HomeCubit extends Cubit<HomeState> {
 
   selectCategory(ModelCategory category) {
     emit(state.copyWith(selectedCategory: category));
-    getActivities();
+    getActivities(filterCode: 0);
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -45,12 +46,6 @@ class HomePageLayout extends StatefulWidget {
 }
 
 class _HomePageLayoutState extends State<HomePageLayout> {
-  @override
-  void initState() {
-    context.read<HomeCubit>().getActivities();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final user = getIt<AuthBloc>().state.user;
@@ -216,161 +211,202 @@ class _HomePageLayoutState extends State<HomePageLayout> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TitleText(
-                  text: 'Tasks :',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 20),
+              //   child: TitleText(
+              //     text: 'Tasks :',
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
               Expanded(
-                child: NotificationListener(
-                  onNotification: (ScrollNotification scrollInfo) {
-                    if (getActivitiesStatus != Status.loadingMore &&
-                        scrollInfo.metrics.pixels >=
-                            0.9 * scrollInfo.metrics.maxScrollExtent) {
-                      context.read<HomeCubit>().getActivities();
-                    }
-                    return true;
-                  },
-                  child: RefreshIndicator.adaptive(
-                    onRefresh: () async {
-                      await context
-                          .read<HomeCubit>()
-                          .getActivities(refresh: true);
-                    },
-                    child: ListView.separated(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                        itemCount: getActivitiesStatus != Status.loadingMore
-                            ? activities.length
-                            : activities.length + 1,
-                        itemBuilder: (context, index) {
-                          if (index == activities.length) {
-                            return SizedBox(
-                              height: 50,
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          }
-                          final activity = activities[index];
-                          return Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16.h),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: shadowColor,
-                                      offset: Offset(-4, 5),
-                                      blurRadius: 11)
-                                ]),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.h, vertical: 6.h),
-                              child: InkWell(
-                                onTap: () {
-                                  context.pushNamed(TaskDetailScreen.routeName,
-                                      pathParameters: {
-                                        'id': activity.lead?.id ?? ''
+                child: CustomScrollView(
+                  slivers: List.generate(
+                      7,
+                      (index) => SliverStickyHeader(
+                            header: Container(
+                              height: 60.0,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                              padding: EdgeInsets.symmetric(horizontal: 16.0),
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  LabelText(
+                                    text: switch (index) {
+                                      0 => 'Pending Fresh Hot Leads:',
+                                      1 => 'Pending Call Center Leads:',
+                                      2 => 'Hot Confidential Pending:',
+                                      3 => 'Active Prospects:',
+                                      4 => 'Follow Up Hot Leads:',
+                                      5 => 'Follow Up Cold Leads:',
+                                      6 => 'Fresh Cold Leads:',
+                                      _ => ''
+                                    },
+                                  ),
+                                  TextButton(
+                                      onPressed: () async {
+                                        await context
+                                            .read<HomeCubit>()
+                                            .getActivities(
+                                                filterCode: index,
+                                                refresh: true);
                                       },
-                                      extra: activity);
-                                },
-                                child: Row(children: [
-                                  Container(
-                                    width: 70,
-                                    height: 60,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 2, vertical: 4),
-                                    decoration: BoxDecoration(
-                                        // border: Border.all(color: Colors.grey),
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: Colors.grey[100]),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        switch (activity.type.toLowerCase()) {
-                                          'call' => Icon(
-                                              Icons.call,
-                                              color: Colors.grey,
-                                            ),
-                                          'whatsapp' => ImageIcon(
-                                              AssetImage(
-                                                  'assets/images/whatsapp.png'),
-                                              color: Colors.grey,
-                                            ),
-                                          _ => Icon(
-                                              Icons.call,
-                                              color: Colors.grey,
-                                            )
-                                        },
-                                        VerticalSmallGap(
-                                          adjustment: 0.3,
-                                        ),
-                                        SmallText(
-                                          text: activity.type,
-                                          color: Colors.grey[800]!,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  HorizontalSmallGap(),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.h, vertical: 1.h),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.blueGrey),
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              color: Colors.blueGrey[100]),
-                                          child: SmallText(
-                                              text: activity
-                                                      .lead?.leadStatus?.name ??
-                                                  ''),
-                                        ),
-                                        VerticalSmallGap(
-                                          adjustment: .2,
-                                        ),
-                                        Text(
-                                            "${activity.lead?.firstName ?? ''} ${activity.lead?.lastName ?? ''}"),
-                                        CountdownTimer(endTime: activity.date)
-                                      ],
-                                    ),
-                                  ),
-                                  HorizontalSmallGap(),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      IconButton.filledTonal(
-                                          onPressed: () async {
-                                            if (activity.lead == null) {
-                                              return;
-                                            }
-                                            context.read<CallBloc>().add(
-                                                CallEvent.callStarted(
-                                                    phoneNumber:
-                                                        activity.lead!.phone,
-                                                    activityId: activity.id,
-                                                    leadId: activity.lead!.id));
-                                          },
-                                          icon: Icon(
-                                            Icons.call,
-                                          ))
-                                    ],
-                                  )
-                                ]),
+                                      child: Text('Refresh'))
+                                ],
                               ),
                             ),
-                          );
-                        },
-                        separatorBuilder: (context, index) =>
-                            VerticalSmallGap()),
-                  ),
+                            sliver: SliverPadding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                              sliver: SliverList.separated(
+                                  itemCount: activities.length,
+                                  itemBuilder: (context, index) {
+                                    final activity = activities[index];
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(16.h),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: shadowColor,
+                                                offset: Offset(-4, 5),
+                                                blurRadius: 11)
+                                          ]),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 12.h, vertical: 6.h),
+                                        child: InkWell(
+                                          onTap: () {
+                                            context.pushNamed(
+                                                TaskDetailScreen.routeName,
+                                                pathParameters: {
+                                                  'id': activity.lead?.id ?? ''
+                                                },
+                                                extra: activity);
+                                          },
+                                          child: Row(children: [
+                                            Container(
+                                              width: 70,
+                                              height: 60,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 2, vertical: 4),
+                                              decoration: BoxDecoration(
+                                                  // border: Border.all(color: Colors.grey),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  color: Colors.grey[100]),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  switch (activity.type
+                                                      .toLowerCase()) {
+                                                    'call' => Icon(
+                                                        Icons.call,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    'whatsapp' => ImageIcon(
+                                                        AssetImage(
+                                                            'assets/images/whatsapp.png'),
+                                                        color: Colors.grey,
+                                                      ),
+                                                    _ => Icon(
+                                                        Icons.call,
+                                                        color: Colors.grey,
+                                                      )
+                                                  },
+                                                  VerticalSmallGap(
+                                                    adjustment: 0.3,
+                                                  ),
+                                                  SmallText(
+                                                    text: activity.type,
+                                                    color: Colors.grey[800]!,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            HorizontalSmallGap(),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 4.h,
+                                                            vertical: 1.h),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors
+                                                                .blueGrey),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        color: Colors
+                                                            .blueGrey[100]),
+                                                    child: SmallText(
+                                                        text: activity
+                                                                .lead
+                                                                ?.leadStatus
+                                                                ?.name ??
+                                                            ''),
+                                                  ),
+                                                  VerticalSmallGap(
+                                                    adjustment: .2,
+                                                  ),
+                                                  Text(
+                                                      "${activity.lead?.firstName ?? ''} ${activity.lead?.lastName ?? ''}"),
+                                                  CountdownTimer(
+                                                      endTime: activity.date)
+                                                ],
+                                              ),
+                                            ),
+                                            HorizontalSmallGap(),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                IconButton.filledTonal(
+                                                    onPressed: () async {
+                                                      if (activity.lead ==
+                                                          null) {
+                                                        return;
+                                                      }
+                                                      context
+                                                          .read<CallBloc>()
+                                                          .add(CallEvent
+                                                              .callStarted(
+                                                                  phoneNumber:
+                                                                      activity
+                                                                          .lead!
+                                                                          .phone,
+                                                                  activityId:
+                                                                      activity
+                                                                          .id,
+                                                                  leadId:
+                                                                      activity
+                                                                          .lead!
+                                                                          .id));
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.call,
+                                                    ))
+                                              ],
+                                            )
+                                          ]),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      VerticalSmallGap()),
+                            ),
+                          )),
                 ),
               ),
             ],

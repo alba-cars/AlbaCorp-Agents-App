@@ -20,6 +20,7 @@ Community _$CommunityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Community {
+  @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
   String get community => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
@@ -45,7 +46,7 @@ abstract class $CommunityCopyWith<$Res> {
       _$CommunityCopyWithImpl<$Res, Community>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       String community,
       String? slug,
       String? icon,
@@ -123,7 +124,7 @@ abstract class _$$CommunityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       String community,
       String? slug,
       String? icon,
@@ -194,7 +195,7 @@ class __$$CommunityImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CommunityImpl implements _Community {
   const _$CommunityImpl(
-      {required this.id,
+      {@JsonKey(readValue: readId) required this.id,
       required this.community,
       this.slug,
       this.icon,
@@ -207,6 +208,7 @@ class _$CommunityImpl implements _Community {
       _$$CommunityImplFromJson(json);
 
   @override
+  @JsonKey(readValue: readId)
   final String id;
   @override
   final String community;
@@ -273,7 +275,7 @@ class _$CommunityImpl implements _Community {
 
 abstract class _Community implements Community {
   const factory _Community(
-      {required final String id,
+      {@JsonKey(readValue: readId) required final String id,
       required final String community,
       final String? slug,
       final String? icon,
@@ -286,6 +288,7 @@ abstract class _Community implements Community {
       _$CommunityImpl.fromJson;
 
   @override
+  @JsonKey(readValue: readId)
   String get id;
   @override
   String get community;

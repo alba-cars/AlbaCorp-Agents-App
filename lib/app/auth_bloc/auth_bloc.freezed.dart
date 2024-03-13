@@ -21,6 +21,7 @@ mixin _$AuthEvent {
     required TResult Function(User user) userLoggedIn,
     required TResult Function() userLoggedOut,
     required TResult Function() started,
+    required TResult Function() refreshAgentData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$AuthEvent {
     TResult? Function(User user)? userLoggedIn,
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$AuthEvent {
     TResult Function(User user)? userLoggedIn,
     TResult Function()? userLoggedOut,
     TResult Function()? started,
+    TResult Function()? refreshAgentData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$AuthEvent {
     required TResult Function(_UserLoggedIn value) userLoggedIn,
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$AuthEvent {
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$AuthEvent {
     TResult Function(_UserLoggedIn value)? userLoggedIn,
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +162,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function(User user) userLoggedIn,
     required TResult Function() userLoggedOut,
     required TResult Function() started,
+    required TResult Function() refreshAgentData,
   }) {
     return userLoggedIn(user);
   }
@@ -166,6 +173,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function(User user)? userLoggedIn,
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
   }) {
     return userLoggedIn?.call(user);
   }
@@ -176,6 +184,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function(User user)? userLoggedIn,
     TResult Function()? userLoggedOut,
     TResult Function()? started,
+    TResult Function()? refreshAgentData,
     required TResult orElse(),
   }) {
     if (userLoggedIn != null) {
@@ -190,6 +199,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function(_UserLoggedIn value) userLoggedIn,
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
   }) {
     return userLoggedIn(this);
   }
@@ -200,6 +210,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
   }) {
     return userLoggedIn?.call(this);
   }
@@ -210,6 +221,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function(_UserLoggedIn value)? userLoggedIn,
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
     required TResult orElse(),
   }) {
     if (userLoggedIn != null) {
@@ -269,6 +281,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function(User user) userLoggedIn,
     required TResult Function() userLoggedOut,
     required TResult Function() started,
+    required TResult Function() refreshAgentData,
   }) {
     return userLoggedOut();
   }
@@ -279,6 +292,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function(User user)? userLoggedIn,
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
   }) {
     return userLoggedOut?.call();
   }
@@ -289,6 +303,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function(User user)? userLoggedIn,
     TResult Function()? userLoggedOut,
     TResult Function()? started,
+    TResult Function()? refreshAgentData,
     required TResult orElse(),
   }) {
     if (userLoggedOut != null) {
@@ -303,6 +318,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function(_UserLoggedIn value) userLoggedIn,
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
   }) {
     return userLoggedOut(this);
   }
@@ -313,6 +329,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
   }) {
     return userLoggedOut?.call(this);
   }
@@ -323,6 +340,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function(_UserLoggedIn value)? userLoggedIn,
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
     required TResult orElse(),
   }) {
     if (userLoggedOut != null) {
@@ -377,6 +395,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(User user) userLoggedIn,
     required TResult Function() userLoggedOut,
     required TResult Function() started,
+    required TResult Function() refreshAgentData,
   }) {
     return started();
   }
@@ -387,6 +406,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(User user)? userLoggedIn,
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
   }) {
     return started?.call();
   }
@@ -397,6 +417,7 @@ class _$StartedImpl implements _Started {
     TResult Function(User user)? userLoggedIn,
     TResult Function()? userLoggedOut,
     TResult Function()? started,
+    TResult Function()? refreshAgentData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -411,6 +432,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_UserLoggedIn value) userLoggedIn,
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
   }) {
     return started(this);
   }
@@ -421,6 +443,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_UserLoggedIn value)? userLoggedIn,
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
   }) {
     return started?.call(this);
   }
@@ -431,6 +454,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_UserLoggedIn value)? userLoggedIn,
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -442,6 +466,120 @@ class _$StartedImpl implements _Started {
 
 abstract class _Started implements AuthEvent {
   const factory _Started() = _$StartedImpl;
+}
+
+/// @nodoc
+abstract class _$$RefreshAgentDataImplCopyWith<$Res> {
+  factory _$$RefreshAgentDataImplCopyWith(_$RefreshAgentDataImpl value,
+          $Res Function(_$RefreshAgentDataImpl) then) =
+      __$$RefreshAgentDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RefreshAgentDataImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$RefreshAgentDataImpl>
+    implements _$$RefreshAgentDataImplCopyWith<$Res> {
+  __$$RefreshAgentDataImplCopyWithImpl(_$RefreshAgentDataImpl _value,
+      $Res Function(_$RefreshAgentDataImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RefreshAgentDataImpl implements _RefreshAgentData {
+  const _$RefreshAgentDataImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.refreshAgentData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RefreshAgentDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+  }) {
+    return refreshAgentData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+  }) {
+    return refreshAgentData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    required TResult orElse(),
+  }) {
+    if (refreshAgentData != null) {
+      return refreshAgentData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+  }) {
+    return refreshAgentData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+  }) {
+    return refreshAgentData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    required TResult orElse(),
+  }) {
+    if (refreshAgentData != null) {
+      return refreshAgentData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshAgentData implements AuthEvent {
+  const factory _RefreshAgentData() = _$RefreshAgentDataImpl;
 }
 
 /// @nodoc

@@ -27,6 +27,8 @@ mixin _$Agent {
   String? get DEDNo => throw _privateConstructorUsedError;
   String? get PERMITNo => throw _privateConstructorUsedError;
   bool get RICSCertified => throw _privateConstructorUsedError;
+  int get creditsBalance => throw _privateConstructorUsedError;
+  int get creditsLimit => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,6 +49,8 @@ abstract class $AgentCopyWith<$Res> {
       String? DEDNo,
       String? PERMITNo,
       bool RICSCertified,
+      int creditsBalance,
+      int creditsLimit,
       User user});
 
   $UserCopyWith<$Res> get user;
@@ -72,6 +76,8 @@ class _$AgentCopyWithImpl<$Res, $Val extends Agent>
     Object? DEDNo = freezed,
     Object? PERMITNo = freezed,
     Object? RICSCertified = null,
+    Object? creditsBalance = null,
+    Object? creditsLimit = null,
     Object? user = null,
   }) {
     return _then(_value.copyWith(
@@ -103,6 +109,14 @@ class _$AgentCopyWithImpl<$Res, $Val extends Agent>
           ? _value.RICSCertified
           : RICSCertified // ignore: cast_nullable_to_non_nullable
               as bool,
+      creditsBalance: null == creditsBalance
+          ? _value.creditsBalance
+          : creditsBalance // ignore: cast_nullable_to_non_nullable
+              as int,
+      creditsLimit: null == creditsLimit
+          ? _value.creditsLimit
+          : creditsLimit // ignore: cast_nullable_to_non_nullable
+              as int,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -134,6 +148,8 @@ abstract class _$$AgentImplCopyWith<$Res> implements $AgentCopyWith<$Res> {
       String? DEDNo,
       String? PERMITNo,
       bool RICSCertified,
+      int creditsBalance,
+      int creditsLimit,
       User user});
 
   @override
@@ -158,6 +174,8 @@ class __$$AgentImplCopyWithImpl<$Res>
     Object? DEDNo = freezed,
     Object? PERMITNo = freezed,
     Object? RICSCertified = null,
+    Object? creditsBalance = null,
+    Object? creditsLimit = null,
     Object? user = null,
   }) {
     return _then(_$AgentImpl(
@@ -189,6 +207,14 @@ class __$$AgentImplCopyWithImpl<$Res>
           ? _value.RICSCertified
           : RICSCertified // ignore: cast_nullable_to_non_nullable
               as bool,
+      creditsBalance: null == creditsBalance
+          ? _value.creditsBalance
+          : creditsBalance // ignore: cast_nullable_to_non_nullable
+              as int,
+      creditsLimit: null == creditsLimit
+          ? _value.creditsLimit
+          : creditsLimit // ignore: cast_nullable_to_non_nullable
+              as int,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -208,6 +234,8 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       this.DEDNo,
       this.PERMITNo,
       this.RICSCertified = false,
+      this.creditsBalance = 0,
+      this.creditsLimit = 0,
       required this.user})
       : _languages = languages;
 
@@ -237,11 +265,17 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
   @JsonKey()
   final bool RICSCertified;
   @override
+  @JsonKey()
+  final int creditsBalance;
+  @override
+  @JsonKey()
+  final int creditsLimit;
+  @override
   final User user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Agent(id: $id, userId: $userId, languages: $languages, RERANo: $RERANo, DEDNo: $DEDNo, PERMITNo: $PERMITNo, RICSCertified: $RICSCertified, user: $user)';
+    return 'Agent(id: $id, userId: $userId, languages: $languages, RERANo: $RERANo, DEDNo: $DEDNo, PERMITNo: $PERMITNo, RICSCertified: $RICSCertified, creditsBalance: $creditsBalance, creditsLimit: $creditsLimit, user: $user)';
   }
 
   @override
@@ -256,6 +290,8 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       ..add(DiagnosticsProperty('DEDNo', DEDNo))
       ..add(DiagnosticsProperty('PERMITNo', PERMITNo))
       ..add(DiagnosticsProperty('RICSCertified', RICSCertified))
+      ..add(DiagnosticsProperty('creditsBalance', creditsBalance))
+      ..add(DiagnosticsProperty('creditsLimit', creditsLimit))
       ..add(DiagnosticsProperty('user', user));
   }
 
@@ -274,6 +310,10 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
                 other.PERMITNo == PERMITNo) &&
             (identical(other.RICSCertified, RICSCertified) ||
                 other.RICSCertified == RICSCertified) &&
+            (identical(other.creditsBalance, creditsBalance) ||
+                other.creditsBalance == creditsBalance) &&
+            (identical(other.creditsLimit, creditsLimit) ||
+                other.creditsLimit == creditsLimit) &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -288,6 +328,8 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       DEDNo,
       PERMITNo,
       RICSCertified,
+      creditsBalance,
+      creditsLimit,
       user);
 
   @JsonKey(ignore: true)
@@ -313,6 +355,8 @@ abstract class _Agent implements Agent {
       final String? DEDNo,
       final String? PERMITNo,
       final bool RICSCertified,
+      final int creditsBalance,
+      final int creditsLimit,
       required final User user}) = _$AgentImpl;
 
   factory _Agent.fromJson(Map<String, dynamic> json) = _$AgentImpl.fromJson;
@@ -331,6 +375,10 @@ abstract class _Agent implements Agent {
   String? get PERMITNo;
   @override
   bool get RICSCertified;
+  @override
+  int get creditsBalance;
+  @override
+  int get creditsLimit;
   @override
   User get user;
   @override

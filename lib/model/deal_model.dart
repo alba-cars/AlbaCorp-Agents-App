@@ -7,6 +7,8 @@ import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/user.dart';
 
 import 'agent_model.dart';
+import 'listing_request_model.dart';
+import 'property_type_model.dart';
 
 part 'deal_model.freezed.dart';
 part 'deal_model.g.dart';
@@ -14,7 +16,7 @@ part 'deal_model.g.dart';
 @freezed
 class Deal with _$Deal {
   const factory Deal({
-    required String id,
+    @JsonKey(readValue: readId) required String id,
     @JsonKey(name: 'reference_number') required String referenceNumber,
     @JsonKey(name: 'creation_date') required DateTime creationDate,
     required String category,
@@ -28,7 +30,7 @@ class Deal with _$Deal {
     @JsonKey(name: 'user_id') String? userId,
     @JsonKey(name: 'new_listing_request_id') String? newListingRequestId,
     required bool active,
-    @JsonKey(name: 'created_by') required User createdBy,
+    @JsonKey(name: 'created_by') User? createdBy,
     @JsonKey(name: 'user') Lead? client,
     String? purpose,
     String? buyerClientType,
@@ -60,7 +62,7 @@ class Deal with _$Deal {
     Lead? sellerInternalUser,
     Agent? sellerAssignedAgent,
     @JsonKey(name: 'property_list') Property? propertyList,
-    // NewListingRequest? newListingRequest,
+    @JsonKey(name: 'new_listing_request') NewListingRequest? newListingRequest,
   }) = _Deal;
 
   factory Deal.fromJson(Map<String, dynamic> json) => _$DealFromJson(json);

@@ -8,7 +8,7 @@ part of 'property_type_model.dart';
 
 _$PropertyTypeImpl _$$PropertyTypeImplFromJson(Map<String, dynamic> json) =>
     _$PropertyTypeImpl(
-      id: _readId(json, 'id') as String,
+      id: readId(json, 'id') as String,
       propertyType: json['propertyType'] as String,
       icon: json['icon'] as String?,
       categoryId: json['categoryId'] as String?,

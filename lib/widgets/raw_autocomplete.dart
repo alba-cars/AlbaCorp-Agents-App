@@ -365,6 +365,9 @@ class _RawAutocompleteState<T extends Object>
     _userHidOptions = !_focusNode.hasFocus;
     _updateActions();
     _updateOverlay();
+    if (_focusNode.hasFocus == true) {
+      _onChangedField();
+    }
   }
 
   // Called from fieldViewBuilder when the user submits the field.
@@ -535,6 +538,7 @@ class _RawAutocompleteState<T extends Object>
   @override
   void initState() {
     super.initState();
+
     _textEditingController = widget.textEditingController ??
         TextEditingController.fromValue(widget.initialValue);
     _textEditingController.addListener(_onChangedField);

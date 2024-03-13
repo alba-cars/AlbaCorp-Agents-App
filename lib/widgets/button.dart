@@ -99,9 +99,6 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
           backgroundColor: widget.backgroundColor ?? colorScheme.primary,
           foregroundColor: widget.foregroundColor,
           visualDensity: VisualDensity.compact,
-          minimumSize:
-              widget.fullWidth ? const Size.fromHeight(20) : const Size(40, 10),
-          maximumSize: Size.fromHeight(widget.height ?? 60),
           padding: widget.backgroundImage != null ? EdgeInsets.zero : null,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.borderRadious ?? 10),

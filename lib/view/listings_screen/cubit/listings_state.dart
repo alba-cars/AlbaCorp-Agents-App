@@ -7,5 +7,10 @@ class ListingsState with _$ListingsState {
     @Default(Status.init) Status getListingsStatus,
     String? getListingsError,
     Paginator? listingsPaginator,
+    @Default([]) List<PropertyCard> pocketListings,
+    @Default(Status.init) Status getPocketListingsStatus,
+    String? getPocketListingsError,
+    Paginator? pocketListingsPaginator,
+    @Default(0) int currentTab,
   }) = _ListingsState;
 }

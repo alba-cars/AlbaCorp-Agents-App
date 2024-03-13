@@ -67,6 +67,8 @@ dependencies:
   flutter_libphonenumber: ^2.2.1
   easy_debounce: ^2.0.3
   sliver_tools: ^0.2.12
+  flutter_chat_ui: ^1.6.12
+  flutter_sticky_header: ^0.6.5
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"
 

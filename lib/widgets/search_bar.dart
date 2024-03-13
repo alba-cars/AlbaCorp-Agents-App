@@ -38,7 +38,7 @@ class AppSearchBar extends StatelessWidget {
                     height: 24.h,
                     width: 24.w,
                     child: SvgPicture.asset(
-                      "${Constant.assetImagePath}/search.png",
+                      "${Constant.assetImagePath}filter.svg",
                       height: 24.h,
                       width: 24.w,
                     )),

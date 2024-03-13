@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -137,25 +138,29 @@ class CallFeedbackDialog extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ElevatedButton(
-                          onPressed: () async {
-                            getIt<CallBloc>().add(CallEvent.updateActivity(
-                                feedback: feedBackValue.value,
-                                note: _controller.text,
-                                description: ''));
-                            context.pop();
-                          },
-                          child: Text('Cancel')),
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              getIt<CallBloc>().add(CallEvent.updateActivity(
+                                  feedback: feedBackValue.value,
+                                  note: _controller.text,
+                                  description: ''));
+                              context.pop();
+                            },
+                            child: Text('Cancel')),
+                      ),
                       HorizontalSmallGap(),
-                      ElevatedButton(
-                          onPressed: () async {
-                            getIt<CallBloc>().add(CallEvent.updateActivity(
-                                feedback: feedBackValue.value,
-                                note: _controller.text,
-                                description: ''));
-                            context.pop();
-                          },
-                          child: Text('Save')),
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              getIt<CallBloc>().add(CallEvent.updateActivity(
+                                  feedback: feedBackValue.value,
+                                  note: _controller.text,
+                                  description: ''));
+                              context.pop();
+                            },
+                            child: Text('Save')),
+                      ),
                     ],
                   ),
                 )

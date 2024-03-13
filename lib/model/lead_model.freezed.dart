@@ -20,6 +20,7 @@ Lead _$LeadFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Lead {
+  @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_name')
   String get firstName => throw _privateConstructorUsedError;
@@ -48,7 +49,7 @@ mixin _$Lead {
   @JsonKey(name: 'last_activity_is_complete')
   bool get lastActivityIsComplete => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by')
@@ -72,7 +73,7 @@ abstract class $LeadCopyWith<$Res> {
       _$LeadCopyWithImpl<$Res, Lead>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
       String email,
@@ -91,7 +92,7 @@ abstract class $LeadCopyWith<$Res> {
       @JsonKey(name: 'last_activity_type') String? lastActivityType,
       @JsonKey(name: 'last_activity_date') DateTime? lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete') bool lastActivityIsComplete,
-      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'modified_by') String? modifiedBy,
@@ -135,7 +136,7 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
     Object? lastActivityType = freezed,
     Object? lastActivityDate = freezed,
     Object? lastActivityIsComplete = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? createdBy = freezed,
     Object? modifiedBy = freezed,
@@ -221,10 +222,10 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
           ? _value.lastActivityIsComplete
           : lastActivityIsComplete // ignore: cast_nullable_to_non_nullable
               as bool,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -277,7 +278,7 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
       String email,
@@ -296,7 +297,7 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       @JsonKey(name: 'last_activity_type') String? lastActivityType,
       @JsonKey(name: 'last_activity_date') DateTime? lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete') bool lastActivityIsComplete,
-      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'modified_by') String? modifiedBy,
@@ -338,7 +339,7 @@ class __$$LeadImplCopyWithImpl<$Res>
     Object? lastActivityType = freezed,
     Object? lastActivityDate = freezed,
     Object? lastActivityIsComplete = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? createdBy = freezed,
     Object? modifiedBy = freezed,
@@ -424,10 +425,10 @@ class __$$LeadImplCopyWithImpl<$Res>
           ? _value.lastActivityIsComplete
           : lastActivityIsComplete // ignore: cast_nullable_to_non_nullable
               as bool,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -464,7 +465,7 @@ class __$$LeadImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   const _$LeadImpl(
-      {required this.id,
+      {@JsonKey(readValue: readId) required this.id,
       @JsonKey(name: 'first_name') required this.firstName,
       @JsonKey(name: 'last_name') required this.lastName,
       required this.email,
@@ -476,15 +477,15 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       this.photo,
       @JsonKey(name: 'provider_id') this.providerId,
       this.provider,
-      required this.active,
+      this.active = true,
       @JsonKey(name: 'lead_source') required this.leadSource,
       @JsonKey(name: 'lead_status') this.leadStatus,
       final List<dynamic> languages = const [],
       @JsonKey(name: 'last_activity_type') this.lastActivityType,
       @JsonKey(name: 'last_activity_date') this.lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete')
-      required this.lastActivityIsComplete,
-      @JsonKey(name: 'created_at') required this.createdAt,
+      this.lastActivityIsComplete = false,
+      @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'created_by') this.createdBy,
       @JsonKey(name: 'modified_by') this.modifiedBy,
@@ -501,6 +502,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       _$$LeadImplFromJson(json);
 
   @override
+  @JsonKey(readValue: readId)
   final String id;
   @override
   @JsonKey(name: 'first_name')
@@ -528,6 +530,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   @override
   final String? provider;
   @override
+  @JsonKey()
   final bool active;
   @override
   @JsonKey(name: 'lead_source')
@@ -555,7 +558,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   final bool lastActivityIsComplete;
   @override
   @JsonKey(name: 'created_at')
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
@@ -728,7 +731,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
 
 abstract class _Lead implements Lead {
   const factory _Lead(
-      {required final String id,
+      {@JsonKey(readValue: readId) required final String id,
       @JsonKey(name: 'first_name') required final String firstName,
       @JsonKey(name: 'last_name') required final String lastName,
       required final String email,
@@ -740,15 +743,15 @@ abstract class _Lead implements Lead {
       final String? photo,
       @JsonKey(name: 'provider_id') final String? providerId,
       final String? provider,
-      required final bool active,
+      final bool active,
       @JsonKey(name: 'lead_source') required final String leadSource,
       @JsonKey(name: 'lead_status') final LeadStatus? leadStatus,
       final List<dynamic> languages,
       @JsonKey(name: 'last_activity_type') final String? lastActivityType,
       @JsonKey(name: 'last_activity_date') final DateTime? lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete')
-      required final bool lastActivityIsComplete,
-      @JsonKey(name: 'created_at') required final DateTime createdAt,
+      final bool lastActivityIsComplete,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       @JsonKey(name: 'created_by') final String? createdBy,
       @JsonKey(name: 'modified_by') final String? modifiedBy,
@@ -761,6 +764,7 @@ abstract class _Lead implements Lead {
   factory _Lead.fromJson(Map<String, dynamic> json) = _$LeadImpl.fromJson;
 
   @override
+  @JsonKey(readValue: readId)
   String get id;
   @override
   @JsonKey(name: 'first_name')
@@ -808,7 +812,7 @@ abstract class _Lead implements Lead {
   bool get lastActivityIsComplete;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

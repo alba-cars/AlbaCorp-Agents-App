@@ -7,7 +7,7 @@ part of 'deal_model.dart';
 // **************************************************************************
 
 _$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
-      id: json['id'] as String,
+      id: readId(json, 'id') as String,
       referenceNumber: json['reference_number'] as String,
       creationDate: DateTime.parse(json['creation_date'] as String),
       category: json['category'] as String,
@@ -24,7 +24,9 @@ _$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
       userId: json['user_id'] as String?,
       newListingRequestId: json['new_listing_request_id'] as String?,
       active: json['active'] as bool,
-      createdBy: User.fromJson(json['created_by'] as Map<String, dynamic>),
+      createdBy: json['created_by'] == null
+          ? null
+          : User.fromJson(json['created_by'] as Map<String, dynamic>),
       client: json['user'] == null
           ? null
           : Lead.fromJson(json['user'] as Map<String, dynamic>),
@@ -71,6 +73,10 @@ _$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
       propertyList: json['property_list'] == null
           ? null
           : Property.fromJson(json['property_list'] as Map<String, dynamic>),
+      newListingRequest: json['new_listing_request'] == null
+          ? null
+          : NewListingRequest.fromJson(
+              json['new_listing_request'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$DealImplToJson(_$DealImpl instance) =>
@@ -117,4 +123,5 @@ Map<String, dynamic> _$$DealImplToJson(_$DealImpl instance) =>
       'sellerInternalUser': instance.sellerInternalUser,
       'sellerAssignedAgent': instance.sellerAssignedAgent,
       'property_list': instance.propertyList,
+      'new_listing_request': instance.newListingRequest,
     };

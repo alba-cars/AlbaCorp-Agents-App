@@ -19,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_UserLoggedIn>(_userLoggedIn);
     on<_UserLoggedOut>(_userLoggedOut);
     on<_Started>(_started);
+    on<_RefreshAgentData>(_refreshAgentData);
     // add(AuthEvent.started());
   }
   final AuthRepo _authRepo;
@@ -60,5 +61,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(state.copyWith());
         break;
     }
+  }
+
+  FutureOr<void> _refreshAgentData(
+      _RefreshAgentData event, Emitter<AuthState> emit) async {
+    await getAgentData();
   }
 }

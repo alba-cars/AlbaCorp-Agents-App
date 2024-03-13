@@ -1,12 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'property_type_model.dart';
+
 part 'community_model.freezed.dart';
 part 'community_model.g.dart';
 
 @freezed
 class Community with _$Community {
   const factory Community({
-    required String id,
+    @JsonKey(readValue: readId) required String id,
     required String community,
     String? slug,
     String? icon,

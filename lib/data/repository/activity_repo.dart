@@ -8,7 +8,7 @@ abstract class ActivityRepo {
   Future<Result<void>> createActivity(
       {required String leadId, required String type});
   Future<Result<List<Activity>>> fetchActivities(
-      {LeadStatus? status, Paginator? paginator});
+      {required int filterCode, LeadStatus? status, Paginator? paginator});
   Future<Result<void>> updateActivity(
       {required String activityId,
       required int duration,

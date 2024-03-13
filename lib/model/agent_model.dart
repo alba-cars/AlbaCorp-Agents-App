@@ -16,6 +16,8 @@ class Agent with _$Agent {
     String? DEDNo,
     String? PERMITNo,
     @Default(false) bool RICSCertified,
+    @Default(0) int creditsBalance,
+    @Default(0) int creditsLimit,
     required User user, // Assuming you have a User model defined similarly
   }) = _Agent;
 

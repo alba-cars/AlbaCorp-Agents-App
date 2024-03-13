@@ -7,6 +7,7 @@ import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/cubit/deals_cubit.dart';
+import 'package:real_estate_app/view/deals_screen/widgets/client_name.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
 
 import '../../util/color_category.dart';
@@ -192,18 +193,22 @@ class DealItem extends StatelessWidget {
             context.pushNamed(DealDetailsScreen.routeName,
                 pathParameters: {'id': deal.id});
           },
-          child: Row(children: [
-            Container(
-              height: 120,
-              width: 150,
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                  color: Colors.grey[100]!,
-                  borderRadius: BorderRadius.circular(12)),
-              child: S3Image(
-                url: image,
-                fit: BoxFit.contain,
-              ),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Column(
+              children: [
+                Container(
+                  height: 120,
+                  width: 150,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[100]!,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: S3Image(
+                    url: image,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ],
             ),
             HorizontalSmallGap(),
             Expanded(
@@ -234,11 +239,9 @@ class DealItem extends StatelessWidget {
                   VerticalSmallGap(
                     adjustment: .2,
                   ),
-                  LabelText(
-                      text:
-                          "${deal.client?.firstName} ${deal.client?.lastName}"),
+                  ClientName(deal: deal),
                   VerticalSmallGap(
-                    adjustment: .2,
+                    adjustment: .4,
                   ),
                   Container(
                     padding:

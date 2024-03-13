@@ -7,7 +7,7 @@ part of 'lead_model.dart';
 // **************************************************************************
 
 _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
-      id: json['id'] as String,
+      id: readId(json, 'id') as String,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
       email: json['email'] as String,
@@ -19,7 +19,7 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       photo: json['photo'] as String?,
       providerId: json['provider_id'] as String?,
       provider: json['provider'] as String?,
-      active: json['active'] as bool,
+      active: json['active'] as bool? ?? true,
       leadSource: json['lead_source'] as String,
       leadStatus: $enumDecodeNullable(_$LeadStatusEnumMap, json['lead_status']),
       languages: json['languages'] as List<dynamic>? ?? const [],
@@ -27,8 +27,11 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       lastActivityDate: json['last_activity_date'] == null
           ? null
           : DateTime.parse(json['last_activity_date'] as String),
-      lastActivityIsComplete: json['last_activity_is_complete'] as bool,
-      createdAt: DateTime.parse(json['created_at'] as String),
+      lastActivityIsComplete:
+          json['last_activity_is_complete'] as bool? ?? false,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
@@ -66,7 +69,7 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'last_activity_type': instance.lastActivityType,
       'last_activity_date': instance.lastActivityDate?.toIso8601String(),
       'last_activity_is_complete': instance.lastActivityIsComplete,
-      'created_at': instance.createdAt.toIso8601String(),
+      'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'created_by': instance.createdBy,
       'modified_by': instance.modifiedBy,

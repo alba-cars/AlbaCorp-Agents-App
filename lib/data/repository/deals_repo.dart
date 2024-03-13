@@ -9,7 +9,7 @@ import 'package:real_estate_app/model/paginator.dart';
 import '../../util/result.dart';
 
 abstract class DealsRepo {
-  Future<Result<List<Deal>>> getDeals({Paginator? paginator});
+  Future<Result<List<Deal>>> getDeals({String? search, Paginator? paginator});
   Future<Result<Deal>> getDeal({required String dealId});
   Future<Result<List<OffPlanModel>>> getOffPlanList(
       {String? search, Paginator? paginator});

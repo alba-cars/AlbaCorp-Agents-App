@@ -17,6 +17,8 @@ _$AgentImpl _$$AgentImplFromJson(Map<String, dynamic> json) => _$AgentImpl(
       DEDNo: json['DEDNo'] as String?,
       PERMITNo: json['PERMITNo'] as String?,
       RICSCertified: json['RICSCertified'] as bool? ?? false,
+      creditsBalance: json['creditsBalance'] as int? ?? 0,
+      creditsLimit: json['creditsLimit'] as int? ?? 0,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
@@ -29,5 +31,7 @@ Map<String, dynamic> _$$AgentImplToJson(_$AgentImpl instance) =>
       'DEDNo': instance.DEDNo,
       'PERMITNo': instance.PERMITNo,
       'RICSCertified': instance.RICSCertified,
+      'creditsBalance': instance.creditsBalance,
+      'creditsLimit': instance.creditsLimit,
       'user': instance.user,
     };

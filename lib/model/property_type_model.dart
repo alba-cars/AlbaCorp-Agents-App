@@ -6,7 +6,7 @@ part 'property_type_model.g.dart';
 @freezed
 class PropertyType with _$PropertyType {
   const factory PropertyType({
-    @JsonKey(readValue: _readId) required String id,
+    @JsonKey(readValue: readId) required String id,
     required String propertyType,
     String? icon,
     String? categoryId,
@@ -17,7 +17,7 @@ class PropertyType with _$PropertyType {
       _$PropertyTypeFromJson(json);
 }
 
-_readId(Map<dynamic, dynamic> json, String val) {
+readId(Map<dynamic, dynamic> json, String val) {
   return json[val] ?? json['_id'];
 }
 

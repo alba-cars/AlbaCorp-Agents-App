@@ -26,11 +26,13 @@ class DealData implements DealsRepo {
   DealData({required Dio dio}) : _dio = dio;
   final log = Logger();
   @override
-  Future<Result<List<Deal>>> getDeals({Paginator? paginator}) async {
+  Future<Result<List<Deal>>> getDeals(
+      {String? search, Paginator? paginator}) async {
     try {
       String url = 'v1/search/deal/filter';
 
       final response = await _dio.get(url, queryParameters: {
+        if (search != null) 'search': search,
         if (paginator != null) 'page': paginator.currentPage + 1,
         // 'sort_by': 'createdAt',
         // "sort_dir": 'DESC',

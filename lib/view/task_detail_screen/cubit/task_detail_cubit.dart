@@ -19,12 +19,12 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> getTask() async {
     emit(state.copyWith(getTaskStatus: Status.loading));
-    final result = await _activityRepo.fetchActivities();
-    switch (result) {
-      case (Success s):
-        break;
-      case (Error e):
-        break;
-    }
+    // final result = await _activityRepo();
+    // switch (result) {
+    //   case (Success s):
+    //     break;
+    //   case (Error e):
+    //     break;
+    // }
   }
 }

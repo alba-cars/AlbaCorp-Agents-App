@@ -28,7 +28,7 @@ class InfoLabelValue extends StatelessWidget {
                   color: Colors.blueGrey,
                 ),
                 VerticalSmallGap(
-                  adjustment: 0.2,
+                  adjustment: 0.1,
                 ),
                 NormalText(
                   text: valueOne ?? '',
@@ -47,7 +47,7 @@ class InfoLabelValue extends StatelessWidget {
                   color: Colors.blueGrey,
                 ),
                 VerticalSmallGap(
-                  adjustment: 0.2,
+                  adjustment: 0.1,
                 ),
                 NormalText(
                   text: valueTwo ?? '',

@@ -20,7 +20,7 @@ PropertyType _$PropertyTypeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PropertyType {
-  @JsonKey(readValue: _readId)
+  @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
   String get propertyType => throw _privateConstructorUsedError;
   String? get icon => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $PropertyTypeCopyWith<$Res> {
       _$PropertyTypeCopyWithImpl<$Res, PropertyType>;
   @useResult
   $Res call(
-      {@JsonKey(readValue: _readId) String id,
+      {@JsonKey(readValue: readId) String id,
       String propertyType,
       String? icon,
       String? categoryId,
@@ -100,7 +100,7 @@ abstract class _$$PropertyTypeImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(readValue: _readId) String id,
+      {@JsonKey(readValue: readId) String id,
       String propertyType,
       String? icon,
       String? categoryId,
@@ -153,7 +153,7 @@ class __$$PropertyTypeImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PropertyTypeImpl implements _PropertyType {
   const _$PropertyTypeImpl(
-      {@JsonKey(readValue: _readId) required this.id,
+      {@JsonKey(readValue: readId) required this.id,
       required this.propertyType,
       this.icon,
       this.categoryId,
@@ -164,7 +164,7 @@ class _$PropertyTypeImpl implements _PropertyType {
       _$$PropertyTypeImplFromJson(json);
 
   @override
-  @JsonKey(readValue: _readId)
+  @JsonKey(readValue: readId)
   final String id;
   @override
   final String propertyType;
@@ -221,7 +221,7 @@ class _$PropertyTypeImpl implements _PropertyType {
 
 abstract class _PropertyType implements PropertyType {
   const factory _PropertyType(
-      {@JsonKey(readValue: _readId) required final String id,
+      {@JsonKey(readValue: readId) required final String id,
       required final String propertyType,
       final String? icon,
       final String? categoryId,
@@ -231,7 +231,7 @@ abstract class _PropertyType implements PropertyType {
       _$PropertyTypeImpl.fromJson;
 
   @override
-  @JsonKey(readValue: _readId)
+  @JsonKey(readValue: readId)
   String get id;
   @override
   String get propertyType;

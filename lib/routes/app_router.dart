@@ -9,6 +9,8 @@ import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
+import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
+import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
@@ -21,9 +23,11 @@ import 'package:real_estate_app/view/listings_screen/listing_screen.dart';
 import 'package:real_estate_app/view/message_screen/tab_message.dart';
 import 'package:real_estate_app/view/more_screen/tab_more.dart';
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
+import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/view/root_layout/root_layout.dart';
 import 'package:real_estate_app/view/saved_screen/tab_saved.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
+import 'package:real_estate_app/view/ticket_detail_screen/ticket_details_screen.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 
 import '../app/auth_bloc/auth_bloc.dart';
@@ -165,6 +169,42 @@ class AppRouter {
                 name: AddListingScreen.routeName,
                 pageBuilder: (context, state) {
                   return AppTransition(child: AddListingScreen());
+                },
+              ),
+              GoRoute(
+                path: AddTicketScreen.routeName,
+                name: AddTicketScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: AddTicketScreen());
+                },
+              ),
+              GoRoute(
+                path: TicketDetailScreen.routeName,
+                name: TicketDetailScreen.routeName,
+                pageBuilder: (context, state) {
+                  final id = state.pathParameters['id'] ?? '';
+                  return AppTransition(
+                      child: TicketDetailScreen(
+                    ticketId: id,
+                  ));
+                },
+              ),
+              GoRoute(
+                path: PropertyCardDetailsScreen.routeName,
+                name: PropertyCardDetailsScreen.routeName,
+                pageBuilder: (context, state) {
+                  final id = state.pathParameters['id'] ?? '';
+                  return AppTransition(
+                      child: PropertyCardDetailsScreen(
+                    propertyCardId: id,
+                  ));
+                },
+              ),
+              GoRoute(
+                path: ChatScreen.routeName,
+                name: ChatScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: ChatScreen());
                 },
               ),
               GoRoute(

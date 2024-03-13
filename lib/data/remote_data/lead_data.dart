@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 
 import '../../model/lead_source_model.dart';
@@ -65,6 +67,7 @@ class LeadData implements LeadRepo {
       String url = 'v1/search/user/filter';
 
       final response = await _dio.get(url, queryParameters: {
+        'agent_id': getIt<AuthBloc>().state.agent?.id,
         if (paginator != null) 'page': paginator.currentPage + 1,
         'sort_by': 'createdAt',
         "sort_dir": 'DESC',

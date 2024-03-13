@@ -8,7 +8,7 @@ part of 'community_model.dart';
 
 _$CommunityImpl _$$CommunityImplFromJson(Map<String, dynamic> json) =>
     _$CommunityImpl(
-      id: json['id'] as String,
+      id: readId(json, 'id') as String,
       community: json['community'] as String,
       slug: json['slug'] as String?,
       icon: json['icon'] as String?,

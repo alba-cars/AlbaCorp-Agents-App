@@ -154,7 +154,7 @@ class NormalText extends StatelessWidget {
       text,
       textAlign: textAlign,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          fontSize: fontSize ?? 14, color: color, fontWeight: fontWeight),
+          fontSize: fontSize ?? 13, color: color, fontWeight: fontWeight),
     );
   }
 }

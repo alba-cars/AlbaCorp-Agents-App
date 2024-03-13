@@ -20,6 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
@@ -42,7 +43,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       String email,
       String phone,
       String? whatsapp,
@@ -119,7 +120,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       String email,
       String phone,
       String? whatsapp,
@@ -189,7 +190,7 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {required this.id,
+      {@JsonKey(readValue: readId) required this.id,
       required this.email,
       this.phone = '',
       this.whatsapp,
@@ -202,6 +203,7 @@ class _$UserImpl implements _User {
       _$$UserImplFromJson(json);
 
   @override
+  @JsonKey(readValue: readId)
   final String id;
   @override
   final String email;
@@ -265,7 +267,7 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String id,
+      {@JsonKey(readValue: readId) required final String id,
       required final String email,
       final String phone,
       final String? whatsapp,
@@ -277,6 +279,7 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
+  @JsonKey(readValue: readId)
   String get id;
   @override
   String get email;

@@ -283,6 +283,7 @@ class _DocumentSelectionFieldState<T> extends State<DocumentSelectionField<T>> {
 void chooseFileDialog(
     BuildContext originalContext, FutureOr Function(DialogType? value) onValue,
     {Function? onError, List<DialogType>? types}) {
+  Logger().d(types);
   types ??= [DialogType.Photo];
   List<DialogType> expandedTypes = [];
   for (DialogType type in types) {
@@ -301,6 +302,7 @@ void chooseFileDialog(
       expandedTypes.add(type);
     }
   }
+
   bool isIOS = Theme.of(originalContext).platform == TargetPlatform.iOS;
   double bottomSafePadding = MediaQuery.of(originalContext).padding.bottom;
   showGeneralDialog<DialogType>(
