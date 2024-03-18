@@ -9,6 +9,7 @@ import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
+import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
@@ -266,7 +267,14 @@ class AppRouter {
                     ),
                   );
                 },
-              )
+              ),
+              GoRoute(
+                path: AddTaskScreen.routeName,
+                name: AddTaskScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: AddTaskScreen());
+                },
+              ),
             ]),
         GoRoute(
           path: Routes.forgotRoute,

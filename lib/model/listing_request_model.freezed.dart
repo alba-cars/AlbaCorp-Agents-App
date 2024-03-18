@@ -24,20 +24,20 @@ mixin _$NewListingRequest {
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'property_type_id')
-  String get propertyTypeId => throw _privateConstructorUsedError;
+  String? get propertyTypeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'community_id')
-  String get communityId => throw _privateConstructorUsedError;
+  String? get communityId => throw _privateConstructorUsedError;
   @JsonKey(name: 'building_id')
-  String get buildingId => throw _privateConstructorUsedError;
+  String? get buildingId => throw _privateConstructorUsedError;
   bool get multiple => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  String get beds => throw _privateConstructorUsedError;
-  String get baths => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
-  int get size => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  String? get beds => throw _privateConstructorUsedError;
+  String? get baths => throw _privateConstructorUsedError;
+  num? get price => throw _privateConstructorUsedError;
+  num? get size => throw _privateConstructorUsedError;
   @JsonKey(name: 'property_type')
-  PropertyType get propertyType => throw _privateConstructorUsedError;
-  Community get community => throw _privateConstructorUsedError;
+  PropertyType? get propertyType => throw _privateConstructorUsedError;
+  Community? get community => throw _privateConstructorUsedError;
   Building? get building => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,21 +55,21 @@ abstract class $NewListingRequestCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'property_type_id') String propertyTypeId,
-      @JsonKey(name: 'community_id') String communityId,
-      @JsonKey(name: 'building_id') String buildingId,
+      @JsonKey(name: 'property_type_id') String? propertyTypeId,
+      @JsonKey(name: 'community_id') String? communityId,
+      @JsonKey(name: 'building_id') String? buildingId,
       bool multiple,
-      String type,
-      String beds,
-      String baths,
-      int price,
-      int size,
-      @JsonKey(name: 'property_type') PropertyType propertyType,
-      Community community,
+      String? type,
+      String? beds,
+      String? baths,
+      num? price,
+      num? size,
+      @JsonKey(name: 'property_type') PropertyType? propertyType,
+      Community? community,
       Building? building});
 
-  $PropertyTypeCopyWith<$Res> get propertyType;
-  $CommunityCopyWith<$Res> get community;
+  $PropertyTypeCopyWith<$Res>? get propertyType;
+  $CommunityCopyWith<$Res>? get community;
   $BuildingCopyWith<$Res>? get building;
 }
 
@@ -88,17 +88,17 @@ class _$NewListingRequestCopyWithImpl<$Res, $Val extends NewListingRequest>
   $Res call({
     Object? id = null,
     Object? userId = null,
-    Object? propertyTypeId = null,
-    Object? communityId = null,
-    Object? buildingId = null,
+    Object? propertyTypeId = freezed,
+    Object? communityId = freezed,
+    Object? buildingId = freezed,
     Object? multiple = null,
-    Object? type = null,
-    Object? beds = null,
-    Object? baths = null,
-    Object? price = null,
-    Object? size = null,
-    Object? propertyType = null,
-    Object? community = null,
+    Object? type = freezed,
+    Object? beds = freezed,
+    Object? baths = freezed,
+    Object? price = freezed,
+    Object? size = freezed,
+    Object? propertyType = freezed,
+    Object? community = freezed,
     Object? building = freezed,
   }) {
     return _then(_value.copyWith(
@@ -110,50 +110,50 @@ class _$NewListingRequestCopyWithImpl<$Res, $Val extends NewListingRequest>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      propertyTypeId: null == propertyTypeId
+      propertyTypeId: freezed == propertyTypeId
           ? _value.propertyTypeId
           : propertyTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      communityId: null == communityId
+              as String?,
+      communityId: freezed == communityId
           ? _value.communityId
           : communityId // ignore: cast_nullable_to_non_nullable
-              as String,
-      buildingId: null == buildingId
+              as String?,
+      buildingId: freezed == buildingId
           ? _value.buildingId
           : buildingId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       multiple: null == multiple
           ? _value.multiple
           : multiple // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: null == type
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      beds: null == beds
+              as String?,
+      beds: freezed == beds
           ? _value.beds
           : beds // ignore: cast_nullable_to_non_nullable
-              as String,
-      baths: null == baths
+              as String?,
+      baths: freezed == baths
           ? _value.baths
           : baths // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      size: null == size
+              as num?,
+      size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
-              as int,
-      propertyType: null == propertyType
+              as num?,
+      propertyType: freezed == propertyType
           ? _value.propertyType
           : propertyType // ignore: cast_nullable_to_non_nullable
-              as PropertyType,
-      community: null == community
+              as PropertyType?,
+      community: freezed == community
           ? _value.community
           : community // ignore: cast_nullable_to_non_nullable
-              as Community,
+              as Community?,
       building: freezed == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
@@ -163,16 +163,24 @@ class _$NewListingRequestCopyWithImpl<$Res, $Val extends NewListingRequest>
 
   @override
   @pragma('vm:prefer-inline')
-  $PropertyTypeCopyWith<$Res> get propertyType {
-    return $PropertyTypeCopyWith<$Res>(_value.propertyType, (value) {
+  $PropertyTypeCopyWith<$Res>? get propertyType {
+    if (_value.propertyType == null) {
+      return null;
+    }
+
+    return $PropertyTypeCopyWith<$Res>(_value.propertyType!, (value) {
       return _then(_value.copyWith(propertyType: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CommunityCopyWith<$Res> get community {
-    return $CommunityCopyWith<$Res>(_value.community, (value) {
+  $CommunityCopyWith<$Res>? get community {
+    if (_value.community == null) {
+      return null;
+    }
+
+    return $CommunityCopyWith<$Res>(_value.community!, (value) {
       return _then(_value.copyWith(community: value) as $Val);
     });
   }
@@ -201,23 +209,23 @@ abstract class _$$NewListingRequestImplCopyWith<$Res>
   $Res call(
       {String id,
       @JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'property_type_id') String propertyTypeId,
-      @JsonKey(name: 'community_id') String communityId,
-      @JsonKey(name: 'building_id') String buildingId,
+      @JsonKey(name: 'property_type_id') String? propertyTypeId,
+      @JsonKey(name: 'community_id') String? communityId,
+      @JsonKey(name: 'building_id') String? buildingId,
       bool multiple,
-      String type,
-      String beds,
-      String baths,
-      int price,
-      int size,
-      @JsonKey(name: 'property_type') PropertyType propertyType,
-      Community community,
+      String? type,
+      String? beds,
+      String? baths,
+      num? price,
+      num? size,
+      @JsonKey(name: 'property_type') PropertyType? propertyType,
+      Community? community,
       Building? building});
 
   @override
-  $PropertyTypeCopyWith<$Res> get propertyType;
+  $PropertyTypeCopyWith<$Res>? get propertyType;
   @override
-  $CommunityCopyWith<$Res> get community;
+  $CommunityCopyWith<$Res>? get community;
   @override
   $BuildingCopyWith<$Res>? get building;
 }
@@ -235,17 +243,17 @@ class __$$NewListingRequestImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? userId = null,
-    Object? propertyTypeId = null,
-    Object? communityId = null,
-    Object? buildingId = null,
+    Object? propertyTypeId = freezed,
+    Object? communityId = freezed,
+    Object? buildingId = freezed,
     Object? multiple = null,
-    Object? type = null,
-    Object? beds = null,
-    Object? baths = null,
-    Object? price = null,
-    Object? size = null,
-    Object? propertyType = null,
-    Object? community = null,
+    Object? type = freezed,
+    Object? beds = freezed,
+    Object? baths = freezed,
+    Object? price = freezed,
+    Object? size = freezed,
+    Object? propertyType = freezed,
+    Object? community = freezed,
     Object? building = freezed,
   }) {
     return _then(_$NewListingRequestImpl(
@@ -257,50 +265,50 @@ class __$$NewListingRequestImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      propertyTypeId: null == propertyTypeId
+      propertyTypeId: freezed == propertyTypeId
           ? _value.propertyTypeId
           : propertyTypeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      communityId: null == communityId
+              as String?,
+      communityId: freezed == communityId
           ? _value.communityId
           : communityId // ignore: cast_nullable_to_non_nullable
-              as String,
-      buildingId: null == buildingId
+              as String?,
+      buildingId: freezed == buildingId
           ? _value.buildingId
           : buildingId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       multiple: null == multiple
           ? _value.multiple
           : multiple // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: null == type
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      beds: null == beds
+              as String?,
+      beds: freezed == beds
           ? _value.beds
           : beds // ignore: cast_nullable_to_non_nullable
-              as String,
-      baths: null == baths
+              as String?,
+      baths: freezed == baths
           ? _value.baths
           : baths // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      size: null == size
+              as num?,
+      size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
-              as int,
-      propertyType: null == propertyType
+              as num?,
+      propertyType: freezed == propertyType
           ? _value.propertyType
           : propertyType // ignore: cast_nullable_to_non_nullable
-              as PropertyType,
-      community: null == community
+              as PropertyType?,
+      community: freezed == community
           ? _value.community
           : community // ignore: cast_nullable_to_non_nullable
-              as Community,
+              as Community?,
       building: freezed == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
@@ -317,9 +325,9 @@ class _$NewListingRequestImpl
   const _$NewListingRequestImpl(
       {required this.id,
       @JsonKey(name: 'user_id') required this.userId,
-      @JsonKey(name: 'property_type_id') required this.propertyTypeId,
-      @JsonKey(name: 'community_id') required this.communityId,
-      @JsonKey(name: 'building_id') required this.buildingId,
+      @JsonKey(name: 'property_type_id') this.propertyTypeId,
+      @JsonKey(name: 'community_id') this.communityId,
+      @JsonKey(name: 'building_id') this.buildingId,
       required this.multiple,
       required this.type,
       required this.beds,
@@ -340,30 +348,30 @@ class _$NewListingRequestImpl
   final String userId;
   @override
   @JsonKey(name: 'property_type_id')
-  final String propertyTypeId;
+  final String? propertyTypeId;
   @override
   @JsonKey(name: 'community_id')
-  final String communityId;
+  final String? communityId;
   @override
   @JsonKey(name: 'building_id')
-  final String buildingId;
+  final String? buildingId;
   @override
   final bool multiple;
   @override
-  final String type;
+  final String? type;
   @override
-  final String beds;
+  final String? beds;
   @override
-  final String baths;
+  final String? baths;
   @override
-  final int price;
+  final num? price;
   @override
-  final int size;
+  final num? size;
   @override
   @JsonKey(name: 'property_type')
-  final PropertyType propertyType;
+  final PropertyType? propertyType;
   @override
-  final Community community;
+  final Community? community;
   @override
   final Building? building;
 
@@ -459,17 +467,17 @@ abstract class _NewListingRequest implements NewListingRequest {
   const factory _NewListingRequest(
       {required final String id,
       @JsonKey(name: 'user_id') required final String userId,
-      @JsonKey(name: 'property_type_id') required final String propertyTypeId,
-      @JsonKey(name: 'community_id') required final String communityId,
-      @JsonKey(name: 'building_id') required final String buildingId,
+      @JsonKey(name: 'property_type_id') final String? propertyTypeId,
+      @JsonKey(name: 'community_id') final String? communityId,
+      @JsonKey(name: 'building_id') final String? buildingId,
       required final bool multiple,
-      required final String type,
-      required final String beds,
-      required final String baths,
-      required final int price,
-      required final int size,
-      @JsonKey(name: 'property_type') required final PropertyType propertyType,
-      required final Community community,
+      required final String? type,
+      required final String? beds,
+      required final String? baths,
+      required final num? price,
+      required final num? size,
+      @JsonKey(name: 'property_type') required final PropertyType? propertyType,
+      required final Community? community,
       final Building? building}) = _$NewListingRequestImpl;
 
   factory _NewListingRequest.fromJson(Map<String, dynamic> json) =
@@ -482,30 +490,30 @@ abstract class _NewListingRequest implements NewListingRequest {
   String get userId;
   @override
   @JsonKey(name: 'property_type_id')
-  String get propertyTypeId;
+  String? get propertyTypeId;
   @override
   @JsonKey(name: 'community_id')
-  String get communityId;
+  String? get communityId;
   @override
   @JsonKey(name: 'building_id')
-  String get buildingId;
+  String? get buildingId;
   @override
   bool get multiple;
   @override
-  String get type;
+  String? get type;
   @override
-  String get beds;
+  String? get beds;
   @override
-  String get baths;
+  String? get baths;
   @override
-  int get price;
+  num? get price;
   @override
-  int get size;
+  num? get size;
   @override
   @JsonKey(name: 'property_type')
-  PropertyType get propertyType;
+  PropertyType? get propertyType;
   @override
-  Community get community;
+  Community? get community;
   @override
   Building? get building;
   @override

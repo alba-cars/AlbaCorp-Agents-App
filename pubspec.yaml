@@ -34,7 +34,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   country_code_picker: ^3.0.0
   pinput: ^4.0.0
-  syncfusion_flutter_sliders: ^20.3.48
+  syncfusion_flutter_sliders: ^24.2.9
   url_launcher: ^6.2.4
   firebase_core: ^2.25.4
   logger: ^2.0.2+1
@@ -69,6 +69,7 @@ dependencies:
   sliver_tools: ^0.2.12
   flutter_chat_ui: ^1.6.12
   flutter_sticky_header: ^0.6.5
+
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"
 

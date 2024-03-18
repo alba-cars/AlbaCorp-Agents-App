@@ -14,11 +14,14 @@ const categoryList = [
 @freezed
 class HomeState with _$HomeState {
   const factory HomeState({
-    @Default([]) List<Activity> activities,
-    @Default(Status.init) Status getActivitiesStatus,
-    String? getActivitiesError,
-    Paginator? activityPaginator,
+    @Default({}) Map<int, List<Activity>> activities,
+    @Default({}) Map<int, Status?> getActivitiesStatus,
+    @Default({}) Map<int, String?> getActivitiesError,
+    @Default({}) Map<int, Paginator?> activityPaginator,
     @Default(ModelCategory(name: 'ALL')) ModelCategory selectedCategory,
     @Default(categoryList) List<ModelCategory> categories,
+    @Default(0) int completedTasksCount,
+    @Default(0) int pendingTasksCount,
+    @Default(0) int viewingTasksCount,
   }) = _HomeState;
 }

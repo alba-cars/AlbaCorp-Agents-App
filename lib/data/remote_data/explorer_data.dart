@@ -21,14 +21,28 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<List<PropertyCard>>> getPropertyCards(
-      {Map<String, dynamic> filter = const {}, Paginator? paginator}) async {
+      {Map<String, dynamic>? filter, Paginator? paginator}) async {
     try {
       String url = 'v1/property-cards';
+      Map<String, dynamic>? filterRemoved;
+      if (filter != null) {
+        filterRemoved =
+            (Map.from(filter)..removeWhere((key, value) => value == null));
 
+        filterRemoved = filterRemoved.map((key, value) {
+          if (value is Map) {
+            return MapEntry(key, value['value']);
+          } else if (value is List<Map>) {
+            return MapEntry(key, value.map((e) => e['value']).toList());
+          } else {
+            return MapEntry(key, value);
+          }
+        });
+      }
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,
-        ...filter
+        if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();
@@ -44,7 +58,7 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<List<PropertyCard>>> getCheckedOutPropertyCards(
-      {Map<String, dynamic> filter = const {}, Paginator? paginator}) async {
+      {Map<String, dynamic>? filter, Paginator? paginator}) async {
     try {
       String url =
           'v1/property-cards/checkout-leads?currentAgent=${getIt<AuthBloc>().state.agent?.id}&withLeadsCount=true';
@@ -52,7 +66,7 @@ class ExplorerData implements ExplorerRepo {
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,
-        ...filter
+        if (filter != null) ...filter
       });
       final data = response.data['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();
@@ -132,8 +146,9 @@ class ExplorerData implements ExplorerRepo {
   }
 
   @override
-  Future<Result<List<PropertyCardLog>>> getPropertyCardLogs(
-      {required String propertyCardId}) async {
+  Future<Result<List<PropertyCardLog>>> getPropertyCardLogs({
+    required String propertyCardId,
+  }) async {
     try {
       String url =
           'v1/property-cards/get-logs?propertyCard=$propertyCardId&sortField=createdAt';
@@ -153,17 +168,31 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<List<PropertyCard>>> getPocketListings(
-      {Map<String, dynamic> filter = const {}, Paginator? paginator}) async {
+      {Map<String, dynamic>? filter, Paginator? paginator}) async {
     try {
       String url = 'v1/property-cards';
+      Map<String, dynamic>? filterRemoved;
+      if (filter != null) {
+        filterRemoved =
+            (Map.from(filter)..removeWhere((key, value) => value == null));
 
+        filterRemoved = filterRemoved.map((key, value) {
+          if (value is Map) {
+            return MapEntry(key, value['value']);
+          } else if (value is List<Map>) {
+            return MapEntry(key, value.map((e) => e['value']).toList());
+          } else {
+            return MapEntry(key, value);
+          }
+        });
+      }
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,
         'purpose': '',
         'withLeadsCount': true,
         'status': 'Pocket Listing',
-        ...filter
+        if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();

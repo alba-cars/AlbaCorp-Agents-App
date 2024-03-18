@@ -7,5 +7,7 @@ class DealsState with _$DealsState {
     @Default(Status.init) Status getDealsStatus,
     String? getDealsError,
     Paginator? dealsPaginator,
+    String? dealsSearch,
+    Map<String, dynamic>? dealsFilter,
   }) = _DealsState;
 }

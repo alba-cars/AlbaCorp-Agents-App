@@ -25,6 +25,18 @@ mixin _$ListingsState {
   String? get getPocketListingsError => throw _privateConstructorUsedError;
   Paginator? get pocketListingsPaginator => throw _privateConstructorUsedError;
   int get currentTab => throw _privateConstructorUsedError;
+  String? get listingsSearch => throw _privateConstructorUsedError;
+  String? get pocketListingsSearch => throw _privateConstructorUsedError;
+  List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
+  Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  List<Community> get communityList => throw _privateConstructorUsedError;
+  Status get getCommunityListStatus => throw _privateConstructorUsedError;
+  List<Building> get buildingList => throw _privateConstructorUsedError;
+  Status get getBuildingListStatus => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get listingsFilter =>
+      throw _privateConstructorUsedError;
+  Map<String, dynamic>? get pocketListingsFilter =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListingsStateCopyWith<ListingsState> get copyWith =>
@@ -46,7 +58,17 @@ abstract class $ListingsStateCopyWith<$Res> {
       Status getPocketListingsStatus,
       String? getPocketListingsError,
       Paginator? pocketListingsPaginator,
-      int currentTab});
+      int currentTab,
+      String? listingsSearch,
+      String? pocketListingsSearch,
+      List<PropertyType> propertyTypeList,
+      Status getPropertyTypeListStatus,
+      List<Community> communityList,
+      Status getCommunityListStatus,
+      List<Building> buildingList,
+      Status getBuildingListStatus,
+      Map<String, dynamic>? listingsFilter,
+      Map<String, dynamic>? pocketListingsFilter});
 
   $PaginatorCopyWith<$Res>? get listingsPaginator;
   $PaginatorCopyWith<$Res>? get pocketListingsPaginator;
@@ -74,6 +96,16 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
     Object? getPocketListingsError = freezed,
     Object? pocketListingsPaginator = freezed,
     Object? currentTab = null,
+    Object? listingsSearch = freezed,
+    Object? pocketListingsSearch = freezed,
+    Object? propertyTypeList = null,
+    Object? getPropertyTypeListStatus = null,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
+    Object? listingsFilter = freezed,
+    Object? pocketListingsFilter = freezed,
   }) {
     return _then(_value.copyWith(
       listings: null == listings
@@ -112,6 +144,46 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
+      listingsSearch: freezed == listingsSearch
+          ? _value.listingsSearch
+          : listingsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pocketListingsSearch: freezed == pocketListingsSearch
+          ? _value.pocketListingsSearch
+          : pocketListingsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyTypeList: null == propertyTypeList
+          ? _value.propertyTypeList
+          : propertyTypeList // ignore: cast_nullable_to_non_nullable
+              as List<PropertyType>,
+      getPropertyTypeListStatus: null == getPropertyTypeListStatus
+          ? _value.getPropertyTypeListStatus
+          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      communityList: null == communityList
+          ? _value.communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<Community>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _value.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      buildingList: null == buildingList
+          ? _value.buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _value.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      listingsFilter: freezed == listingsFilter
+          ? _value.listingsFilter
+          : listingsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      pocketListingsFilter: freezed == pocketListingsFilter
+          ? _value.pocketListingsFilter
+          : pocketListingsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 
@@ -157,7 +229,17 @@ abstract class _$$ListingsStateImplCopyWith<$Res>
       Status getPocketListingsStatus,
       String? getPocketListingsError,
       Paginator? pocketListingsPaginator,
-      int currentTab});
+      int currentTab,
+      String? listingsSearch,
+      String? pocketListingsSearch,
+      List<PropertyType> propertyTypeList,
+      Status getPropertyTypeListStatus,
+      List<Community> communityList,
+      Status getCommunityListStatus,
+      List<Building> buildingList,
+      Status getBuildingListStatus,
+      Map<String, dynamic>? listingsFilter,
+      Map<String, dynamic>? pocketListingsFilter});
 
   @override
   $PaginatorCopyWith<$Res>? get listingsPaginator;
@@ -185,6 +267,16 @@ class __$$ListingsStateImplCopyWithImpl<$Res>
     Object? getPocketListingsError = freezed,
     Object? pocketListingsPaginator = freezed,
     Object? currentTab = null,
+    Object? listingsSearch = freezed,
+    Object? pocketListingsSearch = freezed,
+    Object? propertyTypeList = null,
+    Object? getPropertyTypeListStatus = null,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
+    Object? listingsFilter = freezed,
+    Object? pocketListingsFilter = freezed,
   }) {
     return _then(_$ListingsStateImpl(
       listings: null == listings
@@ -223,6 +315,46 @@ class __$$ListingsStateImplCopyWithImpl<$Res>
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
+      listingsSearch: freezed == listingsSearch
+          ? _value.listingsSearch
+          : listingsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pocketListingsSearch: freezed == pocketListingsSearch
+          ? _value.pocketListingsSearch
+          : pocketListingsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyTypeList: null == propertyTypeList
+          ? _value._propertyTypeList
+          : propertyTypeList // ignore: cast_nullable_to_non_nullable
+              as List<PropertyType>,
+      getPropertyTypeListStatus: null == getPropertyTypeListStatus
+          ? _value.getPropertyTypeListStatus
+          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      communityList: null == communityList
+          ? _value._communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<Community>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _value.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      buildingList: null == buildingList
+          ? _value._buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _value.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      listingsFilter: freezed == listingsFilter
+          ? _value._listingsFilter
+          : listingsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      pocketListingsFilter: freezed == pocketListingsFilter
+          ? _value._pocketListingsFilter
+          : pocketListingsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -239,9 +371,24 @@ class _$ListingsStateImpl implements _ListingsState {
       this.getPocketListingsStatus = Status.init,
       this.getPocketListingsError,
       this.pocketListingsPaginator,
-      this.currentTab = 0})
+      this.currentTab = 0,
+      this.listingsSearch,
+      this.pocketListingsSearch,
+      final List<PropertyType> propertyTypeList = const [],
+      this.getPropertyTypeListStatus = Status.init,
+      final List<Community> communityList = const [],
+      this.getCommunityListStatus = Status.init,
+      final List<Building> buildingList = const [],
+      this.getBuildingListStatus = Status.init,
+      final Map<String, dynamic>? listingsFilter,
+      final Map<String, dynamic>? pocketListingsFilter})
       : _listings = listings,
-        _pocketListings = pocketListings;
+        _pocketListings = pocketListings,
+        _propertyTypeList = propertyTypeList,
+        _communityList = communityList,
+        _buildingList = buildingList,
+        _listingsFilter = listingsFilter,
+        _pocketListingsFilter = pocketListingsFilter;
 
   final List<Property> _listings;
   @override
@@ -278,10 +425,71 @@ class _$ListingsStateImpl implements _ListingsState {
   @override
   @JsonKey()
   final int currentTab;
+  @override
+  final String? listingsSearch;
+  @override
+  final String? pocketListingsSearch;
+  final List<PropertyType> _propertyTypeList;
+  @override
+  @JsonKey()
+  List<PropertyType> get propertyTypeList {
+    if (_propertyTypeList is EqualUnmodifiableListView)
+      return _propertyTypeList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_propertyTypeList);
+  }
+
+  @override
+  @JsonKey()
+  final Status getPropertyTypeListStatus;
+  final List<Community> _communityList;
+  @override
+  @JsonKey()
+  List<Community> get communityList {
+    if (_communityList is EqualUnmodifiableListView) return _communityList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_communityList);
+  }
+
+  @override
+  @JsonKey()
+  final Status getCommunityListStatus;
+  final List<Building> _buildingList;
+  @override
+  @JsonKey()
+  List<Building> get buildingList {
+    if (_buildingList is EqualUnmodifiableListView) return _buildingList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_buildingList);
+  }
+
+  @override
+  @JsonKey()
+  final Status getBuildingListStatus;
+  final Map<String, dynamic>? _listingsFilter;
+  @override
+  Map<String, dynamic>? get listingsFilter {
+    final value = _listingsFilter;
+    if (value == null) return null;
+    if (_listingsFilter is EqualUnmodifiableMapView) return _listingsFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, dynamic>? _pocketListingsFilter;
+  @override
+  Map<String, dynamic>? get pocketListingsFilter {
+    final value = _pocketListingsFilter;
+    if (value == null) return null;
+    if (_pocketListingsFilter is EqualUnmodifiableMapView)
+      return _pocketListingsFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'ListingsState(listings: $listings, getListingsStatus: $getListingsStatus, getListingsError: $getListingsError, listingsPaginator: $listingsPaginator, pocketListings: $pocketListings, getPocketListingsStatus: $getPocketListingsStatus, getPocketListingsError: $getPocketListingsError, pocketListingsPaginator: $pocketListingsPaginator, currentTab: $currentTab)';
+    return 'ListingsState(listings: $listings, getListingsStatus: $getListingsStatus, getListingsError: $getListingsError, listingsPaginator: $listingsPaginator, pocketListings: $pocketListings, getPocketListingsStatus: $getPocketListingsStatus, getPocketListingsError: $getPocketListingsError, pocketListingsPaginator: $pocketListingsPaginator, currentTab: $currentTab, listingsSearch: $listingsSearch, pocketListingsSearch: $pocketListingsSearch, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, listingsFilter: $listingsFilter, pocketListingsFilter: $pocketListingsFilter)';
   }
 
   @override
@@ -307,21 +515,53 @@ class _$ListingsStateImpl implements _ListingsState {
                     other.pocketListingsPaginator, pocketListingsPaginator) ||
                 other.pocketListingsPaginator == pocketListingsPaginator) &&
             (identical(other.currentTab, currentTab) ||
-                other.currentTab == currentTab));
+                other.currentTab == currentTab) &&
+            (identical(other.listingsSearch, listingsSearch) ||
+                other.listingsSearch == listingsSearch) &&
+            (identical(other.pocketListingsSearch, pocketListingsSearch) ||
+                other.pocketListingsSearch == pocketListingsSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._propertyTypeList, _propertyTypeList) &&
+            (identical(other.getPropertyTypeListStatus,
+                    getPropertyTypeListStatus) ||
+                other.getPropertyTypeListStatus == getPropertyTypeListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._communityList, _communityList) &&
+            (identical(other.getCommunityListStatus, getCommunityListStatus) ||
+                other.getCommunityListStatus == getCommunityListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._buildingList, _buildingList) &&
+            (identical(other.getBuildingListStatus, getBuildingListStatus) ||
+                other.getBuildingListStatus == getBuildingListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._listingsFilter, _listingsFilter) &&
+            const DeepCollectionEquality()
+                .equals(other._pocketListingsFilter, _pocketListingsFilter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_listings),
-      getListingsStatus,
-      getListingsError,
-      listingsPaginator,
-      const DeepCollectionEquality().hash(_pocketListings),
-      getPocketListingsStatus,
-      getPocketListingsError,
-      pocketListingsPaginator,
-      currentTab);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(_listings),
+        getListingsStatus,
+        getListingsError,
+        listingsPaginator,
+        const DeepCollectionEquality().hash(_pocketListings),
+        getPocketListingsStatus,
+        getPocketListingsError,
+        pocketListingsPaginator,
+        currentTab,
+        listingsSearch,
+        pocketListingsSearch,
+        const DeepCollectionEquality().hash(_propertyTypeList),
+        getPropertyTypeListStatus,
+        const DeepCollectionEquality().hash(_communityList),
+        getCommunityListStatus,
+        const DeepCollectionEquality().hash(_buildingList),
+        getBuildingListStatus,
+        const DeepCollectionEquality().hash(_listingsFilter),
+        const DeepCollectionEquality().hash(_pocketListingsFilter)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -340,7 +580,17 @@ abstract class _ListingsState implements ListingsState {
       final Status getPocketListingsStatus,
       final String? getPocketListingsError,
       final Paginator? pocketListingsPaginator,
-      final int currentTab}) = _$ListingsStateImpl;
+      final int currentTab,
+      final String? listingsSearch,
+      final String? pocketListingsSearch,
+      final List<PropertyType> propertyTypeList,
+      final Status getPropertyTypeListStatus,
+      final List<Community> communityList,
+      final Status getCommunityListStatus,
+      final List<Building> buildingList,
+      final Status getBuildingListStatus,
+      final Map<String, dynamic>? listingsFilter,
+      final Map<String, dynamic>? pocketListingsFilter}) = _$ListingsStateImpl;
 
   @override
   List<Property> get listings;
@@ -360,6 +610,26 @@ abstract class _ListingsState implements ListingsState {
   Paginator? get pocketListingsPaginator;
   @override
   int get currentTab;
+  @override
+  String? get listingsSearch;
+  @override
+  String? get pocketListingsSearch;
+  @override
+  List<PropertyType> get propertyTypeList;
+  @override
+  Status get getPropertyTypeListStatus;
+  @override
+  List<Community> get communityList;
+  @override
+  Status get getCommunityListStatus;
+  @override
+  List<Building> get buildingList;
+  @override
+  Status get getBuildingListStatus;
+  @override
+  Map<String, dynamic>? get listingsFilter;
+  @override
+  Map<String, dynamic>? get pocketListingsFilter;
   @override
   @JsonKey(ignore: true)
   _$$ListingsStateImplCopyWith<_$ListingsStateImpl> get copyWith =>

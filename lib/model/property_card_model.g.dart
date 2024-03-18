@@ -28,7 +28,10 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       checkedOutDate: json['checkedOutDate'] as String?,
-      currentAgent: json['currentAgent'],
+      currentAgent: json['currentAgent'] == null
+          ? null
+          : PropertyCardAgent.fromJson(
+              json['currentAgent'] as Map<String, dynamic>),
       updatedBy: json['updatedBy'] as String?,
       referenceNumber: json['referenceNumber'] as String?,
       expirationDate: json['expirationDate'] as String?,
@@ -76,4 +79,18 @@ Map<String, dynamic> _$$CreatedByImplToJson(_$CreatedByImpl instance) =>
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'phone': instance.phone,
+    };
+
+_$PropertyCardAgentImpl _$$PropertyCardAgentImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PropertyCardAgentImpl(
+      id: json['id'] as String,
+      userId: User.fromJson(json['userId'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$PropertyCardAgentImplToJson(
+        _$PropertyCardAgentImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
     };

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/user.dart';
 
@@ -28,7 +29,7 @@ class PropertyCard with _$PropertyCard {
     @JsonKey(name: 'createdAt') String? createdAt,
     @JsonKey(name: 'updatedAt') String? updatedAt,
     @JsonKey(name: 'checkedOutDate') String? checkedOutDate,
-    @JsonKey(name: 'currentAgent') dynamic currentAgent,
+    @JsonKey(name: 'currentAgent') PropertyCardAgent? currentAgent,
     @JsonKey(name: 'updatedBy') String? updatedBy,
     @JsonKey(name: 'referenceNumber') String? referenceNumber,
     @JsonKey(name: 'expirationDate') String? expirationDate,
@@ -53,4 +54,15 @@ class CreatedBy with _$CreatedBy {
 
   factory CreatedBy.fromJson(Map<String, dynamic> json) =>
       _$CreatedByFromJson(json);
+}
+
+@freezed
+class PropertyCardAgent with _$PropertyCardAgent {
+  const factory PropertyCardAgent({
+    required String id,
+    required User userId,
+  }) = _PropertyCardAgent;
+
+  factory PropertyCardAgent.fromJson(Map<String, dynamic> json) =>
+      _$PropertyCardAgentFromJson(json);
 }

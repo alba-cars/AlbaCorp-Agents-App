@@ -66,6 +66,9 @@ class _AppTextFieldState extends State<AppTextField> {
     controller = widget.controller ?? TextEditingController();
     _focusNode.addListener(_onFocusChanged);
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      if (widget.value != null) {
+        _fieldKey.currentState?.didChange(widget.value);
+      }
       if (_fieldKey.currentState?.value != null) {
         controller.text = _fieldKey.currentState?.value ?? '';
       }

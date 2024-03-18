@@ -8,11 +8,11 @@ import '../../util/result.dart';
 
 abstract class ExplorerRepo {
   Future<Result<List<PropertyCard>>> getPropertyCards(
-      {Map<String, dynamic> filter = const {}, Paginator? paginator});
+      {Map<String, dynamic>? filter, Paginator? paginator});
   Future<Result<List<PropertyCard>>> getPocketListings(
-      {Map<String, dynamic> filter = const {}, Paginator? paginator});
+      {Map<String, dynamic>? filter, Paginator? paginator});
   Future<Result<List<PropertyCard>>> getCheckedOutPropertyCards(
-      {Map<String, dynamic> filter = const {}, Paginator? paginator});
+      {Map<String, dynamic>? filter, Paginator? paginator});
   Future<Result<void>> checkInLead({required List<String> propertyCardIds});
   Future<Result<void>> checkOutLead({required List<String> propertyCardIds});
   Future<Result<List<LeadPropertyCardModel>>> getPropertyCardLeads(

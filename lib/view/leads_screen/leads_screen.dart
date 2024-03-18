@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/leads_screen/cubit/leads_cubit.dart';
+import 'package:real_estate_app/widgets/fields/date_field.dart';
+import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
+import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
+import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
 
 import '../../util/color_category.dart';
@@ -38,6 +43,173 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
   void initState() {
     context.read<LeadsCubit>().getLeads();
     super.initState();
+  }
+
+  List<Widget> filterFields() {
+    return [
+      WrapSelectField(
+        name: 'active',
+        label: 'Active',
+        values: [
+          {'value': true, 'label': 'Active'},
+          {'value': false, 'label': 'Inactive'}
+        ],
+        isRequired: false,
+        displayOption: (option) => option['label'] as String,
+      ),
+      WrapSelectField(
+        name: 'roles',
+        label: 'Role',
+        values: ['User', 'Owner'],
+        isRequired: false,
+      ),
+      WrapSelectField(
+        name: 'lead_source_type',
+        label: 'Lead Source',
+        values: [
+          {
+            'value': [
+              "External REF0101",
+              "External REF0102" ",External REF0103",
+              "External REF0104",
+              "External REF0105",
+              "External RIK/Burj Vista",
+              "External RIK/Creek Harbour",
+              "External RIK/Palm",
+              "External Ref0102",
+              "External Ref0105",
+              "External2023 Ref0101",
+              "ExternalREF0105",
+              "External%EF%BF%BDREF0105"
+            ],
+            'label': 'Cold Leads'
+          },
+          {
+            'value': [
+              "Admin Created",
+              "Agent Created",
+              "Alba Cars" ",Ask a Question",
+              "Bayut",
+              "Call Center",
+              "Call Center 1",
+              "Call Center 2",
+              "Call Center 3",
+              "DLD",
+              "Dubizzle",
+              "DubizzleHL",
+              "Email",
+              "Facebook Call",
+              "Facebook Campaign",
+              "Facebook Chat",
+              "Get Matched Assistance",
+              "Google Ads",
+              "Hot Confidential",
+              "Imported",
+              "Instagram Call",
+              "Instagram Campaign",
+              "Instagram Chat",
+              "New Listing",
+              "Newsletter",
+              "Off-Plan",
+              "Property Finder",
+              "Referral",
+              "Register",
+              "Saqib",
+              "Snapchat",
+              "TikTok",
+              "Twitter",
+              "Unkown Inbound Call",
+              "Viewing",
+              "Watti",
+              "Whatsapp"
+            ],
+            'label': 'Hot Leads'
+          }
+        ],
+        isRequired: false,
+        displayOption: (option) => option['label'] as String,
+        // valueTransformer: (p0) => p0?['value'],
+      ),
+      MultiDropDownField(
+          label: 'Lead Source',
+          items: [
+            "Admin Created",
+            "Agent Created",
+            "Alba Cars",
+            "Ask a Question",
+            "Bayut",
+            "Call Center",
+            "Call Center 1",
+            "Call Center 2",
+            "Call Center 3",
+            "DLD",
+            "Dubizzle",
+            "DubizzleHL",
+            "Email",
+            "Facebook Call",
+            "Facebook Campaign",
+            "Facebook Chat",
+            "Get Matched Assistance",
+            "Google Ads",
+            "Hot Confidential",
+            "Imported",
+            "Instagram Call",
+            "Instagram Campaign",
+            "Instagram Chat",
+            "New Listing",
+            "Newsletter",
+            "Off-Plan",
+            "Property Finder",
+            "Referral",
+            "Register",
+            "Saqib",
+            "Snapchat",
+            "TikTok",
+            "Twitter",
+            "Unkown Inbound Call",
+            "Viewing",
+            "Watti",
+            "Whatsapp",
+            "External REF0101",
+            "External REF0102" ",External REF0103",
+            "External REF0104",
+            "External REF0105",
+            "External RIK/Burj Vista",
+            "External RIK/Creek Harbour",
+            "External RIK/Palm",
+            "External Ref0102",
+            "External Ref0105",
+            "External2023 Ref0101",
+            "ExternalREF0105",
+            "External%EF%BF%BDREF0105"
+          ],
+          name: 'lead_source_many'),
+      DropDownfield(
+          label: 'Lead Status',
+          items: [
+            "Fresh",
+            "Prospect",
+            "For Listing",
+            "Appointment",
+            "Viewing",
+            "Negotiating",
+            "Deal",
+            "Won",
+            "Lost",
+            "Disqualified"
+          ],
+          name: 'lead_status'),
+      DateField(
+          name: 'fromDate',
+          label: 'From Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+      DateField(
+          name: 'toDate',
+          label: 'To Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+    ];
   }
 
   @override
@@ -83,7 +255,17 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                child: AppSearchBar(),
+                child: AppSearchBar(
+                  onChanged: (val) {
+                    context.read<LeadsCubit>().searchLeads(val);
+                  },
+                  filterFields: filterFields(),
+                  onFilterApplied: (filter) {
+                    context.read<LeadsCubit>().setLeadFilters(filter);
+                  },
+                  filter: context
+                      .select((LeadsCubit value) => value.state.leadsFilter),
+                ),
               ),
             ),
           ];

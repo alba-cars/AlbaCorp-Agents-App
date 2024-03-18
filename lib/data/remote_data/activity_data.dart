@@ -20,14 +20,21 @@ class ActivityData implements ActivityRepo {
   ActivityData({required Dio dio}) : _dio = dio;
   final log = Logger();
   @override
-  Future<Result<void>> createActivity(
-      {required String leadId, required String type}) async {
+  Future<Result<void>> createActivity({
+    required String leadId,
+    required String type,
+    DateTime? date,
+    String? propertyId,
+    String? description,
+  }) async {
     try {
       final response = await _dio.post('/v1/activities', data: {
         'user_id': leadId,
         'type': type,
-        'date': DateTime.now().toIso8601String(),
-        'disableDateChecking': true
+        'date': date?.toIso8601String() ?? DateTime.now().toIso8601String(),
+        if (date == null) 'disableDateChecking': true,
+        'description': description,
+        'property_id': propertyId
       });
       return Success(null);
     } catch (e, stack) {
@@ -66,15 +73,8 @@ class ActivityData implements ActivityRepo {
       Paginator? paginator}) async {
     try {
       String url = 'v1/activities/query-activities';
-      Map<String, dynamic> query = {
-        "status": ["Pending", "Overdue"]
-      };
-      if (status != null) {
-        query["leadStatus"] = status.name;
-      }
-      if (paginator != null) {
-        query['page'] = paginator.currentPage + 1;
-      }
+      Map<String, dynamic> query = {};
+
       final d = DateTime.now();
       if (filterCode == 0) {
         query = {
@@ -121,7 +121,7 @@ class ActivityData implements ActivityRepo {
             "Bilal",
           ],
           "leadStatus": "Fresh",
-          "status": ["Pending" "Overdue"],
+          "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}',
         };
       } else if (filterCode == 1) {
@@ -149,11 +149,11 @@ class ActivityData implements ActivityRepo {
         };
       } else if (filterCode == 2) {
         query = {
-          "leadSource": "Hot  Confidential",
+          "leadSource": "Hot Confidential",
           'leadStatus': [
             "Fresh",
             "Prospect",
-            "For  Listing",
+            "For Listing",
             "Appointment",
             "Viewing",
             "Negotiating",
@@ -168,19 +168,19 @@ class ActivityData implements ActivityRepo {
       } else if (filterCode == 3) {
         query = {
           'leadSource': [
-            "Ask  a  Question",
-            "Get  Matched  Assistance",
+            "Ask a Question",
+            "Get Matched Assistance",
             "Register",
-            "New  Listing",
+            "New Listing",
             "Viewing",
             "Newsletter",
             "Imported",
-            "Facebook  Chat",
-            "Facebook  Call",
-            "Facebook  Campaign",
-            "Instagram  Chat",
-            "Instagram  Call",
-            "Instagram  Campaign",
+            "Facebook Chat",
+            "Facebook Call",
+            "Facebook Campaign",
+            "Instagram Chat",
+            "Instagram Call",
+            "Instagram Campaign",
             "TikTok",
             "Twitter",
             "Taboola",
@@ -191,30 +191,30 @@ class ActivityData implements ActivityRepo {
             "Youtube",
             "Pinterest",
             "Meta",
-            "Google  Ads",
+            "Google Ads",
             "Off-Plan",
             "Bayut",
-            "James  Edition",
-            "Luxury  Estates",
-            "Wall  Street",
-            "Right  Move",
+            "James Edition",
+            "Luxury Estates",
+            "Wall Street",
+            "Right Move",
             "Lefigaro",
-            "Property  Finder",
+            "Property Finder",
             "Dubizzle",
             "Referral",
-            "Alba  Cars",
-            "Unkown  Inbound  Call",
-            "Call  Center",
-            "Call  Center  1",
-            "Call  Center  2",
-            "Call  Center  3",
-            "Hot  Confidential",
+            "Alba Cars",
+            "Unkown Inbound Call",
+            "Call Center",
+            "Call Center 1",
+            "Call Center 2",
+            "Call Center 3",
+            "Hot Confidential",
             "Saqib",
             "Watti",
             "Research",
             "Bilal"
           ],
-          "leadStatus": "Follow  up",
+          "leadStatus": "Follow up",
           "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}'
         };
@@ -222,7 +222,7 @@ class ActivityData implements ActivityRepo {
         query = {
           'leadStatus': [
             "Prospect",
-            "For  Listing",
+            "For Listing",
             "Appointment",
             "Viewing",
             "Negotiating",
@@ -233,27 +233,94 @@ class ActivityData implements ActivityRepo {
         };
       } else if (filterCode == 5) {
         query = {
-          "leadSource": ["External", "DLD", "Dubizzle  Listing", "Imported"],
-          "leadStatus": "Follow  up",
+          "leadSource": ["External", "DLD", "Dubizzle Listing", "Imported"],
+          "leadStatus": "Follow up",
           "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}'
         };
       } else if (filterCode == 6) {
         query = {
-          "leadSource": ["External", "DLD", "Dubizzle  Listing", "Imported"],
+          "leadSource": ["External", "DLD", "Dubizzle Listing", "Imported"],
           'leadStatus': "Fresh",
           "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}'
         };
       }
-      final response = await _dio.get(url);
-      final data = response.data['items'] as List;
+
+      query['page'] = (paginator?.currentPage ?? 0) + 1;
+
+      final response = await _dio.get(url, queryParameters: query);
+      final data = response.data['data']['items'] as List;
       final list = data.map((e) => Activity.fromJson(e)).toList();
       return Success(list,
           paginator: Paginator(
-              currentPage: response.data['page'],
-              perPage: response.data['pageSize'],
-              itemCount: response.data['totalItems']));
+              currentPage: (paginator?.currentPage ?? 0) + 1,
+              perPage: response.data['data']?['limit'] ?? 0,
+              itemCount: response.data['data']?['totalItems'] ?? 0));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<int>> completedActivitiesCount() async {
+    try {
+      final url = 'v1/activities/count-activities';
+      final d = DateTime.now();
+      final query = {
+        "completedBy": getIt<AuthBloc>().state.user?.id,
+        "fromDate": '${d.year}-${d.month}-${d.day}',
+        "status": "Complete",
+        "toDate": '${d.year}-${d.month}-${d.day}',
+      };
+      var loginResponse = await _dio.get(url, queryParameters: query);
+      Map<String, dynamic> data = loginResponse.data;
+
+      final int count = data['data'] ?? 0;
+      return Success(count);
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<int>> pendingActivitiesCount() async {
+    try {
+      final url = 'v1/activities/count-activities';
+      final d = DateTime.now();
+      final query = {
+        "completedBy": getIt<AuthBloc>().state.user?.id,
+        "fromDate": '${d.year}-${d.month}-${d.day}',
+        "status": "Complete",
+        "toDate": '${d.year}-${d.month}-${d.day}',
+      };
+      var loginResponse = await _dio.get(url, queryParameters: query);
+      Map<String, dynamic> data = loginResponse.data;
+
+      final int count = data['data'] ?? 0;
+      return Success(count);
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<int>> pendingViewingActivitiesCount() async {
+    try {
+      final url = 'v1/activities/count-activities';
+      final d = DateTime.now();
+      final query = {
+        "createdBy": getIt<AuthBloc>().state.user?.id,
+        "fromDate": '${d.year}-${d.month}-${d.day}',
+        "status": ["Pending", 'Overdue'],
+        "toDate": '${d.year}-${d.month}-${d.day}',
+        'type': 'Viewing'
+      };
+      var loginResponse = await _dio.get(url, queryParameters: query);
+      Map<String, dynamic> data = loginResponse.data;
+
+      final int count = data['data'] ?? 0;
+      return Success(count);
     } catch (e, stack) {
       return onError(e, stack, log);
     }

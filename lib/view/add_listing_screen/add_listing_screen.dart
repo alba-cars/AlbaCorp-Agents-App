@@ -227,7 +227,7 @@ class BasicInfoTab extends StatelessWidget {
                   isRequired: true,
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (lead) =>
-                      '${lead.firstName} ${lead.lastName} (*****${lead.phone.substring(lead.phone.length - 5, lead.phone.length - 1)})',
+                      '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
                   optionsBuilder: (v) async {
                     return context
                         .read<AddListingCubit>()

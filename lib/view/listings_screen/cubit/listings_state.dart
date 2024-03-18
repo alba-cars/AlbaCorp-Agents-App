@@ -12,5 +12,15 @@ class ListingsState with _$ListingsState {
     String? getPocketListingsError,
     Paginator? pocketListingsPaginator,
     @Default(0) int currentTab,
+    String? listingsSearch,
+    String? pocketListingsSearch,
+    @Default([]) List<PropertyType> propertyTypeList,
+    @Default(Status.init) Status getPropertyTypeListStatus,
+    @Default([]) List<Community> communityList,
+    @Default(Status.init) Status getCommunityListStatus,
+    @Default([]) List<Building> buildingList,
+    @Default(Status.init) Status getBuildingListStatus,
+    Map<String, dynamic>? listingsFilter,
+    Map<String, dynamic>? pocketListingsFilter,
   }) = _ListingsState;
 }

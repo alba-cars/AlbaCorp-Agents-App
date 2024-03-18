@@ -16,37 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ActivityState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) =>
+  ActivityFeedback? get activityFeedback => throw _privateConstructorUsedError;
+  Activity? get lastActivity => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ActivityStateCopyWith<ActivityState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -55,6 +29,11 @@ abstract class $ActivityStateCopyWith<$Res> {
   factory $ActivityStateCopyWith(
           ActivityState value, $Res Function(ActivityState) then) =
       _$ActivityStateCopyWithImpl<$Res, ActivityState>;
+  @useResult
+  $Res call({ActivityFeedback? activityFeedback, Activity? lastActivity});
+
+  $ActivityFeedbackCopyWith<$Res>? get activityFeedback;
+  $ActivityCopyWith<$Res>? get lastActivity;
 }
 
 /// @nodoc
@@ -66,100 +45,140 @@ class _$ActivityStateCopyWithImpl<$Res, $Val extends ActivityState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activityFeedback = freezed,
+    Object? lastActivity = freezed,
+  }) {
+    return _then(_value.copyWith(
+      activityFeedback: freezed == activityFeedback
+          ? _value.activityFeedback
+          : activityFeedback // ignore: cast_nullable_to_non_nullable
+              as ActivityFeedback?,
+      lastActivity: freezed == lastActivity
+          ? _value.lastActivity
+          : lastActivity // ignore: cast_nullable_to_non_nullable
+              as Activity?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ActivityFeedbackCopyWith<$Res>? get activityFeedback {
+    if (_value.activityFeedback == null) {
+      return null;
+    }
+
+    return $ActivityFeedbackCopyWith<$Res>(_value.activityFeedback!, (value) {
+      return _then(_value.copyWith(activityFeedback: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ActivityCopyWith<$Res>? get lastActivity {
+    if (_value.lastActivity == null) {
+      return null;
+    }
+
+    return $ActivityCopyWith<$Res>(_value.lastActivity!, (value) {
+      return _then(_value.copyWith(lastActivity: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+abstract class _$$ActivityStateImplCopyWith<$Res>
+    implements $ActivityStateCopyWith<$Res> {
+  factory _$$ActivityStateImplCopyWith(
+          _$ActivityStateImpl value, $Res Function(_$ActivityStateImpl) then) =
+      __$$ActivityStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ActivityFeedback? activityFeedback, Activity? lastActivity});
+
+  @override
+  $ActivityFeedbackCopyWith<$Res>? get activityFeedback;
+  @override
+  $ActivityCopyWith<$Res>? get lastActivity;
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ActivityStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+class __$$ActivityStateImplCopyWithImpl<$Res>
+    extends _$ActivityStateCopyWithImpl<$Res, _$ActivityStateImpl>
+    implements _$$ActivityStateImplCopyWith<$Res> {
+  __$$ActivityStateImplCopyWithImpl(
+      _$ActivityStateImpl _value, $Res Function(_$ActivityStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activityFeedback = freezed,
+    Object? lastActivity = freezed,
+  }) {
+    return _then(_$ActivityStateImpl(
+      activityFeedback: freezed == activityFeedback
+          ? _value.activityFeedback
+          : activityFeedback // ignore: cast_nullable_to_non_nullable
+              as ActivityFeedback?,
+      lastActivity: freezed == lastActivity
+          ? _value.lastActivity
+          : lastActivity // ignore: cast_nullable_to_non_nullable
+              as Activity?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$ActivityStateImpl implements _ActivityState {
+  const _$ActivityStateImpl({this.activityFeedback, this.lastActivity});
+
+  @override
+  final ActivityFeedback? activityFeedback;
+  @override
+  final Activity? lastActivity;
 
   @override
   String toString() {
-    return 'ActivityState.initial()';
+    return 'ActivityState(activityFeedback: $activityFeedback, lastActivity: $lastActivity)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ActivityStateImpl &&
+            (identical(other.activityFeedback, activityFeedback) ||
+                other.activityFeedback == activityFeedback) &&
+            (identical(other.lastActivity, lastActivity) ||
+                other.lastActivity == lastActivity));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, activityFeedback, lastActivity);
 
+  @JsonKey(ignore: true)
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
+  @pragma('vm:prefer-inline')
+  _$$ActivityStateImplCopyWith<_$ActivityStateImpl> get copyWith =>
+      __$$ActivityStateImplCopyWithImpl<_$ActivityStateImpl>(this, _$identity);
 }
 
-abstract class _Initial implements ActivityState {
-  const factory _Initial() = _$InitialImpl;
+abstract class _ActivityState implements ActivityState {
+  const factory _ActivityState(
+      {final ActivityFeedback? activityFeedback,
+      final Activity? lastActivity}) = _$ActivityStateImpl;
+
+  @override
+  ActivityFeedback? get activityFeedback;
+  @override
+  Activity? get lastActivity;
+  @override
+  @JsonKey(ignore: true)
+  _$$ActivityStateImplCopyWith<_$ActivityStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

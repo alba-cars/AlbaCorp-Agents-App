@@ -36,7 +36,7 @@ class AboutTabView extends StatelessWidget {
                   ),
                   Expanded(
                     child: TextWithIcon(
-                      text: lead.email,
+                      text: lead.email ?? '',
                       icon: Icons.email_outlined,
                     ),
                   ),

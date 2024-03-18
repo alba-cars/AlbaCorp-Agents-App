@@ -46,7 +46,7 @@ mixin _$PropertyCard {
   @JsonKey(name: 'checkedOutDate')
   String? get checkedOutDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'currentAgent')
-  dynamic get currentAgent => throw _privateConstructorUsedError;
+  PropertyCardAgent? get currentAgent => throw _privateConstructorUsedError;
   @JsonKey(name: 'updatedBy')
   String? get updatedBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNumber')
@@ -87,7 +87,7 @@ abstract class $PropertyCardCopyWith<$Res> {
       @JsonKey(name: 'createdAt') String? createdAt,
       @JsonKey(name: 'updatedAt') String? updatedAt,
       @JsonKey(name: 'checkedOutDate') String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') dynamic currentAgent,
+      @JsonKey(name: 'currentAgent') PropertyCardAgent? currentAgent,
       @JsonKey(name: 'updatedBy') String? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') String? expirationDate,
@@ -96,6 +96,7 @@ abstract class $PropertyCardCopyWith<$Res> {
 
   $BuildingCopyWith<$Res>? get building;
   $CommunityCopyWith<$Res>? get community;
+  $PropertyCardAgentCopyWith<$Res>? get currentAgent;
 }
 
 /// @nodoc
@@ -202,7 +203,7 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
       currentAgent: freezed == currentAgent
           ? _value.currentAgent
           : currentAgent // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as PropertyCardAgent?,
       updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
@@ -249,6 +250,18 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
       return _then(_value.copyWith(community: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PropertyCardAgentCopyWith<$Res>? get currentAgent {
+    if (_value.currentAgent == null) {
+      return null;
+    }
+
+    return $PropertyCardAgentCopyWith<$Res>(_value.currentAgent!, (value) {
+      return _then(_value.copyWith(currentAgent: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -276,7 +289,7 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
       @JsonKey(name: 'createdAt') String? createdAt,
       @JsonKey(name: 'updatedAt') String? updatedAt,
       @JsonKey(name: 'checkedOutDate') String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') dynamic currentAgent,
+      @JsonKey(name: 'currentAgent') PropertyCardAgent? currentAgent,
       @JsonKey(name: 'updatedBy') String? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') String? expirationDate,
@@ -287,6 +300,8 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
   $BuildingCopyWith<$Res>? get building;
   @override
   $CommunityCopyWith<$Res>? get community;
+  @override
+  $PropertyCardAgentCopyWith<$Res>? get currentAgent;
 }
 
 /// @nodoc
@@ -391,7 +406,7 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
       currentAgent: freezed == currentAgent
           ? _value.currentAgent
           : currentAgent // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as PropertyCardAgent?,
       updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
@@ -498,7 +513,7 @@ class _$PropertyCardImpl implements _PropertyCard {
   final String? checkedOutDate;
   @override
   @JsonKey(name: 'currentAgent')
-  final dynamic currentAgent;
+  final PropertyCardAgent? currentAgent;
   @override
   @JsonKey(name: 'updatedBy')
   final String? updatedBy;
@@ -550,8 +565,8 @@ class _$PropertyCardImpl implements _PropertyCard {
                 other.updatedAt == updatedAt) &&
             (identical(other.checkedOutDate, checkedOutDate) ||
                 other.checkedOutDate == checkedOutDate) &&
-            const DeepCollectionEquality()
-                .equals(other.currentAgent, currentAgent) &&
+            (identical(other.currentAgent, currentAgent) ||
+                other.currentAgent == currentAgent) &&
             (identical(other.updatedBy, updatedBy) ||
                 other.updatedBy == updatedBy) &&
             (identical(other.referenceNumber, referenceNumber) ||
@@ -584,7 +599,7 @@ class _$PropertyCardImpl implements _PropertyCard {
         createdAt,
         updatedAt,
         checkedOutDate,
-        const DeepCollectionEquality().hash(currentAgent),
+        currentAgent,
         updatedBy,
         referenceNumber,
         expirationDate,
@@ -624,7 +639,7 @@ abstract class _PropertyCard implements PropertyCard {
       @JsonKey(name: 'createdAt') final String? createdAt,
       @JsonKey(name: 'updatedAt') final String? updatedAt,
       @JsonKey(name: 'checkedOutDate') final String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') final dynamic currentAgent,
+      @JsonKey(name: 'currentAgent') final PropertyCardAgent? currentAgent,
       @JsonKey(name: 'updatedBy') final String? updatedBy,
       @JsonKey(name: 'referenceNumber') final String? referenceNumber,
       @JsonKey(name: 'expirationDate') final String? expirationDate,
@@ -677,7 +692,7 @@ abstract class _PropertyCard implements PropertyCard {
   String? get checkedOutDate;
   @override
   @JsonKey(name: 'currentAgent')
-  dynamic get currentAgent;
+  PropertyCardAgent? get currentAgent;
   @override
   @JsonKey(name: 'updatedBy')
   String? get updatedBy;
@@ -907,5 +922,173 @@ abstract class _CreatedBy implements CreatedBy {
   @override
   @JsonKey(ignore: true)
   _$$CreatedByImplCopyWith<_$CreatedByImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+PropertyCardAgent _$PropertyCardAgentFromJson(Map<String, dynamic> json) {
+  return _PropertyCardAgent.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PropertyCardAgent {
+  String get id => throw _privateConstructorUsedError;
+  User get userId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PropertyCardAgentCopyWith<PropertyCardAgent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PropertyCardAgentCopyWith<$Res> {
+  factory $PropertyCardAgentCopyWith(
+          PropertyCardAgent value, $Res Function(PropertyCardAgent) then) =
+      _$PropertyCardAgentCopyWithImpl<$Res, PropertyCardAgent>;
+  @useResult
+  $Res call({String id, User userId});
+
+  $UserCopyWith<$Res> get userId;
+}
+
+/// @nodoc
+class _$PropertyCardAgentCopyWithImpl<$Res, $Val extends PropertyCardAgent>
+    implements $PropertyCardAgentCopyWith<$Res> {
+  _$PropertyCardAgentCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as User,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get userId {
+    return $UserCopyWith<$Res>(_value.userId, (value) {
+      return _then(_value.copyWith(userId: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$PropertyCardAgentImplCopyWith<$Res>
+    implements $PropertyCardAgentCopyWith<$Res> {
+  factory _$$PropertyCardAgentImplCopyWith(_$PropertyCardAgentImpl value,
+          $Res Function(_$PropertyCardAgentImpl) then) =
+      __$$PropertyCardAgentImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, User userId});
+
+  @override
+  $UserCopyWith<$Res> get userId;
+}
+
+/// @nodoc
+class __$$PropertyCardAgentImplCopyWithImpl<$Res>
+    extends _$PropertyCardAgentCopyWithImpl<$Res, _$PropertyCardAgentImpl>
+    implements _$$PropertyCardAgentImplCopyWith<$Res> {
+  __$$PropertyCardAgentImplCopyWithImpl(_$PropertyCardAgentImpl _value,
+      $Res Function(_$PropertyCardAgentImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+  }) {
+    return _then(_$PropertyCardAgentImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PropertyCardAgentImpl implements _PropertyCardAgent {
+  const _$PropertyCardAgentImpl({required this.id, required this.userId});
+
+  factory _$PropertyCardAgentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PropertyCardAgentImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final User userId;
+
+  @override
+  String toString() {
+    return 'PropertyCardAgent(id: $id, userId: $userId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PropertyCardAgentImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PropertyCardAgentImplCopyWith<_$PropertyCardAgentImpl> get copyWith =>
+      __$$PropertyCardAgentImplCopyWithImpl<_$PropertyCardAgentImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PropertyCardAgentImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PropertyCardAgent implements PropertyCardAgent {
+  const factory _PropertyCardAgent(
+      {required final String id,
+      required final User userId}) = _$PropertyCardAgentImpl;
+
+  factory _PropertyCardAgent.fromJson(Map<String, dynamic> json) =
+      _$PropertyCardAgentImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  User get userId;
+  @override
+  @JsonKey(ignore: true)
+  _$$PropertyCardAgentImplCopyWith<_$PropertyCardAgentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

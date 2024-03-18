@@ -13,6 +13,7 @@ import 'package:real_estate_app/view/ticket_detail_screen/cubit/ticket_details_c
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:recase/recase.dart';
 
+import '../../util/color_category.dart';
 import '../../widgets/fields/attachment_field.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';

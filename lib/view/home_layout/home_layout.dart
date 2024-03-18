@@ -136,52 +136,54 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 const VerticalSmallGap(),
                 const VerticalSmallGap(),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CustomListTileWithIcon(
-                      title: 'Explorer',
-                      iconImagePath: 'assets/images/compass.png',
-                      onPressed: () {
-                        Scaffold.of(context).closeDrawer();
-                        context.pushNamed(ExplorerScreen.routeName);
-                      },
-                    ),
-                    CustomListTileWithIcon(
-                      title: 'Tickets',
-                      iconImagePath: 'assets/images/ticket.png',
-                      onPressed: () {
-                        Scaffold.of(context).closeDrawer();
-                        context.pushNamed(TicketsScreen.routeName);
-                      },
-                    ),
-                    VerticalSmallGap(
-                      adjustment: 4,
-                    ),
-                    CustomListTileWithIcon(
-                      title: 'Settings',
-                      iconImagePath: 'assets/images/settings.png',
-                      onPressed: () {
-                        Scaffold.of(context).closeDrawer();
-                        // context.pushNamed('settings');
-                      },
-                    ),
-                    CustomListTileWithIcon(
-                      title: 'Logout',
-                      iconImagePath: 'assets/images/logout_icon.png',
-                      onPressed: () async {
-                        final confirm = await showDialog<bool>(
-                            context: context,
-                            builder: (context) => const ConfirmLogOut());
-                        if (confirm == true && mounted) {
-                          getIt<AuthBloc>()
-                              .add(const AuthEvent.userLoggedOut());
-                          context.pop();
-                        }
-                      },
-                    ),
-                  ],
-                ),
+                Builder(builder: (context) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomListTileWithIcon(
+                        title: 'Explorer',
+                        iconImagePath: 'assets/images/compass.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          context.pushNamed(ExplorerScreen.routeName);
+                        },
+                      ),
+                      CustomListTileWithIcon(
+                        title: 'Tickets',
+                        iconImagePath: 'assets/images/ticket.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          context.pushNamed(TicketsScreen.routeName);
+                        },
+                      ),
+                      VerticalSmallGap(
+                        adjustment: 4,
+                      ),
+                      CustomListTileWithIcon(
+                        title: 'Settings',
+                        iconImagePath: 'assets/images/settings.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          // context.pushNamed('settings');
+                        },
+                      ),
+                      CustomListTileWithIcon(
+                        title: 'Logout',
+                        iconImagePath: 'assets/images/logout_icon.png',
+                        onPressed: () async {
+                          final confirm = await showDialog<bool>(
+                              context: context,
+                              builder: (context) => const ConfirmLogOut());
+                          if (confirm == true && mounted) {
+                            getIt<AuthBloc>()
+                                .add(const AuthEvent.userLoggedOut());
+                            context.pop();
+                          }
+                        },
+                      ),
+                    ],
+                  );
+                }),
               ],
             ),
           ),

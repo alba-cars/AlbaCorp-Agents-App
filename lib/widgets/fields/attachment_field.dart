@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import '../../model/file_object.dart';
+import '../../util/color_category.dart';
 import '../../view/pdf_view_screen/pdf_view_screen.dart';
 import 'document_upload_field.dart';
 import 'error_text.dart';
@@ -40,9 +41,6 @@ class AttachmentField<T> extends StatefulWidget {
   @override
   State<AttachmentField<T>> createState() => _AttachmentFieldState<T>();
 }
-
-Color fieldColor = const Color(0xE9E9E9E9);
-Color borderColor = const Color(0xD2D2D2D2);
 
 class _AttachmentFieldState<T> extends State<AttachmentField<T>> {
   final GlobalKey<FormBuilderFieldState<FormBuilderField, FileObject>>

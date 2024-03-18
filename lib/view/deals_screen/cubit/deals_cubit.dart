@@ -27,7 +27,10 @@ class DealsCubit extends Cubit<DealsState> {
       emit(state.copyWith(getDealsStatus: Status.loadingMore));
     }
 
-    final result = await _dealsRepo.getDeals(paginator: state.dealsPaginator);
+    final result = await _dealsRepo.getDeals(
+        filter: state.dealsFilter,
+        search: state.dealsSearch,
+        paginator: state.dealsPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -40,5 +43,15 @@ class DealsCubit extends Cubit<DealsState> {
         emit(state.copyWith(
             getDealsStatus: Status.failure, getDealsError: e.exception));
     }
+  }
+
+  void searchDeals(String? search) {
+    emit(state.copyWith(dealsSearch: search));
+    getDeals(refresh: true);
+  }
+
+  void setDealsFilter(Map<String, dynamic>? filter) {
+    emit(state.copyWith(dealsFilter: filter));
+    getDeals(refresh: true);
   }
 }

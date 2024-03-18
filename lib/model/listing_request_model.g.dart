@@ -11,18 +11,22 @@ _$NewListingRequestImpl _$$NewListingRequestImplFromJson(
     _$NewListingRequestImpl(
       id: json['id'] as String,
       userId: json['user_id'] as String,
-      propertyTypeId: json['property_type_id'] as String,
-      communityId: json['community_id'] as String,
-      buildingId: json['building_id'] as String,
+      propertyTypeId: json['property_type_id'] as String?,
+      communityId: json['community_id'] as String?,
+      buildingId: json['building_id'] as String?,
       multiple: json['multiple'] as bool,
-      type: json['type'] as String,
-      beds: json['beds'] as String,
-      baths: json['baths'] as String,
-      price: json['price'] as int,
-      size: json['size'] as int,
-      propertyType:
-          PropertyType.fromJson(json['property_type'] as Map<String, dynamic>),
-      community: Community.fromJson(json['community'] as Map<String, dynamic>),
+      type: json['type'] as String?,
+      beds: json['beds'] as String?,
+      baths: json['baths'] as String?,
+      price: json['price'] as num?,
+      size: json['size'] as num?,
+      propertyType: json['property_type'] == null
+          ? null
+          : PropertyType.fromJson(
+              json['property_type'] as Map<String, dynamic>),
+      community: json['community'] == null
+          ? null
+          : Community.fromJson(json['community'] as Map<String, dynamic>),
       building: json['building'] == null
           ? null
           : Building.fromJson(json['building'] as Map<String, dynamic>),

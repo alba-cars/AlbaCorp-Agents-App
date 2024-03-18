@@ -124,7 +124,7 @@ class _AddTicketScreenLayoutState extends State<_AddTicketScreenLayout> {
                             isRequired: false,
                             valueTransformer: (p0) => p0?.id,
                             displayStringForOption: (deal) =>
-                                "${deal.referenceNumber} | ${deal.propertyList?.communityName ?? deal.newListingRequest?.community.community} | AED ${deal.agreedSalePrice?.toInt()}",
+                                "${deal.referenceNumber} | ${deal.propertyList?.communityName ?? deal.newListingRequest?.community?.community ?? ''} | AED ${deal.agreedSalePrice?.toInt()}",
                             optionsBuilder: (v) async {
                               return context
                                   .read<AddTicketCubit>()

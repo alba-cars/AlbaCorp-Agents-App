@@ -332,7 +332,7 @@ class InfoTabView extends StatelessWidget {
                           return InfoLabelValue(
                             labelOne: 'Type',
                             valueOne: deal!
-                                .newListingRequest?.propertyType.propertyType,
+                                .newListingRequest?.propertyType?.propertyType,
                             labelTwo: 'Listing Type',
                             valueTwo: deal.propertyList?.listingType,
                           );
@@ -348,7 +348,7 @@ class InfoTabView extends StatelessWidget {
                         labelOne: 'Area',
                         valueOne: deal.newListingRequest?.size.toString(),
                         labelTwo: 'Community',
-                        valueTwo: deal.newListingRequest?.community.community,
+                        valueTwo: deal.newListingRequest?.community?.community,
                       ),
                     ],
                   ),

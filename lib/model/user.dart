@@ -9,7 +9,7 @@ part 'user.g.dart';
 class User with _$User {
   const factory User({
     @JsonKey(readValue: readId) required String id,
-    required String email,
+    required String? email,
     @Default('') String phone,
     String? whatsapp,
     @JsonKey(name: "first_name") @Default('') String firstName,

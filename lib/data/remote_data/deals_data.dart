@@ -27,13 +27,30 @@ class DealData implements DealsRepo {
   final log = Logger();
   @override
   Future<Result<List<Deal>>> getDeals(
-      {String? search, Paginator? paginator}) async {
+      {String? search,
+      Map<String, dynamic>? filter,
+      Paginator? paginator}) async {
     try {
       String url = 'v1/search/deal/filter';
+      Map<String, dynamic>? filterRemoved;
+      if (filter != null) {
+        filterRemoved =
+            (Map.from(filter)..removeWhere((key, value) => value == null));
 
+        filterRemoved = filterRemoved.map((key, value) {
+          if (value is Map) {
+            return MapEntry(key, value['value']);
+          } else if (value is List<Map>) {
+            return MapEntry(key, value.map((e) => e['value']).toList());
+          } else {
+            return MapEntry(key, value);
+          }
+        });
+      }
       final response = await _dio.get(url, queryParameters: {
         if (search != null) 'search': search,
         if (paginator != null) 'page': paginator.currentPage + 1,
+        if (filterRemoved != null) ...filterRemoved
         // 'sort_by': 'createdAt',
         // "sort_dir": 'DESC',
         // 'roles': ['User', 'Owner'],

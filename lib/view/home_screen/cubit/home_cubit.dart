@@ -18,52 +18,111 @@ part 'home_cubit.freezed.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._activityRepo) : super(HomeState()) {
     Future.wait(List.generate(7, (index) => getActivities(filterCode: index)));
+
+    pendingViewingActivitiesCount();
+    completedActivitiesCount();
   }
 
   final ActivityRepo _activityRepo;
 
   Future<void> getActivities(
       {required int filterCode, bool refresh = false}) async {
-    if (state.getActivitiesStatus == Status.loading ||
-        state.getActivitiesStatus == Status.loadingMore) {
+    if (state.getActivitiesStatus[filterCode] == Status.loading ||
+        state.getActivitiesStatus[filterCode] == Status.loadingMore) {
       return;
     }
-    if (refresh || state.activityPaginator == null) {
+    if (refresh || state.activityPaginator[filterCode] == null) {
+      final status = {...state.getActivitiesStatus, filterCode: Status.loading};
+      final error = {...state.getActivitiesError, filterCode: null};
+      final activities = {...state.activities, filterCode: <Activity>[]};
+      final paginator = {...state.activityPaginator, filterCode: null};
       emit(state.copyWith(
-          activityPaginator: null,
-          getActivitiesStatus: Status.loading,
-          activities: [],
-          getActivitiesError: null));
+          activityPaginator: paginator,
+          getActivitiesStatus: status,
+          activities: activities,
+          getActivitiesError: error));
     } else {
+      final status = {
+        ...state.getActivitiesStatus,
+        filterCode: Status.loadingMore
+      };
+      final error = {...state.getActivitiesError, filterCode: null};
       emit(state.copyWith(
-          getActivitiesStatus: Status.loadingMore, getActivitiesError: null));
+          getActivitiesStatus: status, getActivitiesError: error));
     }
 
     final result = await _activityRepo.fetchActivities(
-        filterCode: 0,
+        filterCode: filterCode,
         status: switch (state.selectedCategory.name) {
           'Fresh Hot' => LeadStatus.Fresh,
           'Prospect' => LeadStatus.Disqualified,
           _ => null
         },
-        paginator: state.activityPaginator);
+        paginator: state.activityPaginator[filterCode]);
     switch (result) {
       case (Success<List<Activity>> s):
+        final status = {
+          ...state.getActivitiesStatus,
+          filterCode: Status.success
+        };
+        final error = {...state.getActivitiesError, filterCode: null};
+        final activities = {
+          ...state.activities,
+          filterCode: [
+            ...(state.activities[filterCode] ?? <Activity>[]),
+            ...s.value
+          ]
+        };
+
+        final paginator = {...state.activityPaginator, filterCode: s.paginator};
         emit(state.copyWith(
-            activities: [...state.activities, ...s.value],
-            getActivitiesError: null,
-            getActivitiesStatus: Status.success,
-            activityPaginator: s.paginator));
+            activities: activities,
+            getActivitiesError: error,
+            getActivitiesStatus: status,
+            activityPaginator: paginator));
+        pendingActivitiesCount();
         break;
       case (Error e):
+        final status = {
+          ...state.getActivitiesStatus,
+          filterCode: Status.failure
+        };
+        final error = {...state.getActivitiesError, filterCode: e.exception};
         emit(state.copyWith(
-            getActivitiesError: e.exception,
-            getActivitiesStatus: Status.failure));
+            getActivitiesError: error, getActivitiesStatus: status));
     }
   }
 
   selectCategory(ModelCategory category) {
     emit(state.copyWith(selectedCategory: category));
     getActivities(filterCode: 0);
+  }
+
+  Future<void> pendingActivitiesCount() async {
+    int count = 0;
+    state.activityPaginator
+        .forEach((key, value) => count = count + (value?.itemCount ?? 0));
+
+    emit(state.copyWith(pendingTasksCount: count));
+  }
+
+  Future<void> completedActivitiesCount() async {
+    final result = await _activityRepo.completedActivitiesCount();
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(completedTasksCount: s.value));
+        break;
+      default:
+    }
+  }
+
+  Future<void> pendingViewingActivitiesCount() async {
+    final result = await _activityRepo.pendingViewingActivitiesCount();
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(viewingTasksCount: s.value));
+        break;
+      default:
+    }
   }
 }

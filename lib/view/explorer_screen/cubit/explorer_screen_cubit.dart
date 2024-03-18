@@ -4,26 +4,53 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
+import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
+import '../../../model/building_model.dart';
+import '../../../model/community_model.dart';
+import '../../../model/paginator.dart';
+import '../../../model/property_type_model.dart';
+
 part 'explorer_screen_state.dart';
 part 'explorer_screen_cubit.freezed.dart';
 
 @injectable
 class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
-  ExplorerScreenCubit(this._explorerRepo) : super(ExplorerScreenState());
+  ExplorerScreenCubit(this._explorerRepo, this._listingsRepo)
+      : super(ExplorerScreenState()) {
+    getPropertyTypes();
+  }
   final ExplorerRepo _explorerRepo;
+  final ListingsRepo _listingsRepo;
 
-  Future<void> getExplorerList({bool refresh = false}) async {
-    final result = await _explorerRepo.getPropertyCards();
+  Future<void> getExplorerList({
+    bool refresh = false,
+  }) async {
+    if (refresh || state.explorerPaginator == null) {
+      emit(state.copyWith(
+          getExplorerListStatus: Status.loading,
+          explorerPaginator: null,
+          explorerList: []));
+    } else {
+      if (state.getExplorerListStatus == Status.loadingMore) {
+        return;
+      }
+      emit(state.copyWith(getExplorerListStatus: Status.loadingMore));
+    }
+
+    final result = await _explorerRepo.getPropertyCards(
+        filter: state.explorerFilter, paginator: state.explorerPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            explorerList: s.value, getExplorerListStatus: Status.success));
+            explorerList: [...state.explorerList, ...s.value],
+            getExplorerListStatus: Status.success,
+            explorerPaginator: s.paginator));
         break;
       case (Error e):
         emit(state.copyWith(
@@ -32,20 +59,58 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     }
   }
 
-  Future<void> getCheckedOutExplorerList({bool refresh = false}) async {
-    emit(state.copyWith(getCheckedOutExplorerListStatus: Status.loading));
-    final result = await _explorerRepo.getCheckedOutPropertyCards();
+  Future<void> getCheckedOutExplorerList({
+    bool refresh = false,
+  }) async {
+    if (refresh || state.checkedOutPaginator == null) {
+      emit(state.copyWith(
+          getCheckedOutExplorerListStatus: Status.loading,
+          checkedOutPaginator: null,
+          checkedOutExplorerList: []));
+    } else {
+      if (state.getCheckedOutExplorerListStatus == Status.loadingMore) {
+        return;
+      }
+      emit(state.copyWith(getCheckedOutExplorerListStatus: Status.loadingMore));
+    }
+
+    final result = await _explorerRepo.getCheckedOutPropertyCards(
+        filter: state.checkedOutFilter, paginator: state.checkedOutPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            checkedOutExplorerList: s.value,
-            getCheckedOutExplorerListStatus: Status.success));
+            checkedOutExplorerList: [
+              ...state.checkedOutExplorerList,
+              ...s.value
+            ],
+            getCheckedOutExplorerListStatus: Status.success,
+            checkedOutPaginator: s.paginator));
         break;
       case (Error e):
         emit(state.copyWith(
             getCheckedOutExplorerListStatus: Status.failure,
             getCheckedOutExplorerListError: e.exception));
     }
+  }
+
+  void searchExplorer(String? search) {
+    emit(state.copyWith(explorerSearch: search));
+    getExplorerList(refresh: true);
+  }
+
+  void searchCheckedOut(String? search) {
+    emit(state.copyWith(checkedOutSearch: search));
+    getCheckedOutExplorerList(refresh: true);
+  }
+
+  void setExplorerFilter(Map<String, dynamic>? filter) {
+    emit(state.copyWith(explorerFilter: filter));
+    getExplorerList(refresh: true);
+  }
+
+  void setCheckedOutFilter(Map<String, dynamic>? filter) {
+    emit(state.copyWith(checkedOutFilter: filter));
+    getCheckedOutExplorerList(refresh: true);
   }
 
   Future<void> checkInLead(
@@ -109,6 +174,55 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
       getExplorerList();
     } else {
       getCheckedOutExplorerList();
+    }
+  }
+
+  Future<List<Community>> getCommunities({String? search}) async {
+    emit(state.copyWith(getCommunityListStatus: Status.loadingMore));
+    final result = await _listingsRepo.getCommunities(search: search);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            communityList: s.value, getCommunityListStatus: Status.success));
+        return s.value;
+      case (Error e):
+        emit(state.copyWith(
+          getCommunityListStatus: Status.failure,
+        ));
+        return [];
+    }
+  }
+
+  Future<List<Building>> getBuildings({String? search}) async {
+    emit(state.copyWith(getBuildingListStatus: Status.loadingMore));
+    final result = await _listingsRepo.getBuildingNames(search: search);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            buildingList: s.value, getBuildingListStatus: Status.success));
+        return s.value;
+
+      case (Error e):
+        emit(state.copyWith(
+          getBuildingListStatus: Status.failure,
+        ));
+        return [];
+    }
+  }
+
+  Future<void> getPropertyTypes() async {
+    emit(state.copyWith(getPropertyTypeListStatus: Status.loadingMore));
+    final result = await _listingsRepo.getPropertyTypes();
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            propertyTypeList: s.value,
+            getPropertyTypeListStatus: Status.success));
+        break;
+      case (Error e):
+        emit(state.copyWith(
+          getPropertyTypeListStatus: Status.failure,
+        ));
     }
   }
 }

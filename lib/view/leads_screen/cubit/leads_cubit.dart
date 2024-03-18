@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 
@@ -25,7 +26,10 @@ class LeadsCubit extends Cubit<LeadsState> {
       emit(state.copyWith(getLeadsStatus: Status.loadingMore));
     }
 
-    final result = await _leadRepo.getLeads(paginator: state.leadsPaginator);
+    final result = await _leadRepo.getLeads(
+        search: state.leadsSearch,
+        filter: state.leadsFilter,
+        paginator: state.leadsPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -38,5 +42,15 @@ class LeadsCubit extends Cubit<LeadsState> {
         emit(state.copyWith(
             getLeadsStatus: Status.failure, getLeadsError: e.exception));
     }
+  }
+
+  void searchLeads(String? search) {
+    emit(state.copyWith(leadsSearch: search));
+    getLeads(refresh: true);
+  }
+
+  void setLeadFilters(Map<String, dynamic>? filter) {
+    emit(state.copyWith(leadsFilter: filter));
+    getLeads(refresh: true);
   }
 }

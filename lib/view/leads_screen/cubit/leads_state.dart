@@ -7,5 +7,7 @@ class LeadsState with _$LeadsState {
     @Default(Status.init) Status getLeadsStatus,
     String? getLeadsError,
     Paginator? leadsPaginator,
+    String? leadsSearch,
+    Map<String, dynamic>? leadsFilter,
   }) = _LeadsState;
 }

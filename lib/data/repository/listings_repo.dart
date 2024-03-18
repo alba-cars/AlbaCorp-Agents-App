@@ -10,7 +10,7 @@ import '../../util/result.dart';
 
 abstract class ListingsRepo {
   Future<Result<List<Property>>> getListings(
-      {String? status, Paginator? paginator});
+      {String? search, Map<String, dynamic>? filter, Paginator? paginator});
   Future<Result<Property>> getListingDetails(
       {String? status, required String listingId});
   Future<Result<List<Activity>>> getListingActivities(

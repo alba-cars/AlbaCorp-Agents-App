@@ -62,10 +62,24 @@ class LeadData implements LeadRepo {
 
   @override
   Future<Result<List<Lead>>> getLeads(
-      {String? status, String? search, Paginator? paginator}) async {
+      {Map<String, dynamic>? filter,
+      String? search,
+      Paginator? paginator}) async {
     try {
       String url = 'v1/search/user/filter';
-
+      final Map<String, dynamic>? filterRemoved = (filter != null)
+          ? (Map.from(filter)..removeWhere((key, value) => value == null))
+          : null;
+      if (filterRemoved?.containsKey('lead_source_type') == true) {
+        final val = filterRemoved!['lead_source_type'];
+        final vals = filterRemoved['lead_source_many'] ?? [];
+        filterRemoved['lead_source_many'] = [...vals, ...val['value']];
+        filterRemoved.remove('lead_source_type');
+      }
+      if (filterRemoved?.containsKey('active') == true) {
+        filterRemoved!["active"] = filterRemoved['active']?['value'];
+      }
+      Logger().d(filterRemoved);
       final response = await _dio.get(url, queryParameters: {
         'agent_id': getIt<AuthBloc>().state.agent?.id,
         if (paginator != null) 'page': paginator.currentPage + 1,
@@ -73,7 +87,8 @@ class LeadData implements LeadRepo {
         "sort_dir": 'DESC',
         'roles': ['User', 'Owner'],
         'active': true,
-        'search': search
+        if (search != null) 'search': search,
+        if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['findUsersOutput'] as List;
       final list = data.map((e) => Lead.fromJson(e)).toList();

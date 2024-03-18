@@ -67,7 +67,12 @@ class _WrapSelectFieldState<T extends Object>
       key: _fieldKey,
       name: widget.name,
       valueTransformer: widget.valueTransformer,
-      validator: widget.validator,
+      validator: (value) {
+        if (widget.isRequired && (value == null)) {
+          return 'Please enter a value';
+        }
+        return widget.validator?.call(value);
+      },
       initialValue: widget.defaultValue,
       builder: (state) {
         return Column(

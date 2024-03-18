@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
+import 'package:real_estate_app/model/activity_feedback_model.dart';
+import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 
@@ -11,7 +13,7 @@ part 'activity_cubit.freezed.dart';
 
 @singleton
 class ActivityCubit extends Cubit<ActivityState> {
-  ActivityCubit(this._activityRepo) : super(ActivityState.initial());
+  ActivityCubit(this._activityRepo) : super(ActivityState());
   final ActivityRepo _activityRepo;
 
   Future<void> updateActivity(
@@ -34,5 +36,10 @@ class ActivityCubit extends Cubit<ActivityState> {
         break;
       default:
     }
+  }
+
+  Future<void> setLastActivityFeedback(
+      Activity activity, ActivityFeedback feedback) async {
+    emit(state.copyWith(lastActivity: activity, activityFeedback: feedback));
   }
 }

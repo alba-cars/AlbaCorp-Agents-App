@@ -26,8 +26,8 @@ mixin _$Lead {
   String get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name')
   String get lastName => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
@@ -76,8 +76,8 @@ abstract class $LeadCopyWith<$Res> {
       {@JsonKey(readValue: readId) String id,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
-      String email,
-      String phone,
+      String? email,
+      String? phone,
       String? country,
       String? city,
       String? address,
@@ -120,8 +120,8 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
     Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? email = null,
-    Object? phone = null,
+    Object? email = freezed,
+    Object? phone = freezed,
     Object? country = freezed,
     Object? city = freezed,
     Object? address = freezed,
@@ -158,14 +158,14 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -281,8 +281,8 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       {@JsonKey(readValue: readId) String id,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
-      String email,
-      String phone,
+      String? email,
+      String? phone,
       String? country,
       String? city,
       String? address,
@@ -323,8 +323,8 @@ class __$$LeadImplCopyWithImpl<$Res>
     Object? id = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? email = null,
-    Object? phone = null,
+    Object? email = freezed,
+    Object? phone = freezed,
     Object? country = freezed,
     Object? city = freezed,
     Object? address = freezed,
@@ -361,14 +361,14 @@ class __$$LeadImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -468,8 +468,8 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       {@JsonKey(readValue: readId) required this.id,
       @JsonKey(name: 'first_name') required this.firstName,
       @JsonKey(name: 'last_name') required this.lastName,
-      required this.email,
-      required this.phone,
+      this.email,
+      this.phone,
       this.country,
       this.city,
       this.address,
@@ -511,9 +511,9 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   @JsonKey(name: 'last_name')
   final String lastName;
   @override
-  final String email;
+  final String? email;
   @override
-  final String phone;
+  final String? phone;
   @override
   final String? country;
   @override
@@ -734,8 +734,8 @@ abstract class _Lead implements Lead {
       {@JsonKey(readValue: readId) required final String id,
       @JsonKey(name: 'first_name') required final String firstName,
       @JsonKey(name: 'last_name') required final String lastName,
-      required final String email,
-      required final String phone,
+      final String? email,
+      final String? phone,
       final String? country,
       final String? city,
       final String? address,
@@ -773,9 +773,9 @@ abstract class _Lead implements Lead {
   @JsonKey(name: 'last_name')
   String get lastName;
   @override
-  String get email;
+  String? get email;
   @override
-  String get phone;
+  String? get phone;
   @override
   String? get country;
   @override

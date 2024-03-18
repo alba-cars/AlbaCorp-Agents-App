@@ -20,6 +20,8 @@ mixin _$DealsState {
   Status get getDealsStatus => throw _privateConstructorUsedError;
   String? get getDealsError => throw _privateConstructorUsedError;
   Paginator? get dealsPaginator => throw _privateConstructorUsedError;
+  String? get dealsSearch => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get dealsFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DealsStateCopyWith<DealsState> get copyWith =>
@@ -36,7 +38,9 @@ abstract class $DealsStateCopyWith<$Res> {
       {List<Deal> deals,
       Status getDealsStatus,
       String? getDealsError,
-      Paginator? dealsPaginator});
+      Paginator? dealsPaginator,
+      String? dealsSearch,
+      Map<String, dynamic>? dealsFilter});
 
   $PaginatorCopyWith<$Res>? get dealsPaginator;
 }
@@ -58,6 +62,8 @@ class _$DealsStateCopyWithImpl<$Res, $Val extends DealsState>
     Object? getDealsStatus = null,
     Object? getDealsError = freezed,
     Object? dealsPaginator = freezed,
+    Object? dealsSearch = freezed,
+    Object? dealsFilter = freezed,
   }) {
     return _then(_value.copyWith(
       deals: null == deals
@@ -76,6 +82,14 @@ class _$DealsStateCopyWithImpl<$Res, $Val extends DealsState>
           ? _value.dealsPaginator
           : dealsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      dealsSearch: freezed == dealsSearch
+          ? _value.dealsSearch
+          : dealsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealsFilter: freezed == dealsFilter
+          ? _value.dealsFilter
+          : dealsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 
@@ -104,7 +118,9 @@ abstract class _$$DealsStateImplCopyWith<$Res>
       {List<Deal> deals,
       Status getDealsStatus,
       String? getDealsError,
-      Paginator? dealsPaginator});
+      Paginator? dealsPaginator,
+      String? dealsSearch,
+      Map<String, dynamic>? dealsFilter});
 
   @override
   $PaginatorCopyWith<$Res>? get dealsPaginator;
@@ -125,6 +141,8 @@ class __$$DealsStateImplCopyWithImpl<$Res>
     Object? getDealsStatus = null,
     Object? getDealsError = freezed,
     Object? dealsPaginator = freezed,
+    Object? dealsSearch = freezed,
+    Object? dealsFilter = freezed,
   }) {
     return _then(_$DealsStateImpl(
       deals: null == deals
@@ -143,6 +161,14 @@ class __$$DealsStateImplCopyWithImpl<$Res>
           ? _value.dealsPaginator
           : dealsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      dealsSearch: freezed == dealsSearch
+          ? _value.dealsSearch
+          : dealsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealsFilter: freezed == dealsFilter
+          ? _value._dealsFilter
+          : dealsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -154,8 +180,11 @@ class _$DealsStateImpl implements _DealsState {
       {final List<Deal> deals = const [],
       this.getDealsStatus = Status.init,
       this.getDealsError,
-      this.dealsPaginator})
-      : _deals = deals;
+      this.dealsPaginator,
+      this.dealsSearch,
+      final Map<String, dynamic>? dealsFilter})
+      : _deals = deals,
+        _dealsFilter = dealsFilter;
 
   final List<Deal> _deals;
   @override
@@ -173,10 +202,21 @@ class _$DealsStateImpl implements _DealsState {
   final String? getDealsError;
   @override
   final Paginator? dealsPaginator;
+  @override
+  final String? dealsSearch;
+  final Map<String, dynamic>? _dealsFilter;
+  @override
+  Map<String, dynamic>? get dealsFilter {
+    final value = _dealsFilter;
+    if (value == null) return null;
+    if (_dealsFilter is EqualUnmodifiableMapView) return _dealsFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'DealsState(deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, dealsPaginator: $dealsPaginator)';
+    return 'DealsState(deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, dealsPaginator: $dealsPaginator, dealsSearch: $dealsSearch, dealsFilter: $dealsFilter)';
   }
 
   @override
@@ -190,7 +230,11 @@ class _$DealsStateImpl implements _DealsState {
             (identical(other.getDealsError, getDealsError) ||
                 other.getDealsError == getDealsError) &&
             (identical(other.dealsPaginator, dealsPaginator) ||
-                other.dealsPaginator == dealsPaginator));
+                other.dealsPaginator == dealsPaginator) &&
+            (identical(other.dealsSearch, dealsSearch) ||
+                other.dealsSearch == dealsSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._dealsFilter, _dealsFilter));
   }
 
   @override
@@ -199,7 +243,9 @@ class _$DealsStateImpl implements _DealsState {
       const DeepCollectionEquality().hash(_deals),
       getDealsStatus,
       getDealsError,
-      dealsPaginator);
+      dealsPaginator,
+      dealsSearch,
+      const DeepCollectionEquality().hash(_dealsFilter));
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +259,9 @@ abstract class _DealsState implements DealsState {
       {final List<Deal> deals,
       final Status getDealsStatus,
       final String? getDealsError,
-      final Paginator? dealsPaginator}) = _$DealsStateImpl;
+      final Paginator? dealsPaginator,
+      final String? dealsSearch,
+      final Map<String, dynamic>? dealsFilter}) = _$DealsStateImpl;
 
   @override
   List<Deal> get deals;
@@ -223,6 +271,10 @@ abstract class _DealsState implements DealsState {
   String? get getDealsError;
   @override
   Paginator? get dealsPaginator;
+  @override
+  String? get dealsSearch;
+  @override
+  Map<String, dynamic>? get dealsFilter;
   @override
   @JsonKey(ignore: true)
   _$$DealsStateImplCopyWith<_$DealsStateImpl> get copyWith =>

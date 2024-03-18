@@ -16,12 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeState {
-  List<Activity> get activities => throw _privateConstructorUsedError;
-  Status get getActivitiesStatus => throw _privateConstructorUsedError;
-  String? get getActivitiesError => throw _privateConstructorUsedError;
-  Paginator? get activityPaginator => throw _privateConstructorUsedError;
+  Map<int, List<Activity>> get activities => throw _privateConstructorUsedError;
+  Map<int, Status?> get getActivitiesStatus =>
+      throw _privateConstructorUsedError;
+  Map<int, String?> get getActivitiesError =>
+      throw _privateConstructorUsedError;
+  Map<int, Paginator?> get activityPaginator =>
+      throw _privateConstructorUsedError;
   ModelCategory get selectedCategory => throw _privateConstructorUsedError;
   List<ModelCategory> get categories => throw _privateConstructorUsedError;
+  int get completedTasksCount => throw _privateConstructorUsedError;
+  int get pendingTasksCount => throw _privateConstructorUsedError;
+  int get viewingTasksCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -34,14 +40,16 @@ abstract class $HomeStateCopyWith<$Res> {
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
   $Res call(
-      {List<Activity> activities,
-      Status getActivitiesStatus,
-      String? getActivitiesError,
-      Paginator? activityPaginator,
+      {Map<int, List<Activity>> activities,
+      Map<int, Status?> getActivitiesStatus,
+      Map<int, String?> getActivitiesError,
+      Map<int, Paginator?> activityPaginator,
       ModelCategory selectedCategory,
-      List<ModelCategory> categories});
+      List<ModelCategory> categories,
+      int completedTasksCount,
+      int pendingTasksCount,
+      int viewingTasksCount});
 
-  $PaginatorCopyWith<$Res>? get activityPaginator;
   $ModelCategoryCopyWith<$Res> get selectedCategory;
 }
 
@@ -60,28 +68,31 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   $Res call({
     Object? activities = null,
     Object? getActivitiesStatus = null,
-    Object? getActivitiesError = freezed,
-    Object? activityPaginator = freezed,
+    Object? getActivitiesError = null,
+    Object? activityPaginator = null,
     Object? selectedCategory = null,
     Object? categories = null,
+    Object? completedTasksCount = null,
+    Object? pendingTasksCount = null,
+    Object? viewingTasksCount = null,
   }) {
     return _then(_value.copyWith(
       activities: null == activities
           ? _value.activities
           : activities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
+              as Map<int, List<Activity>>,
       getActivitiesStatus: null == getActivitiesStatus
           ? _value.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
-      getActivitiesError: freezed == getActivitiesError
+              as Map<int, Status?>,
+      getActivitiesError: null == getActivitiesError
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      activityPaginator: freezed == activityPaginator
+              as Map<int, String?>,
+      activityPaginator: null == activityPaginator
           ? _value.activityPaginator
           : activityPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
+              as Map<int, Paginator?>,
       selectedCategory: null == selectedCategory
           ? _value.selectedCategory
           : selectedCategory // ignore: cast_nullable_to_non_nullable
@@ -90,19 +101,19 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<ModelCategory>,
+      completedTasksCount: null == completedTasksCount
+          ? _value.completedTasksCount
+          : completedTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      pendingTasksCount: null == pendingTasksCount
+          ? _value.pendingTasksCount
+          : pendingTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      viewingTasksCount: null == viewingTasksCount
+          ? _value.viewingTasksCount
+          : viewingTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get activityPaginator {
-    if (_value.activityPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.activityPaginator!, (value) {
-      return _then(_value.copyWith(activityPaginator: value) as $Val);
-    });
   }
 
   @override
@@ -123,15 +134,16 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Activity> activities,
-      Status getActivitiesStatus,
-      String? getActivitiesError,
-      Paginator? activityPaginator,
+      {Map<int, List<Activity>> activities,
+      Map<int, Status?> getActivitiesStatus,
+      Map<int, String?> getActivitiesError,
+      Map<int, Paginator?> activityPaginator,
       ModelCategory selectedCategory,
-      List<ModelCategory> categories});
+      List<ModelCategory> categories,
+      int completedTasksCount,
+      int pendingTasksCount,
+      int viewingTasksCount});
 
-  @override
-  $PaginatorCopyWith<$Res>? get activityPaginator;
   @override
   $ModelCategoryCopyWith<$Res> get selectedCategory;
 }
@@ -149,28 +161,31 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   $Res call({
     Object? activities = null,
     Object? getActivitiesStatus = null,
-    Object? getActivitiesError = freezed,
-    Object? activityPaginator = freezed,
+    Object? getActivitiesError = null,
+    Object? activityPaginator = null,
     Object? selectedCategory = null,
     Object? categories = null,
+    Object? completedTasksCount = null,
+    Object? pendingTasksCount = null,
+    Object? viewingTasksCount = null,
   }) {
     return _then(_$HomeStateImpl(
       activities: null == activities
           ? _value._activities
           : activities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
+              as Map<int, List<Activity>>,
       getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
+          ? _value._getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
-      getActivitiesError: freezed == getActivitiesError
-          ? _value.getActivitiesError
+              as Map<int, Status?>,
+      getActivitiesError: null == getActivitiesError
+          ? _value._getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      activityPaginator: freezed == activityPaginator
-          ? _value.activityPaginator
+              as Map<int, String?>,
+      activityPaginator: null == activityPaginator
+          ? _value._activityPaginator
           : activityPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
+              as Map<int, Paginator?>,
       selectedCategory: null == selectedCategory
           ? _value.selectedCategory
           : selectedCategory // ignore: cast_nullable_to_non_nullable
@@ -179,6 +194,18 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<ModelCategory>,
+      completedTasksCount: null == completedTasksCount
+          ? _value.completedTasksCount
+          : completedTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      pendingTasksCount: null == pendingTasksCount
+          ? _value.pendingTasksCount
+          : pendingTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      viewingTasksCount: null == viewingTasksCount
+          ? _value.viewingTasksCount
+          : viewingTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -187,31 +214,60 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 
 class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
-      {final List<Activity> activities = const [],
-      this.getActivitiesStatus = Status.init,
-      this.getActivitiesError,
-      this.activityPaginator,
+      {final Map<int, List<Activity>> activities = const {},
+      final Map<int, Status?> getActivitiesStatus = const {},
+      final Map<int, String?> getActivitiesError = const {},
+      final Map<int, Paginator?> activityPaginator = const {},
       this.selectedCategory = const ModelCategory(name: 'ALL'),
-      final List<ModelCategory> categories = categoryList})
+      final List<ModelCategory> categories = categoryList,
+      this.completedTasksCount = 0,
+      this.pendingTasksCount = 0,
+      this.viewingTasksCount = 0})
       : _activities = activities,
+        _getActivitiesStatus = getActivitiesStatus,
+        _getActivitiesError = getActivitiesError,
+        _activityPaginator = activityPaginator,
         _categories = categories;
 
-  final List<Activity> _activities;
+  final Map<int, List<Activity>> _activities;
   @override
   @JsonKey()
-  List<Activity> get activities {
-    if (_activities is EqualUnmodifiableListView) return _activities;
+  Map<int, List<Activity>> get activities {
+    if (_activities is EqualUnmodifiableMapView) return _activities;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_activities);
+    return EqualUnmodifiableMapView(_activities);
   }
 
+  final Map<int, Status?> _getActivitiesStatus;
   @override
   @JsonKey()
-  final Status getActivitiesStatus;
+  Map<int, Status?> get getActivitiesStatus {
+    if (_getActivitiesStatus is EqualUnmodifiableMapView)
+      return _getActivitiesStatus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_getActivitiesStatus);
+  }
+
+  final Map<int, String?> _getActivitiesError;
   @override
-  final String? getActivitiesError;
+  @JsonKey()
+  Map<int, String?> get getActivitiesError {
+    if (_getActivitiesError is EqualUnmodifiableMapView)
+      return _getActivitiesError;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_getActivitiesError);
+  }
+
+  final Map<int, Paginator?> _activityPaginator;
   @override
-  final Paginator? activityPaginator;
+  @JsonKey()
+  Map<int, Paginator?> get activityPaginator {
+    if (_activityPaginator is EqualUnmodifiableMapView)
+      return _activityPaginator;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_activityPaginator);
+  }
+
   @override
   @JsonKey()
   final ModelCategory selectedCategory;
@@ -225,8 +281,18 @@ class _$HomeStateImpl implements _HomeState {
   }
 
   @override
+  @JsonKey()
+  final int completedTasksCount;
+  @override
+  @JsonKey()
+  final int pendingTasksCount;
+  @override
+  @JsonKey()
+  final int viewingTasksCount;
+
+  @override
   String toString() {
-    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories)';
+    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount)';
   }
 
   @override
@@ -236,27 +302,36 @@ class _$HomeStateImpl implements _HomeState {
             other is _$HomeStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._activities, _activities) &&
-            (identical(other.getActivitiesStatus, getActivitiesStatus) ||
-                other.getActivitiesStatus == getActivitiesStatus) &&
-            (identical(other.getActivitiesError, getActivitiesError) ||
-                other.getActivitiesError == getActivitiesError) &&
-            (identical(other.activityPaginator, activityPaginator) ||
-                other.activityPaginator == activityPaginator) &&
+            const DeepCollectionEquality()
+                .equals(other._getActivitiesStatus, _getActivitiesStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._getActivitiesError, _getActivitiesError) &&
+            const DeepCollectionEquality()
+                .equals(other._activityPaginator, _activityPaginator) &&
             (identical(other.selectedCategory, selectedCategory) ||
                 other.selectedCategory == selectedCategory) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            (identical(other.completedTasksCount, completedTasksCount) ||
+                other.completedTasksCount == completedTasksCount) &&
+            (identical(other.pendingTasksCount, pendingTasksCount) ||
+                other.pendingTasksCount == pendingTasksCount) &&
+            (identical(other.viewingTasksCount, viewingTasksCount) ||
+                other.viewingTasksCount == viewingTasksCount));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_activities),
-      getActivitiesStatus,
-      getActivitiesError,
-      activityPaginator,
+      const DeepCollectionEquality().hash(_getActivitiesStatus),
+      const DeepCollectionEquality().hash(_getActivitiesError),
+      const DeepCollectionEquality().hash(_activityPaginator),
       selectedCategory,
-      const DeepCollectionEquality().hash(_categories));
+      const DeepCollectionEquality().hash(_categories),
+      completedTasksCount,
+      pendingTasksCount,
+      viewingTasksCount);
 
   @JsonKey(ignore: true)
   @override
@@ -267,25 +342,34 @@ class _$HomeStateImpl implements _HomeState {
 
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
-      {final List<Activity> activities,
-      final Status getActivitiesStatus,
-      final String? getActivitiesError,
-      final Paginator? activityPaginator,
+      {final Map<int, List<Activity>> activities,
+      final Map<int, Status?> getActivitiesStatus,
+      final Map<int, String?> getActivitiesError,
+      final Map<int, Paginator?> activityPaginator,
       final ModelCategory selectedCategory,
-      final List<ModelCategory> categories}) = _$HomeStateImpl;
+      final List<ModelCategory> categories,
+      final int completedTasksCount,
+      final int pendingTasksCount,
+      final int viewingTasksCount}) = _$HomeStateImpl;
 
   @override
-  List<Activity> get activities;
+  Map<int, List<Activity>> get activities;
   @override
-  Status get getActivitiesStatus;
+  Map<int, Status?> get getActivitiesStatus;
   @override
-  String? get getActivitiesError;
+  Map<int, String?> get getActivitiesError;
   @override
-  Paginator? get activityPaginator;
+  Map<int, Paginator?> get activityPaginator;
   @override
   ModelCategory get selectedCategory;
   @override
   List<ModelCategory> get categories;
+  @override
+  int get completedTasksCount;
+  @override
+  int get pendingTasksCount;
+  @override
+  int get viewingTasksCount;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

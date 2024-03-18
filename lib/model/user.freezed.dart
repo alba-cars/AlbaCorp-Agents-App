@@ -22,7 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String? get whatsapp => throw _privateConstructorUsedError;
   @JsonKey(name: "first_name")
@@ -44,7 +44,7 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
-      String email,
+      String? email,
       String phone,
       String? whatsapp,
       @JsonKey(name: "first_name") String firstName,
@@ -67,7 +67,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? phone = null,
     Object? whatsapp = freezed,
     Object? firstName = null,
@@ -80,10 +80,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -121,7 +121,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
-      String email,
+      String? email,
       String phone,
       String? whatsapp,
       @JsonKey(name: "first_name") String firstName,
@@ -141,7 +141,7 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? phone = null,
     Object? whatsapp = freezed,
     Object? firstName = null,
@@ -154,10 +154,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -206,7 +206,7 @@ class _$UserImpl implements _User {
   @JsonKey(readValue: readId)
   final String id;
   @override
-  final String email;
+  final String? email;
   @override
   @JsonKey()
   final String phone;
@@ -268,7 +268,7 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {@JsonKey(readValue: readId) required final String id,
-      required final String email,
+      required final String? email,
       final String phone,
       final String? whatsapp,
       @JsonKey(name: "first_name") final String firstName,
@@ -282,7 +282,7 @@ abstract class _User implements User {
   @JsonKey(readValue: readId)
   String get id;
   @override
-  String get email;
+  String? get email;
   @override
   String get phone;
   @override

@@ -96,7 +96,9 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
             SliverToBoxAdapter(
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: AppSearchBar(),
+              child: AppSearchBar(
+                onChanged: (val) {},
+              ),
             ))
           ];
         },

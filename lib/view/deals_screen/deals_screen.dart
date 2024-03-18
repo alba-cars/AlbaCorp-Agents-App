@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/cubit/deals_cubit.dart';
 import 'package:real_estate_app/view/deals_screen/widgets/client_name.dart';
+import 'package:real_estate_app/widgets/fields/date_field.dart';
+import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
 
 import '../../util/color_category.dart';
 import '../../util/status.dart';
+import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';
 import '../../widgets/tab_bar.dart';
@@ -51,6 +55,50 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  List<Widget> filterFields(BuildContext context) {
+    return [
+      WrapSelectField(
+          name: 'category',
+          label: 'Deal Type',
+          values: [
+            'Primary Off Plan Property',
+            'Secondary Market Property',
+            'Listing Acquired'
+          ],
+          isRequired: true),
+      DropDownfield(
+          name: 'status',
+          label: 'Deal Status',
+          items: [
+            "Created",
+            "Collecting Documents",
+            "Choose Listing",
+            "Create Listing",
+            "Choose Offplan Listing",
+            "Create Offplan Listing",
+            "Choose External Property Listing",
+            "Create External Property Listing",
+            "Assign Property",
+            "Pending Approval",
+            "Approved",
+            "Rejected",
+            "Completed",
+            "Canceled",
+          ],
+          isRequired: true),
+      DateField(
+          name: 'fromDate',
+          label: 'From Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+      DateField(
+          name: 'toDate',
+          label: 'To Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+    ];
   }
 
   @override
@@ -107,7 +155,17 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
                 child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: AppSearchBar())),
+                    child: AppSearchBar(
+                      onChanged: (val) {
+                        context.read<DealsCubit>().searchDeals(val);
+                      },
+                      filterFields: filterFields(context),
+                      onFilterApplied: (filter) {
+                        context.read<DealsCubit>().setDealsFilter(filter);
+                      },
+                      filter: context.select(
+                          (DealsCubit value) => value.state.dealsFilter),
+                    ))),
           ];
         },
         body: BlocBuilder<DealsCubit, DealsState>(

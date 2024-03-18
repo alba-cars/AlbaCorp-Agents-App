@@ -53,7 +53,6 @@ class TokenInterceptor extends InterceptorsWrapper {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    Logger().d(err.response?.statusCode);
     if (err.response?.statusCode == 403 &&
         err.requestOptions.path != '/device/auth/logout') {
       if (!_tokenRefreshAttempted) {

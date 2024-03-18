@@ -20,6 +20,8 @@ mixin _$LeadsState {
   Status get getLeadsStatus => throw _privateConstructorUsedError;
   String? get getLeadsError => throw _privateConstructorUsedError;
   Paginator? get leadsPaginator => throw _privateConstructorUsedError;
+  String? get leadsSearch => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get leadsFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LeadsStateCopyWith<LeadsState> get copyWith =>
@@ -36,7 +38,9 @@ abstract class $LeadsStateCopyWith<$Res> {
       {List<Lead> leads,
       Status getLeadsStatus,
       String? getLeadsError,
-      Paginator? leadsPaginator});
+      Paginator? leadsPaginator,
+      String? leadsSearch,
+      Map<String, dynamic>? leadsFilter});
 
   $PaginatorCopyWith<$Res>? get leadsPaginator;
 }
@@ -58,6 +62,8 @@ class _$LeadsStateCopyWithImpl<$Res, $Val extends LeadsState>
     Object? getLeadsStatus = null,
     Object? getLeadsError = freezed,
     Object? leadsPaginator = freezed,
+    Object? leadsSearch = freezed,
+    Object? leadsFilter = freezed,
   }) {
     return _then(_value.copyWith(
       leads: null == leads
@@ -76,6 +82,14 @@ class _$LeadsStateCopyWithImpl<$Res, $Val extends LeadsState>
           ? _value.leadsPaginator
           : leadsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      leadsSearch: freezed == leadsSearch
+          ? _value.leadsSearch
+          : leadsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadsFilter: freezed == leadsFilter
+          ? _value.leadsFilter
+          : leadsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 
@@ -104,7 +118,9 @@ abstract class _$$LeadsStateImplCopyWith<$Res>
       {List<Lead> leads,
       Status getLeadsStatus,
       String? getLeadsError,
-      Paginator? leadsPaginator});
+      Paginator? leadsPaginator,
+      String? leadsSearch,
+      Map<String, dynamic>? leadsFilter});
 
   @override
   $PaginatorCopyWith<$Res>? get leadsPaginator;
@@ -125,6 +141,8 @@ class __$$LeadsStateImplCopyWithImpl<$Res>
     Object? getLeadsStatus = null,
     Object? getLeadsError = freezed,
     Object? leadsPaginator = freezed,
+    Object? leadsSearch = freezed,
+    Object? leadsFilter = freezed,
   }) {
     return _then(_$LeadsStateImpl(
       leads: null == leads
@@ -143,6 +161,14 @@ class __$$LeadsStateImplCopyWithImpl<$Res>
           ? _value.leadsPaginator
           : leadsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      leadsSearch: freezed == leadsSearch
+          ? _value.leadsSearch
+          : leadsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadsFilter: freezed == leadsFilter
+          ? _value._leadsFilter
+          : leadsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -154,8 +180,11 @@ class _$LeadsStateImpl implements _LeadsState {
       {final List<Lead> leads = const [],
       this.getLeadsStatus = Status.init,
       this.getLeadsError,
-      this.leadsPaginator})
-      : _leads = leads;
+      this.leadsPaginator,
+      this.leadsSearch,
+      final Map<String, dynamic>? leadsFilter})
+      : _leads = leads,
+        _leadsFilter = leadsFilter;
 
   final List<Lead> _leads;
   @override
@@ -173,10 +202,21 @@ class _$LeadsStateImpl implements _LeadsState {
   final String? getLeadsError;
   @override
   final Paginator? leadsPaginator;
+  @override
+  final String? leadsSearch;
+  final Map<String, dynamic>? _leadsFilter;
+  @override
+  Map<String, dynamic>? get leadsFilter {
+    final value = _leadsFilter;
+    if (value == null) return null;
+    if (_leadsFilter is EqualUnmodifiableMapView) return _leadsFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'LeadsState(leads: $leads, getLeadsStatus: $getLeadsStatus, getLeadsError: $getLeadsError, leadsPaginator: $leadsPaginator)';
+    return 'LeadsState(leads: $leads, getLeadsStatus: $getLeadsStatus, getLeadsError: $getLeadsError, leadsPaginator: $leadsPaginator, leadsSearch: $leadsSearch, leadsFilter: $leadsFilter)';
   }
 
   @override
@@ -190,7 +230,11 @@ class _$LeadsStateImpl implements _LeadsState {
             (identical(other.getLeadsError, getLeadsError) ||
                 other.getLeadsError == getLeadsError) &&
             (identical(other.leadsPaginator, leadsPaginator) ||
-                other.leadsPaginator == leadsPaginator));
+                other.leadsPaginator == leadsPaginator) &&
+            (identical(other.leadsSearch, leadsSearch) ||
+                other.leadsSearch == leadsSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._leadsFilter, _leadsFilter));
   }
 
   @override
@@ -199,7 +243,9 @@ class _$LeadsStateImpl implements _LeadsState {
       const DeepCollectionEquality().hash(_leads),
       getLeadsStatus,
       getLeadsError,
-      leadsPaginator);
+      leadsPaginator,
+      leadsSearch,
+      const DeepCollectionEquality().hash(_leadsFilter));
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +259,9 @@ abstract class _LeadsState implements LeadsState {
       {final List<Lead> leads,
       final Status getLeadsStatus,
       final String? getLeadsError,
-      final Paginator? leadsPaginator}) = _$LeadsStateImpl;
+      final Paginator? leadsPaginator,
+      final String? leadsSearch,
+      final Map<String, dynamic>? leadsFilter}) = _$LeadsStateImpl;
 
   @override
   List<Lead> get leads;
@@ -223,6 +271,10 @@ abstract class _LeadsState implements LeadsState {
   String? get getLeadsError;
   @override
   Paginator? get leadsPaginator;
+  @override
+  String? get leadsSearch;
+  @override
+  Map<String, dynamic>? get leadsFilter;
   @override
   @JsonKey(ignore: true)
   _$$LeadsStateImplCopyWith<_$LeadsStateImpl> get copyWith =>

@@ -14,6 +14,8 @@ import 'package:recase/recase.dart';
 import '../../model/agent_model.dart';
 import '../../util/color_category.dart';
 import '../../util/status.dart';
+import '../../widgets/fields/multi_select_autocomplete_field.dart';
+import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/search_bar.dart';
 import '../../widgets/space.dart';
 import '../../widgets/tab_bar.dart';
@@ -125,15 +127,16 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
               ),
             )),
             SliverToBoxAdapter(),
-            SliverToBoxAdapter(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: AppSearchBar(),
-            ))
+            // SliverToBoxAdapter(
+            //     child: Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            //   child: AppSearchBar(),
+            // ))
           ];
         },
         body: TabBarView(
           controller: _tabController,
+          physics: NeverScrollableScrollPhysics(),
           children: [ExplorerTab(), CheckedOutPoolTab()],
         ),
       ),
@@ -146,10 +149,69 @@ class ExplorerTab extends StatelessWidget {
     super.key,
   });
 
+  List<Widget> filterFields(BuildContext context) {
+    return [
+      MultiSelectAutoCompleteField(
+          label: 'Community',
+          optionsBuilder: (v) async {
+            final list = await context
+                .read<ExplorerScreenCubit>()
+                .getCommunities(search: v.text);
+            return list.map((e) => {'value': e.id, 'label': e.community});
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          name: 'communities'),
+      MultiSelectAutoCompleteField(
+          label: 'Building',
+          optionsBuilder: (v) async {
+            final list = await context
+                .read<ExplorerScreenCubit>()
+                .getBuildings(search: v.text);
+            return list.map((e) => {'value': e.id, 'label': e.name});
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          name: 'buildings'),
+      WrapSelectField(
+          name: 'beds',
+          label: 'Beds',
+          values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'baths',
+          label: 'Baths',
+          values: ['1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'propertyType',
+          label: 'Property Type',
+          values:
+              context.select<ExplorerScreenCubit, List<Map<String, dynamic>>>(
+                  (cubit) => cubit.state.propertyTypeList
+                      .map((e) => {'value': e.id, 'label': e.propertyType})
+                      .toList()),
+          displayOption: (option) => option['label'] ?? '',
+          isRequired: true),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          child: AppSearchBar(
+            onChanged: (val) {
+              context.read<ExplorerScreenCubit>().searchExplorer(val);
+            },
+            filterFields: filterFields(context),
+            filter: context.select(
+                (ExplorerScreenCubit value) => value.state.explorerFilter),
+            onFilterApplied: (filter) {
+              context.read<ExplorerScreenCubit>().setExplorerFilter(filter);
+            },
+          ),
+        ),
         Expanded(
           child: BlocBuilder<ExplorerScreenCubit, ExplorerScreenState>(
             buildWhen: (previous, current) =>
@@ -303,6 +365,14 @@ class CheckedOutPoolTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          child: AppSearchBar(
+            onChanged: (val) {
+              context.read<ExplorerScreenCubit>().searchCheckedOut(val);
+            },
+          ),
+        ),
         Expanded(
           child: BlocBuilder<ExplorerScreenCubit, ExplorerScreenState>(
             buildWhen: (previous, current) =>
