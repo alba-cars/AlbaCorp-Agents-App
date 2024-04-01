@@ -5,6 +5,7 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/model/activity_feedback_model.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 
@@ -41,5 +42,25 @@ class ActivityCubit extends Cubit<ActivityState> {
   Future<void> setLastActivityFeedback(
       Activity activity, ActivityFeedback feedback) async {
     emit(state.copyWith(lastActivity: activity, activityFeedback: feedback));
+  }
+
+  Future<void> updateLastActivity({DealResponse? dealResponse}) async {
+    final userId = getIt<AuthBloc>().state.user?.id;
+    if (userId == null) {
+      return;
+    }
+    if (dealResponse != null &&
+        dealResponse.client != state.lastActivity?.lead?.id) {
+      return;
+    }
+    final result = await _activityRepo.updateActivity(
+        activityId: state.lastActivity?.id ?? '',
+        notes: state.activityFeedback?.notes);
+    switch (result) {
+      case (Success s):
+        print(s.value);
+        break;
+      default:
+    }
   }
 }

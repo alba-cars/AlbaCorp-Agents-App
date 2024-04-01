@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
-import 'package:real_estate_app/controller/controller.dart';
+
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
-import 'package:real_estate_app/util/pref_data.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
-import 'package:real_estate_app/view/more_screen/help_center_screen.dart';
-import 'package:real_estate_app/view/more_screen/language_screen.dart';
-import 'package:real_estate_app/view/more_screen/booking_tab/my_bookings_screen.dart';
-import 'package:real_estate_app/view/more_screen/my_profiles/my_profile_screen.dart';
-import 'package:real_estate_app/view/more_screen/notification_screen.dart';
-import 'package:real_estate_app/view/more_screen/privacy_security_screen.dart';
-import 'package:real_estate_app/view/login/login_screen.dart';
 
 import '../../util/constant_widget.dart';
 

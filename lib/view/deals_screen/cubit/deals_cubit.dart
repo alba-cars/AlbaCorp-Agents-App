@@ -27,10 +27,13 @@ class DealsCubit extends Cubit<DealsState> {
       emit(state.copyWith(getDealsStatus: Status.loadingMore));
     }
 
-    final result = await _dealsRepo.getDeals(
-        filter: state.dealsFilter,
-        search: state.dealsSearch,
-        paginator: state.dealsPaginator);
+    final result = await _dealsRepo.getDeals(filter: {
+      'category': [
+        'Primary Off Plan Property',
+        'Secondary Market Property',
+      ],
+      ...state.dealsFilter ?? {}
+    }, search: state.dealsSearch, paginator: state.dealsPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -45,6 +48,41 @@ class DealsCubit extends Cubit<DealsState> {
     }
   }
 
+  Future<void> getYourListings({bool refresh = false}) async {
+    if (refresh || state.yourListingsPaginator == null) {
+      emit(state.copyWith(
+          getYourListingsStatus: Status.loading,
+          yourListingsPaginator: null,
+          yourListings: []));
+    } else {
+      if (state.getYourListingsStatus == Status.loadingMore) {
+        return;
+      }
+      emit(state.copyWith(getYourListingsStatus: Status.loadingMore));
+    }
+
+    final result = await _dealsRepo.getDeals(
+        filter: {
+          ...state.yourListingsFilter ?? {},
+          'category': 'Listing Acquired'
+        },
+        search: state.yourListingsSearch,
+        paginator: state.yourListingsPaginator);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            yourListings: [...state.yourListings, ...s.value],
+            yourListingsPaginator: s.paginator,
+            getYourListingsStatus: Status.success));
+        // Logger().d(state.listings);
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getYourListingsStatus: Status.failure,
+            getYourListingsError: e.exception));
+    }
+  }
+
   void searchDeals(String? search) {
     emit(state.copyWith(dealsSearch: search));
     getDeals(refresh: true);
@@ -53,5 +91,40 @@ class DealsCubit extends Cubit<DealsState> {
   void setDealsFilter(Map<String, dynamic>? filter) {
     emit(state.copyWith(dealsFilter: filter));
     getDeals(refresh: true);
+  }
+
+  void onDealUpdated(Deal deal, int index) {
+    final deals = List<Deal>.from(state.deals);
+    deals.removeAt(index);
+    deals.insert(index, deal);
+    emit(state.copyWith(deals: deals));
+  }
+
+  void searchYourListings(String? search) {
+    emit(state.copyWith(yourListingsSearch: search));
+    getDeals(refresh: true);
+  }
+
+  void setYourListingsFilter(Map<String, dynamic>? filter) {
+    emit(state.copyWith(yourListingsFilter: filter));
+    getDeals(refresh: true);
+  }
+
+  void onYourListingsUpdated(Deal deal, int index) {
+    final deals = List<Deal>.from(state.yourListings);
+    deals.removeAt(index);
+    deals.insert(index, deal);
+    emit(state.copyWith(yourListings: deals));
+  }
+
+  void setSelectedTab(int index) {
+    if (state.currentTab != index) {
+      emit(state.copyWith(currentTab: index));
+      if (index == 0) {
+        getDeals(refresh: true);
+      } else {
+        // getListings(refresh: true);
+      }
+    }
   }
 }

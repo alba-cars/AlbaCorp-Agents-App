@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,6 +97,9 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
   double? commissionPercentage;
   @override
   Widget build(BuildContext context) {
+    final types = context.select(
+      (AddDealCubit value) => value.state.propertyTypeList,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -163,7 +167,8 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
                 });
               }
             },
-            displayOption: (option) => "${option.propertyTitle}",
+            displayOption: (option) =>
+                "${option.referNo} | ${types.firstWhereOrNull((element) => element.id == option.propertyTypeId)?.propertyType ?? ''} | ${option.communityName}",
           );
         }),
         BlocSelector<AddDealCubit, AddDealState, Lead?>(

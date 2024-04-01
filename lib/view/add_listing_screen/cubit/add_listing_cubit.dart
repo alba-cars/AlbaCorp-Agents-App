@@ -3,11 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+import 'package:real_estate_app/data/repository/deals_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/listing_request_model.dart';
+import 'package:real_estate_app/model/offplan_listing_response.dart';
+import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
@@ -20,13 +25,14 @@ part 'add_listing_cubit.freezed.dart';
 
 @injectable
 class AddListingCubit extends Cubit<AddListingState> {
-  AddListingCubit(this._leadRepo, this._listingsRepo)
+  AddListingCubit(this._leadRepo, this._listingsRepo, this._dealsRepo)
       : super(AddListingState()) {
     getPropertyTypes();
   }
 
   final LeadRepo _leadRepo;
   final ListingsRepo _listingsRepo;
+  final DealsRepo _dealsRepo;
   ScrollController? _scrollController;
 
   void setScrollController(ScrollController scrollController) {
@@ -39,11 +45,30 @@ class AddListingCubit extends Cubit<AddListingState> {
         .addListingAcquired(values: {'multiple': false, ...values});
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addListingStatus: Status.success));
+        emit(state.copyWith(
+            addListingStatus: Status.success, dealListingResponse: s.value));
         break;
       case (Error e):
         emit(state.copyWith(
             addListingStatus: Status.failure, addListingError: e.exception));
+        break;
+    }
+  }
+
+  Future<void> addListingDocuments(
+      {required Map<String, dynamic> values}) async {
+    emit(state.copyWith(addListingDocumentsStatus: Status.loadingMore));
+    final result = await _dealsRepo.addDealDocuments(
+        dealId: state.dealListingResponse!.id ?? '', values: values);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(addListingDocumentsStatus: Status.success));
+
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            addListingDocumentsStatus: Status.failure,
+            addListingDocumentsError: e.exception));
         break;
     }
   }
@@ -72,10 +97,25 @@ class AddListingCubit extends Cubit<AddListingState> {
         }
         return;
       case 1:
-        // await addListing(values: values);
-        emit(state.copyWith(currentTab: 2));
-        tabController.animateTo(2);
-        _scrollToTop();
+        final validated = formKey.currentState?.saveAndValidate();
+        if (validated == true) {
+          final val = formKey.currentState?.value;
+          await addListingDocuments(values: val!);
+          if (state.addListingDocumentsStatus == Status.success) {
+            if (context.mounted) {
+              showSnackbar(
+                  context, 'Listing Added Successfully', SnackBarType.success);
+              context.pop();
+            }
+          } else if (state.addListingDocumentsStatus == Status.failure) {
+            if (context.mounted) {
+              showSnackbar(
+                  context,
+                  state.addListingError ?? 'Something failed try again',
+                  SnackBarType.failure);
+            }
+          }
+        }
         return;
       case 2:
         // await addListing(values: values);

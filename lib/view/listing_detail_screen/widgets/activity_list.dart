@@ -43,6 +43,7 @@ class ActivityList extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Column(
                           children: [
@@ -65,7 +66,6 @@ class ActivityList extends StatelessWidget {
                             ),
                             Container(
                               width: 70,
-                              height: 60,
                               padding: EdgeInsets.symmetric(
                                   horizontal: 2, vertical: 4),
                               decoration: BoxDecoration(
@@ -95,6 +95,7 @@ class ActivityList extends StatelessWidget {
                                   ),
                                   SmallText(
                                     text: activity.type,
+                                    textAlign: TextAlign.center,
                                     color: Colors.grey[800]!,
                                   )
                                 ],
@@ -107,16 +108,34 @@ class ActivityList extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              LabelText(text: activity.createdBy ?? ''),
+                              //LabelText(text: activity.createdBy ?? ''),
                               RichText(
                                   text: TextSpan(
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelMedium,
-                                      text: 'Feedback : ',
+                                      text: 'Notes : ',
                                       children: [
                                     TextSpan(
                                         text: activity.description,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium
+                                            ?.copyWith(color: Colors.blueGrey))
+                                  ])),
+                              RichText(
+                                  text: TextSpan(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium,
+                                      text: 'Completed Date : ',
+                                      children: [
+                                    TextSpan(
+                                        text: activity.completedDate != null
+                                            ? DateFormat.MMMEd()
+                                                .add_jms()
+                                                .format(activity.completedDate!)
+                                            : null,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelMedium
@@ -153,17 +172,18 @@ class ActivityList extends StatelessWidget {
                   ],
                 ),
               ),
-              PositionedDirectional(
-                top: index == 0 ? 60 : 0.0,
-                bottom: index == activities.length - 1 ? null : 0.0,
-                height: index == activities.length - 1 ? 50 : null,
-                start: 60.0,
-                child: Container(
-                  height: double.infinity,
-                  width: 1.0,
-                  color: Theme.of(context).colorScheme.onBackground,
+              if (activities.length > 1)
+                PositionedDirectional(
+                  top: index == 0 ? 60 : 0.0,
+                  bottom: index == activities.length - 1 ? null : 0.0,
+                  height: index == activities.length - 1 ? 50 : null,
+                  start: 60.0,
+                  child: Container(
+                    height: double.infinity,
+                    width: 1.0,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
                 ),
-              ),
               PositionedDirectional(
                 top: 50.0,
                 start: 52.5,

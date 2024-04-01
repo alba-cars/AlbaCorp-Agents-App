@@ -9,5 +9,12 @@ class DealsState with _$DealsState {
     Paginator? dealsPaginator,
     String? dealsSearch,
     Map<String, dynamic>? dealsFilter,
+    @Default([]) List<Deal> yourListings,
+    @Default(Status.init) Status getYourListingsStatus,
+    String? getYourListingsError,
+    Paginator? yourListingsPaginator,
+    String? yourListingsSearch,
+    Map<String, dynamic>? yourListingsFilter,
+    @Default(0) int currentTab,
   }) = _DealsState;
 }

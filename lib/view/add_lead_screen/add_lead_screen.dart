@@ -10,6 +10,7 @@ import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/add_lead_screen/cubit/add_lead_cubit.dart';
+import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/phone_number_field.dart';
@@ -27,119 +28,19 @@ class AddLeadScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<AddLeadCubit>(),
-      child: Try(),
+      child: _AddLeadScreenLayout(),
     );
   }
 }
 
-class AddLeadScreenLayout extends StatelessWidget {
-  const AddLeadScreenLayout({super.key});
+class _AddLeadScreenLayout extends StatefulWidget {
+  const _AddLeadScreenLayout({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Lead'),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            VerticalSmallGap(
-              adjustment: 2,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: FormBuilder(
-                child: Column(
-                  children: [
-                    BlocSelector<AddLeadCubit, AddLeadState, List<LeadSource>>(
-                      selector: (state) {
-                        return state.leadSources;
-                      },
-                      builder: (context, leadSources) {
-                        return DropDownfield(
-                            label: 'Lead Source',
-                            items: leadSources,
-                            displayOption: (option) => option.name,
-                            name: 'leadSource');
-                      },
-                    ),
-                    AppTextField(
-                      name: 'firstName',
-                      label: 'First Name',
-                    ),
-                    AppTextField(
-                      name: 'lastName',
-                      label: 'Last Name',
-                    ),
-                    AppTextField(
-                      name: 'email',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        final regex = RegExp(
-                            r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-                        if (!regex.hasMatch(value)) {
-                          return 'Please enter a valid email address';
-                        }
-                        return null;
-                      },
-                      label: 'Email',
-                    ),
-                    PhoneNumberField(
-                      name: 'subCommunity',
-                      label: 'Phone',
-                    ),
-                    DropDownfield(
-                      name: 'country',
-                      label: 'Country',
-                      items: ['UAE'],
-                    ),
-                    DropDownfield(
-                      name: 'city',
-                      label: 'City',
-                      items: ['UAE'],
-                    ),
-                    DropDownfield(
-                      name: 'nationality',
-                      label: 'Nationality',
-                      items: ['UAE'],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        // context.read<AddLeadCubit>().addLead(values: {});
-                      },
-                      child: Text('Add')),
-                ],
-              ),
-            ),
-            VerticalSmallGap()
-          ],
-        ),
-      ),
-    );
-  }
+  State<_AddLeadScreenLayout> createState() => _TryState();
 }
 
-class Try extends StatefulWidget {
-  const Try({super.key});
-
-  @override
-  State<Try> createState() => _TryState();
-}
-
-class _TryState extends State<Try> {
+class _TryState extends State<_AddLeadScreenLayout> {
   late final List<GlobalKey<FormBuilderState>> _formKey =
       List.generate(3, (index) => GlobalKey());
   late final List<Key> _stepKey = List.generate(3, (index) => ValueKey(index));
@@ -251,8 +152,8 @@ class _TryState extends State<Try> {
                         },
                         listenWhen: (previous, current) =>
                             previous.addLeadStatus != current.addLeadStatus,
-                        child: ElevatedButton(
-                          onPressed: () {
+                        child: AppPrimaryButton(
+                          onTap: () async {
                             final validated = _formKey[currentStep]
                                 .currentState
                                 ?.saveAndValidate();
@@ -260,14 +161,14 @@ class _TryState extends State<Try> {
                               final val =
                                   _formKey[currentStep].currentState!.value;
 
-                              context.read<AddLeadCubit>().onNextPressed(
+                              await context.read<AddLeadCubit>().onNextPressed(
                                     values: val,
                                   );
                             }
                           },
-                          child: currentStep < _steps.length - 1
-                              ? Text('Next')
-                              : Text('Submit'),
+                          text: currentStep < _steps.length - 1
+                              ? 'Next'
+                              : 'Submit',
                         ),
                       ),
                     ),
@@ -325,6 +226,7 @@ class _TryState extends State<Try> {
                   },
                   builder: (context, leadSources) {
                     return DropDownfield(
+                        isRequired: true,
                         label: 'Lead Source',
                         items: leadSources,
                         displayOption: (option) => option.name,
@@ -378,6 +280,7 @@ class _TryState extends State<Try> {
                 Text('Enter the lead\'s personal information.'),
                 SizedBox(height: 16),
                 AppTextField(
+                  isRequired: true,
                   name: 'first_name',
                   label: 'First Name',
                 ),
@@ -390,20 +293,21 @@ class _TryState extends State<Try> {
                 AppTextField(
                   name: 'email',
                   label: 'Email',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    final regex =
-                        RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-                    if (!regex.hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
+                  // validator: (value) {
+                  //   if (value == null || value.isEmpty) {
+                  //     return 'Please enter your email';
+                  //   }
+                  //   final regex =
+                  //       RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+                  //   if (!regex.hasMatch(value)) {
+                  //     return 'Please enter a valid email address';
+                  //   }
+                  //   return null;
+                  // },
                 ),
                 SizedBox(height: 16),
                 PhoneNumberField(
+                  isRequired: true,
                   name: 'phone',
                   label: 'Phone',
                 ),

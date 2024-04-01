@@ -20,7 +20,7 @@ class ActivityData implements ActivityRepo {
   ActivityData({required Dio dio}) : _dio = dio;
   final log = Logger();
   @override
-  Future<Result<void>> createActivity({
+  Future<Result<Activity>> createActivity({
     required String leadId,
     required String type,
     DateTime? date,
@@ -36,7 +36,9 @@ class ActivityData implements ActivityRepo {
         'description': description,
         'property_id': propertyId
       });
-      return Success(null);
+      final data = response.data;
+      final model = Activity.fromJson(data);
+      return Success(model);
     } catch (e, stack) {
       return onError(e, stack, log);
       ;
@@ -46,18 +48,18 @@ class ActivityData implements ActivityRepo {
   @override
   Future<Result<void>> updateActivity(
       {required String activityId,
-      required int duration,
+      int? duration,
       String? notes,
       String? feedback}) async {
     try {
       final response = await _dio.patch('/v1/activities/$activityId', data: {
         'status': 'Complete',
-        'duration': duration,
+        if (duration != null) 'duration': duration,
         if (feedback == 'Not Interested') 'is_interested': false,
         if (feedback == 'Interested') 'is_interested': true,
         'notes': notes,
-        'description':
-            "Lasted ${Duration(milliseconds: duration).inSeconds} seconds"
+        // 'description':
+        //     "Lasted ${Duration(milliseconds: duration).inSeconds} seconds"
       });
       return Success(null);
     } catch (e, stack) {

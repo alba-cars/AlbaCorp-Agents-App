@@ -7,12 +7,15 @@ import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant.dart';
 import 'package:real_estate_app/util/pref_data.dart';
+import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
 import 'package:real_estate_app/view/home_layout/home_layout.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/login/cubit/login_cubit.dart';
+import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../util/constant_widget.dart';
+import '../../widgets/button.dart';
 
 // ignore: must_be_immutable
 class TabLogin extends StatefulWidget {
@@ -88,16 +91,33 @@ class _TabLoginState extends State<TabLogin> {
   }
 
   Widget buildLoginButton(BuildContext context) {
-    return getButton(context, pacificBlue, "Login", Colors.white, () {
-      if (loginForm.currentState!.validate()) {
-        final email = emailController.text;
-        final password = passwordController.text;
-        context.read<LoginCubit>().login(email: email, password: password);
-      }
-    }, 18.sp,
-        weight: FontWeight.w700,
-        buttonHeight: 60.h,
-        borderRadius: BorderRadius.circular(16.h));
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        BlocListener<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if (state.loginStatus == Status.success) {
+            } else if (state.loginStatus == Status.failure &&
+                state.loginErrorMessage != null) {
+              showSnackbar(
+                  context, state.loginErrorMessage!, SnackBarType.failure);
+            }
+          },
+          child: AppPrimaryButton(
+            text: "Login",
+            onTap: () async {
+              if (loginForm.currentState!.validate()) {
+                final email = emailController.text;
+                final password = passwordController.text;
+                await context
+                    .read<LoginCubit>()
+                    .login(email: email, password: password);
+              }
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   Align buildForgotButton() {

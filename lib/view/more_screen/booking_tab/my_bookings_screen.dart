@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:real_estate_app/controller/controller.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant.dart';
 import 'package:real_estate_app/util/constant_widget.dart';

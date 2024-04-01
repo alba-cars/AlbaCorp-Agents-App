@@ -288,12 +288,15 @@ class _HomePageLayoutState extends State<HomePageLayout> {
                                             child: CircularProgressIndicator()),
                                       )
                                     : SliverList.separated(
-                                        itemCount: state
-                                                    .activityPaginator[index]
-                                                    ?.hasNextPage ??
-                                                false
-                                            ? itemLength + 1
-                                            : itemLength,
+                                        itemCount:
+                                            (state.activityPaginator[index]
+                                                            ?.hasNextPage ??
+                                                        false) &&
+                                                    state.activities[index]
+                                                            ?.isNotEmpty ==
+                                                        true
+                                                ? itemLength + 1
+                                                : itemLength,
                                         itemBuilder: (context, v) {
                                           if (v == itemLength) {
                                             return OutlinedButton(

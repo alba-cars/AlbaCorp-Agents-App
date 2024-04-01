@@ -7,7 +7,6 @@ import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
 import 'package:real_estate_app/view/home_screen/cubit/home_cubit.dart';
 
-import '../../controller/controller.dart';
 import '../../model/saved_home_model.dart';
 import '../../util/constant.dart';
 import '../../util/constant_widget.dart';

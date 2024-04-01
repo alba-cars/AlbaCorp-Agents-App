@@ -92,6 +92,7 @@ class _CardPickerDialogState<T extends Object>
                     }
                   },
                   child: Container(
+                    constraints: BoxConstraints(minHeight: 42),
                     decoration: BoxDecoration(
                         color: fieldColor,
                         borderRadius: BorderRadius.circular(12),

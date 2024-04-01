@@ -13,6 +13,7 @@ _$LeadPropertyCardModelImpl _$$LeadPropertyCardModelImplFromJson(
       lead: Lead.fromJson(json['lead'] as Map<String, dynamic>),
       propertyCard: PropertyCardDetailsModel.fromJson(
           json['propertyCard'] as Map<String, dynamic>),
+      wasOwner: json['wasOwner'] as bool? ?? false,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       amount: (json['amount'] as num?)?.toDouble(),
@@ -31,6 +32,7 @@ Map<String, dynamic> _$$LeadPropertyCardModelImplToJson(
       'id': instance.id,
       'lead': instance.lead,
       'propertyCard': instance.propertyCard,
+      'wasOwner': instance.wasOwner,
       'date': instance.date?.toIso8601String(),
       'amount': instance.amount,
       'createdBy': instance.createdBy,

@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
@@ -13,7 +15,9 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
+import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/currency_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
@@ -46,11 +50,11 @@ class AddListingScreenLayout extends StatefulWidget {
 
 class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
     with SingleTickerProviderStateMixin {
-  late final GlobalKey<FormBuilderState> _formKeyStepOne = GlobalKey();
-  late final GlobalKey<FormBuilderState> _formKeyStepTwo = GlobalKey();
-  late final GlobalKey<FormBuilderState> _formKeyStepThree = GlobalKey();
+  late final List<GlobalKey<FormBuilderState>> _formKey =
+      List.generate(2, (index) => GlobalKey());
+
   late final TabController _tabController =
-      TabController(length: 4, vsync: this);
+      TabController(length: 2, vsync: this);
   late final ScrollController _scrollController = ScrollController();
 
   @override
@@ -145,13 +149,11 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
                     physics: NeverScrollableScrollPhysics(),
                     children: [
                       BasicInfoTab(
-                          formKey: _formKeyStepOne,
+                          formKey: _formKey[0],
                           propertyTypeList: propertyTypeList),
                       CollectDocumentsTab(
-                        formKey: _formKeyStepTwo,
+                        formKey: _formKey[1],
                       ),
-                      Text('hi'),
-                      Text('hi'),
                     ],
                   ),
                 ),
@@ -168,25 +170,28 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         if (currentTab != 0) ...[
-                          OutlinedButton(
-                              onPressed: () {
-                                context
-                                    .read<AddListingCubit>()
-                                    .onPreviousPressed(
-                                        tabController: _tabController);
-                              },
-                              child: Text('Previous')),
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  context
+                                      .read<AddListingCubit>()
+                                      .onPreviousPressed(
+                                          tabController: _tabController);
+                                },
+                                child: Text('Previous')),
+                          ),
                           HorizontalSmallGap(),
                         ],
                         Expanded(
-                          child: ElevatedButton(
-                              onPressed: () {
-                                context.read<AddListingCubit>().onNextPressed(
-                                    context,
-                                    formKey: _formKeyStepOne,
-                                    tabController: _tabController);
+                          child: AppPrimaryButton(
+                              onTap: () async {
+                                await context
+                                    .read<AddListingCubit>()
+                                    .onNextPressed(context,
+                                        formKey: _formKey[currentTab],
+                                        tabController: _tabController);
                               },
-                              child: Text('Next')),
+                              text: ('Next')),
                         ),
                       ],
                     );
@@ -225,6 +230,30 @@ class BasicInfoTab extends StatelessWidget {
                   name: 'user_id',
                   label: 'Client',
                   isRequired: true,
+                  actionButton: (key) {
+                    return TextButton(
+                      style: TextButton.styleFrom(
+                          visualDensity: VisualDensity.compact,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          // alignment: Alignment.centerRight,
+                          padding: EdgeInsets.zero),
+                      onPressed: () async {
+                        final lead = await context
+                            .pushNamed<Lead>(AddLeadScreen.routeName);
+                        Logger().d(lead);
+                        if (lead != null) {
+                          SchedulerBinding.instance
+                              .addPostFrameCallback((timeStamp) {
+                            final fieldValues =
+                                _formKey.currentState?.instantValue ?? {};
+                            _formKey.currentState
+                                ?.patchValue({...fieldValues, 'user_id': lead});
+                          });
+                        }
+                      },
+                      child: Text('Add'),
+                    );
+                  },
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (lead) =>
                       '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',

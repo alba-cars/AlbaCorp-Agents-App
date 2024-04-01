@@ -5,6 +5,9 @@ class AddListingState with _$AddListingState {
   const factory AddListingState({
     @Default(Status.init) Status addListingStatus,
     String? addListingError,
+    NewListingRequest? dealListingResponse,
+    @Default(Status.init) Status addListingDocumentsStatus,
+    String? addListingDocumentsError,
     @Default([]) List<PropertyType> propertyTypeList,
     @Default(Status.init) Status getPropertyTypeListStatus,
     @Default([]) List<Community> communityList,

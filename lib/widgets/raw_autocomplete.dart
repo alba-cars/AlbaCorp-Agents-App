@@ -8,6 +8,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 
 // Examples can assume:
 // late BuildContext context;
@@ -43,10 +44,10 @@ typedef AutocompleteOnSelected<T extends Object> = void Function(T option);
 ///
 ///   * [AppRawAutocomplete.optionsViewBuilder], which is of this type.
 typedef AutocompleteOptionsViewBuilder<T extends Object> = Widget Function(
-  BuildContext context,
-  AutocompleteOnSelected<T> onSelected,
-  Iterable<T> options,
-);
+    BuildContext context,
+    AutocompleteOnSelected<T> onSelected,
+    Iterable<T> options,
+    bool loading);
 
 /// The type of the Autocomplete callback which returns the widget that
 /// contains the input [TextField] or [TextFormField].
@@ -55,11 +56,11 @@ typedef AutocompleteOptionsViewBuilder<T extends Object> = Widget Function(
 ///
 ///   * [AppRawAutocomplete.fieldViewBuilder], which is of this type.
 typedef AutocompleteFieldViewBuilder = Widget Function(
-  BuildContext context,
-  TextEditingController textEditingController,
-  FocusNode focusNode,
-  VoidCallback onFieldSubmitted,
-);
+    BuildContext context,
+    TextEditingController textEditingController,
+    FocusNode focusNode,
+    VoidCallback onFieldSubmitted,
+    String text);
 
 /// The type of the [AppRawAutocomplete] callback that converts an option value to
 /// a string which can be displayed in the widget's options menu.
@@ -327,26 +328,36 @@ class _RawAutocompleteState<T extends Object>
 
   // True iff the state indicates that the options should be visible.
   bool get _shouldShowOptions {
-    return !_userHidOptions &&
-        _focusNode.hasFocus &&
-        _selection == null &&
-        _options.isNotEmpty;
+    return !_userHidOptions && _focusNode.hasFocus;
   }
+
+  bool _loading = false;
 
   // Called when _textEditingController changes.
   Future<void> _onChangedField() async {
     final TextEditingValue value = _textEditingController.value;
-    EasyDebounce.debounce('app-autocomplete', Duration(milliseconds: 400),
+    _loading = true;
+
+    _updateOverlay();
+    _updateActions();
+    EasyDebounce.debounce('app-autocomplete', Duration(milliseconds: 250),
         () async {
+      if (!mounted) {
+        return;
+      }
+
       final Iterable<T> options = await widget.optionsBuilder(
         value,
       );
+      if (!mounted) {
+        return;
+      }
       _options = options;
       _updateHighlight(_highlightedOptionIndex.value);
-      if (_selection != null &&
-          value.text != widget.displayStringForOption(_selection!)) {
-        _selection = null;
-      }
+      // if (_selection != null &&
+      //     value.text != widget.displayStringForOption(_selection!)) {
+      //   _selection = null;
+      // }
 
       // Make sure the options are no longer hidden if the content of the field
       // changes (ignore selection changes).
@@ -354,6 +365,7 @@ class _RawAutocompleteState<T extends Object>
         _userHidOptions = false;
         _lastFieldText = value.text;
       }
+      _loading = false;
       _updateActions();
       _updateOverlay();
     });
@@ -367,6 +379,8 @@ class _RawAutocompleteState<T extends Object>
     _updateOverlay();
     if (_focusNode.hasFocus == true) {
       _onChangedField();
+    } else {
+      // _textEditingController.value = TextEditingValue.empty;
     }
   }
 
@@ -383,12 +397,14 @@ class _RawAutocompleteState<T extends Object>
     if (nextSelection == _selection) {
       return;
     }
+    _textEditingController.value = TextEditingValue.empty;
     _selection = nextSelection;
-    final String selectionString = widget.displayStringForOption(nextSelection);
-    _textEditingController.value = TextEditingValue(
-      selection: TextSelection.collapsed(offset: selectionString.length),
-      text: selectionString,
-    );
+    // final String selectionString = widget.displayStringForOption(nextSelection);
+    if (mounted) {
+      setState(() {});
+    }
+
+    _focusNode.unfocus();
     _updateActions();
     _updateOverlay();
     widget.onSelected?.call(_selection!);
@@ -480,7 +496,7 @@ class _RawAutocompleteState<T extends Object>
                   highlightIndexNotifier: _highlightedOptionIndex,
                   child: Builder(builder: (BuildContext context) {
                     return widget.optionsViewBuilder(
-                        context, _select, _options);
+                        context, _select, _options, _loading);
                   })),
             ),
           );
@@ -608,7 +624,9 @@ class _RawAutocompleteState<T extends Object>
                       _textEditingController,
                       _focusNode,
                       _onFieldSubmitted,
-                    ),
+                      _selection != null
+                          ? widget.displayStringForOption(_selection!)
+                          : ''),
             ),
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:real_estate_app/controller/controller.dart';
+
 import 'package:real_estate_app/data/datafile.dart';
 import 'package:real_estate_app/model/detail_screen_slider.dart';
 import 'package:real_estate_app/util/color_category.dart';

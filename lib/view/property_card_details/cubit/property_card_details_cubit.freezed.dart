@@ -25,10 +25,22 @@ mixin _$PropertyCardDetailsState {
       throw _privateConstructorUsedError;
   Status get getPropertyCardLogsStatus => throw _privateConstructorUsedError;
   String? get getPropertyCardLogsError => throw _privateConstructorUsedError;
+  List<PropertyCardNoteModel> get propertyCardNotes =>
+      throw _privateConstructorUsedError;
+  Status get getPropertyCardNotesStatus => throw _privateConstructorUsedError;
+  String? get getPropertyCardNotesError => throw _privateConstructorUsedError;
   PropertyCardDetailsModel? get propertyCard =>
       throw _privateConstructorUsedError;
   Status get getPropertyCardStatus => throw _privateConstructorUsedError;
   String? get getPropertyCardError => throw _privateConstructorUsedError;
+  Status get addPropertyCardNoteStatus => throw _privateConstructorUsedError;
+  String? get addPropertyCardNoteError => throw _privateConstructorUsedError;
+  Status get updatePropertyCardStatus => throw _privateConstructorUsedError;
+  String? get updatePropertyCardError => throw _privateConstructorUsedError;
+  Status get checkInStatus => throw _privateConstructorUsedError;
+  String? get checkInError => throw _privateConstructorUsedError;
+  Status get checkOutLeadStatus => throw _privateConstructorUsedError;
+  String? get checkOutLeadError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PropertyCardDetailsStateCopyWith<PropertyCardDetailsState> get copyWith =>
@@ -49,9 +61,20 @@ abstract class $PropertyCardDetailsStateCopyWith<$Res> {
       List<PropertyCardLog> propertyCardLogs,
       Status getPropertyCardLogsStatus,
       String? getPropertyCardLogsError,
+      List<PropertyCardNoteModel> propertyCardNotes,
+      Status getPropertyCardNotesStatus,
+      String? getPropertyCardNotesError,
       PropertyCardDetailsModel? propertyCard,
       Status getPropertyCardStatus,
-      String? getPropertyCardError});
+      String? getPropertyCardError,
+      Status addPropertyCardNoteStatus,
+      String? addPropertyCardNoteError,
+      Status updatePropertyCardStatus,
+      String? updatePropertyCardError,
+      Status checkInStatus,
+      String? checkInError,
+      Status checkOutLeadStatus,
+      String? checkOutLeadError});
 
   $PropertyCardDetailsModelCopyWith<$Res>? get propertyCard;
 }
@@ -77,9 +100,20 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
     Object? propertyCardLogs = null,
     Object? getPropertyCardLogsStatus = null,
     Object? getPropertyCardLogsError = freezed,
+    Object? propertyCardNotes = null,
+    Object? getPropertyCardNotesStatus = null,
+    Object? getPropertyCardNotesError = freezed,
     Object? propertyCard = freezed,
     Object? getPropertyCardStatus = null,
     Object? getPropertyCardError = freezed,
+    Object? addPropertyCardNoteStatus = null,
+    Object? addPropertyCardNoteError = freezed,
+    Object? updatePropertyCardStatus = null,
+    Object? updatePropertyCardError = freezed,
+    Object? checkInStatus = null,
+    Object? checkInError = freezed,
+    Object? checkOutLeadStatus = null,
+    Object? checkOutLeadError = freezed,
   }) {
     return _then(_value.copyWith(
       propertyCardId: null == propertyCardId
@@ -110,6 +144,18 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
           ? _value.getPropertyCardLogsError
           : getPropertyCardLogsError // ignore: cast_nullable_to_non_nullable
               as String?,
+      propertyCardNotes: null == propertyCardNotes
+          ? _value.propertyCardNotes
+          : propertyCardNotes // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCardNoteModel>,
+      getPropertyCardNotesStatus: null == getPropertyCardNotesStatus
+          ? _value.getPropertyCardNotesStatus
+          : getPropertyCardNotesStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      getPropertyCardNotesError: freezed == getPropertyCardNotesError
+          ? _value.getPropertyCardNotesError
+          : getPropertyCardNotesError // ignore: cast_nullable_to_non_nullable
+              as String?,
       propertyCard: freezed == propertyCard
           ? _value.propertyCard
           : propertyCard // ignore: cast_nullable_to_non_nullable
@@ -121,6 +167,38 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       getPropertyCardError: freezed == getPropertyCardError
           ? _value.getPropertyCardError
           : getPropertyCardError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addPropertyCardNoteStatus: null == addPropertyCardNoteStatus
+          ? _value.addPropertyCardNoteStatus
+          : addPropertyCardNoteStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      addPropertyCardNoteError: freezed == addPropertyCardNoteError
+          ? _value.addPropertyCardNoteError
+          : addPropertyCardNoteError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatePropertyCardStatus: null == updatePropertyCardStatus
+          ? _value.updatePropertyCardStatus
+          : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updatePropertyCardError: freezed == updatePropertyCardError
+          ? _value.updatePropertyCardError
+          : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkInStatus: null == checkInStatus
+          ? _value.checkInStatus
+          : checkInStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      checkInError: freezed == checkInError
+          ? _value.checkInError
+          : checkInError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkOutLeadStatus: null == checkOutLeadStatus
+          ? _value.checkOutLeadStatus
+          : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      checkOutLeadError: freezed == checkOutLeadError
+          ? _value.checkOutLeadError
+          : checkOutLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -156,9 +234,20 @@ abstract class _$$PropertyCardDetailsStateImplCopyWith<$Res>
       List<PropertyCardLog> propertyCardLogs,
       Status getPropertyCardLogsStatus,
       String? getPropertyCardLogsError,
+      List<PropertyCardNoteModel> propertyCardNotes,
+      Status getPropertyCardNotesStatus,
+      String? getPropertyCardNotesError,
       PropertyCardDetailsModel? propertyCard,
       Status getPropertyCardStatus,
-      String? getPropertyCardError});
+      String? getPropertyCardError,
+      Status addPropertyCardNoteStatus,
+      String? addPropertyCardNoteError,
+      Status updatePropertyCardStatus,
+      String? updatePropertyCardError,
+      Status checkInStatus,
+      String? checkInError,
+      Status checkOutLeadStatus,
+      String? checkOutLeadError});
 
   @override
   $PropertyCardDetailsModelCopyWith<$Res>? get propertyCard;
@@ -184,9 +273,20 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
     Object? propertyCardLogs = null,
     Object? getPropertyCardLogsStatus = null,
     Object? getPropertyCardLogsError = freezed,
+    Object? propertyCardNotes = null,
+    Object? getPropertyCardNotesStatus = null,
+    Object? getPropertyCardNotesError = freezed,
     Object? propertyCard = freezed,
     Object? getPropertyCardStatus = null,
     Object? getPropertyCardError = freezed,
+    Object? addPropertyCardNoteStatus = null,
+    Object? addPropertyCardNoteError = freezed,
+    Object? updatePropertyCardStatus = null,
+    Object? updatePropertyCardError = freezed,
+    Object? checkInStatus = null,
+    Object? checkInError = freezed,
+    Object? checkOutLeadStatus = null,
+    Object? checkOutLeadError = freezed,
   }) {
     return _then(_$PropertyCardDetailsStateImpl(
       propertyCardId: null == propertyCardId
@@ -217,6 +317,18 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
           ? _value.getPropertyCardLogsError
           : getPropertyCardLogsError // ignore: cast_nullable_to_non_nullable
               as String?,
+      propertyCardNotes: null == propertyCardNotes
+          ? _value._propertyCardNotes
+          : propertyCardNotes // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCardNoteModel>,
+      getPropertyCardNotesStatus: null == getPropertyCardNotesStatus
+          ? _value.getPropertyCardNotesStatus
+          : getPropertyCardNotesStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      getPropertyCardNotesError: freezed == getPropertyCardNotesError
+          ? _value.getPropertyCardNotesError
+          : getPropertyCardNotesError // ignore: cast_nullable_to_non_nullable
+              as String?,
       propertyCard: freezed == propertyCard
           ? _value.propertyCard
           : propertyCard // ignore: cast_nullable_to_non_nullable
@@ -228,6 +340,38 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       getPropertyCardError: freezed == getPropertyCardError
           ? _value.getPropertyCardError
           : getPropertyCardError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addPropertyCardNoteStatus: null == addPropertyCardNoteStatus
+          ? _value.addPropertyCardNoteStatus
+          : addPropertyCardNoteStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      addPropertyCardNoteError: freezed == addPropertyCardNoteError
+          ? _value.addPropertyCardNoteError
+          : addPropertyCardNoteError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatePropertyCardStatus: null == updatePropertyCardStatus
+          ? _value.updatePropertyCardStatus
+          : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updatePropertyCardError: freezed == updatePropertyCardError
+          ? _value.updatePropertyCardError
+          : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkInStatus: null == checkInStatus
+          ? _value.checkInStatus
+          : checkInStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      checkInError: freezed == checkInError
+          ? _value.checkInError
+          : checkInError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkOutLeadStatus: null == checkOutLeadStatus
+          ? _value.checkOutLeadStatus
+          : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      checkOutLeadError: freezed == checkOutLeadError
+          ? _value.checkOutLeadError
+          : checkOutLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -244,11 +388,23 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
       final List<PropertyCardLog> propertyCardLogs = const [],
       this.getPropertyCardLogsStatus = Status.init,
       this.getPropertyCardLogsError,
+      final List<PropertyCardNoteModel> propertyCardNotes = const [],
+      this.getPropertyCardNotesStatus = Status.init,
+      this.getPropertyCardNotesError,
       this.propertyCard,
       this.getPropertyCardStatus = Status.init,
-      this.getPropertyCardError})
+      this.getPropertyCardError,
+      this.addPropertyCardNoteStatus = Status.init,
+      this.addPropertyCardNoteError,
+      this.updatePropertyCardStatus = Status.init,
+      this.updatePropertyCardError,
+      this.checkInStatus = Status.init,
+      this.checkInError,
+      this.checkOutLeadStatus = Status.init,
+      this.checkOutLeadError})
       : _propertyCardLeads = propertyCardLeads,
-        _propertyCardLogs = propertyCardLogs;
+        _propertyCardLogs = propertyCardLogs,
+        _propertyCardNotes = propertyCardNotes;
 
   @override
   final String propertyCardId;
@@ -282,6 +438,21 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
   final Status getPropertyCardLogsStatus;
   @override
   final String? getPropertyCardLogsError;
+  final List<PropertyCardNoteModel> _propertyCardNotes;
+  @override
+  @JsonKey()
+  List<PropertyCardNoteModel> get propertyCardNotes {
+    if (_propertyCardNotes is EqualUnmodifiableListView)
+      return _propertyCardNotes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_propertyCardNotes);
+  }
+
+  @override
+  @JsonKey()
+  final Status getPropertyCardNotesStatus;
+  @override
+  final String? getPropertyCardNotesError;
   @override
   final PropertyCardDetailsModel? propertyCard;
   @override
@@ -289,10 +460,30 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
   final Status getPropertyCardStatus;
   @override
   final String? getPropertyCardError;
+  @override
+  @JsonKey()
+  final Status addPropertyCardNoteStatus;
+  @override
+  final String? addPropertyCardNoteError;
+  @override
+  @JsonKey()
+  final Status updatePropertyCardStatus;
+  @override
+  final String? updatePropertyCardError;
+  @override
+  @JsonKey()
+  final Status checkInStatus;
+  @override
+  final String? checkInError;
+  @override
+  @JsonKey()
+  final Status checkOutLeadStatus;
+  @override
+  final String? checkOutLeadError;
 
   @override
   String toString() {
-    return 'PropertyCardDetailsState(propertyCardId: $propertyCardId, propertyCardLeads: $propertyCardLeads, getPropertyCardLeadsStatus: $getPropertyCardLeadsStatus, getPropertyCardLeadsError: $getPropertyCardLeadsError, propertyCardLogs: $propertyCardLogs, getPropertyCardLogsStatus: $getPropertyCardLogsStatus, getPropertyCardLogsError: $getPropertyCardLogsError, propertyCard: $propertyCard, getPropertyCardStatus: $getPropertyCardStatus, getPropertyCardError: $getPropertyCardError)';
+    return 'PropertyCardDetailsState(propertyCardId: $propertyCardId, propertyCardLeads: $propertyCardLeads, getPropertyCardLeadsStatus: $getPropertyCardLeadsStatus, getPropertyCardLeadsError: $getPropertyCardLeadsError, propertyCardLogs: $propertyCardLogs, getPropertyCardLogsStatus: $getPropertyCardLogsStatus, getPropertyCardLogsError: $getPropertyCardLogsError, propertyCardNotes: $propertyCardNotes, getPropertyCardNotesStatus: $getPropertyCardNotesStatus, getPropertyCardNotesError: $getPropertyCardNotesError, propertyCard: $propertyCard, getPropertyCardStatus: $getPropertyCardStatus, getPropertyCardError: $getPropertyCardError, addPropertyCardNoteStatus: $addPropertyCardNoteStatus, addPropertyCardNoteError: $addPropertyCardNoteError, updatePropertyCardStatus: $updatePropertyCardStatus, updatePropertyCardError: $updatePropertyCardError, checkInStatus: $checkInStatus, checkInError: $checkInError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError)';
   }
 
   @override
@@ -304,42 +495,73 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
                 other.propertyCardId == propertyCardId) &&
             const DeepCollectionEquality()
                 .equals(other._propertyCardLeads, _propertyCardLeads) &&
-            (identical(other.getPropertyCardLeadsStatus,
-                    getPropertyCardLeadsStatus) ||
+            (identical(other.getPropertyCardLeadsStatus, getPropertyCardLeadsStatus) ||
                 other.getPropertyCardLeadsStatus ==
                     getPropertyCardLeadsStatus) &&
-            (identical(other.getPropertyCardLeadsError,
-                    getPropertyCardLeadsError) ||
+            (identical(other.getPropertyCardLeadsError, getPropertyCardLeadsError) ||
                 other.getPropertyCardLeadsError == getPropertyCardLeadsError) &&
             const DeepCollectionEquality()
                 .equals(other._propertyCardLogs, _propertyCardLogs) &&
-            (identical(other.getPropertyCardLogsStatus,
-                    getPropertyCardLogsStatus) ||
+            (identical(other.getPropertyCardLogsStatus, getPropertyCardLogsStatus) ||
                 other.getPropertyCardLogsStatus == getPropertyCardLogsStatus) &&
-            (identical(
-                    other.getPropertyCardLogsError, getPropertyCardLogsError) ||
+            (identical(other.getPropertyCardLogsError, getPropertyCardLogsError) ||
                 other.getPropertyCardLogsError == getPropertyCardLogsError) &&
+            const DeepCollectionEquality()
+                .equals(other._propertyCardNotes, _propertyCardNotes) &&
+            (identical(other.getPropertyCardNotesStatus, getPropertyCardNotesStatus) ||
+                other.getPropertyCardNotesStatus ==
+                    getPropertyCardNotesStatus) &&
+            (identical(other.getPropertyCardNotesError, getPropertyCardNotesError) ||
+                other.getPropertyCardNotesError == getPropertyCardNotesError) &&
             (identical(other.propertyCard, propertyCard) ||
                 other.propertyCard == propertyCard) &&
             (identical(other.getPropertyCardStatus, getPropertyCardStatus) ||
                 other.getPropertyCardStatus == getPropertyCardStatus) &&
             (identical(other.getPropertyCardError, getPropertyCardError) ||
-                other.getPropertyCardError == getPropertyCardError));
+                other.getPropertyCardError == getPropertyCardError) &&
+            (identical(other.addPropertyCardNoteStatus, addPropertyCardNoteStatus) ||
+                other.addPropertyCardNoteStatus == addPropertyCardNoteStatus) &&
+            (identical(other.addPropertyCardNoteError, addPropertyCardNoteError) ||
+                other.addPropertyCardNoteError == addPropertyCardNoteError) &&
+            (identical(other.updatePropertyCardStatus, updatePropertyCardStatus) ||
+                other.updatePropertyCardStatus == updatePropertyCardStatus) &&
+            (identical(other.updatePropertyCardError, updatePropertyCardError) ||
+                other.updatePropertyCardError == updatePropertyCardError) &&
+            (identical(other.checkInStatus, checkInStatus) ||
+                other.checkInStatus == checkInStatus) &&
+            (identical(other.checkInError, checkInError) ||
+                other.checkInError == checkInError) &&
+            (identical(other.checkOutLeadStatus, checkOutLeadStatus) ||
+                other.checkOutLeadStatus == checkOutLeadStatus) &&
+            (identical(other.checkOutLeadError, checkOutLeadError) ||
+                other.checkOutLeadError == checkOutLeadError));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      propertyCardId,
-      const DeepCollectionEquality().hash(_propertyCardLeads),
-      getPropertyCardLeadsStatus,
-      getPropertyCardLeadsError,
-      const DeepCollectionEquality().hash(_propertyCardLogs),
-      getPropertyCardLogsStatus,
-      getPropertyCardLogsError,
-      propertyCard,
-      getPropertyCardStatus,
-      getPropertyCardError);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        propertyCardId,
+        const DeepCollectionEquality().hash(_propertyCardLeads),
+        getPropertyCardLeadsStatus,
+        getPropertyCardLeadsError,
+        const DeepCollectionEquality().hash(_propertyCardLogs),
+        getPropertyCardLogsStatus,
+        getPropertyCardLogsError,
+        const DeepCollectionEquality().hash(_propertyCardNotes),
+        getPropertyCardNotesStatus,
+        getPropertyCardNotesError,
+        propertyCard,
+        getPropertyCardStatus,
+        getPropertyCardError,
+        addPropertyCardNoteStatus,
+        addPropertyCardNoteError,
+        updatePropertyCardStatus,
+        updatePropertyCardError,
+        checkInStatus,
+        checkInError,
+        checkOutLeadStatus,
+        checkOutLeadError
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -358,9 +580,20 @@ abstract class _PropertyCardDetailsState implements PropertyCardDetailsState {
       final List<PropertyCardLog> propertyCardLogs,
       final Status getPropertyCardLogsStatus,
       final String? getPropertyCardLogsError,
+      final List<PropertyCardNoteModel> propertyCardNotes,
+      final Status getPropertyCardNotesStatus,
+      final String? getPropertyCardNotesError,
       final PropertyCardDetailsModel? propertyCard,
       final Status getPropertyCardStatus,
-      final String? getPropertyCardError}) = _$PropertyCardDetailsStateImpl;
+      final String? getPropertyCardError,
+      final Status addPropertyCardNoteStatus,
+      final String? addPropertyCardNoteError,
+      final Status updatePropertyCardStatus,
+      final String? updatePropertyCardError,
+      final Status checkInStatus,
+      final String? checkInError,
+      final Status checkOutLeadStatus,
+      final String? checkOutLeadError}) = _$PropertyCardDetailsStateImpl;
 
   @override
   String get propertyCardId;
@@ -377,11 +610,33 @@ abstract class _PropertyCardDetailsState implements PropertyCardDetailsState {
   @override
   String? get getPropertyCardLogsError;
   @override
+  List<PropertyCardNoteModel> get propertyCardNotes;
+  @override
+  Status get getPropertyCardNotesStatus;
+  @override
+  String? get getPropertyCardNotesError;
+  @override
   PropertyCardDetailsModel? get propertyCard;
   @override
   Status get getPropertyCardStatus;
   @override
   String? get getPropertyCardError;
+  @override
+  Status get addPropertyCardNoteStatus;
+  @override
+  String? get addPropertyCardNoteError;
+  @override
+  Status get updatePropertyCardStatus;
+  @override
+  String? get updatePropertyCardError;
+  @override
+  Status get checkInStatus;
+  @override
+  String? get checkInError;
+  @override
+  Status get checkOutLeadStatus;
+  @override
+  String? get checkOutLeadError;
   @override
   @JsonKey(ignore: true)
   _$$PropertyCardDetailsStateImplCopyWith<_$PropertyCardDetailsStateImpl>

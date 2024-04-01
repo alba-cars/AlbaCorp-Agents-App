@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -9,6 +10,7 @@ import 'package:phone_state/phone_state.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/data/remote_data/activity_data.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
+import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.config.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
@@ -27,6 +29,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
     on<_CallStarted>(_onCallStarted);
     on<_CallEnded>(_onCallEnded);
     on<_UpdateActivity>(_onUpdateActivity);
+    on<_ClickToCall>(_onClickToCall);
     add(_Started());
   }
 
@@ -87,6 +90,26 @@ class CallBloc extends Bloc<CallEvent, CallState> {
       emit(state.copyWith(
           phoneCallStatus: PhoneCallStatus.callEnded,
           feedbackRequestDialogOpen: true));
+    }
+  }
+
+  FutureOr<void> _onClickToCall(
+      _ClickToCall event, Emitter<CallState> emit) async {
+    final result = await _activityRepo.createActivity(
+      leadId: event.leadId,
+      type: 'Call',
+    );
+    switch (result) {
+      case (Success<Activity> s):
+        emit(state.copyWith(
+          phoneCallStatus: PhoneCallStatus.inCall,
+          calledNumber: event.phoneNumber,
+          callStartTime: DateTime.now(),
+          activityId: s.value.id,
+          leadId: event.leadId,
+        ));
+        await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
+      case (Error e):
     }
   }
 }

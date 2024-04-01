@@ -185,14 +185,20 @@ class _AppState extends State<App> {
                           side: BorderSide(color: Color(0xff374eab), width: 2),
                           borderRadius: BorderRadius.circular(12)))),
               outlinedButtonTheme: OutlinedButtonThemeData(
-                  style: OutlinedButton.styleFrom(
-                      foregroundColor: Color(0xff374eab),
-                      shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                              color: Color(0xff374eab),
-                              width: 20,
-                              strokeAlign: BorderSide.strokeAlignOutside),
-                          borderRadius: BorderRadius.circular(12)))),
+                  style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStatePropertyAll(Color(0xff374eab)),
+                      fixedSize: MaterialStatePropertyAll(Size.fromWidth(
+                        200,
+                      )),
+                      minimumSize:
+                          MaterialStatePropertyAll(Size.fromHeight(43)),
+                      side: MaterialStatePropertyAll(BorderSide(
+                        color: const Color(0xff374eab),
+                        width: 1,
+                      )),
+                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12))))),
               dialogTheme: DialogTheme(
                   backgroundColor: Colors.white,
                   surfaceTintColor: Colors.white)),

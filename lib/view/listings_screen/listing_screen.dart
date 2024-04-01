@@ -12,8 +12,10 @@ import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/property_price.dart';
+import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/listings_screen/cubit/listings_cubit.dart';
+import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_select_autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
@@ -89,16 +91,7 @@ class _ListingScreenLayoutState extends State<ListingScreenLayout>
             // ),
             SliverVerticalSmallGap(),
             SliverVerticalSmallGap(),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TitleText(
-                  text: 'Listings List',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SliverVerticalSmallGap(),
+
             SliverToBoxAdapter(
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -125,6 +118,7 @@ class _ListingScreenLayoutState extends State<ListingScreenLayout>
           },
           builder: (context, state) {
             return TabBarView(
+              physics: NeverScrollableScrollPhysics(),
               controller: _tabController,
               children: [ListingsTab(), PocketListingsTab()],
             );
@@ -193,7 +187,21 @@ class ListingsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        VerticalSmallGap(
+          adjustment: 0.5,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: TitleText(
+            text: 'Listings List',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        VerticalSmallGap(
+          adjustment: 0.5,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: AppSearchBar(
@@ -485,6 +493,43 @@ class PocketListingsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        VerticalSmallGap(
+          adjustment: 0.5,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              TitleText(
+                text: 'Pocket Listings',
+                fontWeight: FontWeight.bold,
+              ),
+              Spacer(),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(40, 34),
+                      maximumSize: Size(110, 34),
+                      fixedSize: null,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      foregroundColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: Color.fromARGB(255, 230, 239, 245)),
+                  child: Text('Add New'),
+                  onPressed: () async {
+                    final result = await context
+                        .pushNamed(AddPocketListingScreen.routeName);
+                    if (result == true) {
+                      context
+                          .read<ListingsCubit>()
+                          .getPocketListings(refresh: true);
+                    }
+                  })
+            ],
+          ),
+        ),
+        VerticalSmallGap(
+          adjustment: 0.5,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: AppSearchBar(
@@ -546,113 +591,125 @@ class PocketListingsTab extends StatelessWidget {
                                     offset: Offset(-4, 5),
                                     blurRadius: 11)
                               ]),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  LabelText(
-                                    text: propertyCard.referenceNumber ?? '',
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
+                          child: InkWell(
+                            onTap: () {
+                              context.pushNamed(
+                                  PropertyCardDetailsScreen.routeName,
+                                  pathParameters: {'id': propertyCard.id});
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    LabelText(
+                                      text: propertyCard.referenceNumber ?? '',
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 4.h, vertical: 1.h),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.blueGrey),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          color: Colors.blueGrey[100]),
+                                      child: SmallText(
+                                          text:
+                                              propertyCard.status?.titleCase ??
+                                                  ''),
+                                    ),
+                                  ],
+                                ),
+                                InfoLabelValue(
+                                  labelOne: 'Property Type',
+                                  valueOne: propertyCard.propertyType,
+                                  labelTwo: 'Purpose',
+                                  valueTwo: propertyCard.purpose,
+                                ),
+                                InfoLabelValue(
+                                  labelOne: 'Building Name',
+                                  valueOne:
+                                      propertyCard.building?.name ?? 'N/A',
+                                  labelTwo: 'Community Name',
+                                  valueTwo: propertyCard.community?.community
+                                      .toString(),
+                                ),
+                                InfoLabelValue(
+                                  labelOne: 'Area',
+                                  valueOne: (propertyCard.size != null)
+                                      ? '${propertyCard.size} SqFt'
+                                      : 'N/A',
+                                  labelTwo: 'Beds',
+                                  valueTwo: propertyCard.beds?.toString(),
+                                ),
+                                if (propertyCard.currentAgent is Map)
                                   Container(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 4.h, vertical: 1.h),
+                                        horizontal: 10, vertical: 2),
                                     decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: Colors.blueGrey),
-                                        borderRadius: BorderRadius.circular(4),
-                                        color: Colors.blueGrey[100]),
-                                    child: SmallText(
-                                        text: propertyCard.status?.titleCase ??
-                                            ''),
-                                  ),
-                                ],
-                              ),
-                              InfoLabelValue(
-                                labelOne: 'Property Type',
-                                valueOne: propertyCard.propertyType,
-                                labelTwo: 'Purpose',
-                                valueTwo: propertyCard.purpose,
-                              ),
-                              InfoLabelValue(
-                                labelOne: 'Building Name',
-                                valueOne: propertyCard.building?.name ?? 'N/A',
-                                labelTwo: 'Community Name',
-                                valueTwo: propertyCard.community?.community
-                                    .toString(),
-                              ),
-                              InfoLabelValue(
-                                labelOne: 'Area',
-                                valueOne: (propertyCard.size != null)
-                                    ? '${propertyCard.size} SqFt'
-                                    : 'N/A',
-                                labelTwo: 'Beds',
-                                valueTwo: propertyCard.beds?.toString(),
-                              ),
-                              if (propertyCard.currentAgent != null)
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 2),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primaryContainer
-                                          .withOpacity(.5)),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        height: 40,
-                                        width: 40,
-                                        clipBehavior: Clip.hardEdge,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle),
-                                        child: S3Image(
-                                          url: propertyCard
-                                                  .currentAgent?.userId.photo ??
-                                              '',
+                                        borderRadius: BorderRadius.circular(6),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primaryContainer
+                                            .withOpacity(.5)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          height: 40,
+                                          width: 40,
+                                          clipBehavior: Clip.hardEdge,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle),
+                                          child: S3Image(
+                                            url: propertyCard
+                                                        .currentAgent["userId"]
+                                                    ?["photo"] ??
+                                                '',
+                                          ),
                                         ),
-                                      ),
-                                      HorizontalSmallGap(),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SmallText(text: 'Agent'),
-                                          LabelText(
-                                              text: propertyCard.currentAgent
-                                                      ?.userId.firstName ??
-                                                  ''),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      HorizontalSmallGap(),
-                                      IconButton.filledTonal(
-                                          style: IconButton.styleFrom(
-                                              backgroundColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              foregroundColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .onPrimary),
-                                          onPressed: () async {
-                                            await FlutterPhoneDirectCaller
-                                                .callNumber(
-                                                    'tel://${propertyCard.currentAgent!.userId.phone}');
-                                          },
-                                          icon: Icon(
-                                            Icons.call,
-                                          ))
-                                    ],
-                                  ),
-                                )
-                            ],
+                                        HorizontalSmallGap(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SmallText(text: 'Agent'),
+                                            LabelText(
+                                                text:
+                                                    "${propertyCard.currentAgent["userId"]["first_name"] ?? ''} ${propertyCard.currentAgent["userId"]["last_name"] ?? ''}"),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        HorizontalSmallGap(),
+                                        IconButton.filledTonal(
+                                            style: IconButton.styleFrom(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                foregroundColor:
+                                                    Theme.of(context)
+                                                        .colorScheme
+                                                        .onPrimary),
+                                            onPressed: () async {
+                                              await FlutterPhoneDirectCaller
+                                                  .callNumber(
+                                                      'tel://${propertyCard.currentAgent!["userId"]["phone"]}');
+                                            },
+                                            icon: Icon(
+                                              Icons.call,
+                                            ))
+                                      ],
+                                    ),
+                                  )
+                              ],
+                            ),
                           ),
                         );
                       },

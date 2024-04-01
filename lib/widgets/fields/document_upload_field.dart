@@ -283,7 +283,6 @@ class _DocumentSelectionFieldState<T> extends State<DocumentSelectionField<T>> {
 void chooseFileDialog(
     BuildContext originalContext, FutureOr Function(DialogType? value) onValue,
     {Function? onError, List<DialogType>? types}) {
-  Logger().d(types);
   types ??= [DialogType.Photo];
   List<DialogType> expandedTypes = [];
   for (DialogType type in types) {

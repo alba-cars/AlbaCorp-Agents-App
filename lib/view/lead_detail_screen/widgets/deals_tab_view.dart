@@ -23,7 +23,10 @@ class DealsTabView extends StatelessWidget {
     return ListView.separated(
         itemBuilder: (context, index) {
           final deal = deals[index];
-          return DealItem(deal: deal);
+          return DealItem(
+            deal: deal,
+            index: index,
+          );
         },
         separatorBuilder: (context, index) => SizedBox(
               height: 8,

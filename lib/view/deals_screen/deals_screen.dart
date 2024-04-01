@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -44,7 +45,7 @@ class DealsScreenLayout extends StatefulWidget {
 class _DealsScreenLayoutState extends State<DealsScreenLayout>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
-      TabController(length: 3, vsync: this);
+      TabController(length: 2, vsync: this);
   @override
   void initState() {
     context.read<DealsCubit>().getDeals();
@@ -55,50 +56,6 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
   void dispose() {
     _tabController.dispose();
     super.dispose();
-  }
-
-  List<Widget> filterFields(BuildContext context) {
-    return [
-      WrapSelectField(
-          name: 'category',
-          label: 'Deal Type',
-          values: [
-            'Primary Off Plan Property',
-            'Secondary Market Property',
-            'Listing Acquired'
-          ],
-          isRequired: true),
-      DropDownfield(
-          name: 'status',
-          label: 'Deal Status',
-          items: [
-            "Created",
-            "Collecting Documents",
-            "Choose Listing",
-            "Create Listing",
-            "Choose Offplan Listing",
-            "Create Offplan Listing",
-            "Choose External Property Listing",
-            "Create External Property Listing",
-            "Assign Property",
-            "Pending Approval",
-            "Approved",
-            "Rejected",
-            "Completed",
-            "Canceled",
-          ],
-          isRequired: true),
-      DateField(
-          name: 'fromDate',
-          label: 'From Date',
-          firstDate: DateTime(2000),
-          lastDate: DateTime.now()),
-      DateField(
-          name: 'toDate',
-          label: 'To Date',
-          firstDate: DateTime(2000),
-          lastDate: DateTime.now()),
-    ];
   }
 
   @override
@@ -140,6 +97,17 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
               ),
             ),
             SliverVerticalSmallGap(),
+            // SliverToBoxAdapter(
+            //     child: Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            //   child: AppTabBar(
+            //     backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            //     selectedColor: Theme.of(context).primaryColor,
+            //     tabController: _tabController,
+            //     tabs: ['In Progress', 'Completed', 'Cancelled'],
+            //     onTap: (index) {},
+            //   ),
+            // )),
             SliverToBoxAdapter(
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -147,73 +115,264 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: ['In Progress', 'Completed', 'Cancelled'],
-                onTap: (index) {},
+                tabs: ['Deals', 'Your Listings'],
+                onTap: (index) {
+                  context.read<DealsCubit>().setSelectedTab(index);
+                },
               ),
             )),
-            SliverToBoxAdapter(
-                child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: AppSearchBar(
-                      onChanged: (val) {
-                        context.read<DealsCubit>().searchDeals(val);
-                      },
-                      filterFields: filterFields(context),
-                      onFilterApplied: (filter) {
-                        context.read<DealsCubit>().setDealsFilter(filter);
-                      },
-                      filter: context.select(
-                          (DealsCubit value) => value.state.dealsFilter),
-                    ))),
           ];
         },
-        body: BlocBuilder<DealsCubit, DealsState>(
-          builder: (context, state) {
-            if (state.getDealsStatus == Status.loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final deals = state.deals;
-            return NotificationListener<ScrollNotification>(
-              onNotification: (scrollInfo) {
-                if (state.getDealsStatus != Status.loadingMore &&
-                    scrollInfo.metrics.pixels >=
-                        0.9 * scrollInfo.metrics.maxScrollExtent) {
-                  context.read<DealsCubit>().getDeals();
-                }
-                return true;
-              },
-              child: RefreshIndicator.adaptive(
-                onRefresh: () async {
-                  await context.read<DealsCubit>().getDeals(refresh: true);
-                },
-                child: ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  itemCount: state.getDealsStatus != Status.loadingMore
-                      ? deals.length
-                      : deals.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index == deals.length) {
-                      return SizedBox(
-                        height: 50,
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    }
-                    final deal = deals[index];
-
-                    return DealItem(deal: deal);
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 8,
-                  ),
-                ),
-              ),
-            );
-          },
+        body: TabBarView(
+          controller: _tabController,
+          physics: NeverScrollableScrollPhysics(),
+          children: [DealsTab(), ListingsTab()],
         ),
       ),
+    );
+  }
+}
+
+class DealsTab extends StatelessWidget {
+  const DealsTab({
+    super.key,
+  });
+  List<Widget> filterFields(BuildContext context) {
+    return [
+      WrapSelectField(
+          name: 'category',
+          label: 'Deal Type',
+          values: [
+            'Primary Off Plan Property',
+            'Secondary Market Property',
+          ],
+          isRequired: true),
+      DropDownfield(
+          name: 'status',
+          label: 'Deal Status',
+          items: [
+            "Created",
+            "Collecting Documents",
+            "Choose Listing",
+            "Create Listing",
+            "Choose Offplan Listing",
+            "Create Offplan Listing",
+            "Choose External Property Listing",
+            "Create External Property Listing",
+            "Assign Property",
+            "Pending Approval",
+            "Approved",
+            "Rejected",
+            "Completed",
+            "Canceled",
+          ],
+          isRequired: true),
+      DateField(
+          name: 'from_date',
+          label: 'From Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+      DateField(
+          name: 'to_date',
+          label: 'To Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            child: AppSearchBar(
+              onChanged: (val) {
+                context.read<DealsCubit>().searchDeals(val);
+              },
+              filterFields: filterFields(context),
+              onFilterApplied: (filter) {
+                context.read<DealsCubit>().setDealsFilter(filter);
+              },
+              filter:
+                  context.select((DealsCubit value) => value.state.dealsFilter),
+            )),
+        Expanded(
+          child: BlocBuilder<DealsCubit, DealsState>(
+            builder: (context, state) {
+              if (state.getDealsStatus == Status.loading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final deals = state.deals;
+              return NotificationListener<ScrollNotification>(
+                onNotification: (scrollInfo) {
+                  if (state.getDealsStatus != Status.loadingMore &&
+                      scrollInfo.metrics.pixels >=
+                          0.9 * scrollInfo.metrics.maxScrollExtent) {
+                    context.read<DealsCubit>().getDeals();
+                  }
+                  return true;
+                },
+                child: RefreshIndicator.adaptive(
+                  onRefresh: () async {
+                    await context.read<DealsCubit>().getDeals(refresh: true);
+                  },
+                  child: ListView.separated(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    itemCount: state.getDealsStatus != Status.loadingMore
+                        ? deals.length
+                        : deals.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == deals.length) {
+                        return SizedBox(
+                          height: 50,
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                      final deal = deals[index];
+
+                      return DealItem(
+                        deal: deal,
+                        index: index,
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 8,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ListingsTab extends StatefulWidget {
+  const ListingsTab({
+    super.key,
+  });
+
+  @override
+  State<ListingsTab> createState() => _ListingsTabState();
+}
+
+class _ListingsTabState extends State<ListingsTab> {
+  @override
+  void initState() {
+    context.read<DealsCubit>().getYourListings();
+    super.initState();
+  }
+
+  List<Widget> filterFields(BuildContext context) {
+    return [
+      DropDownfield(
+          name: 'status',
+          label: 'Deal Status',
+          items: [
+            "Created",
+            "Collecting Documents",
+            "Choose Listing",
+            "Create Listing",
+            "Choose Offplan Listing",
+            "Create Offplan Listing",
+            "Choose External Property Listing",
+            "Create External Property Listing",
+            "Assign Property",
+            "Pending Approval",
+            "Approved",
+            "Rejected",
+            "Completed",
+            "Canceled",
+          ],
+          isRequired: true),
+      DateField(
+          name: 'from_date',
+          label: 'From Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+      DateField(
+          name: 'to_date',
+          label: 'To Date',
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now()),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            child: AppSearchBar(
+              onChanged: (val) {
+                context.read<DealsCubit>().searchYourListings(val);
+              },
+              filterFields: filterFields(context),
+              onFilterApplied: (filter) {
+                context.read<DealsCubit>().setYourListingsFilter(filter);
+              },
+              filter: context
+                  .select((DealsCubit value) => value.state.yourListingsFilter),
+            )),
+        Expanded(
+          child: BlocBuilder<DealsCubit, DealsState>(
+            builder: (context, state) {
+              if (state.getYourListingsStatus == Status.loading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final yourListings = state.yourListings;
+              return NotificationListener<ScrollNotification>(
+                onNotification: (scrollInfo) {
+                  if (state.getYourListingsStatus != Status.loadingMore &&
+                      scrollInfo.metrics.pixels >=
+                          0.9 * scrollInfo.metrics.maxScrollExtent) {
+                    context.read<DealsCubit>().getYourListings();
+                  }
+                  return true;
+                },
+                child: RefreshIndicator.adaptive(
+                  onRefresh: () async {
+                    await context
+                        .read<DealsCubit>()
+                        .getYourListings(refresh: true);
+                  },
+                  child: ListView.separated(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    itemCount: state.getYourListingsStatus != Status.loadingMore
+                        ? yourListings.length
+                        : yourListings.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == yourListings.length) {
+                        return SizedBox(
+                          height: 50,
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                      final yourListing = yourListings[index];
+
+                      return DealItem(
+                        deal: yourListing,
+                        index: index,
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 8,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -222,9 +381,11 @@ class DealItem extends StatelessWidget {
   const DealItem({
     super.key,
     required this.deal,
+    required this.index,
   });
 
   final Deal deal;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -247,9 +408,13 @@ class DealItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
         child: InkWell(
-          onTap: () {
-            context.pushNamed(DealDetailsScreen.routeName,
+          onTap: () async {
+            final dealR = await context.pushNamed<Deal>(
+                DealDetailsScreen.routeName,
                 pathParameters: {'id': deal.id});
+            if (dealR != null) {
+              context.read<DealsCubit>().onDealUpdated(deal, index);
+            }
           },
           child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Column(
@@ -276,14 +441,16 @@ class DealItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 4.h, vertical: 1.h),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blueGrey),
-                            borderRadius: BorderRadius.circular(4),
-                            color: Colors.blueGrey[100]),
-                        child: SmallText(text: deal.category),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 4.h, vertical: 1.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blueGrey),
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.blueGrey[100]),
+                          child: SmallText(text: deal.category),
+                        ),
                       ),
                     ],
                   ),
@@ -318,5 +485,14 @@ class DealItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class YourListingsTab extends StatelessWidget {
+  const YourListingsTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

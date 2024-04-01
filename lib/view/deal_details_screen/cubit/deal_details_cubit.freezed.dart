@@ -24,6 +24,16 @@ mixin _$DealDetailsState {
   Status get getDealDocumentsStatus => throw _privateConstructorUsedError;
   List<DealDocument> get userDocuments => throw _privateConstructorUsedError;
   Status get getUserDocumentsStatus => throw _privateConstructorUsedError;
+  List<Deal> get buyerDeals => throw _privateConstructorUsedError;
+  Status get buyerDealsStatus => throw _privateConstructorUsedError;
+  List<Deal> get sellerDeals => throw _privateConstructorUsedError;
+  Status get sellerDealsStatus => throw _privateConstructorUsedError;
+  List<Activity> get buyerActivities => throw _privateConstructorUsedError;
+  Status get buyerActivitiesStatus => throw _privateConstructorUsedError;
+  List<Activity> get sellerActivities => throw _privateConstructorUsedError;
+  Status get sellerActivitiesStatus => throw _privateConstructorUsedError;
+  List<Activity> get propertyActivities => throw _privateConstructorUsedError;
+  Status get propertyActivitiesStatus => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
   Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
 
@@ -47,6 +57,16 @@ abstract class $DealDetailsStateCopyWith<$Res> {
       Status getDealDocumentsStatus,
       List<DealDocument> userDocuments,
       Status getUserDocumentsStatus,
+      List<Deal> buyerDeals,
+      Status buyerDealsStatus,
+      List<Deal> sellerDeals,
+      Status sellerDealsStatus,
+      List<Activity> buyerActivities,
+      Status buyerActivitiesStatus,
+      List<Activity> sellerActivities,
+      Status sellerActivitiesStatus,
+      List<Activity> propertyActivities,
+      Status propertyActivitiesStatus,
       List<PropertyType> propertyTypeList,
       Status getPropertyTypeListStatus});
 
@@ -74,6 +94,16 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
     Object? getDealDocumentsStatus = null,
     Object? userDocuments = null,
     Object? getUserDocumentsStatus = null,
+    Object? buyerDeals = null,
+    Object? buyerDealsStatus = null,
+    Object? sellerDeals = null,
+    Object? sellerDealsStatus = null,
+    Object? buyerActivities = null,
+    Object? buyerActivitiesStatus = null,
+    Object? sellerActivities = null,
+    Object? sellerActivitiesStatus = null,
+    Object? propertyActivities = null,
+    Object? propertyActivitiesStatus = null,
     Object? propertyTypeList = null,
     Object? getPropertyTypeListStatus = null,
   }) {
@@ -109,6 +139,46 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       getUserDocumentsStatus: null == getUserDocumentsStatus
           ? _value.getUserDocumentsStatus
           : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      buyerDeals: null == buyerDeals
+          ? _value.buyerDeals
+          : buyerDeals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      buyerDealsStatus: null == buyerDealsStatus
+          ? _value.buyerDealsStatus
+          : buyerDealsStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      sellerDeals: null == sellerDeals
+          ? _value.sellerDeals
+          : sellerDeals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      sellerDealsStatus: null == sellerDealsStatus
+          ? _value.sellerDealsStatus
+          : sellerDealsStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      buyerActivities: null == buyerActivities
+          ? _value.buyerActivities
+          : buyerActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      buyerActivitiesStatus: null == buyerActivitiesStatus
+          ? _value.buyerActivitiesStatus
+          : buyerActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      sellerActivities: null == sellerActivities
+          ? _value.sellerActivities
+          : sellerActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      sellerActivitiesStatus: null == sellerActivitiesStatus
+          ? _value.sellerActivitiesStatus
+          : sellerActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      propertyActivities: null == propertyActivities
+          ? _value.propertyActivities
+          : propertyActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      propertyActivitiesStatus: null == propertyActivitiesStatus
+          ? _value.propertyActivitiesStatus
+          : propertyActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as Status,
       propertyTypeList: null == propertyTypeList
           ? _value.propertyTypeList
@@ -151,6 +221,16 @@ abstract class _$$DealDetailsStateImplCopyWith<$Res>
       Status getDealDocumentsStatus,
       List<DealDocument> userDocuments,
       Status getUserDocumentsStatus,
+      List<Deal> buyerDeals,
+      Status buyerDealsStatus,
+      List<Deal> sellerDeals,
+      Status sellerDealsStatus,
+      List<Activity> buyerActivities,
+      Status buyerActivitiesStatus,
+      List<Activity> sellerActivities,
+      Status sellerActivitiesStatus,
+      List<Activity> propertyActivities,
+      Status propertyActivitiesStatus,
       List<PropertyType> propertyTypeList,
       Status getPropertyTypeListStatus});
 
@@ -177,6 +257,16 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
     Object? getDealDocumentsStatus = null,
     Object? userDocuments = null,
     Object? getUserDocumentsStatus = null,
+    Object? buyerDeals = null,
+    Object? buyerDealsStatus = null,
+    Object? sellerDeals = null,
+    Object? sellerDealsStatus = null,
+    Object? buyerActivities = null,
+    Object? buyerActivitiesStatus = null,
+    Object? sellerActivities = null,
+    Object? sellerActivitiesStatus = null,
+    Object? propertyActivities = null,
+    Object? propertyActivitiesStatus = null,
     Object? propertyTypeList = null,
     Object? getPropertyTypeListStatus = null,
   }) {
@@ -213,6 +303,46 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
           ? _value.getUserDocumentsStatus
           : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as Status,
+      buyerDeals: null == buyerDeals
+          ? _value._buyerDeals
+          : buyerDeals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      buyerDealsStatus: null == buyerDealsStatus
+          ? _value.buyerDealsStatus
+          : buyerDealsStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      sellerDeals: null == sellerDeals
+          ? _value._sellerDeals
+          : sellerDeals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      sellerDealsStatus: null == sellerDealsStatus
+          ? _value.sellerDealsStatus
+          : sellerDealsStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      buyerActivities: null == buyerActivities
+          ? _value._buyerActivities
+          : buyerActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      buyerActivitiesStatus: null == buyerActivitiesStatus
+          ? _value.buyerActivitiesStatus
+          : buyerActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      sellerActivities: null == sellerActivities
+          ? _value._sellerActivities
+          : sellerActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      sellerActivitiesStatus: null == sellerActivitiesStatus
+          ? _value.sellerActivitiesStatus
+          : sellerActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      propertyActivities: null == propertyActivities
+          ? _value._propertyActivities
+          : propertyActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      propertyActivitiesStatus: null == propertyActivitiesStatus
+          ? _value.propertyActivitiesStatus
+          : propertyActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
       propertyTypeList: null == propertyTypeList
           ? _value._propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
@@ -237,10 +367,25 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
       this.getDealDocumentsStatus = Status.init,
       final List<DealDocument> userDocuments = const [],
       this.getUserDocumentsStatus = Status.init,
+      final List<Deal> buyerDeals = const [],
+      this.buyerDealsStatus = Status.init,
+      final List<Deal> sellerDeals = const [],
+      this.sellerDealsStatus = Status.init,
+      final List<Activity> buyerActivities = const [],
+      this.buyerActivitiesStatus = Status.init,
+      final List<Activity> sellerActivities = const [],
+      this.sellerActivitiesStatus = Status.init,
+      final List<Activity> propertyActivities = const [],
+      this.propertyActivitiesStatus = Status.init,
       final List<PropertyType> propertyTypeList = const [],
       this.getPropertyTypeListStatus = Status.init})
       : _dealDocuments = dealDocuments,
         _userDocuments = userDocuments,
+        _buyerDeals = buyerDeals,
+        _sellerDeals = sellerDeals,
+        _buyerActivities = buyerActivities,
+        _sellerActivities = sellerActivities,
+        _propertyActivities = propertyActivities,
         _propertyTypeList = propertyTypeList;
 
   @override
@@ -276,6 +421,68 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
   @override
   @JsonKey()
   final Status getUserDocumentsStatus;
+  final List<Deal> _buyerDeals;
+  @override
+  @JsonKey()
+  List<Deal> get buyerDeals {
+    if (_buyerDeals is EqualUnmodifiableListView) return _buyerDeals;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_buyerDeals);
+  }
+
+  @override
+  @JsonKey()
+  final Status buyerDealsStatus;
+  final List<Deal> _sellerDeals;
+  @override
+  @JsonKey()
+  List<Deal> get sellerDeals {
+    if (_sellerDeals is EqualUnmodifiableListView) return _sellerDeals;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sellerDeals);
+  }
+
+  @override
+  @JsonKey()
+  final Status sellerDealsStatus;
+  final List<Activity> _buyerActivities;
+  @override
+  @JsonKey()
+  List<Activity> get buyerActivities {
+    if (_buyerActivities is EqualUnmodifiableListView) return _buyerActivities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_buyerActivities);
+  }
+
+  @override
+  @JsonKey()
+  final Status buyerActivitiesStatus;
+  final List<Activity> _sellerActivities;
+  @override
+  @JsonKey()
+  List<Activity> get sellerActivities {
+    if (_sellerActivities is EqualUnmodifiableListView)
+      return _sellerActivities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sellerActivities);
+  }
+
+  @override
+  @JsonKey()
+  final Status sellerActivitiesStatus;
+  final List<Activity> _propertyActivities;
+  @override
+  @JsonKey()
+  List<Activity> get propertyActivities {
+    if (_propertyActivities is EqualUnmodifiableListView)
+      return _propertyActivities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_propertyActivities);
+  }
+
+  @override
+  @JsonKey()
+  final Status propertyActivitiesStatus;
   final List<PropertyType> _propertyTypeList;
   @override
   @JsonKey()
@@ -292,7 +499,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   String toString() {
-    return 'DealDetailsState(dealId: $dealId, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError, dealDocuments: $dealDocuments, getDealDocumentsStatus: $getDealDocumentsStatus, userDocuments: $userDocuments, getUserDocumentsStatus: $getUserDocumentsStatus, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus)';
+    return 'DealDetailsState(dealId: $dealId, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError, dealDocuments: $dealDocuments, getDealDocumentsStatus: $getDealDocumentsStatus, userDocuments: $userDocuments, getUserDocumentsStatus: $getUserDocumentsStatus, buyerDeals: $buyerDeals, buyerDealsStatus: $buyerDealsStatus, sellerDeals: $sellerDeals, sellerDealsStatus: $sellerDealsStatus, buyerActivities: $buyerActivities, buyerActivitiesStatus: $buyerActivitiesStatus, sellerActivities: $sellerActivities, sellerActivitiesStatus: $sellerActivitiesStatus, propertyActivities: $propertyActivities, propertyActivitiesStatus: $propertyActivitiesStatus, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus)';
   }
 
   @override
@@ -315,6 +522,27 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
             (identical(other.getUserDocumentsStatus, getUserDocumentsStatus) ||
                 other.getUserDocumentsStatus == getUserDocumentsStatus) &&
             const DeepCollectionEquality()
+                .equals(other._buyerDeals, _buyerDeals) &&
+            (identical(other.buyerDealsStatus, buyerDealsStatus) ||
+                other.buyerDealsStatus == buyerDealsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._sellerDeals, _sellerDeals) &&
+            (identical(other.sellerDealsStatus, sellerDealsStatus) ||
+                other.sellerDealsStatus == sellerDealsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._buyerActivities, _buyerActivities) &&
+            (identical(other.buyerActivitiesStatus, buyerActivitiesStatus) ||
+                other.buyerActivitiesStatus == buyerActivitiesStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._sellerActivities, _sellerActivities) &&
+            (identical(other.sellerActivitiesStatus, sellerActivitiesStatus) ||
+                other.sellerActivitiesStatus == sellerActivitiesStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._propertyActivities, _propertyActivities) &&
+            (identical(
+                    other.propertyActivitiesStatus, propertyActivitiesStatus) ||
+                other.propertyActivitiesStatus == propertyActivitiesStatus) &&
+            const DeepCollectionEquality()
                 .equals(other._propertyTypeList, _propertyTypeList) &&
             (identical(other.getPropertyTypeListStatus,
                     getPropertyTypeListStatus) ||
@@ -322,18 +550,29 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      dealId,
-      deal,
-      getDealStatus,
-      getDealError,
-      const DeepCollectionEquality().hash(_dealDocuments),
-      getDealDocumentsStatus,
-      const DeepCollectionEquality().hash(_userDocuments),
-      getUserDocumentsStatus,
-      const DeepCollectionEquality().hash(_propertyTypeList),
-      getPropertyTypeListStatus);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        dealId,
+        deal,
+        getDealStatus,
+        getDealError,
+        const DeepCollectionEquality().hash(_dealDocuments),
+        getDealDocumentsStatus,
+        const DeepCollectionEquality().hash(_userDocuments),
+        getUserDocumentsStatus,
+        const DeepCollectionEquality().hash(_buyerDeals),
+        buyerDealsStatus,
+        const DeepCollectionEquality().hash(_sellerDeals),
+        sellerDealsStatus,
+        const DeepCollectionEquality().hash(_buyerActivities),
+        buyerActivitiesStatus,
+        const DeepCollectionEquality().hash(_sellerActivities),
+        sellerActivitiesStatus,
+        const DeepCollectionEquality().hash(_propertyActivities),
+        propertyActivitiesStatus,
+        const DeepCollectionEquality().hash(_propertyTypeList),
+        getPropertyTypeListStatus
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -353,6 +592,16 @@ abstract class _DealDetailsState implements DealDetailsState {
       final Status getDealDocumentsStatus,
       final List<DealDocument> userDocuments,
       final Status getUserDocumentsStatus,
+      final List<Deal> buyerDeals,
+      final Status buyerDealsStatus,
+      final List<Deal> sellerDeals,
+      final Status sellerDealsStatus,
+      final List<Activity> buyerActivities,
+      final Status buyerActivitiesStatus,
+      final List<Activity> sellerActivities,
+      final Status sellerActivitiesStatus,
+      final List<Activity> propertyActivities,
+      final Status propertyActivitiesStatus,
       final List<PropertyType> propertyTypeList,
       final Status getPropertyTypeListStatus}) = _$DealDetailsStateImpl;
 
@@ -372,6 +621,26 @@ abstract class _DealDetailsState implements DealDetailsState {
   List<DealDocument> get userDocuments;
   @override
   Status get getUserDocumentsStatus;
+  @override
+  List<Deal> get buyerDeals;
+  @override
+  Status get buyerDealsStatus;
+  @override
+  List<Deal> get sellerDeals;
+  @override
+  Status get sellerDealsStatus;
+  @override
+  List<Activity> get buyerActivities;
+  @override
+  Status get buyerActivitiesStatus;
+  @override
+  List<Activity> get sellerActivities;
+  @override
+  Status get sellerActivitiesStatus;
+  @override
+  List<Activity> get propertyActivities;
+  @override
+  Status get propertyActivitiesStatus;
   @override
   List<PropertyType> get propertyTypeList;
   @override

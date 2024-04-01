@@ -23,7 +23,6 @@ import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 import 'package:recase/recase.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
-import '../../controller/controller.dart';
 import '../../model/bottom_model.dart';
 import '../../model/user.dart';
 import '../../service_locator/injectable.dart';
@@ -269,25 +268,26 @@ class _HomeScreenState extends State<HomeScreen>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [Icon(Icons.business), Text('Listing')],
                     )),
-                IconButton.filledTonal(
-                    style: IconButton.styleFrom(
-                        elevation: 10,
-                        shadowColor: shadowColor,
-                        fixedSize: Size(70, 70),
-                        minimumSize: Size(70, 70)),
-                    padding: EdgeInsets.all(8),
-                    onPressed: () {
-                      context.pushNamed(AddDealScreen.routeName);
-                    },
-                    icon: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ImageIcon(AssetImage('assets/images/deal.png')),
-                        Text('Deal')
-                      ],
-                    )),
+                BubbleButton(
+                  child: Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        shape: BoxShape.circle,
+                        boxShadow: [BoxShadow(color: shadowColor)],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ImageIcon(AssetImage('assets/images/deal.png')),
+                          Text('Deal')
+                        ],
+                      )),
+                ),
                 IconButton.filled(
                     padding: EdgeInsets.all(16),
+                    style: IconButton.styleFrom(elevation: 4),
                     onPressed: () {
                       if (_animationController.status ==
                           AnimationStatus.completed) {
@@ -373,6 +373,28 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ],
       ),
+    );
+  }
+}
+
+class BubbleButton extends StatelessWidget {
+  const BubbleButton({
+    super.key,
+    required this.child,
+  });
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        context.pushNamed(
+          AddDealScreen.routeName,
+          extra: child,
+        );
+      },
+      child: child,
     );
   }
 }
@@ -598,13 +620,9 @@ class _ConfirmLogOutState extends State<ConfirmLogOut> {
                   children: [
                     Expanded(
                       flex: 2,
-                      child: AppPrimaryButton(
-                        text: 'Cancel',
-                        backgroundColor: const Color(0XFFFFC8C8),
-                        foregroundColor: const Color(0XFFD05555),
-                        borderShow: true,
-                        borderColor: const Color(0XFFF19E9E),
-                        onTap: () {
+                      child: OutlinedButton(
+                        child: Text('Cancel'),
+                        onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
@@ -614,8 +632,6 @@ class _ConfirmLogOutState extends State<ConfirmLogOut> {
                       flex: 3,
                       child: AppPrimaryButton(
                         text: 'Confirm',
-                        backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
                         onTap: () async {
                           Navigator.of(context).pop(true);
                         },

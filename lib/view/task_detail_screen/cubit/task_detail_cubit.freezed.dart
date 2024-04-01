@@ -20,6 +20,8 @@ mixin _$TaskDetailState {
   Status get getTaskStatus => throw _privateConstructorUsedError;
   String? get getTaskError => throw _privateConstructorUsedError;
   Activity? get task => throw _privateConstructorUsedError;
+  Status get updateTaskStatus => throw _privateConstructorUsedError;
+  String? get updateTaskError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskDetailStateCopyWith<TaskDetailState> get copyWith =>
@@ -36,7 +38,9 @@ abstract class $TaskDetailStateCopyWith<$Res> {
       {String taskId,
       Status getTaskStatus,
       String? getTaskError,
-      Activity? task});
+      Activity? task,
+      Status updateTaskStatus,
+      String? updateTaskError});
 
   $ActivityCopyWith<$Res>? get task;
 }
@@ -58,6 +62,8 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
     Object? getTaskStatus = null,
     Object? getTaskError = freezed,
     Object? task = freezed,
+    Object? updateTaskStatus = null,
+    Object? updateTaskError = freezed,
   }) {
     return _then(_value.copyWith(
       taskId: null == taskId
@@ -76,6 +82,14 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
           ? _value.task
           : task // ignore: cast_nullable_to_non_nullable
               as Activity?,
+      updateTaskStatus: null == updateTaskStatus
+          ? _value.updateTaskStatus
+          : updateTaskStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updateTaskError: freezed == updateTaskError
+          ? _value.updateTaskError
+          : updateTaskError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -104,7 +118,9 @@ abstract class _$$TaskDetailStateImplCopyWith<$Res>
       {String taskId,
       Status getTaskStatus,
       String? getTaskError,
-      Activity? task});
+      Activity? task,
+      Status updateTaskStatus,
+      String? updateTaskError});
 
   @override
   $ActivityCopyWith<$Res>? get task;
@@ -125,6 +141,8 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
     Object? getTaskStatus = null,
     Object? getTaskError = freezed,
     Object? task = freezed,
+    Object? updateTaskStatus = null,
+    Object? updateTaskError = freezed,
   }) {
     return _then(_$TaskDetailStateImpl(
       taskId: null == taskId
@@ -143,6 +161,14 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
           ? _value.task
           : task // ignore: cast_nullable_to_non_nullable
               as Activity?,
+      updateTaskStatus: null == updateTaskStatus
+          ? _value.updateTaskStatus
+          : updateTaskStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updateTaskError: freezed == updateTaskError
+          ? _value.updateTaskError
+          : updateTaskError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -154,7 +180,9 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
       {required this.taskId,
       this.getTaskStatus = Status.init,
       this.getTaskError,
-      this.task});
+      this.task,
+      this.updateTaskStatus = Status.init,
+      this.updateTaskError});
 
   @override
   final String taskId;
@@ -165,10 +193,15 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
   final String? getTaskError;
   @override
   final Activity? task;
+  @override
+  @JsonKey()
+  final Status updateTaskStatus;
+  @override
+  final String? updateTaskError;
 
   @override
   String toString() {
-    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task)';
+    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError)';
   }
 
   @override
@@ -181,12 +214,16 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
                 other.getTaskStatus == getTaskStatus) &&
             (identical(other.getTaskError, getTaskError) ||
                 other.getTaskError == getTaskError) &&
-            (identical(other.task, task) || other.task == task));
+            (identical(other.task, task) || other.task == task) &&
+            (identical(other.updateTaskStatus, updateTaskStatus) ||
+                other.updateTaskStatus == updateTaskStatus) &&
+            (identical(other.updateTaskError, updateTaskError) ||
+                other.updateTaskError == updateTaskError));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, taskId, getTaskStatus, getTaskError, task);
+  int get hashCode => Object.hash(runtimeType, taskId, getTaskStatus,
+      getTaskError, task, updateTaskStatus, updateTaskError);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +238,9 @@ abstract class _TaskDetailState implements TaskDetailState {
       {required final String taskId,
       final Status getTaskStatus,
       final String? getTaskError,
-      final Activity? task}) = _$TaskDetailStateImpl;
+      final Activity? task,
+      final Status updateTaskStatus,
+      final String? updateTaskError}) = _$TaskDetailStateImpl;
 
   @override
   String get taskId;
@@ -211,6 +250,10 @@ abstract class _TaskDetailState implements TaskDetailState {
   String? get getTaskError;
   @override
   Activity? get task;
+  @override
+  Status get updateTaskStatus;
+  @override
+  String? get updateTaskError;
   @override
   @JsonKey(ignore: true)
   _$$TaskDetailStateImplCopyWith<_$TaskDetailStateImpl> get copyWith =>

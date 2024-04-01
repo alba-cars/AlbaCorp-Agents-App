@@ -26,6 +26,12 @@ mixin _$LeadDetailState {
   List<Deal> get deals => throw _privateConstructorUsedError;
   Status get getDealsStatus => throw _privateConstructorUsedError;
   String? get getDealsError => throw _privateConstructorUsedError;
+  Status get updateLeadStatus => throw _privateConstructorUsedError;
+  String? get updateLeadError => throw _privateConstructorUsedError;
+  Status get getPropertyCardsListStatus => throw _privateConstructorUsedError;
+  List<LeadPropertyCardModel> get propertyCardsList =>
+      throw _privateConstructorUsedError;
+  String? get getPropertyCardsListError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LeadDetailStateCopyWith<LeadDetailState> get copyWith =>
@@ -48,7 +54,12 @@ abstract class $LeadDetailStateCopyWith<$Res> {
       String? getActivitiesError,
       List<Deal> deals,
       Status getDealsStatus,
-      String? getDealsError});
+      String? getDealsError,
+      Status updateLeadStatus,
+      String? updateLeadError,
+      Status getPropertyCardsListStatus,
+      List<LeadPropertyCardModel> propertyCardsList,
+      String? getPropertyCardsListError});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -76,6 +87,11 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
     Object? deals = null,
     Object? getDealsStatus = null,
     Object? getDealsError = freezed,
+    Object? updateLeadStatus = null,
+    Object? updateLeadError = freezed,
+    Object? getPropertyCardsListStatus = null,
+    Object? propertyCardsList = null,
+    Object? getPropertyCardsListError = freezed,
   }) {
     return _then(_value.copyWith(
       leadId: null == leadId
@@ -118,6 +134,26 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
           ? _value.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
               as String?,
+      updateLeadStatus: null == updateLeadStatus
+          ? _value.updateLeadStatus
+          : updateLeadStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updateLeadError: freezed == updateLeadError
+          ? _value.updateLeadError
+          : updateLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      getPropertyCardsListStatus: null == getPropertyCardsListStatus
+          ? _value.getPropertyCardsListStatus
+          : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      propertyCardsList: null == propertyCardsList
+          ? _value.propertyCardsList
+          : propertyCardsList // ignore: cast_nullable_to_non_nullable
+              as List<LeadPropertyCardModel>,
+      getPropertyCardsListError: freezed == getPropertyCardsListError
+          ? _value.getPropertyCardsListError
+          : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -152,7 +188,12 @@ abstract class _$$LeadDetailStateImplCopyWith<$Res>
       String? getActivitiesError,
       List<Deal> deals,
       Status getDealsStatus,
-      String? getDealsError});
+      String? getDealsError,
+      Status updateLeadStatus,
+      String? updateLeadError,
+      Status getPropertyCardsListStatus,
+      List<LeadPropertyCardModel> propertyCardsList,
+      String? getPropertyCardsListError});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -179,6 +220,11 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
     Object? deals = null,
     Object? getDealsStatus = null,
     Object? getDealsError = freezed,
+    Object? updateLeadStatus = null,
+    Object? updateLeadError = freezed,
+    Object? getPropertyCardsListStatus = null,
+    Object? propertyCardsList = null,
+    Object? getPropertyCardsListError = freezed,
   }) {
     return _then(_$LeadDetailStateImpl(
       leadId: null == leadId
@@ -221,6 +267,26 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
           ? _value.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
               as String?,
+      updateLeadStatus: null == updateLeadStatus
+          ? _value.updateLeadStatus
+          : updateLeadStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updateLeadError: freezed == updateLeadError
+          ? _value.updateLeadError
+          : updateLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      getPropertyCardsListStatus: null == getPropertyCardsListStatus
+          ? _value.getPropertyCardsListStatus
+          : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      propertyCardsList: null == propertyCardsList
+          ? _value._propertyCardsList
+          : propertyCardsList // ignore: cast_nullable_to_non_nullable
+              as List<LeadPropertyCardModel>,
+      getPropertyCardsListError: freezed == getPropertyCardsListError
+          ? _value.getPropertyCardsListError
+          : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -238,9 +304,15 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
       this.getActivitiesError,
       final List<Deal> deals = const [],
       this.getDealsStatus = Status.init,
-      this.getDealsError})
+      this.getDealsError,
+      this.updateLeadStatus = Status.init,
+      this.updateLeadError,
+      this.getPropertyCardsListStatus = Status.init,
+      final List<LeadPropertyCardModel> propertyCardsList = const [],
+      this.getPropertyCardsListError})
       : _activities = activities,
-        _deals = deals;
+        _deals = deals,
+        _propertyCardsList = propertyCardsList;
 
   @override
   final String leadId;
@@ -279,10 +351,30 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
   final Status getDealsStatus;
   @override
   final String? getDealsError;
+  @override
+  @JsonKey()
+  final Status updateLeadStatus;
+  @override
+  final String? updateLeadError;
+  @override
+  @JsonKey()
+  final Status getPropertyCardsListStatus;
+  final List<LeadPropertyCardModel> _propertyCardsList;
+  @override
+  @JsonKey()
+  List<LeadPropertyCardModel> get propertyCardsList {
+    if (_propertyCardsList is EqualUnmodifiableListView)
+      return _propertyCardsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_propertyCardsList);
+  }
+
+  @override
+  final String? getPropertyCardsListError;
 
   @override
   String toString() {
-    return 'LeadDetailState(leadId: $leadId, lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError)';
+    return 'LeadDetailState(leadId: $leadId, lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, updateLeadStatus: $updateLeadStatus, updateLeadError: $updateLeadError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError)';
   }
 
   @override
@@ -306,7 +398,20 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
             (identical(other.getDealsStatus, getDealsStatus) ||
                 other.getDealsStatus == getDealsStatus) &&
             (identical(other.getDealsError, getDealsError) ||
-                other.getDealsError == getDealsError));
+                other.getDealsError == getDealsError) &&
+            (identical(other.updateLeadStatus, updateLeadStatus) ||
+                other.updateLeadStatus == updateLeadStatus) &&
+            (identical(other.updateLeadError, updateLeadError) ||
+                other.updateLeadError == updateLeadError) &&
+            (identical(other.getPropertyCardsListStatus,
+                    getPropertyCardsListStatus) ||
+                other.getPropertyCardsListStatus ==
+                    getPropertyCardsListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._propertyCardsList, _propertyCardsList) &&
+            (identical(other.getPropertyCardsListError,
+                    getPropertyCardsListError) ||
+                other.getPropertyCardsListError == getPropertyCardsListError));
   }
 
   @override
@@ -321,7 +426,12 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
       getActivitiesError,
       const DeepCollectionEquality().hash(_deals),
       getDealsStatus,
-      getDealsError);
+      getDealsError,
+      updateLeadStatus,
+      updateLeadError,
+      getPropertyCardsListStatus,
+      const DeepCollectionEquality().hash(_propertyCardsList),
+      getPropertyCardsListError);
 
   @JsonKey(ignore: true)
   @override
@@ -342,7 +452,12 @@ abstract class _LeadDetailState implements LeadDetailState {
       final String? getActivitiesError,
       final List<Deal> deals,
       final Status getDealsStatus,
-      final String? getDealsError}) = _$LeadDetailStateImpl;
+      final String? getDealsError,
+      final Status updateLeadStatus,
+      final String? updateLeadError,
+      final Status getPropertyCardsListStatus,
+      final List<LeadPropertyCardModel> propertyCardsList,
+      final String? getPropertyCardsListError}) = _$LeadDetailStateImpl;
 
   @override
   String get leadId;
@@ -364,6 +479,16 @@ abstract class _LeadDetailState implements LeadDetailState {
   Status get getDealsStatus;
   @override
   String? get getDealsError;
+  @override
+  Status get updateLeadStatus;
+  @override
+  String? get updateLeadError;
+  @override
+  Status get getPropertyCardsListStatus;
+  @override
+  List<LeadPropertyCardModel> get propertyCardsList;
+  @override
+  String? get getPropertyCardsListError;
   @override
   @JsonKey(ignore: true)
   _$$LeadDetailStateImplCopyWith<_$LeadDetailStateImpl> get copyWith =>

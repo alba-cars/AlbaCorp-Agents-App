@@ -126,7 +126,7 @@ class _PrimaryBasicInfoTabState extends State<PrimaryBasicInfoTab> {
               ),
               CurrencyField(
                 name: 'agreedSalesPrice',
-                label: 'Agreed Sale Prize',
+                label: 'Agreed Sale Price',
                 onChanged: (p0) {
                   price = p0;
                   setState(() {});

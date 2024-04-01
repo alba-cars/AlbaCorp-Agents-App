@@ -5,7 +5,7 @@ import '../../model/activity_model.dart';
 import '../../util/result.dart';
 
 abstract class ActivityRepo {
-  Future<Result<void>> createActivity({
+  Future<Result<Activity>> createActivity({
     required String leadId,
     required String type,
     DateTime? date,
@@ -19,7 +19,7 @@ abstract class ActivityRepo {
   Future<Result<int>> pendingViewingActivitiesCount();
   Future<Result<void>> updateActivity(
       {required String activityId,
-      required int duration,
+      int? duration,
       String? notes,
       String? feedback});
 }

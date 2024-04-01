@@ -10,6 +10,7 @@ import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/cubit/add_deal_cubit.dart';
 import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
+import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/currency_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
@@ -110,7 +111,7 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                             Align(
                                 alignment: Alignment.center,
                                 child:
-                                    LabelText(text: '${currentTab + 1} of 4'))
+                                    LabelText(text: '${currentTab + 1} of 3'))
                           ],
                         ),
                       ),
@@ -119,8 +120,13 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                           child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          BlockTitleText(text: 'Deal Type'),
-                          NormalText(text: 'Next : Basic Info')
+                          BlockTitleText(
+                              text: context
+                                  .read<AddDealCubit>()
+                                  .stepNames[currentTab]),
+                          NormalText(
+                              text:
+                                  '${currentTab != 2 ? "Next" : 'Previous'} : ${currentTab != 2 ? context.read<AddDealCubit>().stepNames[currentTab + 1] : context.read<AddDealCubit>().stepNames[currentTab - 1]}')
                         ],
                       ))
                     ],
@@ -185,8 +191,8 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                           HorizontalSmallGap(),
                         ],
                         Expanded(
-                          child: ElevatedButton(
-                              onPressed: () async {
+                          child: AppPrimaryButton(
+                              onTap: () async {
                                 final error = await context
                                     .read<AddDealCubit>()
                                     .onNextPressed(context,
@@ -202,7 +208,7 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                                       bottomSpace: 70);
                                 }
                               },
-                              child: Text('Next')),
+                              text: ('Next')),
                         ),
                       ],
                     );
@@ -319,6 +325,7 @@ class DealTypeTab extends StatelessWidget {
                                   ),
                                   LabelText(
                                     text: 'Primary OffPlan',
+                                    textAlign: TextAlign.center,
                                     color: selectedDealType ==
                                             DealType.primaryOffPlan
                                         ? Colors.white
@@ -364,6 +371,7 @@ class DealTypeTab extends StatelessWidget {
                                   ),
                                   LabelText(
                                     text: 'Secondary Market',
+                                    textAlign: TextAlign.center,
                                     color: selectedDealType ==
                                             DealType.SecondaryMarket
                                         ? Colors.white

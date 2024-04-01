@@ -77,6 +77,9 @@ mixin _$Deal {
   @JsonKey(name: 'new_listing_request')
   NewListingRequest? get newListingRequest =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'new_listing_offplan')
+  DealListingResponse? get offPlanProperty =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -132,7 +135,9 @@ abstract class $DealCopyWith<$Res> {
       Agent? sellerAssignedAgent,
       @JsonKey(name: 'property_list') Property? propertyList,
       @JsonKey(name: 'new_listing_request')
-      NewListingRequest? newListingRequest});
+      NewListingRequest? newListingRequest,
+      @JsonKey(name: 'new_listing_offplan')
+      DealListingResponse? offPlanProperty});
 
   $AgentCopyWith<$Res>? get assignedAgent;
   $UserCopyWith<$Res>? get createdBy;
@@ -145,6 +150,7 @@ abstract class $DealCopyWith<$Res> {
   $AgentCopyWith<$Res>? get sellerAssignedAgent;
   $PropertyCopyWith<$Res>? get propertyList;
   $NewListingRequestCopyWith<$Res>? get newListingRequest;
+  $DealListingResponseCopyWith<$Res>? get offPlanProperty;
 }
 
 /// @nodoc
@@ -203,6 +209,7 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
     Object? sellerAssignedAgent = freezed,
     Object? propertyList = freezed,
     Object? newListingRequest = freezed,
+    Object? offPlanProperty = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -377,6 +384,10 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
           ? _value.newListingRequest
           : newListingRequest // ignore: cast_nullable_to_non_nullable
               as NewListingRequest?,
+      offPlanProperty: freezed == offPlanProperty
+          ? _value.offPlanProperty
+          : offPlanProperty // ignore: cast_nullable_to_non_nullable
+              as DealListingResponse?,
     ) as $Val);
   }
 
@@ -512,6 +523,18 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
       return _then(_value.copyWith(newListingRequest: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DealListingResponseCopyWith<$Res>? get offPlanProperty {
+    if (_value.offPlanProperty == null) {
+      return null;
+    }
+
+    return $DealListingResponseCopyWith<$Res>(_value.offPlanProperty!, (value) {
+      return _then(_value.copyWith(offPlanProperty: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -565,7 +588,9 @@ abstract class _$$DealImplCopyWith<$Res> implements $DealCopyWith<$Res> {
       Agent? sellerAssignedAgent,
       @JsonKey(name: 'property_list') Property? propertyList,
       @JsonKey(name: 'new_listing_request')
-      NewListingRequest? newListingRequest});
+      NewListingRequest? newListingRequest,
+      @JsonKey(name: 'new_listing_offplan')
+      DealListingResponse? offPlanProperty});
 
   @override
   $AgentCopyWith<$Res>? get assignedAgent;
@@ -589,6 +614,8 @@ abstract class _$$DealImplCopyWith<$Res> implements $DealCopyWith<$Res> {
   $PropertyCopyWith<$Res>? get propertyList;
   @override
   $NewListingRequestCopyWith<$Res>? get newListingRequest;
+  @override
+  $DealListingResponseCopyWith<$Res>? get offPlanProperty;
 }
 
 /// @nodoc
@@ -644,6 +671,7 @@ class __$$DealImplCopyWithImpl<$Res>
     Object? sellerAssignedAgent = freezed,
     Object? propertyList = freezed,
     Object? newListingRequest = freezed,
+    Object? offPlanProperty = freezed,
   }) {
     return _then(_$DealImpl(
       id: null == id
@@ -818,6 +846,10 @@ class __$$DealImplCopyWithImpl<$Res>
           ? _value.newListingRequest
           : newListingRequest // ignore: cast_nullable_to_non_nullable
               as NewListingRequest?,
+      offPlanProperty: freezed == offPlanProperty
+          ? _value.offPlanProperty
+          : offPlanProperty // ignore: cast_nullable_to_non_nullable
+              as DealListingResponse?,
     ));
   }
 }
@@ -868,7 +900,8 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
       this.sellerInternalUser,
       this.sellerAssignedAgent,
       @JsonKey(name: 'property_list') this.propertyList,
-      @JsonKey(name: 'new_listing_request') this.newListingRequest})
+      @JsonKey(name: 'new_listing_request') this.newListingRequest,
+      @JsonKey(name: 'new_listing_offplan') this.offPlanProperty})
       : _roleType = roleType,
         _rejection = rejection;
 
@@ -987,10 +1020,13 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
   @override
   @JsonKey(name: 'new_listing_request')
   final NewListingRequest? newListingRequest;
+  @override
+  @JsonKey(name: 'new_listing_offplan')
+  final DealListingResponse? offPlanProperty;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Deal(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, type: $type, status: $status, rejection: $rejection, userId: $userId, newListingRequestId: $newListingRequestId, active: $active, createdBy: $createdBy, client: $client, purpose: $purpose, buyerClientType: $buyerClientType, sellerclientType: $sellerclientType, buyerInternalUserId: $buyerInternalUserId, buyerAssignedAgentId: $buyerAssignedAgentId, buyerAgreedCommission: $buyerAgreedCommission, sellerInternalUserId: $sellerInternalUserId, sellerAssignedAgentId: $sellerAssignedAgentId, sellerAgreedCommission: $sellerAgreedCommission, sellerExternalUserId: $sellerExternalUserId, sellerExternalAgentName: $sellerExternalAgentName, sellerExternalAgentPhone: $sellerExternalAgentPhone, sellerExternalClientName: $sellerExternalClientName, sellerExternalClientPhone: $sellerExternalClientPhone, sellerExternalUser: $sellerExternalUser, external_listing_property: $external_listing_property, buyerExternalAgentName: $buyerExternalAgentName, buyerExternalAgentPhone: $buyerExternalAgentPhone, buyerExternalClientName: $buyerExternalClientName, buyerExternalClientPhone: $buyerExternalClientPhone, propertyListId: $propertyListId, buyerInternalUser: $buyerInternalUser, buyerAssignedAgent: $buyerAssignedAgent, sellerInternalUser: $sellerInternalUser, sellerAssignedAgent: $sellerAssignedAgent, propertyList: $propertyList, newListingRequest: $newListingRequest)';
+    return 'Deal(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, type: $type, status: $status, rejection: $rejection, userId: $userId, newListingRequestId: $newListingRequestId, active: $active, createdBy: $createdBy, client: $client, purpose: $purpose, buyerClientType: $buyerClientType, sellerclientType: $sellerclientType, buyerInternalUserId: $buyerInternalUserId, buyerAssignedAgentId: $buyerAssignedAgentId, buyerAgreedCommission: $buyerAgreedCommission, sellerInternalUserId: $sellerInternalUserId, sellerAssignedAgentId: $sellerAssignedAgentId, sellerAgreedCommission: $sellerAgreedCommission, sellerExternalUserId: $sellerExternalUserId, sellerExternalAgentName: $sellerExternalAgentName, sellerExternalAgentPhone: $sellerExternalAgentPhone, sellerExternalClientName: $sellerExternalClientName, sellerExternalClientPhone: $sellerExternalClientPhone, sellerExternalUser: $sellerExternalUser, external_listing_property: $external_listing_property, buyerExternalAgentName: $buyerExternalAgentName, buyerExternalAgentPhone: $buyerExternalAgentPhone, buyerExternalClientName: $buyerExternalClientName, buyerExternalClientPhone: $buyerExternalClientPhone, propertyListId: $propertyListId, buyerInternalUser: $buyerInternalUser, buyerAssignedAgent: $buyerAssignedAgent, sellerInternalUser: $sellerInternalUser, sellerAssignedAgent: $sellerAssignedAgent, propertyList: $propertyList, newListingRequest: $newListingRequest, offPlanProperty: $offPlanProperty)';
   }
 
   @override
@@ -1050,7 +1086,8 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
       ..add(DiagnosticsProperty('sellerInternalUser', sellerInternalUser))
       ..add(DiagnosticsProperty('sellerAssignedAgent', sellerAssignedAgent))
       ..add(DiagnosticsProperty('propertyList', propertyList))
-      ..add(DiagnosticsProperty('newListingRequest', newListingRequest));
+      ..add(DiagnosticsProperty('newListingRequest', newListingRequest))
+      ..add(DiagnosticsProperty('offPlanProperty', offPlanProperty));
   }
 
   @override
@@ -1133,7 +1170,8 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
             (identical(other.sellerAssignedAgent, sellerAssignedAgent) ||
                 other.sellerAssignedAgent == sellerAssignedAgent) &&
             (identical(other.propertyList, propertyList) || other.propertyList == propertyList) &&
-            (identical(other.newListingRequest, newListingRequest) || other.newListingRequest == newListingRequest));
+            (identical(other.newListingRequest, newListingRequest) || other.newListingRequest == newListingRequest) &&
+            (identical(other.offPlanProperty, offPlanProperty) || other.offPlanProperty == offPlanProperty));
   }
 
   @JsonKey(ignore: true)
@@ -1182,7 +1220,8 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
         sellerInternalUser,
         sellerAssignedAgent,
         propertyList,
-        newListingRequest
+        newListingRequest,
+        offPlanProperty
       ]);
 
   @JsonKey(ignore: true)
@@ -1245,7 +1284,9 @@ abstract class _Deal implements Deal {
       final Agent? sellerAssignedAgent,
       @JsonKey(name: 'property_list') final Property? propertyList,
       @JsonKey(name: 'new_listing_request')
-      final NewListingRequest? newListingRequest}) = _$DealImpl;
+      final NewListingRequest? newListingRequest,
+      @JsonKey(name: 'new_listing_offplan')
+      final DealListingResponse? offPlanProperty}) = _$DealImpl;
 
   factory _Deal.fromJson(Map<String, dynamic> json) = _$DealImpl.fromJson;
 
@@ -1346,6 +1387,9 @@ abstract class _Deal implements Deal {
   @override
   @JsonKey(name: 'new_listing_request')
   NewListingRequest? get newListingRequest;
+  @override
+  @JsonKey(name: 'new_listing_offplan')
+  DealListingResponse? get offPlanProperty;
   @override
   @JsonKey(ignore: true)
   _$$DealImplCopyWith<_$DealImpl> get copyWith =>

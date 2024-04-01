@@ -25,6 +25,7 @@ mixin _$CallEvent {
     required TResult Function(
             String phoneNumber, String activityId, String leadId)
         callStarted,
+    required TResult Function(String phoneNumber, String leadId) clickToCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +36,7 @@ mixin _$CallEvent {
         updateActivity,
     TResult? Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult? Function(String phoneNumber, String leadId)? clickToCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,6 +47,7 @@ mixin _$CallEvent {
         updateActivity,
     TResult Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult Function(String phoneNumber, String leadId)? clickToCall,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +57,7 @@ mixin _$CallEvent {
     required TResult Function(_CallEnded value) callEnded,
     required TResult Function(_UpdateActivity value) updateActivity,
     required TResult Function(_CallStarted value) callStarted,
+    required TResult Function(_ClickToCall value) clickToCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$CallEvent {
     TResult? Function(_CallEnded value)? callEnded,
     TResult? Function(_UpdateActivity value)? updateActivity,
     TResult? Function(_CallStarted value)? callStarted,
+    TResult? Function(_ClickToCall value)? clickToCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +75,7 @@ mixin _$CallEvent {
     TResult Function(_CallEnded value)? callEnded,
     TResult Function(_UpdateActivity value)? updateActivity,
     TResult Function(_CallStarted value)? callStarted,
+    TResult Function(_ClickToCall value)? clickToCall,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,6 +143,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(
             String phoneNumber, String activityId, String leadId)
         callStarted,
+    required TResult Function(String phoneNumber, String leadId) clickToCall,
   }) {
     return started();
   }
@@ -150,6 +157,7 @@ class _$StartedImpl implements _Started {
         updateActivity,
     TResult? Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult? Function(String phoneNumber, String leadId)? clickToCall,
   }) {
     return started?.call();
   }
@@ -163,6 +171,7 @@ class _$StartedImpl implements _Started {
         updateActivity,
     TResult Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult Function(String phoneNumber, String leadId)? clickToCall,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -178,6 +187,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_CallEnded value) callEnded,
     required TResult Function(_UpdateActivity value) updateActivity,
     required TResult Function(_CallStarted value) callStarted,
+    required TResult Function(_ClickToCall value) clickToCall,
   }) {
     return started(this);
   }
@@ -189,6 +199,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_CallEnded value)? callEnded,
     TResult? Function(_UpdateActivity value)? updateActivity,
     TResult? Function(_CallStarted value)? callStarted,
+    TResult? Function(_ClickToCall value)? clickToCall,
   }) {
     return started?.call(this);
   }
@@ -200,6 +211,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_CallEnded value)? callEnded,
     TResult Function(_UpdateActivity value)? updateActivity,
     TResult Function(_CallStarted value)? callStarted,
+    TResult Function(_ClickToCall value)? clickToCall,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -258,6 +270,7 @@ class _$CallEndedImpl implements _CallEnded {
     required TResult Function(
             String phoneNumber, String activityId, String leadId)
         callStarted,
+    required TResult Function(String phoneNumber, String leadId) clickToCall,
   }) {
     return callEnded();
   }
@@ -271,6 +284,7 @@ class _$CallEndedImpl implements _CallEnded {
         updateActivity,
     TResult? Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult? Function(String phoneNumber, String leadId)? clickToCall,
   }) {
     return callEnded?.call();
   }
@@ -284,6 +298,7 @@ class _$CallEndedImpl implements _CallEnded {
         updateActivity,
     TResult Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult Function(String phoneNumber, String leadId)? clickToCall,
     required TResult orElse(),
   }) {
     if (callEnded != null) {
@@ -299,6 +314,7 @@ class _$CallEndedImpl implements _CallEnded {
     required TResult Function(_CallEnded value) callEnded,
     required TResult Function(_UpdateActivity value) updateActivity,
     required TResult Function(_CallStarted value) callStarted,
+    required TResult Function(_ClickToCall value) clickToCall,
   }) {
     return callEnded(this);
   }
@@ -310,6 +326,7 @@ class _$CallEndedImpl implements _CallEnded {
     TResult? Function(_CallEnded value)? callEnded,
     TResult? Function(_UpdateActivity value)? updateActivity,
     TResult? Function(_CallStarted value)? callStarted,
+    TResult? Function(_ClickToCall value)? clickToCall,
   }) {
     return callEnded?.call(this);
   }
@@ -321,6 +338,7 @@ class _$CallEndedImpl implements _CallEnded {
     TResult Function(_CallEnded value)? callEnded,
     TResult Function(_UpdateActivity value)? updateActivity,
     TResult Function(_CallStarted value)? callStarted,
+    TResult Function(_ClickToCall value)? clickToCall,
     required TResult orElse(),
   }) {
     if (callEnded != null) {
@@ -425,6 +443,7 @@ class _$UpdateActivityImpl implements _UpdateActivity {
     required TResult Function(
             String phoneNumber, String activityId, String leadId)
         callStarted,
+    required TResult Function(String phoneNumber, String leadId) clickToCall,
   }) {
     return updateActivity(note, description, feedback);
   }
@@ -438,6 +457,7 @@ class _$UpdateActivityImpl implements _UpdateActivity {
         updateActivity,
     TResult? Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult? Function(String phoneNumber, String leadId)? clickToCall,
   }) {
     return updateActivity?.call(note, description, feedback);
   }
@@ -451,6 +471,7 @@ class _$UpdateActivityImpl implements _UpdateActivity {
         updateActivity,
     TResult Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult Function(String phoneNumber, String leadId)? clickToCall,
     required TResult orElse(),
   }) {
     if (updateActivity != null) {
@@ -466,6 +487,7 @@ class _$UpdateActivityImpl implements _UpdateActivity {
     required TResult Function(_CallEnded value) callEnded,
     required TResult Function(_UpdateActivity value) updateActivity,
     required TResult Function(_CallStarted value) callStarted,
+    required TResult Function(_ClickToCall value) clickToCall,
   }) {
     return updateActivity(this);
   }
@@ -477,6 +499,7 @@ class _$UpdateActivityImpl implements _UpdateActivity {
     TResult? Function(_CallEnded value)? callEnded,
     TResult? Function(_UpdateActivity value)? updateActivity,
     TResult? Function(_CallStarted value)? callStarted,
+    TResult? Function(_ClickToCall value)? clickToCall,
   }) {
     return updateActivity?.call(this);
   }
@@ -488,6 +511,7 @@ class _$UpdateActivityImpl implements _UpdateActivity {
     TResult Function(_CallEnded value)? callEnded,
     TResult Function(_UpdateActivity value)? updateActivity,
     TResult Function(_CallStarted value)? callStarted,
+    TResult Function(_ClickToCall value)? clickToCall,
     required TResult orElse(),
   }) {
     if (updateActivity != null) {
@@ -603,6 +627,7 @@ class _$CallStartedImpl implements _CallStarted {
     required TResult Function(
             String phoneNumber, String activityId, String leadId)
         callStarted,
+    required TResult Function(String phoneNumber, String leadId) clickToCall,
   }) {
     return callStarted(phoneNumber, activityId, leadId);
   }
@@ -616,6 +641,7 @@ class _$CallStartedImpl implements _CallStarted {
         updateActivity,
     TResult? Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult? Function(String phoneNumber, String leadId)? clickToCall,
   }) {
     return callStarted?.call(phoneNumber, activityId, leadId);
   }
@@ -629,6 +655,7 @@ class _$CallStartedImpl implements _CallStarted {
         updateActivity,
     TResult Function(String phoneNumber, String activityId, String leadId)?
         callStarted,
+    TResult Function(String phoneNumber, String leadId)? clickToCall,
     required TResult orElse(),
   }) {
     if (callStarted != null) {
@@ -644,6 +671,7 @@ class _$CallStartedImpl implements _CallStarted {
     required TResult Function(_CallEnded value) callEnded,
     required TResult Function(_UpdateActivity value) updateActivity,
     required TResult Function(_CallStarted value) callStarted,
+    required TResult Function(_ClickToCall value) clickToCall,
   }) {
     return callStarted(this);
   }
@@ -655,6 +683,7 @@ class _$CallStartedImpl implements _CallStarted {
     TResult? Function(_CallEnded value)? callEnded,
     TResult? Function(_UpdateActivity value)? updateActivity,
     TResult? Function(_CallStarted value)? callStarted,
+    TResult? Function(_ClickToCall value)? clickToCall,
   }) {
     return callStarted?.call(this);
   }
@@ -666,6 +695,7 @@ class _$CallStartedImpl implements _CallStarted {
     TResult Function(_CallEnded value)? callEnded,
     TResult Function(_UpdateActivity value)? updateActivity,
     TResult Function(_CallStarted value)? callStarted,
+    TResult Function(_ClickToCall value)? clickToCall,
     required TResult orElse(),
   }) {
     if (callStarted != null) {
@@ -686,6 +716,176 @@ abstract class _CallStarted implements CallEvent {
   String get leadId;
   @JsonKey(ignore: true)
   _$$CallStartedImplCopyWith<_$CallStartedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClickToCallImplCopyWith<$Res> {
+  factory _$$ClickToCallImplCopyWith(
+          _$ClickToCallImpl value, $Res Function(_$ClickToCallImpl) then) =
+      __$$ClickToCallImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String phoneNumber, String leadId});
+}
+
+/// @nodoc
+class __$$ClickToCallImplCopyWithImpl<$Res>
+    extends _$CallEventCopyWithImpl<$Res, _$ClickToCallImpl>
+    implements _$$ClickToCallImplCopyWith<$Res> {
+  __$$ClickToCallImplCopyWithImpl(
+      _$ClickToCallImpl _value, $Res Function(_$ClickToCallImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? phoneNumber = null,
+    Object? leadId = null,
+  }) {
+    return _then(_$ClickToCallImpl(
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      leadId: null == leadId
+          ? _value.leadId
+          : leadId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ClickToCallImpl implements _ClickToCall {
+  const _$ClickToCallImpl({required this.phoneNumber, required this.leadId});
+
+  @override
+  final String phoneNumber;
+  @override
+  final String leadId;
+
+  @override
+  String toString() {
+    return 'CallEvent.clickToCall(phoneNumber: $phoneNumber, leadId: $leadId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClickToCallImpl &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.leadId, leadId) || other.leadId == leadId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, phoneNumber, leadId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClickToCallImplCopyWith<_$ClickToCallImpl> get copyWith =>
+      __$$ClickToCallImplCopyWithImpl<_$ClickToCallImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() callEnded,
+    required TResult Function(String note, String description, String feedback)
+        updateActivity,
+    required TResult Function(
+            String phoneNumber, String activityId, String leadId)
+        callStarted,
+    required TResult Function(String phoneNumber, String leadId) clickToCall,
+  }) {
+    return clickToCall(phoneNumber, leadId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? callEnded,
+    TResult? Function(String note, String description, String feedback)?
+        updateActivity,
+    TResult? Function(String phoneNumber, String activityId, String leadId)?
+        callStarted,
+    TResult? Function(String phoneNumber, String leadId)? clickToCall,
+  }) {
+    return clickToCall?.call(phoneNumber, leadId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? callEnded,
+    TResult Function(String note, String description, String feedback)?
+        updateActivity,
+    TResult Function(String phoneNumber, String activityId, String leadId)?
+        callStarted,
+    TResult Function(String phoneNumber, String leadId)? clickToCall,
+    required TResult orElse(),
+  }) {
+    if (clickToCall != null) {
+      return clickToCall(phoneNumber, leadId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CallEnded value) callEnded,
+    required TResult Function(_UpdateActivity value) updateActivity,
+    required TResult Function(_CallStarted value) callStarted,
+    required TResult Function(_ClickToCall value) clickToCall,
+  }) {
+    return clickToCall(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CallEnded value)? callEnded,
+    TResult? Function(_UpdateActivity value)? updateActivity,
+    TResult? Function(_CallStarted value)? callStarted,
+    TResult? Function(_ClickToCall value)? clickToCall,
+  }) {
+    return clickToCall?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CallEnded value)? callEnded,
+    TResult Function(_UpdateActivity value)? updateActivity,
+    TResult Function(_CallStarted value)? callStarted,
+    TResult Function(_ClickToCall value)? clickToCall,
+    required TResult orElse(),
+  }) {
+    if (clickToCall != null) {
+      return clickToCall(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClickToCall implements CallEvent {
+  const factory _ClickToCall(
+      {required final String phoneNumber,
+      required final String leadId}) = _$ClickToCallImpl;
+
+  String get phoneNumber;
+  String get leadId;
+  @JsonKey(ignore: true)
+  _$$ClickToCallImplCopyWith<_$ClickToCallImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

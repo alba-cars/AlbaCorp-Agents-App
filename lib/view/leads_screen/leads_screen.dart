@@ -12,6 +12,7 @@ import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
 
+import '../../app/call_bloc/call_bloc.dart';
 import '../../util/color_category.dart';
 import '../../util/status.dart';
 import '../../widgets/space.dart';
@@ -190,6 +191,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
             "Fresh",
             "Prospect",
             "For Listing",
+            "Follow up",
             "Appointment",
             "Viewing",
             "Negotiating",
@@ -392,7 +394,12 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 IconButton.filledTonal(
-                                    onPressed: () async {},
+                                    onPressed: () async {
+                                      getIt<CallBloc>().add(
+                                          CallEvent.clickToCall(
+                                              phoneNumber: lead.phone ?? '',
+                                              leadId: lead.id));
+                                    },
                                     icon: Icon(
                                       Icons.call,
                                     ))

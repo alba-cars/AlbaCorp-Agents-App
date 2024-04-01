@@ -41,7 +41,6 @@ class ActivityList extends StatelessWidget {
                       children: [
                         Container(
                           width: 70,
-                          height: 60,
                           padding:
                               EdgeInsets.symmetric(horizontal: 2, vertical: 4),
                           decoration: BoxDecoration(
@@ -70,6 +69,7 @@ class ActivityList extends StatelessWidget {
                               ),
                               SmallText(
                                 text: activity.type,
+                                textAlign: TextAlign.center,
                                 color: Colors.grey[800]!,
                               )
                             ],

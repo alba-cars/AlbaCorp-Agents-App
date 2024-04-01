@@ -11,7 +11,7 @@ abstract class RegisterModules {
 
   @Environment('Stage')
   @Named('BaseUrl')
-  String get baseUrl => //'https://backend.homes.albacars.app/api';
+  String get baseUrl => //'https://backend.homes.albacars.app/api/';
       // 'http://10.0.2.2:4000/api/';
       'http://192.168.2.78:4000/api/';
   @Environment('Prod')

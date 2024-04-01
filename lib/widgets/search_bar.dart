@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -126,7 +127,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
                 showModalBottomSheet(
                     context: context,
                     showDragHandle: true,
-                    useRootNavigator: true,
+                    // useRootNavigator: true,
                     isScrollControlled: true,
                     enableDrag: false,
                     builder: (context) => DraggableScrollableSheet(
@@ -187,6 +188,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
                         ));
               },
               child: Container(
+                height: 50,
                 decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme
@@ -291,6 +293,8 @@ class _AppSearchBarState extends State<AppSearchBar> {
       }
     } else if (value is SfRangeValues) {
       return '${(value.start as num).currency} - ${(value.end as num).currency}';
+    } else if (value is DateTime) {
+      return '${DateFormat.yMd().format(value)}';
     }
     return value.toString();
   }

@@ -8,7 +8,6 @@ import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
 import 'package:real_estate_app/view/home_screen/widgets/detail_screen.dart';
 
-import '../controller/controller.dart';
 import '../model/recomended_model.dart';
 
 class ExploreBottomSheet extends StatefulWidget {

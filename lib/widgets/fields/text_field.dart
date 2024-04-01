@@ -24,11 +24,11 @@ class AppTextField extends StatefulWidget {
     this.focusNode,
     this.textStyle,
     this.showIcon,
-    this.showLinkAbove,
     this.onFieldSubmitted,
     this.disabled = false,
     this.value,
     this.obscureText,
+    this.isRequired = false,
   });
 
   final String name;
@@ -46,11 +46,11 @@ class AppTextField extends StatefulWidget {
   final TextAlign? textAlign;
   final TextStyle? textStyle;
   final bool? showIcon;
-  final String? showLinkAbove;
   final void Function()? onFieldSubmitted;
   final bool disabled;
   final String? value;
   final bool? obscureText;
+  final bool isRequired;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -106,7 +106,12 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return FormBuilderField<String>(
         key: _fieldKey,
-        validator: widget.validator,
+        validator: (v) {
+          if (widget.isRequired && (v == null || v.isEmpty)) {
+            return 'Please enter a value';
+          }
+          return widget.validator?.call(v);
+        },
         name: widget.name,
         enabled: !widget.disabled,
         builder: (state) {
@@ -119,85 +124,13 @@ class _AppTextFieldState extends State<AppTextField> {
                   children: [
                     Expanded(
                       child: Text(
-                        widget.label!,
+                        widget.label! + (widget.isRequired ? ' *' : ''),
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: const Color(0xFF555555),
                             ),
                       ),
                     ),
-                    if (widget.showLinkAbove == 'phone')
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(bottom: 4.0),
-                            child: const Text(
-                              'or use ',
-                              style: TextStyle(
-                                color: Color(0xFF555555),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(bottom: 1.0),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  width: 0.7,
-                                ),
-                              ),
-                            ),
-                            child: const Text(
-                              'Phone Number',
-                              style: TextStyle(
-                                color: Color(0xFF555555),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (widget.showLinkAbove == 'email')
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(bottom: 4.0),
-                            child: const Text(
-                              'or use ',
-                              style: TextStyle(
-                                color: Color(0xFF555555),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(bottom: 1.0),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  width: 0.7,
-                                ),
-                              ),
-                            ),
-                            child: const Text(
-                              'Email Address',
-                              style: TextStyle(
-                                color: Color(0xFF555555),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                   ],
                 ),
               if (widget.label != null) const SizedBox(height: 6),

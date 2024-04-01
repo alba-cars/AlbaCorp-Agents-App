@@ -44,7 +44,9 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     }
 
     final result = await _explorerRepo.getPropertyCards(
-        filter: state.explorerFilter, paginator: state.explorerPaginator);
+        search: state.explorerSearch,
+        filter: state.explorerFilter,
+        paginator: state.explorerPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -75,7 +77,9 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     }
 
     final result = await _explorerRepo.getCheckedOutPropertyCards(
-        filter: state.checkedOutFilter, paginator: state.checkedOutPaginator);
+        search: state.checkedOutSearch,
+        filter: state.checkedOutFilter,
+        paginator: state.checkedOutPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -111,6 +115,47 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   void setCheckedOutFilter(Map<String, dynamic>? filter) {
     emit(state.copyWith(checkedOutFilter: filter));
     getCheckedOutExplorerList(refresh: true);
+  }
+
+  void setSelectionModeEnabled(BuildContext context, PropertyCard card) {
+    if (card.availableForCheckout && card.currentAgent == null) {
+      emit(state
+          .copyWith(selectModeEnabled: true, selectedPropertyCards: [card.id]));
+    } else {
+      emit(state.copyWith(
+        selectModeEnabled: true,
+      ));
+      if (context.mounted) {
+        showSnackbar(
+            context,
+            'You can\'t assign this card, Please choose another',
+            SnackBarType.info);
+      }
+    }
+  }
+
+  void setSelectionModeDisabled() {
+    emit(state.copyWith(selectModeEnabled: false, selectedPropertyCards: []));
+  }
+
+  void addToSelection(BuildContext context, PropertyCard card) {
+    if (card.availableForCheckout && card.currentAgent == null) {
+      if (state.selectedPropertyCards.contains(card.id)) {
+        final list = List<String>.from(state.selectedPropertyCards)
+          ..remove(card.id);
+        emit(state.copyWith(selectedPropertyCards: list));
+        return;
+      }
+      emit(state.copyWith(
+          selectedPropertyCards: [...state.selectedPropertyCards, card.id]));
+    } else {
+      if (context.mounted) {
+        showSnackbar(
+            context,
+            'You can\'t assign this card, Please choose another',
+            SnackBarType.info);
+      }
+    }
   }
 
   Future<void> checkInLead(
@@ -162,6 +207,62 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         emit(state.copyWith(
             checkOutLeadStatus: Status.failure,
             checkOutLeadError: e.exception));
+        if (context.mounted) {
+          showSnackbar(context, e.exception, SnackBarType.failure);
+        }
+    }
+  }
+
+  Future<void> checkOutLeadInBulk({
+    required BuildContext context,
+  }) async {
+    emit(state.copyWith(checkOutLeadStatus: Status.loading));
+    final result = await _explorerRepo.checkOutLead(
+        propertyCardIds: state.selectedPropertyCards);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            checkOutLeadStatus: Status.success,
+            selectModeEnabled: false,
+            selectedPropertyCards: []));
+        getExplorerList(refresh: true);
+        if (context.mounted) {
+          showSnackbar(
+              context, 'Leads Checked Out Successfully', SnackBarType.success);
+        }
+        getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            checkOutLeadStatus: Status.failure,
+            checkOutLeadError: e.exception));
+        if (context.mounted) {
+          showSnackbar(context, e.exception, SnackBarType.failure);
+        }
+    }
+  }
+
+  Future<void> randomCheckout(
+      {required BuildContext context,
+      required Map<String, dynamic> values}) async {
+    emit(state.copyWith(randomLeadsAssignmentStatus: Status.loading));
+    final result = await _explorerRepo.randomLeadsAssignment(values: values);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+          randomLeadsAssignmentStatus: Status.success,
+        ));
+        if (context.mounted) {
+          showSnackbar(context, 'Leads Randomly Checked In Successfully',
+              SnackBarType.success);
+          Navigator.of(context).pop();
+        }
+        getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            randomLeadsAssignmentStatus: Status.failure,
+            randomLeadsAssignmentError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }

@@ -14,6 +14,9 @@ _$DealListingResponseImpl _$$DealListingResponseImplFromJson(
       beds: json['beds'] as String,
       baths: json['baths'] as String,
       size: json['size'] as int,
+      community: json['community'] == null
+          ? null
+          : Community.fromJson(json['community'] as Map<String, dynamic>),
       agreedSalesPrice: (json['agreedSalesPrice'] as num).toDouble(),
       agreedCommission: _stringToDouble(json['agreedCommission'] as String),
     );
@@ -26,6 +29,7 @@ Map<String, dynamic> _$$DealListingResponseImplToJson(
       'beds': instance.beds,
       'baths': instance.baths,
       'size': instance.size,
+      'community': instance.community,
       'agreedSalesPrice': instance.agreedSalesPrice,
       'agreedCommission': _stringFromDouble(instance.agreedCommission),
     };

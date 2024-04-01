@@ -27,7 +27,7 @@ mixin _$PropertyCard {
   Building? get building => throw _privateConstructorUsedError;
   @JsonKey(name: 'community')
   Community? get community => throw _privateConstructorUsedError;
-  int? get beds => throw _privateConstructorUsedError;
+  String? get beds => throw _privateConstructorUsedError;
   int? get baths => throw _privateConstructorUsedError;
   double? get size => throw _privateConstructorUsedError;
   @JsonKey(name: 'propertyType')
@@ -46,7 +46,9 @@ mixin _$PropertyCard {
   @JsonKey(name: 'checkedOutDate')
   String? get checkedOutDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'currentAgent')
-  PropertyCardAgent? get currentAgent => throw _privateConstructorUsedError;
+  dynamic get currentAgent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'currentOwner')
+  String? get currentOwner => throw _privateConstructorUsedError;
   @JsonKey(name: 'updatedBy')
   String? get updatedBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNumber')
@@ -75,7 +77,7 @@ abstract class $PropertyCardCopyWith<$Res> {
       @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
       Building? building,
       @JsonKey(name: 'community') Community? community,
-      int? beds,
+      String? beds,
       int? baths,
       double? size,
       @JsonKey(name: 'propertyType') String? propertyType,
@@ -87,7 +89,8 @@ abstract class $PropertyCardCopyWith<$Res> {
       @JsonKey(name: 'createdAt') String? createdAt,
       @JsonKey(name: 'updatedAt') String? updatedAt,
       @JsonKey(name: 'checkedOutDate') String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') PropertyCardAgent? currentAgent,
+      @JsonKey(name: 'currentAgent') dynamic currentAgent,
+      @JsonKey(name: 'currentOwner') String? currentOwner,
       @JsonKey(name: 'updatedBy') String? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') String? expirationDate,
@@ -96,7 +99,6 @@ abstract class $PropertyCardCopyWith<$Res> {
 
   $BuildingCopyWith<$Res>? get building;
   $CommunityCopyWith<$Res>? get community;
-  $PropertyCardAgentCopyWith<$Res>? get currentAgent;
 }
 
 /// @nodoc
@@ -129,6 +131,7 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
     Object? updatedAt = freezed,
     Object? checkedOutDate = freezed,
     Object? currentAgent = freezed,
+    Object? currentOwner = freezed,
     Object? updatedBy = freezed,
     Object? referenceNumber = freezed,
     Object? expirationDate = freezed,
@@ -155,7 +158,7 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
       beds: freezed == beds
           ? _value.beds
           : beds // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       baths: freezed == baths
           ? _value.baths
           : baths // ignore: cast_nullable_to_non_nullable
@@ -203,7 +206,11 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
       currentAgent: freezed == currentAgent
           ? _value.currentAgent
           : currentAgent // ignore: cast_nullable_to_non_nullable
-              as PropertyCardAgent?,
+              as dynamic,
+      currentOwner: freezed == currentOwner
+          ? _value.currentOwner
+          : currentOwner // ignore: cast_nullable_to_non_nullable
+              as String?,
       updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
@@ -250,18 +257,6 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
       return _then(_value.copyWith(community: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PropertyCardAgentCopyWith<$Res>? get currentAgent {
-    if (_value.currentAgent == null) {
-      return null;
-    }
-
-    return $PropertyCardAgentCopyWith<$Res>(_value.currentAgent!, (value) {
-      return _then(_value.copyWith(currentAgent: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -277,7 +272,7 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
       @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
       Building? building,
       @JsonKey(name: 'community') Community? community,
-      int? beds,
+      String? beds,
       int? baths,
       double? size,
       @JsonKey(name: 'propertyType') String? propertyType,
@@ -289,7 +284,8 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
       @JsonKey(name: 'createdAt') String? createdAt,
       @JsonKey(name: 'updatedAt') String? updatedAt,
       @JsonKey(name: 'checkedOutDate') String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') PropertyCardAgent? currentAgent,
+      @JsonKey(name: 'currentAgent') dynamic currentAgent,
+      @JsonKey(name: 'currentOwner') String? currentOwner,
       @JsonKey(name: 'updatedBy') String? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') String? expirationDate,
@@ -300,8 +296,6 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
   $BuildingCopyWith<$Res>? get building;
   @override
   $CommunityCopyWith<$Res>? get community;
-  @override
-  $PropertyCardAgentCopyWith<$Res>? get currentAgent;
 }
 
 /// @nodoc
@@ -332,6 +326,7 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? checkedOutDate = freezed,
     Object? currentAgent = freezed,
+    Object? currentOwner = freezed,
     Object? updatedBy = freezed,
     Object? referenceNumber = freezed,
     Object? expirationDate = freezed,
@@ -358,7 +353,7 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
       beds: freezed == beds
           ? _value.beds
           : beds // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       baths: freezed == baths
           ? _value.baths
           : baths // ignore: cast_nullable_to_non_nullable
@@ -406,7 +401,11 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
       currentAgent: freezed == currentAgent
           ? _value.currentAgent
           : currentAgent // ignore: cast_nullable_to_non_nullable
-              as PropertyCardAgent?,
+              as dynamic,
+      currentOwner: freezed == currentOwner
+          ? _value.currentOwner
+          : currentOwner // ignore: cast_nullable_to_non_nullable
+              as String?,
       updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
@@ -452,6 +451,7 @@ class _$PropertyCardImpl implements _PropertyCard {
       @JsonKey(name: 'updatedAt') this.updatedAt,
       @JsonKey(name: 'checkedOutDate') this.checkedOutDate,
       @JsonKey(name: 'currentAgent') this.currentAgent,
+      @JsonKey(name: 'currentOwner') this.currentOwner,
       @JsonKey(name: 'updatedBy') this.updatedBy,
       @JsonKey(name: 'referenceNumber') this.referenceNumber,
       @JsonKey(name: 'expirationDate') this.expirationDate,
@@ -474,7 +474,7 @@ class _$PropertyCardImpl implements _PropertyCard {
   @JsonKey(name: 'community')
   final Community? community;
   @override
-  final int? beds;
+  final String? beds;
   @override
   final int? baths;
   @override
@@ -513,7 +513,10 @@ class _$PropertyCardImpl implements _PropertyCard {
   final String? checkedOutDate;
   @override
   @JsonKey(name: 'currentAgent')
-  final PropertyCardAgent? currentAgent;
+  final dynamic currentAgent;
+  @override
+  @JsonKey(name: 'currentOwner')
+  final String? currentOwner;
   @override
   @JsonKey(name: 'updatedBy')
   final String? updatedBy;
@@ -532,7 +535,7 @@ class _$PropertyCardImpl implements _PropertyCard {
 
   @override
   String toString() {
-    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, leadsCount: $leadsCount)';
+    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, leadsCount: $leadsCount)';
   }
 
   @override
@@ -565,8 +568,10 @@ class _$PropertyCardImpl implements _PropertyCard {
                 other.updatedAt == updatedAt) &&
             (identical(other.checkedOutDate, checkedOutDate) ||
                 other.checkedOutDate == checkedOutDate) &&
-            (identical(other.currentAgent, currentAgent) ||
-                other.currentAgent == currentAgent) &&
+            const DeepCollectionEquality()
+                .equals(other.currentAgent, currentAgent) &&
+            (identical(other.currentOwner, currentOwner) ||
+                other.currentOwner == currentOwner) &&
             (identical(other.updatedBy, updatedBy) ||
                 other.updatedBy == updatedBy) &&
             (identical(other.referenceNumber, referenceNumber) ||
@@ -599,7 +604,8 @@ class _$PropertyCardImpl implements _PropertyCard {
         createdAt,
         updatedAt,
         checkedOutDate,
-        currentAgent,
+        const DeepCollectionEquality().hash(currentAgent),
+        currentOwner,
         updatedBy,
         referenceNumber,
         expirationDate,
@@ -627,7 +633,7 @@ abstract class _PropertyCard implements PropertyCard {
       @JsonKey(name: 'plCreationDate') final dynamic plCreationDate,
       final Building? building,
       @JsonKey(name: 'community') final Community? community,
-      final int? beds,
+      final String? beds,
       final int? baths,
       final double? size,
       @JsonKey(name: 'propertyType') final String? propertyType,
@@ -639,7 +645,8 @@ abstract class _PropertyCard implements PropertyCard {
       @JsonKey(name: 'createdAt') final String? createdAt,
       @JsonKey(name: 'updatedAt') final String? updatedAt,
       @JsonKey(name: 'checkedOutDate') final String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') final PropertyCardAgent? currentAgent,
+      @JsonKey(name: 'currentAgent') final dynamic currentAgent,
+      @JsonKey(name: 'currentOwner') final String? currentOwner,
       @JsonKey(name: 'updatedBy') final String? updatedBy,
       @JsonKey(name: 'referenceNumber') final String? referenceNumber,
       @JsonKey(name: 'expirationDate') final String? expirationDate,
@@ -661,7 +668,7 @@ abstract class _PropertyCard implements PropertyCard {
   @JsonKey(name: 'community')
   Community? get community;
   @override
-  int? get beds;
+  String? get beds;
   @override
   int? get baths;
   @override
@@ -692,7 +699,10 @@ abstract class _PropertyCard implements PropertyCard {
   String? get checkedOutDate;
   @override
   @JsonKey(name: 'currentAgent')
-  PropertyCardAgent? get currentAgent;
+  dynamic get currentAgent;
+  @override
+  @JsonKey(name: 'currentOwner')
+  String? get currentOwner;
   @override
   @JsonKey(name: 'updatedBy')
   String? get updatedBy;

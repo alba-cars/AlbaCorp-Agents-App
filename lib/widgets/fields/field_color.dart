@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
 
-const Color fieldColor = Color.fromRGBO(240, 239, 243, 1);
-const Color borderColor = Color.fromARGB(255, 1, 0, 71);
+const Color fieldColor = Color(0x44dde1ff);
+const Color borderColor = Color(0xffdde1ff);

@@ -240,7 +240,7 @@ class _AttachmentFieldState<T> extends State<AttachmentField<T>> {
       if (result != null) {
         final fileObjects =
             result.files.map((e) => FileObject(localImage: e.path));
-        Logger().d(fileObjects);
+
         state.didChange(
             <FileObject>[...(state.value ?? <FileObject>[]), ...fileObjects]);
       }

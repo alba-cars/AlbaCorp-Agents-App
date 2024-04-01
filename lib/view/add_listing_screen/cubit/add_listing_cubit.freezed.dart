@@ -18,6 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddListingState {
   Status get addListingStatus => throw _privateConstructorUsedError;
   String? get addListingError => throw _privateConstructorUsedError;
+  NewListingRequest? get dealListingResponse =>
+      throw _privateConstructorUsedError;
+  Status get addListingDocumentsStatus => throw _privateConstructorUsedError;
+  String? get addListingDocumentsError => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
   Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
   List<Community> get communityList => throw _privateConstructorUsedError;
@@ -42,6 +46,9 @@ abstract class $AddListingStateCopyWith<$Res> {
   $Res call(
       {Status addListingStatus,
       String? addListingError,
+      NewListingRequest? dealListingResponse,
+      Status addListingDocumentsStatus,
+      String? addListingDocumentsError,
       List<PropertyType> propertyTypeList,
       Status getPropertyTypeListStatus,
       List<Community> communityList,
@@ -51,6 +58,8 @@ abstract class $AddListingStateCopyWith<$Res> {
       List<Lead> leadList,
       Status getLeadListStatus,
       int currentTab});
+
+  $NewListingRequestCopyWith<$Res>? get dealListingResponse;
 }
 
 /// @nodoc
@@ -68,6 +77,9 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
   $Res call({
     Object? addListingStatus = null,
     Object? addListingError = freezed,
+    Object? dealListingResponse = freezed,
+    Object? addListingDocumentsStatus = null,
+    Object? addListingDocumentsError = freezed,
     Object? propertyTypeList = null,
     Object? getPropertyTypeListStatus = null,
     Object? communityList = null,
@@ -86,6 +98,18 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
       addListingError: freezed == addListingError
           ? _value.addListingError
           : addListingError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealListingResponse: freezed == dealListingResponse
+          ? _value.dealListingResponse
+          : dealListingResponse // ignore: cast_nullable_to_non_nullable
+              as NewListingRequest?,
+      addListingDocumentsStatus: null == addListingDocumentsStatus
+          ? _value.addListingDocumentsStatus
+          : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      addListingDocumentsError: freezed == addListingDocumentsError
+          ? _value.addListingDocumentsError
+          : addListingDocumentsError // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyTypeList: null == propertyTypeList
           ? _value.propertyTypeList
@@ -125,6 +149,19 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
               as int,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NewListingRequestCopyWith<$Res>? get dealListingResponse {
+    if (_value.dealListingResponse == null) {
+      return null;
+    }
+
+    return $NewListingRequestCopyWith<$Res>(_value.dealListingResponse!,
+        (value) {
+      return _then(_value.copyWith(dealListingResponse: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -138,6 +175,9 @@ abstract class _$$AddListingStateImplCopyWith<$Res>
   $Res call(
       {Status addListingStatus,
       String? addListingError,
+      NewListingRequest? dealListingResponse,
+      Status addListingDocumentsStatus,
+      String? addListingDocumentsError,
       List<PropertyType> propertyTypeList,
       Status getPropertyTypeListStatus,
       List<Community> communityList,
@@ -147,6 +187,9 @@ abstract class _$$AddListingStateImplCopyWith<$Res>
       List<Lead> leadList,
       Status getLeadListStatus,
       int currentTab});
+
+  @override
+  $NewListingRequestCopyWith<$Res>? get dealListingResponse;
 }
 
 /// @nodoc
@@ -162,6 +205,9 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
   $Res call({
     Object? addListingStatus = null,
     Object? addListingError = freezed,
+    Object? dealListingResponse = freezed,
+    Object? addListingDocumentsStatus = null,
+    Object? addListingDocumentsError = freezed,
     Object? propertyTypeList = null,
     Object? getPropertyTypeListStatus = null,
     Object? communityList = null,
@@ -180,6 +226,18 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
       addListingError: freezed == addListingError
           ? _value.addListingError
           : addListingError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealListingResponse: freezed == dealListingResponse
+          ? _value.dealListingResponse
+          : dealListingResponse // ignore: cast_nullable_to_non_nullable
+              as NewListingRequest?,
+      addListingDocumentsStatus: null == addListingDocumentsStatus
+          ? _value.addListingDocumentsStatus
+          : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      addListingDocumentsError: freezed == addListingDocumentsError
+          ? _value.addListingDocumentsError
+          : addListingDocumentsError // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyTypeList: null == propertyTypeList
           ? _value._propertyTypeList
@@ -227,6 +285,9 @@ class _$AddListingStateImpl implements _AddListingState {
   const _$AddListingStateImpl(
       {this.addListingStatus = Status.init,
       this.addListingError,
+      this.dealListingResponse,
+      this.addListingDocumentsStatus = Status.init,
+      this.addListingDocumentsError,
       final List<PropertyType> propertyTypeList = const [],
       this.getPropertyTypeListStatus = Status.init,
       final List<Community> communityList = const [],
@@ -246,6 +307,13 @@ class _$AddListingStateImpl implements _AddListingState {
   final Status addListingStatus;
   @override
   final String? addListingError;
+  @override
+  final NewListingRequest? dealListingResponse;
+  @override
+  @JsonKey()
+  final Status addListingDocumentsStatus;
+  @override
+  final String? addListingDocumentsError;
   final List<PropertyType> _propertyTypeList;
   @override
   @JsonKey()
@@ -301,7 +369,7 @@ class _$AddListingStateImpl implements _AddListingState {
 
   @override
   String toString() {
-    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab)';
+    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab)';
   }
 
   @override
@@ -313,6 +381,14 @@ class _$AddListingStateImpl implements _AddListingState {
                 other.addListingStatus == addListingStatus) &&
             (identical(other.addListingError, addListingError) ||
                 other.addListingError == addListingError) &&
+            (identical(other.dealListingResponse, dealListingResponse) ||
+                other.dealListingResponse == dealListingResponse) &&
+            (identical(other.addListingDocumentsStatus,
+                    addListingDocumentsStatus) ||
+                other.addListingDocumentsStatus == addListingDocumentsStatus) &&
+            (identical(
+                    other.addListingDocumentsError, addListingDocumentsError) ||
+                other.addListingDocumentsError == addListingDocumentsError) &&
             const DeepCollectionEquality()
                 .equals(other._propertyTypeList, _propertyTypeList) &&
             (identical(other.getPropertyTypeListStatus,
@@ -338,6 +414,9 @@ class _$AddListingStateImpl implements _AddListingState {
       runtimeType,
       addListingStatus,
       addListingError,
+      dealListingResponse,
+      addListingDocumentsStatus,
+      addListingDocumentsError,
       const DeepCollectionEquality().hash(_propertyTypeList),
       getPropertyTypeListStatus,
       const DeepCollectionEquality().hash(_communityList),
@@ -360,6 +439,9 @@ abstract class _AddListingState implements AddListingState {
   const factory _AddListingState(
       {final Status addListingStatus,
       final String? addListingError,
+      final NewListingRequest? dealListingResponse,
+      final Status addListingDocumentsStatus,
+      final String? addListingDocumentsError,
       final List<PropertyType> propertyTypeList,
       final Status getPropertyTypeListStatus,
       final List<Community> communityList,
@@ -374,6 +456,12 @@ abstract class _AddListingState implements AddListingState {
   Status get addListingStatus;
   @override
   String? get addListingError;
+  @override
+  NewListingRequest? get dealListingResponse;
+  @override
+  Status get addListingDocumentsStatus;
+  @override
+  String? get addListingDocumentsError;
   @override
   List<PropertyType> get propertyTypeList;
   @override

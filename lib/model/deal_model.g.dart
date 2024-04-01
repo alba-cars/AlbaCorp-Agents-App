@@ -77,6 +77,10 @@ _$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
           ? null
           : NewListingRequest.fromJson(
               json['new_listing_request'] as Map<String, dynamic>),
+      offPlanProperty: json['new_listing_offplan'] == null
+          ? null
+          : DealListingResponse.fromJson(
+              json['new_listing_offplan'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$DealImplToJson(_$DealImpl instance) =>
@@ -124,4 +128,5 @@ Map<String, dynamic> _$$DealImplToJson(_$DealImpl instance) =>
       'sellerAssignedAgent': instance.sellerAssignedAgent,
       'property_list': instance.propertyList,
       'new_listing_request': instance.newListingRequest,
+      'new_listing_offplan': instance.offPlanProperty,
     };

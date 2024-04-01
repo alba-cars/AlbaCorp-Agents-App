@@ -50,6 +50,8 @@ class _S3ImageState extends State<S3Image> {
 
   getUrl() async {
     try {
+      isLoading = true;
+      if (mounted) setState(() {});
       if (widget.url != null) {
         if (!widget.publicImage) {
           final fileinfo =
@@ -155,28 +157,32 @@ class _S3ImageState extends State<S3Image> {
           return widget.errorWidget!;
         }
         if (error) {
-          return Container(
-            width: double.maxFinite,
-            decoration: BoxDecoration(),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.error),
-                TextButton(
-                    style: TextButton.styleFrom(
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        padding: EdgeInsets.zero),
-                    onPressed: () {
-                      getUrl();
-                    },
-                    child: const Text('Retry'))
-              ],
+          return Center(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: InkWell(
+                onTap: () {
+                  getUrl();
+                },
+                child: Container(
+                  // width: double.maxFinite,
+                  decoration: BoxDecoration(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: const Icon(Icons.rotate_right),
+                      ),
+                      const Text('Error')
+                    ],
+                  ),
+                ),
+              ),
             ),
           );
         }
         return Image.asset(
-          "assets/images/detail_image.png",
+          "assets/images/placeholder.webp",
           fit: widget.fit,
         );
       }

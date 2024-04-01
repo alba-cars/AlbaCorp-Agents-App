@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,9 +10,11 @@ import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
+import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
+import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
@@ -162,6 +165,18 @@ class AppRouter {
                 path: AddDealScreen.routeName,
                 name: AddDealScreen.routeName,
                 pageBuilder: (context, state) {
+                  final openWidget = state.extra as Widget?;
+
+                  if (openWidget != null) {
+                    return CustomTransitionPage(
+                        child: AddDealScreen(),
+                        transitionsBuilder: (context, anim1, anim2, child) {
+                          return OpenContainer(
+                            openBuilder: (context, action) => openWidget,
+                            closedBuilder: (context, action) => child,
+                          );
+                        });
+                  }
                   return AppTransition(child: AddDealScreen());
                 },
               ),
@@ -170,6 +185,13 @@ class AppRouter {
                 name: AddListingScreen.routeName,
                 pageBuilder: (context, state) {
                   return AppTransition(child: AddListingScreen());
+                },
+              ),
+              GoRoute(
+                path: AddPocketListingScreen.routeName,
+                name: AddPocketListingScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: AddPocketListingScreen());
                 },
               ),
               GoRoute(
@@ -273,6 +295,17 @@ class AppRouter {
                 name: AddTaskScreen.routeName,
                 pageBuilder: (context, state) {
                   return AppTransition(child: AddTaskScreen());
+                },
+              ),
+              GoRoute(
+                path: DealAddDocumentScreen.routeName,
+                name: DealAddDocumentScreen.routeName,
+                pageBuilder: (context, state) {
+                  final id = state.pathParameters['id'] ?? '';
+                  return AppTransition(
+                      child: DealAddDocumentScreen(
+                    dealId: id,
+                  ));
                 },
               ),
             ]),

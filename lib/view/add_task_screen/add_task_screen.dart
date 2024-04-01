@@ -44,7 +44,7 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
   late final GlobalKey<FormBuilderState> _formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    final activity = getIt<ActivityCubit>().state.lastActivity;
+    final activity = context.read<ActivityCubit>().state.lastActivity;
     Logger().d(activity);
     return Scaffold(
       appBar: AppBar(
@@ -80,6 +80,7 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                   name: 'property',
                   label: 'Property',
                   isRequired: false,
+                  valueTransformer: (option) => option?.id,
                   optionsBuilder: (v) async {
                     return context
                         .read<AddTaskCubit>()

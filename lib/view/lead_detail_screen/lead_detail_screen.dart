@@ -5,6 +5,7 @@ import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/deals_tab_view.dart';
+import 'package:real_estate_app/view/lead_detail_screen/widgets/property_cards_tab_view.dart';
 import 'package:real_estate_app/view/leads_screen/cubit/leads_cubit.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
@@ -95,9 +96,7 @@ class _LeadDetailScreenLayoutState extends State<LeadDetailScreenLayout>
                     return DealsTabView(deals: deals);
                   },
                 ),
-                Center(
-                  child: Text('Notes'),
-                ),
+                PropertyCardsTabView()
               ],
             );
           }));
@@ -116,7 +115,7 @@ class LeadDetailScreenTabHeader extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Material(
       color: Colors.white,
-      child: TabBar(controller: tabController, tabs: [
+      child: TabBar(padding: EdgeInsets.zero, controller: tabController, tabs: [
         Tab(
           text: 'About',
         ),
@@ -127,7 +126,7 @@ class LeadDetailScreenTabHeader extends SliverPersistentHeaderDelegate {
           text: 'Deals',
         ),
         Tab(
-          text: 'Notes',
+          text: 'Property Cards',
         ),
       ]),
     );

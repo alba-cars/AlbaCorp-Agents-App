@@ -17,13 +17,11 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
       community: json['community'] == null
           ? null
           : Community.fromJson(json['community'] as Map<String, dynamic>),
-      beds: json['beds'] as int?,
+      beds: json['beds'] as String?,
       baths: json['baths'] as int?,
       size: (json['size'] as num?)?.toDouble(),
       propertyType: json['propertyType'] as String?,
-      createdBy: json['createdBy'] == null
-          ? null
-          : CreatedBy.fromJson(json['createdBy'] as Map<String, dynamic>),
+      createdBy: readCreatedBy(json, 'createdBy'),
       partyType: json['partyType'] as String?,
       status: json['status'] as String?,
       purpose: json['purpose'] as String?,
@@ -38,15 +36,25 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
           ? null
           : DateTime.parse(json['checkedOutDate'] as String),
       currentAgent: json['currentAgent'],
+      currentOwner: json['currentOwner'] == null
+          ? null
+          : User.fromJson(json['currentOwner'] as Map<String, dynamic>),
       updatedBy: json['updatedBy'] == null
           ? null
-          : CreatedBy.fromJson(json['updatedBy'] as Map<String, dynamic>),
+          : User.fromJson(json['updatedBy'] as Map<String, dynamic>),
       referenceNumber: json['referenceNumber'] as String?,
       expirationDate: json['expirationDate'] == null
           ? null
           : DateTime.parse(json['expirationDate'] as String),
       availableForCheckout: json['availableForCheckout'] as bool? ?? false,
+      photos: (json['photos'] as List<dynamic>?)
+              ?.map(
+                  (e) => PropertyCardPhoto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       leadsCount: json['leadsCount'] as int?,
+      askingPrice: json['askingPrice'] as num?,
+      agentValutionPrice: json['agentValutionPrice'] as num?,
     );
 
 Map<String, dynamic> _$$PropertyCardDetailsModelImplToJson(
@@ -69,9 +77,27 @@ Map<String, dynamic> _$$PropertyCardDetailsModelImplToJson(
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'checkedOutDate': instance.checkedOutDate?.toIso8601String(),
       'currentAgent': instance.currentAgent,
+      'currentOwner': instance.currentOwner,
       'updatedBy': instance.updatedBy,
       'referenceNumber': instance.referenceNumber,
       'expirationDate': instance.expirationDate?.toIso8601String(),
       'availableForCheckout': instance.availableForCheckout,
+      'photos': instance.photos,
       'leadsCount': instance.leadsCount,
+      'askingPrice': instance.askingPrice,
+      'agentValutionPrice': instance.agentValutionPrice,
+    };
+
+_$PropertyCardPhotoImpl _$$PropertyCardPhotoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PropertyCardPhotoImpl(
+      id: readId(json, 'id') as String,
+      original: json['original'] as String,
+    );
+
+Map<String, dynamic> _$$PropertyCardPhotoImplToJson(
+        _$PropertyCardPhotoImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'original': instance.original,
     };

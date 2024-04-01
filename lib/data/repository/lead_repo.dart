@@ -14,6 +14,8 @@ abstract class LeadRepo {
       {String? search, Paginator? paginator});
   Future<Result<Lead>> getLead({required String leadId});
   Future<Result<Lead>> addLead({required Map<String, dynamic> lead});
+  Future<Result<Lead>> updateLead(
+      {required String leadId, required Map<String, dynamic> value});
 
   Future<Result<List<Activity>>> getLeadActivities({required String leadId});
   Future<Result<List<Deal>>> getLeadDeals({required String leadId});

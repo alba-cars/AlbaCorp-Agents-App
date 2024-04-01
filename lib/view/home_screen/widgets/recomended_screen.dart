@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:real_estate_app/controller/controller.dart';
+
 import 'package:real_estate_app/data/datafile.dart';
 import 'package:real_estate_app/model/recomended_model.dart';
 import 'package:real_estate_app/util/constant.dart';

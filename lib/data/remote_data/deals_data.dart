@@ -161,7 +161,7 @@ class DealData implements DealsRepo {
           final file = File(v.value!.localImage!);
           final uploaded = await uploadFileToS3AndGetPath(file,
               fullPath:
-                  '/deals/hashahaa${(v.key).paramCase}-${const Uuid().v4()}${extension(file.path)}');
+                  '/deals/${(v.key).paramCase}-${const Uuid().v4()}${extension(file.path)}');
           return MapEntry(
             v.key,
             uploaded,

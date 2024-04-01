@@ -13,6 +13,7 @@ class LeadPropertyCardModel with _$LeadPropertyCardModel {
     @JsonKey(readValue: readId) required String id,
     required Lead lead,
     required PropertyCardDetailsModel propertyCard,
+    @Default(false) bool wasOwner,
     DateTime? date,
     double? amount,
     required CreatedBy createdBy,

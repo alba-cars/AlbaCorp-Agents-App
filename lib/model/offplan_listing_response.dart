@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:real_estate_app/model/community_model.dart';
 
 part 'offplan_listing_response.freezed.dart';
 part 'offplan_listing_response.g.dart';
@@ -11,6 +12,7 @@ class DealListingResponse with _$DealListingResponse {
     required String beds,
     required String baths,
     required int size,
+    Community? community,
     required double agreedSalesPrice,
     @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
     required double agreedCommission,

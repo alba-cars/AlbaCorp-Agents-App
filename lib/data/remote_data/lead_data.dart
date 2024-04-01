@@ -192,4 +192,21 @@ class LeadData implements LeadRepo {
       return onError(e, stack, log);
     }
   }
+
+  @override
+  Future<Result<Lead>> updateLead(
+      {required String leadId, required Map<String, dynamic> value}) async {
+    try {
+      String url = 'v1/users/$leadId';
+
+      final response = await _dio.patch(url, data: value);
+      final data = response.data;
+      final model = Lead.fromJson(data);
+      return Success(
+        model,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
 }

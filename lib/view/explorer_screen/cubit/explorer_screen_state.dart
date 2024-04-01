@@ -15,6 +15,8 @@ class ExplorerScreenState with _$ExplorerScreenState {
     String? checkInLeadError,
     @Default(Status.init) Status checkOutLeadStatus,
     String? checkOutLeadError,
+    @Default(Status.init) Status randomLeadsAssignmentStatus,
+    String? randomLeadsAssignmentError,
     @Default(0) currentTab,
     String? explorerSearch,
     String? checkedOutSearch,
@@ -26,5 +28,7 @@ class ExplorerScreenState with _$ExplorerScreenState {
     @Default(Status.init) Status getCommunityListStatus,
     @Default([]) List<Building> buildingList,
     @Default(Status.init) Status getBuildingListStatus,
+    @Default(false) bool selectModeEnabled,
+    @Default([]) List<String> selectedPropertyCards,
   }) = _ExplorerScreenState;
 }

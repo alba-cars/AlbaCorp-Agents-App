@@ -6,9 +6,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/widgets/raw_autocomplete.dart';
+import 'package:real_estate_app/widgets/space.dart';
 
 import 'autocomplete_field.dart';
 import 'error_text.dart';
+import 'field_color.dart';
 
 class MultiSelectAutoCompleteField<T extends Object> extends StatefulWidget {
   const MultiSelectAutoCompleteField({
@@ -90,9 +92,6 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
     _controller.dispose();
     super.dispose();
   }
-
-  Color fieldColor = const Color(0xE9E9E9E9);
-  Color borderColor = const Color(0xD2D2D2D2);
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +185,7 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
               focusNode: _focusNode,
               displayStringForOption: widget._displayStringForOption,
               fieldViewBuilder: (context, textEditingController, focusNode,
-                  onFieldSubmitted) {
+                  onFieldSubmitted, val) {
                 return TextFormField(
                   focusNode: _focusNode,
                   controller: textEditingController,
@@ -237,7 +236,7 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
                   ),
                 );
               },
-              optionsViewBuilder: (context, onSelected, _options) {
+              optionsViewBuilder: (context, onSelected, _options, loading) {
                 final filteredOptions = _options.whereNot(
                   (element1) =>
                       state.value?.any((element2) {
@@ -262,8 +261,33 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
                       child: ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
-                        itemCount: filteredOptions.length,
+                        itemCount: loading
+                            ? filteredOptions.length + 1
+                            : filteredOptions.length,
                         itemBuilder: (BuildContext context, int index) {
+                          if (index == filteredOptions.length && loading) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Loading'),
+                                  HorizontalSmallGap(),
+                                  Center(
+                                    child: SizedBox.square(
+                                        dimension: 25,
+                                        child: CircularProgressIndicator()),
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                          if (filteredOptions.isEmpty && !loading) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('No Options'),
+                            );
+                          }
                           final T option = filteredOptions.elementAt(index);
                           return InkWell(
                             onTap: () {

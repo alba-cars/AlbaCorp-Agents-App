@@ -25,6 +25,7 @@ mixin _$DealListingResponse {
   String get beds => throw _privateConstructorUsedError;
   String get baths => throw _privateConstructorUsedError;
   int get size => throw _privateConstructorUsedError;
+  Community? get community => throw _privateConstructorUsedError;
   double get agreedSalesPrice => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
   double get agreedCommission => throw _privateConstructorUsedError;
@@ -47,9 +48,12 @@ abstract class $DealListingResponseCopyWith<$Res> {
       String beds,
       String baths,
       int size,
+      Community? community,
       double agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
       double agreedCommission});
+
+  $CommunityCopyWith<$Res>? get community;
 }
 
 /// @nodoc
@@ -70,6 +74,7 @@ class _$DealListingResponseCopyWithImpl<$Res, $Val extends DealListingResponse>
     Object? beds = null,
     Object? baths = null,
     Object? size = null,
+    Object? community = freezed,
     Object? agreedSalesPrice = null,
     Object? agreedCommission = null,
   }) {
@@ -94,6 +99,10 @@ class _$DealListingResponseCopyWithImpl<$Res, $Val extends DealListingResponse>
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as int,
+      community: freezed == community
+          ? _value.community
+          : community // ignore: cast_nullable_to_non_nullable
+              as Community?,
       agreedSalesPrice: null == agreedSalesPrice
           ? _value.agreedSalesPrice
           : agreedSalesPrice // ignore: cast_nullable_to_non_nullable
@@ -103,6 +112,18 @@ class _$DealListingResponseCopyWithImpl<$Res, $Val extends DealListingResponse>
           : agreedCommission // ignore: cast_nullable_to_non_nullable
               as double,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CommunityCopyWith<$Res>? get community {
+    if (_value.community == null) {
+      return null;
+    }
+
+    return $CommunityCopyWith<$Res>(_value.community!, (value) {
+      return _then(_value.copyWith(community: value) as $Val);
+    });
   }
 }
 
@@ -120,9 +141,13 @@ abstract class _$$DealListingResponseImplCopyWith<$Res>
       String beds,
       String baths,
       int size,
+      Community? community,
       double agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
       double agreedCommission});
+
+  @override
+  $CommunityCopyWith<$Res>? get community;
 }
 
 /// @nodoc
@@ -141,6 +166,7 @@ class __$$DealListingResponseImplCopyWithImpl<$Res>
     Object? beds = null,
     Object? baths = null,
     Object? size = null,
+    Object? community = freezed,
     Object? agreedSalesPrice = null,
     Object? agreedCommission = null,
   }) {
@@ -165,6 +191,10 @@ class __$$DealListingResponseImplCopyWithImpl<$Res>
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as int,
+      community: freezed == community
+          ? _value.community
+          : community // ignore: cast_nullable_to_non_nullable
+              as Community?,
       agreedSalesPrice: null == agreedSalesPrice
           ? _value.agreedSalesPrice
           : agreedSalesPrice // ignore: cast_nullable_to_non_nullable
@@ -186,6 +216,7 @@ class _$DealListingResponseImpl implements _DealListingResponse {
       required this.beds,
       required this.baths,
       required this.size,
+      this.community,
       required this.agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
       required this.agreedCommission});
@@ -204,6 +235,8 @@ class _$DealListingResponseImpl implements _DealListingResponse {
   @override
   final int size;
   @override
+  final Community? community;
+  @override
   final double agreedSalesPrice;
   @override
   @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
@@ -211,7 +244,7 @@ class _$DealListingResponseImpl implements _DealListingResponse {
 
   @override
   String toString() {
-    return 'DealListingResponse(id: $id, propertyType: $propertyType, beds: $beds, baths: $baths, size: $size, agreedSalesPrice: $agreedSalesPrice, agreedCommission: $agreedCommission)';
+    return 'DealListingResponse(id: $id, propertyType: $propertyType, beds: $beds, baths: $baths, size: $size, community: $community, agreedSalesPrice: $agreedSalesPrice, agreedCommission: $agreedCommission)';
   }
 
   @override
@@ -225,6 +258,8 @@ class _$DealListingResponseImpl implements _DealListingResponse {
             (identical(other.beds, beds) || other.beds == beds) &&
             (identical(other.baths, baths) || other.baths == baths) &&
             (identical(other.size, size) || other.size == size) &&
+            (identical(other.community, community) ||
+                other.community == community) &&
             (identical(other.agreedSalesPrice, agreedSalesPrice) ||
                 other.agreedSalesPrice == agreedSalesPrice) &&
             (identical(other.agreedCommission, agreedCommission) ||
@@ -234,7 +269,7 @@ class _$DealListingResponseImpl implements _DealListingResponse {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, propertyType, beds, baths,
-      size, agreedSalesPrice, agreedCommission);
+      size, community, agreedSalesPrice, agreedCommission);
 
   @JsonKey(ignore: true)
   @override
@@ -258,6 +293,7 @@ abstract class _DealListingResponse implements DealListingResponse {
       required final String beds,
       required final String baths,
       required final int size,
+      final Community? community,
       required final double agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
       required final double agreedCommission}) = _$DealListingResponseImpl;
@@ -275,6 +311,8 @@ abstract class _DealListingResponse implements DealListingResponse {
   String get baths;
   @override
   int get size;
+  @override
+  Community? get community;
   @override
   double get agreedSalesPrice;
   @override

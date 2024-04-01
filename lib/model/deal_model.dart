@@ -63,6 +63,7 @@ class Deal with _$Deal {
     Agent? sellerAssignedAgent,
     @JsonKey(name: 'property_list') Property? propertyList,
     @JsonKey(name: 'new_listing_request') NewListingRequest? newListingRequest,
+    @JsonKey(name: 'new_listing_offplan') DealListingResponse? offPlanProperty,
   }) = _Deal;
 
   factory Deal.fromJson(Map<String, dynamic> json) => _$DealFromJson(json);

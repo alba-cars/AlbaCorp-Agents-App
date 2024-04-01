@@ -7,6 +7,8 @@ import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/listing_request_model.dart';
+import 'package:real_estate_app/model/offplan_listing_response.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
@@ -109,15 +111,16 @@ class ListingsData implements ListingsRepo {
   }
 
   @override
-  Future<Result<void>> addListingAcquired(
+  Future<Result<NewListingRequest>> addListingAcquired(
       {required Map<String, dynamic> values}) async {
     try {
       String url = 'v1/propList/request';
 
       final response = await _dio.post(url, data: values);
-
+      final data = response.data;
+      final model = NewListingRequest.fromJson(data);
       return Success(
-        null,
+        model,
       );
     } catch (e, stack) {
       return onError(e, stack, log);
@@ -126,12 +129,14 @@ class ListingsData implements ListingsRepo {
 
   @override
   Future<Result<List<Building>>> getBuildingNames(
-      {String? search, Paginator? paginator}) async {
+      {String? search, String? communityId, Paginator? paginator}) async {
     try {
       String url = 'v1/buildings';
 
       final response = await _dio.get(url, queryParameters: {
-        if (paginator != null) 'page': paginator.currentPage + 1
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        'search': search,
+        'community': communityId
       });
       final data = response.data as List;
       final list = data.map((e) => Building.fromJson(e)).toList();

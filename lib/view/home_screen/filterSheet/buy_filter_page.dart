@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:real_estate_app/controller/controller.dart';
 import 'package:real_estate_app/data/datafile.dart';
 import 'package:real_estate_app/model/filter_buy_page_type_model.dart';
 import 'package:real_estate_app/util/constant_widget.dart';

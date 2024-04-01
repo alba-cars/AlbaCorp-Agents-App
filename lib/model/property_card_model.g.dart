@@ -16,7 +16,7 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
       community: json['community'] == null
           ? null
           : Community.fromJson(json['community'] as Map<String, dynamic>),
-      beds: json['beds'] as int?,
+      beds: json['beds'] as String?,
       baths: json['baths'] as int?,
       size: (json['size'] as num?)?.toDouble(),
       propertyType: json['propertyType'] as String?,
@@ -28,10 +28,8 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       checkedOutDate: json['checkedOutDate'] as String?,
-      currentAgent: json['currentAgent'] == null
-          ? null
-          : PropertyCardAgent.fromJson(
-              json['currentAgent'] as Map<String, dynamic>),
+      currentAgent: json['currentAgent'],
+      currentOwner: json['currentOwner'] as String?,
       updatedBy: json['updatedBy'] as String?,
       referenceNumber: json['referenceNumber'] as String?,
       expirationDate: json['expirationDate'] as String?,
@@ -58,6 +56,7 @@ Map<String, dynamic> _$$PropertyCardImplToJson(_$PropertyCardImpl instance) =>
       'updatedAt': instance.updatedAt,
       'checkedOutDate': instance.checkedOutDate,
       'currentAgent': instance.currentAgent,
+      'currentOwner': instance.currentOwner,
       'updatedBy': instance.updatedBy,
       'referenceNumber': instance.referenceNumber,
       'expirationDate': instance.expirationDate,

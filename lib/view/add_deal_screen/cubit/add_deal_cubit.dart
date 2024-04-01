@@ -424,4 +424,6 @@ class AddDealCubit extends Cubit<AddDealState> {
   void _scrollToTop() {
     _scrollController?.jumpTo(0);
   }
+
+  List<String> stepNames = ['Deal Type', 'Deal Info', 'Collect Documents'];
 }

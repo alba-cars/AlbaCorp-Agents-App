@@ -10,6 +10,7 @@ import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/model/activity_feedback_model.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
@@ -108,9 +109,11 @@ class _TaskDetailScreenLayout extends StatelessWidget {
                         flex: 3,
                         child: ElevatedButton(
                             onPressed: () {
-                              showDialog(
+                              showGeneralDialog(
                                   context: context,
-                                  builder: (dContext) => ActivityFeedbackDialog(
+                                  useRootNavigator: false,
+                                  pageBuilder: (dContext, anim1, anim2) =>
+                                      ActivityFeedbackDialog(
                                         parentContext: context,
                                         activity: context
                                             .read<TaskDetailCubit>()
@@ -119,18 +122,18 @@ class _TaskDetailScreenLayout extends StatelessWidget {
                                       ));
                             },
                             child: Text('Complete task'))),
-                    HorizontalSmallGap(),
-                    Expanded(
-                        flex: 2,
-                        child: OutlinedButton(
-                            onPressed: () {
-                              context.pushNamed(AddTaskScreen.routeName);
-                            },
-                            child: Text(
-                              'Add Followup',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ))),
+                    // HorizontalSmallGap(),
+                    // Expanded(
+                    //     flex: 2,
+                    //     child: OutlinedButton(
+                    //         onPressed: () {
+                    //           context.pushNamed(AddTaskScreen.routeName);
+                    //         },
+                    //         child: Text(
+                    //           'Add Followup',
+                    //           maxLines: 1,
+                    //           overflow: TextOverflow.ellipsis,
+                    //         ))),
                   ],
                 )
               ],
@@ -191,7 +194,21 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  child: TitleText(text: 'Complete Task?'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TitleText(text: 'Complete Task?'),
+                      IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            size: 20,
+                          ))
+                    ],
+                  ),
                   height: 60,
                   padding:
                       EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 12),
@@ -274,7 +291,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                                 status: 'Complete',
                                                 notes: _controller.text));
                                     Navigator.of(context).pop();
-                                    final result = await context
+                                    final result = await widget.parentContext
                                         .pushNamed(AddTaskScreen.routeName);
                                     if (result == true &&
                                         widget.parentContext.mounted) {
@@ -286,6 +303,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                 adjustment: 1,
                               ),
                               AppPrimaryButton(
+                                  backgroundColor: Colors.green[800],
                                   onTap: () async {
                                     if (_formKey.currentState
                                             ?.saveAndValidate() !=
@@ -300,6 +318,8 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                                 isInterested: true,
                                                 status: 'Complete',
                                                 notes: _controller.text));
+                                    widget.parentContext
+                                        .replaceNamed(AddDealScreen.routeName);
                                   },
                                   text: ('Complete & Add Deal')),
                             ],
@@ -311,14 +331,12 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                         true) {
                                       return;
                                     }
+                                    await widget.parentContext
+                                        .read<TaskDetailCubit>()
+                                        .updateActivity(
+                                            context: widget.parentContext,
+                                            description: _controller.text);
                                     Navigator.of(context).pop();
-                                    getIt<ActivityCubit>()
-                                        .setLastActivityFeedback(
-                                            widget.activity,
-                                            ActivityFeedback(
-                                                isInterested: false,
-                                                status: 'Complete',
-                                                notes: _controller.text));
                                   },
                                   text: ('Complete')),
                             ],
@@ -330,36 +348,39 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                         true) {
                                       return;
                                     }
+
+                                    await widget.parentContext
+                                        .read<TaskDetailCubit>()
+                                        .updateActivity(
+                                            context: widget.parentContext,
+                                            description: _controller.text);
                                     Navigator.of(context).pop();
-                                    getIt<ActivityCubit>()
-                                        .setLastActivityFeedback(
-                                            widget.activity,
-                                            ActivityFeedback(
-                                                isInterested: false,
-                                                status: 'Complete',
-                                                notes: _controller.text));
                                   },
                                   text: ('Complete')),
                               VerticalSmallGap(
                                 adjustment: 1,
                               ),
-                              AppPrimaryButton(
-                                  onTap: () async {
+                              OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                      maximumSize: Size(200, 43),
+                                      minimumSize: Size(100, 43),
+                                      side: BorderSide(color: Colors.red[800]!),
+                                      foregroundColor: Colors.red[800]!),
+                                  onPressed: () async {
                                     if (_formKey.currentState
                                             ?.saveAndValidate() !=
                                         true) {
                                       return;
                                     }
+
+                                    await widget.parentContext
+                                        .read<TaskDetailCubit>()
+                                        .disqualify(
+                                            context: widget.parentContext,
+                                            description: _controller.text);
                                     Navigator.of(context).pop();
-                                    getIt<ActivityCubit>()
-                                        .setLastActivityFeedback(
-                                            widget.activity,
-                                            ActivityFeedback(
-                                                isInterested: false,
-                                                status: 'Complete',
-                                                notes: _controller.text));
                                   },
-                                  text: ('Disqualify')),
+                                  child: Text('Disqualify')),
                             ]
                           ],
                         );

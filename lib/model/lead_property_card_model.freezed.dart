@@ -26,6 +26,7 @@ mixin _$LeadPropertyCardModel {
   Lead get lead => throw _privateConstructorUsedError;
   PropertyCardDetailsModel get propertyCard =>
       throw _privateConstructorUsedError;
+  bool get wasOwner => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   double? get amount => throw _privateConstructorUsedError;
   CreatedBy get createdBy => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $LeadPropertyCardModelCopyWith<$Res> {
       {@JsonKey(readValue: readId) String id,
       Lead lead,
       PropertyCardDetailsModel propertyCard,
+      bool wasOwner,
       DateTime? date,
       double? amount,
       CreatedBy createdBy,
@@ -76,6 +78,7 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
     Object? id = null,
     Object? lead = null,
     Object? propertyCard = null,
+    Object? wasOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
     Object? createdBy = null,
@@ -95,6 +98,10 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
           ? _value.propertyCard
           : propertyCard // ignore: cast_nullable_to_non_nullable
               as PropertyCardDetailsModel,
+      wasOwner: null == wasOwner
+          ? _value.wasOwner
+          : wasOwner // ignore: cast_nullable_to_non_nullable
+              as bool,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -157,6 +164,7 @@ abstract class _$$LeadPropertyCardModelImplCopyWith<$Res>
       {@JsonKey(readValue: readId) String id,
       Lead lead,
       PropertyCardDetailsModel propertyCard,
+      bool wasOwner,
       DateTime? date,
       double? amount,
       CreatedBy createdBy,
@@ -186,6 +194,7 @@ class __$$LeadPropertyCardModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? lead = null,
     Object? propertyCard = null,
+    Object? wasOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
     Object? createdBy = null,
@@ -205,6 +214,10 @@ class __$$LeadPropertyCardModelImplCopyWithImpl<$Res>
           ? _value.propertyCard
           : propertyCard // ignore: cast_nullable_to_non_nullable
               as PropertyCardDetailsModel,
+      wasOwner: null == wasOwner
+          ? _value.wasOwner
+          : wasOwner // ignore: cast_nullable_to_non_nullable
+              as bool,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -236,6 +249,7 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
       {@JsonKey(readValue: readId) required this.id,
       required this.lead,
       required this.propertyCard,
+      this.wasOwner = false,
       this.date,
       this.amount,
       required this.createdBy,
@@ -253,6 +267,9 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
   @override
   final PropertyCardDetailsModel propertyCard;
   @override
+  @JsonKey()
+  final bool wasOwner;
+  @override
   final DateTime? date;
   @override
   final double? amount;
@@ -265,7 +282,7 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
 
   @override
   String toString() {
-    return 'LeadPropertyCardModel(id: $id, lead: $lead, propertyCard: $propertyCard, date: $date, amount: $amount, createdBy: $createdBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'LeadPropertyCardModel(id: $id, lead: $lead, propertyCard: $propertyCard, wasOwner: $wasOwner, date: $date, amount: $amount, createdBy: $createdBy, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -277,6 +294,8 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
             (identical(other.lead, lead) || other.lead == lead) &&
             (identical(other.propertyCard, propertyCard) ||
                 other.propertyCard == propertyCard) &&
+            (identical(other.wasOwner, wasOwner) ||
+                other.wasOwner == wasOwner) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.createdBy, createdBy) ||
@@ -289,8 +308,8 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, lead, propertyCard, date,
-      amount, createdBy, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, lead, propertyCard, wasOwner,
+      date, amount, createdBy, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -312,6 +331,7 @@ abstract class _LeadPropertyCardModel implements LeadPropertyCardModel {
       {@JsonKey(readValue: readId) required final String id,
       required final Lead lead,
       required final PropertyCardDetailsModel propertyCard,
+      final bool wasOwner,
       final DateTime? date,
       final double? amount,
       required final CreatedBy createdBy,
@@ -328,6 +348,8 @@ abstract class _LeadPropertyCardModel implements LeadPropertyCardModel {
   Lead get lead;
   @override
   PropertyCardDetailsModel get propertyCard;
+  @override
+  bool get wasOwner;
   @override
   DateTime? get date;
   @override

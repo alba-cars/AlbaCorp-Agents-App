@@ -50,6 +50,7 @@ class WrapSelectField<T extends Object> extends StatefulWidget {
 class _WrapSelectFieldState<T extends Object>
     extends State<WrapSelectField<T>> {
   late final _fieldKey = GlobalKey<FormBuilderFieldState>();
+  late final _focusNode = FocusScopeNode();
 
   @override
   void didUpdateWidget(covariant WrapSelectField<T> oldWidget) {
@@ -59,6 +60,12 @@ class _WrapSelectFieldState<T extends Object>
       });
     }
     super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -75,110 +82,117 @@ class _WrapSelectFieldState<T extends Object>
       },
       initialValue: widget.defaultValue,
       builder: (state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (widget.label != null)
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.label! + (widget.isRequired ? ' *' : ''),
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF555555),
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            if (widget.description != null)
-              Row(
-                children: [
-                  Expanded(
-                    child: SmallText(text: widget.description!),
-                  ),
-                ],
-              ),
-            const SizedBox(height: 6),
-            ScrollShadow(
-              size: 16,
-              color: Colors.blueGrey[100]!,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  // d
-                  // runSpacing: 8,
-                  // spacing: 8,
-                  children: widget.values.mapIndexed((i, e) {
-                    final length = widget.values.length;
-                    return Padding(
-                      padding: EdgeInsets.only(
-                          left: i == 0 ? 0 : 4, right: i == length - 1 ? 0 : 4),
-                      child: InkWell(
-                        onTap: widget.disabled
-                            ? null
-                            : () {
-                                if (state.value == e) {
-                                  state.didChange(null);
-                                  widget.onSelected?.call(null);
-                                } else {
-                                  state.didChange(e);
-                                  widget.onSelected?.call(e);
-                                }
-                              },
-                        child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: state.value != null &&
-                                        widget._displayOption(e) ==
-                                            widget._displayOption(state.value!)
-                                    ? Theme.of(context).colorScheme.secondary
-                                    : null,
-                                border: Border.all(
-                                    color: widget.disabled
-                                        ? Colors.grey
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .secondary)),
-                            child: Text(
-                              widget._displayOption(e),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                      color: state.value != null &&
-                                              widget._displayOption(e) ==
-                                                  widget._displayOption(
-                                                      state.value!)
-                                          ? Theme.of(context)
-                                              .colorScheme
-                                              .onPrimary
-                                          : widget.disabled
-                                              ? Colors.grey
-                                              : null),
-                            )),
+        return FocusScope(
+          node: _focusNode,
+          canRequestFocus: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (widget.label != null)
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.label! + (widget.isRequired ? ' *' : ''),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF555555),
+                            ),
                       ),
-                    );
-                  }).toList(),
+                    ),
+                  ],
+                ),
+              if (widget.description != null)
+                Row(
+                  children: [
+                    Expanded(
+                      child: SmallText(text: widget.description!),
+                    ),
+                  ],
+                ),
+              const SizedBox(height: 6),
+              ScrollShadow(
+                size: 16,
+                color: Colors.blueGrey[100]!,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    // d
+                    // runSpacing: 8,
+                    // spacing: 8,
+                    children: widget.values.mapIndexed((i, e) {
+                      final length = widget.values.length;
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            left: i == 0 ? 0 : 4,
+                            right: i == length - 1 ? 0 : 4),
+                        child: InkWell(
+                          onTap: widget.disabled
+                              ? null
+                              : () {
+                                  _focusNode.requestFocus();
+                                  if (state.value == e) {
+                                    state.didChange(null);
+                                    widget.onSelected?.call(null);
+                                  } else {
+                                    state.didChange(e);
+                                    widget.onSelected?.call(e);
+                                  }
+                                },
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: state.value != null &&
+                                          widget._displayOption(e) ==
+                                              widget
+                                                  ._displayOption(state.value!)
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : null,
+                                  border: Border.all(
+                                      color: widget.disabled
+                                          ? Colors.grey
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .secondary)),
+                              child: Text(
+                                widget._displayOption(e),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(
+                                        color: state.value != null &&
+                                                widget._displayOption(e) ==
+                                                    widget._displayOption(
+                                                        state.value!)
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary
+                                            : widget.disabled
+                                                ? Colors.grey
+                                                : null),
+                              )),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
-            ),
-            if (state.hasError == true)
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 4,
+              if (state.hasError == true)
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 4,
+                  ),
+                  child: ErrorText(
+                    state.errorText ?? "",
+                  ),
                 ),
-                child: ErrorText(
-                  state.errorText ?? "",
-                ),
-              ),
-            const SizedBox(
-              height: 6,
-            )
-          ],
+              const SizedBox(
+                height: 6,
+              )
+            ],
+          ),
         );
       },
     );

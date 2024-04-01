@@ -7,5 +7,7 @@ class TaskDetailState with _$TaskDetailState {
     @Default(Status.init) Status getTaskStatus,
     String? getTaskError,
     Activity? task,
+    @Default(Status.init) Status updateTaskStatus,
+    String? updateTaskError,
   }) = _TaskDetailState;
 }

@@ -14,4 +14,8 @@ class CallEvent with _$CallEvent {
     required String activityId,
     required String leadId,
   }) = _CallStarted;
+  const factory CallEvent.clickToCall({
+    required String phoneNumber,
+    required String leadId,
+  }) = _ClickToCall;
 }

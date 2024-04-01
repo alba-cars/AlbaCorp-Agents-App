@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/deal_details_screen/cubit/deal_details_cubit.dart';
 import 'package:real_estate_app/view/deal_details_screen/widgets/documents_tabview.dart';
 import 'package:real_estate_app/view/deal_details_screen/widgets/info_tabview.dart';
+import 'package:real_estate_app/view/deal_details_screen/widgets/transactions_tabview.dart';
 
+import 'widgets/activities_tabview.dart';
 import 'widgets/deal_tab_bar.dart';
 
 class DealDetailsScreen extends StatelessWidget {
@@ -44,34 +48,38 @@ class _DealDetailsScreenLayoutState extends State<_DealDetailsScreenLayout>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                title: Text('Deal Details'),
-                centerTitle: true,
-                backgroundColor: Colors.white,
-                foregroundColor: Theme.of(context).colorScheme.primary,
-              ),
-              SliverPersistentHeader(
-                  delegate:
-                      DealDetailScreenTabHeader(tabController: _tabController)),
-            ];
-          },
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              InfoTabView(),
-              Center(
-                child: Text('Activities'),
-              ),
-              DocumentsTabView(),
-              Center(
-                child: Text('Notes'),
-              ),
-            ],
-          )),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        context.pop<Deal>(context.read<DealDetailsCubit>().state.deal);
+      },
+      child: SafeArea(
+        child: Scaffold(
+          body: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return [
+                  SliverAppBar(
+                    title: Text('Deal Details'),
+                    centerTitle: true,
+                    backgroundColor: Colors.white,
+                    foregroundColor: Theme.of(context).colorScheme.primary,
+                  ),
+                  SliverPersistentHeader(
+                      delegate: DealDetailScreenTabHeader(
+                          tabController: _tabController)),
+                ];
+              },
+              body: TabBarView(
+                controller: _tabController,
+                children: [
+                  InfoTabView(),
+                  TransactionsTabView(),
+                  DocumentsTabView(),
+                  ActivitiesTabView()
+                ],
+              )),
+        ),
+      ),
     );
   }
 }
