@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/snackbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/call_bloc/call_bloc.dart';
@@ -116,7 +118,17 @@ class AboutTabView extends StatelessWidget {
                               icon: ImageIcon(
                                   AssetImage('assets/images/whatsapp.png'))),
                           IconButton.filled(
-                              onPressed: () {},
+                              onPressed: () async {
+                                final uri = Uri.parse('mailto:${lead.email}');
+                                if (await canLaunchUrl(uri)) {
+                                  await launchUrl(uri);
+                                } else {
+                                  showSnackbar(
+                                      context,
+                                      'Can not launch the app',
+                                      SnackBarType.failure);
+                                }
+                              },
                               icon: Icon(Icons.email_outlined))
                         ],
                       ),

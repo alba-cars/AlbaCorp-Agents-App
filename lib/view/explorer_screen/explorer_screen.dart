@@ -536,7 +536,8 @@ class ExplorerTab extends StatelessWidget {
                                             })
                                       ],
                                     ),
-                                  if (!propertyCard.availableForCheckout)
+                                  if (!propertyCard.availableForCheckout &&
+                                      propertyCard.currentAgent == null)
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [

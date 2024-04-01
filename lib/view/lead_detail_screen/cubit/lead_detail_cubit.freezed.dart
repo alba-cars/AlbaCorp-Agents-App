@@ -32,6 +32,9 @@ mixin _$LeadDetailState {
   List<LeadPropertyCardModel> get propertyCardsList =>
       throw _privateConstructorUsedError;
   String? get getPropertyCardsListError => throw _privateConstructorUsedError;
+  Paginator? get propertyCardPaginator => throw _privateConstructorUsedError;
+  Status get updatePropertyCardStatus => throw _privateConstructorUsedError;
+  String? get updatePropertyCardError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LeadDetailStateCopyWith<LeadDetailState> get copyWith =>
@@ -59,7 +62,10 @@ abstract class $LeadDetailStateCopyWith<$Res> {
       String? updateLeadError,
       Status getPropertyCardsListStatus,
       List<LeadPropertyCardModel> propertyCardsList,
-      String? getPropertyCardsListError});
+      String? getPropertyCardsListError,
+      Paginator? propertyCardPaginator,
+      Status updatePropertyCardStatus,
+      String? updatePropertyCardError});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -92,6 +98,9 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
     Object? getPropertyCardsListStatus = null,
     Object? propertyCardsList = null,
     Object? getPropertyCardsListError = freezed,
+    Object? propertyCardPaginator = freezed,
+    Object? updatePropertyCardStatus = null,
+    Object? updatePropertyCardError = freezed,
   }) {
     return _then(_value.copyWith(
       leadId: null == leadId
@@ -154,6 +163,18 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
           ? _value.getPropertyCardsListError
           : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
               as String?,
+      propertyCardPaginator: freezed == propertyCardPaginator
+          ? _value.propertyCardPaginator
+          : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      updatePropertyCardStatus: null == updatePropertyCardStatus
+          ? _value.updatePropertyCardStatus
+          : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updatePropertyCardError: freezed == updatePropertyCardError
+          ? _value.updatePropertyCardError
+          : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -193,7 +214,10 @@ abstract class _$$LeadDetailStateImplCopyWith<$Res>
       String? updateLeadError,
       Status getPropertyCardsListStatus,
       List<LeadPropertyCardModel> propertyCardsList,
-      String? getPropertyCardsListError});
+      String? getPropertyCardsListError,
+      Paginator? propertyCardPaginator,
+      Status updatePropertyCardStatus,
+      String? updatePropertyCardError});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -225,6 +249,9 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
     Object? getPropertyCardsListStatus = null,
     Object? propertyCardsList = null,
     Object? getPropertyCardsListError = freezed,
+    Object? propertyCardPaginator = freezed,
+    Object? updatePropertyCardStatus = null,
+    Object? updatePropertyCardError = freezed,
   }) {
     return _then(_$LeadDetailStateImpl(
       leadId: null == leadId
@@ -287,6 +314,18 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
           ? _value.getPropertyCardsListError
           : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
               as String?,
+      propertyCardPaginator: freezed == propertyCardPaginator
+          ? _value.propertyCardPaginator
+          : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      updatePropertyCardStatus: null == updatePropertyCardStatus
+          ? _value.updatePropertyCardStatus
+          : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updatePropertyCardError: freezed == updatePropertyCardError
+          ? _value.updatePropertyCardError
+          : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -309,7 +348,10 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
       this.updateLeadError,
       this.getPropertyCardsListStatus = Status.init,
       final List<LeadPropertyCardModel> propertyCardsList = const [],
-      this.getPropertyCardsListError})
+      this.getPropertyCardsListError,
+      this.propertyCardPaginator,
+      this.updatePropertyCardStatus = Status.init,
+      this.updatePropertyCardError})
       : _activities = activities,
         _deals = deals,
         _propertyCardsList = propertyCardsList;
@@ -371,10 +413,17 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
 
   @override
   final String? getPropertyCardsListError;
+  @override
+  final Paginator? propertyCardPaginator;
+  @override
+  @JsonKey()
+  final Status updatePropertyCardStatus;
+  @override
+  final String? updatePropertyCardError;
 
   @override
   String toString() {
-    return 'LeadDetailState(leadId: $leadId, lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, updateLeadStatus: $updateLeadStatus, updateLeadError: $updateLeadError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError)';
+    return 'LeadDetailState(leadId: $leadId, lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, updateLeadStatus: $updateLeadStatus, updateLeadError: $updateLeadError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, updatePropertyCardStatus: $updatePropertyCardStatus, updatePropertyCardError: $updatePropertyCardError)';
   }
 
   @override
@@ -411,7 +460,15 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
                 .equals(other._propertyCardsList, _propertyCardsList) &&
             (identical(other.getPropertyCardsListError,
                     getPropertyCardsListError) ||
-                other.getPropertyCardsListError == getPropertyCardsListError));
+                other.getPropertyCardsListError == getPropertyCardsListError) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyCardPaginator, propertyCardPaginator) &&
+            (identical(
+                    other.updatePropertyCardStatus, updatePropertyCardStatus) ||
+                other.updatePropertyCardStatus == updatePropertyCardStatus) &&
+            (identical(
+                    other.updatePropertyCardError, updatePropertyCardError) ||
+                other.updatePropertyCardError == updatePropertyCardError));
   }
 
   @override
@@ -431,7 +488,10 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
       updateLeadError,
       getPropertyCardsListStatus,
       const DeepCollectionEquality().hash(_propertyCardsList),
-      getPropertyCardsListError);
+      getPropertyCardsListError,
+      const DeepCollectionEquality().hash(propertyCardPaginator),
+      updatePropertyCardStatus,
+      updatePropertyCardError);
 
   @JsonKey(ignore: true)
   @override
@@ -457,7 +517,10 @@ abstract class _LeadDetailState implements LeadDetailState {
       final String? updateLeadError,
       final Status getPropertyCardsListStatus,
       final List<LeadPropertyCardModel> propertyCardsList,
-      final String? getPropertyCardsListError}) = _$LeadDetailStateImpl;
+      final String? getPropertyCardsListError,
+      final Paginator? propertyCardPaginator,
+      final Status updatePropertyCardStatus,
+      final String? updatePropertyCardError}) = _$LeadDetailStateImpl;
 
   @override
   String get leadId;
@@ -489,6 +552,12 @@ abstract class _LeadDetailState implements LeadDetailState {
   List<LeadPropertyCardModel> get propertyCardsList;
   @override
   String? get getPropertyCardsListError;
+  @override
+  Paginator? get propertyCardPaginator;
+  @override
+  Status get updatePropertyCardStatus;
+  @override
+  String? get updatePropertyCardError;
   @override
   @JsonKey(ignore: true)
   _$$LeadDetailStateImplCopyWith<_$LeadDetailStateImpl> get copyWith =>

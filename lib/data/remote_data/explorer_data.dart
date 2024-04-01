@@ -97,7 +97,7 @@ class ExplorerData implements ExplorerRepo {
         if (filterRemoved != null) ...filterRemoved,
         if (search != null) 'search': search
       });
-      final data = response.data['data']['data'] as List;
+      final data = response.data['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();
       return Success(list,
           paginator: Paginator(
@@ -435,6 +435,7 @@ class ExplorerData implements ExplorerRepo {
       );
       final data = response.data['data'] as List;
       final list = data.map((e) => LeadPropertyCardModel.fromJson(e)).toList();
+      // final paginator = Paginator(itemCount: 10, perPage: 10, currentPage: 1)
       return Success(
         list,
       );

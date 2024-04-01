@@ -18,5 +18,8 @@ class LeadDetailState with _$LeadDetailState {
     @Default(Status.init) Status getPropertyCardsListStatus,
     @Default([]) List<LeadPropertyCardModel> propertyCardsList,
     String? getPropertyCardsListError,
+    Paginator? propertyCardPaginator,
+    @Default(Status.init) Status updatePropertyCardStatus,
+    String? updatePropertyCardError,
   }) = _LeadDetailState;
 }

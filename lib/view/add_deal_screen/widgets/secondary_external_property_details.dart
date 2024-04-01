@@ -75,9 +75,12 @@ class _SecondaryExternalPropertyDetailsState
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (p0) => p0.community,
             optionsBuilder: (v) async {
-              return context
+              final list = await context
                   .read<AddDealCubit>()
                   .getCommunities(search: v.text);
+              return list.where((element) => element.community
+                  .toLowerCase()
+                  .contains(v.text.toLowerCase()));
             }),
         AppTextField(
           name: 'subCommunity',
@@ -91,7 +94,11 @@ class _SecondaryExternalPropertyDetailsState
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (p0) => p0.name,
             optionsBuilder: (v) async {
-              return context.read<AddDealCubit>().getBuildings(search: v.text);
+              final list = await context
+                  .read<AddDealCubit>()
+                  .getBuildings(search: v.text);
+              return list.where((element) =>
+                  element.name.toLowerCase().contains(v.text.toLowerCase()));
             }),
         CurrencyField(
           isRequired: true,

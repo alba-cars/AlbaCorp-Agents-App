@@ -9,6 +9,7 @@ import 'package:real_estate_app/model/lead_property_card_model.dart';
 import 'package:real_estate_app/util/status.dart';
 
 import '../../../model/activity_model.dart';
+import '../../../model/paginator.dart';
 import '../../../model/property_card_model.dart';
 import '../../../util/result.dart';
 
@@ -94,32 +95,44 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
   Future<void> getExplorerList({
     bool refresh = false,
   }) async {
-    // if (refresh || state.explorerPaginator == null) {
-    //   emit(state.copyWith(
-    //       getExplorerListStatus: Status.loading,
-
-    //       explorerList: []));
-    // } else {
-    //   if (state.getExplorerListStatus == Status.loadingMore) {
-    //     return;
-    //   }
-    //   emit(state.copyWith(getExplorerListStatus: Status.loadingMore));
-    // }
+    if (refresh || state.propertyCardPaginator == null) {
+      emit(state.copyWith(
+          getPropertyCardsListStatus: Status.loading, propertyCardsList: []));
+    } else {
+      if (state.getPropertyCardsListStatus == Status.loadingMore) {
+        return;
+      }
+      emit(state.copyWith(getPropertyCardsListStatus: Status.loadingMore));
+    }
 
     final result =
         await _explorerRepo.getLeadPropertyCards(leadId: state.leadId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-          propertyCardsList: s.value,
-          getPropertyCardsListStatus: Status.success,
-          // explorerPaginator: s.paginator
-        ));
+            propertyCardsList: s.value,
+            getPropertyCardsListStatus: Status.success,
+            propertyCardPaginator: s.paginator));
         break;
       case (Error e):
         emit(state.copyWith(
             getPropertyCardsListStatus: Status.failure,
             getPropertyCardsListError: e.exception));
+    }
+  }
+
+  Future<void> unLinkLeadFromPropertyCard({required String leadCardId}) async {
+    emit(state.copyWith(updatePropertyCardStatus: Status.loading));
+    final result =
+        await _explorerRepo.unLinkPropertyFromLead(leadCardId: leadCardId);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(updatePropertyCardStatus: Status.success));
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            updatePropertyCardStatus: Status.failure,
+            updatePropertyCardError: e.exception));
     }
   }
 }

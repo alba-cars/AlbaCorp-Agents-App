@@ -30,11 +30,11 @@ class _RootLayoutState extends State<RootLayout> {
     return Scaffold(
       body: BlocListener<CallBloc, CallState>(
         listener: (context, state) {
-          showDialog(
+          showGeneralDialog(
               context: context,
               barrierDismissible: false,
               barrierLabel: 'call_feedback_dialog',
-              builder: (context) {
+              pageBuilder: (context, anim1, anim2) {
                 return CallFeedbackDialog(
                     feedBackValue: feedBackValue, controller: _controller);
               });
@@ -145,7 +145,7 @@ class CallFeedbackDialog extends StatelessWidget {
                                   feedback: feedBackValue.value,
                                   note: _controller.text,
                                   description: ''));
-                              context.pop();
+                              Navigator.of(context).pop();
                             },
                             child: Text('Cancel')),
                       ),
@@ -157,7 +157,7 @@ class CallFeedbackDialog extends StatelessWidget {
                                   feedback: feedBackValue.value,
                                   note: _controller.text,
                                   description: ''));
-                              context.pop();
+                              Navigator.of(context).pop();
                             },
                             child: Text('Save')),
                       ),

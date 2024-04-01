@@ -280,208 +280,226 @@ class _HomePageLayoutState extends State<HomePageLayout> {
                               ),
                               sliver: SliverPadding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
+                                    horizontal: 20, vertical: 10),
                                 sliver: state.getActivitiesStatus[index] ==
                                         Status.loading
                                     ? SliverToBoxAdapter(
                                         child: Center(
                                             child: CircularProgressIndicator()),
                                       )
-                                    : SliverList.separated(
-                                        itemCount:
-                                            (state.activityPaginator[index]
-                                                            ?.hasNextPage ??
-                                                        false) &&
-                                                    state.activities[index]
-                                                            ?.isNotEmpty ==
-                                                        true
-                                                ? itemLength + 1
-                                                : itemLength,
-                                        itemBuilder: (context, v) {
-                                          if (v == itemLength) {
-                                            return OutlinedButton(
-                                                onPressed: () {
-                                                  context
-                                                      .read<HomeCubit>()
-                                                      .getActivities(
-                                                          filterCode: index);
-                                                },
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text("Load More"),
-                                                    if (state.getActivitiesStatus[
-                                                            index] ==
-                                                        Status.loadingMore) ...[
-                                                      HorizontalSmallGap(),
-                                                      SizedBox.square(
-                                                        dimension: 20,
-                                                        child:
-                                                            CircularProgressIndicator
-                                                                .adaptive(),
-                                                      )
-                                                    ]
-                                                  ],
-                                                ));
-                                          }
-                                          final activity = activities[v];
-                                          return Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(16.h),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: shadowColor,
-                                                      offset: Offset(-4, 5),
-                                                      blurRadius: 11)
-                                                ]),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 12.h,
-                                                  vertical: 6.h),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  context.pushNamed(
-                                                      TaskDetailScreen
-                                                          .routeName,
-                                                      pathParameters: {
-                                                        'id':
-                                                            activity.lead?.id ??
+                                    : state.getActivitiesStatus[index] ==
+                                                Status.success &&
+                                            state.activities[index]?.isEmpty ==
+                                                true
+                                        ? SliverToBoxAdapter(
+                                            child: Text('No Leads'))
+                                        : SliverList.separated(
+                                            itemCount:
+                                                (state.activityPaginator[index]
+                                                                ?.hasNextPage ??
+                                                            false) &&
+                                                        state.activities[index]
+                                                                ?.isNotEmpty ==
+                                                            true
+                                                    ? itemLength + 1
+                                                    : itemLength,
+                                            itemBuilder: (context, v) {
+                                              if (v == itemLength) {
+                                                return OutlinedButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<HomeCubit>()
+                                                          .getActivities(
+                                                              filterCode:
+                                                                  index);
+                                                    },
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Text("Load More"),
+                                                        if (state.getActivitiesStatus[
+                                                                index] ==
+                                                            Status
+                                                                .loadingMore) ...[
+                                                          HorizontalSmallGap(),
+                                                          SizedBox.square(
+                                                            dimension: 20,
+                                                            child:
+                                                                CircularProgressIndicator
+                                                                    .adaptive(),
+                                                          )
+                                                        ]
+                                                      ],
+                                                    ));
+                                              }
+                                              final activity = activities[v];
+                                              return Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16.h),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: shadowColor,
+                                                          offset: Offset(-4, 5),
+                                                          blurRadius: 11)
+                                                    ]),
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 12.h,
+                                                      vertical: 6.h),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      context.pushNamed(
+                                                          TaskDetailScreen
+                                                              .routeName,
+                                                          pathParameters: {
+                                                            'id': activity
+                                                                    .lead?.id ??
                                                                 ''
-                                                      },
-                                                      extra: activity);
-                                                },
-                                                child: Row(children: [
-                                                  Container(
-                                                    width: 70,
-                                                    height: 60,
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 2,
-                                                            vertical: 4),
-                                                    decoration: BoxDecoration(
-                                                        // border: Border.all(color: Colors.grey),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12),
-                                                        color:
-                                                            Colors.grey[100]),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        switch (activity.type
-                                                            .toLowerCase()) {
-                                                          'call' => Icon(
-                                                              Icons.call,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          'whatsapp' =>
-                                                            ImageIcon(
-                                                              AssetImage(
-                                                                  'assets/images/whatsapp.png'),
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                          _ => Icon(
-                                                              Icons.call,
-                                                              color:
-                                                                  Colors.grey,
-                                                            )
-                                                        },
-                                                        VerticalSmallGap(
-                                                          adjustment: 0.3,
-                                                        ),
-                                                        SmallText(
-                                                          text: activity.type,
-                                                          color:
-                                                              Colors.grey[800]!,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  HorizontalSmallGap(),
-                                                  Expanded(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  horizontal:
-                                                                      4.h,
-                                                                  vertical:
-                                                                      1.h),
-                                                          decoration: BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .blueGrey),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          4),
-                                                              color: Colors
-                                                                      .blueGrey[
-                                                                  100]),
-                                                          child: SmallText(
-                                                              text: activity
-                                                                      .lead
-                                                                      ?.leadStatus
-                                                                      ?.name ??
-                                                                  ''),
-                                                        ),
-                                                        VerticalSmallGap(
-                                                          adjustment: .2,
-                                                        ),
-                                                        Text(
-                                                            "${activity.lead?.firstName ?? ''} ${activity.lead?.lastName ?? ''}"),
-                                                        CountdownTimer(
-                                                            endTime:
-                                                                activity.date)
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  HorizontalSmallGap(),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      IconButton.filledTonal(
-                                                          onPressed: () async {
-                                                            if (activity.lead ==
-                                                                null) {
-                                                              return;
-                                                            }
-                                                            context.read<CallBloc>().add(
-                                                                CallEvent.callStarted(
-                                                                    phoneNumber:
-                                                                        activity.lead!.phone ??
-                                                                            '',
-                                                                    activityId:
-                                                                        activity
-                                                                            .id,
-                                                                    leadId: activity
-                                                                        .lead!
-                                                                        .id));
                                                           },
-                                                          icon: Icon(
-                                                            Icons.call,
-                                                          ))
-                                                    ],
-                                                  )
-                                                ]),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) =>
-                                            VerticalSmallGap()),
+                                                          extra: activity);
+                                                    },
+                                                    child: Row(children: [
+                                                      Container(
+                                                        width: 70,
+                                                        height: 60,
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 2,
+                                                                vertical: 4),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                // border: Border.all(color: Colors.grey),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
+                                                                color: Colors
+                                                                    .grey[100]),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            switch (activity
+                                                                .type
+                                                                .toLowerCase()) {
+                                                              'call' => Icon(
+                                                                  Icons.call,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              'whatsapp' =>
+                                                                ImageIcon(
+                                                                  AssetImage(
+                                                                      'assets/images/whatsapp.png'),
+                                                                  color: Colors
+                                                                      .grey,
+                                                                ),
+                                                              _ => Icon(
+                                                                  Icons.call,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                )
+                                                            },
+                                                            VerticalSmallGap(
+                                                              adjustment: 0.3,
+                                                            ),
+                                                            SmallText(
+                                                              text:
+                                                                  activity.type,
+                                                              color: Colors
+                                                                  .grey[800]!,
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      HorizontalSmallGap(),
+                                                      Expanded(
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          4.h,
+                                                                      vertical:
+                                                                          1.h),
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .blueGrey),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              4),
+                                                                  color: Colors
+                                                                          .blueGrey[
+                                                                      100]),
+                                                              child: SmallText(
+                                                                  text: activity
+                                                                          .lead
+                                                                          ?.leadStatus
+                                                                          ?.name ??
+                                                                      ''),
+                                                            ),
+                                                            VerticalSmallGap(
+                                                              adjustment: .2,
+                                                            ),
+                                                            Text(
+                                                                "${activity.lead?.firstName ?? ''} ${activity.lead?.lastName ?? ''}"),
+                                                            CountdownTimer(
+                                                                endTime:
+                                                                    activity
+                                                                        .date)
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      HorizontalSmallGap(),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          IconButton
+                                                              .filledTonal(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    if (activity
+                                                                            .lead ==
+                                                                        null) {
+                                                                      return;
+                                                                    }
+                                                                    context.read<CallBloc>().add(CallEvent.callStarted(
+                                                                        phoneNumber:
+                                                                            activity.lead!.phone ??
+                                                                                '',
+                                                                        activityId:
+                                                                            activity
+                                                                                .id,
+                                                                        leadId: activity
+                                                                            .lead!
+                                                                            .id));
+                                                                  },
+                                                                  icon: Icon(
+                                                                    Icons.call,
+                                                                  ))
+                                                        ],
+                                                      )
+                                                    ]),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            separatorBuilder:
+                                                (context, index) =>
+                                                    VerticalSmallGap()),
                               ),
                             );
                           },

@@ -322,9 +322,12 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (p0) => p0.community,
                   optionsBuilder: (v) async {
-                    return context
+                    final list = await context
                         .read<AddPocketListingCubit>()
                         .getCommunities(search: v.text);
+                    return list.where((element) => element.community
+                        .toLowerCase()
+                        .contains(v.text.toLowerCase()));
                   }),
               AppAutoComplete<Building>(
                   onSelected: (v) {},
