@@ -79,11 +79,6 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 2, vsync: this);
-  @override
-  void initState() {
-    context.read<ExplorerScreenCubit>().getExplorerList();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,11 +140,16 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
   }
 }
 
-class ExplorerTab extends StatelessWidget {
+class ExplorerTab extends StatefulWidget {
   const ExplorerTab({
     super.key,
   });
 
+  @override
+  State<ExplorerTab> createState() => _ExplorerTabState();
+}
+
+class _ExplorerTabState extends State<ExplorerTab> {
   List<Widget> filterFields(BuildContext context) {
     return [
       MultiSelectAutoCompleteField(
@@ -193,6 +193,12 @@ class ExplorerTab extends StatelessWidget {
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
     ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ExplorerScreenCubit>().getExplorerList(refresh: true);
   }
 
   @override
@@ -576,11 +582,16 @@ class ExplorerTab extends StatelessWidget {
   }
 }
 
-class CheckedOutPoolTab extends StatelessWidget {
+class CheckedOutPoolTab extends StatefulWidget {
   const CheckedOutPoolTab({
     super.key,
   });
 
+  @override
+  State<CheckedOutPoolTab> createState() => _CheckedOutPoolTabState();
+}
+
+class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
   List<Widget> filterFields(BuildContext context) {
     return [
       MultiSelectAutoCompleteField(
@@ -624,6 +635,14 @@ class CheckedOutPoolTab extends StatelessWidget {
       //     displayOption: (option) => option['label'] ?? '',
       //     isRequired: true),
     ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<ExplorerScreenCubit>()
+        .getCheckedOutExplorerList(refresh: true);
   }
 
   @override

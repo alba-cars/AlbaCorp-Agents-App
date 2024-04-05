@@ -23,5 +23,12 @@ class HomeState with _$HomeState {
     @Default(0) int completedTasksCount,
     @Default(0) int pendingTasksCount,
     @Default(0) int viewingTasksCount,
+    @Default({ListType.Categorized}) Set<ListType> listType,
+    @Default([]) List<Activity> sortedActivity,
+    @Default(Status.init) Status? getSortedActivitiesStatus,
+    String? getSortedActivitiesError,
+    Paginator? sortedActivityPaginator,
+    @Default(Status.init) Status updateTaskStatus,
+    String? updateTaskError,
   }) = _HomeState;
 }

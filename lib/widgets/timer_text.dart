@@ -57,7 +57,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
             " mins";
 
     return Text(
-      (!isOverdue ? 'Scheduled At : ' : 'Overdue By : ') + displayText,
+      (!isOverdue ? 'Due In : ' : 'Overdue By : ') + displayText,
       style:
           TextStyle(color: isOverdue ? Colors.red : Colors.black, fontSize: 10),
     );

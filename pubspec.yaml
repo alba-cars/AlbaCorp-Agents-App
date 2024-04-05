@@ -71,6 +71,8 @@ dependencies:
   flutter_sticky_header: ^0.6.5
   google_maps_flutter: ^2.6.0
   animations: ^2.0.11
+  flutter_slidable: ^3.1.0
+  appinio_swiper: ^2.1.0
 
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"

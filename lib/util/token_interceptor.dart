@@ -35,9 +35,14 @@ class TokenInterceptor extends InterceptorsWrapper {
     String? accessToken;
     String? refreshToken;
     if (response.data.toString() != "") {
-      if (response.data is Map) {
+      if (response.data is Map && response.data?['access_token'] != null) {
         accessToken = response.data?['access_token'];
-        refreshToken = response.data?['refreshToken'];
+        refreshToken = response.headers['set-cookie']?.firstOrNull?.splitMapJoin(
+            RegExp(r'refreshToken=(.*?);'),
+            onMatch: (m) =>
+                '${m[0]?.replaceFirst('refreshToken=', '').replaceFirst(';', '')}',
+            onNonMatch: (m) => '');
+
         _tokenRefreshAttempted = false;
       }
     }
@@ -94,7 +99,11 @@ class TokenInterceptor extends InterceptorsWrapper {
       final response = await getIt<Dio>().get('/v1/auth/refresh-token',
           options: Options(headers: {'cookie': 'device-token=$rToken'}));
       final accessToken = response.data?['access_token'];
-      final refreshToken = response.data?['refreshToken'];
+      final refreshToken = response.headers['set-cookie']?.firstOrNull
+          ?.splitMapJoin(RegExp(r'refreshToken=(.*?);'),
+              onMatch: (m) =>
+                  '${m[0]?.replaceFirst('refreshToken=', '').replaceFirst(';', '')}',
+              onNonMatch: (m) => '');
 
       storage.write(key: 'refreshToken', value: refreshToken);
       storage.write(key: 'accessToken', value: accessToken);

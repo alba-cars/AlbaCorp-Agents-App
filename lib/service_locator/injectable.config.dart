@@ -80,11 +80,6 @@ extension GetItInjectableX on _i1.GetIt {
       preResolve: true,
     );
     gh.factory<String>(
-      () => registerModules.baseProdUrl,
-      instanceName: 'BaseUrl',
-      registerFor: {_Prod},
-    );
-    gh.factory<String>(
       () => registerModules.baseUrl,
       instanceName: 'BaseUrl',
       registerFor: {_Stage},
@@ -92,6 +87,11 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<String>(
       () => registerModules.awsProdBucket,
       instanceName: 'AwsBucket',
+      registerFor: {_Prod},
+    );
+    gh.factory<String>(
+      () => registerModules.baseProdUrl,
+      instanceName: 'BaseUrl',
       registerFor: {_Prod},
     );
     gh.factory<String>(
@@ -131,7 +131,10 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i6.ExplorerRepo>(),
           gh<_i11.ListingsRepo>(),
         ));
-    gh.factory<_i29.HomeCubit>(() => _i29.HomeCubit(gh<_i17.ActivityRepo>()));
+    gh.factory<_i29.HomeCubit>(() => _i29.HomeCubit(
+          gh<_i17.ActivityRepo>(),
+          gh<_i8.LeadRepo>(),
+        ));
     gh.factoryParam<_i30.LeadDetailCubit, String, dynamic>((
       leadId,
       _,
@@ -163,6 +166,7 @@ extension GetItInjectableX on _i1.GetIt {
           taskId,
           activity,
           gh<_i8.LeadRepo>(),
+          gh<_i21.AgentRepo>(),
         ));
     gh.factoryParam<_i36.TicketDetailsCubit, String, dynamic>((
       ticketId,

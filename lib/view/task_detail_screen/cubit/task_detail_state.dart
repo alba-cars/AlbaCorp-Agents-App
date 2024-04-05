@@ -9,5 +9,11 @@ class TaskDetailState with _$TaskDetailState {
     Activity? task,
     @Default(Status.init) Status updateTaskStatus,
     String? updateTaskError,
+    @Default([]) List<Activity> sortedActivity,
+    @Default(Status.init) Status? getSortedActivitiesStatus,
+    String? getSortedActivitiesError,
+    Paginator? sortedActivityPaginator,
+    @Default(Status.init) Status? addTaskStatus,
+    String? addTaskError,
   }) = _TaskDetailState;
 }

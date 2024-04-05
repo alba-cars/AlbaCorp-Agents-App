@@ -97,7 +97,7 @@ class ExplorerData implements ExplorerRepo {
         if (filterRemoved != null) ...filterRemoved,
         if (search != null) 'search': search
       });
-      final data = response.data['data'] as List;
+      final data = response.data['data']['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();
       return Success(list,
           paginator: Paginator(

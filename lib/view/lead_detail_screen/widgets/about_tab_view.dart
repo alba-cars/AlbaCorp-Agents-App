@@ -103,21 +103,21 @@ class AboutTabView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          IconButton.filled(
+                          IconButton.filledTonal(
                               onPressed: () {
                                 getIt<CallBloc>().add(CallEvent.clickToCall(
                                     phoneNumber: lead.phone ?? '',
                                     leadId: lead.id));
                               },
                               icon: Icon(Icons.call)),
-                          IconButton.filled(
+                          IconButton.filledTonal(
                               onPressed: () {
                                 launchUrlString(
                                     'whatsapp://send?phone=${lead.phone}');
                               },
                               icon: ImageIcon(
                                   AssetImage('assets/images/whatsapp.png'))),
-                          IconButton.filled(
+                          IconButton.filledTonal(
                               onPressed: () async {
                                 final uri = Uri.parse('mailto:${lead.email}');
                                 if (await canLaunchUrl(uri)) {

@@ -136,52 +136,56 @@ class _AppSearchBarState extends State<AppSearchBar> {
                           initialChildSize: 0.85,
                           expand: false,
                           builder: (context, scrollController) {
-                            return Scaffold(
-                              body: Container(
-                                color: Colors.white,
-                                width: double.maxFinite,
-                                child: FormBuilder(
-                                    key: _formKey,
-                                    initialValue: filter ?? {},
-                                    child: Column(
-                                      children: [
-                                        VerticalSmallGap(),
-                                        if (widget.filterFields != null)
-                                          Expanded(
-                                              child: ScrollShadow(
-                                            size: 10,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primaryContainer
-                                                .withOpacity(0.5),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20),
-                                              child: ListView(
-                                                controller: scrollController,
-                                                children: widget.filterFields!,
+                            return GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Scaffold(
+                                body: Container(
+                                  color: Colors.white,
+                                  width: double.maxFinite,
+                                  child: FormBuilder(
+                                      key: _formKey,
+                                      initialValue: filter ?? {},
+                                      child: Column(
+                                        children: [
+                                          VerticalSmallGap(),
+                                          if (widget.filterFields != null)
+                                            Expanded(
+                                                child: ScrollShadow(
+                                              size: 10,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primaryContainer
+                                                  .withOpacity(0.5),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 20),
+                                                child: ListView(
+                                                  controller: scrollController,
+                                                  children:
+                                                      widget.filterFields!,
+                                                ),
                                               ),
-                                            ),
-                                          )),
-                                        VerticalSmallGap(),
-                                        AppPrimaryButton(
-                                            text: 'Filter',
-                                            onTap: () {
-                                              _formKey.currentState?.save();
-                                              final val =
-                                                  _formKey.currentState?.value;
-                                              if (val != null) {
-                                                widget.onFilterApplied
-                                                    ?.call(val);
-                                                Navigator.of(context).pop();
-                                              }
-                                            }),
-                                        VerticalSmallGap(
-                                          adjustment: 2,
-                                        ),
-                                      ],
-                                    )),
+                                            )),
+                                          VerticalSmallGap(),
+                                          AppPrimaryButton(
+                                              text: 'Filter',
+                                              onTap: () {
+                                                _formKey.currentState?.save();
+                                                final val = _formKey
+                                                    .currentState?.value;
+                                                if (val != null) {
+                                                  widget.onFilterApplied
+                                                      ?.call(val);
+                                                  Navigator.of(context).pop();
+                                                }
+                                              }),
+                                          VerticalSmallGap(
+                                            adjustment: 2,
+                                          ),
+                                        ],
+                                      )),
+                                ),
                               ),
                             );
                           },

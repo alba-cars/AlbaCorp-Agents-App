@@ -124,7 +124,7 @@ class ActivityData implements ActivityRepo {
           ],
           "leadStatus": "Fresh",
           "status": ["Pending", "Overdue"],
-          "toDate": '${d.year}-${d.month}-${d.day}',
+          // "toDate": '${d.year}-${d.month}-${d.day}',
         };
       } else if (filterCode == 1) {
         query = {
@@ -147,7 +147,7 @@ class ActivityData implements ActivityRepo {
             "Disqualified"
           ],
           "status": ["Pending", "Overdue"],
-          "toDate": '${d.year}-${d.month}-${d.day}'
+          // "toDate": '${d.year}-${d.month}-${d.day}'
         };
       } else if (filterCode == 2) {
         query = {
@@ -165,7 +165,7 @@ class ActivityData implements ActivityRepo {
             "Disqualified"
           ],
           "status": ["Pending", "Overdue"],
-          "toDate": '${d.year}-${d.month}-${d.day}'
+          // "toDate": '${d.year}-${d.month}-${d.day}'
         };
       } else if (filterCode == 3) {
         query = {
@@ -218,7 +218,7 @@ class ActivityData implements ActivityRepo {
           ],
           "leadStatus": "Follow up",
           "status": ["Pending", "Overdue"],
-          "toDate": '${d.year}-${d.month}-${d.day}'
+          // "toDate": '${d.year}-${d.month}-${d.day}'
         };
       } else if (filterCode == 4) {
         query = {
@@ -231,21 +231,21 @@ class ActivityData implements ActivityRepo {
             "Deal"
           ],
           "status": ["Pending", "Overdue"],
-          "toDate": '${d.year}-${d.month}-${d.day}'
+          // "toDate": '${d.year}-${d.month}-${d.day}'
         };
       } else if (filterCode == 5) {
         query = {
           "leadSource": ["External", "DLD", "Dubizzle Listing", "Imported"],
           "leadStatus": "Follow up",
           "status": ["Pending", "Overdue"],
-          "toDate": '${d.year}-${d.month}-${d.day}'
+          // "toDate": '${d.year}-${d.month}-${d.day}'
         };
       } else if (filterCode == 6) {
         query = {
           "leadSource": ["External", "DLD", "Dubizzle Listing", "Imported"],
           'leadStatus': "Fresh",
           "status": ["Pending", "Overdue"],
-          "toDate": '${d.year}-${d.month}-${d.day}'
+          // "toDate": '${d.year}-${d.month}-${d.day}'
         };
       }
 
@@ -323,6 +323,27 @@ class ActivityData implements ActivityRepo {
 
       final int count = data['data'] ?? 0;
       return Success(count);
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<Activity>>> fetchActivitiesSorted(
+      {Paginator? paginator}) async {
+    try {
+      String url = 'v1/activities/query-activities';
+      Map<String, dynamic> query = {
+        "status": ["Pending", 'Overdue'],
+      };
+      final response = await _dio.get(url, queryParameters: query);
+      final data = response.data['data']['items'] as List;
+      final list = data.map((e) => Activity.fromJson(e)).toList();
+      return Success(list,
+          paginator: Paginator(
+              currentPage: (paginator?.currentPage ?? 0) + 1,
+              perPage: response.data['pageSize'] ?? 0,
+              itemCount: response.data['totalItems'] ?? 0));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

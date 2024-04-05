@@ -68,6 +68,7 @@ abstract class $LeadDetailStateCopyWith<$Res> {
       String? updatePropertyCardError});
 
   $LeadCopyWith<$Res>? get lead;
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator;
 }
 
 /// @nodoc
@@ -189,6 +190,18 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
       return _then(_value.copyWith(lead: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator {
+    if (_value.propertyCardPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.propertyCardPaginator!, (value) {
+      return _then(_value.copyWith(propertyCardPaginator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -221,6 +234,8 @@ abstract class _$$LeadDetailStateImplCopyWith<$Res>
 
   @override
   $LeadCopyWith<$Res>? get lead;
+  @override
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator;
 }
 
 /// @nodoc
@@ -461,8 +476,8 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
             (identical(other.getPropertyCardsListError,
                     getPropertyCardsListError) ||
                 other.getPropertyCardsListError == getPropertyCardsListError) &&
-            const DeepCollectionEquality()
-                .equals(other.propertyCardPaginator, propertyCardPaginator) &&
+            (identical(other.propertyCardPaginator, propertyCardPaginator) ||
+                other.propertyCardPaginator == propertyCardPaginator) &&
             (identical(
                     other.updatePropertyCardStatus, updatePropertyCardStatus) ||
                 other.updatePropertyCardStatus == updatePropertyCardStatus) &&
@@ -489,7 +504,7 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
       getPropertyCardsListStatus,
       const DeepCollectionEquality().hash(_propertyCardsList),
       getPropertyCardsListError,
-      const DeepCollectionEquality().hash(propertyCardPaginator),
+      propertyCardPaginator,
       updatePropertyCardStatus,
       updatePropertyCardError);
 

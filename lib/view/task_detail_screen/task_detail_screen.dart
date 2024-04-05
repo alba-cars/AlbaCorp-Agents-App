@@ -1,11 +1,13 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/model/activity_feedback_model.dart';
 import 'package:real_estate_app/model/activity_model.dart';
@@ -16,9 +18,19 @@ import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../app/call_bloc/call_bloc.dart';
+import '../../model/property_model.dart';
 import '../../util/color_category.dart';
+import '../../util/property_price.dart';
 import '../../widgets/button.dart';
+import '../../widgets/fields/card_picker_field.dart';
+import '../../widgets/fields/date_field.dart';
+import '../../widgets/fields/wrap_select_field.dart';
+import '../../widgets/s3_image.dart';
+import '../../widgets/snackbar.dart';
 
 class TaskDetailScreen extends StatelessWidget {
   static const routeName = '/taskDetailScreen';
@@ -36,9 +48,21 @@ class TaskDetailScreen extends StatelessWidget {
   }
 }
 
-class _TaskDetailScreenLayout extends StatelessWidget {
+class _TaskDetailScreenLayout extends StatefulWidget {
   const _TaskDetailScreenLayout({super.key});
 
+  @override
+  State<_TaskDetailScreenLayout> createState() =>
+      _TaskDetailScreenLayoutState();
+}
+
+enum CardAction { ManuelSwipe, Heart, Charge, Star }
+
+class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
+  late final AppinioSwiperController _appinioSwiperController =
+      AppinioSwiperController();
+
+  CardAction mode = CardAction.ManuelSwipe;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,97 +70,301 @@ class _TaskDetailScreenLayout extends StatelessWidget {
         title: Text('Task'),
         centerTitle: true,
       ),
+      backgroundColor: Colors.blueGrey[100],
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        child: BlocSelector<TaskDetailCubit, TaskDetailState, Activity?>(
+        child: BlocSelector<TaskDetailCubit, TaskDetailState, List<Activity>>(
           selector: (state) {
-            return state.task;
+            return state.sortedActivity;
           },
-          builder: (context, task) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TitleText(
-                  text: task?.type ?? 'Call',
-                ),
-                VerticalSmallGap(),
-                Row(
-                  children: [
-                    ContainerIcon(icon: CupertinoIcons.person),
-                    HorizontalSmallGap(),
-                    NormalText(
-                        text:
-                            '${task?.lead?.firstName ?? ''} ${task?.lead?.lastName ?? ''}')
-                  ],
-                ),
-                VerticalSmallGap(),
-                Row(
-                  children: [
-                    ContainerIcon(icon: CupertinoIcons.search),
-                    HorizontalSmallGap(),
-                    NormalText(
-                        text: 'Lead Source: ${task?.lead?.leadSource ?? ''}')
-                  ],
-                ),
-                VerticalSmallGap(),
-                Row(
-                  children: [
-                    ContainerIcon(icon: CupertinoIcons.check_mark),
-                    HorizontalSmallGap(),
-                    NormalText(text: 'Task Type Call')
-                  ],
-                ),
-                VerticalSmallGap(),
-                Row(
-                  children: [
-                    ContainerIcon(icon: CupertinoIcons.calendar),
-                    HorizontalSmallGap(),
-                    NormalText(
-                        text:
-                            'Due on : ${DateFormat.yMMMMd().add_jmv().format(task?.date ?? DateTime.now())}')
-                  ],
-                ),
-                VerticalSmallGap(),
-                VerticalSmallGap(),
-                TitleText(
-                  text: 'Notes',
-                ),
-                VerticalSmallGap(),
-                VerticalSmallGap(),
-                Row(
-                  children: [
-                    Expanded(
-                        flex: 3,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              showGeneralDialog(
-                                  context: context,
-                                  useRootNavigator: false,
-                                  pageBuilder: (dContext, anim1, anim2) =>
-                                      ActivityFeedbackDialog(
-                                        parentContext: context,
-                                        activity: context
-                                            .read<TaskDetailCubit>()
-                                            .state
-                                            .task!,
-                                      ));
-                            },
-                            child: Text('Complete task'))),
-                    // HorizontalSmallGap(),
-                    // Expanded(
-                    //     flex: 2,
-                    //     child: OutlinedButton(
-                    //         onPressed: () {
-                    //           context.pushNamed(AddTaskScreen.routeName);
-                    //         },
-                    //         child: Text(
-                    //           'Add Followup',
-                    //           maxLines: 1,
-                    //           overflow: TextOverflow.ellipsis,
-                    //         ))),
-                  ],
-                )
-              ],
+          builder: (context, tasks) {
+            if (tasks.isEmpty) {
+              return Center(
+                child: Text('No Tasks'),
+              );
+            }
+            return AppinioSwiper(
+              controller: _appinioSwiperController,
+              swipeOptions: SwipeOptions.symmetric(horizontal: true),
+              cardCount: tasks.length,
+              backgroundCardScale: 1,
+              threshold: 150,
+              invertAngleOnBottomDrag: false,
+              backgroundCardCount: 3,
+              backgroundCardOffset: Offset(-3, -3),
+              onCardPositionChanged: (position) {
+                mode = CardAction.ManuelSwipe;
+              },
+              onSwipeEnd: (previousIndex, targetIndex, activity) async {
+                if (previousIndex >= targetIndex) {
+                  return;
+                }
+                if ((activity.begin?.dx ?? 0) < (activity.end?.dx ?? 0)) {
+                  final val = await showGeneralDialog(
+                      context: context,
+                      useRootNavigator: false,
+                      pageBuilder: (dContext, anim1, anim2) =>
+                          ActivityFeedbackDialog(
+                            parentContext: context,
+                            direction: DismissDirection.startToEnd,
+                            mode: mode,
+                            activity:
+                                context.read<TaskDetailCubit>().state.task!,
+                          ));
+                  if (val == null && mounted) {
+                    _appinioSwiperController.unswipe();
+                  }
+                } else {
+                  final val = await showGeneralDialog(
+                      context: context,
+                      useRootNavigator: false,
+                      pageBuilder: (dContext, anim1, anim2) =>
+                          ActivityFeedbackDialog(
+                            parentContext: context,
+                            direction: DismissDirection.endToStart,
+                            activity:
+                                context.read<TaskDetailCubit>().state.task!,
+                          ));
+                  if (val == null && mounted) {
+                    _appinioSwiperController.unswipe();
+                  }
+                }
+              },
+              cardBuilder: (context, index) {
+                final task = tasks[index];
+                return SizedBox(
+                  child: Column(
+                    children: [
+                      Spacer(),
+                      Container(
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: shadowColor,
+                                blurRadius: 9,
+                              )
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TitleText(
+                                text: task.type,
+                              ),
+                              VerticalSmallGap(),
+                              Row(
+                                children: [
+                                  ContainerIcon(icon: CupertinoIcons.person),
+                                  HorizontalSmallGap(),
+                                  NormalText(
+                                      text:
+                                          '${task.lead?.firstName ?? ''} ${task.lead?.lastName ?? ''}')
+                                ],
+                              ),
+                              VerticalSmallGap(),
+                              Row(
+                                children: [
+                                  ContainerIcon(icon: CupertinoIcons.search),
+                                  HorizontalSmallGap(),
+                                  NormalText(
+                                      text:
+                                          'Lead Source: ${task.lead?.leadSource ?? ''}')
+                                ],
+                              ),
+                              VerticalSmallGap(),
+                              Row(
+                                children: [
+                                  ContainerIcon(
+                                      icon: CupertinoIcons.check_mark),
+                                  HorizontalSmallGap(),
+                                  NormalText(text: 'Task Type Call')
+                                ],
+                              ),
+                              VerticalSmallGap(),
+                              Row(
+                                children: [
+                                  ContainerIcon(icon: CupertinoIcons.calendar),
+                                  HorizontalSmallGap(),
+                                  NormalText(
+                                      text:
+                                          'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date)}')
+                                ],
+                              ),
+                              VerticalSmallGap(),
+                              Row(
+                                children: [
+                                  ContainerIcon(icon: Icons.apartment_outlined),
+                                  HorizontalSmallGap(),
+                                  NormalText(text: '')
+                                ],
+                              ),
+                              VerticalSmallGap(),
+                              Row(
+                                children: [
+                                  ContainerIcon(icon: CupertinoIcons.location),
+                                  HorizontalSmallGap(),
+                                  NormalText(text: '')
+                                ],
+                              ),
+                              VerticalSmallGap(),
+                              Row(
+                                children: [
+                                  ContainerIcon(icon: CupertinoIcons.calendar),
+                                  HorizontalSmallGap(),
+                                  NormalText(text: '')
+                                ],
+                              ),
+                              VerticalSmallGap(),
+
+                              TitleText(
+                                text: 'Actions',
+                              ),
+
+                              VerticalSmallGap(),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton(
+                                        onPressed: () {
+                                          getIt<CallBloc>().add(
+                                              CallEvent.clickToCall(
+                                                  phoneNumber:
+                                                      task.lead?.phone ?? '',
+                                                  leadId: task.lead?.id ?? ''));
+                                        },
+                                        child: Icon(Icons.call)),
+                                  ),
+                                  HorizontalSmallGap(),
+                                  Expanded(
+                                    child: OutlinedButton(
+                                        onPressed: () {
+                                          launchUrlString(
+                                              'whatsapp://send?phone=${task.lead?.phone}');
+                                        },
+                                        child: ImageIcon(AssetImage(
+                                            'assets/images/whatsapp.png'))),
+                                  ),
+                                  HorizontalSmallGap(),
+                                  Expanded(
+                                    child: OutlinedButton(
+                                        onPressed: () async {
+                                          final uri = Uri.parse(
+                                              'mailto:${task.lead?.email}');
+                                          if (await canLaunchUrl(uri)) {
+                                            await launchUrl(uri);
+                                          } else {
+                                            showSnackbar(
+                                                context,
+                                                'Can not launch the app',
+                                                SnackBarType.failure);
+                                          }
+                                        },
+                                        child: Icon(Icons.email_outlined)),
+                                  )
+                                ],
+                              ),
+                              VerticalSmallGap(),
+                              TitleText(
+                                text: 'Notes',
+                              ),
+                              VerticalSmallGap(),
+                              VerticalSmallGap(),
+                              // Row(
+                              //   children: [
+                              //     Expanded(
+                              //         flex: 3,
+                              //         child: ElevatedButton(
+                              //             onPressed: () {
+                              //               showGeneralDialog(
+                              //                   context: context,
+                              //                   useRootNavigator: false,
+                              //                   pageBuilder:
+                              //                       (dContext, anim1, anim2) =>
+                              //                           ActivityFeedbackDialog(
+                              //                             parentContext: context,
+                              //                             activity: context
+                              //                                 .read<TaskDetailCubit>()
+                              //                                 .state
+                              //                                 .task!,
+                              //                           ));
+                              //             },
+                              //             child: Text('Complete task'))),
+                              //     // HorizontalSmallGap(),
+                              //     // Expanded(
+                              //     //     flex: 2,
+                              //     //     child: OutlinedButton(
+                              //     //         onPressed: () {
+                              //     //           context.pushNamed(AddTaskScreen.routeName);
+                              //     //         },
+                              //     //         child: Text(
+                              //     //           'Add Followup',
+                              //     //           maxLines: 1,
+                              //     //           overflow: TextOverflow.ellipsis,
+                              //     //         ))),
+                              //   ],
+                              // )
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: IconButton.filled(
+                                        onPressed: null, // () {},
+                                        icon: Icon(Icons.undo)),
+                                  ),
+                                  HorizontalSmallGap(),
+                                  Expanded(
+                                    child: IconButton.filled(
+                                        onPressed: () async {
+                                          _appinioSwiperController.swipeLeft();
+                                        },
+                                        icon: Icon(Icons.close)),
+                                  ),
+                                  HorizontalSmallGap(),
+                                  Expanded(
+                                    child: IconButton.filled(
+                                        onPressed: () {
+                                          mode = CardAction.Heart;
+                                          _appinioSwiperController.swipeRight();
+                                        },
+                                        icon: Icon(CupertinoIcons.heart_fill)),
+                                  ),
+                                  HorizontalSmallGap(),
+                                  Expanded(
+                                      child: IconButton.filled(
+                                          onPressed: () async {
+                                            mode = CardAction.Star;
+                                            _appinioSwiperController
+                                                .swipeRight();
+                                          },
+                                          icon: Icon(Icons.star))),
+                                  HorizontalSmallGap(),
+                                  Expanded(
+                                    child: IconButton.filled(
+                                        onPressed: () async {
+                                          mode = CardAction.Charge;
+                                          _appinioSwiperController.swipeRight();
+                                        },
+                                        icon:
+                                            Icon(Icons.battery_charging_full)),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                );
+              },
             );
           },
         ),
@@ -167,10 +395,14 @@ class ActivityFeedbackDialog extends StatefulWidget {
     super.key,
     required this.activity,
     required this.parentContext,
+    this.direction,
+    this.mode,
   });
 
   final Activity activity;
   final BuildContext parentContext;
+  final DismissDirection? direction;
+  final CardAction? mode;
 
   @override
   State<ActivityFeedbackDialog> createState() => _ActivityFeedbackDialogState();
@@ -180,6 +412,19 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   final ValueNotifier<String?> feedBackValue = ValueNotifier(null);
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<FormBuilderState> _formKey = GlobalKey();
+
+  @override
+  void initState() {
+    feedBackValue.value = switch (widget.mode) {
+      CardAction.Heart => 'Interested',
+      CardAction.Charge => 'Very Interested',
+      CardAction.Star => 'Deal',
+      _ => null
+    };
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -213,55 +458,333 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                   padding:
                       EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 12),
                   width: double.infinity,
-                  color: lightPacific,
+                  color: widget.direction == DismissDirection.startToEnd
+                      ? Colors.green[200]
+                      : widget.direction == DismissDirection.endToStart
+                          ? Colors.red[200]
+                          : lightPacific,
                 ),
                 VerticalSmallGap(),
                 Flexible(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: FormBuilder(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RadioListTile(
-                              value: 'Interested',
-                              title: Text('Interested'),
-                              groupValue: value,
-                              contentPadding: EdgeInsets.zero,
-                              onChanged: (val) {
-                                if (val != null) feedBackValue.value = val;
-                              }),
-                          RadioListTile(
-                              value: 'Not Interested',
-                              title: Text('Not Interested'),
-                              groupValue: value,
-                              contentPadding: EdgeInsets.zero,
-                              onChanged: (val) {
-                                if (val != null) feedBackValue.value = val;
-                              }),
-                          RadioListTile(
-                              value: 'Not Answered',
-                              title: Text('Not Answered'),
-                              groupValue: value,
-                              contentPadding: EdgeInsets.zero,
-                              onChanged: (val) {
-                                if (val != null) feedBackValue.value = val;
-                              }),
-                          MultiLineField(
-                            controller: _controller,
-                            placeHolder: "Write a brief note!",
-                            label: "Notes",
-                            name: 'notes',
-                            validator: (val) {
-                              if (val == null || val.length < 5) {
-                                return 'Please write a valid note';
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
+                  child: ScrollShadow(
+                    child: SingleChildScrollView(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: FormBuilder(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            LabelText(
+                              text: 'Feedback Note',
+                              underline: true,
+                            ),
+                            VerticalSmallGap(),
+                            if ((widget.direction ==
+                                    DismissDirection.startToEnd &&
+                                widget.mode == CardAction.ManuelSwipe))
+                              RadioListTile(
+                                  value: 'Very Interested',
+                                  title: Text('Very Interested'),
+                                  groupValue: value,
+                                  contentPadding: EdgeInsets.zero,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            if ((widget.direction ==
+                                    DismissDirection.startToEnd &&
+                                widget.mode == CardAction.ManuelSwipe))
+                              RadioListTile(
+                                  value: 'Interested',
+                                  title: Text('Interested'),
+                                  groupValue: value,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            if ((widget.direction ==
+                                    DismissDirection.startToEnd &&
+                                widget.mode == CardAction.ManuelSwipe))
+                              RadioListTile(
+                                  value: 'Deal',
+                                  title: Text('Deal'),
+                                  groupValue: value,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            if (widget.direction == null ||
+                                widget.direction == DismissDirection.endToStart)
+                              RadioListTile(
+                                  value: 'Not Interested',
+                                  title: Text('Not Interested'),
+                                  groupValue: value,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            if (widget.direction == null ||
+                                widget.direction == DismissDirection.endToStart)
+                              RadioListTile(
+                                  value: 'Not Answered',
+                                  title: Text('No Answer'),
+                                  groupValue: value,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            if (widget.direction == null ||
+                                widget.direction == DismissDirection.endToStart)
+                              RadioListTile(
+                                  value: 'Invalid Number',
+                                  title: Text('Invalid Number'),
+                                  groupValue: value,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            if (widget.direction == null ||
+                                widget.direction == DismissDirection.endToStart)
+                              RadioListTile(
+                                  value: 'Disqualify',
+                                  title: Text('Disqualify'),
+                                  groupValue: value,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            MultiLineField(
+                              controller: _controller,
+                              placeHolder: "Write a brief note!",
+                              label: "Notes",
+                              name: 'notes',
+                              validator: (val) {
+                                if (val == null || val.length < 5) {
+                                  return 'Please write a valid note';
+                                }
+                                return null;
+                              },
+                            ),
+                            if (feedBackValue.value == 'Interested' ||
+                                feedBackValue.value == 'Very Interested') ...[
+                              LabelText(
+                                text: 'New Task',
+                                underline: true,
+                              ),
+                              VerticalSmallGap(),
+                              WrapSelectField(
+                                name: 'type',
+                                label: 'Type',
+                                values: ['Call', 'WhatsApp', 'Viewing'],
+                                isRequired: true,
+                              ),
+                              DateField(
+                                  name: 'date',
+                                  label: 'Date',
+                                  firstDate: DateTime.now(),
+                                  lastDate:
+                                      DateTime.now().add(Duration(days: 90))),
+                              CardPickerDialogField<Property>(
+                                name: 'property',
+                                label: 'Property',
+                                isRequired: false,
+                                valueTransformer: (option) => option?.id,
+                                optionsBuilder: (v) async {
+                                  return widget.parentContext
+                                      .read<TaskDetailCubit>()
+                                      .getListings(search: v.text);
+                                },
+                                optionBuilder: (context, listing) {
+                                  String? image;
+                                  if (listing.images?.isNotEmpty == true) {
+                                    image = listing.images!.first is String
+                                        ? listing.images!.first
+                                        : listing.images!.first['thumbnail'];
+                                  }
+
+                                  return Container(
+                                    height: 170,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: shadowColor,
+                                              offset: Offset(-4, 5),
+                                              blurRadius: 11)
+                                        ]),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    child: Container(
+                                                      clipBehavior:
+                                                          Clip.hardEdge,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      12)),
+                                                      child: S3Image(
+                                                        url: image,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  VerticalSmallGap(
+                                                    adjustment: 0.5,
+                                                  ),
+                                                  BlockTitleText(
+                                                    text: 'AED ' +
+                                                        (getPrice(listing)
+                                                                ?.toInt()
+                                                                .toString() ??
+                                                            ''),
+                                                  ),
+                                                ],
+                                              )),
+                                          HorizontalSmallGap(),
+                                          Expanded(
+                                              flex: 5,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  LabelText(
+                                                    text: listing.propertyTitle,
+                                                    maxLines: 2,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                  ),
+                                                  VerticalSmallGap(),
+                                                  TextWithIcon(
+                                                    text: (listing.beds
+                                                                ?.toString() ??
+                                                            "1") +
+                                                        ' Beds',
+                                                    iconPath:
+                                                        'assets/images/bed.png',
+                                                    color: Colors.black,
+                                                  ),
+                                                  TextWithIcon(
+                                                    text: (listing.baths
+                                                                ?.toString() ??
+                                                            "1") +
+                                                        " Baths",
+                                                    iconPath:
+                                                        'assets/images/shower.png',
+                                                    color: Colors.black,
+                                                  ),
+                                                  TextWithIcon(
+                                                    text: (listing.size
+                                                                ?.toInt()
+                                                                .toString() ??
+                                                            "1") +
+                                                        ' Sqft',
+                                                    iconPath:
+                                                        'assets/images/area.png',
+                                                    color: Colors.black,
+                                                  ),
+                                                  VerticalSmallGap(
+                                                    adjustment: 0.3,
+                                                  ),
+                                                  Spacer(),
+                                                  Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 10,
+                                                            vertical: 2),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(6),
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primaryContainer
+                                                            .withOpacity(.5)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            SmallText(
+                                                                text: 'Agent'),
+                                                            LabelText(
+                                                                text: listing
+                                                                        .agent
+                                                                        ?.user
+                                                                        .firstName ??
+                                                                    ''),
+                                                          ],
+                                                        ),
+                                                        HorizontalSmallGap(),
+                                                        Container(
+                                                          height: 40,
+                                                          width: 40,
+                                                          clipBehavior:
+                                                              Clip.hardEdge,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                          child: S3Image(
+                                                            url: listing
+                                                                    .agent
+                                                                    ?.user
+                                                                    .photo ??
+                                                                '',
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              MultiLineField(
+                                label: 'Description',
+                                name: 'description',
+                              ),
+                              VerticalSmallGap(),
+                            ]
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -275,33 +798,53 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                       builder: (context, value, _) {
                         return Column(
                           children: [
-                            if (value == "Interested") ...[
-                              AppPrimaryButton(
-                                  onTap: () async {
-                                    if (_formKey.currentState
-                                            ?.saveAndValidate() !=
-                                        true) {
-                                      return;
-                                    }
-                                    getIt<ActivityCubit>()
-                                        .setLastActivityFeedback(
-                                            widget.activity,
-                                            ActivityFeedback(
-                                                isInterested: true,
-                                                status: 'Complete',
-                                                notes: _controller.text));
-                                    Navigator.of(context).pop();
-                                    final result = await widget.parentContext
-                                        .pushNamed(AddTaskScreen.routeName);
-                                    if (result == true &&
-                                        widget.parentContext.mounted) {
-                                      widget.parentContext.pop();
-                                    }
-                                  },
-                                  text: ('Add Followup')),
+                            if (value == "Interested" ||
+                                value == 'Very Interested') ...[
+                              if (widget.mode != CardAction.Star)
+                                AppPrimaryButton(
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
+                                      final val = _formKey.currentState!.value;
+                                      Logger().d({
+                                        ...val,
+                                        'interested': feedBackValue.value
+                                      });
+                                      await widget.parentContext
+                                          .read<TaskDetailCubit>()
+                                          .completeAndAddFollowUp(
+                                              context: context,
+                                              values: val,
+                                              description: val['description'],
+                                              markAsProspect:
+                                                  feedBackValue.value ==
+                                                      'Very Interested');
+                                      // getIt<ActivityCubit>()
+                                      //     .setLastActivityFeedback(
+                                      //         widget.activity,
+                                      //         ActivityFeedback(
+                                      //             isInterested: true,
+                                      //             status: 'Complete',
+                                      //             notes: _controller.text));
+                                      // Navigator.of(context).pop();
+                                      // final result = await widget.parentContext
+                                      //     .pushNamed(AddTaskScreen.routeName);
+                                      // if (result == true &&
+                                      //     widget.parentContext.mounted) {
+                                      //   widget.parentContext.pop();
+                                      // }
+                                    },
+                                    text: ('Add Followup')),
                               VerticalSmallGap(
                                 adjustment: 1,
                               ),
+                            ],
+                            if (widget.mode == CardAction.Star ||
+                                (widget.mode == CardAction.ManuelSwipe &&
+                                    feedBackValue.value == 'Deal'))
                               AppPrimaryButton(
                                   backgroundColor: Colors.green[800],
                                   onTap: () async {
@@ -310,7 +853,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                         true) {
                                       return;
                                     }
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop(false);
                                     getIt<ActivityCubit>()
                                         .setLastActivityFeedback(
                                             widget.activity,
@@ -319,10 +862,9 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                                 status: 'Complete',
                                                 notes: _controller.text));
                                     widget.parentContext
-                                        .replaceNamed(AddDealScreen.routeName);
+                                        .pushNamed(AddDealScreen.routeName);
                                   },
                                   text: ('Complete & Add Deal')),
-                            ],
                             if (value == "Not Interested") ...[
                               AppPrimaryButton(
                                   onTap: () async {
@@ -334,32 +876,37 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                     await widget.parentContext
                                         .read<TaskDetailCubit>()
                                         .updateActivity(
-                                            context: widget.parentContext,
-                                            description: _controller.text);
-                                    Navigator.of(context).pop();
+                                            context: context,
+                                            description: _controller.text,
+                                            addFollowUp: false);
                                   },
                                   text: ('Complete')),
                             ],
-                            if (value == "Not Answered") ...[
-                              AppPrimaryButton(
-                                  onTap: () async {
-                                    if (_formKey.currentState
-                                            ?.saveAndValidate() !=
-                                        true) {
-                                      return;
-                                    }
+                            if (value == "Not Answered" ||
+                                value == "Invalid Number" ||
+                                value == "Disqualify") ...[
+                              if (value == "Not Answered")
+                                AppPrimaryButton(
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
 
-                                    await widget.parentContext
-                                        .read<TaskDetailCubit>()
-                                        .updateActivity(
+                                      await widget.parentContext
+                                          .read<TaskDetailCubit>()
+                                          .makeLost(
                                             context: widget.parentContext,
-                                            description: _controller.text);
-                                    Navigator.of(context).pop();
-                                  },
-                                  text: ('Complete')),
-                              VerticalSmallGap(
-                                adjustment: 1,
-                              ),
+                                            description: _controller.text,
+                                          );
+                                      Navigator.of(context).pop();
+                                    },
+                                    text: ('Complete')),
+                              if (value == "Not Answered")
+                                VerticalSmallGap(
+                                  adjustment: 1,
+                                ),
                               OutlinedButton(
                                   style: OutlinedButton.styleFrom(
                                       maximumSize: Size(200, 43),

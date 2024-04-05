@@ -28,6 +28,13 @@ mixin _$HomeState {
   int get completedTasksCount => throw _privateConstructorUsedError;
   int get pendingTasksCount => throw _privateConstructorUsedError;
   int get viewingTasksCount => throw _privateConstructorUsedError;
+  Set<ListType> get listType => throw _privateConstructorUsedError;
+  List<Activity> get sortedActivity => throw _privateConstructorUsedError;
+  Status? get getSortedActivitiesStatus => throw _privateConstructorUsedError;
+  String? get getSortedActivitiesError => throw _privateConstructorUsedError;
+  Paginator? get sortedActivityPaginator => throw _privateConstructorUsedError;
+  Status get updateTaskStatus => throw _privateConstructorUsedError;
+  String? get updateTaskError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -48,9 +55,17 @@ abstract class $HomeStateCopyWith<$Res> {
       List<ModelCategory> categories,
       int completedTasksCount,
       int pendingTasksCount,
-      int viewingTasksCount});
+      int viewingTasksCount,
+      Set<ListType> listType,
+      List<Activity> sortedActivity,
+      Status? getSortedActivitiesStatus,
+      String? getSortedActivitiesError,
+      Paginator? sortedActivityPaginator,
+      Status updateTaskStatus,
+      String? updateTaskError});
 
   $ModelCategoryCopyWith<$Res> get selectedCategory;
+  $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
 }
 
 /// @nodoc
@@ -75,6 +90,13 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? completedTasksCount = null,
     Object? pendingTasksCount = null,
     Object? viewingTasksCount = null,
+    Object? listType = null,
+    Object? sortedActivity = null,
+    Object? getSortedActivitiesStatus = freezed,
+    Object? getSortedActivitiesError = freezed,
+    Object? sortedActivityPaginator = freezed,
+    Object? updateTaskStatus = null,
+    Object? updateTaskError = freezed,
   }) {
     return _then(_value.copyWith(
       activities: null == activities
@@ -113,6 +135,34 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.viewingTasksCount
           : viewingTasksCount // ignore: cast_nullable_to_non_nullable
               as int,
+      listType: null == listType
+          ? _value.listType
+          : listType // ignore: cast_nullable_to_non_nullable
+              as Set<ListType>,
+      sortedActivity: null == sortedActivity
+          ? _value.sortedActivity
+          : sortedActivity // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
+          ? _value.getSortedActivitiesStatus
+          : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Status?,
+      getSortedActivitiesError: freezed == getSortedActivitiesError
+          ? _value.getSortedActivitiesError
+          : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sortedActivityPaginator: freezed == sortedActivityPaginator
+          ? _value.sortedActivityPaginator
+          : sortedActivityPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      updateTaskStatus: null == updateTaskStatus
+          ? _value.updateTaskStatus
+          : updateTaskStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updateTaskError: freezed == updateTaskError
+          ? _value.updateTaskError
+          : updateTaskError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -121,6 +171,18 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   $ModelCategoryCopyWith<$Res> get selectedCategory {
     return $ModelCategoryCopyWith<$Res>(_value.selectedCategory, (value) {
       return _then(_value.copyWith(selectedCategory: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get sortedActivityPaginator {
+    if (_value.sortedActivityPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.sortedActivityPaginator!, (value) {
+      return _then(_value.copyWith(sortedActivityPaginator: value) as $Val);
     });
   }
 }
@@ -142,10 +204,19 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       List<ModelCategory> categories,
       int completedTasksCount,
       int pendingTasksCount,
-      int viewingTasksCount});
+      int viewingTasksCount,
+      Set<ListType> listType,
+      List<Activity> sortedActivity,
+      Status? getSortedActivitiesStatus,
+      String? getSortedActivitiesError,
+      Paginator? sortedActivityPaginator,
+      Status updateTaskStatus,
+      String? updateTaskError});
 
   @override
   $ModelCategoryCopyWith<$Res> get selectedCategory;
+  @override
+  $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
 }
 
 /// @nodoc
@@ -168,6 +239,13 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? completedTasksCount = null,
     Object? pendingTasksCount = null,
     Object? viewingTasksCount = null,
+    Object? listType = null,
+    Object? sortedActivity = null,
+    Object? getSortedActivitiesStatus = freezed,
+    Object? getSortedActivitiesError = freezed,
+    Object? sortedActivityPaginator = freezed,
+    Object? updateTaskStatus = null,
+    Object? updateTaskError = freezed,
   }) {
     return _then(_$HomeStateImpl(
       activities: null == activities
@@ -206,6 +284,34 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.viewingTasksCount
           : viewingTasksCount // ignore: cast_nullable_to_non_nullable
               as int,
+      listType: null == listType
+          ? _value._listType
+          : listType // ignore: cast_nullable_to_non_nullable
+              as Set<ListType>,
+      sortedActivity: null == sortedActivity
+          ? _value._sortedActivity
+          : sortedActivity // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
+          ? _value.getSortedActivitiesStatus
+          : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Status?,
+      getSortedActivitiesError: freezed == getSortedActivitiesError
+          ? _value.getSortedActivitiesError
+          : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sortedActivityPaginator: freezed == sortedActivityPaginator
+          ? _value.sortedActivityPaginator
+          : sortedActivityPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      updateTaskStatus: null == updateTaskStatus
+          ? _value.updateTaskStatus
+          : updateTaskStatus // ignore: cast_nullable_to_non_nullable
+              as Status,
+      updateTaskError: freezed == updateTaskError
+          ? _value.updateTaskError
+          : updateTaskError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -222,12 +328,21 @@ class _$HomeStateImpl implements _HomeState {
       final List<ModelCategory> categories = categoryList,
       this.completedTasksCount = 0,
       this.pendingTasksCount = 0,
-      this.viewingTasksCount = 0})
+      this.viewingTasksCount = 0,
+      final Set<ListType> listType = const {ListType.Categorized},
+      final List<Activity> sortedActivity = const [],
+      this.getSortedActivitiesStatus = Status.init,
+      this.getSortedActivitiesError,
+      this.sortedActivityPaginator,
+      this.updateTaskStatus = Status.init,
+      this.updateTaskError})
       : _activities = activities,
         _getActivitiesStatus = getActivitiesStatus,
         _getActivitiesError = getActivitiesError,
         _activityPaginator = activityPaginator,
-        _categories = categories;
+        _categories = categories,
+        _listType = listType,
+        _sortedActivity = sortedActivity;
 
   final Map<int, List<Activity>> _activities;
   @override
@@ -289,10 +404,40 @@ class _$HomeStateImpl implements _HomeState {
   @override
   @JsonKey()
   final int viewingTasksCount;
+  final Set<ListType> _listType;
+  @override
+  @JsonKey()
+  Set<ListType> get listType {
+    if (_listType is EqualUnmodifiableSetView) return _listType;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_listType);
+  }
+
+  final List<Activity> _sortedActivity;
+  @override
+  @JsonKey()
+  List<Activity> get sortedActivity {
+    if (_sortedActivity is EqualUnmodifiableListView) return _sortedActivity;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sortedActivity);
+  }
+
+  @override
+  @JsonKey()
+  final Status? getSortedActivitiesStatus;
+  @override
+  final String? getSortedActivitiesError;
+  @override
+  final Paginator? sortedActivityPaginator;
+  @override
+  @JsonKey()
+  final Status updateTaskStatus;
+  @override
+  final String? updateTaskError;
 
   @override
   String toString() {
-    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount)';
+    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount, listType: $listType, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError)';
   }
 
   @override
@@ -317,7 +462,23 @@ class _$HomeStateImpl implements _HomeState {
             (identical(other.pendingTasksCount, pendingTasksCount) ||
                 other.pendingTasksCount == pendingTasksCount) &&
             (identical(other.viewingTasksCount, viewingTasksCount) ||
-                other.viewingTasksCount == viewingTasksCount));
+                other.viewingTasksCount == viewingTasksCount) &&
+            const DeepCollectionEquality().equals(other._listType, _listType) &&
+            const DeepCollectionEquality()
+                .equals(other._sortedActivity, _sortedActivity) &&
+            (identical(other.getSortedActivitiesStatus,
+                    getSortedActivitiesStatus) ||
+                other.getSortedActivitiesStatus == getSortedActivitiesStatus) &&
+            (identical(
+                    other.getSortedActivitiesError, getSortedActivitiesError) ||
+                other.getSortedActivitiesError == getSortedActivitiesError) &&
+            (identical(
+                    other.sortedActivityPaginator, sortedActivityPaginator) ||
+                other.sortedActivityPaginator == sortedActivityPaginator) &&
+            (identical(other.updateTaskStatus, updateTaskStatus) ||
+                other.updateTaskStatus == updateTaskStatus) &&
+            (identical(other.updateTaskError, updateTaskError) ||
+                other.updateTaskError == updateTaskError));
   }
 
   @override
@@ -331,7 +492,14 @@ class _$HomeStateImpl implements _HomeState {
       const DeepCollectionEquality().hash(_categories),
       completedTasksCount,
       pendingTasksCount,
-      viewingTasksCount);
+      viewingTasksCount,
+      const DeepCollectionEquality().hash(_listType),
+      const DeepCollectionEquality().hash(_sortedActivity),
+      getSortedActivitiesStatus,
+      getSortedActivitiesError,
+      sortedActivityPaginator,
+      updateTaskStatus,
+      updateTaskError);
 
   @JsonKey(ignore: true)
   @override
@@ -350,7 +518,14 @@ abstract class _HomeState implements HomeState {
       final List<ModelCategory> categories,
       final int completedTasksCount,
       final int pendingTasksCount,
-      final int viewingTasksCount}) = _$HomeStateImpl;
+      final int viewingTasksCount,
+      final Set<ListType> listType,
+      final List<Activity> sortedActivity,
+      final Status? getSortedActivitiesStatus,
+      final String? getSortedActivitiesError,
+      final Paginator? sortedActivityPaginator,
+      final Status updateTaskStatus,
+      final String? updateTaskError}) = _$HomeStateImpl;
 
   @override
   Map<int, List<Activity>> get activities;
@@ -370,6 +545,20 @@ abstract class _HomeState implements HomeState {
   int get pendingTasksCount;
   @override
   int get viewingTasksCount;
+  @override
+  Set<ListType> get listType;
+  @override
+  List<Activity> get sortedActivity;
+  @override
+  Status? get getSortedActivitiesStatus;
+  @override
+  String? get getSortedActivitiesError;
+  @override
+  Paginator? get sortedActivityPaginator;
+  @override
+  Status get updateTaskStatus;
+  @override
+  String? get updateTaskError;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
