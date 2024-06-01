@@ -16,7 +16,7 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
       community: json['community'] == null
           ? null
           : Community.fromJson(json['community'] as Map<String, dynamic>),
-      beds: json['beds'] as String?,
+      beds: readBeds(json, 'beds') as String?,
       baths: json['baths'] as int?,
       size: (json['size'] as num?)?.toDouble(),
       propertyType: json['propertyType'] as String?,

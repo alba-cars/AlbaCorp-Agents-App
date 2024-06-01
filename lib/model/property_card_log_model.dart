@@ -10,7 +10,7 @@ part 'property_card_log_model.g.dart';
 class PropertyCardLog with _$PropertyCardLog {
   const factory PropertyCardLog({
     required String message,
-    required CreatedBy createdBy,
+    required CreatedBy? createdBy,
     required String type,
     required String createdAt,
     required String updatedAt,

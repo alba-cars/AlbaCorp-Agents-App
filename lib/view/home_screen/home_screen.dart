@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +10,7 @@ import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/paginator.dart';
@@ -54,6 +54,40 @@ class HomePageLayout extends StatefulWidget {
 }
 
 class _HomePageLayoutState extends State<HomePageLayout> {
+  late final RouteInformation routeInformation;
+  void routeListener() async {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      if (mounted &&
+          AppRouter.router.routerDelegate.currentConfiguration.fullPath ==
+              HomePage.routeName) {
+        if (context.read<HomeCubit>().state.listType.first ==
+            ListType.Categorized) {
+          Future.wait(List.generate(
+              7,
+              (index) => context
+                  .read<HomeCubit>()
+                  .getActivities(filterCode: index, refresh: true)));
+        } else {
+          context.read<HomeCubit>().getSortedActivities();
+        }
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    routeInformation = AppRouter.router.routeInformationProvider.value;
+    AppRouter.router.routerDelegate.addListener(routeListener);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    AppRouter.router.routeInformationProvider.removeListener(routeListener);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = getIt<AuthBloc>().state.user;
@@ -304,7 +338,7 @@ class SortedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        if (state.getSortedActivitiesStatus == Status.loading) {
+        if (state.getSortedActivitiesStatus == AppStatus.loading) {
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -318,7 +352,7 @@ class SortedView extends StatelessWidget {
           },
           child: NotificationListener<ScrollNotification>(
             onNotification: (scrollInfo) {
-              if (state.getSortedActivitiesStatus != Status.loadingMore &&
+              if (state.getSortedActivitiesStatus != AppStatus.loadingMore &&
                   scrollInfo.metrics.pixels >=
                       0.9 * scrollInfo.metrics.maxScrollExtent) {
                 context.read<HomeCubit>().getSortedActivities();
@@ -343,9 +377,10 @@ class SortedView extends StatelessWidget {
               separatorBuilder: (context, index) => SizedBox(
                 height: 8,
               ),
-              itemCount: state.getSortedActivitiesStatus != Status.loadingMore
-                  ? itemLength
-                  : itemLength + 1,
+              itemCount:
+                  state.getSortedActivitiesStatus != AppStatus.loadingMore
+                      ? itemLength
+                      : itemLength + 1,
             ),
           ),
         );
@@ -402,12 +437,13 @@ class CategorizedView extends StatelessWidget {
                     sliver: SliverPadding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      sliver: state.getActivitiesStatus[index] == Status.loading
+                      sliver: state.getActivitiesStatus[index] ==
+                              AppStatus.loading
                           ? SliverToBoxAdapter(
                               child: Center(child: CircularProgressIndicator()),
                             )
                           : state.getActivitiesStatus[index] ==
-                                      Status.success &&
+                                      AppStatus.success &&
                                   state.activities[index]?.isEmpty == true
                               ? SliverToBoxAdapter(child: Text('No Leads'))
                               : SliverList.separated(
@@ -433,7 +469,7 @@ class CategorizedView extends StatelessWidget {
                                               Text("Load More"),
                                               if (state.getActivitiesStatus[
                                                       index] ==
-                                                  Status.loadingMore) ...[
+                                                  AppStatus.loadingMore) ...[
                                                 HorizontalSmallGap(),
                                                 SizedBox.square(
                                                   dimension: 20,

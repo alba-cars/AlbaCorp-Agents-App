@@ -71,7 +71,7 @@ class AddDealCubit extends Cubit<AddDealState> {
   }
 
   Future<void> addPrimaryDeal({required Map<String, dynamic> values}) async {
-    emit(state.copyWith(addDealStatus: Status.loadingMore));
+    emit(state.copyWith(addDealStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addOffPlanListingDeal(values: values);
     switch (result) {
       case (Success<DealListingResponse> s):
@@ -86,24 +86,24 @@ class AddDealCubit extends Cubit<AddDealState> {
         switch (dealResult) {
           case (Success s):
             emit(state.copyWith(
-                dealResponse: s.value, addDealStatus: Status.success));
+                dealResponse: s.value, addDealStatus: AppStatus.success));
             break;
           case (Error e):
             emit(state.copyWith(
-                addDealStatus: Status.failure, addDealError: e.exception));
+                addDealStatus: AppStatus.failure, addDealError: e.exception));
             break;
         }
         break;
       case (Error e):
         emit(state.copyWith(
-            addDealStatus: Status.failure, addDealError: e.exception));
+            addDealStatus: AppStatus.failure, addDealError: e.exception));
         break;
     }
   }
 
   Future<void> addSecondaryAlbaDeal(
       {required Map<String, dynamic> values}) async {
-    emit(state.copyWith(addDealStatus: Status.loadingMore));
+    emit(state.copyWith(addDealStatus: AppStatus.loadingMore));
 
     final dealResult = await _dealsRepo.addDeal(values: {
       'category': state.selectedDealType?.toJson(),
@@ -116,18 +116,18 @@ class AddDealCubit extends Cubit<AddDealState> {
     switch (dealResult) {
       case (Success s):
         emit(state.copyWith(
-            dealResponse: s.value, addDealStatus: Status.success));
+            dealResponse: s.value, addDealStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            addDealStatus: Status.failure, addDealError: e.exception));
+            addDealStatus: AppStatus.failure, addDealError: e.exception));
         break;
     }
   }
 
   Future<void> addSecondaryExternalDeal(
       {required Map<String, dynamic> values}) async {
-    emit(state.copyWith(addDealStatus: Status.loadingMore));
+    emit(state.copyWith(addDealStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addExternalListingDeal(values: values);
     switch (result) {
       case (Success<DealListingResponse> s):
@@ -146,33 +146,33 @@ class AddDealCubit extends Cubit<AddDealState> {
         switch (dealResult) {
           case (Success s):
             emit(state.copyWith(
-                dealResponse: s.value, addDealStatus: Status.success));
+                dealResponse: s.value, addDealStatus: AppStatus.success));
             break;
           case (Error e):
             emit(state.copyWith(
-                addDealStatus: Status.failure, addDealError: e.exception));
+                addDealStatus: AppStatus.failure, addDealError: e.exception));
             break;
         }
         break;
       case (Error e):
         emit(state.copyWith(
-            addDealStatus: Status.failure, addDealError: e.exception));
+            addDealStatus: AppStatus.failure, addDealError: e.exception));
         break;
     }
   }
 
   Future<void> addDealDocuments({required Map<String, dynamic> values}) async {
-    emit(state.copyWith(addDealDocumentsStatus: Status.loadingMore));
+    emit(state.copyWith(addDealDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
         dealId: state.dealResponse!.id, values: values);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addDealDocumentsStatus: Status.success));
+        emit(state.copyWith(addDealDocumentsStatus: AppStatus.success));
 
         break;
       case (Error e):
         emit(state.copyWith(
-            addDealDocumentsStatus: Status.failure,
+            addDealDocumentsStatus: AppStatus.failure,
             addDealDocumentsError: e.exception));
         break;
     }
@@ -209,7 +209,7 @@ class AddDealCubit extends Cubit<AddDealState> {
               await addSecondaryExternalDeal(values: val);
             }
           }
-          if (state.addDealStatus == Status.success) {
+          if (state.addDealStatus == AppStatus.success) {
             emit(state.copyWith(currentTab: 2));
             tabController.animateTo(2);
             _scrollToTop();
@@ -221,8 +221,8 @@ class AddDealCubit extends Cubit<AddDealState> {
         if (validated == true) {
           final val = formKey!.currentState!.value;
           await addDealDocuments(values: val);
-          if (state.addDealDocumentsStatus == Status.success) {
-            emit(state.copyWith(currentTab: 3));
+          if (state.addDealDocumentsStatus == AppStatus.success) {
+            // emit(state.copyWith(currentTab: 3));
             if (context.mounted) {
               showSnackbar(context, 'Documents Uploaded Successfully',
                   SnackBarType.success);
@@ -245,32 +245,32 @@ class AddDealCubit extends Cubit<AddDealState> {
   }
 
   Future<List<Lead>> getLeads({String? search}) async {
-    emit(state.copyWith(getLeadListStatus: Status.loadingMore));
+    emit(state.copyWith(getLeadListStatus: AppStatus.loadingMore));
     final result = await _leadRepo.getLeads(search: search);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            leadList: s.value, getLeadListStatus: Status.success));
+            leadList: s.value, getLeadListStatus: AppStatus.success));
         return s.value;
       case (Error e):
         emit(state.copyWith(
-          getLeadListStatus: Status.failure,
+          getLeadListStatus: AppStatus.failure,
         ));
         return [];
     }
   }
 
   Future<void> getAgents({String? search}) async {
-    emit(state.copyWith(getAgentsListStatus: Status.loadingMore));
+    emit(state.copyWith(getAgentsListStatus: AppStatus.loadingMore));
     final result = await _agentRepo.getAgents();
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            agentList: s.value, getAgentsListStatus: Status.success));
+            agentList: s.value, getAgentsListStatus: AppStatus.success));
 
       case (Error e):
         emit(state.copyWith(
-          getAgentsListStatus: Status.failure,
+          getAgentsListStatus: AppStatus.failure,
         ));
     }
   }
@@ -287,16 +287,16 @@ class AddDealCubit extends Cubit<AddDealState> {
   }
 
   Future<List<Agency>> getAgencies({String? search}) async {
-    emit(state.copyWith(getAgencyListStatus: Status.loadingMore));
+    emit(state.copyWith(getAgencyListStatus: AppStatus.loadingMore));
     final result = await _agentRepo.getAgencies();
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            agencyList: s.value, getAgencyListStatus: Status.success));
+            agencyList: s.value, getAgencyListStatus: AppStatus.success));
         return s.value;
       case (Error e):
         emit(state.copyWith(
-          getAgencyListStatus: Status.failure,
+          getAgencyListStatus: AppStatus.failure,
         ));
         return [];
     }
@@ -304,7 +304,7 @@ class AddDealCubit extends Cubit<AddDealState> {
 
   Future<void> getAgentProperties({required String agentId}) async {
     emit(state.copyWith(
-        getAgentPropertyListStatus: Status.loadingMore,
+        getAgentPropertyListStatus: AppStatus.loadingMore,
         selectedPropertyOwnerId: null,
         propertyOwner: null));
     final result = await _agentRepo.getAgentProperties(agentId: agentId);
@@ -312,93 +312,106 @@ class AddDealCubit extends Cubit<AddDealState> {
       case (Success s):
         emit(state.copyWith(
             agentPropertyList: s.value,
-            getAgentPropertyListStatus: Status.success));
+            getAgentPropertyListStatus: AppStatus.success));
 
       case (Error e):
         emit(state.copyWith(
-          getAgentPropertyListStatus: Status.failure,
+          getAgentPropertyListStatus: AppStatus.failure,
         ));
     }
   }
 
   Future<void> getPropertyOwner({required String ownerId}) async {
     emit(state.copyWith(
-        getPropertyOwnerStatus: Status.loadingMore,
+        getPropertyOwnerStatus: AppStatus.loadingMore,
         selectedPropertyOwnerId: null));
     final result = await _leadRepo.getPropertyOwner(ownerId: ownerId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            propertyOwner: s.value, getPropertyOwnerStatus: Status.success));
+            propertyOwner: s.value, getPropertyOwnerStatus: AppStatus.success));
 
       case (Error e):
         emit(state.copyWith(
-          getPropertyOwnerStatus: Status.failure,
+          getPropertyOwnerStatus: AppStatus.failure,
         ));
     }
   }
 
   Future<List<Community>> getCommunities({String? search}) async {
-    emit(state.copyWith(getCommunityListStatus: Status.loadingMore));
+    if (state.communityList.isNotEmpty && search != null) {
+      return state.communityList
+          .where((element) =>
+              element.community.toLowerCase().contains(search.toLowerCase()))
+          .toList();
+    }
+    emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getCommunities(search: search);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            communityList: s.value, getCommunityListStatus: Status.success));
+            communityList: s.value, getCommunityListStatus: AppStatus.success));
         return s.value;
       case (Error e):
         emit(state.copyWith(
-          getCommunityListStatus: Status.failure,
+          getCommunityListStatus: AppStatus.failure,
         ));
         return [];
     }
   }
 
   Future<List<OffPlanModel>> getOffPlans({String? search}) async {
-    emit(state.copyWith(getPffPlansListStatus: Status.loadingMore));
+    emit(state.copyWith(getPffPlansListStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.getOffPlanList(search: search);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            offPlansList: s.value, getPffPlansListStatus: Status.success));
+            offPlansList: s.value, getPffPlansListStatus: AppStatus.success));
         return s.value;
       case (Error e):
         emit(state.copyWith(
-          getPffPlansListStatus: Status.failure,
+          getPffPlansListStatus: AppStatus.failure,
         ));
         return [];
     }
   }
 
   Future<List<Building>> getBuildings({String? search}) async {
-    emit(state.copyWith(getBuildingListStatus: Status.loadingMore));
+    if (state.buildingList.isNotEmpty && search != null) {
+      return state.buildingList
+          .where((element) =>
+              element.name.toLowerCase().contains(search.toLowerCase()))
+          .toList();
+    }
+    emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
+
     final result = await _listingsRepo.getBuildingNames(search: search);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            buildingList: s.value, getBuildingListStatus: Status.success));
+            buildingList: s.value, getBuildingListStatus: AppStatus.success));
         return s.value;
 
       case (Error e):
         emit(state.copyWith(
-          getBuildingListStatus: Status.failure,
+          getBuildingListStatus: AppStatus.failure,
         ));
         return [];
     }
   }
 
   Future<void> getPropertyTypes() async {
-    emit(state.copyWith(getPropertyTypeListStatus: Status.loadingMore));
+    emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             propertyTypeList: s.value,
-            getPropertyTypeListStatus: Status.success));
+            getPropertyTypeListStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-          getPropertyTypeListStatus: Status.failure,
+          getPropertyTypeListStatus: AppStatus.failure,
         ));
     }
   }
@@ -425,5 +438,9 @@ class AddDealCubit extends Cubit<AddDealState> {
     _scrollController?.jumpTo(0);
   }
 
-  List<String> stepNames = ['Deal Type', 'Deal Info', 'Collect Documents'];
+  List<String> stepNames = [
+    'Deal Type',
+    'Deal Info',
+    'Collect Documents',
+  ];
 }

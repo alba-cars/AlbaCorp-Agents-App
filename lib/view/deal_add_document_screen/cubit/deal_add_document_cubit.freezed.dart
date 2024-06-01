@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DealAddDocumentState {
-  Status get addDealDocumentsStatus => throw _privateConstructorUsedError;
+  AppStatus get addDealDocumentsStatus => throw _privateConstructorUsedError;
   String? get addDealDocumentsError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $DealAddDocumentStateCopyWith<$Res> {
           $Res Function(DealAddDocumentState) then) =
       _$DealAddDocumentStateCopyWithImpl<$Res, DealAddDocumentState>;
   @useResult
-  $Res call({Status addDealDocumentsStatus, String? addDealDocumentsError});
+  $Res call({AppStatus addDealDocumentsStatus, String? addDealDocumentsError});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$DealAddDocumentStateCopyWithImpl<$Res,
       addDealDocumentsStatus: null == addDealDocumentsStatus
           ? _value.addDealDocumentsStatus
           : addDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addDealDocumentsError: freezed == addDealDocumentsError
           ? _value.addDealDocumentsError
           : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
@@ -71,7 +71,7 @@ abstract class _$$DealAddDocumentStateImplCopyWith<$Res>
       __$$DealAddDocumentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status addDealDocumentsStatus, String? addDealDocumentsError});
+  $Res call({AppStatus addDealDocumentsStatus, String? addDealDocumentsError});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class __$$DealAddDocumentStateImplCopyWithImpl<$Res>
       addDealDocumentsStatus: null == addDealDocumentsStatus
           ? _value.addDealDocumentsStatus
           : addDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addDealDocumentsError: freezed == addDealDocumentsError
           ? _value.addDealDocumentsError
           : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
@@ -105,11 +105,12 @@ class __$$DealAddDocumentStateImplCopyWithImpl<$Res>
 
 class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
   const _$DealAddDocumentStateImpl(
-      {this.addDealDocumentsStatus = Status.init, this.addDealDocumentsError});
+      {this.addDealDocumentsStatus = AppStatus.init,
+      this.addDealDocumentsError});
 
   @override
   @JsonKey()
-  final Status addDealDocumentsStatus;
+  final AppStatus addDealDocumentsStatus;
   @override
   final String? addDealDocumentsError;
 
@@ -144,11 +145,11 @@ class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
 
 abstract class _DealAddDocumentState implements DealAddDocumentState {
   const factory _DealAddDocumentState(
-      {final Status addDealDocumentsStatus,
+      {final AppStatus addDealDocumentsStatus,
       final String? addDealDocumentsError}) = _$DealAddDocumentStateImpl;
 
   @override
-  Status get addDealDocumentsStatus;
+  AppStatus get addDealDocumentsStatus;
   @override
   String? get addDealDocumentsError;
   @override

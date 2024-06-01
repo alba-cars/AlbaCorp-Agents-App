@@ -60,6 +60,14 @@ class _TicketDetailScreenLayoutState extends State<_TicketDetailScreenLayout> {
         title: Text('Ticket Details'),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.pushNamed(ChatScreen.routeName, pathParameters: {
+            'id': context.read<TicketDetailsCubit>().state.ticketId
+          });
+        },
+        child: Icon(Icons.message_outlined),
+      ),
       body: BlocBuilder<TicketDetailsCubit, TicketDetailsState>(
         builder: (context, state) {
           final ticket = state.ticket;

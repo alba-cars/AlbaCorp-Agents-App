@@ -19,27 +19,29 @@ mixin _$PropertyCardDetailsState {
   String get propertyCardId => throw _privateConstructorUsedError;
   List<LeadPropertyCardModel> get propertyCardLeads =>
       throw _privateConstructorUsedError;
-  Status get getPropertyCardLeadsStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyCardLeadsStatus =>
+      throw _privateConstructorUsedError;
   String? get getPropertyCardLeadsError => throw _privateConstructorUsedError;
   List<PropertyCardLog> get propertyCardLogs =>
       throw _privateConstructorUsedError;
-  Status get getPropertyCardLogsStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyCardLogsStatus => throw _privateConstructorUsedError;
   String? get getPropertyCardLogsError => throw _privateConstructorUsedError;
   List<PropertyCardNoteModel> get propertyCardNotes =>
       throw _privateConstructorUsedError;
-  Status get getPropertyCardNotesStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyCardNotesStatus =>
+      throw _privateConstructorUsedError;
   String? get getPropertyCardNotesError => throw _privateConstructorUsedError;
   PropertyCardDetailsModel? get propertyCard =>
       throw _privateConstructorUsedError;
-  Status get getPropertyCardStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyCardStatus => throw _privateConstructorUsedError;
   String? get getPropertyCardError => throw _privateConstructorUsedError;
-  Status get addPropertyCardNoteStatus => throw _privateConstructorUsedError;
+  AppStatus get addPropertyCardNoteStatus => throw _privateConstructorUsedError;
   String? get addPropertyCardNoteError => throw _privateConstructorUsedError;
-  Status get updatePropertyCardStatus => throw _privateConstructorUsedError;
+  AppStatus get updatePropertyCardStatus => throw _privateConstructorUsedError;
   String? get updatePropertyCardError => throw _privateConstructorUsedError;
-  Status get checkInStatus => throw _privateConstructorUsedError;
+  AppStatus get checkInStatus => throw _privateConstructorUsedError;
   String? get checkInError => throw _privateConstructorUsedError;
-  Status get checkOutLeadStatus => throw _privateConstructorUsedError;
+  AppStatus get checkOutLeadStatus => throw _privateConstructorUsedError;
   String? get checkOutLeadError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -56,24 +58,24 @@ abstract class $PropertyCardDetailsStateCopyWith<$Res> {
   $Res call(
       {String propertyCardId,
       List<LeadPropertyCardModel> propertyCardLeads,
-      Status getPropertyCardLeadsStatus,
+      AppStatus getPropertyCardLeadsStatus,
       String? getPropertyCardLeadsError,
       List<PropertyCardLog> propertyCardLogs,
-      Status getPropertyCardLogsStatus,
+      AppStatus getPropertyCardLogsStatus,
       String? getPropertyCardLogsError,
       List<PropertyCardNoteModel> propertyCardNotes,
-      Status getPropertyCardNotesStatus,
+      AppStatus getPropertyCardNotesStatus,
       String? getPropertyCardNotesError,
       PropertyCardDetailsModel? propertyCard,
-      Status getPropertyCardStatus,
+      AppStatus getPropertyCardStatus,
       String? getPropertyCardError,
-      Status addPropertyCardNoteStatus,
+      AppStatus addPropertyCardNoteStatus,
       String? addPropertyCardNoteError,
-      Status updatePropertyCardStatus,
+      AppStatus updatePropertyCardStatus,
       String? updatePropertyCardError,
-      Status checkInStatus,
+      AppStatus checkInStatus,
       String? checkInError,
-      Status checkOutLeadStatus,
+      AppStatus checkOutLeadStatus,
       String? checkOutLeadError});
 
   $PropertyCardDetailsModelCopyWith<$Res>? get propertyCard;
@@ -127,7 +129,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       getPropertyCardLeadsStatus: null == getPropertyCardLeadsStatus
           ? _value.getPropertyCardLeadsStatus
           : getPropertyCardLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardLeadsError: freezed == getPropertyCardLeadsError
           ? _value.getPropertyCardLeadsError
           : getPropertyCardLeadsError // ignore: cast_nullable_to_non_nullable
@@ -139,7 +141,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       getPropertyCardLogsStatus: null == getPropertyCardLogsStatus
           ? _value.getPropertyCardLogsStatus
           : getPropertyCardLogsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardLogsError: freezed == getPropertyCardLogsError
           ? _value.getPropertyCardLogsError
           : getPropertyCardLogsError // ignore: cast_nullable_to_non_nullable
@@ -151,7 +153,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       getPropertyCardNotesStatus: null == getPropertyCardNotesStatus
           ? _value.getPropertyCardNotesStatus
           : getPropertyCardNotesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardNotesError: freezed == getPropertyCardNotesError
           ? _value.getPropertyCardNotesError
           : getPropertyCardNotesError // ignore: cast_nullable_to_non_nullable
@@ -163,7 +165,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       getPropertyCardStatus: null == getPropertyCardStatus
           ? _value.getPropertyCardStatus
           : getPropertyCardStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardError: freezed == getPropertyCardError
           ? _value.getPropertyCardError
           : getPropertyCardError // ignore: cast_nullable_to_non_nullable
@@ -171,7 +173,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       addPropertyCardNoteStatus: null == addPropertyCardNoteStatus
           ? _value.addPropertyCardNoteStatus
           : addPropertyCardNoteStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addPropertyCardNoteError: freezed == addPropertyCardNoteError
           ? _value.addPropertyCardNoteError
           : addPropertyCardNoteError // ignore: cast_nullable_to_non_nullable
@@ -179,7 +181,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       updatePropertyCardStatus: null == updatePropertyCardStatus
           ? _value.updatePropertyCardStatus
           : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updatePropertyCardError: freezed == updatePropertyCardError
           ? _value.updatePropertyCardError
           : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
@@ -187,7 +189,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       checkInStatus: null == checkInStatus
           ? _value.checkInStatus
           : checkInStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkInError: freezed == checkInError
           ? _value.checkInError
           : checkInError // ignore: cast_nullable_to_non_nullable
@@ -195,7 +197,7 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
       checkOutLeadStatus: null == checkOutLeadStatus
           ? _value.checkOutLeadStatus
           : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkOutLeadError: freezed == checkOutLeadError
           ? _value.checkOutLeadError
           : checkOutLeadError // ignore: cast_nullable_to_non_nullable
@@ -229,24 +231,24 @@ abstract class _$$PropertyCardDetailsStateImplCopyWith<$Res>
   $Res call(
       {String propertyCardId,
       List<LeadPropertyCardModel> propertyCardLeads,
-      Status getPropertyCardLeadsStatus,
+      AppStatus getPropertyCardLeadsStatus,
       String? getPropertyCardLeadsError,
       List<PropertyCardLog> propertyCardLogs,
-      Status getPropertyCardLogsStatus,
+      AppStatus getPropertyCardLogsStatus,
       String? getPropertyCardLogsError,
       List<PropertyCardNoteModel> propertyCardNotes,
-      Status getPropertyCardNotesStatus,
+      AppStatus getPropertyCardNotesStatus,
       String? getPropertyCardNotesError,
       PropertyCardDetailsModel? propertyCard,
-      Status getPropertyCardStatus,
+      AppStatus getPropertyCardStatus,
       String? getPropertyCardError,
-      Status addPropertyCardNoteStatus,
+      AppStatus addPropertyCardNoteStatus,
       String? addPropertyCardNoteError,
-      Status updatePropertyCardStatus,
+      AppStatus updatePropertyCardStatus,
       String? updatePropertyCardError,
-      Status checkInStatus,
+      AppStatus checkInStatus,
       String? checkInError,
-      Status checkOutLeadStatus,
+      AppStatus checkOutLeadStatus,
       String? checkOutLeadError});
 
   @override
@@ -300,7 +302,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       getPropertyCardLeadsStatus: null == getPropertyCardLeadsStatus
           ? _value.getPropertyCardLeadsStatus
           : getPropertyCardLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardLeadsError: freezed == getPropertyCardLeadsError
           ? _value.getPropertyCardLeadsError
           : getPropertyCardLeadsError // ignore: cast_nullable_to_non_nullable
@@ -312,7 +314,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       getPropertyCardLogsStatus: null == getPropertyCardLogsStatus
           ? _value.getPropertyCardLogsStatus
           : getPropertyCardLogsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardLogsError: freezed == getPropertyCardLogsError
           ? _value.getPropertyCardLogsError
           : getPropertyCardLogsError // ignore: cast_nullable_to_non_nullable
@@ -324,7 +326,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       getPropertyCardNotesStatus: null == getPropertyCardNotesStatus
           ? _value.getPropertyCardNotesStatus
           : getPropertyCardNotesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardNotesError: freezed == getPropertyCardNotesError
           ? _value.getPropertyCardNotesError
           : getPropertyCardNotesError // ignore: cast_nullable_to_non_nullable
@@ -336,7 +338,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       getPropertyCardStatus: null == getPropertyCardStatus
           ? _value.getPropertyCardStatus
           : getPropertyCardStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getPropertyCardError: freezed == getPropertyCardError
           ? _value.getPropertyCardError
           : getPropertyCardError // ignore: cast_nullable_to_non_nullable
@@ -344,7 +346,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       addPropertyCardNoteStatus: null == addPropertyCardNoteStatus
           ? _value.addPropertyCardNoteStatus
           : addPropertyCardNoteStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addPropertyCardNoteError: freezed == addPropertyCardNoteError
           ? _value.addPropertyCardNoteError
           : addPropertyCardNoteError // ignore: cast_nullable_to_non_nullable
@@ -352,7 +354,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       updatePropertyCardStatus: null == updatePropertyCardStatus
           ? _value.updatePropertyCardStatus
           : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updatePropertyCardError: freezed == updatePropertyCardError
           ? _value.updatePropertyCardError
           : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
@@ -360,7 +362,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       checkInStatus: null == checkInStatus
           ? _value.checkInStatus
           : checkInStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkInError: freezed == checkInError
           ? _value.checkInError
           : checkInError // ignore: cast_nullable_to_non_nullable
@@ -368,7 +370,7 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
       checkOutLeadStatus: null == checkOutLeadStatus
           ? _value.checkOutLeadStatus
           : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkOutLeadError: freezed == checkOutLeadError
           ? _value.checkOutLeadError
           : checkOutLeadError // ignore: cast_nullable_to_non_nullable
@@ -383,24 +385,24 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
   const _$PropertyCardDetailsStateImpl(
       {required this.propertyCardId,
       final List<LeadPropertyCardModel> propertyCardLeads = const [],
-      this.getPropertyCardLeadsStatus = Status.init,
+      this.getPropertyCardLeadsStatus = AppStatus.init,
       this.getPropertyCardLeadsError,
       final List<PropertyCardLog> propertyCardLogs = const [],
-      this.getPropertyCardLogsStatus = Status.init,
+      this.getPropertyCardLogsStatus = AppStatus.init,
       this.getPropertyCardLogsError,
       final List<PropertyCardNoteModel> propertyCardNotes = const [],
-      this.getPropertyCardNotesStatus = Status.init,
+      this.getPropertyCardNotesStatus = AppStatus.init,
       this.getPropertyCardNotesError,
       this.propertyCard,
-      this.getPropertyCardStatus = Status.init,
+      this.getPropertyCardStatus = AppStatus.init,
       this.getPropertyCardError,
-      this.addPropertyCardNoteStatus = Status.init,
+      this.addPropertyCardNoteStatus = AppStatus.init,
       this.addPropertyCardNoteError,
-      this.updatePropertyCardStatus = Status.init,
+      this.updatePropertyCardStatus = AppStatus.init,
       this.updatePropertyCardError,
-      this.checkInStatus = Status.init,
+      this.checkInStatus = AppStatus.init,
       this.checkInError,
-      this.checkOutLeadStatus = Status.init,
+      this.checkOutLeadStatus = AppStatus.init,
       this.checkOutLeadError})
       : _propertyCardLeads = propertyCardLeads,
         _propertyCardLogs = propertyCardLogs,
@@ -420,7 +422,7 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
 
   @override
   @JsonKey()
-  final Status getPropertyCardLeadsStatus;
+  final AppStatus getPropertyCardLeadsStatus;
   @override
   final String? getPropertyCardLeadsError;
   final List<PropertyCardLog> _propertyCardLogs;
@@ -435,7 +437,7 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
 
   @override
   @JsonKey()
-  final Status getPropertyCardLogsStatus;
+  final AppStatus getPropertyCardLogsStatus;
   @override
   final String? getPropertyCardLogsError;
   final List<PropertyCardNoteModel> _propertyCardNotes;
@@ -450,34 +452,34 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
 
   @override
   @JsonKey()
-  final Status getPropertyCardNotesStatus;
+  final AppStatus getPropertyCardNotesStatus;
   @override
   final String? getPropertyCardNotesError;
   @override
   final PropertyCardDetailsModel? propertyCard;
   @override
   @JsonKey()
-  final Status getPropertyCardStatus;
+  final AppStatus getPropertyCardStatus;
   @override
   final String? getPropertyCardError;
   @override
   @JsonKey()
-  final Status addPropertyCardNoteStatus;
+  final AppStatus addPropertyCardNoteStatus;
   @override
   final String? addPropertyCardNoteError;
   @override
   @JsonKey()
-  final Status updatePropertyCardStatus;
+  final AppStatus updatePropertyCardStatus;
   @override
   final String? updatePropertyCardError;
   @override
   @JsonKey()
-  final Status checkInStatus;
+  final AppStatus checkInStatus;
   @override
   final String? checkInError;
   @override
   @JsonKey()
-  final Status checkOutLeadStatus;
+  final AppStatus checkOutLeadStatus;
   @override
   final String? checkOutLeadError;
 
@@ -575,24 +577,24 @@ abstract class _PropertyCardDetailsState implements PropertyCardDetailsState {
   const factory _PropertyCardDetailsState(
       {required final String propertyCardId,
       final List<LeadPropertyCardModel> propertyCardLeads,
-      final Status getPropertyCardLeadsStatus,
+      final AppStatus getPropertyCardLeadsStatus,
       final String? getPropertyCardLeadsError,
       final List<PropertyCardLog> propertyCardLogs,
-      final Status getPropertyCardLogsStatus,
+      final AppStatus getPropertyCardLogsStatus,
       final String? getPropertyCardLogsError,
       final List<PropertyCardNoteModel> propertyCardNotes,
-      final Status getPropertyCardNotesStatus,
+      final AppStatus getPropertyCardNotesStatus,
       final String? getPropertyCardNotesError,
       final PropertyCardDetailsModel? propertyCard,
-      final Status getPropertyCardStatus,
+      final AppStatus getPropertyCardStatus,
       final String? getPropertyCardError,
-      final Status addPropertyCardNoteStatus,
+      final AppStatus addPropertyCardNoteStatus,
       final String? addPropertyCardNoteError,
-      final Status updatePropertyCardStatus,
+      final AppStatus updatePropertyCardStatus,
       final String? updatePropertyCardError,
-      final Status checkInStatus,
+      final AppStatus checkInStatus,
       final String? checkInError,
-      final Status checkOutLeadStatus,
+      final AppStatus checkOutLeadStatus,
       final String? checkOutLeadError}) = _$PropertyCardDetailsStateImpl;
 
   @override
@@ -600,41 +602,41 @@ abstract class _PropertyCardDetailsState implements PropertyCardDetailsState {
   @override
   List<LeadPropertyCardModel> get propertyCardLeads;
   @override
-  Status get getPropertyCardLeadsStatus;
+  AppStatus get getPropertyCardLeadsStatus;
   @override
   String? get getPropertyCardLeadsError;
   @override
   List<PropertyCardLog> get propertyCardLogs;
   @override
-  Status get getPropertyCardLogsStatus;
+  AppStatus get getPropertyCardLogsStatus;
   @override
   String? get getPropertyCardLogsError;
   @override
   List<PropertyCardNoteModel> get propertyCardNotes;
   @override
-  Status get getPropertyCardNotesStatus;
+  AppStatus get getPropertyCardNotesStatus;
   @override
   String? get getPropertyCardNotesError;
   @override
   PropertyCardDetailsModel? get propertyCard;
   @override
-  Status get getPropertyCardStatus;
+  AppStatus get getPropertyCardStatus;
   @override
   String? get getPropertyCardError;
   @override
-  Status get addPropertyCardNoteStatus;
+  AppStatus get addPropertyCardNoteStatus;
   @override
   String? get addPropertyCardNoteError;
   @override
-  Status get updatePropertyCardStatus;
+  AppStatus get updatePropertyCardStatus;
   @override
   String? get updatePropertyCardError;
   @override
-  Status get checkInStatus;
+  AppStatus get checkInStatus;
   @override
   String? get checkInError;
   @override
-  Status get checkOutLeadStatus;
+  AppStatus get checkOutLeadStatus;
   @override
   String? get checkOutLeadError;
   @override

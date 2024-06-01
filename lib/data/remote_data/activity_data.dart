@@ -48,12 +48,13 @@ class ActivityData implements ActivityRepo {
   @override
   Future<Result<void>> updateActivity(
       {required String activityId,
+      required bool completed,
       int? duration,
       String? notes,
       String? feedback}) async {
     try {
       final response = await _dio.patch('/v1/activities/$activityId', data: {
-        'status': 'Complete',
+        if (completed) 'status': 'Complete',
         if (duration != null) 'duration': duration,
         if (feedback == 'Not Interested') 'is_interested': false,
         if (feedback == 'Interested') 'is_interested': true,

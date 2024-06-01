@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
+import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 
+import '../../../model/lead_model.dart';
 import '../../../model/off_plan_model.dart';
 import '../../../model/property_type_model.dart';
 import '../../../widgets/fields/autocomplete_field.dart';
@@ -44,17 +48,37 @@ class _PrimaryBasicInfoTabState extends State<PrimaryBasicInfoTab> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppAutoComplete(
-                  name: 'user_id',
-                  label: 'Client',
-                  isRequired: true,
-                  valueTransformer: (p0) => p0?.id,
-                  displayStringForOption: (lead) =>
-                      '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
-                  optionsBuilder: (v) async {
-                    return context
-                        .read<AddDealCubit>()
-                        .getLeads(search: v.text);
-                  }),
+                name: 'user_id',
+                label: 'Client',
+                isRequired: true,
+                valueTransformer: (p0) => p0?.id,
+                displayStringForOption: (lead) =>
+                    '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
+                optionsBuilder: (v) async {
+                  return context.read<AddDealCubit>().getLeads(search: v.text);
+                },
+                actionButton: (key) {
+                  return TextButton(
+                    style: TextButton.styleFrom(
+                        visualDensity: VisualDensity.compact,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        // alignment: Alignment.centerRight,
+                        padding: EdgeInsets.zero),
+                    onPressed: () async {
+                      final lead = await context
+                          .pushNamed<Lead>(AddLeadScreen.routeName);
+
+                      if (lead != null) {
+                        final fieldValues =
+                            widget._formKey.currentState?.instantValue ?? {};
+                        widget._formKey.currentState
+                            ?.patchValue({...fieldValues, 'user_id': lead});
+                      }
+                    },
+                    child: Text('Add'),
+                  );
+                },
+              ),
               AppAutoComplete(
                   name: 'offPlanId',
                   label: 'Development',

@@ -9,7 +9,10 @@ import '../../util/result.dart';
 
 abstract class ExplorerRepo {
   Future<Result<List<PropertyCard>>> getPropertyCards(
-      {Map<String, dynamic>? filter, String? search, Paginator? paginator});
+      {Map<String, dynamic>? filter,
+      String? search,
+      bool showOnlyAvailable = true,
+      Paginator? paginator});
   Future<Result<List<PropertyCard>>> getPocketListings(
       {Map<String, dynamic>? filter, String? search, Paginator? paginator});
   Future<Result<void>> addPocketListings(

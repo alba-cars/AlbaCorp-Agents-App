@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ActivityState {
   ActivityFeedback? get activityFeedback => throw _privateConstructorUsedError;
   Activity? get lastActivity => throw _privateConstructorUsedError;
+  bool get newSpecialLeadsTasks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ActivityStateCopyWith<ActivityState> get copyWith =>
@@ -30,7 +31,10 @@ abstract class $ActivityStateCopyWith<$Res> {
           ActivityState value, $Res Function(ActivityState) then) =
       _$ActivityStateCopyWithImpl<$Res, ActivityState>;
   @useResult
-  $Res call({ActivityFeedback? activityFeedback, Activity? lastActivity});
+  $Res call(
+      {ActivityFeedback? activityFeedback,
+      Activity? lastActivity,
+      bool newSpecialLeadsTasks});
 
   $ActivityFeedbackCopyWith<$Res>? get activityFeedback;
   $ActivityCopyWith<$Res>? get lastActivity;
@@ -51,6 +55,7 @@ class _$ActivityStateCopyWithImpl<$Res, $Val extends ActivityState>
   $Res call({
     Object? activityFeedback = freezed,
     Object? lastActivity = freezed,
+    Object? newSpecialLeadsTasks = null,
   }) {
     return _then(_value.copyWith(
       activityFeedback: freezed == activityFeedback
@@ -61,6 +66,10 @@ class _$ActivityStateCopyWithImpl<$Res, $Val extends ActivityState>
           ? _value.lastActivity
           : lastActivity // ignore: cast_nullable_to_non_nullable
               as Activity?,
+      newSpecialLeadsTasks: null == newSpecialLeadsTasks
+          ? _value.newSpecialLeadsTasks
+          : newSpecialLeadsTasks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -97,7 +106,10 @@ abstract class _$$ActivityStateImplCopyWith<$Res>
       __$$ActivityStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ActivityFeedback? activityFeedback, Activity? lastActivity});
+  $Res call(
+      {ActivityFeedback? activityFeedback,
+      Activity? lastActivity,
+      bool newSpecialLeadsTasks});
 
   @override
   $ActivityFeedbackCopyWith<$Res>? get activityFeedback;
@@ -118,6 +130,7 @@ class __$$ActivityStateImplCopyWithImpl<$Res>
   $Res call({
     Object? activityFeedback = freezed,
     Object? lastActivity = freezed,
+    Object? newSpecialLeadsTasks = null,
   }) {
     return _then(_$ActivityStateImpl(
       activityFeedback: freezed == activityFeedback
@@ -128,6 +141,10 @@ class __$$ActivityStateImplCopyWithImpl<$Res>
           ? _value.lastActivity
           : lastActivity // ignore: cast_nullable_to_non_nullable
               as Activity?,
+      newSpecialLeadsTasks: null == newSpecialLeadsTasks
+          ? _value.newSpecialLeadsTasks
+          : newSpecialLeadsTasks // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -135,16 +152,22 @@ class __$$ActivityStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ActivityStateImpl implements _ActivityState {
-  const _$ActivityStateImpl({this.activityFeedback, this.lastActivity});
+  const _$ActivityStateImpl(
+      {this.activityFeedback,
+      this.lastActivity,
+      this.newSpecialLeadsTasks = false});
 
   @override
   final ActivityFeedback? activityFeedback;
   @override
   final Activity? lastActivity;
+  @override
+  @JsonKey()
+  final bool newSpecialLeadsTasks;
 
   @override
   String toString() {
-    return 'ActivityState(activityFeedback: $activityFeedback, lastActivity: $lastActivity)';
+    return 'ActivityState(activityFeedback: $activityFeedback, lastActivity: $lastActivity, newSpecialLeadsTasks: $newSpecialLeadsTasks)';
   }
 
   @override
@@ -155,11 +178,14 @@ class _$ActivityStateImpl implements _ActivityState {
             (identical(other.activityFeedback, activityFeedback) ||
                 other.activityFeedback == activityFeedback) &&
             (identical(other.lastActivity, lastActivity) ||
-                other.lastActivity == lastActivity));
+                other.lastActivity == lastActivity) &&
+            (identical(other.newSpecialLeadsTasks, newSpecialLeadsTasks) ||
+                other.newSpecialLeadsTasks == newSpecialLeadsTasks));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, activityFeedback, lastActivity);
+  int get hashCode => Object.hash(
+      runtimeType, activityFeedback, lastActivity, newSpecialLeadsTasks);
 
   @JsonKey(ignore: true)
   @override
@@ -171,12 +197,15 @@ class _$ActivityStateImpl implements _ActivityState {
 abstract class _ActivityState implements ActivityState {
   const factory _ActivityState(
       {final ActivityFeedback? activityFeedback,
-      final Activity? lastActivity}) = _$ActivityStateImpl;
+      final Activity? lastActivity,
+      final bool newSpecialLeadsTasks}) = _$ActivityStateImpl;
 
   @override
   ActivityFeedback? get activityFeedback;
   @override
   Activity? get lastActivity;
+  @override
+  bool get newSpecialLeadsTasks;
   @override
   @JsonKey(ignore: true)
   _$$ActivityStateImplCopyWith<_$ActivityStateImpl> get copyWith =>

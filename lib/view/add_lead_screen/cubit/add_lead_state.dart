@@ -3,10 +3,10 @@ part of 'add_lead_cubit.dart';
 @freezed
 class AddLeadState with _$AddLeadState {
   const factory AddLeadState({
-    @Default(Status.init) Status addLeadStatus,
+    @Default(AppStatus.init) AppStatus addLeadStatus,
     String? addLeadError,
     @Default([]) List<LeadSource> leadSources,
-    @Default(Status.init) Status getLeadSourceStatus,
+    @Default(AppStatus.init) AppStatus getLeadSourceStatus,
     @Default([]) List<Country> countries,
     Country? selectedCountry,
     @Default([]) List<State> states,

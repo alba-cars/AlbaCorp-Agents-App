@@ -36,68 +36,68 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
   final ExplorerRepo _explorerRepo;
 
   Future<void> getPropertyCard() async {
-    emit(state.copyWith(getPropertyCardStatus: Status.loading));
+    emit(state.copyWith(getPropertyCardStatus: AppStatus.loading));
     final result = await _explorerRepo.getPropertyCard(
         propertyCardId: state.propertyCardId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            propertyCard: s.value, getPropertyCardStatus: Status.success));
+            propertyCard: s.value, getPropertyCardStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            getPropertyCardStatus: Status.failure,
+            getPropertyCardStatus: AppStatus.failure,
             getPropertyCardError: e.exception));
     }
   }
 
   Future<void> getPropertyCardLeads() async {
-    emit(state.copyWith(getPropertyCardLeadsStatus: Status.loading));
+    emit(state.copyWith(getPropertyCardLeadsStatus: AppStatus.loading));
     final result = await _explorerRepo.getPropertyCardLeads(
         propertyCardId: state.propertyCardId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             propertyCardLeads: s.value,
-            getPropertyCardLeadsStatus: Status.success));
+            getPropertyCardLeadsStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            getPropertyCardLeadsStatus: Status.failure,
+            getPropertyCardLeadsStatus: AppStatus.failure,
             getPropertyCardLeadsError: e.exception));
     }
   }
 
   Future<void> getPropertyCardLogs() async {
-    emit(state.copyWith(getPropertyCardLogsStatus: Status.loading));
+    emit(state.copyWith(getPropertyCardLogsStatus: AppStatus.loading));
     final result = await _explorerRepo.getPropertyCardLogs(
         propertyCardId: state.propertyCardId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             propertyCardLogs: s.value,
-            getPropertyCardLogsStatus: Status.success));
+            getPropertyCardLogsStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            getPropertyCardLogsStatus: Status.failure,
+            getPropertyCardLogsStatus: AppStatus.failure,
             getPropertyCardLogsError: e.exception));
     }
   }
 
   Future<void> getPropertyCardNotes() async {
-    emit(state.copyWith(getPropertyCardNotesStatus: Status.loading));
+    emit(state.copyWith(getPropertyCardNotesStatus: AppStatus.loading));
     final result = await _explorerRepo.getPropertyCardNotes(
         propertyCardId: state.propertyCardId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             propertyCardNotes: s.value,
-            getPropertyCardNotesStatus: Status.success));
+            getPropertyCardNotesStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            getPropertyCardNotesStatus: Status.failure,
+            getPropertyCardNotesStatus: AppStatus.failure,
             getPropertyCardNotesError: e.exception));
     }
   }
@@ -105,19 +105,19 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
   Future<void> addPropertyCardNotes(
       {required BuildContext context,
       required Map<String, dynamic> values}) async {
-    emit(state.copyWith(addPropertyCardNoteStatus: Status.loading));
+    emit(state.copyWith(addPropertyCardNoteStatus: AppStatus.loading));
     final result = await _explorerRepo.addPropertyCardNotes(
         propertyCardId: state.propertyCardId, values: values);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addPropertyCardNoteStatus: Status.success));
+        emit(state.copyWith(addPropertyCardNoteStatus: AppStatus.success));
         getPropertyCardNotes();
         showSnackbar(context, 'Note added successfully', SnackBarType.success);
         Navigator.of(context).pop();
         break;
       case (Error e):
         emit(state.copyWith(
-            addPropertyCardNoteStatus: Status.failure,
+            addPropertyCardNoteStatus: AppStatus.failure,
             addPropertyCardNoteError: e.exception));
         showSnackbar(context, e.exception, SnackBarType.failure);
     }
@@ -125,7 +125,7 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
 
   Future<void> verifyLeadAsOwner(
       {required LeadPropertyCardModel leadCard, required int index}) async {
-    emit(state.copyWith(updatePropertyCardStatus: Status.loading));
+    emit(state.copyWith(updatePropertyCardStatus: AppStatus.loading));
     final result = await _explorerRepo.updatePropertyCard(
         propertyCardId: state.propertyCardId,
         values: {'currentOwner': leadCard.lead.id, 'status': 'Verified'});
@@ -146,18 +146,18 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
         emit(state.copyWith(
             propertyCard: card,
             propertyCardLeads: leadCards,
-            updatePropertyCardStatus: Status.success));
+            updatePropertyCardStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            updatePropertyCardStatus: Status.failure,
+            updatePropertyCardStatus: AppStatus.failure,
             updatePropertyCardError: e.exception));
     }
   }
 
   Future<void> markLeadAsPastOwner(
       {required LeadPropertyCardModel leadCard, required int index}) async {
-    emit(state.copyWith(updatePropertyCardStatus: Status.loading));
+    emit(state.copyWith(updatePropertyCardStatus: AppStatus.loading));
     final result = await _explorerRepo.setPastOwner(
         propertyCardId: state.propertyCardId, leadId: leadCard.lead.id);
     switch (result) {
@@ -169,45 +169,45 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
         leadCards.insert(index, leadCard.copyWith(wasOwner: true));
 
         emit(state.copyWith(
-            updatePropertyCardStatus: Status.success,
+            updatePropertyCardStatus: AppStatus.success,
             propertyCard: card,
             propertyCardLeads: leadCards));
         break;
       case (Error e):
         emit(state.copyWith(
-            updatePropertyCardStatus: Status.failure,
+            updatePropertyCardStatus: AppStatus.failure,
             updatePropertyCardError: e.exception));
     }
   }
 
   Future<void> unLinkLeadFromPropertyCard({required String leadCardId}) async {
-    emit(state.copyWith(updatePropertyCardStatus: Status.loading));
+    emit(state.copyWith(updatePropertyCardStatus: AppStatus.loading));
     final result =
         await _explorerRepo.unLinkPropertyFromLead(leadCardId: leadCardId);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(updatePropertyCardStatus: Status.success));
+        emit(state.copyWith(updatePropertyCardStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            updatePropertyCardStatus: Status.failure,
+            updatePropertyCardStatus: AppStatus.failure,
             updatePropertyCardError: e.exception));
     }
   }
 
   Future<void> updatePropertyCard(
       {required Map<String, dynamic> values}) async {
-    emit(state.copyWith(updatePropertyCardStatus: Status.loading));
+    emit(state.copyWith(updatePropertyCardStatus: AppStatus.loading));
     final result = await _explorerRepo.updatePropertyCard(
         propertyCardId: state.propertyCardId, values: values);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(updatePropertyCardStatus: Status.success));
+        emit(state.copyWith(updatePropertyCardStatus: AppStatus.success));
         getPropertyCard();
         break;
       case (Error e):
         emit(state.copyWith(
-            updatePropertyCardStatus: Status.failure,
+            updatePropertyCardStatus: AppStatus.failure,
             updatePropertyCardError: e.exception));
     }
   }
@@ -215,13 +215,13 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
   Future<void> checkInLead({
     required BuildContext context,
   }) async {
-    emit(state.copyWith(checkInStatus: Status.loading));
+    emit(state.copyWith(checkInStatus: AppStatus.loading));
     final result = await _explorerRepo
         .checkInLead(propertyCardIds: [state.propertyCardId]);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-          checkInStatus: Status.success,
+          checkInStatus: AppStatus.success,
         ));
         getPropertyCard();
         if (context.mounted) {
@@ -233,7 +233,7 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            checkInStatus: Status.failure, checkInError: e.exception));
+            checkInStatus: AppStatus.failure, checkInError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
@@ -243,13 +243,13 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
   Future<void> checkOutLead({
     required BuildContext context,
   }) async {
-    emit(state.copyWith(checkOutLeadStatus: Status.loading));
+    emit(state.copyWith(checkOutLeadStatus: AppStatus.loading));
     final result = await _explorerRepo
         .checkOutLead(propertyCardIds: [state.propertyCardId]);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-          checkOutLeadStatus: Status.success,
+          checkOutLeadStatus: AppStatus.success,
         ));
         getPropertyCard();
         if (context.mounted) {
@@ -260,7 +260,7 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            checkOutLeadStatus: Status.failure,
+            checkOutLeadStatus: AppStatus.failure,
             checkOutLeadError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);

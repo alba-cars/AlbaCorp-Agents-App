@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginState {
-  Status get loginStatus => throw _privateConstructorUsedError;
+  AppStatus get loginStatus => throw _privateConstructorUsedError;
   String? get loginErrorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({Status loginStatus, String? loginErrorMessage});
+  $Res call({AppStatus loginStatus, String? loginErrorMessage});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       loginStatus: null == loginStatus
           ? _value.loginStatus
           : loginStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       loginErrorMessage: freezed == loginErrorMessage
           ? _value.loginErrorMessage
           : loginErrorMessage // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status loginStatus, String? loginErrorMessage});
+  $Res call({AppStatus loginStatus, String? loginErrorMessage});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
       loginStatus: null == loginStatus
           ? _value.loginStatus
           : loginStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       loginErrorMessage: freezed == loginErrorMessage
           ? _value.loginErrorMessage
           : loginErrorMessage // ignore: cast_nullable_to_non_nullable
@@ -104,11 +104,11 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 
 class _$LoginStateImpl implements _LoginState {
   const _$LoginStateImpl(
-      {this.loginStatus = Status.init, this.loginErrorMessage});
+      {this.loginStatus = AppStatus.init, this.loginErrorMessage});
 
   @override
   @JsonKey()
-  final Status loginStatus;
+  final AppStatus loginStatus;
   @override
   final String? loginErrorMessage;
 
@@ -140,11 +140,11 @@ class _$LoginStateImpl implements _LoginState {
 
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
-      {final Status loginStatus,
+      {final AppStatus loginStatus,
       final String? loginErrorMessage}) = _$LoginStateImpl;
 
   @override
-  Status get loginStatus;
+  AppStatus get loginStatus;
   @override
   String? get loginErrorMessage;
   @override

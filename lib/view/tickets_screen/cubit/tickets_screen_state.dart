@@ -4,9 +4,13 @@ part of 'tickets_screen_cubit.dart';
 class TicketsScreenState with _$TicketsScreenState {
   const factory TicketsScreenState({
     @Default([]) List<Ticket> ticketsList,
-    @Default(Status.init) Status getTicketsListStatus,
+    @Default(AppStatus.init) AppStatus getTicketsListStatus,
     String? getTicketsListError,
     Paginator? ticketsPaginator,
     @Default(0) int currentTab,
+    String? ticketsSearch,
+    Map<String, dynamic>? ticketsFilter,
+    @Default([]) List<Department> departments,
+    @Default(AppStatus.init) AppStatus getDepartmentsStatus,
   }) = _TicketsScreenState;
 }

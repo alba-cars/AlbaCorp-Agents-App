@@ -48,8 +48,8 @@ mixin _$PropertyCardDetailsModel {
   DateTime? get checkedOutDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'currentAgent')
   dynamic get currentAgent => throw _privateConstructorUsedError;
-  @JsonKey(name: 'currentOwner')
-  User? get currentOwner => throw _privateConstructorUsedError;
+  @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+  dynamic get currentOwner => throw _privateConstructorUsedError;
   @JsonKey(name: 'updatedBy')
   User? get updatedBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNumber')
@@ -94,7 +94,8 @@ abstract class $PropertyCardDetailsModelCopyWith<$Res> {
       @JsonKey(name: 'updatedAt') DateTime? updatedAt,
       @JsonKey(name: 'checkedOutDate') DateTime? checkedOutDate,
       @JsonKey(name: 'currentAgent') dynamic currentAgent,
-      @JsonKey(name: 'currentOwner') User? currentOwner,
+      @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+      dynamic currentOwner,
       @JsonKey(name: 'updatedBy') User? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') DateTime? expirationDate,
@@ -106,7 +107,6 @@ abstract class $PropertyCardDetailsModelCopyWith<$Res> {
 
   $BuildingCopyWith<$Res>? get building;
   $CommunityCopyWith<$Res>? get community;
-  $UserCopyWith<$Res>? get currentOwner;
   $UserCopyWith<$Res>? get updatedBy;
 }
 
@@ -223,7 +223,7 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
       currentOwner: freezed == currentOwner
           ? _value.currentOwner
           : currentOwner // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as dynamic,
       updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
@@ -285,18 +285,6 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get currentOwner {
-    if (_value.currentOwner == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.currentOwner!, (value) {
-      return _then(_value.copyWith(currentOwner: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res>? get updatedBy {
     if (_value.updatedBy == null) {
       return null;
@@ -335,7 +323,8 @@ abstract class _$$PropertyCardDetailsModelImplCopyWith<$Res>
       @JsonKey(name: 'updatedAt') DateTime? updatedAt,
       @JsonKey(name: 'checkedOutDate') DateTime? checkedOutDate,
       @JsonKey(name: 'currentAgent') dynamic currentAgent,
-      @JsonKey(name: 'currentOwner') User? currentOwner,
+      @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+      dynamic currentOwner,
       @JsonKey(name: 'updatedBy') User? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') DateTime? expirationDate,
@@ -349,8 +338,6 @@ abstract class _$$PropertyCardDetailsModelImplCopyWith<$Res>
   $BuildingCopyWith<$Res>? get building;
   @override
   $CommunityCopyWith<$Res>? get community;
-  @override
-  $UserCopyWith<$Res>? get currentOwner;
   @override
   $UserCopyWith<$Res>? get updatedBy;
 }
@@ -467,7 +454,7 @@ class __$$PropertyCardDetailsModelImplCopyWithImpl<$Res>
       currentOwner: freezed == currentOwner
           ? _value.currentOwner
           : currentOwner // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as dynamic,
       updatedBy: freezed == updatedBy
           ? _value.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
@@ -525,7 +512,8 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
       @JsonKey(name: 'updatedAt') this.updatedAt,
       @JsonKey(name: 'checkedOutDate') this.checkedOutDate,
       @JsonKey(name: 'currentAgent') this.currentAgent,
-      @JsonKey(name: 'currentOwner') this.currentOwner,
+      @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+      this.currentOwner,
       @JsonKey(name: 'updatedBy') this.updatedBy,
       @JsonKey(name: 'referenceNumber') this.referenceNumber,
       @JsonKey(name: 'expirationDate') this.expirationDate,
@@ -593,8 +581,8 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
   @JsonKey(name: 'currentAgent')
   final dynamic currentAgent;
   @override
-  @JsonKey(name: 'currentOwner')
-  final User? currentOwner;
+  @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+  final dynamic currentOwner;
   @override
   @JsonKey(name: 'updatedBy')
   final User? updatedBy;
@@ -661,8 +649,8 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
                 other.checkedOutDate == checkedOutDate) &&
             const DeepCollectionEquality()
                 .equals(other.currentAgent, currentAgent) &&
-            (identical(other.currentOwner, currentOwner) ||
-                other.currentOwner == currentOwner) &&
+            const DeepCollectionEquality()
+                .equals(other.currentOwner, currentOwner) &&
             (identical(other.updatedBy, updatedBy) ||
                 other.updatedBy == updatedBy) &&
             (identical(other.referenceNumber, referenceNumber) ||
@@ -701,7 +689,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
         updatedAt,
         checkedOutDate,
         const DeepCollectionEquality().hash(currentAgent),
-        currentOwner,
+        const DeepCollectionEquality().hash(currentOwner),
         updatedBy,
         referenceNumber,
         expirationDate,
@@ -746,7 +734,8 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
       @JsonKey(name: 'updatedAt') final DateTime? updatedAt,
       @JsonKey(name: 'checkedOutDate') final DateTime? checkedOutDate,
       @JsonKey(name: 'currentAgent') final dynamic currentAgent,
-      @JsonKey(name: 'currentOwner') final User? currentOwner,
+      @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+      final dynamic currentOwner,
       @JsonKey(name: 'updatedBy') final User? updatedBy,
       @JsonKey(name: 'referenceNumber') final String? referenceNumber,
       @JsonKey(name: 'expirationDate') final DateTime? expirationDate,
@@ -804,8 +793,8 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
   @JsonKey(name: 'currentAgent')
   dynamic get currentAgent;
   @override
-  @JsonKey(name: 'currentOwner')
-  User? get currentOwner;
+  @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+  dynamic get currentOwner;
   @override
   @JsonKey(name: 'updatedBy')
   User? get updatedBy;

@@ -14,6 +14,7 @@ import 'package:real_estate_app/model/property_card_note_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:recase/recase.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart';
 
@@ -32,6 +33,7 @@ class ExplorerData implements ExplorerRepo {
   Future<Result<List<PropertyCard>>> getPropertyCards(
       {Map<String, dynamic>? filter,
       String? search,
+      bool showOnlyAvailable = true,
       Paginator? paginator}) async {
     try {
       String url = 'v1/property-cards';
@@ -54,7 +56,8 @@ class ExplorerData implements ExplorerRepo {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,
         if (filterRemoved != null) ...filterRemoved,
-        if (search != null) 'search': search
+        if (search != null) 'search': search,
+        if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
       });
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();
@@ -62,7 +65,7 @@ class ExplorerData implements ExplorerRepo {
           paginator: Paginator(
               currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: 15,
-              itemCount: response.data['data']['filteredCount']));
+              itemCount: response.data['data']?['filteredCount'] ?? 0));
     } catch (e, stack) {
       return onError(e, stack, log);
     }
@@ -186,6 +189,7 @@ class ExplorerData implements ExplorerRepo {
         url,
       );
       final data = response.data['data'] as List;
+      log.d(data);
       final list = data.map((e) => PropertyCardLog.fromJson(e)).toList();
       return Success(
         list,
@@ -216,7 +220,14 @@ class ExplorerData implements ExplorerRepo {
             return MapEntry(key, value);
           }
         });
+        if (filterRemoved.containsKey('price') == true) {
+          final val = filterRemoved['price'] as SfRangeValues;
+          filterRemoved['minPrice'] = val.start;
+          filterRemoved['maxPrice'] = val.end;
+          filterRemoved.remove('price');
+        }
       }
+
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,

@@ -17,10 +17,14 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TicketsScreenState {
   List<Ticket> get ticketsList => throw _privateConstructorUsedError;
-  Status get getTicketsListStatus => throw _privateConstructorUsedError;
+  AppStatus get getTicketsListStatus => throw _privateConstructorUsedError;
   String? get getTicketsListError => throw _privateConstructorUsedError;
   Paginator? get ticketsPaginator => throw _privateConstructorUsedError;
   int get currentTab => throw _privateConstructorUsedError;
+  String? get ticketsSearch => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get ticketsFilter => throw _privateConstructorUsedError;
+  List<Department> get departments => throw _privateConstructorUsedError;
+  AppStatus get getDepartmentsStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TicketsScreenStateCopyWith<TicketsScreenState> get copyWith =>
@@ -35,10 +39,14 @@ abstract class $TicketsScreenStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Ticket> ticketsList,
-      Status getTicketsListStatus,
+      AppStatus getTicketsListStatus,
       String? getTicketsListError,
       Paginator? ticketsPaginator,
-      int currentTab});
+      int currentTab,
+      String? ticketsSearch,
+      Map<String, dynamic>? ticketsFilter,
+      List<Department> departments,
+      AppStatus getDepartmentsStatus});
 
   $PaginatorCopyWith<$Res>? get ticketsPaginator;
 }
@@ -61,6 +69,10 @@ class _$TicketsScreenStateCopyWithImpl<$Res, $Val extends TicketsScreenState>
     Object? getTicketsListError = freezed,
     Object? ticketsPaginator = freezed,
     Object? currentTab = null,
+    Object? ticketsSearch = freezed,
+    Object? ticketsFilter = freezed,
+    Object? departments = null,
+    Object? getDepartmentsStatus = null,
   }) {
     return _then(_value.copyWith(
       ticketsList: null == ticketsList
@@ -70,7 +82,7 @@ class _$TicketsScreenStateCopyWithImpl<$Res, $Val extends TicketsScreenState>
       getTicketsListStatus: null == getTicketsListStatus
           ? _value.getTicketsListStatus
           : getTicketsListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getTicketsListError: freezed == getTicketsListError
           ? _value.getTicketsListError
           : getTicketsListError // ignore: cast_nullable_to_non_nullable
@@ -83,6 +95,22 @@ class _$TicketsScreenStateCopyWithImpl<$Res, $Val extends TicketsScreenState>
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
+      ticketsSearch: freezed == ticketsSearch
+          ? _value.ticketsSearch
+          : ticketsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ticketsFilter: freezed == ticketsFilter
+          ? _value.ticketsFilter
+          : ticketsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      departments: null == departments
+          ? _value.departments
+          : departments // ignore: cast_nullable_to_non_nullable
+              as List<Department>,
+      getDepartmentsStatus: null == getDepartmentsStatus
+          ? _value.getDepartmentsStatus
+          : getDepartmentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
     ) as $Val);
   }
 
@@ -109,10 +137,14 @@ abstract class _$$TicketsScreenStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<Ticket> ticketsList,
-      Status getTicketsListStatus,
+      AppStatus getTicketsListStatus,
       String? getTicketsListError,
       Paginator? ticketsPaginator,
-      int currentTab});
+      int currentTab,
+      String? ticketsSearch,
+      Map<String, dynamic>? ticketsFilter,
+      List<Department> departments,
+      AppStatus getDepartmentsStatus});
 
   @override
   $PaginatorCopyWith<$Res>? get ticketsPaginator;
@@ -134,6 +166,10 @@ class __$$TicketsScreenStateImplCopyWithImpl<$Res>
     Object? getTicketsListError = freezed,
     Object? ticketsPaginator = freezed,
     Object? currentTab = null,
+    Object? ticketsSearch = freezed,
+    Object? ticketsFilter = freezed,
+    Object? departments = null,
+    Object? getDepartmentsStatus = null,
   }) {
     return _then(_$TicketsScreenStateImpl(
       ticketsList: null == ticketsList
@@ -143,7 +179,7 @@ class __$$TicketsScreenStateImplCopyWithImpl<$Res>
       getTicketsListStatus: null == getTicketsListStatus
           ? _value.getTicketsListStatus
           : getTicketsListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getTicketsListError: freezed == getTicketsListError
           ? _value.getTicketsListError
           : getTicketsListError // ignore: cast_nullable_to_non_nullable
@@ -156,6 +192,22 @@ class __$$TicketsScreenStateImplCopyWithImpl<$Res>
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
+      ticketsSearch: freezed == ticketsSearch
+          ? _value.ticketsSearch
+          : ticketsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ticketsFilter: freezed == ticketsFilter
+          ? _value._ticketsFilter
+          : ticketsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      departments: null == departments
+          ? _value._departments
+          : departments // ignore: cast_nullable_to_non_nullable
+              as List<Department>,
+      getDepartmentsStatus: null == getDepartmentsStatus
+          ? _value.getDepartmentsStatus
+          : getDepartmentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
     ));
   }
 }
@@ -165,11 +217,17 @@ class __$$TicketsScreenStateImplCopyWithImpl<$Res>
 class _$TicketsScreenStateImpl implements _TicketsScreenState {
   const _$TicketsScreenStateImpl(
       {final List<Ticket> ticketsList = const [],
-      this.getTicketsListStatus = Status.init,
+      this.getTicketsListStatus = AppStatus.init,
       this.getTicketsListError,
       this.ticketsPaginator,
-      this.currentTab = 0})
-      : _ticketsList = ticketsList;
+      this.currentTab = 0,
+      this.ticketsSearch,
+      final Map<String, dynamic>? ticketsFilter,
+      final List<Department> departments = const [],
+      this.getDepartmentsStatus = AppStatus.init})
+      : _ticketsList = ticketsList,
+        _ticketsFilter = ticketsFilter,
+        _departments = departments;
 
   final List<Ticket> _ticketsList;
   @override
@@ -182,7 +240,7 @@ class _$TicketsScreenStateImpl implements _TicketsScreenState {
 
   @override
   @JsonKey()
-  final Status getTicketsListStatus;
+  final AppStatus getTicketsListStatus;
   @override
   final String? getTicketsListError;
   @override
@@ -190,10 +248,34 @@ class _$TicketsScreenStateImpl implements _TicketsScreenState {
   @override
   @JsonKey()
   final int currentTab;
+  @override
+  final String? ticketsSearch;
+  final Map<String, dynamic>? _ticketsFilter;
+  @override
+  Map<String, dynamic>? get ticketsFilter {
+    final value = _ticketsFilter;
+    if (value == null) return null;
+    if (_ticketsFilter is EqualUnmodifiableMapView) return _ticketsFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final List<Department> _departments;
+  @override
+  @JsonKey()
+  List<Department> get departments {
+    if (_departments is EqualUnmodifiableListView) return _departments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_departments);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getDepartmentsStatus;
 
   @override
   String toString() {
-    return 'TicketsScreenState(ticketsList: $ticketsList, getTicketsListStatus: $getTicketsListStatus, getTicketsListError: $getTicketsListError, ticketsPaginator: $ticketsPaginator, currentTab: $currentTab)';
+    return 'TicketsScreenState(ticketsList: $ticketsList, getTicketsListStatus: $getTicketsListStatus, getTicketsListError: $getTicketsListError, ticketsPaginator: $ticketsPaginator, currentTab: $currentTab, ticketsSearch: $ticketsSearch, ticketsFilter: $ticketsFilter, departments: $departments, getDepartmentsStatus: $getDepartmentsStatus)';
   }
 
   @override
@@ -210,7 +292,15 @@ class _$TicketsScreenStateImpl implements _TicketsScreenState {
             (identical(other.ticketsPaginator, ticketsPaginator) ||
                 other.ticketsPaginator == ticketsPaginator) &&
             (identical(other.currentTab, currentTab) ||
-                other.currentTab == currentTab));
+                other.currentTab == currentTab) &&
+            (identical(other.ticketsSearch, ticketsSearch) ||
+                other.ticketsSearch == ticketsSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._ticketsFilter, _ticketsFilter) &&
+            const DeepCollectionEquality()
+                .equals(other._departments, _departments) &&
+            (identical(other.getDepartmentsStatus, getDepartmentsStatus) ||
+                other.getDepartmentsStatus == getDepartmentsStatus));
   }
 
   @override
@@ -220,7 +310,11 @@ class _$TicketsScreenStateImpl implements _TicketsScreenState {
       getTicketsListStatus,
       getTicketsListError,
       ticketsPaginator,
-      currentTab);
+      currentTab,
+      ticketsSearch,
+      const DeepCollectionEquality().hash(_ticketsFilter),
+      const DeepCollectionEquality().hash(_departments),
+      getDepartmentsStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -233,21 +327,33 @@ class _$TicketsScreenStateImpl implements _TicketsScreenState {
 abstract class _TicketsScreenState implements TicketsScreenState {
   const factory _TicketsScreenState(
       {final List<Ticket> ticketsList,
-      final Status getTicketsListStatus,
+      final AppStatus getTicketsListStatus,
       final String? getTicketsListError,
       final Paginator? ticketsPaginator,
-      final int currentTab}) = _$TicketsScreenStateImpl;
+      final int currentTab,
+      final String? ticketsSearch,
+      final Map<String, dynamic>? ticketsFilter,
+      final List<Department> departments,
+      final AppStatus getDepartmentsStatus}) = _$TicketsScreenStateImpl;
 
   @override
   List<Ticket> get ticketsList;
   @override
-  Status get getTicketsListStatus;
+  AppStatus get getTicketsListStatus;
   @override
   String? get getTicketsListError;
   @override
   Paginator? get ticketsPaginator;
   @override
   int get currentTab;
+  @override
+  String? get ticketsSearch;
+  @override
+  Map<String, dynamic>? get ticketsFilter;
+  @override
+  List<Department> get departments;
+  @override
+  AppStatus get getDepartmentsStatus;
   @override
   @JsonKey(ignore: true)
   _$$TicketsScreenStateImplCopyWith<_$TicketsScreenStateImpl> get copyWith =>

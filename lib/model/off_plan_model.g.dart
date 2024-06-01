@@ -24,7 +24,7 @@ _$OffPlanModelImpl _$$OffPlanModelImplFromJson(Map<String, dynamic> json) =>
           .toList(),
       startingPrice: json['startingPrice'] as int,
       amenities: (json['amenities'] as List<dynamic>)
-          .map((e) => Amenity.fromJson(e as Map<String, dynamic>))
+          .map((e) => OffPlanAmenity.fromJson(e as Map<String, dynamic>))
           .toList(),
       developer: Developer.fromJson(json['developer'] as Map<String, dynamic>),
       footer: Footer.fromJson(json['footer'] as Map<String, dynamic>),

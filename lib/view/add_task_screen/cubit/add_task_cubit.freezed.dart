@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddTaskState {
-  Status get addLeadStatus => throw _privateConstructorUsedError;
+  AppStatus get addLeadStatus => throw _privateConstructorUsedError;
   String? get addLeadError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $AddTaskStateCopyWith<$Res> {
           AddTaskState value, $Res Function(AddTaskState) then) =
       _$AddTaskStateCopyWithImpl<$Res, AddTaskState>;
   @useResult
-  $Res call({Status addLeadStatus, String? addLeadError});
+  $Res call({AppStatus addLeadStatus, String? addLeadError});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$AddTaskStateCopyWithImpl<$Res, $Val extends AddTaskState>
       addLeadStatus: null == addLeadStatus
           ? _value.addLeadStatus
           : addLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addLeadError: freezed == addLeadError
           ? _value.addLeadError
           : addLeadError // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,7 @@ abstract class _$$AddTaskStateImplCopyWith<$Res>
       __$$AddTaskStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status addLeadStatus, String? addLeadError});
+  $Res call({AppStatus addLeadStatus, String? addLeadError});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class __$$AddTaskStateImplCopyWithImpl<$Res>
       addLeadStatus: null == addLeadStatus
           ? _value.addLeadStatus
           : addLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addLeadError: freezed == addLeadError
           ? _value.addLeadError
           : addLeadError // ignore: cast_nullable_to_non_nullable
@@ -104,11 +104,11 @@ class __$$AddTaskStateImplCopyWithImpl<$Res>
 
 class _$AddTaskStateImpl implements _AddTaskState {
   const _$AddTaskStateImpl(
-      {this.addLeadStatus = Status.init, this.addLeadError});
+      {this.addLeadStatus = AppStatus.init, this.addLeadError});
 
   @override
   @JsonKey()
-  final Status addLeadStatus;
+  final AppStatus addLeadStatus;
   @override
   final String? addLeadError;
 
@@ -140,11 +140,11 @@ class _$AddTaskStateImpl implements _AddTaskState {
 
 abstract class _AddTaskState implements AddTaskState {
   const factory _AddTaskState(
-      {final Status addLeadStatus,
+      {final AppStatus addLeadStatus,
       final String? addLeadError}) = _$AddTaskStateImpl;
 
   @override
-  Status get addLeadStatus;
+  AppStatus get addLeadStatus;
   @override
   String? get addLeadError;
   @override

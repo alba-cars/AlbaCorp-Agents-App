@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:linkus_sdk/linkus_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:phone_state/phone_state.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
@@ -55,7 +55,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
       leadId: event.leadId,
     ));
 
-    await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
+    // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
     getIt<SharedPreferences>().setBool(event.activityId, true);
   }
 
@@ -69,6 +69,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
             DateTime.now().millisecondsSinceEpoch);
     final result = await _activityRepo.updateActivity(
         activityId: state.activityId!,
+        completed: true,
         duration: duration,
         notes: event.note,
         feedback: event.feedback);
@@ -108,7 +109,8 @@ class CallBloc extends Bloc<CallEvent, CallState> {
           activityId: s.value.id,
           leadId: event.leadId,
         ));
-        await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
+        await LinkusSdk().makeACall(number: '1001');
+      // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
       case (Error e):
     }
   }

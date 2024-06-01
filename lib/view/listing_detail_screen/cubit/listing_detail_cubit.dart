@@ -21,18 +21,18 @@ class ListingDetailCubit extends Cubit<ListingDetailState> {
   final ListingsRepo _listingsRepo;
 
   Future<void> getListingDetails() async {
-    emit(state.copyWith(getListingDetailsStatus: Status.loading));
+    emit(state.copyWith(getListingDetailsStatus: AppStatus.loading));
     final result =
         await _listingsRepo.getListingDetails(listingId: state.listingId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            getListingDetailsStatus: Status.success, listing: s.value));
+            getListingDetailsStatus: AppStatus.success, listing: s.value));
         getListingActivities();
         break;
       case (Error e):
         emit(state.copyWith(
-            getListingDetailsStatus: Status.failure,
+            getListingDetailsStatus: AppStatus.failure,
             getListingError: e.exception));
 
         break;
@@ -40,17 +40,17 @@ class ListingDetailCubit extends Cubit<ListingDetailState> {
   }
 
   Future<void> getListingActivities() async {
-    emit(state.copyWith(getActivitiesStatus: Status.loading));
+    emit(state.copyWith(getActivitiesStatus: AppStatus.loading));
     final result =
         await _listingsRepo.getListingActivities(listingId: state.listingId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            getActivitiesStatus: Status.success, activities: s.value));
+            getActivitiesStatus: AppStatus.success, activities: s.value));
         break;
       case (Error e):
         emit(state.copyWith(
-            getActivitiesStatus: Status.failure,
+            getActivitiesStatus: AppStatus.failure,
             getActivitiesError: e.exception));
 
         break;

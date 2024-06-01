@@ -10,6 +10,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 
+import 'fields/autocomplete_field.dart';
+
 // Examples can assume:
 // late BuildContext context;
 
@@ -152,6 +154,7 @@ class AppRawAutocomplete<T extends Object> extends StatefulWidget {
     this.onSelected,
     this.textEditingController,
     this.initialValue,
+    this.controller,
   })  : assert(
           fieldViewBuilder != null ||
               (key != null &&
@@ -165,120 +168,16 @@ class AppRawAutocomplete<T extends Object> extends StatefulWidget {
           'textEditingController and initialValue cannot be simultaneously defined.',
         );
 
-  /// {@template flutter.widgets.AppRawAutocomplete.fieldViewBuilder}
-  /// Builds the field whose input is used to get the options.
-  ///
-  /// Pass the provided [TextEditingController] to the field built here so that
-  /// AppRawAutocomplete can listen for changes.
-  /// {@endtemplate}
-  ///
-  /// If this parameter is null, then a [SizedBox.shrink] is built instead.
-  /// For how that pattern can be useful, see [textEditingController].
   final AutocompleteFieldViewBuilder? fieldViewBuilder;
-
-  /// The [FocusNode] that is used for the text field.
-  ///
-  /// {@template flutter.widgets.AppRawAutocomplete.split}
-  /// The main purpose of this parameter is to allow the use of a separate text
-  /// field located in another part of the widget tree instead of the text
-  /// field built by [fieldViewBuilder]. For example, it may be desirable to
-  /// place the text field in the AppBar and the options below in the main body.
-  ///
-  /// When following this pattern, [fieldViewBuilder] can be omitted,
-  /// so that a text field is not drawn where it would normally be.
-  /// A separate text field can be created elsewhere, and a
-  /// FocusNode and TextEditingController can be passed both to that text field
-  /// and to AppRawAutocomplete.
-  ///
-  /// {@tool dartpad}
-  /// This examples shows how to create an autocomplete widget with the text
-  /// field in the AppBar and the results in the main body of the app.
-  ///
-  /// ** See code in examples/api/lib/widgets/autocomplete/raw_autocomplete.focus_node.0.dart **
-  /// {@end-tool}
-  /// {@endtemplate}
-  ///
-  /// If this parameter is not null, then [textEditingController] must also be
-  /// not null.
   final FocusNode? focusNode;
-
-  /// {@template flutter.widgets.AppRawAutocomplete.optionsViewBuilder}
-  /// Builds the selectable options widgets from a list of options objects.
-  ///
-  /// The options are displayed floating below or above the field using a
-  /// [CompositedTransformFollower] inside of an [Overlay], not at the same
-  /// place in the widget tree as [AppRawAutocomplete]. To control whether it opens
-  /// upward or downward, use [optionsViewOpenDirection].
-  ///
-  /// In order to track which item is highlighted by keyboard navigation, the
-  /// resulting options will be wrapped in an inherited
-  /// [AutocompleteHighlightedOption] widget.
-  /// Inside this callback, the index of the highlighted option can be obtained
-  /// from [AutocompleteHighlightedOption.of] to display the highlighted option
-  /// with a visual highlight to indicate it will be the option selected from
-  /// the keyboard.
-  ///
-  /// {@endtemplate}
   final AutocompleteOptionsViewBuilder<T> optionsViewBuilder;
-
-  /// {@template flutter.widgets.AppRawAutocomplete.optionsViewOpenDirection}
-  /// The direction in which to open the options-view overlay.
-  ///
-  /// Defaults to [OptionsViewOpenDirection.down].
-  /// {@endtemplate}
   final OptionsViewOpenDirection optionsViewOpenDirection;
-
-  /// {@template flutter.widgets.AppRawAutocomplete.displayStringForOption}
-  /// Returns the string to display in the field when the option is selected.
-  ///
-  /// This is useful when using a custom T type and the string to display is
-  /// different than the string to search by.
-  ///
-  /// If not provided, will use `option.toString()`.
-  /// {@endtemplate}
   final AutocompleteOptionToString<T> displayStringForOption;
-
-  /// {@template flutter.widgets.AppRawAutocomplete.onSelected}
-  /// Called when an option is selected by the user.
-  /// {@endtemplate}
-  final AutocompleteOnSelected<T>? onSelected;
-
-  /// {@template flutter.widgets.AppRawAutocomplete.optionsBuilder}
-  /// A function that returns the current selectable options objects given the
-  /// current TextEditingValue.
-  /// {@endtemplate}
+  final void Function(T?)? onSelected;
   final AutocompleteOptionsBuilder<T> optionsBuilder;
-
-  /// The [TextEditingController] that is used for the text field.
-  ///
-  /// {@macro flutter.widgets.AppRawAutocomplete.split}
-  ///
-  /// If this parameter is not null, then [focusNode] must also be not null.
   final TextEditingController? textEditingController;
-
-  /// {@template flutter.widgets.AppRawAutocomplete.initialValue}
-  /// The initial value to use for the text field.
-  /// {@endtemplate}
-  ///
-  /// Setting the initial value does not notify [textEditingController]'s
-  /// listeners, and thus will not cause the options UI to appear.
-  ///
-  /// This parameter is ignored if [textEditingController] is defined.
   final TextEditingValue? initialValue;
-
-  /// Calls [AutocompleteFieldViewBuilder]'s onFieldSubmitted callback for the
-  /// AppRawAutocomplete widget indicated by the given [GlobalKey].
-  ///
-  /// This is not typically used unless a custom field is implemented instead of
-  /// using [fieldViewBuilder]. In the typical case, the onFieldSubmitted
-  /// callback is passed via the [AutocompleteFieldViewBuilder] signature. When
-  /// not using fieldViewBuilder, the same callback can be called by using this
-  /// static method.
-  ///
-  /// See also:
-  ///
-  ///  * [focusNode] and [textEditingController], which contain a code example
-  ///    showing how to create a separate field outside of fieldViewBuilder.
+  final AutoCompleteFieldController? controller;
   static void onFieldSubmitted<T extends Object>(GlobalKey key) {
     final _RawAutocompleteState<T> rawAutocomplete =
         key.currentState! as _RawAutocompleteState<T>;
@@ -554,7 +453,7 @@ class _RawAutocompleteState<T extends Object>
   @override
   void initState() {
     super.initState();
-
+    widget.controller?.reset = reset;
     _textEditingController = widget.textEditingController ??
         TextEditingController.fromValue(widget.initialValue);
     _textEditingController.addListener(_onChangedField);
@@ -604,6 +503,13 @@ class _RawAutocompleteState<T extends Object>
     _floatingOptions = null;
     _highlightedOptionIndex.dispose();
     super.dispose();
+  }
+
+  void reset() {
+    _selection = null;
+    _textEditingController.text = '';
+    widget.onSelected?.call(null);
+    if (mounted) setState(() {});
   }
 
   @override

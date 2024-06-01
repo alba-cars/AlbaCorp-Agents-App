@@ -31,7 +31,8 @@ class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
     @JsonKey(name: 'updatedAt') DateTime? updatedAt,
     @JsonKey(name: 'checkedOutDate') DateTime? checkedOutDate,
     @JsonKey(name: 'currentAgent') dynamic currentAgent,
-    @JsonKey(name: 'currentOwner') User? currentOwner,
+    @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
+    dynamic currentOwner,
     @JsonKey(name: 'updatedBy') User? updatedBy,
     @JsonKey(name: 'referenceNumber') String? referenceNumber,
     @JsonKey(name: 'expirationDate') DateTime? expirationDate,
@@ -49,7 +50,11 @@ class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
 }
 
 readCreatedBy(Map<dynamic, dynamic> json, String val) {
-  return json[val] is String ? json[val] : User.fromJson(json[val]);
+  return json[val] is String
+      ? json[val]
+      : json[val] != null
+          ? User.fromJson(json[val])
+          : null;
 }
 
 @freezed

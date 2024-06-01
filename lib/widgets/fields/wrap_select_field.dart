@@ -23,7 +23,7 @@ class WrapSelectField<T extends Object> extends StatefulWidget {
       this.defaultValue,
       this.valueTransformer,
       DisplayOptionString<T>? displayOption,
-      required this.isRequired,
+      this.isRequired = false,
       this.description,
       this.onSelected,
       this.disabled = false})

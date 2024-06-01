@@ -48,8 +48,11 @@ import '../view/login/verification_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
+  static final RouteObserver<ModalRoute> routerObserver =
+      RouteObserver<ModalRoute>();
   static final router = GoRouter(
       refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
+      observers: [routerObserver],
       redirect: (context, state) {
         final authState = getIt<AuthBloc>().state;
         if (authState.authStatus == AuthStatus.Authenticated) {
@@ -165,18 +168,6 @@ class AppRouter {
                 path: AddDealScreen.routeName,
                 name: AddDealScreen.routeName,
                 pageBuilder: (context, state) {
-                  final openWidget = state.extra as Widget?;
-
-                  if (openWidget != null) {
-                    return CustomTransitionPage(
-                        child: AddDealScreen(),
-                        transitionsBuilder: (context, anim1, anim2, child) {
-                          return OpenContainer(
-                            openBuilder: (context, action) => openWidget,
-                            closedBuilder: (context, action) => child,
-                          );
-                        });
-                  }
                   return AppTransition(child: AddDealScreen());
                 },
               ),
@@ -224,10 +215,14 @@ class AppRouter {
                 },
               ),
               GoRoute(
-                path: ChatScreen.routeName,
+                path: "${ChatScreen.routeName}/:id",
                 name: ChatScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: ChatScreen());
+                  final id = state.pathParameters['id'] ?? '';
+                  return AppTransition(
+                      child: ChatScreen(
+                    ticketId: id,
+                  ));
                 },
               ),
               GoRoute(
@@ -282,10 +277,13 @@ class AppRouter {
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
                   final Activity? activity = state.extra as Activity?;
+                  final bool isBlocking =
+                      state.uri.queryParameters['isBlocking'] as bool? ?? false;
                   return AppTransition(
                     child: TaskDetailScreen(
                       taskId: id,
                       activity: activity,
+                      isBlocking: isBlocking,
                     ),
                   );
                 },
@@ -362,6 +360,8 @@ class AppTransition extends CustomTransitionPage {
             transitionDuration: const Duration(milliseconds: 500),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              return FadeTransition(opacity: animation, child: child);
+              return FadeTransition(
+                  opacity: animation.drive(CurveTween(curve: Curves.easeIn)),
+                  child: child);
             });
 }

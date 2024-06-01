@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'space.dart';
 
@@ -84,10 +85,10 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final textSlyle = Theme.of(context).textTheme.labelLarge!.apply(
-          color: widget.foregroundColor ?? colorScheme.onPrimary,
-          fontWeightDelta: 3,
-        );
+    final textSlyle = Theme.of(context).textTheme.labelLarge!.copyWith(
+        color: widget.foregroundColor ?? colorScheme.onPrimary,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600);
     if (widget.animate) {
       _startPulseAnimation();
     }
@@ -151,6 +152,7 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
                               child: Text(
                                 widget.text,
                                 style: textSlyle,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ],
@@ -167,6 +169,7 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
                           child: Text(
                             widget.text,
                             style: textSlyle,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),

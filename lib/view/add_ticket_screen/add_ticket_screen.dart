@@ -79,6 +79,12 @@ class _AddTicketScreenLayoutState extends State<_AddTicketScreenLayout> {
                           valueTransformer: (p0) => p0?.value,
                           displayOption: (option) => option.name.titleCase,
                         ),
+                        WrapSelectField(
+                          name: 'priority',
+                          label: 'Priority',
+                          values: ['Minor', 'Major', 'Critical'],
+                          isRequired: true,
+                        ),
                         BlocSelector<AddTicketCubit, AddTicketState,
                             List<Department>>(
                           selector: (state) {

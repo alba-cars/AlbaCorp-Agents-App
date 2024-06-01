@@ -33,7 +33,7 @@ mixin _$OffPlanModel {
   String get developmentLogo => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypes => throw _privateConstructorUsedError;
   int get startingPrice => throw _privateConstructorUsedError;
-  List<Amenity> get amenities => throw _privateConstructorUsedError;
+  List<OffPlanAmenity> get amenities => throw _privateConstructorUsedError;
   Developer get developer => throw _privateConstructorUsedError;
   Footer get footer => throw _privateConstructorUsedError;
   List<DevelopmentPhoto> get developmentPhotos =>
@@ -74,7 +74,7 @@ abstract class $OffPlanModelCopyWith<$Res> {
       String developmentLogo,
       List<PropertyType> propertyTypes,
       int startingPrice,
-      List<Amenity> amenities,
+      List<OffPlanAmenity> amenities,
       Developer developer,
       Footer footer,
       List<DevelopmentPhoto> developmentPhotos,
@@ -186,7 +186,7 @@ class _$OffPlanModelCopyWithImpl<$Res, $Val extends OffPlanModel>
       amenities: null == amenities
           ? _value.amenities
           : amenities // ignore: cast_nullable_to_non_nullable
-              as List<Amenity>,
+              as List<OffPlanAmenity>,
       developer: null == developer
           ? _value.developer
           : developer // ignore: cast_nullable_to_non_nullable
@@ -288,7 +288,7 @@ abstract class _$$OffPlanModelImplCopyWith<$Res>
       String developmentLogo,
       List<PropertyType> propertyTypes,
       int startingPrice,
-      List<Amenity> amenities,
+      List<OffPlanAmenity> amenities,
       Developer developer,
       Footer footer,
       List<DevelopmentPhoto> developmentPhotos,
@@ -401,7 +401,7 @@ class __$$OffPlanModelImplCopyWithImpl<$Res>
       amenities: null == amenities
           ? _value._amenities
           : amenities // ignore: cast_nullable_to_non_nullable
-              as List<Amenity>,
+              as List<OffPlanAmenity>,
       developer: null == developer
           ? _value.developer
           : developer // ignore: cast_nullable_to_non_nullable
@@ -474,7 +474,7 @@ class _$OffPlanModelImpl implements _OffPlanModel {
       required this.developmentLogo,
       required final List<PropertyType> propertyTypes,
       required this.startingPrice,
-      required final List<Amenity> amenities,
+      required final List<OffPlanAmenity> amenities,
       required this.developer,
       required this.footer,
       required final List<DevelopmentPhoto> developmentPhotos,
@@ -527,9 +527,9 @@ class _$OffPlanModelImpl implements _OffPlanModel {
 
   @override
   final int startingPrice;
-  final List<Amenity> _amenities;
+  final List<OffPlanAmenity> _amenities;
   @override
-  List<Amenity> get amenities {
+  List<OffPlanAmenity> get amenities {
     if (_amenities is EqualUnmodifiableListView) return _amenities;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_amenities);
@@ -694,7 +694,7 @@ abstract class _OffPlanModel implements OffPlanModel {
       required final String developmentLogo,
       required final List<PropertyType> propertyTypes,
       required final int startingPrice,
-      required final List<Amenity> amenities,
+      required final List<OffPlanAmenity> amenities,
       required final Developer developer,
       required final Footer footer,
       required final List<DevelopmentPhoto> developmentPhotos,
@@ -738,7 +738,7 @@ abstract class _OffPlanModel implements OffPlanModel {
   @override
   int get startingPrice;
   @override
-  List<Amenity> get amenities;
+  List<OffPlanAmenity> get amenities;
   @override
   Developer get developer;
   @override
@@ -1139,12 +1139,12 @@ abstract class _Position implements Position {
       throw _privateConstructorUsedError;
 }
 
-Amenity _$AmenityFromJson(Map<String, dynamic> json) {
+OffPlanAmenity _$OffPlanAmenityFromJson(Map<String, dynamic> json) {
   return _Amenity.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Amenity {
+mixin _$OffPlanAmenity {
   String get title => throw _privateConstructorUsedError;
   String get photo => throw _privateConstructorUsedError;
   @JsonKey(name: '_id')
@@ -1152,21 +1152,23 @@ mixin _$Amenity {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AmenityCopyWith<Amenity> get copyWith => throw _privateConstructorUsedError;
+  $OffPlanAmenityCopyWith<OffPlanAmenity> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AmenityCopyWith<$Res> {
-  factory $AmenityCopyWith(Amenity value, $Res Function(Amenity) then) =
-      _$AmenityCopyWithImpl<$Res, Amenity>;
+abstract class $OffPlanAmenityCopyWith<$Res> {
+  factory $OffPlanAmenityCopyWith(
+          OffPlanAmenity value, $Res Function(OffPlanAmenity) then) =
+      _$OffPlanAmenityCopyWithImpl<$Res, OffPlanAmenity>;
   @useResult
   $Res call({String title, String photo, @JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
-class _$AmenityCopyWithImpl<$Res, $Val extends Amenity>
-    implements $AmenityCopyWith<$Res> {
-  _$AmenityCopyWithImpl(this._value, this._then);
+class _$OffPlanAmenityCopyWithImpl<$Res, $Val extends OffPlanAmenity>
+    implements $OffPlanAmenityCopyWith<$Res> {
+  _$OffPlanAmenityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1198,7 +1200,8 @@ class _$AmenityCopyWithImpl<$Res, $Val extends Amenity>
 }
 
 /// @nodoc
-abstract class _$$AmenityImplCopyWith<$Res> implements $AmenityCopyWith<$Res> {
+abstract class _$$AmenityImplCopyWith<$Res>
+    implements $OffPlanAmenityCopyWith<$Res> {
   factory _$$AmenityImplCopyWith(
           _$AmenityImpl value, $Res Function(_$AmenityImpl) then) =
       __$$AmenityImplCopyWithImpl<$Res>;
@@ -1209,7 +1212,7 @@ abstract class _$$AmenityImplCopyWith<$Res> implements $AmenityCopyWith<$Res> {
 
 /// @nodoc
 class __$$AmenityImplCopyWithImpl<$Res>
-    extends _$AmenityCopyWithImpl<$Res, _$AmenityImpl>
+    extends _$OffPlanAmenityCopyWithImpl<$Res, _$AmenityImpl>
     implements _$$AmenityImplCopyWith<$Res> {
   __$$AmenityImplCopyWithImpl(
       _$AmenityImpl _value, $Res Function(_$AmenityImpl) _then)
@@ -1260,7 +1263,7 @@ class _$AmenityImpl implements _Amenity {
 
   @override
   String toString() {
-    return 'Amenity(title: $title, photo: $photo, id: $id)';
+    return 'OffPlanAmenity(title: $title, photo: $photo, id: $id)';
   }
 
   @override
@@ -1291,7 +1294,7 @@ class _$AmenityImpl implements _Amenity {
   }
 }
 
-abstract class _Amenity implements Amenity {
+abstract class _Amenity implements OffPlanAmenity {
   factory _Amenity(
       {required final String title,
       required final String photo,

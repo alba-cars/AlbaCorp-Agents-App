@@ -20,7 +20,7 @@ class OffPlanModel with _$OffPlanModel {
     required String developmentLogo,
     required List<PropertyType> propertyTypes,
     required int startingPrice,
-    required List<Amenity> amenities,
+    required List<OffPlanAmenity> amenities,
     required Developer developer,
     required Footer footer,
     required List<DevelopmentPhoto> developmentPhotos,
@@ -65,15 +65,15 @@ class Position with _$Position {
 }
 
 @freezed
-class Amenity with _$Amenity {
-  factory Amenity({
+class OffPlanAmenity with _$OffPlanAmenity {
+  factory OffPlanAmenity({
     required String title,
     required String photo,
     @JsonKey(name: '_id') required String id,
   }) = _Amenity;
 
-  factory Amenity.fromJson(Map<String, dynamic> json) =>
-      _$AmenityFromJson(json);
+  factory OffPlanAmenity.fromJson(Map<String, dynamic> json) =>
+      _$OffPlanAmenityFromJson(json);
 }
 
 @freezed

@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:linkus_sdk/linkus_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/leads_screen/cubit/leads_cubit.dart';
@@ -272,151 +274,193 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
             ),
           ];
         },
-        body: BlocBuilder<LeadsCubit, LeadsState>(
-          builder: (context, state) {
-            if (state.getLeadsStatus == Status.loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final leads = state.leads;
-            return NotificationListener<ScrollNotification>(
-              onNotification: (scrollInfo) {
-                if (state.getLeadsStatus != Status.loadingMore &&
-                    scrollInfo.metrics.pixels >=
-                        0.9 * scrollInfo.metrics.maxScrollExtent) {
-                  context.read<LeadsCubit>().getLeads();
-                }
-                return true;
-              },
-              child: RefreshIndicator.adaptive(
-                onRefresh: () async {
-                  await context.read<LeadsCubit>().getLeads(refresh: true);
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: WrapSelectField(
+                name: '',
+                values: [
+                  'Recent',
+                  'Prospect',
+                  'Fresh',
+                  'Hot',
+                  'Hot & Fresh',
+                  'Client with deals'
+                ],
+                onSelected: (val) {
+                  context.read<LeadsCubit>().setQuickFilter(val);
                 },
-                child: ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  itemCount: state.getLeadsStatus != Status.loadingMore
-                      ? leads.length
-                      : leads.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index == leads.length) {
-                      return SizedBox(
-                        height: 50,
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    }
-                    final lead = leads[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16.h),
-                          boxShadow: [
-                            BoxShadow(
-                                color: shadowColor,
-                                offset: Offset(-4, 5),
-                                blurRadius: 11)
-                          ]),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12.h, vertical: 6.h),
-                        child: InkWell(
-                          onTap: () {
-                            context.pushNamed(LeadDetailScreen.routeName,
-                                pathParameters: {'id': lead.id});
-                          },
-                          child: Row(children: [
-                            Container(
-                              width: 70,
-                              height: 60,
+              ),
+            ),
+            Expanded(
+              child: BlocBuilder<LeadsCubit, LeadsState>(
+                builder: (context, state) {
+                  if (state.getLeadsStatus == AppStatus.loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  final leads = state.leads;
+                  return NotificationListener<ScrollNotification>(
+                    onNotification: (scrollInfo) {
+                      if (state.getLeadsStatus != AppStatus.loadingMore &&
+                          scrollInfo.metrics.pixels >=
+                              0.9 * scrollInfo.metrics.maxScrollExtent) {
+                        context.read<LeadsCubit>().getLeads();
+                      }
+                      return true;
+                    },
+                    child: RefreshIndicator.adaptive(
+                      onRefresh: () async {
+                        await context
+                            .read<LeadsCubit>()
+                            .getLeads(refresh: true);
+                      },
+                      child: ListView.separated(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        itemCount: state.getLeadsStatus != AppStatus.loadingMore
+                            ? leads.length
+                            : leads.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index == leads.length) {
+                            return SizedBox(
+                              height: 50,
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          }
+                          final lead = leads[index];
+                          return Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16.h),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: shadowColor,
+                                      offset: Offset(-4, 5),
+                                      blurRadius: 11)
+                                ]),
+                            child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 2, vertical: 4),
-                              decoration: BoxDecoration(
-                                  // border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Colors.grey[100]),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // switch (lead.leadSource.toLowerCase()) {
-                                  //   'call' => Icon(
-                                  //       Icons.call,
-                                  //       color: Colors.grey,
-                                  //     ),
-                                  //   'whatsapp' => ImageIcon(
-                                  //       AssetImage(
-                                  //           'assets/images/whatsapp.png'),
-                                  //       color: Colors.grey,
-                                  //     ),
-                                  //   _ => Icon(
-                                  //       Icons.call,
-                                  //       color: Colors.grey,
-                                  //     )
-                                  // },
-                                  // VerticalSmallGap(
-                                  //   adjustment: 0.3,
-                                  // ),
-                                  NormalText(
-                                    text: lead.leadSource,
-                                    textAlign: TextAlign.center,
-                                    color: Colors.grey[800]!,
-                                  )
-                                ],
-                              ),
-                            ),
-                            HorizontalSmallGap(),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                  horizontal: 12.h, vertical: 6.h),
+                              child: InkWell(
+                                onTap: () {
+                                  context.pushNamed(LeadDetailScreen.routeName,
+                                      pathParameters: {'id': lead.id});
+                                },
+                                child: Row(children: [
                                   Container(
+                                    width: 70,
+                                    height: 60,
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 4.h, vertical: 1.h),
+                                        horizontal: 2, vertical: 4),
                                     decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: Colors.blueGrey),
-                                        borderRadius: BorderRadius.circular(4),
-                                        color: Colors.blueGrey[100]),
-                                    child: SmallText(
-                                        text: lead.leadStatus?.name ?? ''),
+                                        // border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.grey[100]),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        // switch (lead.leadSource.toLowerCase()) {
+                                        //   'call' => Icon(
+                                        //       Icons.call,
+                                        //       color: Colors.grey,
+                                        //     ),
+                                        //   'whatsapp' => ImageIcon(
+                                        //       AssetImage(
+                                        //           'assets/images/whatsapp.png'),
+                                        //       color: Colors.grey,
+                                        //     ),
+                                        //   _ => Icon(
+                                        //       Icons.call,
+                                        //       color: Colors.grey,
+                                        //     )
+                                        // },
+                                        // VerticalSmallGap(
+                                        //   adjustment: 0.3,
+                                        // ),
+                                        NormalText(
+                                          text: lead.leadSource,
+                                          textAlign: TextAlign.center,
+                                          color: Colors.grey[800]!,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  VerticalSmallGap(
-                                    adjustment: .2,
+                                  HorizontalSmallGap(),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 4.h, vertical: 1.h),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.blueGrey),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                              color: Colors.blueGrey[100]),
+                                          child: SmallText(
+                                              text:
+                                                  lead.leadStatus?.name ?? ''),
+                                        ),
+                                        VerticalSmallGap(
+                                          adjustment: .2,
+                                        ),
+                                        LabelText(
+                                            text:
+                                                "${lead.firstName} ${lead.lastName}")
+                                      ],
+                                    ),
                                   ),
-                                  LabelText(
-                                      text:
-                                          "${lead.firstName} ${lead.lastName}")
-                                ],
+                                  HorizontalSmallGap(),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      IconButton.filledTonal(
+                                          onPressed: () async {
+                                            // LinkusSdk().loginToPbx(
+                                            //     userName: "ziad@albacorp.net",
+                                            //     password:
+                                            //         "eyJleHBpcmUiOjAsInNpZ24iOiJRN2FlSXNHRjJ0WDhOSGhURHZCdFpWS0hDZVcxOXpKTkNlME5VM0xmL3NrPSIsInVzZXJuYW1lIjoiemlhZEBhbGJhY29ycC5uZXQiLCJ2ZXJzaW9uIjoiMS4wIn0_",
+                                            //     localeIp: '192.168.0.252',
+                                            //     localePortI: 8111,
+                                            //     remoteIp: '',
+                                            //     remotePortI: 8111);
+                                            await LinkusSdk()
+                                                .makeACall(number: '1002');
+                                            // getIt<CallBloc>().add(
+                                            //     CallEvent.clickToCall(
+                                            //         phoneNumber:
+                                            //             lead.phone ?? '',
+                                            //         leadId: lead.id));
+                                          },
+                                          icon: Icon(
+                                            Icons.call,
+                                          ))
+                                    ],
+                                  )
+                                ]),
                               ),
                             ),
-                            HorizontalSmallGap(),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                IconButton.filledTonal(
-                                    onPressed: () async {
-                                      getIt<CallBloc>().add(
-                                          CallEvent.clickToCall(
-                                              phoneNumber: lead.phone ?? '',
-                                              leadId: lead.id));
-                                    },
-                                    icon: Icon(
-                                      Icons.call,
-                                    ))
-                              ],
-                            )
-                          ]),
+                          );
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: 8,
                         ),
                       ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 8,
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );

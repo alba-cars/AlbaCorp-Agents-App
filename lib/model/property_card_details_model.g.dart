@@ -36,9 +36,7 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
           ? null
           : DateTime.parse(json['checkedOutDate'] as String),
       currentAgent: json['currentAgent'],
-      currentOwner: json['currentOwner'] == null
-          ? null
-          : User.fromJson(json['currentOwner'] as Map<String, dynamic>),
+      currentOwner: readCreatedBy(json, 'currentOwner'),
       updatedBy: json['updatedBy'] == null
           ? null
           : User.fromJson(json['updatedBy'] as Map<String, dynamic>),

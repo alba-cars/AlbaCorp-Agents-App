@@ -2,20 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/property_price.dart';
+import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/listings_screen/cubit/listings_cubit.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
+import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_select_autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
@@ -155,6 +158,21 @@ class ListingsTab extends StatelessWidget {
           },
           displayStringForOption: (option) => option['label'] ?? '',
           name: 'community'),
+      MultiSelectAutoCompleteField(
+          label: 'Building',
+          optionsBuilder: (v) async {
+            final stateResult =
+                context.read<ListingsCubit>().state.buildingList;
+            if (stateResult.isEmpty) {
+              await context.read<ListingsCubit>().getBuildings(search: v.text);
+            }
+            final list = context.read<ListingsCubit>().state.buildingList.where(
+                (element) =>
+                    element.name.toLowerCase().contains(v.text.toLowerCase()));
+            return list.map((e) => {'value': e.id, 'label': e.name});
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          name: 'building'),
       RangeSliderField(
           name: 'price', label: 'Price Range', min: 10000, max: 1000000000),
       WrapSelectField(
@@ -181,6 +199,15 @@ class ListingsTab extends StatelessWidget {
                   .toList()),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
+      MultiDropDownField(
+        label: 'Amenities',
+        items: context.select<ListingsCubit, List<Map<String, dynamic>>>(
+            (cubit) => cubit.state.amenityList
+                .map((e) => {'value': e.id, 'label': e.amenity})
+                .toList()),
+        name: "amenities",
+        displayOption: (option) => option['label']?.toString() ?? '',
+      ),
     ];
   }
 
@@ -194,9 +221,31 @@ class ListingsTab extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: TitleText(
-            text: 'Listings List',
-            fontWeight: FontWeight.bold,
+          child: Row(
+            children: [
+              TitleText(
+                text: 'Listings List',
+                fontWeight: FontWeight.bold,
+              ),
+              Spacer(),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(40, 34),
+                      maximumSize: Size(110, 34),
+                      fixedSize: null,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      foregroundColor: Theme.of(context).colorScheme.onTertiary,
+                      backgroundColor: Theme.of(context).colorScheme.tertiary),
+                  child: Text('Add New'),
+                  onPressed: () async {
+                    final result =
+                        await context.pushNamed(AddListingScreen.routeName);
+                    if (result == true) {
+                      context.read<ListingsCubit>().getListings(refresh: true);
+                    }
+                  })
+            ],
           ),
         ),
         VerticalSmallGap(
@@ -219,14 +268,30 @@ class ListingsTab extends StatelessWidget {
         Expanded(
           child: BlocBuilder<ListingsCubit, ListingsState>(
             builder: (context, state) {
-              if (state.getListingsStatus == Status.loading) {
+              if (state.getListingsStatus == AppStatus.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               }
+              if (state.listings.isEmpty) {
+                return Center(
+                  child: AppPrimaryButton(
+                      backgroundColor: Theme.of(context).colorScheme.tertiary,
+                      text: 'Add Listings',
+                      onTap: () async {
+                        final result =
+                            await context.pushNamed(AddListingScreen.routeName);
+                        if (result == true) {
+                          context
+                              .read<ListingsCubit>()
+                              .getListings(refresh: true);
+                        }
+                      }),
+                );
+              }
               return NotificationListener<ScrollNotification>(
                 onNotification: (scrollInfo) {
-                  if (state.getListingsStatus != Status.loadingMore &&
+                  if (state.getListingsStatus != AppStatus.loadingMore &&
                       scrollInfo.metrics.pixels >=
                           0.9 * scrollInfo.metrics.maxScrollExtent) {
                     context.read<ListingsCubit>().getListings();
@@ -258,7 +323,7 @@ class ListingsTab extends StatelessWidget {
                         }
 
                         return Container(
-                          height: 170,
+                          height: 200,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
@@ -324,30 +389,61 @@ class ListingsTab extends StatelessWidget {
                                                 .colorScheme
                                                 .primary,
                                           ),
-                                          VerticalSmallGap(),
-                                          TextWithIcon(
-                                            text: (listing.beds?.toString() ??
-                                                    "1") +
-                                                ' Beds',
-                                            iconPath: 'assets/images/bed.png',
-                                            color: Colors.black,
+                                          VerticalSmallGap(
+                                            adjustment: 0.5,
                                           ),
-                                          TextWithIcon(
-                                            text: (listing.baths?.toString() ??
-                                                    "1") +
-                                                " Baths",
-                                            iconPath:
-                                                'assets/images/shower.png',
-                                            color: Colors.black,
+                                          SmallText(
+                                              text: listing.communityName
+                                                      ?.trim() ??
+                                                  ''),
+                                          if (listing.buildingName != null) ...[
+                                            SmallText(
+                                                text: listing.buildingName
+                                                        ?.trim() ??
+                                                    ''),
+                                          ],
+                                          VerticalSmallGap(
+                                            adjustment: 0.5,
                                           ),
-                                          TextWithIcon(
-                                            text: (listing.size
-                                                        ?.toInt()
-                                                        .toString() ??
-                                                    "1") +
-                                                ' Sqft',
-                                            iconPath: 'assets/images/area.png',
-                                            color: Colors.black,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: TextWithIcon(
+                                                  text: (listing.beds
+                                                          ?.toString() ??
+                                                      "1"),
+                                                  iconPath:
+                                                      'assets/images/bed.png',
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: TextWithIcon(
+                                                  text: (listing.baths
+                                                          ?.toString() ??
+                                                      "1"),
+                                                  iconPath:
+                                                      'assets/images/shower.png',
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: TextWithIcon(
+                                                  text: (listing.size
+                                                          ?.toInt()
+                                                          .toString() ??
+                                                      "1"),
+                                                  iconPath:
+                                                      'assets/images/area.png',
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           VerticalSmallGap(
                                             adjustment: 0.3,
@@ -408,9 +504,10 @@ class ListingsTab extends StatelessWidget {
                       separatorBuilder: (context, index) => SizedBox(
                             height: 8,
                           ),
-                      itemCount: state.getListingsStatus == Status.loadingMore
-                          ? state.listings.length + 1
-                          : state.listings.length),
+                      itemCount:
+                          state.getListingsStatus == AppStatus.loadingMore
+                              ? state.listings.length + 1
+                              : state.listings.length),
                 ),
               );
             },
@@ -426,6 +523,11 @@ class PocketListingsTab extends StatelessWidget {
 
   List<Widget> filterFields(BuildContext context) {
     return [
+      WrapSelectField(
+          name: 'timeFilter',
+          label: 'Created Period',
+          values: ['This Week', 'This Month', 'Old'],
+          isRequired: false),
       MultiSelectAutoCompleteField(
           label: 'Community',
           optionsBuilder: (v) async {
@@ -447,6 +549,26 @@ class PocketListingsTab extends StatelessWidget {
           },
           displayStringForOption: (option) => option['label'] ?? '',
           name: 'communities'),
+      AppAutoComplete(
+          label: 'Agent',
+          optionsBuilder: (v) async {
+            final stateResult = context.read<ListingsCubit>().state.agentList;
+            if (stateResult.isEmpty) {
+              await context.read<ListingsCubit>().getAgents(search: v.text);
+            }
+            final list = context.read<ListingsCubit>().state.agentList.where(
+                (element) =>
+                    "${element.user.firstName} ${element.user.lastName}"
+                        .toLowerCase()
+                        .contains(v.text.toLowerCase()));
+            return list.map((e) => {
+                  'value': e.id,
+                  'label': "${e.user.firstName} ${e.user.lastName}"
+                });
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          isRequired: false,
+          name: 'currentAgent'),
       MultiSelectAutoCompleteField(
           label: 'Building',
           optionsBuilder: (v) async {
@@ -486,6 +608,8 @@ class PocketListingsTab extends StatelessWidget {
           label: 'Baths',
           values: ['1', '2', '3', '4', '5', '6', '7+'],
           isRequired: true),
+      RangeSliderField(
+          name: 'price', label: 'Price Range', min: 10000, max: 10000000),
     ];
   }
 
@@ -512,8 +636,8 @@ class PocketListingsTab extends StatelessWidget {
                       fixedSize: null,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
-                      foregroundColor: Theme.of(context).colorScheme.primary,
-                      backgroundColor: Color.fromARGB(255, 230, 239, 245)),
+                      foregroundColor: Theme.of(context).colorScheme.onTertiary,
+                      backgroundColor: Theme.of(context).colorScheme.tertiary),
                   child: Text('Add New'),
                   onPressed: () async {
                     final result = await context
@@ -547,14 +671,30 @@ class PocketListingsTab extends StatelessWidget {
         Expanded(
           child: BlocBuilder<ListingsCubit, ListingsState>(
             builder: (context, state) {
-              if (state.getPocketListingsStatus == Status.loading) {
+              if (state.getPocketListingsStatus == AppStatus.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               }
+              if (state.pocketListings.isEmpty) {
+                return Center(
+                  child: AppPrimaryButton(
+                      backgroundColor: Theme.of(context).colorScheme.tertiary,
+                      text: 'Add Pocket Listing',
+                      onTap: () async {
+                        final result = await context
+                            .pushNamed(AddPocketListingScreen.routeName);
+                        if (result == true) {
+                          context
+                              .read<ListingsCubit>()
+                              .getPocketListings(refresh: true);
+                        }
+                      }),
+                );
+              }
               return NotificationListener<ScrollNotification>(
                 onNotification: (scrollInfo) {
-                  if (state.getPocketListingsStatus != Status.loadingMore &&
+                  if (state.getPocketListingsStatus != AppStatus.loadingMore &&
                       scrollInfo.metrics.pixels >=
                           0.9 * scrollInfo.metrics.maxScrollExtent) {
                     context.read<ListingsCubit>().getPocketListings();
@@ -626,26 +766,26 @@ class PocketListingsTab extends StatelessWidget {
                                   ],
                                 ),
                                 InfoLabelValue(
-                                  labelOne: 'Property Type',
-                                  valueOne: propertyCard.propertyType,
-                                  labelTwo: 'Purpose',
-                                  valueTwo: propertyCard.purpose,
-                                ),
-                                InfoLabelValue(
-                                  labelOne: 'Building Name',
+                                  labelOne: 'Community',
                                   valueOne:
-                                      propertyCard.building?.name ?? 'N/A',
-                                  labelTwo: 'Community Name',
-                                  valueTwo: propertyCard.community?.community
-                                      .toString(),
+                                      propertyCard.community?.community.trim(),
+                                  labelTwo: 'Building',
+                                  valueTwo:
+                                      propertyCard.building?.name.trim() ??
+                                          'N/A',
                                 ),
                                 InfoLabelValue(
-                                  labelOne: 'Area',
-                                  valueOne: (propertyCard.size != null)
-                                      ? '${propertyCard.size} SqFt'
-                                      : 'N/A',
+                                  labelOne: 'Property Type',
+                                  valueOne: propertyCard.propertyType?.trim(),
                                   labelTwo: 'Beds',
-                                  valueTwo: propertyCard.beds?.toString(),
+                                  valueTwo: propertyCard.beds ?? 'N/A',
+                                ),
+                                InfoLabelValue(
+                                  labelOne: 'purpose',
+                                  valueOne: propertyCard.purpose?.trim(),
+                                  labelTwo: 'Size',
+                                  valueTwo:
+                                      propertyCard.size?.toString() ?? 'N/A',
                                 ),
                                 if (propertyCard.currentAgent is Map)
                                   Container(
@@ -698,9 +838,9 @@ class PocketListingsTab extends StatelessWidget {
                                                         .colorScheme
                                                         .onPrimary),
                                             onPressed: () async {
-                                              await FlutterPhoneDirectCaller
-                                                  .callNumber(
-                                                      'tel://${propertyCard.currentAgent!["userId"]["phone"]}');
+                                              // await FlutterPhoneDirectCaller
+                                              //     .callNumber(
+                                              //         'tel://${propertyCard.currentAgent!["userId"]["phone"]}');
                                             },
                                             icon: Icon(
                                               Icons.call,
@@ -717,7 +857,7 @@ class PocketListingsTab extends StatelessWidget {
                             height: 8,
                           ),
                       itemCount:
-                          state.getPocketListingsStatus == Status.loadingMore
+                          state.getPocketListingsStatus == AppStatus.loadingMore
                               ? state.pocketListings.length + 1
                               : state.pocketListings.length),
                 ),

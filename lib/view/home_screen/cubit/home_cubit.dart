@@ -31,12 +31,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getActivities(
       {required int filterCode, bool refresh = false}) async {
-    if (state.getActivitiesStatus[filterCode] == Status.loading ||
-        state.getActivitiesStatus[filterCode] == Status.loadingMore) {
+    if (state.getActivitiesStatus[filterCode] == AppStatus.loading ||
+        state.getActivitiesStatus[filterCode] == AppStatus.loadingMore) {
       return;
     }
     if (refresh || state.activityPaginator[filterCode] == null) {
-      final status = {...state.getActivitiesStatus, filterCode: Status.loading};
+      final status = {
+        ...state.getActivitiesStatus,
+        filterCode: AppStatus.loading
+      };
       final error = {...state.getActivitiesError, filterCode: null};
       final activities = {...state.activities, filterCode: <Activity>[]};
       final paginator = {...state.activityPaginator, filterCode: null};
@@ -48,7 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
     } else {
       final status = {
         ...state.getActivitiesStatus,
-        filterCode: Status.loadingMore
+        filterCode: AppStatus.loadingMore
       };
       final error = {...state.getActivitiesError, filterCode: null};
       emit(state.copyWith(
@@ -67,7 +70,7 @@ class HomeCubit extends Cubit<HomeState> {
       case (Success<List<Activity>> s):
         final status = {
           ...state.getActivitiesStatus,
-          filterCode: Status.success
+          filterCode: AppStatus.success
         };
         final error = {...state.getActivitiesError, filterCode: null};
         final activities = {
@@ -89,7 +92,7 @@ class HomeCubit extends Cubit<HomeState> {
       case (Error e):
         final status = {
           ...state.getActivitiesStatus,
-          filterCode: Status.failure
+          filterCode: AppStatus.failure
         };
         final error = {...state.getActivitiesError, filterCode: e.exception};
         emit(state.copyWith(
@@ -98,19 +101,19 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> getSortedActivities({bool refresh = false}) async {
-    if (state.getSortedActivitiesStatus == Status.loading ||
-        state.getSortedActivitiesStatus == Status.loadingMore) {
+    if (state.getSortedActivitiesStatus == AppStatus.loading ||
+        state.getSortedActivitiesStatus == AppStatus.loadingMore) {
       return;
     }
     if (refresh || state.sortedActivityPaginator == null) {
       emit(state.copyWith(
           sortedActivityPaginator: null,
-          getSortedActivitiesStatus: Status.loading,
+          getSortedActivitiesStatus: AppStatus.loading,
           sortedActivity: [],
           getSortedActivitiesError: null));
     } else {
       emit(state.copyWith(
-          getSortedActivitiesStatus: Status.loadingMore,
+          getSortedActivitiesStatus: AppStatus.loadingMore,
           getSortedActivitiesError: null));
     }
 
@@ -120,14 +123,14 @@ class HomeCubit extends Cubit<HomeState> {
       case (Success<List<Activity>> s):
         emit(state.copyWith(
             sortedActivity: s.value,
-            getSortedActivitiesStatus: Status.success,
+            getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
 
         break;
       case (Error e):
         emit(state.copyWith(
             getSortedActivitiesError: e.exception,
-            getSortedActivitiesStatus: Status.failure));
+            getSortedActivitiesStatus: AppStatus.failure));
     }
   }
 
@@ -181,10 +184,10 @@ class HomeCubit extends Cubit<HomeState> {
       int? taskSection,
       required int index}) async {
     final result = await _activityRepo.updateActivity(
-        activityId: task.id, notes: description);
+        activityId: task.id, notes: description, completed: true);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(updateTaskStatus: Status.success));
+        emit(state.copyWith(updateTaskStatus: AppStatus.success));
         if (taskSection != null) {
           if (state.listType.first == ListType.Categorized) {
             final tasks =
@@ -205,7 +208,7 @@ class HomeCubit extends Cubit<HomeState> {
 
       case (Error e):
         emit(state.copyWith(
-            updateTaskError: e.exception, updateTaskStatus: Status.failure));
+            updateTaskError: e.exception, updateTaskStatus: AppStatus.failure));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }

@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeState {
   Map<int, List<Activity>> get activities => throw _privateConstructorUsedError;
-  Map<int, Status?> get getActivitiesStatus =>
+  Map<int, AppStatus?> get getActivitiesStatus =>
       throw _privateConstructorUsedError;
   Map<int, String?> get getActivitiesError =>
       throw _privateConstructorUsedError;
@@ -30,10 +30,11 @@ mixin _$HomeState {
   int get viewingTasksCount => throw _privateConstructorUsedError;
   Set<ListType> get listType => throw _privateConstructorUsedError;
   List<Activity> get sortedActivity => throw _privateConstructorUsedError;
-  Status? get getSortedActivitiesStatus => throw _privateConstructorUsedError;
+  AppStatus? get getSortedActivitiesStatus =>
+      throw _privateConstructorUsedError;
   String? get getSortedActivitiesError => throw _privateConstructorUsedError;
   Paginator? get sortedActivityPaginator => throw _privateConstructorUsedError;
-  Status get updateTaskStatus => throw _privateConstructorUsedError;
+  AppStatus get updateTaskStatus => throw _privateConstructorUsedError;
   String? get updateTaskError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -48,7 +49,7 @@ abstract class $HomeStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<int, List<Activity>> activities,
-      Map<int, Status?> getActivitiesStatus,
+      Map<int, AppStatus?> getActivitiesStatus,
       Map<int, String?> getActivitiesError,
       Map<int, Paginator?> activityPaginator,
       ModelCategory selectedCategory,
@@ -58,10 +59,10 @@ abstract class $HomeStateCopyWith<$Res> {
       int viewingTasksCount,
       Set<ListType> listType,
       List<Activity> sortedActivity,
-      Status? getSortedActivitiesStatus,
+      AppStatus? getSortedActivitiesStatus,
       String? getSortedActivitiesError,
       Paginator? sortedActivityPaginator,
-      Status updateTaskStatus,
+      AppStatus updateTaskStatus,
       String? updateTaskError});
 
   $ModelCategoryCopyWith<$Res> get selectedCategory;
@@ -106,7 +107,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       getActivitiesStatus: null == getActivitiesStatus
           ? _value.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Map<int, Status?>,
+              as Map<int, AppStatus?>,
       getActivitiesError: null == getActivitiesError
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -146,7 +147,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
           ? _value.getSortedActivitiesStatus
           : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status?,
+              as AppStatus?,
       getSortedActivitiesError: freezed == getSortedActivitiesError
           ? _value.getSortedActivitiesError
           : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -158,7 +159,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       updateTaskStatus: null == updateTaskStatus
           ? _value.updateTaskStatus
           : updateTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updateTaskError: freezed == updateTaskError
           ? _value.updateTaskError
           : updateTaskError // ignore: cast_nullable_to_non_nullable
@@ -197,7 +198,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {Map<int, List<Activity>> activities,
-      Map<int, Status?> getActivitiesStatus,
+      Map<int, AppStatus?> getActivitiesStatus,
       Map<int, String?> getActivitiesError,
       Map<int, Paginator?> activityPaginator,
       ModelCategory selectedCategory,
@@ -207,10 +208,10 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       int viewingTasksCount,
       Set<ListType> listType,
       List<Activity> sortedActivity,
-      Status? getSortedActivitiesStatus,
+      AppStatus? getSortedActivitiesStatus,
       String? getSortedActivitiesError,
       Paginator? sortedActivityPaginator,
-      Status updateTaskStatus,
+      AppStatus updateTaskStatus,
       String? updateTaskError});
 
   @override
@@ -255,7 +256,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       getActivitiesStatus: null == getActivitiesStatus
           ? _value._getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Map<int, Status?>,
+              as Map<int, AppStatus?>,
       getActivitiesError: null == getActivitiesError
           ? _value._getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -295,7 +296,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
           ? _value.getSortedActivitiesStatus
           : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status?,
+              as AppStatus?,
       getSortedActivitiesError: freezed == getSortedActivitiesError
           ? _value.getSortedActivitiesError
           : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -307,7 +308,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       updateTaskStatus: null == updateTaskStatus
           ? _value.updateTaskStatus
           : updateTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updateTaskError: freezed == updateTaskError
           ? _value.updateTaskError
           : updateTaskError // ignore: cast_nullable_to_non_nullable
@@ -321,7 +322,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {final Map<int, List<Activity>> activities = const {},
-      final Map<int, Status?> getActivitiesStatus = const {},
+      final Map<int, AppStatus?> getActivitiesStatus = const {},
       final Map<int, String?> getActivitiesError = const {},
       final Map<int, Paginator?> activityPaginator = const {},
       this.selectedCategory = const ModelCategory(name: 'ALL'),
@@ -331,10 +332,10 @@ class _$HomeStateImpl implements _HomeState {
       this.viewingTasksCount = 0,
       final Set<ListType> listType = const {ListType.Categorized},
       final List<Activity> sortedActivity = const [],
-      this.getSortedActivitiesStatus = Status.init,
+      this.getSortedActivitiesStatus = AppStatus.init,
       this.getSortedActivitiesError,
       this.sortedActivityPaginator,
-      this.updateTaskStatus = Status.init,
+      this.updateTaskStatus = AppStatus.init,
       this.updateTaskError})
       : _activities = activities,
         _getActivitiesStatus = getActivitiesStatus,
@@ -353,10 +354,10 @@ class _$HomeStateImpl implements _HomeState {
     return EqualUnmodifiableMapView(_activities);
   }
 
-  final Map<int, Status?> _getActivitiesStatus;
+  final Map<int, AppStatus?> _getActivitiesStatus;
   @override
   @JsonKey()
-  Map<int, Status?> get getActivitiesStatus {
+  Map<int, AppStatus?> get getActivitiesStatus {
     if (_getActivitiesStatus is EqualUnmodifiableMapView)
       return _getActivitiesStatus;
     // ignore: implicit_dynamic_type
@@ -424,14 +425,14 @@ class _$HomeStateImpl implements _HomeState {
 
   @override
   @JsonKey()
-  final Status? getSortedActivitiesStatus;
+  final AppStatus? getSortedActivitiesStatus;
   @override
   final String? getSortedActivitiesError;
   @override
   final Paginator? sortedActivityPaginator;
   @override
   @JsonKey()
-  final Status updateTaskStatus;
+  final AppStatus updateTaskStatus;
   @override
   final String? updateTaskError;
 
@@ -511,7 +512,7 @@ class _$HomeStateImpl implements _HomeState {
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final Map<int, List<Activity>> activities,
-      final Map<int, Status?> getActivitiesStatus,
+      final Map<int, AppStatus?> getActivitiesStatus,
       final Map<int, String?> getActivitiesError,
       final Map<int, Paginator?> activityPaginator,
       final ModelCategory selectedCategory,
@@ -521,16 +522,16 @@ abstract class _HomeState implements HomeState {
       final int viewingTasksCount,
       final Set<ListType> listType,
       final List<Activity> sortedActivity,
-      final Status? getSortedActivitiesStatus,
+      final AppStatus? getSortedActivitiesStatus,
       final String? getSortedActivitiesError,
       final Paginator? sortedActivityPaginator,
-      final Status updateTaskStatus,
+      final AppStatus updateTaskStatus,
       final String? updateTaskError}) = _$HomeStateImpl;
 
   @override
   Map<int, List<Activity>> get activities;
   @override
-  Map<int, Status?> get getActivitiesStatus;
+  Map<int, AppStatus?> get getActivitiesStatus;
   @override
   Map<int, String?> get getActivitiesError;
   @override
@@ -550,13 +551,13 @@ abstract class _HomeState implements HomeState {
   @override
   List<Activity> get sortedActivity;
   @override
-  Status? get getSortedActivitiesStatus;
+  AppStatus? get getSortedActivitiesStatus;
   @override
   String? get getSortedActivitiesError;
   @override
   Paginator? get sortedActivityPaginator;
   @override
-  Status get updateTaskStatus;
+  AppStatus get updateTaskStatus;
   @override
   String? get updateTaskError;
   @override

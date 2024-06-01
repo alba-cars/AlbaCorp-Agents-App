@@ -19,12 +19,12 @@ class DealsCubit extends Cubit<DealsState> {
   Future<void> getDeals({bool refresh = false}) async {
     if (refresh || state.dealsPaginator == null) {
       emit(state.copyWith(
-          getDealsStatus: Status.loading, dealsPaginator: null, deals: []));
+          getDealsStatus: AppStatus.loading, dealsPaginator: null, deals: []));
     } else {
-      if (state.getDealsStatus == Status.loadingMore) {
+      if (state.getDealsStatus == AppStatus.loadingMore) {
         return;
       }
-      emit(state.copyWith(getDealsStatus: Status.loadingMore));
+      emit(state.copyWith(getDealsStatus: AppStatus.loadingMore));
     }
 
     final result = await _dealsRepo.getDeals(filter: {
@@ -39,26 +39,26 @@ class DealsCubit extends Cubit<DealsState> {
         emit(state.copyWith(
             deals: [...state.deals, ...s.value],
             dealsPaginator: s.paginator,
-            getDealsStatus: Status.success));
+            getDealsStatus: AppStatus.success));
         // Logger().d(state.listings);
         break;
       case (Error e):
         emit(state.copyWith(
-            getDealsStatus: Status.failure, getDealsError: e.exception));
+            getDealsStatus: AppStatus.failure, getDealsError: e.exception));
     }
   }
 
   Future<void> getYourListings({bool refresh = false}) async {
     if (refresh || state.yourListingsPaginator == null) {
       emit(state.copyWith(
-          getYourListingsStatus: Status.loading,
+          getYourListingsStatus: AppStatus.loading,
           yourListingsPaginator: null,
           yourListings: []));
     } else {
-      if (state.getYourListingsStatus == Status.loadingMore) {
+      if (state.getYourListingsStatus == AppStatus.loadingMore) {
         return;
       }
-      emit(state.copyWith(getYourListingsStatus: Status.loadingMore));
+      emit(state.copyWith(getYourListingsStatus: AppStatus.loadingMore));
     }
 
     final result = await _dealsRepo.getDeals(
@@ -73,12 +73,12 @@ class DealsCubit extends Cubit<DealsState> {
         emit(state.copyWith(
             yourListings: [...state.yourListings, ...s.value],
             yourListingsPaginator: s.paginator,
-            getYourListingsStatus: Status.success));
+            getYourListingsStatus: AppStatus.success));
         // Logger().d(state.listings);
         break;
       case (Error e):
         emit(state.copyWith(
-            getYourListingsStatus: Status.failure,
+            getYourListingsStatus: AppStatus.failure,
             getYourListingsError: e.exception));
     }
   }

@@ -56,7 +56,6 @@ class _AppAutoCompleteState<T extends Object>
 
   @override
   void initState() {
-    widget.controller?.reset = reset;
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (_fieldKey.currentState?.value != null) {
         _controller.text =
@@ -110,6 +109,7 @@ class _AppAutoCompleteState<T extends Object>
           if (widget.label != null) const SizedBox(height: 6),
           Stack(children: [
             AppRawAutocomplete<T>(
+                controller: widget.controller,
                 textEditingController: _controller,
                 focusNode: _focusNode,
                 displayStringForOption: widget._displayStringForOption,
@@ -222,7 +222,9 @@ class _AppAutoCompleteState<T extends Object>
                 },
                 onSelected: (v) {
                   state.didChange(v);
-                  widget.onSelected?.call(v);
+                  if (v != null) {
+                    widget.onSelected?.call(v);
+                  }
                 },
                 optionsBuilder: widget.optionsBuilder),
             Positioned(
@@ -256,14 +258,6 @@ class _AppAutoCompleteState<T extends Object>
         ],
       ),
     );
-  }
-
-  void reset() {
-    _controller.text = '';
-    if (mounted) setState(() {});
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _fieldKey.currentState?.didChange(null);
-    });
   }
 }
 

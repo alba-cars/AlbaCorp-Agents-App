@@ -22,17 +22,17 @@ class AddLeadCubit extends Cubit<AddLeadState> {
   final LeadRepo _leadRepo;
 
   Future<void> addLead() async {
-    emit(state.copyWith(addLeadStatus: Status.loadingMore));
+    emit(state.copyWith(addLeadStatus: AppStatus.loadingMore));
 
     final result =
         await _leadRepo.addLead(lead: {'role': "User", ...state.val});
     switch (result) {
       case (Success s):
-        emit(state.copyWith(lead: s.value, addLeadStatus: Status.success));
+        emit(state.copyWith(lead: s.value, addLeadStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            addLeadStatus: Status.failure, addLeadError: e.exception));
+            addLeadStatus: AppStatus.failure, addLeadError: e.exception));
         break;
     }
   }
@@ -68,16 +68,16 @@ class AddLeadCubit extends Cubit<AddLeadState> {
   }
 
   Future<void> getLeadSources() async {
-    emit(state.copyWith(getLeadSourceStatus: Status.loadingMore));
+    emit(state.copyWith(getLeadSourceStatus: AppStatus.loadingMore));
     final result = await _leadRepo.getLeadSources();
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            leadSources: s.value, getLeadSourceStatus: Status.success));
+            leadSources: s.value, getLeadSourceStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            getLeadSourceStatus: Status.failure, addLeadError: e.exception));
+            getLeadSourceStatus: AppStatus.failure, addLeadError: e.exception));
         break;
     }
   }

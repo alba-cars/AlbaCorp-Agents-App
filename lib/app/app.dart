@@ -4,8 +4,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:phone_state/phone_state.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
@@ -13,6 +13,7 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:uuid/uuid.dart';
@@ -73,7 +74,12 @@ void onDidReceiveNotificationResponse(NotificationResponse response) async {
 
 @pragma('vm:entry-point')
 Future<void> onFirebaseBackgroundMessage(RemoteMessage message) async {
-  showNotificationWithAction(message);
+  if (message.data['type'] == 'NEW_SPECIAL_LEADS') {
+    (await SharedPreferences.getInstance())
+        .setString('NEW_SPECIAL_LEADS', json.encode(message.data));
+  } else {
+    showNotificationWithAction(message);
+  }
 }
 
 class App extends StatefulWidget {
@@ -91,11 +97,21 @@ class _AppState extends State<App> {
     firebaseMessaging.requestPermission();
     getToken();
 
-    FirebaseMessaging.onMessage.listen(showNotificationWithAction);
+    FirebaseMessaging.onMessage.listen(onFirebaseForegroundMessage);
     FirebaseMessaging.onBackgroundMessage(onFirebaseBackgroundMessage);
     initiatePhoneStateStream();
     checkpreference();
     super.initState();
+  }
+
+  void onFirebaseForegroundMessage(RemoteMessage message) async {
+    if (message.data['type'] == 'NEW_SPECIAL_LEADS') {
+      (await SharedPreferences.getInstance())
+          .setString('NEW_SPECIAL_LEADS', json.encode(message.data));
+      context.read<ActivityCubit>().setHasNewSpecialLeadsActivity(true);
+    } else {
+      showNotificationWithAction(message);
+    }
   }
 
   checkpreference() async {
@@ -106,7 +122,10 @@ class _AppState extends State<App> {
   }
 
   getToken() async {
-    final token = await firebaseMessaging.getToken();
+    await getIt<SharedPreferences>().reload();
+    if (getIt<SharedPreferences>().containsKey('NEW_SPECIAL_LEADS')) {
+      context.read<ActivityCubit>().setHasNewSpecialLeadsActivity(true);
+    }
     final lmsg =
         await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 
@@ -165,7 +184,8 @@ class _AppState extends State<App> {
         builder: (context, _) => MaterialApp.router(
           routerConfig: AppRouter.router,
           theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff374eab)),
+              colorScheme: ColorScheme.fromSeed(
+                  seedColor: Color(0xff374eab), tertiary: Color(0xffdfc090)),
               dialogBackgroundColor: Colors.white,
               buttonTheme: ButtonThemeData(
                 buttonColor: Color(0xff374eab),

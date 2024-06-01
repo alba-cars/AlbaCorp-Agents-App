@@ -19,17 +19,18 @@ class TicketDetailsCubit extends Cubit<TicketDetailsState> {
   final TicketRepo _ticketRepo;
 
   Future<void> getTicket({bool refresh = false}) async {
-    emit(state.copyWith(getTicketStatus: Status.loadingMore));
+    emit(state.copyWith(getTicketStatus: AppStatus.loadingMore));
 
     final result = await _ticketRepo.getTicket(state.ticketId);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(ticket: s.value, getTicketStatus: Status.success));
+        emit(state.copyWith(
+            ticket: s.value, getTicketStatus: AppStatus.success));
 
         break;
       case (Error e):
         emit(state.copyWith(
-            getTicketStatus: Status.failure, getTicketError: e.exception));
+            getTicketStatus: AppStatus.failure, getTicketError: e.exception));
     }
   }
 

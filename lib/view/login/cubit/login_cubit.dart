@@ -18,15 +18,16 @@ class LoginCubit extends Cubit<LoginState> {
   final AuthRepo _authRepo;
 
   Future<void> login({required String email, required String password}) async {
+    emit(state.copyWith(loginStatus: AppStatus.loading));
     final result = await _authRepo.login(username: email, password: password);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(loginStatus: Status.success));
+        emit(state.copyWith(loginStatus: AppStatus.success));
         getIt<AuthBloc>().add(AuthEvent.userLoggedIn(user: s.value));
         break;
       case (Error e):
         emit(state.copyWith(
-            loginStatus: Status.failure, loginErrorMessage: e.exception));
+            loginStatus: AppStatus.failure, loginErrorMessage: e.exception));
         break;
     }
   }

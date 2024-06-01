@@ -8,6 +8,8 @@ import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/widgets/info_label_value.dart';
 import 'package:real_estate_app/view/ticket_detail_screen/ticket_details_screen.dart';
 import 'package:real_estate_app/view/tickets_screen/cubit/tickets_screen_cubit.dart';
+import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
+import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:recase/recase.dart';
 
 import '../../service_locator/injectable.dart';
@@ -46,6 +48,44 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
   void initState() {
     context.read<TicketsScreenCubit>().getTickets();
     super.initState();
+  }
+
+  List<Widget> filterFields(BuildContext context) {
+    return [
+      DropDownfield(
+        label: 'Request Type',
+        items: RequestType.values.map((e) => e.value).toList(),
+        name: "requestType",
+        displayOption: (option) => option,
+      ),
+      DropDownfield(
+        label: 'Department',
+        items: context.select((TicketsScreenCubit value) => value
+            .state.departments
+            .map((e) => {'label': e.departmentName, 'value': e.id})
+            .toList()),
+        name: "department",
+        displayOption: (option) => option['label']?.toString() ?? '',
+      ),
+      WrapSelectField(
+        name: 'status',
+        values: TicketStatus.values.map((e) => e.name.titleCase).toList(),
+        label: "Ticket Status",
+      ),
+      WrapSelectField(
+        name: 'type',
+        values: TicketType.values
+            .map((e) => {'label': e.name.titleCase, "value": e.name})
+            .toList(),
+        displayOption: (option) => option['label']?.toString() ?? '',
+        label: "Ticket Type",
+      ),
+      WrapSelectField(
+        name: 'priority',
+        values: TicketPriority.values.map((e) => e.name.titleCase).toList(),
+        label: "Priority",
+      )
+    ];
   }
 
   @override
@@ -97,7 +137,12 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: AppSearchBar(
-                onChanged: (val) {},
+                onChanged: context.read<TicketsScreenCubit>().searchTickets,
+                filterFields: filterFields(context),
+                filter: context.select(
+                    (TicketsScreenCubit value) => value.state.ticketsFilter),
+                onFilterApplied:
+                    context.read<TicketsScreenCubit>().setTicketsFilters,
               ),
             ))
           ];
@@ -110,11 +155,11 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
                     previous.getTicketsListStatus !=
                     current.getTicketsListStatus,
                 builder: (context, state) {
-                  if (state.getTicketsListStatus == Status.loading) {
+                  if (state.getTicketsListStatus == AppStatus.loading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state.getTicketsListStatus == Status.success &&
+                  } else if (state.getTicketsListStatus == AppStatus.success &&
                       state.ticketsList.length == 0) {
                     return Center(
                       child: Text('No Tickets Found'),
@@ -122,7 +167,8 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
                   }
                   return NotificationListener<ScrollNotification>(
                       onNotification: (scrollInfo) {
-                        if (state.getTicketsListStatus != Status.loadingMore &&
+                        if (state.getTicketsListStatus !=
+                                AppStatus.loadingMore &&
                             scrollInfo.metrics.pixels >=
                                 0.9 * scrollInfo.metrics.maxScrollExtent) {
                           context.read<TicketsScreenCubit>().getTickets();
@@ -152,10 +198,10 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
                             separatorBuilder: (context, index) => SizedBox(
                                   height: 8,
                                 ),
-                            itemCount:
-                                state.getTicketsListStatus == Status.loadingMore
-                                    ? state.ticketsList.length + 1
-                                    : state.ticketsList.length),
+                            itemCount: state.getTicketsListStatus ==
+                                    AppStatus.loadingMore
+                                ? state.ticketsList.length + 1
+                                : state.ticketsList.length),
                       ));
                 },
               ),

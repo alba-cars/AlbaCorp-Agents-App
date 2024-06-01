@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddLeadState {
-  Status get addLeadStatus => throw _privateConstructorUsedError;
+  AppStatus get addLeadStatus => throw _privateConstructorUsedError;
   String? get addLeadError => throw _privateConstructorUsedError;
   List<LeadSource> get leadSources => throw _privateConstructorUsedError;
-  Status get getLeadSourceStatus => throw _privateConstructorUsedError;
+  AppStatus get getLeadSourceStatus => throw _privateConstructorUsedError;
   List<Country> get countries => throw _privateConstructorUsedError;
   Country? get selectedCountry => throw _privateConstructorUsedError;
   List<State> get states => throw _privateConstructorUsedError;
@@ -43,10 +43,10 @@ abstract class $AddLeadStateCopyWith<$Res> {
       _$AddLeadStateCopyWithImpl<$Res, AddLeadState>;
   @useResult
   $Res call(
-      {Status addLeadStatus,
+      {AppStatus addLeadStatus,
       String? addLeadError,
       List<LeadSource> leadSources,
-      Status getLeadSourceStatus,
+      AppStatus getLeadSourceStatus,
       List<Country> countries,
       Country? selectedCountry,
       List<State> states,
@@ -93,7 +93,7 @@ class _$AddLeadStateCopyWithImpl<$Res, $Val extends AddLeadState>
       addLeadStatus: null == addLeadStatus
           ? _value.addLeadStatus
           : addLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addLeadError: freezed == addLeadError
           ? _value.addLeadError
           : addLeadError // ignore: cast_nullable_to_non_nullable
@@ -105,7 +105,7 @@ class _$AddLeadStateCopyWithImpl<$Res, $Val extends AddLeadState>
       getLeadSourceStatus: null == getLeadSourceStatus
           ? _value.getLeadSourceStatus
           : getLeadSourceStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       countries: null == countries
           ? _value.countries
           : countries // ignore: cast_nullable_to_non_nullable
@@ -171,10 +171,10 @@ abstract class _$$AddLeadStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Status addLeadStatus,
+      {AppStatus addLeadStatus,
       String? addLeadError,
       List<LeadSource> leadSources,
-      Status getLeadSourceStatus,
+      AppStatus getLeadSourceStatus,
       List<Country> countries,
       Country? selectedCountry,
       List<State> states,
@@ -220,7 +220,7 @@ class __$$AddLeadStateImplCopyWithImpl<$Res>
       addLeadStatus: null == addLeadStatus
           ? _value.addLeadStatus
           : addLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addLeadError: freezed == addLeadError
           ? _value.addLeadError
           : addLeadError // ignore: cast_nullable_to_non_nullable
@@ -232,7 +232,7 @@ class __$$AddLeadStateImplCopyWithImpl<$Res>
       getLeadSourceStatus: null == getLeadSourceStatus
           ? _value.getLeadSourceStatus
           : getLeadSourceStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       countries: null == countries
           ? _value._countries
           : countries // ignore: cast_nullable_to_non_nullable
@@ -281,10 +281,10 @@ class __$$AddLeadStateImplCopyWithImpl<$Res>
 
 class _$AddLeadStateImpl implements _AddLeadState {
   const _$AddLeadStateImpl(
-      {this.addLeadStatus = Status.init,
+      {this.addLeadStatus = AppStatus.init,
       this.addLeadError,
       final List<LeadSource> leadSources = const [],
-      this.getLeadSourceStatus = Status.init,
+      this.getLeadSourceStatus = AppStatus.init,
       final List<Country> countries = const [],
       this.selectedCountry,
       final List<State> states = const [],
@@ -305,7 +305,7 @@ class _$AddLeadStateImpl implements _AddLeadState {
 
   @override
   @JsonKey()
-  final Status addLeadStatus;
+  final AppStatus addLeadStatus;
   @override
   final String? addLeadError;
   final List<LeadSource> _leadSources;
@@ -319,7 +319,7 @@ class _$AddLeadStateImpl implements _AddLeadState {
 
   @override
   @JsonKey()
-  final Status getLeadSourceStatus;
+  final AppStatus getLeadSourceStatus;
   final List<Country> _countries;
   @override
   @JsonKey()
@@ -452,10 +452,10 @@ class _$AddLeadStateImpl implements _AddLeadState {
 
 abstract class _AddLeadState implements AddLeadState {
   const factory _AddLeadState(
-      {final Status addLeadStatus,
+      {final AppStatus addLeadStatus,
       final String? addLeadError,
       final List<LeadSource> leadSources,
-      final Status getLeadSourceStatus,
+      final AppStatus getLeadSourceStatus,
       final List<Country> countries,
       final Country? selectedCountry,
       final List<State> states,
@@ -468,13 +468,13 @@ abstract class _AddLeadState implements AddLeadState {
       final Lead? lead}) = _$AddLeadStateImpl;
 
   @override
-  Status get addLeadStatus;
+  AppStatus get addLeadStatus;
   @override
   String? get addLeadError;
   @override
   List<LeadSource> get leadSources;
   @override
-  Status get getLeadSourceStatus;
+  AppStatus get getLeadSourceStatus;
   @override
   List<Country> get countries;
   @override

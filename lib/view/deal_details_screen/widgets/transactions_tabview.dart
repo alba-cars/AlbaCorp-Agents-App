@@ -47,14 +47,14 @@ class _TransactionsTabViewState extends State<TransactionsTabView> {
           ),
           BlocBuilder<DealDetailsCubit, DealDetailsState>(
             builder: (context, state) {
-              if (state.buyerDealsStatus == Status.loading) {
+              if (state.buyerDealsStatus == AppStatus.loading) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
-              } else if (state.buyerDealsStatus == Status.success &&
+              } else if (state.buyerDealsStatus == AppStatus.success &&
                   state.buyerDeals.isEmpty) {
                 return Padding(
                   padding:
@@ -95,14 +95,14 @@ class _TransactionsTabViewState extends State<TransactionsTabView> {
           ),
           BlocBuilder<DealDetailsCubit, DealDetailsState>(
             builder: (context, state) {
-              if (state.sellerDealsStatus == Status.loading) {
+              if (state.sellerDealsStatus == AppStatus.loading) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
-              } else if (state.sellerDealsStatus == Status.success &&
+              } else if (state.sellerDealsStatus == AppStatus.success &&
                   state.sellerDeals.isEmpty) {
                 return Padding(
                   padding:

@@ -21,9 +21,9 @@ class LeadsCubit extends Cubit<LeadsState> {
   Future<void> getLeads({bool refresh = false}) async {
     if (refresh || state.leadsPaginator == null) {
       emit(state.copyWith(
-          getLeadsStatus: Status.loading, leadsPaginator: null, leads: []));
+          getLeadsStatus: AppStatus.loading, leadsPaginator: null, leads: []));
     } else {
-      emit(state.copyWith(getLeadsStatus: Status.loadingMore));
+      emit(state.copyWith(getLeadsStatus: AppStatus.loadingMore));
     }
 
     final result = await _leadRepo.getLeads(
@@ -35,12 +35,12 @@ class LeadsCubit extends Cubit<LeadsState> {
         emit(state.copyWith(
             leads: [...state.leads, ...s.value],
             leadsPaginator: s.paginator,
-            getLeadsStatus: Status.success));
+            getLeadsStatus: AppStatus.success));
         // Logger().d(state.listings);
         break;
       case (Error e):
         emit(state.copyWith(
-            getLeadsStatus: Status.failure, getLeadsError: e.exception));
+            getLeadsStatus: AppStatus.failure, getLeadsError: e.exception));
     }
   }
 
@@ -51,6 +51,35 @@ class LeadsCubit extends Cubit<LeadsState> {
 
   void setLeadFilters(Map<String, dynamic>? filter) {
     emit(state.copyWith(leadsFilter: filter));
+    getLeads(refresh: true);
+  }
+
+  void setQuickFilter(String? filter) {
+    print(filter);
+    switch (filter) {
+      case 'Hot':
+        emit(state.copyWith(leadsFilter: {'lead_source': 'Fresh'}));
+        break;
+      case 'Fresh':
+        emit(state.copyWith(leadsFilter: {'lead_status': 'Fresh'}));
+        break;
+      case 'Prospect':
+        emit(state.copyWith(leadsFilter: {
+          ...state.leadsFilter ?? {},
+          'lead_status': 'Prospect'
+        }));
+        break;
+      case 'Hot & Fresh':
+        emit(state.copyWith(leadsFilter: {'lead_status': 'Fresh'}));
+        break;
+      case 'Client with deals':
+        emit(state.copyWith(leadsFilter: {'lead_status': 'Fresh'}));
+        break;
+      case 'Recent':
+        break;
+      default:
+        emit(state.copyWith(leadsFilter: {}));
+    }
     getLeads(refresh: true);
   }
 }

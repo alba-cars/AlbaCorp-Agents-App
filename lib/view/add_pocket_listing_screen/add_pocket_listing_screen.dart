@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -232,10 +233,23 @@ class BasicInfoTab extends StatefulWidget {
 class _BasicInfoTabState extends State<BasicInfoTab> {
   final AutoCompleteFieldController _buildingController =
       AutoCompleteFieldController();
+
+  Map<String, dynamic> val = {};
+
+  @override
+  void initState() {
+    val = widget._formKey.currentState?.instantValue ?? {};
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
       key: widget._formKey,
+      onChanged: () {
+        val = widget._formKey.currentState?.instantValue ?? {};
+        setState(() {});
+      },
       initialValue: context.read<AddPocketListingCubit>().state.rawValues,
       child: ScrollShadow(
         color: Colors.indigo[50]!,
@@ -329,32 +343,38 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                         .toLowerCase()
                         .contains(v.text.toLowerCase()));
                   }),
-              AppAutoComplete<Building>(
-                  onSelected: (v) {},
-                  name: 'building',
-                  label: 'Building',
-                  isRequired: true,
-                  valueTransformer: (p0) => p0?.id,
-                  displayStringForOption: (p0) => p0.name,
-                  controller: _buildingController,
-                  optionsBuilder: (v) async {
-                    final list = await context
-                        .read<AddPocketListingCubit>()
-                        .getBuildings(
-                            search: v.text,
-                            communityId: (widget._formKey.currentState
-                                ?.instantValue['community']));
-                    return list.where((element) => element.name
-                        .toLowerCase()
-                        .contains(v.text.toLowerCase()));
-                  }),
+              if (widget.propertyTypeList
+                      .firstWhereOrNull(
+                          (element) => element.id == val['property_type_id'])
+                      ?.propertyType
+                      .contains(RegExp('Apartment|Flat')) ??
+                  false)
+                AppAutoComplete<Building>(
+                    onSelected: (v) {},
+                    name: 'building',
+                    label: 'Building',
+                    isRequired: true,
+                    valueTransformer: (p0) => p0?.id,
+                    displayStringForOption: (p0) => p0.name,
+                    controller: _buildingController,
+                    optionsBuilder: (v) async {
+                      final list = await context
+                          .read<AddPocketListingCubit>()
+                          .getBuildings(
+                              search: v.text,
+                              communityId: (widget._formKey.currentState
+                                  ?.instantValue['community']));
+                      return list.where((element) => element.name
+                          .toLowerCase()
+                          .contains(v.text.toLowerCase()));
+                    }),
               CurrencyField(
                 isRequired: true,
                 name: 'askingPrice',
                 label: 'Asking Price',
               ),
               CurrencyField(
-                isRequired: true,
+                isRequired: false,
                 name: 'agencyValuationPrice',
                 label: 'Agency Valuation',
               ),

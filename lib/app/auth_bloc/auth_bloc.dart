@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:linkus_sdk/linkus_sdk.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/model/user.dart';
 
@@ -29,6 +30,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
     await getAgentData();
+    LinkusSdk().loginToPbx(
+        userName: "ziad@albacorp.net",
+        password:
+            "eyJleHBpcmUiOjAsInNpZ24iOiJRN2FlSXNHRjJ0WDhOSGhURHZCdFpWS0hDZVcxOXpKTkNlME5VM0xmL3NrPSIsInVzZXJuYW1lIjoiemlhZEBhbGJhY29ycC5uZXQiLCJ2ZXJzaW9uIjoiMS4wIn0_",
+        localeIp: '192.168.0.252',
+        localePortI: 8111,
+        remoteIp: '',
+        remotePortI: 8111);
   }
 
   FutureOr<void> _userLoggedOut(_UserLoggedOut event, Emitter<AuthState> emit) {

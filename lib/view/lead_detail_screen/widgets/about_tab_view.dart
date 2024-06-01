@@ -138,10 +138,25 @@ class AboutTabView extends StatelessWidget {
                             alignment: Alignment.center,
                             child: AppPrimaryButton(
                                 text: 'Mark it as Prospect',
-                                onTap: () {
-                                  context
+                                onTap: () async {
+                                  final result = await context
                                       .read<LeadDetailCubit>()
                                       .updateLead({"lead_status": "Prospect"});
+                                  if (result) {
+                                    showSnackbar(
+                                        context,
+                                        'Successfully marked as prospect',
+                                        SnackBarType.success);
+                                  } else {
+                                    final error = context
+                                        .read<LeadDetailCubit>()
+                                        .state
+                                        .updateLeadError;
+                                    showSnackbar(
+                                        context,
+                                        error ?? 'Failed to mark as prospect',
+                                        SnackBarType.failure);
+                                  }
                                 }))
                       ],
                       if (lead.leadStatus == LeadStatus.Viewing) ...[

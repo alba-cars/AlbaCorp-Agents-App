@@ -41,52 +41,17 @@ class _TabLoginState extends State<TabLogin> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              getVerSpace(60.h),
               buildTextFieldWidget(context),
               getVerSpace(20.h),
               buildForgotButton(),
               getVerSpace(50.h),
               buildLoginButton(context),
               getVerSpace(30.h),
-              buildOtherSignIn(context),
             ],
           ).marginSymmetric(horizontal: 20.h),
         ),
       ),
-    );
-  }
-
-  Column buildOtherSignIn(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Align(
-        //   alignment: Alignment.topCenter,
-        //   child: getCustomFont("Or Continue With", 14.sp, Colors.black, 1,
-        //       fontWeight: FontWeight.w400, txtHeight: 1.5),
-        // ),
-        getVerSpace(30.h),
-        // getButton(
-        //     context, Colors.transparent, "Google", Colors.black, () {}, 16.sp,
-        //     weight: FontWeight.w400,
-        //     borderRadius: BorderRadius.circular(16.h),
-        //     buttonHeight: 60.h,
-        //     isBorder: true,
-        //     borderColor: borderColor,
-        //     borderWidth: 1.h,
-        //     isIcon: true,
-        //     image: "google.svg"),
-        // getVerSpace(20.h),
-        // getButton(
-        //     context, Colors.transparent, "Facebook", Colors.black, () {}, 16.sp,
-        //     weight: FontWeight.w400,
-        //     borderRadius: BorderRadius.circular(16.h),
-        //     buttonHeight: 60.h,
-        //     isBorder: true,
-        //     borderColor: borderColor,
-        //     borderWidth: 1.h,
-        //     isIcon: true,
-        //     image: "facebook.svg")
-      ],
     );
   }
 
@@ -96,8 +61,8 @@ class _TabLoginState extends State<TabLogin> {
       children: [
         BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
-            if (state.loginStatus == Status.success) {
-            } else if (state.loginStatus == Status.failure &&
+            if (state.loginStatus == AppStatus.success) {
+            } else if (state.loginStatus == AppStatus.failure &&
                 state.loginErrorMessage != null) {
               showSnackbar(
                   context, state.loginErrorMessage!, SnackBarType.failure);
@@ -127,7 +92,7 @@ class _TabLoginState extends State<TabLogin> {
         onTap: () {
           Constant.sendToNext(context, Routes.forgotRoute);
         },
-        child: getCustomFont("Forgot Password?", 16.sp, Colors.black, 1,
+        child: getCustomFont("Forgot Password?", 14.sp, Colors.black, 1,
             fontWeight: FontWeight.w400, txtHeight: 1.5),
       ),
     );
@@ -137,7 +102,7 @@ class _TabLoginState extends State<TabLogin> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        getCustomFont("Email Address", 16.sp, Colors.black, 1,
+        getCustomFont("Email Address", 14.sp, Colors.black, 1,
             fontWeight: FontWeight.w600, txtHeight: 1.5),
         getVerSpace(6.h),
         defaultTextField(context, emailController, "Email Address",
@@ -153,7 +118,7 @@ class _TabLoginState extends State<TabLogin> {
           return null;
         }),
         getVerSpace(20.h),
-        getCustomFont("Password", 16.sp, Colors.black, 1,
+        getCustomFont("Password", 14.sp, Colors.black, 1,
             fontWeight: FontWeight.w600, txtHeight: 1.5),
         getVerSpace(6.h),
         defaultTextField(context, passwordController, "Your Password",

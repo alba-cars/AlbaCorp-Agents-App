@@ -37,15 +37,15 @@ class AddPocketListingCubit extends Cubit<AddPocketListingState> {
   }
 
   Future<void> addPocketListing({required Map<String, dynamic> values}) async {
-    emit(state.copyWith(addPocketListingStatus: Status.loading));
+    emit(state.copyWith(addPocketListingStatus: AppStatus.loading));
     final result = await _explorerRepo.addPocketListings(values: values);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addPocketListingStatus: Status.success));
+        emit(state.copyWith(addPocketListingStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            addPocketListingStatus: Status.failure,
+            addPocketListingStatus: AppStatus.failure,
             addPocketListingError: e.exception));
         break;
     }
@@ -76,13 +76,13 @@ class AddPocketListingCubit extends Cubit<AddPocketListingState> {
         return;
       case 1:
         await addPocketListing(values: state.values);
-        if (state.addPocketListingStatus == Status.success) {
+        if (state.addPocketListingStatus == AppStatus.success) {
           if (context.mounted) {
             showSnackbar(context, 'Successfully added pocket listing',
                 SnackBarType.success);
             context.pop(true);
           }
-        } else if (state.addPocketListingStatus == Status.failure) {
+        } else if (state.addPocketListingStatus == AppStatus.failure) {
           if (context.mounted) {
             showSnackbar(context, state.addPocketListingError ?? '',
                 SnackBarType.success);
@@ -102,32 +102,32 @@ class AddPocketListingCubit extends Cubit<AddPocketListingState> {
   }
 
   Future<List<Lead>> getLeads({String? search}) async {
-    emit(state.copyWith(getLeadListStatus: Status.loadingMore));
+    emit(state.copyWith(getLeadListStatus: AppStatus.loadingMore));
     final result = await _leadRepo.getLeads(search: search);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            leadList: s.value, getLeadListStatus: Status.success));
+            leadList: s.value, getLeadListStatus: AppStatus.success));
         return s.value;
       case (Error e):
         emit(state.copyWith(
-          getLeadListStatus: Status.failure,
+          getLeadListStatus: AppStatus.failure,
         ));
         return [];
     }
   }
 
   Future<List<Community>> getCommunities({String? search}) async {
-    emit(state.copyWith(getCommunityListStatus: Status.loadingMore));
+    emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getCommunities(search: search);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            communityList: s.value, getCommunityListStatus: Status.success));
+            communityList: s.value, getCommunityListStatus: AppStatus.success));
         return s.value;
       case (Error e):
         emit(state.copyWith(
-          getCommunityListStatus: Status.failure,
+          getCommunityListStatus: AppStatus.failure,
         ));
         return [];
     }
@@ -143,35 +143,35 @@ class AddPocketListingCubit extends Cubit<AddPocketListingState> {
                   : true)
           .toList();
     }
-    emit(state.copyWith(getBuildingListStatus: Status.loadingMore));
+    emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getBuildingNames(
         search: search, communityId: communityId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            buildingList: s.value, getBuildingListStatus: Status.success));
+            buildingList: s.value, getBuildingListStatus: AppStatus.success));
         return s.value;
 
       case (Error e):
         emit(state.copyWith(
-          getBuildingListStatus: Status.failure,
+          getBuildingListStatus: AppStatus.failure,
         ));
         return [];
     }
   }
 
   Future<void> getPropertyTypes() async {
-    emit(state.copyWith(getPropertyTypeListStatus: Status.loadingMore));
+    emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             propertyTypeList: s.value,
-            getPropertyTypeListStatus: Status.success));
+            getPropertyTypeListStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-          getPropertyTypeListStatus: Status.failure,
+          getPropertyTypeListStatus: AppStatus.failure,
         ));
     }
   }

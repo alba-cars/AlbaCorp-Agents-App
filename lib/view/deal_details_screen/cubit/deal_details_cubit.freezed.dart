@@ -18,24 +18,24 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DealDetailsState {
   String get dealId => throw _privateConstructorUsedError;
   Deal? get deal => throw _privateConstructorUsedError;
-  Status get getDealStatus => throw _privateConstructorUsedError;
+  AppStatus get getDealStatus => throw _privateConstructorUsedError;
   String? get getDealError => throw _privateConstructorUsedError;
   List<DealDocument> get dealDocuments => throw _privateConstructorUsedError;
-  Status get getDealDocumentsStatus => throw _privateConstructorUsedError;
+  AppStatus get getDealDocumentsStatus => throw _privateConstructorUsedError;
   List<DealDocument> get userDocuments => throw _privateConstructorUsedError;
-  Status get getUserDocumentsStatus => throw _privateConstructorUsedError;
+  AppStatus get getUserDocumentsStatus => throw _privateConstructorUsedError;
   List<Deal> get buyerDeals => throw _privateConstructorUsedError;
-  Status get buyerDealsStatus => throw _privateConstructorUsedError;
+  AppStatus get buyerDealsStatus => throw _privateConstructorUsedError;
   List<Deal> get sellerDeals => throw _privateConstructorUsedError;
-  Status get sellerDealsStatus => throw _privateConstructorUsedError;
+  AppStatus get sellerDealsStatus => throw _privateConstructorUsedError;
   List<Activity> get buyerActivities => throw _privateConstructorUsedError;
-  Status get buyerActivitiesStatus => throw _privateConstructorUsedError;
+  AppStatus get buyerActivitiesStatus => throw _privateConstructorUsedError;
   List<Activity> get sellerActivities => throw _privateConstructorUsedError;
-  Status get sellerActivitiesStatus => throw _privateConstructorUsedError;
+  AppStatus get sellerActivitiesStatus => throw _privateConstructorUsedError;
   List<Activity> get propertyActivities => throw _privateConstructorUsedError;
-  Status get propertyActivitiesStatus => throw _privateConstructorUsedError;
+  AppStatus get propertyActivitiesStatus => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DealDetailsStateCopyWith<DealDetailsState> get copyWith =>
@@ -51,24 +51,24 @@ abstract class $DealDetailsStateCopyWith<$Res> {
   $Res call(
       {String dealId,
       Deal? deal,
-      Status getDealStatus,
+      AppStatus getDealStatus,
       String? getDealError,
       List<DealDocument> dealDocuments,
-      Status getDealDocumentsStatus,
+      AppStatus getDealDocumentsStatus,
       List<DealDocument> userDocuments,
-      Status getUserDocumentsStatus,
+      AppStatus getUserDocumentsStatus,
       List<Deal> buyerDeals,
-      Status buyerDealsStatus,
+      AppStatus buyerDealsStatus,
       List<Deal> sellerDeals,
-      Status sellerDealsStatus,
+      AppStatus sellerDealsStatus,
       List<Activity> buyerActivities,
-      Status buyerActivitiesStatus,
+      AppStatus buyerActivitiesStatus,
       List<Activity> sellerActivities,
-      Status sellerActivitiesStatus,
+      AppStatus sellerActivitiesStatus,
       List<Activity> propertyActivities,
-      Status propertyActivitiesStatus,
+      AppStatus propertyActivitiesStatus,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus});
+      AppStatus getPropertyTypeListStatus});
 
   $DealCopyWith<$Res>? get deal;
 }
@@ -119,7 +119,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       getDealStatus: null == getDealStatus
           ? _value.getDealStatus
           : getDealStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getDealError: freezed == getDealError
           ? _value.getDealError
           : getDealError // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       getDealDocumentsStatus: null == getDealDocumentsStatus
           ? _value.getDealDocumentsStatus
           : getDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       userDocuments: null == userDocuments
           ? _value.userDocuments
           : userDocuments // ignore: cast_nullable_to_non_nullable
@@ -139,7 +139,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       getUserDocumentsStatus: null == getUserDocumentsStatus
           ? _value.getUserDocumentsStatus
           : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buyerDeals: null == buyerDeals
           ? _value.buyerDeals
           : buyerDeals // ignore: cast_nullable_to_non_nullable
@@ -147,7 +147,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       buyerDealsStatus: null == buyerDealsStatus
           ? _value.buyerDealsStatus
           : buyerDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       sellerDeals: null == sellerDeals
           ? _value.sellerDeals
           : sellerDeals // ignore: cast_nullable_to_non_nullable
@@ -155,7 +155,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       sellerDealsStatus: null == sellerDealsStatus
           ? _value.sellerDealsStatus
           : sellerDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buyerActivities: null == buyerActivities
           ? _value.buyerActivities
           : buyerActivities // ignore: cast_nullable_to_non_nullable
@@ -163,7 +163,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       buyerActivitiesStatus: null == buyerActivitiesStatus
           ? _value.buyerActivitiesStatus
           : buyerActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       sellerActivities: null == sellerActivities
           ? _value.sellerActivities
           : sellerActivities // ignore: cast_nullable_to_non_nullable
@@ -171,7 +171,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       sellerActivitiesStatus: null == sellerActivitiesStatus
           ? _value.sellerActivitiesStatus
           : sellerActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyActivities: null == propertyActivities
           ? _value.propertyActivities
           : propertyActivities // ignore: cast_nullable_to_non_nullable
@@ -179,7 +179,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       propertyActivitiesStatus: null == propertyActivitiesStatus
           ? _value.propertyActivitiesStatus
           : propertyActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyTypeList: null == propertyTypeList
           ? _value.propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
@@ -187,7 +187,7 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
     ) as $Val);
   }
 
@@ -215,24 +215,24 @@ abstract class _$$DealDetailsStateImplCopyWith<$Res>
   $Res call(
       {String dealId,
       Deal? deal,
-      Status getDealStatus,
+      AppStatus getDealStatus,
       String? getDealError,
       List<DealDocument> dealDocuments,
-      Status getDealDocumentsStatus,
+      AppStatus getDealDocumentsStatus,
       List<DealDocument> userDocuments,
-      Status getUserDocumentsStatus,
+      AppStatus getUserDocumentsStatus,
       List<Deal> buyerDeals,
-      Status buyerDealsStatus,
+      AppStatus buyerDealsStatus,
       List<Deal> sellerDeals,
-      Status sellerDealsStatus,
+      AppStatus sellerDealsStatus,
       List<Activity> buyerActivities,
-      Status buyerActivitiesStatus,
+      AppStatus buyerActivitiesStatus,
       List<Activity> sellerActivities,
-      Status sellerActivitiesStatus,
+      AppStatus sellerActivitiesStatus,
       List<Activity> propertyActivities,
-      Status propertyActivitiesStatus,
+      AppStatus propertyActivitiesStatus,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus});
+      AppStatus getPropertyTypeListStatus});
 
   @override
   $DealCopyWith<$Res>? get deal;
@@ -282,7 +282,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       getDealStatus: null == getDealStatus
           ? _value.getDealStatus
           : getDealStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getDealError: freezed == getDealError
           ? _value.getDealError
           : getDealError // ignore: cast_nullable_to_non_nullable
@@ -294,7 +294,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       getDealDocumentsStatus: null == getDealDocumentsStatus
           ? _value.getDealDocumentsStatus
           : getDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       userDocuments: null == userDocuments
           ? _value._userDocuments
           : userDocuments // ignore: cast_nullable_to_non_nullable
@@ -302,7 +302,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       getUserDocumentsStatus: null == getUserDocumentsStatus
           ? _value.getUserDocumentsStatus
           : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buyerDeals: null == buyerDeals
           ? _value._buyerDeals
           : buyerDeals // ignore: cast_nullable_to_non_nullable
@@ -310,7 +310,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       buyerDealsStatus: null == buyerDealsStatus
           ? _value.buyerDealsStatus
           : buyerDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       sellerDeals: null == sellerDeals
           ? _value._sellerDeals
           : sellerDeals // ignore: cast_nullable_to_non_nullable
@@ -318,7 +318,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       sellerDealsStatus: null == sellerDealsStatus
           ? _value.sellerDealsStatus
           : sellerDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buyerActivities: null == buyerActivities
           ? _value._buyerActivities
           : buyerActivities // ignore: cast_nullable_to_non_nullable
@@ -326,7 +326,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       buyerActivitiesStatus: null == buyerActivitiesStatus
           ? _value.buyerActivitiesStatus
           : buyerActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       sellerActivities: null == sellerActivities
           ? _value._sellerActivities
           : sellerActivities // ignore: cast_nullable_to_non_nullable
@@ -334,7 +334,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       sellerActivitiesStatus: null == sellerActivitiesStatus
           ? _value.sellerActivitiesStatus
           : sellerActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyActivities: null == propertyActivities
           ? _value._propertyActivities
           : propertyActivities // ignore: cast_nullable_to_non_nullable
@@ -342,7 +342,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       propertyActivitiesStatus: null == propertyActivitiesStatus
           ? _value.propertyActivitiesStatus
           : propertyActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyTypeList: null == propertyTypeList
           ? _value._propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
@@ -350,7 +350,7 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
     ));
   }
 }
@@ -361,24 +361,24 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
   const _$DealDetailsStateImpl(
       {required this.dealId,
       this.deal,
-      this.getDealStatus = Status.init,
+      this.getDealStatus = AppStatus.init,
       this.getDealError,
       final List<DealDocument> dealDocuments = const [],
-      this.getDealDocumentsStatus = Status.init,
+      this.getDealDocumentsStatus = AppStatus.init,
       final List<DealDocument> userDocuments = const [],
-      this.getUserDocumentsStatus = Status.init,
+      this.getUserDocumentsStatus = AppStatus.init,
       final List<Deal> buyerDeals = const [],
-      this.buyerDealsStatus = Status.init,
+      this.buyerDealsStatus = AppStatus.init,
       final List<Deal> sellerDeals = const [],
-      this.sellerDealsStatus = Status.init,
+      this.sellerDealsStatus = AppStatus.init,
       final List<Activity> buyerActivities = const [],
-      this.buyerActivitiesStatus = Status.init,
+      this.buyerActivitiesStatus = AppStatus.init,
       final List<Activity> sellerActivities = const [],
-      this.sellerActivitiesStatus = Status.init,
+      this.sellerActivitiesStatus = AppStatus.init,
       final List<Activity> propertyActivities = const [],
-      this.propertyActivitiesStatus = Status.init,
+      this.propertyActivitiesStatus = AppStatus.init,
       final List<PropertyType> propertyTypeList = const [],
-      this.getPropertyTypeListStatus = Status.init})
+      this.getPropertyTypeListStatus = AppStatus.init})
       : _dealDocuments = dealDocuments,
         _userDocuments = userDocuments,
         _buyerDeals = buyerDeals,
@@ -394,7 +394,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
   final Deal? deal;
   @override
   @JsonKey()
-  final Status getDealStatus;
+  final AppStatus getDealStatus;
   @override
   final String? getDealError;
   final List<DealDocument> _dealDocuments;
@@ -408,7 +408,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status getDealDocumentsStatus;
+  final AppStatus getDealDocumentsStatus;
   final List<DealDocument> _userDocuments;
   @override
   @JsonKey()
@@ -420,7 +420,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status getUserDocumentsStatus;
+  final AppStatus getUserDocumentsStatus;
   final List<Deal> _buyerDeals;
   @override
   @JsonKey()
@@ -432,7 +432,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status buyerDealsStatus;
+  final AppStatus buyerDealsStatus;
   final List<Deal> _sellerDeals;
   @override
   @JsonKey()
@@ -444,7 +444,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status sellerDealsStatus;
+  final AppStatus sellerDealsStatus;
   final List<Activity> _buyerActivities;
   @override
   @JsonKey()
@@ -456,7 +456,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status buyerActivitiesStatus;
+  final AppStatus buyerActivitiesStatus;
   final List<Activity> _sellerActivities;
   @override
   @JsonKey()
@@ -469,7 +469,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status sellerActivitiesStatus;
+  final AppStatus sellerActivitiesStatus;
   final List<Activity> _propertyActivities;
   @override
   @JsonKey()
@@ -482,7 +482,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status propertyActivitiesStatus;
+  final AppStatus propertyActivitiesStatus;
   final List<PropertyType> _propertyTypeList;
   @override
   @JsonKey()
@@ -495,7 +495,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   @JsonKey()
-  final Status getPropertyTypeListStatus;
+  final AppStatus getPropertyTypeListStatus;
 
   @override
   String toString() {
@@ -586,65 +586,65 @@ abstract class _DealDetailsState implements DealDetailsState {
   const factory _DealDetailsState(
       {required final String dealId,
       final Deal? deal,
-      final Status getDealStatus,
+      final AppStatus getDealStatus,
       final String? getDealError,
       final List<DealDocument> dealDocuments,
-      final Status getDealDocumentsStatus,
+      final AppStatus getDealDocumentsStatus,
       final List<DealDocument> userDocuments,
-      final Status getUserDocumentsStatus,
+      final AppStatus getUserDocumentsStatus,
       final List<Deal> buyerDeals,
-      final Status buyerDealsStatus,
+      final AppStatus buyerDealsStatus,
       final List<Deal> sellerDeals,
-      final Status sellerDealsStatus,
+      final AppStatus sellerDealsStatus,
       final List<Activity> buyerActivities,
-      final Status buyerActivitiesStatus,
+      final AppStatus buyerActivitiesStatus,
       final List<Activity> sellerActivities,
-      final Status sellerActivitiesStatus,
+      final AppStatus sellerActivitiesStatus,
       final List<Activity> propertyActivities,
-      final Status propertyActivitiesStatus,
+      final AppStatus propertyActivitiesStatus,
       final List<PropertyType> propertyTypeList,
-      final Status getPropertyTypeListStatus}) = _$DealDetailsStateImpl;
+      final AppStatus getPropertyTypeListStatus}) = _$DealDetailsStateImpl;
 
   @override
   String get dealId;
   @override
   Deal? get deal;
   @override
-  Status get getDealStatus;
+  AppStatus get getDealStatus;
   @override
   String? get getDealError;
   @override
   List<DealDocument> get dealDocuments;
   @override
-  Status get getDealDocumentsStatus;
+  AppStatus get getDealDocumentsStatus;
   @override
   List<DealDocument> get userDocuments;
   @override
-  Status get getUserDocumentsStatus;
+  AppStatus get getUserDocumentsStatus;
   @override
   List<Deal> get buyerDeals;
   @override
-  Status get buyerDealsStatus;
+  AppStatus get buyerDealsStatus;
   @override
   List<Deal> get sellerDeals;
   @override
-  Status get sellerDealsStatus;
+  AppStatus get sellerDealsStatus;
   @override
   List<Activity> get buyerActivities;
   @override
-  Status get buyerActivitiesStatus;
+  AppStatus get buyerActivitiesStatus;
   @override
   List<Activity> get sellerActivities;
   @override
-  Status get sellerActivitiesStatus;
+  AppStatus get sellerActivitiesStatus;
   @override
   List<Activity> get propertyActivities;
   @override
-  Status get propertyActivitiesStatus;
+  AppStatus get propertyActivitiesStatus;
   @override
   List<PropertyType> get propertyTypeList;
   @override
-  Status get getPropertyTypeListStatus;
+  AppStatus get getPropertyTypeListStatus;
   @override
   @JsonKey(ignore: true)
   _$$DealDetailsStateImplCopyWith<_$DealDetailsStateImpl> get copyWith =>

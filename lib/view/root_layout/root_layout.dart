@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -45,7 +46,13 @@ class _RootLayoutState extends State<RootLayout> {
               previous.phoneCallStatus == PhoneCallStatus.inCall &&
               current.phoneCallStatus == PhoneCallStatus.callEnded;
         },
-        child: widget.child,
+        child: BlocListener<ActivityCubit, ActivityState>(
+          listener: (context, state) {},
+          listenWhen: (previous, current) =>
+              previous.newSpecialLeadsTasks != current.newSpecialLeadsTasks &&
+              current.newSpecialLeadsTasks == true,
+          child: widget.child,
+        ),
       ),
     );
   }

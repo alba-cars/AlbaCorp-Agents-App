@@ -27,6 +27,7 @@ mixin _$PropertyCard {
   Building? get building => throw _privateConstructorUsedError;
   @JsonKey(name: 'community')
   Community? get community => throw _privateConstructorUsedError;
+  @JsonKey(readValue: readBeds)
   String? get beds => throw _privateConstructorUsedError;
   int? get baths => throw _privateConstructorUsedError;
   double? get size => throw _privateConstructorUsedError;
@@ -77,7 +78,7 @@ abstract class $PropertyCardCopyWith<$Res> {
       @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
       Building? building,
       @JsonKey(name: 'community') Community? community,
-      String? beds,
+      @JsonKey(readValue: readBeds) String? beds,
       int? baths,
       double? size,
       @JsonKey(name: 'propertyType') String? propertyType,
@@ -272,7 +273,7 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
       @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
       Building? building,
       @JsonKey(name: 'community') Community? community,
-      String? beds,
+      @JsonKey(readValue: readBeds) String? beds,
       int? baths,
       double? size,
       @JsonKey(name: 'propertyType') String? propertyType,
@@ -438,7 +439,7 @@ class _$PropertyCardImpl implements _PropertyCard {
       @JsonKey(name: 'plCreationDate') this.plCreationDate,
       this.building,
       @JsonKey(name: 'community') this.community,
-      this.beds,
+      @JsonKey(readValue: readBeds) this.beds,
       this.baths,
       this.size,
       @JsonKey(name: 'propertyType') this.propertyType,
@@ -474,6 +475,7 @@ class _$PropertyCardImpl implements _PropertyCard {
   @JsonKey(name: 'community')
   final Community? community;
   @override
+  @JsonKey(readValue: readBeds)
   final String? beds;
   @override
   final int? baths;
@@ -633,7 +635,7 @@ abstract class _PropertyCard implements PropertyCard {
       @JsonKey(name: 'plCreationDate') final dynamic plCreationDate,
       final Building? building,
       @JsonKey(name: 'community') final Community? community,
-      final String? beds,
+      @JsonKey(readValue: readBeds) final String? beds,
       final int? baths,
       final double? size,
       @JsonKey(name: 'propertyType') final String? propertyType,
@@ -668,6 +670,7 @@ abstract class _PropertyCard implements PropertyCard {
   @JsonKey(name: 'community')
   Community? get community;
   @override
+  @JsonKey(readValue: readBeds)
   String? get beds;
   @override
   int? get baths;

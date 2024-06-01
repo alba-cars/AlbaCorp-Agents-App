@@ -18,22 +18,23 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LeadDetailState {
   String get leadId => throw _privateConstructorUsedError;
   Lead? get lead => throw _privateConstructorUsedError;
-  Status get getLeadStatus => throw _privateConstructorUsedError;
+  AppStatus get getLeadStatus => throw _privateConstructorUsedError;
   String? get getLeadError => throw _privateConstructorUsedError;
   List<Activity> get activities => throw _privateConstructorUsedError;
-  Status get getActivitiesStatus => throw _privateConstructorUsedError;
+  AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
   String? get getActivitiesError => throw _privateConstructorUsedError;
   List<Deal> get deals => throw _privateConstructorUsedError;
-  Status get getDealsStatus => throw _privateConstructorUsedError;
+  AppStatus get getDealsStatus => throw _privateConstructorUsedError;
   String? get getDealsError => throw _privateConstructorUsedError;
-  Status get updateLeadStatus => throw _privateConstructorUsedError;
+  AppStatus get updateLeadStatus => throw _privateConstructorUsedError;
   String? get updateLeadError => throw _privateConstructorUsedError;
-  Status get getPropertyCardsListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyCardsListStatus =>
+      throw _privateConstructorUsedError;
   List<LeadPropertyCardModel> get propertyCardsList =>
       throw _privateConstructorUsedError;
   String? get getPropertyCardsListError => throw _privateConstructorUsedError;
   Paginator? get propertyCardPaginator => throw _privateConstructorUsedError;
-  Status get updatePropertyCardStatus => throw _privateConstructorUsedError;
+  AppStatus get updatePropertyCardStatus => throw _privateConstructorUsedError;
   String? get updatePropertyCardError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -50,21 +51,21 @@ abstract class $LeadDetailStateCopyWith<$Res> {
   $Res call(
       {String leadId,
       Lead? lead,
-      Status getLeadStatus,
+      AppStatus getLeadStatus,
       String? getLeadError,
       List<Activity> activities,
-      Status getActivitiesStatus,
+      AppStatus getActivitiesStatus,
       String? getActivitiesError,
       List<Deal> deals,
-      Status getDealsStatus,
+      AppStatus getDealsStatus,
       String? getDealsError,
-      Status updateLeadStatus,
+      AppStatus updateLeadStatus,
       String? updateLeadError,
-      Status getPropertyCardsListStatus,
+      AppStatus getPropertyCardsListStatus,
       List<LeadPropertyCardModel> propertyCardsList,
       String? getPropertyCardsListError,
       Paginator? propertyCardPaginator,
-      Status updatePropertyCardStatus,
+      AppStatus updatePropertyCardStatus,
       String? updatePropertyCardError});
 
   $LeadCopyWith<$Res>? get lead;
@@ -115,7 +116,7 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
       getLeadStatus: null == getLeadStatus
           ? _value.getLeadStatus
           : getLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getLeadError: freezed == getLeadError
           ? _value.getLeadError
           : getLeadError // ignore: cast_nullable_to_non_nullable
@@ -127,7 +128,7 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
       getActivitiesStatus: null == getActivitiesStatus
           ? _value.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getActivitiesError: freezed == getActivitiesError
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -139,7 +140,7 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
       getDealsStatus: null == getDealsStatus
           ? _value.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getDealsError: freezed == getDealsError
           ? _value.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
@@ -147,7 +148,7 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
       updateLeadStatus: null == updateLeadStatus
           ? _value.updateLeadStatus
           : updateLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updateLeadError: freezed == updateLeadError
           ? _value.updateLeadError
           : updateLeadError // ignore: cast_nullable_to_non_nullable
@@ -155,7 +156,7 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
       getPropertyCardsListStatus: null == getPropertyCardsListStatus
           ? _value.getPropertyCardsListStatus
           : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyCardsList: null == propertyCardsList
           ? _value.propertyCardsList
           : propertyCardsList // ignore: cast_nullable_to_non_nullable
@@ -171,7 +172,7 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
       updatePropertyCardStatus: null == updatePropertyCardStatus
           ? _value.updatePropertyCardStatus
           : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updatePropertyCardError: freezed == updatePropertyCardError
           ? _value.updatePropertyCardError
           : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
@@ -215,21 +216,21 @@ abstract class _$$LeadDetailStateImplCopyWith<$Res>
   $Res call(
       {String leadId,
       Lead? lead,
-      Status getLeadStatus,
+      AppStatus getLeadStatus,
       String? getLeadError,
       List<Activity> activities,
-      Status getActivitiesStatus,
+      AppStatus getActivitiesStatus,
       String? getActivitiesError,
       List<Deal> deals,
-      Status getDealsStatus,
+      AppStatus getDealsStatus,
       String? getDealsError,
-      Status updateLeadStatus,
+      AppStatus updateLeadStatus,
       String? updateLeadError,
-      Status getPropertyCardsListStatus,
+      AppStatus getPropertyCardsListStatus,
       List<LeadPropertyCardModel> propertyCardsList,
       String? getPropertyCardsListError,
       Paginator? propertyCardPaginator,
-      Status updatePropertyCardStatus,
+      AppStatus updatePropertyCardStatus,
       String? updatePropertyCardError});
 
   @override
@@ -280,7 +281,7 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
       getLeadStatus: null == getLeadStatus
           ? _value.getLeadStatus
           : getLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getLeadError: freezed == getLeadError
           ? _value.getLeadError
           : getLeadError // ignore: cast_nullable_to_non_nullable
@@ -292,7 +293,7 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
       getActivitiesStatus: null == getActivitiesStatus
           ? _value.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getActivitiesError: freezed == getActivitiesError
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -304,7 +305,7 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
       getDealsStatus: null == getDealsStatus
           ? _value.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getDealsError: freezed == getDealsError
           ? _value.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
@@ -312,7 +313,7 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
       updateLeadStatus: null == updateLeadStatus
           ? _value.updateLeadStatus
           : updateLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updateLeadError: freezed == updateLeadError
           ? _value.updateLeadError
           : updateLeadError // ignore: cast_nullable_to_non_nullable
@@ -320,7 +321,7 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
       getPropertyCardsListStatus: null == getPropertyCardsListStatus
           ? _value.getPropertyCardsListStatus
           : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyCardsList: null == propertyCardsList
           ? _value._propertyCardsList
           : propertyCardsList // ignore: cast_nullable_to_non_nullable
@@ -336,7 +337,7 @@ class __$$LeadDetailStateImplCopyWithImpl<$Res>
       updatePropertyCardStatus: null == updatePropertyCardStatus
           ? _value.updatePropertyCardStatus
           : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updatePropertyCardError: freezed == updatePropertyCardError
           ? _value.updatePropertyCardError
           : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
@@ -351,21 +352,21 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
   const _$LeadDetailStateImpl(
       {required this.leadId,
       this.lead,
-      this.getLeadStatus = Status.init,
+      this.getLeadStatus = AppStatus.init,
       this.getLeadError,
       final List<Activity> activities = const [],
-      this.getActivitiesStatus = Status.init,
+      this.getActivitiesStatus = AppStatus.init,
       this.getActivitiesError,
       final List<Deal> deals = const [],
-      this.getDealsStatus = Status.init,
+      this.getDealsStatus = AppStatus.init,
       this.getDealsError,
-      this.updateLeadStatus = Status.init,
+      this.updateLeadStatus = AppStatus.init,
       this.updateLeadError,
-      this.getPropertyCardsListStatus = Status.init,
+      this.getPropertyCardsListStatus = AppStatus.init,
       final List<LeadPropertyCardModel> propertyCardsList = const [],
       this.getPropertyCardsListError,
       this.propertyCardPaginator,
-      this.updatePropertyCardStatus = Status.init,
+      this.updatePropertyCardStatus = AppStatus.init,
       this.updatePropertyCardError})
       : _activities = activities,
         _deals = deals,
@@ -377,7 +378,7 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
   final Lead? lead;
   @override
   @JsonKey()
-  final Status getLeadStatus;
+  final AppStatus getLeadStatus;
   @override
   final String? getLeadError;
   final List<Activity> _activities;
@@ -391,7 +392,7 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
 
   @override
   @JsonKey()
-  final Status getActivitiesStatus;
+  final AppStatus getActivitiesStatus;
   @override
   final String? getActivitiesError;
   final List<Deal> _deals;
@@ -405,17 +406,17 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
 
   @override
   @JsonKey()
-  final Status getDealsStatus;
+  final AppStatus getDealsStatus;
   @override
   final String? getDealsError;
   @override
   @JsonKey()
-  final Status updateLeadStatus;
+  final AppStatus updateLeadStatus;
   @override
   final String? updateLeadError;
   @override
   @JsonKey()
-  final Status getPropertyCardsListStatus;
+  final AppStatus getPropertyCardsListStatus;
   final List<LeadPropertyCardModel> _propertyCardsList;
   @override
   @JsonKey()
@@ -432,7 +433,7 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
   final Paginator? propertyCardPaginator;
   @override
   @JsonKey()
-  final Status updatePropertyCardStatus;
+  final AppStatus updatePropertyCardStatus;
   @override
   final String? updatePropertyCardError;
 
@@ -520,21 +521,21 @@ abstract class _LeadDetailState implements LeadDetailState {
   const factory _LeadDetailState(
       {required final String leadId,
       final Lead? lead,
-      final Status getLeadStatus,
+      final AppStatus getLeadStatus,
       final String? getLeadError,
       final List<Activity> activities,
-      final Status getActivitiesStatus,
+      final AppStatus getActivitiesStatus,
       final String? getActivitiesError,
       final List<Deal> deals,
-      final Status getDealsStatus,
+      final AppStatus getDealsStatus,
       final String? getDealsError,
-      final Status updateLeadStatus,
+      final AppStatus updateLeadStatus,
       final String? updateLeadError,
-      final Status getPropertyCardsListStatus,
+      final AppStatus getPropertyCardsListStatus,
       final List<LeadPropertyCardModel> propertyCardsList,
       final String? getPropertyCardsListError,
       final Paginator? propertyCardPaginator,
-      final Status updatePropertyCardStatus,
+      final AppStatus updatePropertyCardStatus,
       final String? updatePropertyCardError}) = _$LeadDetailStateImpl;
 
   @override
@@ -542,27 +543,27 @@ abstract class _LeadDetailState implements LeadDetailState {
   @override
   Lead? get lead;
   @override
-  Status get getLeadStatus;
+  AppStatus get getLeadStatus;
   @override
   String? get getLeadError;
   @override
   List<Activity> get activities;
   @override
-  Status get getActivitiesStatus;
+  AppStatus get getActivitiesStatus;
   @override
   String? get getActivitiesError;
   @override
   List<Deal> get deals;
   @override
-  Status get getDealsStatus;
+  AppStatus get getDealsStatus;
   @override
   String? get getDealsError;
   @override
-  Status get updateLeadStatus;
+  AppStatus get updateLeadStatus;
   @override
   String? get updateLeadError;
   @override
-  Status get getPropertyCardsListStatus;
+  AppStatus get getPropertyCardsListStatus;
   @override
   List<LeadPropertyCardModel> get propertyCardsList;
   @override
@@ -570,7 +571,7 @@ abstract class _LeadDetailState implements LeadDetailState {
   @override
   Paginator? get propertyCardPaginator;
   @override
-  Status get updatePropertyCardStatus;
+  AppStatus get updatePropertyCardStatus;
   @override
   String? get updatePropertyCardError;
   @override

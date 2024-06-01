@@ -17,28 +17,29 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AddDealState {
   DealResponse? get dealResponse => throw _privateConstructorUsedError;
-  Status get addDealStatus => throw _privateConstructorUsedError;
+  AppStatus get addDealStatus => throw _privateConstructorUsedError;
   String? get addDealError => throw _privateConstructorUsedError;
-  Status get addDealDocumentsStatus => throw _privateConstructorUsedError;
+  AppStatus get addDealDocumentsStatus => throw _privateConstructorUsedError;
   String? get addDealDocumentsError => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
   List<Community> get communityList => throw _privateConstructorUsedError;
-  Status get getCommunityListStatus => throw _privateConstructorUsedError;
+  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
-  Status get getBuildingListStatus => throw _privateConstructorUsedError;
+  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
   List<Lead> get leadList => throw _privateConstructorUsedError;
-  Status get getLeadListStatus => throw _privateConstructorUsedError;
+  AppStatus get getLeadListStatus => throw _privateConstructorUsedError;
   List<OffPlanModel> get offPlansList => throw _privateConstructorUsedError;
-  Status get getPffPlansListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPffPlansListStatus => throw _privateConstructorUsedError;
   List<Agent> get agentList => throw _privateConstructorUsedError;
-  Status get getAgentsListStatus => throw _privateConstructorUsedError;
+  AppStatus get getAgentsListStatus => throw _privateConstructorUsedError;
   List<Property> get agentPropertyList => throw _privateConstructorUsedError;
-  Status get getAgentPropertyListStatus => throw _privateConstructorUsedError;
+  AppStatus get getAgentPropertyListStatus =>
+      throw _privateConstructorUsedError;
   List<Agency> get agencyList => throw _privateConstructorUsedError;
-  Status get getAgencyListStatus => throw _privateConstructorUsedError;
+  AppStatus get getAgencyListStatus => throw _privateConstructorUsedError;
   Lead? get propertyOwner => throw _privateConstructorUsedError;
-  Status get getPropertyOwnerStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyOwnerStatus => throw _privateConstructorUsedError;
   int get currentTab => throw _privateConstructorUsedError;
   DealType? get selectedDealType => throw _privateConstructorUsedError;
   ClientSource? get sellerSource => throw _privateConstructorUsedError;
@@ -61,28 +62,28 @@ abstract class $AddDealStateCopyWith<$Res> {
   @useResult
   $Res call(
       {DealResponse? dealResponse,
-      Status addDealStatus,
+      AppStatus addDealStatus,
       String? addDealError,
-      Status addDealDocumentsStatus,
+      AppStatus addDealDocumentsStatus,
       String? addDealDocumentsError,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
       List<Lead> leadList,
-      Status getLeadListStatus,
+      AppStatus getLeadListStatus,
       List<OffPlanModel> offPlansList,
-      Status getPffPlansListStatus,
+      AppStatus getPffPlansListStatus,
       List<Agent> agentList,
-      Status getAgentsListStatus,
+      AppStatus getAgentsListStatus,
       List<Property> agentPropertyList,
-      Status getAgentPropertyListStatus,
+      AppStatus getAgentPropertyListStatus,
       List<Agency> agencyList,
-      Status getAgencyListStatus,
+      AppStatus getAgencyListStatus,
       Lead? propertyOwner,
-      Status getPropertyOwnerStatus,
+      AppStatus getPropertyOwnerStatus,
       int currentTab,
       DealType? selectedDealType,
       ClientSource? sellerSource,
@@ -150,7 +151,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       addDealStatus: null == addDealStatus
           ? _value.addDealStatus
           : addDealStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addDealError: freezed == addDealError
           ? _value.addDealError
           : addDealError // ignore: cast_nullable_to_non_nullable
@@ -158,7 +159,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       addDealDocumentsStatus: null == addDealDocumentsStatus
           ? _value.addDealDocumentsStatus
           : addDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addDealDocumentsError: freezed == addDealDocumentsError
           ? _value.addDealDocumentsError
           : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
@@ -170,7 +171,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -178,7 +179,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -186,7 +187,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       leadList: null == leadList
           ? _value.leadList
           : leadList // ignore: cast_nullable_to_non_nullable
@@ -194,7 +195,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getLeadListStatus: null == getLeadListStatus
           ? _value.getLeadListStatus
           : getLeadListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       offPlansList: null == offPlansList
           ? _value.offPlansList
           : offPlansList // ignore: cast_nullable_to_non_nullable
@@ -202,7 +203,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getPffPlansListStatus: null == getPffPlansListStatus
           ? _value.getPffPlansListStatus
           : getPffPlansListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       agentList: null == agentList
           ? _value.agentList
           : agentList // ignore: cast_nullable_to_non_nullable
@@ -210,7 +211,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getAgentsListStatus: null == getAgentsListStatus
           ? _value.getAgentsListStatus
           : getAgentsListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       agentPropertyList: null == agentPropertyList
           ? _value.agentPropertyList
           : agentPropertyList // ignore: cast_nullable_to_non_nullable
@@ -218,7 +219,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getAgentPropertyListStatus: null == getAgentPropertyListStatus
           ? _value.getAgentPropertyListStatus
           : getAgentPropertyListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       agencyList: null == agencyList
           ? _value.agencyList
           : agencyList // ignore: cast_nullable_to_non_nullable
@@ -226,7 +227,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getAgencyListStatus: null == getAgencyListStatus
           ? _value.getAgencyListStatus
           : getAgencyListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyOwner: freezed == propertyOwner
           ? _value.propertyOwner
           : propertyOwner // ignore: cast_nullable_to_non_nullable
@@ -234,7 +235,7 @@ class _$AddDealStateCopyWithImpl<$Res, $Val extends AddDealState>
       getPropertyOwnerStatus: null == getPropertyOwnerStatus
           ? _value.getPropertyOwnerStatus
           : getPropertyOwnerStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
@@ -317,28 +318,28 @@ abstract class _$$AddDealStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {DealResponse? dealResponse,
-      Status addDealStatus,
+      AppStatus addDealStatus,
       String? addDealError,
-      Status addDealDocumentsStatus,
+      AppStatus addDealDocumentsStatus,
       String? addDealDocumentsError,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
       List<Lead> leadList,
-      Status getLeadListStatus,
+      AppStatus getLeadListStatus,
       List<OffPlanModel> offPlansList,
-      Status getPffPlansListStatus,
+      AppStatus getPffPlansListStatus,
       List<Agent> agentList,
-      Status getAgentsListStatus,
+      AppStatus getAgentsListStatus,
       List<Property> agentPropertyList,
-      Status getAgentPropertyListStatus,
+      AppStatus getAgentPropertyListStatus,
       List<Agency> agencyList,
-      Status getAgencyListStatus,
+      AppStatus getAgencyListStatus,
       Lead? propertyOwner,
-      Status getPropertyOwnerStatus,
+      AppStatus getPropertyOwnerStatus,
       int currentTab,
       DealType? selectedDealType,
       ClientSource? sellerSource,
@@ -407,7 +408,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       addDealStatus: null == addDealStatus
           ? _value.addDealStatus
           : addDealStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addDealError: freezed == addDealError
           ? _value.addDealError
           : addDealError // ignore: cast_nullable_to_non_nullable
@@ -415,7 +416,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       addDealDocumentsStatus: null == addDealDocumentsStatus
           ? _value.addDealDocumentsStatus
           : addDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addDealDocumentsError: freezed == addDealDocumentsError
           ? _value.addDealDocumentsError
           : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
@@ -427,7 +428,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value._communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -435,7 +436,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value._buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -443,7 +444,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       leadList: null == leadList
           ? _value._leadList
           : leadList // ignore: cast_nullable_to_non_nullable
@@ -451,7 +452,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getLeadListStatus: null == getLeadListStatus
           ? _value.getLeadListStatus
           : getLeadListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       offPlansList: null == offPlansList
           ? _value._offPlansList
           : offPlansList // ignore: cast_nullable_to_non_nullable
@@ -459,7 +460,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getPffPlansListStatus: null == getPffPlansListStatus
           ? _value.getPffPlansListStatus
           : getPffPlansListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       agentList: null == agentList
           ? _value._agentList
           : agentList // ignore: cast_nullable_to_non_nullable
@@ -467,7 +468,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getAgentsListStatus: null == getAgentsListStatus
           ? _value.getAgentsListStatus
           : getAgentsListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       agentPropertyList: null == agentPropertyList
           ? _value._agentPropertyList
           : agentPropertyList // ignore: cast_nullable_to_non_nullable
@@ -475,7 +476,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getAgentPropertyListStatus: null == getAgentPropertyListStatus
           ? _value.getAgentPropertyListStatus
           : getAgentPropertyListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       agencyList: null == agencyList
           ? _value._agencyList
           : agencyList // ignore: cast_nullable_to_non_nullable
@@ -483,7 +484,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getAgencyListStatus: null == getAgencyListStatus
           ? _value.getAgencyListStatus
           : getAgencyListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyOwner: freezed == propertyOwner
           ? _value.propertyOwner
           : propertyOwner // ignore: cast_nullable_to_non_nullable
@@ -491,7 +492,7 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
       getPropertyOwnerStatus: null == getPropertyOwnerStatus
           ? _value.getPropertyOwnerStatus
           : getPropertyOwnerStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
@@ -533,28 +534,28 @@ class __$$AddDealStateImplCopyWithImpl<$Res>
 class _$AddDealStateImpl implements _AddDealState {
   const _$AddDealStateImpl(
       {this.dealResponse,
-      this.addDealStatus = Status.init,
+      this.addDealStatus = AppStatus.init,
       this.addDealError,
-      this.addDealDocumentsStatus = Status.init,
+      this.addDealDocumentsStatus = AppStatus.init,
       this.addDealDocumentsError,
       final List<PropertyType> propertyTypeList = const [],
-      this.getPropertyTypeListStatus = Status.init,
+      this.getPropertyTypeListStatus = AppStatus.init,
       final List<Community> communityList = const [],
-      this.getCommunityListStatus = Status.init,
+      this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
-      this.getBuildingListStatus = Status.init,
+      this.getBuildingListStatus = AppStatus.init,
       final List<Lead> leadList = const [],
-      this.getLeadListStatus = Status.init,
+      this.getLeadListStatus = AppStatus.init,
       final List<OffPlanModel> offPlansList = const [],
-      this.getPffPlansListStatus = Status.init,
+      this.getPffPlansListStatus = AppStatus.init,
       final List<Agent> agentList = const [],
-      this.getAgentsListStatus = Status.init,
+      this.getAgentsListStatus = AppStatus.init,
       final List<Property> agentPropertyList = const [],
-      this.getAgentPropertyListStatus = Status.init,
+      this.getAgentPropertyListStatus = AppStatus.init,
       final List<Agency> agencyList = const [],
-      this.getAgencyListStatus = Status.init,
+      this.getAgencyListStatus = AppStatus.init,
       this.propertyOwner,
-      this.getPropertyOwnerStatus = Status.init,
+      this.getPropertyOwnerStatus = AppStatus.init,
       this.currentTab = 0,
       this.selectedDealType,
       this.sellerSource,
@@ -576,12 +577,12 @@ class _$AddDealStateImpl implements _AddDealState {
   final DealResponse? dealResponse;
   @override
   @JsonKey()
-  final Status addDealStatus;
+  final AppStatus addDealStatus;
   @override
   final String? addDealError;
   @override
   @JsonKey()
-  final Status addDealDocumentsStatus;
+  final AppStatus addDealDocumentsStatus;
   @override
   final String? addDealDocumentsError;
   final List<PropertyType> _propertyTypeList;
@@ -596,7 +597,7 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getPropertyTypeListStatus;
+  final AppStatus getPropertyTypeListStatus;
   final List<Community> _communityList;
   @override
   @JsonKey()
@@ -608,7 +609,7 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getCommunityListStatus;
+  final AppStatus getCommunityListStatus;
   final List<Building> _buildingList;
   @override
   @JsonKey()
@@ -620,7 +621,7 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getBuildingListStatus;
+  final AppStatus getBuildingListStatus;
   final List<Lead> _leadList;
   @override
   @JsonKey()
@@ -632,7 +633,7 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getLeadListStatus;
+  final AppStatus getLeadListStatus;
   final List<OffPlanModel> _offPlansList;
   @override
   @JsonKey()
@@ -644,7 +645,7 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getPffPlansListStatus;
+  final AppStatus getPffPlansListStatus;
   final List<Agent> _agentList;
   @override
   @JsonKey()
@@ -656,7 +657,7 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getAgentsListStatus;
+  final AppStatus getAgentsListStatus;
   final List<Property> _agentPropertyList;
   @override
   @JsonKey()
@@ -669,7 +670,7 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getAgentPropertyListStatus;
+  final AppStatus getAgentPropertyListStatus;
   final List<Agency> _agencyList;
   @override
   @JsonKey()
@@ -681,12 +682,12 @@ class _$AddDealStateImpl implements _AddDealState {
 
   @override
   @JsonKey()
-  final Status getAgencyListStatus;
+  final AppStatus getAgencyListStatus;
   @override
   final Lead? propertyOwner;
   @override
   @JsonKey()
-  final Status getPropertyOwnerStatus;
+  final AppStatus getPropertyOwnerStatus;
   @override
   @JsonKey()
   final int currentTab;
@@ -827,28 +828,28 @@ class _$AddDealStateImpl implements _AddDealState {
 abstract class _AddDealState implements AddDealState {
   const factory _AddDealState(
       {final DealResponse? dealResponse,
-      final Status addDealStatus,
+      final AppStatus addDealStatus,
       final String? addDealError,
-      final Status addDealDocumentsStatus,
+      final AppStatus addDealDocumentsStatus,
       final String? addDealDocumentsError,
       final List<PropertyType> propertyTypeList,
-      final Status getPropertyTypeListStatus,
+      final AppStatus getPropertyTypeListStatus,
       final List<Community> communityList,
-      final Status getCommunityListStatus,
+      final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
-      final Status getBuildingListStatus,
+      final AppStatus getBuildingListStatus,
       final List<Lead> leadList,
-      final Status getLeadListStatus,
+      final AppStatus getLeadListStatus,
       final List<OffPlanModel> offPlansList,
-      final Status getPffPlansListStatus,
+      final AppStatus getPffPlansListStatus,
       final List<Agent> agentList,
-      final Status getAgentsListStatus,
+      final AppStatus getAgentsListStatus,
       final List<Property> agentPropertyList,
-      final Status getAgentPropertyListStatus,
+      final AppStatus getAgentPropertyListStatus,
       final List<Agency> agencyList,
-      final Status getAgencyListStatus,
+      final AppStatus getAgencyListStatus,
       final Lead? propertyOwner,
-      final Status getPropertyOwnerStatus,
+      final AppStatus getPropertyOwnerStatus,
       final int currentTab,
       final DealType? selectedDealType,
       final ClientSource? sellerSource,
@@ -861,49 +862,49 @@ abstract class _AddDealState implements AddDealState {
   @override
   DealResponse? get dealResponse;
   @override
-  Status get addDealStatus;
+  AppStatus get addDealStatus;
   @override
   String? get addDealError;
   @override
-  Status get addDealDocumentsStatus;
+  AppStatus get addDealDocumentsStatus;
   @override
   String? get addDealDocumentsError;
   @override
   List<PropertyType> get propertyTypeList;
   @override
-  Status get getPropertyTypeListStatus;
+  AppStatus get getPropertyTypeListStatus;
   @override
   List<Community> get communityList;
   @override
-  Status get getCommunityListStatus;
+  AppStatus get getCommunityListStatus;
   @override
   List<Building> get buildingList;
   @override
-  Status get getBuildingListStatus;
+  AppStatus get getBuildingListStatus;
   @override
   List<Lead> get leadList;
   @override
-  Status get getLeadListStatus;
+  AppStatus get getLeadListStatus;
   @override
   List<OffPlanModel> get offPlansList;
   @override
-  Status get getPffPlansListStatus;
+  AppStatus get getPffPlansListStatus;
   @override
   List<Agent> get agentList;
   @override
-  Status get getAgentsListStatus;
+  AppStatus get getAgentsListStatus;
   @override
   List<Property> get agentPropertyList;
   @override
-  Status get getAgentPropertyListStatus;
+  AppStatus get getAgentPropertyListStatus;
   @override
   List<Agency> get agencyList;
   @override
-  Status get getAgencyListStatus;
+  AppStatus get getAgencyListStatus;
   @override
   Lead? get propertyOwner;
   @override
-  Status get getPropertyOwnerStatus;
+  AppStatus get getPropertyOwnerStatus;
   @override
   int get currentTab;
   @override

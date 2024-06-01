@@ -65,7 +65,9 @@ class SecondaryBasicInfoTab extends StatelessWidget {
                           if (buyerSource == null) {
                             return SizedBox();
                           } else if (buyerSource == ClientSource.alba) {
-                            return SecondaryAlbaBuyerDetails();
+                            return SecondaryAlbaBuyerDetails(
+                              formKey: _formKey,
+                            );
                           } else {
                             return SecondaryExternalBuyerDetails();
                           }

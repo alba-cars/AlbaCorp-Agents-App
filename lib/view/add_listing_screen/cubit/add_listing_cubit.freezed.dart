@@ -16,20 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddListingState {
-  Status get addListingStatus => throw _privateConstructorUsedError;
+  AppStatus get addListingStatus => throw _privateConstructorUsedError;
   String? get addListingError => throw _privateConstructorUsedError;
   NewListingRequest? get dealListingResponse =>
       throw _privateConstructorUsedError;
-  Status get addListingDocumentsStatus => throw _privateConstructorUsedError;
+  AppStatus get addListingDocumentsStatus => throw _privateConstructorUsedError;
   String? get addListingDocumentsError => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
   List<Community> get communityList => throw _privateConstructorUsedError;
-  Status get getCommunityListStatus => throw _privateConstructorUsedError;
+  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
-  Status get getBuildingListStatus => throw _privateConstructorUsedError;
+  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
+  List<Amenity> get amenityList => throw _privateConstructorUsedError;
+  AppStatus get getAmenityListStatus => throw _privateConstructorUsedError;
   List<Lead> get leadList => throw _privateConstructorUsedError;
-  Status get getLeadListStatus => throw _privateConstructorUsedError;
+  AppStatus get getLeadListStatus => throw _privateConstructorUsedError;
   int get currentTab => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -44,19 +46,21 @@ abstract class $AddListingStateCopyWith<$Res> {
       _$AddListingStateCopyWithImpl<$Res, AddListingState>;
   @useResult
   $Res call(
-      {Status addListingStatus,
+      {AppStatus addListingStatus,
       String? addListingError,
       NewListingRequest? dealListingResponse,
-      Status addListingDocumentsStatus,
+      AppStatus addListingDocumentsStatus,
       String? addListingDocumentsError,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
+      List<Amenity> amenityList,
+      AppStatus getAmenityListStatus,
       List<Lead> leadList,
-      Status getLeadListStatus,
+      AppStatus getLeadListStatus,
       int currentTab});
 
   $NewListingRequestCopyWith<$Res>? get dealListingResponse;
@@ -86,6 +90,8 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? amenityList = null,
+    Object? getAmenityListStatus = null,
     Object? leadList = null,
     Object? getLeadListStatus = null,
     Object? currentTab = null,
@@ -94,7 +100,7 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
       addListingStatus: null == addListingStatus
           ? _value.addListingStatus
           : addListingStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addListingError: freezed == addListingError
           ? _value.addListingError
           : addListingError // ignore: cast_nullable_to_non_nullable
@@ -106,7 +112,7 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
       addListingDocumentsStatus: null == addListingDocumentsStatus
           ? _value.addListingDocumentsStatus
           : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addListingDocumentsError: freezed == addListingDocumentsError
           ? _value.addListingDocumentsError
           : addListingDocumentsError // ignore: cast_nullable_to_non_nullable
@@ -118,7 +124,7 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -126,7 +132,7 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -134,7 +140,15 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
+      amenityList: null == amenityList
+          ? _value.amenityList
+          : amenityList // ignore: cast_nullable_to_non_nullable
+              as List<Amenity>,
+      getAmenityListStatus: null == getAmenityListStatus
+          ? _value.getAmenityListStatus
+          : getAmenityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
       leadList: null == leadList
           ? _value.leadList
           : leadList // ignore: cast_nullable_to_non_nullable
@@ -142,7 +156,7 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
       getLeadListStatus: null == getLeadListStatus
           ? _value.getLeadListStatus
           : getLeadListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
@@ -173,19 +187,21 @@ abstract class _$$AddListingStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Status addListingStatus,
+      {AppStatus addListingStatus,
       String? addListingError,
       NewListingRequest? dealListingResponse,
-      Status addListingDocumentsStatus,
+      AppStatus addListingDocumentsStatus,
       String? addListingDocumentsError,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
+      List<Amenity> amenityList,
+      AppStatus getAmenityListStatus,
       List<Lead> leadList,
-      Status getLeadListStatus,
+      AppStatus getLeadListStatus,
       int currentTab});
 
   @override
@@ -214,6 +230,8 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? amenityList = null,
+    Object? getAmenityListStatus = null,
     Object? leadList = null,
     Object? getLeadListStatus = null,
     Object? currentTab = null,
@@ -222,7 +240,7 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
       addListingStatus: null == addListingStatus
           ? _value.addListingStatus
           : addListingStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addListingError: freezed == addListingError
           ? _value.addListingError
           : addListingError // ignore: cast_nullable_to_non_nullable
@@ -234,7 +252,7 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
       addListingDocumentsStatus: null == addListingDocumentsStatus
           ? _value.addListingDocumentsStatus
           : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addListingDocumentsError: freezed == addListingDocumentsError
           ? _value.addListingDocumentsError
           : addListingDocumentsError // ignore: cast_nullable_to_non_nullable
@@ -246,7 +264,7 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value._communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -254,7 +272,7 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value._buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -262,7 +280,15 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
+      amenityList: null == amenityList
+          ? _value._amenityList
+          : amenityList // ignore: cast_nullable_to_non_nullable
+              as List<Amenity>,
+      getAmenityListStatus: null == getAmenityListStatus
+          ? _value.getAmenityListStatus
+          : getAmenityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
       leadList: null == leadList
           ? _value._leadList
           : leadList // ignore: cast_nullable_to_non_nullable
@@ -270,7 +296,7 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
       getLeadListStatus: null == getLeadListStatus
           ? _value.getLeadListStatus
           : getLeadListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
@@ -283,35 +309,38 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
 
 class _$AddListingStateImpl implements _AddListingState {
   const _$AddListingStateImpl(
-      {this.addListingStatus = Status.init,
+      {this.addListingStatus = AppStatus.init,
       this.addListingError,
       this.dealListingResponse,
-      this.addListingDocumentsStatus = Status.init,
+      this.addListingDocumentsStatus = AppStatus.init,
       this.addListingDocumentsError,
       final List<PropertyType> propertyTypeList = const [],
-      this.getPropertyTypeListStatus = Status.init,
+      this.getPropertyTypeListStatus = AppStatus.init,
       final List<Community> communityList = const [],
-      this.getCommunityListStatus = Status.init,
+      this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
-      this.getBuildingListStatus = Status.init,
+      this.getBuildingListStatus = AppStatus.init,
+      final List<Amenity> amenityList = const [],
+      this.getAmenityListStatus = AppStatus.init,
       final List<Lead> leadList = const [],
-      this.getLeadListStatus = Status.init,
+      this.getLeadListStatus = AppStatus.init,
       this.currentTab = 0})
       : _propertyTypeList = propertyTypeList,
         _communityList = communityList,
         _buildingList = buildingList,
+        _amenityList = amenityList,
         _leadList = leadList;
 
   @override
   @JsonKey()
-  final Status addListingStatus;
+  final AppStatus addListingStatus;
   @override
   final String? addListingError;
   @override
   final NewListingRequest? dealListingResponse;
   @override
   @JsonKey()
-  final Status addListingDocumentsStatus;
+  final AppStatus addListingDocumentsStatus;
   @override
   final String? addListingDocumentsError;
   final List<PropertyType> _propertyTypeList;
@@ -326,7 +355,7 @@ class _$AddListingStateImpl implements _AddListingState {
 
   @override
   @JsonKey()
-  final Status getPropertyTypeListStatus;
+  final AppStatus getPropertyTypeListStatus;
   final List<Community> _communityList;
   @override
   @JsonKey()
@@ -338,7 +367,7 @@ class _$AddListingStateImpl implements _AddListingState {
 
   @override
   @JsonKey()
-  final Status getCommunityListStatus;
+  final AppStatus getCommunityListStatus;
   final List<Building> _buildingList;
   @override
   @JsonKey()
@@ -350,7 +379,19 @@ class _$AddListingStateImpl implements _AddListingState {
 
   @override
   @JsonKey()
-  final Status getBuildingListStatus;
+  final AppStatus getBuildingListStatus;
+  final List<Amenity> _amenityList;
+  @override
+  @JsonKey()
+  List<Amenity> get amenityList {
+    if (_amenityList is EqualUnmodifiableListView) return _amenityList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_amenityList);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getAmenityListStatus;
   final List<Lead> _leadList;
   @override
   @JsonKey()
@@ -362,14 +403,14 @@ class _$AddListingStateImpl implements _AddListingState {
 
   @override
   @JsonKey()
-  final Status getLeadListStatus;
+  final AppStatus getLeadListStatus;
   @override
   @JsonKey()
   final int currentTab;
 
   @override
   String toString() {
-    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab)';
+    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab)';
   }
 
   @override
@@ -402,6 +443,10 @@ class _$AddListingStateImpl implements _AddListingState {
                 .equals(other._buildingList, _buildingList) &&
             (identical(other.getBuildingListStatus, getBuildingListStatus) ||
                 other.getBuildingListStatus == getBuildingListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._amenityList, _amenityList) &&
+            (identical(other.getAmenityListStatus, getAmenityListStatus) ||
+                other.getAmenityListStatus == getAmenityListStatus) &&
             const DeepCollectionEquality().equals(other._leadList, _leadList) &&
             (identical(other.getLeadListStatus, getLeadListStatus) ||
                 other.getLeadListStatus == getLeadListStatus) &&
@@ -423,6 +468,8 @@ class _$AddListingStateImpl implements _AddListingState {
       getCommunityListStatus,
       const DeepCollectionEquality().hash(_buildingList),
       getBuildingListStatus,
+      const DeepCollectionEquality().hash(_amenityList),
+      getAmenityListStatus,
       const DeepCollectionEquality().hash(_leadList),
       getLeadListStatus,
       currentTab);
@@ -437,47 +484,53 @@ class _$AddListingStateImpl implements _AddListingState {
 
 abstract class _AddListingState implements AddListingState {
   const factory _AddListingState(
-      {final Status addListingStatus,
+      {final AppStatus addListingStatus,
       final String? addListingError,
       final NewListingRequest? dealListingResponse,
-      final Status addListingDocumentsStatus,
+      final AppStatus addListingDocumentsStatus,
       final String? addListingDocumentsError,
       final List<PropertyType> propertyTypeList,
-      final Status getPropertyTypeListStatus,
+      final AppStatus getPropertyTypeListStatus,
       final List<Community> communityList,
-      final Status getCommunityListStatus,
+      final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
-      final Status getBuildingListStatus,
+      final AppStatus getBuildingListStatus,
+      final List<Amenity> amenityList,
+      final AppStatus getAmenityListStatus,
       final List<Lead> leadList,
-      final Status getLeadListStatus,
+      final AppStatus getLeadListStatus,
       final int currentTab}) = _$AddListingStateImpl;
 
   @override
-  Status get addListingStatus;
+  AppStatus get addListingStatus;
   @override
   String? get addListingError;
   @override
   NewListingRequest? get dealListingResponse;
   @override
-  Status get addListingDocumentsStatus;
+  AppStatus get addListingDocumentsStatus;
   @override
   String? get addListingDocumentsError;
   @override
   List<PropertyType> get propertyTypeList;
   @override
-  Status get getPropertyTypeListStatus;
+  AppStatus get getPropertyTypeListStatus;
   @override
   List<Community> get communityList;
   @override
-  Status get getCommunityListStatus;
+  AppStatus get getCommunityListStatus;
   @override
   List<Building> get buildingList;
   @override
-  Status get getBuildingListStatus;
+  AppStatus get getBuildingListStatus;
+  @override
+  List<Amenity> get amenityList;
+  @override
+  AppStatus get getAmenityListStatus;
   @override
   List<Lead> get leadList;
   @override
-  Status get getLeadListStatus;
+  AppStatus get getLeadListStatus;
   @override
   int get currentTab;
   @override

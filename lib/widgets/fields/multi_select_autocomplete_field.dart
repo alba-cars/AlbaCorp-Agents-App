@@ -323,8 +323,13 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
               onSelected: (v) {
                 _controller.text = '';
                 final val = state.value ?? [];
-
-                state.didChange([...val, v]);
+                if (v != null) {
+                  state.didChange([...val, v]);
+                } else {
+                  final val = List<T>.from(state.value ?? [])
+                    ..removeWhere((element) => element == v);
+                  state.didChange(val);
+                }
                 _focusNode.unfocus();
               },
               optionsBuilder: widget.optionsBuilder,

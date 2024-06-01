@@ -897,7 +897,7 @@ mixin _$CallState {
   DateTime? get callStartTime => throw _privateConstructorUsedError;
   PhoneCallStatus get phoneCallStatus => throw _privateConstructorUsedError;
   bool get feedbackRequestDialogOpen => throw _privateConstructorUsedError;
-  Status get updateActivityStatus => throw _privateConstructorUsedError;
+  AppStatus get updateActivityStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CallStateCopyWith<CallState> get copyWith =>
@@ -916,7 +916,7 @@ abstract class $CallStateCopyWith<$Res> {
       DateTime? callStartTime,
       PhoneCallStatus phoneCallStatus,
       bool feedbackRequestDialogOpen,
-      Status updateActivityStatus});
+      AppStatus updateActivityStatus});
 }
 
 /// @nodoc
@@ -968,7 +968,7 @@ class _$CallStateCopyWithImpl<$Res, $Val extends CallState>
       updateActivityStatus: null == updateActivityStatus
           ? _value.updateActivityStatus
           : updateActivityStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
     ) as $Val);
   }
 }
@@ -988,7 +988,7 @@ abstract class _$$CallStateImplCopyWith<$Res>
       DateTime? callStartTime,
       PhoneCallStatus phoneCallStatus,
       bool feedbackRequestDialogOpen,
-      Status updateActivityStatus});
+      AppStatus updateActivityStatus});
 }
 
 /// @nodoc
@@ -1038,7 +1038,7 @@ class __$$CallStateImplCopyWithImpl<$Res>
       updateActivityStatus: null == updateActivityStatus
           ? _value.updateActivityStatus
           : updateActivityStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
     ));
   }
 }
@@ -1053,7 +1053,7 @@ class _$CallStateImpl implements _CallState {
       this.callStartTime,
       this.phoneCallStatus = PhoneCallStatus.noCall,
       this.feedbackRequestDialogOpen = false,
-      this.updateActivityStatus = Status.init});
+      this.updateActivityStatus = AppStatus.init});
 
   @override
   final String? calledNumber;
@@ -1071,7 +1071,7 @@ class _$CallStateImpl implements _CallState {
   final bool feedbackRequestDialogOpen;
   @override
   @JsonKey()
-  final Status updateActivityStatus;
+  final AppStatus updateActivityStatus;
 
   @override
   String toString() {
@@ -1125,7 +1125,7 @@ abstract class _CallState implements CallState {
       final DateTime? callStartTime,
       final PhoneCallStatus phoneCallStatus,
       final bool feedbackRequestDialogOpen,
-      final Status updateActivityStatus}) = _$CallStateImpl;
+      final AppStatus updateActivityStatus}) = _$CallStateImpl;
 
   @override
   String? get calledNumber;
@@ -1140,7 +1140,7 @@ abstract class _CallState implements CallState {
   @override
   bool get feedbackRequestDialogOpen;
   @override
-  Status get updateActivityStatus;
+  AppStatus get updateActivityStatus;
   @override
   @JsonKey(ignore: true)
   _$$CallStateImplCopyWith<_$CallStateImpl> get copyWith =>

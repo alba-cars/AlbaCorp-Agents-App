@@ -15,7 +15,7 @@ const categoryList = [
 class HomeState with _$HomeState {
   const factory HomeState({
     @Default({}) Map<int, List<Activity>> activities,
-    @Default({}) Map<int, Status?> getActivitiesStatus,
+    @Default({}) Map<int, AppStatus?> getActivitiesStatus,
     @Default({}) Map<int, String?> getActivitiesError,
     @Default({}) Map<int, Paginator?> activityPaginator,
     @Default(ModelCategory(name: 'ALL')) ModelCategory selectedCategory,
@@ -25,10 +25,10 @@ class HomeState with _$HomeState {
     @Default(0) int viewingTasksCount,
     @Default({ListType.Categorized}) Set<ListType> listType,
     @Default([]) List<Activity> sortedActivity,
-    @Default(Status.init) Status? getSortedActivitiesStatus,
+    @Default(AppStatus.init) AppStatus? getSortedActivitiesStatus,
     String? getSortedActivitiesError,
     Paginator? sortedActivityPaginator,
-    @Default(Status.init) Status updateTaskStatus,
+    @Default(AppStatus.init) AppStatus updateTaskStatus,
     String? updateTaskError,
   }) = _HomeState;
 }

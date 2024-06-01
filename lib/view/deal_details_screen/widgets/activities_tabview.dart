@@ -49,14 +49,14 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
           ),
           BlocBuilder<DealDetailsCubit, DealDetailsState>(
             builder: (context, state) {
-              if (state.buyerActivitiesStatus == Status.loading) {
+              if (state.buyerActivitiesStatus == AppStatus.loading) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
-              } else if (state.buyerActivitiesStatus == Status.success &&
+              } else if (state.buyerActivitiesStatus == AppStatus.success &&
                   state.buyerActivities.isEmpty) {
                 return Padding(
                   padding:
@@ -87,14 +87,14 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
           ),
           BlocBuilder<DealDetailsCubit, DealDetailsState>(
             builder: (context, state) {
-              if (state.sellerActivitiesStatus == Status.loading) {
+              if (state.sellerActivitiesStatus == AppStatus.loading) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
-              } else if (state.sellerActivitiesStatus == Status.success &&
+              } else if (state.sellerActivitiesStatus == AppStatus.success &&
                   state.sellerActivities.isEmpty) {
                 return Padding(
                   padding:
@@ -125,14 +125,14 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
           ),
           BlocBuilder<DealDetailsCubit, DealDetailsState>(
             builder: (context, state) {
-              if (state.propertyActivitiesStatus == Status.loading) {
+              if (state.propertyActivitiesStatus == AppStatus.loading) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
-              } else if (state.propertyActivitiesStatus == Status.success &&
+              } else if (state.propertyActivitiesStatus == AppStatus.success &&
                   state.propertyActivities.isEmpty) {
                 return Padding(
                   padding:

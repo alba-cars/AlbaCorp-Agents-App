@@ -3,19 +3,19 @@ part of 'add_ticket_cubit.dart';
 @freezed
 class AddTicketState with _$AddTicketState {
   const factory AddTicketState({
-    @Default(Status.init) Status addTicketStatus,
+    @Default(AppStatus.init) AppStatus addTicketStatus,
     String? addTicketError,
     @Default([]) List<Deal> deals,
-    @Default(Status.init) Status getDealsStatus,
+    @Default(AppStatus.init) AppStatus getDealsStatus,
     @Default([]) List<Lead> leads,
-    @Default(Status.init) Status getLeadsStatus,
+    @Default(AppStatus.init) AppStatus getLeadsStatus,
     @Default([]) List<Property> properties,
-    @Default(Status.init) Status getPropertiesStatus,
+    @Default(AppStatus.init) AppStatus getPropertiesStatus,
     @Default([]) List<Department> departments,
-    @Default(Status.init) Status getDepartmentsStatus,
+    @Default(AppStatus.init) AppStatus getDepartmentsStatus,
     @Default([]) List<PropertyType> propertyTypeList,
-    @Default(Status.init) Status getPropertyTypeListStatus,
+    @Default(AppStatus.init) AppStatus getPropertyTypeListStatus,
     @Default([]) List<Community> communityList,
-    @Default(Status.init) Status getCommunityListStatus,
+    @Default(AppStatus.init) AppStatus getCommunityListStatus,
   }) = _AddTicketState;
 }

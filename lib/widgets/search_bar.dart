@@ -160,10 +160,14 @@ class _AppSearchBarState extends State<AppSearchBar> {
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 20),
-                                                child: ListView(
+                                                child: SingleChildScrollView(
                                                   controller: scrollController,
-                                                  children:
-                                                      widget.filterFields!,
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children:
+                                                        widget.filterFields!,
+                                                  ),
                                                 ),
                                               ),
                                             )),

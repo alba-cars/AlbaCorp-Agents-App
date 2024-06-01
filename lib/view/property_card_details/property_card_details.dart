@@ -463,7 +463,8 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: state.propertyCardLeads.isEmpty &&
-                              state.getPropertyCardLeadsStatus == Status.success
+                              state.getPropertyCardLeadsStatus ==
+                                  AppStatus.success
                           ? [Text('No leads available for this property card')]
                           : state.propertyCardLeads.mapIndexed((index, e) {
                                 return Container(
@@ -775,7 +776,7 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                     child: Row(
                       children: [
                         BlockTitleText(
-                          text: 'photos',
+                          text: 'Photos',
                         ),
                       ],
                     ),
@@ -785,7 +786,7 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: state.propertyCard?.photos.isEmpty == true
-                          ? Text('No Photos')
+                          ? Text('No photos')
                           : GridView.count(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
@@ -999,7 +1000,7 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                               Expanded(
                                                 child: LabelText(
                                                   text:
-                                                      "${e.createdBy.firstName} ${e.createdBy.lastName}",
+                                                      "${e.createdBy?.firstName ?? "System"} ${e.createdBy?.lastName ?? ""}",
                                                   maxLines: 2,
                                                 ),
                                               ),

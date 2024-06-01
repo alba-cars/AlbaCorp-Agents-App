@@ -26,33 +26,33 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
   final ExplorerRepo _explorerRepo;
 
   Future<void> getLeadDetails() async {
-    emit(state.copyWith(getLeadStatus: Status.loading));
+    emit(state.copyWith(getLeadStatus: AppStatus.loading));
     final result = await _leadRepo.getLead(leadId: state.leadId);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(getLeadStatus: Status.success, lead: s.value));
+        emit(state.copyWith(getLeadStatus: AppStatus.success, lead: s.value));
         Future.wait([getLeadActivities(), getLeadDeals()]);
         break;
       case (Error e):
         emit(state.copyWith(
-            getLeadStatus: Status.failure, getLeadError: e.exception));
+            getLeadStatus: AppStatus.failure, getLeadError: e.exception));
 
         break;
     }
   }
 
   Future<void> getLeadActivities() async {
-    emit(state.copyWith(getActivitiesStatus: Status.loading));
+    emit(state.copyWith(getActivitiesStatus: AppStatus.loading));
     final result = await _leadRepo.getLeadActivities(leadId: state.leadId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            getActivitiesStatus: Status.success, activities: s.value));
+            getActivitiesStatus: AppStatus.success, activities: s.value));
 
         break;
       case (Error e):
         emit(state.copyWith(
-            getActivitiesStatus: Status.failure,
+            getActivitiesStatus: AppStatus.failure,
             getActivitiesError: e.exception));
 
         break;
@@ -60,35 +60,35 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
   }
 
   Future<void> getLeadDeals() async {
-    emit(state.copyWith(getDealsStatus: Status.loading));
+    emit(state.copyWith(getDealsStatus: AppStatus.loading));
     final result = await _leadRepo.getLeadDeals(leadId: state.leadId);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(getDealsStatus: Status.success, deals: s.value));
+        emit(state.copyWith(getDealsStatus: AppStatus.success, deals: s.value));
 
         break;
       case (Error e):
         emit(state.copyWith(
-            getDealsStatus: Status.failure, getDealsError: e.exception));
+            getDealsStatus: AppStatus.failure, getDealsError: e.exception));
 
         break;
     }
   }
 
-  Future<void> updateLead(Map<String, dynamic> value) async {
-    emit(state.copyWith(updateLeadStatus: Status.loading));
+  Future<bool> updateLead(Map<String, dynamic> value) async {
+    emit(state.copyWith(updateLeadStatus: AppStatus.loading));
     final result =
         await _leadRepo.updateLead(leadId: state.leadId, value: value);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(updateLeadStatus: Status.success, lead: s.value));
+        emit(
+            state.copyWith(updateLeadStatus: AppStatus.success, lead: s.value));
+        return true;
 
-        break;
       case (Error e):
         emit(state.copyWith(
-            updateLeadStatus: Status.failure, updateLeadError: e.exception));
-
-        break;
+            updateLeadStatus: AppStatus.failure, updateLeadError: e.exception));
+        return false;
     }
   }
 
@@ -97,12 +97,13 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
   }) async {
     if (refresh || state.propertyCardPaginator == null) {
       emit(state.copyWith(
-          getPropertyCardsListStatus: Status.loading, propertyCardsList: []));
+          getPropertyCardsListStatus: AppStatus.loading,
+          propertyCardsList: []));
     } else {
-      if (state.getPropertyCardsListStatus == Status.loadingMore) {
+      if (state.getPropertyCardsListStatus == AppStatus.loadingMore) {
         return;
       }
-      emit(state.copyWith(getPropertyCardsListStatus: Status.loadingMore));
+      emit(state.copyWith(getPropertyCardsListStatus: AppStatus.loadingMore));
     }
 
     final result =
@@ -111,27 +112,27 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
       case (Success s):
         emit(state.copyWith(
             propertyCardsList: s.value,
-            getPropertyCardsListStatus: Status.success,
+            getPropertyCardsListStatus: AppStatus.success,
             propertyCardPaginator: s.paginator));
         break;
       case (Error e):
         emit(state.copyWith(
-            getPropertyCardsListStatus: Status.failure,
+            getPropertyCardsListStatus: AppStatus.failure,
             getPropertyCardsListError: e.exception));
     }
   }
 
   Future<void> unLinkLeadFromPropertyCard({required String leadCardId}) async {
-    emit(state.copyWith(updatePropertyCardStatus: Status.loading));
+    emit(state.copyWith(updatePropertyCardStatus: AppStatus.loading));
     final result =
         await _explorerRepo.unLinkPropertyFromLead(leadCardId: leadCardId);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(updatePropertyCardStatus: Status.success));
+        emit(state.copyWith(updatePropertyCardStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-            updatePropertyCardStatus: Status.failure,
+            updatePropertyCardStatus: AppStatus.failure,
             updatePropertyCardError: e.exception));
     }
   }

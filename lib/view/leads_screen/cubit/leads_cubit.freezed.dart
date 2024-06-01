@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LeadsState {
   List<Lead> get leads => throw _privateConstructorUsedError;
-  Status get getLeadsStatus => throw _privateConstructorUsedError;
+  AppStatus get getLeadsStatus => throw _privateConstructorUsedError;
   String? get getLeadsError => throw _privateConstructorUsedError;
   Paginator? get leadsPaginator => throw _privateConstructorUsedError;
   String? get leadsSearch => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $LeadsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Lead> leads,
-      Status getLeadsStatus,
+      AppStatus getLeadsStatus,
       String? getLeadsError,
       Paginator? leadsPaginator,
       String? leadsSearch,
@@ -73,7 +73,7 @@ class _$LeadsStateCopyWithImpl<$Res, $Val extends LeadsState>
       getLeadsStatus: null == getLeadsStatus
           ? _value.getLeadsStatus
           : getLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getLeadsError: freezed == getLeadsError
           ? _value.getLeadsError
           : getLeadsError // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ abstract class _$$LeadsStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<Lead> leads,
-      Status getLeadsStatus,
+      AppStatus getLeadsStatus,
       String? getLeadsError,
       Paginator? leadsPaginator,
       String? leadsSearch,
@@ -152,7 +152,7 @@ class __$$LeadsStateImplCopyWithImpl<$Res>
       getLeadsStatus: null == getLeadsStatus
           ? _value.getLeadsStatus
           : getLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getLeadsError: freezed == getLeadsError
           ? _value.getLeadsError
           : getLeadsError // ignore: cast_nullable_to_non_nullable
@@ -178,7 +178,7 @@ class __$$LeadsStateImplCopyWithImpl<$Res>
 class _$LeadsStateImpl implements _LeadsState {
   const _$LeadsStateImpl(
       {final List<Lead> leads = const [],
-      this.getLeadsStatus = Status.init,
+      this.getLeadsStatus = AppStatus.init,
       this.getLeadsError,
       this.leadsPaginator,
       this.leadsSearch,
@@ -197,7 +197,7 @@ class _$LeadsStateImpl implements _LeadsState {
 
   @override
   @JsonKey()
-  final Status getLeadsStatus;
+  final AppStatus getLeadsStatus;
   @override
   final String? getLeadsError;
   @override
@@ -257,7 +257,7 @@ class _$LeadsStateImpl implements _LeadsState {
 abstract class _LeadsState implements LeadsState {
   const factory _LeadsState(
       {final List<Lead> leads,
-      final Status getLeadsStatus,
+      final AppStatus getLeadsStatus,
       final String? getLeadsError,
       final Paginator? leadsPaginator,
       final String? leadsSearch,
@@ -266,7 +266,7 @@ abstract class _LeadsState implements LeadsState {
   @override
   List<Lead> get leads;
   @override
-  Status get getLeadsStatus;
+  AppStatus get getLeadsStatus;
   @override
   String? get getLeadsError;
   @override

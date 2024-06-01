@@ -20,6 +20,7 @@ abstract class ActivityRepo {
   Future<Result<int>> pendingViewingActivitiesCount();
   Future<Result<void>> updateActivity(
       {required String activityId,
+      required bool completed,
       int? duration,
       String? notes,
       String? feedback});

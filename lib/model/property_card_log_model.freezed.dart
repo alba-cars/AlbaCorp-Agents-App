@@ -21,7 +21,7 @@ PropertyCardLog _$PropertyCardLogFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PropertyCardLog {
   String get message => throw _privateConstructorUsedError;
-  CreatedBy get createdBy => throw _privateConstructorUsedError;
+  CreatedBy? get createdBy => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get updatedAt => throw _privateConstructorUsedError;
@@ -42,13 +42,13 @@ abstract class $PropertyCardLogCopyWith<$Res> {
   @useResult
   $Res call(
       {String message,
-      CreatedBy createdBy,
+      CreatedBy? createdBy,
       String type,
       String createdAt,
       String updatedAt,
       @JsonKey(readValue: readId) String id});
 
-  $CreatedByCopyWith<$Res> get createdBy;
+  $CreatedByCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -65,7 +65,7 @@ class _$PropertyCardLogCopyWithImpl<$Res, $Val extends PropertyCardLog>
   @override
   $Res call({
     Object? message = null,
-    Object? createdBy = null,
+    Object? createdBy = freezed,
     Object? type = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -76,10 +76,10 @@ class _$PropertyCardLogCopyWithImpl<$Res, $Val extends PropertyCardLog>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy,
+              as CreatedBy?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -101,8 +101,12 @@ class _$PropertyCardLogCopyWithImpl<$Res, $Val extends PropertyCardLog>
 
   @override
   @pragma('vm:prefer-inline')
-  $CreatedByCopyWith<$Res> get createdBy {
-    return $CreatedByCopyWith<$Res>(_value.createdBy, (value) {
+  $CreatedByCopyWith<$Res>? get createdBy {
+    if (_value.createdBy == null) {
+      return null;
+    }
+
+    return $CreatedByCopyWith<$Res>(_value.createdBy!, (value) {
       return _then(_value.copyWith(createdBy: value) as $Val);
     });
   }
@@ -118,14 +122,14 @@ abstract class _$$PropertyCardLogImplCopyWith<$Res>
   @useResult
   $Res call(
       {String message,
-      CreatedBy createdBy,
+      CreatedBy? createdBy,
       String type,
       String createdAt,
       String updatedAt,
       @JsonKey(readValue: readId) String id});
 
   @override
-  $CreatedByCopyWith<$Res> get createdBy;
+  $CreatedByCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -140,7 +144,7 @@ class __$$PropertyCardLogImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
-    Object? createdBy = null,
+    Object? createdBy = freezed,
     Object? type = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -151,10 +155,10 @@ class __$$PropertyCardLogImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy,
+              as CreatedBy?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -192,7 +196,7 @@ class _$PropertyCardLogImpl implements _PropertyCardLog {
   @override
   final String message;
   @override
-  final CreatedBy createdBy;
+  final CreatedBy? createdBy;
   @override
   final String type;
   @override
@@ -247,7 +251,7 @@ class _$PropertyCardLogImpl implements _PropertyCardLog {
 abstract class _PropertyCardLog implements PropertyCardLog {
   const factory _PropertyCardLog(
           {required final String message,
-          required final CreatedBy createdBy,
+          required final CreatedBy? createdBy,
           required final String type,
           required final String createdAt,
           required final String updatedAt,
@@ -260,7 +264,7 @@ abstract class _PropertyCardLog implements PropertyCardLog {
   @override
   String get message;
   @override
-  CreatedBy get createdBy;
+  CreatedBy? get createdBy;
   @override
   String get type;
   @override

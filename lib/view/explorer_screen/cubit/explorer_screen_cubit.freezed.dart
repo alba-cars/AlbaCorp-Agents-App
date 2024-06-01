@@ -16,22 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ExplorerScreenState {
-  Status get getExplorerListStatus => throw _privateConstructorUsedError;
+  AppStatus get getExplorerListStatus => throw _privateConstructorUsedError;
   List<PropertyCard> get explorerList => throw _privateConstructorUsedError;
   String? get getExplorerListError => throw _privateConstructorUsedError;
   Paginator? get explorerPaginator => throw _privateConstructorUsedError;
-  Status get getCheckedOutExplorerListStatus =>
+  AppStatus get getCheckedOutExplorerListStatus =>
       throw _privateConstructorUsedError;
   List<PropertyCard> get checkedOutExplorerList =>
       throw _privateConstructorUsedError;
   String? get getCheckedOutExplorerListError =>
       throw _privateConstructorUsedError;
   Paginator? get checkedOutPaginator => throw _privateConstructorUsedError;
-  Status get checkInLeadStatus => throw _privateConstructorUsedError;
+  AppStatus get checkInLeadStatus => throw _privateConstructorUsedError;
   String? get checkInLeadError => throw _privateConstructorUsedError;
-  Status get checkOutLeadStatus => throw _privateConstructorUsedError;
+  AppStatus get checkOutLeadStatus => throw _privateConstructorUsedError;
   String? get checkOutLeadError => throw _privateConstructorUsedError;
-  Status get randomLeadsAssignmentStatus => throw _privateConstructorUsedError;
+  AppStatus get randomLeadsAssignmentStatus =>
+      throw _privateConstructorUsedError;
   String? get randomLeadsAssignmentError => throw _privateConstructorUsedError;
   dynamic get currentTab => throw _privateConstructorUsedError;
   String? get explorerSearch => throw _privateConstructorUsedError;
@@ -41,13 +42,14 @@ mixin _$ExplorerScreenState {
   Map<String, dynamic>? get checkedOutFilter =>
       throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
   List<Community> get communityList => throw _privateConstructorUsedError;
-  Status get getCommunityListStatus => throw _privateConstructorUsedError;
+  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
-  Status get getBuildingListStatus => throw _privateConstructorUsedError;
+  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
   bool get selectModeEnabled => throw _privateConstructorUsedError;
   List<String> get selectedPropertyCards => throw _privateConstructorUsedError;
+  bool get showOnlyAvailable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ExplorerScreenStateCopyWith<ExplorerScreenState> get copyWith =>
@@ -61,19 +63,19 @@ abstract class $ExplorerScreenStateCopyWith<$Res> {
       _$ExplorerScreenStateCopyWithImpl<$Res, ExplorerScreenState>;
   @useResult
   $Res call(
-      {Status getExplorerListStatus,
+      {AppStatus getExplorerListStatus,
       List<PropertyCard> explorerList,
       String? getExplorerListError,
       Paginator? explorerPaginator,
-      Status getCheckedOutExplorerListStatus,
+      AppStatus getCheckedOutExplorerListStatus,
       List<PropertyCard> checkedOutExplorerList,
       String? getCheckedOutExplorerListError,
       Paginator? checkedOutPaginator,
-      Status checkInLeadStatus,
+      AppStatus checkInLeadStatus,
       String? checkInLeadError,
-      Status checkOutLeadStatus,
+      AppStatus checkOutLeadStatus,
       String? checkOutLeadError,
-      Status randomLeadsAssignmentStatus,
+      AppStatus randomLeadsAssignmentStatus,
       String? randomLeadsAssignmentError,
       dynamic currentTab,
       String? explorerSearch,
@@ -81,13 +83,14 @@ abstract class $ExplorerScreenStateCopyWith<$Res> {
       Map<String, dynamic>? explorerFilter,
       Map<String, dynamic>? checkedOutFilter,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
       bool selectModeEnabled,
-      List<String> selectedPropertyCards});
+      List<String> selectedPropertyCards,
+      bool showOnlyAvailable});
 
   $PaginatorCopyWith<$Res>? get explorerPaginator;
   $PaginatorCopyWith<$Res>? get checkedOutPaginator;
@@ -133,12 +136,13 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
     Object? getBuildingListStatus = null,
     Object? selectModeEnabled = null,
     Object? selectedPropertyCards = null,
+    Object? showOnlyAvailable = null,
   }) {
     return _then(_value.copyWith(
       getExplorerListStatus: null == getExplorerListStatus
           ? _value.getExplorerListStatus
           : getExplorerListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       explorerList: null == explorerList
           ? _value.explorerList
           : explorerList // ignore: cast_nullable_to_non_nullable
@@ -154,7 +158,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       getCheckedOutExplorerListStatus: null == getCheckedOutExplorerListStatus
           ? _value.getCheckedOutExplorerListStatus
           : getCheckedOutExplorerListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkedOutExplorerList: null == checkedOutExplorerList
           ? _value.checkedOutExplorerList
           : checkedOutExplorerList // ignore: cast_nullable_to_non_nullable
@@ -170,7 +174,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       checkInLeadStatus: null == checkInLeadStatus
           ? _value.checkInLeadStatus
           : checkInLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkInLeadError: freezed == checkInLeadError
           ? _value.checkInLeadError
           : checkInLeadError // ignore: cast_nullable_to_non_nullable
@@ -178,7 +182,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       checkOutLeadStatus: null == checkOutLeadStatus
           ? _value.checkOutLeadStatus
           : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkOutLeadError: freezed == checkOutLeadError
           ? _value.checkOutLeadError
           : checkOutLeadError // ignore: cast_nullable_to_non_nullable
@@ -186,7 +190,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       randomLeadsAssignmentStatus: null == randomLeadsAssignmentStatus
           ? _value.randomLeadsAssignmentStatus
           : randomLeadsAssignmentStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       randomLeadsAssignmentError: freezed == randomLeadsAssignmentError
           ? _value.randomLeadsAssignmentError
           : randomLeadsAssignmentError // ignore: cast_nullable_to_non_nullable
@@ -218,7 +222,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -226,7 +230,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -234,7 +238,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       selectModeEnabled: null == selectModeEnabled
           ? _value.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
@@ -243,6 +247,10 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
           ? _value.selectedPropertyCards
           : selectedPropertyCards // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      showOnlyAvailable: null == showOnlyAvailable
+          ? _value.showOnlyAvailable
+          : showOnlyAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -280,19 +288,19 @@ abstract class _$$ExplorerScreenStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Status getExplorerListStatus,
+      {AppStatus getExplorerListStatus,
       List<PropertyCard> explorerList,
       String? getExplorerListError,
       Paginator? explorerPaginator,
-      Status getCheckedOutExplorerListStatus,
+      AppStatus getCheckedOutExplorerListStatus,
       List<PropertyCard> checkedOutExplorerList,
       String? getCheckedOutExplorerListError,
       Paginator? checkedOutPaginator,
-      Status checkInLeadStatus,
+      AppStatus checkInLeadStatus,
       String? checkInLeadError,
-      Status checkOutLeadStatus,
+      AppStatus checkOutLeadStatus,
       String? checkOutLeadError,
-      Status randomLeadsAssignmentStatus,
+      AppStatus randomLeadsAssignmentStatus,
       String? randomLeadsAssignmentError,
       dynamic currentTab,
       String? explorerSearch,
@@ -300,13 +308,14 @@ abstract class _$$ExplorerScreenStateImplCopyWith<$Res>
       Map<String, dynamic>? explorerFilter,
       Map<String, dynamic>? checkedOutFilter,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
       bool selectModeEnabled,
-      List<String> selectedPropertyCards});
+      List<String> selectedPropertyCards,
+      bool showOnlyAvailable});
 
   @override
   $PaginatorCopyWith<$Res>? get explorerPaginator;
@@ -352,12 +361,13 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
     Object? getBuildingListStatus = null,
     Object? selectModeEnabled = null,
     Object? selectedPropertyCards = null,
+    Object? showOnlyAvailable = null,
   }) {
     return _then(_$ExplorerScreenStateImpl(
       getExplorerListStatus: null == getExplorerListStatus
           ? _value.getExplorerListStatus
           : getExplorerListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       explorerList: null == explorerList
           ? _value._explorerList
           : explorerList // ignore: cast_nullable_to_non_nullable
@@ -373,7 +383,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
       getCheckedOutExplorerListStatus: null == getCheckedOutExplorerListStatus
           ? _value.getCheckedOutExplorerListStatus
           : getCheckedOutExplorerListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkedOutExplorerList: null == checkedOutExplorerList
           ? _value._checkedOutExplorerList
           : checkedOutExplorerList // ignore: cast_nullable_to_non_nullable
@@ -389,7 +399,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
       checkInLeadStatus: null == checkInLeadStatus
           ? _value.checkInLeadStatus
           : checkInLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkInLeadError: freezed == checkInLeadError
           ? _value.checkInLeadError
           : checkInLeadError // ignore: cast_nullable_to_non_nullable
@@ -397,7 +407,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
       checkOutLeadStatus: null == checkOutLeadStatus
           ? _value.checkOutLeadStatus
           : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       checkOutLeadError: freezed == checkOutLeadError
           ? _value.checkOutLeadError
           : checkOutLeadError // ignore: cast_nullable_to_non_nullable
@@ -405,7 +415,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
       randomLeadsAssignmentStatus: null == randomLeadsAssignmentStatus
           ? _value.randomLeadsAssignmentStatus
           : randomLeadsAssignmentStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       randomLeadsAssignmentError: freezed == randomLeadsAssignmentError
           ? _value.randomLeadsAssignmentError
           : randomLeadsAssignmentError // ignore: cast_nullable_to_non_nullable
@@ -434,7 +444,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value._communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -442,7 +452,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value._buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -450,7 +460,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       selectModeEnabled: null == selectModeEnabled
           ? _value.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
@@ -459,6 +469,10 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
           ? _value._selectedPropertyCards
           : selectedPropertyCards // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      showOnlyAvailable: null == showOnlyAvailable
+          ? _value.showOnlyAvailable
+          : showOnlyAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -467,19 +481,19 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
 
 class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
   const _$ExplorerScreenStateImpl(
-      {this.getExplorerListStatus = Status.init,
+      {this.getExplorerListStatus = AppStatus.init,
       final List<PropertyCard> explorerList = const [],
       this.getExplorerListError,
       this.explorerPaginator,
-      this.getCheckedOutExplorerListStatus = Status.init,
+      this.getCheckedOutExplorerListStatus = AppStatus.init,
       final List<PropertyCard> checkedOutExplorerList = const [],
       this.getCheckedOutExplorerListError,
       this.checkedOutPaginator,
-      this.checkInLeadStatus = Status.init,
+      this.checkInLeadStatus = AppStatus.init,
       this.checkInLeadError,
-      this.checkOutLeadStatus = Status.init,
+      this.checkOutLeadStatus = AppStatus.init,
       this.checkOutLeadError,
-      this.randomLeadsAssignmentStatus = Status.init,
+      this.randomLeadsAssignmentStatus = AppStatus.init,
       this.randomLeadsAssignmentError,
       this.currentTab = 0,
       this.explorerSearch,
@@ -487,13 +501,14 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
       final Map<String, dynamic>? explorerFilter,
       final Map<String, dynamic>? checkedOutFilter,
       final List<PropertyType> propertyTypeList = const [],
-      this.getPropertyTypeListStatus = Status.init,
+      this.getPropertyTypeListStatus = AppStatus.init,
       final List<Community> communityList = const [],
-      this.getCommunityListStatus = Status.init,
+      this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
-      this.getBuildingListStatus = Status.init,
+      this.getBuildingListStatus = AppStatus.init,
       this.selectModeEnabled = false,
-      final List<String> selectedPropertyCards = const []})
+      final List<String> selectedPropertyCards = const [],
+      this.showOnlyAvailable = true})
       : _explorerList = explorerList,
         _checkedOutExplorerList = checkedOutExplorerList,
         _explorerFilter = explorerFilter,
@@ -505,7 +520,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
 
   @override
   @JsonKey()
-  final Status getExplorerListStatus;
+  final AppStatus getExplorerListStatus;
   final List<PropertyCard> _explorerList;
   @override
   @JsonKey()
@@ -521,7 +536,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
   final Paginator? explorerPaginator;
   @override
   @JsonKey()
-  final Status getCheckedOutExplorerListStatus;
+  final AppStatus getCheckedOutExplorerListStatus;
   final List<PropertyCard> _checkedOutExplorerList;
   @override
   @JsonKey()
@@ -538,17 +553,17 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
   final Paginator? checkedOutPaginator;
   @override
   @JsonKey()
-  final Status checkInLeadStatus;
+  final AppStatus checkInLeadStatus;
   @override
   final String? checkInLeadError;
   @override
   @JsonKey()
-  final Status checkOutLeadStatus;
+  final AppStatus checkOutLeadStatus;
   @override
   final String? checkOutLeadError;
   @override
   @JsonKey()
-  final Status randomLeadsAssignmentStatus;
+  final AppStatus randomLeadsAssignmentStatus;
   @override
   final String? randomLeadsAssignmentError;
   @override
@@ -590,7 +605,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
 
   @override
   @JsonKey()
-  final Status getPropertyTypeListStatus;
+  final AppStatus getPropertyTypeListStatus;
   final List<Community> _communityList;
   @override
   @JsonKey()
@@ -602,7 +617,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
 
   @override
   @JsonKey()
-  final Status getCommunityListStatus;
+  final AppStatus getCommunityListStatus;
   final List<Building> _buildingList;
   @override
   @JsonKey()
@@ -614,7 +629,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
 
   @override
   @JsonKey()
-  final Status getBuildingListStatus;
+  final AppStatus getBuildingListStatus;
   @override
   @JsonKey()
   final bool selectModeEnabled;
@@ -629,8 +644,12 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
   }
 
   @override
+  @JsonKey()
+  final bool showOnlyAvailable;
+
+  @override
   String toString() {
-    return 'ExplorerScreenState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards)';
+    return 'ExplorerScreenState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
   }
 
   @override
@@ -692,7 +711,8 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
                 .equals(other._buildingList, _buildingList) &&
             (identical(other.getBuildingListStatus, getBuildingListStatus) || other.getBuildingListStatus == getBuildingListStatus) &&
             (identical(other.selectModeEnabled, selectModeEnabled) || other.selectModeEnabled == selectModeEnabled) &&
-            const DeepCollectionEquality().equals(other._selectedPropertyCards, _selectedPropertyCards));
+            const DeepCollectionEquality().equals(other._selectedPropertyCards, _selectedPropertyCards) &&
+            (identical(other.showOnlyAvailable, showOnlyAvailable) || other.showOnlyAvailable == showOnlyAvailable));
   }
 
   @override
@@ -724,7 +744,8 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
         const DeepCollectionEquality().hash(_buildingList),
         getBuildingListStatus,
         selectModeEnabled,
-        const DeepCollectionEquality().hash(_selectedPropertyCards)
+        const DeepCollectionEquality().hash(_selectedPropertyCards),
+        showOnlyAvailable
       ]);
 
   @JsonKey(ignore: true)
@@ -737,19 +758,19 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
 
 abstract class _ExplorerScreenState implements ExplorerScreenState {
   const factory _ExplorerScreenState(
-      {final Status getExplorerListStatus,
+      {final AppStatus getExplorerListStatus,
       final List<PropertyCard> explorerList,
       final String? getExplorerListError,
       final Paginator? explorerPaginator,
-      final Status getCheckedOutExplorerListStatus,
+      final AppStatus getCheckedOutExplorerListStatus,
       final List<PropertyCard> checkedOutExplorerList,
       final String? getCheckedOutExplorerListError,
       final Paginator? checkedOutPaginator,
-      final Status checkInLeadStatus,
+      final AppStatus checkInLeadStatus,
       final String? checkInLeadError,
-      final Status checkOutLeadStatus,
+      final AppStatus checkOutLeadStatus,
       final String? checkOutLeadError,
-      final Status randomLeadsAssignmentStatus,
+      final AppStatus randomLeadsAssignmentStatus,
       final String? randomLeadsAssignmentError,
       final dynamic currentTab,
       final String? explorerSearch,
@@ -757,16 +778,17 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
       final Map<String, dynamic>? explorerFilter,
       final Map<String, dynamic>? checkedOutFilter,
       final List<PropertyType> propertyTypeList,
-      final Status getPropertyTypeListStatus,
+      final AppStatus getPropertyTypeListStatus,
       final List<Community> communityList,
-      final Status getCommunityListStatus,
+      final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
-      final Status getBuildingListStatus,
+      final AppStatus getBuildingListStatus,
       final bool selectModeEnabled,
-      final List<String> selectedPropertyCards}) = _$ExplorerScreenStateImpl;
+      final List<String> selectedPropertyCards,
+      final bool showOnlyAvailable}) = _$ExplorerScreenStateImpl;
 
   @override
-  Status get getExplorerListStatus;
+  AppStatus get getExplorerListStatus;
   @override
   List<PropertyCard> get explorerList;
   @override
@@ -774,7 +796,7 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
   @override
   Paginator? get explorerPaginator;
   @override
-  Status get getCheckedOutExplorerListStatus;
+  AppStatus get getCheckedOutExplorerListStatus;
   @override
   List<PropertyCard> get checkedOutExplorerList;
   @override
@@ -782,15 +804,15 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
   @override
   Paginator? get checkedOutPaginator;
   @override
-  Status get checkInLeadStatus;
+  AppStatus get checkInLeadStatus;
   @override
   String? get checkInLeadError;
   @override
-  Status get checkOutLeadStatus;
+  AppStatus get checkOutLeadStatus;
   @override
   String? get checkOutLeadError;
   @override
-  Status get randomLeadsAssignmentStatus;
+  AppStatus get randomLeadsAssignmentStatus;
   @override
   String? get randomLeadsAssignmentError;
   @override
@@ -806,19 +828,21 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
   @override
   List<PropertyType> get propertyTypeList;
   @override
-  Status get getPropertyTypeListStatus;
+  AppStatus get getPropertyTypeListStatus;
   @override
   List<Community> get communityList;
   @override
-  Status get getCommunityListStatus;
+  AppStatus get getCommunityListStatus;
   @override
   List<Building> get buildingList;
   @override
-  Status get getBuildingListStatus;
+  AppStatus get getBuildingListStatus;
   @override
   bool get selectModeEnabled;
   @override
   List<String> get selectedPropertyCards;
+  @override
+  bool get showOnlyAvailable;
   @override
   @JsonKey(ignore: true)
   _$$ExplorerScreenStateImplCopyWith<_$ExplorerScreenStateImpl> get copyWith =>

@@ -38,7 +38,7 @@ Future<String> uploadFileToS3AndGetPath(File file,
       options: Options(
         headers: {
           Headers.contentLengthHeader: fileBytes.length,
-          Headers.contentTypeHeader: fileType!
+          Headers.contentTypeHeader: fileType
         },
       ),
     );

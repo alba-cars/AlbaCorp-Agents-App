@@ -244,7 +244,8 @@ class InfoTabView extends StatelessWidget {
                           ? BuyerExternalUerInfo(deal: deal!)
                           : SizedBox(),
                 if (deal?.category == 'Secondary Market Property')
-                  (deal?.sellerclientType == 'Alba')
+                  (deal?.sellerclientType == 'Alba' &&
+                          deal?.sellerInternalUser != null)
                       ? SellerInternalUserInfo(
                           client: deal!.sellerInternalUser!,
                           clientSource: deal.sellerclientType!)
@@ -364,7 +365,7 @@ class InfoTabView extends StatelessWidget {
                               valueOne: deal!.newListingRequest?.propertyType
                                   ?.propertyType,
                               labelTwo: 'Listing Type',
-                              valueTwo: deal.propertyList?.listingType,
+                              valueTwo: deal.newListingRequest?.type,
                             );
                           },
                         ),

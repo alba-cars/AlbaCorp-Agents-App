@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TicketDetailsState {
   Ticket? get ticket => throw _privateConstructorUsedError;
   String get ticketId => throw _privateConstructorUsedError;
-  Status get getTicketStatus => throw _privateConstructorUsedError;
+  AppStatus get getTicketStatus => throw _privateConstructorUsedError;
   String? get getTicketError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $TicketDetailsStateCopyWith<$Res> {
   $Res call(
       {Ticket? ticket,
       String ticketId,
-      Status getTicketStatus,
+      AppStatus getTicketStatus,
       String? getTicketError});
 
   $TicketCopyWith<$Res>? get ticket;
@@ -71,7 +71,7 @@ class _$TicketDetailsStateCopyWithImpl<$Res, $Val extends TicketDetailsState>
       getTicketStatus: null == getTicketStatus
           ? _value.getTicketStatus
           : getTicketStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getTicketError: freezed == getTicketError
           ? _value.getTicketError
           : getTicketError // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ abstract class _$$TicketDetailsStateImplCopyWith<$Res>
   $Res call(
       {Ticket? ticket,
       String ticketId,
-      Status getTicketStatus,
+      AppStatus getTicketStatus,
       String? getTicketError});
 
   @override
@@ -138,7 +138,7 @@ class __$$TicketDetailsStateImplCopyWithImpl<$Res>
       getTicketStatus: null == getTicketStatus
           ? _value.getTicketStatus
           : getTicketStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getTicketError: freezed == getTicketError
           ? _value.getTicketError
           : getTicketError // ignore: cast_nullable_to_non_nullable
@@ -153,7 +153,7 @@ class _$TicketDetailsStateImpl implements _TicketDetailsState {
   const _$TicketDetailsStateImpl(
       {this.ticket,
       required this.ticketId,
-      this.getTicketStatus = Status.init,
+      this.getTicketStatus = AppStatus.init,
       this.getTicketError});
 
   @override
@@ -162,7 +162,7 @@ class _$TicketDetailsStateImpl implements _TicketDetailsState {
   final String ticketId;
   @override
   @JsonKey()
-  final Status getTicketStatus;
+  final AppStatus getTicketStatus;
   @override
   final String? getTicketError;
 
@@ -201,7 +201,7 @@ abstract class _TicketDetailsState implements TicketDetailsState {
   const factory _TicketDetailsState(
       {final Ticket? ticket,
       required final String ticketId,
-      final Status getTicketStatus,
+      final AppStatus getTicketStatus,
       final String? getTicketError}) = _$TicketDetailsStateImpl;
 
   @override
@@ -209,7 +209,7 @@ abstract class _TicketDetailsState implements TicketDetailsState {
   @override
   String get ticketId;
   @override
-  Status get getTicketStatus;
+  AppStatus get getTicketStatus;
   @override
   String? get getTicketError;
   @override

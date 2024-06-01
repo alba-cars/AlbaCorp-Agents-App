@@ -17,11 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ListingDetailState {
   String get listingId => throw _privateConstructorUsedError;
-  Status get getListingDetailsStatus => throw _privateConstructorUsedError;
+  AppStatus get getListingDetailsStatus => throw _privateConstructorUsedError;
   Property? get listing => throw _privateConstructorUsedError;
   String? get getListingError => throw _privateConstructorUsedError;
   List<Activity> get activities => throw _privateConstructorUsedError;
-  Status get getActivitiesStatus => throw _privateConstructorUsedError;
+  AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
   String? get getActivitiesError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,11 +37,11 @@ abstract class $ListingDetailStateCopyWith<$Res> {
   @useResult
   $Res call(
       {String listingId,
-      Status getListingDetailsStatus,
+      AppStatus getListingDetailsStatus,
       Property? listing,
       String? getListingError,
       List<Activity> activities,
-      Status getActivitiesStatus,
+      AppStatus getActivitiesStatus,
       String? getActivitiesError});
 
   $PropertyCopyWith<$Res>? get listing;
@@ -76,7 +76,7 @@ class _$ListingDetailStateCopyWithImpl<$Res, $Val extends ListingDetailState>
       getListingDetailsStatus: null == getListingDetailsStatus
           ? _value.getListingDetailsStatus
           : getListingDetailsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       listing: freezed == listing
           ? _value.listing
           : listing // ignore: cast_nullable_to_non_nullable
@@ -92,7 +92,7 @@ class _$ListingDetailStateCopyWithImpl<$Res, $Val extends ListingDetailState>
       getActivitiesStatus: null == getActivitiesStatus
           ? _value.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getActivitiesError: freezed == getActivitiesError
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -123,11 +123,11 @@ abstract class _$$ListingDetailStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {String listingId,
-      Status getListingDetailsStatus,
+      AppStatus getListingDetailsStatus,
       Property? listing,
       String? getListingError,
       List<Activity> activities,
-      Status getActivitiesStatus,
+      AppStatus getActivitiesStatus,
       String? getActivitiesError});
 
   @override
@@ -161,7 +161,7 @@ class __$$ListingDetailStateImplCopyWithImpl<$Res>
       getListingDetailsStatus: null == getListingDetailsStatus
           ? _value.getListingDetailsStatus
           : getListingDetailsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       listing: freezed == listing
           ? _value.listing
           : listing // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ class __$$ListingDetailStateImplCopyWithImpl<$Res>
       getActivitiesStatus: null == getActivitiesStatus
           ? _value.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getActivitiesError: freezed == getActivitiesError
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -191,11 +191,11 @@ class __$$ListingDetailStateImplCopyWithImpl<$Res>
 class _$ListingDetailStateImpl implements _ListingDetailState {
   const _$ListingDetailStateImpl(
       {required this.listingId,
-      this.getListingDetailsStatus = Status.init,
+      this.getListingDetailsStatus = AppStatus.init,
       this.listing,
       this.getListingError,
       final List<Activity> activities = const [],
-      this.getActivitiesStatus = Status.init,
+      this.getActivitiesStatus = AppStatus.init,
       this.getActivitiesError})
       : _activities = activities;
 
@@ -203,7 +203,7 @@ class _$ListingDetailStateImpl implements _ListingDetailState {
   final String listingId;
   @override
   @JsonKey()
-  final Status getListingDetailsStatus;
+  final AppStatus getListingDetailsStatus;
   @override
   final Property? listing;
   @override
@@ -219,7 +219,7 @@ class _$ListingDetailStateImpl implements _ListingDetailState {
 
   @override
   @JsonKey()
-  final Status getActivitiesStatus;
+  final AppStatus getActivitiesStatus;
   @override
   final String? getActivitiesError;
 
@@ -271,17 +271,17 @@ class _$ListingDetailStateImpl implements _ListingDetailState {
 abstract class _ListingDetailState implements ListingDetailState {
   const factory _ListingDetailState(
       {required final String listingId,
-      final Status getListingDetailsStatus,
+      final AppStatus getListingDetailsStatus,
       final Property? listing,
       final String? getListingError,
       final List<Activity> activities,
-      final Status getActivitiesStatus,
+      final AppStatus getActivitiesStatus,
       final String? getActivitiesError}) = _$ListingDetailStateImpl;
 
   @override
   String get listingId;
   @override
-  Status get getListingDetailsStatus;
+  AppStatus get getListingDetailsStatus;
   @override
   Property? get listing;
   @override
@@ -289,7 +289,7 @@ abstract class _ListingDetailState implements ListingDetailState {
   @override
   List<Activity> get activities;
   @override
-  Status get getActivitiesStatus;
+  AppStatus get getActivitiesStatus;
   @override
   String? get getActivitiesError;
   @override

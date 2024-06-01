@@ -11,6 +11,6 @@ class CallState with _$CallState {
     DateTime? callStartTime,
     @Default(PhoneCallStatus.noCall) PhoneCallStatus phoneCallStatus,
     @Default(false) bool feedbackRequestDialogOpen,
-    @Default(Status.init) Status updateActivityStatus,
+    @Default(AppStatus.init) AppStatus updateActivityStatus,
   }) = _CallState;
 }

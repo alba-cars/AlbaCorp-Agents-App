@@ -139,11 +139,11 @@ class _TryState extends State<_AddLeadScreenLayout> {
                     Expanded(
                       child: BlocListener<AddLeadCubit, AddLeadState>(
                         listener: (context, state) {
-                          if (state.addLeadStatus == Status.success) {
+                          if (state.addLeadStatus == AppStatus.success) {
                             showSnackbar(context, 'Client Added Successfully',
                                 SnackBarType.success);
                             context.pop(state.lead);
-                          } else if (state.addLeadStatus == Status.failure) {
+                          } else if (state.addLeadStatus == AppStatus.failure) {
                             showSnackbar(
                                 context,
                                 state.addLeadError ?? 'Failed to add client',

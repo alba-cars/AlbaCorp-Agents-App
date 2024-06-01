@@ -60,7 +60,7 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
           builder: (context, listing) {
             final status =
                 context.read<ListingDetailCubit>().getListingDetails();
-            if (status == Status.loading) {
+            if (status == AppStatus.loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );

@@ -1,1 +1,1 @@
-enum Status { success, failure, loading, init, loadingMore }
+enum AppStatus { success, failure, loading, init, loadingMore }

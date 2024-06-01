@@ -4,13 +4,13 @@ part of 'deals_cubit.dart';
 class DealsState with _$DealsState {
   const factory DealsState({
     @Default([]) List<Deal> deals,
-    @Default(Status.init) Status getDealsStatus,
+    @Default(AppStatus.init) AppStatus getDealsStatus,
     String? getDealsError,
     Paginator? dealsPaginator,
     String? dealsSearch,
     Map<String, dynamic>? dealsFilter,
     @Default([]) List<Deal> yourListings,
-    @Default(Status.init) Status getYourListingsStatus,
+    @Default(AppStatus.init) AppStatus getYourListingsStatus,
     String? getYourListingsError,
     Paginator? yourListingsPaginator,
     String? yourListingsSearch,

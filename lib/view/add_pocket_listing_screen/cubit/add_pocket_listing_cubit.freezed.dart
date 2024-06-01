@@ -16,16 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddPocketListingState {
-  Status get addPocketListingStatus => throw _privateConstructorUsedError;
+  AppStatus get addPocketListingStatus => throw _privateConstructorUsedError;
   String? get addPocketListingError => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
   List<Community> get communityList => throw _privateConstructorUsedError;
-  Status get getCommunityListStatus => throw _privateConstructorUsedError;
+  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
-  Status get getBuildingListStatus => throw _privateConstructorUsedError;
+  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
   List<Lead> get leadList => throw _privateConstructorUsedError;
-  Status get getLeadListStatus => throw _privateConstructorUsedError;
+  AppStatus get getLeadListStatus => throw _privateConstructorUsedError;
   int get currentTab => throw _privateConstructorUsedError;
   Map<String, dynamic> get rawValues => throw _privateConstructorUsedError;
   Map<String, dynamic> get values => throw _privateConstructorUsedError;
@@ -42,16 +42,16 @@ abstract class $AddPocketListingStateCopyWith<$Res> {
       _$AddPocketListingStateCopyWithImpl<$Res, AddPocketListingState>;
   @useResult
   $Res call(
-      {Status addPocketListingStatus,
+      {AppStatus addPocketListingStatus,
       String? addPocketListingError,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
       List<Lead> leadList,
-      Status getLeadListStatus,
+      AppStatus getLeadListStatus,
       int currentTab,
       Map<String, dynamic> rawValues,
       Map<String, dynamic> values});
@@ -89,7 +89,7 @@ class _$AddPocketListingStateCopyWithImpl<$Res,
       addPocketListingStatus: null == addPocketListingStatus
           ? _value.addPocketListingStatus
           : addPocketListingStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addPocketListingError: freezed == addPocketListingError
           ? _value.addPocketListingError
           : addPocketListingError // ignore: cast_nullable_to_non_nullable
@@ -101,7 +101,7 @@ class _$AddPocketListingStateCopyWithImpl<$Res,
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ class _$AddPocketListingStateCopyWithImpl<$Res,
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ class _$AddPocketListingStateCopyWithImpl<$Res,
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       leadList: null == leadList
           ? _value.leadList
           : leadList // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ class _$AddPocketListingStateCopyWithImpl<$Res,
       getLeadListStatus: null == getLeadListStatus
           ? _value.getLeadListStatus
           : getLeadListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
@@ -152,16 +152,16 @@ abstract class _$$AddPocketListingStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Status addPocketListingStatus,
+      {AppStatus addPocketListingStatus,
       String? addPocketListingError,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus,
+      AppStatus getCommunityListStatus,
       List<Building> buildingList,
-      Status getBuildingListStatus,
+      AppStatus getBuildingListStatus,
       List<Lead> leadList,
-      Status getLeadListStatus,
+      AppStatus getLeadListStatus,
       int currentTab,
       Map<String, dynamic> rawValues,
       Map<String, dynamic> values});
@@ -197,7 +197,7 @@ class __$$AddPocketListingStateImplCopyWithImpl<$Res>
       addPocketListingStatus: null == addPocketListingStatus
           ? _value.addPocketListingStatus
           : addPocketListingStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addPocketListingError: freezed == addPocketListingError
           ? _value.addPocketListingError
           : addPocketListingError // ignore: cast_nullable_to_non_nullable
@@ -209,7 +209,7 @@ class __$$AddPocketListingStateImplCopyWithImpl<$Res>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value._communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -217,7 +217,7 @@ class __$$AddPocketListingStateImplCopyWithImpl<$Res>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       buildingList: null == buildingList
           ? _value._buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -225,7 +225,7 @@ class __$$AddPocketListingStateImplCopyWithImpl<$Res>
       getBuildingListStatus: null == getBuildingListStatus
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       leadList: null == leadList
           ? _value._leadList
           : leadList // ignore: cast_nullable_to_non_nullable
@@ -233,7 +233,7 @@ class __$$AddPocketListingStateImplCopyWithImpl<$Res>
       getLeadListStatus: null == getLeadListStatus
           ? _value.getLeadListStatus
           : getLeadListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
@@ -254,16 +254,16 @@ class __$$AddPocketListingStateImplCopyWithImpl<$Res>
 
 class _$AddPocketListingStateImpl implements _AddPocketListingState {
   const _$AddPocketListingStateImpl(
-      {this.addPocketListingStatus = Status.init,
+      {this.addPocketListingStatus = AppStatus.init,
       this.addPocketListingError,
       final List<PropertyType> propertyTypeList = const [],
-      this.getPropertyTypeListStatus = Status.init,
+      this.getPropertyTypeListStatus = AppStatus.init,
       final List<Community> communityList = const [],
-      this.getCommunityListStatus = Status.init,
+      this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
-      this.getBuildingListStatus = Status.init,
+      this.getBuildingListStatus = AppStatus.init,
       final List<Lead> leadList = const [],
-      this.getLeadListStatus = Status.init,
+      this.getLeadListStatus = AppStatus.init,
       this.currentTab = 0,
       final Map<String, dynamic> rawValues = const {},
       final Map<String, dynamic> values = const {}})
@@ -276,7 +276,7 @@ class _$AddPocketListingStateImpl implements _AddPocketListingState {
 
   @override
   @JsonKey()
-  final Status addPocketListingStatus;
+  final AppStatus addPocketListingStatus;
   @override
   final String? addPocketListingError;
   final List<PropertyType> _propertyTypeList;
@@ -291,7 +291,7 @@ class _$AddPocketListingStateImpl implements _AddPocketListingState {
 
   @override
   @JsonKey()
-  final Status getPropertyTypeListStatus;
+  final AppStatus getPropertyTypeListStatus;
   final List<Community> _communityList;
   @override
   @JsonKey()
@@ -303,7 +303,7 @@ class _$AddPocketListingStateImpl implements _AddPocketListingState {
 
   @override
   @JsonKey()
-  final Status getCommunityListStatus;
+  final AppStatus getCommunityListStatus;
   final List<Building> _buildingList;
   @override
   @JsonKey()
@@ -315,7 +315,7 @@ class _$AddPocketListingStateImpl implements _AddPocketListingState {
 
   @override
   @JsonKey()
-  final Status getBuildingListStatus;
+  final AppStatus getBuildingListStatus;
   final List<Lead> _leadList;
   @override
   @JsonKey()
@@ -327,7 +327,7 @@ class _$AddPocketListingStateImpl implements _AddPocketListingState {
 
   @override
   @JsonKey()
-  final Status getLeadListStatus;
+  final AppStatus getLeadListStatus;
   @override
   @JsonKey()
   final int currentTab;
@@ -413,40 +413,40 @@ class _$AddPocketListingStateImpl implements _AddPocketListingState {
 
 abstract class _AddPocketListingState implements AddPocketListingState {
   const factory _AddPocketListingState(
-      {final Status addPocketListingStatus,
+      {final AppStatus addPocketListingStatus,
       final String? addPocketListingError,
       final List<PropertyType> propertyTypeList,
-      final Status getPropertyTypeListStatus,
+      final AppStatus getPropertyTypeListStatus,
       final List<Community> communityList,
-      final Status getCommunityListStatus,
+      final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
-      final Status getBuildingListStatus,
+      final AppStatus getBuildingListStatus,
       final List<Lead> leadList,
-      final Status getLeadListStatus,
+      final AppStatus getLeadListStatus,
       final int currentTab,
       final Map<String, dynamic> rawValues,
       final Map<String, dynamic> values}) = _$AddPocketListingStateImpl;
 
   @override
-  Status get addPocketListingStatus;
+  AppStatus get addPocketListingStatus;
   @override
   String? get addPocketListingError;
   @override
   List<PropertyType> get propertyTypeList;
   @override
-  Status get getPropertyTypeListStatus;
+  AppStatus get getPropertyTypeListStatus;
   @override
   List<Community> get communityList;
   @override
-  Status get getCommunityListStatus;
+  AppStatus get getCommunityListStatus;
   @override
   List<Building> get buildingList;
   @override
-  Status get getBuildingListStatus;
+  AppStatus get getBuildingListStatus;
   @override
   List<Lead> get leadList;
   @override
-  Status get getLeadListStatus;
+  AppStatus get getLeadListStatus;
   @override
   int get currentTab;
   @override

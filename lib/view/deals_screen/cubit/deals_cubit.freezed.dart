@@ -17,13 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DealsState {
   List<Deal> get deals => throw _privateConstructorUsedError;
-  Status get getDealsStatus => throw _privateConstructorUsedError;
+  AppStatus get getDealsStatus => throw _privateConstructorUsedError;
   String? get getDealsError => throw _privateConstructorUsedError;
   Paginator? get dealsPaginator => throw _privateConstructorUsedError;
   String? get dealsSearch => throw _privateConstructorUsedError;
   Map<String, dynamic>? get dealsFilter => throw _privateConstructorUsedError;
   List<Deal> get yourListings => throw _privateConstructorUsedError;
-  Status get getYourListingsStatus => throw _privateConstructorUsedError;
+  AppStatus get getYourListingsStatus => throw _privateConstructorUsedError;
   String? get getYourListingsError => throw _privateConstructorUsedError;
   Paginator? get yourListingsPaginator => throw _privateConstructorUsedError;
   String? get yourListingsSearch => throw _privateConstructorUsedError;
@@ -44,13 +44,13 @@ abstract class $DealsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Deal> deals,
-      Status getDealsStatus,
+      AppStatus getDealsStatus,
       String? getDealsError,
       Paginator? dealsPaginator,
       String? dealsSearch,
       Map<String, dynamic>? dealsFilter,
       List<Deal> yourListings,
-      Status getYourListingsStatus,
+      AppStatus getYourListingsStatus,
       String? getYourListingsError,
       Paginator? yourListingsPaginator,
       String? yourListingsSearch,
@@ -96,7 +96,7 @@ class _$DealsStateCopyWithImpl<$Res, $Val extends DealsState>
       getDealsStatus: null == getDealsStatus
           ? _value.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getDealsError: freezed == getDealsError
           ? _value.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
@@ -120,7 +120,7 @@ class _$DealsStateCopyWithImpl<$Res, $Val extends DealsState>
       getYourListingsStatus: null == getYourListingsStatus
           ? _value.getYourListingsStatus
           : getYourListingsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getYourListingsError: freezed == getYourListingsError
           ? _value.getYourListingsError
           : getYourListingsError // ignore: cast_nullable_to_non_nullable
@@ -179,13 +179,13 @@ abstract class _$$DealsStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<Deal> deals,
-      Status getDealsStatus,
+      AppStatus getDealsStatus,
       String? getDealsError,
       Paginator? dealsPaginator,
       String? dealsSearch,
       Map<String, dynamic>? dealsFilter,
       List<Deal> yourListings,
-      Status getYourListingsStatus,
+      AppStatus getYourListingsStatus,
       String? getYourListingsError,
       Paginator? yourListingsPaginator,
       String? yourListingsSearch,
@@ -231,7 +231,7 @@ class __$$DealsStateImplCopyWithImpl<$Res>
       getDealsStatus: null == getDealsStatus
           ? _value.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getDealsError: freezed == getDealsError
           ? _value.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
@@ -255,7 +255,7 @@ class __$$DealsStateImplCopyWithImpl<$Res>
       getYourListingsStatus: null == getYourListingsStatus
           ? _value.getYourListingsStatus
           : getYourListingsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getYourListingsError: freezed == getYourListingsError
           ? _value.getYourListingsError
           : getYourListingsError // ignore: cast_nullable_to_non_nullable
@@ -285,13 +285,13 @@ class __$$DealsStateImplCopyWithImpl<$Res>
 class _$DealsStateImpl implements _DealsState {
   const _$DealsStateImpl(
       {final List<Deal> deals = const [],
-      this.getDealsStatus = Status.init,
+      this.getDealsStatus = AppStatus.init,
       this.getDealsError,
       this.dealsPaginator,
       this.dealsSearch,
       final Map<String, dynamic>? dealsFilter,
       final List<Deal> yourListings = const [],
-      this.getYourListingsStatus = Status.init,
+      this.getYourListingsStatus = AppStatus.init,
       this.getYourListingsError,
       this.yourListingsPaginator,
       this.yourListingsSearch,
@@ -313,7 +313,7 @@ class _$DealsStateImpl implements _DealsState {
 
   @override
   @JsonKey()
-  final Status getDealsStatus;
+  final AppStatus getDealsStatus;
   @override
   final String? getDealsError;
   @override
@@ -341,7 +341,7 @@ class _$DealsStateImpl implements _DealsState {
 
   @override
   @JsonKey()
-  final Status getYourListingsStatus;
+  final AppStatus getYourListingsStatus;
   @override
   final String? getYourListingsError;
   @override
@@ -427,13 +427,13 @@ class _$DealsStateImpl implements _DealsState {
 abstract class _DealsState implements DealsState {
   const factory _DealsState(
       {final List<Deal> deals,
-      final Status getDealsStatus,
+      final AppStatus getDealsStatus,
       final String? getDealsError,
       final Paginator? dealsPaginator,
       final String? dealsSearch,
       final Map<String, dynamic>? dealsFilter,
       final List<Deal> yourListings,
-      final Status getYourListingsStatus,
+      final AppStatus getYourListingsStatus,
       final String? getYourListingsError,
       final Paginator? yourListingsPaginator,
       final String? yourListingsSearch,
@@ -443,7 +443,7 @@ abstract class _DealsState implements DealsState {
   @override
   List<Deal> get deals;
   @override
-  Status get getDealsStatus;
+  AppStatus get getDealsStatus;
   @override
   String? get getDealsError;
   @override
@@ -455,7 +455,7 @@ abstract class _DealsState implements DealsState {
   @override
   List<Deal> get yourListings;
   @override
-  Status get getYourListingsStatus;
+  AppStatus get getYourListingsStatus;
   @override
   String? get getYourListingsError;
   @override

@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddTicketState {
-  Status get addTicketStatus => throw _privateConstructorUsedError;
+  AppStatus get addTicketStatus => throw _privateConstructorUsedError;
   String? get addTicketError => throw _privateConstructorUsedError;
   List<Deal> get deals => throw _privateConstructorUsedError;
-  Status get getDealsStatus => throw _privateConstructorUsedError;
+  AppStatus get getDealsStatus => throw _privateConstructorUsedError;
   List<Lead> get leads => throw _privateConstructorUsedError;
-  Status get getLeadsStatus => throw _privateConstructorUsedError;
+  AppStatus get getLeadsStatus => throw _privateConstructorUsedError;
   List<Property> get properties => throw _privateConstructorUsedError;
-  Status get getPropertiesStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertiesStatus => throw _privateConstructorUsedError;
   List<Department> get departments => throw _privateConstructorUsedError;
-  Status get getDepartmentsStatus => throw _privateConstructorUsedError;
+  AppStatus get getDepartmentsStatus => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  Status get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
   List<Community> get communityList => throw _privateConstructorUsedError;
-  Status get getCommunityListStatus => throw _privateConstructorUsedError;
+  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddTicketStateCopyWith<AddTicketState> get copyWith =>
@@ -43,20 +43,20 @@ abstract class $AddTicketStateCopyWith<$Res> {
       _$AddTicketStateCopyWithImpl<$Res, AddTicketState>;
   @useResult
   $Res call(
-      {Status addTicketStatus,
+      {AppStatus addTicketStatus,
       String? addTicketError,
       List<Deal> deals,
-      Status getDealsStatus,
+      AppStatus getDealsStatus,
       List<Lead> leads,
-      Status getLeadsStatus,
+      AppStatus getLeadsStatus,
       List<Property> properties,
-      Status getPropertiesStatus,
+      AppStatus getPropertiesStatus,
       List<Department> departments,
-      Status getDepartmentsStatus,
+      AppStatus getDepartmentsStatus,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus});
+      AppStatus getCommunityListStatus});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class _$AddTicketStateCopyWithImpl<$Res, $Val extends AddTicketState>
       addTicketStatus: null == addTicketStatus
           ? _value.addTicketStatus
           : addTicketStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addTicketError: freezed == addTicketError
           ? _value.addTicketError
           : addTicketError // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ class _$AddTicketStateCopyWithImpl<$Res, $Val extends AddTicketState>
       getDealsStatus: null == getDealsStatus
           ? _value.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       leads: null == leads
           ? _value.leads
           : leads // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ class _$AddTicketStateCopyWithImpl<$Res, $Val extends AddTicketState>
       getLeadsStatus: null == getLeadsStatus
           ? _value.getLeadsStatus
           : getLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       properties: null == properties
           ? _value.properties
           : properties // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ class _$AddTicketStateCopyWithImpl<$Res, $Val extends AddTicketState>
       getPropertiesStatus: null == getPropertiesStatus
           ? _value.getPropertiesStatus
           : getPropertiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       departments: null == departments
           ? _value.departments
           : departments // ignore: cast_nullable_to_non_nullable
@@ -127,7 +127,7 @@ class _$AddTicketStateCopyWithImpl<$Res, $Val extends AddTicketState>
       getDepartmentsStatus: null == getDepartmentsStatus
           ? _value.getDepartmentsStatus
           : getDepartmentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyTypeList: null == propertyTypeList
           ? _value.propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ class _$AddTicketStateCopyWithImpl<$Res, $Val extends AddTicketState>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -143,7 +143,7 @@ class _$AddTicketStateCopyWithImpl<$Res, $Val extends AddTicketState>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
     ) as $Val);
   }
 }
@@ -157,20 +157,20 @@ abstract class _$$AddTicketStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Status addTicketStatus,
+      {AppStatus addTicketStatus,
       String? addTicketError,
       List<Deal> deals,
-      Status getDealsStatus,
+      AppStatus getDealsStatus,
       List<Lead> leads,
-      Status getLeadsStatus,
+      AppStatus getLeadsStatus,
       List<Property> properties,
-      Status getPropertiesStatus,
+      AppStatus getPropertiesStatus,
       List<Department> departments,
-      Status getDepartmentsStatus,
+      AppStatus getDepartmentsStatus,
       List<PropertyType> propertyTypeList,
-      Status getPropertyTypeListStatus,
+      AppStatus getPropertyTypeListStatus,
       List<Community> communityList,
-      Status getCommunityListStatus});
+      AppStatus getCommunityListStatus});
 }
 
 /// @nodoc
@@ -203,7 +203,7 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
       addTicketStatus: null == addTicketStatus
           ? _value.addTicketStatus
           : addTicketStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       addTicketError: freezed == addTicketError
           ? _value.addTicketError
           : addTicketError // ignore: cast_nullable_to_non_nullable
@@ -215,7 +215,7 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
       getDealsStatus: null == getDealsStatus
           ? _value.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       leads: null == leads
           ? _value._leads
           : leads // ignore: cast_nullable_to_non_nullable
@@ -223,7 +223,7 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
       getLeadsStatus: null == getLeadsStatus
           ? _value.getLeadsStatus
           : getLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       properties: null == properties
           ? _value._properties
           : properties // ignore: cast_nullable_to_non_nullable
@@ -231,7 +231,7 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
       getPropertiesStatus: null == getPropertiesStatus
           ? _value.getPropertiesStatus
           : getPropertiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       departments: null == departments
           ? _value._departments
           : departments // ignore: cast_nullable_to_non_nullable
@@ -239,7 +239,7 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
       getDepartmentsStatus: null == getDepartmentsStatus
           ? _value.getDepartmentsStatus
           : getDepartmentsStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       propertyTypeList: null == propertyTypeList
           ? _value._propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
@@ -247,7 +247,7 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
           ? _value.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       communityList: null == communityList
           ? _value._communityList
           : communityList // ignore: cast_nullable_to_non_nullable
@@ -255,7 +255,7 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
     ));
   }
 }
@@ -264,20 +264,20 @@ class __$$AddTicketStateImplCopyWithImpl<$Res>
 
 class _$AddTicketStateImpl implements _AddTicketState {
   const _$AddTicketStateImpl(
-      {this.addTicketStatus = Status.init,
+      {this.addTicketStatus = AppStatus.init,
       this.addTicketError,
       final List<Deal> deals = const [],
-      this.getDealsStatus = Status.init,
+      this.getDealsStatus = AppStatus.init,
       final List<Lead> leads = const [],
-      this.getLeadsStatus = Status.init,
+      this.getLeadsStatus = AppStatus.init,
       final List<Property> properties = const [],
-      this.getPropertiesStatus = Status.init,
+      this.getPropertiesStatus = AppStatus.init,
       final List<Department> departments = const [],
-      this.getDepartmentsStatus = Status.init,
+      this.getDepartmentsStatus = AppStatus.init,
       final List<PropertyType> propertyTypeList = const [],
-      this.getPropertyTypeListStatus = Status.init,
+      this.getPropertyTypeListStatus = AppStatus.init,
       final List<Community> communityList = const [],
-      this.getCommunityListStatus = Status.init})
+      this.getCommunityListStatus = AppStatus.init})
       : _deals = deals,
         _leads = leads,
         _properties = properties,
@@ -287,7 +287,7 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
   @override
   @JsonKey()
-  final Status addTicketStatus;
+  final AppStatus addTicketStatus;
   @override
   final String? addTicketError;
   final List<Deal> _deals;
@@ -301,7 +301,7 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
   @override
   @JsonKey()
-  final Status getDealsStatus;
+  final AppStatus getDealsStatus;
   final List<Lead> _leads;
   @override
   @JsonKey()
@@ -313,7 +313,7 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
   @override
   @JsonKey()
-  final Status getLeadsStatus;
+  final AppStatus getLeadsStatus;
   final List<Property> _properties;
   @override
   @JsonKey()
@@ -325,7 +325,7 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
   @override
   @JsonKey()
-  final Status getPropertiesStatus;
+  final AppStatus getPropertiesStatus;
   final List<Department> _departments;
   @override
   @JsonKey()
@@ -337,7 +337,7 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
   @override
   @JsonKey()
-  final Status getDepartmentsStatus;
+  final AppStatus getDepartmentsStatus;
   final List<PropertyType> _propertyTypeList;
   @override
   @JsonKey()
@@ -350,7 +350,7 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
   @override
   @JsonKey()
-  final Status getPropertyTypeListStatus;
+  final AppStatus getPropertyTypeListStatus;
   final List<Community> _communityList;
   @override
   @JsonKey()
@@ -362,7 +362,7 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
   @override
   @JsonKey()
-  final Status getCommunityListStatus;
+  final AppStatus getCommunityListStatus;
 
   @override
   String toString() {
@@ -431,49 +431,49 @@ class _$AddTicketStateImpl implements _AddTicketState {
 
 abstract class _AddTicketState implements AddTicketState {
   const factory _AddTicketState(
-      {final Status addTicketStatus,
+      {final AppStatus addTicketStatus,
       final String? addTicketError,
       final List<Deal> deals,
-      final Status getDealsStatus,
+      final AppStatus getDealsStatus,
       final List<Lead> leads,
-      final Status getLeadsStatus,
+      final AppStatus getLeadsStatus,
       final List<Property> properties,
-      final Status getPropertiesStatus,
+      final AppStatus getPropertiesStatus,
       final List<Department> departments,
-      final Status getDepartmentsStatus,
+      final AppStatus getDepartmentsStatus,
       final List<PropertyType> propertyTypeList,
-      final Status getPropertyTypeListStatus,
+      final AppStatus getPropertyTypeListStatus,
       final List<Community> communityList,
-      final Status getCommunityListStatus}) = _$AddTicketStateImpl;
+      final AppStatus getCommunityListStatus}) = _$AddTicketStateImpl;
 
   @override
-  Status get addTicketStatus;
+  AppStatus get addTicketStatus;
   @override
   String? get addTicketError;
   @override
   List<Deal> get deals;
   @override
-  Status get getDealsStatus;
+  AppStatus get getDealsStatus;
   @override
   List<Lead> get leads;
   @override
-  Status get getLeadsStatus;
+  AppStatus get getLeadsStatus;
   @override
   List<Property> get properties;
   @override
-  Status get getPropertiesStatus;
+  AppStatus get getPropertiesStatus;
   @override
   List<Department> get departments;
   @override
-  Status get getDepartmentsStatus;
+  AppStatus get getDepartmentsStatus;
   @override
   List<PropertyType> get propertyTypeList;
   @override
-  Status get getPropertyTypeListStatus;
+  AppStatus get getPropertyTypeListStatus;
   @override
   List<Community> get communityList;
   @override
-  Status get getCommunityListStatus;
+  AppStatus get getCommunityListStatus;
   @override
   @JsonKey(ignore: true)
   _$$AddTicketStateImplCopyWith<_$AddTicketStateImpl> get copyWith =>

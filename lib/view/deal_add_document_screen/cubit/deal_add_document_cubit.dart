@@ -24,12 +24,12 @@ class DealAddDocumentCubit extends Cubit<DealAddDocumentState> {
   Future<void> addDealDocuments(
       {required BuildContext context,
       required Map<String, dynamic> values}) async {
-    emit(state.copyWith(addDealDocumentsStatus: Status.loadingMore));
+    emit(state.copyWith(addDealDocumentsStatus: AppStatus.loadingMore));
     final result =
         await _dealsRepo.addDealDocuments(dealId: _dealId, values: values);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addDealDocumentsStatus: Status.success));
+        emit(state.copyWith(addDealDocumentsStatus: AppStatus.success));
         if (context.mounted) {
           showSnackbar(
               context, 'Documents Added Successfully', SnackBarType.success);
@@ -38,7 +38,7 @@ class DealAddDocumentCubit extends Cubit<DealAddDocumentState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            addDealDocumentsStatus: Status.failure,
+            addDealDocumentsStatus: AppStatus.failure,
             addDealDocumentsError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);

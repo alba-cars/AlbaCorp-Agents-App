@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/agent_repo.dart';
+import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/result.dart';
@@ -12,6 +13,7 @@ import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
+import '../../../model/lead_property_card_model.dart';
 import '../../../model/paginator.dart';
 import '../../../model/property_model.dart';
 import '../../../service_locator/injectable.dart';
@@ -21,21 +23,29 @@ part 'task_detail_cubit.freezed.dart';
 
 @injectable
 class TaskDetailCubit extends Cubit<TaskDetailState> {
-  TaskDetailCubit(this._activityRepo, @factoryParam String taskId,
-      @factoryParam Activity? activity, this._leadRepo, this._agentRepo)
+  TaskDetailCubit(
+      this._activityRepo,
+      @factoryParam String taskId,
+      @factoryParam Activity? activity,
+      this._leadRepo,
+      this._agentRepo,
+      this._explorerRepo)
       : super(TaskDetailState(
-          taskId: taskId,
+          taskId: activity?.id ?? taskId,
           task: activity,
         )) {
     getSortedActivities();
+    getLeadActivities();
+    getExplorerList();
   }
 
   final ActivityRepo _activityRepo;
   final LeadRepo _leadRepo;
   final AgentRepo _agentRepo;
+  final ExplorerRepo _explorerRepo;
 
   Future<void> getTask() async {
-    emit(state.copyWith(getTaskStatus: Status.loading));
+    emit(state.copyWith(getTaskStatus: AppStatus.loading));
     // final result = await _activityRepo();
     // switch (result) {
     //   case (Success s):
@@ -49,12 +59,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       {required BuildContext context,
       String? description,
       required bool addFollowUp,
+      bool refresh = false,
+      bool completed = true,
       Map<String, dynamic>? values}) async {
     final result = await _activityRepo.updateActivity(
-        activityId: state.task!.id, notes: description);
+        activityId: state.task!.id, notes: description, completed: completed);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(updateTaskStatus: Status.success));
+        emit(state.copyWith(updateTaskStatus: AppStatus.success));
         if (addFollowUp) {
           final type = values?['type'];
           final propertyId = values?['property'];
@@ -74,9 +86,17 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         if (context.mounted) {
           Navigator.of(context).pop(true);
         }
+        if (refresh) {
+          final activity = state.task?.copyWith(notes: description);
+          final activities = state.activities
+              .map((e) =>
+                  e.id == state.taskId ? e.copyWith(notes: description) : e)
+              .toList();
+          emit(state.copyWith(task: activity, sortedActivity: activities));
+        }
       case (Error e):
         emit(state.copyWith(
-            updateTaskError: e.exception, updateTaskStatus: Status.failure));
+            updateTaskError: e.exception, updateTaskStatus: AppStatus.failure));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
@@ -174,19 +194,19 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   }
 
   Future<void> getSortedActivities({bool refresh = false}) async {
-    if (state.getSortedActivitiesStatus == Status.loading ||
-        state.getSortedActivitiesStatus == Status.loadingMore) {
+    if (state.getSortedActivitiesStatus == AppStatus.loading ||
+        state.getSortedActivitiesStatus == AppStatus.loadingMore) {
       return;
     }
     if (refresh || state.sortedActivityPaginator == null) {
       emit(state.copyWith(
           sortedActivityPaginator: null,
-          getSortedActivitiesStatus: Status.loading,
+          getSortedActivitiesStatus: AppStatus.loading,
           sortedActivity: [state.task!],
           getSortedActivitiesError: null));
     } else {
       emit(state.copyWith(
-          getSortedActivitiesStatus: Status.loadingMore,
+          getSortedActivitiesStatus: AppStatus.loadingMore,
           getSortedActivitiesError: null));
     }
 
@@ -199,14 +219,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           ..insert(0, state.task!);
         emit(state.copyWith(
             sortedActivity: list,
-            getSortedActivitiesStatus: Status.success,
+            getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
 
         break;
       case (Error e):
         emit(state.copyWith(
             getSortedActivitiesError: e.exception,
-            getSortedActivitiesStatus: Status.failure));
+            getSortedActivitiesStatus: AppStatus.failure));
     }
   }
 
@@ -226,11 +246,11 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         propertyId: propertyId);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addTaskStatus: Status.success));
+        emit(state.copyWith(addTaskStatus: AppStatus.success));
         return true;
       case (Error e):
         emit(state.copyWith(
-            addTaskError: e.exception, addTaskStatus: Status.failure));
+            addTaskError: e.exception, addTaskStatus: AppStatus.failure));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
@@ -248,5 +268,70 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       case (Error e):
         return [];
     }
+  }
+
+  Future<void> getLeadActivities() async {
+    if (state.task == null) {
+      return;
+    }
+    emit(state.copyWith(getActivitiesStatus: AppStatus.loading));
+    final result =
+        await _leadRepo.getLeadActivities(leadId: state.task!.lead!.id);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            getActivitiesStatus: AppStatus.success, activities: s.value));
+
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getActivitiesStatus: AppStatus.failure,
+            getActivitiesError: e.exception));
+
+        break;
+    }
+  }
+
+  Future<void> getExplorerList({
+    bool refresh = false,
+  }) async {
+    if (state.task == null) {
+      return;
+    }
+    if (refresh || state.propertyCardPaginator == null) {
+      emit(state.copyWith(
+          getPropertyCardsListStatus: AppStatus.loading,
+          propertyCardsList: []));
+    } else {
+      if (state.getPropertyCardsListStatus == AppStatus.loadingMore) {
+        return;
+      }
+      emit(state.copyWith(getPropertyCardsListStatus: AppStatus.loadingMore));
+    }
+
+    final result =
+        await _explorerRepo.getLeadPropertyCards(leadId: state.task!.lead!.id);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            propertyCardsList: s.value,
+            getPropertyCardsListStatus: AppStatus.success,
+            propertyCardPaginator: s.paginator));
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getPropertyCardsListStatus: AppStatus.failure,
+            getPropertyCardsListError: e.exception));
+    }
+  }
+
+  void setCurrentTask(int taskIndex) {
+    print(taskIndex);
+    if (taskIndex == state.activities.length) return;
+    emit(state.copyWith(
+        task: state.sortedActivity[taskIndex],
+        taskId: state.sortedActivity[taskIndex].id));
+    getLeadActivities();
+    getExplorerList();
   }
 }

@@ -8,7 +8,7 @@ part of 'building_model.dart';
 
 _$BuildingImpl _$$BuildingImplFromJson(Map<String, dynamic> json) =>
     _$BuildingImpl(
-      id: json['id'] as String,
+      id: readId(json, 'id') as String,
       name: json['name'] as String,
       buildingNumber: json['buildingNumber'] as String?,
       communityId: json['communityId'] as String?,

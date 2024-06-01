@@ -17,17 +17,27 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TaskDetailState {
   String get taskId => throw _privateConstructorUsedError;
-  Status get getTaskStatus => throw _privateConstructorUsedError;
+  AppStatus get getTaskStatus => throw _privateConstructorUsedError;
   String? get getTaskError => throw _privateConstructorUsedError;
   Activity? get task => throw _privateConstructorUsedError;
-  Status get updateTaskStatus => throw _privateConstructorUsedError;
+  AppStatus get updateTaskStatus => throw _privateConstructorUsedError;
   String? get updateTaskError => throw _privateConstructorUsedError;
   List<Activity> get sortedActivity => throw _privateConstructorUsedError;
-  Status? get getSortedActivitiesStatus => throw _privateConstructorUsedError;
+  AppStatus? get getSortedActivitiesStatus =>
+      throw _privateConstructorUsedError;
   String? get getSortedActivitiesError => throw _privateConstructorUsedError;
   Paginator? get sortedActivityPaginator => throw _privateConstructorUsedError;
-  Status? get addTaskStatus => throw _privateConstructorUsedError;
+  AppStatus? get addTaskStatus => throw _privateConstructorUsedError;
   String? get addTaskError => throw _privateConstructorUsedError;
+  List<Activity> get activities => throw _privateConstructorUsedError;
+  AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
+  String? get getActivitiesError => throw _privateConstructorUsedError;
+  AppStatus get getPropertyCardsListStatus =>
+      throw _privateConstructorUsedError;
+  List<LeadPropertyCardModel> get propertyCardsList =>
+      throw _privateConstructorUsedError;
+  String? get getPropertyCardsListError => throw _privateConstructorUsedError;
+  Paginator? get propertyCardPaginator => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskDetailStateCopyWith<TaskDetailState> get copyWith =>
@@ -42,20 +52,28 @@ abstract class $TaskDetailStateCopyWith<$Res> {
   @useResult
   $Res call(
       {String taskId,
-      Status getTaskStatus,
+      AppStatus getTaskStatus,
       String? getTaskError,
       Activity? task,
-      Status updateTaskStatus,
+      AppStatus updateTaskStatus,
       String? updateTaskError,
       List<Activity> sortedActivity,
-      Status? getSortedActivitiesStatus,
+      AppStatus? getSortedActivitiesStatus,
       String? getSortedActivitiesError,
       Paginator? sortedActivityPaginator,
-      Status? addTaskStatus,
-      String? addTaskError});
+      AppStatus? addTaskStatus,
+      String? addTaskError,
+      List<Activity> activities,
+      AppStatus getActivitiesStatus,
+      String? getActivitiesError,
+      AppStatus getPropertyCardsListStatus,
+      List<LeadPropertyCardModel> propertyCardsList,
+      String? getPropertyCardsListError,
+      Paginator? propertyCardPaginator});
 
   $ActivityCopyWith<$Res>? get task;
   $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator;
 }
 
 /// @nodoc
@@ -83,6 +101,13 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
     Object? sortedActivityPaginator = freezed,
     Object? addTaskStatus = freezed,
     Object? addTaskError = freezed,
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = freezed,
+    Object? getPropertyCardsListStatus = null,
+    Object? propertyCardsList = null,
+    Object? getPropertyCardsListError = freezed,
+    Object? propertyCardPaginator = freezed,
   }) {
     return _then(_value.copyWith(
       taskId: null == taskId
@@ -92,7 +117,7 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
       getTaskStatus: null == getTaskStatus
           ? _value.getTaskStatus
           : getTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getTaskError: freezed == getTaskError
           ? _value.getTaskError
           : getTaskError // ignore: cast_nullable_to_non_nullable
@@ -104,7 +129,7 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
       updateTaskStatus: null == updateTaskStatus
           ? _value.updateTaskStatus
           : updateTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updateTaskError: freezed == updateTaskError
           ? _value.updateTaskError
           : updateTaskError // ignore: cast_nullable_to_non_nullable
@@ -116,7 +141,7 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
       getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
           ? _value.getSortedActivitiesStatus
           : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status?,
+              as AppStatus?,
       getSortedActivitiesError: freezed == getSortedActivitiesError
           ? _value.getSortedActivitiesError
           : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -128,11 +153,39 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
       addTaskStatus: freezed == addTaskStatus
           ? _value.addTaskStatus
           : addTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status?,
+              as AppStatus?,
       addTaskError: freezed == addTaskError
           ? _value.addTaskError
           : addTaskError // ignore: cast_nullable_to_non_nullable
               as String?,
+      activities: null == activities
+          ? _value.activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _value.getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getActivitiesError: freezed == getActivitiesError
+          ? _value.getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      getPropertyCardsListStatus: null == getPropertyCardsListStatus
+          ? _value.getPropertyCardsListStatus
+          : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      propertyCardsList: null == propertyCardsList
+          ? _value.propertyCardsList
+          : propertyCardsList // ignore: cast_nullable_to_non_nullable
+              as List<LeadPropertyCardModel>,
+      getPropertyCardsListError: freezed == getPropertyCardsListError
+          ? _value.getPropertyCardsListError
+          : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyCardPaginator: freezed == propertyCardPaginator
+          ? _value.propertyCardPaginator
+          : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
     ) as $Val);
   }
 
@@ -159,6 +212,18 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
       return _then(_value.copyWith(sortedActivityPaginator: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator {
+    if (_value.propertyCardPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.propertyCardPaginator!, (value) {
+      return _then(_value.copyWith(propertyCardPaginator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -171,22 +236,31 @@ abstract class _$$TaskDetailStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {String taskId,
-      Status getTaskStatus,
+      AppStatus getTaskStatus,
       String? getTaskError,
       Activity? task,
-      Status updateTaskStatus,
+      AppStatus updateTaskStatus,
       String? updateTaskError,
       List<Activity> sortedActivity,
-      Status? getSortedActivitiesStatus,
+      AppStatus? getSortedActivitiesStatus,
       String? getSortedActivitiesError,
       Paginator? sortedActivityPaginator,
-      Status? addTaskStatus,
-      String? addTaskError});
+      AppStatus? addTaskStatus,
+      String? addTaskError,
+      List<Activity> activities,
+      AppStatus getActivitiesStatus,
+      String? getActivitiesError,
+      AppStatus getPropertyCardsListStatus,
+      List<LeadPropertyCardModel> propertyCardsList,
+      String? getPropertyCardsListError,
+      Paginator? propertyCardPaginator});
 
   @override
   $ActivityCopyWith<$Res>? get task;
   @override
   $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator;
 }
 
 /// @nodoc
@@ -212,6 +286,13 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
     Object? sortedActivityPaginator = freezed,
     Object? addTaskStatus = freezed,
     Object? addTaskError = freezed,
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = freezed,
+    Object? getPropertyCardsListStatus = null,
+    Object? propertyCardsList = null,
+    Object? getPropertyCardsListError = freezed,
+    Object? propertyCardPaginator = freezed,
   }) {
     return _then(_$TaskDetailStateImpl(
       taskId: null == taskId
@@ -221,7 +302,7 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
       getTaskStatus: null == getTaskStatus
           ? _value.getTaskStatus
           : getTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       getTaskError: freezed == getTaskError
           ? _value.getTaskError
           : getTaskError // ignore: cast_nullable_to_non_nullable
@@ -233,7 +314,7 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
       updateTaskStatus: null == updateTaskStatus
           ? _value.updateTaskStatus
           : updateTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as AppStatus,
       updateTaskError: freezed == updateTaskError
           ? _value.updateTaskError
           : updateTaskError // ignore: cast_nullable_to_non_nullable
@@ -245,7 +326,7 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
       getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
           ? _value.getSortedActivitiesStatus
           : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Status?,
+              as AppStatus?,
       getSortedActivitiesError: freezed == getSortedActivitiesError
           ? _value.getSortedActivitiesError
           : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
@@ -257,11 +338,39 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
       addTaskStatus: freezed == addTaskStatus
           ? _value.addTaskStatus
           : addTaskStatus // ignore: cast_nullable_to_non_nullable
-              as Status?,
+              as AppStatus?,
       addTaskError: freezed == addTaskError
           ? _value.addTaskError
           : addTaskError // ignore: cast_nullable_to_non_nullable
               as String?,
+      activities: null == activities
+          ? _value._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _value.getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getActivitiesError: freezed == getActivitiesError
+          ? _value.getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      getPropertyCardsListStatus: null == getPropertyCardsListStatus
+          ? _value.getPropertyCardsListStatus
+          : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      propertyCardsList: null == propertyCardsList
+          ? _value._propertyCardsList
+          : propertyCardsList // ignore: cast_nullable_to_non_nullable
+              as List<LeadPropertyCardModel>,
+      getPropertyCardsListError: freezed == getPropertyCardsListError
+          ? _value.getPropertyCardsListError
+          : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyCardPaginator: freezed == propertyCardPaginator
+          ? _value.propertyCardPaginator
+          : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
     ));
   }
 }
@@ -271,31 +380,40 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
 class _$TaskDetailStateImpl implements _TaskDetailState {
   const _$TaskDetailStateImpl(
       {required this.taskId,
-      this.getTaskStatus = Status.init,
+      this.getTaskStatus = AppStatus.init,
       this.getTaskError,
       this.task,
-      this.updateTaskStatus = Status.init,
+      this.updateTaskStatus = AppStatus.init,
       this.updateTaskError,
       final List<Activity> sortedActivity = const [],
-      this.getSortedActivitiesStatus = Status.init,
+      this.getSortedActivitiesStatus = AppStatus.init,
       this.getSortedActivitiesError,
       this.sortedActivityPaginator,
-      this.addTaskStatus = Status.init,
-      this.addTaskError})
-      : _sortedActivity = sortedActivity;
+      this.addTaskStatus = AppStatus.init,
+      this.addTaskError,
+      final List<Activity> activities = const [],
+      this.getActivitiesStatus = AppStatus.init,
+      this.getActivitiesError,
+      this.getPropertyCardsListStatus = AppStatus.init,
+      final List<LeadPropertyCardModel> propertyCardsList = const [],
+      this.getPropertyCardsListError,
+      this.propertyCardPaginator})
+      : _sortedActivity = sortedActivity,
+        _activities = activities,
+        _propertyCardsList = propertyCardsList;
 
   @override
   final String taskId;
   @override
   @JsonKey()
-  final Status getTaskStatus;
+  final AppStatus getTaskStatus;
   @override
   final String? getTaskError;
   @override
   final Activity? task;
   @override
   @JsonKey()
-  final Status updateTaskStatus;
+  final AppStatus updateTaskStatus;
   @override
   final String? updateTaskError;
   final List<Activity> _sortedActivity;
@@ -309,20 +427,51 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
 
   @override
   @JsonKey()
-  final Status? getSortedActivitiesStatus;
+  final AppStatus? getSortedActivitiesStatus;
   @override
   final String? getSortedActivitiesError;
   @override
   final Paginator? sortedActivityPaginator;
   @override
   @JsonKey()
-  final Status? addTaskStatus;
+  final AppStatus? addTaskStatus;
   @override
   final String? addTaskError;
+  final List<Activity> _activities;
+  @override
+  @JsonKey()
+  List<Activity> get activities {
+    if (_activities is EqualUnmodifiableListView) return _activities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activities);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getActivitiesStatus;
+  @override
+  final String? getActivitiesError;
+  @override
+  @JsonKey()
+  final AppStatus getPropertyCardsListStatus;
+  final List<LeadPropertyCardModel> _propertyCardsList;
+  @override
+  @JsonKey()
+  List<LeadPropertyCardModel> get propertyCardsList {
+    if (_propertyCardsList is EqualUnmodifiableListView)
+      return _propertyCardsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_propertyCardsList);
+  }
+
+  @override
+  final String? getPropertyCardsListError;
+  @override
+  final Paginator? propertyCardPaginator;
 
   @override
   String toString() {
-    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError)';
+    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator)';
   }
 
   @override
@@ -342,36 +491,58 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
                 other.updateTaskError == updateTaskError) &&
             const DeepCollectionEquality()
                 .equals(other._sortedActivity, _sortedActivity) &&
-            (identical(other.getSortedActivitiesStatus,
-                    getSortedActivitiesStatus) ||
+            (identical(other.getSortedActivitiesStatus, getSortedActivitiesStatus) ||
                 other.getSortedActivitiesStatus == getSortedActivitiesStatus) &&
-            (identical(
-                    other.getSortedActivitiesError, getSortedActivitiesError) ||
+            (identical(other.getSortedActivitiesError, getSortedActivitiesError) ||
                 other.getSortedActivitiesError == getSortedActivitiesError) &&
-            (identical(
-                    other.sortedActivityPaginator, sortedActivityPaginator) ||
+            (identical(other.sortedActivityPaginator, sortedActivityPaginator) ||
                 other.sortedActivityPaginator == sortedActivityPaginator) &&
             (identical(other.addTaskStatus, addTaskStatus) ||
                 other.addTaskStatus == addTaskStatus) &&
             (identical(other.addTaskError, addTaskError) ||
-                other.addTaskError == addTaskError));
+                other.addTaskError == addTaskError) &&
+            const DeepCollectionEquality()
+                .equals(other._activities, _activities) &&
+            (identical(other.getActivitiesStatus, getActivitiesStatus) ||
+                other.getActivitiesStatus == getActivitiesStatus) &&
+            (identical(other.getActivitiesError, getActivitiesError) ||
+                other.getActivitiesError == getActivitiesError) &&
+            (identical(other.getPropertyCardsListStatus,
+                    getPropertyCardsListStatus) ||
+                other.getPropertyCardsListStatus ==
+                    getPropertyCardsListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._propertyCardsList, _propertyCardsList) &&
+            (identical(other.getPropertyCardsListError,
+                    getPropertyCardsListError) ||
+                other.getPropertyCardsListError == getPropertyCardsListError) &&
+            (identical(other.propertyCardPaginator, propertyCardPaginator) ||
+                other.propertyCardPaginator == propertyCardPaginator));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      taskId,
-      getTaskStatus,
-      getTaskError,
-      task,
-      updateTaskStatus,
-      updateTaskError,
-      const DeepCollectionEquality().hash(_sortedActivity),
-      getSortedActivitiesStatus,
-      getSortedActivitiesError,
-      sortedActivityPaginator,
-      addTaskStatus,
-      addTaskError);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        taskId,
+        getTaskStatus,
+        getTaskError,
+        task,
+        updateTaskStatus,
+        updateTaskError,
+        const DeepCollectionEquality().hash(_sortedActivity),
+        getSortedActivitiesStatus,
+        getSortedActivitiesError,
+        sortedActivityPaginator,
+        addTaskStatus,
+        addTaskError,
+        const DeepCollectionEquality().hash(_activities),
+        getActivitiesStatus,
+        getActivitiesError,
+        getPropertyCardsListStatus,
+        const DeepCollectionEquality().hash(_propertyCardsList),
+        getPropertyCardsListError,
+        propertyCardPaginator
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -384,42 +555,63 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
 abstract class _TaskDetailState implements TaskDetailState {
   const factory _TaskDetailState(
       {required final String taskId,
-      final Status getTaskStatus,
+      final AppStatus getTaskStatus,
       final String? getTaskError,
       final Activity? task,
-      final Status updateTaskStatus,
+      final AppStatus updateTaskStatus,
       final String? updateTaskError,
       final List<Activity> sortedActivity,
-      final Status? getSortedActivitiesStatus,
+      final AppStatus? getSortedActivitiesStatus,
       final String? getSortedActivitiesError,
       final Paginator? sortedActivityPaginator,
-      final Status? addTaskStatus,
-      final String? addTaskError}) = _$TaskDetailStateImpl;
+      final AppStatus? addTaskStatus,
+      final String? addTaskError,
+      final List<Activity> activities,
+      final AppStatus getActivitiesStatus,
+      final String? getActivitiesError,
+      final AppStatus getPropertyCardsListStatus,
+      final List<LeadPropertyCardModel> propertyCardsList,
+      final String? getPropertyCardsListError,
+      final Paginator? propertyCardPaginator}) = _$TaskDetailStateImpl;
 
   @override
   String get taskId;
   @override
-  Status get getTaskStatus;
+  AppStatus get getTaskStatus;
   @override
   String? get getTaskError;
   @override
   Activity? get task;
   @override
-  Status get updateTaskStatus;
+  AppStatus get updateTaskStatus;
   @override
   String? get updateTaskError;
   @override
   List<Activity> get sortedActivity;
   @override
-  Status? get getSortedActivitiesStatus;
+  AppStatus? get getSortedActivitiesStatus;
   @override
   String? get getSortedActivitiesError;
   @override
   Paginator? get sortedActivityPaginator;
   @override
-  Status? get addTaskStatus;
+  AppStatus? get addTaskStatus;
   @override
   String? get addTaskError;
+  @override
+  List<Activity> get activities;
+  @override
+  AppStatus get getActivitiesStatus;
+  @override
+  String? get getActivitiesError;
+  @override
+  AppStatus get getPropertyCardsListStatus;
+  @override
+  List<LeadPropertyCardModel> get propertyCardsList;
+  @override
+  String? get getPropertyCardsListError;
+  @override
+  Paginator? get propertyCardPaginator;
   @override
   @JsonKey(ignore: true)
   _$$TaskDetailStateImplCopyWith<_$TaskDetailStateImpl> get copyWith =>

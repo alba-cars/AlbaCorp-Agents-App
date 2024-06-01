@@ -17,7 +17,7 @@ class PropertyCard with _$PropertyCard {
     @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
     Building? building,
     @JsonKey(name: 'community') Community? community,
-    String? beds,
+    @JsonKey(readValue: readBeds) String? beds,
     int? baths,
     double? size,
     @JsonKey(name: 'propertyType') String? propertyType,
@@ -66,4 +66,8 @@ class PropertyCardAgent with _$PropertyCardAgent {
 
   factory PropertyCardAgent.fromJson(Map<String, dynamic> json) =>
       _$PropertyCardAgentFromJson(json);
+}
+
+readBeds(Map<dynamic, dynamic> json, String val) {
+  return json[val]?.toString();
 }

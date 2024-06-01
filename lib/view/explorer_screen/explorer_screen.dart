@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -122,12 +123,15 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: ['Pool', 'Checked Out'],
+                tabs: ['Available', 'Assigned to Me'],
                 onTap: (index) {
                   context.read<ExplorerScreenCubit>().setSelectedTab(index);
                 },
               ),
             )),
+            SliverVerticalSmallGap(
+              height: 4,
+            ),
           ];
         },
         body: TabBarView(
@@ -206,7 +210,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
           child: AppSearchBar(
             onChanged: (val) {
               context.read<ExplorerScreenCubit>().searchExplorer(val);
@@ -220,14 +224,36 @@ class _ExplorerTabState extends State<ExplorerTab> {
           ),
         ),
         Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Container(
+                  child: Row(
+                    children: [
+                      Text('Show only available'),
+                      BlocSelector<ExplorerScreenCubit, ExplorerScreenState,
+                          bool>(
+                        selector: (state) {
+                          return state.showOnlyAvailable;
+                        },
+                        builder: (context, showOnlyAvailable) {
+                          return Switch.adaptive(
+                              value: showOnlyAvailable,
+                              onChanged: (e) {
+                                context
+                                    .read<ExplorerScreenCubit>()
+                                    .setShowOnlyAvailable(e);
+                              });
+                        },
+                      )
+                    ],
+                  ),
+                ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green[700],
+                      side: BorderSide.none,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       maximumSize: Size(150, 34),
                       minimumSize: Size(150, 34),
@@ -313,7 +339,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                             );
                           });
                     },
-                    child: Text('Random Assign'))
+                    child: Text('Get Bulk Leads'))
               ],
             )),
         BlocBuilder<ExplorerScreenCubit, ExplorerScreenState>(
@@ -341,7 +367,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                   Text(
                       "${state.selectedPropertyCards.length.toString()} Selected"),
                   Spacer(),
-                  state.checkOutLeadStatus == Status.loading
+                  state.checkOutLeadStatus == AppStatus.loading
                       ? SizedBox.square(
                           dimension: 24, child: CircularProgressIndicator())
                       : TextButton(
@@ -363,11 +389,11 @@ class _ExplorerTabState extends State<ExplorerTab> {
             //         current.getExplorerListStatus ||
             //     previous.explorerList != current.explorerList,
             builder: (context, state) {
-              if (state.getExplorerListStatus == Status.loading) {
+              if (state.getExplorerListStatus == AppStatus.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state.getExplorerListStatus == Status.success &&
+              } else if (state.getExplorerListStatus == AppStatus.success &&
                   state.explorerList.length == 0) {
                 return Center(
                   child: Text('No Property Card Found'),
@@ -375,7 +401,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
               }
               return NotificationListener<ScrollNotification>(
                   onNotification: (scrollInfo) {
-                    if (state.getExplorerListStatus != Status.loadingMore &&
+                    if (state.getExplorerListStatus != AppStatus.loadingMore &&
                         state.explorerPaginator?.hasNextPage == true &&
                         scrollInfo.metrics.pixels >=
                             0.9 * scrollInfo.metrics.maxScrollExtent) {
@@ -392,187 +418,224 @@ class _ExplorerTabState extends State<ExplorerTab> {
                           .read<ExplorerScreenCubit>()
                           .getExplorerList(refresh: true);
                     },
-                    child: ListView.separated(
-                        physics: NeverScrollableScrollPhysics(),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        itemBuilder: (context, index) {
-                          if (index == state.explorerList.length) {
-                            return SizedBox(
-                              height: 50,
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          }
-                          final propertyCard = state.explorerList[index];
-                          return InkWell(
-                            onTap: () {
-                              if (state.selectModeEnabled) {
+                    child: ScrollShadow(
+                      color: Colors.grey[300]!,
+                      size: 6,
+                      child: ListView.separated(
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          itemBuilder: (context, index) {
+                            if (index == state.explorerList.length) {
+                              return SizedBox(
+                                height: 50,
+                                child:
+                                    Center(child: CircularProgressIndicator()),
+                              );
+                            }
+                            final propertyCard = state.explorerList[index];
+                            return InkWell(
+                              onTap: () {
+                                if (state.selectModeEnabled) {
+                                  context
+                                      .read<ExplorerScreenCubit>()
+                                      .addToSelection(context, propertyCard);
+                                } else {
+                                  context.pushNamed(
+                                      PropertyCardDetailsScreen.routeName,
+                                      pathParameters: {'id': propertyCard.id});
+                                }
+                              },
+                              onLongPress: () {
                                 context
                                     .read<ExplorerScreenCubit>()
-                                    .addToSelection(context, propertyCard);
-                              } else {
-                                context.pushNamed(
-                                    PropertyCardDetailsScreen.routeName,
-                                    pathParameters: {'id': propertyCard.id});
-                              }
-                            },
-                            onLongPress: () {
-                              context
-                                  .read<ExplorerScreenCubit>()
-                                  .setSelectionModeEnabled(
-                                      context, propertyCard);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Colors.white,
-                                  border: state.selectModeEnabled &&
-                                          state.selectedPropertyCards
-                                              .contains(propertyCard.id)
-                                      ? Border.all(
+                                    .setSelectionModeEnabled(
+                                        context, propertyCard);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 8),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    color: Colors.white,
+                                    border: state.selectModeEnabled &&
+                                            state.selectedPropertyCards
+                                                .contains(propertyCard.id)
+                                        ? Border.all(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            width: 2)
+                                        : null,
+                                    boxShadow: state.selectModeEnabled &&
+                                            state.selectedPropertyCards
+                                                .contains(propertyCard.id)
+                                        ? [
+                                            BoxShadow(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary
+                                                    .withOpacity(.5),
+                                                offset: Offset(-4, 5),
+                                                blurRadius: 19)
+                                          ]
+                                        : [
+                                            BoxShadow(
+                                                color: shadowColor,
+                                                offset: Offset(-4, 5),
+                                                blurRadius: 11)
+                                          ]),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        LabelText(
+                                          text: propertyCard.referenceNumber ??
+                                              '',
                                           color: Theme.of(context)
                                               .colorScheme
                                               .primary,
-                                          width: 3)
-                                      : null,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: shadowColor,
-                                        offset: Offset(-4, 5),
-                                        blurRadius: 11)
-                                  ]),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      LabelText(
-                                        text:
-                                            propertyCard.referenceNumber ?? '',
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 4.h, vertical: 1.h),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.blueGrey),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            color: Colors.blueGrey[100]),
-                                        child: SmallText(
-                                            text: propertyCard
-                                                    .status?.titleCase ??
-                                                ''),
-                                      ),
-                                    ],
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Property Type',
-                                    valueOne: propertyCard.propertyType,
-                                    labelTwo: 'Community Name',
-                                    valueTwo: propertyCard.community?.community,
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Building Name',
-                                    valueOne:
-                                        propertyCard.building?.name ?? 'N/A',
-                                    labelTwo: 'Beds',
-                                    valueTwo: propertyCard.beds?.toString(),
-                                  ),
-                                  if (propertyCard.currentAgent is Map)
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 2),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primaryContainer
-                                              .withOpacity(.5)),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            height: 40,
-                                            width: 40,
-                                            clipBehavior: Clip.hardEdge,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle),
-                                            child: S3Image(
-                                              url: propertyCard.currentAgent[
-                                                      "userId"]["photo"] ??
-                                                  '',
-                                            ),
-                                          ),
-                                          HorizontalSmallGap(),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SmallText(text: 'Agent'),
-                                              LabelText(
-                                                  text:
-                                                      "${propertyCard.currentAgent["userId"]["first_name"] ?? ''} ${propertyCard.currentAgent["userId"]["last_name"] ?? ''}"),
-                                            ],
-                                          ),
-                                          HorizontalSmallGap(),
-                                        ],
-                                      ),
-                                    ),
-                                  if (propertyCard.availableForCheckout &&
-                                      propertyCard.currentAgent == null)
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        AppPrimaryButton(
-                                            text: 'Check Out',
-                                            onTap: () async {
-                                              await context
-                                                  .read<ExplorerScreenCubit>()
-                                                  .checkOutLead(
-                                                      context: context,
-                                                      card: propertyCard);
-                                            })
-                                      ],
-                                    ),
-                                  if (!propertyCard.availableForCheckout &&
-                                      propertyCard.currentAgent == null)
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
+                                        ),
                                         Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 4.h, vertical: 1.h),
                                           decoration: BoxDecoration(
                                               border: Border.all(
-                                                  color: Colors.red[800]!),
+                                                  color: Colors.blueGrey),
                                               borderRadius:
                                                   BorderRadius.circular(4),
-                                              color: Colors.red[100]),
-                                          child:
-                                              SmallText(text: 'Not Available'),
-                                        )
+                                              color: Colors.blueGrey[100]),
+                                          child: SmallText(
+                                              text: propertyCard
+                                                      .status?.titleCase ??
+                                                  ''),
+                                        ),
                                       ],
                                     ),
-                                ],
+                                    InfoLabelValue(
+                                      labelOne: 'Community',
+                                      valueOne: propertyCard
+                                          .community?.community
+                                          .trim(),
+                                      labelTwo: 'Building',
+                                      valueTwo:
+                                          propertyCard.building?.name.trim() ??
+                                              'N/A',
+                                    ),
+                                    InfoLabelValue(
+                                      labelOne: 'Property Type',
+                                      valueOne:
+                                          propertyCard.propertyType?.trim(),
+                                      labelTwo: 'Beds',
+                                      valueTwo: propertyCard.beds ?? 'N/A',
+                                    ),
+                                    InfoLabelValue(
+                                      labelOne: 'purpose',
+                                      valueOne: propertyCard.purpose,
+                                      labelTwo: 'Size',
+                                      valueTwo: propertyCard.size?.toString() ??
+                                          'N/A',
+                                    ),
+                                    if (propertyCard.currentAgent is Map)
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 2),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primaryContainer
+                                                .withOpacity(.5)),
+                                        child: Row(
+                                          children: [
+                                            // HorizontalSmallGap(),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SmallText(text: 'Agent'),
+                                                LabelText(
+                                                    text:
+                                                        "${propertyCard.currentAgent["userId"]["first_name"] ?? ''} ${propertyCard.currentAgent["userId"]["last_name"] ?? ''}"),
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            HorizontalSmallGap(),
+                                            Container(
+                                              height: 40,
+                                              width: 40,
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle),
+                                              child: S3Image(
+                                                url: propertyCard.currentAgent[
+                                                        "userId"]["photo"] ??
+                                                    '',
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    if (propertyCard.availableForCheckout &&
+                                        propertyCard.currentAgent == null)
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          AppPrimaryButton(
+                                              backgroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .primaryContainer,
+                                              foregroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              text: 'Assign to me',
+                                              onTap: () async {
+                                                await context
+                                                    .read<ExplorerScreenCubit>()
+                                                    .checkOutLead(
+                                                        context: context,
+                                                        card: propertyCard);
+                                              })
+                                        ],
+                                      ),
+                                    if (!propertyCard.availableForCheckout &&
+                                        propertyCard.currentAgent == null)
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.h, vertical: 1.h),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.red[800]!),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color: Colors.red[100]),
+                                            child: SmallText(
+                                                text: 'Not Available'),
+                                          )
+                                        ],
+                                      ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: 8,
-                            ),
-                        itemCount:
-                            state.getExplorerListStatus == Status.loadingMore
-                                ? state.explorerList.length + 1
-                                : state.explorerList.length),
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: 8,
+                              ),
+                          itemCount: state.getExplorerListStatus ==
+                                  AppStatus.loadingMore
+                              ? state.explorerList.length + 1
+                              : state.explorerList.length),
+                    ),
                   ));
             },
           ),
@@ -671,12 +734,12 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
                 previous.checkedOutExplorerList !=
                     current.checkedOutExplorerList,
             builder: (context, state) {
-              if (state.getCheckedOutExplorerListStatus == Status.loading) {
+              if (state.getCheckedOutExplorerListStatus == AppStatus.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (state.getCheckedOutExplorerListStatus ==
-                      Status.success &&
+                      AppStatus.success &&
                   state.explorerList.length == 0) {
                 return Center(
                   child: Text('No Property Card Found'),
@@ -685,7 +748,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
               return NotificationListener<ScrollNotification>(
                   onNotification: (scrollInfo) {
                     if (state.getCheckedOutExplorerListStatus !=
-                            Status.loadingMore &&
+                            AppStatus.loadingMore &&
                         state.checkedOutPaginator?.hasNextPage == true &&
                         scrollInfo.metrics.pixels >=
                             0.9 * scrollInfo.metrics.maxScrollExtent) {
@@ -782,7 +845,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       AppPrimaryButton(
-                                          text: 'Check In',
+                                          text: 'Return Lead',
                                           onTap: () async {
                                             await context
                                                 .read<ExplorerScreenCubit>()
@@ -801,7 +864,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
                               height: 8,
                             ),
                         itemCount: state.getCheckedOutExplorerListStatus ==
-                                Status.loadingMore
+                                AppStatus.loadingMore
                             ? state.checkedOutExplorerList.length + 1
                             : state.checkedOutExplorerList.length),
                   ));

@@ -22,6 +22,7 @@ class MultiDropDownField<T extends Object> extends StatefulWidget {
     this.isVerified = false,
     required this.name,
     this.validator,
+    this.valueTransformer,
   })  : _displayOption = displayOption ?? _defaultDisplayOption,
         _selectValue = selectValue,
         super(key: key);
@@ -37,6 +38,7 @@ class MultiDropDownField<T extends Object> extends StatefulWidget {
   final dynamic Function(T?)? _selectValue;
   final Function(List<T> option)? onSelected;
   final String? Function(T? val)? validator;
+  final dynamic Function(List<T>?)? valueTransformer;
 
   static String _defaultDisplayOption(val) => val.toString();
 
@@ -124,6 +126,7 @@ class _MultiDropDownFieldState<T extends Object>
     return FormBuilderField<List<T>>(
       key: _fieldKey,
       name: widget.name,
+      valueTransformer: widget.valueTransformer,
       builder: (state) {
         return FocusScope(
           onFocusChange: (value) => {
@@ -364,7 +367,10 @@ class _MultiDropDownFieldState<T extends Object>
   Widget overlayWidget() {
     final vals = _fieldKey.currentState?.value as List?;
     final items = List.from(widget.items)
-      ..removeWhere((element) => vals?.contains(element) == true);
+      ..removeWhere((element) =>
+          vals?.any((v) =>
+              widget._displayOption(v) == widget._displayOption(element)) ??
+          false);
     return Material(
         child: ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 200),

@@ -20,6 +20,7 @@ Building _$BuildingFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Building {
+  @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get buildingNumber => throw _privateConstructorUsedError;
@@ -41,7 +42,7 @@ abstract class $BuildingCopyWith<$Res> {
       _$BuildingCopyWithImpl<$Res, Building>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       String name,
       String? buildingNumber,
       String? communityId,
@@ -119,7 +120,7 @@ abstract class _$$BuildingImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       String name,
       String? buildingNumber,
       String? communityId,
@@ -190,7 +191,7 @@ class __$$BuildingImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BuildingImpl implements _Building {
   const _$BuildingImpl(
-      {required this.id,
+      {@JsonKey(readValue: readId) required this.id,
       required this.name,
       this.buildingNumber,
       this.communityId,
@@ -204,6 +205,7 @@ class _$BuildingImpl implements _Building {
       _$$BuildingImplFromJson(json);
 
   @override
+  @JsonKey(readValue: readId)
   final String id;
   @override
   final String name;
@@ -280,7 +282,7 @@ class _$BuildingImpl implements _Building {
 
 abstract class _Building implements Building {
   const factory _Building(
-      {required final String id,
+      {@JsonKey(readValue: readId) required final String id,
       required final String name,
       final String? buildingNumber,
       final String? communityId,
@@ -293,6 +295,7 @@ abstract class _Building implements Building {
       _$BuildingImpl.fromJson;
 
   @override
+  @JsonKey(readValue: readId)
   String get id;
   @override
   String get name;

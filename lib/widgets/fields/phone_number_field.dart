@@ -2,7 +2,6 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:logger/logger.dart';
 
 import 'field_color.dart';
@@ -54,15 +53,15 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
 
   parseNumber(String number) async {
     try {
-      final num = await parse(number);
-      Logger().d(num);
-      if (num.containsKey('country_code')) {
-        code = "+${num['country_code']}";
-        value = (num['national_number'] as String);
-        controller.text = value!;
-        _initialCountrySelection = num['region_code'];
-        if (mounted) setState(() {});
-      }
+      // final num = await parse(number);
+      // Logger().d(num);
+      // if (num.containsKey('country_code')) {
+      //   code = "+${num['country_code']}";
+      //   value = (num['national_number'] as String);
+      //   controller.text = value!;
+      //   _initialCountrySelection = num['region_code'];
+      //   if (mounted) setState(() {});
+      // }
     } catch (e) {
       Logger().e(e);
     }

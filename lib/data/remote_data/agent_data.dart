@@ -45,6 +45,7 @@ class AgentData implements AgentRepo {
       );
       final data = response.data as List;
       final list = data.map((e) => Property.fromJson(e)).toList();
+
       return Success(
         list,
       );

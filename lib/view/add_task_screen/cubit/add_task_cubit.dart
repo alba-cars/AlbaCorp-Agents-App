@@ -42,13 +42,13 @@ class AddTaskCubit extends Cubit<AddTaskState> {
         propertyId: propertyId);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addLeadStatus: Status.success));
+        emit(state.copyWith(addLeadStatus: AppStatus.success));
         if (context.mounted) {
           context.pop(true);
         }
       case (Error e):
         emit(state.copyWith(
-            addLeadError: e.exception, addLeadStatus: Status.failure));
+            addLeadError: e.exception, addLeadStatus: AppStatus.failure));
     }
   }
 

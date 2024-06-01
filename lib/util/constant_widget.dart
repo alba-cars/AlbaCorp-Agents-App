@@ -204,11 +204,11 @@ Widget defaultTextField(
     cursorColor: pacificBlue,
     onChanged: onChanged,
     style: TextStyle(
-        color: hintColor, fontSize: 16.sp, fontWeight: FontWeight.w400),
+        color: hintColor, fontSize: 14.sp, fontWeight: FontWeight.w400),
     decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(
-            color: hintColor, fontSize: 16.sp, fontWeight: FontWeight.w400),
+            color: hintColor, fontSize: 14.sp, fontWeight: FontWeight.w400),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16.h),
             borderSide: BorderSide(width: 1.h, color: borderColor)),

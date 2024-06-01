@@ -4,16 +4,23 @@ part of 'task_detail_cubit.dart';
 class TaskDetailState with _$TaskDetailState {
   const factory TaskDetailState({
     required String taskId,
-    @Default(Status.init) Status getTaskStatus,
+    @Default(AppStatus.init) AppStatus getTaskStatus,
     String? getTaskError,
     Activity? task,
-    @Default(Status.init) Status updateTaskStatus,
+    @Default(AppStatus.init) AppStatus updateTaskStatus,
     String? updateTaskError,
     @Default([]) List<Activity> sortedActivity,
-    @Default(Status.init) Status? getSortedActivitiesStatus,
+    @Default(AppStatus.init) AppStatus? getSortedActivitiesStatus,
     String? getSortedActivitiesError,
     Paginator? sortedActivityPaginator,
-    @Default(Status.init) Status? addTaskStatus,
+    @Default(AppStatus.init) AppStatus? addTaskStatus,
     String? addTaskError,
+    @Default([]) List<Activity> activities,
+    @Default(AppStatus.init) AppStatus getActivitiesStatus,
+    String? getActivitiesError,
+    @Default(AppStatus.init) AppStatus getPropertyCardsListStatus,
+    @Default([]) List<LeadPropertyCardModel> propertyCardsList,
+    String? getPropertyCardsListError,
+    Paginator? propertyCardPaginator,
   }) = _TaskDetailState;
 }

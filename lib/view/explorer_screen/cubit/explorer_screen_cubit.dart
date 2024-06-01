@@ -33,30 +33,31 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }) async {
     if (refresh || state.explorerPaginator == null) {
       emit(state.copyWith(
-          getExplorerListStatus: Status.loading,
+          getExplorerListStatus: AppStatus.loading,
           explorerPaginator: null,
           explorerList: []));
     } else {
-      if (state.getExplorerListStatus == Status.loadingMore) {
+      if (state.getExplorerListStatus == AppStatus.loadingMore) {
         return;
       }
-      emit(state.copyWith(getExplorerListStatus: Status.loadingMore));
+      emit(state.copyWith(getExplorerListStatus: AppStatus.loadingMore));
     }
 
     final result = await _explorerRepo.getPropertyCards(
         search: state.explorerSearch,
         filter: state.explorerFilter,
+        showOnlyAvailable: state.showOnlyAvailable,
         paginator: state.explorerPaginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             explorerList: [...state.explorerList, ...s.value],
-            getExplorerListStatus: Status.success,
+            getExplorerListStatus: AppStatus.success,
             explorerPaginator: s.paginator));
         break;
       case (Error e):
         emit(state.copyWith(
-            getExplorerListStatus: Status.failure,
+            getExplorerListStatus: AppStatus.failure,
             getExplorerListError: e.exception));
     }
   }
@@ -66,14 +67,15 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }) async {
     if (refresh || state.checkedOutPaginator == null) {
       emit(state.copyWith(
-          getCheckedOutExplorerListStatus: Status.loading,
+          getCheckedOutExplorerListStatus: AppStatus.loading,
           checkedOutPaginator: null,
           checkedOutExplorerList: []));
     } else {
-      if (state.getCheckedOutExplorerListStatus == Status.loadingMore) {
+      if (state.getCheckedOutExplorerListStatus == AppStatus.loadingMore) {
         return;
       }
-      emit(state.copyWith(getCheckedOutExplorerListStatus: Status.loadingMore));
+      emit(state.copyWith(
+          getCheckedOutExplorerListStatus: AppStatus.loadingMore));
     }
 
     final result = await _explorerRepo.getCheckedOutPropertyCards(
@@ -87,14 +89,19 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
               ...state.checkedOutExplorerList,
               ...s.value
             ],
-            getCheckedOutExplorerListStatus: Status.success,
+            getCheckedOutExplorerListStatus: AppStatus.success,
             checkedOutPaginator: s.paginator));
         break;
       case (Error e):
         emit(state.copyWith(
-            getCheckedOutExplorerListStatus: Status.failure,
+            getCheckedOutExplorerListStatus: AppStatus.failure,
             getCheckedOutExplorerListError: e.exception));
     }
+  }
+
+  void setShowOnlyAvailable(bool val) {
+    emit(state.copyWith(showOnlyAvailable: val));
+    getExplorerList(refresh: true);
   }
 
   void searchExplorer(String? search) {
@@ -160,14 +167,14 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
 
   Future<void> checkInLead(
       {required BuildContext context, required PropertyCard card}) async {
-    emit(state.copyWith(checkInLeadStatus: Status.loading));
+    emit(state.copyWith(checkInLeadStatus: AppStatus.loading));
     final result = await _explorerRepo.checkInLead(propertyCardIds: [card.id]);
     switch (result) {
       case (Success s):
         final newList = List<PropertyCard>.from(state.checkedOutExplorerList)
           ..remove(card);
         emit(state.copyWith(
-            checkInLeadStatus: Status.success,
+            checkInLeadStatus: AppStatus.success,
             checkedOutExplorerList: newList));
         if (context.mounted) {
           showSnackbar(
@@ -178,7 +185,8 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            checkInLeadStatus: Status.failure, checkInLeadError: e.exception));
+            checkInLeadStatus: AppStatus.failure,
+            checkInLeadError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
@@ -187,7 +195,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
 
   Future<void> checkOutLead(
       {required BuildContext context, required PropertyCard card}) async {
-    emit(state.copyWith(checkOutLeadStatus: Status.loading));
+    emit(state.copyWith(checkOutLeadStatus: AppStatus.loading));
     final result = await _explorerRepo.checkOutLead(propertyCardIds: [card.id]);
     switch (result) {
       case (Success s):
@@ -196,7 +204,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         newList.remove(card);
         newList.insert(index, card.copyWith(availableForCheckout: false));
         emit(state.copyWith(
-            checkOutLeadStatus: Status.success, explorerList: newList));
+            checkOutLeadStatus: AppStatus.success, explorerList: newList));
         if (context.mounted) {
           showSnackbar(
               context, 'Lead Checked In Successfully', SnackBarType.success);
@@ -205,7 +213,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            checkOutLeadStatus: Status.failure,
+            checkOutLeadStatus: AppStatus.failure,
             checkOutLeadError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
@@ -216,13 +224,13 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   Future<void> checkOutLeadInBulk({
     required BuildContext context,
   }) async {
-    emit(state.copyWith(checkOutLeadStatus: Status.loading));
+    emit(state.copyWith(checkOutLeadStatus: AppStatus.loading));
     final result = await _explorerRepo.checkOutLead(
         propertyCardIds: state.selectedPropertyCards);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            checkOutLeadStatus: Status.success,
+            checkOutLeadStatus: AppStatus.success,
             selectModeEnabled: false,
             selectedPropertyCards: []));
         getExplorerList(refresh: true);
@@ -234,7 +242,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            checkOutLeadStatus: Status.failure,
+            checkOutLeadStatus: AppStatus.failure,
             checkOutLeadError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
@@ -245,12 +253,12 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   Future<void> randomCheckout(
       {required BuildContext context,
       required Map<String, dynamic> values}) async {
-    emit(state.copyWith(randomLeadsAssignmentStatus: Status.loading));
+    emit(state.copyWith(randomLeadsAssignmentStatus: AppStatus.loading));
     final result = await _explorerRepo.randomLeadsAssignment(values: values);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-          randomLeadsAssignmentStatus: Status.success,
+          randomLeadsAssignmentStatus: AppStatus.success,
         ));
         if (context.mounted) {
           showSnackbar(context, 'Leads Randomly Checked In Successfully',
@@ -261,7 +269,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            randomLeadsAssignmentStatus: Status.failure,
+            randomLeadsAssignmentStatus: AppStatus.failure,
             randomLeadsAssignmentError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
@@ -279,50 +287,65 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }
 
   Future<List<Community>> getCommunities({String? search}) async {
-    emit(state.copyWith(getCommunityListStatus: Status.loadingMore));
-    final result = await _listingsRepo.getCommunities(search: search);
-    switch (result) {
-      case (Success s):
-        emit(state.copyWith(
-            communityList: s.value, getCommunityListStatus: Status.success));
-        return s.value;
-      case (Error e):
-        emit(state.copyWith(
-          getCommunityListStatus: Status.failure,
-        ));
-        return [];
+    emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
+    if (state.communityList.isNotEmpty && search != null) {
+      return state.communityList
+          .where((element) =>
+              element.community.toLowerCase().contains(search.toLowerCase()))
+          .toList();
+    } else {
+      final result = await _listingsRepo.getCommunities(search: search);
+      switch (result) {
+        case (Success s):
+          emit(state.copyWith(
+              communityList: s.value,
+              getCommunityListStatus: AppStatus.success));
+          return s.value;
+        case (Error e):
+          emit(state.copyWith(
+            getCommunityListStatus: AppStatus.failure,
+          ));
+          return [];
+      }
     }
   }
 
   Future<List<Building>> getBuildings({String? search}) async {
-    emit(state.copyWith(getBuildingListStatus: Status.loadingMore));
-    final result = await _listingsRepo.getBuildingNames(search: search);
-    switch (result) {
-      case (Success s):
-        emit(state.copyWith(
-            buildingList: s.value, getBuildingListStatus: Status.success));
-        return s.value;
+    emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
+    if (state.buildingList.isNotEmpty && search != null) {
+      return state.buildingList
+          .where((element) =>
+              element.name.toLowerCase().contains(search.toLowerCase()))
+          .toList();
+    } else {
+      final result = await _listingsRepo.getBuildingNames(search: search);
+      switch (result) {
+        case (Success s):
+          emit(state.copyWith(
+              buildingList: s.value, getBuildingListStatus: AppStatus.success));
+          return s.value;
 
-      case (Error e):
-        emit(state.copyWith(
-          getBuildingListStatus: Status.failure,
-        ));
-        return [];
+        case (Error e):
+          emit(state.copyWith(
+            getBuildingListStatus: AppStatus.failure,
+          ));
+          return [];
+      }
     }
   }
 
   Future<void> getPropertyTypes() async {
-    emit(state.copyWith(getPropertyTypeListStatus: Status.loadingMore));
+    emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             propertyTypeList: s.value,
-            getPropertyTypeListStatus: Status.success));
+            getPropertyTypeListStatus: AppStatus.success));
         break;
       case (Error e):
         emit(state.copyWith(
-          getPropertyTypeListStatus: Status.failure,
+          getPropertyTypeListStatus: AppStatus.failure,
         ));
     }
   }

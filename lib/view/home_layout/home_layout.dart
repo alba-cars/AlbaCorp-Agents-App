@@ -12,6 +12,7 @@ import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
+import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
@@ -20,6 +21,7 @@ import 'package:real_estate_app/view/message_screen/tab_message.dart';
 import 'package:real_estate_app/view/more_screen/tab_more.dart';
 import 'package:real_estate_app/view/saved_screen/tab_saved.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
+import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
@@ -262,7 +264,14 @@ class _HomeScreenState extends State<HomeScreen>
                         fixedSize: Size(70, 70),
                         minimumSize: Size(70, 70)),
                     onPressed: () {
-                      context.pushNamed(AddListingScreen.routeName);
+                      showGeneralDialog(
+                          context: context,
+                          useRootNavigator: true,
+                          barrierDismissible: true,
+                          barrierLabel: 'listing type dialog',
+                          pageBuilder: (context, anim1, anim2) {
+                            return ListingTypeDialog();
+                          });
                     },
                     icon: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -694,6 +703,42 @@ class CustomListTileWithIcon extends StatelessWidget {
                     fontWeightDelta: 2,
                   ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ListingTypeDialog extends StatelessWidget {
+  const ListingTypeDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TitleText(text: 'Choose Listing Type'),
+            VerticalSmallGap(),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  context.pushNamed(AddListingScreen.routeName);
+                },
+                child: Text('Listing Acquired')),
+            VerticalSmallGap(
+              adjustment: .2,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+
+                  context.pushNamed(AddPocketListingScreen.routeName);
+                },
+                child: Text('Pocket Listing')),
           ],
         ),
       ),

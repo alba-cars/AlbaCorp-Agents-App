@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +11,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/off_plan_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -22,11 +26,14 @@ import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/currency_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
+import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/number_field.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
+
+import '../../widgets/fields/commission_field.dart';
 
 class AddListingScreen extends StatelessWidget {
   static const routeName = '/addListingScreen';
@@ -206,7 +213,7 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
   }
 }
 
-class BasicInfoTab extends StatelessWidget {
+class BasicInfoTab extends StatefulWidget {
   const BasicInfoTab({
     super.key,
     required GlobalKey<FormBuilderState> formKey,
@@ -217,9 +224,28 @@ class BasicInfoTab extends StatelessWidget {
   final List<PropertyType> propertyTypeList;
 
   @override
+  State<BasicInfoTab> createState() => _BasicInfoTabState();
+}
+
+class _BasicInfoTabState extends State<BasicInfoTab> {
+  Map<String, dynamic> val = {};
+
+  AutoCompleteFieldController _controller = AutoCompleteFieldController();
+
+  @override
+  void initState() {
+    val = widget._formKey.currentState?.instantValue ?? {};
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FormBuilder(
-      key: _formKey,
+      key: widget._formKey,
+      onChanged: () {
+        val = widget._formKey.currentState?.instantValue ?? {};
+        setState(() {});
+      },
       child: ScrollShadow(
         color: Colors.indigo[50]!,
         child: SingleChildScrollView(
@@ -245,8 +271,9 @@ class BasicInfoTab extends StatelessWidget {
                           SchedulerBinding.instance
                               .addPostFrameCallback((timeStamp) {
                             final fieldValues =
-                                _formKey.currentState?.instantValue ?? {};
-                            _formKey.currentState
+                                widget._formKey.currentState?.instantValue ??
+                                    {};
+                            widget._formKey.currentState
                                 ?.patchValue({...fieldValues, 'user_id': lead});
                           });
                         }
@@ -265,7 +292,7 @@ class BasicInfoTab extends StatelessWidget {
               WrapSelectField(
                   name: 'property_type_id',
                   label: 'Property Type',
-                  values: propertyTypeList,
+                  values: widget.propertyTypeList,
                   displayOption: (option) => option.propertyType,
                   valueTransformer: (p0) => p0?.id,
                   isRequired: true),
@@ -284,6 +311,16 @@ class BasicInfoTab extends StatelessWidget {
                   label: 'Baths',
                   values: ['1', '2', '3', '4', '5', '6', '7+'],
                   isRequired: true),
+              WrapSelectField(
+                  name: 'contractValidity',
+                  label: 'Duration of Contract',
+                  values: ['1 Month', '3 Months', '6 Months'],
+                  isRequired: true),
+              WrapSelectField(
+                  name: 'furnishing',
+                  label: 'furnishing',
+                  values: ['Furnished', 'Semi furnished', 'unfurnished'],
+                  isRequired: true),
               NumberField(
                 isRequired: true,
                 name: 'size',
@@ -292,7 +329,9 @@ class BasicInfoTab extends StatelessWidget {
                 convertToString: true,
               ),
               AppAutoComplete<Community>(
-                  onSelected: (v) {},
+                  onSelected: (v) {
+                    _controller.reset();
+                  },
                   name: 'community_id',
                   label: 'Community',
                   isRequired: true,
@@ -310,25 +349,103 @@ class BasicInfoTab extends StatelessWidget {
                 name: 'subCommunity',
                 label: 'Sub Community',
               ),
-              AppAutoComplete<Building>(
-                  onSelected: (v) {},
-                  name: 'building_id',
-                  label: 'Building Name',
-                  isRequired: true,
-                  valueTransformer: (p0) => p0?.id,
-                  displayStringForOption: (p0) => p0.name,
-                  optionsBuilder: (v) async {
-                    final list = await context
-                        .read<AddListingCubit>()
-                        .getBuildings(search: v.text);
-                    return list.where((element) => element.name
-                        .toLowerCase()
-                        .contains(v.text.toLowerCase()));
-                  }),
+              if (widget.propertyTypeList
+                      .firstWhereOrNull(
+                          (element) => element.id == val['property_type_id'])
+                      ?.propertyType
+                      .contains(RegExp('Apartment|Flat')) ??
+                  false)
+                AppAutoComplete<Building>(
+                    controller: _controller,
+                    name: 'building_id',
+                    label: 'Building Name',
+                    isRequired: true,
+                    valueTransformer: (p0) => p0?.id,
+                    displayStringForOption: (p0) => p0.name,
+                    optionsBuilder: (v) async {
+                      final list =
+                          await context.read<AddListingCubit>().getBuildings(
+                                search: v.text,
+                              );
+                      return list.where((element) =>
+                          (element.name
+                              .toLowerCase()
+                              .contains(v.text.toLowerCase())) &&
+                          (element.communityId == val['community_id']));
+                    }),
+              BlocSelector<AddListingCubit, AddListingState, List<Amenity>>(
+                selector: (state) {
+                  return state.amenityList;
+                },
+                builder: (context, amenityList) {
+                  return MultiDropDownField(
+                    label: 'Amenities',
+                    items: amenityList
+                        .map((e) => {'label': e.amenity, 'value': e.id})
+                        .toList(),
+                    name: "amenities",
+                    displayOption: (option) =>
+                        option['label']?.toString() ?? '',
+                    valueTransformer: (p0) {
+                      return p0?.map((e) => e["value"]).toList();
+                    },
+                  );
+                },
+              ),
+              DropDownfield(
+                label: 'Vacancy',
+                items: ['Vacant', 'Tenanted'],
+                name: 'vacancy',
+                isRequired: true,
+              ),
+              FormBuilderSwitch(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.zero),
+                  name: 'vacantOnTransfer',
+                  title: Text(
+                    'Vacant On Transfer',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF555555),
+                        ),
+                  )),
+              FormBuilderSwitch(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.zero),
+                  name: 'exclusive',
+                  title: Text(
+                    'Exclusive',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF555555),
+                        ),
+                  )),
+              VerticalSmallGap(
+                adjustment: 0.3,
+              ),
+              if (val['type'] == 'Rent')
+                NumberField(
+                  label: 'Number of Cheques',
+                  name: "numberOfCheques",
+                  unit: '',
+                ),
               CurrencyField(
                 isRequired: true,
                 name: 'price',
                 label: 'Listing Price',
+                onChanged: (p0) {
+                  EasyDebounce.debounce('price-debounce', Durations.medium1,
+                      () {
+                    setState(() {});
+                  });
+                },
+              ),
+              CommissionField(
+                name: 'agreedCommission',
+                isRequired: true,
+                price: widget._formKey.currentState?.instantValue['price'],
               ),
             ],
           ),

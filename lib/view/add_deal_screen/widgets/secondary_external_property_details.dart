@@ -25,6 +25,7 @@ class SecondaryExternalPropertyDetails extends StatefulWidget {
 class _SecondaryExternalPropertyDetailsState
     extends State<SecondaryExternalPropertyDetails> {
   num? agreedPrice;
+  String? propertytype;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,6 +50,10 @@ class _SecondaryExternalPropertyDetailsState
             name: 'propertyType',
             label: 'Property Type',
             values: ["Villa", "Townhouse", "Apartment", "Plot", "Commercial"],
+            onSelected: (val) {
+              propertytype = val;
+              setState(() {});
+            },
             isRequired: true),
         WrapSelectField(
             name: 'beds',
@@ -86,20 +91,21 @@ class _SecondaryExternalPropertyDetailsState
           name: 'subCommunity',
           label: 'Sub Community',
         ),
-        AppAutoComplete<Building>(
-            onSelected: (v) {},
-            name: 'building_id',
-            label: 'Building Name',
-            isRequired: true,
-            valueTransformer: (p0) => p0?.id,
-            displayStringForOption: (p0) => p0.name,
-            optionsBuilder: (v) async {
-              final list = await context
-                  .read<AddDealCubit>()
-                  .getBuildings(search: v.text);
-              return list.where((element) =>
-                  element.name.toLowerCase().contains(v.text.toLowerCase()));
-            }),
+        if (propertytype?.contains(RegExp('Apartment|Flat')) ?? false)
+          AppAutoComplete<Building>(
+              onSelected: (v) {},
+              name: 'building_id',
+              label: 'Building Name',
+              isRequired: true,
+              valueTransformer: (p0) => p0?.id,
+              displayStringForOption: (p0) => p0.name,
+              optionsBuilder: (v) async {
+                final list = await context
+                    .read<AddDealCubit>()
+                    .getBuildings(search: v.text);
+                return list.where((element) =>
+                    element.name.toLowerCase().contains(v.text.toLowerCase()));
+              }),
         CurrencyField(
           isRequired: true,
           name: 'agreedSalesPrice',

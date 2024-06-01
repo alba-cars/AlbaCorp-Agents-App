@@ -28,6 +28,7 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
     final result = await _activityRepo.updateActivity(
         activityId: activityId,
+        completed: true,
         duration: duration,
         feedback: feedback,
         notes: note);
@@ -55,6 +56,7 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
     final result = await _activityRepo.updateActivity(
         activityId: state.lastActivity?.id ?? '',
+        completed: true,
         notes: state.activityFeedback?.notes);
     switch (result) {
       case (Success s):
@@ -62,5 +64,9 @@ class ActivityCubit extends Cubit<ActivityState> {
         break;
       default:
     }
+  }
+
+  Future<void> setHasNewSpecialLeadsActivity(bool hasActivity) async {
+    emit(state.copyWith(newSpecialLeadsTasks: hasActivity));
   }
 }

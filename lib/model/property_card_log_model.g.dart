@@ -10,7 +10,9 @@ _$PropertyCardLogImpl _$$PropertyCardLogImplFromJson(
         Map<String, dynamic> json) =>
     _$PropertyCardLogImpl(
       message: json['message'] as String,
-      createdBy: CreatedBy.fromJson(json['createdBy'] as Map<String, dynamic>),
+      createdBy: json['createdBy'] == null
+          ? null
+          : CreatedBy.fromJson(json['createdBy'] as Map<String, dynamic>),
       type: json['type'] as String,
       createdAt: json['createdAt'] as String,
       updatedAt: json['updatedAt'] as String,

@@ -182,12 +182,16 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (currentTab != 0) ...[
-                          OutlinedButton(
-                              onPressed: () {
-                                context.read<AddDealCubit>().onPreviousPressed(
-                                    tabController: _tabController);
-                              },
-                              child: Text('Previous')),
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  context
+                                      .read<AddDealCubit>()
+                                      .onPreviousPressed(
+                                          tabController: _tabController);
+                                },
+                                child: Text('Previous')),
+                          ),
                           HorizontalSmallGap(),
                         ],
                         Expanded(
@@ -234,7 +238,7 @@ class DealTypeTab extends StatelessWidget {
     return ScrollShadow(
       color: Colors.indigo[50]!,
       child: SingleChildScrollView(
-        child: Builder(builder: (context) {
+        child: LayoutBuilder(builder: (context, cons) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
