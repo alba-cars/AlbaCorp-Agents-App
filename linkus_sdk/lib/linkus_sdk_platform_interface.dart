@@ -37,9 +37,21 @@ abstract class LinkusSdkPlatform extends PlatformInterface {
     throw UnimplementedError('loginToPbx() has not been implemented.');
   }
 
+  Future<bool> requestPermission() {
+    throw UnimplementedError('requestPermission() has not been implemented.');
+  }
+
   Future<bool> makeACall({
     required String number,
   }) {
+    throw UnimplementedError('makeACall() has not been implemented.');
+  }
+
+  Future<bool> hangUpCall({required int callId}) {
+    throw UnimplementedError('makeACall() has not been implemented.');
+  }
+
+  Future<bool> setFcmToken({required String token}) {
     throw UnimplementedError('makeACall() has not been implemented.');
   }
 

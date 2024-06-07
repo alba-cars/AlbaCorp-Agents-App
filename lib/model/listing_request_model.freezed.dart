@@ -38,7 +38,15 @@ mixin _$NewListingRequest {
   @JsonKey(name: 'property_type')
   PropertyType? get propertyType => throw _privateConstructorUsedError;
   Community? get community => throw _privateConstructorUsedError;
-  Building? get building => throw _privateConstructorUsedError;
+  Building? get building =>
+      throw _privateConstructorUsedError; // @Default([]) List<Amenity> amenities,
+  String? get furnishing => throw _privateConstructorUsedError;
+  String? get contractValidity => throw _privateConstructorUsedError;
+  String? get vacancy => throw _privateConstructorUsedError;
+  int? get numberOfCheques => throw _privateConstructorUsedError;
+  bool get exclusive => throw _privateConstructorUsedError;
+  bool get isOffPlanResale => throw _privateConstructorUsedError;
+  bool get vacantOnTransfer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +74,14 @@ abstract class $NewListingRequestCopyWith<$Res> {
       num? size,
       @JsonKey(name: 'property_type') PropertyType? propertyType,
       Community? community,
-      Building? building});
+      Building? building,
+      String? furnishing,
+      String? contractValidity,
+      String? vacancy,
+      int? numberOfCheques,
+      bool exclusive,
+      bool isOffPlanResale,
+      bool vacantOnTransfer});
 
   $PropertyTypeCopyWith<$Res>? get propertyType;
   $CommunityCopyWith<$Res>? get community;
@@ -100,6 +115,13 @@ class _$NewListingRequestCopyWithImpl<$Res, $Val extends NewListingRequest>
     Object? propertyType = freezed,
     Object? community = freezed,
     Object? building = freezed,
+    Object? furnishing = freezed,
+    Object? contractValidity = freezed,
+    Object? vacancy = freezed,
+    Object? numberOfCheques = freezed,
+    Object? exclusive = null,
+    Object? isOffPlanResale = null,
+    Object? vacantOnTransfer = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -158,6 +180,34 @@ class _$NewListingRequestCopyWithImpl<$Res, $Val extends NewListingRequest>
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as Building?,
+      furnishing: freezed == furnishing
+          ? _value.furnishing
+          : furnishing // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contractValidity: freezed == contractValidity
+          ? _value.contractValidity
+          : contractValidity // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vacancy: freezed == vacancy
+          ? _value.vacancy
+          : vacancy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      numberOfCheques: freezed == numberOfCheques
+          ? _value.numberOfCheques
+          : numberOfCheques // ignore: cast_nullable_to_non_nullable
+              as int?,
+      exclusive: null == exclusive
+          ? _value.exclusive
+          : exclusive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isOffPlanResale: null == isOffPlanResale
+          ? _value.isOffPlanResale
+          : isOffPlanResale // ignore: cast_nullable_to_non_nullable
+              as bool,
+      vacantOnTransfer: null == vacantOnTransfer
+          ? _value.vacantOnTransfer
+          : vacantOnTransfer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -220,7 +270,14 @@ abstract class _$$NewListingRequestImplCopyWith<$Res>
       num? size,
       @JsonKey(name: 'property_type') PropertyType? propertyType,
       Community? community,
-      Building? building});
+      Building? building,
+      String? furnishing,
+      String? contractValidity,
+      String? vacancy,
+      int? numberOfCheques,
+      bool exclusive,
+      bool isOffPlanResale,
+      bool vacantOnTransfer});
 
   @override
   $PropertyTypeCopyWith<$Res>? get propertyType;
@@ -255,6 +312,13 @@ class __$$NewListingRequestImplCopyWithImpl<$Res>
     Object? propertyType = freezed,
     Object? community = freezed,
     Object? building = freezed,
+    Object? furnishing = freezed,
+    Object? contractValidity = freezed,
+    Object? vacancy = freezed,
+    Object? numberOfCheques = freezed,
+    Object? exclusive = null,
+    Object? isOffPlanResale = null,
+    Object? vacantOnTransfer = null,
   }) {
     return _then(_$NewListingRequestImpl(
       id: null == id
@@ -313,6 +377,34 @@ class __$$NewListingRequestImplCopyWithImpl<$Res>
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
               as Building?,
+      furnishing: freezed == furnishing
+          ? _value.furnishing
+          : furnishing // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contractValidity: freezed == contractValidity
+          ? _value.contractValidity
+          : contractValidity // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vacancy: freezed == vacancy
+          ? _value.vacancy
+          : vacancy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      numberOfCheques: freezed == numberOfCheques
+          ? _value.numberOfCheques
+          : numberOfCheques // ignore: cast_nullable_to_non_nullable
+              as int?,
+      exclusive: null == exclusive
+          ? _value.exclusive
+          : exclusive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isOffPlanResale: null == isOffPlanResale
+          ? _value.isOffPlanResale
+          : isOffPlanResale // ignore: cast_nullable_to_non_nullable
+              as bool,
+      vacantOnTransfer: null == vacantOnTransfer
+          ? _value.vacantOnTransfer
+          : vacantOnTransfer // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -336,7 +428,14 @@ class _$NewListingRequestImpl
       required this.size,
       @JsonKey(name: 'property_type') required this.propertyType,
       required this.community,
-      this.building});
+      this.building,
+      this.furnishing,
+      this.contractValidity,
+      this.vacancy,
+      this.numberOfCheques,
+      this.exclusive = false,
+      this.isOffPlanResale = false,
+      this.vacantOnTransfer = false});
 
   factory _$NewListingRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewListingRequestImplFromJson(json);
@@ -374,10 +473,28 @@ class _$NewListingRequestImpl
   final Community? community;
   @override
   final Building? building;
+// @Default([]) List<Amenity> amenities,
+  @override
+  final String? furnishing;
+  @override
+  final String? contractValidity;
+  @override
+  final String? vacancy;
+  @override
+  final int? numberOfCheques;
+  @override
+  @JsonKey()
+  final bool exclusive;
+  @override
+  @JsonKey()
+  final bool isOffPlanResale;
+  @override
+  @JsonKey()
+  final bool vacantOnTransfer;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewListingRequest(id: $id, userId: $userId, propertyTypeId: $propertyTypeId, communityId: $communityId, buildingId: $buildingId, multiple: $multiple, type: $type, beds: $beds, baths: $baths, price: $price, size: $size, propertyType: $propertyType, community: $community, building: $building)';
+    return 'NewListingRequest(id: $id, userId: $userId, propertyTypeId: $propertyTypeId, communityId: $communityId, buildingId: $buildingId, multiple: $multiple, type: $type, beds: $beds, baths: $baths, price: $price, size: $size, propertyType: $propertyType, community: $community, building: $building, furnishing: $furnishing, contractValidity: $contractValidity, vacancy: $vacancy, numberOfCheques: $numberOfCheques, exclusive: $exclusive, isOffPlanResale: $isOffPlanResale, vacantOnTransfer: $vacantOnTransfer)';
   }
 
   @override
@@ -398,7 +515,14 @@ class _$NewListingRequestImpl
       ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('propertyType', propertyType))
       ..add(DiagnosticsProperty('community', community))
-      ..add(DiagnosticsProperty('building', building));
+      ..add(DiagnosticsProperty('building', building))
+      ..add(DiagnosticsProperty('furnishing', furnishing))
+      ..add(DiagnosticsProperty('contractValidity', contractValidity))
+      ..add(DiagnosticsProperty('vacancy', vacancy))
+      ..add(DiagnosticsProperty('numberOfCheques', numberOfCheques))
+      ..add(DiagnosticsProperty('exclusive', exclusive))
+      ..add(DiagnosticsProperty('isOffPlanResale', isOffPlanResale))
+      ..add(DiagnosticsProperty('vacantOnTransfer', vacantOnTransfer));
   }
 
   @override
@@ -426,27 +550,48 @@ class _$NewListingRequestImpl
             (identical(other.community, community) ||
                 other.community == community) &&
             (identical(other.building, building) ||
-                other.building == building));
+                other.building == building) &&
+            (identical(other.furnishing, furnishing) ||
+                other.furnishing == furnishing) &&
+            (identical(other.contractValidity, contractValidity) ||
+                other.contractValidity == contractValidity) &&
+            (identical(other.vacancy, vacancy) || other.vacancy == vacancy) &&
+            (identical(other.numberOfCheques, numberOfCheques) ||
+                other.numberOfCheques == numberOfCheques) &&
+            (identical(other.exclusive, exclusive) ||
+                other.exclusive == exclusive) &&
+            (identical(other.isOffPlanResale, isOffPlanResale) ||
+                other.isOffPlanResale == isOffPlanResale) &&
+            (identical(other.vacantOnTransfer, vacantOnTransfer) ||
+                other.vacantOnTransfer == vacantOnTransfer));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      userId,
-      propertyTypeId,
-      communityId,
-      buildingId,
-      multiple,
-      type,
-      beds,
-      baths,
-      price,
-      size,
-      propertyType,
-      community,
-      building);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        userId,
+        propertyTypeId,
+        communityId,
+        buildingId,
+        multiple,
+        type,
+        beds,
+        baths,
+        price,
+        size,
+        propertyType,
+        community,
+        building,
+        furnishing,
+        contractValidity,
+        vacancy,
+        numberOfCheques,
+        exclusive,
+        isOffPlanResale,
+        vacantOnTransfer
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -478,7 +623,14 @@ abstract class _NewListingRequest implements NewListingRequest {
       required final num? size,
       @JsonKey(name: 'property_type') required final PropertyType? propertyType,
       required final Community? community,
-      final Building? building}) = _$NewListingRequestImpl;
+      final Building? building,
+      final String? furnishing,
+      final String? contractValidity,
+      final String? vacancy,
+      final int? numberOfCheques,
+      final bool exclusive,
+      final bool isOffPlanResale,
+      final bool vacantOnTransfer}) = _$NewListingRequestImpl;
 
   factory _NewListingRequest.fromJson(Map<String, dynamic> json) =
       _$NewListingRequestImpl.fromJson;
@@ -516,6 +668,20 @@ abstract class _NewListingRequest implements NewListingRequest {
   Community? get community;
   @override
   Building? get building;
+  @override // @Default([]) List<Amenity> amenities,
+  String? get furnishing;
+  @override
+  String? get contractValidity;
+  @override
+  String? get vacancy;
+  @override
+  int? get numberOfCheques;
+  @override
+  bool get exclusive;
+  @override
+  bool get isOffPlanResale;
+  @override
+  bool get vacantOnTransfer;
   @override
   @JsonKey(ignore: true)
   _$$NewListingRequestImplCopyWith<_$NewListingRequestImpl> get copyWith =>

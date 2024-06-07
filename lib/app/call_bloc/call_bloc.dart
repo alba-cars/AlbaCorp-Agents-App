@@ -10,6 +10,7 @@ import 'package:phone_state/phone_state.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/data/remote_data/activity_data.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
+import 'package:real_estate_app/data/repository/linkus_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.config.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -24,7 +25,7 @@ part 'call_bloc.freezed.dart';
 
 @singleton
 class CallBloc extends Bloc<CallEvent, CallState> {
-  CallBloc(this._activityRepo) : super(CallState()) {
+  CallBloc(this._activityRepo, this._linkusRepo) : super(CallState()) {
     on<_Started>(_onStarted);
     on<_CallStarted>(_onCallStarted);
     on<_CallEnded>(_onCallEnded);
@@ -35,6 +36,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
 
   StreamSubscription? phoneCallStateSubscription;
   final ActivityRepo _activityRepo;
+  final LinkusRepo _linkusRepo;
 
   FutureOr<void> _onStarted(_Started event, Emitter<CallState> emit) {
     phoneCallStateSubscription = PhoneState.stream.listen((event) {
@@ -47,16 +49,17 @@ class CallBloc extends Bloc<CallEvent, CallState> {
 
   FutureOr<void> _onCallStarted(
       _CallStarted event, Emitter<CallState> emit) async {
-    emit(state.copyWith(
-      phoneCallStatus: PhoneCallStatus.inCall,
-      calledNumber: event.phoneNumber,
-      callStartTime: DateTime.now(),
-      activityId: event.activityId,
-      leadId: event.leadId,
-    ));
-
+    // emit(state.copyWith(
+    //   phoneCallStatus: PhoneCallStatus.inCall,
+    //   calledNumber: event.phoneNumber,
+    //   callStartTime: DateTime.now(),
+    //   activityId: event.activityId,
+    //   leadId: event.leadId,
+    // ));
+    await _linkusRepo.makeACall(
+        number: event.phoneNumber, activityId: event.activityId);
     // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
-    getIt<SharedPreferences>().setBool(event.activityId, true);
+    // getIt<SharedPreferences>().setBool(event.activityId, true);
   }
 
   FutureOr<void> _onUpdateActivity(
@@ -87,31 +90,32 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   }
 
   FutureOr<void> _onCallEnded(_CallEnded event, Emitter<CallState> emit) {
-    if (state.phoneCallStatus == PhoneCallStatus.inCall) {
-      emit(state.copyWith(
-          phoneCallStatus: PhoneCallStatus.callEnded,
-          feedbackRequestDialogOpen: true));
-    }
+    // if (state.phoneCallStatus == PhoneCallStatus.inCall) {
+    //   emit(state.copyWith(
+    //       phoneCallStatus: PhoneCallStatus.callEnded,
+    //       feedbackRequestDialogOpen: true));
+    // }
   }
 
   FutureOr<void> _onClickToCall(
       _ClickToCall event, Emitter<CallState> emit) async {
-    final result = await _activityRepo.createActivity(
-      leadId: event.leadId,
-      type: 'Call',
-    );
-    switch (result) {
-      case (Success<Activity> s):
-        emit(state.copyWith(
-          phoneCallStatus: PhoneCallStatus.inCall,
-          calledNumber: event.phoneNumber,
-          callStartTime: DateTime.now(),
-          activityId: s.value.id,
-          leadId: event.leadId,
-        ));
-        await LinkusSdk().makeACall(number: '1001');
-      // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
-      case (Error e):
-    }
+    await _linkusRepo.makeACall(number: event.phoneNumber);
+    // final result = await _activityRepo.createActivity(
+    //   leadId: event.leadId,
+    //   type: 'Call',
+    // );
+    // switch (result) {
+    //   case (Success<Activity> s):
+    //     emit(state.copyWith(
+    //       phoneCallStatus: PhoneCallStatus.inCall,
+    //       calledNumber: event.phoneNumber,
+    //       callStartTime: DateTime.now(),
+    //       activityId: s.value.id,
+    //       leadId: event.leadId,
+    //     ));
+    //     await LinkusSdk().makeACall(number: '1001');
+    //   // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
+    //   case (Error e):
+    // }
   }
 }

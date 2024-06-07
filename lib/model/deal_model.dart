@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/agency_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/offplan_listing_response.dart';
@@ -24,7 +25,7 @@ class Deal with _$Deal {
     double? agreedSalePrice,
     double? agreedCommission,
     Agent? assignedAgent,
-    String? type,
+    required String type,
     required String status,
     required List<dynamic> rejection,
     @JsonKey(name: 'user_id') String? userId,
@@ -67,4 +68,29 @@ class Deal with _$Deal {
   }) = _Deal;
 
   factory Deal.fromJson(Map<String, dynamic> json) => _$DealFromJson(json);
+}
+
+extension EditDeal on Deal {
+  Map<String, dynamic> toListing() {
+    return {
+      'beds': newListingRequest?.beds,
+      'baths': newListingRequest?.baths,
+      'property_type_id': newListingRequest?.propertyType,
+      'building_id': newListingRequest?.building,
+      'size': newListingRequest?.size,
+      'user_id': client,
+      'assignedAgent': assignedAgent?.id,
+      'agreedCommission': agreedCommission,
+      "price": agreedSalePrice,
+      'community_id': newListingRequest?.community,
+      // "amenities": newListingRequest?.amenities,
+      "vacancy": newListingRequest?.vacancy,
+      "vacantOnTransfer": newListingRequest?.vacantOnTransfer,
+      "exclusive": newListingRequest?.exclusive,
+      "numberOfCheques": newListingRequest?.numberOfCheques,
+      "contractValidity": newListingRequest?.contractValidity,
+      "furnishing": newListingRequest?.furnishing,
+      "type": newListingRequest?.type,
+    };
+  }
 }

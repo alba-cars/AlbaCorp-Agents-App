@@ -34,6 +34,7 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
       case (Success s):
         emit(state.copyWith(deal: s.value, getDealStatus: AppStatus.success));
         getDealDocuments();
+
         break;
       case (Error e):
         emit(state.copyWith(
@@ -46,9 +47,12 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
     emit(state.copyWith(getDealDocumentsStatus: AppStatus.loading));
     final result = await _dealRepo.getDealDocuments(dealId: state.dealId);
     switch (result) {
-      case (Success s):
+      case (Success<List<DealDocument>> s):
         emit(state.copyWith(
-            dealDocuments: s.value, getDealDocumentsStatus: AppStatus.success));
+            userDocuments: s.value.where((e) => e.dealId == null).toList(),
+            dealDocuments:
+                s.value.where((e) => e.dealId == state.dealId).toList(),
+            getDealDocumentsStatus: AppStatus.success));
         break;
       case (Error _):
         emit(state.copyWith(getDealDocumentsStatus: AppStatus.failure));

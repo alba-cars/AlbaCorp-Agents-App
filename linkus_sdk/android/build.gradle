@@ -58,8 +58,10 @@ android {
     dependencies {
         implementation(name: 'linkus-sdk', ext: 'aar')
         implementation 'com.tencent.wcdb:wcdb-android:1.0.8'
+        implementation 'com.guolindev.permissionx:permissionx:1.5.1'
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.0.0'
+
     }
 
     testOptions {

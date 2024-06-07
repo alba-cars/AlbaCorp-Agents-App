@@ -20,6 +20,7 @@ mixin _$AddListingState {
   String? get addListingError => throw _privateConstructorUsedError;
   NewListingRequest? get dealListingResponse =>
       throw _privateConstructorUsedError;
+  DealResponse? get dealResponse => throw _privateConstructorUsedError;
   AppStatus get addListingDocumentsStatus => throw _privateConstructorUsedError;
   String? get addListingDocumentsError => throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
@@ -33,6 +34,7 @@ mixin _$AddListingState {
   List<Lead> get leadList => throw _privateConstructorUsedError;
   AppStatus get getLeadListStatus => throw _privateConstructorUsedError;
   int get currentTab => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get initialValues => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddListingStateCopyWith<AddListingState> get copyWith =>
@@ -49,6 +51,7 @@ abstract class $AddListingStateCopyWith<$Res> {
       {AppStatus addListingStatus,
       String? addListingError,
       NewListingRequest? dealListingResponse,
+      DealResponse? dealResponse,
       AppStatus addListingDocumentsStatus,
       String? addListingDocumentsError,
       List<PropertyType> propertyTypeList,
@@ -61,9 +64,11 @@ abstract class $AddListingStateCopyWith<$Res> {
       AppStatus getAmenityListStatus,
       List<Lead> leadList,
       AppStatus getLeadListStatus,
-      int currentTab});
+      int currentTab,
+      Map<String, dynamic>? initialValues});
 
   $NewListingRequestCopyWith<$Res>? get dealListingResponse;
+  $DealResponseCopyWith<$Res>? get dealResponse;
 }
 
 /// @nodoc
@@ -82,6 +87,7 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
     Object? addListingStatus = null,
     Object? addListingError = freezed,
     Object? dealListingResponse = freezed,
+    Object? dealResponse = freezed,
     Object? addListingDocumentsStatus = null,
     Object? addListingDocumentsError = freezed,
     Object? propertyTypeList = null,
@@ -95,6 +101,7 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
     Object? leadList = null,
     Object? getLeadListStatus = null,
     Object? currentTab = null,
+    Object? initialValues = freezed,
   }) {
     return _then(_value.copyWith(
       addListingStatus: null == addListingStatus
@@ -109,6 +116,10 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
           ? _value.dealListingResponse
           : dealListingResponse // ignore: cast_nullable_to_non_nullable
               as NewListingRequest?,
+      dealResponse: freezed == dealResponse
+          ? _value.dealResponse
+          : dealResponse // ignore: cast_nullable_to_non_nullable
+              as DealResponse?,
       addListingDocumentsStatus: null == addListingDocumentsStatus
           ? _value.addListingDocumentsStatus
           : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
@@ -161,6 +172,10 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
+      initialValues: freezed == initialValues
+          ? _value.initialValues
+          : initialValues // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 
@@ -174,6 +189,18 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
     return $NewListingRequestCopyWith<$Res>(_value.dealListingResponse!,
         (value) {
       return _then(_value.copyWith(dealListingResponse: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DealResponseCopyWith<$Res>? get dealResponse {
+    if (_value.dealResponse == null) {
+      return null;
+    }
+
+    return $DealResponseCopyWith<$Res>(_value.dealResponse!, (value) {
+      return _then(_value.copyWith(dealResponse: value) as $Val);
     });
   }
 }
@@ -190,6 +217,7 @@ abstract class _$$AddListingStateImplCopyWith<$Res>
       {AppStatus addListingStatus,
       String? addListingError,
       NewListingRequest? dealListingResponse,
+      DealResponse? dealResponse,
       AppStatus addListingDocumentsStatus,
       String? addListingDocumentsError,
       List<PropertyType> propertyTypeList,
@@ -202,10 +230,13 @@ abstract class _$$AddListingStateImplCopyWith<$Res>
       AppStatus getAmenityListStatus,
       List<Lead> leadList,
       AppStatus getLeadListStatus,
-      int currentTab});
+      int currentTab,
+      Map<String, dynamic>? initialValues});
 
   @override
   $NewListingRequestCopyWith<$Res>? get dealListingResponse;
+  @override
+  $DealResponseCopyWith<$Res>? get dealResponse;
 }
 
 /// @nodoc
@@ -222,6 +253,7 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
     Object? addListingStatus = null,
     Object? addListingError = freezed,
     Object? dealListingResponse = freezed,
+    Object? dealResponse = freezed,
     Object? addListingDocumentsStatus = null,
     Object? addListingDocumentsError = freezed,
     Object? propertyTypeList = null,
@@ -235,6 +267,7 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
     Object? leadList = null,
     Object? getLeadListStatus = null,
     Object? currentTab = null,
+    Object? initialValues = freezed,
   }) {
     return _then(_$AddListingStateImpl(
       addListingStatus: null == addListingStatus
@@ -249,6 +282,10 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
           ? _value.dealListingResponse
           : dealListingResponse // ignore: cast_nullable_to_non_nullable
               as NewListingRequest?,
+      dealResponse: freezed == dealResponse
+          ? _value.dealResponse
+          : dealResponse // ignore: cast_nullable_to_non_nullable
+              as DealResponse?,
       addListingDocumentsStatus: null == addListingDocumentsStatus
           ? _value.addListingDocumentsStatus
           : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
@@ -301,6 +338,10 @@ class __$$AddListingStateImplCopyWithImpl<$Res>
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
+      initialValues: freezed == initialValues
+          ? _value._initialValues
+          : initialValues // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -312,6 +353,7 @@ class _$AddListingStateImpl implements _AddListingState {
       {this.addListingStatus = AppStatus.init,
       this.addListingError,
       this.dealListingResponse,
+      this.dealResponse,
       this.addListingDocumentsStatus = AppStatus.init,
       this.addListingDocumentsError,
       final List<PropertyType> propertyTypeList = const [],
@@ -324,12 +366,14 @@ class _$AddListingStateImpl implements _AddListingState {
       this.getAmenityListStatus = AppStatus.init,
       final List<Lead> leadList = const [],
       this.getLeadListStatus = AppStatus.init,
-      this.currentTab = 0})
+      this.currentTab = 0,
+      final Map<String, dynamic>? initialValues})
       : _propertyTypeList = propertyTypeList,
         _communityList = communityList,
         _buildingList = buildingList,
         _amenityList = amenityList,
-        _leadList = leadList;
+        _leadList = leadList,
+        _initialValues = initialValues;
 
   @override
   @JsonKey()
@@ -338,6 +382,8 @@ class _$AddListingStateImpl implements _AddListingState {
   final String? addListingError;
   @override
   final NewListingRequest? dealListingResponse;
+  @override
+  final DealResponse? dealResponse;
   @override
   @JsonKey()
   final AppStatus addListingDocumentsStatus;
@@ -407,10 +453,19 @@ class _$AddListingStateImpl implements _AddListingState {
   @override
   @JsonKey()
   final int currentTab;
+  final Map<String, dynamic>? _initialValues;
+  @override
+  Map<String, dynamic>? get initialValues {
+    final value = _initialValues;
+    if (value == null) return null;
+    if (_initialValues is EqualUnmodifiableMapView) return _initialValues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab)';
+    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, dealResponse: $dealResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab, initialValues: $initialValues)';
   }
 
   @override
@@ -424,6 +479,8 @@ class _$AddListingStateImpl implements _AddListingState {
                 other.addListingError == addListingError) &&
             (identical(other.dealListingResponse, dealListingResponse) ||
                 other.dealListingResponse == dealListingResponse) &&
+            (identical(other.dealResponse, dealResponse) ||
+                other.dealResponse == dealResponse) &&
             (identical(other.addListingDocumentsStatus,
                     addListingDocumentsStatus) ||
                 other.addListingDocumentsStatus == addListingDocumentsStatus) &&
@@ -451,7 +508,9 @@ class _$AddListingStateImpl implements _AddListingState {
             (identical(other.getLeadListStatus, getLeadListStatus) ||
                 other.getLeadListStatus == getLeadListStatus) &&
             (identical(other.currentTab, currentTab) ||
-                other.currentTab == currentTab));
+                other.currentTab == currentTab) &&
+            const DeepCollectionEquality()
+                .equals(other._initialValues, _initialValues));
   }
 
   @override
@@ -460,6 +519,7 @@ class _$AddListingStateImpl implements _AddListingState {
       addListingStatus,
       addListingError,
       dealListingResponse,
+      dealResponse,
       addListingDocumentsStatus,
       addListingDocumentsError,
       const DeepCollectionEquality().hash(_propertyTypeList),
@@ -472,7 +532,8 @@ class _$AddListingStateImpl implements _AddListingState {
       getAmenityListStatus,
       const DeepCollectionEquality().hash(_leadList),
       getLeadListStatus,
-      currentTab);
+      currentTab,
+      const DeepCollectionEquality().hash(_initialValues));
 
   @JsonKey(ignore: true)
   @override
@@ -487,6 +548,7 @@ abstract class _AddListingState implements AddListingState {
       {final AppStatus addListingStatus,
       final String? addListingError,
       final NewListingRequest? dealListingResponse,
+      final DealResponse? dealResponse,
       final AppStatus addListingDocumentsStatus,
       final String? addListingDocumentsError,
       final List<PropertyType> propertyTypeList,
@@ -499,7 +561,8 @@ abstract class _AddListingState implements AddListingState {
       final AppStatus getAmenityListStatus,
       final List<Lead> leadList,
       final AppStatus getLeadListStatus,
-      final int currentTab}) = _$AddListingStateImpl;
+      final int currentTab,
+      final Map<String, dynamic>? initialValues}) = _$AddListingStateImpl;
 
   @override
   AppStatus get addListingStatus;
@@ -507,6 +570,8 @@ abstract class _AddListingState implements AddListingState {
   String? get addListingError;
   @override
   NewListingRequest? get dealListingResponse;
+  @override
+  DealResponse? get dealResponse;
   @override
   AppStatus get addListingDocumentsStatus;
   @override
@@ -533,6 +598,8 @@ abstract class _AddListingState implements AddListingState {
   AppStatus get getLeadListStatus;
   @override
   int get currentTab;
+  @override
+  Map<String, dynamic>? get initialValues;
   @override
   @JsonKey(ignore: true)
   _$$AddListingStateImplCopyWith<_$AddListingStateImpl> get copyWith =>

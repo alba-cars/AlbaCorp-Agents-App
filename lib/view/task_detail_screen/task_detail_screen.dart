@@ -288,7 +288,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                 child: OutlinedButton(
                                                     onPressed: () {
                                                       getIt<CallBloc>().add(
-                                                          CallEvent.clickToCall(
+                                                          CallEvent.callStarted(
+                                                              activityId:
+                                                                  task.id,
                                                               phoneNumber: task
                                                                       .lead
                                                                       ?.phone ??
@@ -692,7 +694,14 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                               WrapSelectField(
                                 name: 'type',
                                 label: 'Type',
-                                values: ['Call', 'WhatsApp', 'Viewing'],
+                                values: [
+                                  'Call',
+                                  'WhatsApp',
+                                  'Viewing',
+                                  'Appointment',
+                                  'Email',
+                                  'SMSMessage'
+                                ],
                                 isRequired: true,
                               ),
                               DateField(

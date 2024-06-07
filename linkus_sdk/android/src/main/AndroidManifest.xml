@@ -1,3 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.alba.linkus_sdk">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.alba.linkus_sdk">
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <application>
+    <service
+        android:name=".utils.MicroPhoneService"
+        android:foregroundServiceType="phoneCall" />
+    </application>
 </manifest>

@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
+import 'package:real_estate_app/data/repository/linkus_repo.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 
 import '../../../model/paginator.dart';
@@ -14,9 +15,10 @@ part 'leads_cubit.freezed.dart';
 
 @injectable
 class LeadsCubit extends Cubit<LeadsState> {
-  LeadsCubit(this._leadRepo) : super(LeadsState());
+  LeadsCubit(this._leadRepo, this._linkusRepo) : super(LeadsState());
 
   final LeadRepo _leadRepo;
+  final LinkusRepo _linkusRepo;
 
   Future<void> getLeads({bool refresh = false}) async {
     if (refresh || state.leadsPaginator == null) {
@@ -81,5 +83,9 @@ class LeadsCubit extends Cubit<LeadsState> {
         emit(state.copyWith(leadsFilter: {}));
     }
     getLeads(refresh: true);
+  }
+
+  Future<void> makeACall(Lead lead) async {
+    await _linkusRepo.makeACall(number: lead.phone!);
   }
 }

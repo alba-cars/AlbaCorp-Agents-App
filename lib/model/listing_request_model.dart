@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:real_estate_app/model/amenity_model.dart';
 
 import 'building_model.dart';
 import 'community_model.dart';
@@ -25,6 +26,14 @@ class NewListingRequest with _$NewListingRequest {
     @JsonKey(name: 'property_type') required PropertyType? propertyType,
     required Community? community,
     Building? building,
+    // @Default([]) List<Amenity> amenities,
+    String? furnishing,
+    String? contractValidity,
+    String? vacancy,
+    int? numberOfCheques,
+    @Default(false) bool exclusive,
+    @Default(false) bool isOffPlanResale,
+    @Default(false) bool vacantOnTransfer,
   }) = _NewListingRequest;
 
   factory NewListingRequest.fromJson(Map<String, dynamic> json) =>

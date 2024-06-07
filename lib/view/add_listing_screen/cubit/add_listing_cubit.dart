@@ -5,12 +5,15 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/deals_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
+import 'package:real_estate_app/model/deal_model.dart';
+import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/listing_request_model.dart';
 import 'package:real_estate_app/model/off_plan_model.dart';
@@ -29,12 +32,19 @@ part 'add_listing_cubit.freezed.dart';
 
 @injectable
 class AddListingCubit extends Cubit<AddListingState> {
-  AddListingCubit(this._leadRepo, this._listingsRepo, this._dealsRepo)
-      : super(AddListingState()) {
+  AddListingCubit(this._leadRepo, this._listingsRepo, this._dealsRepo,
+      @factoryParam bool _isEdit, @factoryParam Deal? _deal)
+      : isEdit = _isEdit,
+        deal = _deal,
+        super(AddListingState()) {
+    if (isEdit && deal != null) {
+      _applyInitialValues();
+    }
     getPropertyTypes();
     getAmenities();
   }
-
+  final Deal? deal;
+  final bool isEdit;
   final LeadRepo _leadRepo;
   final ListingsRepo _listingsRepo;
   final DealsRepo _dealsRepo;
@@ -42,6 +52,10 @@ class AddListingCubit extends Cubit<AddListingState> {
 
   void setScrollController(ScrollController scrollController) {
     _scrollController = scrollController;
+  }
+
+  void _applyInitialValues() {
+    emit(state.copyWith(initialValues: deal?.toListing()));
   }
 
   Future<void> addListing({required Map<String, dynamic> values}) async {
@@ -64,7 +78,42 @@ class AddListingCubit extends Cubit<AddListingState> {
           case (Success dealResult):
             emit(state.copyWith(
                 addListingStatus: AppStatus.success,
-                dealListingResponse: s.value));
+                dealResponse: dealResult.value));
+            break;
+          case (Error e):
+            emit(state.copyWith(
+                addListingStatus: AppStatus.failure,
+                addListingError: e.exception));
+            break;
+        }
+
+      case (Error e):
+        emit(state.copyWith(
+            addListingStatus: AppStatus.failure, addListingError: e.exception));
+        break;
+    }
+  }
+
+  Future<void> editListing({required Map<String, dynamic> values}) async {
+    emit(state.copyWith(addListingStatus: AppStatus.loading));
+    final val = Map.from(values)..removeWhere((key, value) => value == null);
+    final result = await _listingsRepo.updateListingAcquired(
+        id: deal!.newListingRequest!.id, values: {'multiple': false, ...val});
+    switch (result) {
+      case (Success<NewListingRequest> s):
+        final deal = await _dealsRepo.addDeal(values: {
+          "assignedAgent": getIt<AuthBloc>().state.agent?.id,
+          "category": "Listing Acquired",
+          "type": "Listing",
+          "agreedSalePrice": s.value.price,
+          "agreedCommission": values['agreedCommission'],
+          'user_id': s.value.userId
+        });
+        switch (deal) {
+          case (Success<DealResponse> dealResult):
+            emit(state.copyWith(
+                addListingStatus: AppStatus.success,
+                dealResponse: dealResult.value));
             break;
           case (Error e):
             emit(state.copyWith(
@@ -82,9 +131,12 @@ class AddListingCubit extends Cubit<AddListingState> {
 
   Future<void> addListingDocuments(
       {required Map<String, dynamic> values}) async {
+    Logger().d(values);
     emit(state.copyWith(addListingDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
-        dealId: state.dealListingResponse!.id ?? '', values: values);
+        userId: state.dealResponse!.client!.id,
+        dealId: state.dealResponse!.id,
+        values: values);
     switch (result) {
       case (Success s):
         emit(state.copyWith(addListingDocumentsStatus: AppStatus.success));

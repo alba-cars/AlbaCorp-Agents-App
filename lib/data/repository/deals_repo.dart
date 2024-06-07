@@ -20,7 +20,9 @@ abstract class DealsRepo {
       {required Map<String, dynamic> values});
   Future<Result<DealResponse>> addDeal({required Map<String, dynamic> values});
   Future<Result<void>> addDealDocuments(
-      {required String dealId, required Map<String, dynamic> values});
+      {required String dealId,
+      required String userId,
+      required Map<String, dynamic> values});
   Future<Result<List<DealDocument>>> getDealDocuments({required String dealId});
   Future<Result<DealResponse>> updateDeal(
       {required String id, required Map<String, dynamic> values});

@@ -11,10 +11,10 @@ class DealDocument with _$DealDocument {
     required String id,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'created_by_id') required String createdById,
-    required String path,
+    String? path,
     required String type,
     List<dynamic>? documents,
-    @JsonKey(name: 'deal_id') required String dealId,
+    @JsonKey(name: 'deal_id') String? dealId,
     @JsonKey(name: 'created_by') User? createdBy,
   }) = _DealDocument;
 

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
+import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/off_plan_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -14,6 +15,7 @@ import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/currency_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
+import 'package:real_estate_app/widgets/fields/document_upload_field_multi.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
@@ -26,20 +28,27 @@ import 'widgets/secondary_base_info.dart';
 
 class AddDealScreen extends StatelessWidget {
   static const routeName = '/addDealScreen';
-  const AddDealScreen({super.key});
+  const AddDealScreen({super.key, required this.isEdit, this.deal});
+  final bool isEdit;
+  final Deal? deal;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddDealCubit>(),
-      child: AddDealScreenLayout(),
+      create: (context) => getIt<AddDealCubit>(param1: deal),
+      child: AddDealScreenLayout(
+        isEdit: isEdit,
+      ),
     );
   }
 }
 
 class AddDealScreenLayout extends StatefulWidget {
-  const AddDealScreenLayout({super.key});
-
+  const AddDealScreenLayout({
+    super.key,
+    required this.isEdit,
+  });
+  final bool isEdit;
   @override
   State<AddDealScreenLayout> createState() => _AddDealScreenLayoutState();
 }
@@ -50,7 +59,7 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
   late final GlobalKey<FormBuilderState> _formKeyStepTwo = GlobalKey();
   late final GlobalKey<FormBuilderState> _formKeyStepThree = GlobalKey();
   late final TabController _tabController =
-      TabController(length: 3, vsync: this);
+      TabController(length: widget.isEdit ? 2 : 3, vsync: this);
   late final ScrollController _scrollController = ScrollController();
 
   @override
@@ -83,58 +92,59 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
             backgroundColor: primaryColor,
             foregroundColor: Colors.white,
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-              child: BlocSelector<AddDealCubit, AddDealState, int>(
-                selector: (state) {
-                  return state.currentTab;
-                },
-                builder: (context, currentTab) {
-                  return Row(
-                    children: [
-                      SizedBox.square(
-                        dimension: 60,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            CircularProgressIndicator(
-                              strokeWidth: 8,
-                              value: (currentTab + 1) / 4,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                              color: primaryColor,
-                              strokeCap: StrokeCap.round,
-                              // valueColor: AlwaysStoppedAnimation(Colors.blue),
-                            ),
-                            Align(
-                                alignment: Alignment.center,
-                                child:
-                                    LabelText(text: '${currentTab + 1} of 3'))
-                          ],
+          if (!widget.isEdit)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
+                child: BlocSelector<AddDealCubit, AddDealState, int>(
+                  selector: (state) {
+                    return state.currentTab;
+                  },
+                  builder: (context, currentTab) {
+                    return Row(
+                      children: [
+                        SizedBox.square(
+                          dimension: 60,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              CircularProgressIndicator(
+                                strokeWidth: 8,
+                                value: (currentTab + 1) / 4,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
+                                color: primaryColor,
+                                strokeCap: StrokeCap.round,
+                                // valueColor: AlwaysStoppedAnimation(Colors.blue),
+                              ),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child:
+                                      LabelText(text: '${currentTab + 1} of 3'))
+                            ],
+                          ),
                         ),
-                      ),
-                      HorizontalSmallGap(),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          BlockTitleText(
-                              text: context
-                                  .read<AddDealCubit>()
-                                  .stepNames[currentTab]),
-                          NormalText(
-                              text:
-                                  '${currentTab != 2 ? "Next" : 'Previous'} : ${currentTab != 2 ? context.read<AddDealCubit>().stepNames[currentTab + 1] : context.read<AddDealCubit>().stepNames[currentTab - 1]}')
-                        ],
-                      ))
-                    ],
-                  );
-                },
+                        HorizontalSmallGap(),
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            BlockTitleText(
+                                text: context
+                                    .read<AddDealCubit>()
+                                    .stepNames[currentTab]),
+                            NormalText(
+                                text:
+                                    '${currentTab != 2 ? "Next" : 'Previous'} : ${currentTab != 2 ? context.read<AddDealCubit>().stepNames[currentTab + 1] : context.read<AddDealCubit>().stepNames[currentTab - 1]}')
+                          ],
+                        ))
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
-          ),
         ],
         body: SafeArea(
           child: Column(
@@ -153,7 +163,7 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                         controller: _tabController,
                         physics: NeverScrollableScrollPhysics(),
                         children: [
-                          DealTypeTab(),
+                          if (!widget.isEdit) DealTypeTab(),
                           selectedDealType == DealType.primaryOffPlan
                               ? PrimaryBasicInfoTab(
                                   formKey: _formKeyStepOne,
@@ -552,7 +562,7 @@ class CollectDocumentsTab extends StatelessWidget {
                 DocumentSelectionField(
                   onSelected: (v) {},
                   isEditting: false,
-                  name: 'Emirates Id',
+                  name: 'EID',
                   label: 'Emirates Id',
                 ),
                 DocumentSelectionField(
@@ -560,6 +570,10 @@ class CollectDocumentsTab extends StatelessWidget {
                   isEditting: false,
                   name: 'Passport',
                   label: 'Passport',
+                ),
+                MultiDocumentUploadField(
+                  name: 'Other',
+                  label: 'Other Documents',
                 ),
               ],
             ),

@@ -30,6 +30,13 @@ _$NewListingRequestImpl _$$NewListingRequestImplFromJson(
       building: json['building'] == null
           ? null
           : Building.fromJson(json['building'] as Map<String, dynamic>),
+      furnishing: json['furnishing'] as String?,
+      contractValidity: json['contractValidity'] as String?,
+      vacancy: json['vacancy'] as String?,
+      numberOfCheques: json['numberOfCheques'] as int?,
+      exclusive: json['exclusive'] as bool? ?? false,
+      isOffPlanResale: json['isOffPlanResale'] as bool? ?? false,
+      vacantOnTransfer: json['vacantOnTransfer'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$NewListingRequestImplToJson(
@@ -49,4 +56,11 @@ Map<String, dynamic> _$$NewListingRequestImplToJson(
       'property_type': instance.propertyType,
       'community': instance.community,
       'building': instance.building,
+      'furnishing': instance.furnishing,
+      'contractValidity': instance.contractValidity,
+      'vacancy': instance.vacancy,
+      'numberOfCheques': instance.numberOfCheques,
+      'exclusive': instance.exclusive,
+      'isOffPlanResale': instance.isOffPlanResale,
+      'vacantOnTransfer': instance.vacantOnTransfer,
     };

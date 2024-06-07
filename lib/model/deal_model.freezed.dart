@@ -31,7 +31,7 @@ mixin _$Deal {
   double? get agreedSalePrice => throw _privateConstructorUsedError;
   double? get agreedCommission => throw _privateConstructorUsedError;
   Agent? get assignedAgent => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   List<dynamic> get rejection => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
@@ -100,7 +100,7 @@ abstract class $DealCopyWith<$Res> {
       double? agreedSalePrice,
       double? agreedCommission,
       Agent? assignedAgent,
-      String? type,
+      String type,
       String status,
       List<dynamic> rejection,
       @JsonKey(name: 'user_id') String? userId,
@@ -174,7 +174,7 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
     Object? agreedSalePrice = freezed,
     Object? agreedCommission = freezed,
     Object? assignedAgent = freezed,
-    Object? type = freezed,
+    Object? type = null,
     Object? status = null,
     Object? rejection = null,
     Object? userId = freezed,
@@ -244,10 +244,10 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
           ? _value.assignedAgent
           : assignedAgent // ignore: cast_nullable_to_non_nullable
               as Agent?,
-      type: freezed == type
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -553,7 +553,7 @@ abstract class _$$DealImplCopyWith<$Res> implements $DealCopyWith<$Res> {
       double? agreedSalePrice,
       double? agreedCommission,
       Agent? assignedAgent,
-      String? type,
+      String type,
       String status,
       List<dynamic> rejection,
       @JsonKey(name: 'user_id') String? userId,
@@ -636,7 +636,7 @@ class __$$DealImplCopyWithImpl<$Res>
     Object? agreedSalePrice = freezed,
     Object? agreedCommission = freezed,
     Object? assignedAgent = freezed,
-    Object? type = freezed,
+    Object? type = null,
     Object? status = null,
     Object? rejection = null,
     Object? userId = freezed,
@@ -706,10 +706,10 @@ class __$$DealImplCopyWithImpl<$Res>
           ? _value.assignedAgent
           : assignedAgent // ignore: cast_nullable_to_non_nullable
               as Agent?,
-      type: freezed == type
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -866,7 +866,7 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
       this.agreedSalePrice,
       this.agreedCommission,
       this.assignedAgent,
-      this.type,
+      required this.type,
       required this.status,
       required final List<dynamic> rejection,
       @JsonKey(name: 'user_id') this.userId,
@@ -934,7 +934,7 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
   @override
   final Agent? assignedAgent;
   @override
-  final String? type;
+  final String type;
   @override
   final String status;
   final List<dynamic> _rejection;
@@ -1248,7 +1248,7 @@ abstract class _Deal implements Deal {
       final double? agreedSalePrice,
       final double? agreedCommission,
       final Agent? assignedAgent,
-      final String? type,
+      required final String type,
       required final String status,
       required final List<dynamic> rejection,
       @JsonKey(name: 'user_id') final String? userId,
@@ -1310,7 +1310,7 @@ abstract class _Deal implements Deal {
   @override
   Agent? get assignedAgent;
   @override
-  String? get type;
+  String get type;
   @override
   String get status;
   @override

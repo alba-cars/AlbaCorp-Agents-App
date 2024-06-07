@@ -14,6 +14,7 @@ import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
+import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/off_plan_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
@@ -25,8 +26,10 @@ import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/currency_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
+import 'package:real_estate_app/widgets/fields/document_upload_field_multi.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
+import 'package:real_estate_app/widgets/fields/multi_image_field.dart';
 import 'package:real_estate_app/widgets/fields/number_field.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
@@ -37,12 +40,14 @@ import '../../widgets/fields/commission_field.dart';
 
 class AddListingScreen extends StatelessWidget {
   static const routeName = '/addListingScreen';
-  const AddListingScreen({super.key});
+  const AddListingScreen({super.key, required this.isEdit, this.deal});
+  final bool isEdit;
+  final Deal? deal;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddListingCubit>(),
+      create: (context) => getIt<AddListingCubit>(param1: isEdit, param2: deal),
       child: AddListingScreenLayout(),
     );
   }
@@ -123,7 +128,7 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
                             Align(
                                 alignment: Alignment.center,
                                 child:
-                                    LabelText(text: '${currentTab + 1} of 4'))
+                                    LabelText(text: '${currentTab + 1} of 2'))
                           ],
                         ),
                       ),
@@ -234,7 +239,12 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
 
   @override
   void initState() {
-    val = widget._formKey.currentState?.instantValue ?? {};
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      val = widget._formKey.currentState?.instantValue ?? {};
+      if (mounted) {
+        setState(() {});
+      }
+    });
     super.initState();
   }
 
@@ -242,6 +252,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
   Widget build(BuildContext context) {
     return FormBuilder(
       key: widget._formKey,
+      initialValue: context.read<AddListingCubit>().state.initialValues ?? {},
       onChanged: () {
         val = widget._formKey.currentState?.instantValue ?? {};
         setState(() {});
@@ -256,6 +267,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   name: 'user_id',
                   label: 'Client',
                   isRequired: true,
+                  disabled: context.read<AddListingCubit>().isEdit,
                   actionButton: (key) {
                     return TextButton(
                       style: TextButton.styleFrom(
@@ -318,7 +330,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   isRequired: true),
               WrapSelectField(
                   name: 'furnishing',
-                  label: 'furnishing',
+                  label: 'Furnishing',
                   values: ['Furnished', 'Semi furnished', 'unfurnished'],
                   isRequired: true),
               NumberField(
@@ -445,7 +457,8 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
               CommissionField(
                 name: 'agreedCommission',
                 isRequired: true,
-                price: widget._formKey.currentState?.instantValue['price'],
+                price: val['price'],
+                commissionPercentage: val['agreedCommission'],
               ),
             ],
           ),
@@ -488,7 +501,7 @@ class CollectDocumentsTab extends StatelessWidget {
                 DocumentSelectionField(
                   onSelected: (v) {},
                   isEditting: false,
-                  name: 'sss',
+                  name: 'Title Deed',
                   label: 'Title Deed',
                 ),
                 DocumentSelectionField(
@@ -515,14 +528,18 @@ class CollectDocumentsTab extends StatelessWidget {
                 DocumentSelectionField(
                   onSelected: (v) {},
                   isEditting: false,
-                  name: 'sss',
+                  name: 'EID',
                   label: 'Emirates Id',
                 ),
                 DocumentSelectionField(
                   onSelected: (v) {},
                   isEditting: false,
-                  name: 'ejari',
+                  name: 'Passport',
                   label: 'Passport',
+                ),
+                MultiDocumentUploadField(
+                  name: 'Other',
+                  label: 'Other Documents',
                 ),
               ],
             ),

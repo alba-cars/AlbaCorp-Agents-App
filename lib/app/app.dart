@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:linkus_sdk/linkus_sdk.dart';
+import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:phone_state/phone_state.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
@@ -100,11 +102,15 @@ class _AppState extends State<App> {
     FirebaseMessaging.onMessage.listen(onFirebaseForegroundMessage);
     FirebaseMessaging.onBackgroundMessage(onFirebaseBackgroundMessage);
     initiatePhoneStateStream();
+    LinkusSdk().onSdkCallBack().listen((e) {
+      Logger().d(e);
+    });
     checkpreference();
     super.initState();
   }
 
   void onFirebaseForegroundMessage(RemoteMessage message) async {
+    Logger().d(message.data);
     if (message.data['type'] == 'NEW_SPECIAL_LEADS') {
       (await SharedPreferences.getInstance())
           .setString('NEW_SPECIAL_LEADS', json.encode(message.data));
@@ -122,6 +128,10 @@ class _AppState extends State<App> {
   }
 
   getToken() async {
+    final token = await FirebaseMessaging.instance.getToken();
+    if (token != null) {
+      LinkusSdk().setFcmToken(token: token);
+    }
     await getIt<SharedPreferences>().reload();
     if (getIt<SharedPreferences>().containsKey('NEW_SPECIAL_LEADS')) {
       context.read<ActivityCubit>().setHasNewSpecialLeadsActivity(true);
@@ -207,17 +217,16 @@ class _AppState extends State<App> {
               outlinedButtonTheme: OutlinedButtonThemeData(
                   style: ButtonStyle(
                       foregroundColor:
-                          MaterialStatePropertyAll(Color(0xff374eab)),
-                      fixedSize: MaterialStatePropertyAll(Size.fromWidth(
+                          WidgetStatePropertyAll(Color(0xff374eab)),
+                      fixedSize: WidgetStatePropertyAll(Size.fromWidth(
                         200,
                       )),
-                      minimumSize:
-                          MaterialStatePropertyAll(Size.fromHeight(43)),
-                      side: MaterialStatePropertyAll(BorderSide(
+                      minimumSize: WidgetStatePropertyAll(Size.fromHeight(43)),
+                      side: WidgetStatePropertyAll(BorderSide(
                         color: const Color(0xff374eab),
                         width: 1,
                       )),
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12))))),
               dialogTheme: DialogTheme(
                   backgroundColor: Colors.white,

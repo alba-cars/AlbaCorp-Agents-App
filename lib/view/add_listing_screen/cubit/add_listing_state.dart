@@ -6,6 +6,7 @@ class AddListingState with _$AddListingState {
     @Default(AppStatus.init) AppStatus addListingStatus,
     String? addListingError,
     NewListingRequest? dealListingResponse,
+    DealResponse? dealResponse,
     @Default(AppStatus.init) AppStatus addListingDocumentsStatus,
     String? addListingDocumentsError,
     @Default([]) List<PropertyType> propertyTypeList,
@@ -19,5 +20,6 @@ class AddListingState with _$AddListingState {
     @Default([]) List<Lead> leadList,
     @Default(AppStatus.init) AppStatus getLeadListStatus,
     @Default(0) int currentTab,
+    Map<String, dynamic>? initialValues,
   }) = _AddListingState;
 }

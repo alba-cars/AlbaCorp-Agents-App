@@ -21,6 +21,13 @@ class CommissionField extends StatefulWidget {
 
 class _CommissionFieldState extends State<CommissionField> {
   num? commissionPercentage;
+
+  @override
+  void initState() {
+    commissionPercentage = widget.commissionPercentage?.toDouble();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(

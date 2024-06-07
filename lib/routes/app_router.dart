@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/model/deal_document_model.dart';
+import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -52,7 +55,7 @@ class AppRouter {
       RouteObserver<ModalRoute>();
   static final router = GoRouter(
       refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
-      observers: [routerObserver],
+      // observers: [routerObserver],
       redirect: (context, state) {
         final authState = getIt<AuthBloc>().state;
         if (authState.authStatus == AuthStatus.Authenticated) {
@@ -168,14 +171,34 @@ class AppRouter {
                 path: AddDealScreen.routeName,
                 name: AddDealScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: AddDealScreen());
+                  final isEdit = state.uri.queryParameters['isEdit'] == 'true';
+                  Deal? deal;
+                  if (state.uri.queryParameters['deal'] != null) {
+                    deal = Deal.fromJson(
+                        json.decode(state.uri.queryParameters['deal']!));
+                  }
+                  return AppTransition(
+                      child: AddDealScreen(
+                    isEdit: isEdit,
+                    deal: deal,
+                  ));
                 },
               ),
               GoRoute(
                 path: AddListingScreen.routeName,
                 name: AddListingScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: AddListingScreen());
+                  final isEdit = state.uri.queryParameters['isEdit'] == 'true';
+                  Deal? deal;
+                  if (state.uri.queryParameters['deal'] != null) {
+                    deal = Deal.fromJson(
+                        json.decode(state.uri.queryParameters['deal']!));
+                  }
+                  return AppTransition(
+                      child: AddListingScreen(
+                    isEdit: isEdit,
+                    deal: deal,
+                  ));
                 },
               ),
               GoRoute(
@@ -300,9 +323,21 @@ class AppRouter {
                 name: DealAddDocumentScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
+                  final userId = state.uri.queryParameters['userId'] ?? '';
+                  final isEdit = state.uri.queryParameters['isEdit'] == 'true';
+                  List<DealDocument>? dealDocuments;
+                  if (state.uri.queryParameters.containsKey('dealDocuments'))
+                    dealDocuments = (json.decode(
+                                state.uri.queryParameters['dealDocuments']!)
+                            as List)
+                        .map((e) => DealDocument.fromJson(e))
+                        .toList();
                   return AppTransition(
                       child: DealAddDocumentScreen(
                     dealId: id,
+                    userId: userId,
+                    isEdit: isEdit,
+                    dealDocuments: dealDocuments,
                   ));
                 },
               ),

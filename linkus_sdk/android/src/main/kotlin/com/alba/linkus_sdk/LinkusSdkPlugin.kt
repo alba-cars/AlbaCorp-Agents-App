@@ -1,10 +1,13 @@
 package com.alba.linkus_sdk
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.alba.linkus_sdk.utils.permission.PermissionRequest
 import com.yeastar.linkus.constant.YlsConstant
 import com.yeastar.linkus.service.base.YlsBaseManager
 import com.yeastar.linkus.service.call.YlsCallManager
@@ -14,7 +17,6 @@ import com.yeastar.linkus.service.callback.CallStateCallback
 import com.yeastar.linkus.service.callback.RequestCallback
 import com.yeastar.linkus.service.callback.SdkCallback
 import com.yeastar.linkus.service.login.YlsLoginManager
-import com.yeastar.linkus.utils.SoundManager
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -37,6 +39,7 @@ class LinkusSdkPlugin: FlutterPlugin, MethodCallHandler,EventChannel.StreamHandl
   private lateinit var context: Context
   private var _eventSink :EventChannel.EventSink? = null
   private var activity: Activity? = null
+  private val uiThreadHandler = Handler(Looper.getMainLooper())
 
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "linkus_sdk")
@@ -77,57 +80,61 @@ class LinkusSdkPlugin: FlutterPlugin, MethodCallHandler,EventChannel.StreamHandl
     when (call.method ) {
       "initialize" -> {
         try {
-          YlsBaseManager.getInstance().initYlsSDK(context, null);
+          YlsBaseManager.getInstance().initYlsSDK(activity?.applicationContext, null);
 
           YlsBaseManager.getInstance().sdkCallback = object : SdkCallback {
             // User account logout callback. Refer to the table below for account logout event types
             override fun onLogout(type: Int) {
-              _eventSink?.success(mapOf("onLogout" to type))
+              uiThreadHandler.post {   _eventSink?.success(mapOf("onLogout" to type)) }
+
               Log.d("Something ===========", "onLogout: ")
             }
 
             // Linus SDK reconnecting with PBX success callback
             override fun onReconnectSuccess() {
-              _eventSink?.success(mapOf("onReconnectSuccess" to true))
+              uiThreadHandler.post { _eventSink?.success(mapOf("onReconnectSuccess" to true))}
               Log.d("Something ===========", "onReconnectSuccess: ")
             }
 
             // CDR records change callback
             override fun onCdrChange(syncResult: Int) {
-              _eventSink?.success(mapOf("onCdrChange" to syncResult))
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              uiThreadHandler.post {  _eventSink?.success(mapOf("onCdrChange" to syncResult))}
+              Log.d("Something ===========", "onCdrChange: ")
             }
           }
           YlsCallManager.getInstance().callStateCallback = object : CallStateCallback {
             override fun onCallStateChange(callStateVo: CallStateVo) {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onCallStateChange: $callStateVo")
+              uiThreadHandler.post { _eventSink?.success(
+                mapOf("onCallStateChange" to mapOf("callId" to callStateVo.callId,"status" to callStateVo.status
+              )))}
 //              EventBus.getDefault().post(CallStateEvent(callStateVo))
             }
 
             override fun onNetWorkLevelChange(callId: Int, networkLevel: Int) {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onNetWorkLevelChange: ")
 //              EventBus.getDefault().postSticky(NetWorkLevelEvent(callId, networkLevel))
             }
 
             override fun onConnectChange() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onConnectChange: ")
 //              EventBus.getDefault().postSticky(ConnectionChangeEvent())
             }
 
             override fun onRecordChange(isRecording: Boolean) {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onRecordChange: ")
 //              EventBus.getDefault().post(RecordEvent(isRecording))
             }
           }
 
           YlsCallManager.getInstance().actionCallback = object : ActionCallback {
             override fun onFinishCall() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onFinishCall: ")
 //              finishAllCall(context)
             }
 
             override fun onNewCall() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onNewCall: ")
 //              if (com.yeastar.linkus.demo.call.CallManager.getInstance()
 //                  .getMicroPhoneServiceIntent() == null
 //              ) {
@@ -138,17 +145,17 @@ class LinkusSdkPlugin: FlutterPlugin, MethodCallHandler,EventChannel.StreamHandl
             }
 
             override fun onCallWaiting() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onCallWaiting: ")
 //              EventBus.getDefault().post(CallWaitingEvent())
 //              SoundManager.getInstance().startPlay(context, YlsConstant.SOUND_CALL_WAITING_TYPE)
             }
 
             override fun onMissCallClick() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onMissCallClick: ")
             }
 
             override fun onStopMicroPhoneService() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onStopMicroPhoneService: ")
 //              if (!YlsCallManager.getInstance().isInCall
 //                && com.yeastar.linkus.demo.call.CallManager.getInstance()
 //                  .getMicroPhoneServiceIntent() != null
@@ -162,17 +169,17 @@ class LinkusSdkPlugin: FlutterPlugin, MethodCallHandler,EventChannel.StreamHandl
             }
 
             override fun onDismissPopupView() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onDismissPopupView: ")
 //              dismissPopupView()
             }
 
             override fun onNotifyAudioChange() {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onNotifyAudioChange: ")
 //              notifyAudioChange()
             }
 
             override fun onMissCallArrive(caller: String) {
-              Log.d("Something ===========", "onReconnectSuccess: ")
+              Log.d("Something ===========", "onMissCallArrive: ")
 //              if (Utils.isAppOnForeground(context)) {
 //                return
 //              }
@@ -200,7 +207,7 @@ class LinkusSdkPlugin: FlutterPlugin, MethodCallHandler,EventChannel.StreamHandl
         val remotePortI = call.requiredArgument<Int>("remotePortI")
 
         YlsLoginManager.getInstance().loginBlock(
-          context, userName, password,localeIp ,localePortI, remoteIp, remotePortI, object : RequestCallback<Boolean?> {
+          activity?.applicationContext, userName, password,localeIp ,localePortI, remoteIp, remotePortI, object : RequestCallback<Boolean?> {
             // Login succeess callback
             override fun onSuccess(res: Boolean?) {
                 result.success(res);
@@ -214,19 +221,77 @@ class LinkusSdkPlugin: FlutterPlugin, MethodCallHandler,EventChannel.StreamHandl
               result.error("400",exception.localizedMessage,exception.stackTrace);
             }
           })
+
         }
+      "requestPermission"->{
+        val request: PermissionRequest = PermissionRequest(activity,
+          object : PermissionRequest.PermissionCallback {
+            override fun onFailure(permissions: List<String?>?) {
+              if (permissions != null) {
+
+                for (str in permissions) {
+                  Log.w("Linkus Sdk", "onFailure:$str")
+                }
+              }
+              result.success(false)
+            }
+            override fun onSuccessful(permissions: List<String?>?) {
+              result.success(true)
+            }
+
+          })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+          request.hasPermission(listOf(
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.BLUETOOTH_CONNECT)
+          )
+        } else {
+          request.hasPermission(
+            listOf(
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.RECORD_AUDIO)
+          )
+        }
+      }
       "makeACall" ->{
         val number = call.requiredArgument<String>("number")
         try {
           YlsCallManager.getInstance().makeNewCall(number,true)
+          YlsCallManager.getInstance().registerSip()
           result.success(true)
         }catch (e:Exception){
           result.error("400",e.message,e.stackTrace);
         }
 
       }
-      "sdkCallBack"->{
+      "hangUpCall" ->{
+        val number = call.requiredArgument<Int>("callId")
+        try {
+          YlsCallManager.getInstance().hangUpCall(activity?.applicationContext,number)
+          YlsCallManager.getInstance().unRegisterSip()
+          result.success(true)
+        }catch (e:Exception){
+          result.error("400",e.message,e.stackTrace);
+        }
 
+      }
+      "setFcmToken"->{
+         val token = call.requiredArgument<String>("token")
+        YlsBaseManager.getInstance()
+          .setPushInfo(YlsConstant.PUSH_MODE_FIRE_BASE, token, object : RequestCallback<Any> {
+            override fun onSuccess(o: Any) {
+              result.success(true)
+            }
+
+            override fun onFailed(i: Int) {
+              result.success(false)
+            }
+
+            override fun onException(throwable: Throwable) {
+              result.error("400",null,null)
+            }
+          })
       }
       else ->
         result.notImplemented()

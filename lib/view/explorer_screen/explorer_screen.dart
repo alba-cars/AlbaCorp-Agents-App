@@ -228,26 +228,28 @@ class _ExplorerTabState extends State<ExplorerTab> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Row(
-                    children: [
-                      Text('Show only available'),
-                      BlocSelector<ExplorerScreenCubit, ExplorerScreenState,
-                          bool>(
-                        selector: (state) {
-                          return state.showOnlyAvailable;
-                        },
-                        builder: (context, showOnlyAvailable) {
-                          return Switch.adaptive(
-                              value: showOnlyAvailable,
-                              onChanged: (e) {
-                                context
-                                    .read<ExplorerScreenCubit>()
-                                    .setShowOnlyAvailable(e);
-                              });
-                        },
-                      )
-                    ],
+                Expanded(
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Text('Show only available'),
+                        BlocSelector<ExplorerScreenCubit, ExplorerScreenState,
+                            bool>(
+                          selector: (state) {
+                            return state.showOnlyAvailable;
+                          },
+                          builder: (context, showOnlyAvailable) {
+                            return Switch.adaptive(
+                                value: showOnlyAvailable,
+                                onChanged: (e) {
+                                  context
+                                      .read<ExplorerScreenCubit>()
+                                      .setShowOnlyAvailable(e);
+                                });
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 ElevatedButton(

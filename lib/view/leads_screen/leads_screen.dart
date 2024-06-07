@@ -425,25 +425,22 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                                     children: [
                                       IconButton.filledTonal(
                                           onPressed: () async {
-                                            // LinkusSdk().loginToPbx(
-                                            //     userName: "ziad@albacorp.net",
-                                            //     password:
-                                            //         "eyJleHBpcmUiOjAsInNpZ24iOiJRN2FlSXNHRjJ0WDhOSGhURHZCdFpWS0hDZVcxOXpKTkNlME5VM0xmL3NrPSIsInVzZXJuYW1lIjoiemlhZEBhbGJhY29ycC5uZXQiLCJ2ZXJzaW9uIjoiMS4wIn0_",
-                                            //     localeIp: '192.168.0.252',
-                                            //     localePortI: 8111,
-                                            //     remoteIp: '',
-                                            //     remotePortI: 8111);
-                                            await LinkusSdk()
-                                                .makeACall(number: '1002');
+                                            // await LinkusSdk()
+                                            //     .makeACall(number: '1002');
                                             // getIt<CallBloc>().add(
                                             //     CallEvent.clickToCall(
                                             //         phoneNumber:
                                             //             lead.phone ?? '',
                                             //         leadId: lead.id));
+                                            if (lead.phone != null) {
+                                              context
+                                                  .read<LeadsCubit>()
+                                                  .makeACall(lead);
+                                            }
                                           },
                                           icon: Icon(
                                             Icons.call,
-                                          ))
+                                          )),
                                     ],
                                   )
                                 ]),

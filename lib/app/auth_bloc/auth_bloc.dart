@@ -30,14 +30,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
     await getAgentData();
-    LinkusSdk().loginToPbx(
-        userName: "ziad@albacorp.net",
-        password:
-            "eyJleHBpcmUiOjAsInNpZ24iOiJRN2FlSXNHRjJ0WDhOSGhURHZCdFpWS0hDZVcxOXpKTkNlME5VM0xmL3NrPSIsInVzZXJuYW1lIjoiemlhZEBhbGJhY29ycC5uZXQiLCJ2ZXJzaW9uIjoiMS4wIn0_",
-        localeIp: '192.168.0.252',
-        localePortI: 8111,
-        remoteIp: '',
-        remotePortI: 8111);
+    // LinkusSdk().loginToPbx(
+    //     userName: "ziad@albacorp.net",
+    //     password:
+    //         "eyJleHBpcmUiOjAsInNpZ24iOiJRN2FlSXNHRjJ0WDhOSGhURHZCdFpWS0hDZVcxOXpKTkNlME5VM0xmL3NrPSIsInVzZXJuYW1lIjoiemlhZEBhbGJhY29ycC5uZXQiLCJ2ZXJzaW9uIjoiMS4wIn0_",
+    //     localeIp: '192.168.0.252',
+    //     localePortI: 8111,
+    //     remoteIp: '',
+    //     remotePortI: 8111);
   }
 
   FutureOr<void> _userLoggedOut(_UserLoggedOut event, Emitter<AuthState> emit) {

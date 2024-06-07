@@ -89,7 +89,7 @@ class _AddListingScreenLayoutState extends State<_AddPocketListingScreenLayout>
         controller: _scrollController,
         headerSliverBuilder: (context, isScrolledBelow) => [
           SliverAppBar(
-            title: Text('Add Listing'),
+            title: Text('Add Pocket Listing'),
             centerTitle: true,
             backgroundColor: primaryColor,
             foregroundColor: Colors.white,

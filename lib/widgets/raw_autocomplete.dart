@@ -162,11 +162,7 @@ class AppRawAutocomplete<T extends Object> extends StatefulWidget {
                   textEditingController != null),
           'Pass in a fieldViewBuilder, or otherwise create a separate field and pass in the FocusNode, TextEditingController, and a key. Use the key with AppRawAutocomplete.onFieldSubmitted.',
         ),
-        assert((focusNode == null) == (textEditingController == null)),
-        assert(
-          !(textEditingController != null && initialValue != null),
-          'textEditingController and initialValue cannot be simultaneously defined.',
-        );
+        assert((focusNode == null) == (textEditingController == null));
 
   final AutocompleteFieldViewBuilder? fieldViewBuilder;
   final FocusNode? focusNode;
@@ -176,7 +172,7 @@ class AppRawAutocomplete<T extends Object> extends StatefulWidget {
   final void Function(T?)? onSelected;
   final AutocompleteOptionsBuilder<T> optionsBuilder;
   final TextEditingController? textEditingController;
-  final TextEditingValue? initialValue;
+  final T? initialValue;
   final AutoCompleteFieldController? controller;
   static void onFieldSubmitted<T extends Object>(GlobalKey key) {
     final _RawAutocompleteState<T> rawAutocomplete =
@@ -453,9 +449,12 @@ class _RawAutocompleteState<T extends Object>
   @override
   void initState() {
     super.initState();
+    if (widget.initialValue != null) {
+      _selection = widget.initialValue;
+    }
     widget.controller?.reset = reset;
-    _textEditingController = widget.textEditingController ??
-        TextEditingController.fromValue(widget.initialValue);
+    _textEditingController =
+        widget.textEditingController ?? TextEditingController();
     _textEditingController.addListener(_onChangedField);
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onChangedFocus);

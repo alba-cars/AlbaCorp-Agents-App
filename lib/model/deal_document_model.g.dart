@@ -11,10 +11,10 @@ _$DealDocumentImpl _$$DealDocumentImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       userId: json['user_id'] as String,
       createdById: json['created_by_id'] as String,
-      path: json['path'] as String,
+      path: json['path'] as String?,
       type: json['type'] as String,
       documents: json['documents'] as List<dynamic>?,
-      dealId: json['deal_id'] as String,
+      dealId: json['deal_id'] as String?,
       createdBy: json['created_by'] == null
           ? null
           : User.fromJson(json['created_by'] as Map<String, dynamic>),

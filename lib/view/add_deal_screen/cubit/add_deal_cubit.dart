@@ -11,6 +11,7 @@ import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/agency_model.dart';
 import 'package:real_estate_app/model/agent_model.dart';
+import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/off_plan_model.dart';
 import 'package:real_estate_app/model/offplan_listing_response.dart';
@@ -30,8 +31,8 @@ part 'add_deal_cubit.freezed.dart';
 
 @injectable
 class AddDealCubit extends Cubit<AddDealState> {
-  AddDealCubit(
-      this._listingsRepo, this._leadRepo, this._dealsRepo, this._agentRepo)
+  AddDealCubit(this._listingsRepo, this._leadRepo, this._dealsRepo,
+      this._agentRepo, @factoryParam Deal? deal)
       : super(AddDealState()) {
     getPropertyTypes();
     getAgents();
@@ -164,7 +165,9 @@ class AddDealCubit extends Cubit<AddDealState> {
   Future<void> addDealDocuments({required Map<String, dynamic> values}) async {
     emit(state.copyWith(addDealDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
-        dealId: state.dealResponse!.id, values: values);
+        userId: state.dealResponse!.client!.id,
+        dealId: state.dealResponse!.id,
+        values: values);
     switch (result) {
       case (Success s):
         emit(state.copyWith(addDealDocumentsStatus: AppStatus.success));

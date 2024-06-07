@@ -13,6 +13,7 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
+import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
@@ -137,7 +138,8 @@ class _DocumentSelectionFieldState<T> extends State<DocumentSelectionField<T>> {
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(6)),
                                 child: getImageByFileType(context,
-                                    File(state.value!.networkImageUrl!)),
+                                    File(state.value!.networkImageUrl!),
+                                    isNetwork: true),
                               ),
                               Positioned.directional(
                                   end: 10,
@@ -429,7 +431,8 @@ enum FType {
   Other,
 }
 
-Widget getImageByFileType(BuildContext context, File file) {
+Widget getImageByFileType(BuildContext context, File file,
+    {bool isNetwork = false}) {
   FType fileType = getFileType(file);
   switch (fileType) {
     case FType.PDF:
@@ -472,6 +475,14 @@ Widget getImageByFileType(BuildContext context, File file) {
         ),
       );
     default:
+      if (isNetwork) {
+        return Center(
+          child: S3Image(
+            url: file.path,
+            fit: BoxFit.contain,
+          ),
+        );
+      }
       return Image.file(
         file,
         fit: BoxFit.contain,

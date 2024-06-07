@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
 import 'package:real_estate_app/widgets/fields/error_text.dart';
@@ -43,11 +44,14 @@ class _NumberFieldState extends State<NumberField> {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (widget.value != null) {
         _fieldKey.currentState?.didChange(widget.value);
-        final val = widget.value?.toString() ?? '';
+        final val = NumberFormat().format(widget.value);
         _controller.text = val;
       }
       if (_fieldKey.currentState?.value != null) {
-        _controller.text = _fieldKey.currentState?.value?.toString() ?? '';
+        final val = NumberFormat().format(_fieldKey.currentState?.value is num
+            ? _fieldKey.currentState?.value
+            : num.tryParse(_fieldKey.currentState?.value));
+        _controller.text = val;
       }
     });
 
@@ -59,11 +63,10 @@ class _NumberFieldState extends State<NumberField> {
     super.didUpdateWidget(oldWidget);
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (widget.value != oldWidget.value) {
-        if (widget.value != _fieldKey.currentState?.value) {
+        if (widget.value != _fieldKey.currentState?.value &&
+            widget.value != null) {
           _fieldKey.currentState?.didChange(widget.value);
-          final val = CurrencyTextInputFormatter()
-              .formatDouble(widget.value?.toDouble());
-          Logger().d(val);
+          final val = NumberFormat().format(widget.value?.toDouble());
           _controller.text = val;
         }
       }
@@ -102,16 +105,23 @@ class _NumberFieldState extends State<NumberField> {
               TextFormField(
                 controller: _controller,
                 keyboardType: TextInputType.number,
-                inputFormatters: [CurrencyTextInputFormatter()],
+                // inputFormatters: [CurrencyTextInputFormatter()],
                 textAlignVertical: TextAlignVertical.center,
                 textAlign: TextAlign.start,
                 onChanged: (val) {
-                  final v = num.tryParse(val.replaceAll(',', ''));
-                  if (!widget.convertToString) {
-                    state.didChange(v);
+                  late final v;
+                  if (widget.convertToString) {
+                    v = val.replaceAll(',', '');
                   } else {
-                    state.didChange(val.replaceAll(',', ''));
+                    v = num.tryParse(val.replaceAll(',', ''));
                   }
+                  if (v != state.value && v != null) {
+                    _controller.text =
+                        NumberFormat().format(v is num ? v : num.tryParse(v));
+                  }
+
+                  state.didChange(v);
+
                   widget.onChanged?.call(v);
                 },
                 decoration: InputDecoration(

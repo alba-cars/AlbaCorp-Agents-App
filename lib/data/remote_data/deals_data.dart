@@ -153,31 +153,85 @@ class DealData implements DealsRepo {
 
   @override
   Future<Result<void>> addDealDocuments(
-      {required String dealId, required Map<String, dynamic> values}) async {
+      {required String dealId,
+      required String userId,
+      required Map<String, dynamic> values}) async {
     try {
       String url = 'v1/Documents';
+      Map<String, Map<String, dynamic>> updateDocuments = {};
       final futures = values.entries.map((v) async {
-        if (v.value is FileObject) {
+        final value = v.value;
+        if (value is FileObject) {
+          if (value.networkImageUrl != null && value.localImage == null) {
+            return null;
+          }
           final file = File(v.value!.localImage!);
           final uploaded = await uploadFileToS3AndGetPath(file,
               fullPath:
                   '/deals/${(v.key).paramCase}-${const Uuid().v4()}${extension(file.path)}');
+          if (value.networkImageUrl != null && value.networkObjectId != null) {
+            updateDocuments.addAll({
+              value.networkObjectId!: {'path': uploaded}
+            });
+            return null;
+          }
           return MapEntry(
             v.key,
             uploaded,
+          );
+        } else if (value is List<FileObject>) {
+          final List<String> files = [];
+          for (final fileObject in value) {
+            if (fileObject.networkImageUrl != null &&
+                fileObject.localImage == null) {
+              continue;
+            }
+            final file = File(fileObject.localImage!);
+            final ext = extension(file.path);
+            final uploaded = await uploadFileToS3AndGetPath(file,
+                fullPath:
+                    '/deals/${(v.key).paramCase}-${const Uuid().v4()}${ext}');
+
+            files.add(uploaded);
+          }
+          if (value.isNotEmpty &&
+              value.first.networkImageUrl != null &&
+              value.first.networkObjectId != null) {
+            updateDocuments.addAll({
+              value.first.networkObjectId!: {'documents': files}
+            });
+            return null;
+          }
+          return MapEntry(
+            v.key,
+            files,
           );
         }
       });
       final futureResults = await Future.wait(futures);
       futureResults.forEach((element) async {
         if (element != null) {
+          Logger().d(element);
+          bool deal = false;
+          if (element.key == 'EID' || element.key == 'Passport') {
+            deal = false;
+          } else {
+            deal = true;
+          }
           await _dio.post(url, data: {
-            'deal_id': dealId,
-            'path': element.value,
-            'type': element.key
+            if (deal) 'deal_id': dealId,
+            if (element.value is String) 'path': element.value,
+            if (element.value is List) 'documents': element.value,
+            'type': element.key,
+            if (!deal) 'user_id': userId
           });
         }
       });
+      if (updateDocuments.isNotEmpty) {
+        updateDocuments.entries.forEach((element) async {
+          await _dio.patch('$url/${element.key}', data: element.value);
+        });
+      }
 
       return Success(
         null,

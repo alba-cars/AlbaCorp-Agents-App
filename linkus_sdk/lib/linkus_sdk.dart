@@ -21,8 +21,20 @@ class LinkusSdk {
         remotePortI: remotePortI);
   }
 
+  Future<bool> requestPermissions() {
+    return LinkusSdkPlatform.instance.requestPermission();
+  }
+
   Future<bool> makeACall({required String number}) {
     return LinkusSdkPlatform.instance.makeACall(number: number);
+  }
+
+  Future<bool> hangUpCall({required int callId}) {
+    return LinkusSdkPlatform.instance.hangUpCall(callId: callId);
+  }
+
+  Future<bool> setFcmToken({required String token}) {
+    return LinkusSdkPlatform.instance.setFcmToken(token: token);
   }
 
   Stream onSdkCallBack() {

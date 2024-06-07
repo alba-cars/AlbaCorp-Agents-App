@@ -208,4 +208,21 @@ class ListingsData implements ListingsRepo {
       return onError(e, stack, log);
     }
   }
+
+  @override
+  Future<Result<NewListingRequest>> updateListingAcquired(
+      {required String id, required Map<String, dynamic> values}) async {
+    try {
+      String url = 'v1/propList/request/$id';
+
+      final response = await _dio.put(url, data: values);
+      final data = response.data;
+      final model = NewListingRequest.fromJson(data);
+      return Success(
+        model,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
 }

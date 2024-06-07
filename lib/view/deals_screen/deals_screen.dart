@@ -48,6 +48,7 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 2, vsync: this);
+
   @override
   void initState() {
     context.read<DealsCubit>().getDeals();
@@ -135,10 +136,16 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
   }
 }
 
-class DealsTab extends StatelessWidget {
+class DealsTab extends StatefulWidget {
   const DealsTab({
     super.key,
   });
+
+  @override
+  State<DealsTab> createState() => _DealsTabState();
+}
+
+class _DealsTabState extends State<DealsTab> {
   List<Widget> filterFields(BuildContext context) {
     return [
       WrapSelectField(
@@ -182,97 +189,106 @@ class DealsTab extends StatelessWidget {
     ];
   }
 
+  late final PageStorageBucket _bucket = PageStorageBucket();
+
+  late final PageStorageKey _pageStorageKey = PageStorageKey('deals screen');
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: AppSearchBar(
-              onChanged: (val) {
-                context.read<DealsCubit>().searchDeals(val);
-              },
-              filterFields: filterFields(context),
-              onFilterApplied: (filter) {
-                context.read<DealsCubit>().setDealsFilter(filter);
-              },
-              filter:
-                  context.select((DealsCubit value) => value.state.dealsFilter),
-            )),
-        Expanded(
-          child: BlocBuilder<DealsCubit, DealsState>(
-            builder: (context, state) {
-              if (state.getDealsStatus == AppStatus.loading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (state.deals.isEmpty) {
-                return Center(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: Size(40, 34),
-                          maximumSize: Size(110, 34),
-                          fixedSize: null,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onTertiary,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.tertiary),
-                      child: Text('Add Deal'),
-                      onPressed: () async {
-                        final result =
-                            await context.pushNamed(AddDealScreen.routeName);
-                        if (result == true) {
-                          context.read<DealsCubit>().getDeals(refresh: true);
-                        }
-                      }),
-                );
-              }
-              final deals = state.deals;
-              return NotificationListener<ScrollNotification>(
-                onNotification: (scrollInfo) {
-                  if (state.getDealsStatus != AppStatus.loadingMore &&
-                      scrollInfo.metrics.pixels >=
-                          0.9 * scrollInfo.metrics.maxScrollExtent) {
-                    context.read<DealsCubit>().getDeals();
-                  }
-                  return true;
+    return PageStorage(
+      bucket: _bucket,
+      child: Column(
+        children: [
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              child: AppSearchBar(
+                onChanged: (val) {
+                  context.read<DealsCubit>().searchDeals(val);
                 },
-                child: RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    await context.read<DealsCubit>().getDeals(refresh: true);
+                filterFields: filterFields(context),
+                onFilterApplied: (filter) {
+                  context.read<DealsCubit>().setDealsFilter(filter);
+                },
+                filter: context
+                    .select((DealsCubit value) => value.state.dealsFilter),
+              )),
+          Expanded(
+            child: BlocBuilder<DealsCubit, DealsState>(
+              builder: (context, state) {
+                if (state.getDealsStatus == AppStatus.loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state.deals.isEmpty) {
+                  return Center(
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(40, 34),
+                            maximumSize: Size(110, 34),
+                            fixedSize: null,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onTertiary,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.tertiary),
+                        child: Text('Add Deal'),
+                        onPressed: () async {
+                          final result =
+                              await context.pushNamed(AddDealScreen.routeName);
+                          if (result == true) {
+                            context.read<DealsCubit>().getDeals(refresh: true);
+                          }
+                        }),
+                  );
+                }
+                final deals = state.deals;
+                return NotificationListener<ScrollNotification>(
+                  onNotification: (scrollInfo) {
+                    if (state.getDealsStatus != AppStatus.loadingMore &&
+                        scrollInfo.metrics.pixels >=
+                            0.9 * scrollInfo.metrics.maxScrollExtent) {
+                      context.read<DealsCubit>().getDeals();
+                    }
+                    return true;
                   },
-                  child: ListView.separated(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    itemCount: state.getDealsStatus != AppStatus.loadingMore
-                        ? deals.length
-                        : deals.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == deals.length) {
-                        return SizedBox(
-                          height: 50,
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-                      final deal = deals[index];
-
-                      return DealItem(
-                        deal: deal,
-                        index: index,
-                      );
+                  child: RefreshIndicator.adaptive(
+                    onRefresh: () async {
+                      await context.read<DealsCubit>().getDeals(refresh: true);
                     },
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 8,
+                    child: ListView.separated(
+                      key: _pageStorageKey,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      itemCount: state.getDealsStatus != AppStatus.loadingMore
+                          ? deals.length
+                          : deals.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == deals.length) {
+                          return SizedBox(
+                            height: 50,
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        }
+                        final deal = deals[index];
+
+                        return DealItem(
+                          deal: deal,
+                          index: index,
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 8,
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -328,102 +344,112 @@ class _ListingsTabState extends State<ListingsTab> {
     ];
   }
 
+  late final PageStorageBucket _bucket = PageStorageBucket();
+
+  late final PageStorageKey _pageStorageKey = PageStorageKey('listings screen');
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: AppSearchBar(
-              onChanged: (val) {
-                context.read<DealsCubit>().searchYourListings(val);
-              },
-              filterFields: filterFields(context),
-              onFilterApplied: (filter) {
-                context.read<DealsCubit>().setYourListingsFilter(filter);
-              },
-              filter: context
-                  .select((DealsCubit value) => value.state.yourListingsFilter),
-            )),
-        Expanded(
-          child: BlocBuilder<DealsCubit, DealsState>(
-            builder: (context, state) {
-              if (state.getYourListingsStatus == AppStatus.loading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (state.yourListings.isEmpty) {
-                return Center(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: Size(40, 34),
-                          maximumSize: Size(110, 34),
-                          fixedSize: null,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onTertiary,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.tertiary),
-                      child: Text('Add Listing Acquired'),
-                      onPressed: () async {
-                        final result =
-                            await context.pushNamed(AddListingScreen.routeName);
-                        if (result == true) {
-                          context
-                              .read<DealsCubit>()
-                              .getYourListings(refresh: true);
-                        }
-                      }),
-                );
-              }
-              final yourListings = state.yourListings;
-              return NotificationListener<ScrollNotification>(
-                onNotification: (scrollInfo) {
-                  if (state.getYourListingsStatus != AppStatus.loadingMore &&
-                      scrollInfo.metrics.pixels >=
-                          0.9 * scrollInfo.metrics.maxScrollExtent) {
-                    context.read<DealsCubit>().getYourListings();
-                  }
-                  return true;
+    return PageStorage(
+      bucket: _bucket,
+      child: Column(
+        children: [
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              child: AppSearchBar(
+                onChanged: (val) {
+                  context.read<DealsCubit>().searchYourListings(val);
                 },
-                child: RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    await context
-                        .read<DealsCubit>()
-                        .getYourListings(refresh: true);
+                filterFields: filterFields(context),
+                onFilterApplied: (filter) {
+                  context.read<DealsCubit>().setYourListingsFilter(filter);
+                },
+                filter: context.select(
+                    (DealsCubit value) => value.state.yourListingsFilter),
+              )),
+          Expanded(
+            child: BlocBuilder<DealsCubit, DealsState>(
+              builder: (context, state) {
+                if (state.getYourListingsStatus == AppStatus.loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state.yourListings.isEmpty) {
+                  return Center(
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(40, 34),
+                            maximumSize: Size(110, 34),
+                            fixedSize: null,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onTertiary,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.tertiary),
+                        child: Text('Add Listing Acquired'),
+                        onPressed: () async {
+                          final result = await context
+                              .pushNamed(AddListingScreen.routeName);
+                          if (result == true) {
+                            context
+                                .read<DealsCubit>()
+                                .getYourListings(refresh: true);
+                          }
+                        }),
+                  );
+                }
+                final yourListings = state.yourListings;
+                return NotificationListener<ScrollNotification>(
+                  onNotification: (scrollInfo) {
+                    if (state.getYourListingsStatus != AppStatus.loadingMore &&
+                        scrollInfo.metrics.pixels >=
+                            0.9 * scrollInfo.metrics.maxScrollExtent) {
+                      context.read<DealsCubit>().getYourListings();
+                    }
+                    return true;
                   },
-                  child: ListView.separated(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    itemCount:
-                        state.getYourListingsStatus != AppStatus.loadingMore
-                            ? yourListings.length
-                            : yourListings.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == yourListings.length) {
-                        return SizedBox(
-                          height: 50,
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-                      final yourListing = yourListings[index];
-
-                      return DealItem(
-                        deal: yourListing,
-                        index: index,
-                      );
+                  child: RefreshIndicator.adaptive(
+                    onRefresh: () async {
+                      await context
+                          .read<DealsCubit>()
+                          .getYourListings(refresh: true);
                     },
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 8,
+                    child: ListView.separated(
+                      key: _pageStorageKey,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      itemCount:
+                          state.getYourListingsStatus != AppStatus.loadingMore
+                              ? yourListings.length
+                              : yourListings.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == yourListings.length) {
+                          return SizedBox(
+                            height: 50,
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        }
+                        final yourListing = yourListings[index];
+
+                        return DealItem(
+                          key: ValueKey(yourListing.id),
+                          deal: yourListing,
+                          index: index,
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 8,
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -460,12 +486,13 @@ class DealItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
         child: InkWell(
           onTap: () async {
-            final dealR = await context.pushNamed<Deal>(
-                DealDetailsScreen.routeName,
+            // final dealR = await
+            context.pushNamed(DealDetailsScreen.routeName,
                 pathParameters: {'id': deal.id});
-            if (dealR != null) {
-              context.read<DealsCubit>().onDealUpdated(deal, index);
-            }
+            // if (dealR != null) {
+            // Logger().d(index);
+            // context.read<DealsCubit>().onDealUpdated(deal, index);
+            // }
           },
           child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Column(

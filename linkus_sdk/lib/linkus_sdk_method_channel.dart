@@ -39,11 +39,33 @@ class MethodChannelLinkusSdk extends LinkusSdkPlatform {
   }
 
   @override
+  Future<bool> requestPermission() async {
+    final initialize =
+        await methodChannel.invokeMethod<bool>('requestPermission', {});
+    return initialize ?? false;
+  }
+
+  @override
   Future<bool> makeACall({
     required String number,
   }) async {
     final initialize = await methodChannel.invokeMethod<bool>('makeACall', {
       'number': number,
+    });
+    return initialize ?? false;
+  }
+
+  @override
+  Future<bool> hangUpCall({required int callId}) async {
+    final initialize = await methodChannel.invokeMethod<bool>('hangUpCall', {
+      'callId': callId,
+    });
+    return initialize ?? false;
+  }
+
+  Future<bool> setFcmToken({required String token}) async {
+    final initialize = await methodChannel.invokeMethod<bool>('setFcmToken', {
+      'token': token,
     });
     return initialize ?? false;
   }

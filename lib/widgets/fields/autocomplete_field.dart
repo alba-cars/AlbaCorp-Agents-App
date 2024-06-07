@@ -58,8 +58,9 @@ class _AppAutoCompleteState<T extends Object>
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (_fieldKey.currentState?.value != null) {
-        _controller.text =
-            widget._displayStringForOption(_fieldKey.currentState!.value!);
+        // _controller.text =
+        //     widget._displayStringForOption(_fieldKey.currentState!.value!);
+        // Logger().d(_fieldKey.currentState!.value!);
       }
     });
     super.initState();
@@ -112,6 +113,7 @@ class _AppAutoCompleteState<T extends Object>
                 controller: widget.controller,
                 textEditingController: _controller,
                 focusNode: _focusNode,
+                initialValue: _fieldKey.currentState!.value,
                 displayStringForOption: widget._displayStringForOption,
                 fieldViewBuilder: (context, textEditingController, focusNode,
                     onFieldSubmitted, val) {
@@ -121,6 +123,7 @@ class _AppAutoCompleteState<T extends Object>
                     controller: textEditingController,
                     textAlignVertical: TextAlignVertical.center,
                     onEditingComplete: onFieldSubmitted,
+                    enabled: !widget.disabled,
                     decoration: InputDecoration(
                       hintText: val,
                       hintStyle: TextStyle(

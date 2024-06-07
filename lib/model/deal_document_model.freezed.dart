@@ -25,11 +25,11 @@ mixin _$DealDocument {
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by_id')
   String get createdById => throw _privateConstructorUsedError;
-  String get path => throw _privateConstructorUsedError;
+  String? get path => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   List<dynamic>? get documents => throw _privateConstructorUsedError;
   @JsonKey(name: 'deal_id')
-  String get dealId => throw _privateConstructorUsedError;
+  String? get dealId => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by')
   User? get createdBy => throw _privateConstructorUsedError;
 
@@ -49,10 +49,10 @@ abstract class $DealDocumentCopyWith<$Res> {
       {String id,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_by_id') String createdById,
-      String path,
+      String? path,
       String type,
       List<dynamic>? documents,
-      @JsonKey(name: 'deal_id') String dealId,
+      @JsonKey(name: 'deal_id') String? dealId,
       @JsonKey(name: 'created_by') User? createdBy});
 
   $UserCopyWith<$Res>? get createdBy;
@@ -74,10 +74,10 @@ class _$DealDocumentCopyWithImpl<$Res, $Val extends DealDocument>
     Object? id = null,
     Object? userId = null,
     Object? createdById = null,
-    Object? path = null,
+    Object? path = freezed,
     Object? type = null,
     Object? documents = freezed,
-    Object? dealId = null,
+    Object? dealId = freezed,
     Object? createdBy = freezed,
   }) {
     return _then(_value.copyWith(
@@ -93,10 +93,10 @@ class _$DealDocumentCopyWithImpl<$Res, $Val extends DealDocument>
           ? _value.createdById
           : createdById // ignore: cast_nullable_to_non_nullable
               as String,
-      path: null == path
+      path: freezed == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -105,10 +105,10 @@ class _$DealDocumentCopyWithImpl<$Res, $Val extends DealDocument>
           ? _value.documents
           : documents // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      dealId: null == dealId
+      dealId: freezed == dealId
           ? _value.dealId
           : dealId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -141,10 +141,10 @@ abstract class _$$DealDocumentImplCopyWith<$Res>
       {String id,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_by_id') String createdById,
-      String path,
+      String? path,
       String type,
       List<dynamic>? documents,
-      @JsonKey(name: 'deal_id') String dealId,
+      @JsonKey(name: 'deal_id') String? dealId,
       @JsonKey(name: 'created_by') User? createdBy});
 
   @override
@@ -165,10 +165,10 @@ class __$$DealDocumentImplCopyWithImpl<$Res>
     Object? id = null,
     Object? userId = null,
     Object? createdById = null,
-    Object? path = null,
+    Object? path = freezed,
     Object? type = null,
     Object? documents = freezed,
-    Object? dealId = null,
+    Object? dealId = freezed,
     Object? createdBy = freezed,
   }) {
     return _then(_$DealDocumentImpl(
@@ -184,10 +184,10 @@ class __$$DealDocumentImplCopyWithImpl<$Res>
           ? _value.createdById
           : createdById // ignore: cast_nullable_to_non_nullable
               as String,
-      path: null == path
+      path: freezed == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -196,10 +196,10 @@ class __$$DealDocumentImplCopyWithImpl<$Res>
           ? _value._documents
           : documents // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      dealId: null == dealId
+      dealId: freezed == dealId
           ? _value.dealId
           : dealId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -215,10 +215,10 @@ class _$DealDocumentImpl with DiagnosticableTreeMixin implements _DealDocument {
       {required this.id,
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'created_by_id') required this.createdById,
-      required this.path,
+      this.path,
       required this.type,
       final List<dynamic>? documents,
-      @JsonKey(name: 'deal_id') required this.dealId,
+      @JsonKey(name: 'deal_id') this.dealId,
       @JsonKey(name: 'created_by') this.createdBy})
       : _documents = documents;
 
@@ -234,7 +234,7 @@ class _$DealDocumentImpl with DiagnosticableTreeMixin implements _DealDocument {
   @JsonKey(name: 'created_by_id')
   final String createdById;
   @override
-  final String path;
+  final String? path;
   @override
   final String type;
   final List<dynamic>? _documents;
@@ -249,7 +249,7 @@ class _$DealDocumentImpl with DiagnosticableTreeMixin implements _DealDocument {
 
   @override
   @JsonKey(name: 'deal_id')
-  final String dealId;
+  final String? dealId;
   @override
   @JsonKey(name: 'created_by')
   final User? createdBy;
@@ -316,10 +316,10 @@ abstract class _DealDocument implements DealDocument {
       {required final String id,
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'created_by_id') required final String createdById,
-      required final String path,
+      final String? path,
       required final String type,
       final List<dynamic>? documents,
-      @JsonKey(name: 'deal_id') required final String dealId,
+      @JsonKey(name: 'deal_id') final String? dealId,
       @JsonKey(name: 'created_by') final User? createdBy}) = _$DealDocumentImpl;
 
   factory _DealDocument.fromJson(Map<String, dynamic> json) =
@@ -334,14 +334,14 @@ abstract class _DealDocument implements DealDocument {
   @JsonKey(name: 'created_by_id')
   String get createdById;
   @override
-  String get path;
+  String? get path;
   @override
   String get type;
   @override
   List<dynamic>? get documents;
   @override
   @JsonKey(name: 'deal_id')
-  String get dealId;
+  String? get dealId;
   @override
   @JsonKey(name: 'created_by')
   User? get createdBy;

@@ -68,7 +68,14 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                 WrapSelectField(
                   name: 'type',
                   label: 'Type',
-                  values: ['Call', 'WhatsApp', 'Viewing'],
+                  values: [
+                    'Call',
+                    'WhatsApp',
+                    'Viewing',
+                    'Appointment',
+                    'Email',
+                    'SMSMessage'
+                  ],
                   isRequired: true,
                 ),
                 DateField(
