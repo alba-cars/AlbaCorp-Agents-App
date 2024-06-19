@@ -31,11 +31,11 @@ class HomeCubit extends Cubit<HomeState> {
     _listChangeSubscription = getIt<ListStateCubit>().stream.listen((data) {
       if (data.tasksCategorizedView != _lastTaskCategorizedListHash &&
           state.listType.first == ListType.Categorized) {
-        Future.wait(
-            List.generate(7, (index) => getActivities(filterCode: index)));
+        Future.wait(List.generate(
+            7, (index) => getActivities(filterCode: index, refresh: true)));
       } else if (data.taskSortedView != _lastTaskSortedListHash &&
           state.listType.first == ListType.Sorted) {
-        getSortedActivities();
+        getSortedActivities(refresh: true);
       }
       _lastTaskCategorizedListHash = data.tasksCategorizedView;
       _lastTaskSortedListHash = data.taskSortedView;

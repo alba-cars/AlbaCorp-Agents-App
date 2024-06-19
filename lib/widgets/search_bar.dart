@@ -222,7 +222,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
             ),
           ],
         ),
-        if (filter != null && filter?.isNotEmpty == true)
+        if (arrFilter.isNotEmpty)
           SizedBox(
             height: 42,
             child: ListView.separated(
@@ -231,7 +231,40 @@ class _AppSearchBarState extends State<AppSearchBar> {
                 ),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  final ifilter = arrFilter[index];
+                  if (index == 0) {
+                    return Container(
+                      height: 35,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.errorContainer,
+                          border: Border.all(
+                              color: Theme.of(context).colorScheme.error),
+                          borderRadius: BorderRadius.circular(12)),
+                      child: InkWell(
+                        onTap: () {
+                          widget.onFilterApplied?.call(null);
+                          arrFilter = [];
+                          filter = null;
+                          setState(() {});
+                        },
+                        child: Center(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 12, right: 12),
+                                child: Row(
+                                  children: [
+                                    Text("Reset All"),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  final ifilter = arrFilter[index - 1];
                   final key = ifilter.keys.elementAt(0);
                   final value = ifilter.values.elementAt(0);
                   return Container(
@@ -286,7 +319,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
                   );
                 },
                 separatorBuilder: (context, index) => HorizontalSmallGap(),
-                itemCount: arrFilter.length),
+                itemCount: arrFilter.length + 1),
           ),
       ],
     );

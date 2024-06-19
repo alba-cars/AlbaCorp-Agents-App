@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/building_model.dart';
@@ -159,6 +160,8 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
               context, 'Lead Checked In Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+        getIt<ListStateCubit>().setChangedTaskListState();
+        getIt<ListStateCubit>().setChangedLeadsListState();
 
         break;
       case (Error e):
@@ -188,6 +191,8 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
               context, 'Lead Checked In Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+        getIt<ListStateCubit>().setChangedTaskListState();
+        getIt<ListStateCubit>().setChangedLeadsListState();
         break;
       case (Error e):
         emit(state.copyWith(
@@ -221,6 +226,8 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
               context, 'Leads Checked Out Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+        getIt<ListStateCubit>().setChangedTaskListState();
+        getIt<ListStateCubit>().setChangedLeadsListState();
         break;
       case (Error e):
         emit(state.copyWith(

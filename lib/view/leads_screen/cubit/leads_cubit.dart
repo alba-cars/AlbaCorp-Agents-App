@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/constants/hot_leads.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/linkus_repo.dart';
 import 'package:real_estate_app/model/lead_model.dart';
@@ -30,7 +31,11 @@ class LeadsCubit extends Cubit<LeadsState> {
 
     final result = await _leadRepo.getLeads(
         search: state.leadsSearch,
-        filter: state.leadsFilter,
+        filter: {
+          ...(state.leadsFilter ?? {}),
+          ...(state.quickFilter?.value ?? {}),
+          'sort_dir': state.sortDir == 1 ? 'ASC' : 'DESC'
+        },
         paginator: state.leadsPaginator);
     switch (result) {
       case (Success s):
@@ -57,36 +62,50 @@ class LeadsCubit extends Cubit<LeadsState> {
   }
 
   void setQuickFilter(String? filter) {
-    print("hhhhhhhhhhhhh $filter");
     switch (filter) {
       case 'Hot':
-        emit(state.copyWith(leadsFilter: {'lead_source': 'Fresh'}));
+        emit(state.copyWith(
+            leadsFilter: null,
+            quickFilter: QuickFilter(
+                value: {'lead_source': hotLeads}, filter: filter!)));
         break;
       case 'Fresh':
-        emit(state.copyWith(leadsFilter: {'lead_status': 'Fresh'}));
+        emit(state.copyWith(
+            leadsFilter: null,
+            quickFilter:
+                QuickFilter(value: {'lead_status': 'Fresh'}, filter: filter!)));
         break;
       case 'Prospect':
-        emit(state.copyWith(leadsFilter: {
-          ...state.leadsFilter ?? {},
-          'lead_status': 'Prospect'
-        }));
+        emit(state.copyWith(
+            leadsFilter: null,
+            quickFilter: QuickFilter(
+                value: {'lead_status': 'Prospect'}, filter: filter!)));
         break;
       case 'Hot & Fresh':
-        emit(state.copyWith(leadsFilter: {'lead_status': 'Fresh'}));
+        emit(state.copyWith(
+            leadsFilter: null,
+            quickFilter: QuickFilter(
+                value: {'lead_status': 'Fresh', 'lead_source': hotLeads},
+                filter: filter!)));
         break;
       case 'Client with deals':
-        emit(state.copyWith(leadsFilter: {'lead_status': 'Fresh'}));
+        emit(state.copyWith(
+            leadsFilter: null,
+            quickFilter:
+                QuickFilter(value: {'lead_status': 'Deal'}, filter: filter!)));
         break;
       case 'Recent':
-        emit(state.copyWith(leadsFilter: {
-          'sort_by': 'createdAt',
-          "sort_dir": 'DESC',
-          "from_date": DateTime.now().subtract(Duration(days: 7)),
-          "to_date": DateTime.now()
-        }));
+        emit(state.copyWith(
+            leadsFilter: null,
+            quickFilter: QuickFilter(value: {
+              'sort_by': 'createdAt',
+              "sort_dir": 'DESC',
+              "from_date": DateTime.now().subtract(Duration(days: 7)),
+              "to_date": DateTime.now()
+            }, filter: filter!)));
         break;
       default:
-        emit(state.copyWith(leadsFilter: {}));
+        emit(state.copyWith(leadsFilter: {}, quickFilter: null));
     }
     getLeads(refresh: true);
   }
@@ -94,4 +113,16 @@ class LeadsCubit extends Cubit<LeadsState> {
   Future<void> makeACall(Lead lead) async {
     await _linkusRepo.makeACall(number: lead.phone!);
   }
+
+  void setSortDir() {
+    emit(state.copyWith(sortDir: -1 * state.sortDir));
+    getLeads(refresh: true);
+  }
+}
+
+class QuickFilter {
+  final Map<String, dynamic> value;
+  final String filter;
+
+  QuickFilter({required this.value, required this.filter});
 }

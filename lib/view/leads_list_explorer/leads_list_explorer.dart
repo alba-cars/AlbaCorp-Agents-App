@@ -398,6 +398,13 @@ class _ExplorerTabState extends State<ExplorerTab> {
                           }
                           final leadCard = state.explorerList[index];
                           return InkWell(
+                            onTap: () {
+                              if (state.selectModeEnabled) {
+                                context
+                                    .read<LeadsListExplorerCubit>()
+                                    .addToSelection(context, leadCard);
+                              }
+                            },
                             onLongPress: () {
                               context
                                   .read<LeadsListExplorerCubit>()

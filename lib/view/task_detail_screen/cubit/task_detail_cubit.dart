@@ -8,6 +8,7 @@ import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
@@ -71,7 +72,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           final type = values?['type'];
           final propertyId = values?['property'];
           final description = values?["description"];
-          final date = values?["date"];
+          final date = (values?["date"] as DateTime?)
+              ?.addTime((values?["time"] as TimeOfDay));
           final res = await addActivity(
               context: context,
               leadId: state.task!.lead!.id,
@@ -218,7 +220,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           ..removeWhere((element) => element.id == state.task?.id)
           ..insert(0, state.task!);
         emit(state.copyWith(
-            sortedActivity: list,
+            sortedActivity: [...state.sortedActivity, ...list],
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
 
@@ -327,7 +329,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   void setCurrentTask(int taskIndex) {
     print(taskIndex);
-    if (taskIndex == state.activities.length) return;
+    if (taskIndex > state.activities.length - 1) return;
     emit(state.copyWith(
         task: state.sortedActivity[taskIndex],
         taskId: state.sortedActivity[taskIndex].id));

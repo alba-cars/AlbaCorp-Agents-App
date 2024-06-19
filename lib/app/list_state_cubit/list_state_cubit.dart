@@ -11,8 +11,10 @@ class ListStateCubit extends Cubit<ListStateState> {
   ListStateCubit() : super(ListStateState());
 
   void setChangedTaskListState() {
-    emit(state.copyWith(
-        taskSortedView: Uuid().v4(), tasksCategorizedView: Uuid().v4()));
+    Future.delayed(Duration(seconds: 4), () {
+      emit(state.copyWith(
+          taskSortedView: Uuid().v4(), tasksCategorizedView: Uuid().v4()));
+    });
   }
 
   void setChangedLeadsListState() {

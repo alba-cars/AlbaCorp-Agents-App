@@ -288,11 +288,41 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                   'Hot & Fresh',
                   'Client with deals'
                 ],
+                // defaultValue: context.select((LeadsCubit c)=>c.state.),
                 onSelected: (val) {
                   context.read<LeadsCubit>().setQuickFilter(val);
                 },
               ),
             ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text('Sort : '),
+                    BlocSelector<LeadsCubit, LeadsState, int>(
+                      selector: (state) {
+                        return state.sortDir;
+                      },
+                      builder: (context, sortDir) {
+                        return TextButton(
+                            onPressed: () {
+                              context.read<LeadsCubit>().setSortDir();
+                            },
+                            child: Text(
+                              sortDir == 1 ? 'Ascending' : 'Descending',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                            ));
+                      },
+                    )
+                  ],
+                )),
             Expanded(
               child: BlocBuilder<LeadsCubit, LeadsState>(
                 builder: (context, state) {

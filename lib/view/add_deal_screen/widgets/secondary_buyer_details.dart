@@ -45,7 +45,7 @@ class SecondaryAlbaBuyerDetails extends StatelessWidget {
         AppAutoComplete(
           name: 'buyerInternalUserId',
           label: 'Client',
-          isRequired: false,
+          isRequired: true,
           valueTransformer: (p0) => p0?.id,
           displayStringForOption: (lead) =>
               '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
@@ -79,12 +79,17 @@ class SecondaryAlbaBuyerDetails extends StatelessWidget {
           },
           builder: (context, property) {
             return CommissionField(
+              isRequired: true,
               name: 'buyerAgreedComm',
               commissionPercentage:
                   num.tryParse(property?.commission.toString() ?? ''),
-              price: property != null
-                  ? context.read<AddDealCubit>().getPrice(property)
-                  : null,
+              price: num.tryParse(formKey
+                          .currentState?.instantValue['agreedSalePrice']
+                          ?.toString() ??
+                      '') ??
+                  (property != null
+                      ? context.read<AddDealCubit>().getPrice(property)
+                      : null),
             );
           },
         ),

@@ -149,6 +149,7 @@ class _PrimaryBasicInfoTabState extends State<PrimaryBasicInfoTab> {
                 label: 'Unit ID Number',
               ),
               CurrencyField(
+                isRequired: true,
                 name: 'agreedSalesPrice',
                 label: 'Agreed Sale Price',
                 onChanged: (p0) {
@@ -157,6 +158,7 @@ class _PrimaryBasicInfoTabState extends State<PrimaryBasicInfoTab> {
                 },
               ),
               NumberField(
+                isRequired: true,
                 name: 'agreedCommission',
                 label: 'Agreed Commission',
                 unit: '%',
@@ -171,6 +173,7 @@ class _PrimaryBasicInfoTabState extends State<PrimaryBasicInfoTab> {
                 },
               ),
               NumberField(
+                isRequired: true,
                 name: 'commission_amount',
                 unit: 'AED',
                 value: commission,

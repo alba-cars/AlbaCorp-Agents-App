@@ -97,6 +97,7 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
       DropDownFieldController();
   Property? property;
   double? commissionPercentage;
+  double? agreedSalePrice;
   @override
   Widget build(BuildContext context) {
     final types = context.select(
@@ -197,15 +198,19 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
           value: (property != null)
               ? context.read<AddDealCubit>().getPrice(property!)?.toDouble()
               : null,
+          onChanged: (val) {
+            agreedSalePrice = val?.toDouble();
+          },
         ),
         CommissionField(
           name: 'sellerAgreedComm',
           isRequired: true,
           commissionPercentage:
               num.tryParse(property?.commission.toString() ?? ''),
-          price: property != null
-              ? context.read<AddDealCubit>().getPrice(property!)
-              : null,
+          price: agreedSalePrice ??
+              (property != null
+                  ? context.read<AddDealCubit>().getPrice(property!)
+                  : null),
         ),
       ],
     );

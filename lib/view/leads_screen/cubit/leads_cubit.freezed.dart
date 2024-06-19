@@ -22,6 +22,8 @@ mixin _$LeadsState {
   Paginator? get leadsPaginator => throw _privateConstructorUsedError;
   String? get leadsSearch => throw _privateConstructorUsedError;
   Map<String, dynamic>? get leadsFilter => throw _privateConstructorUsedError;
+  QuickFilter? get quickFilter => throw _privateConstructorUsedError;
+  int get sortDir => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LeadsStateCopyWith<LeadsState> get copyWith =>
@@ -40,7 +42,9 @@ abstract class $LeadsStateCopyWith<$Res> {
       String? getLeadsError,
       Paginator? leadsPaginator,
       String? leadsSearch,
-      Map<String, dynamic>? leadsFilter});
+      Map<String, dynamic>? leadsFilter,
+      QuickFilter? quickFilter,
+      int sortDir});
 
   $PaginatorCopyWith<$Res>? get leadsPaginator;
 }
@@ -64,6 +68,8 @@ class _$LeadsStateCopyWithImpl<$Res, $Val extends LeadsState>
     Object? leadsPaginator = freezed,
     Object? leadsSearch = freezed,
     Object? leadsFilter = freezed,
+    Object? quickFilter = freezed,
+    Object? sortDir = null,
   }) {
     return _then(_value.copyWith(
       leads: null == leads
@@ -90,6 +96,14 @@ class _$LeadsStateCopyWithImpl<$Res, $Val extends LeadsState>
           ? _value.leadsFilter
           : leadsFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      quickFilter: freezed == quickFilter
+          ? _value.quickFilter
+          : quickFilter // ignore: cast_nullable_to_non_nullable
+              as QuickFilter?,
+      sortDir: null == sortDir
+          ? _value.sortDir
+          : sortDir // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -120,7 +134,9 @@ abstract class _$$LeadsStateImplCopyWith<$Res>
       String? getLeadsError,
       Paginator? leadsPaginator,
       String? leadsSearch,
-      Map<String, dynamic>? leadsFilter});
+      Map<String, dynamic>? leadsFilter,
+      QuickFilter? quickFilter,
+      int sortDir});
 
   @override
   $PaginatorCopyWith<$Res>? get leadsPaginator;
@@ -143,6 +159,8 @@ class __$$LeadsStateImplCopyWithImpl<$Res>
     Object? leadsPaginator = freezed,
     Object? leadsSearch = freezed,
     Object? leadsFilter = freezed,
+    Object? quickFilter = freezed,
+    Object? sortDir = null,
   }) {
     return _then(_$LeadsStateImpl(
       leads: null == leads
@@ -169,6 +187,14 @@ class __$$LeadsStateImplCopyWithImpl<$Res>
           ? _value._leadsFilter
           : leadsFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      quickFilter: freezed == quickFilter
+          ? _value.quickFilter
+          : quickFilter // ignore: cast_nullable_to_non_nullable
+              as QuickFilter?,
+      sortDir: null == sortDir
+          ? _value.sortDir
+          : sortDir // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -182,7 +208,9 @@ class _$LeadsStateImpl implements _LeadsState {
       this.getLeadsError,
       this.leadsPaginator,
       this.leadsSearch,
-      final Map<String, dynamic>? leadsFilter})
+      final Map<String, dynamic>? leadsFilter,
+      this.quickFilter,
+      this.sortDir = -1})
       : _leads = leads,
         _leadsFilter = leadsFilter;
 
@@ -215,8 +243,14 @@ class _$LeadsStateImpl implements _LeadsState {
   }
 
   @override
+  final QuickFilter? quickFilter;
+  @override
+  @JsonKey()
+  final int sortDir;
+
+  @override
   String toString() {
-    return 'LeadsState(leads: $leads, getLeadsStatus: $getLeadsStatus, getLeadsError: $getLeadsError, leadsPaginator: $leadsPaginator, leadsSearch: $leadsSearch, leadsFilter: $leadsFilter)';
+    return 'LeadsState(leads: $leads, getLeadsStatus: $getLeadsStatus, getLeadsError: $getLeadsError, leadsPaginator: $leadsPaginator, leadsSearch: $leadsSearch, leadsFilter: $leadsFilter, quickFilter: $quickFilter, sortDir: $sortDir)';
   }
 
   @override
@@ -234,7 +268,10 @@ class _$LeadsStateImpl implements _LeadsState {
             (identical(other.leadsSearch, leadsSearch) ||
                 other.leadsSearch == leadsSearch) &&
             const DeepCollectionEquality()
-                .equals(other._leadsFilter, _leadsFilter));
+                .equals(other._leadsFilter, _leadsFilter) &&
+            (identical(other.quickFilter, quickFilter) ||
+                other.quickFilter == quickFilter) &&
+            (identical(other.sortDir, sortDir) || other.sortDir == sortDir));
   }
 
   @override
@@ -245,7 +282,9 @@ class _$LeadsStateImpl implements _LeadsState {
       getLeadsError,
       leadsPaginator,
       leadsSearch,
-      const DeepCollectionEquality().hash(_leadsFilter));
+      const DeepCollectionEquality().hash(_leadsFilter),
+      quickFilter,
+      sortDir);
 
   @JsonKey(ignore: true)
   @override
@@ -261,7 +300,9 @@ abstract class _LeadsState implements LeadsState {
       final String? getLeadsError,
       final Paginator? leadsPaginator,
       final String? leadsSearch,
-      final Map<String, dynamic>? leadsFilter}) = _$LeadsStateImpl;
+      final Map<String, dynamic>? leadsFilter,
+      final QuickFilter? quickFilter,
+      final int sortDir}) = _$LeadsStateImpl;
 
   @override
   List<Lead> get leads;
@@ -275,6 +316,10 @@ abstract class _LeadsState implements LeadsState {
   String? get leadsSearch;
   @override
   Map<String, dynamic>? get leadsFilter;
+  @override
+  QuickFilter? get quickFilter;
+  @override
+  int get sortDir;
   @override
   @JsonKey(ignore: true)
   _$$LeadsStateImplCopyWith<_$LeadsStateImpl> get copyWith =>

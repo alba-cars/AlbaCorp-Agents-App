@@ -23,7 +23,7 @@ class LeadData implements LeadRepo {
   @override
   Future<Result<Lead>> getLead({required String leadId}) async {
     try {
-      String url = 'v1/users//$leadId';
+      String url = 'v1/users/$leadId';
 
       final response = await _dio.get(
         url,
