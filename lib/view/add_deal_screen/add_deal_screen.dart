@@ -470,8 +470,6 @@ class DealTypeTab extends StatelessWidget {
                                       label: 'Choose Buyer Source',
                                       disabled: state.sellerSource ==
                                           ClientSource.external,
-                                      description:
-                                          'Choose only if you are selling/Renting a property',
                                       defaultValue: state.buyerSource,
                                       values: [
                                         ClientSource.alba,
@@ -484,7 +482,7 @@ class DealTypeTab extends StatelessWidget {
                                             .read<AddDealCubit>()
                                             .setSelectedBuyerSource(val);
                                       },
-                                      isRequired: false);
+                                      isRequired: true);
                                 },
                               ),
                             ],

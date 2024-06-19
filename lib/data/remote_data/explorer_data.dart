@@ -72,6 +72,48 @@ class ExplorerData implements ExplorerRepo {
   }
 
   @override
+  Future<Result<List<LeadExplorerItem>>> getLeadsWithPropertyCards(
+      {Map<String, dynamic>? filter,
+      String? search,
+      bool showOnlyAvailable = true,
+      Paginator? paginator}) async {
+    try {
+      String url = 'v1/property-cards/lead-with-cards';
+      Map<String, dynamic>? filterRemoved;
+      if (filter != null) {
+        filterRemoved =
+            (Map.from(filter)..removeWhere((key, value) => value == null));
+
+        filterRemoved = filterRemoved.map((key, value) {
+          if (value is Map) {
+            return MapEntry(key, value['value']);
+          } else if (value is List<Map>) {
+            return MapEntry(key, value.map((e) => e['value']).toList());
+          } else {
+            return MapEntry(key, value);
+          }
+        });
+      }
+      final response = await _dio.get(url, queryParameters: {
+        'limit': 15,
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        if (filterRemoved != null) ...filterRemoved,
+        if (search != null) 'search': search,
+        if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
+      });
+      final data = response.data['data']['data'] as List;
+      final list = data.map((e) => LeadExplorerItem.fromJson(e)).toList();
+      return Success(list,
+          paginator: Paginator(
+              currentPage: response.data['data']?["page"] ?? 1,
+              perPage: response.data['data']?["itemsPerPage"] ?? 15,
+              itemCount: response.data['data']?['filteredCount'] ?? 0));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
   Future<Result<List<PropertyCard>>> getCheckedOutPropertyCards(
       {Map<String, dynamic>? filter,
       String? search,
@@ -116,7 +158,7 @@ class ExplorerData implements ExplorerRepo {
   Future<Result<void>> checkInLead(
       {required List<String> propertyCardIds}) async {
     try {
-      String url = 'v1/property-cards/checkin-leads';
+      String url = '/v1/property-cards/checkin-cards';
       await _dio.post(url, data: {'data': propertyCardIds});
       return Success(
         null,
@@ -128,10 +170,13 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<void>> checkOutLead(
-      {required List<String> propertyCardIds}) async {
+      {List<String>? propertyCardIds, List<String>? leadIds}) async {
     try {
       String url = 'v1/property-cards/checkout-leads';
-      await _dio.post(url, data: {'data': propertyCardIds});
+      await _dio.post(url, data: {
+        if (propertyCardIds != null) 'cards': propertyCardIds,
+        if (leadIds != null) 'leads': leadIds
+      });
       return Success(
         null,
       );

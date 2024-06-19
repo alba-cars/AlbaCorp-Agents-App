@@ -95,7 +95,7 @@ class TokenInterceptor extends InterceptorsWrapper {
         return null;
       }
       final response = await getIt<Dio>().get('/v1/auth/refresh-token',
-          options: Options(headers: {'cookie': 'device-token=$rToken'}));
+          options: Options(headers: {'cookie': 'refreshToken=$rToken'}));
       final accessToken = response.data?['access_token'];
       final refreshToken = response.headers['set-cookie']?.firstOrNull
           ?.splitMapJoin(RegExp(r'refreshToken=(.*?);'),

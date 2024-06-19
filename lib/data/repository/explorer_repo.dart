@@ -13,6 +13,11 @@ abstract class ExplorerRepo {
       String? search,
       bool showOnlyAvailable = true,
       Paginator? paginator});
+  Future<Result<List<LeadExplorerItem>>> getLeadsWithPropertyCards(
+      {Map<String, dynamic>? filter,
+      String? search,
+      bool showOnlyAvailable = true,
+      Paginator? paginator});
   Future<Result<List<PropertyCard>>> getPocketListings(
       {Map<String, dynamic>? filter, String? search, Paginator? paginator});
   Future<Result<void>> addPocketListings(
@@ -20,7 +25,8 @@ abstract class ExplorerRepo {
   Future<Result<List<PropertyCard>>> getCheckedOutPropertyCards(
       {Map<String, dynamic>? filter, String? search, Paginator? paginator});
   Future<Result<void>> checkInLead({required List<String> propertyCardIds});
-  Future<Result<void>> checkOutLead({required List<String> propertyCardIds});
+  Future<Result<void>> checkOutLead(
+      {List<String>? propertyCardIds, List<String>? leadIds});
   Future<Result<List<LeadPropertyCardModel>>> getPropertyCardLeads(
       {required String propertyCardId});
   Future<Result<List<LeadPropertyCardModel>>> getLeadPropertyCards(

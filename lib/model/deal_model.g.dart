@@ -18,7 +18,7 @@ _$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
       assignedAgent: json['assignedAgent'] == null
           ? null
           : Agent.fromJson(json['assignedAgent'] as Map<String, dynamic>),
-      type: json['type'] as String,
+      type: json['type'] as String?,
       status: json['status'] as String,
       rejection: json['rejection'] as List<dynamic>,
       userId: json['user_id'] as String?,

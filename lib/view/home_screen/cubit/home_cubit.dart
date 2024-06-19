@@ -1,13 +1,17 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/category_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
 
@@ -24,10 +28,25 @@ class HomeCubit extends Cubit<HomeState> {
 
     pendingViewingActivitiesCount();
     completedActivitiesCount();
+    _listChangeSubscription = getIt<ListStateCubit>().stream.listen((data) {
+      if (data.tasksCategorizedView != _lastTaskCategorizedListHash &&
+          state.listType.first == ListType.Categorized) {
+        Future.wait(
+            List.generate(7, (index) => getActivities(filterCode: index)));
+      } else if (data.taskSortedView != _lastTaskSortedListHash &&
+          state.listType.first == ListType.Sorted) {
+        getSortedActivities();
+      }
+      _lastTaskCategorizedListHash = data.tasksCategorizedView;
+      _lastTaskSortedListHash = data.taskSortedView;
+    });
   }
 
   final ActivityRepo _activityRepo;
   final LeadRepo _leadRepo;
+  StreamSubscription? _listChangeSubscription;
+  String? _lastTaskCategorizedListHash;
+  String? _lastTaskSortedListHash;
 
   Future<void> getActivities(
       {required int filterCode, bool refresh = false}) async {
@@ -122,7 +141,7 @@ class HomeCubit extends Cubit<HomeState> {
     switch (result) {
       case (Success<List<Activity>> s):
         emit(state.copyWith(
-            sortedActivity: s.value,
+            sortedActivity: [...state.sortedActivity, ...s.value],
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
 
@@ -237,6 +256,12 @@ class HomeCubit extends Cubit<HomeState> {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
     }
+  }
+
+  @override
+  Future<void> close() {
+    _listChangeSubscription?.cancel();
+    return super.close();
   }
 }
 

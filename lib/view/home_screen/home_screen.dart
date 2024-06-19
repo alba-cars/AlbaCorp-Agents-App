@@ -54,40 +54,6 @@ class HomePageLayout extends StatefulWidget {
 }
 
 class _HomePageLayoutState extends State<HomePageLayout> {
-  late final RouteInformation routeInformation;
-  void routeListener() async {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      if (mounted &&
-          AppRouter.router.routerDelegate.currentConfiguration.fullPath ==
-              HomePage.routeName) {
-        if (context.read<HomeCubit>().state.listType.first ==
-            ListType.Categorized) {
-          Future.wait(List.generate(
-              7,
-              (index) => context
-                  .read<HomeCubit>()
-                  .getActivities(filterCode: index, refresh: true)));
-        } else {
-          context.read<HomeCubit>().getSortedActivities();
-        }
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    routeInformation = AppRouter.router.routeInformationProvider.value;
-    AppRouter.router.routerDelegate.addListener(routeListener);
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    AppRouter.router.routeInformationProvider.removeListener(routeListener);
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final user = getIt<AuthBloc>().state.user;

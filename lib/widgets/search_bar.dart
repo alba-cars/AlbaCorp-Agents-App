@@ -222,7 +222,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
             ),
           ],
         ),
-        if (filter != null)
+        if (filter != null && filter?.isNotEmpty == true)
           SizedBox(
             height: 42,
             child: ListView.separated(

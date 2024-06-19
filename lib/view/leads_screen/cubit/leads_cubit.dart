@@ -57,7 +57,7 @@ class LeadsCubit extends Cubit<LeadsState> {
   }
 
   void setQuickFilter(String? filter) {
-    print(filter);
+    print("hhhhhhhhhhhhh $filter");
     switch (filter) {
       case 'Hot':
         emit(state.copyWith(leadsFilter: {'lead_source': 'Fresh'}));
@@ -78,6 +78,12 @@ class LeadsCubit extends Cubit<LeadsState> {
         emit(state.copyWith(leadsFilter: {'lead_status': 'Fresh'}));
         break;
       case 'Recent':
+        emit(state.copyWith(leadsFilter: {
+          'sort_by': 'createdAt',
+          "sort_dir": 'DESC',
+          "from_date": DateTime.now().subtract(Duration(days: 7)),
+          "to_date": DateTime.now()
+        }));
         break;
       default:
         emit(state.copyWith(leadsFilter: {}));

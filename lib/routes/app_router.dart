@@ -25,6 +25,7 @@ import 'package:real_estate_app/view/home_screen/widgets/detail_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
+import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/listings_screen/listing_screen.dart';
 import 'package:real_estate_app/view/message_screen/tab_message.dart';
@@ -309,6 +310,13 @@ class AppRouter {
                       isBlocking: isBlocking,
                     ),
                   );
+                },
+              ),
+              GoRoute(
+                path: LeadsExplorerScreen.routeName,
+                name: LeadsExplorerScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: LeadsExplorerScreen());
                 },
               ),
               GoRoute(

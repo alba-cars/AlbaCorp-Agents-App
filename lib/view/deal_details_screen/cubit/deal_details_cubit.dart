@@ -143,7 +143,7 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
       emit(state.copyWith(sellerActivitiesStatus: AppStatus.success));
       return;
     }
-    final result = await _leadRepo.getLeadActivities(leadId: seller ?? '');
+    final result = await _leadRepo.getLeadActivities(leadId: seller);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -160,14 +160,13 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
     emit(state.copyWith(buyerActivitiesStatus: AppStatus.loading));
     final buyerClientId = switch (state.deal?.category) {
       'Secondary Market Property' => state.deal?.buyerInternalUserId,
-      _ => "",
+      _ => null,
     };
     if (buyerClientId == null) {
       emit(state.copyWith(buyerActivitiesStatus: AppStatus.success));
       return;
     }
-    final result =
-        await _leadRepo.getLeadActivities(leadId: buyerClientId ?? '');
+    final result = await _leadRepo.getLeadActivities(leadId: buyerClientId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

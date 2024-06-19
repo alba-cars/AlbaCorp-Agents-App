@@ -48,37 +48,31 @@ class _DealDetailsScreenLayoutState extends State<_DealDetailsScreenLayout>
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) {
-        context.pop<Deal>(context.read<DealDetailsCubit>().state.deal);
-      },
-      child: SafeArea(
-        child: Scaffold(
-          body: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    title: Text('Deal Details'),
-                    centerTitle: true,
-                    backgroundColor: Colors.white,
-                    foregroundColor: Theme.of(context).colorScheme.primary,
-                  ),
-                  SliverPersistentHeader(
-                      delegate: DealDetailScreenTabHeader(
-                          tabController: _tabController)),
-                ];
-              },
-              body: TabBarView(
-                controller: _tabController,
-                children: [
-                  InfoTabView(),
-                  TransactionsTabView(),
-                  DocumentsTabView(),
-                  ActivitiesTabView()
-                ],
-              )),
-        ),
+    return SafeArea(
+      child: Scaffold(
+        body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  title: Text('Deal Details'),
+                  centerTitle: true,
+                  backgroundColor: Colors.white,
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                ),
+                SliverPersistentHeader(
+                    delegate: DealDetailScreenTabHeader(
+                        tabController: _tabController)),
+              ];
+            },
+            body: TabBarView(
+              controller: _tabController,
+              children: [
+                InfoTabView(),
+                TransactionsTabView(),
+                DocumentsTabView(),
+                ActivitiesTabView()
+              ],
+            )),
       ),
     );
   }

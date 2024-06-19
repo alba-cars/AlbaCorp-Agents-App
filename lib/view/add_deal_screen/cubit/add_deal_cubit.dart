@@ -191,6 +191,8 @@ class AddDealCubit extends Cubit<AddDealState> {
             return 'Select purpose to continue to next step';
           } else if (state.sellerSource == null) {
             return 'Select seller source to continue to next step';
+          } else if (state.buyerSource == null) {
+            return 'Select Buyer source to continue to next step';
           }
         }
         // if (val != null) await addListing(values: val);

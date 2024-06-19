@@ -17,7 +17,6 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
-import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/property_card_list.dart';
@@ -107,6 +106,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 mode = CardAction.ManuelSwipe;
               },
               onSwipeEnd: (previousIndex, targetIndex, activity) async {
+                if (targetIndex == tasks.length - 1) {
+                  context.read<TaskDetailCubit>().getSortedActivities();
+                }
                 if (previousIndex >= targetIndex) {
                   return;
                 }
@@ -665,6 +667,18 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                               RadioListTile(
                                   value: 'Disqualify',
                                   title: Text('Disqualify'),
+                                  groupValue: value,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  onChanged: (val) {
+                                    if (val != null) feedBackValue.value = val;
+                                  }),
+                            if (widget.direction == null ||
+                                widget.direction == DismissDirection.endToStart)
+                              RadioListTile(
+                                  value: 'Do not Call',
+                                  title: Text('Do not call'),
                                   groupValue: value,
                                   materialTapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,

@@ -24,3 +24,35 @@ class LeadPropertyCardModel with _$LeadPropertyCardModel {
   factory LeadPropertyCardModel.fromJson(Map<String, dynamic> json) =>
       _$LeadPropertyCardModelFromJson(json);
 }
+
+@freezed
+class LeadPropertyCardModelNotPopulated
+    with _$LeadPropertyCardModelNotPopulated {
+  const factory LeadPropertyCardModelNotPopulated({
+    @JsonKey(readValue: readId) required String id,
+    required String lead,
+    required PropertyCard propertyCard,
+    @Default(false) bool wasOwner,
+    DateTime? date,
+    double? amount,
+    required String createdBy,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) = _LeadPropertyCardModelNotPopulated;
+
+  factory LeadPropertyCardModelNotPopulated.fromJson(
+          Map<String, dynamic> json) =>
+      _$LeadPropertyCardModelNotPopulatedFromJson(json);
+}
+
+@freezed
+class LeadExplorerItem with _$LeadExplorerItem {
+  const factory LeadExplorerItem(
+          {@JsonKey(readValue: readId) required String id,
+          required Lead lead,
+          required List<LeadPropertyCardModelNotPopulated> mappings}) =
+      _LeadExplorerItem;
+
+  factory LeadExplorerItem.fromJson(Map<String, dynamic> json) =>
+      _$LeadExplorerItemFromJson(json);
+}

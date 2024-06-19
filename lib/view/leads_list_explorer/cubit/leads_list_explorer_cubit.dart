@@ -2,35 +2,32 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
-import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
+import 'package:real_estate_app/model/building_model.dart';
+import 'package:real_estate_app/model/community_model.dart';
+import 'package:real_estate_app/model/lead_property_card_model.dart';
+import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
+import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
-import '../../../model/building_model.dart';
-import '../../../model/community_model.dart';
-import '../../../model/paginator.dart';
-import '../../../model/property_type_model.dart';
-
-part 'explorer_screen_state.dart';
-part 'explorer_screen_cubit.freezed.dart';
+part 'leads_list_explorer_state.dart';
+part 'leads_list_explorer_cubit.freezed.dart';
 
 @injectable
-class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
-  ExplorerScreenCubit(this._explorerRepo, this._listingsRepo)
-      : super(ExplorerScreenState()) {
-    getPropertyTypes();
-  }
+class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
+  LeadsListExplorerCubit(this._explorerRepo, this._listingsRepo)
+      : super(LeadsListExplorerState());
+
   final ExplorerRepo _explorerRepo;
   final ListingsRepo _listingsRepo;
 
-  Future<void> getExplorerList({
+  Future<void> getLeadsExplorerList({
     bool refresh = false,
   }) async {
     if (refresh || state.explorerPaginator == null) {
@@ -45,7 +42,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
       emit(state.copyWith(getExplorerListStatus: AppStatus.loadingMore));
     }
 
-    final result = await _explorerRepo.getPropertyCards(
+    final result = await _explorerRepo.getLeadsWithPropertyCards(
         search: state.explorerSearch,
         filter: state.explorerFilter,
         showOnlyAvailable: state.showOnlyAvailable,
@@ -103,12 +100,12 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
 
   void setShowOnlyAvailable(bool val) {
     emit(state.copyWith(showOnlyAvailable: val));
-    getExplorerList(refresh: true);
+    getLeadsExplorerList(refresh: true);
   }
 
   void searchExplorer(String? search) {
     emit(state.copyWith(explorerSearch: search));
-    getExplorerList(refresh: true);
+    getLeadsExplorerList(refresh: true);
   }
 
   void searchCheckedOut(String? search) {
@@ -118,7 +115,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
 
   void setExplorerFilter(Map<String, dynamic>? filter) {
     emit(state.copyWith(explorerFilter: filter));
-    getExplorerList(refresh: true);
+    getLeadsExplorerList(refresh: true);
   }
 
   void setCheckedOutFilter(Map<String, dynamic>? filter) {
@@ -126,45 +123,24 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     getCheckedOutExplorerList(refresh: true);
   }
 
-  void setSelectionModeEnabled(BuildContext context, PropertyCard card) {
-    if (card.availableForCheckout && card.currentAgent == null) {
-      emit(state
-          .copyWith(selectModeEnabled: true, selectedPropertyCards: [card.id]));
-    } else {
-      emit(state.copyWith(
-        selectModeEnabled: true,
-      ));
-      if (context.mounted) {
-        showSnackbar(
-            context,
-            'You can\'t assign this card, Please choose another',
-            SnackBarType.info);
-      }
-    }
+  void setSelectionModeEnabled(BuildContext context, LeadExplorerItem lead) {
+    emit(
+        state.copyWith(selectModeEnabled: true, selectedPropertyCards: [lead]));
   }
 
   void setSelectionModeDisabled() {
     emit(state.copyWith(selectModeEnabled: false, selectedPropertyCards: []));
   }
 
-  void addToSelection(BuildContext context, PropertyCard card) {
-    if (card.availableForCheckout && card.currentAgent == null) {
-      if (state.selectedPropertyCards.contains(card.id)) {
-        final list = List<String>.from(state.selectedPropertyCards)
-          ..remove(card.id);
-        emit(state.copyWith(selectedPropertyCards: list));
-        return;
-      }
-      emit(state.copyWith(
-          selectedPropertyCards: [...state.selectedPropertyCards, card.id]));
-    } else {
-      if (context.mounted) {
-        showSnackbar(
-            context,
-            'You can\'t assign this card, Please choose another',
-            SnackBarType.info);
-      }
+  void addToSelection(BuildContext context, LeadExplorerItem lead) {
+    if (state.selectedPropertyCards.contains(lead)) {
+      final list = List<LeadExplorerItem>.from(state.selectedPropertyCards)
+        ..remove(lead.id);
+      emit(state.copyWith(selectedPropertyCards: list));
+      return;
     }
+    emit(state.copyWith(
+        selectedPropertyCards: [...state.selectedPropertyCards, lead]));
   }
 
   Future<void> checkInLead(
@@ -183,8 +159,6 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
               context, 'Lead Checked In Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
-        getIt<ListStateCubit>().setChangedTaskListState();
-        getIt<ListStateCubit>().setChangedLeadsListState();
 
         break;
       case (Error e):
@@ -198,15 +172,15 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }
 
   Future<void> checkOutLead(
-      {required BuildContext context, required PropertyCard card}) async {
+      {required BuildContext context, required LeadExplorerItem lead}) async {
     emit(state.copyWith(checkOutLeadStatus: AppStatus.loading));
-    final result = await _explorerRepo.checkOutLead(propertyCardIds: [card.id]);
+    final result = await _explorerRepo.checkOutLead(
+        leadIds: [lead.id],
+        propertyCardIds: lead.mappings.map((e) => e.id).toList());
     switch (result) {
       case (Success s):
-        final newList = List<PropertyCard>.from(state.explorerList);
-        final index = newList.indexOf(card);
-        newList.remove(card);
-        newList.insert(index, card.copyWith(availableForCheckout: false));
+        final newList = List<LeadExplorerItem>.from(state.explorerList);
+        newList.remove(lead);
         emit(state.copyWith(
             checkOutLeadStatus: AppStatus.success, explorerList: newList));
         if (context.mounted) {
@@ -214,8 +188,6 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
               context, 'Lead Checked In Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
-        getIt<ListStateCubit>().setChangedTaskListState();
-        getIt<ListStateCubit>().setChangedLeadsListState();
         break;
       case (Error e):
         emit(state.copyWith(
@@ -232,21 +204,23 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }) async {
     emit(state.copyWith(checkOutLeadStatus: AppStatus.loading));
     final result = await _explorerRepo.checkOutLead(
-        propertyCardIds: state.selectedPropertyCards);
+        leadIds: state.selectedPropertyCards.map((e) => e.id).toList(),
+        propertyCardIds: state.selectedPropertyCards
+            .expand((e) => e.mappings)
+            .map((e) => e.id)
+            .toList());
     switch (result) {
       case (Success s):
         emit(state.copyWith(
             checkOutLeadStatus: AppStatus.success,
             selectModeEnabled: false,
             selectedPropertyCards: []));
-        getExplorerList(refresh: true);
+        getLeadsExplorerList(refresh: true);
         if (context.mounted) {
           showSnackbar(
               context, 'Leads Checked Out Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
-        getIt<ListStateCubit>().setChangedTaskListState();
-        getIt<ListStateCubit>().setChangedLeadsListState();
         break;
       case (Error e):
         emit(state.copyWith(
@@ -274,8 +248,6 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
           Navigator.of(context).pop();
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
-        getIt<ListStateCubit>().setChangedTaskListState();
-        getIt<ListStateCubit>().setChangedLeadsListState();
         break;
       case (Error e):
         emit(state.copyWith(
@@ -290,7 +262,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   Future<void> setSelectedTab(int index) async {
     emit(state.copyWith(currentTab: index));
     if (index == 0) {
-      getExplorerList();
+      getLeadsExplorerList();
     } else {
       getCheckedOutExplorerList();
     }

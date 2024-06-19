@@ -25,7 +25,7 @@ class Deal with _$Deal {
     double? agreedSalePrice,
     double? agreedCommission,
     Agent? assignedAgent,
-    required String type,
+    String? type,
     required String status,
     required List<dynamic> rejection,
     @JsonKey(name: 'user_id') String? userId,

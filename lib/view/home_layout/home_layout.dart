@@ -16,6 +16,7 @@ import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listin
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
+import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/message_screen/tab_message.dart';
 import 'package:real_estate_app/view/more_screen/tab_more.dart';
@@ -144,10 +145,22 @@ class _HomeScreenState extends State<HomeScreen>
                       CustomListTileWithIcon(
                         title: 'Explorer',
                         iconImagePath: 'assets/images/compass.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(ExplorerScreen.routeName);
-                        },
+                        children: [
+                          ListIcon(
+                            title: 'Cards',
+                            onPressed: () {
+                              Scaffold.of(context).closeDrawer();
+                              context.pushNamed(ExplorerScreen.routeName);
+                            },
+                          ),
+                          ListIcon(
+                            title: 'Leads',
+                            onPressed: () {
+                              Scaffold.of(context).closeDrawer();
+                              context.pushNamed(LeadsExplorerScreen.routeName);
+                            },
+                          )
+                        ],
                       ),
                       CustomListTileWithIcon(
                         title: 'Tickets',
@@ -663,51 +676,93 @@ class _ConfirmLogOutState extends State<ConfirmLogOut> {
   }
 }
 
+class ListIcon {
+  final String title;
+  final VoidCallback onPressed;
+
+  ListIcon({
+    required this.title,
+    required this.onPressed,
+  });
+}
+
 class CustomListTileWithIcon extends StatelessWidget {
   final String title;
   final String iconImagePath;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final List<ListIcon>? children;
 
   const CustomListTileWithIcon({
     super.key,
     required this.title,
     required this.iconImagePath,
-    required this.onPressed,
+    this.onPressed,
+    this.children,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onPressed,
-      title: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2.0),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(11.0),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.15),
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(11),
-              ),
-              child: ImageIcon(
-                AssetImage(iconImagePath),
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
-            ),
-            const SizedBox(width: 16.0),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleSmall?.apply(
-                    color: const Color(0xFFFFFFFF),
-                    fontWeightDelta: 2,
-                  ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return children == null
+        ? widget(context, title, iconImagePath, onPressed)
+        : ExpansionTile(
+            shape: Border.fromBorderSide(BorderSide.none),
+            tilePadding: EdgeInsets.zero,
+            title: widget(context, title, iconImagePath, onPressed),
+            initiallyExpanded: true,
+            iconColor: Theme.of(context).colorScheme.onPrimary,
+            collapsedIconColor: Theme.of(context).colorScheme.onPrimary,
+            children: children!
+                .map((e) => Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                            child: widget(context, e.title, null, e.onPressed)),
+                      ],
+                    ))
+                .toList(),
+          );
   }
+
+  Widget widget(BuildContext context, String title, String? iconImagePath,
+          VoidCallback? onPressed) =>
+      ListTile(
+        onTap: onPressed,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(11.0),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.15),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(11),
+                ),
+                child: iconImagePath != null
+                    ? ImageIcon(
+                        AssetImage(iconImagePath),
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      )
+                    : Icon(
+                        Icons.circle,
+                        size: 8,
+                        color: Colors.white,
+                      ),
+              ),
+              const SizedBox(width: 16.0),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleSmall?.apply(
+                      color: const Color(0xFFFFFFFF),
+                      fontWeightDelta: 2,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      );
 }
 
 class ListingTypeDialog extends StatelessWidget {

@@ -84,9 +84,9 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                           }
                           String? image;
                           if (listing.images?.isNotEmpty == true) {
-                            image = listing.images!.first is String
-                                ? listing.images!.first
-                                : listing.images!.first['thumbnail'];
+                            image = listing.images![index] is String
+                                ? listing.images![index]
+                                : listing.images![index]['thumbnail'];
                           }
 
                           return InkWell(

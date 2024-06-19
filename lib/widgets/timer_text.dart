@@ -27,14 +27,13 @@ class _CountdownTimerState extends State<CountdownTimer> {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       final now = DateTime.now();
       final timeLeft = widget.endTime.difference(now);
-
       setState(() {
         _timeLeft = timeLeft;
       });
 
-      if (timeLeft.inSeconds <= 0) {
-        _timer?.cancel();
-      }
+      // if (timeLeft.inSeconds <= 0) {
+      //   _timer?.cancel();
+      // }
     });
   }
 
@@ -54,7 +53,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
             (_timeLeft.inHours % 24).toString() +
             " hrs, " +
             (_timeLeft.inMinutes % 60).toString() +
-            " mins";
+            " mins " +
+            (_timeLeft.inSeconds % 60).toString() +
+            " secs";
 
     return Text(
       (!isOverdue ? 'Due In : ' : 'Overdue By : ') + displayText,
