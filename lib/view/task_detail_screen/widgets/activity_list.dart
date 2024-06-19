@@ -17,7 +17,7 @@ class ActivityList extends StatelessWidget {
         return state.activities;
       },
       builder: (context, activities) {
-        if (activities.isEmpty) {
+        if (activities.length <= 1) {
           return Text('No activities for this lead');
         }
         return ListView.separated(
