@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/constants/beds_baths_optional_list.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/cubit/add_pocket_listing_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -310,12 +311,18 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   name: 'beds',
                   label: 'Beds',
                   values: ['Studio', "1", "2", "3", "4", "5", "6", "7+"],
-                  isRequired: true),
+                  isRequired: propertyTypesExcludeBedsBaths
+                          .contains(val['propertyType'])
+                      ? false
+                      : true),
               WrapSelectField(
                   name: 'baths',
                   label: 'Baths',
                   values: [1, 2, 3, 4, 5, 6, 7],
-                  isRequired: true),
+                  isRequired: propertyTypesExcludeBedsBaths
+                          .contains(val['propertyType'])
+                      ? false
+                      : true),
               NumberField(
                 isRequired: true,
                 name: 'size',

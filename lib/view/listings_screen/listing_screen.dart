@@ -13,6 +13,7 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
+import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
@@ -309,7 +310,8 @@ class _ListingsTabState extends State<ListingsTab> {
                   onNotification: (scrollInfo) {
                     if (state.getListingsStatus != AppStatus.loadingMore &&
                         scrollInfo.metrics.pixels >=
-                            0.9 * scrollInfo.metrics.maxScrollExtent) {
+                            0.9 * scrollInfo.metrics.maxScrollExtent &&
+                        state.listingsPaginator?.hasNextPage == true) {
                       context.read<ListingsCubit>().getListings();
                     }
                     return true;
@@ -733,7 +735,8 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                     if (state.getPocketListingsStatus !=
                             AppStatus.loadingMore &&
                         scrollInfo.metrics.pixels >=
-                            0.9 * scrollInfo.metrics.maxScrollExtent) {
+                            0.9 * scrollInfo.metrics.maxScrollExtent &&
+                        state.pocketListingsPaginator?.hasNextPage == true) {
                       context.read<ListingsCubit>().getPocketListings();
                     }
                     return true;

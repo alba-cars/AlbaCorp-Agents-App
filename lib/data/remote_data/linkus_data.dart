@@ -16,8 +16,8 @@ class LinkusData implements LinkusRepo {
     try {
       String url = 'v1/yeastarPBX/initiate-call';
 
-      final response = await _dio.post(url,
-          data: {'phoneNumber': '+971562945548', 'activityId': activityId});
+      final response = await _dio
+          .post(url, data: {'phoneNumber': number, 'activityId': activityId});
 
       return Success(
         true,

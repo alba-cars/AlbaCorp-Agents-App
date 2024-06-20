@@ -11,6 +11,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/constants/beds_baths_optional_list.dart';
 import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
@@ -234,6 +235,7 @@ class BasicInfoTab extends StatefulWidget {
 
 class _BasicInfoTabState extends State<BasicInfoTab> {
   Map<String, dynamic> val = {};
+  String? propertyType;
 
   AutoCompleteFieldController _controller = AutoCompleteFieldController();
 
@@ -307,6 +309,10 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   values: widget.propertyTypeList,
                   displayOption: (option) => option.propertyType,
                   valueTransformer: (p0) => p0?.id,
+                  onSelected: (val) {
+                    propertyType = val?.propertyType;
+                    setState(() {});
+                  },
                   isRequired: true),
               WrapSelectField(
                   name: 'type',
@@ -317,12 +323,18 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   name: 'beds',
                   label: 'Beds',
                   values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
-                  isRequired: true),
+                  isRequired:
+                      propertyTypesExcludeBedsBaths.contains(propertyType)
+                          ? false
+                          : true),
               WrapSelectField(
                   name: 'baths',
                   label: 'Baths',
                   values: ['1', '2', '3', '4', '5', '6', '7+'],
-                  isRequired: true),
+                  isRequired:
+                      propertyTypesExcludeBedsBaths.contains(propertyType)
+                          ? false
+                          : true),
               WrapSelectField(
                   name: 'contractValidity',
                   label: 'Duration of Contract',
@@ -331,8 +343,11 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
               WrapSelectField(
                   name: 'furnishing',
                   label: 'Furnishing',
-                  values: ['Furnished', 'Semi furnished', 'unfurnished'],
-                  isRequired: true),
+                  values: ['Furnished', 'Semi furnished', 'Unfurnished'],
+                  isRequired:
+                      propertyTypesExcludeBedsBaths.contains(propertyType)
+                          ? false
+                          : true),
               NumberField(
                 isRequired: true,
                 name: 'size',

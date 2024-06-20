@@ -8,6 +8,7 @@ import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
+import 'package:real_estate_app/model/community_team_model.dart';
 import 'package:real_estate_app/model/lead_property_card_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
@@ -283,13 +284,21 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
               element.community.toLowerCase().contains(search.toLowerCase()))
           .toList();
     } else {
-      final result = await _listingsRepo.getCommunities(search: search);
+      final result = await _explorerRepo.getCommunityTeams(
+          agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
-        case (Success s):
+        case (Success<List<CommunityTeamModel>> s):
+          final List<Community> communities = s.value.fold(
+              [],
+              (v, b) => [
+                    ...v,
+                    ...b.communities
+                        .map((e) => Community(id: e.id, community: e.community))
+                  ]);
           emit(state.copyWith(
-              communityList: s.value,
+              communityList: communities,
               getCommunityListStatus: AppStatus.success));
-          return s.value;
+          return communities;
         case (Error e):
           emit(state.copyWith(
             getCommunityListStatus: AppStatus.failure,

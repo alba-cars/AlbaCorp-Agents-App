@@ -7,6 +7,7 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
+import 'package:real_estate_app/model/community_team_model.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
@@ -68,6 +69,9 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     bool refresh = false,
   }) async {
     if (refresh || state.checkedOutPaginator == null) {
+      if (state.getCheckedOutExplorerListStatus == AppStatus.loading) {
+        return;
+      }
       emit(state.copyWith(
           getCheckedOutExplorerListStatus: AppStatus.loading,
           checkedOutPaginator: null,
@@ -85,7 +89,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         filter: state.checkedOutFilter,
         paginator: state.checkedOutPaginator);
     switch (result) {
-      case (Success s):
+      case (Success<List<PropertyCard>> s):
         emit(state.copyWith(
             checkedOutExplorerList: [
               ...state.checkedOutExplorerList,
@@ -304,13 +308,21 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
               element.community.toLowerCase().contains(search.toLowerCase()))
           .toList();
     } else {
-      final result = await _listingsRepo.getCommunities(search: search);
+      final result = await _explorerRepo.getCommunityTeams(
+          agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
-        case (Success s):
+        case (Success<List<CommunityTeamModel>> s):
+          final List<Community> communities = s.value.fold(
+              [],
+              (v, b) => [
+                    ...v,
+                    ...b.communities
+                        .map((e) => Community(id: e.id, community: e.community))
+                  ]);
           emit(state.copyWith(
-              communityList: s.value,
+              communityList: communities,
               getCommunityListStatus: AppStatus.success));
-          return s.value;
+          return communities;
         case (Error e):
           emit(state.copyWith(
             getCommunityListStatus: AppStatus.failure,

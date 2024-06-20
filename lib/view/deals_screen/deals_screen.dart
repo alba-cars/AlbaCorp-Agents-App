@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
@@ -248,7 +249,8 @@ class _DealsTabState extends State<DealsTab> {
                   onNotification: (scrollInfo) {
                     if (state.getDealsStatus != AppStatus.loadingMore &&
                         scrollInfo.metrics.pixels >=
-                            0.9 * scrollInfo.metrics.maxScrollExtent) {
+                            0.9 * scrollInfo.metrics.maxScrollExtent &&
+                        state.dealsPaginator?.hasNextPage == true) {
                       context.read<DealsCubit>().getDeals();
                     }
                     return true;
@@ -405,7 +407,8 @@ class _ListingsTabState extends State<ListingsTab> {
                   onNotification: (scrollInfo) {
                     if (state.getYourListingsStatus != AppStatus.loadingMore &&
                         scrollInfo.metrics.pixels >=
-                            0.9 * scrollInfo.metrics.maxScrollExtent) {
+                            0.9 * scrollInfo.metrics.maxScrollExtent &&
+                        state.yourListingsPaginator?.hasNextPage == true) {
                       context.read<DealsCubit>().getYourListings();
                     }
                     return true;

@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:linkus_sdk/linkus_sdk.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/constants/hot_leads.dart';
+import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/view/leads_screen/cubit/leads_cubit.dart';
 import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
@@ -297,30 +300,67 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Sort : '),
-                    BlocSelector<LeadsCubit, LeadsState, int>(
-                      selector: (state) {
-                        return state.sortDir;
-                      },
-                      builder: (context, sortDir) {
-                        return TextButton(
-                            onPressed: () {
-                              context.read<LeadsCubit>().setSortDir();
-                            },
-                            child: Text(
-                              sortDir == 1 ? 'Ascending' : 'Descending',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
-                            ));
-                      },
-                    )
+                    BlocSelector<LeadsCubit, LeadsState, Paginator?>(
+                        selector: (state) => state.leadsPaginator,
+                        builder: (context, paginator) {
+                          return RichText(
+                              text: TextSpan(
+                                  text: 'Count ',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  children: [
+                                TextSpan(
+                                  text: '${paginator?.itemCount ?? ''}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                )
+                              ]));
+                        }),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text('Sort : '),
+                        BlocSelector<LeadsCubit, LeadsState, int>(
+                          selector: (state) {
+                            return state.sortDir;
+                          },
+                          builder: (context, sortDir) {
+                            return TextButton(
+                                onPressed: () {
+                                  context.read<LeadsCubit>().setSortDir();
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      sortDir == 1 ? 'Ascending' : 'Descending',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary),
+                                    ),
+                                    Icon(
+                                      sortDir == 1
+                                          ? Icons.arrow_downward
+                                          : Icons.arrow_upward,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    )
+                                  ],
+                                ));
+                          },
+                        )
+                      ],
+                    ),
                   ],
                 )),
             Expanded(
@@ -336,7 +376,8 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                     onNotification: (scrollInfo) {
                       if (state.getLeadsStatus != AppStatus.loadingMore &&
                           scrollInfo.metrics.pixels >=
-                              0.9 * scrollInfo.metrics.maxScrollExtent) {
+                              0.9 * scrollInfo.metrics.maxScrollExtent &&
+                          state.leadsPaginator?.hasNextPage == true) {
                         context.read<LeadsCubit>().getLeads();
                       }
                       return true;
@@ -427,18 +468,31 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.h, vertical: 1.h),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.blueGrey),
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              color: Colors.blueGrey[100]),
-                                          child: SmallText(
-                                              text:
-                                                  lead.leadStatus?.name ?? ''),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.h,
+                                                  vertical: 1.h),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.blueGrey),
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  color: Colors.blueGrey[100]),
+                                              child: SmallText(
+                                                  text: lead.leadStatus?.name ??
+                                                      ''),
+                                            ),
+                                            HorizontalSmallGap(),
+                                            if (hotLeads
+                                                .contains(lead.leadSource))
+                                              Image.asset(
+                                                'assets/images/flame.png',
+                                                height: 17,
+                                                width: 20,
+                                              )
+                                          ],
                                         ),
                                         VerticalSmallGap(
                                           adjustment: .2,

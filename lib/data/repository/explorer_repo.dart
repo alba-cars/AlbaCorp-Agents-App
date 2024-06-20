@@ -1,3 +1,4 @@
+import 'package:real_estate_app/model/community_team_model.dart';
 import 'package:real_estate_app/model/lead_property_card_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_card_details_model.dart';
@@ -46,4 +47,6 @@ abstract class ExplorerRepo {
   Future<Result<void>> unLinkPropertyFromLead({required String leadCardId});
   Future<Result<void>> randomLeadsAssignment(
       {required Map<String, dynamic> values});
+  Future<Result<List<CommunityTeamModel>>> getCommunityTeams(
+      {required String agentId});
 }

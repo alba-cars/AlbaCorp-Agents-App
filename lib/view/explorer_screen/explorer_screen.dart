@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/view/explorer_screen/cubit/explorer_screen_cubit.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
@@ -536,7 +537,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                     valueOne: propertyCard.purpose,
                                     labelTwo: 'Size',
                                     valueTwo:
-                                        propertyCard.size?.toString() ?? 'N/A',
+                                        propertyCard.size?.currency ?? 'N/A',
                                   ),
                                   if (propertyCard.currentAgent is Map)
                                     Container(

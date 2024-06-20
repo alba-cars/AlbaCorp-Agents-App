@@ -94,7 +94,7 @@ class LeadData implements LeadRepo {
       final list = data.map((e) => Lead.fromJson(e)).toList();
       return Success(list,
           paginator: Paginator(
-              currentPage: (paginator?.currentPage ?? 1) + 1,
+              currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: response.data['searchPerPage'],
               itemCount: response.data['filteredCount']));
     } catch (e, stack) {

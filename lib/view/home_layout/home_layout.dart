@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen>
                         iconImagePath: 'assets/images/compass.png',
                         children: [
                           ListIcon(
-                            title: 'Cards',
+                            title: 'Property Cards',
                             onPressed: () {
                               Scaffold.of(context).closeDrawer();
                               context.pushNamed(ExplorerScreen.routeName);

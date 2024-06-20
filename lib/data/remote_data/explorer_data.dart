@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
+import 'package:real_estate_app/model/community_team_model.dart';
 import 'package:real_estate_app/model/lead_property_card_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_card_log_model.dart';
@@ -492,6 +493,26 @@ class ExplorerData implements ExplorerRepo {
       final data = response.data['data'] as List;
       final list = data.map((e) => LeadPropertyCardModel.fromJson(e)).toList();
       // final paginator = Paginator(itemCount: 10, perPage: 10, currentPage: 1)
+      return Success(
+        list,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<CommunityTeamModel>>> getCommunityTeams(
+      {required String agentId}) async {
+    try {
+      String url = 'v1/communityTeams?user_id=$agentId';
+
+      final response = await _dio.get(
+        url,
+      );
+      final data = response.data['results'] as List;
+      final list = data.map((e) => CommunityTeamModel.fromJson(e)).toList();
+      // final paginator = Paginator(itemCount: 30, perPage: 30, currentPage: 1);
       return Success(
         list,
       );
