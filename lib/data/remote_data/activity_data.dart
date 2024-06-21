@@ -41,7 +41,22 @@ class ActivityData implements ActivityRepo {
       return Success(model);
     } catch (e, stack) {
       return onError(e, stack, log);
-      ;
+    }
+  }
+
+  @override
+  Future<Result<Activity>> getActivity({
+    required String activityId,
+  }) async {
+    try {
+      final response = await _dio.get(
+        '/v1/activities/$activityId',
+      );
+      final data = response.data;
+      final model = Activity.fromJson(data);
+      return Success(model);
+    } catch (e, stack) {
+      return onError(e, stack, log);
     }
   }
 
@@ -336,7 +351,8 @@ class ActivityData implements ActivityRepo {
       String url = 'v1/activities/query-activities';
       Map<String, dynamic> query = {
         "status": ["Pending", 'Overdue'],
-        if (paginator != null) 'page': paginator.currentPage + 1
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        // 'pageSize': 10
       };
       final response = await _dio.get(url, queryParameters: query);
       final data = response.data['data']['items'] as List;

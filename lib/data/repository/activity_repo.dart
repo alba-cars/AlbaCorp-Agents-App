@@ -12,6 +12,9 @@ abstract class ActivityRepo {
     String? propertyId,
     String? description,
   });
+  Future<Result<Activity>> getActivity({
+    required String activityId,
+  });
   Future<Result<List<Activity>>> fetchActivities(
       {required int filterCode, LeadStatus? status, Paginator? paginator});
   Future<Result<List<Activity>>> fetchActivitiesSorted({Paginator? paginator});

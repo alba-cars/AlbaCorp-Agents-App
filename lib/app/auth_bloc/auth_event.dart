@@ -6,4 +6,8 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.userLoggedOut() = _UserLoggedOut;
   const factory AuthEvent.started() = _Started;
   const factory AuthEvent.refreshAgentData() = _RefreshAgentData;
+  const factory AuthEvent.newImportantActivity(
+      {required List<String> activityIds}) = _NewImportantActivity;
+  const factory AuthEvent.completedImportantActivity(
+      {required String activityId}) = _CompletedImportantActivity;
 }

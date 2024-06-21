@@ -611,7 +611,7 @@ class ActivityListItem extends StatelessWidget {
                           return;
                         }
                         context.read<CallBloc>().add(CallEvent.callStarted(
-                            phoneNumber: '1002', // activity.lead!.phone ?? '',
+                            phoneNumber: activity.lead!.phone ?? '',
                             activityId: activity.id,
                             leadId: activity.lead!.id));
                       },

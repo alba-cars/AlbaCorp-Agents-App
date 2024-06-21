@@ -208,9 +208,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     switch (result) {
       case (Success s):
         final newList = List<PropertyCard>.from(state.explorerList);
-        final index = newList.indexOf(card);
         newList.remove(card);
-        newList.insert(index, card.copyWith(availableForCheckout: false));
         emit(state.copyWith(
             checkOutLeadStatus: AppStatus.success, explorerList: newList));
         if (context.mounted) {

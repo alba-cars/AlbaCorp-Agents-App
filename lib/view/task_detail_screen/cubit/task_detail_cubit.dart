@@ -35,9 +35,17 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           taskId: activity?.id ?? taskId,
           task: activity,
         )) {
-    getSortedActivities();
-    getLeadActivities();
-    getExplorerList();
+    if (activity == null) {
+      getTask().then((v) {
+        getSortedActivities();
+        getLeadActivities();
+        getExplorerList();
+      });
+    } else {
+      getSortedActivities();
+      getLeadActivities();
+      getExplorerList();
+    }
   }
 
   final ActivityRepo _activityRepo;
@@ -47,13 +55,18 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> getTask() async {
     emit(state.copyWith(getTaskStatus: AppStatus.loading));
-    // final result = await _activityRepo();
-    // switch (result) {
-    //   case (Success s):
-    //     break;
-    //   case (Error e):
-    //     break;
-    // }
+    final result = await _activityRepo.getActivity(activityId: state.taskId);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+          task: s.value,
+          getTaskStatus: AppStatus.success,
+        ));
+        break;
+      case (Error e):
+        emit(state.copyWith(getTaskStatus: AppStatus.failure));
+        break;
+    }
   }
 
   Future<void> updateActivity(
@@ -67,6 +80,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         activityId: state.task!.id, notes: description, completed: completed);
     switch (result) {
       case (Success s):
+        getIt<AuthBloc>().add(
+            AuthEvent.completedImportantActivity(activityId: state.task!.id));
         emit(state.copyWith(updateTaskStatus: AppStatus.success));
         if (addFollowUp) {
           final type = values?['type'];

@@ -85,14 +85,14 @@ class LeadsCubit extends Cubit<LeadsState> {
         emit(state.copyWith(
             leadsFilter: null,
             quickFilter: QuickFilter(
-                value: {'lead_status': 'Fresh', 'lead_source': hotLeads},
+                value: {'lead_status': 'Fresh', 'lead_source_type': 'hot'},
                 filter: filter!)));
         break;
       case 'Client with deals':
         emit(state.copyWith(
             leadsFilter: null,
             quickFilter:
-                QuickFilter(value: {'lead_status': 'Deal'}, filter: filter!)));
+                QuickFilter(value: {'with_deals': "true"}, filter: filter!)));
         break;
       case 'Recent':
         emit(state.copyWith(

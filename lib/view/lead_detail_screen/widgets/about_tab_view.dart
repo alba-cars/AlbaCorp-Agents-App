@@ -106,8 +106,8 @@ class AboutTabView extends StatelessWidget {
                           IconButton.filledTonal(
                               onPressed: () {
                                 getIt<CallBloc>().add(CallEvent.clickToCall(
-                                    phoneNumber: lead.phone ?? '',
-                                    leadId: lead.id));
+                                  phoneNumber: lead.phone ?? '',
+                                ));
                               },
                               icon: Icon(Icons.call)),
                           IconButton.filledTonal(

@@ -31,6 +31,7 @@ mixin _$User {
   String get lastName => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
+  UserPBXNumbers? get userPBXNumbers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +51,10 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: "first_name") String firstName,
       @JsonKey(name: "last_name") String lastName,
       String? city,
-      String? photo});
+      String? photo,
+      UserPBXNumbers? userPBXNumbers});
+
+  $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers;
 }
 
 /// @nodoc
@@ -74,6 +78,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? lastName = null,
     Object? city = freezed,
     Object? photo = freezed,
+    Object? userPBXNumbers = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -108,7 +113,23 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
+      userPBXNumbers: freezed == userPBXNumbers
+          ? _value.userPBXNumbers
+          : userPBXNumbers // ignore: cast_nullable_to_non_nullable
+              as UserPBXNumbers?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers {
+    if (_value.userPBXNumbers == null) {
+      return null;
+    }
+
+    return $UserPBXNumbersCopyWith<$Res>(_value.userPBXNumbers!, (value) {
+      return _then(_value.copyWith(userPBXNumbers: value) as $Val);
+    });
   }
 }
 
@@ -127,7 +148,11 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: "first_name") String firstName,
       @JsonKey(name: "last_name") String lastName,
       String? city,
-      String? photo});
+      String? photo,
+      UserPBXNumbers? userPBXNumbers});
+
+  @override
+  $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers;
 }
 
 /// @nodoc
@@ -148,6 +173,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? city = freezed,
     Object? photo = freezed,
+    Object? userPBXNumbers = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -182,6 +208,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
+      userPBXNumbers: freezed == userPBXNumbers
+          ? _value.userPBXNumbers
+          : userPBXNumbers // ignore: cast_nullable_to_non_nullable
+              as UserPBXNumbers?,
     ));
   }
 }
@@ -197,7 +227,8 @@ class _$UserImpl implements _User {
       @JsonKey(name: "first_name") this.firstName = '',
       @JsonKey(name: "last_name") this.lastName = '',
       this.city,
-      this.photo});
+      this.photo,
+      this.userPBXNumbers});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -222,10 +253,12 @@ class _$UserImpl implements _User {
   final String? city;
   @override
   final String? photo;
+  @override
+  final UserPBXNumbers? userPBXNumbers;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo)';
+    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, userPBXNumbers: $userPBXNumbers)';
   }
 
   @override
@@ -243,13 +276,15 @@ class _$UserImpl implements _User {
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.city, city) || other.city == city) &&
-            (identical(other.photo, photo) || other.photo == photo));
+            (identical(other.photo, photo) || other.photo == photo) &&
+            (identical(other.userPBXNumbers, userPBXNumbers) ||
+                other.userPBXNumbers == userPBXNumbers));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, email, phone, whatsapp,
-      firstName, lastName, city, photo);
+      firstName, lastName, city, photo, userPBXNumbers);
 
   @JsonKey(ignore: true)
   @override
@@ -274,7 +309,8 @@ abstract class _User implements User {
       @JsonKey(name: "first_name") final String firstName,
       @JsonKey(name: "last_name") final String lastName,
       final String? city,
-      final String? photo}) = _$UserImpl;
+      final String? photo,
+      final UserPBXNumbers? userPBXNumbers}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -298,7 +334,186 @@ abstract class _User implements User {
   @override
   String? get photo;
   @override
+  UserPBXNumbers? get userPBXNumbers;
+  @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+UserPBXNumbers _$UserPBXNumbersFromJson(Map<String, dynamic> json) {
+  return _UserPBXNumbers.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UserPBXNumbers {
+  String get publicNumber => throw _privateConstructorUsedError;
+  String? get pfNumber => throw _privateConstructorUsedError;
+  String? get bayutNumber => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UserPBXNumbersCopyWith<UserPBXNumbers> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserPBXNumbersCopyWith<$Res> {
+  factory $UserPBXNumbersCopyWith(
+          UserPBXNumbers value, $Res Function(UserPBXNumbers) then) =
+      _$UserPBXNumbersCopyWithImpl<$Res, UserPBXNumbers>;
+  @useResult
+  $Res call({String publicNumber, String? pfNumber, String? bayutNumber});
+}
+
+/// @nodoc
+class _$UserPBXNumbersCopyWithImpl<$Res, $Val extends UserPBXNumbers>
+    implements $UserPBXNumbersCopyWith<$Res> {
+  _$UserPBXNumbersCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? publicNumber = null,
+    Object? pfNumber = freezed,
+    Object? bayutNumber = freezed,
+  }) {
+    return _then(_value.copyWith(
+      publicNumber: null == publicNumber
+          ? _value.publicNumber
+          : publicNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pfNumber: freezed == pfNumber
+          ? _value.pfNumber
+          : pfNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bayutNumber: freezed == bayutNumber
+          ? _value.bayutNumber
+          : bayutNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$UserPBXNumbersImplCopyWith<$Res>
+    implements $UserPBXNumbersCopyWith<$Res> {
+  factory _$$UserPBXNumbersImplCopyWith(_$UserPBXNumbersImpl value,
+          $Res Function(_$UserPBXNumbersImpl) then) =
+      __$$UserPBXNumbersImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String publicNumber, String? pfNumber, String? bayutNumber});
+}
+
+/// @nodoc
+class __$$UserPBXNumbersImplCopyWithImpl<$Res>
+    extends _$UserPBXNumbersCopyWithImpl<$Res, _$UserPBXNumbersImpl>
+    implements _$$UserPBXNumbersImplCopyWith<$Res> {
+  __$$UserPBXNumbersImplCopyWithImpl(
+      _$UserPBXNumbersImpl _value, $Res Function(_$UserPBXNumbersImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? publicNumber = null,
+    Object? pfNumber = freezed,
+    Object? bayutNumber = freezed,
+  }) {
+    return _then(_$UserPBXNumbersImpl(
+      publicNumber: null == publicNumber
+          ? _value.publicNumber
+          : publicNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pfNumber: freezed == pfNumber
+          ? _value.pfNumber
+          : pfNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bayutNumber: freezed == bayutNumber
+          ? _value.bayutNumber
+          : bayutNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$UserPBXNumbersImpl implements _UserPBXNumbers {
+  const _$UserPBXNumbersImpl(
+      {required this.publicNumber, this.pfNumber, this.bayutNumber});
+
+  factory _$UserPBXNumbersImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserPBXNumbersImplFromJson(json);
+
+  @override
+  final String publicNumber;
+  @override
+  final String? pfNumber;
+  @override
+  final String? bayutNumber;
+
+  @override
+  String toString() {
+    return 'UserPBXNumbers(publicNumber: $publicNumber, pfNumber: $pfNumber, bayutNumber: $bayutNumber)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserPBXNumbersImpl &&
+            (identical(other.publicNumber, publicNumber) ||
+                other.publicNumber == publicNumber) &&
+            (identical(other.pfNumber, pfNumber) ||
+                other.pfNumber == pfNumber) &&
+            (identical(other.bayutNumber, bayutNumber) ||
+                other.bayutNumber == bayutNumber));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, publicNumber, pfNumber, bayutNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserPBXNumbersImplCopyWith<_$UserPBXNumbersImpl> get copyWith =>
+      __$$UserPBXNumbersImplCopyWithImpl<_$UserPBXNumbersImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UserPBXNumbersImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _UserPBXNumbers implements UserPBXNumbers {
+  const factory _UserPBXNumbers(
+      {required final String publicNumber,
+      final String? pfNumber,
+      final String? bayutNumber}) = _$UserPBXNumbersImpl;
+
+  factory _UserPBXNumbers.fromJson(Map<String, dynamic> json) =
+      _$UserPBXNumbersImpl.fromJson;
+
+  @override
+  String get publicNumber;
+  @override
+  String? get pfNumber;
+  @override
+  String? get bayutNumber;
+  @override
+  @JsonKey(ignore: true)
+  _$$UserPBXNumbersImplCopyWith<_$UserPBXNumbersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

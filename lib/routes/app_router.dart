@@ -54,7 +54,7 @@ import 'app_routes.dart';
 class AppRouter {
   static final RouteObserver<ModalRoute> routerObserver =
       RouteObserver<ModalRoute>();
-  static final router = GoRouter(
+  static final GoRouter router = GoRouter(
       refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
       // observers: [routerObserver],
       redirect: (context, state) {
@@ -64,6 +64,12 @@ class AppRouter {
               state.matchedLocation == Routes.homeRoute ||
               state.matchedLocation == Routes.loginRoute) {
             return HomePage.routeName;
+          } else if (authState.veryImportantActivities != null &&
+              authState.veryImportantActivities!.isNotEmpty) {
+            // router.pushNamed(TaskDetailScreen.routeName, pathParameters: {
+            //   'id': authState.veryImportantActivities!.first
+            // });
+            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
           }
           return null;
         } else if (authState.authStatus == AuthStatus.initial) {
@@ -378,7 +384,9 @@ class GoRouterRefreshStream extends ChangeNotifier {
     final s = stream;
     _subscription = s.listen(
       (AuthState element) {
-        if (element.authStatus != lastElement?.authStatus) {
+        if (element.authStatus != lastElement?.authStatus ||
+            element.veryImportantActivities !=
+                lastElement?.veryImportantActivities) {
           notifyListeners();
         }
         lastElement = element;

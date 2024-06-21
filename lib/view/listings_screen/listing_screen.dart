@@ -483,25 +483,7 @@ class _ListingsTabState extends State<ListingsTab> {
                                                       .primaryContainer
                                                       .withOpacity(.5)),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
                                                 children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SmallText(text: 'Agent'),
-                                                      LabelText(
-                                                          text: listing
-                                                                  .agent
-                                                                  ?.user
-                                                                  .firstName ??
-                                                              ''),
-                                                    ],
-                                                  ),
-                                                  HorizontalSmallGap(),
                                                   Container(
                                                     height: 40,
                                                     width: 40,
@@ -514,6 +496,51 @@ class _ListingsTabState extends State<ListingsTab> {
                                                           '',
                                                     ),
                                                   ),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SmallText(
+                                                            text: 'Agent'),
+                                                        LabelText(
+                                                            text: listing
+                                                                    .agent
+                                                                    ?.user
+                                                                    .firstName ??
+                                                                ''),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  IconButton.filledTonal(
+                                                      style: IconButton.styleFrom(
+                                                          backgroundColor:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                          foregroundColor:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .onPrimary),
+                                                      onPressed: () async {
+                                                        final number = listing
+                                                            .agent
+                                                            ?.user
+                                                            .userPBXNumbers
+                                                            ?.publicNumber;
+                                                        if (number != null) {
+                                                          getIt<CallBloc>().add(
+                                                              CallEvent
+                                                                  .clickToCall(
+                                                            phoneNumber: number,
+                                                          ));
+                                                        }
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.call,
+                                                      ))
                                                 ],
                                               ),
                                             )
@@ -883,7 +910,16 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                                           .onPrimary),
                                               onPressed: () async {
                                                 final number =
-                                                    '${propertyCard.currentAgent!["userId"]["phone"]}';
+                                                    propertyCard.currentAgent?[
+                                                                "user"]
+                                                            ["userPBXNumbers"]
+                                                        ["publicNumber"];
+                                                if (number != null) {
+                                                  getIt<CallBloc>().add(
+                                                      CallEvent.clickToCall(
+                                                    phoneNumber: number,
+                                                  ));
+                                                }
                                               },
                                               icon: Icon(
                                                 Icons.call,

@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:linkus_sdk/linkus_sdk.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/model/user.dart';
 
@@ -21,23 +24,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_UserLoggedOut>(_userLoggedOut);
     on<_Started>(_started);
     on<_RefreshAgentData>(_refreshAgentData);
+    on<_NewImportantActivity>(_newImportantActivity);
+    on<_CompletedImportantActivity>(_completedImportantActivity);
+    _fcmStream = FirebaseMessaging.onMessage.listen((e) async {
+      Logger().d(e.data);
+      if (e.data['type'] == 'ImportantActivity') {
+        final activities = e.data['values'] as String;
+        add(AuthEvent.newImportantActivity(activityIds: [activities]));
+      }
+    });
     // add(AuthEvent.started());
   }
   final AuthRepo _authRepo;
+  StreamSubscription? _fcmStream;
 
   FutureOr<void> _userLoggedIn(
       _UserLoggedIn event, Emitter<AuthState> emit) async {
     emit(
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
     await getAgentData();
-    // LinkusSdk().loginToPbx(
-    //     userName: "ziad@albacorp.net",
-    //     password:
-    //         "eyJleHBpcmUiOjAsInNpZ24iOiJRN2FlSXNHRjJ0WDhOSGhURHZCdFpWS0hDZVcxOXpKTkNlME5VM0xmL3NrPSIsInVzZXJuYW1lIjoiemlhZEBhbGJhY29ycC5uZXQiLCJ2ZXJzaW9uIjoiMS4wIn0_",
-    //     localeIp: '192.168.0.252',
-    //     localePortI: 8111,
-    //     remoteIp: '',
-    //     remotePortI: 8111);
   }
 
   FutureOr<void> _userLoggedOut(_UserLoggedOut event, Emitter<AuthState> emit) {
@@ -75,5 +80,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _refreshAgentData(
       _RefreshAgentData event, Emitter<AuthState> emit) async {
     await getAgentData();
+  }
+
+  FutureOr<void> _newImportantActivity(
+      _NewImportantActivity event, Emitter<AuthState> emit) {
+    emit(state.copyWith(veryImportantActivities: event.activityIds));
+  }
+
+  FutureOr<void> _completedImportantActivity(
+      _CompletedImportantActivity event, Emitter<AuthState> emit) {
+    final activities = List<String>.from(state.veryImportantActivities ?? [])
+      ..remove(event.activityId);
+    emit(state.copyWith(veryImportantActivities: activities));
   }
 }

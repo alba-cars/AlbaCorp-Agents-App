@@ -70,12 +70,7 @@ class LeadData implements LeadRepo {
       final Map<String, dynamic>? filterRemoved = (filter != null)
           ? (Map.from(filter)..removeWhere((key, value) => value == null))
           : null;
-      if (filterRemoved?.containsKey('lead_source_type') == true) {
-        final val = filterRemoved!['lead_source_type'];
-        final vals = filterRemoved['lead_source_many'] ?? [];
-        filterRemoved['lead_source_many'] = [...vals, ...val['value']];
-        filterRemoved.remove('lead_source_type');
-      }
+
       if (filterRemoved?.containsKey('active') == true) {
         filterRemoved!["active"] = filterRemoved['active']?['value'];
       }
