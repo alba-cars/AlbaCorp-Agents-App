@@ -8,6 +8,6 @@ class AuthState with _$AuthState {
     @Default(AuthStatus.initial) AuthStatus authStatus,
     User? user,
     Agent? agent,
-    List<String>? veryImportantActivities,
+    Set<String>? veryImportantActivities,
   }) = _AuthState;
 }

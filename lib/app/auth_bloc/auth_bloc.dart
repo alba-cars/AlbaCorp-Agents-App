@@ -26,8 +26,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_RefreshAgentData>(_refreshAgentData);
     on<_NewImportantActivity>(_newImportantActivity);
     on<_CompletedImportantActivity>(_completedImportantActivity);
-    _fcmStream = FirebaseMessaging.onMessage.listen((e) async {
-      Logger().d(e.data);
+
+    _fcmForegroundStream = FirebaseMessaging.onMessage.listen((e) async {
+      if (e.data['type'] == 'ImportantActivity') {
+        final activities = e.data['values'] as String;
+        add(AuthEvent.newImportantActivity(activityIds: [activities]));
+      }
+    });
+    _fcmForegroundStream =
+        FirebaseMessaging.onMessageOpenedApp.listen((e) async {
+      if (e.data['type'] == 'ImportantActivity') {
+        final activities = e.data['values'] as String;
+        add(AuthEvent.newImportantActivity(activityIds: [activities]));
+      }
+    });
+    FirebaseMessaging.instance.getInitialMessage().then((e) async {
+      if (e == null) {
+        return;
+      }
       if (e.data['type'] == 'ImportantActivity') {
         final activities = e.data['values'] as String;
         add(AuthEvent.newImportantActivity(activityIds: [activities]));
@@ -36,7 +52,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // add(AuthEvent.started());
   }
   final AuthRepo _authRepo;
-  StreamSubscription? _fcmStream;
+  StreamSubscription? _fcmForegroundStream;
+  StreamSubscription? _fcmBackgroundStream;
 
   FutureOr<void> _userLoggedIn(
       _UserLoggedIn event, Emitter<AuthState> emit) async {
@@ -84,13 +101,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _newImportantActivity(
       _NewImportantActivity event, Emitter<AuthState> emit) {
-    emit(state.copyWith(veryImportantActivities: event.activityIds));
+    emit(state.copyWith(veryImportantActivities: event.activityIds.toSet()));
   }
 
   FutureOr<void> _completedImportantActivity(
       _CompletedImportantActivity event, Emitter<AuthState> emit) {
-    final activities = List<String>.from(state.veryImportantActivities ?? [])
+    final activities = Set<String>.from(state.veryImportantActivities ?? {})
       ..remove(event.activityId);
     emit(state.copyWith(veryImportantActivities: activities));
+  }
+
+  @override
+  Future<void> close() {
+    _fcmBackgroundStream?.cancel();
+    _fcmForegroundStream?.cancel();
+    return super.close();
   }
 }

@@ -998,7 +998,7 @@ mixin _$AuthState {
   AuthStatus get authStatus => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
   Agent? get agent => throw _privateConstructorUsedError;
-  List<String>? get veryImportantActivities =>
+  Set<String>? get veryImportantActivities =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1015,7 +1015,7 @@ abstract class $AuthStateCopyWith<$Res> {
       {AuthStatus authStatus,
       User? user,
       Agent? agent,
-      List<String>? veryImportantActivities});
+      Set<String>? veryImportantActivities});
 
   $UserCopyWith<$Res>? get user;
   $AgentCopyWith<$Res>? get agent;
@@ -1055,7 +1055,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
       veryImportantActivities: freezed == veryImportantActivities
           ? _value.veryImportantActivities
           : veryImportantActivities // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as Set<String>?,
     ) as $Val);
   }
 
@@ -1096,7 +1096,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       {AuthStatus authStatus,
       User? user,
       Agent? agent,
-      List<String>? veryImportantActivities});
+      Set<String>? veryImportantActivities});
 
   @override
   $UserCopyWith<$Res>? get user;
@@ -1136,7 +1136,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
       veryImportantActivities: freezed == veryImportantActivities
           ? _value._veryImportantActivities
           : veryImportantActivities // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as Set<String>?,
     ));
   }
 }
@@ -1148,7 +1148,7 @@ class _$AuthStateImpl implements _AuthState {
       {this.authStatus = AuthStatus.initial,
       this.user,
       this.agent,
-      final List<String>? veryImportantActivities})
+      final Set<String>? veryImportantActivities})
       : _veryImportantActivities = veryImportantActivities;
 
   @override
@@ -1158,15 +1158,15 @@ class _$AuthStateImpl implements _AuthState {
   final User? user;
   @override
   final Agent? agent;
-  final List<String>? _veryImportantActivities;
+  final Set<String>? _veryImportantActivities;
   @override
-  List<String>? get veryImportantActivities {
+  Set<String>? get veryImportantActivities {
     final value = _veryImportantActivities;
     if (value == null) return null;
-    if (_veryImportantActivities is EqualUnmodifiableListView)
+    if (_veryImportantActivities is EqualUnmodifiableSetView)
       return _veryImportantActivities;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableSetView(value);
   }
 
   @override
@@ -1203,7 +1203,7 @@ abstract class _AuthState implements AuthState {
       {final AuthStatus authStatus,
       final User? user,
       final Agent? agent,
-      final List<String>? veryImportantActivities}) = _$AuthStateImpl;
+      final Set<String>? veryImportantActivities}) = _$AuthStateImpl;
 
   @override
   AuthStatus get authStatus;
@@ -1212,7 +1212,7 @@ abstract class _AuthState implements AuthState {
   @override
   Agent? get agent;
   @override
-  List<String>? get veryImportantActivities;
+  Set<String>? get veryImportantActivities;
   @override
   @JsonKey(ignore: true)
   _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>

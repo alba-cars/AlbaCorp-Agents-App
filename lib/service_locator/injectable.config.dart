@@ -91,6 +91,11 @@ extension GetItInjectableX on _i1.GetIt {
       registerFor: {_Prod},
     );
     gh.factory<String>(
+      () => registerModules.awsStageBucket,
+      instanceName: 'AwsBucket',
+      registerFor: {_Stage},
+    );
+    gh.factory<String>(
       () => registerModules.baseUrl,
       instanceName: 'BaseUrl',
       registerFor: {_Stage},
@@ -99,11 +104,6 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModules.awsProdBucket,
       instanceName: 'AwsBucket',
       registerFor: {_Prod},
-    );
-    gh.factory<String>(
-      () => registerModules.awsStageBucket,
-      instanceName: 'AwsBucket',
-      registerFor: {_Stage},
     );
     gh.lazySingleton<_i5.Dio>(
         () => registerModules.getDio(gh<String>(instanceName: 'BaseUrl')));
