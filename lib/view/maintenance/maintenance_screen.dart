@@ -129,7 +129,7 @@ class MaintenanceScreen extends StatelessWidget {
       return;
     }
     StoreRedirect.redirect(
-      androidAppId: appConfig.appStoreUrl,
+      iOSAppId: appConfig.appStoreUrl,
     );
   }
 

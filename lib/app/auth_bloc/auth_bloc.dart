@@ -92,7 +92,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    AuthEvent.started();
+    add(AuthEvent.started());
     return;
   }
 }
