@@ -17,7 +17,7 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
           ? null
           : Community.fromJson(json['community'] as Map<String, dynamic>),
       beds: readBeds(json, 'beds') as String?,
-      baths: json['baths'] as int?,
+      baths: (json['baths'] as num?)?.toInt(),
       size: (json['size'] as num?)?.toDouble(),
       propertyType: json['propertyType'] as String?,
       createdBy: json['createdBy'],
@@ -34,7 +34,7 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
       referenceNumber: json['referenceNumber'] as String?,
       expirationDate: json['expirationDate'] as String?,
       availableForCheckout: json['availableForCheckout'] as bool? ?? false,
-      leadsCount: json['leadsCount'] as int?,
+      leadsCount: (json['leadsCount'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PropertyCardImplToJson(_$PropertyCardImpl instance) =>

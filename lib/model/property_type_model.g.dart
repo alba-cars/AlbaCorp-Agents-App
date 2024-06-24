@@ -29,7 +29,7 @@ Map<String, dynamic> _$$PropertyTypeImplToJson(_$PropertyTypeImpl instance) =>
 
 _$BedImpl _$$BedImplFromJson(Map<String, dynamic> json) => _$BedImpl(
       name: json['name'] as String,
-      startingPrice: json['startingPrice'] as int,
+      startingPrice: (json['startingPrice'] as num).toInt(),
       id: json['_id'] as String,
     );
 

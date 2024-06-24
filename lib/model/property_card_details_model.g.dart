@@ -18,7 +18,7 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
           ? null
           : Community.fromJson(json['community'] as Map<String, dynamic>),
       beds: json['beds'] as String?,
-      baths: json['baths'] as int?,
+      baths: (json['baths'] as num?)?.toInt(),
       size: (json['size'] as num?)?.toDouble(),
       propertyType: json['propertyType'] as String?,
       createdBy: readCreatedBy(json, 'createdBy'),
@@ -50,7 +50,7 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
                   (e) => PropertyCardPhoto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      leadsCount: json['leadsCount'] as int?,
+      leadsCount: (json['leadsCount'] as num?)?.toInt(),
       askingPrice: json['askingPrice'] as num?,
       agentValutionPrice: json['agentValutionPrice'] as num?,
     );

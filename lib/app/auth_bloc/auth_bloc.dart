@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:linkus_sdk/linkus_sdk.dart';
+import 'package:real_estate_app/core/helpers/app_config_helper.dart';
+import 'package:real_estate_app/core/models/app_config/AppConfig.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/model/user.dart';
 
@@ -21,7 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_UserLoggedOut>(_userLoggedOut);
     on<_Started>(_started);
     on<_RefreshAgentData>(_refreshAgentData);
-    // add(AuthEvent.started());
+    on<_GetAppConfig>(_getAppConfigData);
   }
   final AuthRepo _authRepo;
 
@@ -29,7 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       _UserLoggedIn event, Emitter<AuthState> emit) async {
     emit(
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
-    await getAgentData();
+    await getAgentData(emit);
     // LinkusSdk().loginToPbx(
     //     userName: "ziad@albacorp.net",
     //     password:
@@ -50,9 +51,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       case (Success s):
         emit(state.copyWith(
             authStatus: AuthStatus.Authenticated, user: s.value));
-        await getAgentData();
+        await getAgentData(emit);
         break;
-      case (Error e):
+      case (Error _):
         emit(state.copyWith(
           authStatus: AuthStatus.UnAuthenticated,
         ));
@@ -60,13 +61,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  FutureOr<void> getAgentData() async {
+  FutureOr<void> getAgentData(Emitter<AuthState> emit) async {
     final result = await _authRepo.getAgentData(userId: state.user!.id);
     switch (result) {
       case (Success s):
         emit(state.copyWith(agent: s.value));
         break;
-      case (Error e):
+      case (Error _):
         emit(state.copyWith());
         break;
     }
@@ -74,6 +75,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _refreshAgentData(
       _RefreshAgentData event, Emitter<AuthState> emit) async {
-    await getAgentData();
+    await getAgentData(emit);
+  }
+
+  FutureOr<void> _getAppConfigData(
+      _GetAppConfig event, Emitter<AuthState> emit) async {
+    AppConfig appConfig = await AppConfigHelper().getAppInfo();
+    if (appConfig.underMaintenance) {
+      emit(state.copyWith(authStatus: AuthStatus.Maintenance, appConfig: appConfig));
+      return;
+    }
+
+    bool hasUpdates = appConfig.hasUpdates();
+    if (hasUpdates) {
+      emit(state.copyWith(authStatus: AuthStatus.Update, appConfig: appConfig));
+      return;
+    }
+
+    add(AuthEvent.started());
+    return;
   }
 }

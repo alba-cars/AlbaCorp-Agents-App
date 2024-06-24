@@ -17,8 +17,8 @@ _$AgentImpl _$$AgentImplFromJson(Map<String, dynamic> json) => _$AgentImpl(
       DEDNo: json['DEDNo'] as String?,
       PERMITNo: json['PERMITNo'] as String?,
       RICSCertified: json['RICSCertified'] as bool? ?? false,
-      creditsBalance: json['creditsBalance'] as int? ?? 0,
-      creditsLimit: json['creditsLimit'] as int? ?? 0,
+      creditsBalance: (json['creditsBalance'] as num?)?.toInt() ?? 0,
+      creditsLimit: (json['creditsLimit'] as num?)?.toInt() ?? 0,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 

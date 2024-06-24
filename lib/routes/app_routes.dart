@@ -1,5 +1,6 @@
 abstract class Routes {
   static const homeRoute = Paths.homePath;
+  static const maintenanceRoute = Paths.maintenancePagePath;
   static const introRoute = Paths.introPath;
   static const loginRoute = Paths.loginPath;
   static const homeScreenRoute = Paths.homeScreenPath;
@@ -11,6 +12,7 @@ abstract class Routes {
 
 abstract class Paths {
   static const homePath = "/";
+  static const maintenancePagePath = "/Maintenance";
   static const introPath = "/IntroScreen";
   static const loginPath = "/LoginScreen";
   static const homeScreenPath = "/HomeScreen";

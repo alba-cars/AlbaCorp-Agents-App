@@ -13,7 +13,7 @@ _$DealListingResponseImpl _$$DealListingResponseImplFromJson(
       propertyType: json['propertyType'] as String,
       beds: json['beds'] as String,
       baths: json['baths'] as String,
-      size: json['size'] as int,
+      size: (json['size'] as num).toInt(),
       community: json['community'] == null
           ? null
           : Community.fromJson(json['community'] as Map<String, dynamic>),

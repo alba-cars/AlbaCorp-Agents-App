@@ -33,7 +33,7 @@ _$NewListingRequestImpl _$$NewListingRequestImplFromJson(
       furnishing: json['furnishing'] as String?,
       contractValidity: json['contractValidity'] as String?,
       vacancy: json['vacancy'] as String?,
-      numberOfCheques: json['numberOfCheques'] as int?,
+      numberOfCheques: (json['numberOfCheques'] as num?)?.toInt(),
       exclusive: json['exclusive'] as bool? ?? false,
       isOffPlanResale: json['isOffPlanResale'] as bool? ?? false,
       vacantOnTransfer: json['vacantOnTransfer'] as bool? ?? false,

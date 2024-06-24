@@ -12,7 +12,7 @@ _$BuildingImpl _$$BuildingImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       buildingNumber: json['buildingNumber'] as String?,
       communityId: json['communityId'] as String?,
-      floors: json['floors'] as int?,
+      floors: (json['floors'] as num?)?.toInt(),
       type: json['type'] as String?,
       createdBy: json['createdBy'] as String?,
       distances: json['distances'] as List<dynamic>?,
