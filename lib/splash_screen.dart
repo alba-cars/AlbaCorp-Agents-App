@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _getIsFirst() async {
     Timer(const Duration(seconds: 3), () {
-      context.read<AuthBloc>().add(AuthEvent.started());
+      context.read<AuthBloc>().add(AuthEvent.getAppConfig());
     });
   }
 

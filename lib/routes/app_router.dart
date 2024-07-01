@@ -25,6 +25,8 @@ import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart'
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/listings_screen/listing_screen.dart';
+import 'package:real_estate_app/view/maintenance/maintenance_screen.dart';
+import 'package:real_estate_app/view/message_screen/tab_message.dart';
 import 'package:real_estate_app/view/more_screen/tab_more.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
@@ -55,6 +57,10 @@ class AppRouter {
       // observers: [routerObserver],
       redirect: (context, state) {
         final authState = getIt<AuthBloc>().state;
+        if ([AuthStatus.Maintenance, AuthStatus.Update]
+            .contains(authState.authStatus)) {
+          return Routes.maintenanceRoute;
+        }
         if (authState.authStatus == AuthStatus.Authenticated) {
           if (state.matchedLocation == Routes.introRoute ||
               state.matchedLocation == Routes.homeRoute ||
@@ -78,6 +84,11 @@ class AppRouter {
         GoRoute(
           path: Routes.homeRoute,
           pageBuilder: (context, state) => AppTransition(child: SplashScreen()),
+        ),
+        GoRoute(
+          path: Routes.maintenanceRoute,
+          pageBuilder: (context, state) =>
+              AppTransition(child: MaintenanceScreen()),
         ),
         GoRoute(
           path: Routes.introRoute,

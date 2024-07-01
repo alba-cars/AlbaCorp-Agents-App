@@ -9,6 +9,8 @@ import 'package:injectable/injectable.dart';
 import 'package:linkus_sdk/linkus_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
+import 'package:real_estate_app/core/helpers/app_config_helper.dart';
+import 'package:real_estate_app/core/models/app_config/AppConfig.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/data/repository/notification_repo.dart';
 import 'package:real_estate_app/model/notification_model.dart';
@@ -52,6 +54,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       Logger().d(number);
     });
     // add(AuthEvent.started());
+    on<_GetAppConfig>(_getAppConfigData);
   }
   final AuthRepo _authRepo;
   final ActivityRepo _activityRepo;
@@ -76,7 +79,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
     add(AuthEvent.checkForImportantActivity());
-    await getAgentData();
+    await getAgentData(emit);
   }
 
   FutureOr<void> _userLoggedOut(_UserLoggedOut event, Emitter<AuthState> emit) {
@@ -92,10 +95,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       case (Success s):
         emit(state.copyWith(
             authStatus: AuthStatus.Authenticated, user: s.value));
-        add(AuthEvent.checkForImportantActivity());
-        await getAgentData();
+        await getAgentData(emit);
         break;
-      case (Error e):
+      case (Error _):
         emit(state.copyWith(
           authStatus: AuthStatus.UnAuthenticated,
         ));
@@ -103,13 +105,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  FutureOr<void> getAgentData() async {
+  FutureOr<void> getAgentData(Emitter<AuthState> emit) async {
     final result = await _authRepo.getAgentData(userId: state.user!.id);
     switch (result) {
       case (Success s):
         emit(state.copyWith(agent: s.value));
         break;
-      case (Error e):
+      case (Error _):
         emit(state.copyWith());
         break;
     }
@@ -117,7 +119,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _refreshAgentData(
       _RefreshAgentData event, Emitter<AuthState> emit) async {
-    await getAgentData();
+    await getAgentData(emit);
+  }
+
+  FutureOr<void> _getAppConfigData(
+      _GetAppConfig event, Emitter<AuthState> emit) async {
+    AppConfig appConfig = await AppConfigHelper().getAppInfo();
+    if (appConfig.underMaintenance) {
+      emit(state.copyWith(
+          authStatus: AuthStatus.Maintenance, appConfig: appConfig));
+      return;
+    }
+
+    bool hasUpdates = appConfig.hasUpdates();
+    if (hasUpdates) {
+      emit(state.copyWith(authStatus: AuthStatus.Update, appConfig: appConfig));
+      return;
+    }
+
+    add(AuthEvent.started());
+    return;
   }
 
   FutureOr<void> _newImportantActivity(
