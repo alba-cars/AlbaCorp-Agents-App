@@ -20,10 +20,12 @@ import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dar
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/message_screen/tab_message.dart';
 import 'package:real_estate_app/view/more_screen/tab_more.dart';
+import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/saved_screen/tab_saved.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
 import '../../model/bottom_model.dart';
@@ -47,7 +49,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final AnimationController _animationController = AnimationController(
       vsync: this,
       duration: Duration(
@@ -55,9 +57,23 @@ class _HomeScreenState extends State<HomeScreen>
       ));
 
   @override
+  void initState() {
+    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
@@ -111,7 +127,11 @@ class _HomeScreenState extends State<HomeScreen>
                                     shape: BoxShape.circle,
                                     color: Colors.grey[100]!,
                                   ),
-                                  child: S3Image(url: user.photo),
+                                  child: S3Image(
+                                    url: user.photo,
+                                    errorWidget: Image.asset(
+                                        'assets/images/person_placeholder.jpeg'),
+                                  ),
                                 ),
                                 const SizedBox(width: 6),
                                 Column(
@@ -223,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen>
         actions: [
           IconButton(
               onPressed: () {
-                Scaffold.of(context).openDrawer();
+                context.pushNamed(NotificationsScreen.routeName);
               },
               icon: Icon(Icons.notifications)),
         ],

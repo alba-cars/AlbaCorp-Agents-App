@@ -9,7 +9,7 @@ part of 'lead_model.dart';
 _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       id: readId(json, 'id') as String,
       firstName: json['first_name'] as String,
-      lastName: json['last_name'] as String,
+      lastName: json['last_name'] as String? ?? '',
       email: json['email'] as String?,
       phone: json['phone'] as String?,
       country: json['country'] as String?,
@@ -46,6 +46,7 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const [],
+      dndStatus: json['DndStatus'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
@@ -77,6 +78,7 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'preferred_languages': instance.preferredLanguages,
       'notes': instance.notes,
       'tags': instance.tags,
+      'DndStatus': instance.dndStatus,
     };
 
 const _$LeadStatusEnumMap = {

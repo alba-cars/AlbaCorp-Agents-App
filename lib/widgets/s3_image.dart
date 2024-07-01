@@ -87,7 +87,7 @@ class _S3ImageState extends State<S3Image> {
             } catch (e) {
               isLoading = false;
               error = true;
-              print(e);
+              Logger().d(e);
             }
           }
         }

@@ -140,9 +140,6 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
                 },
               ),
             )),
-            SliverVerticalSmallGap(
-              height: 4,
-            ),
           ];
         },
         body: SafeArea(

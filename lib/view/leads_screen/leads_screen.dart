@@ -20,6 +20,7 @@ import 'package:real_estate_app/widgets/search_bar.dart';
 import '../../app/call_bloc/call_bloc.dart';
 import '../../util/color_category.dart';
 import '../../util/status.dart';
+import '../../widgets/call_button.dart';
 import '../../widgets/space.dart';
 import '../../widgets/text.dart';
 import '../lead_detail_screen/lead_detail_screen.dart';
@@ -451,24 +452,15 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      IconButton.filledTonal(
-                                          onPressed: () async {
-                                            // await LinkusSdk()
-                                            //     .makeACall(number: '1002');
-                                            // getIt<CallBloc>().add(
-                                            //     CallEvent.clickToCall(
-                                            //         phoneNumber:
-                                            //             lead.phone ?? '',
-                                            //         leadId: lead.id));
+                                      CallButton(
+                                          onTap: () async {
                                             if (lead.phone != null) {
                                               context
                                                   .read<LeadsCubit>()
                                                   .makeACall(lead);
                                             }
                                           },
-                                          icon: Icon(
-                                            Icons.call,
-                                          )),
+                                          isDnd: lead.dndStatus),
                                     ],
                                   )
                                 ]),

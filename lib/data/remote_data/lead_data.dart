@@ -76,7 +76,7 @@ class LeadData implements LeadRepo {
       }
       Logger().d(filterRemoved);
       final response = await _dio.get(url, queryParameters: {
-        'agent_id': getIt<AuthBloc>().state.agent?.id,
+        // 'agent_id': getIt<AuthBloc>().state.agent?.id,
         if (paginator != null) 'page': paginator.currentPage + 1,
         'sort_by': 'createdAt',
         "sort_dir": 'DESC',
@@ -174,7 +174,6 @@ class LeadData implements LeadRepo {
       {required String clientId}) async {
     try {
       String url = 'v1/documents/user/$clientId';
-
       final response = await _dio.get(
         url,
       );
@@ -193,7 +192,6 @@ class LeadData implements LeadRepo {
       {required String leadId, required Map<String, dynamic> value}) async {
     try {
       String url = 'v1/users/$leadId';
-
       final response = await _dio.patch(url, data: value);
       final data = response.data;
       final model = Lead.fromJson(data);

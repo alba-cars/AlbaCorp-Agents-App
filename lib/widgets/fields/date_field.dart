@@ -38,6 +38,12 @@ class _DateFieldState extends State<DateField> {
     final colorScheme = Theme.of(context).colorScheme;
     return FormBuilderField<DateTime>(
         name: widget.name,
+        validator: (val) {
+          if (val == null && widget.isRequired == true) {
+            return "This field is required";
+          }
+          return null;
+        },
         builder: (state) {
           return Column(
             children: [

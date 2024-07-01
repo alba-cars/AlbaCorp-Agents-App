@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
@@ -87,8 +88,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           final type = values?['type'];
           final propertyId = values?['property'];
           final description = values?["description"];
-          final date = (values?["date"] as DateTime?)
-              ?.addTime((values?["time"] as TimeOfDay));
+          final date = (values?["date"] as DateTime?)?.addTime(
+              (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 0, minute: 0)));
           final res = await addActivity(
               context: context,
               leadId: state.task!.lead!.id,
@@ -125,8 +126,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       String? description,
       required bool markAsProspect,
       Map<String, dynamic>? values}) async {
-    final date =
-        (values?["date"] as DateTime?)?.addTime((values?["time"] as TimeOfDay));
+    final date = (values?["date"] as DateTime?)?.addTime(
+        (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 0, minute: 0)));
     if (date == null || date.compareTo(DateTime.now()) == -1) {
       if (context.mounted) {
         showSnackbar(context, 'Choose a valid date time', SnackBarType.failure);
@@ -140,7 +141,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           addFollowUp: true,
           values: values);
     } else {
-      updateActivity(
+      await updateActivity(
           context: context,
           addFollowUp: true,
           values: values,
@@ -239,9 +240,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
-        final list = List<Activity>.from(s.value)
-          ..removeWhere((element) => element.id == state.task?.id)
-          ..insert(0, state.task!);
+        final list = List<Activity>.from(s.value);
+        list.removeWhere((element) => element.id == state.taskId);
         emit(state.copyWith(
             sortedActivity: [...state.sortedActivity, ...list],
             getSortedActivitiesStatus: AppStatus.success,

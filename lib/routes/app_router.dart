@@ -1,39 +1,35 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:animations/animations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
-import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
+import 'package:real_estate_app/view/call_feedback_screen/call_feedback_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
-import 'package:real_estate_app/view/home_screen/widgets/detail_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/listings_screen/listing_screen.dart';
-import 'package:real_estate_app/view/message_screen/tab_message.dart';
 import 'package:real_estate_app/view/more_screen/tab_more.dart';
+import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/view/root_layout/root_layout.dart';
-import 'package:real_estate_app/view/saved_screen/tab_saved.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/view/ticket_detail_screen/ticket_details_screen.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
@@ -65,11 +61,11 @@ class AppRouter {
               state.matchedLocation == Routes.loginRoute) {
             return HomePage.routeName;
           } else if (authState.veryImportantActivities != null &&
-              authState.veryImportantActivities!.isNotEmpty) {
-            // router.pushNamed(TaskDetailScreen.routeName, pathParameters: {
-            //   'id': authState.veryImportantActivities!.first
-            // });
+              authState.veryImportantActivities!.isNotEmpty &&
+              state.uri.path.contains(TaskDetailScreen.routeName) == false) {
             return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
+          } else if (authState.lastCalledNumber != null) {
+            return CallFeedbackScreen.routeName;
           }
           return null;
         } else if (authState.authStatus == AuthStatus.initial) {
@@ -306,7 +302,10 @@ class AppRouter {
                 name: TaskDetailScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  final Activity? activity = state.extra as Activity?;
+                  Activity? activity;
+                  try {
+                    activity = state.extra as Activity?;
+                  } catch (e) {}
                   final bool isBlocking =
                       state.uri.queryParameters['isBlocking'] as bool? ?? false;
                   return AppTransition(
@@ -330,6 +329,20 @@ class AppRouter {
                 name: AddTaskScreen.routeName,
                 pageBuilder: (context, state) {
                   return AppTransition(child: AddTaskScreen());
+                },
+              ),
+              GoRoute(
+                path: NotificationsScreen.routeName,
+                name: NotificationsScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: NotificationsScreen());
+                },
+              ),
+              GoRoute(
+                path: CallFeedbackScreen.routeName,
+                name: CallFeedbackScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: CallFeedbackScreen());
                 },
               ),
               GoRoute(
@@ -385,8 +398,10 @@ class GoRouterRefreshStream extends ChangeNotifier {
     _subscription = s.listen(
       (AuthState element) {
         if (element.authStatus != lastElement?.authStatus ||
-            element.veryImportantActivities !=
-                lastElement?.veryImportantActivities) {
+            element.veryImportantActivities?.length !=
+                lastElement?.veryImportantActivities?.length ||
+            (element.lastCalledNumber != null &&
+                lastElement?.lastCalledNumber != element.lastCalledNumber)) {
           notifyListeners();
         }
         lastElement = element;

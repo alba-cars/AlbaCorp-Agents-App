@@ -18,6 +18,8 @@ abstract class ActivityRepo {
   Future<Result<List<Activity>>> fetchActivities(
       {required int filterCode, LeadStatus? status, Paginator? paginator});
   Future<Result<List<Activity>>> fetchActivitiesSorted({Paginator? paginator});
+  Future<Result<List<Activity>>> fetchActivitiesImportant(
+      {Paginator? paginator});
   Future<Result<int>> completedActivitiesCount();
   Future<Result<int>> pendingActivitiesCount();
   Future<Result<int>> pendingViewingActivitiesCount();

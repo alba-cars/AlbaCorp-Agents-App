@@ -28,7 +28,7 @@ class Lead with _$Lead {
   const factory Lead({
     @JsonKey(readValue: readId) required String id,
     @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name') required String lastName,
+    @JsonKey(name: 'last_name') @Default('') String lastName,
     String? email,
     String? phone,
     String? country,
@@ -57,6 +57,7 @@ class Lead with _$Lead {
     List<dynamic> preferredLanguages,
     String? notes,
     @Default([]) List<String> tags,
+    @JsonKey(name: 'DndStatus') @Default(false) bool dndStatus,
   }) = _Lead;
 
   factory Lead.fromJson(Map<String, dynamic> json) => _$LeadFromJson(json);

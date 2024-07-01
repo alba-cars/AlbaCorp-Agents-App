@@ -61,6 +61,8 @@ mixin _$Lead {
   List<dynamic> get preferredLanguages => throw _privateConstructorUsedError;
   String? get notes => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DndStatus')
+  bool get dndStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -99,7 +101,8 @@ abstract class $LeadCopyWith<$Res> {
       Preference? preference,
       @JsonKey(name: 'preferred_languages') List<dynamic> preferredLanguages,
       String? notes,
-      List<String> tags});
+      List<String> tags,
+      @JsonKey(name: 'DndStatus') bool dndStatus});
 
   $PreferenceCopyWith<$Res>? get preference;
 }
@@ -144,6 +147,7 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
     Object? preferredLanguages = null,
     Object? notes = freezed,
     Object? tags = null,
+    Object? dndStatus = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -254,6 +258,10 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      dndStatus: null == dndStatus
+          ? _value.dndStatus
+          : dndStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -304,7 +312,8 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       Preference? preference,
       @JsonKey(name: 'preferred_languages') List<dynamic> preferredLanguages,
       String? notes,
-      List<String> tags});
+      List<String> tags,
+      @JsonKey(name: 'DndStatus') bool dndStatus});
 
   @override
   $PreferenceCopyWith<$Res>? get preference;
@@ -347,6 +356,7 @@ class __$$LeadImplCopyWithImpl<$Res>
     Object? preferredLanguages = null,
     Object? notes = freezed,
     Object? tags = null,
+    Object? dndStatus = null,
   }) {
     return _then(_$LeadImpl(
       id: null == id
@@ -457,6 +467,10 @@ class __$$LeadImplCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      dndStatus: null == dndStatus
+          ? _value.dndStatus
+          : dndStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -467,7 +481,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   const _$LeadImpl(
       {@JsonKey(readValue: readId) required this.id,
       @JsonKey(name: 'first_name') required this.firstName,
-      @JsonKey(name: 'last_name') required this.lastName,
+      @JsonKey(name: 'last_name') this.lastName = '',
       this.email,
       this.phone,
       this.country,
@@ -493,7 +507,8 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       @JsonKey(name: 'preferred_languages')
       final List<dynamic> preferredLanguages = const [],
       this.notes,
-      final List<String> tags = const []})
+      final List<String> tags = const [],
+      @JsonKey(name: 'DndStatus') this.dndStatus = false})
       : _languages = languages,
         _preferredLanguages = preferredLanguages,
         _tags = tags;
@@ -592,8 +607,12 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   }
 
   @override
+  @JsonKey(name: 'DndStatus')
+  final bool dndStatus;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, modifiedBy: $modifiedBy, preference: $preference, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags)';
+    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, modifiedBy: $modifiedBy, preference: $preference, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, dndStatus: $dndStatus)';
   }
 
   @override
@@ -628,7 +647,8 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       ..add(DiagnosticsProperty('preference', preference))
       ..add(DiagnosticsProperty('preferredLanguages', preferredLanguages))
       ..add(DiagnosticsProperty('notes', notes))
-      ..add(DiagnosticsProperty('tags', tags));
+      ..add(DiagnosticsProperty('tags', tags))
+      ..add(DiagnosticsProperty('dndStatus', dndStatus));
   }
 
   @override
@@ -679,7 +699,9 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
             const DeepCollectionEquality()
                 .equals(other._preferredLanguages, _preferredLanguages) &&
             (identical(other.notes, notes) || other.notes == notes) &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.dndStatus, dndStatus) ||
+                other.dndStatus == dndStatus));
   }
 
   @JsonKey(ignore: true)
@@ -712,7 +734,8 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
         preference,
         const DeepCollectionEquality().hash(_preferredLanguages),
         notes,
-        const DeepCollectionEquality().hash(_tags)
+        const DeepCollectionEquality().hash(_tags),
+        dndStatus
       ]);
 
   @JsonKey(ignore: true)
@@ -733,7 +756,7 @@ abstract class _Lead implements Lead {
   const factory _Lead(
       {@JsonKey(readValue: readId) required final String id,
       @JsonKey(name: 'first_name') required final String firstName,
-      @JsonKey(name: 'last_name') required final String lastName,
+      @JsonKey(name: 'last_name') final String lastName,
       final String? email,
       final String? phone,
       final String? country,
@@ -759,7 +782,8 @@ abstract class _Lead implements Lead {
       @JsonKey(name: 'preferred_languages')
       final List<dynamic> preferredLanguages,
       final String? notes,
-      final List<String> tags}) = _$LeadImpl;
+      final List<String> tags,
+      @JsonKey(name: 'DndStatus') final bool dndStatus}) = _$LeadImpl;
 
   factory _Lead.fromJson(Map<String, dynamic> json) = _$LeadImpl.fromJson;
 
@@ -831,6 +855,9 @@ abstract class _Lead implements Lead {
   String? get notes;
   @override
   List<String> get tags;
+  @override
+  @JsonKey(name: 'DndStatus')
+  bool get dndStatus;
   @override
   @JsonKey(ignore: true)
   _$$LeadImplCopyWith<_$LeadImpl> get copyWith =>

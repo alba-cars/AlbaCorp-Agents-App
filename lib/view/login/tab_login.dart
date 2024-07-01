@@ -74,6 +74,7 @@ class _TabLoginState extends State<TabLogin> {
               if (loginForm.currentState!.validate()) {
                 final email = emailController.text;
                 final password = passwordController.text;
+                FocusScope.of(context).unfocus();
                 await context
                     .read<LoginCubit>()
                     .login(email: email, password: password);

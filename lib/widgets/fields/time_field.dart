@@ -35,6 +35,12 @@ class _TimeFieldState extends State<TimeField> {
     final colorScheme = Theme.of(context).colorScheme;
     return FormBuilderField<TimeOfDay>(
         name: widget.name,
+        validator: (val) {
+          if (val == null && widget.isRequired == true) {
+            return "This field is required";
+          }
+          return null;
+        },
         builder: (state) {
           return Column(
             children: [

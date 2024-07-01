@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
+import 'package:real_estate_app/constants/listing_status_color.dart';
 import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -371,15 +372,51 @@ class _ListingsTabState extends State<ListingsTab> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              child: Container(
-                                                clipBehavior: Clip.hardEdge,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12)),
-                                                child: S3Image(
-                                                  url: image,
-                                                ),
+                                              child: Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  Container(
+                                                    height: double.maxFinite,
+                                                    clipBehavior: Clip.hardEdge,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12)),
+                                                    child: S3Image(
+                                                      url: image,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    left: 8,
+                                                    top: 8,
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 4,
+                                                              vertical: 1),
+                                                      decoration: BoxDecoration(
+                                                          color: listingStatusContainerColor(
+                                                              (listing.statusArray?.isNotEmpty ==
+                                                                          true
+                                                                      ? listing
+                                                                          .statusArray
+                                                                          ?.first
+                                                                      : '') ??
+                                                                  ''),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                          border: Border.fromBorderSide(BorderSide(
+                                                              color: listingStatusBorderColor(
+                                                                  (listing.statusArray?.isNotEmpty == true ? listing.statusArray?.first : '') ?? '')))),
+                                                      child: SmallText(
+                                                          text:
+                                                              listing.status ??
+                                                                  ''),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
                                             ),
                                             VerticalSmallGap(
@@ -494,6 +531,8 @@ class _ListingsTabState extends State<ListingsTab> {
                                                       url: listing.agent?.user
                                                               .photo ??
                                                           '',
+                                                      errorWidget: Image.asset(
+                                                          'assets/images/person_placeholder.jpeg'),
                                                     ),
                                                   ),
                                                   HorizontalSmallGap(),

@@ -173,8 +173,13 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 }
               },
               cardBuilder: (context, index) {
+                final blockingActivities = context.select((AuthBloc authBloc) =>
+                    authBloc.state.veryImportantActivities);
                 final task = tasks[index];
+                final isBlockingActivity =
+                    blockingActivities?.contains(task.id) ?? false;
                 return SizedBox(
+                  key: ValueKey(task.id),
                   child: Column(
                     children: [
                       SizedBox(
@@ -205,6 +210,27 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          if (isBlockingActivity) ...[
+                                            VerticalSmallGap(),
+                                            Container(
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .errorContainer,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  border: Border.fromBorderSide(
+                                                      BorderSide(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .error))),
+                                              child: Text(
+                                                  'This is a very important activity. complete this activity to further use the app'),
+                                            ),
+                                          ],
+                                          VerticalSmallGap(),
                                           TitleText(
                                             text: task.type,
                                           ),
@@ -452,11 +478,13 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                     HorizontalSmallGap(),
                                     Expanded(
                                       child: IconButton.filled(
-                                          onPressed: () {
-                                            mode = CardAction.Skip;
-                                            _appinioSwiperController
-                                                .swipeRight();
-                                          }, // () {},
+                                          onPressed: isBlockingActivity
+                                              ? null
+                                              : () {
+                                                  mode = CardAction.Skip;
+                                                  _appinioSwiperController
+                                                      .swipeRight();
+                                                }, // () {},
                                           icon: Icon(Icons.redo)),
                                     ),
                                   ],

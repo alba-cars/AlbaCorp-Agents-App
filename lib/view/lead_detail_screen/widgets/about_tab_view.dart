@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -103,20 +104,19 @@ class AboutTabView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          IconButton.filledTonal(
-                              onPressed: () {
+                          CallButton(
+                              onTap: () {
                                 getIt<CallBloc>().add(CallEvent.clickToCall(
                                   phoneNumber: lead.phone ?? '',
                                 ));
                               },
-                              icon: Icon(Icons.call)),
-                          IconButton.filledTonal(
-                              onPressed: () {
+                              isDnd: lead.dndStatus),
+                          WhatsAppButton(
+                              onTap: () {
                                 launchUrlString(
                                     'whatsapp://send?phone=${lead.phone}');
                               },
-                              icon: ImageIcon(
-                                  AssetImage('assets/images/whatsapp.png'))),
+                              isDnd: lead.dndStatus),
                           IconButton.filledTonal(
                               onPressed: () async {
                                 final uri = Uri.parse('mailto:${lead.email}');

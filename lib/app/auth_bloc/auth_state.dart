@@ -9,5 +9,6 @@ class AuthState with _$AuthState {
     User? user,
     Agent? agent,
     Set<String>? veryImportantActivities,
+    String? lastCalledNumber,
   }) = _AuthState;
 }

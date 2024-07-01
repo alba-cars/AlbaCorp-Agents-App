@@ -19,6 +19,7 @@ import 'package:real_estate_app/view/home_screen/widgets/sliver_categories.dart'
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
@@ -94,6 +95,8 @@ class _HomePageLayoutState extends State<HomePageLayout> {
                         child: S3Image(
                           url: user?.photo,
                           fit: BoxFit.cover,
+                          errorWidget: Image.asset(
+                              'assets/images/person_placeholder.jpeg'),
                         ),
                       ),
                       HorizontalSmallGap(),
@@ -117,23 +120,6 @@ class _HomePageLayoutState extends State<HomePageLayout> {
               ),
               SliverVerticalSmallGap(),
               SliverVerticalSmallGap(),
-              // SliverToBoxAdapter(
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(horizontal: 20),
-              //     child: getSearchField('Search'),
-              //   ),
-              // ),
-              // SliverVerticalSmallGap(),
-              // BlocSelector<HomeCubit, HomeState, ModelCategory>(
-              //   selector: (state) {
-              //     return state.selectedCategory;
-              //   },
-              //   builder: (context, selectedCategory) {
-              //     return SliverCategories(
-              //         categories: context.read<HomeCubit>().state.categories,
-              //         selectedCategory: selectedCategory);
-              //   },
-              // ),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -320,7 +306,8 @@ class SortedView extends StatelessWidget {
             onNotification: (scrollInfo) {
               if (state.getSortedActivitiesStatus != AppStatus.loadingMore &&
                   scrollInfo.metrics.pixels >=
-                      0.9 * scrollInfo.metrics.maxScrollExtent) {
+                      0.9 * scrollInfo.metrics.maxScrollExtent &&
+                  state.sortedActivityPaginator?.hasNextPage == true) {
                 context.read<HomeCubit>().getSortedActivities();
               }
               return true;
@@ -538,8 +525,7 @@ class ActivityListItem extends StatelessWidget {
           child: InkWell(
             onTap: () {
               context.pushNamed(TaskDetailScreen.routeName,
-                  pathParameters: {'id': activity.lead?.id ?? ''},
-                  extra: activity);
+                  pathParameters: {'id': activity.id}, extra: activity);
             },
             child: Row(children: [
               Container(
@@ -605,19 +591,18 @@ class ActivityListItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconButton.filledTonal(
-                      onPressed: () async {
-                        if (activity.lead == null) {
-                          return;
-                        }
-                        context.read<CallBloc>().add(CallEvent.callStarted(
-                            phoneNumber: activity.lead!.phone ?? '',
-                            activityId: activity.id,
-                            leadId: activity.lead!.id));
-                      },
-                      icon: Icon(
-                        Icons.call,
-                      ))
+                  CallButton(
+                    onTap: () async {
+                      if (activity.lead == null) {
+                        return;
+                      }
+                      context.read<CallBloc>().add(CallEvent.callStarted(
+                          phoneNumber: activity.lead!.phone ?? '',
+                          activityId: activity.id,
+                          leadId: activity.lead!.id));
+                    },
+                    isDnd: activity.lead!.dndStatus,
+                  )
                 ],
               )
             ]),

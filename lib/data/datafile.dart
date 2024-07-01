@@ -5,7 +5,7 @@ import 'package:real_estate_app/model/detail_screen_slider.dart';
 import 'package:real_estate_app/model/filter_buy_page_type_model.dart';
 import 'package:real_estate_app/model/intro_model.dart';
 import 'package:real_estate_app/model/messege_model.dart';
-import 'package:real_estate_app/model/notification_type_model.dart';
+import 'package:real_estate_app/model/notification_model.dart';
 import 'package:real_estate_app/model/recomended_model.dart';
 import 'package:real_estate_app/model/search_histry_data.dart';
 
@@ -159,15 +159,6 @@ class DataFile {
           price: '\$1500'),
       BookingHome(
           image: 'booking3rd.png', name: 'Heaven Appartment', price: '\$800'),
-    ];
-  }
-
-  static List<NotificationType> getNotificationType() {
-    return [
-      NotificationType(name: "All"),
-      NotificationType(name: "Review"),
-      NotificationType(name: "Flat"),
-      NotificationType(name: "Favourite"),
     ];
   }
 }
