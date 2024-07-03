@@ -249,13 +249,6 @@ class _HomePageLayoutState extends State<HomePageLayout> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 20),
-            //   child: TitleText(
-            //     text: 'Tasks :',
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            // ),
             Expanded(
               child: BlocSelector<HomeCubit, HomeState, Set<ListType>>(
                 selector: (state) {
