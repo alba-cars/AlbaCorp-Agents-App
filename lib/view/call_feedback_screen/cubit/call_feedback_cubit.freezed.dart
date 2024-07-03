@@ -19,6 +19,7 @@ mixin _$CallFeedbackState {
   AppStatus get checkLeadStatus => throw _privateConstructorUsedError;
   Lead? get lead => throw _privateConstructorUsedError;
   String? get feedback => throw _privateConstructorUsedError;
+  AppStatus get addActivityStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CallFeedbackStateCopyWith<CallFeedbackState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $CallFeedbackStateCopyWith<$Res> {
           CallFeedbackState value, $Res Function(CallFeedbackState) then) =
       _$CallFeedbackStateCopyWithImpl<$Res, CallFeedbackState>;
   @useResult
-  $Res call({AppStatus checkLeadStatus, Lead? lead, String? feedback});
+  $Res call(
+      {AppStatus checkLeadStatus,
+      Lead? lead,
+      String? feedback,
+      AppStatus addActivityStatus});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -52,6 +57,7 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
     Object? checkLeadStatus = null,
     Object? lead = freezed,
     Object? feedback = freezed,
+    Object? addActivityStatus = null,
   }) {
     return _then(_value.copyWith(
       checkLeadStatus: null == checkLeadStatus
@@ -66,6 +72,10 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
           ? _value.feedback
           : feedback // ignore: cast_nullable_to_non_nullable
               as String?,
+      addActivityStatus: null == addActivityStatus
+          ? _value.addActivityStatus
+          : addActivityStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
     ) as $Val);
   }
 
@@ -90,7 +100,11 @@ abstract class _$$CallFeedbackStateImplCopyWith<$Res>
       __$$CallFeedbackStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppStatus checkLeadStatus, Lead? lead, String? feedback});
+  $Res call(
+      {AppStatus checkLeadStatus,
+      Lead? lead,
+      String? feedback,
+      AppStatus addActivityStatus});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -110,6 +124,7 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
     Object? checkLeadStatus = null,
     Object? lead = freezed,
     Object? feedback = freezed,
+    Object? addActivityStatus = null,
   }) {
     return _then(_$CallFeedbackStateImpl(
       checkLeadStatus: null == checkLeadStatus
@@ -124,6 +139,10 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
           ? _value.feedback
           : feedback // ignore: cast_nullable_to_non_nullable
               as String?,
+      addActivityStatus: null == addActivityStatus
+          ? _value.addActivityStatus
+          : addActivityStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
     ));
   }
 }
@@ -132,7 +151,10 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
 
 class _$CallFeedbackStateImpl implements _CallFeedbackState {
   const _$CallFeedbackStateImpl(
-      {this.checkLeadStatus = AppStatus.init, this.lead, this.feedback});
+      {this.checkLeadStatus = AppStatus.init,
+      this.lead,
+      this.feedback,
+      this.addActivityStatus = AppStatus.init});
 
   @override
   @JsonKey()
@@ -141,10 +163,13 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
   final Lead? lead;
   @override
   final String? feedback;
+  @override
+  @JsonKey()
+  final AppStatus addActivityStatus;
 
   @override
   String toString() {
-    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback)';
+    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus)';
   }
 
   @override
@@ -156,11 +181,14 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
                 other.checkLeadStatus == checkLeadStatus) &&
             (identical(other.lead, lead) || other.lead == lead) &&
             (identical(other.feedback, feedback) ||
-                other.feedback == feedback));
+                other.feedback == feedback) &&
+            (identical(other.addActivityStatus, addActivityStatus) ||
+                other.addActivityStatus == addActivityStatus));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, checkLeadStatus, lead, feedback);
+  int get hashCode => Object.hash(
+      runtimeType, checkLeadStatus, lead, feedback, addActivityStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -174,7 +202,8 @@ abstract class _CallFeedbackState implements CallFeedbackState {
   const factory _CallFeedbackState(
       {final AppStatus checkLeadStatus,
       final Lead? lead,
-      final String? feedback}) = _$CallFeedbackStateImpl;
+      final String? feedback,
+      final AppStatus addActivityStatus}) = _$CallFeedbackStateImpl;
 
   @override
   AppStatus get checkLeadStatus;
@@ -182,6 +211,8 @@ abstract class _CallFeedbackState implements CallFeedbackState {
   Lead? get lead;
   @override
   String? get feedback;
+  @override
+  AppStatus get addActivityStatus;
   @override
   @JsonKey(ignore: true)
   _$$CallFeedbackStateImplCopyWith<_$CallFeedbackStateImpl> get copyWith =>

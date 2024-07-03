@@ -5,13 +5,18 @@ import '../../model/activity_model.dart';
 import '../../util/result.dart';
 
 abstract class ActivityRepo {
-  Future<Result<Activity>> createActivity({
-    required String leadId,
-    required String type,
-    DateTime? date,
-    String? propertyId,
-    String? description,
-  });
+  Future<Result<Activity>> createActivity(
+      {required String leadId,
+      required String type,
+      DateTime? date,
+      String? propertyId,
+      String? description,
+      bool isCompleted = false});
+      Future<Result<void>> createCallFeedbackActivity(
+      {required String leadId,
+     
+    required  String feedback,
+     });
   Future<Result<Activity>> getActivity({
     required String activityId,
   });

@@ -6,5 +6,6 @@ class CallFeedbackState with _$CallFeedbackState {
     @Default(AppStatus.init) AppStatus checkLeadStatus,
     Lead? lead,
     String? feedback,
+    @Default(AppStatus.init) AppStatus addActivityStatus,
   }) = _CallFeedbackState;
 }

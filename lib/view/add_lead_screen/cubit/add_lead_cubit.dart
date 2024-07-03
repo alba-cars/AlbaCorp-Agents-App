@@ -63,7 +63,7 @@ class AddLeadCubit extends Cubit<AddLeadState> {
       emit(state.copyWith(
           currentTab: state.currentTab - 1, previousTab: state.currentTab));
     } else {
-      await addLead();
+      // await addLead();
     }
   }
 

@@ -10,7 +10,7 @@ part 'agent_model.g.dart';
 class Agent with _$Agent {
   const factory Agent({
     required String id,
-    required String userId,
+    @JsonKey(readValue: userIdFromJson) required String userId,
     @Default([]) List<String> languages,
     String? RERANo,
     String? DEDNo,
@@ -18,8 +18,20 @@ class Agent with _$Agent {
     @Default(false) bool RICSCertified,
     @Default(0) int creditsBalance,
     @Default(0) int creditsLimit,
-    required User user, // Assuming you have a User model defined similarly
+    @JsonKey(readValue: userFromJson) required User user,
   }) = _Agent;
 
   factory Agent.fromJson(Map<String, dynamic> json) => _$AgentFromJson(json);
+}
+
+String userIdFromJson(Map p1, String p2) {
+  return p1[p2] is Map ? p1[p2]['id'] : p1[p2];
+}
+
+Map<String, dynamic> userFromJson(Map p1, String p2) {
+  return p1[p2] is Map
+      ? p1[p2]
+      : p1['userId'] is Map
+          ? p1["userId"]
+          : {};
 }

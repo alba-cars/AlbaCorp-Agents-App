@@ -8,12 +8,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:linkus_sdk/linkus_sdk.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/data/remote_data/pending_call_feedback_repo.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/core/helpers/app_config_helper.dart';
 import 'package:real_estate_app/core/models/app_config/AppConfig.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/data/repository/notification_repo.dart';
 import 'package:real_estate_app/model/notification_model.dart';
+import 'package:real_estate_app/model/pending_call_feedback.dart';
 import 'package:real_estate_app/model/user.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +30,8 @@ part 'auth_bloc.freezed.dart';
 
 @singleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc(this._authRepo, this._notificationRepo, this._activityRepo)
+  AuthBloc(this._authRepo, this._notificationRepo, this._activityRepo,
+      this._pendingCallFeedbackRepo)
       : super(_AuthState()) {
     on<_UserLoggedIn>(_userLoggedIn);
     on<_UserLoggedOut>(_userLoggedOut);
@@ -38,6 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_CompletedImportantActivity>(_completedImportantActivity);
     on<_CheckForImportantActivity>(_checkForImportantActivity);
     on<_CheckForCallFeedback>(_checkForCallFeedback);
+    on<_RemoveLastCallDetails>(_removeLastCallDetails);
 
     _fcmForegroundStream = FirebaseMessaging.onMessage.listen(onNotification);
     _fcmForegroundStream =
@@ -49,16 +53,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       onNotification(e);
     });
-    getIt<SharedPreferences>().reload().then((_) {
-      final number = getIt<SharedPreferences>().getString('call');
-      Logger().d(number);
-    });
-    // add(AuthEvent.started());
     on<_GetAppConfig>(_getAppConfigData);
   }
   final AuthRepo _authRepo;
   final ActivityRepo _activityRepo;
   final NotificationRepo _notificationRepo;
+  final PendingCallFeedbackRepo _pendingCallFeedbackRepo;
   StreamSubscription? _fcmForegroundStream;
   StreamSubscription? _fcmBackgroundStream;
 
@@ -178,7 +178,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       _CheckForCallFeedback event, Emitter<AuthState> emit) async {
     await getIt<SharedPreferences>().reload();
     final number = getIt<SharedPreferences>().getString("calledNumber");
-    Logger().d(number);
-    emit(state.copyWith(lastCalledNumber: number));
+    //TODO : add call direction
+    if (number != null) {
+      await _pendingCallFeedbackRepo.add(
+          model: PendingCallFeedback(
+              id: 0, number: number, callDirection: CallDirection.incoming));
+      emit(state.copyWith(
+          lastCalledNumber: number,
+          showFeedbackScreen: number == state.lastCalledNumber
+              ? state.showFeedbackScreen
+              : true));
+    }
+  }
+
+  FutureOr<void> _removeLastCallDetails(
+      _RemoveLastCallDetails event, Emitter<AuthState> emit) {
+    emit(state.copyWith(showFeedbackScreen: false));
   }
 }

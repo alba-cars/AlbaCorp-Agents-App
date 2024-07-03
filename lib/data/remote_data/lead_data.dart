@@ -74,15 +74,15 @@ class LeadData implements LeadRepo {
       if (filterRemoved?.containsKey('active') == true) {
         filterRemoved!["active"] = filterRemoved['active']?['value'];
       }
-      Logger().d(filterRemoved);
       final response = await _dio.get(url, queryParameters: {
-        // 'agent_id': getIt<AuthBloc>().state.agent?.id,
-        if (paginator != null) 'page': paginator.currentPage + 1,
+        'agent_id': getIt<AuthBloc>().state.agent?.id,
+        'page': paginator?.currentPage ?? 0 + 1,
+        'per_page': 15,
         'sort_by': 'createdAt',
         "sort_dir": 'DESC',
         'roles': ['User', 'Owner'],
         'active': true,
-        if (search != null) 'search': search,
+        if (search != null) 'search': '523809178', // search,
         if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['findUsersOutput'] as List;
@@ -111,6 +111,22 @@ class LeadData implements LeadRepo {
               currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: response.data['searchPerPage'],
               itemCount: response.data['filteredCount']));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<Lead>> getLeadByPhone({required String phone}) async {
+    try {
+      String url = 'v1/users/getUserByPhone';
+
+      final response = await _dio.post(url, data: {'phone': phone});
+      final data = response.data;
+      final lead = Lead.fromJson(data);
+      return Success(
+        lead,
+      );
     } catch (e, stack) {
       return onError(e, stack, log);
     }

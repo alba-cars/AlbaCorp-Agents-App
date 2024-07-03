@@ -15,6 +15,7 @@ import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'data/objectbox/entity/notification_entity.dart';
+import 'data/objectbox/entity/pending_call_feedback.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -49,6 +50,40 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(5, 3668146916538278613),
             name: 'createdAt',
             type: 10,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(3, 7049694244653760523),
+      name: 'PendingCallFeedbackEntity',
+      lastPropertyId: const obx_int.IdUid(5, 8161508637393570831),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 9826608743018263),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 4820043944492960187),
+            name: 'number',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 1362298140004410048),
+            name: 'feedback',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 2873496119375944348),
+            name: 'isSynced',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 8161508637393570831),
+            name: 'callDirection',
+            type: 6,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -90,13 +125,19 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(1, 5795122159064061020),
+      lastEntityId: const obx_int.IdUid(3, 7049694244653760523),
       lastIndexId: const obx_int.IdUid(0, 0),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
-      retiredEntityUids: const [],
+      retiredEntityUids: const [6363046916056047050],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        1979810741703805588,
+        272374996687882852,
+        4471211523630168431,
+        4717547009146856455,
+        6538964272779489073
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -149,7 +190,53 @@ obx_int.ModelDefinition getObjectBoxModel() {
               createdAt: createdAtParam);
 
           return object;
-        })
+        }),
+    PendingCallFeedbackEntity:
+        obx_int.EntityDefinition<PendingCallFeedbackEntity>(
+            model: _entities[1],
+            toOneRelations: (PendingCallFeedbackEntity object) => [],
+            toManyRelations: (PendingCallFeedbackEntity object) => {},
+            getId: (PendingCallFeedbackEntity object) => object.id,
+            setId: (PendingCallFeedbackEntity object, int id) {
+              object.id = id;
+            },
+            objectToFB: (PendingCallFeedbackEntity object, fb.Builder fbb) {
+              final numberOffset = fbb.writeString(object.number);
+              final feedbackOffset = object.feedback == null
+                  ? null
+                  : fbb.writeString(object.feedback!);
+              fbb.startTable(6);
+              fbb.addInt64(0, object.id);
+              fbb.addOffset(1, numberOffset);
+              fbb.addOffset(2, feedbackOffset);
+              fbb.addBool(3, object.isSynced);
+              fbb.addInt64(4, object.callDirection);
+              fbb.finish(fbb.endTable());
+              return object.id;
+            },
+            objectFromFB: (obx.Store store, ByteData fbData) {
+              final buffer = fb.BufferContext(fbData);
+              final rootOffset = buffer.derefObject(0);
+              final idParam =
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+              final numberParam = const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, '');
+              final callDirectionParam =
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+              final feedbackParam =
+                  const fb.StringReader(asciiOptimization: true)
+                      .vTableGetNullable(buffer, rootOffset, 8);
+              final isSyncedParam = const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 10, false);
+              final object = PendingCallFeedbackEntity(
+                  id: idParam,
+                  number: numberParam,
+                  callDirection: callDirectionParam,
+                  feedback: feedbackParam,
+                  isSynced: isSyncedParam);
+
+              return object;
+            })
   };
 
   return obx_int.ModelDefinition(model, bindings);
@@ -176,4 +263,28 @@ class NotificationEntity_ {
   /// See [NotificationEntity.createdAt].
   static final createdAt =
       obx.QueryDateProperty<NotificationEntity>(_entities[0].properties[4]);
+}
+
+/// [PendingCallFeedbackEntity] entity fields to define ObjectBox queries.
+class PendingCallFeedbackEntity_ {
+  /// See [PendingCallFeedbackEntity.id].
+  static final id = obx.QueryIntegerProperty<PendingCallFeedbackEntity>(
+      _entities[1].properties[0]);
+
+  /// See [PendingCallFeedbackEntity.number].
+  static final number = obx.QueryStringProperty<PendingCallFeedbackEntity>(
+      _entities[1].properties[1]);
+
+  /// See [PendingCallFeedbackEntity.feedback].
+  static final feedback = obx.QueryStringProperty<PendingCallFeedbackEntity>(
+      _entities[1].properties[2]);
+
+  /// See [PendingCallFeedbackEntity.isSynced].
+  static final isSynced = obx.QueryBooleanProperty<PendingCallFeedbackEntity>(
+      _entities[1].properties[3]);
+
+  /// See [PendingCallFeedbackEntity.callDirection].
+  static final callDirection =
+      obx.QueryIntegerProperty<PendingCallFeedbackEntity>(
+          _entities[1].properties[4]);
 }

@@ -1,13 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
-import 'package:real_estate_app/data/datafile.dart';
-import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -18,21 +13,15 @@ import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
-import 'package:real_estate_app/view/message_screen/tab_message.dart';
 import 'package:real_estate_app/view/more_screen/tab_more.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
-import 'package:real_estate_app/view/saved_screen/tab_saved.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
-import '../../model/bottom_model.dart';
 import '../../model/user.dart';
 import '../../service_locator/injectable.dart';
-import '../../util/constant.dart';
-import '../../util/constant_widget.dart';
 import '../../widgets/button.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';

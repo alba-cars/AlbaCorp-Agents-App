@@ -42,6 +42,10 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
           : Preference.fromJson(json['preference'] as Map<String, dynamic>),
       preferredLanguages:
           json['preferred_languages'] as List<dynamic>? ?? const [],
+      currentAgent: readCurrentAgent(json, 'currentAgent') == null
+          ? null
+          : Agent.fromJson(
+              readCurrentAgent(json, 'currentAgent') as Map<String, dynamic>),
       notes: json['notes'] as String?,
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
@@ -76,6 +80,7 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'modified_by': instance.modifiedBy,
       'preference': instance.preference,
       'preferred_languages': instance.preferredLanguages,
+      'currentAgent': instance.currentAgent,
       'notes': instance.notes,
       'tags': instance.tags,
       'DndStatus': instance.dndStatus,

@@ -97,8 +97,7 @@ private class MyListener(
              val number=   sharedPreferences.getString("flutter.call",null);
              Log.d("flutter", "number: $number")
                 if(number!= null){
-                    sharedPreferences.edit().putString("flutter.calledNumber",number.replace("tel:","")).apply()
-                    sharedPreferences.edit().remove("flutter.call").apply()
+                    
                     val LAYOUT_FLAG : Int;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -132,6 +131,8 @@ private class MyListener(
                    val text = textWidget?.text
                     textWidget?.text = text?.toString()?.replace("{number}",number)
                     buttonFeedback?.setOnClickListener {
+                        sharedPreferences.edit().putString("flutter.calledNumber",number.replace("tel:","")).apply()
+                        sharedPreferences.edit().remove("flutter.call").apply()
                         val feedbackText = feedbackInputWidget?.text.toString()
                         sharedPreferences.edit().putString("flutter.calledNumberFeedback",feedbackText).apply()
                         wm?.removeView(ly1);

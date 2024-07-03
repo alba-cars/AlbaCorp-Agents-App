@@ -20,13 +20,13 @@ class ActivityData implements ActivityRepo {
   ActivityData({required Dio dio}) : _dio = dio;
   final log = Logger();
   @override
-  Future<Result<Activity>> createActivity({
-    required String leadId,
-    required String type,
-    DateTime? date,
-    String? propertyId,
-    String? description,
-  }) async {
+  Future<Result<Activity>> createActivity(
+      {required String leadId,
+      required String type,
+      DateTime? date,
+      String? propertyId,
+      String? description,
+      bool isCompleted = false}) async {
     try {
       final response = await _dio.post('/v1/activities', data: {
         'user_id': leadId,
@@ -34,7 +34,8 @@ class ActivityData implements ActivityRepo {
         'date': date?.toIso8601String() ?? DateTime.now().toIso8601String(),
         if (date == null) 'disableDateChecking': true,
         'description': description,
-        'property_id': propertyId
+        'property_id': propertyId,
+        if (isCompleted) "status": 'Complete'
       });
       final data = response.data;
       final model = Activity.fromJson(data);
@@ -302,6 +303,21 @@ class ActivityData implements ActivityRepo {
                   (paginator?.currentPage ?? 0) + 1,
               perPage: response.data['data']['limit'] ?? 0,
               itemCount: response.data['data']['totalItems'] ?? 0));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<void>> createCallFeedbackActivity(
+      {required String leadId, required String feedback}) async {
+    try {
+      await _dio.post('/v1/activities/call-feedback-activity', data: {
+        'lead_id': leadId,
+        'feedback': feedback,
+      });
+
+      return Success(null);
     } catch (e, stack) {
       return onError(e, stack, log);
     }

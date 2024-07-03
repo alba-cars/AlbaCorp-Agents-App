@@ -66,11 +66,13 @@ class AppRouter {
               state.matchedLocation == Routes.homeRoute ||
               state.matchedLocation == Routes.loginRoute) {
             return HomePage.routeName;
-          } else if (authState.veryImportantActivities != null &&
-              authState.veryImportantActivities!.isNotEmpty &&
+            // } else if (authState.veryImportantActivities != null &&
+            //     authState.veryImportantActivities!.isNotEmpty &&
+            //     state.uri.path.contains(TaskDetailScreen.routeName) == false) {
+            //   return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
+          } else if (authState.showFeedbackScreen &&
+              state.uri.path.contains(CallFeedbackScreen.routeName) == false &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {
-            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
-          } else if (authState.lastCalledNumber != null) {
             return CallFeedbackScreen.routeName;
           }
           return null;
@@ -412,7 +414,8 @@ class GoRouterRefreshStream extends ChangeNotifier {
             element.veryImportantActivities?.length !=
                 lastElement?.veryImportantActivities?.length ||
             (element.lastCalledNumber != null &&
-                lastElement?.lastCalledNumber != element.lastCalledNumber)) {
+                lastElement?.lastCalledNumber != element.lastCalledNumber &&
+                element.showFeedbackScreen)) {
           notifyListeners();
         }
         lastElement = element;
