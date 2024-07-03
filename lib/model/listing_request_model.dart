@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:real_estate_app/model/amenity_model.dart';
 
 import 'building_model.dart';
 import 'community_model.dart';

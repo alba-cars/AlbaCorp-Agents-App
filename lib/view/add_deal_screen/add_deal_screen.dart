@@ -1,28 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:real_estate_app/model/deal_model.dart';
-import 'package:real_estate_app/model/off_plan_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/cubit/add_deal_cubit.dart';
-import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/currency_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field_multi.dart';
-import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
-import '../../widgets/fields/number_field.dart';
 import 'widgets/primary_base_info.dart';
 import 'widgets/secondary_base_info.dart';
 

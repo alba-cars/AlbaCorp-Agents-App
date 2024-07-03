@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -87,7 +86,7 @@ class _S3ImageState extends State<S3Image> {
             } catch (e) {
               isLoading = false;
               error = true;
-              print(e);
+              Logger().d(e);
             }
           }
         }

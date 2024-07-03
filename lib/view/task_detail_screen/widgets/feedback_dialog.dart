@@ -332,20 +332,6 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                               markAsProspect:
                                                   feedBackValue.value ==
                                                       'Very Interested');
-                                      // getIt<ActivityCubit>()
-                                      //     .setLastActivityFeedback(
-                                      //         widget.activity,
-                                      //         ActivityFeedback(
-                                      //             isInterested: true,
-                                      //             status: 'Complete',
-                                      //             notes: _controller.text));
-                                      // Navigator.of(context).pop();
-                                      // final result = await widget.parentContext
-                                      //     .pushNamed(AddTaskScreen.routeName);
-                                      // if (result == true &&
-                                      //     widget.parentContext.mounted) {
-                                      //   widget.parentContext.pop();
-                                      // }
                                     },
                                     text: ('Add Followup')),
                               VerticalSmallGap(
@@ -433,7 +419,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                             context: widget.parentContext,
                                             description: _controller.text,
                                           );
-                                      Navigator.of(context).pop();
+                                      // Navigator.of(context).pop();
                                     },
                                     text: ('Complete')),
                               if (value == "Not Answered")
@@ -458,7 +444,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                         .disqualify(
                                             context: widget.parentContext,
                                             description: _controller.text);
-                                    Navigator.of(context).pop();
+                                    // Navigator.of(context).pop();
                                   },
                                   child: Text('Disqualify')),
                             ]

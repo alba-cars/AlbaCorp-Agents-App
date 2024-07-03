@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -23,6 +22,7 @@ class AboutTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return RefreshIndicator.adaptive(
       onRefresh: () => context.read<LeadDetailCubit>().getLeadDetails(),
       child: CustomScrollView(
@@ -43,9 +43,10 @@ class AboutTabView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           LabelText(text: 'Client Info:'),
+                          Spacer(),
                           Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 4.h, vertical: 1.h),
@@ -55,6 +56,17 @@ class AboutTabView extends StatelessWidget {
                                 color: Colors.blueGrey[100]),
                             child: SmallText(text: lead.leadStatus?.name ?? ''),
                           ),
+                          HorizontalSmallGap(),
+                          if (lead.dndStatus)
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4.h, vertical: 1.h),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: colorScheme.error),
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: colorScheme.errorContainer),
+                              child: SmallText(text: 'DND'),
+                            ),
                         ],
                       ),
                       VerticalSmallGap(),
@@ -103,20 +115,19 @@ class AboutTabView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          IconButton.filledTonal(
-                              onPressed: () {
+                          CallButton(
+                              onTap: () {
                                 getIt<CallBloc>().add(CallEvent.clickToCall(
-                                    phoneNumber: lead.phone ?? '',
-                                    leadId: lead.id));
+                                  phoneNumber: lead.phone ?? '',
+                                ));
                               },
-                              icon: Icon(Icons.call)),
-                          IconButton.filledTonal(
-                              onPressed: () {
+                              isDnd: lead.dndStatus),
+                          WhatsAppButton(
+                              onTap: () {
                                 launchUrlString(
                                     'whatsapp://send?phone=${lead.phone}');
                               },
-                              icon: ImageIcon(
-                                  AssetImage('assets/images/whatsapp.png'))),
+                              isDnd: lead.dndStatus),
                           IconButton.filledTonal(
                               onPressed: () async {
                                 final uri = Uri.parse('mailto:${lead.email}');

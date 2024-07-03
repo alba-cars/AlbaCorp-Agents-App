@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:real_estate_app/data/remote_data/deals_data.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/deal_details_screen/cubit/deal_details_cubit.dart';
 

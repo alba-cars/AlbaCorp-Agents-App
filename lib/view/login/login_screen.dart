@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
-import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/view/login/cubit/login_cubit.dart';
 import 'package:real_estate_app/view/login/tab_login.dart';
 
@@ -34,12 +32,11 @@ class _LoginScreenLayoutState extends State<LoginScreenLayout>
     Constant.closeApp();
   }
 
-  var tabController;
-  var pController;
+  TabController? tabController;
+  PageController? pController;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: 1, vsync: this);
     pController = PageController();
@@ -47,9 +44,9 @@ class _LoginScreenLayoutState extends State<LoginScreenLayout>
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    tabController?.dispose();
+    pController?.dispose();
     super.dispose();
-    tabController.dispose();
   }
 
   @override

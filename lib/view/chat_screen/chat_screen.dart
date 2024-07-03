@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -9,7 +8,6 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/chat_screen/cubit/chat_cubit.dart'
     as cubit;
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
-import 'package:uuid/uuid.dart';
 
 class ChatScreen extends StatelessWidget {
   static const routeName = '/chatScreen';
@@ -27,7 +25,7 @@ class ChatScreen extends StatelessWidget {
 }
 
 class _ChatScreenLayout extends StatefulWidget {
-  const _ChatScreenLayout({super.key});
+  const _ChatScreenLayout();
 
   @override
   State<_ChatScreenLayout> createState() => _ChatScreenLayoutState();

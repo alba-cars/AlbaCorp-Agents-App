@@ -24,7 +24,7 @@ class AuthData implements AuthRepo {
         data: {
           "email": username,
           "password": password,
-          "notification_token": await _notification.getToken()
+          // "notification_token": await _notification.getToken()
         },
       );
       Map<String, dynamic> data = loginResponse.data;

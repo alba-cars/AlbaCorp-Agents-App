@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation='4dp'
+>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:orientation="vertical">
+
+        <!-- Logo and Title -->
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background='#E3EFFA'
+            android:padding="16dp"
+            android:orientation="horizontal">
+
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/branding" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Alba Homes agent app alert"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+         <LinearLayout
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/header"
+            android:layout_marginTop="16dp"
+            android:padding="16dp">
+
+        <!-- Message -->
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The app detected that a call has made to {number}. If it is a business call, please provide feedback so it can be added to the CRM. If it is a personal call, you can ignore the feedback request."
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <!-- Feedback Input -->
+        <EditText
+            android:id="@+id/feedback_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/message"
+            android:layout_marginTop="16dp"
+            android:hint="Enter feedback"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:background='#E3EFFA'
+            android:padding="12dp"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            android:gravity="top" />
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/message"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Ignore Button -->
+            <Button
+                android:id="@+id/button_ignore"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#E0E6F1"
+                android:text="Ignore"
+                android:textColor="#666666"
+                android:textSize="16sp" />
+
+            <!-- Give Feedback Button -->
+            <Button
+                android:id="@+id/button_feedback"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:backgroundTint="#001C3E"
+                android:text="Give Feedback"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

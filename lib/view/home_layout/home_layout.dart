@@ -1,13 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
-import 'package:real_estate_app/data/datafile.dart';
-import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -18,19 +13,14 @@ import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
-import 'package:real_estate_app/view/message_screen/tab_message.dart';
-import 'package:real_estate_app/view/more_screen/tab_more.dart';
-import 'package:real_estate_app/view/saved_screen/tab_saved.dart';
+import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
-import '../../model/bottom_model.dart';
 import '../../model/user.dart';
 import '../../service_locator/injectable.dart';
-import '../../util/constant.dart';
-import '../../util/constant_widget.dart';
 import '../../widgets/button.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';
@@ -47,7 +37,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final AnimationController _animationController = AnimationController(
       vsync: this,
       duration: Duration(
@@ -55,9 +45,23 @@ class _HomeScreenState extends State<HomeScreen>
       ));
 
   @override
+  void initState() {
+    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
@@ -111,7 +115,11 @@ class _HomeScreenState extends State<HomeScreen>
                                     shape: BoxShape.circle,
                                     color: Colors.grey[100]!,
                                   ),
-                                  child: S3Image(url: user.photo),
+                                  child: S3Image(
+                                    url: user.photo,
+                                    errorWidget: Image.asset(
+                                        'assets/images/person_placeholder.jpeg'),
+                                  ),
                                 ),
                                 const SizedBox(width: 6),
                                 Column(
@@ -223,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen>
         actions: [
           IconButton(
               onPressed: () {
-                Scaffold.of(context).openDrawer();
+                context.pushNamed(NotificationsScreen.routeName);
               },
               icon: Icon(Icons.notifications)),
         ],
@@ -349,17 +357,13 @@ class _HomeScreenState extends State<HomeScreen>
         case 3:
           context.goNamed(DealsScreen.routeName);
           return;
-        case 4:
-          context.goNamed(TabMore.routeName);
-          return;
+
         default:
           context.goNamed(HomePage.routeName);
           return;
       }
     }
 
-    const iconSize = 15.0;
-    final selectedIconColor = pacificBlue;
     return Container(
       decoration: BoxDecoration(color: Colors.white),
       child: Row(

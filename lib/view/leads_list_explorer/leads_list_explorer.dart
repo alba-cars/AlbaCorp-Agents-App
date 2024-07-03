@@ -1,19 +1,14 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
-import 'package:real_estate_app/view/explorer_screen/cubit/explorer_screen_cubit.dart';
-import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/cubit/leads_list_explorer_cubit.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -26,12 +21,9 @@ import '../../util/color_category.dart';
 import '../../util/status.dart';
 import '../../widgets/fields/multi_select_autocomplete_field.dart';
 import '../../widgets/fields/wrap_select_field.dart';
-import '../../widgets/s3_image.dart';
 import '../../widgets/search_bar.dart';
 import '../../widgets/space.dart';
-import '../../widgets/tab_bar.dart';
 import '../../widgets/text.dart';
-import '../add_ticket_screen/add_ticket_screen.dart';
 import '../deal_details_screen/widgets/info_label_value.dart';
 
 class LeadsExplorerScreen extends StatelessWidget {
@@ -48,7 +40,7 @@ class LeadsExplorerScreen extends StatelessWidget {
 }
 
 class _ExplorerScreenLayout extends StatefulWidget {
-  const _ExplorerScreenLayout({super.key});
+  const _ExplorerScreenLayout();
 
   @override
   State<_ExplorerScreenLayout> createState() => _ExplorerScreenLayoutState();

@@ -27,8 +27,8 @@ class Activity with _$Activity {
     String? offplanId,
     String? propertyType,
     DateTime? overdueAt,
-    @JsonKey(ignore: true) DateTime? createdAt,
-    @JsonKey(ignore: true) DateTime? updatedAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) = _Activity;
 
   factory Activity.fromJson(Map<String, dynamic> json) =>

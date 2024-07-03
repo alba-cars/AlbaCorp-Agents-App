@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
 import '../../../model/deal_model.dart';
-import '../../../util/color_category.dart';
 
 class DealsTabView extends StatelessWidget {
   const DealsTabView({super.key, required this.deals});

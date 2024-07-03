@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
+import 'agent_model.dart';
 import 'property_type_model.dart';
 
 part 'lead_model.freezed.dart';
@@ -28,7 +29,7 @@ class Lead with _$Lead {
   const factory Lead({
     @JsonKey(readValue: readId) required String id,
     @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name') required String lastName,
+    @JsonKey(name: 'last_name') @Default('') String lastName,
     String? email,
     String? phone,
     String? country,
@@ -55,11 +56,17 @@ class Lead with _$Lead {
     @JsonKey(name: 'preferred_languages')
     @Default([])
     List<dynamic> preferredLanguages,
+    @JsonKey(readValue: readCurrentAgent) Agent? currentAgent,
     String? notes,
     @Default([]) List<String> tags,
+    @JsonKey(name: 'DndStatus') @Default(false) bool dndStatus,
   }) = _Lead;
 
   factory Lead.fromJson(Map<String, dynamic> json) => _$LeadFromJson(json);
+}
+
+Map? readCurrentAgent(Map p1, String p2) {
+  return p1[p2] is Map ? p1[p2] : null;
 }
 
 @freezed

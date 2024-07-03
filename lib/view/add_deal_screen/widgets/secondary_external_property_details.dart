@@ -4,7 +4,6 @@ import 'package:real_estate_app/widgets/fields/commission_field.dart';
 
 import '../../../model/building_model.dart';
 import '../../../model/community_model.dart';
-import '../../../model/property_type_model.dart';
 import '../../../widgets/fields/autocomplete_field.dart';
 import '../../../widgets/fields/currency_field.dart';
 import '../../../widgets/fields/number_field.dart';

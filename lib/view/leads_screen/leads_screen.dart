@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:linkus_sdk/linkus_sdk.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/hot_leads.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -17,9 +13,9 @@ import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
 
-import '../../app/call_bloc/call_bloc.dart';
 import '../../util/color_category.dart';
 import '../../util/status.dart';
+import '../../widgets/call_button.dart';
 import '../../widgets/space.dart';
 import '../../widgets/text.dart';
 import '../lead_detail_screen/lead_detail_screen.dart';
@@ -73,64 +69,8 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
         name: 'lead_source_type',
         label: 'Lead Source',
         values: [
-          {
-            'value': [
-              "External REF0101",
-              "External REF0102" ",External REF0103",
-              "External REF0104",
-              "External REF0105",
-              "External RIK/Burj Vista",
-              "External RIK/Creek Harbour",
-              "External RIK/Palm",
-              "External Ref0102",
-              "External Ref0105",
-              "External2023 Ref0101",
-              "ExternalREF0105",
-              "External%EF%BF%BDREF0105"
-            ],
-            'label': 'Cold Leads'
-          },
-          {
-            'value': [
-              "Admin Created",
-              "Agent Created",
-              "Alba Cars" ",Ask a Question",
-              "Bayut",
-              "Call Center",
-              "Call Center 1",
-              "Call Center 2",
-              "Call Center 3",
-              "DLD",
-              "Dubizzle",
-              "DubizzleHL",
-              "Email",
-              "Facebook Call",
-              "Facebook Campaign",
-              "Facebook Chat",
-              "Get Matched Assistance",
-              "Google Ads",
-              "Hot Confidential",
-              "Imported",
-              "Instagram Call",
-              "Instagram Campaign",
-              "Instagram Chat",
-              "New Listing",
-              "Newsletter",
-              "Off-Plan",
-              "Property Finder",
-              "Referral",
-              "Register",
-              "Saqib",
-              "Snapchat",
-              "TikTok",
-              "Twitter",
-              "Unkown Inbound Call",
-              "Viewing",
-              "Watti",
-              "Whatsapp"
-            ],
-            'label': 'Hot Leads'
-          }
+          {'value': 'cold', 'label': 'Cold Leads'},
+          {'value': 'hot', 'label': 'Hot Leads'}
         ],
         isRequired: false,
         displayOption: (option) => option['label'] as String,
@@ -221,6 +161,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -491,7 +432,23 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                                                 'assets/images/flame.png',
                                                 height: 17,
                                                 width: 20,
-                                              )
+                                              ),
+                                            if (lead.dndStatus)
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.h,
+                                                    vertical: 1.h),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color:
+                                                            colorScheme.error),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color: colorScheme
+                                                        .errorContainer),
+                                                child: SmallText(text: 'DND'),
+                                              ),
                                           ],
                                         ),
                                         VerticalSmallGap(
@@ -507,24 +464,15 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      IconButton.filledTonal(
-                                          onPressed: () async {
-                                            // await LinkusSdk()
-                                            //     .makeACall(number: '1002');
-                                            // getIt<CallBloc>().add(
-                                            //     CallEvent.clickToCall(
-                                            //         phoneNumber:
-                                            //             lead.phone ?? '',
-                                            //         leadId: lead.id));
+                                      CallButton(
+                                          onTap: () async {
                                             if (lead.phone != null) {
                                               context
                                                   .read<LeadsCubit>()
                                                   .makeACall(lead);
                                             }
                                           },
-                                          icon: Icon(
-                                            Icons.call,
-                                          )),
+                                          isDnd: lead.dndStatus),
                                     ],
                                   )
                                 ]),

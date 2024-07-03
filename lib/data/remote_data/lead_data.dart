@@ -70,24 +70,19 @@ class LeadData implements LeadRepo {
       final Map<String, dynamic>? filterRemoved = (filter != null)
           ? (Map.from(filter)..removeWhere((key, value) => value == null))
           : null;
-      if (filterRemoved?.containsKey('lead_source_type') == true) {
-        final val = filterRemoved!['lead_source_type'];
-        final vals = filterRemoved['lead_source_many'] ?? [];
-        filterRemoved['lead_source_many'] = [...vals, ...val['value']];
-        filterRemoved.remove('lead_source_type');
-      }
+
       if (filterRemoved?.containsKey('active') == true) {
         filterRemoved!["active"] = filterRemoved['active']?['value'];
       }
-      Logger().d(filterRemoved);
       final response = await _dio.get(url, queryParameters: {
         'agent_id': getIt<AuthBloc>().state.agent?.id,
-        if (paginator != null) 'page': paginator.currentPage + 1,
+        'page': paginator?.currentPage ?? 0 + 1,
+        'per_page': 15,
         'sort_by': 'createdAt',
         "sort_dir": 'DESC',
         'roles': ['User', 'Owner'],
         'active': true,
-        if (search != null) 'search': search,
+        if (search != null) 'search': '523809178', // search,
         if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['findUsersOutput'] as List;
@@ -116,6 +111,22 @@ class LeadData implements LeadRepo {
               currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: response.data['searchPerPage'],
               itemCount: response.data['filteredCount']));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<Lead>> getLeadByPhone({required String phone}) async {
+    try {
+      String url = 'v1/users/getUserByPhone';
+
+      final response = await _dio.post(url, data: {'phone': phone});
+      final data = response.data;
+      final lead = Lead.fromJson(data);
+      return Success(
+        lead,
+      );
     } catch (e, stack) {
       return onError(e, stack, log);
     }
@@ -179,7 +190,6 @@ class LeadData implements LeadRepo {
       {required String clientId}) async {
     try {
       String url = 'v1/documents/user/$clientId';
-
       final response = await _dio.get(
         url,
       );
@@ -198,7 +208,6 @@ class LeadData implements LeadRepo {
       {required String leadId, required Map<String, dynamic> value}) async {
     try {
       String url = 'v1/users/$leadId';
-
       final response = await _dio.patch(url, data: value);
       final data = response.data;
       final model = Lead.fromJson(data);

@@ -1,15 +1,10 @@
-import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -52,6 +47,8 @@ class _AppSearchBarState extends State<AppSearchBar> {
       filter = Map.from(widget.filter!)
         ..removeWhere((key, value) => value == null);
       getFilter();
+    } else {
+      arrFilter = [];
     }
     super.didUpdateWidget(oldWidget);
   }

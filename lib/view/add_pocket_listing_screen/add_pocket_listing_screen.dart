@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +18,6 @@ import '../../model/lead_model.dart';
 import '../../model/property_type_model.dart';
 import '../../widgets/fields/autocomplete_field.dart';
 import '../../widgets/fields/currency_field.dart';
-import '../../widgets/fields/document_upload_field.dart';
 import '../../widgets/fields/number_field.dart';
 import '../../widgets/fields/text_field.dart';
 import '../../widgets/fields/wrap_select_field.dart';
@@ -41,7 +39,7 @@ class AddPocketListingScreen extends StatelessWidget {
 }
 
 class _AddPocketListingScreenLayout extends StatefulWidget {
-  const _AddPocketListingScreenLayout({super.key});
+  const _AddPocketListingScreenLayout();
 
   @override
   State<_AddPocketListingScreenLayout> createState() =>

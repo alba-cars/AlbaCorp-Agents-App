@@ -4,7 +4,6 @@ import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/model/agency_model.dart';
 import 'package:real_estate_app/model/agent_model.dart';
-import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/util/result.dart';
