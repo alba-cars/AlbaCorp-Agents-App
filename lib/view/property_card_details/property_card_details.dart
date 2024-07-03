@@ -1,15 +1,10 @@
 import 'package:collection/collection.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
@@ -22,7 +17,6 @@ import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:recase/recase.dart';
 
-import '../../util/color_category.dart';
 import '../../widgets/fields/attachment_field.dart';
 import '../../widgets/fields/currency_field.dart';
 import '../../widgets/fields/multi_image_field.dart';
@@ -50,7 +44,7 @@ class PropertyCardDetailsScreen extends StatelessWidget {
 }
 
 class _PropertyCardDetailsScreenLayout extends StatelessWidget {
-  const _PropertyCardDetailsScreenLayout({super.key});
+  const _PropertyCardDetailsScreenLayout();
 
   @override
   Widget build(BuildContext context) {

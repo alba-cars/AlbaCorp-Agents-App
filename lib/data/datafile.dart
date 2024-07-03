@@ -1,11 +1,9 @@
 import 'package:real_estate_app/model/booking_data_model.dart';
 import 'package:real_estate_app/model/bottom_model.dart';
-import 'package:real_estate_app/model/category_model.dart';
 import 'package:real_estate_app/model/detail_screen_slider.dart';
 import 'package:real_estate_app/model/filter_buy_page_type_model.dart';
 import 'package:real_estate_app/model/intro_model.dart';
 import 'package:real_estate_app/model/messege_model.dart';
-import 'package:real_estate_app/model/notification_model.dart';
 import 'package:real_estate_app/model/recomended_model.dart';
 import 'package:real_estate_app/model/search_histry_data.dart';
 

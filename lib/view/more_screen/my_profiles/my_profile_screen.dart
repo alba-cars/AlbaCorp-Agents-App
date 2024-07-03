@@ -6,7 +6,6 @@ import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
-import 'package:real_estate_app/view/more_screen/my_profiles/edit_profile_screen.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);

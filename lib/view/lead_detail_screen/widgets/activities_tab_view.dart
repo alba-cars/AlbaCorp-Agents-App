@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
 
 import '../../../model/activity_model.dart';

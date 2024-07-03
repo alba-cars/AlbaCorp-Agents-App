@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
-import 'package:real_estate_app/view/login/account_created_screen.dart';
 
 import '../../util/color_category.dart';
 import '../../util/constant.dart';

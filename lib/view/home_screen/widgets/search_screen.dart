@@ -6,7 +6,6 @@ import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
-import 'package:real_estate_app/view/home_screen/filterSheet/filter_screen.dart';
 
 import '../../../model/search_histry_data.dart';
 

@@ -3,9 +3,6 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
-import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> showNotificationWithOnGoing(RemoteMessage message) async {
   const AndroidNotificationDetails androidPlatformChannelSpecifics =

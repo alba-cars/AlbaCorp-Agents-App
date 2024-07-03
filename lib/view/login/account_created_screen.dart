@@ -5,7 +5,6 @@ import 'package:real_estate_app/util/constant.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/pref_data.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
-import 'package:real_estate_app/view/home_layout/home_layout.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 
 import '../../util/color_category.dart';

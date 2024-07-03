@@ -7,7 +7,6 @@ import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant.dart';
 import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
-import 'package:real_estate_app/view/message_screen/chat_screen.dart';
 
 class TabMessage extends StatefulWidget {
   const TabMessage({Key? key}) : super(key: key);

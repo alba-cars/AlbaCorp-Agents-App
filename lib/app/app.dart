@@ -48,9 +48,9 @@ class _AppState extends State<App> {
     };
   }
 
-  initiatePhoneStateStream() async {
-    final permission = await requestPermission();
-  }
+  // initiatePhoneStateStream() async {
+  //   final permission = await requestPermission();
+  // }
 
   @override
   Widget build(BuildContext context) {

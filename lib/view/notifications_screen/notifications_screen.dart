@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -20,7 +19,7 @@ class NotificationsScreen extends StatelessWidget {
 }
 
 class _NotificationScreenBody extends StatefulWidget {
-  const _NotificationScreenBody({super.key});
+  const _NotificationScreenBody();
 
   @override
   State<_NotificationScreenBody> createState() =>

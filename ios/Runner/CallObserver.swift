@@ -28,6 +28,7 @@ class CallObserver: NSObject, CXCallObserverDelegate {
         }
 
         let alert = UIAlertController(title: "Call Ended", message: "Your call has ended.", preferredStyle: .alert)
+        
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         rootVC.present(alert, animated: true, completion: nil)
     }

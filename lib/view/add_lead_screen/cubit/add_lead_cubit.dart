@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:country_state_city/country_state_city.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 

@@ -1,16 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
-import 'package:real_estate_app/model/property_card_model.dart';
-import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:recase/recase.dart';
 
 import '../../../util/color_category.dart';
-import '../../../util/status.dart';
 import '../../../widgets/button.dart';
 import '../../../widgets/s3_image.dart';
 import '../../../widgets/space.dart';

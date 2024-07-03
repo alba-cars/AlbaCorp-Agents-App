@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:real_estate_app/model/role_model.dart';
 
 part 'department_model.freezed.dart';
 part 'department_model.g.dart';

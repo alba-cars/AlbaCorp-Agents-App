@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import 'user.dart';
 
 part 'amenity_model.freezed.dart';
 part 'amenity_model.g.dart';

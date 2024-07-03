@@ -3,11 +3,9 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 
 import 'package:real_estate_app/widgets/fields/error_text.dart';
 
-import '../input_field_formatter.dart/currency_formatter.dart';
 import 'field_color.dart';
 
 class NumberField extends StatefulWidget {

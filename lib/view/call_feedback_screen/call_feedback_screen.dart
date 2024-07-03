@@ -13,7 +13,6 @@ import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cu
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
-import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
@@ -35,7 +34,7 @@ class CallFeedbackScreen extends StatelessWidget {
 }
 
 class _CallFeedbackScreenBody extends StatefulWidget {
-  const _CallFeedbackScreenBody({super.key});
+  const _CallFeedbackScreenBody();
 
   @override
   State<_CallFeedbackScreenBody> createState() =>

@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:linkus_sdk/linkus_sdk.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/remote_data/pending_call_feedback_repo.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';

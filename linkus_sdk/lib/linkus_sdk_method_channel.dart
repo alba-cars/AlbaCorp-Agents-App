@@ -63,6 +63,7 @@ class MethodChannelLinkusSdk extends LinkusSdkPlatform {
     return initialize ?? false;
   }
 
+  @override
   Future<bool> setFcmToken({required String token}) async {
     final initialize = await methodChannel.invokeMethod<bool>('setFcmToken', {
       'token': token,

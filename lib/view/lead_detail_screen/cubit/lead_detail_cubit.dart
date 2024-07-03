@@ -10,7 +10,6 @@ import 'package:real_estate_app/util/status.dart';
 
 import '../../../model/activity_model.dart';
 import '../../../model/paginator.dart';
-import '../../../model/property_card_model.dart';
 import '../../../util/result.dart';
 
 part 'lead_detail_state.dart';

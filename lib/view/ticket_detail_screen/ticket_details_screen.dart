@@ -1,7 +1,5 @@
-import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/ticket_detail_screen/cubit/ticket_details_cubit.dart';
-import 'package:real_estate_app/widgets/button.dart';
 import 'package:recase/recase.dart';
 
 import '../../util/color_category.dart';
@@ -37,7 +34,7 @@ class TicketDetailScreen extends StatelessWidget {
 }
 
 class _TicketDetailScreenLayout extends StatefulWidget {
-  const _TicketDetailScreenLayout({super.key});
+  const _TicketDetailScreenLayout();
 
   @override
   State<_TicketDetailScreenLayout> createState() =>

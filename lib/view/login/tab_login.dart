@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/routes/app_routes.dart';
-import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/constant.dart';
-import 'package:real_estate_app/util/pref_data.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/util/widget_extensions.dart';
-import 'package:real_estate_app/view/home_layout/home_layout.dart';
-import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/login/cubit/login_cubit.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 

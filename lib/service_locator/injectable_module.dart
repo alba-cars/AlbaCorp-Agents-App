@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:objectbox/objectbox.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:real_estate_app/service_locator/objectbox.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../util/token_interceptor.dart';

@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -80,7 +78,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen>
 }
 
 class _TaskDetailScreenLayout extends StatefulWidget {
-  const _TaskDetailScreenLayout({super.key});
+  const _TaskDetailScreenLayout();
 
   @override
   State<_TaskDetailScreenLayout> createState() =>
