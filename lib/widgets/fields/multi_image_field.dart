@@ -51,8 +51,6 @@ class _MultipleImageuploadFieldState<T>
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-
-    Color backgroundColor = Colors.white;
     Color borderColor = colorScheme.primary;
 
     return FormBuilderField<List<FileObject>>(

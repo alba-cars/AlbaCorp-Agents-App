@@ -67,7 +67,7 @@ class ActivityData implements ActivityRepo {
       String? notes,
       String? feedback}) async {
     try {
-      final response = await _dio.patch('/v1/activities/$activityId', data: {
+      await _dio.patch('/v1/activities/$activityId', data: {
         if (completed) 'status': 'Complete',
         if (duration != null) 'duration': duration,
         if (feedback == 'Not Interested') 'is_interested': false,
@@ -79,7 +79,6 @@ class ActivityData implements ActivityRepo {
       return Success(null);
     } catch (e, stack) {
       return onError(e, stack, log);
-      ;
     }
   }
 
@@ -91,8 +90,6 @@ class ActivityData implements ActivityRepo {
     try {
       String url = 'v1/activities/query-activities';
       Map<String, dynamic> query = {};
-
-      final d = DateTime.now();
       if (filterCode == 0) {
         query = {
           "leadSourceType": 'hot',

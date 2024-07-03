@@ -128,7 +128,7 @@ class TicketData implements TicketRepo {
       await Future.wait(futures);
       Logger().d(mappedVal);
       final response = await _dio.post(url, data: mappedVal);
-      final data = response.data;
+      response.data;
       // final model = Ticket.fromJson(data);
       return Success(
           // model,
@@ -212,7 +212,7 @@ class TicketData implements TicketRepo {
       await Future.wait(futures);
       Logger().d(mappedVal);
       final response = await _dio.post(url, data: mappedVal);
-      final data = response.data;
+      response.data;
       // final model = Ticket.fromJson(data);
       return Success(
           // model,

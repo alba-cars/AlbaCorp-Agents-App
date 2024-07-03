@@ -15,7 +15,6 @@ class ActivityList extends StatelessWidget {
     final primaryColor = Theme.of(context).colorScheme.primary;
     final primaryContainerColor =
         Theme.of(context).colorScheme.primaryContainer;
-    final secondaryColor = Theme.of(context).colorScheme.secondary;
     if (activities.isEmpty) {
       return Container(
           margin: EdgeInsets.only(bottom: 20),
@@ -178,7 +177,7 @@ class ActivityList extends StatelessWidget {
                   child: Container(
                     height: double.infinity,
                     width: 1.0,
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               PositionedDirectional(
@@ -189,7 +188,7 @@ class ActivityList extends StatelessWidget {
                   width: 15.0,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    color: Theme.of(context).colorScheme.surfaceContainer,
                   ),
                 ),
               ),

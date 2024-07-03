@@ -55,9 +55,6 @@ class TicketMessage with _$TicketMessage {
     List<String?>? attachments,
     @JsonKey(name: 'createdAt') required DateTime createdAt,
     @JsonKey(name: 'updatedAt') required DateTime updatedAt,
-    @JsonKey(ignore: true)
-    int?
-        v, // __v is typically used for versioning in MongoDB, may not be needed in your Dart model
   }) = _TicketMessage;
 
   factory TicketMessage.fromJson(Map<String, dynamic> json) =>

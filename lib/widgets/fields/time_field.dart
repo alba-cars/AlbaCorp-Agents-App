@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-
 import 'field_color.dart';
 
 class TimeField extends StatefulWidget {
@@ -26,11 +25,8 @@ class TimeField extends StatefulWidget {
 }
 
 class _TimeFieldState extends State<TimeField> {
-  final String _text = '';
-
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return FormBuilderField<TimeOfDay>(
         name: widget.name,

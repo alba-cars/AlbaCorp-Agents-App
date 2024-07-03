@@ -25,7 +25,6 @@ import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dar
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/listings_screen/listing_screen.dart';
 import 'package:real_estate_app/view/maintenance/maintenance_screen.dart';
-import 'package:real_estate_app/view/more_screen/tab_more.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
@@ -44,7 +43,7 @@ import '../view/login/forgot_screen.dart';
 import '../view/login/login_screen.dart';
 import '../view/login/pass_change_screen.dart';
 import '../view/login/reset_screen.dart';
-import '../view/login/verification_screen.dart';
+
 import 'app_routes.dart';
 
 class AppRouter {
@@ -130,12 +129,6 @@ class AppRouter {
                       name: DealsScreen.routeName,
                       pageBuilder: (context, state) =>
                           AppTransition(child: DealsScreen()),
-                    ),
-                    GoRoute(
-                      path: TabMore.routeName,
-                      name: TabMore.routeName,
-                      pageBuilder: (context, state) =>
-                          AppTransition(child: TabMore()),
                     ),
                     GoRoute(
                       path: ListingsScreen.routeName,
@@ -392,11 +385,6 @@ class AppRouter {
           path: Routes.passChangeRoute,
           pageBuilder: (context, state) =>
               AppTransition(child: PassChangeScreen()),
-        ),
-        GoRoute(
-          path: Routes.verificationRoute,
-          pageBuilder: (context, state) =>
-              AppTransition(child: VerificationScreen()),
         ),
       ]);
 }

@@ -76,7 +76,7 @@ class TicketsScreenCubit extends Cubit<TicketsScreenState> {
             departments: s.value, getDepartmentsStatus: AppStatus.success));
         return s.value;
 
-      case (Error e):
+      case (Error _):
         emit(state.copyWith(
           getDepartmentsStatus: AppStatus.failure,
         ));

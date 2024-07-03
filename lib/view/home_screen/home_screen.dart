@@ -457,6 +457,7 @@ class ActivityListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Dismissible(
       key: ValueKey(activity.id),
       background: Container(
@@ -560,15 +561,30 @@ class ActivityListItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 4.h, vertical: 1.h),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueGrey),
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.blueGrey[100]),
-                      child: SmallText(
-                          text: activity.lead?.leadStatus?.name ?? ''),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 4.h, vertical: 1.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blueGrey),
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.blueGrey[100]),
+                          child: SmallText(
+                              text: activity.lead?.leadStatus?.name ?? ''),
+                        ),
+                        HorizontalSmallGap(),
+                        if (activity.lead?.dndStatus == true)
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4.h, vertical: 1.h),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: colorScheme.error),
+                                borderRadius: BorderRadius.circular(4),
+                                color: colorScheme.errorContainer),
+                            child: SmallText(text: 'DND'),
+                          ),
+                      ],
                     ),
                     VerticalSmallGap(
                       adjustment: .2,

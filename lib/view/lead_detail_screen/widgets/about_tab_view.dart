@@ -22,6 +22,7 @@ class AboutTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return RefreshIndicator.adaptive(
       onRefresh: () => context.read<LeadDetailCubit>().getLeadDetails(),
       child: CustomScrollView(
@@ -42,9 +43,10 @@ class AboutTabView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           LabelText(text: 'Client Info:'),
+                          Spacer(),
                           Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 4.h, vertical: 1.h),
@@ -54,6 +56,17 @@ class AboutTabView extends StatelessWidget {
                                 color: Colors.blueGrey[100]),
                             child: SmallText(text: lead.leadStatus?.name ?? ''),
                           ),
+                          HorizontalSmallGap(),
+                          if (lead.dndStatus)
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4.h, vertical: 1.h),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: colorScheme.error),
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: colorScheme.errorContainer),
+                              child: SmallText(text: 'DND'),
+                            ),
                         ],
                       ),
                       VerticalSmallGap(),

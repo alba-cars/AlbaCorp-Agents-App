@@ -12,9 +12,6 @@ class Department with _$Department {
     required String description,
     @JsonKey(name: 'createdAt') required DateTime createdAt,
     @JsonKey(name: 'updatedAt') required DateTime updatedAt,
-    @JsonKey(ignore: true)
-    int?
-        v, // __v is typically used for versioning in MongoDB, may not be needed in your Dart model
   }) = _Department;
 
   factory Department.fromJson(Map<String, dynamic> json) =>

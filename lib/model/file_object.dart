@@ -40,13 +40,4 @@ class FileObject {
         isChanged: isChanged,
         networkImageUrl: networkImageUrl);
   }
-
-  Future<FileObject> download() async {
-    final url = await downloadFileAndGetFromS3(networkImageUrl);
-    return FileObject(
-        localImage: url?.path,
-        uploadedUrl: uploadedUrl,
-        isChanged: isChanged,
-        networkImageUrl: networkImageUrl);
-  }
 }

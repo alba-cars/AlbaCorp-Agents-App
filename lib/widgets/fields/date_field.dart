@@ -30,11 +30,8 @@ class DateField extends StatefulWidget {
 }
 
 class _DateFieldState extends State<DateField> {
-  final String _text = '';
-
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return FormBuilderField<DateTime>(
         name: widget.name,

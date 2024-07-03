@@ -13,7 +13,6 @@ import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
-import 'package:real_estate_app/view/more_screen/tab_more.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
@@ -358,17 +357,13 @@ class _HomeScreenState extends State<HomeScreen>
         case 3:
           context.goNamed(DealsScreen.routeName);
           return;
-        case 4:
-          context.goNamed(TabMore.routeName);
-          return;
+
         default:
           context.goNamed(HomePage.routeName);
           return;
       }
     }
 
-    const iconSize = 15.0;
-    final selectedIconColor = pacificBlue;
     return Container(
       decoration: BoxDecoration(color: Colors.white),
       child: Row(

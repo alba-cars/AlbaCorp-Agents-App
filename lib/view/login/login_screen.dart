@@ -32,12 +32,11 @@ class _LoginScreenLayoutState extends State<LoginScreenLayout>
     Constant.closeApp();
   }
 
-  var tabController;
-  var pController;
+  TabController? tabController;
+  PageController? pController;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: 1, vsync: this);
     pController = PageController();
@@ -45,9 +44,9 @@ class _LoginScreenLayoutState extends State<LoginScreenLayout>
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    tabController?.dispose();
+    pController?.dispose();
     super.dispose();
-    tabController.dispose();
   }
 
   @override

@@ -95,7 +95,6 @@ enum OptionsViewOpenDirection {
   down,
 }
 
-// TODO(justinmc): Mention AutocompleteCupertino when it is implemented.
 /// {@template flutter.widgets.AppRawAutocomplete.AppRawAutocomplete}
 /// A widget for helping the user make a selection by entering some text and
 /// choosing from among a list of options.

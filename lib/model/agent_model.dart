@@ -24,11 +24,11 @@ class Agent with _$Agent {
   factory Agent.fromJson(Map<String, dynamic> json) => _$AgentFromJson(json);
 }
 
-String userIdFromJson(Map p1, String p2) {
+Object userIdFromJson(Map p1, String p2) {
   return p1[p2] is Map ? p1[p2]['id'] : p1[p2];
 }
 
-Map<String, dynamic> userFromJson(Map p1, String p2) {
+Object userFromJson(Map p1, String p2) {
   return p1[p2] is Map
       ? p1[p2]
       : p1['userId'] is Map

@@ -161,6 +161,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -431,7 +432,23 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                                                 'assets/images/flame.png',
                                                 height: 17,
                                                 width: 20,
-                                              )
+                                              ),
+                                            if (lead.dndStatus)
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.h,
+                                                    vertical: 1.h),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color:
+                                                            colorScheme.error),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color: colorScheme
+                                                        .errorContainer),
+                                                child: SmallText(text: 'DND'),
+                                              ),
                                           ],
                                         ),
                                         VerticalSmallGap(
