@@ -31,6 +31,7 @@ import 'package:real_estate_app/widgets/fields/document_upload_field_multi.dart'
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_image_field.dart';
+import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/fields/number_field.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
@@ -458,6 +459,22 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   name: "numberOfCheques",
                   unit: '',
                 ),
+              WrapSelectField(
+                  name: 'isOffPlanResale',
+                  label: 'Is OffPlan Resale',
+                  values: [
+                    {"label": 'Yes', "value": true},
+                    {"label": 'No', "value": false}
+                  ],
+                  displayOption: (option) => option['label'] as String? ?? '',
+                  valueTransformer: (option) => option?['value'] as bool?,
+                  isRequired: true),
+              if (val['isOffPlanResale'] == true)
+                CurrencyField(
+                  isRequired: val['isOffPlanResale'] == true,
+                  name: 'amountAlreadyPaid',
+                  label: 'Amount Already Paid',
+                ),
               CurrencyField(
                 isRequired: true,
                 name: 'price',
@@ -474,6 +491,13 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                 isRequired: true,
                 price: val['price'],
                 commissionPercentage: val['agreedCommission'],
+              ),
+              VerticalSmallGap(
+                adjustment: 0.3,
+              ),
+              MultiLineField(
+                name: 'relatedInfo',
+                label: 'Related Info',
               ),
             ],
           ),
