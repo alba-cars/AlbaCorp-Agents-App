@@ -18,8 +18,11 @@ import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
+import '../../../app/call_bloc/call_bloc.dart';
 import '../../../model/deal_model.dart';
 import '../../../model/lead_model.dart';
+import '../../../service_locator/injectable.dart';
+import '../../../widgets/call_button.dart';
 
 class InfoTabView extends StatelessWidget {
   const InfoTabView({super.key});
@@ -584,12 +587,12 @@ class BuyerInternalUserInfo extends StatelessWidget {
                 labelTwo: 'Last Name',
                 valueTwo: deal.buyerInternalUser?.lastName,
               ),
-              InfoLabelValue(
-                labelOne: 'Phone',
-                valueOne: deal.buyerInternalUser?.phone,
-                labelTwo: 'Email',
-                valueTwo: deal.buyerInternalUser?.email,
-              ),
+              if (deal.buyerInternalUser != null)
+                InfoWithPhoneWidget(
+                  phone: deal.buyerInternalUser?.phone,
+                  email: deal.buyerInternalUser?.email,
+                  isDnd: deal.buyerInternalUser?.dndStatus ?? false,
+                ),
               InfoLabelValue(
                 labelOne: 'Lead Source',
                 valueOne: deal.buyerInternalUser?.leadSource,
@@ -644,11 +647,10 @@ class SellerInternalUserInfo extends StatelessWidget {
                 labelTwo: 'Last Name',
                 valueTwo: client.lastName,
               ),
-              InfoLabelValue(
-                labelOne: 'Phone',
-                valueOne: client.phone,
-                labelTwo: 'Email',
-                valueTwo: client.email,
+              InfoWithPhoneWidget(
+                phone: client.phone,
+                email: client.email,
+                isDnd: client.dndStatus,
               ),
               InfoLabelValue(
                 labelOne: 'Lead Source',
@@ -702,6 +704,10 @@ class SellerExternalUserInfo extends StatelessWidget {
                 labelTwo: 'Client Name',
                 valueTwo: deal.sellerExternalClientName,
               ),
+              InfoWithPhoneWidget(
+                phone: deal.sellerExternalAgentPhone,
+                email: deal.sellerExternalUser?.email,
+              ),
               InfoLabelValue(
                 labelOne: 'Phone',
                 valueOne: deal.sellerExternalAgentPhone,
@@ -752,11 +758,8 @@ class BuyerExternalUerInfo extends StatelessWidget {
                 labelTwo: 'Client Name',
                 valueTwo: deal.buyerExternalClientName,
               ),
-              InfoLabelValue(
-                labelOne: 'Phone',
-                valueOne: deal.buyerExternalAgentPhone,
-                labelTwo: 'Email',
-                valueTwo: '',
+              InfoWithPhoneWidget(
+                phone: deal.buyerExternalAgentPhone,
               ),
               InfoLabelValue(
                 labelOne: 'Client Type',
@@ -804,11 +807,10 @@ class PrimaryClientInfo extends StatelessWidget {
                 labelTwo: 'Last Name',
                 valueTwo: deal.client?.lastName,
               ),
-              InfoLabelValue(
-                labelOne: 'Phone',
-                valueOne: deal.client?.phone,
-                labelTwo: 'Email',
-                valueTwo: deal.client?.email,
+              InfoWithPhoneWidget(
+                phone: deal.client?.phone,
+                email: deal.client?.email,
+                isDnd: deal.client?.dndStatus ?? false,
               ),
               InfoLabelValue(
                 labelOne: 'Lead Source',
@@ -820,6 +822,87 @@ class PrimaryClientInfo extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class InfoWithPhoneWidget extends StatelessWidget {
+  const InfoWithPhoneWidget(
+      {super.key, this.phone, this.email, this.isDnd = false});
+  final String? phone;
+  final String? email;
+  final bool isDnd;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SmallText(
+                      text: 'Phone',
+                      color: Colors.blueGrey,
+                    ),
+                    VerticalSmallGap(
+                      adjustment: 0.1,
+                    ),
+                    NormalText(
+                      text: phone ?? '',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
+                    if (isDnd)
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 4.h, vertical: 1.h),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: colorScheme.error),
+                            borderRadius: BorderRadius.circular(4),
+                            color: colorScheme.errorContainer),
+                        child: SmallText(text: 'DND'),
+                      ),
+                  ],
+                ),
+                HorizontalSmallGap(),
+                CallButton(
+                    onTap: () {
+                      getIt<CallBloc>().add(CallEvent.clickToCall(
+                        phoneNumber: phone ?? '',
+                      ));
+                    },
+                    isDnd: false),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SmallText(
+                  text: 'Email',
+                  color: Colors.blueGrey,
+                ),
+                VerticalSmallGap(
+                  adjustment: 0.1,
+                ),
+                NormalText(
+                  text: email ?? '',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
