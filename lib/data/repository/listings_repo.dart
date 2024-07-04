@@ -3,13 +3,10 @@ import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
 import 'package:real_estate_app/model/listing_request_model.dart';
-import 'package:real_estate_app/model/off_plan_model.dart';
-import 'package:real_estate_app/model/offplan_listing_response.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 
-import '../../model/lead_model.dart';
 import '../../util/result.dart';
 
 abstract class ListingsRepo {

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -334,7 +333,7 @@ class ExplorerData implements ExplorerRepo {
       });
       final futureResults = await Future.wait(futures);
       final data = Map.fromEntries(futureResults);
-      final response = await _dio.put(url, data: data);
+      await _dio.put(url, data: data);
       // final data = response.data['data'];
       // final model = PropertyCard.fromJson(data);
       return Success(
@@ -416,7 +415,7 @@ class ExplorerData implements ExplorerRepo {
       final futureResults = await Future.wait(futures);
       final data = Map.fromEntries(futureResults);
       Logger().d(data);
-      final response = await _dio.post(url, data: data);
+      await _dio.post(url, data: data);
       // final model = PropertyCard.fromJson(response.data);
 
       return Success(null
@@ -453,7 +452,7 @@ class ExplorerData implements ExplorerRepo {
     try {
       String url = 'v1/property-cards/$propertyCardId/notes';
 
-      final response = await _dio.post(url, data: values);
+      await _dio.post(url, data: values);
       // final data = response.data;
       // final list = PropertyCardNoteModel.fromJson(data);
       return Success(
@@ -470,7 +469,7 @@ class ExplorerData implements ExplorerRepo {
     try {
       String url = 'v1/property-cards/checkout-random-leads';
 
-      final response = await _dio.post(url, data: values);
+      await _dio.post(url, data: values);
       // final data = response.data;
       // final list = PropertyCardNoteModel.fromJson(data);
       return Success(

@@ -1,12 +1,10 @@
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
@@ -28,7 +26,6 @@ import '../../widgets/search_bar.dart';
 import '../../widgets/space.dart';
 import '../../widgets/tab_bar.dart';
 import '../../widgets/text.dart';
-import '../add_ticket_screen/add_ticket_screen.dart';
 import '../deal_details_screen/widgets/info_label_value.dart';
 
 class ExplorerScreen extends StatelessWidget {
@@ -71,7 +68,7 @@ class ExplorerScreen extends StatelessWidget {
 // }
 
 class _ExplorerScreenLayout extends StatefulWidget {
-  const _ExplorerScreenLayout({super.key});
+  const _ExplorerScreenLayout();
 
   @override
   State<_ExplorerScreenLayout> createState() => _ExplorerScreenLayoutState();
@@ -95,6 +92,7 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
               title: Text('Explorer'),
               centerTitle: true,
               pinned: true,
+              floating: true,
             ),
             SliverVerticalSmallGap(),
             SliverToBoxAdapter(
@@ -109,10 +107,19 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TitleText(
-                  text: 'Explorer List',
-                  fontWeight: FontWeight.bold,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TitleText(
+                      text: 'Explorer List',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    SmallText(
+                        text:
+                            'This list shows the property card. leads can be seen by going inside property cards')
+                  ],
                 ),
               ),
             ),
@@ -130,15 +137,21 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
                 },
               ),
             )),
-            SliverVerticalSmallGap(
-              height: 4,
-            ),
           ];
         },
-        body: TabBarView(
-          controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
-          children: [ExplorerTab(), CheckedOutPoolTab()],
+        body: SafeArea(
+          child: BlocListener<ExplorerScreenCubit, ExplorerScreenState>(
+            listenWhen: (previous, current) =>
+                previous.currentTab != current.currentTab,
+            listener: (context, state) {
+              _tabController.animateTo(state.currentTab);
+            },
+            child: TabBarView(
+              controller: _tabController,
+              physics: NeverScrollableScrollPhysics(),
+              children: [ExplorerTab(), CheckedOutPoolTab()],
+            ),
+          ),
         ),
       ),
     );
@@ -155,6 +168,8 @@ class ExplorerTab extends StatefulWidget {
 }
 
 class _ExplorerTabState extends State<ExplorerTab> {
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey();
+
   List<Widget> filterFields(BuildContext context) {
     return [
       MultiSelectAutoCompleteField(
@@ -345,7 +360,65 @@ class _ExplorerTabState extends State<ExplorerTab> {
                     child: Text('Get Bulk Leads'))
               ],
             )),
-        BlocBuilder<ExplorerScreenCubit, ExplorerScreenState>(
+        BlocConsumer<ExplorerScreenCubit, ExplorerScreenState>(
+          listenWhen: (previous, current) =>
+              previous.checkOutLeadStatus != current.checkOutLeadStatus &&
+              current.checkOutLeadStatus == AppStatus.success,
+          listener: (context, state) {
+            showGeneralDialog(
+                barrierDismissible: true,
+                barrierLabel: "success",
+                context: context,
+                pageBuilder: (dContext, anim1, anim2) {
+                  return BlocProvider.value(
+                    value: context.read<ExplorerScreenCubit>(),
+                    child: Builder(builder: (context) {
+                      return Dialog(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.check_circle_rounded,
+                                  color: Colors.green,
+                                  size: 100,
+                                ),
+                                VerticalSmallGap(),
+                                Text(
+                                  'You have successfully assigned Leads to yourself.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                VerticalSmallGap(),
+                                Text(
+                                  'Please hold on for a bit before making another assignement or try using bulk assignment, thank you.',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(dContext)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(fontWeight: FontWeight.w500),
+                                ),
+                                VerticalSmallGap(
+                                  adjustment: 1.5,
+                                ),
+                                AppPrimaryButton(
+                                    text: 'Show Assigned',
+                                    onTap: () {
+                                      context
+                                          .read<ExplorerScreenCubit>()
+                                          .setSelectedTab(1);
+                                      Navigator.of(dContext).pop();
+                                    })
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  );
+                });
+          },
           builder: (context, state) {
             if (!state.selectModeEnabled) {
               return SizedBox();
@@ -425,6 +498,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                           .getExplorerList(refresh: true);
                     },
                     child: ListView.separated(
+                        key: _listKey,
                         physics: NeverScrollableScrollPhysics(),
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -871,6 +945,36 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class MyCustomWidget<T> extends AnimatedWidget {
+  final Widget child;
+  final bool disabled;
+
+  MyCustomWidget(
+      {required this.child,
+      required Animation<double> animation,
+      this.disabled = false})
+      : super(listenable: animation);
+
+  Animation<double> get animation => listenable as Animation<double>;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: CurvedAnimation(parent: animation, curve: Interval(0, 0.25))
+          .drive(Tween(begin: 0, end: 1)),
+      child: FadeTransition(
+        opacity: animation,
+        child: SlideTransition(
+          position: animation.drive(
+              Tween(begin: Offset(-1, 0), end: Offset(0, 0))
+                  .chain(CurveTween(curve: Curves.easeOutCubic))),
+          child: child,
+        ),
+      ),
     );
   }
 }

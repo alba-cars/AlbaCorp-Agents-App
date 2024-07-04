@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,9 +15,6 @@ import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/listing_request_model.dart';
-import 'package:real_estate_app/model/off_plan_model.dart';
-import 'package:real_estate_app/model/offplan_listing_response.dart';
-import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';

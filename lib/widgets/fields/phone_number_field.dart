@@ -80,14 +80,12 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
             return 'Please enter phone number';
           }
 
-          if (code == null) {
-            return 'Please select country';
-          } else if (value == null) {
-            return 'Please enter phone number';
-          } else if (int.tryParse(value ?? '') == null &&
-              (value!.length != 9 || value!.length != 10)) {
-            return 'Please enter valid number';
-          }
+          if (value == null) {
+          return 'Please enter phone number';
+        } else if (int.tryParse(value ?? '') == null &&
+            (value!.length != 9 || value!.length != 10)) {
+          return 'Please enter valid number';
+        }
           return null;
         },
         builder: (state) {

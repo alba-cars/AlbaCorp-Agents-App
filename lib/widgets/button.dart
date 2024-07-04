@@ -390,11 +390,6 @@ class _AppIconButtonState extends State<AppIconButton>
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final textSlyle = Theme.of(context).textTheme.labelLarge!.apply(
-          color: widget.foregroundColor ?? colorScheme.onPrimary,
-          fontWeightDelta: 3,
-        );
     if (widget.animate) {
       _startPulseAnimation();
     }

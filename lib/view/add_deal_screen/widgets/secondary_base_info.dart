@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
@@ -13,15 +12,11 @@ import 'package:real_estate_app/view/add_deal_screen/widgets/secondary_buyer_det
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/commission_field.dart';
 import 'package:real_estate_app/widgets/fields/currency_field.dart';
-import 'package:real_estate_app/widgets/fields/number_field.dart';
 import 'package:real_estate_app/widgets/fields/phone_number_field.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 
-import '../../../model/building_model.dart';
-import '../../../model/community_model.dart';
 import '../../../model/property_type_model.dart';
 import '../../../widgets/fields/drop_down_field.dart';
-import '../../../widgets/fields/wrap_select_field.dart';
 import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 import 'secondary_external_property_details.dart';

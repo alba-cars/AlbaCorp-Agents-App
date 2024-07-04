@@ -1,6 +1,6 @@
 part of 'auth_bloc.dart';
 
-enum AuthStatus { initial, Authenticated, UnAuthenticated,Maintenance,Update }
+enum AuthStatus { initial, Authenticated, UnAuthenticated, Maintenance, Update }
 
 @freezed
 class AuthState with _$AuthState {
@@ -8,6 +8,9 @@ class AuthState with _$AuthState {
     @Default(AuthStatus.initial) AuthStatus authStatus,
     User? user,
     Agent? agent,
-    AppConfig? appConfig
+    Set<String>? veryImportantActivities,
+    String? lastCalledNumber,
+    AppConfig? appConfig,
+    @Default(false) bool showFeedbackScreen,
   }) = _AuthState;
 }

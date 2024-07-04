@@ -4,8 +4,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +54,6 @@ class _MultiDocumentUploadFieldState<T>
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    Color backgroundColor = Colors.white;
     Color borderColor = colorScheme.primary;
 
     return FormBuilderField<List<FileObject>>(

@@ -1,45 +1,32 @@
+
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
-import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
-import 'package:real_estate_app/model/activity_feedback_model.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
-import 'package:real_estate_app/model/lead_property_card_model.dart';
-import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/util/currency_formatter.dart';
-import 'package:real_estate_app/util/date_formatter.dart';
-import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
+import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/property_card_list.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
-import 'package:real_estate_app/widgets/fields/time_field.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/call_bloc/call_bloc.dart';
-import '../../model/property_model.dart';
 import '../../util/color_category.dart';
-import '../../util/property_price.dart';
 import '../../widgets/button.dart';
-import '../../widgets/fields/card_picker_field.dart';
-import '../../widgets/fields/date_field.dart';
-import '../../widgets/fields/wrap_select_field.dart';
-import '../../widgets/s3_image.dart';
 import '../../widgets/snackbar.dart';
 import 'widgets/feedback_dialog.dart';
 
-class TaskDetailScreen extends StatelessWidget {
+class TaskDetailScreen extends StatefulWidget {
   static const routeName = '/taskDetailScreen';
   const TaskDetailScreen(
       {super.key,
@@ -51,17 +38,47 @@ class TaskDetailScreen extends StatelessWidget {
   final bool isBlocking;
 
   @override
+  State<TaskDetailScreen> createState() => _TaskDetailScreenState();
+}
+
+class _TaskDetailScreenState extends State<TaskDetailScreen>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Future<bool> didPopRoute() async {
+    final veryImportantActivities =
+        context.read<AuthBloc>().state.veryImportantActivities;
+    if (veryImportantActivities == null ||
+        veryImportantActivities.isEmpty == true) {
+      context.goNamed(home.HomePage.routeName);
+      return true;
+    }
+    return super.didPopRoute();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<TaskDetailCubit>(param1: taskId, param2: activity),
+      create: (context) => getIt<TaskDetailCubit>(
+          param1: widget.taskId, param2: widget.activity),
       child: _TaskDetailScreenLayout(),
     );
   }
 }
 
 class _TaskDetailScreenLayout extends StatefulWidget {
-  const _TaskDetailScreenLayout({super.key});
+  const _TaskDetailScreenLayout();
 
   @override
   State<_TaskDetailScreenLayout> createState() =>
@@ -154,8 +171,13 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 }
               },
               cardBuilder: (context, index) {
+                final blockingActivities = context.select((AuthBloc authBloc) =>
+                    authBloc.state.veryImportantActivities);
                 final task = tasks[index];
+                final isBlockingActivity =
+                    blockingActivities?.contains(task.id) ?? false;
                 return SizedBox(
+                  key: ValueKey(task.id),
                   child: Column(
                     children: [
                       SizedBox(
@@ -186,6 +208,27 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          if (isBlockingActivity) ...[
+                                            VerticalSmallGap(),
+                                            Container(
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .errorContainer,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  border: Border.fromBorderSide(
+                                                      BorderSide(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .error))),
+                                              child: Text(
+                                                  'This is a very important activity. complete this activity to further use the app'),
+                                            ),
+                                          ],
+                                          VerticalSmallGap(),
                                           TitleText(
                                             text: task.type,
                                           ),
@@ -433,11 +476,13 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                     HorizontalSmallGap(),
                                     Expanded(
                                       child: IconButton.filled(
-                                          onPressed: () {
-                                            mode = CardAction.Skip;
-                                            _appinioSwiperController
-                                                .swipeRight();
-                                          }, // () {},
+                                          onPressed: isBlockingActivity
+                                              ? null
+                                              : () {
+                                                  mode = CardAction.Skip;
+                                                  _appinioSwiperController
+                                                      .swipeRight();
+                                                }, // () {},
                                           icon: Icon(Icons.redo)),
                                     ),
                                   ],

@@ -24,6 +24,22 @@ class AppTabBar extends StatefulWidget {
 
 class _AppTabBarState extends State<AppTabBar> {
   @override
+  void initState() {
+    widget.tabController.addListener(_tabListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.tabController.removeListener(_tabListener);
+    super.dispose();
+  }
+
+  _tabListener() {
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,

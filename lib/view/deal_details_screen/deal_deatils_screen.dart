@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/deal_details_screen/cubit/deal_details_cubit.dart';
 import 'package:real_estate_app/view/deal_details_screen/widgets/documents_tabview.dart';
@@ -28,7 +25,7 @@ class DealDetailsScreen extends StatelessWidget {
 }
 
 class _DealDetailsScreenLayout extends StatefulWidget {
-  const _DealDetailsScreenLayout({super.key});
+  const _DealDetailsScreenLayout();
 
   @override
   State<_DealDetailsScreenLayout> createState() =>

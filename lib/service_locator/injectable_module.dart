@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:real_estate_app/service_locator/objectbox.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../util/token_interceptor.dart';
 
@@ -11,9 +12,10 @@ abstract class RegisterModules {
 
   @Environment('Stage')
   @Named('BaseUrl')
-  String get baseUrl =>  'https://admin.dev.homes.albacars.app/api/';
+  String get baseUrl => //'https://admin.dev.homes.albacars.app/api/';
 
-  // 'http://192.168.2.78:4000/api/';
+      'http://10.0.2.2:4000/api/';
+  // 'https://backend.alba.homes/api/';
   @Environment('Prod')
   @Named('AwsBucket')
   String get awsProdBucket =>
@@ -38,6 +40,12 @@ abstract class RegisterModules {
         responseBody: true,
         responseHeader: false));
     return dio;
+  }
+
+  @preResolve
+  Future<ObjectBox> getStore() async {
+    final objectBox = await ObjectBox.create();
+    return objectBox;
   }
 
   @preResolve

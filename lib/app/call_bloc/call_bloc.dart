@@ -1,21 +1,12 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:linkus_sdk/linkus_sdk.dart';
-import 'package:logger/logger.dart';
 import 'package:phone_state/phone_state.dart';
-import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
-import 'package:real_estate_app/data/remote_data/activity_data.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/linkus_repo.dart';
-import 'package:real_estate_app/model/activity_model.dart';
-import 'package:real_estate_app/service_locator/injectable.config.dart';
-import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../util/status.dart';
 

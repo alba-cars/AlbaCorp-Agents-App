@@ -1,11 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';

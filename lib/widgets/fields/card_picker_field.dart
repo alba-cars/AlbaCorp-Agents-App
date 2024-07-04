@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:real_estate_app/widgets/space.dart';
 
-import 'attachment_field.dart';
 import 'error_text.dart';
 import 'field_color.dart';
 
