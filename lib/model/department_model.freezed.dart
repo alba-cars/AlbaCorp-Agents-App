@@ -29,8 +29,6 @@ mixin _$Department {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updatedAt')
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  int? get v => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,8 +47,7 @@ abstract class $DepartmentCopyWith<$Res> {
       String departmentName,
       String description,
       @JsonKey(name: 'createdAt') DateTime createdAt,
-      @JsonKey(name: 'updatedAt') DateTime updatedAt,
-      @JsonKey(ignore: true) int? v});
+      @JsonKey(name: 'updatedAt') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -71,7 +68,6 @@ class _$DepartmentCopyWithImpl<$Res, $Val extends Department>
     Object? description = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -94,10 +90,6 @@ class _$DepartmentCopyWithImpl<$Res, $Val extends Department>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: freezed == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 }
@@ -115,8 +107,7 @@ abstract class _$$DepartmentImplCopyWith<$Res>
       String departmentName,
       String description,
       @JsonKey(name: 'createdAt') DateTime createdAt,
-      @JsonKey(name: 'updatedAt') DateTime updatedAt,
-      @JsonKey(ignore: true) int? v});
+      @JsonKey(name: 'updatedAt') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -135,7 +126,6 @@ class __$$DepartmentImplCopyWithImpl<$Res>
     Object? description = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = freezed,
   }) {
     return _then(_$DepartmentImpl(
       id: null == id
@@ -158,10 +148,6 @@ class __$$DepartmentImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: freezed == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -174,8 +160,7 @@ class _$DepartmentImpl implements _Department {
       required this.departmentName,
       required this.description,
       @JsonKey(name: 'createdAt') required this.createdAt,
-      @JsonKey(name: 'updatedAt') required this.updatedAt,
-      @JsonKey(ignore: true) this.v});
+      @JsonKey(name: 'updatedAt') required this.updatedAt});
 
   factory _$DepartmentImpl.fromJson(Map<String, dynamic> json) =>
       _$$DepartmentImplFromJson(json);
@@ -194,13 +179,10 @@ class _$DepartmentImpl implements _Department {
   @override
   @JsonKey(name: 'updatedAt')
   final DateTime updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  final int? v;
 
   @override
   String toString() {
-    return 'Department(id: $id, departmentName: $departmentName, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
+    return 'Department(id: $id, departmentName: $departmentName, description: $description, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -216,14 +198,13 @@ class _$DepartmentImpl implements _Department {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.v, v) || other.v == v));
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, departmentName, description, createdAt, updatedAt, v);
+      runtimeType, id, departmentName, description, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -241,12 +222,12 @@ class _$DepartmentImpl implements _Department {
 
 abstract class _Department implements Department {
   const factory _Department(
-      {@JsonKey(name: '_id') required final String id,
-      required final String departmentName,
-      required final String description,
-      @JsonKey(name: 'createdAt') required final DateTime createdAt,
-      @JsonKey(name: 'updatedAt') required final DateTime updatedAt,
-      @JsonKey(ignore: true) final int? v}) = _$DepartmentImpl;
+          {@JsonKey(name: '_id') required final String id,
+          required final String departmentName,
+          required final String description,
+          @JsonKey(name: 'createdAt') required final DateTime createdAt,
+          @JsonKey(name: 'updatedAt') required final DateTime updatedAt}) =
+      _$DepartmentImpl;
 
   factory _Department.fromJson(Map<String, dynamic> json) =
       _$DepartmentImpl.fromJson;
@@ -264,9 +245,6 @@ abstract class _Department implements Department {
   @override
   @JsonKey(name: 'updatedAt')
   DateTime get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  int? get v;
   @override
   @JsonKey(ignore: true)
   _$$DepartmentImplCopyWith<_$DepartmentImpl> get copyWith =>
