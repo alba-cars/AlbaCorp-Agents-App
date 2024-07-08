@@ -117,12 +117,15 @@ class LeadData implements LeadRepo {
   }
 
   @override
-  Future<Result<Lead>> getLeadByPhone({required String phone}) async {
+  Future<Result<Lead?>> getLeadByPhone({required String phone}) async {
     try {
       String url = 'v1/users/getUserByPhone';
 
       final response = await _dio.post(url, data: {'phone': phone});
       final data = response.data;
+      if (data == null) {
+        return Success(null);
+      }
       final lead = Lead.fromJson(data);
       return Success(
         lead,

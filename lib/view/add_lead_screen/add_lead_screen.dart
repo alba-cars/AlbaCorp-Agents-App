@@ -18,12 +18,13 @@ import '../../widgets/fields/text_field.dart';
 class AddLeadScreen extends StatelessWidget {
   static const routeName = '/addLeadScreen';
 
-  const AddLeadScreen({super.key});
+  const AddLeadScreen({super.key, this.data});
+  final Map<String, dynamic>? data;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddLeadCubit>(),
+      create: (context) => getIt<AddLeadCubit>(param1: data),
       child: _AddLeadScreenLayout(),
     );
   }

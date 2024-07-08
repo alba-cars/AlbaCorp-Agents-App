@@ -19,7 +19,7 @@
     android:required="true" />
    <application
         android:label="Alba Homes - Agent"
-        android:name="${applicationName}"
+        android:name=".MyApplication"
         android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyDTUI46cppBiRPLwRCrCKjjbsUKAWmMbx8"/>

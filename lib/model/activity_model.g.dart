@@ -35,6 +35,12 @@ _$ActivityImpl _$$ActivityImplFromJson(Map<String, dynamic> json) =>
       overdueAt: json['overdueAt'] == null
           ? null
           : DateTime.parse(json['overdueAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
@@ -58,4 +64,6 @@ Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
       'offplanId': instance.offplanId,
       'propertyType': instance.propertyType,
       'overdueAt': instance.overdueAt?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
     };

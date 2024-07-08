@@ -259,7 +259,12 @@ class AppRouter {
                 path: AddLeadScreen.routeName,
                 name: AddLeadScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: AddLeadScreen());
+                  final Map<String, dynamic>? data = state
+                      .uri.queryParameters['data'] as Map<String, dynamic>?;
+                  return AppTransition(
+                      child: AddLeadScreen(
+                    data: data,
+                  ));
                 },
               ),
               GoRoute(

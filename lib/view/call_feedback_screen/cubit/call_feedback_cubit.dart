@@ -9,6 +9,7 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'call_feedback_state.dart';
 part 'call_feedback_cubit.freezed.dart';
@@ -32,7 +33,7 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
     if (number != null) {
       final result = await _leadRepo.getLeadByPhone(phone: number);
       switch (result) {
-        case (Success<Lead> s):
+        case (Success<Lead?> s):
           emit(state.copyWith(
               lead: s.value, checkLeadStatus: AppStatus.success));
         case (Error _):
