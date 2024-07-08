@@ -804,8 +804,6 @@ mixin _$TicketMessage {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updatedAt')
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  int? get v => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -826,8 +824,7 @@ abstract class $TicketMessageCopyWith<$Res> {
       String message,
       List<String?>? attachments,
       @JsonKey(name: 'createdAt') DateTime createdAt,
-      @JsonKey(name: 'updatedAt') DateTime updatedAt,
-      @JsonKey(ignore: true) int? v});
+      @JsonKey(name: 'updatedAt') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -850,7 +847,6 @@ class _$TicketMessageCopyWithImpl<$Res, $Val extends TicketMessage>
     Object? attachments = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -881,10 +877,6 @@ class _$TicketMessageCopyWithImpl<$Res, $Val extends TicketMessage>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: freezed == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 }
@@ -904,8 +896,7 @@ abstract class _$$TicketMessageImplCopyWith<$Res>
       String message,
       List<String?>? attachments,
       @JsonKey(name: 'createdAt') DateTime createdAt,
-      @JsonKey(name: 'updatedAt') DateTime updatedAt,
-      @JsonKey(ignore: true) int? v});
+      @JsonKey(name: 'updatedAt') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -926,7 +917,6 @@ class __$$TicketMessageImplCopyWithImpl<$Res>
     Object? attachments = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? v = freezed,
   }) {
     return _then(_$TicketMessageImpl(
       id: null == id
@@ -957,10 +947,6 @@ class __$$TicketMessageImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      v: freezed == v
-          ? _value.v
-          : v // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -977,8 +963,7 @@ class _$TicketMessageImpl
       required this.message,
       final List<String?>? attachments,
       @JsonKey(name: 'createdAt') required this.createdAt,
-      @JsonKey(name: 'updatedAt') required this.updatedAt,
-      @JsonKey(ignore: true) this.v})
+      @JsonKey(name: 'updatedAt') required this.updatedAt})
       : _attachments = attachments;
 
   factory _$TicketMessageImpl.fromJson(Map<String, dynamic> json) =>
@@ -1009,13 +994,10 @@ class _$TicketMessageImpl
   @override
   @JsonKey(name: 'updatedAt')
   final DateTime updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  final int? v;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TicketMessage(id: $id, ticketId: $ticketId, senderId: $senderId, message: $message, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
+    return 'TicketMessage(id: $id, ticketId: $ticketId, senderId: $senderId, message: $message, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -1029,8 +1011,7 @@ class _$TicketMessageImpl
       ..add(DiagnosticsProperty('message', message))
       ..add(DiagnosticsProperty('attachments', attachments))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt))
-      ..add(DiagnosticsProperty('v', v));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt));
   }
 
   @override
@@ -1049,22 +1030,13 @@ class _$TicketMessageImpl
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.v, v) || other.v == v));
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      ticketId,
-      senderId,
-      message,
-      const DeepCollectionEquality().hash(_attachments),
-      createdAt,
-      updatedAt,
-      v);
+  int get hashCode => Object.hash(runtimeType, id, ticketId, senderId, message,
+      const DeepCollectionEquality().hash(_attachments), createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -1082,14 +1054,14 @@ class _$TicketMessageImpl
 
 abstract class _TicketMessage implements TicketMessage {
   const factory _TicketMessage(
-      {@JsonKey(name: '_id') required final String id,
-      required final String ticketId,
-      required final String senderId,
-      required final String message,
-      final List<String?>? attachments,
-      @JsonKey(name: 'createdAt') required final DateTime createdAt,
-      @JsonKey(name: 'updatedAt') required final DateTime updatedAt,
-      @JsonKey(ignore: true) final int? v}) = _$TicketMessageImpl;
+          {@JsonKey(name: '_id') required final String id,
+          required final String ticketId,
+          required final String senderId,
+          required final String message,
+          final List<String?>? attachments,
+          @JsonKey(name: 'createdAt') required final DateTime createdAt,
+          @JsonKey(name: 'updatedAt') required final DateTime updatedAt}) =
+      _$TicketMessageImpl;
 
   factory _TicketMessage.fromJson(Map<String, dynamic> json) =
       _$TicketMessageImpl.fromJson;
@@ -1111,9 +1083,6 @@ abstract class _TicketMessage implements TicketMessage {
   @override
   @JsonKey(name: 'updatedAt')
   DateTime get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  int? get v;
   @override
   @JsonKey(ignore: true)
   _$$TicketMessageImplCopyWith<_$TicketMessageImpl> get copyWith =>

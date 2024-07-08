@@ -9,7 +9,7 @@ part of 'lead_model.dart';
 _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       id: readId(json, 'id') as String,
       firstName: json['first_name'] as String,
-      lastName: json['last_name'] as String,
+      lastName: json['last_name'] as String? ?? '',
       email: json['email'] as String?,
       phone: json['phone'] as String?,
       country: json['country'] as String?,
@@ -42,10 +42,15 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
           : Preference.fromJson(json['preference'] as Map<String, dynamic>),
       preferredLanguages:
           json['preferred_languages'] as List<dynamic>? ?? const [],
+      currentAgent: readCurrentAgent(json, 'currentAgent') == null
+          ? null
+          : Agent.fromJson(
+              readCurrentAgent(json, 'currentAgent') as Map<String, dynamic>),
       notes: json['notes'] as String?,
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const [],
+      dndStatus: json['DndStatus'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
@@ -75,8 +80,10 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'modified_by': instance.modifiedBy,
       'preference': instance.preference,
       'preferred_languages': instance.preferredLanguages,
+      'currentAgent': instance.currentAgent,
       'notes': instance.notes,
       'tags': instance.tags,
+      'DndStatus': instance.dndStatus,
     };
 
 const _$LeadStatusEnumMap = {

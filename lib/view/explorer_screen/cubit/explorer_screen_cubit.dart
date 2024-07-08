@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
@@ -208,9 +207,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     switch (result) {
       case (Success s):
         final newList = List<PropertyCard>.from(state.explorerList);
-        final index = newList.indexOf(card);
         newList.remove(card);
-        newList.insert(index, card.copyWith(availableForCheckout: false));
         emit(state.copyWith(
             checkOutLeadStatus: AppStatus.success, explorerList: newList));
         if (context.mounted) {

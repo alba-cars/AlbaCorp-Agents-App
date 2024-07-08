@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +33,7 @@ class TicketsScreen extends StatelessWidget {
 }
 
 class _TicketsScreenLayout extends StatefulWidget {
-  const _TicketsScreenLayout({super.key});
+  const _TicketsScreenLayout();
 
   @override
   State<_TicketsScreenLayout> createState() => _TicketsScreenLayoutState();

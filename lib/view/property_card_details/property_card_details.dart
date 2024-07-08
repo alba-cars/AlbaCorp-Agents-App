@@ -1,15 +1,10 @@
 import 'package:collection/collection.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
@@ -22,7 +17,6 @@ import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:recase/recase.dart';
 
-import '../../util/color_category.dart';
 import '../../widgets/fields/attachment_field.dart';
 import '../../widgets/fields/currency_field.dart';
 import '../../widgets/fields/multi_image_field.dart';
@@ -50,12 +44,10 @@ class PropertyCardDetailsScreen extends StatelessWidget {
 }
 
 class _PropertyCardDetailsScreenLayout extends StatelessWidget {
-  const _PropertyCardDetailsScreenLayout({super.key});
+  const _PropertyCardDetailsScreenLayout();
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Property Card'),
@@ -130,8 +122,6 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                         barrierDismissible: true,
                                         barrierLabel: 'assign-property-card',
                                         pageBuilder: (dContext, anim1, anim2) {
-                                          final GlobalKey<FormBuilderState>
-                                              key = GlobalKey();
                                           return AlertDialog(
                                             content: Text(
                                                 'Please confirm to assign leads to yourself'),
@@ -190,8 +180,6 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                                 'return-property-card',
                                             pageBuilder:
                                                 (dContext, anim1, anim2) {
-                                              final GlobalKey<FormBuilderState>
-                                                  key = GlobalKey();
                                               return AlertDialog(
                                                 content: Text(
                                                     'Please confirm to return lead to explorer'),
@@ -467,303 +455,289 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                   AppStatus.success
                           ? [Text('No leads available for this property card')]
                           : state.propertyCardLeads.mapIndexed((index, e) {
-                                return Container(
-                                  padding: EdgeInsets.all(8),
-                                  margin: EdgeInsets.symmetric(vertical: 4),
-                                  decoration: BoxDecoration(
-                                      color: (e.wasOwner &&
-                                              (state.propertyCard?.currentOwner
-                                                      ?.id !=
-                                                  e.lead.id))
-                                          ? Colors.grey[300]
-                                          : null,
-                                      border: Border.all(
-                                        color: Colors.blueGrey,
-                                      ),
-                                      borderRadius: BorderRadius.circular(6)),
-                                  child: InkWell(
-                                    onTap: () {
-                                      if ((propertyCard?.currentAgent
-                                                  is String &&
-                                              getIt<AuthBloc>()
-                                                      .state
-                                                      .agent
-                                                      ?.id ==
-                                                  propertyCard?.currentAgent) ||
-                                          (propertyCard?.currentAgent is Map &&
-                                              getIt<AuthBloc>()
-                                                      .state
-                                                      .agent
-                                                      ?.id ==
-                                                  propertyCard
-                                                      ?.currentAgent['id'])) {
-                                        context.pushNamed(
-                                            LeadDetailScreen.routeName,
-                                            pathParameters: {'id': e.lead.id});
-                                      }
-                                    },
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  if (state.propertyCard
-                                                          ?.currentOwner?.id ==
-                                                      e.lead.id)
-                                                    Row(
-                                                      children: [
-                                                        Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                            horizontal: 6,
-                                                          ),
-                                                          decoration: BoxDecoration(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .primaryContainer,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
-                                                              border: Border.all(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .primary)),
-                                                          child: Row(
-                                                            children: [
-                                                              Icon(
-                                                                Icons.verified,
-                                                                size: 14,
-                                                                color: Colors
-                                                                    .green,
-                                                              ),
-                                                              HorizontalSmallGap(),
-                                                              SmallText(
-                                                                  text:
-                                                                      'Current Owner')
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  if (e.wasOwner &&
-                                                      (state
-                                                              .propertyCard
-                                                              ?.currentOwner
-                                                              ?.id !=
-                                                          e.lead.id))
-                                                    Row(
-                                                      children: [
-                                                        Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                            horizontal: 6,
-                                                          ),
-                                                          decoration: BoxDecoration(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .primaryContainer,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6),
-                                                              border: Border.all(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .colorScheme
-                                                                      .primary)),
-                                                          child: Row(
-                                                            children: [
-                                                              Icon(
-                                                                Icons.verified,
-                                                                size: 14,
-                                                                color:
-                                                                    Colors.grey,
-                                                              ),
-                                                              HorizontalSmallGap(),
-                                                              SmallText(
-                                                                  text:
-                                                                      'Past Owner')
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  LabelText(
-                                                    text:
-                                                        "${e.lead.firstName} ${e.lead.lastName}",
-                                                    maxLines: 2,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            HorizontalSmallGap(),
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.h,
-                                                  vertical: 1.h),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.blueGrey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                  color: Colors.blueGrey[100]),
-                                              child: SmallText(
-                                                  text: e.lead.leadStatus?.name
-                                                          .titleCase ??
-                                                      ''),
-                                            ),
-                                            HorizontalSmallGap(),
-                                            if ((propertyCard?.currentAgent
-                                                        is String &&
-                                                    getIt<AuthBloc>()
-                                                            .state
-                                                            .agent
-                                                            ?.id ==
-                                                        propertyCard
-                                                            ?.currentAgent) ||
-                                                (propertyCard?.currentAgent
-                                                        is Map &&
-                                                    getIt<AuthBloc>()
-                                                            .state
-                                                            .agent
-                                                            ?.id ==
-                                                        propertyCard
-                                                                ?.currentAgent[
-                                                            'id']))
-                                              MenuAnchor(
-                                                  alignmentOffset:
-                                                      Offset(-140, 0),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      MenuController controller,
-                                                      Widget? child) {
-                                                    return IconButton(
-                                                      onPressed: () {
-                                                        if (controller.isOpen) {
-                                                          controller.close();
-                                                        } else {
-                                                          controller.open();
-                                                        }
-                                                      },
-                                                      icon: const Icon(
-                                                          Icons.more_vert),
-                                                      tooltip: 'Show menu',
-                                                    );
-                                                  },
-                                                  menuChildren: [
-                                                    MenuItemButton(
-                                                      onPressed: (state
-                                                                  .propertyCard
-                                                                  ?.currentOwner
-                                                                  ?.id ==
-                                                              e.lead.id)
-                                                          ? null
-                                                          : () {
-                                                              context
-                                                                  .read<
-                                                                      PropertyCardDetailsCubit>()
-                                                                  .verifyLeadAsOwner(
-                                                                      leadCard:
-                                                                          e,
-                                                                      index:
-                                                                          index);
-                                                            },
-                                                      leadingIcon:
-                                                          Icon(Icons.check),
-                                                      child: Text(
-                                                          'Verify as Owner'),
-                                                    ),
-                                                    MenuItemButton(
-                                                      onPressed: (e.wasOwner &&
-                                                              (state
-                                                                      .propertyCard
-                                                                      ?.currentOwner
-                                                                      ?.id !=
-                                                                  e.lead.id))
-                                                          ? null
-                                                          : () {
-                                                              context
-                                                                  .read<
-                                                                      PropertyCardDetailsCubit>()
-                                                                  .markLeadAsPastOwner(
-                                                                      leadCard:
-                                                                          e,
-                                                                      index:
-                                                                          index);
-                                                            },
-                                                      leadingIcon:
-                                                          Icon(Icons.minimize),
-                                                      child: Text(
-                                                          'Mark as past owner'),
-                                                    ),
-                                                    MenuItemButton(
-                                                      onPressed: () {
-                                                        showDialog(
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return AlertDialog(
-                                                                content: Text(
-                                                                    'Are you sure to unlink this property from this lead'),
-                                                                actions: [
-                                                                  Row(
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child: AppPrimaryButton(
-                                                                            text: 'Cancel',
-                                                                            onTap: () {
-                                                                              Navigator.of(context).pop();
-                                                                            }),
-                                                                      ),
-                                                                      HorizontalSmallGap(),
-                                                                      Expanded(
-                                                                        child: AppPrimaryButton(
-                                                                            text: 'UnLink',
-                                                                            backgroundColor: Colors.red[700],
-                                                                            onTap: () async {
-                                                                              await context.read<PropertyCardDetailsCubit>().unLinkLeadFromPropertyCard(leadCardId: e.id);
-                                                                              Navigator.of(context).pop();
-                                                                            }),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            });
-                                                      },
-                                                      leadingIcon:
-                                                          Icon(Icons.close),
-                                                      child: Text(
-                                                          'Unlink from property'),
-                                                    ),
-                                                  ]),
-                                          ],
-                                        ),
-                                        InfoLabelValue(
-                                            labelOne: 'Transaction',
-                                            valueOne:
-                                                "AED ${e.amount?.round().toString()}" ??
-                                                    '',
-                                            labelTwo: 'Transaction Date',
-                                            valueTwo: DateFormat.yMMMEd()
-                                                .add_jm()
-                                                .format(
-                                                    e.date ?? DateTime.now())),
-                                      ],
+                              return Container(
+                                padding: EdgeInsets.all(8),
+                                margin: EdgeInsets.symmetric(vertical: 4),
+                                decoration: BoxDecoration(
+                                    color: (e.wasOwner &&
+                                            (state.propertyCard?.currentOwner
+                                                    ?.id !=
+                                                e.lead.id))
+                                        ? Colors.grey[300]
+                                        : null,
+                                    border: Border.all(
+                                      color: Colors.blueGrey,
                                     ),
+                                    borderRadius: BorderRadius.circular(6)),
+                                child: InkWell(
+                                  onTap: () {
+                                    if ((propertyCard?.currentAgent is String &&
+                                            getIt<AuthBloc>().state.agent?.id ==
+                                                propertyCard?.currentAgent) ||
+                                        (propertyCard?.currentAgent is Map &&
+                                            getIt<AuthBloc>().state.agent?.id ==
+                                                propertyCard
+                                                    ?.currentAgent['id'])) {
+                                      context.pushNamed(
+                                          LeadDetailScreen.routeName,
+                                          pathParameters: {'id': e.lead.id});
+                                    }
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                if (state.propertyCard
+                                                        ?.currentOwner?.id ==
+                                                    e.lead.id)
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 6,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .primaryContainer,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6),
+                                                            border: Border.all(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .primary)),
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.verified,
+                                                              size: 14,
+                                                              color:
+                                                                  Colors.green,
+                                                            ),
+                                                            HorizontalSmallGap(),
+                                                            SmallText(
+                                                                text:
+                                                                    'Current Owner')
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                if (e.wasOwner &&
+                                                    (state
+                                                            .propertyCard
+                                                            ?.currentOwner
+                                                            ?.id !=
+                                                        e.lead.id))
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 6,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .primaryContainer,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6),
+                                                            border: Border.all(
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .primary)),
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.verified,
+                                                              size: 14,
+                                                              color:
+                                                                  Colors.grey,
+                                                            ),
+                                                            HorizontalSmallGap(),
+                                                            SmallText(
+                                                                text:
+                                                                    'Past Owner')
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                LabelText(
+                                                  text:
+                                                      "${e.lead.firstName} ${e.lead.lastName}",
+                                                  maxLines: 2,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          HorizontalSmallGap(),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.h, vertical: 1.h),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.blueGrey),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color: Colors.blueGrey[100]),
+                                            child: SmallText(
+                                                text: e.lead.leadStatus?.name
+                                                        .titleCase ??
+                                                    ''),
+                                          ),
+                                          HorizontalSmallGap(),
+                                          if ((propertyCard?.currentAgent
+                                                      is String &&
+                                                  getIt<AuthBloc>()
+                                                          .state
+                                                          .agent
+                                                          ?.id ==
+                                                      propertyCard
+                                                          ?.currentAgent) ||
+                                              (propertyCard?.currentAgent
+                                                      is Map &&
+                                                  getIt<AuthBloc>()
+                                                          .state
+                                                          .agent
+                                                          ?.id ==
+                                                      propertyCard
+                                                          ?.currentAgent['id']))
+                                            MenuAnchor(
+                                                alignmentOffset:
+                                                    Offset(-140, 0),
+                                                builder: (BuildContext context,
+                                                    MenuController controller,
+                                                    Widget? child) {
+                                                  return IconButton(
+                                                    onPressed: () {
+                                                      if (controller.isOpen) {
+                                                        controller.close();
+                                                      } else {
+                                                        controller.open();
+                                                      }
+                                                    },
+                                                    icon: const Icon(
+                                                        Icons.more_vert),
+                                                    tooltip: 'Show menu',
+                                                  );
+                                                },
+                                                menuChildren: [
+                                                  MenuItemButton(
+                                                    onPressed: (state
+                                                                .propertyCard
+                                                                ?.currentOwner
+                                                                ?.id ==
+                                                            e.lead.id)
+                                                        ? null
+                                                        : () {
+                                                            context
+                                                                .read<
+                                                                    PropertyCardDetailsCubit>()
+                                                                .verifyLeadAsOwner(
+                                                                    leadCard: e,
+                                                                    index:
+                                                                        index);
+                                                          },
+                                                    leadingIcon:
+                                                        Icon(Icons.check),
+                                                    child:
+                                                        Text('Verify as Owner'),
+                                                  ),
+                                                  MenuItemButton(
+                                                    onPressed: (e.wasOwner &&
+                                                            (state
+                                                                    .propertyCard
+                                                                    ?.currentOwner
+                                                                    ?.id !=
+                                                                e.lead.id))
+                                                        ? null
+                                                        : () {
+                                                            context
+                                                                .read<
+                                                                    PropertyCardDetailsCubit>()
+                                                                .markLeadAsPastOwner(
+                                                                    leadCard: e,
+                                                                    index:
+                                                                        index);
+                                                          },
+                                                    leadingIcon:
+                                                        Icon(Icons.minimize),
+                                                    child: Text(
+                                                        'Mark as past owner'),
+                                                  ),
+                                                  MenuItemButton(
+                                                    onPressed: () {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return AlertDialog(
+                                                              content: Text(
+                                                                  'Are you sure to unlink this property from this lead'),
+                                                              actions: [
+                                                                Row(
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child: AppPrimaryButton(
+                                                                          text: 'Cancel',
+                                                                          onTap: () {
+                                                                            Navigator.of(context).pop();
+                                                                          }),
+                                                                    ),
+                                                                    HorizontalSmallGap(),
+                                                                    Expanded(
+                                                                      child: AppPrimaryButton(
+                                                                          text: 'UnLink',
+                                                                          backgroundColor: Colors.red[700],
+                                                                          onTap: () async {
+                                                                            await context.read<PropertyCardDetailsCubit>().unLinkLeadFromPropertyCard(leadCardId: e.id);
+                                                                            Navigator.of(context).pop();
+                                                                          }),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            );
+                                                          });
+                                                    },
+                                                    leadingIcon:
+                                                        Icon(Icons.close),
+                                                    child: Text(
+                                                        'Unlink from property'),
+                                                  ),
+                                                ]),
+                                        ],
+                                      ),
+                                      InfoLabelValue(
+                                          labelOne: 'Transaction',
+                                          valueOne:
+                                              "AED ${e.amount?.round().toString() ?? ''}",
+                                          labelTwo: 'Transaction Date',
+                                          valueTwo: DateFormat.yMMMEd()
+                                              .add_jm()
+                                              .format(
+                                                  e.date ?? DateTime.now())),
+                                    ],
                                   ),
-                                );
-                              }).toList() ??
-                              [],
+                                ),
+                              );
+                            }).toList(),
                     ),
                   ),
                   VerticalSmallGap(),
@@ -980,76 +954,71 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: state.propertyCardLogs
-                              .map((e) => InkWell(
-                                    onTap: () {},
-                                    child: Container(
-                                      padding: EdgeInsets.all(8),
-                                      margin: EdgeInsets.symmetric(vertical: 4),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Colors.blueGrey,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(6)),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                          .map((e) => InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  margin: EdgeInsets.symmetric(vertical: 4),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.blueGrey,
+                                      ),
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: LabelText(
-                                                  text:
-                                                      "${e.createdBy?.firstName ?? "System"} ${e.createdBy?.lastName ?? ""}",
-                                                  maxLines: 2,
-                                                ),
-                                              ),
-                                              HorizontalSmallGap(),
-                                              Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 4.h,
-                                                    vertical: 1.h),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.blueGrey),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    color:
-                                                        Colors.blueGrey[100]),
-                                                child: SmallText(
-                                                    text: e.type.titleCase),
-                                              ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 4),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SmallText(
-                                                  text: 'Message',
-                                                  color: Colors.blueGrey,
-                                                ),
-                                                VerticalSmallGap(
-                                                  adjustment: 0.1,
-                                                ),
-                                                NormalText(
-                                                  text: e.message,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
-                                                )
-                                              ],
+                                          Expanded(
+                                            child: LabelText(
+                                              text:
+                                                  "${e.createdBy?.firstName ?? "System"} ${e.createdBy?.lastName ?? ""}",
+                                              maxLines: 2,
                                             ),
-                                          )
+                                          ),
+                                          HorizontalSmallGap(),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.h, vertical: 1.h),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.blueGrey),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color: Colors.blueGrey[100]),
+                                            child: SmallText(
+                                                text: e.type.titleCase),
+                                          ),
                                         ],
                                       ),
-                                    ),
-                                  ))
-                              .toList() ??
-                          [],
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SmallText(
+                                              text: 'Message',
+                                              color: Colors.blueGrey,
+                                            ),
+                                            VerticalSmallGap(
+                                              adjustment: 0.1,
+                                            ),
+                                            NormalText(
+                                              text: e.message,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14,
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ))
+                          .toList(),
                     ),
                   ),
                   VerticalSmallGap(

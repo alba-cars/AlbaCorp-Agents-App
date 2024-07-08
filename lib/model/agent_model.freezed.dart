@@ -21,6 +21,7 @@ Agent _$AgentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Agent {
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(readValue: userIdFromJson)
   String get userId => throw _privateConstructorUsedError;
   List<String> get languages => throw _privateConstructorUsedError;
   String? get RERANo => throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$Agent {
   bool get RICSCertified => throw _privateConstructorUsedError;
   int get creditsBalance => throw _privateConstructorUsedError;
   int get creditsLimit => throw _privateConstructorUsedError;
+  @JsonKey(readValue: userFromJson)
   User get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +45,7 @@ abstract class $AgentCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String userId,
+      @JsonKey(readValue: userIdFromJson) String userId,
       List<String> languages,
       String? RERANo,
       String? DEDNo,
@@ -51,7 +53,7 @@ abstract class $AgentCopyWith<$Res> {
       bool RICSCertified,
       int creditsBalance,
       int creditsLimit,
-      User user});
+      @JsonKey(readValue: userFromJson) User user});
 
   $UserCopyWith<$Res> get user;
 }
@@ -142,7 +144,7 @@ abstract class _$$AgentImplCopyWith<$Res> implements $AgentCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String userId,
+      @JsonKey(readValue: userIdFromJson) String userId,
       List<String> languages,
       String? RERANo,
       String? DEDNo,
@@ -150,7 +152,7 @@ abstract class _$$AgentImplCopyWith<$Res> implements $AgentCopyWith<$Res> {
       bool RICSCertified,
       int creditsBalance,
       int creditsLimit,
-      User user});
+      @JsonKey(readValue: userFromJson) User user});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -228,7 +230,7 @@ class __$$AgentImplCopyWithImpl<$Res>
 class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
   const _$AgentImpl(
       {required this.id,
-      required this.userId,
+      @JsonKey(readValue: userIdFromJson) required this.userId,
       final List<String> languages = const [],
       this.RERANo,
       this.DEDNo,
@@ -236,7 +238,7 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       this.RICSCertified = false,
       this.creditsBalance = 0,
       this.creditsLimit = 0,
-      required this.user})
+      @JsonKey(readValue: userFromJson) required this.user})
       : _languages = languages;
 
   factory _$AgentImpl.fromJson(Map<String, dynamic> json) =>
@@ -245,6 +247,7 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
   @override
   final String id;
   @override
+  @JsonKey(readValue: userIdFromJson)
   final String userId;
   final List<String> _languages;
   @override
@@ -271,6 +274,7 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
   @JsonKey()
   final int creditsLimit;
   @override
+  @JsonKey(readValue: userFromJson)
   final User user;
 
   @override
@@ -348,22 +352,24 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
 
 abstract class _Agent implements Agent {
   const factory _Agent(
-      {required final String id,
-      required final String userId,
-      final List<String> languages,
-      final String? RERANo,
-      final String? DEDNo,
-      final String? PERMITNo,
-      final bool RICSCertified,
-      final int creditsBalance,
-      final int creditsLimit,
-      required final User user}) = _$AgentImpl;
+          {required final String id,
+          @JsonKey(readValue: userIdFromJson) required final String userId,
+          final List<String> languages,
+          final String? RERANo,
+          final String? DEDNo,
+          final String? PERMITNo,
+          final bool RICSCertified,
+          final int creditsBalance,
+          final int creditsLimit,
+          @JsonKey(readValue: userFromJson) required final User user}) =
+      _$AgentImpl;
 
   factory _Agent.fromJson(Map<String, dynamic> json) = _$AgentImpl.fromJson;
 
   @override
   String get id;
   @override
+  @JsonKey(readValue: userIdFromJson)
   String get userId;
   @override
   List<String> get languages;
@@ -380,6 +386,7 @@ abstract class _Agent implements Agent {
   @override
   int get creditsLimit;
   @override
+  @JsonKey(readValue: userFromJson)
   User get user;
   @override
   @JsonKey(ignore: true)

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
@@ -39,7 +38,7 @@ class DealAddDocumentScreen extends StatelessWidget {
 }
 
 class _DealAddDocumentScreenLayout extends StatefulWidget {
-  const _DealAddDocumentScreenLayout({super.key});
+  const _DealAddDocumentScreenLayout();
 
   @override
   State<_DealAddDocumentScreenLayout> createState() =>

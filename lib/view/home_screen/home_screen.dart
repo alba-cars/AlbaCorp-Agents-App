@@ -1,24 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
-import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/util/constant_widget.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
-import 'package:real_estate_app/view/home_screen/widgets/sliver_categories.dart';
-import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
@@ -26,7 +20,6 @@ import 'package:real_estate_app/widgets/timer_text.dart';
 
 import '../../app/activity_cubit/activity_cubit.dart';
 import '../../model/activity_feedback_model.dart';
-import '../../model/category_model.dart';
 import '../../util/color_category.dart';
 import '../../widgets/fields/multi_line_textfield.dart';
 import '../add_deal_screen/add_deal_screen.dart';
@@ -94,6 +87,8 @@ class _HomePageLayoutState extends State<HomePageLayout> {
                         child: S3Image(
                           url: user?.photo,
                           fit: BoxFit.cover,
+                          errorWidget: Image.asset(
+                              'assets/images/person_placeholder.jpeg'),
                         ),
                       ),
                       HorizontalSmallGap(),
@@ -117,23 +112,6 @@ class _HomePageLayoutState extends State<HomePageLayout> {
               ),
               SliverVerticalSmallGap(),
               SliverVerticalSmallGap(),
-              // SliverToBoxAdapter(
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(horizontal: 20),
-              //     child: getSearchField('Search'),
-              //   ),
-              // ),
-              // SliverVerticalSmallGap(),
-              // BlocSelector<HomeCubit, HomeState, ModelCategory>(
-              //   selector: (state) {
-              //     return state.selectedCategory;
-              //   },
-              //   builder: (context, selectedCategory) {
-              //     return SliverCategories(
-              //         categories: context.read<HomeCubit>().state.categories,
-              //         selectedCategory: selectedCategory);
-              //   },
-              // ),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -271,13 +249,6 @@ class _HomePageLayoutState extends State<HomePageLayout> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 20),
-            //   child: TitleText(
-            //     text: 'Tasks :',
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            // ),
             Expanded(
               child: BlocSelector<HomeCubit, HomeState, Set<ListType>>(
                 selector: (state) {
@@ -320,7 +291,8 @@ class SortedView extends StatelessWidget {
             onNotification: (scrollInfo) {
               if (state.getSortedActivitiesStatus != AppStatus.loadingMore &&
                   scrollInfo.metrics.pixels >=
-                      0.9 * scrollInfo.metrics.maxScrollExtent) {
+                      0.9 * scrollInfo.metrics.maxScrollExtent &&
+                  state.sortedActivityPaginator?.hasNextPage == true) {
                 context.read<HomeCubit>().getSortedActivities();
               }
               return true;
@@ -478,6 +450,7 @@ class ActivityListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Dismissible(
       key: ValueKey(activity.id),
       background: Container(
@@ -538,8 +511,7 @@ class ActivityListItem extends StatelessWidget {
           child: InkWell(
             onTap: () {
               context.pushNamed(TaskDetailScreen.routeName,
-                  pathParameters: {'id': activity.lead?.id ?? ''},
-                  extra: activity);
+                  pathParameters: {'id': activity.id}, extra: activity);
             },
             child: Row(children: [
               Container(
@@ -582,15 +554,30 @@ class ActivityListItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 4.h, vertical: 1.h),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueGrey),
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.blueGrey[100]),
-                      child: SmallText(
-                          text: activity.lead?.leadStatus?.name ?? ''),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 4.h, vertical: 1.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blueGrey),
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.blueGrey[100]),
+                          child: SmallText(
+                              text: activity.lead?.leadStatus?.name ?? ''),
+                        ),
+                        HorizontalSmallGap(),
+                        if (activity.lead?.dndStatus == true)
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4.h, vertical: 1.h),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: colorScheme.error),
+                                borderRadius: BorderRadius.circular(4),
+                                color: colorScheme.errorContainer),
+                            child: SmallText(text: 'DND'),
+                          ),
+                      ],
                     ),
                     VerticalSmallGap(
                       adjustment: .2,
@@ -605,19 +592,18 @@ class ActivityListItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconButton.filledTonal(
-                      onPressed: () async {
-                        if (activity.lead == null) {
-                          return;
-                        }
-                        context.read<CallBloc>().add(CallEvent.callStarted(
-                            phoneNumber: '1002', // activity.lead!.phone ?? '',
-                            activityId: activity.id,
-                            leadId: activity.lead!.id));
-                      },
-                      icon: Icon(
-                        Icons.call,
-                      ))
+                  CallButton(
+                    onTap: () async {
+                      if (activity.lead == null) {
+                        return;
+                      }
+                      context.read<CallBloc>().add(CallEvent.callStarted(
+                          phoneNumber: activity.lead!.phone ?? '',
+                          activityId: activity.id,
+                          leadId: activity.lead!.id));
+                    },
+                    isDnd: activity.lead!.dndStatus,
+                  )
                 ],
               )
             ]),

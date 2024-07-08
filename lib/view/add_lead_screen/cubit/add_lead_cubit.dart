@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:country_state_city/country_state_city.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 
@@ -15,7 +14,8 @@ part 'add_lead_cubit.freezed.dart';
 
 @injectable
 class AddLeadCubit extends Cubit<AddLeadState> {
-  AddLeadCubit(this._leadRepo) : super(AddLeadState()) {
+  AddLeadCubit(this._leadRepo, @factoryParam Map<String, dynamic>? data)
+      : super(AddLeadState(val: data ?? {}, step2Values: data ?? {})) {
     getLeadSources();
   }
 
@@ -63,7 +63,7 @@ class AddLeadCubit extends Cubit<AddLeadState> {
       emit(state.copyWith(
           currentTab: state.currentTab - 1, previousTab: state.currentTab));
     } else {
-      await addLead();
+      // await addLead();
     }
   }
 

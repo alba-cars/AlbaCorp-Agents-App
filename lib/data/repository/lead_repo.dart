@@ -19,6 +19,7 @@ abstract class LeadRepo {
 
   Future<Result<List<Activity>>> getLeadActivities({required String leadId});
   Future<Result<List<Deal>>> getLeadDeals({required String leadId});
+  Future<Result<Lead?>> getLeadByPhone({required String phone});
   Future<Result<Lead>> getPropertyOwner({
     required String ownerId,
   });

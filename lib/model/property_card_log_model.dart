@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:real_estate_app/model/property_card_details_model.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 
 import 'property_type_model.dart';

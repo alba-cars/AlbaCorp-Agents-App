@@ -1,7 +1,6 @@
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/deal_response.dart';
-import 'package:real_estate_app/model/file_object.dart';
 import 'package:real_estate_app/model/off_plan_model.dart';
 import 'package:real_estate_app/model/offplan_listing_response.dart';
 import 'package:real_estate_app/model/paginator.dart';

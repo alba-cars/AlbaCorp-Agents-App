@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -9,7 +8,6 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/model/ticket_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_ticket_screen/cubit/add_ticket_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/attachment_field.dart';
@@ -34,7 +32,7 @@ class AddTicketScreen extends StatelessWidget {
 }
 
 class _AddTicketScreenLayout extends StatefulWidget {
-  const _AddTicketScreenLayout({super.key});
+  const _AddTicketScreenLayout();
 
   @override
   State<_AddTicketScreenLayout> createState() => _AddTicketScreenLayoutState();

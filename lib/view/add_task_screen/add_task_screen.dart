@@ -7,7 +7,6 @@ import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_task_screen/cubit/add_task_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/card_picker_field.dart';
 import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
@@ -34,7 +33,7 @@ class AddTaskScreen extends StatelessWidget {
 }
 
 class _AddTaskScreenLayout extends StatefulWidget {
-  const _AddTaskScreenLayout({super.key});
+  const _AddTaskScreenLayout();
 
   @override
   State<_AddTaskScreenLayout> createState() => _AddTaskScreenLayoutState();

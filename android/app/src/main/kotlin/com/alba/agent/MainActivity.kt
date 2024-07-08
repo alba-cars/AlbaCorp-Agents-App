@@ -8,6 +8,7 @@ import android.os.PersistableBundle
 import androidx.annotation.RequiresApi
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity
+import com.alba.agent.MyApplication
 
 
 @RequiresApi(Build.VERSION_CODES.Q)
@@ -35,5 +36,15 @@ class MainActivity: FlutterFragmentActivity() {
       REQUEST_ID_BECOME_CALL_SCREENER
     )
   }
+
+  override fun onResume() {
+    super.onResume()
+    MyApplication.activityResumed()
+}
+
+override fun onPause() {
+    super.onPause()
+    MyApplication.activityPaused()
+}
     
 }

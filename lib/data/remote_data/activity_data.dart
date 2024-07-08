@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
@@ -20,13 +18,13 @@ class ActivityData implements ActivityRepo {
   ActivityData({required Dio dio}) : _dio = dio;
   final log = Logger();
   @override
-  Future<Result<Activity>> createActivity({
-    required String leadId,
-    required String type,
-    DateTime? date,
-    String? propertyId,
-    String? description,
-  }) async {
+  Future<Result<Activity>> createActivity(
+      {required String leadId,
+      required String type,
+      DateTime? date,
+      String? propertyId,
+      String? description,
+      bool isCompleted = false}) async {
     try {
       final response = await _dio.post('/v1/activities', data: {
         'user_id': leadId,
@@ -34,14 +32,30 @@ class ActivityData implements ActivityRepo {
         'date': date?.toIso8601String() ?? DateTime.now().toIso8601String(),
         if (date == null) 'disableDateChecking': true,
         'description': description,
-        'property_id': propertyId
+        'property_id': propertyId,
+        if (isCompleted) "status": 'Complete'
       });
       final data = response.data;
       final model = Activity.fromJson(data);
       return Success(model);
     } catch (e, stack) {
       return onError(e, stack, log);
-      ;
+    }
+  }
+
+  @override
+  Future<Result<Activity>> getActivity({
+    required String activityId,
+  }) async {
+    try {
+      final response = await _dio.get(
+        '/v1/activities/$activityId',
+      );
+      final data = response.data;
+      final model = Activity.fromJson(data);
+      return Success(model);
+    } catch (e, stack) {
+      return onError(e, stack, log);
     }
   }
 
@@ -53,7 +67,7 @@ class ActivityData implements ActivityRepo {
       String? notes,
       String? feedback}) async {
     try {
-      final response = await _dio.patch('/v1/activities/$activityId', data: {
+      await _dio.patch('/v1/activities/$activityId', data: {
         if (completed) 'status': 'Complete',
         if (duration != null) 'duration': duration,
         if (feedback == 'Not Interested') 'is_interested': false,
@@ -65,7 +79,6 @@ class ActivityData implements ActivityRepo {
       return Success(null);
     } catch (e, stack) {
       return onError(e, stack, log);
-      ;
     }
   }
 
@@ -77,52 +90,9 @@ class ActivityData implements ActivityRepo {
     try {
       String url = 'v1/activities/query-activities';
       Map<String, dynamic> query = {};
-
-      final d = DateTime.now();
       if (filterCode == 0) {
         query = {
-          "leadSource": [
-            "Ask a Question",
-            "Get Matched Assistance",
-            "Register",
-            "New Listing",
-            "Viewing",
-            "Newsletter",
-            "Imported",
-            "Facebook Chat",
-            "Facebook Call",
-            "Facebook Campaign",
-            "Instagram Chat",
-            "Instagram Call",
-            "Instagram Campaign",
-            "TikTok",
-            "Twitter",
-            "Taboola",
-            "Snapchat",
-            "Whatsapp",
-            "Email",
-            "LinkedIn",
-            "Youtube",
-            "Pinterest",
-            "Meta",
-            "Google Ads",
-            "Off-Plan",
-            "Bayut",
-            "James Edition",
-            "Luxury Estates",
-            "Wall Street",
-            "Right Move",
-            "Lefigaro",
-            "Property Finder",
-            "Dubizzle",
-            "Referral",
-            "Alba Cars",
-            "Unkown Inbound Call",
-            "Saqib",
-            "Watti",
-            "Research",
-            "Bilal",
-          ],
+          "leadSourceType": 'hot',
           "leadStatus": "Fresh",
           "status": ["Pending", "Overdue"],
           // "toDate": '${d.year}-${d.month}-${d.day}',
@@ -170,59 +140,6 @@ class ActivityData implements ActivityRepo {
         };
       } else if (filterCode == 3) {
         query = {
-          'leadSource': [
-            "Ask a Question",
-            "Get Matched Assistance",
-            "Register",
-            "New Listing",
-            "Viewing",
-            "Newsletter",
-            "Imported",
-            "Facebook Chat",
-            "Facebook Call",
-            "Facebook Campaign",
-            "Instagram Chat",
-            "Instagram Call",
-            "Instagram Campaign",
-            "TikTok",
-            "Twitter",
-            "Taboola",
-            "Snapchat",
-            "Whatsapp",
-            "Email",
-            "LinkedIn",
-            "Youtube",
-            "Pinterest",
-            "Meta",
-            "Google Ads",
-            "Off-Plan",
-            "Bayut",
-            "James Edition",
-            "Luxury Estates",
-            "Wall Street",
-            "Right Move",
-            "Lefigaro",
-            "Property Finder",
-            "Dubizzle",
-            "Referral",
-            "Alba Cars",
-            "Unkown Inbound Call",
-            "Call Center",
-            "Call Center 1",
-            "Call Center 2",
-            "Call Center 3",
-            "Hot Confidential",
-            "Saqib",
-            "Watti",
-            "Research",
-            "Bilal"
-          ],
-          "leadStatus": "Follow up",
-          "status": ["Pending", "Overdue"],
-          // "toDate": '${d.year}-${d.month}-${d.day}'
-        };
-      } else if (filterCode == 4) {
-        query = {
           'leadStatus': [
             "Prospect",
             "For Listing",
@@ -234,16 +151,24 @@ class ActivityData implements ActivityRepo {
           "status": ["Pending", "Overdue"],
           // "toDate": '${d.year}-${d.month}-${d.day}'
         };
+      } else if (filterCode == 4) {
+        query = {
+          'leadSourceType': 'hot',
+          "leadStatus": "Follow up",
+          "status": ["Pending", "Overdue"],
+          // "toDate": '${d.year}-${d.month}-${d.day}'
+        };
       } else if (filterCode == 5) {
         query = {
-          "leadSource": ["External", "DLD", "Dubizzle Listing", "Imported"],
+          "leadSourceType": 'cold',
           "leadStatus": "Follow up",
           "status": ["Pending", "Overdue"],
           // "toDate": '${d.year}-${d.month}-${d.day}'
         };
       } else if (filterCode == 6) {
         query = {
-          "leadSource": ["External", "DLD", "Dubizzle Listing", "Imported"],
+          "leadSourceType": 'cold',
+          // 'leadSource': ['External'],
           'leadStatus': "Fresh",
           "status": ["Pending", "Overdue"],
           // "toDate": '${d.year}-${d.month}-${d.day}'
@@ -336,16 +261,58 @@ class ActivityData implements ActivityRepo {
       String url = 'v1/activities/query-activities';
       Map<String, dynamic> query = {
         "status": ["Pending", 'Overdue'],
-        if (paginator != null) 'page': paginator.currentPage + 1
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        'limit': 10
       };
       final response = await _dio.get(url, queryParameters: query);
       final data = response.data['data']['items'] as List;
       final list = data.map((e) => Activity.fromJson(e)).toList();
       return Success(list,
           paginator: Paginator(
-              currentPage: (paginator?.currentPage ?? 0) + 1,
-              perPage: response.data['pageSize'] ?? 0,
-              itemCount: response.data['totalItems'] ?? 0));
+              currentPage: response.data['data']['currentPage'] ??
+                  (paginator?.currentPage ?? 0) + 1,
+              perPage: response.data['data']['limit'] ?? 0,
+              itemCount: response.data['data']['totalItems'] ?? 0));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<Activity>>> fetchActivitiesImportant(
+      {Paginator? paginator}) async {
+    try {
+      String url = 'v1/activities/query-activities';
+      Map<String, dynamic> query = {
+        "status": ["Pending", 'Overdue'],
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        'limit': 10,
+        'minActivityWeight': .8
+      };
+      final response = await _dio.get(url, queryParameters: query);
+      final data = response.data['data']['items'] as List;
+      final list = data.map((e) => Activity.fromJson(e)).toList();
+      return Success(list,
+          paginator: Paginator(
+              currentPage: response.data['data']['currentPage'] ??
+                  (paginator?.currentPage ?? 0) + 1,
+              perPage: response.data['data']['limit'] ?? 0,
+              itemCount: response.data['data']['totalItems'] ?? 0));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<void>> createCallFeedbackActivity(
+      {required String leadId, required String feedback}) async {
+    try {
+      await _dio.post('/v1/activities/call-feedback-activity', data: {
+        'lead_id': leadId,
+        'feedback': feedback,
+      });
+
+      return Success(null);
     } catch (e, stack) {
       return onError(e, stack, log);
     }

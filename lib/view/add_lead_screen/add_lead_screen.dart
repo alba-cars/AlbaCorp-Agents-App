@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -22,19 +18,20 @@ import '../../widgets/fields/text_field.dart';
 class AddLeadScreen extends StatelessWidget {
   static const routeName = '/addLeadScreen';
 
-  const AddLeadScreen({super.key});
+  const AddLeadScreen({super.key, this.data});
+  final Map<String, dynamic>? data;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddLeadCubit>(),
+      create: (context) => getIt<AddLeadCubit>(param1: data),
       child: _AddLeadScreenLayout(),
     );
   }
 }
 
 class _AddLeadScreenLayout extends StatefulWidget {
-  const _AddLeadScreenLayout({super.key});
+  const _AddLeadScreenLayout();
 
   @override
   State<_AddLeadScreenLayout> createState() => _TryState();

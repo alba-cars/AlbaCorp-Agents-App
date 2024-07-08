@@ -1,39 +1,34 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:animations/animations.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
-import 'package:real_estate_app/view/add_listing_screen/cubit/add_listing_cubit.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
+import 'package:real_estate_app/view/call_feedback_screen/call_feedback_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
-import 'package:real_estate_app/view/home_screen/widgets/detail_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/listings_screen/listing_screen.dart';
-import 'package:real_estate_app/view/message_screen/tab_message.dart';
-import 'package:real_estate_app/view/more_screen/tab_more.dart';
+import 'package:real_estate_app/view/maintenance/maintenance_screen.dart';
+import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/view/root_layout/root_layout.dart';
-import 'package:real_estate_app/view/saved_screen/tab_saved.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/view/ticket_detail_screen/ticket_details_screen.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
@@ -48,22 +43,34 @@ import '../view/login/forgot_screen.dart';
 import '../view/login/login_screen.dart';
 import '../view/login/pass_change_screen.dart';
 import '../view/login/reset_screen.dart';
-import '../view/login/verification_screen.dart';
+
 import 'app_routes.dart';
 
 class AppRouter {
   static final RouteObserver<ModalRoute> routerObserver =
       RouteObserver<ModalRoute>();
-  static final router = GoRouter(
+  static final GoRouter router = GoRouter(
       refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
       // observers: [routerObserver],
       redirect: (context, state) {
         final authState = getIt<AuthBloc>().state;
+        if ([AuthStatus.Maintenance, AuthStatus.Update]
+            .contains(authState.authStatus)) {
+          return Routes.maintenanceRoute;
+        }
         if (authState.authStatus == AuthStatus.Authenticated) {
           if (state.matchedLocation == Routes.introRoute ||
               state.matchedLocation == Routes.homeRoute ||
               state.matchedLocation == Routes.loginRoute) {
             return HomePage.routeName;
+            // } else if (authState.veryImportantActivities != null &&
+            //     authState.veryImportantActivities!.isNotEmpty &&
+            //     state.uri.path.contains(TaskDetailScreen.routeName) == false) {
+            //   return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
+          } else if (authState.showFeedbackScreen &&
+              state.uri.path.contains(CallFeedbackScreen.routeName) == false &&
+              state.uri.path.contains(TaskDetailScreen.routeName) == false) {
+            return CallFeedbackScreen.routeName;
           }
           return null;
         } else if (authState.authStatus == AuthStatus.initial) {
@@ -76,6 +83,11 @@ class AppRouter {
         GoRoute(
           path: Routes.homeRoute,
           pageBuilder: (context, state) => AppTransition(child: SplashScreen()),
+        ),
+        GoRoute(
+          path: Routes.maintenanceRoute,
+          pageBuilder: (context, state) =>
+              AppTransition(child: MaintenanceScreen()),
         ),
         GoRoute(
           path: Routes.introRoute,
@@ -117,12 +129,6 @@ class AppRouter {
                       name: DealsScreen.routeName,
                       pageBuilder: (context, state) =>
                           AppTransition(child: DealsScreen()),
-                    ),
-                    GoRoute(
-                      path: TabMore.routeName,
-                      name: TabMore.routeName,
-                      pageBuilder: (context, state) =>
-                          AppTransition(child: TabMore()),
                     ),
                     GoRoute(
                       path: ListingsScreen.routeName,
@@ -253,7 +259,12 @@ class AppRouter {
                 path: AddLeadScreen.routeName,
                 name: AddLeadScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: AddLeadScreen());
+                  final Map<String, dynamic>? data = state
+                      .uri.queryParameters['data'] as Map<String, dynamic>?;
+                  return AppTransition(
+                      child: AddLeadScreen(
+                    data: data,
+                  ));
                 },
               ),
               GoRoute(
@@ -300,7 +311,10 @@ class AppRouter {
                 name: TaskDetailScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  final Activity? activity = state.extra as Activity?;
+                  Activity? activity;
+                  try {
+                    activity = state.extra as Activity?;
+                  } catch (e) {}
                   final bool isBlocking =
                       state.uri.queryParameters['isBlocking'] as bool? ?? false;
                   return AppTransition(
@@ -324,6 +338,20 @@ class AppRouter {
                 name: AddTaskScreen.routeName,
                 pageBuilder: (context, state) {
                   return AppTransition(child: AddTaskScreen());
+                },
+              ),
+              GoRoute(
+                path: NotificationsScreen.routeName,
+                name: NotificationsScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: NotificationsScreen());
+                },
+              ),
+              GoRoute(
+                path: CallFeedbackScreen.routeName,
+                name: CallFeedbackScreen.routeName,
+                pageBuilder: (context, state) {
+                  return AppTransition(child: CallFeedbackScreen());
                 },
               ),
               GoRoute(
@@ -363,11 +391,6 @@ class AppRouter {
           pageBuilder: (context, state) =>
               AppTransition(child: PassChangeScreen()),
         ),
-        GoRoute(
-          path: Routes.verificationRoute,
-          pageBuilder: (context, state) =>
-              AppTransition(child: VerificationScreen()),
-        ),
       ]);
 }
 
@@ -378,7 +401,12 @@ class GoRouterRefreshStream extends ChangeNotifier {
     final s = stream;
     _subscription = s.listen(
       (AuthState element) {
-        if (element.authStatus != lastElement?.authStatus) {
+        if (element.authStatus != lastElement?.authStatus ||
+            element.veryImportantActivities?.length !=
+                lastElement?.veryImportantActivities?.length ||
+            (element.lastCalledNumber != null &&
+                lastElement?.lastCalledNumber != element.lastCalledNumber &&
+                element.showFeedbackScreen)) {
           notifyListeners();
         }
         lastElement = element;

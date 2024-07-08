@@ -22,6 +22,12 @@ mixin _$AuthEvent {
     required TResult Function() userLoggedOut,
     required TResult Function() started,
     required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +36,12 @@ mixin _$AuthEvent {
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
     TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +50,12 @@ mixin _$AuthEvent {
     TResult Function()? userLoggedOut,
     TResult Function()? started,
     TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +65,15 @@ mixin _$AuthEvent {
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
     required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +82,14 @@ mixin _$AuthEvent {
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
     TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +98,14 @@ mixin _$AuthEvent {
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
     TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -163,6 +206,12 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function() userLoggedOut,
     required TResult Function() started,
     required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
   }) {
     return userLoggedIn(user);
   }
@@ -174,6 +223,12 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
     TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
   }) {
     return userLoggedIn?.call(user);
   }
@@ -185,6 +240,12 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function()? userLoggedOut,
     TResult Function()? started,
     TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
     required TResult orElse(),
   }) {
     if (userLoggedIn != null) {
@@ -200,6 +261,15 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
     required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
   }) {
     return userLoggedIn(this);
   }
@@ -211,6 +281,14 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
     TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
   }) {
     return userLoggedIn?.call(this);
   }
@@ -222,6 +300,14 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
     TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
     required TResult orElse(),
   }) {
     if (userLoggedIn != null) {
@@ -282,6 +368,12 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function() userLoggedOut,
     required TResult Function() started,
     required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
   }) {
     return userLoggedOut();
   }
@@ -293,6 +385,12 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
     TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
   }) {
     return userLoggedOut?.call();
   }
@@ -304,6 +402,12 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function()? userLoggedOut,
     TResult Function()? started,
     TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
     required TResult orElse(),
   }) {
     if (userLoggedOut != null) {
@@ -319,6 +423,15 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
     required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
   }) {
     return userLoggedOut(this);
   }
@@ -330,6 +443,14 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
     TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
   }) {
     return userLoggedOut?.call(this);
   }
@@ -341,6 +462,14 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
     TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
     required TResult orElse(),
   }) {
     if (userLoggedOut != null) {
@@ -396,6 +525,12 @@ class _$StartedImpl implements _Started {
     required TResult Function() userLoggedOut,
     required TResult Function() started,
     required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
   }) {
     return started();
   }
@@ -407,6 +542,12 @@ class _$StartedImpl implements _Started {
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
     TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
   }) {
     return started?.call();
   }
@@ -418,6 +559,12 @@ class _$StartedImpl implements _Started {
     TResult Function()? userLoggedOut,
     TResult Function()? started,
     TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -433,6 +580,15 @@ class _$StartedImpl implements _Started {
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
     required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
   }) {
     return started(this);
   }
@@ -444,6 +600,14 @@ class _$StartedImpl implements _Started {
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
     TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
   }) {
     return started?.call(this);
   }
@@ -455,6 +619,14 @@ class _$StartedImpl implements _Started {
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
     TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -510,6 +682,12 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     required TResult Function() userLoggedOut,
     required TResult Function() started,
     required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
   }) {
     return refreshAgentData();
   }
@@ -521,6 +699,12 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult? Function()? userLoggedOut,
     TResult? Function()? started,
     TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
   }) {
     return refreshAgentData?.call();
   }
@@ -532,6 +716,12 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult Function()? userLoggedOut,
     TResult Function()? started,
     TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
     required TResult orElse(),
   }) {
     if (refreshAgentData != null) {
@@ -547,6 +737,15 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     required TResult Function(_UserLoggedOut value) userLoggedOut,
     required TResult Function(_Started value) started,
     required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
   }) {
     return refreshAgentData(this);
   }
@@ -558,6 +757,14 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult? Function(_UserLoggedOut value)? userLoggedOut,
     TResult? Function(_Started value)? started,
     TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
   }) {
     return refreshAgentData?.call(this);
   }
@@ -569,6 +776,14 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult Function(_UserLoggedOut value)? userLoggedOut,
     TResult Function(_Started value)? started,
     TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
     required TResult orElse(),
   }) {
     if (refreshAgentData != null) {
@@ -583,10 +798,1041 @@ abstract class _RefreshAgentData implements AuthEvent {
 }
 
 /// @nodoc
+abstract class _$$NewImportantActivityImplCopyWith<$Res> {
+  factory _$$NewImportantActivityImplCopyWith(_$NewImportantActivityImpl value,
+          $Res Function(_$NewImportantActivityImpl) then) =
+      __$$NewImportantActivityImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> activityIds});
+}
+
+/// @nodoc
+class __$$NewImportantActivityImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$NewImportantActivityImpl>
+    implements _$$NewImportantActivityImplCopyWith<$Res> {
+  __$$NewImportantActivityImplCopyWithImpl(_$NewImportantActivityImpl _value,
+      $Res Function(_$NewImportantActivityImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activityIds = null,
+  }) {
+    return _then(_$NewImportantActivityImpl(
+      activityIds: null == activityIds
+          ? _value._activityIds
+          : activityIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NewImportantActivityImpl implements _NewImportantActivity {
+  const _$NewImportantActivityImpl({required final List<String> activityIds})
+      : _activityIds = activityIds;
+
+  final List<String> _activityIds;
+  @override
+  List<String> get activityIds {
+    if (_activityIds is EqualUnmodifiableListView) return _activityIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activityIds);
+  }
+
+  @override
+  String toString() {
+    return 'AuthEvent.newImportantActivity(activityIds: $activityIds)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NewImportantActivityImpl &&
+            const DeepCollectionEquality()
+                .equals(other._activityIds, _activityIds));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_activityIds));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewImportantActivityImplCopyWith<_$NewImportantActivityImpl>
+      get copyWith =>
+          __$$NewImportantActivityImplCopyWithImpl<_$NewImportantActivityImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
+  }) {
+    return newImportantActivity(activityIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
+  }) {
+    return newImportantActivity?.call(activityIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (newImportantActivity != null) {
+      return newImportantActivity(activityIds);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+  }) {
+    return newImportantActivity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+  }) {
+    return newImportantActivity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (newImportantActivity != null) {
+      return newImportantActivity(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NewImportantActivity implements AuthEvent {
+  const factory _NewImportantActivity(
+      {required final List<String> activityIds}) = _$NewImportantActivityImpl;
+
+  List<String> get activityIds;
+  @JsonKey(ignore: true)
+  _$$NewImportantActivityImplCopyWith<_$NewImportantActivityImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CompletedImportantActivityImplCopyWith<$Res> {
+  factory _$$CompletedImportantActivityImplCopyWith(
+          _$CompletedImportantActivityImpl value,
+          $Res Function(_$CompletedImportantActivityImpl) then) =
+      __$$CompletedImportantActivityImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String activityId});
+}
+
+/// @nodoc
+class __$$CompletedImportantActivityImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$CompletedImportantActivityImpl>
+    implements _$$CompletedImportantActivityImplCopyWith<$Res> {
+  __$$CompletedImportantActivityImplCopyWithImpl(
+      _$CompletedImportantActivityImpl _value,
+      $Res Function(_$CompletedImportantActivityImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activityId = null,
+  }) {
+    return _then(_$CompletedImportantActivityImpl(
+      activityId: null == activityId
+          ? _value.activityId
+          : activityId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
+  const _$CompletedImportantActivityImpl({required this.activityId});
+
+  @override
+  final String activityId;
+
+  @override
+  String toString() {
+    return 'AuthEvent.completedImportantActivity(activityId: $activityId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CompletedImportantActivityImpl &&
+            (identical(other.activityId, activityId) ||
+                other.activityId == activityId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, activityId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CompletedImportantActivityImplCopyWith<_$CompletedImportantActivityImpl>
+      get copyWith => __$$CompletedImportantActivityImplCopyWithImpl<
+          _$CompletedImportantActivityImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
+  }) {
+    return completedImportantActivity(activityId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
+  }) {
+    return completedImportantActivity?.call(activityId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (completedImportantActivity != null) {
+      return completedImportantActivity(activityId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+  }) {
+    return completedImportantActivity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+  }) {
+    return completedImportantActivity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (completedImportantActivity != null) {
+      return completedImportantActivity(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CompletedImportantActivity implements AuthEvent {
+  const factory _CompletedImportantActivity(
+      {required final String activityId}) = _$CompletedImportantActivityImpl;
+
+  String get activityId;
+  @JsonKey(ignore: true)
+  _$$CompletedImportantActivityImplCopyWith<_$CompletedImportantActivityImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CheckForImportantActivityImplCopyWith<$Res> {
+  factory _$$CheckForImportantActivityImplCopyWith(
+          _$CheckForImportantActivityImpl value,
+          $Res Function(_$CheckForImportantActivityImpl) then) =
+      __$$CheckForImportantActivityImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CheckForImportantActivityImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$CheckForImportantActivityImpl>
+    implements _$$CheckForImportantActivityImplCopyWith<$Res> {
+  __$$CheckForImportantActivityImplCopyWithImpl(
+      _$CheckForImportantActivityImpl _value,
+      $Res Function(_$CheckForImportantActivityImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
+  const _$CheckForImportantActivityImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.checkForImportantActivity()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckForImportantActivityImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
+  }) {
+    return checkForImportantActivity();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
+  }) {
+    return checkForImportantActivity?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (checkForImportantActivity != null) {
+      return checkForImportantActivity();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+  }) {
+    return checkForImportantActivity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+  }) {
+    return checkForImportantActivity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (checkForImportantActivity != null) {
+      return checkForImportantActivity(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckForImportantActivity implements AuthEvent {
+  const factory _CheckForImportantActivity() = _$CheckForImportantActivityImpl;
+}
+
+/// @nodoc
+abstract class _$$CheckForCallFeedbackImplCopyWith<$Res> {
+  factory _$$CheckForCallFeedbackImplCopyWith(_$CheckForCallFeedbackImpl value,
+          $Res Function(_$CheckForCallFeedbackImpl) then) =
+      __$$CheckForCallFeedbackImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CheckForCallFeedbackImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$CheckForCallFeedbackImpl>
+    implements _$$CheckForCallFeedbackImplCopyWith<$Res> {
+  __$$CheckForCallFeedbackImplCopyWithImpl(_$CheckForCallFeedbackImpl _value,
+      $Res Function(_$CheckForCallFeedbackImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
+  const _$CheckForCallFeedbackImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.checkForCallFeedback()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckForCallFeedbackImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
+  }) {
+    return checkForCallFeedback();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
+  }) {
+    return checkForCallFeedback?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (checkForCallFeedback != null) {
+      return checkForCallFeedback();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+  }) {
+    return checkForCallFeedback(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+  }) {
+    return checkForCallFeedback?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (checkForCallFeedback != null) {
+      return checkForCallFeedback(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckForCallFeedback implements AuthEvent {
+  const factory _CheckForCallFeedback() = _$CheckForCallFeedbackImpl;
+}
+
+/// @nodoc
+abstract class _$$RemoveLastCallDetailsImplCopyWith<$Res> {
+  factory _$$RemoveLastCallDetailsImplCopyWith(
+          _$RemoveLastCallDetailsImpl value,
+          $Res Function(_$RemoveLastCallDetailsImpl) then) =
+      __$$RemoveLastCallDetailsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RemoveLastCallDetailsImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$RemoveLastCallDetailsImpl>
+    implements _$$RemoveLastCallDetailsImplCopyWith<$Res> {
+  __$$RemoveLastCallDetailsImplCopyWithImpl(_$RemoveLastCallDetailsImpl _value,
+      $Res Function(_$RemoveLastCallDetailsImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
+  const _$RemoveLastCallDetailsImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.removeLastCallDetails()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RemoveLastCallDetailsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
+  }) {
+    return removeLastCallDetails();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
+  }) {
+    return removeLastCallDetails?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (removeLastCallDetails != null) {
+      return removeLastCallDetails();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+  }) {
+    return removeLastCallDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+  }) {
+    return removeLastCallDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (removeLastCallDetails != null) {
+      return removeLastCallDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RemoveLastCallDetails implements AuthEvent {
+  const factory _RemoveLastCallDetails() = _$RemoveLastCallDetailsImpl;
+}
+
+/// @nodoc
+abstract class _$$GetAppConfigImplCopyWith<$Res> {
+  factory _$$GetAppConfigImplCopyWith(
+          _$GetAppConfigImpl value, $Res Function(_$GetAppConfigImpl) then) =
+      __$$GetAppConfigImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetAppConfigImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$GetAppConfigImpl>
+    implements _$$GetAppConfigImplCopyWith<$Res> {
+  __$$GetAppConfigImplCopyWithImpl(
+      _$GetAppConfigImpl _value, $Res Function(_$GetAppConfigImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetAppConfigImpl implements _GetAppConfig {
+  const _$GetAppConfigImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.getAppConfig()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetAppConfigImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function() getAppConfig,
+  }) {
+    return getAppConfig();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function()? getAppConfig,
+  }) {
+    return getAppConfig?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function()? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (getAppConfig != null) {
+      return getAppConfig();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+  }) {
+    return getAppConfig(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+  }) {
+    return getAppConfig?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    required TResult orElse(),
+  }) {
+    if (getAppConfig != null) {
+      return getAppConfig(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetAppConfig implements AuthEvent {
+  const factory _GetAppConfig() = _$GetAppConfigImpl;
+}
+
+/// @nodoc
 mixin _$AuthState {
   AuthStatus get authStatus => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
   Agent? get agent => throw _privateConstructorUsedError;
+  Set<String>? get veryImportantActivities =>
+      throw _privateConstructorUsedError;
+  String? get lastCalledNumber => throw _privateConstructorUsedError;
+  AppConfig? get appConfig => throw _privateConstructorUsedError;
+  bool get showFeedbackScreen => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -598,10 +1844,18 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({AuthStatus authStatus, User? user, Agent? agent});
+  $Res call(
+      {AuthStatus authStatus,
+      User? user,
+      Agent? agent,
+      Set<String>? veryImportantActivities,
+      String? lastCalledNumber,
+      AppConfig? appConfig,
+      bool showFeedbackScreen});
 
   $UserCopyWith<$Res>? get user;
   $AgentCopyWith<$Res>? get agent;
+  $AppConfigCopyWith<$Res>? get appConfig;
 }
 
 /// @nodoc
@@ -620,6 +1874,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? authStatus = null,
     Object? user = freezed,
     Object? agent = freezed,
+    Object? veryImportantActivities = freezed,
+    Object? lastCalledNumber = freezed,
+    Object? appConfig = freezed,
+    Object? showFeedbackScreen = null,
   }) {
     return _then(_value.copyWith(
       authStatus: null == authStatus
@@ -634,6 +1892,22 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.agent
           : agent // ignore: cast_nullable_to_non_nullable
               as Agent?,
+      veryImportantActivities: freezed == veryImportantActivities
+          ? _value.veryImportantActivities
+          : veryImportantActivities // ignore: cast_nullable_to_non_nullable
+              as Set<String>?,
+      lastCalledNumber: freezed == lastCalledNumber
+          ? _value.lastCalledNumber
+          : lastCalledNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      appConfig: freezed == appConfig
+          ? _value.appConfig
+          : appConfig // ignore: cast_nullable_to_non_nullable
+              as AppConfig?,
+      showFeedbackScreen: null == showFeedbackScreen
+          ? _value.showFeedbackScreen
+          : showFeedbackScreen // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -660,6 +1934,18 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
       return _then(_value.copyWith(agent: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AppConfigCopyWith<$Res>? get appConfig {
+    if (_value.appConfig == null) {
+      return null;
+    }
+
+    return $AppConfigCopyWith<$Res>(_value.appConfig!, (value) {
+      return _then(_value.copyWith(appConfig: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -670,12 +1956,21 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AuthStatus authStatus, User? user, Agent? agent});
+  $Res call(
+      {AuthStatus authStatus,
+      User? user,
+      Agent? agent,
+      Set<String>? veryImportantActivities,
+      String? lastCalledNumber,
+      AppConfig? appConfig,
+      bool showFeedbackScreen});
 
   @override
   $UserCopyWith<$Res>? get user;
   @override
   $AgentCopyWith<$Res>? get agent;
+  @override
+  $AppConfigCopyWith<$Res>? get appConfig;
 }
 
 /// @nodoc
@@ -692,6 +1987,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? authStatus = null,
     Object? user = freezed,
     Object? agent = freezed,
+    Object? veryImportantActivities = freezed,
+    Object? lastCalledNumber = freezed,
+    Object? appConfig = freezed,
+    Object? showFeedbackScreen = null,
   }) {
     return _then(_$AuthStateImpl(
       authStatus: null == authStatus
@@ -706,6 +2005,22 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.agent
           : agent // ignore: cast_nullable_to_non_nullable
               as Agent?,
+      veryImportantActivities: freezed == veryImportantActivities
+          ? _value._veryImportantActivities
+          : veryImportantActivities // ignore: cast_nullable_to_non_nullable
+              as Set<String>?,
+      lastCalledNumber: freezed == lastCalledNumber
+          ? _value.lastCalledNumber
+          : lastCalledNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      appConfig: freezed == appConfig
+          ? _value.appConfig
+          : appConfig // ignore: cast_nullable_to_non_nullable
+              as AppConfig?,
+      showFeedbackScreen: null == showFeedbackScreen
+          ? _value.showFeedbackScreen
+          : showFeedbackScreen // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -714,7 +2029,14 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 
 class _$AuthStateImpl implements _AuthState {
   const _$AuthStateImpl(
-      {this.authStatus = AuthStatus.initial, this.user, this.agent});
+      {this.authStatus = AuthStatus.initial,
+      this.user,
+      this.agent,
+      final Set<String>? veryImportantActivities,
+      this.lastCalledNumber,
+      this.appConfig,
+      this.showFeedbackScreen = false})
+      : _veryImportantActivities = veryImportantActivities;
 
   @override
   @JsonKey()
@@ -723,10 +2045,28 @@ class _$AuthStateImpl implements _AuthState {
   final User? user;
   @override
   final Agent? agent;
+  final Set<String>? _veryImportantActivities;
+  @override
+  Set<String>? get veryImportantActivities {
+    final value = _veryImportantActivities;
+    if (value == null) return null;
+    if (_veryImportantActivities is EqualUnmodifiableSetView)
+      return _veryImportantActivities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(value);
+  }
+
+  @override
+  final String? lastCalledNumber;
+  @override
+  final AppConfig? appConfig;
+  @override
+  @JsonKey()
+  final bool showFeedbackScreen;
 
   @override
   String toString() {
-    return 'AuthState(authStatus: $authStatus, user: $user, agent: $agent)';
+    return 'AuthState(authStatus: $authStatus, user: $user, agent: $agent, veryImportantActivities: $veryImportantActivities, lastCalledNumber: $lastCalledNumber, appConfig: $appConfig, showFeedbackScreen: $showFeedbackScreen)';
   }
 
   @override
@@ -737,11 +2077,27 @@ class _$AuthStateImpl implements _AuthState {
             (identical(other.authStatus, authStatus) ||
                 other.authStatus == authStatus) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.agent, agent) || other.agent == agent));
+            (identical(other.agent, agent) || other.agent == agent) &&
+            const DeepCollectionEquality().equals(
+                other._veryImportantActivities, _veryImportantActivities) &&
+            (identical(other.lastCalledNumber, lastCalledNumber) ||
+                other.lastCalledNumber == lastCalledNumber) &&
+            (identical(other.appConfig, appConfig) ||
+                other.appConfig == appConfig) &&
+            (identical(other.showFeedbackScreen, showFeedbackScreen) ||
+                other.showFeedbackScreen == showFeedbackScreen));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, authStatus, user, agent);
+  int get hashCode => Object.hash(
+      runtimeType,
+      authStatus,
+      user,
+      agent,
+      const DeepCollectionEquality().hash(_veryImportantActivities),
+      lastCalledNumber,
+      appConfig,
+      showFeedbackScreen);
 
   @JsonKey(ignore: true)
   @override
@@ -754,7 +2110,11 @@ abstract class _AuthState implements AuthState {
   const factory _AuthState(
       {final AuthStatus authStatus,
       final User? user,
-      final Agent? agent}) = _$AuthStateImpl;
+      final Agent? agent,
+      final Set<String>? veryImportantActivities,
+      final String? lastCalledNumber,
+      final AppConfig? appConfig,
+      final bool showFeedbackScreen}) = _$AuthStateImpl;
 
   @override
   AuthStatus get authStatus;
@@ -762,6 +2122,14 @@ abstract class _AuthState implements AuthState {
   User? get user;
   @override
   Agent? get agent;
+  @override
+  Set<String>? get veryImportantActivities;
+  @override
+  String? get lastCalledNumber;
+  @override
+  AppConfig? get appConfig;
+  @override
+  bool get showFeedbackScreen;
   @override
   @JsonKey(ignore: true)
   _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>

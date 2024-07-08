@@ -1,18 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
-import 'package:real_estate_app/model/amenity_model.dart';
-import 'package:real_estate_app/model/property_type_model.dart';
+import 'package:real_estate_app/constants/listing_status_color.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
-import 'package:real_estate_app/util/constant_widget.dart';
-import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
@@ -371,15 +365,51 @@ class _ListingsTabState extends State<ListingsTab> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              child: Container(
-                                                clipBehavior: Clip.hardEdge,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12)),
-                                                child: S3Image(
-                                                  url: image,
-                                                ),
+                                              child: Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  Container(
+                                                    height: double.maxFinite,
+                                                    clipBehavior: Clip.hardEdge,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12)),
+                                                    child: S3Image(
+                                                      url: image,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    left: 8,
+                                                    top: 8,
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 4,
+                                                              vertical: 1),
+                                                      decoration: BoxDecoration(
+                                                          color: listingStatusContainerColor(
+                                                              (listing.statusArray?.isNotEmpty ==
+                                                                          true
+                                                                      ? listing
+                                                                          .statusArray
+                                                                          ?.first
+                                                                      : '') ??
+                                                                  ''),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                          border: Border.fromBorderSide(BorderSide(
+                                                              color: listingStatusBorderColor(
+                                                                  (listing.statusArray?.isNotEmpty == true ? listing.statusArray?.first : '') ?? '')))),
+                                                      child: SmallText(
+                                                          text:
+                                                              listing.status ??
+                                                                  ''),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
                                             ),
                                             VerticalSmallGap(
@@ -483,25 +513,7 @@ class _ListingsTabState extends State<ListingsTab> {
                                                       .primaryContainer
                                                       .withOpacity(.5)),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
                                                 children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SmallText(text: 'Agent'),
-                                                      LabelText(
-                                                          text: listing
-                                                                  .agent
-                                                                  ?.user
-                                                                  .firstName ??
-                                                              ''),
-                                                    ],
-                                                  ),
-                                                  HorizontalSmallGap(),
                                                   Container(
                                                     height: 40,
                                                     width: 40,
@@ -512,8 +524,55 @@ class _ListingsTabState extends State<ListingsTab> {
                                                       url: listing.agent?.user
                                                               .photo ??
                                                           '',
+                                                      errorWidget: Image.asset(
+                                                          'assets/images/person_placeholder.jpeg'),
                                                     ),
                                                   ),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SmallText(
+                                                            text: 'Agent'),
+                                                        LabelText(
+                                                            text: listing
+                                                                    .agent
+                                                                    ?.user
+                                                                    .firstName ??
+                                                                ''),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  IconButton.filledTonal(
+                                                      style: IconButton.styleFrom(
+                                                          backgroundColor:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                          foregroundColor:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .onPrimary),
+                                                      onPressed: () async {
+                                                        final number = listing
+                                                            .agent
+                                                            ?.user
+                                                            .userPBXNumbers
+                                                            ?.publicNumber;
+                                                        if (number != null) {
+                                                          getIt<CallBloc>().add(
+                                                              CallEvent
+                                                                  .clickToCall(
+                                                            phoneNumber: number,
+                                                          ));
+                                                        }
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.call,
+                                                      ))
                                                 ],
                                               ),
                                             )
@@ -883,7 +942,16 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                                           .onPrimary),
                                               onPressed: () async {
                                                 final number =
-                                                    '${propertyCard.currentAgent!["userId"]["phone"]}';
+                                                    propertyCard.currentAgent?[
+                                                                "user"]
+                                                            ["userPBXNumbers"]
+                                                        ["publicNumber"];
+                                                if (number != null) {
+                                                  getIt<CallBloc>().add(
+                                                      CallEvent.clickToCall(
+                                                    phoneNumber: number,
+                                                  ));
+                                                }
                                               },
                                               icon: Icon(
                                                 Icons.call,

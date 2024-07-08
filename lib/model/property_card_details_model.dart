@@ -1,8 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:real_estate_app/model/building_model.dart';
-import 'package:real_estate_app/model/lead_model.dart';
-import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/model/user.dart';
 
 import 'community_model.dart';

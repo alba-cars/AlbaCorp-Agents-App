@@ -8,7 +8,6 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:logger/logger.dart';
 
 import 'fields/autocomplete_field.dart';
 
@@ -96,7 +95,6 @@ enum OptionsViewOpenDirection {
   down,
 }
 
-// TODO(justinmc): Mention AutocompleteCupertino when it is implemented.
 /// {@template flutter.widgets.AppRawAutocomplete.AppRawAutocomplete}
 /// A widget for helping the user make a selection by entering some text and
 /// choosing from among a list of options.

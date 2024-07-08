@@ -8,6 +8,7 @@ import 'dart:ui' as ui;
 import 'package:go_router/go_router.dart';
 
 class Constant {
+
   static String assetImagePath = "assets/images/";
   static const String fontsFamily = "SF UI Text";
   static const double defScreenWidth = 414;

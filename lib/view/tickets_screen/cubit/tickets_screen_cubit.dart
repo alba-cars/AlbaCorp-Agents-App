@@ -3,13 +3,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/data/repository/ticket_repo.dart';
 import 'package:real_estate_app/util/status.dart';
-import 'package:path/path.dart';
 
 import '../../../model/department_model.dart';
 import '../../../model/paginator.dart';
 import '../../../model/ticket_model.dart';
 import '../../../util/result.dart';
-import '../../../widgets/fields/attachment_field.dart';
 
 part 'tickets_screen_state.dart';
 part 'tickets_screen_cubit.freezed.dart';
@@ -78,7 +76,7 @@ class TicketsScreenCubit extends Cubit<TicketsScreenState> {
             departments: s.value, getDepartmentsStatus: AppStatus.success));
         return s.value;
 
-      case (Error e):
+      case (Error _):
         emit(state.copyWith(
           getDepartmentsStatus: AppStatus.failure,
         ));

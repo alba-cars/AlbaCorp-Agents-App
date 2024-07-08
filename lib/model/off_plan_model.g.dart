@@ -15,14 +15,14 @@ _$OffPlanModelImpl _$$OffPlanModelImplFromJson(Map<String, dynamic> json) =>
       community:
           OffPlanCommunity.fromJson(json['community'] as Map<String, dynamic>),
       slug: json['slug'] as String,
-      downpayment: json['downpayment'] as int,
+      downpayment: (json['downpayment'] as num).toInt(),
       completionDate: DateTime.parse(json['completionDate'] as String),
       developmentDescription: json['developmentDescription'] as String,
       developmentLogo: json['developmentLogo'] as String,
       propertyTypes: (json['propertyTypes'] as List<dynamic>)
           .map((e) => PropertyType.fromJson(e as Map<String, dynamic>))
           .toList(),
-      startingPrice: json['startingPrice'] as int,
+      startingPrice: (json['startingPrice'] as num).toInt(),
       amenities: (json['amenities'] as List<dynamic>)
           .map((e) => OffPlanAmenity.fromJson(e as Map<String, dynamic>))
           .toList(),

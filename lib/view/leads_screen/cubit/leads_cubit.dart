@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/hot_leads.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/linkus_repo.dart';
@@ -85,14 +84,14 @@ class LeadsCubit extends Cubit<LeadsState> {
         emit(state.copyWith(
             leadsFilter: null,
             quickFilter: QuickFilter(
-                value: {'lead_status': 'Fresh', 'lead_source': hotLeads},
+                value: {'lead_status': 'Fresh', 'lead_source_type': 'hot'},
                 filter: filter!)));
         break;
       case 'Client with deals':
         emit(state.copyWith(
             leadsFilter: null,
             quickFilter:
-                QuickFilter(value: {'lead_status': 'Deal'}, filter: filter!)));
+                QuickFilter(value: {'with_deals': "true"}, filter: filter!)));
         break;
       case 'Recent':
         emit(state.copyWith(

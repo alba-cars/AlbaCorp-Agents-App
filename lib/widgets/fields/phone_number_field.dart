@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:logger/logger.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 import 'field_color.dart';
 
@@ -53,15 +54,15 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
 
   parseNumber(String number) async {
     try {
-      // final num = await parse(number);
-      // Logger().d(num);
-      // if (num.containsKey('country_code')) {
-      //   code = "+${num['country_code']}";
-      //   value = (num['national_number'] as String);
-      //   controller.text = value!;
-      //   _initialCountrySelection = num['region_code'];
-      //   if (mounted) setState(() {});
-      // }
+      final num = await PhoneNumber.parse(number, callerCountry: IsoCode.AE);
+      Logger().d(num);
+      if (num.isValid()) {
+        code = num.countryCode;
+        value = num.nsn;
+        controller.text = value!;
+        _initialCountrySelection = num.isoCode.name;
+        if (mounted) setState(() {});
+      }
     } catch (e) {
       Logger().e(e);
     }
@@ -80,9 +81,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
             return 'Please enter phone number';
           }
 
-          if (code == null) {
-            return 'Please select country';
-          } else if (value == null) {
+          if (value == null) {
             return 'Please enter phone number';
           } else if (int.tryParse(value ?? '') == null &&
               (value!.length != 9 || value!.length != 10)) {
