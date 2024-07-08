@@ -18,11 +18,12 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends State<App> with WidgetsBindingObserver {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     firebaseMessaging.requestPermission();
     checkPreference();
     super.initState();
@@ -46,6 +47,14 @@ class _AppState extends State<App> {
         false,
       PermissionStatus.provisional || PermissionStatus.granted => true,
     };
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   // initiatePhoneStateStream() async {

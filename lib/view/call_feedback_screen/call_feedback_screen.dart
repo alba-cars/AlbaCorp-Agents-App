@@ -127,7 +127,13 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                             await getIt<AuthBloc>().stream.firstWhere(
                                 (state) => !state.showFeedbackScreen);
                             context.goNamed("${HomePage.routeName}");
-                            context.pushNamed("${AddLeadScreen.routeName}");
+                            context.pushNamed("${AddLeadScreen.routeName}",
+                                queryParameters: {
+                                  'data': {
+                                    'phone':
+                                        getIt<AuthBloc>().state.lastCalledNumber
+                                  }
+                                });
                           })
                     ],
                   ),

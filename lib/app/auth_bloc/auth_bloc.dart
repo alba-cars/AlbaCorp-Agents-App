@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -155,6 +156,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> close() {
     _fcmBackgroundStream?.cancel();
     _fcmForegroundStream?.cancel();
+
     return super.close();
   }
 
@@ -174,23 +176,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _checkForCallFeedback(
       _CheckForCallFeedback event, Emitter<AuthState> emit) async {
-    await getIt<SharedPreferences>().reload();
-    final number = getIt<SharedPreferences>().getString("calledNumber");
-    //TODO : add call direction
-    if (number != null) {
-      await _pendingCallFeedbackRepo.add(
-          model: PendingCallFeedback(
-              id: 0, number: number, callDirection: CallDirection.incoming));
-      emit(state.copyWith(
-          lastCalledNumber: number,
-          showFeedbackScreen: number == state.lastCalledNumber
-              ? state.showFeedbackScreen
-              : true));
+    if (state.authStatus == AuthStatus.initial) {
+      await stream
+          .firstWhere((state) => state.authStatus != AuthStatus.initial);
+    }
+    if (state.authStatus == AuthStatus.Authenticated) {
+      await getIt<SharedPreferences>().reload();
+      final number = getIt<SharedPreferences>().getString("calledNumber");
+      //TODO : add call direction
+      if (number != null) {
+        await _pendingCallFeedbackRepo.add(
+            model: PendingCallFeedback(
+                id: 0, number: number, callDirection: CallDirection.incoming));
+        emit(state.copyWith(
+            lastCalledNumber: number,
+            showFeedbackScreen: number == state.lastCalledNumber
+                ? state.showFeedbackScreen
+                : true));
+      }
     }
   }
 
   FutureOr<void> _removeLastCallDetails(
       _RemoveLastCallDetails event, Emitter<AuthState> emit) {
+    getIt<SharedPreferences>().remove('calledNumber');
+
     emit(state.copyWith(showFeedbackScreen: false));
   }
 }

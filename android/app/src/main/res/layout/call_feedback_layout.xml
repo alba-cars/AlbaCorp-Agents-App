@@ -60,7 +60,7 @@
             android:textColor="#666666"
             android:textSize="14sp" />
 
-        <!-- Feedback Input -->
+        <!-- Feedback Input
         <EditText
             android:id="@+id/feedback_input"
             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
             android:padding="12dp"
             android:inputType="textMultiLine"
             android:minHeight="48dp"
-            android:gravity="top" />
+            android:gravity="top" /> -->
 
         <!-- Buttons -->
         <LinearLayout

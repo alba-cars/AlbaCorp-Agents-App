@@ -37,7 +37,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController = AnimationController(
       vsync: this,
       duration: Duration(
@@ -54,14 +54,6 @@ class _HomeScreenState extends State<HomeScreen>
   void dispose() {
     _animationController.dispose();
     super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
-    }
-    super.didChangeAppLifecycleState(state);
   }
 
   @override

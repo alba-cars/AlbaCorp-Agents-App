@@ -22,6 +22,12 @@ import android.widget.TextView
 import android.widget.EditText
 import android.content.ComponentName
 import android.content.Intent
+import io.flutter.embedding.engine.loader.FlutterLoader
+import android.os.Handler
+import io.flutter.plugin.common.MethodChannel
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.embedding.engine.dart.DartExecutor
+import com.alba.agent.MyApplication
 
 
 class MyCallScreeningService : CallScreeningService() {
@@ -37,7 +43,6 @@ class MyCallScreeningService : CallScreeningService() {
         var response = CallResponse.Builder()
         val preferences: SharedPreferences = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE)
         val telephonyManager :TelephonyManager? =  applicationContext.getSystemService<TelephonyManager>()
-        Log.i("flutter", "onScreenCall: $phoneNumber")
         wm = applicationContext.getSystemService(WINDOW_SERVICE) as WindowManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val listener: TelephonyCallback = MyListener(
@@ -127,25 +132,37 @@ private class MyListener(
                     val buttonFeedback = hiddenInfo?.findViewById<Button>(R.id.button_feedback)
 
                     val textWidget = hiddenInfo?.findViewById<TextView>(R.id.message)
-                    val feedbackInputWidget = hiddenInfo?.findViewById<EditText>(R.id.feedback_input)
                    val text = textWidget?.text
                     textWidget?.text = text?.toString()?.replace("{number}",number)
                     buttonFeedback?.setOnClickListener {
                         sharedPreferences.edit().putString("flutter.calledNumber",number.replace("tel:","")).apply()
                         sharedPreferences.edit().remove("flutter.call").apply()
-                        val feedbackText = feedbackInputWidget?.text.toString()
-                        sharedPreferences.edit().putString("flutter.calledNumberFeedback",feedbackText).apply()
+                        if(!MyApplication.isActivityVisible()){
+                             Log.i("flutter", "onScreenCall background")
+                           
+                            Intent().also { intents ->
+                                intents.component = ComponentName(
+                                    "com.alba.agent",
+                                    "com.alba.agent.MainActivity"
+                                )
+                                intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                applicationContext.startActivity(intents)
+                            }
+                        } else {
+                        //   Log.i("flutter", "onScreenCall foreground")
+                        //   val flutterEngine = FlutterEngine(applicationContext)
+                        //   flutterEngine.dartExecutor.executeDartEntrypoint(
+                        //       DartExecutor.DartEntrypoint.createDefault()
+                        //   )
+                        //   val binaryMessenger = flutterEngine.dartExecutor.binaryMessenger
+                        //   val channel = MethodChannel(binaryMessenger,"callEnded");
+                        //   Handler(applicationContext.mainLooper).post {
+                        //       Log.d("flutter", "Invoking callEnded method with number: $number")
+                        //       channel.invokeMethod("callEnded", number) 
+                        //   }
+                        }
                         wm?.removeView(ly1);
                         telephonyManager?.unregisterTelephonyCallback(this)
-                        Intent().also { intents ->
-                            intents.component = ComponentName(
-                                "com.alba.agent",
-                                "com.alba.agent.MainActivity"
-                            )
-                            intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            applicationContext.startActivity(intents)
-                        }
-
                     }
                     buttonIgnore?.setOnClickListener {
                         wm?.removeView(ly1);
