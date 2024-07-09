@@ -401,6 +401,23 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                   },
                                   text: ('Complete')),
                             ],
+                            if (value == "Do not Call") ...[
+                              AppPrimaryButton(
+                                  onTap: () async {
+                                    if (_formKey.currentState
+                                            ?.saveAndValidate() !=
+                                        true) {
+                                      return;
+                                    }
+                                    await widget.parentContext
+                                        .read<TaskDetailCubit>()
+                                        .doNotCall(
+                                          context: context,
+                                          description: _controller.text,
+                                        );
+                                  },
+                                  text: ('Mark as DND')),
+                            ],
                             if (value == "Not Answered" ||
                                 value == "Invalid Number" ||
                                 value == "Disqualify") ...[

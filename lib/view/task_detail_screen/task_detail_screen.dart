@@ -1,4 +1,3 @@
-
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +84,7 @@ class _TaskDetailScreenLayout extends StatefulWidget {
       _TaskDetailScreenLayoutState();
 }
 
-enum CardAction { ManuelSwipe, Heart, Charge, Star, Skip }
+enum CardAction { ManuelSwipe, Heart, Charge, Star, Skip, Negative }
 
 class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
   late final AppinioSwiperController _appinioSwiperController =
@@ -128,7 +127,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 if (targetIndex == tasks.length - 1) {
                   context.read<TaskDetailCubit>().getSortedActivities();
                 }
-                if (previousIndex >= targetIndex) {
+                if (previousIndex >= targetIndex &&
+                    mode != CardAction.Negative) {
                   return;
                 }
                 if (mode == CardAction.Skip) {
@@ -421,6 +421,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                     Expanded(
                                       child: IconButton.outlined(
                                           onPressed: () async {
+                                            mode = CardAction.Negative;
                                             _appinioSwiperController
                                                 .swipeLeft();
                                           },
