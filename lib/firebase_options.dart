@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,10 +50,39 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDre7ULnGWrhPvx5D3AL4L7J1K1MN69JnU',
-    appId: '1:496432202958:ios:b1f4313be7ec57cd02fc9f',
+    appId: '1:496432202958:ios:73f99163e691c05302fc9f',
     messagingSenderId: '496432202958',
     projectId: 'agent-app-2cc24',
     storageBucket: 'agent-app-2cc24.appspot.com',
-    iosBundleId: 'com.alba.agent',
+    iosBundleId: 'com.alba.agent-app',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCD-pF6M09Wi7GjG3RBS8fn8y-zb8DZRGk',
+    appId: '1:496432202958:web:70dbc94333f7608002fc9f',
+    messagingSenderId: '496432202958',
+    projectId: 'agent-app-2cc24',
+    authDomain: 'agent-app-2cc24.firebaseapp.com',
+    storageBucket: 'agent-app-2cc24.appspot.com',
+    measurementId: 'G-604XPCBHVZ',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDre7ULnGWrhPvx5D3AL4L7J1K1MN69JnU',
+    appId: '1:496432202958:ios:f42423229449b0f602fc9f',
+    messagingSenderId: '496432202958',
+    projectId: 'agent-app-2cc24',
+    storageBucket: 'agent-app-2cc24.appspot.com',
+    iosBundleId: 'com.alba.agent-app',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCD-pF6M09Wi7GjG3RBS8fn8y-zb8DZRGk',
+    appId: '1:496432202958:web:6918c7462b1e4a1102fc9f',
+    messagingSenderId: '496432202958',
+    projectId: 'agent-app-2cc24',
+    authDomain: 'agent-app-2cc24.firebaseapp.com',
+    storageBucket: 'agent-app-2cc24.appspot.com',
+    measurementId: 'G-4RQKLKWNEL',
   );
 }

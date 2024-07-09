@@ -1,7 +1,6 @@
-import UIKit
+
 import CallKit
 import UserNotifications
-import AppDelegate
 
 
 
@@ -16,22 +15,11 @@ class CallObserver: NSObject, CXCallObserverDelegate {
     func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
         if call.hasEnded {
             print("Call ended")
-            DispatchQueue.main.async {
-                self.showCallEndedPopup()
-            }
+            sendLocalNotification()
+            
         }
     }
 
-    func showCallEndedPopup() {
-        guard let rootVC = UIApplication.shared.windows.first?.rootViewController else {
-            return
-        }
-
-        let alert = UIAlertController(title: "Call Ended", message: "Your call has ended.", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        rootVC.present(alert, animated: true, completion: nil)
-    }
 
     func sendLocalNotification() {
         let content = UNMutableNotificationContent()
@@ -43,19 +31,3 @@ class CallObserver: NSObject, CXCallObserverDelegate {
     }
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
-    }
-
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        DispatchQueue.main.async {
-            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                let alert = UIAlertController(title: "Call Ended", message: "Your call has ended.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                rootVC.present(alert, animated: true, completion: nil)
-            }
-        }
-        completionHandler()
-    }
-}
