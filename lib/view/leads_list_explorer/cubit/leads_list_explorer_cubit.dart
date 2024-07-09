@@ -24,7 +24,9 @@ part 'leads_list_explorer_cubit.freezed.dart';
 @injectable
 class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   LeadsListExplorerCubit(this._explorerRepo, this._listingsRepo)
-      : super(LeadsListExplorerState());
+      : super(LeadsListExplorerState()) {
+    getPropertyTypes();
+  }
 
   final ExplorerRepo _explorerRepo;
   final ListingsRepo _listingsRepo;
