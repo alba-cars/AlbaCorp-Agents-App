@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.alba.agent</string>
+	<string>com.alba.agent-app</string>
 	<key>PROJECT_ID</key>
 	<string>agent-app-2cc24</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:496432202958:ios:161b0f46b0c3424d02fc9f</string>
+	<string>1:496432202958:ios:73f99163e691c05302fc9f</string>
 </dict>
 </plist>
