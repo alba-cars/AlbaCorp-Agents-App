@@ -110,6 +110,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
               .toList();
           emit(state.copyWith(task: activity, sortedActivity: activities));
         }
+        getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
       case (Error e):
         emit(state.copyWith(
             updateTaskError: e.exception, updateTaskStatus: AppStatus.failure));
