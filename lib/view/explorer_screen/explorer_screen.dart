@@ -799,13 +799,113 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
             },
           ),
         ),
+        BlocConsumer<ExplorerScreenCubit, ExplorerScreenState>(
+          listenWhen: (previous, current) =>
+              previous.checkOutLeadStatus != current.checkOutLeadStatus &&
+              current.checkOutLeadStatus == AppStatus.success,
+          listener: (context, state) {
+            showGeneralDialog(
+                barrierDismissible: true,
+                barrierLabel: "success",
+                context: context,
+                pageBuilder: (dContext, anim1, anim2) {
+                  return BlocProvider.value(
+                    value: context.read<ExplorerScreenCubit>(),
+                    child: Builder(builder: (context) {
+                      return Dialog(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.check_circle_rounded,
+                                  color: Colors.green,
+                                  size: 100,
+                                ),
+                                VerticalSmallGap(),
+                                Text(
+                                  'You have successfully returned Leads to yourself.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                VerticalSmallGap(),
+                                Text(
+                                  'Please hold on for a bit before making another return or try using bulk assignment, thank you.',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(dContext)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(fontWeight: FontWeight.w500),
+                                ),
+                                VerticalSmallGap(
+                                  adjustment: 1.5,
+                                ),
+                                AppPrimaryButton(
+                                    text: 'Show Available',
+                                    onTap: () {
+                                      context
+                                          .read<ExplorerScreenCubit>()
+                                          .setSelectedTab(0);
+                                      Navigator.of(dContext).pop();
+                                    })
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  );
+                });
+          },
+          builder: (context, state) {
+            if (!state.selectModeEnabled) {
+              return SizedBox();
+            }
+            return Container(
+              margin: EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey[100],
+              ),
+              child: Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        context
+                            .read<ExplorerScreenCubit>()
+                            .setSelectionModeDisabled();
+                      },
+                      icon: Icon(Icons.close)),
+                  Text(
+                      "${state.selectedPropertyCards.length.toString()} Selected"),
+                  Spacer(),
+                  state.checkOutLeadStatus == AppStatus.loading
+                      ? SizedBox.square(
+                          dimension: 24, child: CircularProgressIndicator())
+                      : TextButton(
+                          onPressed: () {
+                            context
+                                .read<ExplorerScreenCubit>()
+                                .returnLeadInBulk(context: context);
+                          },
+                          child: Text('Return Leads'))
+                ],
+              ),
+            );
+          },
+        ),
         Expanded(
           child: BlocBuilder<ExplorerScreenCubit, ExplorerScreenState>(
             buildWhen: (previous, current) =>
                 previous.getCheckedOutExplorerListStatus !=
                     current.getCheckedOutExplorerListStatus ||
                 previous.checkedOutExplorerList !=
-                    current.checkedOutExplorerList,
+                    current.checkedOutExplorerList ||
+                current.selectedPropertyCards.length !=
+                    previous.selectedPropertyCards.length,
             builder: (context, state) {
               if (state.getCheckedOutExplorerListStatus == AppStatus.loading) {
                 return Center(
@@ -859,17 +959,51 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
                                 color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: shadowColor,
-                                      offset: Offset(-4, 5),
-                                      blurRadius: 11)
-                                ]),
+                                border: state.selectModeEnabled &&
+                                        state.selectedPropertyCards
+                                            .contains(propertyCard.id)
+                                    ? Border.all(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        width: 2)
+                                    : null,
+                                boxShadow: state.selectModeEnabled &&
+                                        state.selectedPropertyCards
+                                            .contains(propertyCard.id)
+                                    ? [
+                                        BoxShadow(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(.5),
+                                            offset: Offset(-4, 5),
+                                            blurRadius: 19)
+                                      ]
+                                    : [
+                                        BoxShadow(
+                                            color: shadowColor,
+                                            offset: Offset(-4, 5),
+                                            blurRadius: 11)
+                                      ]),
                             child: InkWell(
                               onTap: () {
-                                context.pushNamed(
-                                    PropertyCardDetailsScreen.routeName,
-                                    pathParameters: {'id': propertyCard.id});
+                                if (state.selectModeEnabled) {
+                                  context
+                                      .read<ExplorerScreenCubit>()
+                                      .addToSelectionReturn(
+                                          context, propertyCard);
+                                } else {
+                                  context.pushNamed(
+                                      PropertyCardDetailsScreen.routeName,
+                                      pathParameters: {'id': propertyCard.id});
+                                }
+                              },
+                              onLongPress: () {
+                                context
+                                    .read<ExplorerScreenCubit>()
+                                    .setSelectionModeEnabledForReturn(
+                                        context, propertyCard);
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

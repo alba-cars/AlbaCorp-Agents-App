@@ -146,6 +146,12 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     }
   }
 
+  void setSelectionModeEnabledForReturn(
+      BuildContext context, PropertyCard card) {
+    emit(state
+        .copyWith(selectModeEnabled: true, selectedPropertyCards: [card.id]));
+  }
+
   void setSelectionModeDisabled() {
     emit(state.copyWith(selectModeEnabled: false, selectedPropertyCards: []));
   }
@@ -168,6 +174,17 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
             SnackBarType.info);
       }
     }
+  }
+
+  void addToSelectionReturn(BuildContext context, PropertyCard card) {
+    if (state.selectedPropertyCards.contains(card.id)) {
+      final list = List<String>.from(state.selectedPropertyCards)
+        ..remove(card.id);
+      emit(state.copyWith(selectedPropertyCards: list));
+      return;
+    }
+    emit(state.copyWith(
+        selectedPropertyCards: [...state.selectedPropertyCards, card.id]));
   }
 
   Future<void> checkInLead(
@@ -259,6 +276,37 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     }
   }
 
+  Future<void> returnLeadInBulk({
+    required BuildContext context,
+  }) async {
+    emit(state.copyWith(checkInLeadStatus: AppStatus.loading));
+    final result = await _explorerRepo.checkInLead(
+        propertyCardIds: state.selectedPropertyCards);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            checkInLeadStatus: AppStatus.success,
+            selectModeEnabled: false,
+            selectedPropertyCards: []));
+        getCheckedOutExplorerList(refresh: true);
+        if (context.mounted) {
+          showSnackbar(
+              context, 'Leads Returned Successfully', SnackBarType.success);
+        }
+        getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+        getIt<ListStateCubit>().setChangedTaskListState();
+        getIt<ListStateCubit>().setChangedLeadsListState();
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            checkInLeadStatus: AppStatus.failure,
+            checkInLeadError: e.exception));
+        if (context.mounted) {
+          showSnackbar(context, e.exception, SnackBarType.failure);
+        }
+    }
+  }
+
   Future<void> randomCheckout(
       {required BuildContext context,
       required Map<String, dynamic> values}) async {
@@ -289,7 +337,10 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }
 
   Future<void> setSelectedTab(int index) async {
-    emit(state.copyWith(currentTab: index));
+    emit(state.copyWith(
+        currentTab: index,
+        selectModeEnabled: false,
+        selectedPropertyCards: []));
     if (index == 0) {
       getExplorerList();
     } else {

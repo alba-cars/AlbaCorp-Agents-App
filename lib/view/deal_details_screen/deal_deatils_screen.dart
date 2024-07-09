@@ -51,7 +51,11 @@ class _DealDetailsScreenLayoutState extends State<_DealDetailsScreenLayout>
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
                 SliverAppBar(
-                  title: Text('Deal Details'),
+                  title: Text(
+                    'Deal Details',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
                   centerTitle: true,
                   backgroundColor: Colors.white,
                   foregroundColor: Theme.of(context).colorScheme.primary,

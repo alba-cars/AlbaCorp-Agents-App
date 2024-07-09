@@ -380,7 +380,6 @@ mixin _$LeadPropertyCardModelNotPopulated {
   bool get wasOwner => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   double? get amount => throw _privateConstructorUsedError;
-  String get createdBy => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -405,7 +404,6 @@ abstract class $LeadPropertyCardModelNotPopulatedCopyWith<$Res> {
       bool wasOwner,
       DateTime? date,
       double? amount,
-      String createdBy,
       DateTime? createdAt,
       DateTime? updatedAt});
 
@@ -432,7 +430,6 @@ class _$LeadPropertyCardModelNotPopulatedCopyWithImpl<$Res,
     Object? wasOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
-    Object? createdBy = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -461,10 +458,6 @@ class _$LeadPropertyCardModelNotPopulatedCopyWithImpl<$Res,
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -501,7 +494,6 @@ abstract class _$$LeadPropertyCardModelNotPopulatedImplCopyWith<$Res>
       bool wasOwner,
       DateTime? date,
       double? amount,
-      String createdBy,
       DateTime? createdAt,
       DateTime? updatedAt});
 
@@ -528,7 +520,6 @@ class __$$LeadPropertyCardModelNotPopulatedImplCopyWithImpl<$Res>
     Object? wasOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
-    Object? createdBy = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -557,10 +548,6 @@ class __$$LeadPropertyCardModelNotPopulatedImplCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -584,7 +571,6 @@ class _$LeadPropertyCardModelNotPopulatedImpl
       this.wasOwner = false,
       this.date,
       this.amount,
-      required this.createdBy,
       this.createdAt,
       this.updatedAt});
 
@@ -607,15 +593,13 @@ class _$LeadPropertyCardModelNotPopulatedImpl
   @override
   final double? amount;
   @override
-  final String createdBy;
-  @override
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'LeadPropertyCardModelNotPopulated(id: $id, lead: $lead, propertyCard: $propertyCard, wasOwner: $wasOwner, date: $date, amount: $amount, createdBy: $createdBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'LeadPropertyCardModelNotPopulated(id: $id, lead: $lead, propertyCard: $propertyCard, wasOwner: $wasOwner, date: $date, amount: $amount, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -631,8 +615,6 @@ class _$LeadPropertyCardModelNotPopulatedImpl
                 other.wasOwner == wasOwner) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -642,7 +624,7 @@ class _$LeadPropertyCardModelNotPopulatedImpl
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, lead, propertyCard, wasOwner,
-      date, amount, createdBy, createdAt, updatedAt);
+      date, amount, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -669,7 +651,6 @@ abstract class _LeadPropertyCardModelNotPopulated
       final bool wasOwner,
       final DateTime? date,
       final double? amount,
-      required final String createdBy,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$LeadPropertyCardModelNotPopulatedImpl;
 
@@ -690,8 +671,6 @@ abstract class _LeadPropertyCardModelNotPopulated
   DateTime? get date;
   @override
   double? get amount;
-  @override
-  String get createdBy;
   @override
   DateTime? get createdAt;
   @override

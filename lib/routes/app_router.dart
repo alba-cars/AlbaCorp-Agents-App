@@ -234,7 +234,7 @@ class AppRouter {
                 },
               ),
               GoRoute(
-                path: PropertyCardDetailsScreen.routeName,
+                path: "/${PropertyCardDetailsScreen.routeName}/:id",
                 name: PropertyCardDetailsScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';

@@ -27,7 +27,7 @@ import '../../widgets/text.dart';
 import '../deal_details_screen/widgets/info_label_value.dart';
 
 class PropertyCardDetailsScreen extends StatelessWidget {
-  static const routeName = '/propertyCardDetailsScreen/:id';
+  static const routeName = 'propertyCardDetailsScreen';
   const PropertyCardDetailsScreen({super.key, required this.propertyCardId});
 
   final String propertyCardId;

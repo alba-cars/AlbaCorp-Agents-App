@@ -14,7 +14,9 @@ class CallObserver: NSObject, CXCallObserverDelegate {
 
     func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
         if call.hasEnded {
-            print("Call ended")
+            let preferences = UserDefaults.standard;
+            preferences.set( "IPHONE",forKey:"calledNumber");
+            preferences.synchronize();
             sendLocalNotification()
             
         }
