@@ -74,11 +74,15 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       required bool addFollowUp,
       bool refresh = false,
       bool completed = true,
-      Map<String, dynamic>? values}) async {
+      Map<String, dynamic>? values,
+      Function? onSuccess}) async {
     final result = await _activityRepo.updateActivity(
         activityId: state.task!.id, notes: description, completed: completed);
     switch (result) {
       case (Success s):
+        if (onSuccess != null) {
+          await onSuccess();
+        }
         getIt<AuthBloc>().add(
             AuthEvent.completedImportantActivity(activityId: state.task!.id));
         emit(state.copyWith(updateTaskStatus: AppStatus.success));
@@ -154,20 +158,29 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (state.task?.lead?.id == null) {
       return;
     }
-    final result =
-        await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
-      'lead_status': 'Disqualified',
-      'activity': {'notes': description}
-    });
-    switch (result) {
-      case (Success s):
-        await updateActivity(
-            context: context, description: description, addFollowUp: false);
-      case (Error e):
-        if (context.mounted) {
-          showSnackbar(context, e.exception, SnackBarType.failure);
-        }
-    }
+    await updateActivity(
+        context: context,
+        description: description,
+        addFollowUp: false,
+        onSuccess: () async {
+          final result =
+              await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+            'lead_status': 'Disqualified',
+            'activity': {'notes': description}
+          });
+          switch (result) {
+            case (Success s):
+              {
+                break;
+              }
+            case (Error e):
+              {
+                if (context.mounted) {
+                  showSnackbar(context, e.exception, SnackBarType.failure);
+                }
+              }
+          }
+        });
   }
 
   Future<void> makeLost({
@@ -177,20 +190,25 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (state.task?.lead?.id == null) {
       return;
     }
-    final result =
-        await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
-      'lead_status': 'Lost',
-      'activity': {'notes': description}
-    });
-    switch (result) {
-      case (Success s):
-        await updateActivity(
-            context: context, description: description, addFollowUp: false);
-      case (Error e):
-        if (context.mounted) {
-          showSnackbar(context, e.exception, SnackBarType.failure);
-        }
-    }
+    await updateActivity(
+        context: context,
+        description: description,
+        addFollowUp: false,
+        onSuccess: () async {
+          final result =
+              await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+            'lead_status': 'Lost',
+            'activity': {'notes': description}
+          });
+          switch (result) {
+            case (Success s):
+              break;
+            case (Error e):
+              if (context.mounted) {
+                showSnackbar(context, e.exception, SnackBarType.failure);
+              }
+          }
+        });
   }
 
   Future<void> makeProspect(
