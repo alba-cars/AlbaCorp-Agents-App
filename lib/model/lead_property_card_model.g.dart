@@ -53,7 +53,6 @@ _$LeadPropertyCardModelNotPopulatedImpl
               ? null
               : DateTime.parse(json['date'] as String),
           amount: (json['amount'] as num?)?.toDouble(),
-          createdBy: json['createdBy'] as String,
           createdAt: json['createdAt'] == null
               ? null
               : DateTime.parse(json['createdAt'] as String),
@@ -71,7 +70,6 @@ Map<String, dynamic> _$$LeadPropertyCardModelNotPopulatedImplToJson(
       'wasOwner': instance.wasOwner,
       'date': instance.date?.toIso8601String(),
       'amount': instance.amount,
-      'createdBy': instance.createdBy,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };

@@ -7,5 +7,6 @@ class CallFeedbackState with _$CallFeedbackState {
     Lead? lead,
     String? feedback,
     @Default(AppStatus.init) AppStatus addActivityStatus,
+    @Default(false) bool requestNumber,
   }) = _CallFeedbackState;
 }

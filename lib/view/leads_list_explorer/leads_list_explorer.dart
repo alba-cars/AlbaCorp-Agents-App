@@ -342,7 +342,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
             //     previous.getExplorerListStatus !=
             //         current.getExplorerListStatus ||
             //     previous.explorerList != current.explorerList,
-            builder: (context, state) {
+            builder: (bcontext, state) {
               if (state.getExplorerListStatus == AppStatus.loading) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -381,7 +381,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                         physics: NeverScrollableScrollPhysics(),
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        itemBuilder: (context, index) {
+                        itemBuilder: (ccontext, index) {
                           if (index == state.explorerList.length) {
                             return SizedBox(
                               height: 50,
@@ -504,7 +504,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                       height: 150,
                                       child: ListView.separated(
                                           scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
+                                          itemBuilder: (lcontext, index) {
                                             final card = leadCard
                                                 .mappings[index].propertyCard;
                                             final primaryColor =
@@ -528,10 +528,9 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                               child: InkWell(
                                                 onTap: () {
                                                   context.pushNamed(
-                                                      PropertyCardDetailsScreen
-                                                          .routeName,
+                                                      "${PropertyCardDetailsScreen.routeName}",
                                                       pathParameters: {
-                                                        'id': card.id
+                                                        'id': "dddd"
                                                       });
                                                 },
                                                 child: Column(
@@ -705,232 +704,3 @@ class _ExplorerTabState extends State<ExplorerTab> {
     );
   }
 }
-
-// class CheckedOutPoolTab extends StatefulWidget {
-//   const CheckedOutPoolTab({
-//     super.key,
-//   });
-
-//   @override
-//   State<CheckedOutPoolTab> createState() => _CheckedOutPoolTabState();
-// }
-
-// class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
-//   List<Widget> filterFields(BuildContext context) {
-//     return [
-//       MultiSelectAutoCompleteField(
-//           label: 'Community',
-//           optionsBuilder: (v) async {
-//             final list = await context
-//                 .read<LeadsListExplorerCubit>()
-//                 .getCommunities(search: v.text);
-//             return list.map((e) => {'value': e.id, 'label': e.community});
-//           },
-//           displayStringForOption: (option) => option['label'] ?? '',
-//           name: 'community'),
-//       MultiSelectAutoCompleteField(
-//           label: 'Building',
-//           optionsBuilder: (v) async {
-//             final list = await context
-//                 .read<LeadsListExplorerCubit>()
-//                 .getBuildings(search: v.text);
-//             return list.map((e) => {'value': e.id, 'label': e.name});
-//           },
-//           displayStringForOption: (option) => option['label'] ?? '',
-//           name: 'buildings'),
-//       WrapSelectField(
-//           name: 'beds',
-//           label: 'Beds',
-//           values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
-//           isRequired: true),
-//       WrapSelectField(
-//           name: 'baths',
-//           label: 'Baths',
-//           values: ['1', '2', '3', '4', '5', '6', '7+'],
-//           isRequired: true),
-//       // WrapSelectField(
-//       //     name: 'propertyType',
-//       //     label: 'Property Type',
-//       //     values:
-//       //         context.select<LeadsListExplorerCubit, List<Map<String, dynamic>>>(
-//       //             (cubit) => cubit.state.propertyTypeList
-//       //                 .map((e) => {'value': e.id, 'label': e.propertyType})
-//       //                 .toList()),
-//       //     displayOption: (option) => option['label'] ?? '',
-//       //     isRequired: true),
-//     ];
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     context
-//         .read<LeadsListExplorerCubit>()
-//         .getCheckedOutExplorerList(refresh: true);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-//           child: AppSearchBar(
-//             onChanged: (val) {
-//               context.read<LeadsListExplorerCubit>().searchCheckedOut(val);
-//             },
-//             filterFields: filterFields(context),
-//             filter: context.select(
-//                 (LeadsListExplorerCubit value) => value.state.checkedOutFilter),
-//             onFilterApplied: (filter) {
-//               context
-//                   .read<LeadsListExplorerCubit>()
-//                   .setCheckedOutFilter(filter);
-//             },
-//           ),
-//         ),
-//         Expanded(
-//           child: BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
-//             buildWhen: (previous, current) =>
-//                 previous.getCheckedOutExplorerListStatus !=
-//                     current.getCheckedOutExplorerListStatus ||
-//                 previous.checkedOutExplorerList !=
-//                     current.checkedOutExplorerList,
-//             builder: (context, state) {
-//               if (state.getCheckedOutExplorerListStatus == AppStatus.loading) {
-//                 return Center(
-//                   child: CircularProgressIndicator(),
-//                 );
-//               } else if (state.getCheckedOutExplorerListStatus ==
-//                       AppStatus.success &&
-//                   state.checkedOutExplorerList.length == 0) {
-//                 return Center(
-//                   child: Text('No Property Card Found'),
-//                 );
-//               }
-//               return NotificationListener<ScrollNotification>(
-//                   onNotification: (scrollInfo) {
-//                     if (state.getCheckedOutExplorerListStatus !=
-//                             AppStatus.loadingMore &&
-//                         state.checkedOutPaginator?.hasNextPage == true &&
-//                         scrollInfo.metrics.pixels >=
-//                             0.9 * scrollInfo.metrics.maxScrollExtent) {
-//                       EasyDebounce.debounce(
-//                           'explorer-checked-out-list', Durations.long2, () {
-//                         context
-//                             .read<LeadsListExplorerCubit>()
-//                             .getCheckedOutExplorerList();
-//                       });
-//                     }
-
-//                     return true;
-//                   },
-//                   child: RefreshIndicator.adaptive(
-//                     onRefresh: () async {
-//                       await context
-//                           .read<LeadsListExplorerCubit>()
-//                           .getCheckedOutExplorerList(refresh: true);
-//                     },
-//                     child: ListView.separated(
-//                         padding:
-//                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-//                         itemBuilder: (context, index) {
-//                           if (index == state.checkedOutExplorerList.length) {
-//                             return SizedBox(
-//                               height: 50,
-//                               child: Center(child: CircularProgressIndicator()),
-//                             );
-//                           }
-//                           final leadCard = state.checkedOutExplorerList[index];
-//                           return Container(
-//                             padding: EdgeInsets.symmetric(
-//                                 horizontal: 8, vertical: 8),
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(6),
-//                                 color: Colors.white,
-//                                 boxShadow: [
-//                                   BoxShadow(
-//                                       color: shadowColor,
-//                                       offset: Offset(-4, 5),
-//                                       blurRadius: 11)
-//                                 ]),
-//                             child: InkWell(
-//                               onTap: () {
-//                                 context.pushNamed(
-//                                     PropertyCardDetailsScreen.routeName,
-//                                     pathParameters: {'id': leadCard.id});
-//                               },
-//                               child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 children: [
-//                                   Row(
-//                                     mainAxisAlignment:
-//                                         MainAxisAlignment.spaceBetween,
-//                                     children: [
-//                                       LabelText(
-//                                         text: leadCard.referenceNumber ?? '',
-//                                         color: Theme.of(context)
-//                                             .colorScheme
-//                                             .primary,
-//                                       ),
-//                                       Container(
-//                                         padding: EdgeInsets.symmetric(
-//                                             horizontal: 4.h, vertical: 1.h),
-//                                         decoration: BoxDecoration(
-//                                             border: Border.all(
-//                                                 color: Colors.blueGrey),
-//                                             borderRadius:
-//                                                 BorderRadius.circular(4),
-//                                             color: Colors.blueGrey[100]),
-//                                         child: SmallText(
-//                                             text: leadCard.status?.titleCase ??
-//                                                 ''),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                   InfoLabelValue(
-//                                     labelOne: 'Property Type',
-//                                     valueOne: leadCard.propertyType,
-//                                     labelTwo: 'Community Name',
-//                                     valueTwo: leadCard.community?.community,
-//                                   ),
-//                                   InfoLabelValue(
-//                                     labelOne: 'Building Name',
-//                                     valueOne: leadCard.building?.name ?? 'N/A',
-//                                     labelTwo: 'Beds',
-//                                     valueTwo: leadCard.beds?.toString(),
-//                                   ),
-//                                   Row(
-//                                     mainAxisAlignment: MainAxisAlignment.end,
-//                                     children: [
-//                                       AppPrimaryButton(
-//                                           text: 'Return Lead',
-//                                           onTap: () async {
-//                                             await context
-//                                                 .read<LeadsListExplorerCubit>()
-//                                                 .checkInLead(
-//                                                     context: context,
-//                                                     card: leadCard);
-//                                           })
-//                                     ],
-//                                   )
-//                                 ],
-//                               ),
-//                             ),
-//                           );
-//                         },
-//                         separatorBuilder: (context, index) => SizedBox(
-//                               height: 8,
-//                             ),
-//                         itemCount: state.getCheckedOutExplorerListStatus ==
-//                                 AppStatus.loadingMore
-//                             ? state.checkedOutExplorerList.length + 1
-//                             : state.checkedOutExplorerList.length),
-//                   ));
-//             },
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }

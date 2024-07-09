@@ -26,12 +26,13 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
   final PendingCallFeedbackRepo _pendingCallFeedbackRepo;
   final ActivityRepo _activityRepo;
 
-  Future<void> checkUerExist() async {
-    emit(state.copyWith(checkLeadStatus: AppStatus.loading));
-    final number = getIt<AuthBloc>().state.lastCalledNumber;
+  Future<void> checkUerExist({String? numberEntered}) async {
+    emit(state.copyWith(
+        checkLeadStatus: AppStatus.loading, requestNumber: false));
+    final number = numberEntered ?? getIt<AuthBloc>().state.lastCalledNumber;
 
-    if (number != null) {
-      final result = await _leadRepo.getLeadByPhone(phone: number);
+    if (number != null || number != 'IPHONE') {
+      final result = await _leadRepo.getLeadByPhone(phone: number!);
       switch (result) {
         case (Success<Lead?> s):
           emit(state.copyWith(
@@ -39,6 +40,8 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
         case (Error _):
           emit(state.copyWith(checkLeadStatus: AppStatus.failure));
       }
+    } else {
+      emit(state.copyWith(requestNumber: true));
     }
   }
 

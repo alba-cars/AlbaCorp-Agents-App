@@ -13,6 +13,8 @@ import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cu
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
+import 'package:real_estate_app/widgets/fields/phone_number_field.dart';
+import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
@@ -43,6 +45,8 @@ class _CallFeedbackScreenBody extends StatefulWidget {
 
 class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
   late GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
+  late GlobalKey<FormBuilderState> _formNumberKey =
+      GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -72,6 +76,48 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
             return previous.checkLeadStatus != current.checkLeadStatus;
           },
           builder: (context, state) {
+            if (state.requestNumber) {
+              return FormBuilder(
+                key: _formNumberKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        LottieBuilder.asset(
+                          'assets/lottie/no_lead_found.json',
+                          width: 300,
+                          height: 300,
+                        ),
+                        VerticalSmallGap(),
+                        TitleText(
+                          text: "Please enter the number",
+                          textAlign: TextAlign.center,
+                        ),
+                        VerticalSmallGap(),
+                        PhoneNumberField(name: 'number'),
+                        VerticalSmallGap(),
+                        AppPrimaryButton(
+                            text: 'Check lead',
+                            onTap: () async {
+                              final isValidated = _formNumberKey.currentState
+                                  ?.saveAndValidate();
+                              if (isValidated == true) {
+                                final number = _formNumberKey
+                                        .currentState?.value['number'] ??
+                                    '';
+                                context
+                                    .read<CallFeedbackCubit>()
+                                    .checkUerExist(numberEntered: number);
+                              }
+                            })
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
             if (state.checkLeadStatus == AppStatus.loading) {
               return Center(
                 child: LottieBuilder.asset('assets/lottie/loading.json'),

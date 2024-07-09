@@ -18,7 +18,7 @@ class PropertyType with _$PropertyType {
 }
 
 readId(Map<dynamic, dynamic> json, String val) {
-  return json[val] ?? json['_id'];
+  return json[val] ?? json['_id'] ?? '';
 }
 
 @freezed

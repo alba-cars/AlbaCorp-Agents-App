@@ -96,10 +96,10 @@ class ExplorerData implements ExplorerRepo {
       }
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
-        if (paginator != null) 'page': paginator.currentPage + 1,
+        'page': paginator?.currentPage ?? 0 + 1,
         if (filterRemoved != null) ...filterRemoved,
         if (search != null) 'search': search,
-        if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
+        // if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
       });
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => LeadExplorerItem.fromJson(e)).toList();

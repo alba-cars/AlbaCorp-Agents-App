@@ -35,7 +35,6 @@ class LeadPropertyCardModelNotPopulated
     @Default(false) bool wasOwner,
     DateTime? date,
     double? amount,
-    required String createdBy,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _LeadPropertyCardModelNotPopulated;
