@@ -181,8 +181,8 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
       {required BuildContext context, required LeadExplorerItem lead}) async {
     emit(state.copyWith(checkOutLeadStatus: AppStatus.loading));
     final result = await _explorerRepo.checkOutLead(
-        leadIds: [lead.id],
-        propertyCardIds: lead.mappings.map((e) => e.id).toList());
+      leadIds: [lead.id],
+    );
     switch (result) {
       case (Success s):
         final newList = List<LeadExplorerItem>.from(state.explorerList);
@@ -212,11 +212,8 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   }) async {
     emit(state.copyWith(checkOutLeadStatus: AppStatus.loading));
     final result = await _explorerRepo.checkOutLead(
-        leadIds: state.selectedPropertyCards.map((e) => e.id).toList(),
-        propertyCardIds: state.selectedPropertyCards
-            .expand((e) => e.mappings)
-            .map((e) => e.id)
-            .toList());
+      leadIds: state.selectedPropertyCards.map((e) => e.id).toList(),
+    );
     switch (result) {
       case (Success s):
         emit(state.copyWith(

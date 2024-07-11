@@ -159,28 +159,69 @@ class _HomeScreenState extends State<HomeScreen>
                               Scaffold.of(context).closeDrawer();
                               context.pushNamed(LeadsExplorerScreen.routeName);
                             },
+                          ),
+                          ListIcon(
+                            title: 'Assigned Property Cards',
+                            onPressed: () {
+                              Scaffold.of(context).closeDrawer();
+                              context.pushNamed(ExplorerScreen.routeName,
+                                  queryParameters: {'tab': '1'});
+                            },
                           )
                         ],
                       ),
                       CustomListTileWithIcon(
-                        title: 'Tickets',
-                        iconImagePath: 'assets/images/ticket.png',
+                        title: 'Lead',
+                        iconImagePath: 'assets/images/plus.png',
                         onPressed: () {
                           Scaffold.of(context).closeDrawer();
-                          context.pushNamed(TicketsScreen.routeName);
+                          context.pushNamed(AddLeadScreen.routeName);
                         },
                       ),
+                      CustomListTileWithIcon(
+                        title: 'Deal',
+                        iconImagePath: 'assets/images/plus.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          context.pushNamed(AddDealScreen.routeName);
+                        },
+                      ),
+                      CustomListTileWithIcon(
+                        title: 'Listing Acquired',
+                        iconImagePath: 'assets/images/plus.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          context.pushNamed(AddListingScreen.routeName);
+                        },
+                      ),
+                      CustomListTileWithIcon(
+                        title: 'Pocket Listing',
+                        iconImagePath: 'assets/images/plus.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          context.pushNamed(AddPocketListingScreen.routeName);
+                        },
+                      ),
+
+                      // CustomListTileWithIcon(
+                      //   title: 'Tickets',
+                      //   iconImagePath: 'assets/images/ticket.png',
+                      //   onPressed: () {
+                      //     Scaffold.of(context).closeDrawer();
+                      //     context.pushNamed(TicketsScreen.routeName);
+                      //   },
+                      // ),
                       VerticalSmallGap(
                         adjustment: 4,
                       ),
-                      CustomListTileWithIcon(
-                        title: 'Settings',
-                        iconImagePath: 'assets/images/settings.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          // context.pushNamed('settings');
-                        },
-                      ),
+                      // CustomListTileWithIcon(
+                      //   title: 'Settings',
+                      //   iconImagePath: 'assets/images/settings.png',
+                      //   onPressed: () {
+                      //     Scaffold.of(context).closeDrawer();
+                      //     // context.pushNamed('settings');
+                      //   },
+                      // ),
                       CustomListTileWithIcon(
                         title: 'Logout',
                         iconImagePath: 'assets/images/logout_icon.png',

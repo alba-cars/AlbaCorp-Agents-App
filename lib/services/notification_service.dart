@@ -1,95 +1,86 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-Future<void> showNotificationWithOnGoing(RemoteMessage message) async {
-  const AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails('my_app_channel', 'my_app_channel',
-          importance: Importance.max,
-          priority: Priority.high,
-          visibility: NotificationVisibility.public,
-          audioAttributesUsage: AudioAttributesUsage.alarm,
-          fullScreenIntent: true,
-          category: AndroidNotificationCategory.call,
-          ongoing: true,
-          autoCancel: false);
-  const NotificationDetails platformChannelSpecifics =
-      NotificationDetails(android: androidPlatformChannelSpecifics);
-
-  // Show the notification with action
-
-  await flutterLocalNotificationsPlugin.show(
-    message.data['values'], // Notification ID
-    message.notification?.title ?? '',
-    message.notification?.body ?? '',
-    platformChannelSpecifics,
-    payload: json.encode(message.data), // Example phone number
-  );
-}
-
-@pragma('vm:entry-point')
-void onDidReceiveBackgroundNotificationResponse(
-    NotificationResponse response) {}
-
-@pragma('vm:entry-point')
-void onDidReceiveNotificationResponse(NotificationResponse response) async {}
-
-@pragma('vm:entry-point')
-Future<void> onFirebaseBackgroundMessage(RemoteMessage message) async {}
-
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NotificationService {
   static Future<void> initializeNotification() async {
-    try {
-      const AndroidInitializationSettings initializationSettingsAndroid =
-          AndroidInitializationSettings('@mipmap/ic_launcher');
+    await AwesomeNotifications().initialize(
+        null,
+        [
+          NotificationChannel(
+            channelKey: 'call_channel',
+            channelName: 'Call Notifications',
+            channelDescription: 'Notification channel for calls',
+            defaultColor: Colors.blue,
+            ledColor: Colors.white,
+            importance: NotificationImportance.Max,
+            channelShowBadge: true,
+            criticalAlerts: true,
+            defaultRingtoneType: DefaultRingtoneType.Ringtone,
+            playSound: true,
+          )
+        ],
+        debug: true);
 
-// iOS initialization
-      final DarwinInitializationSettings initializationSettingsIOS =
-          DarwinInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
-      );
+    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
 
-// Initialization settings for both platforms
-      final InitializationSettings initializationSettings =
-          InitializationSettings(
-        android: initializationSettingsAndroid,
-        iOS: initializationSettingsIOS,
-      );
-
-      await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    } catch (e) {}
+    await AwesomeNotifications().setListeners(
+      onActionReceivedMethod: onActionReceivedMethod,
+    );
   }
 
-  static Future<bool> requestPermissions() async {
-    if (Platform.isIOS || Platform.isMacOS) {
-      final bool? grantedNotificationPermission =
-          await flutterLocalNotificationsPlugin
-              .resolvePlatformSpecificImplementation<
-                  IOSFlutterLocalNotificationsPlugin>()
-              ?.requestPermissions(
-                alert: true,
-                badge: true,
-                sound: true,
-              );
+  static Future<void> showCallNotification(
+      String callerName, String phoneNumber) async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'call_channel',
+        title: 'Incoming Call',
+        body: callerName,
+        category: NotificationCategory.Call,
+        wakeUpScreen: true,
+        fullScreenIntent: true,
+        autoDismissible: false,
+        payload: {'phone_number': phoneNumber},
+      ),
+      actionButtons: [
+        NotificationActionButton(
+          key: 'ACCEPT',
+          label: 'Call',
+          color: Colors.green,
+          autoDismissible: true,
+        ),
+        NotificationActionButton(
+          key: 'DECLINE',
+          label: 'Decline',
+          color: Colors.red,
+          autoDismissible: true,
+        ),
+      ],
+    );
+  }
 
-      return grantedNotificationPermission ?? false;
-    } else if (Platform.isAndroid) {
-      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
-          flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
-
-      final bool? grantedNotificationPermission =
-          await androidImplementation?.requestNotificationsPermission();
-      return grantedNotificationPermission ?? false;
-    } else {
-      return false;
+  @pragma('vm:entry-point')
+  static Future<void> onActionReceivedMethod(
+      ReceivedAction receivedAction) async {
+    if (receivedAction.buttonKeyPressed == 'ACCEPT') {
+      final phoneNumber = receivedAction.payload?['phone_number'];
+      if (phoneNumber != null) {
+        await makePhoneCall(phoneNumber);
+      }
     }
+  }
+
+  static Future<void> makePhoneCall(String phoneNumber) async {
+    //await FlutterPhoneDirectCaller.callNumber('tel://${phoneNumber}');
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
   }
 }

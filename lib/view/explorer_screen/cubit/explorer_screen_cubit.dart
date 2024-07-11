@@ -23,8 +23,9 @@ part 'explorer_screen_cubit.freezed.dart';
 
 @injectable
 class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
-  ExplorerScreenCubit(this._explorerRepo, this._listingsRepo)
-      : super(ExplorerScreenState()) {
+  ExplorerScreenCubit(
+      this._explorerRepo, this._listingsRepo, @factoryParam int? tab)
+      : super(ExplorerScreenState(currentTab: tab ?? 0)) {
     getPropertyTypes();
   }
   final ExplorerRepo _explorerRepo;

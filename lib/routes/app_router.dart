@@ -271,7 +271,12 @@ class AppRouter {
                 path: ExplorerScreen.routeName,
                 name: ExplorerScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: ExplorerScreen());
+                  final tab =
+                      int.tryParse(state.uri.queryParameters['tab'] ?? '');
+                  return AppTransition(
+                      child: ExplorerScreen(
+                    tab: tab,
+                  ));
                 },
               ),
               GoRoute(

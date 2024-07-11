@@ -82,7 +82,7 @@ class LeadData implements LeadRepo {
         "sort_dir": 'DESC',
         'roles': ['User', 'Owner'],
         'active': true,
-        if (search != null) 'search': '523809178', // search,
+        if (search != null) 'search': search,
         if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['findUsersOutput'] as List;

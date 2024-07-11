@@ -5,6 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
@@ -30,13 +31,18 @@ import '../deal_details_screen/widgets/info_label_value.dart';
 
 class ExplorerScreen extends StatelessWidget {
   static const routeName = '/explorerScreen';
-  const ExplorerScreen({super.key});
+  const ExplorerScreen({super.key, this.tab});
+
+  final int? tab;
 
   @override
   Widget build(BuildContext context) {
+    Logger().d(tab);
     return BlocProvider(
-      create: (context) => getIt<ExplorerScreenCubit>(),
-      child: _ExplorerScreenLayout(),
+      create: (context) => getIt<ExplorerScreenCubit>(param1: tab),
+      child: _ExplorerScreenLayout(
+        tab: tab,
+      ),
     );
   }
 }
@@ -68,7 +74,8 @@ class ExplorerScreen extends StatelessWidget {
 // }
 
 class _ExplorerScreenLayout extends StatefulWidget {
-  const _ExplorerScreenLayout();
+  const _ExplorerScreenLayout({this.tab});
+  final int? tab;
 
   @override
   State<_ExplorerScreenLayout> createState() => _ExplorerScreenLayoutState();
@@ -78,6 +85,14 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 2, vsync: this);
+
+  @override
+  void initState() {
+    if (widget.tab != null) {
+      _tabController.animateTo(widget.tab!);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
