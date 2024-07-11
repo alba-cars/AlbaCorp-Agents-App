@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/constants/listing_status_color.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -546,33 +547,41 @@ class _ListingsTabState extends State<ListingsTab> {
                                                       ],
                                                     ),
                                                   ),
-                                                  IconButton.filledTonal(
-                                                      style: IconButton.styleFrom(
-                                                          backgroundColor:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .primary,
-                                                          foregroundColor:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .onPrimary),
-                                                      onPressed: () async {
-                                                        final number = listing
-                                                            .agent
-                                                            ?.user
-                                                            .userPBXNumbers
-                                                            ?.publicNumber;
-                                                        if (number != null) {
-                                                          getIt<CallBloc>().add(
-                                                              CallEvent
-                                                                  .clickToCall(
-                                                            phoneNumber: number,
-                                                          ));
-                                                        }
-                                                      },
-                                                      icon: Icon(
-                                                        Icons.call,
-                                                      ))
+                                                  if (listing.agent?.id !=
+                                                      getIt<AuthBloc>()
+                                                          .state
+                                                          .agent
+                                                          ?.id)
+                                                    IconButton.filledTonal(
+                                                        style: IconButton.styleFrom(
+                                                            backgroundColor:
+                                                                Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .primary,
+                                                            foregroundColor:
+                                                                Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .onPrimary),
+                                                        onPressed: () async {
+                                                          final number = listing
+                                                              .agent
+                                                              ?.user
+                                                              .userPBXNumbers
+                                                              ?.publicNumber;
+                                                          if (number != null) {
+                                                            getIt<CallBloc>()
+                                                                .add(CallEvent
+                                                                    .clickToCall(
+                                                              phoneNumber:
+                                                                  number,
+                                                            ));
+                                                          }
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.call,
+                                                        ))
                                                 ],
                                               ),
                                             )

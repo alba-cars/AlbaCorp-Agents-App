@@ -7,6 +7,7 @@
    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+   <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -61,7 +62,7 @@
              
         </activity>
 
-        <service
+        <!-- <service
     android:name=".services.MyCallScreeningService"
     android:permission="android.permission.BIND_SCREENING_SERVICE"
     android:enabled="true"
@@ -69,7 +70,13 @@
     <intent-filter>
         <action android:name="android.telecom.CallScreeningService" />
     </intent-filter>
-</service>
+</service> -->
+<receiver android:name=".services.PhoneStateReceiver" android:exported="true">
+    <intent-filter>
+        <action android:name="android.intent.action.PHONE_STATE" />
+        <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+    </intent-filter>
+</receiver>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

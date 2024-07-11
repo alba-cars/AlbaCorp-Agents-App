@@ -475,9 +475,17 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                             getIt<AuthBloc>().state.agent?.id ==
                                                 propertyCard?.currentAgent) ||
                                         (propertyCard?.currentAgent is Map &&
-                                            getIt<AuthBloc>().state.agent?.id ==
-                                                propertyCard
-                                                    ?.currentAgent['id'])) {
+                                                getIt<AuthBloc>()
+                                                        .state
+                                                        .agent
+                                                        ?.id ==
+                                                    propertyCard
+                                                        ?.currentAgent['id']) &&
+                                            (e.lead.currentAgent?.id ==
+                                                getIt<AuthBloc>()
+                                                    .state
+                                                    .agent
+                                                    ?.id)) {
                                       context.pushNamed(
                                           LeadDetailScreen.routeName,
                                           pathParameters: {'id': e.lead.id});
@@ -612,13 +620,19 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                                       propertyCard
                                                           ?.currentAgent) ||
                                               (propertyCard?.currentAgent
-                                                      is Map &&
-                                                  getIt<AuthBloc>()
+                                                          is Map &&
+                                                      getIt<AuthBloc>()
+                                                              .state
+                                                              .agent
+                                                              ?.id ==
+                                                          propertyCard
+                                                                  ?.currentAgent[
+                                                              'id']) &&
+                                                  (e.lead.currentAgent?.id ==
+                                                      getIt<AuthBloc>()
                                                           .state
                                                           .agent
-                                                          ?.id ==
-                                                      propertyCard
-                                                          ?.currentAgent['id']))
+                                                          ?.id))
                                             MenuAnchor(
                                                 alignmentOffset:
                                                     Offset(-140, 0),
@@ -686,7 +700,7 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                                     onPressed: () {
                                                       showDialog(
                                                           context: context,
-                                                          builder: (context) {
+                                                          builder: (gcontext) {
                                                             return AlertDialog(
                                                               content: Text(
                                                                   'Are you sure to unlink this property from this lead'),
@@ -697,7 +711,7 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                                                       child: AppPrimaryButton(
                                                                           text: 'Cancel',
                                                                           onTap: () {
-                                                                            Navigator.of(context).pop();
+                                                                            Navigator.of(gcontext).pop();
                                                                           }),
                                                                     ),
                                                                     HorizontalSmallGap(),
@@ -707,7 +721,7 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                                                           backgroundColor: Colors.red[700],
                                                                           onTap: () async {
                                                                             await context.read<PropertyCardDetailsCubit>().unLinkLeadFromPropertyCard(leadCardId: e.id);
-                                                                            Navigator.of(context).pop();
+                                                                            Navigator.of(gcontext).pop();
                                                                           }),
                                                                     )
                                                                   ],
