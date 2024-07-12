@@ -283,96 +283,96 @@ class _ExplorerTabState extends State<ExplorerTab> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green[700],
-                      side: BorderSide.none,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      maximumSize: Size(150, 34),
-                      minimumSize: Size(150, 34),
-                      fixedSize: Size(150, 34),
-                    ),
-                    onPressed: () {
-                      showGeneralDialog(
-                          context: context,
-                          useRootNavigator: false,
-                          barrierDismissible: true,
-                          barrierLabel: 'random-leads-assignment-property-card',
-                          pageBuilder: (dContext, anim1, anim2) {
-                            final GlobalKey<FormBuilderState> key = GlobalKey();
-
-                            return AlertDialog(
-                              title: Text('Random Leads Checkout'),
-                              content: FormBuilder(
-                                key: key,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      AppAutoComplete(
-                                          label: 'Community',
-                                          isRequired: true,
-                                          optionsBuilder: (v) async {
-                                            return await context
-                                                .read<ExplorerScreenCubit>()
-                                                .getCommunities(search: v.text);
-                                          },
-                                          displayStringForOption: (option) =>
-                                              option.community,
-                                          valueTransformer: (p0) => p0?.id,
-                                          name: 'community'),
-                                      DropDownfield(
-                                          label: 'Select number of Leads',
-                                          items: [
-                                            1,
-                                            5,
-                                            10,
-                                            15,
-                                            20,
-                                            25,
-                                            50,
-                                            100
-                                          ],
-                                          name: 'numberOfLeads')
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              actions: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: OutlinedButton(
-                                          child: Text('Cancel'),
-                                          onPressed: () {
-                                            Navigator.of(dContext).pop();
-                                          }),
-                                    ),
-                                    HorizontalSmallGap(),
-                                    Expanded(
-                                      child: AppPrimaryButton(
-                                          text: 'Assign Leads',
-                                          onTap: () async {
-                                            final validated = key.currentState
-                                                ?.saveAndValidate();
-                                            if (validated == true) {
-                                              final values =
-                                                  key.currentState!.value;
-                                              await context
-                                                  .read<ExplorerScreenCubit>()
-                                                  .randomCheckout(
-                                                      context: dContext,
-                                                      values: values);
-                                            }
-                                          }),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            );
-                          });
-                    },
-                    child: Text('Get Bulk Leads'))
+                // ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //       backgroundColor: Colors.green[700],
+                //       side: BorderSide.none,
+                //       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                //       maximumSize: Size(150, 34),
+                //       minimumSize: Size(150, 34),
+                //       fixedSize: Size(150, 34),
+                //     ),
+                //     onPressed: () {
+                //       showGeneralDialog(
+                //           context: context,
+                //           useRootNavigator: false,
+                //           barrierDismissible: true,
+                //           barrierLabel: 'random-leads-assignment-property-card',
+                //           pageBuilder: (dContext, anim1, anim2) {
+                //             final GlobalKey<FormBuilderState> key = GlobalKey();
+                //
+                //             return AlertDialog(
+                //               title: Text('Random Leads Checkout'),
+                //               content: FormBuilder(
+                //                 key: key,
+                //                 child: SingleChildScrollView(
+                //                   child: Column(
+                //                     mainAxisSize: MainAxisSize.min,
+                //                     children: [
+                //                       AppAutoComplete(
+                //                           label: 'Community',
+                //                           isRequired: true,
+                //                           optionsBuilder: (v) async {
+                //                             return await context
+                //                                 .read<ExplorerScreenCubit>()
+                //                                 .getCommunities(search: v.text);
+                //                           },
+                //                           displayStringForOption: (option) =>
+                //                               option.community,
+                //                           valueTransformer: (p0) => p0?.id,
+                //                           name: 'community'),
+                //                       DropDownfield(
+                //                           label: 'Select number of Leads',
+                //                           items: [
+                //                             1,
+                //                             5,
+                //                             10,
+                //                             15,
+                //                             20,
+                //                             25,
+                //                             50,
+                //                             100
+                //                           ],
+                //                           name: 'numberOfLeads')
+                //                     ],
+                //                   ),
+                //                 ),
+                //               ),
+                //               actions: [
+                //                 Row(
+                //                   children: [
+                //                     Expanded(
+                //                       child: OutlinedButton(
+                //                           child: Text('Cancel'),
+                //                           onPressed: () {
+                //                             Navigator.of(dContext).pop();
+                //                           }),
+                //                     ),
+                //                     HorizontalSmallGap(),
+                //                     Expanded(
+                //                       child: AppPrimaryButton(
+                //                           text: 'Assign Leads',
+                //                           onTap: () async {
+                //                             final validated = key.currentState
+                //                                 ?.saveAndValidate();
+                //                             if (validated == true) {
+                //                               final values =
+                //                                   key.currentState!.value;
+                //                               await context
+                //                                   .read<ExplorerScreenCubit>()
+                //                                   .randomCheckout(
+                //                                       context: dContext,
+                //                                       values: values);
+                //                             }
+                //                           }),
+                //                     )
+                //                   ],
+                //                 ),
+                //               ],
+                //             );
+                //           });
+                //     },
+                //     child: Text('Get Bulk Leads'))
               ],
             )),
         BlocConsumer<ExplorerScreenCubit, ExplorerScreenState>(
@@ -407,7 +407,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                 ),
                                 VerticalSmallGap(),
                                 Text(
-                                  'Please hold on for a bit before making another assignement or try using bulk assignment, thank you.',
+                                  'Please hold on for a bit before making another assignment or try using bulk assignment, thank you.',
                                   textAlign: TextAlign.center,
                                   style: Theme.of(dContext)
                                       .textTheme
@@ -436,7 +436,17 @@ class _ExplorerTabState extends State<ExplorerTab> {
           },
           builder: (context, state) {
             if (!state.selectModeEnabled) {
-              return SizedBox();
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(6),color: Colors.blueGrey.withOpacity(.4)),
+                  height: 56,
+
+                  child:  ListTile(
+                      leading: Icon(Icons.info_outline),
+                      title: Text("Press and hold on any leads card for enabling multi select",style: TextStyle(fontSize: 12))),
+                ),
+              );
             }
             return Container(
               margin: EdgeInsets.symmetric(vertical: 8),

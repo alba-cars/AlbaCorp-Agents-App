@@ -28,7 +28,7 @@ class FirebaseMessagingService {
         message.data['callerName'] ?? 'Unknown',
         message.data['phoneNumber'] ?? '',
       );
-    } else if (message.data['type'] == 'ImportantActivity') {
+    } else{
       NotificationService.showImportantNotification(
         message.notification?.title ?? 'Unknown',
         message.notification?.body ?? '',
@@ -47,10 +47,11 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       message.data['callerName'] ?? 'Unknown',
       message.data['phoneNumber'] ?? '',
     );
-  } else if (message.data['type'] == 'ImportantActivity') {
+  } else {
     await NotificationService.showImportantNotification(
       message.notification?.title ?? 'Unknown',
       message.notification?.body ?? '',
     );
   }
+
 }

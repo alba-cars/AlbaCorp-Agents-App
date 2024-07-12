@@ -22,12 +22,14 @@ class AppSearchBar extends StatefulWidget {
       this.filterFields,
       this.onFilterApplied,
       this.onResetFilter,
+        this.searchText,
       this.filter});
   final void Function(String? val) onChanged;
   final List<Widget>? filterFields;
   final void Function(Map<String, dynamic>? filter)? onFilterApplied;
   final VoidCallback? onResetFilter;
   final Map<String, dynamic>? filter;
+  final String? searchText;
 
   @override
   State<AppSearchBar> createState() => _AppSearchBarState();
@@ -88,7 +90,8 @@ class _AppSearchBarState extends State<AppSearchBar> {
                           .colorScheme
                           .primaryContainer
                           .withOpacity(0.2),
-                      hintText: 'Search...',
+                      hintText: widget.searchText ?? 'Search...',
+                      hintStyle: TextStyle(fontSize: 11),
                       prefixIcon: Padding(
                           padding: EdgeInsets.only(left: 8.w, right: 8.w),
                           child: Icon(Icons.search)),

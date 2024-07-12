@@ -116,7 +116,7 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: ['Deals', 'Your Listings'],
+                tabs: ['Deals', 'Listings Acquired'],
                 onTap: (index) {
                   context.read<DealsCubit>().setSelectedTab(index);
                 },
