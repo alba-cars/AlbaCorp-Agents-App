@@ -26,6 +26,7 @@ class _TabLoginState extends State<TabLogin> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final loginForm = GlobalKey<FormState>();
+  bool isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +124,11 @@ class _TabLoginState extends State<TabLogin> {
             return 'Please enter valid password';
           }
           return null;
-        }, suffix: true, suffixImage: "eye.svg"),
+        }, suffix: true, isPass: !isPasswordVisible, suffixImage: !isPasswordVisible?"eye.svg":"eyes-closed.svg",onSuffixTap: (){
+          setState(() {
+            isPasswordVisible = !isPasswordVisible;
+          });
+            }),
       ],
     );
   }

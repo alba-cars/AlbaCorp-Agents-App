@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -201,14 +202,27 @@ class _ListingsTabState extends State<ListingsTab> {
                   .toList()),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
-      MultiDropDownField(
+      MultiSelectAutoCompleteField(
         label: 'Amenities',
-        items: context.select<ListingsCubit, List<Map<String, dynamic>>>(
-            (cubit) => cubit.state.amenityList
-                .map((e) => {'value': e.id, 'label': e.amenity})
-                .toList()),
         name: "amenities",
-        displayOption: (option) => option['label']?.toString() ?? '',
+        displayStringForOption: (option) => option['label']?.toString() ?? '',
+        optionsBuilder: (v) async {
+          var list = context
+              .read<ListingsCubit>()
+              .state
+              .amenityList
+              .map((e) => {'value': e.id, 'label': e.amenity})
+              .toList();
+          if (v.text.trim().isNotEmpty) {
+            list = list
+                .where((e) => e["label"]
+                    .toString()
+                    .toLowerCase()
+                    .contains(v.text.toString()))
+                .toList();
+          }
+          return list;
+        },
       ),
     ];
   }
@@ -266,6 +280,7 @@ class _ListingsTabState extends State<ListingsTab> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: AppSearchBar(
+              searchText: "Search by reference id",
               onChanged: (val) {
                 context.read<ListingsCubit>().searchListings(val);
               },
@@ -434,6 +449,23 @@ class _ListingsTabState extends State<ListingsTab> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
+                                            RichText(
+                                                text: TextSpan(children: [
+                                              TextSpan(
+                                                  text: "Ref. no:  ",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall
+                                                      ?.copyWith(fontSize: 8)),
+                                              TextSpan(
+                                                  text: listing.referNo,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodySmall
+                                                      ?.copyWith(
+                                                          color: primary,
+                                                          fontSize: 10))
+                                            ])),
                                             LabelText(
                                               text: listing.propertyTitle,
                                               maxLines: 2,

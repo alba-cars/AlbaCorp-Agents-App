@@ -200,6 +200,7 @@ class _DealsTabState extends State<DealsTab> {
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: AppSearchBar(
+                searchText: "Search by Deal ID",
                 onChanged: (val) {
                   context.read<DealsCubit>().searchDeals(val);
                 },
@@ -356,6 +357,7 @@ class _ListingsTabState extends State<ListingsTab> {
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: AppSearchBar(
+                searchText: "Search by Deal ID",
                 onChanged: (val) {
                   context.read<DealsCubit>().searchYourListings(val);
                 },

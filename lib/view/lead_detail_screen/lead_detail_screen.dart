@@ -13,22 +13,24 @@ import 'widgets/activities_tab_view.dart';
 
 class LeadDetailScreen extends StatelessWidget {
   static const routeName = '/lead-details';
-  const LeadDetailScreen({super.key, required this.leadId});
+  const LeadDetailScreen(
+      {super.key, required this.leadId, this.activeTabIndex});
 
   final String leadId;
+  final int? activeTabIndex;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<LeadDetailCubit>(param1: leadId),
-      child: LeadDetailScreenLayout(),
+      child: LeadDetailScreenLayout(activeTabIndex: activeTabIndex),
     );
   }
 }
 
 class LeadDetailScreenLayout extends StatefulWidget {
-  const LeadDetailScreenLayout({super.key});
-
+  const LeadDetailScreenLayout({super.key, this.activeTabIndex});
+  final int? activeTabIndex;
   @override
   State<LeadDetailScreenLayout> createState() => _LeadDetailScreenLayoutState();
 }
@@ -41,6 +43,9 @@ class _LeadDetailScreenLayoutState extends State<LeadDetailScreenLayout>
   @override
   void initState() {
     context.read<LeadDetailCubit>().getLeadDetails();
+    if (widget.activeTabIndex != null) {
+      _tabController.animateTo(widget.activeTabIndex!);
+    }
     super.initState();
   }
 

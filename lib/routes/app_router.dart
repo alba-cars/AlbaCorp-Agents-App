@@ -138,13 +138,15 @@ class AppRouter {
                     ),
                   ]),
               GoRoute(
-                path: '${HomePage.routeName}/:id',
+                path: '${HomePage.routeName}/:id/:index',
                 name: LeadDetailScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
+                  final index = state.pathParameters['index'] ?? '';
                   return AppTransition(
                     child: LeadDetailScreen(
                       leadId: id,
+                      activeTabIndex: int.tryParse(index) ?? 0,
                     ),
                   );
                 },
