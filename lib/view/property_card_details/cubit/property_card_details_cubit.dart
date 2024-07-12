@@ -185,6 +185,7 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
     switch (result) {
       case (Success s):
         emit(state.copyWith(updatePropertyCardStatus: AppStatus.success));
+        getPropertyCardLeads();
         break;
       case (Error e):
         emit(state.copyWith(

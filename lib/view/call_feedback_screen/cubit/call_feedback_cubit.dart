@@ -36,9 +36,12 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
       switch (result) {
         case (Success<Lead?> s):
           emit(state.copyWith(
-              lead: s.value, checkLeadStatus: AppStatus.success));
+              lead: s.value,
+              checkLeadStatus: AppStatus.success,
+              number: number));
         case (Error _):
-          emit(state.copyWith(checkLeadStatus: AppStatus.failure));
+          emit(state.copyWith(
+              checkLeadStatus: AppStatus.failure, number: number));
       }
     } else {
       emit(state.copyWith(requestNumber: true));

@@ -44,6 +44,7 @@ class MyCallScreeningService : CallScreeningService() {
         val preferences: SharedPreferences = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE)
         val telephonyManager :TelephonyManager? =  applicationContext.getSystemService<TelephonyManager>()
         wm = applicationContext.getSystemService(WINDOW_SERVICE) as WindowManager
+        Log.i("flutter",phoneNumber)   ;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val listener: TelephonyCallback = MyListener(
                 applicationContext,

@@ -201,7 +201,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
             checkedOutExplorerList: newList));
         if (context.mounted) {
           showSnackbar(
-              context, 'Lead Checked In Successfully', SnackBarType.success);
+              context, 'Lead returned Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
         getIt<ListStateCubit>().setChangedTaskListState();
@@ -230,7 +230,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
             checkOutLeadStatus: AppStatus.success, explorerList: newList));
         if (context.mounted) {
           showSnackbar(
-              context, 'Lead Checked In Successfully', SnackBarType.success);
+              context, 'Lead assignrd Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
         getIt<ListStateCubit>().setChangedTaskListState();
@@ -261,7 +261,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
         getExplorerList(refresh: true);
         if (context.mounted) {
           showSnackbar(
-              context, 'Leads Checked Out Successfully', SnackBarType.success);
+              context, 'Leads assigned Successfully', SnackBarType.success);
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
         getIt<ListStateCubit>().setChangedTaskListState();
@@ -319,7 +319,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
           randomLeadsAssignmentStatus: AppStatus.success,
         ));
         if (context.mounted) {
-          showSnackbar(context, 'Leads Randomly Checked In Successfully',
+          showSnackbar(context, 'Leads Randomly assigned Successfully',
               SnackBarType.success);
           Navigator.of(context).pop();
         }

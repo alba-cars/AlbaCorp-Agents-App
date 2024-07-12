@@ -123,7 +123,7 @@ class LeadData implements LeadRepo {
 
       final response = await _dio.post(url, data: {'phone': phone});
       final data = response.data;
-      if (data == null) {
+      if (data == null || data["error"] != null) {
         return Success(null);
       }
       final lead = Lead.fromJson(data);

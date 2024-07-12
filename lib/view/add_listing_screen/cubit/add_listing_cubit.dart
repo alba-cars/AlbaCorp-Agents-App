@@ -97,7 +97,7 @@ class AddListingCubit extends Cubit<AddListingState> {
         id: deal!.newListingRequest!.id, values: {'multiple': false, ...val});
     switch (result) {
       case (Success<NewListingRequest> s):
-        final deal = await _dealsRepo.addDeal(values: {
+        final updatedDeal = await _dealsRepo.updateDeal(id: deal!.id, values: {
           "assignedAgent": getIt<AuthBloc>().state.agent?.id,
           "category": "Listing Acquired",
           "type": "Listing",
@@ -105,7 +105,7 @@ class AddListingCubit extends Cubit<AddListingState> {
           "agreedCommission": values['agreedCommission'],
           'user_id': s.value.userId
         });
-        switch (deal) {
+        switch (updatedDeal) {
           case (Success<DealResponse> dealResult):
             emit(state.copyWith(
                 addListingStatus: AppStatus.success,
@@ -153,12 +153,21 @@ class AddListingCubit extends Cubit<AddListingState> {
       case 0:
         final validated = formKey.currentState?.saveAndValidate();
         if (validated == true) {
-          final val = formKey.currentState?.value;
-          if (val != null) await addListing(values: val);
+          final val = formKey.currentState!.value;
+
+          isEdit
+              ? await editListing(values: val)
+              : await addListing(values: val);
           if (state.addListingStatus == AppStatus.success) {
-            emit(state.copyWith(currentTab: 1));
-            tabController.animateTo(1);
-            _scrollToTop();
+            if (!isEdit) {
+              emit(state.copyWith(currentTab: 1));
+              tabController.animateTo(1);
+              _scrollToTop();
+            } else {
+              showSnackbar(
+                  context, "Successfully updated deal", SnackBarType.success);
+              context.pop();
+            }
           } else if (state.addListingStatus == AppStatus.failure) {
             if (context.mounted) {
               showSnackbar(

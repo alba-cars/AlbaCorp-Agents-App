@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/constants/hot_leads.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
@@ -15,6 +16,7 @@ import 'package:real_estate_app/widgets/search_bar.dart';
 
 import '../../util/color_category.dart';
 import '../../util/status.dart';
+import '../../widgets/button.dart';
 import '../../widgets/call_button.dart';
 import '../../widgets/space.dart';
 import '../../widgets/text.dart';
@@ -304,6 +306,101 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                     ),
                   ],
                 )),
+            BlocConsumer<LeadsCubit, LeadsState>(
+              listenWhen: (previous, current) =>
+                  previous.returnLeadsStatus != current.returnLeadsStatus &&
+                  current.returnLeadsStatus == AppStatus.success,
+              listener: (context, state) {
+                showGeneralDialog(
+                    barrierDismissible: true,
+                    barrierLabel: "success",
+                    context: context,
+                    pageBuilder: (dContext, anim1, anim2) {
+                      return BlocProvider.value(
+                        value: context.read<LeadsCubit>(),
+                        child: Builder(builder: (context) {
+                          return Dialog(
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Colors.green,
+                                      size: 100,
+                                    ),
+                                    VerticalSmallGap(),
+                                    Text(
+                                      'You have successfully returned Leads to yourself.',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    VerticalSmallGap(),
+                                    Text(
+                                      'Please hold on for a bit before making another return, thank you.',
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(dContext)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w500),
+                                    ),
+                                    VerticalSmallGap(
+                                      adjustment: 1.5,
+                                    ),
+                                    AppPrimaryButton(
+                                        text: 'Close',
+                                        onTap: () {
+                                          Navigator.of(dContext).pop();
+                                        })
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      );
+                    });
+              },
+              builder: (context, state) {
+                if (!state.selectModeEnabled) {
+                  return SizedBox();
+                }
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[100],
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            context
+                                .read<LeadsCubit>()
+                                .setSelectionModeDisabled();
+                          },
+                          icon: Icon(Icons.close)),
+                      Text("${state.selectedLeads.length.toString()} Selected"),
+                      Spacer(),
+                      state.returnLeadsStatus == AppStatus.loading
+                          ? SizedBox.square(
+                              dimension: 24, child: CircularProgressIndicator())
+                          : TextButton(
+                              onPressed: () {
+                                context
+                                    .read<LeadsCubit>()
+                                    .returnLeadInBulk(context: context);
+                              },
+                              child: Text('Return Selected'))
+                    ],
+                  ),
+                );
+              },
+            ),
             Expanded(
               child: BlocBuilder<LeadsCubit, LeadsState>(
                 builder: (context, state) {
@@ -343,142 +440,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                             );
                           }
                           final lead = leads[index];
-                          return Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16.h),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: shadowColor,
-                                      offset: Offset(-4, 5),
-                                      blurRadius: 11)
-                                ]),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.h, vertical: 6.h),
-                              child: InkWell(
-                                onTap: () {
-                                  context.pushNamed(LeadDetailScreen.routeName,
-                                      pathParameters: {'id': lead.id});
-                                },
-                                child: Row(children: [
-                                  Container(
-                                    width: 70,
-                                    height: 60,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 2, vertical: 4),
-                                    decoration: BoxDecoration(
-                                        // border: Border.all(color: Colors.grey),
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: Colors.grey[100]),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        // switch (lead.leadSource.toLowerCase()) {
-                                        //   'call' => Icon(
-                                        //       Icons.call,
-                                        //       color: Colors.grey,
-                                        //     ),
-                                        //   'whatsapp' => ImageIcon(
-                                        //       AssetImage(
-                                        //           'assets/images/whatsapp.png'),
-                                        //       color: Colors.grey,
-                                        //     ),
-                                        //   _ => Icon(
-                                        //       Icons.call,
-                                        //       color: Colors.grey,
-                                        //     )
-                                        // },
-                                        // VerticalSmallGap(
-                                        //   adjustment: 0.3,
-                                        // ),
-                                        NormalText(
-                                          text: lead.leadSource,
-                                          textAlign: TextAlign.center,
-                                          color: Colors.grey[800]!,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  HorizontalSmallGap(),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.h,
-                                                  vertical: 1.h),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.blueGrey),
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                  color: Colors.blueGrey[100]),
-                                              child: SmallText(
-                                                  text: lead.leadStatus?.name ??
-                                                      ''),
-                                            ),
-                                            HorizontalSmallGap(),
-                                            if (hotLeads
-                                                .contains(lead.leadSource))
-                                              Image.asset(
-                                                'assets/images/flame.png',
-                                                height: 17,
-                                                width: 20,
-                                              ),
-                                            if (lead.dndStatus)
-                                              Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 4.h,
-                                                    vertical: 1.h),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color:
-                                                            colorScheme.error),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    color: colorScheme
-                                                        .errorContainer),
-                                                child: SmallText(text: 'DND'),
-                                              ),
-                                          ],
-                                        ),
-                                        VerticalSmallGap(
-                                          adjustment: .2,
-                                        ),
-                                        LabelText(
-                                            text:
-                                                "${lead.firstName} ${lead.lastName}")
-                                      ],
-                                    ),
-                                  ),
-                                  HorizontalSmallGap(),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      CallButton(
-                                          onTap: () async {
-                                            if (lead.phone != null) {
-                                              context
-                                                  .read<LeadsCubit>()
-                                                  .makeACall(lead);
-                                            }
-                                          },
-                                          isDnd: lead.dndStatus),
-                                    ],
-                                  )
-                                ]),
-                              ),
-                            ),
-                          );
+                          return LeadItem(lead: lead, colorScheme: colorScheme);
                         },
                         separatorBuilder: (context, index) => SizedBox(
                           height: 8,
@@ -492,6 +454,167 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class LeadItem extends StatelessWidget {
+  const LeadItem({
+    super.key,
+    required this.lead,
+    required this.colorScheme,
+  });
+
+  final Lead lead;
+  final ColorScheme colorScheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<LeadsCubit, LeadsState, List<String>>(
+      selector: (state) {
+        return state.selectedLeads;
+      },
+      builder: (context, selectedLeads) {
+        final selectModeEnabled =
+            context.read<LeadsCubit>().state.selectModeEnabled;
+        return Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: selectModeEnabled && selectedLeads.contains(lead.id)
+                  ? Border.all(
+                      color: Theme.of(context).colorScheme.primary, width: 2)
+                  : null,
+              boxShadow: selectModeEnabled && selectedLeads.contains(lead.id)
+                  ? [
+                      BoxShadow(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(.5),
+                          offset: Offset(-4, 5),
+                          blurRadius: 19)
+                    ]
+                  : [
+                      BoxShadow(
+                          color: shadowColor,
+                          offset: Offset(-4, 5),
+                          blurRadius: 11)
+                    ]),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
+            child: InkWell(
+              onTap: () {
+                if (selectModeEnabled) {
+                  context.read<LeadsCubit>().addToSelection(context, lead);
+                } else {
+                  context.pushNamed(LeadDetailScreen.routeName,
+                      pathParameters: {'id': lead.id});
+                }
+              },
+              onLongPress: () {
+                context
+                    .read<LeadsCubit>()
+                    .setSelectionModeEnabled(context, lead);
+              },
+              child: Row(children: [
+                Container(
+                  width: 70,
+                  height: 60,
+                  padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+                  decoration: BoxDecoration(
+                      // border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.grey[100]),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // switch (lead.leadSource.toLowerCase()) {
+                      //   'call' => Icon(
+                      //       Icons.call,
+                      //       color: Colors.grey,
+                      //     ),
+                      //   'whatsapp' => ImageIcon(
+                      //       AssetImage(
+                      //           'assets/images/whatsapp.png'),
+                      //       color: Colors.grey,
+                      //     ),
+                      //   _ => Icon(
+                      //       Icons.call,
+                      //       color: Colors.grey,
+                      //     )
+                      // },
+                      // VerticalSmallGap(
+                      //   adjustment: 0.3,
+                      // ),
+                      NormalText(
+                        text: lead.leadSource,
+                        textAlign: TextAlign.center,
+                        color: Colors.grey[800]!,
+                      )
+                    ],
+                  ),
+                ),
+                HorizontalSmallGap(),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4.h, vertical: 1.h),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blueGrey),
+                                borderRadius: BorderRadius.circular(4),
+                                color: Colors.blueGrey[100]),
+                            child: SmallText(text: lead.leadStatus?.name ?? ''),
+                          ),
+                          HorizontalSmallGap(),
+                          if (hotLeads.contains(lead.leadSource))
+                            Image.asset(
+                              'assets/images/flame.png',
+                              height: 17,
+                              width: 20,
+                            ),
+                          if (lead.dndStatus)
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4.h, vertical: 1.h),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: colorScheme.error),
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: colorScheme.errorContainer),
+                              child: SmallText(text: 'DND'),
+                            ),
+                        ],
+                      ),
+                      VerticalSmallGap(
+                        adjustment: .2,
+                      ),
+                      LabelText(text: "${lead.firstName} ${lead.lastName}")
+                    ],
+                  ),
+                ),
+                HorizontalSmallGap(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    CallButton(
+                        onTap: () async {
+                          if (lead.phone != null) {
+                            context.read<LeadsCubit>().makeACall(lead);
+                          }
+                        },
+                        isDnd: lead.dndStatus),
+                  ],
+                )
+              ]),
+            ),
+          ),
+        );
+      },
     );
   }
 }

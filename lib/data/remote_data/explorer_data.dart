@@ -169,6 +169,19 @@ class ExplorerData implements ExplorerRepo {
   }
 
   @override
+  Future<Result<void>> checkInLeads({required List<String> leads}) async {
+    try {
+      String url = '/v1/property-cards/checkin-leads';
+      await _dio.post(url, data: {'data': leads});
+      return Success(
+        null,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
   Future<Result<void>> checkOutLead(
       {List<String>? propertyCardIds, List<String>? leadIds}) async {
     try {

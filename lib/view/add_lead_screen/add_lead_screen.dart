@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -23,6 +24,7 @@ class AddLeadScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d(data);
     return BlocProvider(
       create: (context) => getIt<AddLeadCubit>(param1: data),
       child: _AddLeadScreenLayout(),
@@ -124,15 +126,17 @@ class _TryState extends State<_AddLeadScreenLayout> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          context.read<AddLeadCubit>().onBackPressed();
-                        },
-                        child: Text('Back'),
+                    if (currentStep != 0) ...[
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            context.read<AddLeadCubit>().onBackPressed();
+                          },
+                          child: Text('Back'),
+                        ),
                       ),
-                    ),
-                    HorizontalSmallGap(),
+                      HorizontalSmallGap()
+                    ],
                     Expanded(
                       child: BlocListener<AddLeadCubit, AddLeadState>(
                         listener: (context, state) {
@@ -222,12 +226,14 @@ class _TryState extends State<_AddLeadScreenLayout> {
                     return state.leadSources;
                   },
                   builder: (context, leadSources) {
-                    return DropDownfield(
+                    return AppAutoComplete(
                         isRequired: true,
                         label: 'Lead Source',
-                        items: leadSources,
-                        displayOption: (option) => option.name,
-                        selectValue: (p0) => p0?.name,
+                        optionsBuilder: (v) => leadSources.where((e) => e.name
+                            .toLowerCase()
+                            .contains(v.text.toLowerCase())),
+                        displayStringForOption: (option) => option.name,
+                        onSelected: (p0) => p0?.name,
                         name: 'lead_source');
                   },
                 ),

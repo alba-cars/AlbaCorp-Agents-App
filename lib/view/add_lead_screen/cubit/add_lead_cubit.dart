@@ -15,7 +15,10 @@ part 'add_lead_cubit.freezed.dart';
 @injectable
 class AddLeadCubit extends Cubit<AddLeadState> {
   AddLeadCubit(this._leadRepo, @factoryParam Map<String, dynamic>? data)
-      : super(AddLeadState(val: data ?? {}, step2Values: data ?? {})) {
+      : super(AddLeadState(
+            val: data ?? {},
+            step2Values: data ?? {},
+            step1Values: data ?? {})) {
     getLeadSources();
   }
 

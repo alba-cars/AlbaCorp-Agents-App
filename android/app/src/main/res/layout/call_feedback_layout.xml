@@ -104,7 +104,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:backgroundTint="#001C3E"
-                android:text="Give Feedback"
+                android:text="Feedback"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
         </LinearLayout>
