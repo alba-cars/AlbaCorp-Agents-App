@@ -67,13 +67,17 @@ object OverlayManager {
         val layoutInflater = context.getSystemService(inflater) as LayoutInflater
         overlayView = layoutInflater.inflate(R.layout.call_feedback_layout, null)
 
+        val LAYOUT_FLAG : Int;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                    } else {
+                        LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+                    }
+
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) 
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-            else 
-                WindowManager.LayoutParams.TYPE_PHONE,
+            LAYOUT_FLAG,
             WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or 
                 WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
             PixelFormat.TRANSLUCENT

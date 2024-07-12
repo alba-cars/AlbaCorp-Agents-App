@@ -62,7 +62,7 @@
              
         </activity>
 
-        <!-- <service
+        <service
     android:name=".services.MyCallScreeningService"
     android:permission="android.permission.BIND_SCREENING_SERVICE"
     android:enabled="true"
@@ -70,7 +70,7 @@
     <intent-filter>
         <action android:name="android.telecom.CallScreeningService" />
     </intent-filter>
-</service> -->
+</service>
 <receiver android:name=".services.PhoneStateReceiver" android:exported="true">
     <intent-filter>
         <action android:name="android.intent.action.PHONE_STATE" />

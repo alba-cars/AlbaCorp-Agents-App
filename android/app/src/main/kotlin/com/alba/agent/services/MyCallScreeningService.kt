@@ -46,14 +46,14 @@ class MyCallScreeningService : CallScreeningService() {
         wm = applicationContext.getSystemService(WINDOW_SERVICE) as WindowManager
         Log.i("flutter",phoneNumber)   ;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val listener: TelephonyCallback = MyListener(
-                applicationContext,
-                wm!!,
-                preferences,
-                ly1,
-                telephonyManager
-            );
-            telephonyManager?.registerTelephonyCallback(applicationContext.mainExecutor, listener)
+           // val listener: TelephonyCallback = MyListener(
+           //     applicationContext,
+           //     wm!!,
+            //    preferences,
+            //    ly1,
+            //    telephonyManager
+          //  );
+          //  telephonyManager?.registerTelephonyCallback(applicationContext.mainExecutor, listener)
             
         }
         try {
