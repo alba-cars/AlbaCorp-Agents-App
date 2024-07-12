@@ -206,6 +206,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 child: AppSearchBar(
+                  searchText: "Search by name, email or phone",
                   onChanged: (val) {
                     context.read<LeadsCubit>().searchLeads(val);
                   },
