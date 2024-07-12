@@ -126,15 +126,17 @@ class _TryState extends State<_AddLeadScreenLayout> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          context.read<AddLeadCubit>().onBackPressed();
-                        },
-                        child: Text('Back'),
+                    if (currentStep != 0) ...[
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            context.read<AddLeadCubit>().onBackPressed();
+                          },
+                          child: Text('Back'),
+                        ),
                       ),
-                    ),
-                    HorizontalSmallGap(),
+                      HorizontalSmallGap()
+                    ],
                     Expanded(
                       child: BlocListener<AddLeadCubit, AddLeadState>(
                         listener: (context, state) {
@@ -224,12 +226,14 @@ class _TryState extends State<_AddLeadScreenLayout> {
                     return state.leadSources;
                   },
                   builder: (context, leadSources) {
-                    return DropDownfield(
+                    return AppAutoComplete(
                         isRequired: true,
                         label: 'Lead Source',
-                        items: leadSources,
-                        displayOption: (option) => option.name,
-                        selectValue: (p0) => p0?.name,
+                        optionsBuilder: (v) => leadSources.where((e) => e.name
+                            .toLowerCase()
+                            .contains(v.text.toLowerCase())),
+                        displayStringForOption: (option) => option.name,
+                        onSelected: (p0) => p0?.name,
                         name: 'lead_source');
                   },
                 ),

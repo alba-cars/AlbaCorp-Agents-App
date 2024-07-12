@@ -26,6 +26,7 @@ abstract class ExplorerRepo {
   Future<Result<List<PropertyCard>>> getCheckedOutPropertyCards(
       {Map<String, dynamic>? filter, String? search, Paginator? paginator});
   Future<Result<void>> checkInLead({required List<String> propertyCardIds});
+  Future<Result<void>> checkInLeads({required List<String> leads});
   Future<Result<void>> checkOutLead(
       {List<String>? propertyCardIds, List<String>? leadIds});
   Future<Result<List<LeadPropertyCardModel>>> getPropertyCardLeads(
