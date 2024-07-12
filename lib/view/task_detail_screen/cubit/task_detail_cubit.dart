@@ -213,6 +213,35 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         });
   }
 
+  Future<void> doNotCall({
+    required BuildContext context,
+    String? description,
+  }) async {
+    if (state.task?.lead?.id == null) {
+      return;
+    }
+    await updateActivity(
+        context: context,
+        description: description,
+        addFollowUp: false,
+        onSuccess: () async {
+          final result =
+              await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+            'lead_status': 'Lost',
+            'activity': {'notes': description},
+            "DndStatus": true
+          });
+          switch (result) {
+            case (Success s):
+              break;
+            case (Error e):
+              if (context.mounted) {
+                showSnackbar(context, e.exception, SnackBarType.failure);
+              }
+          }
+        });
+  }
+
   Future<void> makeProspect(
       {required BuildContext context,
       String? description,
