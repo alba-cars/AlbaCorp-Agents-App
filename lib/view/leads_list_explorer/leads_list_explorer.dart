@@ -200,7 +200,17 @@ class _ExplorerTabState extends State<ExplorerTab> {
         BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
           builder: (context, state) {
             if (!state.selectModeEnabled) {
-              return SizedBox();
+              return  Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(6),color: Colors.blueGrey.withOpacity(.4)),
+                  height: 56,
+
+                  child:  ListTile(
+                      leading: Icon(Icons.info_outline),
+                      title: Text("Press and hold on any leads card for enabling multi select",style: TextStyle(fontSize: 12))),
+                ),
+              );
             }
             return Container(
               margin: EdgeInsets.symmetric(vertical: 8),
@@ -237,11 +247,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
             );
           },
         ),
-        Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
-          height: 80,
-          child:  Center(child: Text("Hold on any leads card for enabling multi select")),
-        ),
+
         Expanded(
           child: BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
             // buildWhen: (previous, current) =>
