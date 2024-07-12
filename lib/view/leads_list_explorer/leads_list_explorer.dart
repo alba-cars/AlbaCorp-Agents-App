@@ -197,105 +197,6 @@ class _ExplorerTabState extends State<ExplorerTab> {
             },
           ),
         ),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green[700],
-                      side: BorderSide.none,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      maximumSize: Size(150, 34),
-                      minimumSize: Size(150, 34),
-                      fixedSize: Size(150, 34),
-                    ),
-                    onPressed: () {
-                      showGeneralDialog(
-                          context: context,
-                          useRootNavigator: false,
-                          barrierDismissible: true,
-                          barrierLabel: 'random-leads-assignment-property-card',
-                          pageBuilder: (dContext, anim1, anim2) {
-                            final GlobalKey<FormBuilderState> key = GlobalKey();
-
-                            return AlertDialog(
-                              title: Text('Random Leads Checkout'),
-                              content: FormBuilder(
-                                key: key,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      AppAutoComplete(
-                                          label: 'Community',
-                                          isRequired: true,
-                                          optionsBuilder: (v) async {
-                                            return await context
-                                                .read<LeadsListExplorerCubit>()
-                                                .getCommunities(search: v.text);
-                                          },
-                                          displayStringForOption: (option) =>
-                                              option.community,
-                                          valueTransformer: (p0) => p0?.id,
-                                          name: 'community'),
-                                      DropDownfield(
-                                          label: 'Select number of Leads',
-                                          items: [
-                                            1,
-                                            5,
-                                            10,
-                                            15,
-                                            20,
-                                            25,
-                                            50,
-                                            100
-                                          ],
-                                          name: 'numberOfLeads')
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              actions: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: OutlinedButton(
-                                          child: Text('Cancel'),
-                                          onPressed: () {
-                                            Navigator.of(dContext).pop();
-                                          }),
-                                    ),
-                                    HorizontalSmallGap(),
-                                    Expanded(
-                                      child: AppPrimaryButton(
-                                          text: 'Assign Leads',
-                                          onTap: () async {
-                                            final validated = key.currentState
-                                                ?.saveAndValidate();
-                                            if (validated == true) {
-                                              final values =
-                                                  key.currentState!.value;
-                                              await context
-                                                  .read<
-                                                      LeadsListExplorerCubit>()
-                                                  .randomCheckout(
-                                                      context: dContext,
-                                                      values: values);
-                                            }
-                                          }),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            );
-                          });
-                    },
-                    child: Text('Get Bulk Leads'))
-              ],
-            )),
         BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
           builder: (context, state) {
             if (!state.selectModeEnabled) {
@@ -335,6 +236,11 @@ class _ExplorerTabState extends State<ExplorerTab> {
               ),
             );
           },
+        ),
+        Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
+          height: 80,
+          child:  Center(child: Text("Hold on any leads card for enabling multi select")),
         ),
         Expanded(
           child: BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(

@@ -407,7 +407,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                 ),
                                 VerticalSmallGap(),
                                 Text(
-                                  'Please hold on for a bit before making another assignement or try using bulk assignment, thank you.',
+                                  'Please hold on for a bit before making another assignment or try using bulk assignment, thank you.',
                                   textAlign: TextAlign.center,
                                   style: Theme.of(dContext)
                                       .textTheme
