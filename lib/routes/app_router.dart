@@ -259,8 +259,11 @@ class AppRouter {
                 path: AddLeadScreen.routeName,
                 name: AddLeadScreen.routeName,
                 pageBuilder: (context, state) {
-                  final Map<String, dynamic>? data = state
-                      .uri.queryParameters['data'] as Map<String, dynamic>?;
+                  final Map<String, dynamic>? data =
+                      state.uri.queryParameters['data'] != null
+                          ? json.decode(state.uri.queryParameters['data']!)
+                              as Map<String, dynamic>
+                          : null;
                   return AppTransition(
                       child: AddLeadScreen(
                     data: data,

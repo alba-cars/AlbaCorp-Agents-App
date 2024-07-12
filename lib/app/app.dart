@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -38,6 +39,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 
   Future<bool> requestPermission() async {
+    var s = await Permission.systemAlertWindow.request();
+
     var status = await Permission.phone.request();
 
     return switch (status) {

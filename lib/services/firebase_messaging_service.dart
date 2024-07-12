@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:logger/logger.dart';
 import 'dart:convert';
 
 import 'notification_service.dart';
@@ -28,7 +29,8 @@ class FirebaseMessagingService {
         message.data['callerName'] ?? 'Unknown',
         message.data['phoneNumber'] ?? '',
       );
-    } else{
+    } else if (message.data['type'] == 'ImportantActivity') {
+      Logger().d("ImportantActivity");
       NotificationService.showImportantNotification(
         message.notification?.title ?? 'Unknown',
         message.notification?.body ?? '',
@@ -47,11 +49,11 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       message.data['callerName'] ?? 'Unknown',
       message.data['phoneNumber'] ?? '',
     );
-  } else {
+  } else if (message.data['type'] == 'ImportantActivity') {
+    Logger().d("ImportantActivity");
     await NotificationService.showImportantNotification(
       message.notification?.title ?? 'Unknown',
       message.notification?.body ?? '',
     );
   }
-
 }

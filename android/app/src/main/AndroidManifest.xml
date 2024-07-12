@@ -82,7 +82,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
         <meta-data
 
 android:name="com.google.firebase.messaging.default_notification_channel_id"

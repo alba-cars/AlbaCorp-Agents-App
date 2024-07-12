@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/lead_model.dart';
@@ -70,11 +73,12 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                   .firstWhere((state) => !state.showFeedbackScreen);
               context.goNamed("${HomePage.routeName}");
               context.pushNamed("${AddLeadScreen.routeName}", queryParameters: {
-                "data": {
+                "data": json.encode({
                   'phone': state.number,
-                  "lead_Source": 'Unkown Inbound Call'
-                }
+                  "lead_source": 'Unkown Inbound Call'
+                })
               });
+              Logger().d('dddddddd');
             }
           },
           listenWhen: (previous, current) {

@@ -62,15 +62,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   StreamSubscription? _fcmBackgroundStream;
 
   void onNotification(RemoteMessage message) {
-    if (message.data['type'] == 'ImportantActivity') {
-      final activities = message.data['values'] as String;
-      add(AuthEvent.newImportantActivity(activityIds: [activities]));
-    }
-    Logger().d(message.notification?.title);
-    _notificationRepo.addNotification(
-        notification: NotificationModel(
-            title: message.notification?.title ?? '',
-            subTitle: message.notification?.body));
+    try {
+      if (message.data['type'] == 'ImportantActivity') {
+        final activities = message.data['values'] as String;
+        add(AuthEvent.newImportantActivity(activityIds: [activities]));
+      }
+      Logger().d(message.notification?.title);
+      _notificationRepo.addNotification(
+          notification: NotificationModel(
+              title: message.notification?.title ?? '',
+              subTitle: message.notification?.body));
+    } catch (e) {}
   }
 
   FutureOr<void> _userLoggedIn(
@@ -183,7 +185,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (state.authStatus == AuthStatus.Authenticated) {
       await getIt<SharedPreferences>().reload();
       final number = getIt<SharedPreferences>().getString("calledNumber");
-      //TODO : add call direction
       if (number != null) {
         await _pendingCallFeedbackRepo.add(
             model: PendingCallFeedback(
@@ -201,6 +202,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       _RemoveLastCallDetails event, Emitter<AuthState> emit) {
     getIt<SharedPreferences>().remove('calledNumber');
 
-    emit(state.copyWith(showFeedbackScreen: false));
+    emit(state.copyWith(showFeedbackScreen: false, lastCalledNumber: null));
   }
 }

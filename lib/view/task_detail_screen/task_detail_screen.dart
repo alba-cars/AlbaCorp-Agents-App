@@ -10,6 +10,7 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
+import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/property_card_list.dart';
@@ -111,395 +112,458 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 child: Text('No Tasks'),
               );
             }
-            return AppinioSwiper(
-              controller: _appinioSwiperController,
-              swipeOptions: SwipeOptions.symmetric(horizontal: true),
-              cardCount: tasks.length,
-              backgroundCardScale: 1,
-              threshold: 150,
-              invertAngleOnBottomDrag: false,
-              backgroundCardCount: 3,
-              backgroundCardOffset: Offset(-3, -3),
-              onCardPositionChanged: (position) {
-                mode = CardAction.ManuelSwipe;
-              },
-              onSwipeEnd: (previousIndex, targetIndex, activity) async {
-                if (targetIndex == tasks.length - 1) {
-                  context.read<TaskDetailCubit>().getSortedActivities();
-                }
-                if (previousIndex >= targetIndex &&
-                    mode != CardAction.Negative) {
-                  return;
-                }
-                if (mode == CardAction.Skip) {
-                  context.read<TaskDetailCubit>().setCurrentTask(targetIndex);
-                  return;
-                }
-                if ((activity.begin?.dx ?? 0) < (activity.end?.dx ?? 0)) {
-                  final val = await showGeneralDialog(
-                      context: context,
-                      useRootNavigator: false,
-                      pageBuilder: (dContext, anim1, anim2) =>
-                          ActivityFeedbackDialog(
-                            parentContext: context,
-                            direction: DismissDirection.startToEnd,
-                            mode: mode,
-                            activity:
-                                context.read<TaskDetailCubit>().state.task!,
-                          ));
-                  if (val == null && mounted) {
-                    _appinioSwiperController.unswipe();
-                  } else {
-                    context.read<TaskDetailCubit>().setCurrentTask(targetIndex);
-                  }
-                } else {
-                  final val = await showGeneralDialog(
-                      context: context,
-                      useRootNavigator: false,
-                      pageBuilder: (dContext, anim1, anim2) =>
-                          ActivityFeedbackDialog(
-                            parentContext: context,
-                            direction: DismissDirection.endToStart,
-                            activity:
-                                context.read<TaskDetailCubit>().state.task!,
-                          ));
-                  if (val == null && mounted) {
-                    _appinioSwiperController.unswipe();
-                  } else {
-                    context.read<TaskDetailCubit>().setCurrentTask(targetIndex);
-                  }
-                }
-              },
-              cardBuilder: (context, index) {
-                final blockingActivities = context.select((AuthBloc authBloc) =>
-                    authBloc.state.veryImportantActivities);
-                final task = tasks[index];
-                final isBlockingActivity =
-                    blockingActivities?.contains(task.id) ?? false;
-                return SizedBox(
-                  key: ValueKey(task.id),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: shadowColor,
-                                  blurRadius: 9,
-                                )
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ScrollShadow(
-                                  size: 12,
-                                  color: Colors.grey[200]!,
-                                  child: SingleChildScrollView(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          if (isBlockingActivity) ...[
-                                            VerticalSmallGap(),
-                                            Container(
-                                              padding: EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .errorContainer,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  border: Border.fromBorderSide(
-                                                      BorderSide(
-                                                          color:
-                                                              Theme.of(context)
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TitleText(text: "You have reached the end"),
+                        VerticalSmallGap(),
+                        AppPrimaryButton(
+                            text: 'Go To Explorer',
+                            onTap: () {
+                              context
+                                  .replaceNamed(LeadsExplorerScreen.routeName);
+                            }),
+                        VerticalSmallGap(),
+                        AppPrimaryButton(
+                            text: 'Go Back',
+                            backgroundColor: Colors.white,
+                            borderColor: Theme.of(context).colorScheme.primary,
+                            borderShow: true,
+                            foregroundColor:
+                                Theme.of(context).colorScheme.primary,
+                            onTap: () {
+                              context.pop();
+                            })
+                      ],
+                    ),
+                  ),
+                ),
+                AppinioSwiper(
+                  controller: _appinioSwiperController,
+                  swipeOptions: SwipeOptions.symmetric(horizontal: true),
+                  cardCount: tasks.length,
+                  backgroundCardScale: 1,
+                  threshold: 150,
+                  invertAngleOnBottomDrag: false,
+                  backgroundCardCount: 3,
+                  backgroundCardOffset: Offset(-3, -3),
+                  onCardPositionChanged: (position) {
+                    mode = CardAction.ManuelSwipe;
+                  },
+                  onSwipeEnd: (previousIndex, targetIndex, activity) async {
+                    if (targetIndex == tasks.length - 1) {
+                      context.read<TaskDetailCubit>().getSortedActivities();
+                    }
+                    if (previousIndex >= targetIndex &&
+                        mode != CardAction.Negative) {
+                      return;
+                    }
+                    if (mode == CardAction.Skip) {
+                      context
+                          .read<TaskDetailCubit>()
+                          .setCurrentTask(targetIndex);
+                      return;
+                    }
+                    if ((activity.begin?.dx ?? 0) < (activity.end?.dx ?? 0)) {
+                      final val = await showGeneralDialog(
+                          context: context,
+                          useRootNavigator: false,
+                          pageBuilder: (dContext, anim1, anim2) =>
+                              ActivityFeedbackDialog(
+                                parentContext: context,
+                                direction: DismissDirection.startToEnd,
+                                mode: mode,
+                                activity:
+                                    context.read<TaskDetailCubit>().state.task!,
+                              ));
+                      if (val == null &&
+                          mounted &&
+                          context.read<TaskDetailCubit>().state.taskId !=
+                              tasks[targetIndex].id) {
+                        _appinioSwiperController.unswipe();
+                      } else {
+                        context
+                            .read<TaskDetailCubit>()
+                            .setCurrentTask(targetIndex);
+                      }
+                    } else {
+                      final val = await showGeneralDialog(
+                          context: context,
+                          useRootNavigator: false,
+                          pageBuilder: (dContext, anim1, anim2) =>
+                              ActivityFeedbackDialog(
+                                parentContext: context,
+                                direction: DismissDirection.endToStart,
+                                activity:
+                                    context.read<TaskDetailCubit>().state.task!,
+                              ));
+                      if (val == null && mounted) {
+                        _appinioSwiperController.unswipe();
+                      } else {
+                        context
+                            .read<TaskDetailCubit>()
+                            .setCurrentTask(targetIndex);
+                      }
+                    }
+                  },
+                  cardBuilder: (context, index) {
+                    final blockingActivities = context.select(
+                        (AuthBloc authBloc) =>
+                            authBloc.state.veryImportantActivities);
+                    final task = tasks[index];
+                    final isBlockingActivity =
+                        blockingActivities?.contains(task.id) ?? false;
+                    return SizedBox(
+                      key: ValueKey(task.id),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: shadowColor,
+                                      blurRadius: 9,
+                                    )
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: ScrollShadow(
+                                      size: 12,
+                                      color: Colors.grey[200]!,
+                                      child: SingleChildScrollView(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              if (isBlockingActivity) ...[
+                                                VerticalSmallGap(),
+                                                Container(
+                                                  padding: EdgeInsets.all(8),
+                                                  decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .errorContainer,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      border: Border.fromBorderSide(
+                                                          BorderSide(
+                                                              color: Theme.of(
+                                                                      context)
                                                                   .colorScheme
                                                                   .error))),
-                                              child: Text(
-                                                  'This is a very important activity. complete this activity to further use the app'),
-                                            ),
-                                          ],
-                                          VerticalSmallGap(),
-                                          TitleText(
-                                            text: task.type,
-                                          ),
-                                          VerticalSmallGap(),
-                                          Row(
-                                            children: [
-                                              ContainerIcon(
-                                                  icon: CupertinoIcons.person),
-                                              HorizontalSmallGap(),
-                                              Expanded(
-                                                child: NormalText(
-                                                    text:
-                                                        '${task.lead?.firstName ?? ''} ${task.lead?.lastName ?? ''}'),
-                                              )
-                                            ],
-                                          ),
-                                          VerticalSmallGap(),
-                                          Row(
-                                            children: [
-                                              ContainerIcon(
-                                                  icon: CupertinoIcons.search),
-                                              HorizontalSmallGap(),
-                                              Expanded(
-                                                child: NormalText(
-                                                    text:
-                                                        'Lead Source: ${task.lead?.leadSource ?? ''}'),
-                                              )
-                                            ],
-                                          ),
-                                          VerticalSmallGap(),
-                                          Row(
-                                            children: [
-                                              ContainerIcon(
-                                                  icon: CupertinoIcons
-                                                      .check_mark),
-                                              HorizontalSmallGap(),
-                                              Expanded(
-                                                  child: NormalText(
-                                                      text: 'Task Type Call'))
-                                            ],
-                                          ),
-                                          VerticalSmallGap(),
-                                          Row(
-                                            children: [
-                                              ContainerIcon(
-                                                  icon:
-                                                      CupertinoIcons.calendar),
-                                              HorizontalSmallGap(),
-                                              Expanded(
-                                                child: NormalText(
-                                                    text:
-                                                        'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date)}'),
-                                              )
-                                            ],
-                                          ),
-                                          VerticalSmallGap(),
-                                          // show property cards as horizontal scroll
+                                                  child: Text(
+                                                      'This is a very important activity. complete this activity to further use the app'),
+                                                ),
+                                              ],
+                                              VerticalSmallGap(),
+                                              TitleText(
+                                                text: task.type,
+                                              ),
+                                              VerticalSmallGap(),
+                                              Row(
+                                                children: [
+                                                  ContainerIcon(
+                                                      icon: CupertinoIcons
+                                                          .person),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                    child: NormalText(
+                                                        text:
+                                                            '${task.lead?.firstName ?? ''} ${task.lead?.lastName ?? ''}'),
+                                                  )
+                                                ],
+                                              ),
+                                              VerticalSmallGap(),
+                                              Row(
+                                                children: [
+                                                  ContainerIcon(
+                                                      icon: CupertinoIcons
+                                                          .search),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                    child: NormalText(
+                                                        text:
+                                                            'Lead Source: ${task.lead?.leadSource ?? ''}'),
+                                                  )
+                                                ],
+                                              ),
+                                              VerticalSmallGap(),
+                                              Row(
+                                                children: [
+                                                  ContainerIcon(
+                                                      icon: CupertinoIcons
+                                                          .check_mark),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                      child: NormalText(
+                                                          text:
+                                                              'Task Type Call'))
+                                                ],
+                                              ),
+                                              VerticalSmallGap(),
+                                              Row(
+                                                children: [
+                                                  ContainerIcon(
+                                                      icon: CupertinoIcons
+                                                          .calendar),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                    child: NormalText(
+                                                        text:
+                                                            'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date)}'),
+                                                  )
+                                                ],
+                                              ),
+                                              VerticalSmallGap(),
+                                              // show property cards as horizontal scroll
 
-                                          VerticalSmallGap(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              LabelText(
-                                                text: 'Notes',
+                                              VerticalSmallGap(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  LabelText(
+                                                    text: 'Notes',
+                                                  ),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        showGeneralDialog(
+                                                            context: context,
+                                                            useRootNavigator:
+                                                                false,
+                                                            barrierDismissible:
+                                                                true,
+                                                            barrierLabel:
+                                                                'add-note-task',
+                                                            pageBuilder:
+                                                                (dContext,
+                                                                    anim1,
+                                                                    anim2) {
+                                                              return BlocProvider
+                                                                  .value(
+                                                                value: context.read<
+                                                                    TaskDetailCubit>(),
+                                                                child:
+                                                                    AddNoteDialog(),
+                                                              );
+                                                            });
+                                                      },
+                                                      child: Text('Add'))
+                                                ],
                                               ),
-                                              TextButton(
-                                                  onPressed: () {
-                                                    showGeneralDialog(
-                                                        context: context,
-                                                        useRootNavigator: false,
-                                                        barrierDismissible:
-                                                            true,
-                                                        barrierLabel:
-                                                            'add-note-task',
-                                                        pageBuilder: (dContext,
-                                                            anim1, anim2) {
-                                                          return BlocProvider
-                                                              .value(
-                                                            value: context.read<
-                                                                TaskDetailCubit>(),
-                                                            child:
-                                                                AddNoteDialog(),
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Text('Add'))
-                                            ],
-                                          ),
 
-                                          (task.notes?.isNotEmpty == true)
-                                              ? Text(task.notes ?? '')
-                                              : Text('No notes'),
-                                          VerticalSmallGap(),
-                                          LabelText(
-                                            text: 'Actions',
-                                          ),
-                                          VerticalSmallGap(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Expanded(
-                                                child: OutlinedButton(
-                                                    onPressed: () {
-                                                      getIt<CallBloc>().add(
-                                                          CallEvent.callStarted(
-                                                              activityId:
-                                                                  task.id,
-                                                              phoneNumber: task
-                                                                      .lead
-                                                                      ?.phone ??
-                                                                  '',
-                                                              leadId: task.lead
-                                                                      ?.id ??
-                                                                  ''));
-                                                    },
-                                                    child: Icon(Icons.call)),
-                                              ),
-                                              HorizontalSmallGap(),
-                                              Expanded(
-                                                child: OutlinedButton(
-                                                    onPressed: () {
-                                                      launchUrlString(
-                                                          'whatsapp://send?phone=${task.lead?.phone}');
-                                                    },
-                                                    child: ImageIcon(AssetImage(
-                                                        'assets/images/whatsapp.png'))),
-                                              ),
-                                              HorizontalSmallGap(),
-                                              Expanded(
-                                                child: OutlinedButton(
-                                                    onPressed: () async {
-                                                      final uri = Uri.parse(
-                                                          'mailto:${task.lead?.email}');
-                                                      if (await canLaunchUrl(
-                                                          uri)) {
-                                                        await launchUrl(uri);
-                                                      } else {
-                                                        showSnackbar(
-                                                            context,
-                                                            'Can not launch the app',
-                                                            SnackBarType
-                                                                .failure);
-                                                      }
-                                                    },
-                                                    child: Icon(
-                                                        Icons.email_outlined)),
-                                              )
-                                            ],
-                                          ),
-                                          VerticalSmallGap(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
+                                              (task.notes?.isNotEmpty == true)
+                                                  ? Text(task.notes ?? '')
+                                                  : Text('No notes'),
+                                              VerticalSmallGap(),
                                               LabelText(
-                                                text: 'Property cards',
+                                                text: 'Actions',
                                               ),
-                                            ],
-                                          ),
-                                          VerticalSmallGap(),
-                                          PropertyCardList(),
-                                          VerticalSmallGap(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              LabelText(
-                                                text: 'Last 3 activities',
+                                              VerticalSmallGap(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Expanded(
+                                                    child: OutlinedButton(
+                                                        onPressed: () {
+                                                          getIt<CallBloc>().add(
+                                                              CallEvent.callStarted(
+                                                                  activityId:
+                                                                      task.id,
+                                                                  phoneNumber: task
+                                                                          .lead
+                                                                          ?.phone ??
+                                                                      '',
+                                                                  leadId: task
+                                                                          .lead
+                                                                          ?.id ??
+                                                                      ''));
+                                                        },
+                                                        child:
+                                                            Icon(Icons.call)),
+                                                  ),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                    child: OutlinedButton(
+                                                        onPressed: () {
+                                                          launchUrlString(
+                                                              'whatsapp://send?phone=${task.lead?.phone}');
+                                                        },
+                                                        child: ImageIcon(AssetImage(
+                                                            'assets/images/whatsapp.png'))),
+                                                  ),
+                                                  HorizontalSmallGap(),
+                                                  Expanded(
+                                                    child: OutlinedButton(
+                                                        onPressed: () async {
+                                                          final uri = Uri.parse(
+                                                              'mailto:${task.lead?.email}');
+                                                          if (await canLaunchUrl(
+                                                              uri)) {
+                                                            await launchUrl(
+                                                                uri);
+                                                          } else {
+                                                            showSnackbar(
+                                                                context,
+                                                                'Can not launch the app',
+                                                                SnackBarType
+                                                                    .failure);
+                                                          }
+                                                        },
+                                                        child: Icon(Icons
+                                                            .email_outlined)),
+                                                  )
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                          VerticalSmallGap(),
-                                          ActivityList(),
+                                              VerticalSmallGap(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  LabelText(
+                                                    text: 'Property cards',
+                                                  ),
+                                                ],
+                                              ),
+                                              VerticalSmallGap(),
+                                              PropertyCardList(),
+                                              VerticalSmallGap(),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  LabelText(
+                                                    text: 'Last 3 activities',
+                                                  ),
+                                                ],
+                                              ),
+                                              VerticalSmallGap(),
+                                              ActivityList(),
 
-                                          VerticalSmallGap(),
-                                        ],
+                                              VerticalSmallGap(),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Expanded(
-                                      child: IconButton.outlined(
-                                          onPressed: () async {
-                                            mode = CardAction.Negative;
-                                            _appinioSwiperController
-                                                .swipeLeft();
-                                          },
-                                          style: IconButton.styleFrom(
-                                              side: BorderSide(
-                                                  color: Colors.red)),
-                                          icon: Icon(
-                                            Icons.close,
-                                            color: Colors.red,
-                                          )),
-                                    ),
-                                    HorizontalSmallGap(),
-                                    Expanded(
-                                      child: IconButton.filled(
-                                          style: IconButton.styleFrom(
-                                              backgroundColor: Colors.red),
-                                          onPressed: () {
-                                            mode = CardAction.Heart;
-                                            _appinioSwiperController
-                                                .swipeRight();
-                                          },
-                                          icon:
-                                              Icon(CupertinoIcons.heart_fill)),
-                                    ),
-                                    HorizontalSmallGap(),
-                                    Expanded(
-                                        child: IconButton.filled(
-                                            style: IconButton.styleFrom(
-                                                backgroundColor: Colors.purple),
-                                            onPressed: () async {
-                                              mode = CardAction.Star;
-                                              _appinioSwiperController
-                                                  .swipeRight();
-                                            },
-                                            icon: Icon(Icons.star))),
-                                    HorizontalSmallGap(),
-                                    Expanded(
-                                      child: IconButton.filled(
-                                          onPressed: () async {
-                                            mode = CardAction.Charge;
-                                            _appinioSwiperController
-                                                .swipeRight();
-                                          },
-                                          style: IconButton.styleFrom(
-                                            backgroundColor: Color(0xff3A3A3A),
-                                          ),
-                                          icon: Image.asset(
-                                            'assets/images/flame.png',
-                                            fit: BoxFit.contain,
-                                            height: 22,
-                                          )),
-                                    ),
-                                    HorizontalSmallGap(),
-                                    Expanded(
-                                      child: IconButton.filled(
-                                          onPressed: isBlockingActivity
-                                              ? null
-                                              : () {
-                                                  mode = CardAction.Skip;
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Expanded(
+                                          child: IconButton.outlined(
+                                              onPressed: () async {
+                                                mode = CardAction.Negative;
+                                                _appinioSwiperController
+                                                    .swipeLeft();
+                                              },
+                                              style: IconButton.styleFrom(
+                                                  side: BorderSide(
+                                                      color: Colors.red)),
+                                              icon: Icon(
+                                                Icons.close,
+                                                color: Colors.red,
+                                              )),
+                                        ),
+                                        HorizontalSmallGap(),
+                                        Expanded(
+                                          child: IconButton.filled(
+                                              style: IconButton.styleFrom(
+                                                  backgroundColor: Colors.red),
+                                              onPressed: () {
+                                                mode = CardAction.Heart;
+                                                _appinioSwiperController
+                                                    .swipeRight();
+                                              },
+                                              icon: Icon(
+                                                  CupertinoIcons.heart_fill)),
+                                        ),
+                                        HorizontalSmallGap(),
+                                        Expanded(
+                                            child: IconButton.filled(
+                                                style: IconButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.purple),
+                                                onPressed: () async {
+                                                  mode = CardAction.Star;
                                                   _appinioSwiperController
                                                       .swipeRight();
-                                                }, // () {},
-                                          icon: Icon(Icons.redo)),
+                                                },
+                                                icon: Icon(Icons.star))),
+                                        HorizontalSmallGap(),
+                                        Expanded(
+                                          child: IconButton.filled(
+                                              onPressed: () async {
+                                                mode = CardAction.Charge;
+                                                _appinioSwiperController
+                                                    .swipeRight();
+                                              },
+                                              style: IconButton.styleFrom(
+                                                backgroundColor:
+                                                    Color(0xff3A3A3A),
+                                              ),
+                                              icon: Image.asset(
+                                                'assets/images/flame.png',
+                                                fit: BoxFit.contain,
+                                                height: 22,
+                                              )),
+                                        ),
+                                        HorizontalSmallGap(),
+                                        Expanded(
+                                          child: IconButton.filled(
+                                              onPressed: isBlockingActivity
+                                                  ? null
+                                                  : () {
+                                                      mode = CardAction.Skip;
+                                                      _appinioSwiperController
+                                                          .swipeRight();
+                                                    }, // () {},
+                                              icon: Icon(Icons.redo)),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                    ],
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ],
             );
           },
         ),

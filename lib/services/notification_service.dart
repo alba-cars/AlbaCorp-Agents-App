@@ -16,22 +16,21 @@ class NotificationService {
             importance: NotificationImportance.Max,
             channelShowBadge: true,
             criticalAlerts: true,
-            defaultRingtoneType: DefaultRingtoneType.Ringtone,
             playSound: true,
-              soundSource: 'resource://raw/res_buzz'
+            defaultRingtoneType: DefaultRingtoneType.Ringtone,
           ),
           NotificationChannel(
-            channelKey: 'important_channel',
-            channelName: 'Important Notifications',
-            channelDescription: 'Notification channel for important',
-            defaultColor: Colors.blue,
-            ledColor: Colors.white,
-            importance: NotificationImportance.Max,
-            channelShowBadge: true,
-            criticalAlerts: true,
-            defaultRingtoneType: DefaultRingtoneType.Notification,
-            playSound: true, soundSource: 'resource://raw/res_buzz'
-          )
+              channelKey: 'important_channel',
+              channelName: 'Important Notifications',
+              channelDescription: 'Notification channel for important',
+              defaultColor: Colors.blue,
+              ledColor: Colors.white,
+              importance: NotificationImportance.Max,
+              channelShowBadge: true,
+              criticalAlerts: true,
+              defaultRingtoneType: DefaultRingtoneType.Notification,
+              playSound: true,
+              soundSource: 'resource://raw/res_buzz')
         ],
         debug: true);
 
@@ -58,7 +57,6 @@ class NotificationService {
         wakeUpScreen: true,
         fullScreenIntent: true,
         autoDismissible: false,
-
         payload: {'phone_number': phoneNumber},
       ),
       actionButtons: [
