@@ -18,6 +18,18 @@ class NotificationService {
             criticalAlerts: true,
             defaultRingtoneType: DefaultRingtoneType.Ringtone,
             playSound: true,
+          ),
+          NotificationChannel(
+            channelKey: 'important_channel',
+            channelName: 'Important Notifications',
+            channelDescription: 'Notification channel for important',
+            defaultColor: Colors.blue,
+            ledColor: Colors.white,
+            importance: NotificationImportance.Max,
+            channelShowBadge: true,
+            criticalAlerts: true,
+            defaultRingtoneType: DefaultRingtoneType.Notification,
+            playSound: true,
           )
         ],
         debug: true);
@@ -61,6 +73,22 @@ class NotificationService {
           autoDismissible: true,
         ),
       ],
+    );
+  }
+
+  static Future<void> showImportantNotification(
+    String title,
+    String body,
+  ) async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'important_channel',
+        title: title,
+        body: body,
+        category: NotificationCategory.Alarm,
+        autoDismissible: false,
+      ),
     );
   }
 
