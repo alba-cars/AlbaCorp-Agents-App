@@ -69,7 +69,12 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                   .stream
                   .firstWhere((state) => !state.showFeedbackScreen);
               context.goNamed("${HomePage.routeName}");
-              context.pushNamed("${AddLeadScreen.routeName}");
+              context.pushNamed("${AddLeadScreen.routeName}", queryParameters: {
+                "data": {
+                  'phone': state.number,
+                  "lead_Source": 'Unkown Inbound Call'
+                }
+              });
             }
           },
           listenWhen: (previous, current) {

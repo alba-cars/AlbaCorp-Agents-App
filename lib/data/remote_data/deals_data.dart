@@ -121,9 +121,19 @@ class DealData implements DealsRepo {
 
   @override
   Future<Result<DealResponse>> updateDeal(
-      {required String id, required Map<String, dynamic> values}) {
-    // TODO: implement updateDeal
-    throw UnimplementedError();
+      {required String id, required Map<String, dynamic> values}) async {
+    try {
+      String url = 'v1/deals/${id}';
+
+      final response = await _dio.patch(url, data: values);
+      final data = response.data;
+      final model = DealResponse.fromJson(data);
+      return Success(
+        model,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
   }
 
   @override

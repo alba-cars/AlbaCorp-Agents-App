@@ -51,35 +51,37 @@ class InfoTabView extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(child: TitleText(text: 'Deal Details')),
-                            TextButton(
-                                onPressed: () {
-                                  if (deal != null) {
-                                    if (deal.category.trim() ==
-                                        'Listing Acquired') {
-                                      context.pushNamed(
-                                          AddListingScreen.routeName,
-                                          queryParameters: {
-                                            'isEdit': 'true',
-                                            "deal": json.encode(deal.toJson())
-                                          });
-                                    } else {
-                                      context.pushNamed(AddDealScreen.routeName,
-                                          queryParameters: {
-                                            'isEdit': 'true',
-                                            "deal": json.encode(deal.toJson())
-                                          });
+                            if (deal?.category.trim() == 'Listing Acquired')
+                              TextButton(
+                                  onPressed: () {
+                                    if (deal != null) {
+                                      if (deal.category.trim() ==
+                                          'Listing Acquired') {
+                                        context.pushNamed(
+                                            AddListingScreen.routeName,
+                                            queryParameters: {
+                                              'isEdit': 'true',
+                                              "deal": json.encode(deal.toJson())
+                                            });
+                                      } else {
+                                        context.pushNamed(
+                                            AddDealScreen.routeName,
+                                            queryParameters: {
+                                              'isEdit': 'true',
+                                              "deal": json.encode(deal.toJson())
+                                            });
+                                      }
                                     }
-                                  }
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      size: 18,
-                                    ),
-                                    Text('Edit')
-                                  ],
-                                ))
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.edit,
+                                        size: 18,
+                                      ),
+                                      Text('Edit')
+                                    ],
+                                  ))
                           ],
                         ),
                         VerticalSmallGap(),

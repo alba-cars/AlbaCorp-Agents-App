@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -23,6 +24,7 @@ class AddLeadScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d(data);
     return BlocProvider(
       create: (context) => getIt<AddLeadCubit>(param1: data),
       child: _AddLeadScreenLayout(),

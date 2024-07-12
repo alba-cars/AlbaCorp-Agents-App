@@ -21,6 +21,7 @@ mixin _$CallFeedbackState {
   String? get feedback => throw _privateConstructorUsedError;
   AppStatus get addActivityStatus => throw _privateConstructorUsedError;
   bool get requestNumber => throw _privateConstructorUsedError;
+  String? get number => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CallFeedbackStateCopyWith<CallFeedbackState> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $CallFeedbackStateCopyWith<$Res> {
       Lead? lead,
       String? feedback,
       AppStatus addActivityStatus,
-      bool requestNumber});
+      bool requestNumber,
+      String? number});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -61,6 +63,7 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
     Object? feedback = freezed,
     Object? addActivityStatus = null,
     Object? requestNumber = null,
+    Object? number = freezed,
   }) {
     return _then(_value.copyWith(
       checkLeadStatus: null == checkLeadStatus
@@ -83,6 +86,10 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
           ? _value.requestNumber
           : requestNumber // ignore: cast_nullable_to_non_nullable
               as bool,
+      number: freezed == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -112,7 +119,8 @@ abstract class _$$CallFeedbackStateImplCopyWith<$Res>
       Lead? lead,
       String? feedback,
       AppStatus addActivityStatus,
-      bool requestNumber});
+      bool requestNumber,
+      String? number});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -134,6 +142,7 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
     Object? feedback = freezed,
     Object? addActivityStatus = null,
     Object? requestNumber = null,
+    Object? number = freezed,
   }) {
     return _then(_$CallFeedbackStateImpl(
       checkLeadStatus: null == checkLeadStatus
@@ -156,6 +165,10 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
           ? _value.requestNumber
           : requestNumber // ignore: cast_nullable_to_non_nullable
               as bool,
+      number: freezed == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -168,7 +181,8 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
       this.lead,
       this.feedback,
       this.addActivityStatus = AppStatus.init,
-      this.requestNumber = false});
+      this.requestNumber = false,
+      this.number});
 
   @override
   @JsonKey()
@@ -183,10 +197,12 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
   @override
   @JsonKey()
   final bool requestNumber;
+  @override
+  final String? number;
 
   @override
   String toString() {
-    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber)';
+    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number)';
   }
 
   @override
@@ -202,12 +218,13 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
             (identical(other.addActivityStatus, addActivityStatus) ||
                 other.addActivityStatus == addActivityStatus) &&
             (identical(other.requestNumber, requestNumber) ||
-                other.requestNumber == requestNumber));
+                other.requestNumber == requestNumber) &&
+            (identical(other.number, number) || other.number == number));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, checkLeadStatus, lead, feedback,
-      addActivityStatus, requestNumber);
+      addActivityStatus, requestNumber, number);
 
   @JsonKey(ignore: true)
   @override
@@ -223,7 +240,8 @@ abstract class _CallFeedbackState implements CallFeedbackState {
       final Lead? lead,
       final String? feedback,
       final AppStatus addActivityStatus,
-      final bool requestNumber}) = _$CallFeedbackStateImpl;
+      final bool requestNumber,
+      final String? number}) = _$CallFeedbackStateImpl;
 
   @override
   AppStatus get checkLeadStatus;
@@ -235,6 +253,8 @@ abstract class _CallFeedbackState implements CallFeedbackState {
   AppStatus get addActivityStatus;
   @override
   bool get requestNumber;
+  @override
+  String? get number;
   @override
   @JsonKey(ignore: true)
   _$$CallFeedbackStateImplCopyWith<_$CallFeedbackStateImpl> get copyWith =>
