@@ -33,6 +33,7 @@ import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
 import '../../widgets/fields/commission_field.dart';
+import '../../widgets/fields/multi_select_autocomplete_field.dart';
 
 class AddListingScreen extends StatelessWidget {
   static const routeName = '/addListingScreen';
@@ -400,17 +401,29 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   return state.amenityList;
                 },
                 builder: (context, amenityList) {
-                  return MultiDropDownField(
+                  return MultiSelectAutoCompleteField(
                     label: 'Amenities',
-                    items: amenityList
-                        .map((e) => {'label': e.amenity, 'value': e.id})
-                        .toList(),
                     name: "amenities",
-                    displayOption: (option) =>
-                        option['label']?.toString() ?? '',
-                    valueTransformer: (p0) {
-                      return p0?.map((e) => e["value"]).toList();
+                    displayStringForOption: (option) => option['label']?.toString() ?? '',
+                    optionsBuilder: (v) async {
+                      var list = amenityList
+                          .map((e) => {'label': e.amenity, 'value': e.id})
+                          .toList();
+                      if (v.text.trim().isNotEmpty) {
+                        list = list
+                            .where((e) => e["label"]
+                            .toString()
+                            .toLowerCase()
+                            .contains(v.text.toString()))
+                            .toList();
+                      }
+
+                      return list;
                     },
+                    // valueTransformer: (p0) {
+                    //   TODO: Check this
+                    //   return p0?.map((k,v) => v["value"]).toList();
+                    // },
                   );
                 },
               ),

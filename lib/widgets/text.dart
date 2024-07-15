@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/widgets/space.dart';
 
@@ -132,6 +131,32 @@ class SmallText extends StatelessWidget {
           .textTheme
           .bodySmall
           ?.copyWith(fontSize: 12, color: color, fontWeight: fontWeight),
+    );
+  }
+}
+
+class LinkText extends StatelessWidget {
+  const LinkText(
+      {super.key,
+      required this.text,
+      this.color = Colors.black,
+      this.textAlign,
+      this.fontWeight});
+  final String text;
+  final Color color;
+  final TextAlign? textAlign;
+  final FontWeight? fontWeight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: textAlign,
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          fontSize: 10,
+          color: color,
+          fontWeight: fontWeight,
+          decoration: TextDecoration.underline),
     );
   }
 }

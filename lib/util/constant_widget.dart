@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -191,6 +190,7 @@ Widget defaultTextField(
     bool suffix = false,
     String? suffixImage,
     ValueChanged<String>? onChanged,
+    VoidCallback? onSuffixTap,
     double? suffixwidth,
     double? suffixheight}) {
   return TextFormField(
@@ -230,9 +230,17 @@ Widget defaultTextField(
                 .paddingSymmetric(horizontal: 16.h)
             : getHorSpace(16.h),
         suffixIcon: suffix
-            ? getSvgImage(suffixImage!,
-                    width: suffixwidth ?? 24.h, height: suffixheight ?? 24.h)
-                .paddingSymmetric(horizontal: 16.h)
+            ? GestureDetector(
+                onTap: () {
+                  if (onSuffixTap != null) {
+                    onSuffixTap();
+                  }
+                },
+                child: getSvgImage(suffixImage!,
+                        width: suffixwidth ?? 24.h,
+                        height: suffixheight ?? 24.h)
+                    .paddingSymmetric(horizontal: 16.h),
+              )
             : getHorSpace(16.h),
         prefixIconConstraints: BoxConstraints(maxHeight: 24.h, maxWidth: 60.h),
         suffixIconConstraints: suffix

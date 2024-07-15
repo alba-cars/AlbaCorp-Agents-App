@@ -25,6 +25,7 @@ import '../../app/call_bloc/call_bloc.dart';
 import '../../util/color_category.dart';
 import '../../widgets/button.dart';
 import '../../widgets/snackbar.dart';
+import '../lead_detail_screen/lead_detail_screen.dart';
 import 'widgets/feedback_dialog.dart';
 
 class TaskDetailScreen extends StatefulWidget {
@@ -465,6 +466,20 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   LabelText(
                                                     text: 'Last 3 activities',
                                                   ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        context.pushNamed(
+                                                            LeadDetailScreen
+                                                                .routeName,
+                                                            pathParameters: {
+                                                              'id': task.lead
+                                                                      ?.id ??
+                                                                  "",
+                                                              'index': "1"
+                                                            });
+                                                      },
+                                                      child: LinkText(
+                                                          text: "View all"))
                                                 ],
                                               ),
                                               VerticalSmallGap(),
