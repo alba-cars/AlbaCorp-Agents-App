@@ -119,7 +119,7 @@ class InfoTabView extends StatelessWidget {
                               color: Colors.blueGrey[100]),
                           child: SmallText(text: deal?.status ?? ''),
                         ),
-                        if (deal?.status == 'Collecting Documents') ...[
+                        if (deal?.status == 'Created') ...[
                           VerticalSmallGap(
                             adjustment: 1,
                           ),
@@ -132,7 +132,7 @@ class InfoTabView extends StatelessWidget {
                                       'id': deal!.id,
                                     },
                                     queryParameters: {
-                                      'userId': deal.client!.id
+                                      'userId': deal.client?.id
                                     });
                                 if (success == true) {
                                   context.read<DealDetailsCubit>().getDeal();

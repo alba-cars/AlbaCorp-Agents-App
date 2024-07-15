@@ -540,7 +540,7 @@ class CollectDocumentsTab extends StatelessWidget {
                 DocumentSelectionField(
                   onSelected: (v) {},
                   isEditting: false,
-                  name: 'ejari',
+                  name: 'Ejari',
                   label: 'Ejari',
                 ),
                 VerticalSmallGap(),

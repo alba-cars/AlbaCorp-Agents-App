@@ -147,9 +147,12 @@ class _CardPickerDialogState<T extends Object>
   Future<dynamic> showCardDialog() {
     final ValueNotifier<String> valueNotifier = ValueNotifier('');
     widget.optionsBuilder.call(TextEditingValue(text: ''));
-    return showDialog(
+    return showGeneralDialog(
+        barrierDismissible: true,
+        barrierLabel: "card selector dialog",
         context: context,
-        builder: (context) {
+        useRootNavigator: false,
+        pageBuilder: (context, anim1, anim2) {
           return Dialog(
             child: Padding(
               padding: const EdgeInsets.all(20.0),

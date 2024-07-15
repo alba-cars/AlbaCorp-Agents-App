@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -160,6 +161,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                     mode = CardAction.ManuelSwipe;
                   },
                   onSwipeEnd: (previousIndex, targetIndex, activity) async {
+                    if (activity is Unswipe) {
+                      return;
+                    }
                     if (targetIndex == tasks.length - 1) {
                       context.read<TaskDetailCubit>().getSortedActivities();
                     }
@@ -207,6 +211,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                     context.read<TaskDetailCubit>().state.task!,
                               ));
                       if (val == null && mounted) {
+                        mode = CardAction.Skip;
                         _appinioSwiperController.unswipe();
                       } else {
                         context
