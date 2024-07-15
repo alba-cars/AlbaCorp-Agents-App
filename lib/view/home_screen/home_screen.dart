@@ -226,6 +226,7 @@ class _HomePageLayoutState extends State<HomePageLayout> {
                         },
                         builder: (context, listType) {
                           return SegmentedButton<ListType>(
+                            showSelectedIcon: false,
                             segments: [
                               ButtonSegment(
                                   value: ListType.Categorized,

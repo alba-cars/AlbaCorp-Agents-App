@@ -17,7 +17,7 @@ class Activity with _$Activity {
     required String type,
     String? description,
     required DateTime date,
-    DateTime? completedDate,
+    @JsonKey(name: "completed_date") DateTime? completedDate,
     bool? isScheduled,
     @Default('Pending') String status,
     List<String>? preferredLanguages,

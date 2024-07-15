@@ -30,7 +30,6 @@ Object userIdFromJson(Map p1, String p2) {
 }
 
 Object userFromJson(Map p1, String p2) {
-  Logger().d(p1[p2] == null ? p1 : "");
   return p1[p2] is Map<String, dynamic>
       ? p1[p2]
       : p1['userId'] is Map<String, dynamic>

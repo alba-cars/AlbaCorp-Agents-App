@@ -26,7 +26,8 @@ class FirebaseMessagingService {
     print("Handling a message: ${message.messageId}");
     if (message.data['type'] == 'call') {
       NotificationService.showCallNotification(
-        message.data['callerName'] ?? 'Unknown',
+        message.notification?.title ?? 'Unknown',
+        message.notification?.body ?? '',
         message.data['phoneNumber'] ?? '',
       );
     } else if (message.data['type'] == 'ImportantActivity') {
@@ -46,7 +47,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
   if (message.data['type'] == 'call') {
     await NotificationService.showCallNotification(
-      message.data['callerName'] ?? 'Unknown',
+      message.notification?.title ?? 'Unknown',
+      message.notification?.body ?? '',
       message.data['phoneNumber'] ?? '',
     );
   } else if (message.data['type'] == 'ImportantActivity') {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/hot_leads.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
@@ -509,7 +510,7 @@ class LeadItem extends StatelessWidget {
                   context.read<LeadsCubit>().addToSelection(context, lead);
                 } else {
                   context.pushNamed(LeadDetailScreen.routeName,
-                      pathParameters: {'id': lead.id});
+                      pathParameters: {'id': lead.id, 'index': '0'});
                 }
               },
               onLongPress: () {

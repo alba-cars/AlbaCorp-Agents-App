@@ -116,17 +116,21 @@ class SmallText extends StatelessWidget {
       required this.text,
       this.color = Colors.black,
       this.textAlign,
-      this.fontWeight});
+      this.fontWeight,
+      this.maxLines});
   final String text;
   final Color color;
   final TextAlign? textAlign;
   final FontWeight? fontWeight;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       textAlign: textAlign,
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
       style: Theme.of(context)
           .textTheme
           .bodySmall

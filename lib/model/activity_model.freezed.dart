@@ -31,6 +31,7 @@ mixin _$Activity {
   String get type => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
+  @JsonKey(name: "completed_date")
   DateTime? get completedDate => throw _privateConstructorUsedError;
   bool? get isScheduled => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
@@ -65,7 +66,7 @@ abstract class $ActivityCopyWith<$Res> {
       String type,
       String? description,
       DateTime date,
-      DateTime? completedDate,
+      @JsonKey(name: "completed_date") DateTime? completedDate,
       bool? isScheduled,
       String status,
       List<String>? preferredLanguages,
@@ -235,7 +236,7 @@ abstract class _$$ActivityImplCopyWith<$Res>
       String type,
       String? description,
       DateTime date,
-      DateTime? completedDate,
+      @JsonKey(name: "completed_date") DateTime? completedDate,
       bool? isScheduled,
       String status,
       List<String>? preferredLanguages,
@@ -387,7 +388,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       required this.type,
       this.description,
       required this.date,
-      this.completedDate,
+      @JsonKey(name: "completed_date") this.completedDate,
       this.isScheduled,
       this.status = 'Pending',
       final List<String>? preferredLanguages,
@@ -426,6 +427,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
   @override
   final DateTime date;
   @override
+  @JsonKey(name: "completed_date")
   final DateTime? completedDate;
   @override
   final bool? isScheduled;
@@ -594,7 +596,7 @@ abstract class _Activity implements Activity {
       required final String type,
       final String? description,
       required final DateTime date,
-      final DateTime? completedDate,
+      @JsonKey(name: "completed_date") final DateTime? completedDate,
       final bool? isScheduled,
       final String status,
       final List<String>? preferredLanguages,
@@ -631,6 +633,7 @@ abstract class _Activity implements Activity {
   @override
   DateTime get date;
   @override
+  @JsonKey(name: "completed_date")
   DateTime? get completedDate;
   @override
   bool? get isScheduled;

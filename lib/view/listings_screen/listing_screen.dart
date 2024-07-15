@@ -477,15 +477,19 @@ class _ListingsTabState extends State<ListingsTab> {
                                               adjustment: 0.5,
                                             ),
                                             SmallText(
-                                                text: listing.communityName
-                                                        ?.trim() ??
-                                                    ''),
+                                              text: listing.communityName
+                                                      ?.trim() ??
+                                                  '',
+                                              maxLines: 2,
+                                            ),
                                             if (listing.buildingName !=
                                                 null) ...[
                                               SmallText(
-                                                  text: listing.buildingName
-                                                          ?.trim() ??
-                                                      ''),
+                                                text: listing.buildingName
+                                                        ?.trim() ??
+                                                    '',
+                                                maxLines: 2,
+                                              ),
                                             ],
                                             VerticalSmallGap(
                                               adjustment: 0.5,

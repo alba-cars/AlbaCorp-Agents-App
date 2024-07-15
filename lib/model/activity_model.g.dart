@@ -19,9 +19,9 @@ _$ActivityImpl _$$ActivityImplFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       description: json['description'] as String?,
       date: DateTime.parse(json['date'] as String),
-      completedDate: json['completedDate'] == null
+      completedDate: json['completed_date'] == null
           ? null
-          : DateTime.parse(json['completedDate'] as String),
+          : DateTime.parse(json['completed_date'] as String),
       isScheduled: json['isScheduled'] as bool?,
       status: json['status'] as String? ?? 'Pending',
       preferredLanguages: (json['preferredLanguages'] as List<dynamic>?)
@@ -54,7 +54,7 @@ Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
       'type': instance.type,
       'description': instance.description,
       'date': instance.date.toIso8601String(),
-      'completedDate': instance.completedDate?.toIso8601String(),
+      'completed_date': instance.completedDate?.toIso8601String(),
       'isScheduled': instance.isScheduled,
       'status': instance.status,
       'preferredLanguages': instance.preferredLanguages,

@@ -46,13 +46,13 @@ class NotificationService {
   }
 
   static Future<void> showCallNotification(
-      String callerName, String phoneNumber) async {
+      String title, String body, String phoneNumber) async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: 1,
         channelKey: 'call_channel',
-        title: 'Incoming Call',
-        body: callerName,
+        title: title,
+        body: body,
         category: NotificationCategory.Call,
         wakeUpScreen: true,
         fullScreenIntent: true,
