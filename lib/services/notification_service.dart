@@ -67,9 +67,9 @@ class NotificationService {
           autoDismissible: true,
         ),
         NotificationActionButton(
-          key: 'DECLINE',
-          label: 'Decline',
-          color: Colors.red,
+          key: 'WHATSAPP',
+          label: 'WhatsApp',
+          color: Colors.blue,
           autoDismissible: true,
         ),
       ],
@@ -100,6 +100,11 @@ class NotificationService {
       if (phoneNumber != null) {
         await makePhoneCall(phoneNumber);
       }
+    } else if (receivedAction.buttonKeyPressed == 'WHATSAPP') {
+      final phoneNumber = receivedAction.payload?['phone_number'];
+      if (phoneNumber != null) {
+        await makeWhatsApp(phoneNumber);
+      }
     }
   }
 
@@ -109,6 +114,14 @@ class NotificationService {
       scheme: 'tel',
       path: phoneNumber,
     );
+    await launchUrl(launchUri);
+  }
+
+  static Future<void> makeWhatsApp(String phoneNumber) async {
+    final Uri launchUri = Uri(
+        scheme: 'whatsapp',
+        path: 'send',
+        queryParameters: {'phone': phoneNumber.replaceFirst('+', '')});
     await launchUrl(launchUri);
   }
 }

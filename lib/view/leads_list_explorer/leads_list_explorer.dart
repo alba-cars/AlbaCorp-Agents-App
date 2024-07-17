@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
@@ -181,6 +183,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         Padding(
@@ -200,15 +203,18 @@ class _ExplorerTabState extends State<ExplorerTab> {
         BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
           builder: (context, state) {
             if (!state.selectModeEnabled) {
-              return  Padding(
+              return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(6),color: Colors.blueGrey.withOpacity(.4)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.blueGrey.withOpacity(.4)),
                   height: 56,
-
-                  child:  ListTile(
+                  child: ListTile(
                       leading: Icon(Icons.info_outline),
-                      title: Text("Press and hold on any leads card for enabling multi select",style: TextStyle(fontSize: 12))),
+                      title: Text(
+                          "Press and hold on any leads card for enabling multi select",
+                          style: TextStyle(fontSize: 12))),
                 ),
               );
             }
@@ -247,7 +253,6 @@ class _ExplorerTabState extends State<ExplorerTab> {
             );
           },
         ),
-
         Expanded(
           child: BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
             // buildWhen: (previous, current) =>
@@ -361,13 +366,6 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                         children: [
                                           Expanded(
                                             child: InkWell(
-                                              // onTap: () {
-                                              // context.pushNamed(
-                                              //     LeadDetailScreen.routeName,
-                                              //     pathParameters: {
-                                              //       'id': leadCard.id
-                                              //     });
-                                              // },
                                               child: LabelText(
                                                 text: leadCard.lead.firstName +
                                                     " " +
@@ -378,6 +376,26 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                               ),
                                             ),
                                           ),
+                                          if (leadCard.lead.isNewTag) ...[
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.h,
+                                                  vertical: 1.h),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: colorScheme.error),
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  color: colorScheme.error),
+                                              child: SmallText(
+                                                text: 'New',
+                                                color: colorScheme.onError,
+                                              ),
+                                            ),
+                                          ]
                                         ],
                                       ),
                                       InfoLabelValue(

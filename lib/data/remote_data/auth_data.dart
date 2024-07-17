@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/model/agent_model.dart';
+import 'package:real_estate_app/model/global_settings_model.dart';
 import 'package:real_estate_app/model/user.dart';
 import 'package:real_estate_app/util/api_error.dart';
 import 'package:real_estate_app/util/result.dart';
@@ -70,5 +71,20 @@ class AuthData implements AuthRepo {
   Future<Result<void>> logout() {
     // TODO: implement logout
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Result<GlobalSettings>> getSettings() async {
+    try {
+      var response = await _dio.get(
+        'v1/settings',
+      );
+      Map<String, dynamic> data = response.data?['data']?['global'];
+
+      GlobalSettings agent = GlobalSettings.fromJson(data);
+      return Success(agent);
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
   }
 }
