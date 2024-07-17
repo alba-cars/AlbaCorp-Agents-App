@@ -1,6 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
+import '../app/auth_bloc/auth_bloc.dart';
+import '../service_locator/injectable.dart';
 import 'agent_model.dart';
 import 'property_type_model.dart';
 
@@ -80,4 +83,21 @@ class Preference with _$Preference {
 
   factory Preference.fromJson(Map<String, dynamic> json) =>
       _$PreferenceFromJson(json);
+}
+
+extension CheckNew on Lead {
+  bool get isNewTag {
+    final dateLimit = int.tryParse(
+            getIt<AuthBloc>().state.globalSettings?.newLeadFlagDateLimit ??
+                '') ??
+        7;
+    if (leadStatus == LeadStatus.Fresh &&
+        createdAt
+                ?.isAfter(DateTime.now().subtract(Duration(days: dateLimit))) ==
+            true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

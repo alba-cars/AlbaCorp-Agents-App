@@ -8,6 +8,7 @@ import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/beds_baths_optional_list.dart';
+import 'package:real_estate_app/constants/building_optional_propertytype_list.dart';
 import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
@@ -372,30 +373,28 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                 name: 'subCommunity',
                 label: 'Sub Community',
               ),
-              if (widget.propertyTypeList
+              AppAutoComplete<Building>(
+                  controller: _controller,
+                  name: 'building_id',
+                  label: 'Building Name',
+                  isRequired: (!buildingOptionalPropertyTypes.contains(widget
+                      .propertyTypeList
                       .firstWhereOrNull(
                           (element) => element.id == val['property_type_id'])
-                      ?.propertyType
-                      .contains(RegExp('Apartment|Flat')) ??
-                  false)
-                AppAutoComplete<Building>(
-                    controller: _controller,
-                    name: 'building_id',
-                    label: 'Building Name',
-                    isRequired: true,
-                    valueTransformer: (p0) => p0?.id,
-                    displayStringForOption: (p0) => p0.name,
-                    optionsBuilder: (v) async {
-                      final list =
-                          await context.read<AddListingCubit>().getBuildings(
-                                search: v.text,
-                              );
-                      return list.where((element) =>
-                          (element.name
-                              .toLowerCase()
-                              .contains(v.text.toLowerCase())) &&
-                          (element.communityId == val['community_id']));
-                    }),
+                      ?.propertyType)),
+                  valueTransformer: (p0) => p0?.id,
+                  displayStringForOption: (p0) => p0.name,
+                  optionsBuilder: (v) async {
+                    final list =
+                        await context.read<AddListingCubit>().getBuildings(
+                              search: v.text,
+                            );
+                    return list.where((element) =>
+                        (element.name
+                            .toLowerCase()
+                            .contains(v.text.toLowerCase())) &&
+                        (element.communityId == val['community_id']));
+                  }),
               BlocSelector<AddListingCubit, AddListingState, List<Amenity>>(
                 selector: (state) {
                   return state.amenityList;
@@ -404,7 +403,8 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   return MultiSelectAutoCompleteField(
                     label: 'Amenities',
                     name: "amenities",
-                    displayStringForOption: (option) => option['label']?.toString() ?? '',
+                    displayStringForOption: (option) =>
+                        option['label']?.toString() ?? '',
                     optionsBuilder: (v) async {
                       var list = amenityList
                           .map((e) => {'label': e.amenity, 'value': e.id})
@@ -412,9 +412,9 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                       if (v.text.trim().isNotEmpty) {
                         list = list
                             .where((e) => e["label"]
-                            .toString()
-                            .toLowerCase()
-                            .contains(v.text.toString()))
+                                .toString()
+                                .toLowerCase()
+                                .contains(v.text.toString()))
                             .toList();
                       }
 

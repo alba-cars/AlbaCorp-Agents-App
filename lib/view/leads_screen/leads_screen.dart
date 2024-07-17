@@ -590,6 +590,23 @@ class LeadItem extends StatelessWidget {
                                   color: colorScheme.errorContainer),
                               child: SmallText(text: 'DND'),
                             ),
+                          if (lead.isNewTag) ...[
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4.h, vertical: 1.h),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: colorScheme.error),
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: colorScheme.error),
+                              child: SmallText(
+                                text: 'New',
+                                color: colorScheme.onError,
+                              ),
+                            ),
+                          ]
                         ],
                       ),
                       VerticalSmallGap(

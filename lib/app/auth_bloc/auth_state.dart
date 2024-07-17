@@ -12,5 +12,6 @@ class AuthState with _$AuthState {
     String? lastCalledNumber,
     AppConfig? appConfig,
     @Default(false) bool showFeedbackScreen,
+    GlobalSettings? globalSettings,
   }) = _AuthState;
 }

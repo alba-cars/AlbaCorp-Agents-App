@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -578,6 +579,23 @@ class ActivityListItem extends StatelessWidget {
                                 color: colorScheme.errorContainer),
                             child: SmallText(text: 'DND'),
                           ),
+                        if (activity.lead?.isNewTag == true) ...[
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4.h, vertical: 1.h),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: colorScheme.error),
+                                borderRadius: BorderRadius.circular(4),
+                                color: colorScheme.error),
+                            child: SmallText(
+                              text: 'New',
+                              color: colorScheme.onError,
+                            ),
+                          ),
+                        ]
                       ],
                     ),
                     VerticalSmallGap(

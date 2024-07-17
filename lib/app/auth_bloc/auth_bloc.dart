@@ -13,6 +13,7 @@ import 'package:real_estate_app/core/helpers/app_config_helper.dart';
 import 'package:real_estate_app/core/models/app_config/AppConfig.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/data/repository/notification_repo.dart';
+import 'package:real_estate_app/model/global_settings_model.dart';
 import 'package:real_estate_app/model/notification_model.dart';
 import 'package:real_estate_app/model/pending_call_feedback.dart';
 import 'package:real_estate_app/model/user.dart';
@@ -41,7 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_CheckForImportantActivity>(_checkForImportantActivity);
     on<_CheckForCallFeedback>(_checkForCallFeedback);
     on<_RemoveLastCallDetails>(_removeLastCallDetails);
-
+    on<_GetSettings>(_getSettings);
     _fcmForegroundStream = FirebaseMessaging.onMessage.listen(onNotification);
     _fcmForegroundStream =
         FirebaseMessaging.onMessageOpenedApp.listen(onNotification);
@@ -80,6 +81,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
     add(AuthEvent.checkForImportantActivity());
+    add(_GetSettings());
     await getAgentData(emit);
   }
 
@@ -97,6 +99,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(state.copyWith(
             authStatus: AuthStatus.Authenticated, user: s.value));
         await getAgentData(emit);
+        add(AuthEvent.checkForImportantActivity());
+        add(_GetSettings());
         break;
       case (Error _):
         emit(state.copyWith(
@@ -203,5 +207,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     getIt<SharedPreferences>().remove('calledNumber');
 
     emit(state.copyWith(showFeedbackScreen: false, lastCalledNumber: null));
+  }
+
+  FutureOr<void> _getSettings(
+      _GetSettings event, Emitter<AuthState> emit) async {
+    final result = await _authRepo.getSettings();
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(globalSettings: s.value));
+        break;
+      case (Error _):
+        emit(state.copyWith());
+        break;
+    }
   }
 }
