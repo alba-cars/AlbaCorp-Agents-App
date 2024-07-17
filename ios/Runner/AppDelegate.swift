@@ -2,7 +2,6 @@ import Flutter
 import UIKit
 import GoogleMaps
 import awesome_notifications
-import shared_preferences_ios
 
 
 @UIApplicationMain
@@ -19,9 +18,7 @@ import shared_preferences_ios
     // This function registers the desired plugins to be used within a notification background action
       SwiftAwesomeNotificationsPlugin.setPluginRegistrantCallback { registry in          
           SwiftAwesomeNotificationsPlugin.register(
-            with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)          
-          FLTSharedPreferencesPlugin.register(
-            with: registry.registrar(forPlugin: "io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin")!)
+            with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)
       }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
