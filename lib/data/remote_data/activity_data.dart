@@ -285,7 +285,7 @@ class ActivityData implements ActivityRepo {
         if (filterRemoved != null) ...filterRemoved,
         "status": ["Pending", 'Overdue'],
         if (paginator != null) 'page': paginator.currentPage + 1,
-        'limit': limit,
+        'limit': limit ?? 15,
         if (nameSearch != null) 'nameSearch': nameSearch
       };
       final response = await _dio.get(url, queryParameters: query);
