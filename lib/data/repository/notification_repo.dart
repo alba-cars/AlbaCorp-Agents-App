@@ -6,4 +6,5 @@ abstract class NotificationRepo {
   Future<Result<NotificationModel>> getNotification(String ticketId);
   Future<Result<void>> addNotification(
       {required NotificationModel notification});
+  Future<Result<bool>> isNotificationReceived({required String notificationId});
 }

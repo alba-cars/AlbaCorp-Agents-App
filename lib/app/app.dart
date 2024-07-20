@@ -57,6 +57,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+      getIt<AuthBloc>().add(AuthEvent.checkForImportantActivity());
     }
     super.didChangeAppLifecycleState(state);
   }

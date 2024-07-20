@@ -81,7 +81,12 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                       TitleText(
                           text: widget.direction == DismissDirection.endToStart
                               ? 'Leave Feedback'
-                              : 'Complete Task?'),
+                              : switch (widget.mode) {
+                                  CardAction.Heart => 'Interested',
+                                  CardAction.Charge => 'Make Prospect',
+                                  CardAction.Star => 'Deal',
+                                  _ => 'Complete task'
+                                }),
                       IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {

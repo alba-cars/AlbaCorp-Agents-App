@@ -18,10 +18,10 @@ class TitleText extends StatelessWidget {
     return Text(
       text,
       textAlign: textAlign,
-      style: Theme.of(context)
-          .textTheme
-          .titleLarge
-          ?.copyWith(fontWeight: fontWeight ?? FontWeight.w500, color: color),
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontSize: 15,
+          fontWeight: fontWeight ?? FontWeight.w500,
+          color: color),
     );
   }
 }
@@ -46,7 +46,7 @@ class LabelText extends StatelessWidget {
         maxLines: maxLines,
         overflow: (maxLines != null) ? TextOverflow.ellipsis : null,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              fontSize: 15,
+              fontSize: 13,
               fontWeight: FontWeight.w600,
               color: color,
             ),
@@ -86,7 +86,7 @@ class BlockTitleText extends StatelessWidget {
         text,
         textAlign: textAlign,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              fontSize: 18,
+              fontSize: 15,
               fontWeight: FontWeight.w600,
               color: color,
             ),
@@ -134,7 +134,7 @@ class SmallText extends StatelessWidget {
       style: Theme.of(context)
           .textTheme
           .bodySmall
-          ?.copyWith(fontSize: 12, color: color, fontWeight: fontWeight),
+          ?.copyWith(fontSize: 9, color: color, fontWeight: fontWeight),
     );
   }
 }
@@ -185,7 +185,7 @@ class NormalText extends StatelessWidget {
       text,
       textAlign: textAlign,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          fontSize: fontSize ?? 13, color: color, fontWeight: fontWeight),
+          fontSize: fontSize ?? 11, color: color, fontWeight: fontWeight),
     );
   }
 }

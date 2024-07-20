@@ -23,6 +23,7 @@ mixin _$NotificationModel {
   String? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get subTitle => throw _privateConstructorUsedError;
+  String? get notificationId => throw _privateConstructorUsedError;
   bool get isRead => throw _privateConstructorUsedError;
   @JsonKey(name: 'createdAt')
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $NotificationModelCopyWith<$Res> {
       {String? id,
       String title,
       String? subTitle,
+      String? notificationId,
       bool isRead,
       @JsonKey(name: 'createdAt') DateTime? createdAt});
 }
@@ -63,6 +65,7 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
     Object? id = freezed,
     Object? title = null,
     Object? subTitle = freezed,
+    Object? notificationId = freezed,
     Object? isRead = null,
     Object? createdAt = freezed,
   }) {
@@ -78,6 +81,10 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
       subTitle: freezed == subTitle
           ? _value.subTitle
           : subTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      notificationId: freezed == notificationId
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
               as String?,
       isRead: null == isRead
           ? _value.isRead
@@ -103,6 +110,7 @@ abstract class _$$NotificationModelImplCopyWith<$Res>
       {String? id,
       String title,
       String? subTitle,
+      String? notificationId,
       bool isRead,
       @JsonKey(name: 'createdAt') DateTime? createdAt});
 }
@@ -121,6 +129,7 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = null,
     Object? subTitle = freezed,
+    Object? notificationId = freezed,
     Object? isRead = null,
     Object? createdAt = freezed,
   }) {
@@ -136,6 +145,10 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
       subTitle: freezed == subTitle
           ? _value.subTitle
           : subTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      notificationId: freezed == notificationId
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
               as String?,
       isRead: null == isRead
           ? _value.isRead
@@ -156,6 +169,7 @@ class _$NotificationModelImpl implements _NotificationModel {
       {this.id,
       required this.title,
       this.subTitle,
+      this.notificationId,
       this.isRead = false,
       @JsonKey(name: 'createdAt') this.createdAt});
 
@@ -169,6 +183,8 @@ class _$NotificationModelImpl implements _NotificationModel {
   @override
   final String? subTitle;
   @override
+  final String? notificationId;
+  @override
   @JsonKey()
   final bool isRead;
   @override
@@ -177,7 +193,7 @@ class _$NotificationModelImpl implements _NotificationModel {
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, title: $title, subTitle: $subTitle, isRead: $isRead, createdAt: $createdAt)';
+    return 'NotificationModel(id: $id, title: $title, subTitle: $subTitle, notificationId: $notificationId, isRead: $isRead, createdAt: $createdAt)';
   }
 
   @override
@@ -189,6 +205,8 @@ class _$NotificationModelImpl implements _NotificationModel {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.subTitle, subTitle) ||
                 other.subTitle == subTitle) &&
+            (identical(other.notificationId, notificationId) ||
+                other.notificationId == notificationId) &&
             (identical(other.isRead, isRead) || other.isRead == isRead) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
@@ -196,8 +214,8 @@ class _$NotificationModelImpl implements _NotificationModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, subTitle, isRead, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, subTitle, notificationId, isRead, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -219,6 +237,7 @@ abstract class _NotificationModel implements NotificationModel {
           {final String? id,
           required final String title,
           final String? subTitle,
+          final String? notificationId,
           final bool isRead,
           @JsonKey(name: 'createdAt') final DateTime? createdAt}) =
       _$NotificationModelImpl;
@@ -232,6 +251,8 @@ abstract class _NotificationModel implements NotificationModel {
   String get title;
   @override
   String? get subTitle;
+  @override
+  String? get notificationId;
   @override
   bool get isRead;
   @override

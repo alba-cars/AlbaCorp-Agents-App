@@ -30,5 +30,11 @@ class HomeState with _$HomeState {
     Paginator? sortedActivityPaginator,
     @Default(AppStatus.init) AppStatus updateTaskStatus,
     String? updateTaskError,
+    String? nameSearch,
+    Map<String, dynamic>? activityFilter,
+    @Default([]) List<Community> communityList,
+    @Default(AppStatus.init) AppStatus getCommunityListStatus,
+    @Default([]) List<Building> buildingList,
+    @Default(AppStatus.init) AppStatus getBuildingListStatus,
   }) = _HomeState;
 }

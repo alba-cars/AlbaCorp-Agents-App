@@ -96,7 +96,7 @@ class ExplorerData implements ExplorerRepo {
       }
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
-        'page': paginator?.currentPage ?? 0 + 1,
+        'page': (paginator?.currentPage ?? 0) + 1,
         if (filterRemoved != null) ...filterRemoved,
         if (search != null) 'search': search,
         // if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable

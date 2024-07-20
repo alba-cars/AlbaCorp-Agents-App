@@ -12,19 +12,25 @@ abstract class ActivityRepo {
       String? propertyId,
       String? description,
       bool isCompleted = false});
-      Future<Result<void>> createCallFeedbackActivity(
-      {required String leadId,
-     
-    required  String feedback,
-     });
+  Future<Result<void>> createCallFeedbackActivity({
+    required String leadId,
+    required String feedback,
+  });
   Future<Result<Activity>> getActivity({
     required String activityId,
   });
   Future<Result<List<Activity>>> fetchActivities(
-      {required int filterCode, LeadStatus? status, Paginator? paginator});
-  Future<Result<List<Activity>>> fetchActivitiesSorted({Paginator? paginator});
+      {required int filterCode,
+      LeadStatus? status,
+      String? nameSearch,
+      Paginator? paginator});
+  Future<Result<List<Activity>>> fetchActivitiesSorted(
+      {Map<String, dynamic>? filter,
+      int? limit,
+      String? nameSearch,
+      Paginator? paginator});
   Future<Result<List<Activity>>> fetchActivitiesImportant(
-      {Paginator? paginator});
+      {int? limit, Paginator? paginator});
   Future<Result<int>> completedActivitiesCount();
   Future<Result<int>> pendingActivitiesCount();
   Future<Result<int>> pendingViewingActivitiesCount();

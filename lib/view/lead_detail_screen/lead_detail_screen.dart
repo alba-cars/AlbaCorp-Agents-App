@@ -6,6 +6,7 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/deals_tab_view.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/property_cards_tab_view.dart';
+import 'package:real_estate_app/widgets/text.dart';
 
 import '../../model/lead_model.dart';
 import 'widgets/about_tab_view.dart';
@@ -61,7 +62,11 @@ class _LeadDetailScreenLayoutState extends State<LeadDetailScreenLayout>
               headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                title: Text('Lead Details'),
+                title: BlockTitleText(
+                  text: 'Lead Details',
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                centerTitle: true,
                 backgroundColor: Colors.white,
                 foregroundColor: Theme.of(context).colorScheme.primary,
               ),

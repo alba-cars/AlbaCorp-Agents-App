@@ -284,10 +284,11 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
 
     final result = await _activityRepo.fetchActivitiesSorted(
-        paginator: state.sortedActivityPaginator);
+        limit: 35, paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
-        final list = List<Activity>.from(s.value);
+        final list = List<Activity>.from(s.value)
+          ..sort((a, b) => a.activityWeight.compareTo(b.activityWeight));
         list.removeWhere((element) => element.id == state.taskId);
         emit(state.copyWith(
             sortedActivity: [...state.sortedActivity, ...list],

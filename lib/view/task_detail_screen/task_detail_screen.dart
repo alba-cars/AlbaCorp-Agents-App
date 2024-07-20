@@ -100,6 +100,27 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
       appBar: AppBar(
         title: Text('Task'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: BlocSelector<AuthBloc, AuthState, Set<String>?>(
+          selector: (state) {
+            return state.veryImportantActivities;
+          },
+          builder: (context, veryImportantActivities) {
+            if (veryImportantActivities == null ||
+                veryImportantActivities.isEmpty == true) {
+              return IconButton(
+                  onPressed: () {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.goNamed(home.HomePage.routeName);
+                    }
+                  },
+                  icon: Icon(Icons.arrow_back));
+            }
+            return SizedBox();
+          },
+        ),
       ),
       backgroundColor: Colors.blueGrey[100],
       body: Padding(

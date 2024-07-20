@@ -63,10 +63,10 @@ class AppRouter {
               state.matchedLocation == Routes.homeRoute ||
               state.matchedLocation == Routes.loginRoute) {
             return HomePage.routeName;
-            // } else if (authState.veryImportantActivities != null &&
-            //     authState.veryImportantActivities!.isNotEmpty &&
-            //     state.uri.path.contains(TaskDetailScreen.routeName) == false) {
-            //   return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
+          } else if (authState.veryImportantActivities != null &&
+              authState.veryImportantActivities!.isNotEmpty &&
+              state.uri.path.contains(TaskDetailScreen.routeName) == false) {
+            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
           } else if (authState.showFeedbackScreen &&
               state.uri.path.contains(CallFeedbackScreen.routeName) == false &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {

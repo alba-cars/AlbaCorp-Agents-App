@@ -859,7 +859,6 @@ class InfoWithPhoneWidget extends StatelessWidget {
                     NormalText(
                       text: phone ?? '',
                       fontWeight: FontWeight.w400,
-                      fontSize: 14,
                     ),
                     if (isDnd)
                       Container(
@@ -898,7 +897,6 @@ class InfoWithPhoneWidget extends StatelessWidget {
                 NormalText(
                   text: email ?? '',
                   fontWeight: FontWeight.w400,
-                  fontSize: 14,
                 )
               ],
             ),

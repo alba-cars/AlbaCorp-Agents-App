@@ -141,7 +141,7 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   void addToSelection(BuildContext context, LeadExplorerItem lead) {
     if (state.selectedPropertyCards.contains(lead)) {
       final list = List<LeadExplorerItem>.from(state.selectedPropertyCards)
-        ..remove(lead.id);
+        ..remove(lead);
       emit(state.copyWith(selectedPropertyCards: list));
       return;
     }

@@ -5,6 +5,7 @@ import 'package:real_estate_app/model/notification_model.dart';
 class NotificationEntity {
   @Id()
   int id = 0;
+  String? notificationId;
   late String title;
   String? subTitle;
   bool isRead = false;
@@ -13,6 +14,7 @@ class NotificationEntity {
 
   NotificationEntity(
       {this.id = 0,
+      this.notificationId,
       required this.title,
       this.subTitle,
       this.isRead = false,
@@ -23,6 +25,7 @@ class NotificationEntity {
         title: title,
         id: id.toString(),
         subTitle: subTitle,
+        notificationId: notificationId,
         isRead: isRead,
         createdAt: createdAt);
   }
@@ -31,6 +34,7 @@ class NotificationEntity {
     return NotificationEntity(
         title: model.title,
         id: int.tryParse(model.id ?? '') ?? 0,
+        notificationId: model.notificationId,
         subTitle: model.subTitle,
         isRead: model.isRead,
         createdAt: model.createdAt);

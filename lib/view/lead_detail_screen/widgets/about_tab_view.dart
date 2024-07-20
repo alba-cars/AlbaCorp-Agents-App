@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
@@ -294,19 +295,19 @@ class AboutTabView extends StatelessWidget {
                           adjustment: 0.3,
                         ),
                         NormalText(
-                          text: 'Dubai',
+                          text: lead.city ?? 'N/A',
                         ),
                         Divider(),
                         VerticalSmallGap(adjustment: .6),
                         NormalText(
-                          text: 'CITY',
+                          text: 'Created On',
                           color: Colors.blueGrey,
                         ),
                         VerticalSmallGap(
                           adjustment: 0.3,
                         ),
                         NormalText(
-                          text: 'Dubai',
+                          text: lead.createdAt?.formatted,
                         ),
                         Divider(),
                       ]),

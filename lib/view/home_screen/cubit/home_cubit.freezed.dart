@@ -36,6 +36,13 @@ mixin _$HomeState {
   Paginator? get sortedActivityPaginator => throw _privateConstructorUsedError;
   AppStatus get updateTaskStatus => throw _privateConstructorUsedError;
   String? get updateTaskError => throw _privateConstructorUsedError;
+  String? get nameSearch => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get activityFilter =>
+      throw _privateConstructorUsedError;
+  List<Community> get communityList => throw _privateConstructorUsedError;
+  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
+  List<Building> get buildingList => throw _privateConstructorUsedError;
+  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -63,7 +70,13 @@ abstract class $HomeStateCopyWith<$Res> {
       String? getSortedActivitiesError,
       Paginator? sortedActivityPaginator,
       AppStatus updateTaskStatus,
-      String? updateTaskError});
+      String? updateTaskError,
+      String? nameSearch,
+      Map<String, dynamic>? activityFilter,
+      List<Community> communityList,
+      AppStatus getCommunityListStatus,
+      List<Building> buildingList,
+      AppStatus getBuildingListStatus});
 
   $ModelCategoryCopyWith<$Res> get selectedCategory;
   $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
@@ -98,6 +111,12 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? sortedActivityPaginator = freezed,
     Object? updateTaskStatus = null,
     Object? updateTaskError = freezed,
+    Object? nameSearch = freezed,
+    Object? activityFilter = freezed,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
   }) {
     return _then(_value.copyWith(
       activities: null == activities
@@ -164,6 +183,30 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.updateTaskError
           : updateTaskError // ignore: cast_nullable_to_non_nullable
               as String?,
+      nameSearch: freezed == nameSearch
+          ? _value.nameSearch
+          : nameSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      activityFilter: freezed == activityFilter
+          ? _value.activityFilter
+          : activityFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      communityList: null == communityList
+          ? _value.communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<Community>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _value.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingList: null == buildingList
+          ? _value.buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _value.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
     ) as $Val);
   }
 
@@ -212,7 +255,13 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       String? getSortedActivitiesError,
       Paginator? sortedActivityPaginator,
       AppStatus updateTaskStatus,
-      String? updateTaskError});
+      String? updateTaskError,
+      String? nameSearch,
+      Map<String, dynamic>? activityFilter,
+      List<Community> communityList,
+      AppStatus getCommunityListStatus,
+      List<Building> buildingList,
+      AppStatus getBuildingListStatus});
 
   @override
   $ModelCategoryCopyWith<$Res> get selectedCategory;
@@ -247,6 +296,12 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? sortedActivityPaginator = freezed,
     Object? updateTaskStatus = null,
     Object? updateTaskError = freezed,
+    Object? nameSearch = freezed,
+    Object? activityFilter = freezed,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
   }) {
     return _then(_$HomeStateImpl(
       activities: null == activities
@@ -313,6 +368,30 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.updateTaskError
           : updateTaskError // ignore: cast_nullable_to_non_nullable
               as String?,
+      nameSearch: freezed == nameSearch
+          ? _value.nameSearch
+          : nameSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      activityFilter: freezed == activityFilter
+          ? _value._activityFilter
+          : activityFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      communityList: null == communityList
+          ? _value._communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<Community>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _value.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingList: null == buildingList
+          ? _value._buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _value.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
     ));
   }
 }
@@ -336,14 +415,23 @@ class _$HomeStateImpl implements _HomeState {
       this.getSortedActivitiesError,
       this.sortedActivityPaginator,
       this.updateTaskStatus = AppStatus.init,
-      this.updateTaskError})
+      this.updateTaskError,
+      this.nameSearch,
+      final Map<String, dynamic>? activityFilter,
+      final List<Community> communityList = const [],
+      this.getCommunityListStatus = AppStatus.init,
+      final List<Building> buildingList = const [],
+      this.getBuildingListStatus = AppStatus.init})
       : _activities = activities,
         _getActivitiesStatus = getActivitiesStatus,
         _getActivitiesError = getActivitiesError,
         _activityPaginator = activityPaginator,
         _categories = categories,
         _listType = listType,
-        _sortedActivity = sortedActivity;
+        _sortedActivity = sortedActivity,
+        _activityFilter = activityFilter,
+        _communityList = communityList,
+        _buildingList = buildingList;
 
   final Map<int, List<Activity>> _activities;
   @override
@@ -435,10 +523,46 @@ class _$HomeStateImpl implements _HomeState {
   final AppStatus updateTaskStatus;
   @override
   final String? updateTaskError;
+  @override
+  final String? nameSearch;
+  final Map<String, dynamic>? _activityFilter;
+  @override
+  Map<String, dynamic>? get activityFilter {
+    final value = _activityFilter;
+    if (value == null) return null;
+    if (_activityFilter is EqualUnmodifiableMapView) return _activityFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final List<Community> _communityList;
+  @override
+  @JsonKey()
+  List<Community> get communityList {
+    if (_communityList is EqualUnmodifiableListView) return _communityList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_communityList);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getCommunityListStatus;
+  final List<Building> _buildingList;
+  @override
+  @JsonKey()
+  List<Building> get buildingList {
+    if (_buildingList is EqualUnmodifiableListView) return _buildingList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_buildingList);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getBuildingListStatus;
 
   @override
   String toString() {
-    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount, listType: $listType, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError)';
+    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount, listType: $listType, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, nameSearch: $nameSearch, activityFilter: $activityFilter, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus)';
   }
 
   @override
@@ -479,28 +603,47 @@ class _$HomeStateImpl implements _HomeState {
             (identical(other.updateTaskStatus, updateTaskStatus) ||
                 other.updateTaskStatus == updateTaskStatus) &&
             (identical(other.updateTaskError, updateTaskError) ||
-                other.updateTaskError == updateTaskError));
+                other.updateTaskError == updateTaskError) &&
+            (identical(other.nameSearch, nameSearch) ||
+                other.nameSearch == nameSearch) &&
+            const DeepCollectionEquality()
+                .equals(other._activityFilter, _activityFilter) &&
+            const DeepCollectionEquality()
+                .equals(other._communityList, _communityList) &&
+            (identical(other.getCommunityListStatus, getCommunityListStatus) ||
+                other.getCommunityListStatus == getCommunityListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._buildingList, _buildingList) &&
+            (identical(other.getBuildingListStatus, getBuildingListStatus) ||
+                other.getBuildingListStatus == getBuildingListStatus));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_activities),
-      const DeepCollectionEquality().hash(_getActivitiesStatus),
-      const DeepCollectionEquality().hash(_getActivitiesError),
-      const DeepCollectionEquality().hash(_activityPaginator),
-      selectedCategory,
-      const DeepCollectionEquality().hash(_categories),
-      completedTasksCount,
-      pendingTasksCount,
-      viewingTasksCount,
-      const DeepCollectionEquality().hash(_listType),
-      const DeepCollectionEquality().hash(_sortedActivity),
-      getSortedActivitiesStatus,
-      getSortedActivitiesError,
-      sortedActivityPaginator,
-      updateTaskStatus,
-      updateTaskError);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(_activities),
+        const DeepCollectionEquality().hash(_getActivitiesStatus),
+        const DeepCollectionEquality().hash(_getActivitiesError),
+        const DeepCollectionEquality().hash(_activityPaginator),
+        selectedCategory,
+        const DeepCollectionEquality().hash(_categories),
+        completedTasksCount,
+        pendingTasksCount,
+        viewingTasksCount,
+        const DeepCollectionEquality().hash(_listType),
+        const DeepCollectionEquality().hash(_sortedActivity),
+        getSortedActivitiesStatus,
+        getSortedActivitiesError,
+        sortedActivityPaginator,
+        updateTaskStatus,
+        updateTaskError,
+        nameSearch,
+        const DeepCollectionEquality().hash(_activityFilter),
+        const DeepCollectionEquality().hash(_communityList),
+        getCommunityListStatus,
+        const DeepCollectionEquality().hash(_buildingList),
+        getBuildingListStatus
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -526,7 +669,13 @@ abstract class _HomeState implements HomeState {
       final String? getSortedActivitiesError,
       final Paginator? sortedActivityPaginator,
       final AppStatus updateTaskStatus,
-      final String? updateTaskError}) = _$HomeStateImpl;
+      final String? updateTaskError,
+      final String? nameSearch,
+      final Map<String, dynamic>? activityFilter,
+      final List<Community> communityList,
+      final AppStatus getCommunityListStatus,
+      final List<Building> buildingList,
+      final AppStatus getBuildingListStatus}) = _$HomeStateImpl;
 
   @override
   Map<int, List<Activity>> get activities;
@@ -560,6 +709,18 @@ abstract class _HomeState implements HomeState {
   AppStatus get updateTaskStatus;
   @override
   String? get updateTaskError;
+  @override
+  String? get nameSearch;
+  @override
+  Map<String, dynamic>? get activityFilter;
+  @override
+  List<Community> get communityList;
+  @override
+  AppStatus get getCommunityListStatus;
+  @override
+  List<Building> get buildingList;
+  @override
+  AppStatus get getBuildingListStatus;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
