@@ -69,7 +69,10 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
             final primaryColor = Theme.of(context).colorScheme.primary;
             return CustomScrollView(
               slivers: [
-                SliverAppBar(),
+                SliverAppBar(
+                  title: Text('Property Details'),
+                  centerTitle: true,
+                ),
                 SliverToBoxAdapter(
                     child: CarouselSlider.builder(
                         itemCount: listing.images?.length ?? 0,
@@ -94,7 +97,8 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                               },
                               child: S3Image(url: image));
                         },
-                        options: CarouselOptions(height: 350))),
+                        options: CarouselOptions(
+                            height: 350, viewportFraction: 0.9))),
                 SliverVerticalSmallGap(),
                 SliverToBoxAdapter(
                   child: Padding(

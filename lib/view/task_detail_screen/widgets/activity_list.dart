@@ -55,6 +55,11 @@ class ActivityList extends StatelessWidget {
                           Expanded(child: Text(activity.description ?? '')),
                         ],
                       ),
+                      Row(
+                        children: [
+                          Expanded(child: Text(activity.notes ?? '')),
+                        ],
+                      ),
                     ],
                   ),
                 ),

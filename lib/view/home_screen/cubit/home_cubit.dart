@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
+import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/category_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
@@ -15,6 +16,8 @@ import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
 
 import '../../../model/activity_model.dart';
+import '../../../model/building_model.dart';
+import '../../../model/community_model.dart';
 import '../../../widgets/snackbar.dart';
 
 part 'home_state.dart';
@@ -22,7 +25,8 @@ part 'home_cubit.freezed.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._activityRepo, this._leadRepo) : super(HomeState()) {
+  HomeCubit(this._activityRepo, this._leadRepo, this._listingsRepo)
+      : super(HomeState()) {
     Future.wait(List.generate(7, (index) => getActivities(filterCode: index)));
 
     pendingViewingActivitiesCount();
@@ -43,12 +47,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   final ActivityRepo _activityRepo;
   final LeadRepo _leadRepo;
+  final ListingsRepo _listingsRepo;
   StreamSubscription? _listChangeSubscription;
   String? _lastTaskCategorizedListHash;
   String? _lastTaskSortedListHash;
 
   Future<void> getActivities(
-      {required int filterCode, bool refresh = false}) async {
+      {required int filterCode,
+      bool refresh = false,
+      String? nameSearch}) async {
     if (state.getActivitiesStatus[filterCode] == AppStatus.loading ||
         state.getActivitiesStatus[filterCode] == AppStatus.loadingMore) {
       return;
@@ -78,6 +85,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     final result = await _activityRepo.fetchActivities(
         filterCode: filterCode,
+        nameSearch: state.nameSearch,
         status: switch (state.selectedCategory.name) {
           'Fresh Hot' => LeadStatus.Fresh,
           'Prospect' => LeadStatus.Disqualified,
@@ -118,7 +126,8 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> getSortedActivities({bool refresh = false}) async {
+  Future<void> getSortedActivities(
+      {bool refresh = false, String? nameSearch}) async {
     if (state.getSortedActivitiesStatus == AppStatus.loading ||
         state.getSortedActivitiesStatus == AppStatus.loadingMore) {
       return;
@@ -136,7 +145,9 @@ class HomeCubit extends Cubit<HomeState> {
     }
 
     final result = await _activityRepo.fetchActivitiesSorted(
-        paginator: state.sortedActivityPaginator);
+        nameSearch: state.nameSearch,
+        paginator: state.sortedActivityPaginator,
+        filter: state.activityFilter);
     switch (result) {
       case (Success<List<Activity>> s):
         emit(state.copyWith(
@@ -254,6 +265,64 @@ class HomeCubit extends Cubit<HomeState> {
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
+    }
+  }
+
+  void searchLeads(String? search) {
+    emit(state.copyWith(nameSearch: search));
+    if (state.listType.first.hashCode == ListType.Categorized) {
+      Future.wait(List.generate(
+          7, (index) => getActivities(filterCode: index, nameSearch: search)));
+    } else {
+      getSortedActivities(refresh: true, nameSearch: search);
+    }
+  }
+
+  void setActivityFilters(Map<String, dynamic>? filter) {
+    emit(state.copyWith(activityFilter: filter));
+    if (state.listType.first.hashCode == ListType.Categorized) {
+      Future.wait(List.generate(
+          7,
+          (index) => getActivities(
+                filterCode: index,
+              )));
+    } else {
+      getSortedActivities(
+        refresh: true,
+      );
+    }
+  }
+
+  Future<List<Community>> getCommunities({String? search}) async {
+    emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
+    final result = await _listingsRepo.getCommunities(search: search);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            communityList: s.value, getCommunityListStatus: AppStatus.success));
+        return s.value;
+      case (Error e):
+        emit(state.copyWith(
+          getCommunityListStatus: AppStatus.failure,
+        ));
+        return [];
+    }
+  }
+
+  Future<List<Building>> getBuildings({String? search}) async {
+    emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
+    final result = await _listingsRepo.getBuildingNames(search: search);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            buildingList: s.value, getBuildingListStatus: AppStatus.success));
+        return s.value;
+
+      case (Error e):
+        emit(state.copyWith(
+          getBuildingListStatus: AppStatus.failure,
+        ));
+        return [];
     }
   }
 

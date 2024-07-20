@@ -28,6 +28,7 @@ mixin _$Activity {
   Lead? get lead => throw _privateConstructorUsedError;
   String? get createdBy => throw _privateConstructorUsedError;
   String? get completedBy => throw _privateConstructorUsedError;
+  double get activityWeight => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
@@ -63,6 +64,7 @@ abstract class $ActivityCopyWith<$Res> {
       @JsonKey(name: 'user') Lead? lead,
       String? createdBy,
       String? completedBy,
+      double activityWeight,
       String type,
       String? description,
       DateTime date,
@@ -101,6 +103,7 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
     Object? lead = freezed,
     Object? createdBy = freezed,
     Object? completedBy = freezed,
+    Object? activityWeight = null,
     Object? type = null,
     Object? description = freezed,
     Object? date = null,
@@ -142,6 +145,10 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
           ? _value.completedBy
           : completedBy // ignore: cast_nullable_to_non_nullable
               as String?,
+      activityWeight: null == activityWeight
+          ? _value.activityWeight
+          : activityWeight // ignore: cast_nullable_to_non_nullable
+              as double,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -233,6 +240,7 @@ abstract class _$$ActivityImplCopyWith<$Res>
       @JsonKey(name: 'user') Lead? lead,
       String? createdBy,
       String? completedBy,
+      double activityWeight,
       String type,
       String? description,
       DateTime date,
@@ -270,6 +278,7 @@ class __$$ActivityImplCopyWithImpl<$Res>
     Object? lead = freezed,
     Object? createdBy = freezed,
     Object? completedBy = freezed,
+    Object? activityWeight = null,
     Object? type = null,
     Object? description = freezed,
     Object? date = null,
@@ -311,6 +320,10 @@ class __$$ActivityImplCopyWithImpl<$Res>
           ? _value.completedBy
           : completedBy // ignore: cast_nullable_to_non_nullable
               as String?,
+      activityWeight: null == activityWeight
+          ? _value.activityWeight
+          : activityWeight // ignore: cast_nullable_to_non_nullable
+              as double,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -385,6 +398,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       @JsonKey(name: 'user') this.lead,
       this.createdBy,
       this.completedBy,
+      this.activityWeight = 0,
       required this.type,
       this.description,
       required this.date,
@@ -420,6 +434,9 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
   final String? createdBy;
   @override
   final String? completedBy;
+  @override
+  @JsonKey()
+  final double activityWeight;
   @override
   final String type;
   @override
@@ -472,7 +489,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, createdBy: $createdBy, completedBy: $completedBy, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, createdBy: $createdBy, completedBy: $completedBy, activityWeight: $activityWeight, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -486,6 +503,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       ..add(DiagnosticsProperty('lead', lead))
       ..add(DiagnosticsProperty('createdBy', createdBy))
       ..add(DiagnosticsProperty('completedBy', completedBy))
+      ..add(DiagnosticsProperty('activityWeight', activityWeight))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('date', date))
@@ -517,6 +535,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
                 other.createdBy == createdBy) &&
             (identical(other.completedBy, completedBy) ||
                 other.completedBy == completedBy) &&
+            (identical(other.activityWeight, activityWeight) ||
+                other.activityWeight == activityWeight) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -554,6 +574,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
         lead,
         createdBy,
         completedBy,
+        activityWeight,
         type,
         description,
         date,
@@ -593,6 +614,7 @@ abstract class _Activity implements Activity {
       @JsonKey(name: 'user') final Lead? lead,
       final String? createdBy,
       final String? completedBy,
+      final double activityWeight,
       required final String type,
       final String? description,
       required final DateTime date,
@@ -626,6 +648,8 @@ abstract class _Activity implements Activity {
   String? get createdBy;
   @override
   String? get completedBy;
+  @override
+  double get activityWeight;
   @override
   String get type;
   @override

@@ -51,7 +51,7 @@ class Lead with _$Lead {
     @JsonKey(name: 'last_activity_is_complete')
     @Default(false)
     bool lastActivityIsComplete,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     @JsonKey(name: 'created_by') String? createdBy,
     @JsonKey(name: 'modified_by') String? modifiedBy,
@@ -63,13 +63,28 @@ class Lead with _$Lead {
     String? notes,
     @Default([]) List<String> tags,
     @JsonKey(name: 'DndStatus') @Default(false) bool dndStatus,
+    @JsonKey(readValue: readCompletedActivityCount)
+    @Default(0)
+    int completedActivityCount,
   }) = _Lead;
 
   factory Lead.fromJson(Map<String, dynamic> json) => _$LeadFromJson(json);
 }
 
+String? readCreatedAt(Map p1, String p2) {
+  return p1[p2] != null ? p1[p2] : p1['created_at'];
+}
+
 Map? readCurrentAgent(Map p1, String p2) {
   return p1[p2] is Map ? p1[p2] : null;
+}
+
+int readCompletedActivityCount(Map p1, String p2) {
+  if (p1['activities'] is List) {
+    final activities = p1['activities'] as List;
+    return activities.where((e) => e['status'] == 'Complete').length;
+  }
+  return 0;
 }
 
 @freezed
@@ -94,7 +109,8 @@ extension CheckNew on Lead {
     if (leadStatus == LeadStatus.Fresh &&
         createdAt
                 ?.isAfter(DateTime.now().subtract(Duration(days: dateLimit))) ==
-            true) {
+            true &&
+        completedActivityCount <= 1) {
       return true;
     } else {
       return false;

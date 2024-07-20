@@ -158,6 +158,16 @@ class _ExplorerTabState extends State<ExplorerTab> {
           values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
           isRequired: true),
       WrapSelectField(
+          name: 'newLeads',
+          label: 'New Leads',
+          values: [
+            {"label": "Yes", "value": true},
+            {"label": "No", "value": false}
+          ],
+          displayOption: (option) => option?['label']?.toString() ?? '',
+          valueTransformer: (p0) => p0?['value'],
+          isRequired: true),
+      WrapSelectField(
           name: 'baths',
           label: 'Baths',
           values: ['1', '2', '3', '4', '5', '6', '7+'],

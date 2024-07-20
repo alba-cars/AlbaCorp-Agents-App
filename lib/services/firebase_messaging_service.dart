@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/data/objectbox/entity/notification_entity.dart';
+import 'package:real_estate_app/service_locator/objectbox.dart';
 import 'dart:convert';
 
 import 'notification_service.dart';
@@ -26,15 +28,15 @@ class FirebaseMessagingService {
     print("Handling a message: ${message.messageId}");
     if (message.data['type'] == 'call') {
       NotificationService.showCallNotification(
-        message.notification?.title ?? 'Unknown',
-        message.notification?.body ?? '',
+        message.data["title"] ?? 'Unknown',
+        message.data["body"] ?? '',
         message.data['phoneNumber'] ?? '',
       );
     } else if (message.data['type'] == 'ImportantActivity') {
       Logger().d("ImportantActivity");
       NotificationService.showImportantNotification(
-        message.notification?.title ?? 'Unknown',
-        message.notification?.body ?? '',
+        message.data["title"] ?? 'Unknown',
+        message.data["body"] ?? '',
       );
     }
   }
@@ -42,20 +44,24 @@ class FirebaseMessagingService {
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // Initialize Firebase if it hasn't been
-  await Firebase.initializeApp();
   print("Handling a background message: ${message.messageId}");
   if (message.data['type'] == 'call') {
     await NotificationService.showCallNotification(
-      message.notification?.title ?? 'Unknown',
-      message.notification?.body ?? '',
+      message.data["title"] ?? 'Unknown',
+      message.data["body"] ?? '',
       message.data['phoneNumber'] ?? '',
     );
   } else if (message.data['type'] == 'ImportantActivity') {
     Logger().d("ImportantActivity");
     await NotificationService.showImportantNotification(
-      message.notification?.title ?? 'Unknown',
-      message.notification?.body ?? '',
+      message.data["title"] ?? 'Unknown',
+      message.data["body"] ?? '',
     );
   }
+  // final objectBox = await ObjectBox.create();
+  // objectBox.store.box<NotificationEntity>().putAsync(NotificationEntity(
+  //       title: message.notification?.title ?? 'Unknown',
+  //       subTitle: message.notification?.body ?? '',
+  //       createdAt:
+  //     ));
 }

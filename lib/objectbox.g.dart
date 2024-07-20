@@ -23,7 +23,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 5795122159064061020),
       name: 'NotificationEntity',
-      lastPropertyId: const obx_int.IdUid(5, 3668146916538278613),
+      lastPropertyId: const obx_int.IdUid(6, 3017629158783680701),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -50,6 +50,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(5, 3668146916538278613),
             name: 'createdAt',
             type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 3017629158783680701),
+            name: 'notificationId',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -157,12 +162,16 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final subTitleOffset = object.subTitle == null
               ? null
               : fbb.writeString(object.subTitle!);
-          fbb.startTable(6);
+          final notificationIdOffset = object.notificationId == null
+              ? null
+              : fbb.writeString(object.notificationId!);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, subTitleOffset);
           fbb.addBool(3, object.isRead);
           fbb.addInt64(4, object.createdAt?.millisecondsSinceEpoch);
+          fbb.addOffset(5, notificationIdOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -173,6 +182,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final notificationIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 14);
           final titleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final subTitleParam = const fb.StringReader(asciiOptimization: true)
@@ -184,6 +196,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               : DateTime.fromMillisecondsSinceEpoch(createdAtValue);
           final object = NotificationEntity(
               id: idParam,
+              notificationId: notificationIdParam,
               title: titleParam,
               subTitle: subTitleParam,
               isRead: isReadParam,
@@ -263,6 +276,10 @@ class NotificationEntity_ {
   /// See [NotificationEntity.createdAt].
   static final createdAt =
       obx.QueryDateProperty<NotificationEntity>(_entities[0].properties[4]);
+
+  /// See [NotificationEntity.notificationId].
+  static final notificationId =
+      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[5]);
 }
 
 /// [PendingCallFeedbackEntity] entity fields to define ObjectBox queries.

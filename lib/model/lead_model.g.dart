@@ -29,9 +29,9 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
           : DateTime.parse(json['last_activity_date'] as String),
       lastActivityIsComplete:
           json['last_activity_is_complete'] as bool? ?? false,
-      createdAt: json['created_at'] == null
+      createdAt: readCreatedAt(json, 'createdAt') == null
           ? null
-          : DateTime.parse(json['created_at'] as String),
+          : DateTime.parse(readCreatedAt(json, 'createdAt') as String),
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
@@ -51,6 +51,10 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const [],
       dndStatus: json['DndStatus'] as bool? ?? false,
+      completedActivityCount:
+          (readCompletedActivityCount(json, 'completedActivityCount') as num?)
+                  ?.toInt() ??
+              0,
     );
 
 Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
@@ -74,7 +78,7 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'last_activity_type': instance.lastActivityType,
       'last_activity_date': instance.lastActivityDate?.toIso8601String(),
       'last_activity_is_complete': instance.lastActivityIsComplete,
-      'created_at': instance.createdAt?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'created_by': instance.createdBy,
       'modified_by': instance.modifiedBy,
@@ -84,6 +88,7 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'notes': instance.notes,
       'tags': instance.tags,
       'DndStatus': instance.dndStatus,
+      'completedActivityCount': instance.completedActivityCount,
     };
 
 const _$LeadStatusEnumMap = {

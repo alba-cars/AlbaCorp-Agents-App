@@ -9,6 +9,7 @@ class NotificationModel with _$NotificationModel {
     String? id,
     required String title,
     String? subTitle,
+    String? notificationId,
     @Default(false) bool isRead,
     @JsonKey(name: 'createdAt') DateTime? createdAt,
   }) = _NotificationModel;

@@ -76,7 +76,7 @@ class LeadData implements LeadRepo {
       }
       final response = await _dio.get(url, queryParameters: {
         'agent_id': getIt<AuthBloc>().state.agent?.id,
-        'page': paginator?.currentPage ?? 0 + 1,
+        'page': (paginator?.currentPage ?? 0) + 1,
         'per_page': 15,
         'sort_by': 'createdAt',
         "sort_dir": 'DESC',

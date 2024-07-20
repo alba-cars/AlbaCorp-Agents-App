@@ -71,6 +71,13 @@ class LeadsCubit extends Cubit<LeadsState> {
 
   void setQuickFilter(String? filter) {
     switch (filter) {
+      case 'New':
+        emit(state.copyWith(
+            leadsFilter: null,
+            quickFilter:
+                QuickFilter(value: {'newLeads': true}, filter: filter!)));
+        break;
+
       case 'Hot':
         emit(state.copyWith(
             leadsFilter: null,

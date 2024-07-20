@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:awesome_notifications/awesome_notifications.dart' as awesome;
 import 'package:bloc/bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/remote_data/pending_call_feedback_repo.dart';
@@ -17,7 +20,9 @@ import 'package:real_estate_app/model/global_settings_model.dart';
 import 'package:real_estate_app/model/notification_model.dart';
 import 'package:real_estate_app/model/pending_call_feedback.dart';
 import 'package:real_estate_app/model/user.dart';
+import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/activity_model.dart';
@@ -46,7 +51,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _fcmForegroundStream = FirebaseMessaging.onMessage.listen(onNotification);
     _fcmForegroundStream =
         FirebaseMessaging.onMessageOpenedApp.listen(onNotification);
-
+    awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
+      if (v?.payload != null) {
+        onNotificationData(v!.payload!);
+      }
+    });
     FirebaseMessaging.instance.getInitialMessage().then((e) {
       if (e == null) {
         return;
@@ -61,19 +70,47 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final PendingCallFeedbackRepo _pendingCallFeedbackRepo;
   StreamSubscription? _fcmForegroundStream;
   StreamSubscription? _fcmBackgroundStream;
+  void onNotification(RemoteMessage message) async {
+    onNotificationData(message.data);
+  }
 
-  void onNotification(RemoteMessage message) {
+  void onNotificationData(Map<String, dynamic> data) async {
     try {
-      if (message.data['type'] == 'ImportantActivity') {
-        final activities = message.data['values'] as String;
-        add(AuthEvent.newImportantActivity(activityIds: [activities]));
+      Logger().d(data);
+      final notificationId = data['id'] as String? ?? '';
+      final existResult = await _notificationRepo.isNotificationReceived(
+          notificationId: notificationId);
+      if (existResult is Success && (existResult as Success).value) {
+        return;
       }
-      Logger().d(message.notification?.title);
       _notificationRepo.addNotification(
           notification: NotificationModel(
-              title: message.notification?.title ?? '',
-              subTitle: message.notification?.body));
-    } catch (e) {}
+              notificationId: data['id'],
+              title: data["title"] ?? '',
+              subTitle: data["body"]));
+      if (data['type'] == 'ImportantActivity') {
+        final activities = json.decode(data['values'] as String? ?? '[]');
+        add(AuthEvent.newImportantActivity(
+            activityIds: activities is List
+                ? activities.map((e) => e.toString()).toList()
+                : [activities]));
+      } else if (data['type'] == 'NEW_LEAD_CALL') {
+        if (state.authStatus == AuthStatus.initial) {
+          await stream.firstWhere((e) => e.authStatus != AuthStatus.initial);
+        }
+        if (state.authStatus == AuthStatus.Authenticated) {
+          await Future.delayed(Duration(milliseconds: 500));
+          final number = data['phoneNumber'];
+
+          AppRouter.router.pushNamed(AddLeadScreen.routeName, queryParameters: {
+            'data': json
+                .encode({'phone': number, "lead_source": 'Unkown Inbound Call'})
+          });
+        }
+      }
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 
   FutureOr<void> _userLoggedIn(
@@ -168,6 +205,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _checkForImportantActivity(
       _CheckForImportantActivity event, Emitter<AuthState> emit) async {
+    if (state.authStatus == AuthStatus.initial) {
+      await stream
+          .firstWhere((state) => state.authStatus != AuthStatus.initial);
+    }
     final result = await _activityRepo.fetchActivitiesImportant();
     switch (result) {
       case (Success<List<Activity>> s):
@@ -186,6 +227,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await stream
           .firstWhere((state) => state.authStatus != AuthStatus.initial);
     }
+    Logger().d("call feedback event");
+    awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
+      if (v?.payload != null) {
+        onNotificationData(v!.payload!);
+      }
+    });
     if (state.authStatus == AuthStatus.Authenticated) {
       await getIt<SharedPreferences>().reload();
       final number = getIt<SharedPreferences>().getString("calledNumber");

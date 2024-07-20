@@ -45,4 +45,19 @@ class NotificationData implements NotificationRepo {
       return Error(e.toString());
     }
   }
+
+  @override
+  Future<Result<bool>> isNotificationReceived(
+      {required String notificationId}) async {
+    try {
+      final res = await _notificationBox
+          .query(NotificationEntity_.notificationId.equals(notificationId))
+          .build()
+          .findFirstAsync();
+      return Success(res != null);
+    } catch (e) {
+      log.d(e);
+      return Error(e.toString());
+    }
+  }
 }

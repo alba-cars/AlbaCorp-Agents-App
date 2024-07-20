@@ -48,7 +48,7 @@ mixin _$Lead {
   DateTime? get lastActivityDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_activity_is_complete')
   bool get lastActivityIsComplete => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_at')
+  @JsonKey(readValue: readCreatedAt)
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
@@ -65,6 +65,8 @@ mixin _$Lead {
   List<String> get tags => throw _privateConstructorUsedError;
   @JsonKey(name: 'DndStatus')
   bool get dndStatus => throw _privateConstructorUsedError;
+  @JsonKey(readValue: readCompletedActivityCount)
+  int get completedActivityCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -96,7 +98,7 @@ abstract class $LeadCopyWith<$Res> {
       @JsonKey(name: 'last_activity_type') String? lastActivityType,
       @JsonKey(name: 'last_activity_date') DateTime? lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete') bool lastActivityIsComplete,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'modified_by') String? modifiedBy,
@@ -105,7 +107,9 @@ abstract class $LeadCopyWith<$Res> {
       @JsonKey(readValue: readCurrentAgent) Agent? currentAgent,
       String? notes,
       List<String> tags,
-      @JsonKey(name: 'DndStatus') bool dndStatus});
+      @JsonKey(name: 'DndStatus') bool dndStatus,
+      @JsonKey(readValue: readCompletedActivityCount)
+      int completedActivityCount});
 
   $PreferenceCopyWith<$Res>? get preference;
   $AgentCopyWith<$Res>? get currentAgent;
@@ -153,6 +157,7 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
     Object? notes = freezed,
     Object? tags = null,
     Object? dndStatus = null,
+    Object? completedActivityCount = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -271,6 +276,10 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
           ? _value.dndStatus
           : dndStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      completedActivityCount: null == completedActivityCount
+          ? _value.completedActivityCount
+          : completedActivityCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -326,7 +335,7 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       @JsonKey(name: 'last_activity_type') String? lastActivityType,
       @JsonKey(name: 'last_activity_date') DateTime? lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete') bool lastActivityIsComplete,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'created_by') String? createdBy,
       @JsonKey(name: 'modified_by') String? modifiedBy,
@@ -335,7 +344,9 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       @JsonKey(readValue: readCurrentAgent) Agent? currentAgent,
       String? notes,
       List<String> tags,
-      @JsonKey(name: 'DndStatus') bool dndStatus});
+      @JsonKey(name: 'DndStatus') bool dndStatus,
+      @JsonKey(readValue: readCompletedActivityCount)
+      int completedActivityCount});
 
   @override
   $PreferenceCopyWith<$Res>? get preference;
@@ -382,6 +393,7 @@ class __$$LeadImplCopyWithImpl<$Res>
     Object? notes = freezed,
     Object? tags = null,
     Object? dndStatus = null,
+    Object? completedActivityCount = null,
   }) {
     return _then(_$LeadImpl(
       id: null == id
@@ -500,6 +512,10 @@ class __$$LeadImplCopyWithImpl<$Res>
           ? _value.dndStatus
           : dndStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      completedActivityCount: null == completedActivityCount
+          ? _value.completedActivityCount
+          : completedActivityCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -528,7 +544,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       @JsonKey(name: 'last_activity_date') this.lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete')
       this.lastActivityIsComplete = false,
-      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(readValue: readCreatedAt) this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'created_by') this.createdBy,
       @JsonKey(name: 'modified_by') this.modifiedBy,
@@ -538,7 +554,9 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       @JsonKey(readValue: readCurrentAgent) this.currentAgent,
       this.notes,
       final List<String> tags = const [],
-      @JsonKey(name: 'DndStatus') this.dndStatus = false})
+      @JsonKey(name: 'DndStatus') this.dndStatus = false,
+      @JsonKey(readValue: readCompletedActivityCount)
+      this.completedActivityCount = 0})
       : _languages = languages,
         _preferredLanguages = preferredLanguages,
         _tags = tags;
@@ -602,7 +620,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   @JsonKey(name: 'last_activity_is_complete')
   final bool lastActivityIsComplete;
   @override
-  @JsonKey(name: 'created_at')
+  @JsonKey(readValue: readCreatedAt)
   final DateTime? createdAt;
   @override
   @JsonKey(name: 'updated_at')
@@ -642,10 +660,13 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   @override
   @JsonKey(name: 'DndStatus')
   final bool dndStatus;
+  @override
+  @JsonKey(readValue: readCompletedActivityCount)
+  final int completedActivityCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, modifiedBy: $modifiedBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus)';
+    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, modifiedBy: $modifiedBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount)';
   }
 
   @override
@@ -682,7 +703,9 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       ..add(DiagnosticsProperty('currentAgent', currentAgent))
       ..add(DiagnosticsProperty('notes', notes))
       ..add(DiagnosticsProperty('tags', tags))
-      ..add(DiagnosticsProperty('dndStatus', dndStatus));
+      ..add(DiagnosticsProperty('dndStatus', dndStatus))
+      ..add(DiagnosticsProperty(
+          'completedActivityCount', completedActivityCount));
   }
 
   @override
@@ -737,7 +760,9 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
             (identical(other.notes, notes) || other.notes == notes) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.dndStatus, dndStatus) ||
-                other.dndStatus == dndStatus));
+                other.dndStatus == dndStatus) &&
+            (identical(other.completedActivityCount, completedActivityCount) ||
+                other.completedActivityCount == completedActivityCount));
   }
 
   @JsonKey(ignore: true)
@@ -772,7 +797,8 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
         currentAgent,
         notes,
         const DeepCollectionEquality().hash(_tags),
-        dndStatus
+        dndStatus,
+        completedActivityCount
       ]);
 
   @JsonKey(ignore: true)
@@ -811,7 +837,7 @@ abstract class _Lead implements Lead {
       @JsonKey(name: 'last_activity_date') final DateTime? lastActivityDate,
       @JsonKey(name: 'last_activity_is_complete')
       final bool lastActivityIsComplete,
-      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(readValue: readCreatedAt) final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       @JsonKey(name: 'created_by') final String? createdBy,
       @JsonKey(name: 'modified_by') final String? modifiedBy,
@@ -821,7 +847,9 @@ abstract class _Lead implements Lead {
       @JsonKey(readValue: readCurrentAgent) final Agent? currentAgent,
       final String? notes,
       final List<String> tags,
-      @JsonKey(name: 'DndStatus') final bool dndStatus}) = _$LeadImpl;
+      @JsonKey(name: 'DndStatus') final bool dndStatus,
+      @JsonKey(readValue: readCompletedActivityCount)
+      final int completedActivityCount}) = _$LeadImpl;
 
   factory _Lead.fromJson(Map<String, dynamic> json) = _$LeadImpl.fromJson;
 
@@ -873,7 +901,7 @@ abstract class _Lead implements Lead {
   @JsonKey(name: 'last_activity_is_complete')
   bool get lastActivityIsComplete;
   @override
-  @JsonKey(name: 'created_at')
+  @JsonKey(readValue: readCreatedAt)
   DateTime? get createdAt;
   @override
   @JsonKey(name: 'updated_at')
@@ -899,6 +927,9 @@ abstract class _Lead implements Lead {
   @override
   @JsonKey(name: 'DndStatus')
   bool get dndStatus;
+  @override
+  @JsonKey(readValue: readCompletedActivityCount)
+  int get completedActivityCount;
   @override
   @JsonKey(ignore: true)
   _$$LeadImplCopyWith<_$LeadImpl> get copyWith =>

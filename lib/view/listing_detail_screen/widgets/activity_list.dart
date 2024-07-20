@@ -110,7 +110,7 @@ class ActivityList extends StatelessWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelMedium,
-                                      text: 'Notes : ',
+                                      text: 'Description : ',
                                       children: [
                                     TextSpan(
                                         text: activity.description,
@@ -124,19 +124,36 @@ class ActivityList extends StatelessWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelMedium,
-                                      text: 'Completed Date : ',
+                                      text: 'Notes : ',
                                       children: [
                                     TextSpan(
-                                        text: activity.completedDate != null
-                                            ? DateFormat.MMMEd()
-                                                .add_jms()
-                                                .format(activity.completedDate!)
-                                            : null,
+                                        text: activity.notes,
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelMedium
                                             ?.copyWith(color: Colors.blueGrey))
-                                  ]))
+                                  ])),
+                              if (activity.status == 'Complete')
+                                RichText(
+                                    text: TextSpan(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium,
+                                        text: 'Completed Date : ',
+                                        children: [
+                                      TextSpan(
+                                          text: activity.completedDate != null
+                                              ? DateFormat.MMMEd()
+                                                  .add_jms()
+                                                  .format(
+                                                      activity.completedDate!)
+                                              : null,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium
+                                              ?.copyWith(
+                                                  color: Colors.blueGrey))
+                                    ]))
                             ],
                           ),
                         ),

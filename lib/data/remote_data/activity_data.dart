@@ -86,6 +86,7 @@ class ActivityData implements ActivityRepo {
   Future<Result<List<Activity>>> fetchActivities(
       {required int filterCode,
       LeadStatus? status,
+      String? nameSearch,
       Paginator? paginator}) async {
     try {
       String url = 'v1/activities/query-activities';
@@ -176,6 +177,9 @@ class ActivityData implements ActivityRepo {
       }
 
       query['page'] = (paginator?.currentPage ?? 0) + 1;
+      if (nameSearch != null) {
+        query['nameSearch'] = nameSearch;
+      }
 
       final response = await _dio.get(url, queryParameters: query);
       final data = response.data['data']['items'] as List;
@@ -256,13 +260,33 @@ class ActivityData implements ActivityRepo {
 
   @override
   Future<Result<List<Activity>>> fetchActivitiesSorted(
-      {Paginator? paginator}) async {
+      {Map<String, dynamic>? filter,
+      int? limit,
+      String? nameSearch,
+      Paginator? paginator}) async {
     try {
       String url = 'v1/activities/query-activities';
+      Map<String, dynamic>? filterRemoved;
+      if (filter != null) {
+        filterRemoved =
+            (Map.from(filter)..removeWhere((key, value) => value == null));
+
+        filterRemoved = filterRemoved.map((key, value) {
+          if (value is Map) {
+            return MapEntry(key, value['value']);
+          } else if (value is List<Map>) {
+            return MapEntry(key, value.map((e) => e['value']).toList());
+          } else {
+            return MapEntry(key, value);
+          }
+        });
+      }
       Map<String, dynamic> query = {
+        if (filterRemoved != null) ...filterRemoved,
         "status": ["Pending", 'Overdue'],
         if (paginator != null) 'page': paginator.currentPage + 1,
-        'limit': 10
+        'limit': limit,
+        if (nameSearch != null) 'nameSearch': nameSearch
       };
       final response = await _dio.get(url, queryParameters: query);
       final data = response.data['data']['items'] as List;
@@ -280,13 +304,13 @@ class ActivityData implements ActivityRepo {
 
   @override
   Future<Result<List<Activity>>> fetchActivitiesImportant(
-      {Paginator? paginator}) async {
+      {int? limit, Paginator? paginator}) async {
     try {
       String url = 'v1/activities/query-activities';
       Map<String, dynamic> query = {
         "status": ["Pending", 'Overdue'],
         if (paginator != null) 'page': paginator.currentPage + 1,
-        'limit': 10,
+        'limit': limit ?? 20,
         'minActivityWeight': .8
       };
       final response = await _dio.get(url, queryParameters: query);

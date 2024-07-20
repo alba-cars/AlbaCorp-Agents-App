@@ -229,6 +229,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
               child: WrapSelectField(
                 name: '',
                 values: [
+                  'New',
                   'Recent',
                   'Prospect',
                   'Fresh',
@@ -284,7 +285,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      sortDir == 1 ? 'Ascending' : 'Descending',
+                                      sortDir == 1 ? 'Oldest' : 'Newest',
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyLarge
