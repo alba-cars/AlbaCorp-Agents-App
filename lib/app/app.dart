@@ -12,6 +12,9 @@ import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/firebase_messaging_service.dart';
+import '../services/notification_service.dart';
+
 class App extends StatefulWidget {
   const App({super.key});
 
@@ -25,6 +28,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
+    NotificationService.initializeNotification();
+    FirebaseMessagingService.initialize();
     requestPermission();
     firebaseMessaging.requestPermission();
     checkPreference();
