@@ -34,9 +34,15 @@ class NotificationService {
         ],
         debug: true);
 
-    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+    await AwesomeNotifications()
+        .isNotificationAllowed()
+        .then((isAllowed) async {
       if (!isAllowed) {
-        AwesomeNotifications().requestPermissionToSendNotifications();
+        final granted =
+            await AwesomeNotifications().requestPermissionToSendNotifications();
+        if (!granted) {
+          return;
+        }
       }
     });
 

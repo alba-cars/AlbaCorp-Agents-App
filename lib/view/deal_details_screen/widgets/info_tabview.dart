@@ -170,6 +170,8 @@ class InfoTabView extends StatelessWidget {
                                           url: deal?.sellerAssignedAgent?.user
                                                   .photo ??
                                               '',
+                                          errorWidget: Image.asset(
+                                              'assets/images/person_placeholder.jpeg'),
                                         ),
                                       ),
                                       VerticalSmallGap(
@@ -212,6 +214,8 @@ class InfoTabView extends StatelessWidget {
                                           url: deal?.buyerAssignedAgent?.user
                                                   .photo ??
                                               '',
+                                          errorWidget: Image.asset(
+                                              'assets/images/person_placeholder.jpeg'),
                                         ),
                                       ),
                                       VerticalSmallGap(
