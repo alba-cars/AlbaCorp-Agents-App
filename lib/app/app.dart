@@ -1,4 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,15 +23,16 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> with WidgetsBindingObserver {
-  final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  // final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     NotificationService.initializeNotification();
-    FirebaseMessagingService.initialize();
+    AwesomeFcm.initializeRemoteNotifications(debug: true);
+    // FirebaseMessagingService.initialize();
     requestPermission();
-    firebaseMessaging.requestPermission();
+    // firebaseMessaging.requestPermission();
     checkPreference();
     super.initState();
   }

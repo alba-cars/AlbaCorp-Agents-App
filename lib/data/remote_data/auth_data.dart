@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/global_settings_model.dart';
 import 'package:real_estate_app/model/user.dart';
+import 'package:real_estate_app/services/firebase_messaging_service.dart';
 import 'package:real_estate_app/util/api_error.dart';
 import 'package:real_estate_app/util/result.dart';
 
@@ -13,7 +14,7 @@ import 'package:real_estate_app/util/result.dart';
 class AuthData implements AuthRepo {
   AuthData(this._dio);
   final Dio _dio;
-  final _notification = FirebaseMessaging.instance;
+  // final _notification = FirebaseMessaging.instance;
   final log = Logger();
 
   @override
@@ -25,7 +26,7 @@ class AuthData implements AuthRepo {
         data: {
           "email": username,
           "password": password,
-          "notification_token": await _notification.getToken()
+          "notification_token": await AwesomeFcm.getFirebaseMessagingToken()
         },
       );
       Map<String, dynamic> data = loginResponse.data;

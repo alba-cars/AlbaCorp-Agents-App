@@ -81,6 +81,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+1"
+  awesome_notifications_fcm:
+    dependency: "direct main"
+    description:
+      name: awesome_notifications_fcm
+      sha256: "1b116e7069f61c10ec25de15cd8f67912db3fc8bd7a5e2e9ed8013cb95633c59"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.3+1"
   bloc:
     dependency: transitive
     description:
@@ -441,30 +449,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.17.2"
-  firebase_messaging:
-    dependency: "direct main"
-    description:
-      name: firebase_messaging
-      sha256: a1662cc95d9750a324ad9df349b873360af6f11414902021f130c68ec02267c4
-      url: "https://pub.dev"
-    source: hosted
-    version: "14.9.4"
-  firebase_messaging_platform_interface:
+  firebase_crashlytics:
     dependency: transitive
     description:
-      name: firebase_messaging_platform_interface
-      sha256: "87c4a922cb6f811cfb7a889bdbb3622702443c52a0271636cbc90d813ceac147"
+      name: firebase_crashlytics
+      sha256: "9897c01efaa950d2f6da8317d12452749a74dc45f33b46390a14cfe28067f271"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.37"
-  firebase_messaging_web:
+    version: "3.5.7"
+  firebase_crashlytics_platform_interface:
     dependency: transitive
     description:
-      name: firebase_messaging_web
-      sha256: "0d34dca01a7b103ed7f20138bffbb28eb0e61a677bf9e78a028a932e2c7322d5"
+      name: firebase_crashlytics_platform_interface
+      sha256: "16a71e08fbf6e00382816e1b13397898c29a54fa0ad969c2c2a3b82a704877f0"
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.7"
+    version: "3.6.35"
   fixnum:
     dependency: transitive
     description:

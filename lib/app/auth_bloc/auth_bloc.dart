@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:awesome_notifications/awesome_notifications.dart' as awesome;
 import 'package:bloc/bloc.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -48,20 +48,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_CheckForCallFeedback>(_checkForCallFeedback);
     on<_RemoveLastCallDetails>(_removeLastCallDetails);
     on<_GetSettings>(_getSettings);
-    _fcmForegroundStream = FirebaseMessaging.onMessage.listen(onNotification);
-    _fcmForegroundStream =
-        FirebaseMessaging.onMessageOpenedApp.listen(onNotification);
+    // _fcmForegroundStream = FirebaseMessaging.onMessage.listen(onNotification);
+    // _fcmForegroundStream =
+    //     FirebaseMessaging.onMessageOpenedApp.listen(onNotification);
     awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
       if (v?.payload != null) {
         onNotificationData(v!.payload!);
       }
     });
-    FirebaseMessaging.instance.getInitialMessage().then((e) {
-      if (e == null) {
-        return;
-      }
-      onNotification(e);
-    });
+    // FirebaseMessaging.instance.getInitialMessage().then((e) {
+    //   if (e == null) {
+    //     return;
+    //   }
+    //   onNotification(e);
+    // });
     on<_GetAppConfig>(_getAppConfigData);
   }
   final AuthRepo _authRepo;
@@ -70,9 +70,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final PendingCallFeedbackRepo _pendingCallFeedbackRepo;
   StreamSubscription? _fcmForegroundStream;
   StreamSubscription? _fcmBackgroundStream;
-  void onNotification(RemoteMessage message) async {
-    onNotificationData(message.data);
-  }
+  // void onNotification(RemoteMessage message) async {
+  //   onNotificationData(message.data);
+  // }
 
   void onNotificationData(Map<String, dynamic> data) async {
     try {
