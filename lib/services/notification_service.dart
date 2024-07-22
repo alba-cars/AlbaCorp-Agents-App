@@ -102,12 +102,12 @@ class NotificationService {
   static Future<void> onActionReceivedMethod(
       ReceivedAction receivedAction) async {
     if (receivedAction.buttonKeyPressed == 'ACCEPT') {
-      final phoneNumber = receivedAction.payload?['phone_number'];
+      final phoneNumber = receivedAction.payload?['phoneNumber'];
       if (phoneNumber != null) {
         await makePhoneCall(phoneNumber);
       }
     } else if (receivedAction.buttonKeyPressed == 'WHATSAPP') {
-      final phoneNumber = receivedAction.payload?['phone_number'];
+      final phoneNumber = receivedAction.payload?['phoneNumber'];
       if (phoneNumber != null) {
         await makeWhatsApp(phoneNumber);
       }

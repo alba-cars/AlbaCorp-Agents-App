@@ -236,6 +236,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (state.authStatus == AuthStatus.Authenticated) {
       await getIt<SharedPreferences>().reload();
       final number = getIt<SharedPreferences>().getString("calledNumber");
+      Logger().d('number $number');
       if (number != null) {
         await _pendingCallFeedbackRepo.add(
             model: PendingCallFeedback(

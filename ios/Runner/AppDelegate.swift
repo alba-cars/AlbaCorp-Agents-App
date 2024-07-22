@@ -2,6 +2,7 @@ import Flutter
 import UIKit
 import GoogleMaps
 import awesome_notifications
+import awesome_notifications_fcm
 
 
 @UIApplicationMain
@@ -20,6 +21,11 @@ import awesome_notifications
           SwiftAwesomeNotificationsPlugin.register(
             with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)
       }
+      SwiftAwesomeNotificationsFcmPlugin.setPluginRegistrantCallback { registry in
+                SwiftAwesomeNotificationsPlugin.register(
+                  with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)
+                
+            }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     

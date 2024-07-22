@@ -98,16 +98,19 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
                   visible: widget.label != null,
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Text(
-                          widget.label! + (widget.isRequired ? ' *' : ''),
-                          style:
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFF555555),
-                                  ),
+                      if (widget.label != null)
+                        Expanded(
+                          child: Text(
+                            widget.label! + (widget.isRequired ? ' *' : ''),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFF555555),
+                                ),
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -340,6 +343,9 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
                             const EdgeInsets.fromLTRB(14.0, 12.0, 14.0, 12.0),
                       ),
                       builder: (CountryCode? countryCode) {
+                        if (countryCode == null) {
+                          return SizedBox();
+                        }
                         return SizedBox(
                           width: 78,
                           child: Padding(
