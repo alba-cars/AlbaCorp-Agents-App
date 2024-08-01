@@ -93,7 +93,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="#E0E6F1"
-                android:text="Ignore"
+                android:text="Personal"
                 android:textColor="#666666"
                 android:textSize="16sp" />
 
@@ -104,7 +104,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:backgroundTint="#001C3E"
-                android:text="Feedback"
+                android:text="Client"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
         </LinearLayout>

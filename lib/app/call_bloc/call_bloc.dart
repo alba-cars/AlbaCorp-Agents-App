@@ -40,15 +40,18 @@ class CallBloc extends Bloc<CallEvent, CallState> {
 
   FutureOr<void> _onCallStarted(
       _CallStarted event, Emitter<CallState> emit) async {
-    // emit(state.copyWith(
-    //   phoneCallStatus: PhoneCallStatus.inCall,
-    //   calledNumber: event.phoneNumber,
-    //   callStartTime: DateTime.now(),
-    //   activityId: event.activityId,
-    //   leadId: event.leadId,
-    // ));
-    await _linkusRepo.makeACall(
+    emit(state.copyWith(
+        makeACallStatus: AppStatus.loading, makeACallError: null));
+    final result = await _linkusRepo.makeACall(
         number: event.phoneNumber, activityId: event.activityId);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(makeACallStatus: AppStatus.success));
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            makeACallStatus: AppStatus.failure, makeACallError: e.exception));
+    }
     // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
     // getIt<SharedPreferences>().setBool(event.activityId, true);
   }

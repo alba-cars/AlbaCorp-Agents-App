@@ -34,6 +34,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     requestPermission();
     // firebaseMessaging.requestPermission();
     checkPreference();
+    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    getIt<AuthBloc>().add(AuthEvent.checkForImportantActivity());
     super.initState();
   }
 
@@ -94,35 +96,37 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           routerConfig: AppRouter.router,
           theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
-                  seedColor: Color(0xff374eab), tertiary: Color(0xffdfc090)),
+                seedColor: Color(0xff004B85),
+                tertiary: Color(0xffdfc090),
+              ),
               dialogBackgroundColor: Colors.white,
               buttonTheme: ButtonThemeData(
-                buttonColor: Color(0xff374eab),
+                buttonColor: Color(0xff004B85),
               ),
               appBarTheme: AppBarTheme(
-                  backgroundColor: Color(0xff374eab),
+                  backgroundColor: Color(0xff004B85),
                   foregroundColor: Colors.white,
                   titleTextStyle:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff374eab),
+                      backgroundColor: Color(0xff004B85),
                       foregroundColor: Colors.white,
                       // minimumSize: Size.fromWidth(70),
                       fixedSize: Size.fromWidth(200),
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Color(0xff374eab), width: 2),
+                          side: BorderSide(color: Color(0xff004B85), width: 2),
                           borderRadius: BorderRadius.circular(12)))),
               outlinedButtonTheme: OutlinedButtonThemeData(
                   style: ButtonStyle(
                       foregroundColor:
-                          WidgetStatePropertyAll(Color(0xff374eab)),
+                          WidgetStatePropertyAll(Color(0xff004B85)),
                       fixedSize: WidgetStatePropertyAll(Size.fromWidth(
                         200,
                       )),
                       minimumSize: WidgetStatePropertyAll(Size.fromHeight(43)),
                       side: WidgetStatePropertyAll(BorderSide(
-                        color: const Color(0xff374eab),
+                        color: const Color(0xff004B85),
                         width: 1,
                       )),
                       shape: WidgetStatePropertyAll(RoundedRectangleBorder(

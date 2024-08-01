@@ -13,6 +13,7 @@ import '../../../app/call_bloc/call_bloc.dart';
 import '../../../model/lead_model.dart';
 import '../../../service_locator/injectable.dart';
 import '../../../util/color_category.dart';
+import '../../../util/status.dart';
 import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 
@@ -117,16 +118,42 @@ class AboutTabView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CallButton(
-                              onTap: () {
-                                getIt<CallBloc>().add(CallEvent.clickToCall(
-                                  phoneNumber: lead.phone ?? '',
-                                ));
+                              onTap: () async {
+                                context.read<CallBloc>().add(
+                                    CallEvent.callStarted(
+                                        phoneNumber: lead.phone ?? '',
+                                        activityId: "",
+                                        leadId: lead.id));
+                                final state = await getIt<CallBloc>()
+                                    .stream
+                                    .firstWhere((e) =>
+                                        e.makeACallStatus != AppStatus.loading);
+                                if (state.makeACallStatus ==
+                                    AppStatus.success) {
+                                  showSnackbar(
+                                      context,
+                                      'Call request sent successfully. please open linkus app to receieve call',
+                                      SnackBarType.success);
+                                } else {
+                                  showSnackbar(
+                                      context,
+                                      'Call request failed to send. error: ${state.makeACallError}',
+                                      SnackBarType.failure);
+                                }
                               },
                               isDnd: lead.dndStatus),
                           WhatsAppButton(
-                              onTap: () {
-                                launchUrlString(
-                                    'whatsapp://send?phone=${lead.phone}');
+                              onTap: () async {
+                                if (await canLaunchUrlString(
+                                    'whatsapp://send?phone=${lead.phone}')) {
+                                  launchUrlString(
+                                      'whatsapp://send?phone=${lead.phone}');
+                                } else {
+                                  showSnackbar(
+                                      context,
+                                      'Can not launch the app',
+                                      SnackBarType.failure);
+                                }
                               },
                               isDnd: lead.dndStatus),
                           IconButton.filledTonal(

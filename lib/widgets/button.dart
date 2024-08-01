@@ -21,6 +21,7 @@ class AppPrimaryButton extends StatefulWidget {
     this.borderColor,
     this.borderRadious,
     this.loading,
+    this.outlined = false,
   });
   final String text;
   final dynamic Function() onTap;
@@ -35,6 +36,7 @@ class AppPrimaryButton extends StatefulWidget {
   final bool? loading;
   final bool borderShow;
   final bool isDisabled;
+  final bool outlined;
   final Color? borderColor;
   final double? borderRadious;
 
@@ -86,7 +88,8 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final textSlyle = Theme.of(context).textTheme.labelLarge!.copyWith(
-        color: widget.foregroundColor ?? colorScheme.onPrimary,
+        color: widget.foregroundColor ??
+            (widget.outlined ? colorScheme.primary : colorScheme.onPrimary),
         fontSize: 14.sp,
         fontWeight: FontWeight.w600);
     if (widget.animate) {
@@ -97,15 +100,19 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
       child: ElevatedButton(
         clipBehavior: Clip.hardEdge,
         style: ElevatedButton.styleFrom(
-          backgroundColor: widget.backgroundColor ?? colorScheme.primary,
-          foregroundColor: widget.foregroundColor,
+          backgroundColor: widget.backgroundColor ??
+              (widget.outlined ? colorScheme.onPrimary : colorScheme.primary),
+          foregroundColor: widget.foregroundColor ??
+              (widget.outlined ? colorScheme.primary : colorScheme.onPrimary),
           visualDensity: VisualDensity.compact,
           padding: widget.backgroundImage != null ? EdgeInsets.zero : null,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.borderRadious ?? 10),
-            side: widget.borderShow
+            side: widget.borderShow || widget.outlined
                 ? BorderSide(
-                    color: widget.borderColor ?? colorScheme.primary,
+                    color: widget.borderColor ??
+                        widget.foregroundColor ??
+                        colorScheme.primary,
                     width: 1.0,
                   )
                 : BorderSide.none,
@@ -182,7 +189,10 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
                       child: FittedBox(
                         child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(
-                            Theme.of(context).colorScheme.onPrimary,
+                            widget.foregroundColor ??
+                                (widget.outlined
+                                    ? colorScheme.primary
+                                    : colorScheme.onPrimary),
                           ),
                         ),
                       ),

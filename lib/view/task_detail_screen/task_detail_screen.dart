@@ -10,6 +10,7 @@ import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
@@ -415,7 +416,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                 children: [
                                                   Expanded(
                                                     child: OutlinedButton(
-                                                        onPressed: () {
+                                                        onPressed: () async {
                                                           getIt<CallBloc>().add(
                                                               CallEvent.callStarted(
                                                                   activityId:
@@ -428,6 +429,29 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                           .lead
                                                                           ?.id ??
                                                                       ''));
+                                                          final state = await getIt<
+                                                                  CallBloc>()
+                                                              .stream
+                                                              .firstWhere((e) =>
+                                                                  e.makeACallStatus !=
+                                                                  AppStatus
+                                                                      .loading);
+                                                          if (state
+                                                                  .makeACallStatus ==
+                                                              AppStatus
+                                                                  .success) {
+                                                            showSnackbar(
+                                                                context,
+                                                                'Call request sent successfully. please open linkus app to receieve call',
+                                                                SnackBarType
+                                                                    .success);
+                                                          } else {
+                                                            showSnackbar(
+                                                                context,
+                                                                'Call request failed to send. error: ${state.makeACallError}',
+                                                                SnackBarType
+                                                                    .failure);
+                                                          }
                                                         },
                                                         child:
                                                             Icon(Icons.call)),
@@ -435,9 +459,18 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   HorizontalSmallGap(),
                                                   Expanded(
                                                     child: OutlinedButton(
-                                                        onPressed: () {
-                                                          launchUrlString(
-                                                              'whatsapp://send?phone=${task.lead?.phone}');
+                                                        onPressed: () async {
+                                                          if (await canLaunchUrlString(
+                                                              'whatsapp://send?phone=${task.lead?.phone}')) {
+                                                            launchUrlString(
+                                                                'whatsapp://send?phone=${task.lead?.phone}');
+                                                          } else {
+                                                            showSnackbar(
+                                                                context,
+                                                                'Can not launch the app',
+                                                                SnackBarType
+                                                                    .failure);
+                                                          }
                                                         },
                                                         child: ImageIcon(AssetImage(
                                                             'assets/images/whatsapp.png'))),

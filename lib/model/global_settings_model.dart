@@ -7,7 +7,7 @@ part 'global_settings_model.g.dart';
 class GlobalSettings with _$GlobalSettings {
   const factory GlobalSettings({
     required String id,
-    required String timeUntilTicketArchived,
+    String? timeUntilTicketArchived,
     required CheckoutLimit checkoutLimit,
     required String unAssignLeadAfter,
     required DateTime createdAt,

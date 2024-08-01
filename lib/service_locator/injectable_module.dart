@@ -8,22 +8,22 @@ import '../util/token_interceptor.dart';
 abstract class RegisterModules {
   @Environment('Prod')
   @Named('BaseUrl')
-  String get baseProdUrl => 'https://backend.ravo.app';
+  String get baseProdUrl => 'https://backend.alba.homes/api/';
 
   @Environment('Stage')
   @Named('BaseUrl')
-  String get baseUrl => // 'https://admin.dev.homes.albacars.app/api/';
-      // 'http://10.0.2.2:4000/api/';
-      'http://192.168.2.160:4000/api/';
+  String get baseUrl => 'https://admin.dev.homes.albacars.app/api/';
+  // 'http://10.0.2.2:4000/api/';
+  // 'http://192.168.2.160:4000/api/';
   // 'https://backend.alba.homes/api/';
   @Environment('Prod')
   @Named('AwsBucket')
   String get awsProdBucket =>
-      'https://alba-ravo-prod.s3.me-central-1.amazonaws.com/';
+      'https://albacorp-homes-prod.s3.me-central-1.amazonaws.com/';
   @Environment('Stage')
   @Named('AwsBucket')
   String get awsStageBucket =>
-      'https://albacorp-homes-dev.s3.us-east-2.amazonaws.com/';
+      'https://alba-homes-demo.s3.us-east-2.amazonaws.com/';
 
   @lazySingleton
   Dio getDio(@Named('BaseUrl') String baseUrl) {

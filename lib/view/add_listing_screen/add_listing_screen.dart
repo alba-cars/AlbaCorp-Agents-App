@@ -181,14 +181,15 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
                       children: [
                         if (currentTab != 0) ...[
                           Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
+                            child: AppPrimaryButton(
+                                onTap: () {
                                   context
                                       .read<AddListingCubit>()
                                       .onPreviousPressed(
                                           tabController: _tabController);
                                 },
-                                child: Text('Previous')),
+                                outlined: true,
+                                text: 'Previous'),
                           ),
                           HorizontalSmallGap(),
                         ],
@@ -420,10 +421,9 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
 
                       return list;
                     },
-                    // valueTransformer: (p0) {
-                    //   TODO: Check this
-                    //   return p0?.map((k,v) => v["value"]).toList();
-                    // },
+                    valueTransformer: (p0) {
+                      return p0?.map((e) => e['value']).toList();
+                    },
                   );
                 },
               ),

@@ -128,11 +128,12 @@ class _TryState extends State<_AddLeadScreenLayout> {
                   children: [
                     if (currentStep != 0) ...[
                       Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
+                        child: AppPrimaryButton(
+                          onTap: () {
                             context.read<AddLeadCubit>().onBackPressed();
                           },
-                          child: Text('Back'),
+                          outlined: true,
+                          text: 'Back',
                         ),
                       ),
                       HorizontalSmallGap()
@@ -233,7 +234,7 @@ class _TryState extends State<_AddLeadScreenLayout> {
                             .toLowerCase()
                             .contains(v.text.toLowerCase())),
                         displayStringForOption: (option) => option.name,
-                        onSelected: (p0) => p0?.name,
+                        valueTransformer: (p0) => p0?.name,
                         name: 'lead_source');
                   },
                 ),

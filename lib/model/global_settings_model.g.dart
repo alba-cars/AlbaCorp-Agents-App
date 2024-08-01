@@ -9,7 +9,7 @@ part of 'global_settings_model.dart';
 _$GlobalSettingsImpl _$$GlobalSettingsImplFromJson(Map<String, dynamic> json) =>
     _$GlobalSettingsImpl(
       id: json['id'] as String,
-      timeUntilTicketArchived: json['timeUntilTicketArchived'] as String,
+      timeUntilTicketArchived: json['timeUntilTicketArchived'] as String?,
       checkoutLimit:
           CheckoutLimit.fromJson(json['checkoutLimit'] as Map<String, dynamic>),
       unAssignLeadAfter: json['unAssignLeadAfter'] as String,
