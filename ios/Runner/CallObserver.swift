@@ -15,7 +15,7 @@ class CallObserver: NSObject, CXCallObserverDelegate {
     func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
         if call.hasEnded {
             let preferences = UserDefaults.standard;
-            preferences.set( "IPHONE",forKey:"calledNumber");
+            preferences.set( "IPHONE",forKey:"flutter.calledNumber");
             preferences.synchronize();
             sendLocalNotification()
             

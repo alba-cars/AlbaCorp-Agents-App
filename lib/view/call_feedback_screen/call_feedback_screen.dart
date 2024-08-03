@@ -86,42 +86,45 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
           },
           builder: (context, state) {
             if (state.requestNumber) {
-              return FormBuilder(
-                key: _formNumberKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LottieBuilder.asset(
-                          'assets/lottie/no_lead_found.json',
-                          width: 300,
-                          height: 300,
-                        ),
-                        VerticalSmallGap(),
-                        TitleText(
-                          text: "Please enter the number",
-                          textAlign: TextAlign.center,
-                        ),
-                        VerticalSmallGap(),
-                        PhoneNumberField(name: 'number'),
-                        VerticalSmallGap(),
-                        AppPrimaryButton(
-                            text: 'Check lead',
-                            onTap: () async {
-                              final isValidated = _formNumberKey.currentState
-                                  ?.saveAndValidate();
-                              if (isValidated == true) {
-                                final number = _formNumberKey
-                                        .currentState?.value['number'] ??
-                                    '';
-                                context
-                                    .read<CallFeedbackCubit>()
-                                    .checkUerExist(numberEntered: number);
-                              }
-                            })
-                      ],
+              return SingleChildScrollView(
+                reverse: true,
+                child: FormBuilder(
+                  key: _formNumberKey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          LottieBuilder.asset(
+                            'assets/lottie/no_lead_found.json',
+                            width: 300,
+                            height: 300,
+                          ),
+                          VerticalSmallGap(),
+                          TitleText(
+                            text: "Please enter the number",
+                            textAlign: TextAlign.center,
+                          ),
+                          VerticalSmallGap(),
+                          PhoneNumberField(name: 'number'),
+                          VerticalSmallGap(),
+                          AppPrimaryButton(
+                              text: 'Check lead',
+                              onTap: () async {
+                                final isValidated = _formNumberKey.currentState
+                                    ?.saveAndValidate();
+                                if (isValidated == true) {
+                                  final number = _formNumberKey
+                                          .currentState?.value['number'] ??
+                                      '';
+                                  context
+                                      .read<CallFeedbackCubit>()
+                                      .checkUerExist(numberEntered: number);
+                                }
+                              })
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -219,6 +222,7 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                         text:
                             "A lead has been found matching to the number ${getIt<AuthBloc>().state.lastCalledNumber}. Updating the lead activity with the provided. ",
                         textAlign: TextAlign.center,
+                        maxLines: 5,
                       ),
                       VerticalSmallGap(
                         adjustment: 2,

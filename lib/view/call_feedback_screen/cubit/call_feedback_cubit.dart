@@ -31,9 +31,9 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
         checkLeadStatus: AppStatus.loading, requestNumber: false));
     final number = numberEntered ?? getIt<AuthBloc>().state.lastCalledNumber;
 
-    if (number != null || number != 'IPHONE' || number != 'Unknown') {
+    if (number != null && number != 'IPHONE' && number != 'Unknown') {
       final result =
-          await _leadRepo.getLeadByPhone(phone: number!.replaceAll('+', ''));
+          await _leadRepo.getLeadByPhone(phone: number.replaceAll('+', ''));
       switch (result) {
         case (Success<Lead?> s):
           emit(state.copyWith(
