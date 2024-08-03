@@ -408,6 +408,9 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                             ],
                             if (value == "Do not Call") ...[
                               AppPrimaryButton(
+                                  foregroundColor: Colors.red[800]!,
+                                  borderShow: true,
+                                  backgroundColor: Colors.white,
                                   onTap: () async {
                                     if (_formKey.currentState
                                             ?.saveAndValidate() !=
@@ -448,13 +451,11 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                 VerticalSmallGap(
                                   adjustment: 1,
                                 ),
-                              OutlinedButton(
-                                  style: OutlinedButton.styleFrom(
-                                      maximumSize: Size(200, 43),
-                                      minimumSize: Size(100, 43),
-                                      side: BorderSide(color: Colors.red[800]!),
-                                      foregroundColor: Colors.red[800]!),
-                                  onPressed: () async {
+                              AppPrimaryButton(
+                                  foregroundColor: Colors.red[800]!,
+                                  borderShow: true,
+                                  backgroundColor: Colors.white,
+                                  onTap: () async {
                                     if (_formKey.currentState
                                             ?.saveAndValidate() !=
                                         true) {
@@ -468,7 +469,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                             description: _controller.text);
                                     // Navigator.of(context).pop();
                                   },
-                                  child: Text('Disqualify')),
+                                  text: 'Disqualify'),
                             ]
                           ],
                         );

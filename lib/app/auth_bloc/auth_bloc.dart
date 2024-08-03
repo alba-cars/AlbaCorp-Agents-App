@@ -23,6 +23,7 @@ import 'package:real_estate_app/model/user.dart';
 import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
+import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../model/activity_model.dart';
@@ -48,21 +49,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_CheckForCallFeedback>(_checkForCallFeedback);
     on<_RemoveLastCallDetails>(_removeLastCallDetails);
     on<_GetSettings>(_getSettings);
-    // _fcmForegroundStream = FirebaseMessaging.onMessage.listen(onNotification);
-    // _fcmForegroundStream =
-    //     FirebaseMessaging.onMessageOpenedApp.listen(onNotification);
-    awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
-      if (v?.payload != null) {
-        onNotificationData(v!.payload!);
-      }
-    });
-    // FirebaseMessaging.instance.getInitialMessage().then((e) {
-    //   if (e == null) {
-    //     return;
-    //   }
-    //   onNotification(e);
-    // });
     on<_GetAppConfig>(_getAppConfigData);
+
+    awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
+      if (v == null) {
+        return;
+      }
+
+      onNotificationOpenedApp(v);
+    });
   }
   final AuthRepo _authRepo;
   final ActivityRepo _activityRepo;
@@ -70,24 +65,54 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final PendingCallFeedbackRepo _pendingCallFeedbackRepo;
   StreamSubscription? _fcmForegroundStream;
   StreamSubscription? _fcmBackgroundStream;
-  // void onNotification(RemoteMessage message) async {
-  //   onNotificationData(message.data);
-  // }
+  void onNotificationOpenedApp(awesome.ReceivedAction receivedAction) async {
+    try {
+      final data = receivedAction.payload;
+      if (data == null) {
+        return;
+      }
+      saveNotificationToDb(data);
+
+      if (receivedAction.payload?['type'] == 'ACTIVITY_EXPIRING') {
+        if (getIt<AuthBloc>().state.authStatus == AuthStatus.initial) {
+          await getIt<AuthBloc>()
+              .stream
+              .firstWhere((e) => e.authStatus != AuthStatus.initial);
+        }
+        await Future.delayed(Duration(milliseconds: 500));
+        final id = receivedAction.payload?['activityId'];
+        if (id != null) {
+          AppRouter.router.pushNamed(TaskDetailScreen.routeName,
+              pathParameters: {'id': id});
+        }
+      } else {
+        if (receivedAction.payload != null) {
+          onNotificationData(receivedAction.payload!);
+        }
+      }
+    } catch (e) {
+      Logger().e(e);
+    }
+  }
+
+  void saveNotificationToDb(Map<String, dynamic> data) async {
+    Logger().d(data);
+    final notificationId = data['id'] as String? ?? '';
+    final existResult = await _notificationRepo.isNotificationReceived(
+        notificationId: notificationId);
+    if (existResult is Success && (existResult as Success).value) {
+      return;
+    }
+    _notificationRepo.addNotification(
+        notification: NotificationModel(
+            notificationId: data['id'],
+            title: data["title"] ?? '',
+            subTitle: data["body"]));
+  }
 
   void onNotificationData(Map<String, dynamic> data) async {
     try {
-      Logger().d(data);
-      final notificationId = data['id'] as String? ?? '';
-      final existResult = await _notificationRepo.isNotificationReceived(
-          notificationId: notificationId);
-      if (existResult is Success && (existResult as Success).value) {
-        return;
-      }
-      _notificationRepo.addNotification(
-          notification: NotificationModel(
-              notificationId: data['id'],
-              title: data["title"] ?? '',
-              subTitle: data["body"]));
+      saveNotificationToDb(data);
       if (data['type'] == 'ImportantActivity') {
         final activities = json.decode(data['values'] as String? ?? '[]');
         add(AuthEvent.newImportantActivity(
@@ -228,11 +253,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .firstWhere((state) => state.authStatus != AuthStatus.initial);
     }
     Logger().d("call feedback event");
-    awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
-      if (v?.payload != null) {
-        onNotificationData(v!.payload!);
-      }
-    });
+
     if (state.authStatus == AuthStatus.Authenticated) {
       await getIt<SharedPreferences>().reload();
       final number = getIt<SharedPreferences>().getString("calledNumber");

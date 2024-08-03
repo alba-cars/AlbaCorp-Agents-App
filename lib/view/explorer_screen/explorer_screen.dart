@@ -47,32 +47,6 @@ class ExplorerScreen extends StatelessWidget {
   }
 }
 
-// class _ExplorerScreen extends StatelessWidget {
-//   const _ExplorerScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Explorer'),
-//         centerTitle: true,
-//       ),
-//       body: NotificationListener(
-//           child: RefreshIndicator.adaptive(
-//         onRefresh: () async {},
-//         child: ListView.separated(
-//             itemBuilder: (context, index) {
-//               return SizedBox();
-//             },
-//             separatorBuilder: (context, index) => SizedBox(
-//                   height: 8,
-//                 ),
-//             itemCount: 8),
-//       )),
-//     );
-//   }
-// }
-
 class _ExplorerScreenLayout extends StatefulWidget {
   const _ExplorerScreenLayout({this.tab});
   final int? tab;
@@ -439,12 +413,15 @@ class _ExplorerTabState extends State<ExplorerTab> {
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(6),color: Colors.blueGrey.withOpacity(.4)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.blueGrey.withOpacity(.4)),
                   height: 56,
-
-                  child:  ListTile(
+                  child: ListTile(
                       leading: Icon(Icons.info_outline),
-                      title: Text("Press and hold on any leads card for enabling multi select",style: TextStyle(fontSize: 12))),
+                      title: Text(
+                          "Press and hold on any leads card for enabling multi select",
+                          style: TextStyle(fontSize: 12))),
                 ),
               );
             }

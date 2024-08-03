@@ -888,6 +888,8 @@ mixin _$CallState {
   PhoneCallStatus get phoneCallStatus => throw _privateConstructorUsedError;
   bool get feedbackRequestDialogOpen => throw _privateConstructorUsedError;
   AppStatus get updateActivityStatus => throw _privateConstructorUsedError;
+  AppStatus get makeACallStatus => throw _privateConstructorUsedError;
+  String? get makeACallError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CallStateCopyWith<CallState> get copyWith =>
@@ -906,7 +908,9 @@ abstract class $CallStateCopyWith<$Res> {
       DateTime? callStartTime,
       PhoneCallStatus phoneCallStatus,
       bool feedbackRequestDialogOpen,
-      AppStatus updateActivityStatus});
+      AppStatus updateActivityStatus,
+      AppStatus makeACallStatus,
+      String? makeACallError});
 }
 
 /// @nodoc
@@ -929,6 +933,8 @@ class _$CallStateCopyWithImpl<$Res, $Val extends CallState>
     Object? phoneCallStatus = null,
     Object? feedbackRequestDialogOpen = null,
     Object? updateActivityStatus = null,
+    Object? makeACallStatus = null,
+    Object? makeACallError = freezed,
   }) {
     return _then(_value.copyWith(
       calledNumber: freezed == calledNumber
@@ -959,6 +965,14 @@ class _$CallStateCopyWithImpl<$Res, $Val extends CallState>
           ? _value.updateActivityStatus
           : updateActivityStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      makeACallStatus: null == makeACallStatus
+          ? _value.makeACallStatus
+          : makeACallStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      makeACallError: freezed == makeACallError
+          ? _value.makeACallError
+          : makeACallError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -978,7 +992,9 @@ abstract class _$$CallStateImplCopyWith<$Res>
       DateTime? callStartTime,
       PhoneCallStatus phoneCallStatus,
       bool feedbackRequestDialogOpen,
-      AppStatus updateActivityStatus});
+      AppStatus updateActivityStatus,
+      AppStatus makeACallStatus,
+      String? makeACallError});
 }
 
 /// @nodoc
@@ -999,6 +1015,8 @@ class __$$CallStateImplCopyWithImpl<$Res>
     Object? phoneCallStatus = null,
     Object? feedbackRequestDialogOpen = null,
     Object? updateActivityStatus = null,
+    Object? makeACallStatus = null,
+    Object? makeACallError = freezed,
   }) {
     return _then(_$CallStateImpl(
       calledNumber: freezed == calledNumber
@@ -1029,6 +1047,14 @@ class __$$CallStateImplCopyWithImpl<$Res>
           ? _value.updateActivityStatus
           : updateActivityStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      makeACallStatus: null == makeACallStatus
+          ? _value.makeACallStatus
+          : makeACallStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      makeACallError: freezed == makeACallError
+          ? _value.makeACallError
+          : makeACallError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1043,7 +1069,9 @@ class _$CallStateImpl implements _CallState {
       this.callStartTime,
       this.phoneCallStatus = PhoneCallStatus.noCall,
       this.feedbackRequestDialogOpen = false,
-      this.updateActivityStatus = AppStatus.init});
+      this.updateActivityStatus = AppStatus.init,
+      this.makeACallStatus = AppStatus.init,
+      this.makeACallError});
 
   @override
   final String? calledNumber;
@@ -1062,10 +1090,15 @@ class _$CallStateImpl implements _CallState {
   @override
   @JsonKey()
   final AppStatus updateActivityStatus;
+  @override
+  @JsonKey()
+  final AppStatus makeACallStatus;
+  @override
+  final String? makeACallError;
 
   @override
   String toString() {
-    return 'CallState(calledNumber: $calledNumber, activityId: $activityId, leadId: $leadId, callStartTime: $callStartTime, phoneCallStatus: $phoneCallStatus, feedbackRequestDialogOpen: $feedbackRequestDialogOpen, updateActivityStatus: $updateActivityStatus)';
+    return 'CallState(calledNumber: $calledNumber, activityId: $activityId, leadId: $leadId, callStartTime: $callStartTime, phoneCallStatus: $phoneCallStatus, feedbackRequestDialogOpen: $feedbackRequestDialogOpen, updateActivityStatus: $updateActivityStatus, makeACallStatus: $makeACallStatus, makeACallError: $makeACallError)';
   }
 
   @override
@@ -1086,7 +1119,11 @@ class _$CallStateImpl implements _CallState {
                     feedbackRequestDialogOpen) ||
                 other.feedbackRequestDialogOpen == feedbackRequestDialogOpen) &&
             (identical(other.updateActivityStatus, updateActivityStatus) ||
-                other.updateActivityStatus == updateActivityStatus));
+                other.updateActivityStatus == updateActivityStatus) &&
+            (identical(other.makeACallStatus, makeACallStatus) ||
+                other.makeACallStatus == makeACallStatus) &&
+            (identical(other.makeACallError, makeACallError) ||
+                other.makeACallError == makeACallError));
   }
 
   @override
@@ -1098,7 +1135,9 @@ class _$CallStateImpl implements _CallState {
       callStartTime,
       phoneCallStatus,
       feedbackRequestDialogOpen,
-      updateActivityStatus);
+      updateActivityStatus,
+      makeACallStatus,
+      makeACallError);
 
   @JsonKey(ignore: true)
   @override
@@ -1115,7 +1154,9 @@ abstract class _CallState implements CallState {
       final DateTime? callStartTime,
       final PhoneCallStatus phoneCallStatus,
       final bool feedbackRequestDialogOpen,
-      final AppStatus updateActivityStatus}) = _$CallStateImpl;
+      final AppStatus updateActivityStatus,
+      final AppStatus makeACallStatus,
+      final String? makeACallError}) = _$CallStateImpl;
 
   @override
   String? get calledNumber;
@@ -1131,6 +1172,10 @@ abstract class _CallState implements CallState {
   bool get feedbackRequestDialogOpen;
   @override
   AppStatus get updateActivityStatus;
+  @override
+  AppStatus get makeACallStatus;
+  @override
+  String? get makeACallError;
   @override
   @JsonKey(ignore: true)
   _$$CallStateImplCopyWith<_$CallStateImpl> get copyWith =>

@@ -21,7 +21,7 @@ GlobalSettings _$GlobalSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GlobalSettings {
   String get id => throw _privateConstructorUsedError;
-  String get timeUntilTicketArchived => throw _privateConstructorUsedError;
+  String? get timeUntilTicketArchived => throw _privateConstructorUsedError;
   CheckoutLimit get checkoutLimit => throw _privateConstructorUsedError;
   String get unAssignLeadAfter => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $GlobalSettingsCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String timeUntilTicketArchived,
+      String? timeUntilTicketArchived,
       CheckoutLimit checkoutLimit,
       String unAssignLeadAfter,
       DateTime createdAt,
@@ -70,7 +70,7 @@ class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
   @override
   $Res call({
     Object? id = null,
-    Object? timeUntilTicketArchived = null,
+    Object? timeUntilTicketArchived = freezed,
     Object? checkoutLimit = null,
     Object? unAssignLeadAfter = null,
     Object? createdAt = null,
@@ -84,10 +84,10 @@ class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      timeUntilTicketArchived: null == timeUntilTicketArchived
+      timeUntilTicketArchived: freezed == timeUntilTicketArchived
           ? _value.timeUntilTicketArchived
           : timeUntilTicketArchived // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       checkoutLimit: null == checkoutLimit
           ? _value.checkoutLimit
           : checkoutLimit // ignore: cast_nullable_to_non_nullable
@@ -138,7 +138,7 @@ abstract class _$$GlobalSettingsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String timeUntilTicketArchived,
+      String? timeUntilTicketArchived,
       CheckoutLimit checkoutLimit,
       String unAssignLeadAfter,
       DateTime createdAt,
@@ -163,7 +163,7 @@ class __$$GlobalSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? timeUntilTicketArchived = null,
+    Object? timeUntilTicketArchived = freezed,
     Object? checkoutLimit = null,
     Object? unAssignLeadAfter = null,
     Object? createdAt = null,
@@ -177,10 +177,10 @@ class __$$GlobalSettingsImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      timeUntilTicketArchived: null == timeUntilTicketArchived
+      timeUntilTicketArchived: freezed == timeUntilTicketArchived
           ? _value.timeUntilTicketArchived
           : timeUntilTicketArchived // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       checkoutLimit: null == checkoutLimit
           ? _value.checkoutLimit
           : checkoutLimit // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class __$$GlobalSettingsImplCopyWithImpl<$Res>
 class _$GlobalSettingsImpl implements _GlobalSettings {
   const _$GlobalSettingsImpl(
       {required this.id,
-      required this.timeUntilTicketArchived,
+      this.timeUntilTicketArchived,
       required this.checkoutLimit,
       required this.unAssignLeadAfter,
       required this.createdAt,
@@ -233,7 +233,7 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
   @override
   final String id;
   @override
-  final String timeUntilTicketArchived;
+  final String? timeUntilTicketArchived;
   @override
   final CheckoutLimit checkoutLimit;
   @override
@@ -311,7 +311,7 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
 abstract class _GlobalSettings implements GlobalSettings {
   const factory _GlobalSettings(
       {required final String id,
-      required final String timeUntilTicketArchived,
+      final String? timeUntilTicketArchived,
       required final CheckoutLimit checkoutLimit,
       required final String unAssignLeadAfter,
       required final DateTime createdAt,
@@ -326,7 +326,7 @@ abstract class _GlobalSettings implements GlobalSettings {
   @override
   String get id;
   @override
-  String get timeUntilTicketArchived;
+  String? get timeUntilTicketArchived;
   @override
   CheckoutLimit get checkoutLimit;
   @override

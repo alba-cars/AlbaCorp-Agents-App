@@ -38,8 +38,8 @@ class NotificationData implements NotificationRepo {
   @override
   Future<Result<List<NotificationModel>>> getNotifications() async {
     try {
-      final res = _notificationBox.getAll();
-      return Success(res.map((e) => e.toModel()).toList());
+      final res = await _notificationBox.getAllAsync();
+      return Success(res.reversed.map((e) => e.toModel()).toList());
     } catch (e) {
       log.d(e);
       return Error(e.toString());

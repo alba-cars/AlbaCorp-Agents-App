@@ -37,7 +37,7 @@ class MultiSelectAutoCompleteField<T extends Object> extends StatefulWidget {
   final String? hint;
   final Function(Map<String, List<dynamic>?> val)? onChanged;
   final bool isRequired;
-  final dynamic Function(T?)? valueTransformer;
+  final dynamic Function(List<T>?)? valueTransformer;
   final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
   final String Function(T) _displayStringForOption;
   final AutoCompleteFieldController? controller;
@@ -97,6 +97,7 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
     return FormBuilderField<List<T>>(
       key: _fieldKey,
       name: widget.name,
+      valueTransformer: widget.valueTransformer,
       validator: (value) {
         // if (options.contains(value) != true && widget.isRequired) {
         //   return 'Please select a value from options';

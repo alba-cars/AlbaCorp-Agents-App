@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:go_router/go_router.dart';
@@ -12,25 +11,20 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
-import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:real_estate_app/widgets/timer_text.dart';
 
-import '../../app/activity_cubit/activity_cubit.dart';
-import '../../model/activity_feedback_model.dart';
 import '../../util/color_category.dart';
 import '../../widgets/fields/date_field.dart';
 import '../../widgets/fields/drop_down_field.dart';
 import '../../widgets/fields/multi_dropdown_field.dart';
-import '../../widgets/fields/multi_line_textfield.dart';
 import '../../widgets/fields/multi_select_autocomplete_field.dart';
 import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/search_bar.dart';
-import '../add_deal_screen/add_deal_screen.dart';
-import '../add_task_screen/add_task_screen.dart';
+import '../../widgets/snackbar.dart';
 import 'cubit/home_cubit.dart';
 
 class HomePage extends StatelessWidget {
@@ -59,27 +53,6 @@ class _HomePageLayoutState extends State<HomePageLayout> {
     final user = getIt<AuthBloc>().state.user;
     return NestedScrollView(
         headerSliverBuilder: (context, hasUnderScroll) => [
-              // SliverAppBar(
-              //   title: SizedBox(
-              //     height: 50,
-              //     child: Image.asset(
-              //       'assets/images/logo-black.png',
-              //       fit: BoxFit.fitHeight,
-              //     ),
-              //   ),
-              //   centerTitle: true,
-              //   backgroundColor: Color.fromARGB(255, 240, 246, 250),
-              //   foregroundColor: pacificBlue,
-              //   leading: IconButton(
-              //     onPressed: () {},
-              //     icon: Icon(Icons.menu),
-              //     padding: EdgeInsetsDirectional.only(start: 8),
-              //   ),
-              //   actions: [
-              //     IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-              //   ],
-              //   pinned: true,
-              // ),
               SliverVerticalSmallGap(),
               SliverToBoxAdapter(
                 child: Padding(
@@ -528,62 +501,79 @@ class CategorizedView extends StatelessWidget {
                       ),
                     ),
                     sliver: SliverPadding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      sliver: state.getActivitiesStatus[index] ==
-                              AppStatus.loading
-                          ? SliverToBoxAdapter(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        sliver: switch (state.getActivitiesStatus[index]) {
+                          AppStatus.loading => SliverToBoxAdapter(
                               child: Center(child: CircularProgressIndicator()),
-                            )
-                          : state.getActivitiesStatus[index] ==
-                                      AppStatus.success &&
-                                  state.activities[index]?.isEmpty == true
-                              ? SliverToBoxAdapter(child: Text('No Leads'))
-                              : SliverList.separated(
-                                  itemCount: (state.activityPaginator[index]
-                                                  ?.hasNextPage ??
-                                              false) &&
-                                          state.activities[index]?.isNotEmpty ==
-                                              true
-                                      ? itemLength + 1
-                                      : itemLength,
-                                  itemBuilder: (context, v) {
-                                    if (v == itemLength) {
-                                      return OutlinedButton(
-                                          onPressed: () {
-                                            context
-                                                .read<HomeCubit>()
-                                                .getActivities(
-                                                    filterCode: index);
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text("Load More"),
-                                              if (state.getActivitiesStatus[
-                                                      index] ==
-                                                  AppStatus.loadingMore) ...[
-                                                HorizontalSmallGap(),
-                                                SizedBox.square(
-                                                  dimension: 20,
-                                                  child:
-                                                      CircularProgressIndicator
-                                                          .adaptive(),
-                                                )
-                                              ]
-                                            ],
-                                          ));
-                                    }
-                                    final activity = activities[v];
-                                    return ActivityListItem(
-                                      activity: activity,
-                                      index: v,
-                                      taskSection: index,
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) =>
-                                      VerticalSmallGap()),
-                    ),
+                            ),
+                          AppStatus.failure => SliverToBoxAdapter(
+                              child: SliverToBoxAdapter(
+                                  child: Row(
+                                children: [
+                                  Text('Some error occured'),
+                                  TextButton(
+                                      onPressed: () async {
+                                        await context
+                                            .read<HomeCubit>()
+                                            .getActivities(
+                                                filterCode: index,
+                                                refresh: true);
+                                      },
+                                      child: Text("Retry"))
+                                ],
+                              )),
+                            ),
+                          AppStatus.success =>
+                            state.activities[index]?.isEmpty == true
+                                ? SliverToBoxAdapter(child: Text('No Leads'))
+                                : SliverList.separated(
+                                    itemCount: (state.activityPaginator[index]
+                                                    ?.hasNextPage ??
+                                                false) &&
+                                            state.activities[index]
+                                                    ?.isNotEmpty ==
+                                                true
+                                        ? itemLength + 1
+                                        : itemLength,
+                                    itemBuilder: (context, v) {
+                                      if (v == itemLength) {
+                                        return OutlinedButton(
+                                            onPressed: () {
+                                              context
+                                                  .read<HomeCubit>()
+                                                  .getActivities(
+                                                      filterCode: index);
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text("Load More"),
+                                                if (state.getActivitiesStatus[
+                                                        index] ==
+                                                    AppStatus.loadingMore) ...[
+                                                  HorizontalSmallGap(),
+                                                  SizedBox.square(
+                                                    dimension: 20,
+                                                    child:
+                                                        CircularProgressIndicator
+                                                            .adaptive(),
+                                                  )
+                                                ]
+                                              ],
+                                            ));
+                                      }
+                                      final activity = activities[v];
+                                      return ActivityListItem(
+                                        activity: activity,
+                                        index: v,
+                                        taskSection: index,
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) =>
+                                        VerticalSmallGap()),
+                          _ => SizedBox()
+                        }),
                   );
                 },
               )),
@@ -726,6 +716,19 @@ class ActivityListItem extends StatelessWidget {
                         phoneNumber: activity.lead!.phone ?? '',
                         activityId: activity.id,
                         leadId: activity.lead!.id));
+                    final state = await getIt<CallBloc>().stream.firstWhere(
+                        (e) => e.makeACallStatus != AppStatus.loading);
+                    if (state.makeACallStatus == AppStatus.success) {
+                      showSnackbar(
+                          context,
+                          'Call request sent successfully. please open linkus app to receieve call',
+                          SnackBarType.success);
+                    } else {
+                      showSnackbar(
+                          context,
+                          'Call request failed to send. error: ${state.makeACallError}',
+                          SnackBarType.failure);
+                    }
                   },
                   isDnd: activity.lead!.dndStatus,
                 )

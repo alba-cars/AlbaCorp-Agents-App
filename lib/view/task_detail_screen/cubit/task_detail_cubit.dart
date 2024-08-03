@@ -76,7 +76,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       bool refresh = false,
       bool completed = true,
       Map<String, dynamic>? values,
-      Function? onSuccess}) async {
+      Future<void> Function()? onSuccess}) async {
     final result = await _activityRepo.updateActivity(
         activityId: state.task!.id, notes: description, completed: completed);
     switch (result) {
@@ -288,7 +288,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     switch (result) {
       case (Success<List<Activity>> s):
         final list = List<Activity>.from(s.value)
-          ..sort((a, b) => a.activityWeight.compareTo(b.activityWeight));
+          ..sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
         list.removeWhere((element) => element.id == state.taskId);
         emit(state.copyWith(
             sortedActivity: [...state.sortedActivity, ...list],

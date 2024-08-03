@@ -15,10 +15,12 @@ import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
 
+import '../../app/call_bloc/call_bloc.dart';
 import '../../util/color_category.dart';
 import '../../util/status.dart';
 import '../../widgets/button.dart';
 import '../../widgets/call_button.dart';
+import '../../widgets/snackbar.dart';
 import '../../widgets/space.dart';
 import '../../widgets/text.dart';
 import '../lead_detail_screen/lead_detail_screen.dart';
@@ -368,7 +370,21 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
               },
               builder: (context, state) {
                 if (!state.selectModeEnabled) {
-                  return SizedBox();
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Colors.blueGrey.withOpacity(.4)),
+                      height: 56,
+                      child: ListTile(
+                          leading: Icon(Icons.info_outline),
+                          title: Text(
+                              "Press and hold on any leads card for enabling multi select to return leads",
+                              style: TextStyle(fontSize: 12))),
+                    ),
+                  );
                 }
                 return Container(
                   margin: EdgeInsets.symmetric(vertical: 8),
@@ -624,7 +640,25 @@ class LeadItem extends StatelessWidget {
                     CallButton(
                         onTap: () async {
                           if (lead.phone != null) {
-                            context.read<LeadsCubit>().makeACall(lead);
+                            context.read<CallBloc>().add(CallEvent.callStarted(
+                                phoneNumber: lead.phone ?? '',
+                                activityId: "",
+                                leadId: lead.id));
+                            final state = await getIt<CallBloc>()
+                                .stream
+                                .firstWhere((e) =>
+                                    e.makeACallStatus != AppStatus.loading);
+                            if (state.makeACallStatus == AppStatus.success) {
+                              showSnackbar(
+                                  context,
+                                  'Call request sent successfully. please open linkus app to receieve call',
+                                  SnackBarType.success);
+                            } else {
+                              showSnackbar(
+                                  context,
+                                  'Call request failed to send. error: ${state.makeACallError}',
+                                  SnackBarType.failure);
+                            }
                           }
                         },
                         isDnd: lead.dndStatus),

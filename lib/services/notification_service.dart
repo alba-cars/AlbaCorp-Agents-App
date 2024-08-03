@@ -1,6 +1,12 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../routes/app_router.dart';
+import '../view/task_detail_screen/task_detail_screen.dart';
 
 class NotificationService {
   static Future<void> initializeNotification() async {
@@ -18,6 +24,17 @@ class NotificationService {
             criticalAlerts: true,
             playSound: true,
             defaultRingtoneType: DefaultRingtoneType.Ringtone,
+          ),
+          NotificationChannel(
+            channelKey: 'my_app_channel',
+            channelName: 'Default Notifications',
+            channelDescription: 'Notification channel',
+            defaultColor: Colors.blue,
+            ledColor: Colors.white,
+            importance: NotificationImportance.Max,
+            channelShowBadge: true,
+            criticalAlerts: true,
+            playSound: true,
           ),
           NotificationChannel(
               channelKey: 'important_channel',
@@ -48,6 +65,7 @@ class NotificationService {
 
     await AwesomeNotifications().setListeners(
       onActionReceivedMethod: onActionReceivedMethod,
+      onNotificationCreatedMethod: onNotificationReceivedMethod,
     );
   }
 
@@ -63,7 +81,7 @@ class NotificationService {
         wakeUpScreen: true,
         fullScreenIntent: true,
         autoDismissible: false,
-        payload: {'phone_number': phoneNumber},
+        payload: {'phoneNumber': phoneNumber},
       ),
       actionButtons: [
         NotificationActionButton(
@@ -101,6 +119,7 @@ class NotificationService {
   @pragma('vm:entry-point')
   static Future<void> onActionReceivedMethod(
       ReceivedAction receivedAction) async {
+    Logger().d("received action ${receivedAction.toMap()}");
     if (receivedAction.buttonKeyPressed == 'ACCEPT') {
       final phoneNumber = receivedAction.payload?['phoneNumber'];
       if (phoneNumber != null) {
@@ -111,6 +130,18 @@ class NotificationService {
       if (phoneNumber != null) {
         await makeWhatsApp(phoneNumber);
       }
+    } else {
+      getIt<AuthBloc>().onNotificationOpenedApp(receivedAction);
+    }
+  }
+
+  @pragma('vm:entry-point')
+  static Future<void> onNotificationReceivedMethod(
+      ReceivedNotification receivedAction) async {
+    Logger().d("received noyification ${receivedAction.toMap()}");
+    if (receivedAction.displayedLifeCycle == NotificationLifeCycle.Foreground &&
+        receivedAction.payload != null) {
+      getIt<AuthBloc>().onNotificationData(receivedAction.payload!);
     }
   }
 

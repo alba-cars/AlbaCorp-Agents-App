@@ -12,5 +12,7 @@ class CallState with _$CallState {
     @Default(PhoneCallStatus.noCall) PhoneCallStatus phoneCallStatus,
     @Default(false) bool feedbackRequestDialogOpen,
     @Default(AppStatus.init) AppStatus updateActivityStatus,
+    @Default(AppStatus.init) AppStatus makeACallStatus,
+    String? makeACallError,
   }) = _CallState;
 }
