@@ -182,7 +182,8 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
                       child: FittedBox(
                         child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(
-                            Theme.of(context).colorScheme.onPrimary,
+                            widget.foregroundColor ??
+                                Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
                       ),
