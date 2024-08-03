@@ -93,6 +93,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       ],
       child: ScreenUtilInit(
         builder: (context, _) => MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routerConfig: AppRouter.router,
           theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
