@@ -22,8 +22,7 @@ class CallObserver: NSObject, CXCallObserverDelegate {
             preferences.set( Date().timeIntervalSince1970,forKey:"flutter.callTime");
             preferences.synchronize();
             sendLocalNotification()
-            
-        }
+                    }
     }
 
 

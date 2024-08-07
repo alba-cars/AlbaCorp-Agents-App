@@ -1211,8 +1211,6 @@ PODS:
     - FirebaseMessaging
     - IosAwnCore (~> 0.9.3)
   - leveldb-library (1.22.5)
-  - linkus_sdk (0.0.1):
-    - Flutter
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -1264,7 +1262,6 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
-  - linkus_sdk (from `.symlinks/plugins/linkus_sdk/ios`)
   - objectbox_flutter_libs (from `.symlinks/plugins/objectbox_flutter_libs/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -1335,8 +1332,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
-  linkus_sdk:
-    :path: ".symlinks/plugins/linkus_sdk/ios"
   objectbox_flutter_libs:
     :path: ".symlinks/plugins/objectbox_flutter_libs/ios"
   package_info_plus:
@@ -1396,7 +1391,6 @@ SPEC CHECKSUMS:
   IosAwnCore: b8601fbb37f7b3560f31b84ebf55a72f65812e05
   IosAwnFcmDist: 2f780910237ad5c6ba2633376982d30d5fafe447
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
-  linkus_sdk: 02c6d85011b2b94c9a67f32954ac4d23829dd942
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   ObjectBox: f5319bd9ad2ea960796eff7227e86471867e9ef0
   objectbox_flutter_libs: c7748f6c6fda47d22f15c8062fb8208063fd948a

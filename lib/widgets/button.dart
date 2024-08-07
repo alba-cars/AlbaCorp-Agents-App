@@ -190,13 +190,9 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
                         child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(
                             widget.foregroundColor ??
-<<<<<<< HEAD
-                                Theme.of(context).colorScheme.onPrimary,
-=======
                                 (widget.outlined
                                     ? colorScheme.primary
                                     : colorScheme.onPrimary),
->>>>>>> 71ebd154d9f143fbc60c465e267fdd2f3dec2179
                           ),
                         ),
                       ),
