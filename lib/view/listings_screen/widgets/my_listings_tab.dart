@@ -1,118 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
-import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
-import 'package:real_estate_app/constants/listing_status_color.dart';
-import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/paginator.dart';
-import 'package:real_estate_app/util/property_price.dart';
-import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
-import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
-import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/listings_screen/cubit/listings_cubit.dart';
 import 'package:real_estate_app/view/listings_screen/widgets/listing_item.dart';
-import 'package:real_estate_app/view/listings_screen/widgets/my_listings_tab.dart';
-import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
-import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_select_autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
-import 'package:real_estate_app/widgets/s3_image.dart';
-import 'package:real_estate_app/widgets/space.dart';
+import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/tab_bar.dart';
-import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 
-import '../../util/status.dart';
-import '../../widgets/button.dart';
-import '../../widgets/fields/wrap_select_field.dart';
-import '../../widgets/search_bar.dart';
-import '../deal_details_screen/widgets/info_label_value.dart';
+import '../../../app/call_bloc/call_bloc.dart';
+import '../../../service_locator/injectable.dart';
+import '../../../util/color_category.dart';
+import '../../../util/status.dart';
+import '../../../widgets/fields/multi_select_autocomplete_field.dart';
+import '../../../widgets/fields/range_slider_field.dart';
+import '../../../widgets/fields/wrap_select_field.dart';
+import '../../../widgets/s3_image.dart';
+import '../../../widgets/space.dart';
+import '../../../widgets/text.dart';
+import '../../add_listing_screen/add_listing_screen.dart';
+import '../../add_pocket_listing_screen/add_pocket_listing_screen.dart';
+import '../../deal_details_screen/widgets/info_label_value.dart';
+import '../../property_card_details/property_card_details.dart';
 
-class ListingsScreen extends StatelessWidget {
-  static const routeName = '/listingsScreen';
-  const ListingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<ListingsCubit>(),
-      lazy: false,
-      child: ListingScreenLayout(),
-    );
-  }
-}
-
-class ListingScreenLayout extends StatefulWidget {
-  const ListingScreenLayout({super.key});
+class MyListingsTab extends StatefulWidget {
+  const MyListingsTab({super.key});
 
   @override
-  State<ListingScreenLayout> createState() => _ListingScreenLayoutState();
+  State<MyListingsTab> createState() => _MyListingsTabState();
 }
 
-class _ListingScreenLayoutState extends State<ListingScreenLayout>
+class _MyListingsTabState extends State<MyListingsTab>
     with SingleTickerProviderStateMixin {
+  late final TabController _tabController =
+      TabController(length: 2, vsync: this);
+
   @override
   void initState() {
-    context.read<ListingsCubit>().getListings();
+    context.read<ListingsCubit>().getMyListings();
     super.initState();
   }
 
-  late final TabController _tabController =
-      TabController(length: 3, vsync: this);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            SliverVerticalSmallGap(),
-            SliverVerticalSmallGap(),
-            SliverToBoxAdapter(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: AppTabBar(
-                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                selectedColor: Theme.of(context).primaryColor,
-                tabController: _tabController,
-                tabs: ['Listings', 'Pocket Listings', "My Listings"],
-                onTap: (index) {
-                  context.read<ListingsCubit>().setSelectedTab(index);
-                },
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              Spacer(),
+              Flexible(
+                child: AppTabBar(
+                  backgroundColor:
+                      Theme.of(context).colorScheme.primaryContainer,
+                  selectedColor: Theme.of(context).primaryColor,
+                  tabController: _tabController,
+                  tabs: ['Public', 'Pocket'],
+                  onTap: (index) {
+                    if (index == 0) {
+                      context.read<ListingsCubit>().getMyListings();
+                    } else {
+                      context.read<ListingsCubit>().getMyPocketListings();
+                    }
+                  },
+                ),
               ),
-            )),
-          ];
-        },
-        body: BlocSelector<ListingsCubit, ListingsState, int>(
-          selector: (state) {
-            return state.currentTab;
-          },
-          builder: (context, state) {
-            return TabBarView(
-              physics: NeverScrollableScrollPhysics(),
-              controller: _tabController,
-              children: [ListingsTab(), PocketListingsTab(), MyListingsTab()],
-            );
-          },
+            ],
+          ),
         ),
-      ),
+        Expanded(
+          child: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
+            controller: _tabController,
+            children: [PublicListingsTab(), PocketListingsTab()],
+          ),
+        )
+      ],
     );
   }
 }
 
-class ListingsTab extends StatefulWidget {
-  const ListingsTab({super.key});
+class PublicListingsTab extends StatefulWidget {
+  const PublicListingsTab({super.key});
 
   @override
-  State<ListingsTab> createState() => _ListingsTabState();
+  State<PublicListingsTab> createState() => _PublicListingsTabState();
 }
 
-class _ListingsTabState extends State<ListingsTab> {
+class _PublicListingsTabState extends State<PublicListingsTab> {
   List<Widget> filterFields(BuildContext context) {
     return [
       MultiSelectAutoCompleteField(
@@ -216,61 +192,13 @@ class _ListingsTabState extends State<ListingsTab> {
           VerticalSmallGap(
             adjustment: 0.5,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                TitleText(
-                  text: 'Listings List',
-                  fontWeight: FontWeight.bold,
-                ),
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(40, 34),
-                        maximumSize: Size(110, 34),
-                        fixedSize: null,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onTertiary,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.tertiary),
-                    child: Text('Add New'),
-                    onPressed: () async {
-                      final result =
-                          await context.pushNamed(AddListingScreen.routeName);
-                      if (result == true) {
-                        context
-                            .read<ListingsCubit>()
-                            .getListings(refresh: true);
-                      }
-                    })
-              ],
-            ),
-          ),
           VerticalSmallGap(
             adjustment: 0.5,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: AppSearchBar(
-              searchText: "Search by reference id",
-              onChanged: (val) {
-                context.read<ListingsCubit>().searchListings(val);
-              },
-              filterFields: filterFields(context),
-              onFilterApplied: (filter) {
-                context.read<ListingsCubit>().setListingsFilters(filter);
-              },
-              filter: context
-                  .select((ListingsCubit value) => value.state.listingsFilter),
-            ),
           ),
           Expanded(
             child: BlocBuilder<ListingsCubit, ListingsState>(
               builder: (context, state) {
-                if (state.getListingsStatus == AppStatus.loading) {
+                if (state.getMyListingsStatus == AppStatus.loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
@@ -286,18 +214,18 @@ class _ListingsTabState extends State<ListingsTab> {
                           if (result == true) {
                             context
                                 .read<ListingsCubit>()
-                                .getListings(refresh: true);
+                                .getMyListings(refresh: true);
                           }
                         }),
                   );
                 }
                 return NotificationListener<ScrollNotification>(
                   onNotification: (scrollInfo) {
-                    if (state.getListingsStatus != AppStatus.loadingMore &&
+                    if (state.getMyListingsStatus != AppStatus.loadingMore &&
                         scrollInfo.metrics.pixels >=
                             0.9 * scrollInfo.metrics.maxScrollExtent &&
-                        state.listingsPaginator?.hasNextPage == true) {
-                      context.read<ListingsCubit>().getListings();
+                        state.myListingsPaginator?.hasNextPage == true) {
+                      context.read<ListingsCubit>().getMyListings();
                     }
                     return true;
                   },
@@ -305,20 +233,20 @@ class _ListingsTabState extends State<ListingsTab> {
                     onRefresh: () async {
                       await context
                           .read<ListingsCubit>()
-                          .getListings(refresh: true);
+                          .getMyListings(refresh: true);
                     },
                     child: ListView.separated(
                         key: _pageStorageKey,
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                         itemBuilder: (context, index) {
-                          if (index == state.listings.length) {
+                          if (index == state.myListings.length) {
                             return SizedBox(
                               height: 50,
                               child: Center(child: CircularProgressIndicator()),
                             );
                           }
-                          final listing = state.listings[index];
+                          final listing = state.myListings[index];
 
                           return ListingItem(listing: listing);
                         },
@@ -326,9 +254,9 @@ class _ListingsTabState extends State<ListingsTab> {
                               height: 8,
                             ),
                         itemCount:
-                            state.getListingsStatus == AppStatus.loadingMore
-                                ? state.listings.length + 1
-                                : state.listings.length),
+                            state.getMyListingsStatus == AppStatus.loadingMore
+                                ? state.myListings.length + 1
+                                : state.myListings.length),
                   ),
                 );
               },
@@ -348,98 +276,6 @@ class PocketListingsTab extends StatefulWidget {
 }
 
 class _PocketListingsTabState extends State<PocketListingsTab> {
-  List<Widget> filterFields(BuildContext context) {
-    return [
-      WrapSelectField(
-          name: 'timeFilter',
-          label: 'Created Period',
-          values: ['This Week', 'This Month', 'Old'],
-          isRequired: false),
-      MultiSelectAutoCompleteField(
-          label: 'Community',
-          optionsBuilder: (v) async {
-            final stateResult =
-                context.read<ListingsCubit>().state.communityList;
-            if (stateResult.isEmpty) {
-              await context
-                  .read<ListingsCubit>()
-                  .getCommunities(search: v.text);
-            }
-            final list = context
-                .read<ListingsCubit>()
-                .state
-                .communityList
-                .where((element) => element.community
-                    .toLowerCase()
-                    .contains(v.text.toLowerCase()));
-            return list.map((e) => {'value': e.id, 'label': e.community});
-          },
-          displayStringForOption: (option) => option['label'] ?? '',
-          name: 'communities'),
-      AppAutoComplete(
-          label: 'Agent',
-          optionsBuilder: (v) async {
-            final stateResult = context.read<ListingsCubit>().state.agentList;
-            if (stateResult.isEmpty) {
-              await context.read<ListingsCubit>().getAgents(search: v.text);
-            }
-            final list = context.read<ListingsCubit>().state.agentList.where(
-                (element) =>
-                    "${element.user.firstName} ${element.user.lastName}"
-                        .toLowerCase()
-                        .contains(v.text.toLowerCase()));
-            return list.map((e) => {
-                  'value': e.id,
-                  'label': "${e.user.firstName} ${e.user.lastName}"
-                });
-          },
-          displayStringForOption: (option) => option['label'] ?? '',
-          isRequired: false,
-          name: 'currentAgent'),
-      MultiSelectAutoCompleteField(
-          label: 'Building',
-          optionsBuilder: (v) async {
-            final stateResult =
-                context.read<ListingsCubit>().state.buildingList;
-            if (stateResult.isEmpty) {
-              await context.read<ListingsCubit>().getBuildings(search: v.text);
-            }
-            final list = context.read<ListingsCubit>().state.buildingList.where(
-                (element) =>
-                    element.name.toLowerCase().contains(v.text.toLowerCase()));
-            return list.map((e) => {'value': e.id, 'label': e.name});
-          },
-          displayStringForOption: (option) => option['label'] ?? '',
-          name: 'buildings'),
-      WrapSelectField(
-          name: 'property_type_id',
-          label: 'Property Type',
-          values: context.select<ListingsCubit, List<Map<String, dynamic>>>(
-              (cubit) => cubit.state.propertyTypeList
-                  .map((e) => {'value': e.id, 'label': e.propertyType})
-                  .toList()),
-          displayOption: (option) => option['label'] ?? '',
-          isRequired: true),
-      WrapSelectField(
-          name: 'type',
-          label: 'Purpose',
-          values: ['Sell', 'Lease'],
-          isRequired: true),
-      WrapSelectField(
-          name: 'beds',
-          label: 'Beds',
-          values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
-          isRequired: true),
-      WrapSelectField(
-          name: 'baths',
-          label: 'Baths',
-          values: ['1', '2', '3', '4', '5', '6', '7+'],
-          isRequired: true),
-      RangeSliderField(
-          name: 'price', label: 'Price Range', min: 10000, max: 10000000),
-    ];
-  }
-
   late final PageStorageBucket _bucket = PageStorageBucket();
 
   late final PageStorageKey _pageStorageKey = PageStorageKey('pocket screen');
@@ -453,65 +289,18 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           VerticalSmallGap(
             adjustment: 0.5,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                TitleText(
-                  text: 'Pocket Listings',
-                  fontWeight: FontWeight.bold,
-                ),
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(40, 34),
-                        maximumSize: Size(110, 34),
-                        fixedSize: null,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onTertiary,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.tertiary),
-                    child: Text('Add New'),
-                    onPressed: () async {
-                      final result = await context
-                          .pushNamed(AddPocketListingScreen.routeName);
-                      if (result == true) {
-                        context
-                            .read<ListingsCubit>()
-                            .getPocketListings(refresh: true);
-                      }
-                    })
-              ],
-            ),
-          ),
           VerticalSmallGap(
             adjustment: 0.5,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: AppSearchBar(
-              onChanged: (val) {
-                context.read<ListingsCubit>().searchPocketListings(val);
-              },
-              filterFields: filterFields(context),
-              onFilterApplied: (filter) {
-                context.read<ListingsCubit>().setPocketListingFilters(filter);
-              },
-              filter: context.select(
-                  (ListingsCubit value) => value.state.pocketListingsFilter),
-            ),
           ),
           Expanded(
             child: BlocBuilder<ListingsCubit, ListingsState>(
               builder: (context, state) {
-                if (state.getPocketListingsStatus == AppStatus.loading) {
+                if (state.getMyPocketListingsStatus == AppStatus.loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (state.pocketListings.isEmpty) {
+                if (state.myPocketListings.isEmpty) {
                   return Center(
                     child: AppPrimaryButton(
                         backgroundColor: Theme.of(context).colorScheme.tertiary,
@@ -529,11 +318,11 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                 }
                 return NotificationListener<ScrollNotification>(
                   onNotification: (scrollInfo) {
-                    if (state.getPocketListingsStatus !=
+                    if (state.getMyPocketListingsStatus !=
                             AppStatus.loadingMore &&
                         scrollInfo.metrics.pixels >=
                             0.9 * scrollInfo.metrics.maxScrollExtent &&
-                        state.pocketListingsPaginator?.hasNextPage == true) {
+                        state.myPocketListingsPaginator?.hasNextPage == true) {
                       context.read<ListingsCubit>().getPocketListings();
                     }
                     return true;
@@ -549,13 +338,13 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                         itemBuilder: (context, index) {
-                          if (index == state.pocketListings.length) {
+                          if (index == state.myPocketListings.length) {
                             return SizedBox(
                               height: 50,
                               child: Center(child: CircularProgressIndicator()),
                             );
                           }
-                          final propertyCard = state.pocketListings[index];
+                          final propertyCard = state.myPocketListings[index];
 
                           return Container(
                             key: ValueKey(propertyCard.id),
@@ -592,7 +381,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                       ),
                                       Container(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 4.h, vertical: 1.h),
+                                            horizontal: 4, vertical: 1),
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: Colors.blueGrey),
@@ -705,10 +494,10 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                         separatorBuilder: (context, index) => SizedBox(
                               height: 8,
                             ),
-                        itemCount: state.getPocketListingsStatus ==
+                        itemCount: state.getMyPocketListingsStatus ==
                                 AppStatus.loadingMore
-                            ? state.pocketListings.length + 1
-                            : state.pocketListings.length),
+                            ? state.myPocketListings.length + 1
+                            : state.myPocketListings.length),
                   ),
                 );
               },

@@ -289,8 +289,6 @@ class ExplorerData implements ExplorerRepo {
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,
-        'purpose': '',
-        'withLeadsCount': true,
         'status': 'Pocket Listing',
         if (filterRemoved != null) ...filterRemoved
       });
@@ -300,7 +298,7 @@ class ExplorerData implements ExplorerRepo {
           paginator: Paginator(
               currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: 15,
-              itemCount: response.data['data']['filteredCount']));
+              itemCount: response.data['data']['filteredCount'] ?? 0));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

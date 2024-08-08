@@ -53,10 +53,30 @@ class ListingsData implements ListingsRepo {
       }
 
       final response = await _dio.get(url, queryParameters: {
-        'agentId': getIt<AuthBloc>().state.agent?.id,
         if (search != null) 'search': search,
         if (paginator != null) 'page': paginator.currentPage + 1,
         if (filterRemoved != null) ...filterRemoved
+      });
+      final data = response.data['findPropListsOutput'] as List;
+      final list = data.map((e) => Property.fromJson(e)).toList();
+      return Success(list,
+          paginator: Paginator(
+              currentPage: (paginator?.currentPage ?? 0) + 1,
+              perPage: response.data['resPerPage'],
+              itemCount: response.data['ListingCount']));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<Property>>> getMyListings({Paginator? paginator}) async {
+    try {
+      String url = '/v1/filter/propList';
+
+      final response = await _dio.get(url, queryParameters: {
+        'agent_id': getIt<AuthBloc>().state.agent?.id,
+        if (paginator != null) 'page': paginator.currentPage + 1,
       });
       final data = response.data['findPropListsOutput'] as List;
       final list = data.map((e) => Property.fromJson(e)).toList();

@@ -171,38 +171,48 @@ class _HomeScreenState extends State<HomeScreen>
                         ],
                       ),
                       CustomListTileWithIcon(
-                        title: 'Lead',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddLeadScreen.routeName);
-                        },
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Deal',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddDealScreen.routeName);
-                        },
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Listing Acquired',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddListingScreen.routeName);
-                        },
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Pocket Listing',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddPocketListingScreen.routeName);
-                        },
-                      ),
+                          title: 'Add New',
+                          iconImagePath: 'assets/images/plus.png',
+                          children: [
+                            ListIcon(
+                              title: 'Leads',
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context.pushNamed(AddLeadScreen.routeName);
+                              },
+                            ),
+                            ListIcon(
+                              title: 'Deal',
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context.pushNamed(AddDealScreen.routeName);
+                              },
+                            ),
+                            ListIcon(
+                              title: 'Listing Acquired',
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context.pushNamed(AddListingScreen.routeName);
+                              },
+                            ),
+                            ListIcon(
+                              title: 'Pocket Listing',
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context.pushNamed(
+                                    AddPocketListingScreen.routeName);
+                              },
+                            ),
+                          ]),
 
+                      CustomListTileWithIcon(
+                        title: 'Deals',
+                        iconImagePath: 'assets/images/deal.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          context.pushNamed(DealsScreen.routeName);
+                        },
+                      ),
                       // CustomListTileWithIcon(
                       //   title: 'Tickets',
                       //   iconImagePath: 'assets/images/ticket.png',

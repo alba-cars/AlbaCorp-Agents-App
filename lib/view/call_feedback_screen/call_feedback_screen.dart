@@ -13,6 +13,7 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cubit.dart';
+import 'package:real_estate_app/view/call_feedback_screen/widgets/add_lead_widget.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
@@ -62,28 +63,7 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
           title: Text('Feedback'),
           centerTitle: true,
         ),
-        body: BlocConsumer<CallFeedbackCubit, CallFeedbackState>(
-          listener: (context, state) async {
-            if (state.checkLeadStatus == AppStatus.success &&
-                state.lead == null) {
-              getIt<AuthBloc>().add(AuthEvent.removeLastCallDetails());
-
-              await getIt<AuthBloc>()
-                  .stream
-                  .firstWhere((state) => !state.showFeedbackScreen);
-              context.goNamed("${HomePage.routeName}");
-              context.pushNamed("${AddLeadScreen.routeName}", queryParameters: {
-                "data": json.encode({
-                  'phone': state.number,
-                  "lead_source": 'Unkown Inbound Call'
-                })
-              });
-              Logger().d('dddddddd');
-            }
-          },
-          listenWhen: (previous, current) {
-            return previous.checkLeadStatus != current.checkLeadStatus;
-          },
+        body: BlocBuilder<CallFeedbackCubit, CallFeedbackState>(
           builder: (context, state) {
             if (state.requestNumber) {
               return SingleChildScrollView(
@@ -153,50 +133,7 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
             }
             if (state.checkLeadStatus == AppStatus.success &&
                 state.lead == null) {
-              return Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      LottieBuilder.asset(
-                        'assets/lottie/no_lead_found.json',
-                        width: 300,
-                        height: 300,
-                      ),
-                      VerticalSmallGap(),
-                      TitleText(
-                        text: "No Existing Lead Found",
-                        textAlign: TextAlign.center,
-                      ),
-                      VerticalSmallGap(),
-                      SmallText(
-                        text:
-                            "The number is not associated with any lead in the database. Proceeding to add a new lead",
-                        textAlign: TextAlign.center,
-                      ),
-                      VerticalSmallGap(),
-                      AppPrimaryButton(
-                          text: 'Create lead',
-                          onTap: () async {
-                            getIt<AuthBloc>()
-                                .add(AuthEvent.removeLastCallDetails());
-
-                            await getIt<AuthBloc>().stream.firstWhere(
-                                (state) => !state.showFeedbackScreen);
-                            context.goNamed("${HomePage.routeName}");
-                            context.pushNamed("${AddLeadScreen.routeName}",
-                                queryParameters: {
-                                  'data': {
-                                    'phone':
-                                        getIt<AuthBloc>().state.lastCalledNumber
-                                  }
-                                });
-                          })
-                    ],
-                  ),
-                ),
-              );
+              return AddLeadWidget();
             }
             return SingleChildScrollView(
               reverse: true,
@@ -376,9 +313,11 @@ class LeadCard extends StatelessWidget {
                 ),
                 LabelText(text: "${lead.firstName} ${lead.lastName}"),
                 if (lead.currentAgent != null)
-                  NormalText(
-                      text:
-                          "Agent: ${lead.currentAgent?.user.firstName} ${lead.currentAgent?.user.lastName ?? ''}")
+                  (lead.currentAgent?.id != getIt<AuthBloc>().state.agent?.id)
+                      ? NormalText(
+                          text:
+                              "Agent: ${lead.currentAgent?.user.firstName} ${lead.currentAgent?.user.lastName ?? ''}")
+                      : NormalText(text: "You are assigned to this lead")
               ],
             ),
           ),

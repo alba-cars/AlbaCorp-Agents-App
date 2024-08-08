@@ -5,7 +5,9 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/remote_data/pending_call_feedback_repo.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
+import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -40,6 +42,8 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
               lead: s.value,
               checkLeadStatus: AppStatus.success,
               number: number));
+          getLeadActivities();
+          break;
         case (Error _):
           emit(state.copyWith(
               checkLeadStatus: AppStatus.failure, number: number));
@@ -62,6 +66,58 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
         case (Error _):
           emit(state.copyWith(addActivityStatus: AppStatus.failure));
       }
+    }
+  }
+
+  Future<void> addLead(Map<String, dynamic> val) async {
+    emit(state.copyWith(addLeadStatus: AppStatus.loadingMore));
+
+    final result = await _leadRepo.addLead(lead: {'role': "User", ...val});
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(lead: s.value, addLeadStatus: AppStatus.success));
+        getLeadActivities();
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            addLeadStatus: AppStatus.failure, addLeadError: e.exception));
+        break;
+    }
+  }
+
+  Future<void> getLeadSources() async {
+    emit(state.copyWith(getLeadSourceStatus: AppStatus.loadingMore));
+    final result = await _leadRepo.getLeadSources();
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            leadSources: s.value, getLeadSourceStatus: AppStatus.success));
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getLeadSourceStatus: AppStatus.failure, addLeadError: e.exception));
+        break;
+    }
+  }
+
+  Future<void> getLeadActivities() async {
+    if (state.lead == null) {
+      return;
+    }
+    emit(state.copyWith(getActivitiesStatus: AppStatus.loading));
+    final result = await _leadRepo.getLeadActivities(leadId: state.lead!.id);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            getActivitiesStatus: AppStatus.success, activities: s.value));
+
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getActivitiesStatus: AppStatus.failure,
+            getActivitiesError: e.exception));
+
+        break;
     }
   }
 }

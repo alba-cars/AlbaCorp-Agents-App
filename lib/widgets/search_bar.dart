@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -22,14 +23,18 @@ class AppSearchBar extends StatefulWidget {
       this.filterFields,
       this.onFilterApplied,
       this.onResetFilter,
-        this.searchText,
-      this.filter});
+      this.searchText,
+      this.filter,
+      this.showSearch = true,
+      this.leadWidgets});
   final void Function(String? val) onChanged;
   final List<Widget>? filterFields;
   final void Function(Map<String, dynamic>? filter)? onFilterApplied;
   final VoidCallback? onResetFilter;
   final Map<String, dynamic>? filter;
   final String? searchText;
+  final bool showSearch;
+  final List<Widget>? leadWidgets;
 
   @override
   State<AppSearchBar> createState() => _AppSearchBarState();
@@ -56,70 +61,87 @@ class _AppSearchBarState extends State<AppSearchBar> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.filter != null) {
+      filter = Map.from(widget.filter!)
+        ..removeWhere((key, value) => value == null);
+      getFilter();
+    } else {
+      arrFilter = [];
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
           children: [
             Expanded(
-              child: TextFormField(
-                  controller: _controller,
-                  focusNode: _focusNode,
-                  onChanged: (v) {
-                    EasyDebounce.debounce('search-bar', Durations.long3, () {
-                      widget.onChanged.call(v);
-                    });
-                  },
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      constraints: BoxConstraints.tightFor(height: 50),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: pacificBlue, width: 1.w),
-                          borderRadius: BorderRadius.circular(12.h)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                              width: 1.w),
-                          borderRadius: BorderRadius.circular(12.h)),
-                      filled: true,
-                      fillColor: Theme.of(context)
-                          .colorScheme
-                          .primaryContainer
-                          .withOpacity(0.2),
-                      hintText: widget.searchText ?? 'Search...',
-                      hintStyle: TextStyle(fontSize: 11),
-                      prefixIcon: Padding(
-                          padding: EdgeInsets.only(left: 8.w, right: 8.w),
-                          child: Icon(Icons.search)),
-                      suffixIcon: _focusNode.hasFocus
-                          ? GestureDetector(
-                              onTap: () {
-                                _focusNode.unfocus();
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: 8.h, right: 16.w, bottom: 8.h),
-                                child: SizedBox(
-                                    height: 24.h,
-                                    width: 24.w,
-                                    child: Icon(Icons.close)),
-                              ),
-                            )
-                          : _controller.text.isNotEmpty
-                              ? TextButton(
-                                  onPressed: () {
-                                    _controller.clear();
-                                    widget.onChanged.call(null);
-                                    setState(() {});
+              child: widget.showSearch
+                  ? TextFormField(
+                      controller: _controller,
+                      focusNode: _focusNode,
+                      onChanged: (v) {
+                        EasyDebounce.debounce('search-bar', Durations.long3,
+                            () {
+                          widget.onChanged.call(v);
+                        });
+                      },
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(8),
+                          constraints: BoxConstraints.tightFor(height: 50),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: pacificBlue, width: 1.w),
+                              borderRadius: BorderRadius.circular(12.h)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                  width: 1.w),
+                              borderRadius: BorderRadius.circular(12.h)),
+                          filled: true,
+                          fillColor: Theme.of(context)
+                              .colorScheme
+                              .primaryContainer
+                              .withOpacity(0.2),
+                          hintText: widget.searchText ?? 'Search...',
+                          hintStyle: TextStyle(fontSize: 11),
+                          prefixIcon: Padding(
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                              child: Icon(Icons.search)),
+                          suffixIcon: _focusNode.hasFocus
+                              ? GestureDetector(
+                                  onTap: () {
+                                    _focusNode.unfocus();
                                   },
-                                  child: Text('clear'))
-                              : null,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.h)))),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 8.h, right: 16.w, bottom: 8.h),
+                                    child: SizedBox(
+                                        height: 24.h,
+                                        width: 24.w,
+                                        child: Icon(Icons.close)),
+                                  ),
+                                )
+                              : _controller.text.isNotEmpty
+                                  ? TextButton(
+                                      onPressed: () {
+                                        _controller.clear();
+                                        widget.onChanged.call(null);
+                                        setState(() {});
+                                      },
+                                      child: Text('clear'))
+                                  : null,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.h))))
+                  : Row(
+                      children: widget.leadWidgets ?? [],
+                    ),
             ),
             HorizontalSmallGap(),
             InkWell(
@@ -274,46 +296,48 @@ class _AppSearchBarState extends State<AppSearchBar> {
                         border: Border.all(
                             color: Theme.of(context).colorScheme.primary),
                         borderRadius: BorderRadius.circular(12)),
-                    child: Center(
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12),
-                            child: Row(
-                              children: [
-                                SmallText(text: "${key.titleCase}"),
-                                Text(" : ${getFilterValue(value)}"),
-                              ],
-                            ),
-                          ),
-                          IconButton(
-                            visualDensity: VisualDensity.compact,
-                            onPressed: () {
-                              if (filter?[key] is List) {
-                                final val = filter?[key] as List;
-                                val.remove(value);
-                                if (val.isEmpty) {
-                                  filter?.remove(key);
-                                } else {
-                                  filter?[key] = val;
-                                }
-                              } else {
-                                filter?.remove(key);
-                              }
-                              if (filter?.isEmpty == true) {
-                                filter = null;
+                    child: InkWell(
+                      onTap: () {
+                        if (filter?[key] is List) {
+                          final val = filter?[key] as List;
+                          val.remove(value);
+                          if (val.isEmpty) {
+                            filter?.remove(key);
+                          } else {
+                            filter?[key] = val;
+                          }
+                        } else {
+                          filter?.remove(key);
+                        }
+                        if (filter?.isEmpty == true) {
+                          filter = null;
 
-                                widget.onFilterApplied?.call(null);
-                              } else {
-                                widget.onFilterApplied?.call(filter);
-                              }
-                              arrFilter.removeAt(index);
-                              setState(() {});
-                            },
-                            icon: Icon(Icons.close),
-                            padding: EdgeInsets.zero,
-                          )
-                        ],
+                          widget.onFilterApplied?.call(null);
+                        } else {
+                          widget.onFilterApplied?.call(filter);
+                        }
+                        arrFilter.removeAt(index);
+                        setState(() {});
+                      },
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12),
+                              child: Row(
+                                children: [
+                                  SmallText(text: "${key.titleCase}"),
+                                  Text(" : ${getFilterValue(value)}"),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: Icon(Icons.close),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );

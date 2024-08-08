@@ -312,10 +312,19 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   Future<List<Building>> getBuildings({String? search}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
     if (state.buildingList.isNotEmpty && search != null) {
-      return state.buildingList
+      final list = state.buildingList
           .where((element) =>
               element.name.toLowerCase().contains(search.toLowerCase()))
           .toList();
+      if (state.explorerFilter?.containsKey('communities') == true &&
+          state.explorerFilter?['communities'] != null) {
+        final communities = (state.explorerFilter?['communities'] as List)
+            .map((e) => e['value'])
+            .toList();
+        return list.where((e) => communities.contains(e.communityId)).toList();
+      } else {
+        return list;
+      }
     } else {
       final result = await _listingsRepo.getBuildingNames(search: search);
       switch (result) {

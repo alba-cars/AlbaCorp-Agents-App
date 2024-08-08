@@ -15,6 +15,7 @@ import 'package:real_estate_app/view/property_card_details/cubit/property_card_d
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
+import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:recase/recase.dart';
 
 import '../../widgets/fields/attachment_field.dart';
@@ -245,111 +246,165 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                               return StatefulBuilder(builder:
                                                   (sContext,
                                                       StateSetter setState) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'Property card Status'),
-                                                  content: FormBuilder(
-                                                    key: key,
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          DropDownfield(
-                                                              label: 'Status',
-                                                              isRequired: true,
-                                                              items: statuses,
-                                                              onSelected:
-                                                                  (option) {
-                                                                status = option;
-                                                                setState(() {});
-                                                              },
-                                                              name: 'status'),
-                                                          if (status ==
-                                                              'Pocket Listing') ...[
-                                                            WrapSelectField(
-                                                              name: 'purpose',
-                                                              label: 'Purpose',
-                                                              values: [
-                                                                'Sell',
-                                                                'Lease'
-                                                              ],
-                                                              isRequired: true,
-                                                            ),
-                                                            CurrencyField(
-                                                              isRequired: true,
-                                                              name:
-                                                                  'askingPrice',
-                                                              label:
-                                                                  'Asking Price',
-                                                            ),
-                                                            CurrencyField(
-                                                              isRequired: true,
-                                                              name:
-                                                                  'agentValutionPrice',
-                                                              label:
-                                                                  'Agency Valuation',
-                                                            ),
-                                                            MultipleImageuploadField(
-                                                              name: 'photos',
-                                                              label: 'Photos',
-                                                              isRequired: true,
-                                                            ),
-                                                            VerticalSmallGap(),
-                                                            AttachmentField(
-                                                              name: 'documents',
-                                                              label:
-                                                                  'Documents',
-                                                              isRequired: true,
-                                                            )
-                                                          ]
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  actions: [
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: OutlinedButton(
-                                                              child: Text(
-                                                                  'Cancel'),
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        dContext)
-                                                                    .pop();
-                                                              }),
+                                                return BlocProvider.value(
+                                                  value: context.read<
+                                                      PropertyCardDetailsCubit>(),
+                                                  child: Builder(
+                                                      builder: (context) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'Property card Status'),
+                                                      content: FormBuilder(
+                                                        key: key,
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: [
+                                                              DropDownfield(
+                                                                  label:
+                                                                      'Status',
+                                                                  isRequired:
+                                                                      true,
+                                                                  items:
+                                                                      statuses,
+                                                                  onSelected:
+                                                                      (option) {
+                                                                    status =
+                                                                        option;
+                                                                    setState(
+                                                                        () {});
+                                                                  },
+                                                                  name:
+                                                                      'status'),
+                                                              if (status ==
+                                                                  'Pocket Listing') ...[
+                                                                WrapSelectField(
+                                                                  name:
+                                                                      'purpose',
+                                                                  label:
+                                                                      'Purpose',
+                                                                  values: [
+                                                                    'Sell',
+                                                                    'Lease'
+                                                                  ],
+                                                                  isRequired:
+                                                                      true,
+                                                                ),
+                                                                CurrencyField(
+                                                                  isRequired:
+                                                                      true,
+                                                                  name:
+                                                                      'askingPrice',
+                                                                  label:
+                                                                      'Asking Price',
+                                                                ),
+                                                                CurrencyField(
+                                                                  isRequired:
+                                                                      true,
+                                                                  name:
+                                                                      'agentValutionPrice',
+                                                                  label:
+                                                                      'Agency Valuation',
+                                                                ),
+                                                                MultipleImageuploadField(
+                                                                  name:
+                                                                      'photos',
+                                                                  label:
+                                                                      'Photos',
+                                                                  isRequired:
+                                                                      true,
+                                                                ),
+                                                                VerticalSmallGap(),
+                                                                AttachmentField(
+                                                                  name:
+                                                                      'documents',
+                                                                  label:
+                                                                      'Documents',
+                                                                  isRequired:
+                                                                      true,
+                                                                )
+                                                              ]
+                                                            ],
+                                                          ),
                                                         ),
-                                                        HorizontalSmallGap(),
-                                                        Expanded(
-                                                          child:
-                                                              AppPrimaryButton(
-                                                                  text: 'Save',
-                                                                  onTap:
-                                                                      () async {
-                                                                    final validated = key
-                                                                        .currentState
-                                                                        ?.saveAndValidate();
-                                                                    if (validated ==
-                                                                        true) {
-                                                                      final values = key
-                                                                          .currentState!
-                                                                          .value;
-                                                                      await context
-                                                                          .read<
-                                                                              PropertyCardDetailsCubit>()
-                                                                          .updatePropertyCard(
-                                                                              values: values);
-                                                                      Navigator.of(
-                                                                              dContext)
-                                                                          .pop();
-                                                                    }
-                                                                  }),
-                                                        )
+                                                      ),
+                                                      actions: [
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child:
+                                                                  OutlinedButton(
+                                                                      child: Text(
+                                                                          'Cancel'),
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.of(dContext)
+                                                                            .pop();
+                                                                      }),
+                                                            ),
+                                                            HorizontalSmallGap(),
+                                                            Expanded(
+                                                              child: BlocListener<
+                                                                  PropertyCardDetailsCubit,
+                                                                  PropertyCardDetailsState>(
+                                                                listener:
+                                                                    (context,
+                                                                        state) {
+                                                                  if (state
+                                                                          .updatePropertyCardStatus ==
+                                                                      AppStatus
+                                                                          .failure) {
+                                                                    showSnackbar(
+                                                                        context,
+                                                                        state.updatePropertyCardError ??
+                                                                            '',
+                                                                        SnackBarType
+                                                                            .failure);
+                                                                  } else if (state
+                                                                          .updatePropertyCardStatus ==
+                                                                      AppStatus
+                                                                          .success) {
+                                                                    showSnackbar(
+                                                                        context,
+                                                                        "Successfully updated propertycard",
+                                                                        SnackBarType
+                                                                            .success);
+                                                                  }
+                                                                },
+                                                                listenWhen: (previous,
+                                                                        current) =>
+                                                                    previous
+                                                                        .updatePropertyCardStatus !=
+                                                                    current
+                                                                        .updatePropertyCardStatus,
+                                                                child: AppPrimaryButton(
+                                                                    text: 'Save',
+                                                                    onTap: () async {
+                                                                      final validated = key
+                                                                          .currentState
+                                                                          ?.saveAndValidate();
+                                                                      if (validated ==
+                                                                          true) {
+                                                                        final values = key
+                                                                            .currentState!
+                                                                            .value;
+                                                                        await context
+                                                                            .read<PropertyCardDetailsCubit>()
+                                                                            .updatePropertyCard(values: values);
+                                                                        Navigator.of(dContext)
+                                                                            .pop();
+                                                                      }
+                                                                    }),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
                                                       ],
-                                                    ),
-                                                  ],
+                                                    );
+                                                  }),
                                                 );
                                               });
                                             });

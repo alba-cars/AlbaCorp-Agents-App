@@ -155,10 +155,14 @@ class NotificationService {
   }
 
   static Future<void> makeWhatsApp(String phoneNumber) async {
-    final Uri launchUri = Uri(
-        scheme: 'whatsapp',
-        path: 'send',
-        queryParameters: {'phone': phoneNumber.replaceFirst('+', '')});
-    await launchUrl(launchUri);
+    try {
+      final Uri launchUri = Uri(
+          scheme: 'whatsapp',
+          path: 'send',
+          queryParameters: {'phone': phoneNumber.replaceFirst('+', '')});
+      await launchUrl(launchUri);
+    } catch (e) {
+      Logger().d(e);
+    }
   }
 }

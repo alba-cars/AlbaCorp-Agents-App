@@ -99,9 +99,9 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
       name: widget.name,
       valueTransformer: widget.valueTransformer,
       validator: (value) {
-        // if (options.contains(value) != true && widget.isRequired) {
-        //   return 'Please select a value from options';
-        // }
+        if (value?.isEmpty == true && widget.isRequired) {
+          return 'Please select a value from options';
+        }
         return null;
       },
       builder: (state) => Column(

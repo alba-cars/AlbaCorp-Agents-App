@@ -28,4 +28,5 @@ abstract class ListingsRepo {
       {String? search, Paginator? paginator});
   Future<Result<List<Amenity>>> getAmenities(
       {String? search, Paginator? paginator});
+  Future<Result<List<Property>>> getMyListings({Paginator? paginator});
 }

@@ -1,8 +1,5 @@
-const activityTypes =[
-                                  'Call',
-                                  'WhatsApp',
-                                  'Viewing',
-                                  'Appointment',
-                                  'Email',
-                                  'SMSMessage'
-                                ];
+const activityTypes = [
+  'Call',
+  'WhatsApp',
+  'Viewing',
+];

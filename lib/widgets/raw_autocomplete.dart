@@ -476,6 +476,9 @@ class _RawAutocompleteState<T extends Object>
   @override
   void didUpdateWidget(AppRawAutocomplete<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != null) {
+      _selection = widget.initialValue;
+    }
     _updateTextEditingController(
       oldWidget.textEditingController,
       widget.textEditingController,

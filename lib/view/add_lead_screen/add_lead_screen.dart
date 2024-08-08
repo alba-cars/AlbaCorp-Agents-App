@@ -43,13 +43,10 @@ class _TryState extends State<_AddLeadScreenLayout> {
   late final List<GlobalKey<FormBuilderState>> _formKey =
       List.generate(3, (index) => GlobalKey());
   late final List<Key> _stepKey = List.generate(3, (index) => ValueKey(index));
-  late final AutoCompleteFieldController _stateFieldController =
-      AutoCompleteFieldController();
 
   late List<Widget> _steps = [
     _step1(),
     _step2(),
-    _step3(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -67,7 +64,6 @@ class _TryState extends State<_AddLeadScreenLayout> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: AnimatedSwitcher(
@@ -103,7 +99,6 @@ class _TryState extends State<_AddLeadScreenLayout> {
                         child: ScaleTransition(
                           scale: scaleAnimation,
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Step ${currentStep + 1} of ${_steps.length}',
@@ -184,6 +179,7 @@ class _TryState extends State<_AddLeadScreenLayout> {
     );
   }
 
+  ValueNotifier<String?> leadSourceListenable = ValueNotifier(null);
   Widget _step1() {
     return BlocSelector<AddLeadCubit, AddLeadState, Map<String, dynamic>?>(
       key: _stepKey[0],
@@ -205,40 +201,114 @@ class _TryState extends State<_AddLeadScreenLayout> {
             context.read<AddLeadCubit>().setFormValues(values: rawVal);
           },
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TweenAnimationBuilder<double>(
-                  tween: Tween<double>(begin: 0, end: 1),
-                  duration: Duration(milliseconds: 500),
-                  builder: (context, value, child) {
-                    return Transform.scale(
-                      scale: value,
-                      child:
-                          Icon(Icons.person_add, size: 48, color: Colors.blue),
-                    );
-                  },
-                ),
-                SizedBox(height: 16),
-                Text('Select the source of the lead.'),
-                SizedBox(height: 16),
-                BlocSelector<AddLeadCubit, AddLeadState, List<LeadSource>>(
-                  selector: (state) {
-                    return state.leadSources;
-                  },
-                  builder: (context, leadSources) {
-                    return AppAutoComplete(
-                        isRequired: true,
-                        label: 'Lead Source',
-                        optionsBuilder: (v) => leadSources.where((e) => e.name
-                            .toLowerCase()
-                            .contains(v.text.toLowerCase())),
-                        displayStringForOption: (option) => option.name,
-                        valueTransformer: (p0) => p0?.name,
-                        name: 'lead_source');
-                  },
-                ),
-              ],
+            child: ValueListenableBuilder(
+              valueListenable: leadSourceListenable,
+              builder: (context, val, _) => Column(
+                children: [
+                  TweenAnimationBuilder<double>(
+                    tween: Tween<double>(begin: 0, end: 1),
+                    duration: Duration(milliseconds: 500),
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: value,
+                        child: Icon(Icons.person_add,
+                            size: 48, color: Colors.blue),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  Text('Select the source of the lead.'),
+                  SizedBox(height: 16),
+                  Wrap(
+                    runSpacing: 8,
+                    spacing: 8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    children: [
+                      "Bayut",
+                      "Dubizzle",
+                      "Property Finder",
+                      "Referer",
+                      "Alba Website"
+                    ]
+                        .map((e) => InkWell(
+                              onTap: () {
+                                leadSourceListenable.value = e;
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: val == e
+                                      ? Theme.of(context).colorScheme.secondary
+                                      : null,
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.wallet,
+                                      color: val != e
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .onSecondary,
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      e,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                            color: val != e
+                                                ? Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary
+                                                : Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary,
+                                          ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  SizedBox(height: 8),
+                  BlocSelector<AddLeadCubit, AddLeadState, List<LeadSource>>(
+                    selector: (state) {
+                      return state.leadSources;
+                    },
+                    builder: (context, leadSources) {
+                      return AppAutoComplete(
+                          isRequired: true,
+                          label: 'Lead Source',
+                          value: val,
+                          onSelected: (v) {
+                            leadSourceListenable.value = v;
+                          },
+                          optionsBuilder: (v) => leadSources
+                              .where((e) => e.name
+                                  .toLowerCase()
+                                  .contains(v.text.toLowerCase()))
+                              .map((e) => e.name),
+                          name: 'lead_source');
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -297,101 +367,12 @@ class _TryState extends State<_AddLeadScreenLayout> {
                 AppTextField(
                   name: 'email',
                   label: 'Email',
-                  // validator: (value) {
-                  //   if (value == null || value.isEmpty) {
-                  //     return 'Please enter your email';
-                  //   }
-                  //   final regex =
-                  //       RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-                  //   if (!regex.hasMatch(value)) {
-                  //     return 'Please enter a valid email address';
-                  //   }
-                  //   return null;
-                  // },
                 ),
                 SizedBox(height: 16),
                 PhoneNumberField(
                   isRequired: true,
                   name: 'phone',
                   label: 'Phone',
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _step3() {
-    return BlocSelector<AddLeadCubit, AddLeadState, Map<String, dynamic>?>(
-      key: _stepKey[2],
-      selector: (state) {
-        return state.step3Values;
-      },
-      builder: (context, step3Values) {
-        return FormBuilder(
-          key: _formKey[2],
-          initialValue: step3Values ?? {},
-          onChanged: () {
-            final insVal = Map.from(_formKey[2].currentState!.instantValue);
-            final Map<String, dynamic> rawVal = insVal.map(
-              (key, value) {
-                final rawVal = _formKey[2].currentState!.getRawValue(key);
-                return MapEntry(key, rawVal);
-              },
-            );
-            context.read<AddLeadCubit>().setFormValues(values: rawVal);
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TweenAnimationBuilder<double>(
-                  tween: Tween<double>(begin: 0, end: 1),
-                  duration: Duration(milliseconds: 500),
-                  builder: (context, value, child) {
-                    return Transform.scale(
-                      scale: value,
-                      child:
-                          Icon(Icons.location_on, size: 48, color: Colors.blue),
-                    );
-                  },
-                ),
-                SizedBox(height: 16),
-                Text('Enter the lead\'s location information.'),
-                SizedBox(height: 16),
-                AppAutoComplete(
-                  name: 'country',
-                  label: 'Country',
-                  isRequired: false,
-                  displayStringForOption: (p0) => p0.name,
-                  valueTransformer: (p0) => p0?.name,
-                  onSelected: (value) {
-                    context.read<AddLeadCubit>().setSelectedCountry(value);
-                    _stateFieldController.reset();
-                  },
-                  optionsBuilder: (v) async {
-                    return context.read<AddLeadCubit>().getCountries(v.text);
-                  },
-                ),
-                SizedBox(height: 16),
-                AppAutoComplete(
-                  name: 'city',
-                  label: 'City',
-                  isRequired: false,
-                  controller: _stateFieldController,
-                  displayStringForOption: (p0) => p0.name,
-                  valueTransformer: (p0) => p0?.name,
-                  optionsBuilder: (v) async {
-                    return context.read<AddLeadCubit>().getState(v.text);
-                  },
-                ),
-                SizedBox(height: 16),
-                DropDownfield(
-                  name: 'nationality',
-                  label: 'Nationality',
-                  items: ['UAE'],
                 ),
               ],
             ),

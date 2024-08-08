@@ -20,10 +20,19 @@ mixin _$ListingsState {
   AppStatus get getListingsStatus => throw _privateConstructorUsedError;
   String? get getListingsError => throw _privateConstructorUsedError;
   Paginator? get listingsPaginator => throw _privateConstructorUsedError;
+  List<Property> get myListings => throw _privateConstructorUsedError;
+  AppStatus get getMyListingsStatus => throw _privateConstructorUsedError;
+  String? get getMyListingsError => throw _privateConstructorUsedError;
+  Paginator? get myListingsPaginator => throw _privateConstructorUsedError;
   List<PropertyCard> get pocketListings => throw _privateConstructorUsedError;
   AppStatus get getPocketListingsStatus => throw _privateConstructorUsedError;
   String? get getPocketListingsError => throw _privateConstructorUsedError;
   Paginator? get pocketListingsPaginator => throw _privateConstructorUsedError;
+  List<PropertyCard> get myPocketListings => throw _privateConstructorUsedError;
+  AppStatus get getMyPocketListingsStatus => throw _privateConstructorUsedError;
+  String? get getMyPocketListingsError => throw _privateConstructorUsedError;
+  Paginator? get myPocketListingsPaginator =>
+      throw _privateConstructorUsedError;
   int get currentTab => throw _privateConstructorUsedError;
   String? get listingsSearch => throw _privateConstructorUsedError;
   String? get pocketListingsSearch => throw _privateConstructorUsedError;
@@ -58,10 +67,18 @@ abstract class $ListingsStateCopyWith<$Res> {
       AppStatus getListingsStatus,
       String? getListingsError,
       Paginator? listingsPaginator,
+      List<Property> myListings,
+      AppStatus getMyListingsStatus,
+      String? getMyListingsError,
+      Paginator? myListingsPaginator,
       List<PropertyCard> pocketListings,
       AppStatus getPocketListingsStatus,
       String? getPocketListingsError,
       Paginator? pocketListingsPaginator,
+      List<PropertyCard> myPocketListings,
+      AppStatus getMyPocketListingsStatus,
+      String? getMyPocketListingsError,
+      Paginator? myPocketListingsPaginator,
       int currentTab,
       String? listingsSearch,
       String? pocketListingsSearch,
@@ -79,7 +96,9 @@ abstract class $ListingsStateCopyWith<$Res> {
       Map<String, dynamic>? pocketListingsFilter});
 
   $PaginatorCopyWith<$Res>? get listingsPaginator;
+  $PaginatorCopyWith<$Res>? get myListingsPaginator;
   $PaginatorCopyWith<$Res>? get pocketListingsPaginator;
+  $PaginatorCopyWith<$Res>? get myPocketListingsPaginator;
 }
 
 /// @nodoc
@@ -99,10 +118,18 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
     Object? getListingsStatus = null,
     Object? getListingsError = freezed,
     Object? listingsPaginator = freezed,
+    Object? myListings = null,
+    Object? getMyListingsStatus = null,
+    Object? getMyListingsError = freezed,
+    Object? myListingsPaginator = freezed,
     Object? pocketListings = null,
     Object? getPocketListingsStatus = null,
     Object? getPocketListingsError = freezed,
     Object? pocketListingsPaginator = freezed,
+    Object? myPocketListings = null,
+    Object? getMyPocketListingsStatus = null,
+    Object? getMyPocketListingsError = freezed,
+    Object? myPocketListingsPaginator = freezed,
     Object? currentTab = null,
     Object? listingsSearch = freezed,
     Object? pocketListingsSearch = freezed,
@@ -136,6 +163,22 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
           ? _value.listingsPaginator
           : listingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      myListings: null == myListings
+          ? _value.myListings
+          : myListings // ignore: cast_nullable_to_non_nullable
+              as List<Property>,
+      getMyListingsStatus: null == getMyListingsStatus
+          ? _value.getMyListingsStatus
+          : getMyListingsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getMyListingsError: freezed == getMyListingsError
+          ? _value.getMyListingsError
+          : getMyListingsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      myListingsPaginator: freezed == myListingsPaginator
+          ? _value.myListingsPaginator
+          : myListingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       pocketListings: null == pocketListings
           ? _value.pocketListings
           : pocketListings // ignore: cast_nullable_to_non_nullable
@@ -151,6 +194,22 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
       pocketListingsPaginator: freezed == pocketListingsPaginator
           ? _value.pocketListingsPaginator
           : pocketListingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      myPocketListings: null == myPocketListings
+          ? _value.myPocketListings
+          : myPocketListings // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCard>,
+      getMyPocketListingsStatus: null == getMyPocketListingsStatus
+          ? _value.getMyPocketListingsStatus
+          : getMyPocketListingsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getMyPocketListingsError: freezed == getMyPocketListingsError
+          ? _value.getMyPocketListingsError
+          : getMyPocketListingsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      myPocketListingsPaginator: freezed == myPocketListingsPaginator
+          ? _value.myPocketListingsPaginator
+          : myPocketListingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       currentTab: null == currentTab
           ? _value.currentTab
@@ -229,6 +288,18 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
 
   @override
   @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get myListingsPaginator {
+    if (_value.myListingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.myListingsPaginator!, (value) {
+      return _then(_value.copyWith(myListingsPaginator: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $PaginatorCopyWith<$Res>? get pocketListingsPaginator {
     if (_value.pocketListingsPaginator == null) {
       return null;
@@ -236,6 +307,18 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
 
     return $PaginatorCopyWith<$Res>(_value.pocketListingsPaginator!, (value) {
       return _then(_value.copyWith(pocketListingsPaginator: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get myPocketListingsPaginator {
+    if (_value.myPocketListingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.myPocketListingsPaginator!, (value) {
+      return _then(_value.copyWith(myPocketListingsPaginator: value) as $Val);
     });
   }
 }
@@ -253,10 +336,18 @@ abstract class _$$ListingsStateImplCopyWith<$Res>
       AppStatus getListingsStatus,
       String? getListingsError,
       Paginator? listingsPaginator,
+      List<Property> myListings,
+      AppStatus getMyListingsStatus,
+      String? getMyListingsError,
+      Paginator? myListingsPaginator,
       List<PropertyCard> pocketListings,
       AppStatus getPocketListingsStatus,
       String? getPocketListingsError,
       Paginator? pocketListingsPaginator,
+      List<PropertyCard> myPocketListings,
+      AppStatus getMyPocketListingsStatus,
+      String? getMyPocketListingsError,
+      Paginator? myPocketListingsPaginator,
       int currentTab,
       String? listingsSearch,
       String? pocketListingsSearch,
@@ -276,7 +367,11 @@ abstract class _$$ListingsStateImplCopyWith<$Res>
   @override
   $PaginatorCopyWith<$Res>? get listingsPaginator;
   @override
+  $PaginatorCopyWith<$Res>? get myListingsPaginator;
+  @override
   $PaginatorCopyWith<$Res>? get pocketListingsPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get myPocketListingsPaginator;
 }
 
 /// @nodoc
@@ -294,10 +389,18 @@ class __$$ListingsStateImplCopyWithImpl<$Res>
     Object? getListingsStatus = null,
     Object? getListingsError = freezed,
     Object? listingsPaginator = freezed,
+    Object? myListings = null,
+    Object? getMyListingsStatus = null,
+    Object? getMyListingsError = freezed,
+    Object? myListingsPaginator = freezed,
     Object? pocketListings = null,
     Object? getPocketListingsStatus = null,
     Object? getPocketListingsError = freezed,
     Object? pocketListingsPaginator = freezed,
+    Object? myPocketListings = null,
+    Object? getMyPocketListingsStatus = null,
+    Object? getMyPocketListingsError = freezed,
+    Object? myPocketListingsPaginator = freezed,
     Object? currentTab = null,
     Object? listingsSearch = freezed,
     Object? pocketListingsSearch = freezed,
@@ -331,6 +434,22 @@ class __$$ListingsStateImplCopyWithImpl<$Res>
           ? _value.listingsPaginator
           : listingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      myListings: null == myListings
+          ? _value._myListings
+          : myListings // ignore: cast_nullable_to_non_nullable
+              as List<Property>,
+      getMyListingsStatus: null == getMyListingsStatus
+          ? _value.getMyListingsStatus
+          : getMyListingsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getMyListingsError: freezed == getMyListingsError
+          ? _value.getMyListingsError
+          : getMyListingsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      myListingsPaginator: freezed == myListingsPaginator
+          ? _value.myListingsPaginator
+          : myListingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       pocketListings: null == pocketListings
           ? _value._pocketListings
           : pocketListings // ignore: cast_nullable_to_non_nullable
@@ -346,6 +465,22 @@ class __$$ListingsStateImplCopyWithImpl<$Res>
       pocketListingsPaginator: freezed == pocketListingsPaginator
           ? _value.pocketListingsPaginator
           : pocketListingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      myPocketListings: null == myPocketListings
+          ? _value._myPocketListings
+          : myPocketListings // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCard>,
+      getMyPocketListingsStatus: null == getMyPocketListingsStatus
+          ? _value.getMyPocketListingsStatus
+          : getMyPocketListingsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getMyPocketListingsError: freezed == getMyPocketListingsError
+          ? _value.getMyPocketListingsError
+          : getMyPocketListingsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      myPocketListingsPaginator: freezed == myPocketListingsPaginator
+          ? _value.myPocketListingsPaginator
+          : myPocketListingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       currentTab: null == currentTab
           ? _value.currentTab
@@ -419,10 +554,18 @@ class _$ListingsStateImpl implements _ListingsState {
       this.getListingsStatus = AppStatus.init,
       this.getListingsError,
       this.listingsPaginator,
+      final List<Property> myListings = const [],
+      this.getMyListingsStatus = AppStatus.init,
+      this.getMyListingsError,
+      this.myListingsPaginator,
       final List<PropertyCard> pocketListings = const [],
       this.getPocketListingsStatus = AppStatus.init,
       this.getPocketListingsError,
       this.pocketListingsPaginator,
+      final List<PropertyCard> myPocketListings = const [],
+      this.getMyPocketListingsStatus = AppStatus.init,
+      this.getMyPocketListingsError,
+      this.myPocketListingsPaginator,
       this.currentTab = 0,
       this.listingsSearch,
       this.pocketListingsSearch,
@@ -439,7 +582,9 @@ class _$ListingsStateImpl implements _ListingsState {
       final Map<String, dynamic>? listingsFilter,
       final Map<String, dynamic>? pocketListingsFilter})
       : _listings = listings,
+        _myListings = myListings,
         _pocketListings = pocketListings,
+        _myPocketListings = myPocketListings,
         _propertyTypeList = propertyTypeList,
         _communityList = communityList,
         _buildingList = buildingList,
@@ -464,6 +609,22 @@ class _$ListingsStateImpl implements _ListingsState {
   final String? getListingsError;
   @override
   final Paginator? listingsPaginator;
+  final List<Property> _myListings;
+  @override
+  @JsonKey()
+  List<Property> get myListings {
+    if (_myListings is EqualUnmodifiableListView) return _myListings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_myListings);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getMyListingsStatus;
+  @override
+  final String? getMyListingsError;
+  @override
+  final Paginator? myListingsPaginator;
   final List<PropertyCard> _pocketListings;
   @override
   @JsonKey()
@@ -480,6 +641,23 @@ class _$ListingsStateImpl implements _ListingsState {
   final String? getPocketListingsError;
   @override
   final Paginator? pocketListingsPaginator;
+  final List<PropertyCard> _myPocketListings;
+  @override
+  @JsonKey()
+  List<PropertyCard> get myPocketListings {
+    if (_myPocketListings is EqualUnmodifiableListView)
+      return _myPocketListings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_myPocketListings);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getMyPocketListingsStatus;
+  @override
+  final String? getMyPocketListingsError;
+  @override
+  final Paginator? myPocketListingsPaginator;
   @override
   @JsonKey()
   final int currentTab;
@@ -571,7 +749,7 @@ class _$ListingsStateImpl implements _ListingsState {
 
   @override
   String toString() {
-    return 'ListingsState(listings: $listings, getListingsStatus: $getListingsStatus, getListingsError: $getListingsError, listingsPaginator: $listingsPaginator, pocketListings: $pocketListings, getPocketListingsStatus: $getPocketListingsStatus, getPocketListingsError: $getPocketListingsError, pocketListingsPaginator: $pocketListingsPaginator, currentTab: $currentTab, listingsSearch: $listingsSearch, pocketListingsSearch: $pocketListingsSearch, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, agentList: $agentList, getAgentListStatus: $getAgentListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, listingsFilter: $listingsFilter, pocketListingsFilter: $pocketListingsFilter)';
+    return 'ListingsState(listings: $listings, getListingsStatus: $getListingsStatus, getListingsError: $getListingsError, listingsPaginator: $listingsPaginator, myListings: $myListings, getMyListingsStatus: $getMyListingsStatus, getMyListingsError: $getMyListingsError, myListingsPaginator: $myListingsPaginator, pocketListings: $pocketListings, getPocketListingsStatus: $getPocketListingsStatus, getPocketListingsError: $getPocketListingsError, pocketListingsPaginator: $pocketListingsPaginator, myPocketListings: $myPocketListings, getMyPocketListingsStatus: $getMyPocketListingsStatus, getMyPocketListingsError: $getMyPocketListingsError, myPocketListingsPaginator: $myPocketListingsPaginator, currentTab: $currentTab, listingsSearch: $listingsSearch, pocketListingsSearch: $pocketListingsSearch, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, agentList: $agentList, getAgentListStatus: $getAgentListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, listingsFilter: $listingsFilter, pocketListingsFilter: $pocketListingsFilter)';
   }
 
   @override
@@ -587,14 +765,29 @@ class _$ListingsStateImpl implements _ListingsState {
             (identical(other.listingsPaginator, listingsPaginator) ||
                 other.listingsPaginator == listingsPaginator) &&
             const DeepCollectionEquality()
+                .equals(other._myListings, _myListings) &&
+            (identical(other.getMyListingsStatus, getMyListingsStatus) ||
+                other.getMyListingsStatus == getMyListingsStatus) &&
+            (identical(other.getMyListingsError, getMyListingsError) ||
+                other.getMyListingsError == getMyListingsError) &&
+            (identical(other.myListingsPaginator, myListingsPaginator) ||
+                other.myListingsPaginator == myListingsPaginator) &&
+            const DeepCollectionEquality()
                 .equals(other._pocketListings, _pocketListings) &&
             (identical(other.getPocketListingsStatus, getPocketListingsStatus) ||
                 other.getPocketListingsStatus == getPocketListingsStatus) &&
             (identical(other.getPocketListingsError, getPocketListingsError) ||
                 other.getPocketListingsError == getPocketListingsError) &&
-            (identical(
-                    other.pocketListingsPaginator, pocketListingsPaginator) ||
+            (identical(other.pocketListingsPaginator, pocketListingsPaginator) ||
                 other.pocketListingsPaginator == pocketListingsPaginator) &&
+            const DeepCollectionEquality()
+                .equals(other._myPocketListings, _myPocketListings) &&
+            (identical(other.getMyPocketListingsStatus, getMyPocketListingsStatus) ||
+                other.getMyPocketListingsStatus == getMyPocketListingsStatus) &&
+            (identical(other.getMyPocketListingsError, getMyPocketListingsError) ||
+                other.getMyPocketListingsError == getMyPocketListingsError) &&
+            (identical(other.myPocketListingsPaginator, myPocketListingsPaginator) ||
+                other.myPocketListingsPaginator == myPocketListingsPaginator) &&
             (identical(other.currentTab, currentTab) ||
                 other.currentTab == currentTab) &&
             (identical(other.listingsSearch, listingsSearch) ||
@@ -603,8 +796,7 @@ class _$ListingsStateImpl implements _ListingsState {
                 other.pocketListingsSearch == pocketListingsSearch) &&
             const DeepCollectionEquality()
                 .equals(other._propertyTypeList, _propertyTypeList) &&
-            (identical(other.getPropertyTypeListStatus,
-                    getPropertyTypeListStatus) ||
+            (identical(other.getPropertyTypeListStatus, getPropertyTypeListStatus) ||
                 other.getPropertyTypeListStatus == getPropertyTypeListStatus) &&
             const DeepCollectionEquality()
                 .equals(other._communityList, _communityList) &&
@@ -618,14 +810,10 @@ class _$ListingsStateImpl implements _ListingsState {
                 .equals(other._agentList, _agentList) &&
             (identical(other.getAgentListStatus, getAgentListStatus) ||
                 other.getAgentListStatus == getAgentListStatus) &&
-            const DeepCollectionEquality()
-                .equals(other._amenityList, _amenityList) &&
-            (identical(other.getAmenityListStatus, getAmenityListStatus) ||
-                other.getAmenityListStatus == getAmenityListStatus) &&
-            const DeepCollectionEquality()
-                .equals(other._listingsFilter, _listingsFilter) &&
-            const DeepCollectionEquality()
-                .equals(other._pocketListingsFilter, _pocketListingsFilter));
+            const DeepCollectionEquality().equals(other._amenityList, _amenityList) &&
+            (identical(other.getAmenityListStatus, getAmenityListStatus) || other.getAmenityListStatus == getAmenityListStatus) &&
+            const DeepCollectionEquality().equals(other._listingsFilter, _listingsFilter) &&
+            const DeepCollectionEquality().equals(other._pocketListingsFilter, _pocketListingsFilter));
   }
 
   @override
@@ -635,10 +823,18 @@ class _$ListingsStateImpl implements _ListingsState {
         getListingsStatus,
         getListingsError,
         listingsPaginator,
+        const DeepCollectionEquality().hash(_myListings),
+        getMyListingsStatus,
+        getMyListingsError,
+        myListingsPaginator,
         const DeepCollectionEquality().hash(_pocketListings),
         getPocketListingsStatus,
         getPocketListingsError,
         pocketListingsPaginator,
+        const DeepCollectionEquality().hash(_myPocketListings),
+        getMyPocketListingsStatus,
+        getMyPocketListingsError,
+        myPocketListingsPaginator,
         currentTab,
         listingsSearch,
         pocketListingsSearch,
@@ -669,10 +865,18 @@ abstract class _ListingsState implements ListingsState {
       final AppStatus getListingsStatus,
       final String? getListingsError,
       final Paginator? listingsPaginator,
+      final List<Property> myListings,
+      final AppStatus getMyListingsStatus,
+      final String? getMyListingsError,
+      final Paginator? myListingsPaginator,
       final List<PropertyCard> pocketListings,
       final AppStatus getPocketListingsStatus,
       final String? getPocketListingsError,
       final Paginator? pocketListingsPaginator,
+      final List<PropertyCard> myPocketListings,
+      final AppStatus getMyPocketListingsStatus,
+      final String? getMyPocketListingsError,
+      final Paginator? myPocketListingsPaginator,
       final int currentTab,
       final String? listingsSearch,
       final String? pocketListingsSearch,
@@ -698,6 +902,14 @@ abstract class _ListingsState implements ListingsState {
   @override
   Paginator? get listingsPaginator;
   @override
+  List<Property> get myListings;
+  @override
+  AppStatus get getMyListingsStatus;
+  @override
+  String? get getMyListingsError;
+  @override
+  Paginator? get myListingsPaginator;
+  @override
   List<PropertyCard> get pocketListings;
   @override
   AppStatus get getPocketListingsStatus;
@@ -705,6 +917,14 @@ abstract class _ListingsState implements ListingsState {
   String? get getPocketListingsError;
   @override
   Paginator? get pocketListingsPaginator;
+  @override
+  List<PropertyCard> get myPocketListings;
+  @override
+  AppStatus get getMyPocketListingsStatus;
+  @override
+  String? get getMyPocketListingsError;
+  @override
+  Paginator? get myPocketListingsPaginator;
   @override
   int get currentTab;
   @override

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
@@ -384,10 +385,19 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   Future<List<Building>> getBuildings({String? search}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
     if (state.buildingList.isNotEmpty && search != null) {
-      return state.buildingList
+      final list = state.buildingList
           .where((element) =>
               element.name.toLowerCase().contains(search.toLowerCase()))
           .toList();
+      if (state.explorerFilter?.containsKey('communities') == true &&
+          state.explorerFilter?['communities'] != null) {
+        final communities = (state.explorerFilter?['communities'] as List)
+            .map((e) => e['value'])
+            .toList();
+        return list.where((e) => communities.contains(e.communityId)).toList();
+      } else {
+        return list;
+      }
     } else {
       final result = await _listingsRepo.getBuildingNames(search: search);
       switch (result) {

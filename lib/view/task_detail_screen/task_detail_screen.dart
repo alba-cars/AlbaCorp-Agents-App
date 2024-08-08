@@ -314,11 +314,27 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                       icon: CupertinoIcons
                                                           .person),
                                                   HorizontalSmallGap(),
-                                                  Expanded(
-                                                    child: NormalText(
-                                                        text:
-                                                            '${task.lead?.firstName ?? ''} ${task.lead?.lastName ?? ''}'),
-                                                  )
+                                                  Flexible(
+                                                      child: TextButton(
+                                                    style: TextButton.styleFrom(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 0)),
+                                                    child: Text(
+                                                      '${task.lead?.firstName ?? ''} ${task.lead?.lastName ?? ''}',
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                    onPressed: () {
+                                                      context.pushNamed(
+                                                          LeadDetailScreen
+                                                              .routeName,
+                                                          pathParameters: {
+                                                            "id": task.lead!.id,
+                                                            "index": "0"
+                                                          });
+                                                    },
+                                                  ))
                                                 ],
                                               ),
                                               VerticalSmallGap(),
@@ -461,9 +477,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                     child: OutlinedButton(
                                                         onPressed: () async {
                                                           if (await canLaunchUrlString(
-                                                              'whatsapp://send?phone=${task.lead?.phone}')) {
+                                                              "https://wa.me/${task.lead?.phone?.replaceFirst("+", "")}")) {
                                                             launchUrlString(
-                                                                'whatsapp://send?phone=${task.lead?.phone}');
+                                                                "https://wa.me/${task.lead?.phone?.replaceFirst("+", "")}");
                                                           } else {
                                                             showSnackbar(
                                                                 context,
@@ -479,11 +495,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: OutlinedButton(
                                                         onPressed: () async {
-                                                          final uri = Uri.parse(
-                                                              'mailto:${task.lead?.email}');
-                                                          if (await canLaunchUrl(
+                                                          final uri =
+                                                              "https://wa.me/971523809179";
+                                                          if (await canLaunchUrlString(
                                                               uri)) {
-                                                            await launchUrl(
+                                                            await launchUrlString(
                                                                 uri);
                                                           } else {
                                                             showSnackbar(
@@ -493,8 +509,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                     .failure);
                                                           }
                                                         },
-                                                        child: Icon(Icons
-                                                            .email_outlined)),
+                                                        child:
+                                                            Icon(Icons.share)),
                                                   )
                                                 ],
                                               ),
@@ -563,40 +579,44 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   side: BorderSide(
                                                       color: Colors.red)),
                                               icon: Icon(
-                                                Icons.close,
+                                                CupertinoIcons.hand_thumbsdown,
                                                 color: Colors.red,
                                               )),
                                         ),
                                         HorizontalSmallGap(),
                                         Expanded(
-                                          child: IconButton.filled(
+                                          child: IconButton.outlined(
                                               style: IconButton.styleFrom(
-                                                  backgroundColor: Colors.red),
+                                                  side: BorderSide(
+                                                      color: Colors.red)),
                                               onPressed: () {
                                                 mode = CardAction.Heart;
                                                 _appinioSwiperController
                                                     .swipeRight();
                                               },
                                               icon: Icon(
-                                                  CupertinoIcons.heart_fill)),
+                                                CupertinoIcons.hand_thumbsup,
+                                                color: Colors.red,
+                                              )),
                                         ),
                                         HorizontalSmallGap(),
                                         Expanded(
                                             child: IconButton.filled(
                                                 style: IconButton.styleFrom(
                                                     backgroundColor:
-                                                        Colors.purple),
+                                                        Colors.red),
                                                 onPressed: () async {
-                                                  mode = CardAction.Star;
+                                                  mode = CardAction.Charge;
                                                   _appinioSwiperController
                                                       .swipeRight();
                                                 },
-                                                icon: Icon(Icons.star))),
+                                                icon: Icon(CupertinoIcons
+                                                    .heart_fill))),
                                         HorizontalSmallGap(),
                                         Expanded(
                                           child: IconButton.filled(
                                               onPressed: () async {
-                                                mode = CardAction.Charge;
+                                                mode = CardAction.Star;
                                                 _appinioSwiperController
                                                     .swipeRight();
                                               },
