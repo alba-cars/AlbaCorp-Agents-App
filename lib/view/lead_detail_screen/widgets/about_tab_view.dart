@@ -1,11 +1,18 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
+import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -85,30 +92,13 @@ class AboutTabView extends StatelessWidget {
                           ),
                           Expanded(
                             child: TextWithIcon(
-                              text: lead.email ?? '',
+                              text: lead.email == null ||
+                                      lead.email?.contains(
+                                              'generated@alba.homes') ==
+                                          true
+                                  ? "N/A"
+                                  : lead.email ?? '',
                               icon: Icons.email_outlined,
-                            ),
-                          ),
-                        ],
-                      ),
-                      VerticalSmallGap(),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: TextWithIcon(
-                              text: lead.address ?? 'N/A',
-                              icon: Icons.location_on_outlined,
-                            ),
-                          ),
-                          Expanded(
-                            child: TextWithIcon(
-                              text: lead.preferredLanguages.fold(
-                                  '',
-                                  (previousValue, element) =>
-                                      '$previousValue, $element'),
-                              icon: Icons.language_outlined,
                             ),
                           ),
                         ],
@@ -117,58 +107,60 @@ class AboutTabView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CallButton(
-                              onTap: () async {
-                                context.read<CallBloc>().add(
-                                    CallEvent.callStarted(
-                                        phoneNumber: lead.phone ?? '',
-                                        activityId: "",
-                                        leadId: lead.id));
-                                final state = await getIt<CallBloc>()
-                                    .stream
-                                    .firstWhere((e) =>
-                                        e.makeACallStatus != AppStatus.loading);
-                                if (state.makeACallStatus ==
-                                    AppStatus.success) {
-                                  showSnackbar(
-                                      context,
-                                      'Call request sent successfully. please open linkus app to receieve call',
-                                      SnackBarType.success);
-                                } else {
-                                  showSnackbar(
-                                      context,
-                                      'Call request failed to send. error: ${state.makeACallError}',
-                                      SnackBarType.failure);
-                                }
-                              },
-                              isDnd: lead.dndStatus),
-                          WhatsAppButton(
-                              onTap: () async {
-                                if (await canLaunchUrlString(
-                                    'whatsapp://send?phone=${lead.phone}')) {
-                                  launchUrlString(
-                                      'whatsapp://send?phone=${lead.phone}');
-                                } else {
-                                  showSnackbar(
-                                      context,
-                                      'Can not launch the app',
-                                      SnackBarType.failure);
-                                }
-                              },
-                              isDnd: lead.dndStatus),
-                          IconButton.filledTonal(
-                              onPressed: () async {
-                                final uri = Uri.parse('mailto:${lead.email}');
-                                if (await canLaunchUrl(uri)) {
-                                  await launchUrl(uri);
-                                } else {
-                                  showSnackbar(
-                                      context,
-                                      'Can not launch the app',
-                                      SnackBarType.failure);
-                                }
-                              },
-                              icon: Icon(Icons.email_outlined))
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () async {
+                                  getIt<CallBloc>().add(CallEvent.clickToCall(
+                                    phoneNumber: lead.phone ?? '',
+                                  ));
+                                  final state = await getIt<CallBloc>()
+                                      .stream
+                                      .firstWhere((e) =>
+                                          e.makeACallStatus !=
+                                          AppStatus.loading);
+                                  if (state.makeACallStatus ==
+                                      AppStatus.success) {
+                                    showSnackbar(
+                                        context,
+                                        'Call request sent successfully. please open linkus app to receieve call',
+                                        SnackBarType.success);
+                                  } else {
+                                    showSnackbar(
+                                        context,
+                                        'Call request failed to send. error: ${state.makeACallError}',
+                                        SnackBarType.failure);
+                                  }
+                                },
+                                child: Icon(Icons.call)),
+                          ),
+                          HorizontalSmallGap(),
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () async {
+                                  if (await canLaunchUrlString(
+                                      "https://wa.me/${lead.phone?.replaceFirst("+", "")}")) {
+                                    launchUrlString(
+                                        "https://wa.me/${lead.phone?.replaceFirst("+", "")}");
+                                  } else {
+                                    showSnackbar(
+                                        context,
+                                        'Can not launch the app',
+                                        SnackBarType.failure);
+                                  }
+                                },
+                                child: ImageIcon(
+                                    AssetImage('assets/images/whatsapp.png'))),
+                          ),
+                          HorizontalSmallGap(),
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () async {
+                                  shareCompanyProfile();
+                                },
+                                child: Icon(Platform.isIOS
+                                    ? CupertinoIcons.share
+                                    : Icons.share)),
+                          )
                         ],
                       ),
                       if (lead.leadStatus == LeadStatus.FollowUp) ...[
@@ -234,55 +226,6 @@ class AboutTabView extends StatelessWidget {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            LabelText(text: 'TAGS'),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text('ADD'),
-                            )
-                          ],
-                        ),
-                        VerticalSmallGap(),
-                        lead.tags.isEmpty
-                            ? NormalText(text: 'No Tags Found')
-                            : Wrap(
-                                spacing: 12,
-                                runSpacing: 12,
-                                children: lead.tags
-                                    .map((e) => Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.blueGrey[50],
-                                              border: Border.all(
-                                                  color: Colors.blueGrey[200]!),
-                                              borderRadius:
-                                                  BorderRadius.circular(4)),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 8),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              SmallText(text: e),
-                                              // HorizontalSmallGap(),
-                                              // IconButton(
-                                              //     style: IconButton.styleFrom(
-                                              //         padding: EdgeInsets.all(1),
-                                              //         visualDensity: VisualDensity(),
-                                              //         tapTargetSize:
-                                              //             MaterialTapTargetSize.shrinkWrap),
-                                              //     onPressed: () {},
-                                              //     icon: Icon(
-                                              //       Icons.close,
-                                              //       size: 14,
-                                              //     ))
-                                            ],
-                                          ),
-                                        ))
-                                    .toList(),
-                              ),
-                        VerticalSmallGap(),
-                        Divider(),
                         VerticalSmallGap(),
                         LabelText(
                           text: 'LEAD DETAILS',

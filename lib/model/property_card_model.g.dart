@@ -34,6 +34,11 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
       referenceNumber: json['referenceNumber'] as String?,
       expirationDate: json['expirationDate'] as String?,
       availableForCheckout: json['availableForCheckout'] as bool? ?? false,
+      photos: (json['photos'] as List<dynamic>?)
+              ?.map(
+                  (e) => PropertyCardPhoto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       leadsCount: (json['leadsCount'] as num?)?.toInt(),
     );
 
@@ -61,6 +66,7 @@ Map<String, dynamic> _$$PropertyCardImplToJson(_$PropertyCardImpl instance) =>
       'referenceNumber': instance.referenceNumber,
       'expirationDate': instance.expirationDate,
       'availableForCheckout': instance.availableForCheckout,
+      'photos': instance.photos,
       'leadsCount': instance.leadsCount,
     };
 

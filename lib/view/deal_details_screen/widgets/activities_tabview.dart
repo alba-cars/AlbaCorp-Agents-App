@@ -33,13 +33,14 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
                 BlockTitleText(
                   text: 'Buyer Activities',
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),
@@ -71,13 +72,14 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
                 BlockTitleText(
                   text: 'Seller Activities',
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),
@@ -109,13 +111,14 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
                 BlockTitleText(
                   text: 'Property Activities',
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),

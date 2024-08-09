@@ -435,32 +435,29 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                             valueOne: leadCard.lead.leadStatus
                                                     ?.name.titleCase ??
                                                 '',
-                                            labelTwo: 'Lead Source',
-                                            valueTwo: leadCard
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Lead Source',
+                                            valueOne: leadCard
                                                 .lead.leadSource.titleCase,
                                           ),
-                                          Row(
-                                            children: [
-                                              AppPrimaryButton(
-                                                  backgroundColor:
-                                                      Theme.of(context)
-                                                          .colorScheme
-                                                          .primaryContainer,
-                                                  foregroundColor:
-                                                      Theme.of(context)
-                                                          .colorScheme
-                                                          .primary,
-                                                  text: 'Assign to me',
-                                                  onTap: () async {
-                                                    await context
-                                                        .read<
-                                                            LeadsListExplorerCubit>()
-                                                        .checkOutLead(
-                                                            context: context,
-                                                            lead: leadCard);
-                                                  })
-                                            ],
-                                          ),
+                                          AppPrimaryButton(
+                                              height: 38,
+                                              backgroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .primaryContainer,
+                                              foregroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              text: 'Assign to me',
+                                              onTap: () async {
+                                                await context
+                                                    .read<
+                                                        LeadsListExplorerCubit>()
+                                                    .checkOutLead(
+                                                        context: context,
+                                                        lead: leadCard);
+                                              }),
                                         ],
                                       ),
                                       children: [

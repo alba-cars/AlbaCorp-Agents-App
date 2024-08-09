@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
@@ -28,6 +31,7 @@ import 'package:real_estate_app/widgets/tab_bar.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 
+import '../../util/constant.dart';
 import '../../util/status.dart';
 import '../../widgets/button.dart';
 import '../../widgets/fields/wrap_select_field.dart';
@@ -216,39 +220,39 @@ class _ListingsTabState extends State<ListingsTab> {
           VerticalSmallGap(
             adjustment: 0.5,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                TitleText(
-                  text: 'Listings List',
-                  fontWeight: FontWeight.bold,
-                ),
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(40, 34),
-                        maximumSize: Size(110, 34),
-                        fixedSize: null,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onTertiary,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.tertiary),
-                    child: Text('Add New'),
-                    onPressed: () async {
-                      final result =
-                          await context.pushNamed(AddListingScreen.routeName);
-                      if (result == true) {
-                        context
-                            .read<ListingsCubit>()
-                            .getListings(refresh: true);
-                      }
-                    })
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20),
+          //   child: Row(
+          //     children: [
+          //       TitleText(
+          //         text: 'Listings List',
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //       Spacer(),
+          //       ElevatedButton(
+          //           style: ElevatedButton.styleFrom(
+          //               minimumSize: Size(40, 34),
+          //               maximumSize: Size(110, 34),
+          //               fixedSize: null,
+          //               shape: RoundedRectangleBorder(
+          //                   borderRadius: BorderRadius.circular(12)),
+          //               foregroundColor:
+          //                   Theme.of(context).colorScheme.onTertiary,
+          //               backgroundColor:
+          //                   Theme.of(context).colorScheme.tertiary),
+          //           child: Text('Add New'),
+          //           onPressed: () async {
+          //             final result =
+          //                 await context.pushNamed(AddListingScreen.routeName);
+          //             if (result == true) {
+          //               context
+          //                   .read<ListingsCubit>()
+          //                   .getListings(refresh: true);
+          //             }
+          //           })
+          //     ],
+          //   ),
+          // ),
           VerticalSmallGap(
             adjustment: 0.5,
           ),
@@ -259,6 +263,14 @@ class _ListingsTabState extends State<ListingsTab> {
               onChanged: (val) {
                 context.read<ListingsCubit>().searchListings(val);
               },
+              showSearch: false,
+              customFilterButtonWidget: FilterButton(),
+              leadWidgets: [
+                TitleText(
+                  text: 'Listings List',
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
               filterFields: filterFields(context),
               onFilterApplied: (filter) {
                 context.read<ListingsCubit>().setListingsFilters(filter);
@@ -334,6 +346,42 @@ class _ListingsTabState extends State<ListingsTab> {
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class FilterButton extends StatelessWidget {
+  const FilterButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: Theme.of(context).colorScheme.secondary),
+      child: Row(
+        children: [
+          Text(
+            "Filter",
+            style: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(color: Theme.of(context).colorScheme.onSecondary),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          SvgPicture.asset(
+            "${Constant.assetImagePath}filter.svg",
+            height: 18,
+            width: 18,
+            color: Colors.white,
+          )
         ],
       ),
     );
@@ -454,47 +502,19 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
             adjustment: 0.5,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                TitleText(
-                  text: 'Pocket Listings',
-                  fontWeight: FontWeight.bold,
-                ),
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(40, 34),
-                        maximumSize: Size(110, 34),
-                        fixedSize: null,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onTertiary,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.tertiary),
-                    child: Text('Add New'),
-                    onPressed: () async {
-                      final result = await context
-                          .pushNamed(AddPocketListingScreen.routeName);
-                      if (result == true) {
-                        context
-                            .read<ListingsCubit>()
-                            .getPocketListings(refresh: true);
-                      }
-                    })
-              ],
-            ),
-          ),
-          VerticalSmallGap(
-            adjustment: 0.5,
-          ),
-          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: AppSearchBar(
               onChanged: (val) {
                 context.read<ListingsCubit>().searchPocketListings(val);
               },
+              showSearch: false,
+              customFilterButtonWidget: FilterButton(),
+              leadWidgets: [
+                TitleText(
+                  text: 'Pocket Listings',
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
               filterFields: filterFields(context),
               onFilterApplied: (filter) {
                 context.read<ListingsCubit>().setPocketListingFilters(filter);
@@ -580,53 +600,96 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      LabelText(
-                                        text:
-                                            propertyCard.referenceNumber ?? '',
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
                                       Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 4.h, vertical: 1.h),
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                2.5,
+                                        height: min(
+                                            MediaQuery.sizeOf(context).width /
+                                                2.5,
+                                            200),
+                                        clipBehavior: Clip.hardEdge,
                                         decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.blueGrey),
                                             borderRadius:
-                                                BorderRadius.circular(4),
-                                            color: Colors.blueGrey[100]),
-                                        child: SmallText(
-                                            text: propertyCard
-                                                    .status?.titleCase ??
-                                                ''),
+                                                BorderRadius.circular(12)),
+                                        child: S3Image(
+                                          url: propertyCard.photos.isNotEmpty
+                                              ? propertyCard
+                                                  .photos.first.original
+                                              : null,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Expanded(
+                                        child: Column(children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              LabelText(
+                                                text: propertyCard
+                                                        .referenceNumber ??
+                                                    '',
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.h,
+                                                    vertical: 1.h),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.blueGrey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color:
+                                                        Colors.blueGrey[100]),
+                                                child: SmallText(
+                                                    text: propertyCard.status
+                                                            ?.titleCase ??
+                                                        ''),
+                                              ),
+                                            ],
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Community',
+                                            valueOne: propertyCard
+                                                .community?.community
+                                                .trim(),
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Building',
+                                            valueOne: propertyCard
+                                                    .building?.name
+                                                    .trim() ??
+                                                'N/A',
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Property Type',
+                                            valueOne: propertyCard.propertyType
+                                                ?.trim(),
+                                            labelTwo: 'Beds',
+                                            valueTwo:
+                                                propertyCard.beds ?? 'N/A',
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'purpose',
+                                            valueOne:
+                                                propertyCard.purpose?.trim(),
+                                            labelTwo: 'Size',
+                                            valueTwo:
+                                                propertyCard.size?.toString() ??
+                                                    'N/A',
+                                          ),
+                                        ]),
                                       ),
                                     ],
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Community',
-                                    valueOne: propertyCard.community?.community
-                                        .trim(),
-                                    labelTwo: 'Building',
-                                    valueTwo:
-                                        propertyCard.building?.name.trim() ??
-                                            'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Property Type',
-                                    valueOne: propertyCard.propertyType?.trim(),
-                                    labelTwo: 'Beds',
-                                    valueTwo: propertyCard.beds ?? 'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'purpose',
-                                    valueOne: propertyCard.purpose?.trim(),
-                                    labelTwo: 'Size',
-                                    valueTwo:
-                                        propertyCard.size?.toString() ?? 'N/A',
                                   ),
                                   if (propertyCard.currentAgent is Map)
                                     Container(

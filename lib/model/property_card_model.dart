@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:real_estate_app/model/building_model.dart';
+import 'package:real_estate_app/model/property_card_details_model.dart';
 import 'package:real_estate_app/model/user.dart';
 
 import 'community_model.dart';
@@ -35,6 +36,7 @@ class PropertyCard with _$PropertyCard {
     @JsonKey(name: 'availableForCheckout')
     @Default(false)
     bool availableForCheckout,
+    @Default([]) List<PropertyCardPhoto> photos,
     @JsonKey(name: 'leadsCount') int? leadsCount,
   }) = _PropertyCard;
 

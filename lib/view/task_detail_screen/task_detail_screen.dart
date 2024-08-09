@@ -10,6 +10,7 @@ import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
@@ -495,19 +496,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: OutlinedButton(
                                                         onPressed: () async {
-                                                          final uri =
-                                                              "https://wa.me/971523809179";
-                                                          if (await canLaunchUrlString(
-                                                              uri)) {
-                                                            await launchUrlString(
-                                                                uri);
-                                                          } else {
-                                                            showSnackbar(
-                                                                context,
-                                                                'Can not launch the app',
-                                                                SnackBarType
-                                                                    .failure);
-                                                          }
+                                                          shareCompanyProfile();
                                                         },
                                                         child:
                                                             Icon(Icons.share)),
@@ -585,18 +574,20 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                         ),
                                         HorizontalSmallGap(),
                                         Expanded(
-                                          child: IconButton.outlined(
+                                          child: IconButton.filled(
                                               style: IconButton.styleFrom(
+                                                  backgroundColor: Colors.green,
                                                   side: BorderSide(
-                                                      color: Colors.red)),
+                                                      color: Colors.green)),
                                               onPressed: () {
                                                 mode = CardAction.Heart;
                                                 _appinioSwiperController
                                                     .swipeRight();
                                               },
                                               icon: Icon(
-                                                CupertinoIcons.hand_thumbsup,
-                                                color: Colors.red,
+                                                CupertinoIcons
+                                                    .hand_thumbsup_fill,
+                                                color: Colors.white,
                                               )),
                                         ),
                                         HorizontalSmallGap(),

@@ -32,13 +32,14 @@ class _TransactionsTabViewState extends State<TransactionsTabView> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
                 BlockTitleText(
                   text: 'Buyer Deals',
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),
@@ -80,13 +81,14 @@ class _TransactionsTabViewState extends State<TransactionsTabView> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
                 BlockTitleText(
                   text: 'Seller Deals',
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -369,53 +371,95 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      LabelText(
-                                        text:
-                                            propertyCard.referenceNumber ?? '',
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
                                       Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 4, vertical: 1),
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                2.5,
+                                        height: min(
+                                            MediaQuery.sizeOf(context).width /
+                                                2.5,
+                                            200),
+                                        clipBehavior: Clip.hardEdge,
                                         decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.blueGrey),
                                             borderRadius:
-                                                BorderRadius.circular(4),
-                                            color: Colors.blueGrey[100]),
-                                        child: SmallText(
-                                            text: propertyCard
-                                                    .status?.titleCase ??
-                                                ''),
+                                                BorderRadius.circular(12)),
+                                        child: S3Image(
+                                          url: propertyCard.photos.isNotEmpty
+                                              ? propertyCard
+                                                  .photos.first.original
+                                              : null,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Expanded(
+                                        child: Column(children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              LabelText(
+                                                text: propertyCard
+                                                        .referenceNumber ??
+                                                    '',
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4, vertical: 1),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.blueGrey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color:
+                                                        Colors.blueGrey[100]),
+                                                child: SmallText(
+                                                    text: propertyCard.status
+                                                            ?.titleCase ??
+                                                        ''),
+                                              ),
+                                            ],
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Community',
+                                            valueOne: propertyCard
+                                                .community?.community
+                                                .trim(),
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Building',
+                                            valueOne: propertyCard
+                                                    .building?.name
+                                                    .trim() ??
+                                                'N/A',
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Property Type',
+                                            valueOne: propertyCard.propertyType
+                                                ?.trim(),
+                                            labelTwo: 'Beds',
+                                            valueTwo:
+                                                propertyCard.beds ?? 'N/A',
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'purpose',
+                                            valueOne:
+                                                propertyCard.purpose?.trim(),
+                                            labelTwo: 'Size',
+                                            valueTwo:
+                                                propertyCard.size?.toString() ??
+                                                    'N/A',
+                                          ),
+                                        ]),
                                       ),
                                     ],
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Community',
-                                    valueOne: propertyCard.community?.community
-                                        .trim(),
-                                    labelTwo: 'Building',
-                                    valueTwo:
-                                        propertyCard.building?.name.trim() ??
-                                            'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Property Type',
-                                    valueOne: propertyCard.propertyType?.trim(),
-                                    labelTwo: 'Beds',
-                                    valueTwo: propertyCard.beds ?? 'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'purpose',
-                                    valueOne: propertyCard.purpose?.trim(),
-                                    labelTwo: 'Size',
-                                    valueTwo:
-                                        propertyCard.size?.toString() ?? 'N/A',
                                   ),
                                   if (propertyCard.currentAgent is Map)
                                     Container(

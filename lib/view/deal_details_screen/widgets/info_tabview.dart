@@ -236,12 +236,13 @@ class InfoTabView extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
                     children: [
                       BlockTitleText(
+                        color: Theme.of(context).colorScheme.onPrimary,
                         text: 'Deal Info',
                       ),
                     ],
@@ -301,12 +302,13 @@ class InfoTabView extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
                     children: [
                       BlockTitleText(
+                        color: Theme.of(context).colorScheme.onPrimary,
                         text: 'Property Info',
                       ),
                     ],
@@ -332,6 +334,7 @@ class InfoTabView extends StatelessWidget {
                             )),
                         VerticalSmallGap(),
                         BlockTitleText(
+                          color: Theme.of(context).colorScheme.onPrimary,
                           text: deal.propertyList!.propertyTitle,
                         ),
                         VerticalSmallGap(),
@@ -394,6 +397,7 @@ class InfoTabView extends StatelessWidget {
                         //     )),
                         // VerticalSmallGap(),
                         // BlockTitleText(
+                        // color:Theme.of(context).colorScheme.onPrimary,
                         //   text: deal.propertyList!.propertyTitle,
                         // ),
                         VerticalSmallGap(),
@@ -454,6 +458,7 @@ class InfoTabView extends StatelessWidget {
                         //     )),
                         // VerticalSmallGap(),
                         // BlockTitleText(
+                        // color:Theme.of(context).colorScheme.onPrimary,
                         //   text: deal.propertyList!.propertyTitle,
                         // ),
                         VerticalSmallGap(),
@@ -516,6 +521,7 @@ class InfoTabView extends StatelessWidget {
                         //     )),
                         // VerticalSmallGap(),
                         // BlockTitleText(
+                        // color:Theme.of(context).colorScheme.onPrimary,
                         //   text: deal.propertyList!.propertyTitle,
                         // ),
                         VerticalSmallGap(),
@@ -572,12 +578,13 @@ class BuyerInternalUserInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Buyer/Tenant Info',
               ),
             ],
@@ -632,12 +639,13 @@ class SellerInternalUserInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Seller/landlord Info',
               ),
             ],
@@ -689,12 +697,13 @@ class SellerExternalUserInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Seller/landlord Info',
               ),
             ],
@@ -743,12 +752,13 @@ class BuyerExternalUerInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Buyer/Tenant Info',
               ),
             ],
@@ -792,12 +802,13 @@ class PrimaryClientInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Client Info',
               ),
             ],

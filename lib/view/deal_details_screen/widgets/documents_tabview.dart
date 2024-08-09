@@ -82,13 +82,14 @@ class DocumentsTabView extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 8),
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
                 BlockTitleText(
                   text: 'Client Documents',
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),
@@ -220,13 +221,14 @@ class DocumentsTabView extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 8),
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
                 BlockTitleText(
                   text: 'Deal Documents',
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ],
             ),
