@@ -9,6 +9,7 @@ class AppPrimaryButton extends StatefulWidget {
     required this.text,
     required this.onTap,
     this.fullWidth = false,
+    this.width,
     this.backgroundImage,
     this.backgroundColor,
     this.foregroundColor,
@@ -39,6 +40,7 @@ class AppPrimaryButton extends StatefulWidget {
   final bool outlined;
   final Color? borderColor;
   final double? borderRadious;
+  final double? width;
 
   @override
   State<AppPrimaryButton> createState() => _AppPrimaryButtonState();

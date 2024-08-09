@@ -1088,6 +1088,8 @@ PODS:
     - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
+  - flutter_upgrade_version (1.1.6):
+    - Flutter
   - google_maps_flutter_ios (0.0.1):
     - Flutter
     - GoogleMaps (< 10.0, >= 8.4)
@@ -1211,8 +1213,6 @@ PODS:
     - FirebaseMessaging
     - IosAwnCore (~> 0.9.3)
   - leveldb-library (1.22.5)
-  - linkus_sdk (0.0.1):
-    - Flutter
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -1222,8 +1222,6 @@ PODS:
   - objectbox_flutter_libs (0.0.1):
     - Flutter
     - ObjectBox (= 2.0.0)
-  - package_info_plus (0.4.5):
-    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -1262,11 +1260,10 @@ DEPENDENCIES:
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - flutter_upgrade_version (from `.symlinks/plugins/flutter_upgrade_version/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
-  - linkus_sdk (from `.symlinks/plugins/linkus_sdk/ios`)
   - objectbox_flutter_libs (from `.symlinks/plugins/objectbox_flutter_libs/ios`)
-  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - phone_state (from `.symlinks/plugins/phone_state/ios`)
@@ -1331,16 +1328,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_pdfview/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  flutter_upgrade_version:
+    :path: ".symlinks/plugins/flutter_upgrade_version/ios"
   google_maps_flutter_ios:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
-  linkus_sdk:
-    :path: ".symlinks/plugins/linkus_sdk/ios"
   objectbox_flutter_libs:
     :path: ".symlinks/plugins/objectbox_flutter_libs/ios"
-  package_info_plus:
-    :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
@@ -1386,6 +1381,7 @@ SPEC CHECKSUMS:
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
+  flutter_upgrade_version: 056fb7aec8e30182a1db6d436b4fdc615582d996
   google_maps_flutter_ios: 5bc2be60ad012e79b182ce0fb0ef5030a50fb03e
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
@@ -1396,11 +1392,9 @@ SPEC CHECKSUMS:
   IosAwnCore: b8601fbb37f7b3560f31b84ebf55a72f65812e05
   IosAwnFcmDist: 2f780910237ad5c6ba2633376982d30d5fafe447
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
-  linkus_sdk: 02c6d85011b2b94c9a67f32954ac4d23829dd942
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   ObjectBox: f5319bd9ad2ea960796eff7227e86471867e9ef0
   objectbox_flutter_libs: c7748f6c6fda47d22f15c8062fb8208063fd948a
-  package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   phone_state: 699623cef1a83f28ea66bc1d33cf0a65bdb1ffb1

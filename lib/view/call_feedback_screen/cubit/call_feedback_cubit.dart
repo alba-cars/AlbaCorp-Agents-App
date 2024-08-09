@@ -32,6 +32,9 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
     emit(state.copyWith(
         checkLeadStatus: AppStatus.loading, requestNumber: false));
     final number = numberEntered ?? getIt<AuthBloc>().state.lastCalledNumber;
+    if (numberEntered != null) {
+      getIt<SharedPreferences>().setString('calledNumber', numberEntered);
+    }
 
     if (number != null && number != 'IPHONE' && number != 'Unknown') {
       final result =

@@ -1,0 +1,106 @@
+import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
+import 'package:real_estate_app/data/repository/activity_repo.dart';
+import 'package:real_estate_app/model/paginator.dart';
+import 'package:real_estate_app/util/paginator.dart';
+import 'package:real_estate_app/util/result.dart';
+import 'package:real_estate_app/util/status.dart';
+
+import '../../../model/activity_model.dart';
+
+part 'cold_lead_state.dart';
+part 'cold_lead_cubit.freezed.dart';
+
+@injectable
+class ColdLeadCubit extends Cubit<ColdLeadState> {
+  ColdLeadCubit({required this.activityRepo}) : super(ColdLeadState());
+  final ActivityRepo activityRepo;
+
+  fetchColdLeads(TaskFilterEnum filterType, {Paginator? paginator}) async {
+    Logger().d(paginator);
+    try {
+      if (paginator == null) {
+        var fetchStatus = {...state.fetchStatus};
+        fetchStatus[filterType] = AppStatus.loading;
+        emit(state.copyWith(
+            fetchStatus: fetchStatus,
+            paginator: {...state.paginator, filterType: null}));
+      }
+
+      final Result<List<Activity>> result =
+          await activityRepo.fetchActivitiesSorted(
+              filter: getPayload(filterType), paginator: paginator);
+
+      switch (result) {
+        case (Success<List<Activity>> success):
+          Logger().d("On success scenario");
+          _handleEnquiriesFetchSuccess(
+              success.value, success.paginator, filterType);
+          break;
+        case (Error error):
+          Logger().d("On failure scenario");
+          _handleEnquiriesFetchError(error.exception, filterType);
+          break;
+      }
+    } catch (e) {
+      Logger().e(e);
+      _handleEnquiriesFetchError("Something went wrong", filterType);
+    }
+  }
+
+  Map<String, dynamic> getPayload(TaskFilterEnum filterType) {
+    switch (filterType) {
+      case TaskFilterEnum.New:
+        return {"leadSourceType": "cold", "leadStatus": "Fresh"};
+      case TaskFilterEnum.FollowUp:
+        DateTime d = DateTime.now();
+        return {
+          "leadSourceType": 'cold',
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
+          "status": [
+            "Pending",
+          ],
+          "toDate": '${d.year}-${d.month}-${d.day}',
+        };
+      case TaskFilterEnum.Favourites:
+        return {"leadSourceType": "cold", "leadStatus": "Prospect"};
+    }
+  }
+
+  void _handleEnquiriesFetchSuccess(List<Activity> activities,
+      Paginator? paginator, TaskFilterEnum filterType) {
+    var fetchStatus = {...state.fetchStatus};
+    fetchStatus[filterType] = AppStatus.success;
+
+    var currentPaginator = {...state.paginator};
+    currentPaginator[filterType] = paginator;
+
+    var currentActivities = {...state.activities};
+    if (paginator?.hasNextPage ?? false) {
+      Logger().d("Appending the  activities");
+      currentActivities[filterType]?.addAll(activities);
+    } else {
+      currentActivities[filterType] = activities;
+    }
+
+    Logger().d("Going to emit the success fetch status");
+
+    emit(state.copyWith(
+        fetchStatus: fetchStatus,
+        paginator: currentPaginator,
+        activities: currentActivities));
+  }
+
+  void _handleEnquiriesFetchError(String exception, TaskFilterEnum filterType) {
+    var fetchStatus = {...state.fetchStatus};
+    fetchStatus[filterType] = AppStatus.failure;
+
+    var currentErrorMessage = {...state.error};
+    currentErrorMessage[filterType] = exception;
+    Logger()
+        .d("Going to emit the errror status with message $currentErrorMessage");
+    emit(state.copyWith(fetchStatus: fetchStatus, error: currentErrorMessage));
+  }
+}

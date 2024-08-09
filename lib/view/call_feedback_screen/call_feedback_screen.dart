@@ -10,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cubit.dart';
@@ -21,6 +22,7 @@ import 'package:real_estate_app/widgets/fields/phone_number_field.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants/hot_leads.dart';
 import '../../util/color_category.dart';
@@ -87,6 +89,13 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                             textAlign: TextAlign.center,
                           ),
                           VerticalSmallGap(),
+                          SmallText(
+                            text:
+                                "You received a ${getIt<SharedPreferences>().getString('CallDirection')} call at ${DateTime.fromMillisecondsSinceEpoch(getIt<SharedPreferences>().getInt('CallTime') ?? 0).formattedTime}.",
+                            textAlign: TextAlign.center,
+                            maxLines: 5,
+                          ),
+                          VerticalSmallGap(),
                           PhoneNumberField(name: 'number'),
                           VerticalSmallGap(),
                           AppPrimaryButton(
@@ -102,6 +111,22 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                                       .read<CallFeedbackCubit>()
                                       .checkUerExist(numberEntered: number);
                                 }
+                              }),
+                          VerticalSmallGap(),
+                          AppPrimaryButton(
+                              text: 'Ignore',
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.onPrimary,
+                              foregroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                              borderShow: true,
+                              borderColor:
+                                  Theme.of(context).colorScheme.primary,
+                              onTap: () async {
+                                getIt<AuthBloc>()
+                                    .add(AuthEvent.removeLastCallDetails());
+                                await Future.delayed(Durations.extralong1);
+                                context.goNamed(HomePage.routeName);
                               })
                         ],
                       ),

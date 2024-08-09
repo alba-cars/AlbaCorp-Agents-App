@@ -353,6 +353,12 @@ class _TryState extends State<_AddLeadScreenLayout> {
                 SizedBox(height: 16),
                 Text('Enter the lead\'s personal information.'),
                 SizedBox(height: 16),
+                PhoneNumberField(
+                  isRequired: true,
+                  name: 'phone',
+                  label: 'Phone',
+                ),
+                SizedBox(height: 16),
                 AppTextField(
                   isRequired: true,
                   name: 'first_name',
@@ -369,11 +375,6 @@ class _TryState extends State<_AddLeadScreenLayout> {
                   label: 'Email',
                 ),
                 SizedBox(height: 16),
-                PhoneNumberField(
-                  isRequired: true,
-                  name: 'phone',
-                  label: 'Phone',
-                ),
               ],
             ),
           ),

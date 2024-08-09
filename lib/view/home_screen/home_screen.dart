@@ -582,16 +582,17 @@ class CategorizedView extends StatelessWidget {
 }
 
 class ActivityListItem extends StatelessWidget {
-  const ActivityListItem({
-    super.key,
-    required this.activity,
-    required this.index,
-    this.taskSection,
-  });
+  const ActivityListItem(
+      {super.key,
+      required this.activity,
+      required this.index,
+      this.taskSection,
+      this.onActionPerformed});
 
   final Activity activity;
   final int index;
   final int? taskSection;
+  final VoidCallback? onActionPerformed;
 
   @override
   Widget build(BuildContext context) {
@@ -607,8 +608,14 @@ class ActivityListItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
         child: InkWell(
           onTap: () {
-            context.pushNamed(TaskDetailScreen.routeName,
-                pathParameters: {'id': activity.id}, extra: activity);
+            context
+                .pushNamed(TaskDetailScreen.routeName,
+                    pathParameters: {'id': activity.id}, extra: activity)
+                .then((_) {
+              if (onActionPerformed != null) {
+                onActionPerformed!();
+              }
+            });
           },
           child: Row(children: [
             Container(
@@ -723,6 +730,10 @@ class ActivityListItem extends StatelessWidget {
                           context,
                           'Call request sent successfully. please open linkus app to receieve call',
                           SnackBarType.success);
+
+                      if (onActionPerformed != null) {
+                        onActionPerformed!();
+                      }
                     } else {
                       showSnackbar(
                           context,
