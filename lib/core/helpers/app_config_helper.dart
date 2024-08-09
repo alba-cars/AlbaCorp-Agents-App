@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_upgrade_version/flutter_upgrade_version.dart';
 import 'package:real_estate_app/core/models/app_config/AppConfig.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class AppConfigHelper {
   Future<AppConfig> getAppInfo() async {
@@ -10,7 +10,7 @@ class AppConfigHelper {
     QuerySnapshot snapshot = await fireStoreDB.collection("AppConfig").get();
     AppConfig appConfig = AppConfig.fromJson(
         json.decode(json.encode(snapshot.docs.first.data())));
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    PackageInfo packageInfo = await PackageManager.getPackageInfo();
     return appConfig.copyWith(currentVersion: packageInfo.version);
   }
 }

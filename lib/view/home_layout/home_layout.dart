@@ -8,13 +8,14 @@ import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
+import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
-import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 
@@ -370,8 +371,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget bottomBar(String matchedLocation) {
     final currentindex = switch (matchedLocation) {
-      HomePage.routeName => 0,
-      LeadsScreen.routeName => 1,
+      EnquiriesScreen.routeName => 0,
+      ColdLeadScreen.routeName => 1,
       ListingsScreen.routeName => 2,
       DealsScreen.routeName => 3,
       _ => 0
@@ -379,10 +380,10 @@ class _HomeScreenState extends State<HomeScreen>
     void onTap(value) {
       switch (value) {
         case 0:
-          context.goNamed(HomePage.routeName);
+          context.goNamed(EnquiriesScreen.routeName);
           return;
         case 1:
-          context.goNamed(LeadsScreen.routeName);
+          context.goNamed(ColdLeadScreen.routeName);
           return;
         case 2:
           context.goNamed(ListingsScreen.routeName);
@@ -392,24 +393,25 @@ class _HomeScreenState extends State<HomeScreen>
           return;
 
         default:
-          context.goNamed(HomePage.routeName);
+          context.goNamed(EnquiriesScreen.routeName);
           return;
       }
     }
 
     return Container(
       decoration: BoxDecoration(color: Colors.white),
+      padding: EdgeInsets.zero,
       child: Row(
         children: [
           BottomNavBarItem(
-            text: 'Tasks',
+            text: 'Enquiries',
             iconPath: 'assets/images/task.png',
             index: 0,
             onTap: onTap,
             selectedIndex: currentindex,
           ),
           BottomNavBarItem(
-            text: 'Leads',
+            text: 'Explorer',
             iconPath: 'assets/images/leads.png',
             index: 1,
             onTap: onTap,
@@ -418,18 +420,25 @@ class _HomeScreenState extends State<HomeScreen>
           Spacer(),
           BottomNavBarItem(
             text: 'Listings',
-            icon: Icons.business_outlined,
+            iconPath: 'assets/images/task.png',
             index: 2,
             onTap: onTap,
             selectedIndex: currentindex,
           ),
           BottomNavBarItem(
             text: 'Deals',
-            iconPath: 'assets/images/deal.png',
+            icon: Icons.business_outlined,
             index: 3,
             onTap: onTap,
             selectedIndex: currentindex,
           ),
+          // BottomNavBarItem(
+          //   text: 'Deals',
+          //   iconPath: 'assets/images/deal.png',
+          //   index: 3,
+          //   onTap: onTap,
+          //   selectedIndex: currentindex,
+          // ),
         ],
       ),
     );
@@ -524,7 +533,7 @@ class BottomNavBarItem extends StatelessWidget {
         Theme.of(context).textTheme.labelLarge?.copyWith(color: primaryColor);
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Container(
           decoration: selectedIndex == index
               ? BoxDecoration(

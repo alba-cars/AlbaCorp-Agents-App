@@ -26,6 +26,31 @@ class TitleText extends StatelessWidget {
   }
 }
 
+class HeadingText extends StatelessWidget {
+  const HeadingText(
+      {super.key,
+      required this.text,
+      this.color,
+      this.fontWeight,
+      this.textAlign});
+  final String text;
+  final Color? color;
+  final FontWeight? fontWeight;
+  final TextAlign? textAlign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: textAlign,
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontSize: 20,
+          fontWeight: fontWeight ?? FontWeight.w500,
+          color: color),
+    );
+  }
+}
+
 class LabelText extends StatelessWidget {
   const LabelText(
       {super.key,

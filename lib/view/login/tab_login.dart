@@ -23,8 +23,10 @@ class TabLogin extends StatefulWidget {
 }
 
 class _TabLoginState extends State<TabLogin> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController =
+      TextEditingController(text: "ismail@alba.homes");
+  TextEditingController passwordController =
+      TextEditingController(text: "1234@Abcd");
   final loginForm = GlobalKey<FormState>();
   bool isPasswordVisible = false;
 
@@ -120,14 +122,18 @@ class _TabLoginState extends State<TabLogin> {
         getVerSpace(6.h),
         defaultTextField(context, passwordController, "Your Password",
             validator: (password) {
-          if (password == null || password.isEmpty) {
-            return 'Please enter valid password';
-          }
-          return null;
-        }, suffix: true, isPass: !isPasswordVisible, suffixImage: !isPasswordVisible?"eye.svg":"eyes-closed.svg",onSuffixTap: (){
-          setState(() {
-            isPasswordVisible = !isPasswordVisible;
-          });
+              if (password == null || password.isEmpty) {
+                return 'Please enter valid password';
+              }
+              return null;
+            },
+            suffix: true,
+            isPass: !isPasswordVisible,
+            suffixImage: !isPasswordVisible ? "eye.svg" : "eyes-closed.svg",
+            onSuffixTap: () {
+              setState(() {
+                isPasswordVisible = !isPasswordVisible;
+              });
             }),
       ],
     );

@@ -14,9 +14,11 @@ import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/call_feedback_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
+import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
@@ -62,7 +64,7 @@ class AppRouter {
           if (state.matchedLocation == Routes.introRoute ||
               state.matchedLocation == Routes.homeRoute ||
               state.matchedLocation == Routes.loginRoute) {
-            return HomePage.routeName;
+            return EnquiriesScreen.routeName;
           } else if (authState.veryImportantActivities != null &&
               authState.veryImportantActivities!.isNotEmpty &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {
@@ -112,6 +114,18 @@ class AppRouter {
                     );
                   },
                   routes: [
+                    GoRoute(
+                      path: EnquiriesScreen.routeName,
+                      name: EnquiriesScreen.routeName,
+                      pageBuilder: (context, state) =>
+                          AppTransition(child: EnquiriesScreen()),
+                    ),
+                    GoRoute(
+                      path: ColdLeadScreen.routeName,
+                      name: ColdLeadScreen.routeName,
+                      pageBuilder: (context, state) =>
+                          AppTransition(child: ColdLeadScreen()),
+                    ),
                     GoRoute(
                       path: LeadsScreen.routeName,
                       name: LeadsScreen.routeName,
