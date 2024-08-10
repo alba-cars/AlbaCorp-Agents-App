@@ -9,12 +9,15 @@ import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cubit.dart';
+import 'package:real_estate_app/view/call_feedback_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/call_feedback_screen/widgets/add_lead_widget.dart';
+import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
@@ -126,7 +129,7 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                                 getIt<AuthBloc>()
                                     .add(AuthEvent.removeLastCallDetails());
                                 await Future.delayed(Durations.extralong1);
-                                context.goNamed(HomePage.routeName);
+                                context.goNamed(EnquiriesScreen.routeName);
                               })
                         ],
                       ),
@@ -159,6 +162,43 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
             if (state.checkLeadStatus == AppStatus.success &&
                 state.lead == null) {
               return AddLeadWidget();
+            }
+            if (state.checkLeadStatus == AppStatus.success &&
+                state.lead?.role == 'Agent') {
+              return Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      VerticalSmallGap(),
+                      LabelText(
+                        text:
+                            "You received a ${getIt<SharedPreferences>().getString('CallDirection')} call from an Agent.",
+                        textAlign: TextAlign.center,
+                        maxLines: 5,
+                      ),
+                      LeadCard(lead: state.lead!),
+                      VerticalSmallGap(),
+                      VerticalSmallGap(),
+                      AppPrimaryButton(
+                          text: 'Continue to App',
+                          backgroundColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          borderShow: true,
+                          borderColor: Theme.of(context).colorScheme.primary,
+                          onTap: () async {
+                            getIt<AuthBloc>()
+                                .add(AuthEvent.removeLastCallDetails());
+                            await Future.delayed(Durations.extralong1);
+                            context.goNamed(EnquiriesScreen.routeName);
+                          })
+                    ],
+                  ),
+                ),
+              );
             }
             return SingleChildScrollView(
               reverse: true,
@@ -203,6 +243,10 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                       VerticalSmallGap(
                         adjustment: 2,
                       ),
+                      ActivityListCallFeedback(),
+                      VerticalSmallGap(
+                        adjustment: 2,
+                      ),
                       BlocSelector<CallFeedbackCubit, CallFeedbackState,
                           String?>(
                         selector: (state) {
@@ -238,7 +282,7 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
 
                             await getIt<AuthBloc>().stream.firstWhere(
                                 (state) => !state.showFeedbackScreen);
-                            context.goNamed("${HomePage.routeName}");
+                            context.goNamed("${EnquiriesScreen.routeName}");
                           }
                         },
                         listenWhen: (previous, current) =>

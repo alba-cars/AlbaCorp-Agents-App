@@ -33,6 +33,7 @@ mixin _$Lead {
   String? get address => throw _privateConstructorUsedError;
   String? get nationality => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'provider_id')
   String? get providerId => throw _privateConstructorUsedError;
   String? get provider => throw _privateConstructorUsedError;
@@ -89,6 +90,7 @@ abstract class $LeadCopyWith<$Res> {
       String? address,
       String? nationality,
       String? photo,
+      String? role,
       @JsonKey(name: 'provider_id') String? providerId,
       String? provider,
       bool active,
@@ -138,6 +140,7 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
     Object? address = freezed,
     Object? nationality = freezed,
     Object? photo = freezed,
+    Object? role = freezed,
     Object? providerId = freezed,
     Object? provider = freezed,
     Object? active = null,
@@ -199,6 +202,10 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
       photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String?,
       providerId: freezed == providerId
           ? _value.providerId
@@ -326,6 +333,7 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       String? address,
       String? nationality,
       String? photo,
+      String? role,
       @JsonKey(name: 'provider_id') String? providerId,
       String? provider,
       bool active,
@@ -374,6 +382,7 @@ class __$$LeadImplCopyWithImpl<$Res>
     Object? address = freezed,
     Object? nationality = freezed,
     Object? photo = freezed,
+    Object? role = freezed,
     Object? providerId = freezed,
     Object? provider = freezed,
     Object? active = null,
@@ -435,6 +444,10 @@ class __$$LeadImplCopyWithImpl<$Res>
       photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String?,
       providerId: freezed == providerId
           ? _value.providerId
@@ -534,6 +547,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       this.address,
       this.nationality,
       this.photo,
+      this.role,
       @JsonKey(name: 'provider_id') this.providerId,
       this.provider,
       this.active = true,
@@ -587,6 +601,8 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   final String? nationality;
   @override
   final String? photo;
+  @override
+  final String? role;
   @override
   @JsonKey(name: 'provider_id')
   final String? providerId;
@@ -666,7 +682,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, modifiedBy: $modifiedBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount)';
+    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, modifiedBy: $modifiedBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount)';
   }
 
   @override
@@ -684,6 +700,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       ..add(DiagnosticsProperty('address', address))
       ..add(DiagnosticsProperty('nationality', nationality))
       ..add(DiagnosticsProperty('photo', photo))
+      ..add(DiagnosticsProperty('role', role))
       ..add(DiagnosticsProperty('providerId', providerId))
       ..add(DiagnosticsProperty('provider', provider))
       ..add(DiagnosticsProperty('active', active))
@@ -726,6 +743,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
             (identical(other.nationality, nationality) ||
                 other.nationality == nationality) &&
             (identical(other.photo, photo) || other.photo == photo) &&
+            (identical(other.role, role) || other.role == role) &&
             (identical(other.providerId, providerId) ||
                 other.providerId == providerId) &&
             (identical(other.provider, provider) ||
@@ -779,6 +797,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
         address,
         nationality,
         photo,
+        role,
         providerId,
         provider,
         active,
@@ -827,6 +846,7 @@ abstract class _Lead implements Lead {
       final String? address,
       final String? nationality,
       final String? photo,
+      final String? role,
       @JsonKey(name: 'provider_id') final String? providerId,
       final String? provider,
       final bool active,
@@ -876,6 +896,8 @@ abstract class _Lead implements Lead {
   String? get nationality;
   @override
   String? get photo;
+  @override
+  String? get role;
   @override
   @JsonKey(name: 'provider_id')
   String? get providerId;

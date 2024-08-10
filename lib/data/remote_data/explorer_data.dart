@@ -530,4 +530,22 @@ class ExplorerData implements ExplorerRepo {
       return onError(e, stack, log);
     }
   }
+
+  @override
+  Future<Result<String>> convertPropertyCardToListing(
+      {required String propertyCardId,
+      required Map<String, dynamic> values}) async {
+    try {
+      String url =
+          'v1/property-cards/pocket-listing/${propertyCardId}/to-listing-acquired';
+
+      final res = await _dio.patch(url, data: values);
+
+      return Success(
+        res.data['id'],
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
 }

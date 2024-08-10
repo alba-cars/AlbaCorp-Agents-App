@@ -24,5 +24,7 @@ class PropertyCardDetailsState with _$PropertyCardDetailsState {
     String? checkInError,
     @Default(AppStatus.init) AppStatus checkOutLeadStatus,
     String? checkOutLeadError,
+    @Default(AppStatus.init) AppStatus convertToListingAquiredStatus,
+    String? convertToListingAquiredError,
   }) = _PropertyCardDetailsState;
 }
