@@ -50,4 +50,6 @@ abstract class ExplorerRepo {
       {required Map<String, dynamic> values});
   Future<Result<List<CommunityTeamModel>>> getCommunityTeams(
       {required String agentId});
+  Future<Result<String>> convertPropertyCardToListing(
+      {required String propertyCardId, required Map<String, dynamic> values});
 }

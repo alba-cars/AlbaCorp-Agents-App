@@ -104,6 +104,11 @@ class AppRouter {
                 AppTransition(child: RootLayout(child: child)),
             routes: [
               ShellRoute(
+                  redirect: (context, state) {
+                    return state.matchedLocation == '/'
+                        ? EnquiriesScreen.routeName
+                        : null;
+                  },
                   pageBuilder: (context, state, widget) {
                     print(state.matchedLocation);
                     return AppTransition(
@@ -152,11 +157,11 @@ class AppRouter {
                     ),
                   ]),
               GoRoute(
-                path: '${HomePage.routeName}/:id/:index',
+                path: '${HomePage.routeName}/:id',
                 name: LeadDetailScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  final index = state.pathParameters['index'] ?? '';
+                  final index = state.uri.queryParameters['index'] ?? '0';
                   return AppTransition(
                     child: LeadDetailScreen(
                       leadId: id,

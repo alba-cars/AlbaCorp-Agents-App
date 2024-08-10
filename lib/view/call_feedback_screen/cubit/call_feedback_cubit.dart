@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/remote_data/pending_call_feedback_repo.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
@@ -37,8 +38,11 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
     }
 
     if (number != null && number != 'IPHONE' && number != 'Unknown') {
-      final result =
-          await _leadRepo.getLeadByPhone(phone: number.replaceAll('+', ''));
+      String validatedNumber = number.replaceAll('+', '');
+      if (validatedNumber.startsWith('0')) {
+        validatedNumber = validatedNumber.replaceFirst('0', '');
+      }
+      final result = await _leadRepo.getLeadByPhone(phone: validatedNumber);
       switch (result) {
         case (Success<Lead?> s):
           emit(state.copyWith(
@@ -78,6 +82,7 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
     final result = await _leadRepo.addLead(lead: {'role': "User", ...val});
     switch (result) {
       case (Success s):
+        Logger().d(s.value);
         emit(state.copyWith(lead: s.value, addLeadStatus: AppStatus.success));
         getLeadActivities();
         break;

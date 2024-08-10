@@ -40,6 +40,7 @@ class Lead with _$Lead {
     String? address,
     String? nationality,
     String? photo,
+    String? role,
     @JsonKey(name: 'provider_id') String? providerId,
     String? provider,
     @Default(true) bool active,

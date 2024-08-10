@@ -6,9 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
+import 'package:real_estate_app/view/lead_detail_screen/widgets/activity_list.dart';
+import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
@@ -76,6 +79,35 @@ class AboutTabView extends StatelessWidget {
                                   color: colorScheme.errorContainer),
                               child: SmallText(text: 'DND'),
                             ),
+                          IconButton(
+                              // style: IconButton.styleFrom(
+                              //     backgroundColor: Colors.red[100]),
+                              onPressed: () async {
+                                final result = await context
+                                    .read<LeadDetailCubit>()
+                                    .updateLead({"lead_status": "Prospect"});
+                                if (result) {
+                                  showSnackbar(
+                                      context,
+                                      'Successfully marked as prospect',
+                                      SnackBarType.success);
+                                } else {
+                                  final error = context
+                                      .read<LeadDetailCubit>()
+                                      .state
+                                      .updateLeadError;
+                                  showSnackbar(
+                                      context,
+                                      error ?? 'Failed to mark as prospect',
+                                      SnackBarType.failure);
+                                }
+                              },
+                              icon: Icon(
+                                lead.leadStatus == LeadStatus.Prospect
+                                    ? CupertinoIcons.heart_fill
+                                    : CupertinoIcons.heart,
+                                color: Colors.red,
+                              ))
                         ],
                       ),
                       VerticalSmallGap(),
@@ -95,6 +127,9 @@ class AboutTabView extends StatelessWidget {
                               text: lead.email == null ||
                                       lead.email?.contains(
                                               'generated@alba.homes') ==
+                                          true ||
+                                      lead.email?.contains(
+                                              '@generated.alba.homes') ==
                                           true
                                   ? "N/A"
                                   : lead.email ?? '',
@@ -163,33 +198,6 @@ class AboutTabView extends StatelessWidget {
                           )
                         ],
                       ),
-                      if (lead.leadStatus == LeadStatus.FollowUp) ...[
-                        VerticalSmallGap(),
-                        Align(
-                            alignment: Alignment.center,
-                            child: AppPrimaryButton(
-                                text: 'Mark it as Prospect',
-                                onTap: () async {
-                                  final result = await context
-                                      .read<LeadDetailCubit>()
-                                      .updateLead({"lead_status": "Prospect"});
-                                  if (result) {
-                                    showSnackbar(
-                                        context,
-                                        'Successfully marked as prospect',
-                                        SnackBarType.success);
-                                  } else {
-                                    final error = context
-                                        .read<LeadDetailCubit>()
-                                        .state
-                                        .updateLeadError;
-                                    showSnackbar(
-                                        context,
-                                        error ?? 'Failed to mark as prospect',
-                                        SnackBarType.failure);
-                                  }
-                                }))
-                      ],
                       if (lead.leadStatus == LeadStatus.Viewing) ...[
                         VerticalSmallGap(),
                         Align(
@@ -215,6 +223,19 @@ class AboutTabView extends StatelessWidget {
                       ]
                     ],
                   ),
+                ),
+                VerticalSmallGap(
+                  adjustment: 2,
+                ),
+                BlocSelector<LeadDetailCubit, LeadDetailState, List<Activity>>(
+                  selector: (state) {
+                    return state.activities;
+                  },
+                  builder: (context, activities) {
+                    return ActivityListLeadDetail(
+                        activities: activities.sublist(
+                            0, activities.length > 5 ? 5 : activities.length));
+                  },
                 ),
                 VerticalSmallGap(
                   adjustment: 2,

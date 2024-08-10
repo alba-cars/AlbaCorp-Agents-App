@@ -9,9 +9,11 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
@@ -65,7 +67,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen>
         context.read<AuthBloc>().state.veryImportantActivities;
     if (veryImportantActivities == null ||
         veryImportantActivities.isEmpty == true) {
-      context.goNamed(home.HomePage.routeName);
+      context.goNamed(EnquiriesScreen.routeName);
       return true;
     }
     return super.didPopRoute();
@@ -115,7 +117,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.goNamed(home.HomePage.routeName);
+                      context.goNamed(EnquiriesScreen.routeName);
                     }
                   },
                   icon: Icon(Icons.arrow_back));
@@ -332,7 +334,6 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                               .routeName,
                                                           pathParameters: {
                                                             "id": task.lead!.id,
-                                                            "index": "0"
                                                           });
                                                     },
                                                   ))
@@ -534,6 +535,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                               'id': task.lead
                                                                       ?.id ??
                                                                   "",
+                                                            },
+                                                            queryParameters: {
                                                               'index': "1"
                                                             });
                                                       },
