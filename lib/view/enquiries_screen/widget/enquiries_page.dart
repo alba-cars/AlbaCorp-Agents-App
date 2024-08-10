@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/paginator.dart';
+import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/enquiries_screen/cubit/enquiries_cubit.dart';
-import 'package:real_estate_app/view/enquiries_screen/cubit/enquiries_state.dart';
 import 'package:real_estate_app/widgets/button.dart';
 
 import '../../../widgets/tab_bar.dart';
@@ -50,17 +51,37 @@ class _EnquiriesPageState extends State<EnquiriesPage>
           ),
           BlocBuilder<EnquiriesCubit, EnquiriesState>(
             builder: (context, state) {
-              return Container(
-                child: state.maybeWhen(
-                    loading: () => SizedBox(
-                        height: 24,
-                        width: 24,
-                        child: CircularProgressIndicator()),
-                    error: (errorMessage) => showError(context, errorMessage),
-                    loaded: (activities, paginator) =>
-                        showActivities(context, activities, paginator),
-                    orElse: () => showError(context, "Error loading data")),
-              );
+              TaskFilterEnum taskFilterEnum = TaskFilterEnum.values[tabIndex];
+              AppStatus? appStatus = state.fetchStatus[taskFilterEnum];
+              Paginator? currentPaginator = state.paginator[taskFilterEnum];
+              if (currentPaginator == null) {
+                // First load with  out pagination
+                Logger().d("Status : $appStatus");
+                switch (appStatus) {
+                  case AppStatus.success:
+                    return showActivities(
+                        context,
+                        state.activities[taskFilterEnum] ?? [],
+                        currentPaginator,
+                        appStatus);
+                  case AppStatus.failure:
+                    return showError(
+                        context,
+                        state.error[taskFilterEnum] ??
+                            'Unexpected error happened');
+                  case AppStatus.loading:
+                    return CircularProgressIndicator();
+                  default:
+                    return SizedBox();
+                }
+              } else {
+                // For pagination show existing list
+                return showActivities(
+                    context,
+                    state.activities[taskFilterEnum] ?? [],
+                    currentPaginator,
+                    appStatus);
+              }
             },
           ),
         ],
@@ -71,17 +92,14 @@ class _EnquiriesPageState extends State<EnquiriesPage>
   loadData(
     BuildContext context,
   ) {
-    if (tabIndex == 0) {
-      context.read<EnquiriesCubit>().fetchFreshEnquiries();
-    } else if (tabIndex == 1) {
-      context.read<EnquiriesCubit>().fetchFollowUpEnquiries();
-    } else if (tabIndex == 2) {
-      context.read<EnquiriesCubit>().fetchFavouritesEnquiries();
-    }
+    context
+        .read<EnquiriesCubit>()
+        .fetchHoteads(TaskFilterEnum.values[tabIndex], paginator: null);
   }
 
-  Widget showActivities(
-      BuildContext context, List<Activity> activities, Paginator? paginator) {
+  Widget showActivities(BuildContext context, List<Activity> activities,
+      Paginator? paginator, AppStatus? appStatus) {
+    Logger().d("No of activitiess : ${activities.length}");
     if (activities.length == 0) {
       return Column(
         children: [
@@ -98,14 +116,27 @@ class _EnquiriesPageState extends State<EnquiriesPage>
           bool isScrollEnd = scrollInfo.metrics.pixels >=
               0.9 * scrollInfo.metrics.maxScrollExtent;
           if (isScrollEnd && (paginator?.hasNextPage ?? false)) {
-            context.read<EnquiriesCubit>().fetchMoreEnquiries(paginator!);
+            Logger().d("Paginator is executing");
+            context.read<EnquiriesCubit>().fetchHoteads(
+                TaskFilterEnum.values[tabIndex],
+                paginator: paginator);
           }
           return true;
         },
         child: ListView.separated(
             shrinkWrap: true,
             itemBuilder: (_, pos) {
-              if (pos == activities.length) {}
+              if (pos == activities.length) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                        height: 40,
+                        width: 40,
+                        child: CircularProgressIndicator()),
+                  ],
+                );
+              }
               Activity activity = activities[pos];
               "${activity.lead?.firstName ?? ""} ${activity.lead?.lastName ?? ""}";
               return ActivityListItem(
@@ -120,7 +151,10 @@ class _EnquiriesPageState extends State<EnquiriesPage>
             separatorBuilder: (_, __) => SizedBox(
                   height: 8,
                 ),
-            itemCount: activities.length),
+            itemCount: appStatus == AppStatus.loading &&
+                    (paginator?.hasNextPage ?? false)
+                ? activities.length + 1
+                : activities.length),
       ),
     );
   }

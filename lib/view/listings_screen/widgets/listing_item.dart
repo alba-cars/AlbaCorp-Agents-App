@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
 import '../../../app/call_bloc/call_bloc.dart';
@@ -11,6 +13,7 @@ import '../../../model/property_model.dart';
 import '../../../util/color_category.dart';
 import '../../../util/property_price.dart';
 import '../../../widgets/s3_image.dart';
+import '../../../widgets/snackbar.dart';
 import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 import '../../listing_detail_screen/listing_detail_screen.dart';
@@ -225,24 +228,59 @@ class ListingItem extends StatelessWidget {
                       ),
                     ),
                     if (listing.agent?.id != getIt<AuthBloc>().state.agent?.id)
-                      IconButton.filledTonal(
-                          style: IconButton.styleFrom(
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.primary,
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.onPrimary),
-                          onPressed: () async {
-                            final number = listing
-                                .agent?.user.userPBXNumbers?.publicNumber;
-                            if (number != null) {
-                              getIt<CallBloc>().add(CallEvent.clickToCall(
-                                phoneNumber: number,
-                              ));
-                            }
-                          },
-                          icon: Icon(
-                            Icons.call,
-                          ))
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton.filledTonal(
+                              style: IconButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  foregroundColor:
+                                      Theme.of(context).colorScheme.onPrimary),
+                              onPressed: () async {
+                                String? phoneNumber = listing.agent?.user.phone;
+                                if (phoneNumber == null) {
+                                  showSnackbar(
+                                      context,
+                                      'Can not launch the app',
+                                      SnackBarType.failure);
+                                  return;
+                                }
+                                Logger().d(phoneNumber);
+                                if (await canLaunchUrlString(
+                                    "https://wa.me/${phoneNumber}/?text=${getWhatsAppMessageText(listing)}")) {
+                                  launchUrlString(
+                                      "https://wa.me/$phoneNumber/?text=${getWhatsAppMessageText(listing)}");
+                                } else {
+                                  showSnackbar(
+                                      context,
+                                      'Can not launch the app',
+                                      SnackBarType.failure);
+                                }
+                              },
+                              icon: ImageIcon(
+                                  AssetImage('assets/images/whatsapp.png'))),
+                          HorizontalSmallGap(),
+                          IconButton.filledTonal(
+                              style: IconButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  foregroundColor:
+                                      Theme.of(context).colorScheme.onPrimary),
+                              onPressed: () async {
+                                final number = listing
+                                    .agent?.user.userPBXNumbers?.publicNumber;
+                                if (number != null) {
+                                  getIt<CallBloc>().add(CallEvent.clickToCall(
+                                    phoneNumber: number,
+                                  ));
+                                }
+                              },
+                              icon: Icon(
+                                Icons.call,
+                              )),
+                        ],
+                      )
                   ],
                 ),
               )
@@ -251,5 +289,9 @@ class ListingItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getWhatsAppMessageText(Property? propertyCard) {
+    return "Hey ${propertyCard?.agent?.user.firstName ?? ""}, \n I want to enquire about this property ${propertyCard?.propertyTitle ?? ""} on ${propertyCard?.buildingName ?? ""}, ${propertyCard?.communityName ?? ""}";
   }
 }

@@ -5,7 +5,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/model/property_card_details_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -17,7 +19,9 @@ import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:recase/recase.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../app/call_bloc/call_bloc.dart';
 import '../../widgets/fields/attachment_field.dart';
 import '../../widgets/fields/currency_field.dart';
 import '../../widgets/fields/multi_image_field.dart';
@@ -415,6 +419,110 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                       ],
                     ),
                   ),
+                  VerticalSmallGap(),
+                  if ((propertyCard?.currentAgent is Map) &&
+                      (propertyCard?.currentAgent?["_id"] !=
+                          getIt<AuthBloc>().state.agent?.id))
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withOpacity(.5)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(shape: BoxShape.circle),
+                              child: S3Image(
+                                url: propertyCard?.currentAgent["userId"]
+                                        ?["photo"] ??
+                                    '',
+                              ),
+                            ),
+                            HorizontalSmallGap(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SmallText(text: 'Agent'),
+                                LabelText(
+                                    text:
+                                        "${propertyCard?.currentAgent["userId"]["first_name"] ?? ''} ${propertyCard?.currentAgent["userId"]["last_name"] ?? ''}"),
+                              ],
+                            ),
+                            Spacer(),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton.filledTonal(
+                                    style: IconButton.styleFrom(
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        foregroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary),
+                                    onPressed: () async {
+                                      var createdBy = propertyCard?.createdBy;
+                                      if (createdBy == null) {
+                                        showSnackbar(
+                                            context,
+                                            'Phone number not available',
+                                            SnackBarType.failure);
+                                      }
+                                      String phoneNumber = createdBy.phone
+                                          ?.replaceFirst("+", "");
+                                      Logger().d(phoneNumber);
+                                      if (await canLaunchUrlString(
+                                          "https://wa.me/${phoneNumber}/?text=${getWhatsAppMessageText(propertyCard)}")) {
+                                        launchUrlString(
+                                            "https://wa.me/$phoneNumber/?text=${getWhatsAppMessageText(propertyCard)}");
+                                      } else {
+                                        showSnackbar(
+                                            context,
+                                            'Can not launch the app',
+                                            SnackBarType.failure);
+                                      }
+                                    },
+                                    icon: ImageIcon(AssetImage(
+                                        'assets/images/whatsapp.png'))),
+                                HorizontalSmallGap(),
+                                IconButton.filledTonal(
+                                    style: IconButton.styleFrom(
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        foregroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary),
+                                    onPressed: () async {
+                                      final number = propertyCard
+                                              ?.currentAgent?["user"]
+                                          ["userPBXNumbers"]["publicNumber"];
+                                      if (number != null) {
+                                        getIt<CallBloc>()
+                                            .add(CallEvent.clickToCall(
+                                          phoneNumber: number,
+                                        ));
+                                      }
+                                    },
+                                    icon: Icon(
+                                      Icons.call,
+                                    ))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   VerticalSmallGap(),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
@@ -1100,5 +1208,9 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getWhatsAppMessageText(PropertyCardDetailsModel? propertyCard) {
+    return "Hey ${propertyCard?.currentAgent["userId"]["first_name"] ?? ""}, \n I want to enquire about this property on ${propertyCard?.building?.name ?? ""}, ${propertyCard?.community?.community ?? ""} under ${propertyCard?.status} for ${propertyCard?.purpose ?? ""}";
   }
 }

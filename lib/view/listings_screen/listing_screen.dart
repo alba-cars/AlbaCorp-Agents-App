@@ -7,9 +7,11 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/constants/listing_status_color.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/paginator.dart';
@@ -30,12 +32,14 @@ import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/tab_bar.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../util/constant.dart';
 import '../../util/status.dart';
 import '../../widgets/button.dart';
 import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/search_bar.dart';
+import '../../widgets/snackbar.dart';
 import '../deal_details_screen/widgets/info_label_value.dart';
 
 class ListingsScreen extends StatelessWidget {
@@ -742,6 +746,43 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                                           .colorScheme
                                                           .onPrimary),
                                               onPressed: () async {
+                                                var createdBy =
+                                                    propertyCard.currentAgent;
+                                                Logger().d(createdBy);
+                                                if (createdBy == null) {
+                                                  showSnackbar(
+                                                      context,
+                                                      'Phone number not available',
+                                                      SnackBarType.failure);
+                                                }
+                                                String phoneNumber =
+                                                    createdBy["userId"]["phone"]
+                                                        ?.replaceFirst("+", "");
+                                                Logger().d(phoneNumber);
+                                                if (await canLaunchUrlString(
+                                                    "https://wa.me/${phoneNumber}/?text=${getWhatsAppMessageText(propertyCard)}")) {
+                                                  launchUrlString(
+                                                      "https://wa.me/$phoneNumber/?text=${getWhatsAppMessageText(propertyCard)}");
+                                                } else {
+                                                  showSnackbar(
+                                                      context,
+                                                      'Can not launch the app',
+                                                      SnackBarType.failure);
+                                                }
+                                              },
+                                              icon: ImageIcon(AssetImage(
+                                                  'assets/images/whatsapp.png'))),
+                                          IconButton.filledTonal(
+                                              style: IconButton.styleFrom(
+                                                  backgroundColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .primary,
+                                                  foregroundColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimary),
+                                              onPressed: () async {
                                                 final number =
                                                     propertyCard.currentAgent?[
                                                                 "user"]
@@ -780,5 +821,9 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
         ],
       ),
     );
+  }
+
+  String getWhatsAppMessageText(PropertyCard? propertyCard) {
+    return "Hey ${propertyCard?.currentAgent["userId"]["first_name"] ?? ""}, \n I want to enquire about this property on ${propertyCard?.building?.name ?? ""}, ${propertyCard?.community?.community ?? ""} under ${propertyCard?.status} for ${propertyCard?.purpose ?? ""}";
   }
 }

@@ -1,106 +1,106 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
-import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/result.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'enquiries_state.dart';
+import 'package:real_estate_app/model/paginator.dart';
+import 'package:real_estate_app/util/paginator.dart';
+import '../../../util/status.dart';
+import '../../cold_lead_screen/cubit/cold_lead_cubit.dart';
+part 'enquiries_state.dart';
+part 'enquiries_cubit.freezed.dart';
 
 @injectable
 class EnquiriesCubit extends Cubit<EnquiriesState> {
-  EnquiriesCubit({required this.activityRepo})
-      : super(EnquiriesState.initial());
+  EnquiriesCubit({required this.activityRepo}) : super(EnquiriesState());
 
   final ActivityRepo activityRepo;
 
-  //  Enquiries are the one which are marked as hot leads in the system based on the leadsource we get the data
-  fetchFreshEnquiries({Paginator? paginator}) async {
-    // Fetching hot fresh leads
+  fetchHoteads(TaskFilterEnum filterType, {Paginator? paginator}) async {
+    try {
+      if (paginator == null) {
+        var fetchStatus = {...state.fetchStatus};
+        fetchStatus[filterType] = AppStatus.loading;
+        emit(state.copyWith(
+            fetchStatus: fetchStatus,
+            paginator: {...state.paginator, filterType: null}));
+      }
 
-    if (paginator == null) {
-      emit(EnquiriesState.loading());
-    }
-    final Result<List<Activity>> result = await activityRepo
-        .fetchActivitiesSorted(
-            filter: {"leadSourceType": "hot", "leadStatus": "Fresh"},
-            paginator: paginator);
-    switch (result) {
-      case (Success<List<Activity>> success):
-        _handleEnquiriesFetchSuccess(success.value, success.paginator);
-        break;
-      case (Error error):
-        _handleEnquiriesFetchError(error.exception);
-        break;
-    }
-  }
+      final Result<List<Activity>> result =
+          await activityRepo.fetchActivitiesSorted(
+              filter: getPayload(filterType), paginator: paginator);
 
-  fetchFollowUpEnquiries() async {
-    // Fetching hot follow ups
-    emit(EnquiriesState.loading());
-
-    DateTime d = DateTime.now();
-    final Result<List<Activity>> result =
-        await activityRepo.fetchActivitiesSorted(filter: {
-      "leadSourceType": 'hot',
-      "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
-      "status": [
-        "Pending",
-      ],
-      "toDate": '${d.year}-${d.month}-${d.day}',
-    });
-
-    switch (result) {
-      case (Success<List<Activity>> success):
-        _handleEnquiriesFetchSuccess(success.value, success.paginator);
-        break;
-      case (Error error):
-        _handleEnquiriesFetchError(error.exception);
-        break;
+      switch (result) {
+        case (Success<List<Activity>> success):
+          Logger().d("On success scenario");
+          _handleEnquiriesFetchSuccess(
+              success.value, success.paginator, filterType);
+          break;
+        case (Error error):
+          Logger().d("On failure scenario");
+          _handleEnquiriesFetchError(error.exception, filterType);
+          break;
+      }
+    } catch (e) {
+      Logger().e(e);
+      _handleEnquiriesFetchError("Something went wrong", filterType);
     }
   }
 
-  fetchFavouritesEnquiries() async {
-    // Fetching hot prospect
-    emit(EnquiriesState.loading());
-    final Result<List<Activity>> result = await activityRepo
-        .fetchActivitiesSorted(
-            filter: {"leadSourceType": "hot", "leadStatus": "Prospect"});
-    switch (result) {
-      case (Success<List<Activity>> success):
-        _handleEnquiriesFetchSuccess(success.value, success.paginator);
-        break;
-      case (Error error):
-        _handleEnquiriesFetchError(error.exception);
-        break;
+  Map<String, dynamic> getPayload(TaskFilterEnum filterType) {
+    switch (filterType) {
+      case TaskFilterEnum.New:
+        return {"leadSourceType": "hot", "leadStatus": "Fresh"};
+      case TaskFilterEnum.FollowUp:
+        DateTime d = DateTime.now();
+        return {
+          "leadSourceType": 'hot',
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
+          "status": [
+            "Pending",
+          ],
+          "toDate": '${d.year}-${d.month}-${d.day}',
+        };
+      case TaskFilterEnum.Favourites:
+        return {"leadSourceType": "hot", "leadStatus": "Prospect"};
     }
   }
 
-  Future<void> fetchMoreEnquiries(Paginator paginator) async {
-    final Result<List<Activity>> result =
-        await activityRepo.fetchActivitiesSorted(
-      filter: {"leadSourceType": "hot", "leadStatus": "Fresh"},
-      paginator: paginator,
-    );
-    switch (result) {
-      case Success<List<Activity>> success:
-        _handleEnquiriesFetchSuccess(
-          success.value,
-          success.paginator,
-        );
-        break;
-      case Error error:
-        _handleEnquiriesFetchError(error.exception);
-        break;
+  void _handleEnquiriesFetchSuccess(List<Activity> activities,
+      Paginator? paginator, TaskFilterEnum filterType) {
+    var fetchStatus = {...state.fetchStatus};
+    fetchStatus[filterType] = AppStatus.success;
+
+    var currentPaginator = {...state.paginator};
+    currentPaginator[filterType] = paginator;
+
+    var currentActivities = {...state.activities};
+    if (paginator?.hasNextPage ?? false) {
+      Logger().d("Appending the  activities");
+      currentActivities[filterType]?.addAll(activities);
+    } else {
+      currentActivities[filterType] = activities;
     }
+
+    Logger().d("Going to emit the success fetch status");
+
+    emit(state.copyWith(
+        fetchStatus: fetchStatus,
+        paginator: currentPaginator,
+        activities: currentActivities));
   }
 
-  void _handleEnquiriesFetchSuccess(
-      List<Activity> activities, Paginator? paginator) {
-    emit(EnquiriesState.loaded(activities: activities));
-  }
+  void _handleEnquiriesFetchError(String exception, TaskFilterEnum filterType) {
+    var fetchStatus = {...state.fetchStatus};
+    fetchStatus[filterType] = AppStatus.failure;
 
-  void _handleEnquiriesFetchError(String exception) {
-    emit(EnquiriesState.error(errorMessage: exception));
+    var currentErrorMessage = {...state.error};
+    currentErrorMessage[filterType] = exception;
+    Logger()
+        .d("Going to emit the errror status with message $currentErrorMessage");
+    emit(state.copyWith(fetchStatus: fetchStatus, error: currentErrorMessage));
   }
 }

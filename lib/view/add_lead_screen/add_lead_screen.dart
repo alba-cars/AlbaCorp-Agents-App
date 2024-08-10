@@ -9,7 +9,6 @@ import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/add_lead_screen/cubit/add_lead_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/phone_number_field.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -41,8 +40,8 @@ class _AddLeadScreenLayout extends StatefulWidget {
 
 class _TryState extends State<_AddLeadScreenLayout> {
   late final List<GlobalKey<FormBuilderState>> _formKey =
-      List.generate(3, (index) => GlobalKey());
-  late final List<Key> _stepKey = List.generate(3, (index) => ValueKey(index));
+      List.generate(2, (index) => GlobalKey());
+  late final List<Key> _stepKey = List.generate(2, (index) => ValueKey(index));
 
   late List<Widget> _steps = [
     _step1(),
@@ -60,6 +59,7 @@ class _TryState extends State<_AddLeadScreenLayout> {
           return state.currentTab;
         },
         builder: (context, currentStep) {
+          Logger().d("Current Step: $currentStep");
           final previousStep = context.read<AddLeadCubit>().state.previousTab;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
@@ -334,6 +334,7 @@ class _TryState extends State<_AddLeadScreenLayout> {
                 return MapEntry(key, rawVal);
               },
             );
+
             context.read<AddLeadCubit>().setFormValues(values: rawVal);
           },
           child: SingleChildScrollView(
@@ -361,13 +362,8 @@ class _TryState extends State<_AddLeadScreenLayout> {
                 SizedBox(height: 16),
                 AppTextField(
                   isRequired: true,
-                  name: 'first_name',
-                  label: 'First Name',
-                ),
-                SizedBox(height: 16),
-                AppTextField(
-                  name: 'last_name',
-                  label: 'Last Name',
+                  name: 'name',
+                  label: 'Name',
                 ),
                 SizedBox(height: 16),
                 AppTextField(

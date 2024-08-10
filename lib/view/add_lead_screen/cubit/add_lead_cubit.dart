@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:country_state_city/country_state_city.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 
@@ -31,9 +32,20 @@ class AddLeadCubit extends Cubit<AddLeadState> {
 
   Future<void> addLead() async {
     emit(state.copyWith(addLeadStatus: AppStatus.loadingMore));
+    Logger().d("Reached form submission");
+    Map<String, dynamic> data = {...state.val};
+    String name = data["name"];
+    String firstName = name.split(" ").first;
+    String lastName = "";
+    if (name.split(" ").length > 1) {
+      lastName = name.split(" ").sublist(1).join(" ");
+    }
+    Logger().d("First name $firstName and last name is $lastName");
+    data["first_name"] = firstName;
+    data["last_name"] = lastName;
 
-    final result =
-        await _leadRepo.addLead(lead: {'role': "User", ...state.val});
+    Logger().d(data);
+    final result = await _leadRepo.addLead(lead: {'role': "User", ...data});
     switch (result) {
       case (Success s):
         emit(state.copyWith(lead: s.value, addLeadStatus: AppStatus.success));
@@ -62,7 +74,7 @@ class AddLeadCubit extends Cubit<AddLeadState> {
     emit(state.copyWith(
       step1Values: state.currentTab == 0 ? values : state.step1Values,
       step2Values: state.currentTab == 1 ? values : state.step2Values,
-      step3Values: state.currentTab == 2 ? values : state.step3Values,
+      // step3Values: state.currentTab == 2 ? values : state.step3Values,
     ));
   }
 

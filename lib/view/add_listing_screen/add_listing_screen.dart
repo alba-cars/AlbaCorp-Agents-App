@@ -336,7 +336,14 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
               WrapSelectField(
                   name: 'contractValidity',
                   label: 'Duration of Contract',
-                  values: ['1 Month', '3 Months', '6 Months'],
+                  values: [
+                    '1 Month',
+                    '3 Months',
+                    '6 Months',
+                    '9 Months',
+                    '1 Year',
+                    'Over a year'
+                  ],
                   isRequired: true),
               WrapSelectField(
                   name: 'furnishing',
@@ -370,10 +377,6 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                         .toLowerCase()
                         .contains(v.text.toLowerCase()));
                   }),
-              AppTextField(
-                name: 'subCommunity',
-                label: 'Sub Community',
-              ),
               AppAutoComplete<Building>(
                   controller: _controller,
                   name: 'building_id',
@@ -396,37 +399,37 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                             .contains(v.text.toLowerCase())) &&
                         (element.communityId == val['community_id']));
                   }),
-              BlocSelector<AddListingCubit, AddListingState, List<Amenity>>(
-                selector: (state) {
-                  return state.amenityList;
-                },
-                builder: (context, amenityList) {
-                  return MultiSelectAutoCompleteField(
-                    label: 'Amenities',
-                    name: "amenities",
-                    displayStringForOption: (option) =>
-                        option['label']?.toString() ?? '',
-                    optionsBuilder: (v) async {
-                      var list = amenityList
-                          .map((e) => {'label': e.amenity, 'value': e.id})
-                          .toList();
-                      if (v.text.trim().isNotEmpty) {
-                        list = list
-                            .where((e) => e["label"]
-                                .toString()
-                                .toLowerCase()
-                                .contains(v.text.toString()))
-                            .toList();
-                      }
+              // BlocSelector<AddListingCubit, AddListingState, List<Amenity>>(
+              //   selector: (state) {
+              //     return state.amenityList;
+              //   },
+              //   builder: (context, amenityList) {
+              //     return MultiSelectAutoCompleteField(
+              //       label: 'Amenities',
+              //       name: "amenities",
+              //       displayStringForOption: (option) =>
+              //           option['label']?.toString() ?? '',
+              //       optionsBuilder: (v) async {
+              //         var list = amenityList
+              //             .map((e) => {'label': e.amenity, 'value': e.id})
+              //             .toList();
+              //         if (v.text.trim().isNotEmpty) {
+              //           list = list
+              //               .where((e) => e["label"]
+              //                   .toString()
+              //                   .toLowerCase()
+              //                   .contains(v.text.toString()))
+              //               .toList();
+              //         }
 
-                      return list;
-                    },
-                    valueTransformer: (p0) {
-                      return p0?.map((e) => e['value']).toList();
-                    },
-                  );
-                },
-              ),
+              //         return list;
+              //       },
+              //       valueTransformer: (p0) {
+              //         return p0?.map((e) => e['value']).toList();
+              //       },
+              //     );
+              //   },
+              // ),
               DropDownfield(
                 label: 'Vacancy',
                 items: ['Vacant', 'Tenanted'],
@@ -493,12 +496,12 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   });
                 },
               ),
-              CommissionField(
-                name: 'agreedCommission',
-                isRequired: true,
-                price: val['price'],
-                commissionPercentage: val['agreedCommission'],
-              ),
+              // CommissionField(
+              //   name: 'agreedCommission',
+              //   isRequired: true,
+              //   price: val['price'],
+              //   commissionPercentage: val['agreedCommission'],
+              // ),
               VerticalSmallGap(
                 adjustment: 0.3,
               ),

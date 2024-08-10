@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -13,9 +14,13 @@ import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/listing_detail_screen/cubit/listing_detail_cubit.dart';
 import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
+import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../app/auth_bloc/auth_bloc.dart';
+import '../../app/call_bloc/call_bloc.dart';
 import '../../util/status.dart';
 
 class ListingDetailsScreen extends StatelessWidget {
@@ -179,20 +184,88 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                         ),
                         VerticalSmallGap(),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              height: 60,
-                              width: 60,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(shape: BoxShape.circle),
-                              child: S3Image(
-                                url: listing.agent?.user.photo,
-                              ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  height: 60,
+                                  width: 60,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration:
+                                      BoxDecoration(shape: BoxShape.circle),
+                                  child: S3Image(
+                                    url: listing.agent?.user.photo,
+                                  ),
+                                ),
+                                HorizontalSmallGap(),
+                                LabelText(
+                                    text:
+                                        "${listing.agent?.user.firstName ?? ''} ${listing.agent?.user.lastName ?? ''}"),
+                              ],
                             ),
-                            HorizontalSmallGap(),
-                            LabelText(
-                                text:
-                                    "${listing.agent?.user.firstName ?? ''} ${listing.agent?.user.lastName ?? ''}")
+                            if (listing.agent?.id !=
+                                getIt<AuthBloc>().state.agent?.id)
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton.filledTonal(
+                                      style: IconButton.styleFrom(
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          foregroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary),
+                                      onPressed: () async {
+                                        String? phoneNumber =
+                                            listing.agent?.user.phone;
+                                        if (phoneNumber == null) {
+                                          showSnackbar(
+                                              context,
+                                              'Can not launch the app',
+                                              SnackBarType.failure);
+                                          return;
+                                        }
+                                        Logger().d(phoneNumber);
+                                        if (await canLaunchUrlString(
+                                            "https://wa.me/${phoneNumber}/?text=${getWhatsAppMessageText(listing)}")) {
+                                          launchUrlString(
+                                              "https://wa.me/$phoneNumber/?text=${getWhatsAppMessageText(listing)}");
+                                        } else {
+                                          showSnackbar(
+                                              context,
+                                              'Can not launch the app',
+                                              SnackBarType.failure);
+                                        }
+                                      },
+                                      icon: ImageIcon(AssetImage(
+                                          'assets/images/whatsapp.png'))),
+                                  HorizontalSmallGap(),
+                                  IconButton.filledTonal(
+                                      style: IconButton.styleFrom(
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          foregroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary),
+                                      onPressed: () async {
+                                        final number = listing.agent?.user
+                                            .userPBXNumbers?.publicNumber;
+                                        if (number != null) {
+                                          getIt<CallBloc>()
+                                              .add(CallEvent.clickToCall(
+                                            phoneNumber: number,
+                                          ));
+                                        }
+                                      },
+                                      icon: Icon(
+                                        Icons.call,
+                                      )),
+                                ],
+                              )
                           ],
                         )
                       ],
@@ -333,5 +406,9 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
         ),
       ),
     );
+  }
+
+  String getWhatsAppMessageText(Property? propertyCard) {
+    return "Hey ${propertyCard?.agent?.user.firstName ?? ""}, \n I want to enquire about this property ${propertyCard?.propertyTitle ?? ""} on ${propertyCard?.buildingName ?? ""}, ${propertyCard?.communityName ?? ""}";
   }
 }
