@@ -84,6 +84,8 @@ dependencies:
   google_api_availability: ^5.0.0
   phone_numbers_parser: ^8.3.0
   share_plus: ^10.0.0
+  shimmer: ^3.0.0
+  currency_formatter: ^2.2.1
 
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"
