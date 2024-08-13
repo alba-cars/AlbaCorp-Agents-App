@@ -522,7 +522,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                                       context.pushNamed(
                                                           "${PropertyCardDetailsScreen.routeName}",
                                                           pathParameters: {
-                                                            'id': "dddd"
+                                                            'id': card.id
                                                           });
                                                     },
                                                     child: Column(

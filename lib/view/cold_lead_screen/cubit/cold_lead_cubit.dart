@@ -60,7 +60,11 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
   Map<String, dynamic> getPayload(TaskFilterEnum filterType) {
     switch (filterType) {
       case TaskFilterEnum.New:
-        return {"leadSourceType": "cold", "leadStatus": "Fresh"};
+        return {
+          "leadSourceType": "cold",
+          "leadStatus": "Fresh",
+          "sortBy": 'latest'
+        };
       case TaskFilterEnum.FollowUp:
         DateTime d = DateTime.now();
         return {

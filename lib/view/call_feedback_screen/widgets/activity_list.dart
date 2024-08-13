@@ -28,7 +28,7 @@ class ActivityListCallFeedback extends StatelessWidget {
             collapsedBackgroundColor: Colors.white,
             backgroundColor: Colors.white,
             children: activities
-                .slice(0, 6)
+                .slice(0, activities.length > 5 ? 5 : activities.length)
                 .where((e) => e.status == 'Complete')
                 .map((activity) => Container(
                       margin: EdgeInsets.only(bottom: 8),

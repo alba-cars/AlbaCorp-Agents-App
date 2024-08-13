@@ -146,6 +146,7 @@ class _HomeScreenState extends State<HomeScreen>
                       CustomListTileWithIcon(
                         title: 'Explorer',
                         iconImagePath: 'assets/images/compass.png',
+                        initiallyExpanded: true,
                         children: [
                           ListIcon(
                             title: 'Property Cards',
@@ -176,28 +177,28 @@ class _HomeScreenState extends State<HomeScreen>
                           iconImagePath: 'assets/images/plus.png',
                           children: [
                             ListIcon(
-                              title: 'Leads',
+                              title: 'Add Leads',
                               onPressed: () {
                                 Scaffold.of(context).closeDrawer();
                                 context.pushNamed(AddLeadScreen.routeName);
                               },
                             ),
                             ListIcon(
-                              title: 'Deal',
+                              title: 'Add Deal',
                               onPressed: () {
                                 Scaffold.of(context).closeDrawer();
                                 context.pushNamed(AddDealScreen.routeName);
                               },
                             ),
                             ListIcon(
-                              title: 'Listing Acquired',
+                              title: 'Add Listing Acquired',
                               onPressed: () {
                                 Scaffold.of(context).closeDrawer();
                                 context.pushNamed(AddListingScreen.routeName);
                               },
                             ),
                             ListIcon(
-                              title: 'Pocket Listing',
+                              title: 'Add Pocket Listing',
                               onPressed: () {
                                 Scaffold.of(context).closeDrawer();
                                 context.pushNamed(
@@ -678,6 +679,7 @@ class CustomListTileWithIcon extends StatelessWidget {
   final String iconImagePath;
   final VoidCallback? onPressed;
   final List<ListIcon>? children;
+  final bool initiallyExpanded;
 
   const CustomListTileWithIcon({
     super.key,
@@ -685,6 +687,7 @@ class CustomListTileWithIcon extends StatelessWidget {
     required this.iconImagePath,
     this.onPressed,
     this.children,
+    this.initiallyExpanded = false,
   });
 
   @override
@@ -695,7 +698,7 @@ class CustomListTileWithIcon extends StatelessWidget {
             shape: Border.fromBorderSide(BorderSide.none),
             tilePadding: EdgeInsets.zero,
             title: widget(context, title, iconImagePath, onPressed),
-            initiallyExpanded: true,
+            initiallyExpanded: initiallyExpanded,
             iconColor: Theme.of(context).colorScheme.onPrimary,
             collapsedIconColor: Theme.of(context).colorScheme.onPrimary,
             children: children!
