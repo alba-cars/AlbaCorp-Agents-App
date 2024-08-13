@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
@@ -10,6 +11,7 @@ import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart'
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/cubit/deals_cubit.dart';
 import 'package:real_estate_app/view/deals_screen/widgets/client_name.dart';
+import 'package:real_estate_app/view/earnings/widgets/earnings_widget.dart';
 import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
@@ -109,6 +111,8 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
             //     onTap: (index) {},
             //   ),
             // )),
+            SliverToBoxAdapter(child: EarningsWidget()),
+
             SliverToBoxAdapter(
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),

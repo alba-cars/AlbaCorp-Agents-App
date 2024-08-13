@@ -13,37 +13,39 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i4;
 
-import '../app/activity_cubit/activity_cubit.dart' as _i39;
-import '../app/auth_bloc/auth_bloc.dart' as _i42;
-import '../app/call_bloc/call_bloc.dart' as _i43;
+import '../app/activity_cubit/activity_cubit.dart' as _i42;
+import '../app/auth_bloc/auth_bloc.dart' as _i45;
+import '../app/call_bloc/call_bloc.dart' as _i46;
 import '../app/list_state_cubit/list_state_cubit.dart' as _i5;
 import '../data/objectbox/repo_impl/notification_data.dart' as _i9;
 import '../data/objectbox/repo_impl/pending_call_feedback_data.dart' as _i7;
-import '../data/remote_data/activity_data.dart' as _i19;
-import '../data/remote_data/agent_data.dart' as _i17;
+import '../data/remote_data/activity_data.dart' as _i21;
+import '../data/remote_data/agent_data.dart' as _i19;
 import '../data/remote_data/auth_data.dart' as _i13;
-import '../data/remote_data/deals_data.dart' as _i24;
-import '../data/remote_data/explorer_data.dart' as _i22;
-import '../data/remote_data/lead_data.dart' as _i26;
-import '../data/remote_data/linkus_data.dart' as _i28;
-import '../data/remote_data/listings_data.dart' as _i15;
+import '../data/remote_data/deals_data.dart' as _i26;
+import '../data/remote_data/explorer_data.dart' as _i24;
+import '../data/remote_data/finance_data.dart' as _i15;
+import '../data/remote_data/lead_data.dart' as _i28;
+import '../data/remote_data/linkus_data.dart' as _i30;
+import '../data/remote_data/listings_data.dart' as _i17;
 import '../data/remote_data/pending_call_feedback_repo.dart' as _i6;
-import '../data/remote_data/ticket_data.dart' as _i31;
-import '../data/repository/activity_repo.dart' as _i18;
-import '../data/repository/agent_repo.dart' as _i16;
+import '../data/remote_data/ticket_data.dart' as _i33;
+import '../data/repository/activity_repo.dart' as _i20;
+import '../data/repository/agent_repo.dart' as _i18;
 import '../data/repository/auth_repo.dart' as _i12;
-import '../data/repository/deals_repo.dart' as _i23;
-import '../data/repository/explorer_repo.dart' as _i21;
-import '../data/repository/lead_repo.dart' as _i25;
-import '../data/repository/linkus_repo.dart' as _i27;
-import '../data/repository/listings_repo.dart' as _i14;
+import '../data/repository/deals_repo.dart' as _i25;
+import '../data/repository/explorer_repo.dart' as _i23;
+import '../data/repository/finance_repo.dart' as _i14;
+import '../data/repository/lead_repo.dart' as _i27;
+import '../data/repository/linkus_repo.dart' as _i29;
+import '../data/repository/listings_repo.dart' as _i16;
 import '../data/repository/notification_repo.dart' as _i8;
-import '../data/repository/ticket_repo.dart' as _i30;
-import '../model/activity_model.dart' as _i52;
-import '../model/deal_model.dart' as _i56;
-import '../view/add_deal_screen/cubit/add_deal_cubit.dart' as _i58;
-import '../view/add_lead_screen/cubit/add_lead_cubit.dart' as _i50;
-import '../view/add_listing_screen/cubit/add_listing_cubit.dart' as _i55;
+import '../data/repository/ticket_repo.dart' as _i32;
+import '../model/activity_model.dart' as _i55;
+import '../model/deal_model.dart' as _i59;
+import '../view/add_deal_screen/cubit/add_deal_cubit.dart' as _i61;
+import '../view/add_lead_screen/cubit/add_lead_cubit.dart' as _i53;
+import '../view/add_listing_screen/cubit/add_listing_cubit.dart' as _i58;
 import '../view/add_pocket_listing_screen/cubit/add_pocket_listing_cubit.dart'
     as _i47;
 import '../view/add_task_screen/cubit/add_task_cubit.dart' as _i53;
@@ -60,11 +62,11 @@ import '../view/explorer_screen/cubit/explorer_screen_cubit.dart' as _i29;
 import '../view/home_screen/cubit/home_cubit.dart' as _i45;
 import '../view/lead_detail_screen/cubit/lead_detail_cubit.dart' as _i37;
 import '../view/leads_list_explorer/cubit/leads_list_explorer_cubit.dart'
-    as _i57;
-import '../view/leads_screen/cubit/leads_cubit.dart' as _i34;
-import '../view/listing_detail_screen/cubit/listing_detail_cubit.dart' as _i38;
-import '../view/listings_screen/cubit/listings_cubit.dart' as _i59;
-import '../view/login/cubit/login_cubit.dart' as _i20;
+    as _i60;
+import '../view/leads_screen/cubit/leads_cubit.dart' as _i37;
+import '../view/listing_detail_screen/cubit/listing_detail_cubit.dart' as _i41;
+import '../view/listings_screen/cubit/listings_cubit.dart' as _i62;
+import '../view/login/cubit/login_cubit.dart' as _i22;
 import '../view/notifications_screen/cubit/notification_screen_cubit.dart'
     as _i11;
 import '../view/property_card_details/cubit/property_card_details_cubit.dart'
@@ -128,96 +130,99 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i11.NotificationScreenCubit>(
         () => _i11.NotificationScreenCubit(gh<_i8.NotificationRepo>()));
     gh.factory<_i12.AuthRepo>(() => _i13.AuthData(gh<_i10.Dio>()));
-    gh.factory<_i14.ListingsRepo>(() => _i15.ListingsData(dio: gh<_i10.Dio>()));
-    gh.factory<_i16.AgentRepo>(() => _i17.AgentData(dio: gh<_i10.Dio>()));
-    gh.factory<_i18.ActivityRepo>(() => _i19.ActivityData(dio: gh<_i10.Dio>()));
-    gh.factory<_i20.LoginCubit>(() => _i20.LoginCubit(gh<_i12.AuthRepo>()));
-    gh.factory<_i21.ExplorerRepo>(() => _i22.ExplorerData(dio: gh<_i10.Dio>()));
-    gh.factory<_i23.DealsRepo>(() => _i24.DealData(dio: gh<_i10.Dio>()));
-    gh.factory<_i25.LeadRepo>(() => _i26.LeadData(dio: gh<_i10.Dio>()));
-    gh.factory<_i27.LinkusRepo>(() => _i28.LinkusData(dio: gh<_i10.Dio>()));
-    gh.factoryParam<_i29.ExplorerScreenCubit, int?, dynamic>((
+    gh.factory<_i14.FinanceRepo>(() => _i15.FinanceData(dio: gh<_i10.Dio>()));
+    gh.factory<_i16.ListingsRepo>(() => _i17.ListingsData(dio: gh<_i10.Dio>()));
+    gh.factory<_i18.AgentRepo>(() => _i19.AgentData(dio: gh<_i10.Dio>()));
+    gh.factory<_i20.ActivityRepo>(() => _i21.ActivityData(dio: gh<_i10.Dio>()));
+    gh.factory<_i22.LoginCubit>(() => _i22.LoginCubit(gh<_i12.AuthRepo>()));
+    gh.factory<_i23.ExplorerRepo>(() => _i24.ExplorerData(dio: gh<_i10.Dio>()));
+    gh.factory<_i25.DealsRepo>(() => _i26.DealData(dio: gh<_i10.Dio>()));
+    gh.factory<_i27.LeadRepo>(() => _i28.LeadData(dio: gh<_i10.Dio>()));
+    gh.factory<_i29.LinkusRepo>(() => _i30.LinkusData(dio: gh<_i10.Dio>()));
+    gh.factoryParam<_i31.ExplorerScreenCubit, int?, dynamic>((
       tab,
       _,
     ) =>
-        _i29.ExplorerScreenCubit(
-          gh<_i21.ExplorerRepo>(),
-          gh<_i14.ListingsRepo>(),
+        _i31.ExplorerScreenCubit(
+          gh<_i23.ExplorerRepo>(),
+          gh<_i16.ListingsRepo>(),
           tab,
         ));
-    gh.factory<_i30.TicketRepo>(() => _i31.TicketData(dio: gh<_i10.Dio>()));
-    gh.factory<_i32.ColdLeadCubit>(
-        () => _i32.ColdLeadCubit(activityRepo: gh<_i18.ActivityRepo>()));
-    gh.factory<_i33.EnquiriesCubit>(
-        () => _i33.EnquiriesCubit(activityRepo: gh<_i18.ActivityRepo>()));
-    gh.factory<_i34.LeadsCubit>(() => _i34.LeadsCubit(
-          gh<_i25.LeadRepo>(),
-          gh<_i27.LinkusRepo>(),
-          gh<_i21.ExplorerRepo>(),
+    gh.factory<_i32.TicketRepo>(() => _i33.TicketData(dio: gh<_i10.Dio>()));
+    gh.factory<_i34.EnquiriesCubit>(
+        () => _i34.EnquiriesCubit(activityRepo: gh<_i20.ActivityRepo>()));
+    gh.factory<_i35.ColdLeadCubit>(
+        () => _i35.ColdLeadCubit(activityRepo: gh<_i20.ActivityRepo>()));
+    gh.factory<_i36.EarningsCubit>(
+        () => _i36.EarningsCubit(financeRepo: gh<_i14.FinanceRepo>()));
+    gh.factory<_i37.LeadsCubit>(() => _i37.LeadsCubit(
+          gh<_i27.LeadRepo>(),
+          gh<_i29.LinkusRepo>(),
+          gh<_i23.ExplorerRepo>(),
         ));
-    gh.factoryParam<_i35.ChatCubit, String, dynamic>((
+    gh.factoryParam<_i38.TicketDetailsCubit, String, dynamic>((
       ticketId,
       _,
     ) =>
-        _i35.ChatCubit(
-          gh<_i30.TicketRepo>(),
+        _i38.TicketDetailsCubit(
+          gh<_i32.TicketRepo>(),
           ticketId,
         ));
-    gh.factoryParam<_i36.TicketDetailsCubit, String, dynamic>((
+    gh.factoryParam<_i39.ChatCubit, String, dynamic>((
       ticketId,
       _,
     ) =>
-        _i36.TicketDetailsCubit(
-          gh<_i30.TicketRepo>(),
+        _i39.ChatCubit(
+          gh<_i32.TicketRepo>(),
           ticketId,
         ));
-    gh.factoryParam<_i37.LeadDetailCubit, String, dynamic>((
+    gh.factoryParam<_i40.LeadDetailCubit, String, dynamic>((
       leadId,
       _,
     ) =>
-        _i37.LeadDetailCubit(
-          gh<_i25.LeadRepo>(),
+        _i40.LeadDetailCubit(
+          gh<_i27.LeadRepo>(),
           leadId,
-          gh<_i21.ExplorerRepo>(),
+          gh<_i23.ExplorerRepo>(),
         ));
-    gh.factoryParam<_i38.ListingDetailCubit, String, dynamic>((
+    gh.factoryParam<_i41.ListingDetailCubit, String, dynamic>((
       id,
       _,
     ) =>
-        _i38.ListingDetailCubit(
-          gh<_i14.ListingsRepo>(),
+        _i41.ListingDetailCubit(
+          gh<_i16.ListingsRepo>(),
           id,
         ));
-    gh.singleton<_i39.ActivityCubit>(
-        () => _i39.ActivityCubit(gh<_i18.ActivityRepo>()));
-    gh.factoryParam<_i40.DealAddDocumentCubit, String, String>((
+    gh.singleton<_i42.ActivityCubit>(
+        () => _i42.ActivityCubit(gh<_i20.ActivityRepo>()));
+    gh.factoryParam<_i43.DealAddDocumentCubit, String, String>((
       dealId,
       userId,
     ) =>
-        _i40.DealAddDocumentCubit(
+        _i43.DealAddDocumentCubit(
           dealId,
           userId,
-          gh<_i23.DealsRepo>(),
+          gh<_i25.DealsRepo>(),
         ));
-    gh.factoryParam<_i41.DealDetailsCubit, String, dynamic>((
+    gh.factoryParam<_i44.DealDetailsCubit, String, dynamic>((
       dealId,
       _,
     ) =>
-        _i41.DealDetailsCubit(
-          gh<_i23.DealsRepo>(),
-          gh<_i14.ListingsRepo>(),
-          gh<_i25.LeadRepo>(),
+        _i44.DealDetailsCubit(
+          gh<_i25.DealsRepo>(),
+          gh<_i16.ListingsRepo>(),
+          gh<_i27.LeadRepo>(),
           dealId,
         ));
-    gh.singleton<_i42.AuthBloc>(() => _i42.AuthBloc(
+    gh.singleton<_i45.AuthBloc>(() => _i45.AuthBloc(
           gh<_i12.AuthRepo>(),
           gh<_i8.NotificationRepo>(),
-          gh<_i18.ActivityRepo>(),
+          gh<_i20.ActivityRepo>(),
           gh<_i6.PendingCallFeedbackRepo>(),
         ));
-    gh.singleton<_i43.CallBloc>(() => _i43.CallBloc(
-          gh<_i18.ActivityRepo>(),
-          gh<_i27.LinkusRepo>(),
+    gh.singleton<_i46.CallBloc>(() => _i46.CallBloc(
+          gh<_i20.ActivityRepo>(),
+          gh<_i29.LinkusRepo>(),
         ));
     gh.factory<_i44.CallFeedbackCubit>(() => _i44.CallFeedbackCubit(
           gh<_i25.LeadRepo>(),
@@ -245,72 +250,72 @@ extension GetItInjectableX on _i1.GetIt {
           propertyCardId,
           gh<_i21.ExplorerRepo>(),
         ));
-    gh.factory<_i49.DealsCubit>(() => _i49.DealsCubit(gh<_i23.DealsRepo>()));
-    gh.factoryParam<_i50.AddLeadCubit, Map<String, dynamic>?, dynamic>((
+    gh.factory<_i52.DealsCubit>(() => _i52.DealsCubit(gh<_i25.DealsRepo>()));
+    gh.factoryParam<_i53.AddLeadCubit, Map<String, dynamic>?, dynamic>((
       data,
       _,
     ) =>
-        _i50.AddLeadCubit(
-          gh<_i25.LeadRepo>(),
+        _i53.AddLeadCubit(
+          gh<_i27.LeadRepo>(),
           data,
         ));
-    gh.factoryParam<_i51.TaskDetailCubit, String, _i52.Activity?>((
+    gh.factoryParam<_i54.TaskDetailCubit, String, _i55.Activity?>((
       taskId,
       activity,
     ) =>
-        _i51.TaskDetailCubit(
-          gh<_i18.ActivityRepo>(),
+        _i54.TaskDetailCubit(
+          gh<_i20.ActivityRepo>(),
           taskId,
           activity,
-          gh<_i25.LeadRepo>(),
-          gh<_i16.AgentRepo>(),
-          gh<_i21.ExplorerRepo>(),
+          gh<_i27.LeadRepo>(),
+          gh<_i18.AgentRepo>(),
+          gh<_i23.ExplorerRepo>(),
         ));
-    gh.factory<_i53.AddTaskCubit>(() => _i53.AddTaskCubit(
-          gh<_i18.ActivityRepo>(),
-          gh<_i14.ListingsRepo>(),
-          gh<_i16.AgentRepo>(),
+    gh.factory<_i56.AddTaskCubit>(() => _i56.AddTaskCubit(
+          gh<_i20.ActivityRepo>(),
+          gh<_i16.ListingsRepo>(),
+          gh<_i18.AgentRepo>(),
         ));
-    gh.factory<_i54.AddTicketCubit>(() => _i54.AddTicketCubit(
-          gh<_i30.TicketRepo>(),
-          gh<_i23.DealsRepo>(),
-          gh<_i25.LeadRepo>(),
-          gh<_i14.ListingsRepo>(),
-          gh<_i16.AgentRepo>(),
+    gh.factory<_i57.AddTicketCubit>(() => _i57.AddTicketCubit(
+          gh<_i32.TicketRepo>(),
+          gh<_i25.DealsRepo>(),
+          gh<_i27.LeadRepo>(),
+          gh<_i16.ListingsRepo>(),
+          gh<_i18.AgentRepo>(),
         ));
-    gh.factoryParam<_i55.AddListingCubit, bool, _i56.Deal?>((
+    gh.factoryParam<_i58.AddListingCubit, bool, _i59.Deal?>((
       _isEdit,
       _deal,
     ) =>
-        _i55.AddListingCubit(
-          gh<_i25.LeadRepo>(),
-          gh<_i14.ListingsRepo>(),
-          gh<_i23.DealsRepo>(),
+        _i58.AddListingCubit(
+          gh<_i27.LeadRepo>(),
+          gh<_i16.ListingsRepo>(),
+          gh<_i25.DealsRepo>(),
           _isEdit,
           _deal,
         ));
-    gh.factory<_i57.LeadsListExplorerCubit>(() => _i57.LeadsListExplorerCubit(
-          gh<_i21.ExplorerRepo>(),
-          gh<_i14.ListingsRepo>(),
+    gh.factory<_i60.LeadsListExplorerCubit>(() => _i60.LeadsListExplorerCubit(
+          gh<_i23.ExplorerRepo>(),
+          gh<_i16.ListingsRepo>(),
         ));
-    gh.factoryParam<_i58.AddDealCubit, _i56.Deal?, dynamic>((
+    gh.factoryParam<_i61.AddDealCubit, _i59.Deal?, dynamic>((
       deal,
       _,
     ) =>
-        _i58.AddDealCubit(
-          gh<_i14.ListingsRepo>(),
-          gh<_i25.LeadRepo>(),
-          gh<_i23.DealsRepo>(),
-          gh<_i16.AgentRepo>(),
+        _i61.AddDealCubit(
+          gh<_i16.ListingsRepo>(),
+          gh<_i27.LeadRepo>(),
+          gh<_i25.DealsRepo>(),
+          gh<_i18.AgentRepo>(),
           deal,
         ));
-    gh.factory<_i59.ListingsCubit>(() => _i59.ListingsCubit(
-          gh<_i14.ListingsRepo>(),
-          gh<_i21.ExplorerRepo>(),
-          gh<_i16.AgentRepo>(),
+    gh.factory<_i62.ListingsCubit>(() => _i62.ListingsCubit(
+          gh<_i16.ListingsRepo>(),
+          gh<_i23.ExplorerRepo>(),
+          gh<_i18.AgentRepo>(),
         ));
     return this;
   }
 }
 
-class _$RegisterModules extends _i60.RegisterModules {}
+class _$RegisterModules extends _i63.RegisterModules {}

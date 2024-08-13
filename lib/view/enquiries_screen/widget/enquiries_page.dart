@@ -100,16 +100,7 @@ class _EnquiriesPageState extends State<EnquiriesPage>
   Widget showActivities(BuildContext context, List<Activity> activities,
       Paginator? paginator, AppStatus? appStatus) {
     Logger().d("No of activitiess : ${activities.length}");
-    if (activities.length == 0) {
-      return Column(
-        children: [
-          Text("No data found"),
-          SizedBox(
-            height: 8,
-          ),
-        ],
-      );
-    }
+
     return Expanded(
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollInfo) {
@@ -123,38 +114,58 @@ class _EnquiriesPageState extends State<EnquiriesPage>
           }
           return true;
         },
-        child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (_, pos) {
-              if (pos == activities.length) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
+        child: RefreshIndicator.adaptive(
+          onRefresh: () async {
+            await loadData(context);
+          },
+          child: Visibility(
+            visible: activities.length > 0,
+            replacement: ListView(
+              children: [
+                Column(
                   children: [
+                    Text("No data found"),
                     SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: CircularProgressIndicator()),
+                      height: 8,
+                    ),
                   ],
-                );
-              }
-              Activity activity = activities[pos];
-              "${activity.lead?.firstName ?? ""} ${activity.lead?.lastName ?? ""}";
-              return ActivityListItem(
-                activity: activity,
-                index: pos,
-                onActionPerformed: () {
-                  loadData(
-                      context); // Reloading data after a call has performed or page pop event
+                )
+              ],
+            ),
+            child: ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (_, pos) {
+                  if (pos == activities.length) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: CircularProgressIndicator()),
+                      ],
+                    );
+                  }
+                  Activity activity = activities[pos];
+                  "${activity.lead?.firstName ?? ""} ${activity.lead?.lastName ?? ""}";
+                  return ActivityListItem(
+                    activity: activity,
+                    index: pos,
+                    onActionPerformed: () {
+                      loadData(
+                          context); // Reloading data after a call has performed or page pop event
+                    },
+                  );
                 },
-              );
-            },
-            separatorBuilder: (_, __) => SizedBox(
-                  height: 8,
-                ),
-            itemCount: appStatus == AppStatus.loading &&
-                    (paginator?.hasNextPage ?? false)
-                ? activities.length + 1
-                : activities.length),
+                separatorBuilder: (_, __) => SizedBox(
+                      height: 8,
+                    ),
+                itemCount: appStatus == AppStatus.loading &&
+                        (paginator?.hasNextPage ?? false)
+                    ? activities.length + 1
+                    : activities.length),
+          ),
+        ),
       ),
     );
   }
