@@ -17,5 +17,7 @@ class CallFeedbackState with _$CallFeedbackState {
     @Default([]) List<Activity> activities,
     @Default(AppStatus.init) AppStatus getActivitiesStatus,
     String? getActivitiesError,
+    String? attachLastPendingActivityToTheCall,
+    @Default(false) bool requestFollowUpTask,
   }) = _CallFeedbackState;
 }

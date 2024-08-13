@@ -73,6 +73,13 @@ class _ListingScreenLayoutState extends State<ListingScreenLayout>
 
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

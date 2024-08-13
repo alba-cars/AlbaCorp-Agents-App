@@ -45,10 +45,10 @@ import '../view/add_deal_screen/cubit/add_deal_cubit.dart' as _i58;
 import '../view/add_lead_screen/cubit/add_lead_cubit.dart' as _i50;
 import '../view/add_listing_screen/cubit/add_listing_cubit.dart' as _i55;
 import '../view/add_pocket_listing_screen/cubit/add_pocket_listing_cubit.dart'
-    as _i46;
+    as _i47;
 import '../view/add_task_screen/cubit/add_task_cubit.dart' as _i53;
 import '../view/add_ticket_screen/cubit/add_ticket_cubit.dart' as _i54;
-import '../view/call_feedback_screen/cubit/call_feedback_cubit.dart' as _i48;
+import '../view/call_feedback_screen/cubit/call_feedback_cubit.dart' as _i44;
 import '../view/chat_screen/cubit/chat_cubit.dart' as _i35;
 import '../view/cold_lead_screen/cubit/cold_lead_cubit.dart' as _i32;
 import '../view/deal_add_document_screen/cubit/deal_add_document_cubit.dart'
@@ -57,7 +57,7 @@ import '../view/deal_details_screen/cubit/deal_details_cubit.dart' as _i41;
 import '../view/deals_screen/cubit/deals_cubit.dart' as _i49;
 import '../view/enquiries_screen/cubit/enquiries_cubit.dart' as _i33;
 import '../view/explorer_screen/cubit/explorer_screen_cubit.dart' as _i29;
-import '../view/home_screen/cubit/home_cubit.dart' as _i44;
+import '../view/home_screen/cubit/home_cubit.dart' as _i45;
 import '../view/lead_detail_screen/cubit/lead_detail_cubit.dart' as _i37;
 import '../view/leads_list_explorer/cubit/leads_list_explorer_cubit.dart'
     as _i57;
@@ -68,10 +68,10 @@ import '../view/login/cubit/login_cubit.dart' as _i20;
 import '../view/notifications_screen/cubit/notification_screen_cubit.dart'
     as _i11;
 import '../view/property_card_details/cubit/property_card_details_cubit.dart'
-    as _i47;
+    as _i48;
 import '../view/task_detail_screen/cubit/task_detail_cubit.dart' as _i51;
 import '../view/ticket_detail_screen/cubit/ticket_details_cubit.dart' as _i36;
-import '../view/tickets_screen/cubit/tickets_screen_cubit.dart' as _i45;
+import '../view/tickets_screen/cubit/tickets_screen_cubit.dart' as _i46;
 import 'injectable_module.dart' as _i60;
 import 'objectbox.dart' as _i3;
 
@@ -219,30 +219,31 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i18.ActivityRepo>(),
           gh<_i27.LinkusRepo>(),
         ));
-    gh.factory<_i44.HomeCubit>(() => _i44.HomeCubit(
-          gh<_i18.ActivityRepo>(),
-          gh<_i25.LeadRepo>(),
-          gh<_i14.ListingsRepo>(),
-        ));
-    gh.factory<_i45.TicketsScreenCubit>(
-        () => _i45.TicketsScreenCubit(gh<_i30.TicketRepo>()));
-    gh.factory<_i46.AddPocketListingCubit>(() => _i46.AddPocketListingCubit(
-          gh<_i25.LeadRepo>(),
-          gh<_i14.ListingsRepo>(),
-          gh<_i21.ExplorerRepo>(),
-        ));
-    gh.factoryParam<_i47.PropertyCardDetailsCubit, String, dynamic>((
-      propertyCardId,
-      _,
-    ) =>
-        _i47.PropertyCardDetailsCubit(
-          propertyCardId,
-          gh<_i21.ExplorerRepo>(),
-        ));
-    gh.factory<_i48.CallFeedbackCubit>(() => _i48.CallFeedbackCubit(
+    gh.factory<_i44.CallFeedbackCubit>(() => _i44.CallFeedbackCubit(
           gh<_i25.LeadRepo>(),
           gh<_i6.PendingCallFeedbackRepo>(),
           gh<_i18.ActivityRepo>(),
+          gh<_i16.AgentRepo>(),
+        ));
+    gh.factory<_i45.HomeCubit>(() => _i45.HomeCubit(
+          gh<_i18.ActivityRepo>(),
+          gh<_i25.LeadRepo>(),
+          gh<_i14.ListingsRepo>(),
+        ));
+    gh.factory<_i46.TicketsScreenCubit>(
+        () => _i46.TicketsScreenCubit(gh<_i30.TicketRepo>()));
+    gh.factory<_i47.AddPocketListingCubit>(() => _i47.AddPocketListingCubit(
+          gh<_i25.LeadRepo>(),
+          gh<_i14.ListingsRepo>(),
+          gh<_i21.ExplorerRepo>(),
+        ));
+    gh.factoryParam<_i48.PropertyCardDetailsCubit, String, dynamic>((
+      propertyCardId,
+      _,
+    ) =>
+        _i48.PropertyCardDetailsCubit(
+          propertyCardId,
+          gh<_i21.ExplorerRepo>(),
         ));
     gh.factory<_i49.DealsCubit>(() => _i49.DealsCubit(gh<_i23.DealsRepo>()));
     gh.factoryParam<_i50.AddLeadCubit, Map<String, dynamic>?, dynamic>((

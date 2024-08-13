@@ -214,6 +214,32 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 onChanged: (val) {
                   context.read<LeadsListExplorerCubit>().searchExplorer(val);
                 },
+                showSearch: false,
+                leadWidgets: [
+                  Expanded(
+                    child: AppPrimaryButton(
+                      onTap: () {
+                        context.read<LeadsListExplorerCubit>().randomCheckout(
+                            context: context, numberOfLeads: 50);
+                      },
+                      text: "50",
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                      child: AppPrimaryButton(
+                    onTap: () {
+                      context
+                          .read<LeadsListExplorerCubit>()
+                          .randomCheckout(context: context, numberOfLeads: 100);
+                    },
+                    text: "100",
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                  )),
+                ],
                 filterFields: filterFields(context),
                 filter: explorerFilter,
                 onFilterApplied: (filter) {

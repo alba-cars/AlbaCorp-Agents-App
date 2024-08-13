@@ -17,6 +17,8 @@ import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cubit.dart';
 import 'package:real_estate_app/view/call_feedback_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/call_feedback_screen/widgets/add_lead_widget.dart';
+import 'package:real_estate_app/view/call_feedback_screen/widgets/followup_task.dart';
+import 'package:real_estate_app/view/call_feedback_screen/widgets/last_pending_activity.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -200,6 +202,9 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                 ),
               );
             }
+            if (state.requestFollowUpTask) {
+              return FollowUpTask();
+            }
             return SingleChildScrollView(
               reverse: true,
               child: Padding(
@@ -240,6 +245,10 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                           return SizedBox();
                         },
                       ),
+                      VerticalSmallGap(
+                        adjustment: 2,
+                      ),
+                      LastPendingActivity(),
                       VerticalSmallGap(
                         adjustment: 2,
                       ),
@@ -288,20 +297,25 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                         listenWhen: (previous, current) =>
                             previous.addActivityStatus !=
                             current.addActivityStatus,
-                        child: AppPrimaryButton(
-                            text: 'Submit',
-                            onTap: () async {
-                              final validated =
-                                  _formKey.currentState?.saveAndValidate();
-                              if (validated == true) {
-                                await context
-                                    .read<CallFeedbackCubit>()
-                                    .addActivity(
-                                        feedback: _formKey.currentState!
-                                                .value["feedback"] ??
-                                            '');
-                              }
-                            }),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AppPrimaryButton(
+                                text: 'Submit',
+                                onTap: () async {
+                                  final validated =
+                                      _formKey.currentState?.saveAndValidate();
+                                  if (validated == true) {
+                                    await context
+                                        .read<CallFeedbackCubit>()
+                                        .addActivity(
+                                            feedback: _formKey.currentState!
+                                                    .value["feedback"] ??
+                                                '');
+                                  }
+                                }),
+                          ],
+                        ),
                       )
                     ],
                   ),

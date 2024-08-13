@@ -12,10 +12,10 @@ abstract class ActivityRepo {
       String? propertyId,
       String? description,
       bool isCompleted = false});
-  Future<Result<void>> createCallFeedbackActivity({
-    required String leadId,
-    required String feedback,
-  });
+  Future<Result<bool>> createCallFeedbackActivity(
+      {required String leadId,
+      required String feedback,
+      String? attachedActivityId});
   Future<Result<Activity>> getActivity({
     required String activityId,
   });

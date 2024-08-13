@@ -19,14 +19,21 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
   final ActivityRepo activityRepo;
 
   fetchColdLeads(TaskFilterEnum filterType, {Paginator? paginator}) async {
-    Logger().d(paginator);
     try {
+      if (state.fetchStatus[filterType] == AppStatus.loading) {
+        return;
+      }
+      var fetchStatus = {...state.fetchStatus};
+      fetchStatus[filterType] = AppStatus.loading;
       if (paginator == null) {
-        var fetchStatus = {...state.fetchStatus};
-        fetchStatus[filterType] = AppStatus.loading;
         emit(state.copyWith(
+            activities: {...state.activities, filterType: []},
             fetchStatus: fetchStatus,
             paginator: {...state.paginator, filterType: null}));
+      } else {
+        emit(state.copyWith(
+          fetchStatus: fetchStatus,
+        ));
       }
 
       final Result<List<Activity>> result =
@@ -35,7 +42,7 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
 
       switch (result) {
         case (Success<List<Activity>> success):
-          Logger().d("On success scenario");
+          Logger().d("On success scenario ${success.paginator}");
           _handleEnquiriesFetchSuccess(
               success.value, success.paginator, filterType);
           break;
@@ -77,20 +84,15 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
     var currentPaginator = {...state.paginator};
     currentPaginator[filterType] = paginator;
 
-    var currentActivities = {...state.activities};
-    if (paginator?.hasNextPage ?? false) {
-      Logger().d("Appending the  activities");
-      currentActivities[filterType]?.addAll(activities);
-    } else {
-      currentActivities[filterType] = activities;
-    }
-
     Logger().d("Going to emit the success fetch status");
 
     emit(state.copyWith(
         fetchStatus: fetchStatus,
         paginator: currentPaginator,
-        activities: currentActivities));
+        activities: {
+          ...state.activities,
+          filterType: [...(state.activities[filterType] ?? []), ...activities]
+        }));
   }
 
   void _handleEnquiriesFetchError(String exception, TaskFilterEnum filterType) {

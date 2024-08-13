@@ -12,7 +12,7 @@ class Property with _$Property {
     required String listingType,
     String? categoryId,
     String? propertyTypeId,
-    required String propertyTitle,
+    @Default("") String propertyTitle,
     String? propertyDesc,
     required bool featured,
     @Default(false) bool? dealOfWeek,

@@ -55,8 +55,8 @@ class _MyListingsTabState extends State<MyListingsTab>
               Flexible(
                 child: AppTabBar(
                   backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer,
-                  selectedColor: Theme.of(context).primaryColor,
+                      Theme.of(context).colorScheme.tertiaryContainer,
+                  selectedColor: Theme.of(context).colorScheme.tertiary,
                   tabController: _tabController,
                   tabs: ['Public', 'Pocket'],
                   onTap: (index) {

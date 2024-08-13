@@ -12,7 +12,7 @@ _$PropertyImpl _$$PropertyImplFromJson(Map<String, dynamic> json) =>
       listingType: json['listingType'] as String,
       categoryId: json['categoryId'] as String?,
       propertyTypeId: json['propertyTypeId'] as String?,
-      propertyTitle: json['propertyTitle'] as String,
+      propertyTitle: json['propertyTitle'] as String? ?? "",
       propertyDesc: json['propertyDesc'] as String?,
       featured: json['featured'] as bool,
       dealOfWeek: json['dealOfWeek'] as bool? ?? false,

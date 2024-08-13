@@ -328,15 +328,19 @@ class ActivityData implements ActivityRepo {
   }
 
   @override
-  Future<Result<void>> createCallFeedbackActivity(
-      {required String leadId, required String feedback}) async {
+  Future<Result<bool>> createCallFeedbackActivity(
+      {required String leadId,
+      required String feedback,
+      String? attachedActivityId}) async {
     try {
-      await _dio.post('/v1/activities/call-feedback-activity', data: {
+      final res =
+          await _dio.post('/v1/activities/call-feedback-activity', data: {
         'lead_id': leadId,
         'feedback': feedback,
+        'attachedActivityId': attachedActivityId
       });
 
-      return Success(null);
+      return Success(res.data['requestFollowUp']);
     } catch (e, stack) {
       return onError(e, stack, log);
     }

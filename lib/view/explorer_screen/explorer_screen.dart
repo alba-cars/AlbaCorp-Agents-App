@@ -248,11 +248,29 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 },
                 showSearch: false,
                 leadWidgets: [
-                  Expanded(child: AppPrimaryButton(onTap: () {}, text: "50")),
+                  Expanded(
+                    child: AppPrimaryButton(
+                      onTap: () {
+                        context.read<ExplorerScreenCubit>().randomCheckout(
+                            context: context, numberOfLeads: 50);
+                      },
+                      text: "50",
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
                   SizedBox(
                     width: 8,
                   ),
-                  Expanded(child: AppPrimaryButton(onTap: () {}, text: "100")),
+                  Expanded(
+                      child: AppPrimaryButton(
+                    onTap: () {
+                      context
+                          .read<ExplorerScreenCubit>()
+                          .randomCheckout(context: context, numberOfLeads: 100);
+                    },
+                    text: "100",
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                  )),
                 ],
                 filterFields: filterFields(context),
                 filter: explorerFilter,
