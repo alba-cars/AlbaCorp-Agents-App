@@ -476,11 +476,29 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<void>> randomLeadsAssignment(
-      {required Map<String, dynamic> values}) async {
+      {required int numberOfLeads,
+      required Map<String, dynamic> values}) async {
     try {
       String url = 'v1/property-cards/checkout-random-leads';
+      Map<String, dynamic>? filterRemoved;
+      if (values != null) {
+        filterRemoved =
+            (Map.from(values)..removeWhere((key, value) => value == null));
 
-      await _dio.post(url, data: values);
+        filterRemoved = filterRemoved.map((key, value) {
+          if (value is Map) {
+            return MapEntry(key, value['value']);
+          } else if (value is List<Map>) {
+            return MapEntry(key, value.map((e) => e['value']).toList());
+          } else {
+            return MapEntry(key, value);
+          }
+        });
+      }
+
+      await _dio.post(url,
+          data: {"numberOfLeads": numberOfLeads},
+          queryParameters: filterRemoved);
       // final data = response.data;
       // final list = PropertyCardNoteModel.fromJson(data);
       return Success(

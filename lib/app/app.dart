@@ -97,11 +97,11 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           routerConfig: AppRouter.router,
           theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
-                seedColor: Color(0xff004B85),
-                secondary: Color(0xff28666e),
-                onSecondary: Colors.white,
-                tertiary: Color(0xff7c9885),
-              ),
+                  seedColor: Color(0xff004B85),
+                  secondary: Color(0xff28666e),
+                  onSecondary: Colors.white,
+                  tertiary: Color(0xff7c9885),
+                  tertiaryContainer: Color(0xffD9D9D9)),
               dialogBackgroundColor: Colors.white,
               buttonTheme: ButtonThemeData(
                 buttonColor: Color(0xff004B85),

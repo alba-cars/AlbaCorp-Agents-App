@@ -30,6 +30,9 @@ mixin _$CallFeedbackState {
   List<Activity> get activities => throw _privateConstructorUsedError;
   AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
   String? get getActivitiesError => throw _privateConstructorUsedError;
+  String? get attachLastPendingActivityToTheCall =>
+      throw _privateConstructorUsedError;
+  bool get requestFollowUpTask => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CallFeedbackStateCopyWith<CallFeedbackState> get copyWith =>
@@ -56,7 +59,9 @@ abstract class $CallFeedbackStateCopyWith<$Res> {
       Map<String, dynamic> val,
       List<Activity> activities,
       AppStatus getActivitiesStatus,
-      String? getActivitiesError});
+      String? getActivitiesError,
+      String? attachLastPendingActivityToTheCall,
+      bool requestFollowUpTask});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -88,6 +93,8 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
     Object? activities = null,
     Object? getActivitiesStatus = null,
     Object? getActivitiesError = freezed,
+    Object? attachLastPendingActivityToTheCall = freezed,
+    Object? requestFollowUpTask = null,
   }) {
     return _then(_value.copyWith(
       checkLeadStatus: null == checkLeadStatus
@@ -146,6 +153,15 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
               as String?,
+      attachLastPendingActivityToTheCall: freezed ==
+              attachLastPendingActivityToTheCall
+          ? _value.attachLastPendingActivityToTheCall
+          : attachLastPendingActivityToTheCall // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requestFollowUpTask: null == requestFollowUpTask
+          ? _value.requestFollowUpTask
+          : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -184,7 +200,9 @@ abstract class _$$CallFeedbackStateImplCopyWith<$Res>
       Map<String, dynamic> val,
       List<Activity> activities,
       AppStatus getActivitiesStatus,
-      String? getActivitiesError});
+      String? getActivitiesError,
+      String? attachLastPendingActivityToTheCall,
+      bool requestFollowUpTask});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -215,6 +233,8 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
     Object? activities = null,
     Object? getActivitiesStatus = null,
     Object? getActivitiesError = freezed,
+    Object? attachLastPendingActivityToTheCall = freezed,
+    Object? requestFollowUpTask = null,
   }) {
     return _then(_$CallFeedbackStateImpl(
       checkLeadStatus: null == checkLeadStatus
@@ -273,6 +293,15 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
           ? _value.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
               as String?,
+      attachLastPendingActivityToTheCall: freezed ==
+              attachLastPendingActivityToTheCall
+          ? _value.attachLastPendingActivityToTheCall
+          : attachLastPendingActivityToTheCall // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requestFollowUpTask: null == requestFollowUpTask
+          ? _value.requestFollowUpTask
+          : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -294,7 +323,9 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
       final Map<String, dynamic> val = const {},
       final List<Activity> activities = const [],
       this.getActivitiesStatus = AppStatus.init,
-      this.getActivitiesError})
+      this.getActivitiesError,
+      this.attachLastPendingActivityToTheCall,
+      this.requestFollowUpTask = false})
       : _leadSources = leadSources,
         _val = val,
         _activities = activities;
@@ -354,10 +385,15 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
   final AppStatus getActivitiesStatus;
   @override
   final String? getActivitiesError;
+  @override
+  final String? attachLastPendingActivityToTheCall;
+  @override
+  @JsonKey()
+  final bool requestFollowUpTask;
 
   @override
   String toString() {
-    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError)';
+    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, attachLastPendingActivityToTheCall: $attachLastPendingActivityToTheCall, requestFollowUpTask: $requestFollowUpTask)';
   }
 
   @override
@@ -389,7 +425,13 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
             (identical(other.getActivitiesStatus, getActivitiesStatus) ||
                 other.getActivitiesStatus == getActivitiesStatus) &&
             (identical(other.getActivitiesError, getActivitiesError) ||
-                other.getActivitiesError == getActivitiesError));
+                other.getActivitiesError == getActivitiesError) &&
+            (identical(other.attachLastPendingActivityToTheCall,
+                    attachLastPendingActivityToTheCall) ||
+                other.attachLastPendingActivityToTheCall ==
+                    attachLastPendingActivityToTheCall) &&
+            (identical(other.requestFollowUpTask, requestFollowUpTask) ||
+                other.requestFollowUpTask == requestFollowUpTask));
   }
 
   @override
@@ -408,7 +450,9 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
       const DeepCollectionEquality().hash(_val),
       const DeepCollectionEquality().hash(_activities),
       getActivitiesStatus,
-      getActivitiesError);
+      getActivitiesError,
+      attachLastPendingActivityToTheCall,
+      requestFollowUpTask);
 
   @JsonKey(ignore: true)
   @override
@@ -433,7 +477,9 @@ abstract class _CallFeedbackState implements CallFeedbackState {
       final Map<String, dynamic> val,
       final List<Activity> activities,
       final AppStatus getActivitiesStatus,
-      final String? getActivitiesError}) = _$CallFeedbackStateImpl;
+      final String? getActivitiesError,
+      final String? attachLastPendingActivityToTheCall,
+      final bool requestFollowUpTask}) = _$CallFeedbackStateImpl;
 
   @override
   AppStatus get checkLeadStatus;
@@ -463,6 +509,10 @@ abstract class _CallFeedbackState implements CallFeedbackState {
   AppStatus get getActivitiesStatus;
   @override
   String? get getActivitiesError;
+  @override
+  String? get attachLastPendingActivityToTheCall;
+  @override
+  bool get requestFollowUpTask;
   @override
   @JsonKey(ignore: true)
   _$$CallFeedbackStateImplCopyWith<_$CallFeedbackStateImpl> get copyWith =>

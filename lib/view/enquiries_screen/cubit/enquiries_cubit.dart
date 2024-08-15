@@ -21,12 +21,20 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
 
   fetchHoteads(TaskFilterEnum filterType, {Paginator? paginator}) async {
     try {
+      if (state.fetchStatus[filterType] == AppStatus.loading) {
+        return;
+      }
+      var fetchStatus = {...state.fetchStatus};
+      fetchStatus[filterType] = AppStatus.loading;
       if (paginator == null) {
-        var fetchStatus = {...state.fetchStatus};
-        fetchStatus[filterType] = AppStatus.loading;
         emit(state.copyWith(
+            activities: {...state.activities, filterType: []},
             fetchStatus: fetchStatus,
             paginator: {...state.paginator, filterType: null}));
+      } else {
+        emit(state.copyWith(
+          fetchStatus: fetchStatus,
+        ));
       }
 
       final Result<List<Activity>> result =
@@ -82,7 +90,10 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
       Logger().d("Appending the  activities");
       currentActivities[filterType]?.addAll(activities);
     } else {
-      currentActivities[filterType] = activities;
+      currentActivities[filterType] = [
+        ...state.activities[filterType] ?? [],
+        ...activities
+      ];
     }
 
     Logger().d("Going to emit the success fetch status");

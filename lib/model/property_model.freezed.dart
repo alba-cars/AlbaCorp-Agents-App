@@ -1044,7 +1044,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
       required this.listingType,
       this.categoryId,
       this.propertyTypeId,
-      required this.propertyTitle,
+      this.propertyTitle = "",
       this.propertyDesc,
       required this.featured,
       this.dealOfWeek = false,
@@ -1138,6 +1138,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
   @override
   final String? propertyTypeId;
   @override
+  @JsonKey()
   final String propertyTitle;
   @override
   final String? propertyDesc;
@@ -1683,7 +1684,7 @@ abstract class _Property implements Property {
       required final String listingType,
       final String? categoryId,
       final String? propertyTypeId,
-      required final String propertyTitle,
+      final String propertyTitle,
       final String? propertyDesc,
       required final bool featured,
       final bool? dealOfWeek,

@@ -152,7 +152,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
           bool isScrollEnd = scrollInfo.metrics.pixels >=
               0.9 * scrollInfo.metrics.maxScrollExtent;
           if (isScrollEnd && (paginator?.hasNextPage ?? false)) {
-            Logger().d("Paginator is executing");
+            Logger().d("Paginator is executing $paginator");
             context.read<ColdLeadCubit>().fetchColdLeads(
                 TaskFilterEnum.values[tabIndex],
                 paginator: paginator);

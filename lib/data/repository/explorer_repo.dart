@@ -47,7 +47,7 @@ abstract class ExplorerRepo {
       {required String propertyCardId, required String leadId});
   Future<Result<void>> unLinkPropertyFromLead({required String leadCardId});
   Future<Result<void>> randomLeadsAssignment(
-      {required Map<String, dynamic> values});
+      {required int numberOfLeads, required Map<String, dynamic> values});
   Future<Result<List<CommunityTeamModel>>> getCommunityTeams(
       {required String agentId});
   Future<Result<String>> convertPropertyCardToListing(

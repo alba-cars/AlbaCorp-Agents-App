@@ -242,10 +242,10 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   }
 
   Future<void> randomCheckout(
-      {required BuildContext context,
-      required Map<String, dynamic> values}) async {
+      {required BuildContext context, required int numberOfLeads}) async {
     emit(state.copyWith(randomLeadsAssignmentStatus: AppStatus.loading));
-    final result = await _explorerRepo.randomLeadsAssignment(values: values);
+    final result = await _explorerRepo.randomLeadsAssignment(
+        numberOfLeads: numberOfLeads, values: state.explorerFilter ?? {});
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -254,7 +254,6 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
         if (context.mounted) {
           showSnackbar(context, 'Leads Randomly Checked In Successfully',
               SnackBarType.success);
-          Navigator.of(context).pop();
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
         break;

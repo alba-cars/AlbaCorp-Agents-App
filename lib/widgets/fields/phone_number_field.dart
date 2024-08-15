@@ -62,6 +62,9 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
         controller.text = value!;
         _initialCountrySelection = num.isoCode.name;
         if (mounted) setState(() {});
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          _fieldKey.currentState?.didChange('+$code$value');
+        });
       }
     } catch (e) {
       Logger().e(e);
