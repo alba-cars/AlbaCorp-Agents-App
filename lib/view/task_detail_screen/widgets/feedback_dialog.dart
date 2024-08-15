@@ -513,7 +513,10 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                           .read<TaskDetailCubit>()
                                           .disqualify(
                                               context: widget.parentContext,
-                                              description: _controller.text);
+                                              description:
+                                                  value == "Invalid Number"
+                                                      ? "Invalid Number"
+                                                      : _controller.text);
                                       // Navigator.of(context).pop();
                                     },
                                     text: 'Disqualify'),
