@@ -23,7 +23,7 @@ class EnquiriesPage extends StatefulWidget {
 class _EnquiriesPageState extends State<EnquiriesPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
-      TabController(length: 3, vsync: this);
+      TabController(length: TaskFilterEnum.values.length, vsync: this);
   int tabIndex = 0;
 
   @override

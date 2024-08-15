@@ -25,6 +25,8 @@ mixin _$AppConfig {
   String get latestVersion => throw _privateConstructorUsedError;
   String get currentVersion => throw _privateConstructorUsedError;
   String? get playStoreUrl => throw _privateConstructorUsedError;
+  String? get companyPortfolioUrl => throw _privateConstructorUsedError;
+  String? get internetAccessPortal => throw _privateConstructorUsedError;
   String? get appStoreUrl => throw _privateConstructorUsedError;
   String? get huaweiUrl => throw _privateConstructorUsedError;
 
@@ -45,6 +47,8 @@ abstract class $AppConfigCopyWith<$Res> {
       String latestVersion,
       String currentVersion,
       String? playStoreUrl,
+      String? companyPortfolioUrl,
+      String? internetAccessPortal,
       String? appStoreUrl,
       String? huaweiUrl});
 }
@@ -67,6 +71,8 @@ class _$AppConfigCopyWithImpl<$Res, $Val extends AppConfig>
     Object? latestVersion = null,
     Object? currentVersion = null,
     Object? playStoreUrl = freezed,
+    Object? companyPortfolioUrl = freezed,
+    Object? internetAccessPortal = freezed,
     Object? appStoreUrl = freezed,
     Object? huaweiUrl = freezed,
   }) {
@@ -90,6 +96,14 @@ class _$AppConfigCopyWithImpl<$Res, $Val extends AppConfig>
       playStoreUrl: freezed == playStoreUrl
           ? _value.playStoreUrl
           : playStoreUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyPortfolioUrl: freezed == companyPortfolioUrl
+          ? _value.companyPortfolioUrl
+          : companyPortfolioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      internetAccessPortal: freezed == internetAccessPortal
+          ? _value.internetAccessPortal
+          : internetAccessPortal // ignore: cast_nullable_to_non_nullable
               as String?,
       appStoreUrl: freezed == appStoreUrl
           ? _value.appStoreUrl
@@ -117,6 +131,8 @@ abstract class _$$AppConfigImplCopyWith<$Res>
       String latestVersion,
       String currentVersion,
       String? playStoreUrl,
+      String? companyPortfolioUrl,
+      String? internetAccessPortal,
       String? appStoreUrl,
       String? huaweiUrl});
 }
@@ -137,6 +153,8 @@ class __$$AppConfigImplCopyWithImpl<$Res>
     Object? latestVersion = null,
     Object? currentVersion = null,
     Object? playStoreUrl = freezed,
+    Object? companyPortfolioUrl = freezed,
+    Object? internetAccessPortal = freezed,
     Object? appStoreUrl = freezed,
     Object? huaweiUrl = freezed,
   }) {
@@ -161,6 +179,14 @@ class __$$AppConfigImplCopyWithImpl<$Res>
           ? _value.playStoreUrl
           : playStoreUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      companyPortfolioUrl: freezed == companyPortfolioUrl
+          ? _value.companyPortfolioUrl
+          : companyPortfolioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      internetAccessPortal: freezed == internetAccessPortal
+          ? _value.internetAccessPortal
+          : internetAccessPortal // ignore: cast_nullable_to_non_nullable
+              as String?,
       appStoreUrl: freezed == appStoreUrl
           ? _value.appStoreUrl
           : appStoreUrl // ignore: cast_nullable_to_non_nullable
@@ -182,6 +208,8 @@ class _$AppConfigImpl extends _AppConfig {
       required this.latestVersion,
       this.currentVersion = "1.0.0",
       this.playStoreUrl,
+      this.companyPortfolioUrl,
+      this.internetAccessPortal,
       this.appStoreUrl,
       this.huaweiUrl})
       : super._();
@@ -201,13 +229,17 @@ class _$AppConfigImpl extends _AppConfig {
   @override
   final String? playStoreUrl;
   @override
+  final String? companyPortfolioUrl;
+  @override
+  final String? internetAccessPortal;
+  @override
   final String? appStoreUrl;
   @override
   final String? huaweiUrl;
 
   @override
   String toString() {
-    return 'AppConfig(underMaintenance: $underMaintenance, minVersion: $minVersion, latestVersion: $latestVersion, currentVersion: $currentVersion, playStoreUrl: $playStoreUrl, appStoreUrl: $appStoreUrl, huaweiUrl: $huaweiUrl)';
+    return 'AppConfig(underMaintenance: $underMaintenance, minVersion: $minVersion, latestVersion: $latestVersion, currentVersion: $currentVersion, playStoreUrl: $playStoreUrl, companyPortfolioUrl: $companyPortfolioUrl, internetAccessPortal: $internetAccessPortal, appStoreUrl: $appStoreUrl, huaweiUrl: $huaweiUrl)';
   }
 
   @override
@@ -225,6 +257,10 @@ class _$AppConfigImpl extends _AppConfig {
                 other.currentVersion == currentVersion) &&
             (identical(other.playStoreUrl, playStoreUrl) ||
                 other.playStoreUrl == playStoreUrl) &&
+            (identical(other.companyPortfolioUrl, companyPortfolioUrl) ||
+                other.companyPortfolioUrl == companyPortfolioUrl) &&
+            (identical(other.internetAccessPortal, internetAccessPortal) ||
+                other.internetAccessPortal == internetAccessPortal) &&
             (identical(other.appStoreUrl, appStoreUrl) ||
                 other.appStoreUrl == appStoreUrl) &&
             (identical(other.huaweiUrl, huaweiUrl) ||
@@ -233,8 +269,17 @@ class _$AppConfigImpl extends _AppConfig {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, underMaintenance, minVersion,
-      latestVersion, currentVersion, playStoreUrl, appStoreUrl, huaweiUrl);
+  int get hashCode => Object.hash(
+      runtimeType,
+      underMaintenance,
+      minVersion,
+      latestVersion,
+      currentVersion,
+      playStoreUrl,
+      companyPortfolioUrl,
+      internetAccessPortal,
+      appStoreUrl,
+      huaweiUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -257,6 +302,8 @@ abstract class _AppConfig extends AppConfig {
       required final String latestVersion,
       final String currentVersion,
       final String? playStoreUrl,
+      final String? companyPortfolioUrl,
+      final String? internetAccessPortal,
       final String? appStoreUrl,
       final String? huaweiUrl}) = _$AppConfigImpl;
   const _AppConfig._() : super._();
@@ -274,6 +321,10 @@ abstract class _AppConfig extends AppConfig {
   String get currentVersion;
   @override
   String? get playStoreUrl;
+  @override
+  String? get companyPortfolioUrl;
+  @override
+  String? get internetAccessPortal;
   @override
   String? get appStoreUrl;
   @override

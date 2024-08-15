@@ -25,7 +25,7 @@ class ColdLeadPage extends StatefulWidget {
 class _ColdLeadPageState extends State<ColdLeadPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
-      TabController(length: 3, vsync: this);
+      TabController(length: TaskFilterEnum.values.length, vsync: this);
   int tabIndex = 0;
 
   @override

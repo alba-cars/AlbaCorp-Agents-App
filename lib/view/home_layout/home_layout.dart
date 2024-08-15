@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/core/helpers/app_config_helper.dart';
+import 'package:real_estate_app/core/models/enums/quick_access_list_enum.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -12,12 +15,16 @@ import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
+import 'package:real_estate_app/view/home_layout/quick_access_button.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
 import '../../model/user.dart';
@@ -26,6 +33,7 @@ import '../../widgets/button.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';
 import '../listings_screen/listing_screen.dart';
+import 'kpis_layout_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.child, required this.location})
@@ -57,6 +65,29 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
+  String getGreeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning';
+    }
+    if (hour < 17) {
+      return 'Good Afternoon';
+    }
+    return 'Good Evening';
+  }
+
+  IconData getgreetingIcon() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return Icons.sunny_snowing;
+    }
+    if (hour < 17) {
+      return Icons.sunny;
+    }
+
+    return Icons.coffee;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.select<AuthBloc, User?>((bloc) => bloc.state.user);
@@ -66,78 +97,169 @@ class _HomeScreenState extends State<HomeScreen>
       drawer: Drawer(
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(4.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Image.asset(
-                    'assets/images/logo-black.png',
-                    width: 100,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0, left: 12),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              getgreetingIcon(),
+                              color: Colors.white,
+                            ),
+                            HorizontalSmallGap(),
+                            RichText(
+                                text: TextSpan(children: [
+                              TextSpan(
+                                text: 'Hey,\n',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall
+                                    ?.copyWith(
+                                        fontSize: 12, color: Colors.white),
+                              ),
+                              TextSpan(
+                                text: getGreeting(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                        fontSize: 16, color: Colors.white),
+                              )
+                            ])),
+                          ],
+                        ),
+                        Image.asset(
+                          'assets/images/logo-black.png',
+                          width: 100,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const VerticalSmallGap(),
-                if (user != null)
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(13),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
-                          const VerticalSmallGap(),
-                          InkWell(
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  bottomRight: Radius.circular(12)),
+                              image: isValidPhoto(user?.photo)
+                                  ? DecorationImage(
+                                      image: NetworkImage(user?.photo ?? ""))
+                                  : DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/person_placeholder.jpeg")),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          GestureDetector(
                             onTap: () {
-                              context.pushNamed('user_profile');
+                              launchUrlString(
+                                  "https://alba.homes/agents/${user?.id}");
                             },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 65,
-                                  height: 65,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey[100]!,
-                                  ),
-                                  child: S3Image(
-                                    url: user.photo,
-                                    errorWidget: Image.asset(
-                                        'assets/images/person_placeholder.jpeg'),
-                                  ),
-                                ),
-                                const SizedBox(width: 6),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
-                                      user.firstName.titleCase,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall
-                                          ?.apply(
-                                              color: const Color(0xFF000000),
-                                              fontWeightDelta: 2),
+                                    HeadingText(
+                                      text:
+                                          "${user?.firstName.pascalCase ?? ""} ${user?.lastName.pascalCase ?? ""}",
+                                      color: Colors.white,
                                     ),
+                                    HorizontalSmallGap(),
+                                    Icon(
+                                      Icons.open_in_browser_outlined,
+                                      color: Colors.white,
+                                      size: 16,
+                                    )
                                   ],
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                LabelText(
+                                  text: "${user?.phone ?? "Not available"}",
+                                  color: Colors.white,
                                 ),
                               ],
                             ),
                           ),
-                          const VerticalSmallGap(),
                         ],
                       ),
-                    ),
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Share.share(
+                                  "Hey, \n Check my profile \n https://alba.homes/agents/${user?.id}");
+                            },
+                            child: Icon(
+                              Icons.share,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ),
+                          VerticalSmallGap(),
+                        ],
+                      ),
+                    ],
                   ),
+                ),
+                VerticalSmallGap(),
+                Row(
+                  children: [
+                    HeadingText(
+                      text: "Quick Access",
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                SizedBox(
+                  height: 80,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (_, __) => SizedBox(
+                      width: 8,
+                    ),
+                    itemCount: QuickAccessEnumList.values.length,
+                    itemBuilder: (_, pos) => QuickAccessButton(
+                        text: QuickAccessEnumList.values[pos].getName(),
+                        iconData: QuickAccessEnumList.values[pos].getIcon(),
+                        action: () {
+                          QuickAccessEnumList.values[pos].performAction();
+                        }),
+                  ),
+                ), // if (user != null)
+
                 const VerticalSmallGap(),
+                KpisLayoutWidget(),
                 const VerticalSmallGap(),
                 Builder(builder: (context) {
                   return Column(
@@ -256,6 +378,32 @@ class _HomeScreenState extends State<HomeScreen>
                           }
                         },
                       ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      FutureBuilder(
+                          future: AppConfigHelper().getAppInfo(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError || !snapshot.hasData) {
+                              return SizedBox();
+                            }
+                            return Column(
+                              children: [
+                                LabelText(
+                                  text:
+                                      "Version: ${snapshot.data?.currentVersion ?? "1.0.0"}",
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                SmallText(
+                                  text: "Crafted with ❤︎ from Alba corp",
+                                  color: Colors.white,
+                                )
+                              ],
+                            );
+                          }),
                     ],
                   );
                 }),
@@ -461,6 +609,13 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
     );
+  }
+
+  bool isValidPhoto(String? photo) {
+    if (photo == null) {
+      return false;
+    }
+    return photo.isEmpty ? true : false;
   }
 }
 

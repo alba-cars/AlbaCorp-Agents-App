@@ -78,6 +78,8 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
         };
       case TaskFilterEnum.Favourites:
         return {"leadSourceType": "hot", "leadStatus": "Prospect"};
+      case TaskFilterEnum.Expiring:
+        return {"leadSourceType": "hot", "expiring": true};
     }
   }
 

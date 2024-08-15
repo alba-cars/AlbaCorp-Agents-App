@@ -16,6 +16,8 @@ abstract class RegisterModules {
       // 'http://10.0.2.2:4000/api/';
       // 'http://172.15.10.247ß:4000/api/';
       'http://192.168.2.160:4000/api/';
+  // 'http://172.15.10.247:4000/api/';
+  // 'http://192.168.2.160:4000/api/';
   // 'https://backend.alba.homes/api/';
   @Environment('Prod')
   @Named('AwsBucket')

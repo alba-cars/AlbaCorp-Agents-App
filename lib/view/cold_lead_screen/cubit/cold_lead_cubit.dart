@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/model/paginator.dart';
-import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
 
@@ -77,6 +76,8 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
         };
       case TaskFilterEnum.Favourites:
         return {"leadSourceType": "cold", "leadStatus": "Prospect"};
+      case TaskFilterEnum.Expiring:
+        return {"leadSourceType": "cold", "expiring": true};
     }
   }
 
