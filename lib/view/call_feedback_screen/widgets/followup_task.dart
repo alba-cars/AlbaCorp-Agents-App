@@ -19,7 +19,6 @@ import '../../../widgets/fields/time_field.dart';
 import '../../../widgets/fields/wrap_select_field.dart';
 import '../../../widgets/space.dart';
 import '../../enquiries_screen/enquiries_screen.dart';
-import '../../task_detail_screen/cubit/task_detail_cubit.dart';
 import '../../task_detail_screen/widgets/feedback_dialog.dart';
 
 class FollowUpTask extends StatefulWidget {

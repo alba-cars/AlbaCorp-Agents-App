@@ -19,5 +19,6 @@ class CallFeedbackState with _$CallFeedbackState {
     String? getActivitiesError,
     String? attachLastPendingActivityToTheCall,
     @Default(false) bool requestFollowUpTask,
+    @Default(false) bool leadIsReAssignable,
   }) = _CallFeedbackState;
 }

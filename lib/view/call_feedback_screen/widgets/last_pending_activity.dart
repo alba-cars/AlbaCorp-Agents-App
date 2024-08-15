@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cubit.dart';
 
 import '../../../util/color_category.dart';
@@ -23,7 +25,6 @@ class LastPendingActivity extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TitleText(text: "Pending Activity"),
               BlocSelector<CallFeedbackCubit, CallFeedbackState, Activity?>(
                   selector: (state) {
                 final ls =
@@ -33,33 +34,54 @@ class LastPendingActivity extends StatelessWidget {
                 }
                 return ls.first;
               }, builder: (context, activity) {
-                if (activity == null) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: SmallText(
-                      text: "No Pending activity for this lead.",
-                    ),
-                  );
+                if (activity == null &&
+                    context
+                            .read<CallFeedbackCubit>()
+                            .state
+                            .lead
+                            ?.currentAgent
+                            ?.id !=
+                        getIt<AuthBloc>().state.agent?.id) {
+                  return SizedBox();
                 }
-                return Column(
-                  children: [
-                    ActivityListItem(
-                      activity: activity,
-                    ),
-                    CheckboxListTile.adaptive(
-                        contentPadding: EdgeInsets.zero,
-                        value: context.select((CallFeedbackCubit c) =>
-                            c.state.attachLastPendingActivityToTheCall != null),
-                        title: NormalText(
-                          text: "Attach and Complete this task",
-                        ),
-                        onChanged: (val) {
-                          context
-                              .read<CallFeedbackCubit>()
-                              .setAttachLastPendingActivity(
-                                  (val ?? true) ? activity.id : null);
-                        })
-                  ],
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Column(
+                    children: [
+                      TitleText(text: "Pending Activity"),
+                      ...(activity == null)
+                          ? [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: SmallText(
+                                  text: "No Pending activity for this lead.",
+                                ),
+                              )
+                            ]
+                          : [
+                              ActivityListItem(
+                                activity: activity,
+                              ),
+                              CheckboxListTile.adaptive(
+                                  contentPadding: EdgeInsets.zero,
+                                  value: context.select((CallFeedbackCubit c) =>
+                                      c.state
+                                          .attachLastPendingActivityToTheCall !=
+                                      null),
+                                  title: NormalText(
+                                    text: "Attach and Complete this task",
+                                  ),
+                                  onChanged: (val) {
+                                    context
+                                        .read<CallFeedbackCubit>()
+                                        .setAttachLastPendingActivity(
+                                            (val ?? true) ? activity.id : null);
+                                  })
+                            ]
+                    ],
+                  ),
                 );
               })
             ],

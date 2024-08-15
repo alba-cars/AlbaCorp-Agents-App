@@ -17,52 +17,54 @@ class EarningsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<EarningsCubit>()..getAgentEarnings(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-        child: Container(
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              color: Color(0xFFaed6f1).withOpacity(.2),
-              borderRadius: BorderRadius.circular(8)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TitleText(
-                    text: "Your Commission Earnings",
-                    color: Colors.indigoAccent,
-                  ),
-                  VerticalSmallGap(),
-                  BlocBuilder<EarningsCubit, EarningsState>(
-                    builder: (context, state) {
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            child: getWidget(context, state),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: Color(0xFF85c1e9).withOpacity(.5),
-                    borderRadius: BorderRadius.circular(60)),
-                child: Lottie.asset("assets/lottie/wallet-lottie.json",
-                    height: 20, width: 20),
-              ),
-            ],
+      child: Builder(builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+          child: Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                color: Color(0xFFaed6f1).withOpacity(.2),
+                borderRadius: BorderRadius.circular(8)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TitleText(
+                      text: "Your Commission Earnings",
+                      color: Colors.indigoAccent,
+                    ),
+                    VerticalSmallGap(),
+                    BlocBuilder<EarningsCubit, EarningsState>(
+                      builder: (context, state) {
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              child: getWidget(context, state),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Color(0xFF85c1e9).withOpacity(.5),
+                      borderRadius: BorderRadius.circular(60)),
+                  child: Lottie.asset("assets/lottie/wallet-lottie.json",
+                      height: 20, width: 20),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 
@@ -136,8 +138,12 @@ class EarningsWidget extends StatelessWidget {
           ],
         );
       case AppStatus.loading:
-        return LinearProgressIndicator(
-          color: Colors.white,
+        return SizedBox(
+          height: 25,
+          width: 25,
+          child: LinearProgressIndicator(
+            color: Colors.white,
+          ),
         );
       default:
         return SizedBox();

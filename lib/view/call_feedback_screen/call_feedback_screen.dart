@@ -19,6 +19,7 @@ import 'package:real_estate_app/view/call_feedback_screen/widgets/activity_list.
 import 'package:real_estate_app/view/call_feedback_screen/widgets/add_lead_widget.dart';
 import 'package:real_estate_app/view/call_feedback_screen/widgets/followup_task.dart';
 import 'package:real_estate_app/view/call_feedback_screen/widgets/last_pending_activity.dart';
+import 'package:real_estate_app/view/call_feedback_screen/widgets/reassign_lead.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -245,17 +246,9 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                           return SizedBox();
                         },
                       ),
-                      VerticalSmallGap(
-                        adjustment: 2,
-                      ),
                       LastPendingActivity(),
-                      VerticalSmallGap(
-                        adjustment: 2,
-                      ),
                       ActivityListCallFeedback(),
-                      VerticalSmallGap(
-                        adjustment: 2,
-                      ),
+                      ReAssignLead(),
                       BlocSelector<CallFeedbackCubit, CallFeedbackState,
                           String?>(
                         selector: (state) {
@@ -336,75 +329,79 @@ class LeadCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16.h),
-          boxShadow: [
-            BoxShadow(color: shadowColor, offset: Offset(-4, 5), blurRadius: 11)
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16.h),
+            boxShadow: [
+              BoxShadow(
+                  color: shadowColor, offset: Offset(-4, 5), blurRadius: 11)
+            ]),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
+          child: Row(children: [
+            Container(
+              width: 70,
+              height: 60,
+              padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+              decoration: BoxDecoration(
+                  // border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[100]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  NormalText(
+                    text: lead.leadSource,
+                    textAlign: TextAlign.center,
+                    color: Colors.grey[800]!,
+                  )
+                ],
+              ),
+            ),
+            HorizontalSmallGap(),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 4.h, vertical: 1.h),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blueGrey),
+                            borderRadius: BorderRadius.circular(4),
+                            color: Colors.blueGrey[100]),
+                        child: SmallText(text: lead.leadStatus?.name ?? ''),
+                      ),
+                      HorizontalSmallGap(),
+                      if (hotLeads.contains(lead.leadSource))
+                        Image.asset(
+                          'assets/images/flame.png',
+                          height: 17,
+                          width: 20,
+                        )
+                    ],
+                  ),
+                  VerticalSmallGap(
+                    adjustment: .2,
+                  ),
+                  LabelText(text: "${lead.firstName} ${lead.lastName}"),
+                  if (lead.currentAgent != null)
+                    (lead.currentAgent?.id != getIt<AuthBloc>().state.agent?.id)
+                        ? NormalText(
+                            text:
+                                "Agent: ${lead.currentAgent?.user.firstName} ${lead.currentAgent?.user.lastName ?? ''}")
+                        : NormalText(text: "You are assigned to this lead")
+                ],
+              ),
+            ),
           ]),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
-        child: Row(children: [
-          Container(
-            width: 70,
-            height: 60,
-            padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
-            decoration: BoxDecoration(
-                // border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[100]),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                NormalText(
-                  text: lead.leadSource,
-                  textAlign: TextAlign.center,
-                  color: Colors.grey[800]!,
-                )
-              ],
-            ),
-          ),
-          HorizontalSmallGap(),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 4.h, vertical: 1.h),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueGrey),
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.blueGrey[100]),
-                      child: SmallText(text: lead.leadStatus?.name ?? ''),
-                    ),
-                    HorizontalSmallGap(),
-                    if (hotLeads.contains(lead.leadSource))
-                      Image.asset(
-                        'assets/images/flame.png',
-                        height: 17,
-                        width: 20,
-                      )
-                  ],
-                ),
-                VerticalSmallGap(
-                  adjustment: .2,
-                ),
-                LabelText(text: "${lead.firstName} ${lead.lastName}"),
-                if (lead.currentAgent != null)
-                  (lead.currentAgent?.id != getIt<AuthBloc>().state.agent?.id)
-                      ? NormalText(
-                          text:
-                              "Agent: ${lead.currentAgent?.user.firstName} ${lead.currentAgent?.user.lastName ?? ''}")
-                      : NormalText(text: "You are assigned to this lead")
-              ],
-            ),
-          ),
-        ]),
+        ),
       ),
     );
   }

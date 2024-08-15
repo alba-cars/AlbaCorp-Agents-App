@@ -15,7 +15,8 @@ abstract class ActivityRepo {
   Future<Result<bool>> createCallFeedbackActivity(
       {required String leadId,
       required String feedback,
-      String? attachedActivityId});
+      String? attachedActivityId,
+      bool reAssignLeadtoAgent = false});
   Future<Result<Activity>> getActivity({
     required String activityId,
   });

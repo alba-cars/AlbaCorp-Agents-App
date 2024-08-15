@@ -274,6 +274,22 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                     return null;
                                   },
                                 ),
+                              if (value == "Invalid Number" ||
+                                  value == "Do not Call")
+                                FormBuilderCheckbox(
+                                    name: 'acknowledgement',
+                                    validator: (value) {
+                                      if (value != true) {
+                                        return "Please acknwoledge your action";
+                                      }
+                                    },
+                                    contentPadding: EdgeInsets.zero,
+                                    initialValue: false,
+                                    title: NormalText(
+                                      text:
+                                          "Acknowledge your action by checking the box",
+                                    ),
+                                    onChanged: (val) {}),
                               if (feedBackValue.value == 'Interested' ||
                                   feedBackValue.value == 'Very Interested') ...[
                                 LabelText(

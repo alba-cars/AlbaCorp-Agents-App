@@ -331,13 +331,15 @@ class ActivityData implements ActivityRepo {
   Future<Result<bool>> createCallFeedbackActivity(
       {required String leadId,
       required String feedback,
-      String? attachedActivityId}) async {
+      String? attachedActivityId,
+      bool reAssignLeadtoAgent = false}) async {
     try {
       final res =
           await _dio.post('/v1/activities/call-feedback-activity', data: {
         'lead_id': leadId,
         'feedback': feedback,
-        'attachedActivityId': attachedActivityId
+        'attachedActivityId': attachedActivityId,
+        "reAssignLeadtoAgent": reAssignLeadtoAgent
       });
 
       return Success(res.data['requestFollowUp'] ?? true);

@@ -33,6 +33,7 @@ mixin _$CallFeedbackState {
   String? get attachLastPendingActivityToTheCall =>
       throw _privateConstructorUsedError;
   bool get requestFollowUpTask => throw _privateConstructorUsedError;
+  bool get leadIsReAssignable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CallFeedbackStateCopyWith<CallFeedbackState> get copyWith =>
@@ -61,7 +62,8 @@ abstract class $CallFeedbackStateCopyWith<$Res> {
       AppStatus getActivitiesStatus,
       String? getActivitiesError,
       String? attachLastPendingActivityToTheCall,
-      bool requestFollowUpTask});
+      bool requestFollowUpTask,
+      bool leadIsReAssignable});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -95,6 +97,7 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
     Object? getActivitiesError = freezed,
     Object? attachLastPendingActivityToTheCall = freezed,
     Object? requestFollowUpTask = null,
+    Object? leadIsReAssignable = null,
   }) {
     return _then(_value.copyWith(
       checkLeadStatus: null == checkLeadStatus
@@ -162,6 +165,10 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
           ? _value.requestFollowUpTask
           : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
               as bool,
+      leadIsReAssignable: null == leadIsReAssignable
+          ? _value.leadIsReAssignable
+          : leadIsReAssignable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -202,7 +209,8 @@ abstract class _$$CallFeedbackStateImplCopyWith<$Res>
       AppStatus getActivitiesStatus,
       String? getActivitiesError,
       String? attachLastPendingActivityToTheCall,
-      bool requestFollowUpTask});
+      bool requestFollowUpTask,
+      bool leadIsReAssignable});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -235,6 +243,7 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
     Object? getActivitiesError = freezed,
     Object? attachLastPendingActivityToTheCall = freezed,
     Object? requestFollowUpTask = null,
+    Object? leadIsReAssignable = null,
   }) {
     return _then(_$CallFeedbackStateImpl(
       checkLeadStatus: null == checkLeadStatus
@@ -302,6 +311,10 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
           ? _value.requestFollowUpTask
           : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
               as bool,
+      leadIsReAssignable: null == leadIsReAssignable
+          ? _value.leadIsReAssignable
+          : leadIsReAssignable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -325,7 +338,8 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
       this.getActivitiesStatus = AppStatus.init,
       this.getActivitiesError,
       this.attachLastPendingActivityToTheCall,
-      this.requestFollowUpTask = false})
+      this.requestFollowUpTask = false,
+      this.leadIsReAssignable = false})
       : _leadSources = leadSources,
         _val = val,
         _activities = activities;
@@ -390,10 +404,13 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
   @override
   @JsonKey()
   final bool requestFollowUpTask;
+  @override
+  @JsonKey()
+  final bool leadIsReAssignable;
 
   @override
   String toString() {
-    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, attachLastPendingActivityToTheCall: $attachLastPendingActivityToTheCall, requestFollowUpTask: $requestFollowUpTask)';
+    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, attachLastPendingActivityToTheCall: $attachLastPendingActivityToTheCall, requestFollowUpTask: $requestFollowUpTask, leadIsReAssignable: $leadIsReAssignable)';
   }
 
   @override
@@ -431,7 +448,9 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
                 other.attachLastPendingActivityToTheCall ==
                     attachLastPendingActivityToTheCall) &&
             (identical(other.requestFollowUpTask, requestFollowUpTask) ||
-                other.requestFollowUpTask == requestFollowUpTask));
+                other.requestFollowUpTask == requestFollowUpTask) &&
+            (identical(other.leadIsReAssignable, leadIsReAssignable) ||
+                other.leadIsReAssignable == leadIsReAssignable));
   }
 
   @override
@@ -452,7 +471,8 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
       getActivitiesStatus,
       getActivitiesError,
       attachLastPendingActivityToTheCall,
-      requestFollowUpTask);
+      requestFollowUpTask,
+      leadIsReAssignable);
 
   @JsonKey(ignore: true)
   @override
@@ -479,7 +499,8 @@ abstract class _CallFeedbackState implements CallFeedbackState {
       final AppStatus getActivitiesStatus,
       final String? getActivitiesError,
       final String? attachLastPendingActivityToTheCall,
-      final bool requestFollowUpTask}) = _$CallFeedbackStateImpl;
+      final bool requestFollowUpTask,
+      final bool leadIsReAssignable}) = _$CallFeedbackStateImpl;
 
   @override
   AppStatus get checkLeadStatus;
@@ -513,6 +534,8 @@ abstract class _CallFeedbackState implements CallFeedbackState {
   String? get attachLastPendingActivityToTheCall;
   @override
   bool get requestFollowUpTask;
+  @override
+  bool get leadIsReAssignable;
   @override
   @JsonKey(ignore: true)
   _$$CallFeedbackStateImplCopyWith<_$CallFeedbackStateImpl> get copyWith =>

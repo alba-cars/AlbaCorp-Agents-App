@@ -34,52 +34,57 @@ class _ColdLeadPageState extends State<ColdLeadPage>
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          ListTile(
-            title: HeadingText(text: "Explorer Leads"),
-            // trailing: SizedBox(
-            //   width: 160,
-            //   child: OutlinedButton(
-            //     style: OutlinedButton.styleFrom(padding: EdgeInsets.all(2)),
-            //     onPressed: () {
-            //       context.pushNamed(LeadsExplorerScreen.routeName);
-            //     },
-            //     child: Text('Go to explorer'),
-            //   ),
-            // ),
-            trailing: InkWell(
-              onTap: () {
-                context.pushNamed(LeadsExplorerScreen.routeName);
-              },
-              child: SizedBox(
-                height: 40,
-                width: 150,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: Theme.of(context).colorScheme.secondary),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.explore,
-                        color: Colors.white,
-                      ),
-                      HorizontalSmallGap(),
-                      Text(
-                        "Go to explorer",
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.onSecondary),
-                      ),
-                    ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: ListTile(
+              title: HeadingText(text: "Explorer Leads"),
+              // trailing: SizedBox(
+              //   width: 160,
+              //   child: OutlinedButton(
+              //     style: OutlinedButton.styleFrom(padding: EdgeInsets.all(2)),
+              //     onPressed: () {
+              //       context.pushNamed(LeadsExplorerScreen.routeName);
+              //     },
+              //     child: Text('Go to explorer'),
+              //   ),
+              // ),
+              trailing: InkWell(
+                onTap: () {
+                  context.pushNamed(LeadsExplorerScreen.routeName);
+                },
+                child: SizedBox(
+                  height: 40,
+                  width: 150,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Theme.of(context).colorScheme.secondary),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.explore,
+                          color: Colors.white,
+                        ),
+                        HorizontalSmallGap(),
+                        Text(
+                          "Go to explorer",
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge
+                              ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondary),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
+              contentPadding: EdgeInsets.zero,
             ),
-            contentPadding: EdgeInsets.zero,
-          ),
-          SizedBox(
-            height: 24,
           ),
           AppTabBar(
             backgroundColor: Theme.of(context).colorScheme.primaryContainer,

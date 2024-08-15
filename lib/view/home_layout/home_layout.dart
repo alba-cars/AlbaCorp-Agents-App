@@ -206,7 +206,14 @@ class _HomeScreenState extends State<HomeScreen>
                               },
                             ),
                           ]),
-
+                      CustomListTileWithIcon(
+                        title: 'My Leads',
+                        iconImagePath: 'assets/images/leads.png',
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                          context.pushNamed(LeadsScreen.routeName);
+                        },
+                      ),
                       CustomListTileWithIcon(
                         title: 'Deals',
                         iconImagePath: 'assets/images/deal.png',
@@ -215,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen>
                           context.pushNamed(DealsScreen.routeName);
                         },
                       ),
+
                       // CustomListTileWithIcon(
                       //   title: 'Tickets',
                       //   iconImagePath: 'assets/images/ticket.png',

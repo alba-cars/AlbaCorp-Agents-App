@@ -117,19 +117,19 @@ class LeadData implements LeadRepo {
   }
 
   @override
-  Future<Result<Lead?>> getLeadByPhone({required String phone}) async {
+  Future<Result<(Lead, bool)?>> getLeadByPhone({required String phone}) async {
     try {
-      String url = 'v1/users/getUserByPhone';
+      String url = 'v1/users/check-exists-and-reAssignable';
 
-      final response = await _dio.post(url, data: {'phone': phone});
+      final response = await _dio.get(url, queryParameters: {'phone': phone});
       final data = response.data;
-      if (data == null || data["error"] != null) {
+      if (data == null || data?["error"] != null) {
         return Success(null);
       }
-      final lead = Lead.fromJson(data);
-      return Success(
-        lead,
-      );
+      final lead = Lead.fromJson(data['user']);
+      final reAssignable = data['reAssignable'];
+      Logger().d("lead data is reAssignable : $reAssignable");
+      return Success((lead, reAssignable));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

@@ -44,17 +44,28 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
       getIt<SharedPreferences>().setString('calledNumber', numberEntered);
     }
 
-    if (number != null && number != 'IPHONE' && number != 'Unknown' && number != "PROPERTY_FINDER") {
+    if (number != null &&
+        number != 'IPHONE' &&
+        number != 'Unknown' &&
+        number != "PROPERTY_FINDER") {
       String validatedNumber = number.replaceAll('+', '');
       if (validatedNumber.startsWith('0')) {
         validatedNumber = validatedNumber.replaceFirst('0', '');
       }
       final result = await _leadRepo.getLeadByPhone(phone: validatedNumber);
       switch (result) {
-        case (Success<Lead?> s):
+        case (Success<(Lead, bool)?> s):
+          if (s.value == null) {
+            emit(state.copyWith(
+                lead: null,
+                checkLeadStatus: AppStatus.success,
+                number: validatedNumber));
+          }
+          final (Lead lead, bool reAssignable) = s.value!;
           emit(state.copyWith(
-              lead: s.value,
+              lead: lead,
               checkLeadStatus: AppStatus.success,
+              leadIsReAssignable: reAssignable,
               number: validatedNumber));
           getLeadActivities();
           break;
@@ -75,7 +86,8 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
       final result = await _activityRepo.createCallFeedbackActivity(
           leadId: state.lead!.id,
           feedback: feedback,
-          attachedActivityId: state.attachLastPendingActivityToTheCall);
+          attachedActivityId: state.attachLastPendingActivityToTheCall,
+          reAssignLeadtoAgent: state.leadIsReAssignable);
       switch (result) {
         case (Success s):
           if (s.value) {
