@@ -25,7 +25,7 @@ class ColdLeadPage extends StatefulWidget {
 class _ColdLeadPageState extends State<ColdLeadPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
-      TabController(length: 3, vsync: this);
+      TabController(length: TaskFilterEnum.values.length, vsync: this);
   int tabIndex = 0;
 
   @override
@@ -36,16 +36,6 @@ class _ColdLeadPageState extends State<ColdLeadPage>
         children: [
           ListTile(
             title: HeadingText(text: "Explorer Leads"),
-            // trailing: SizedBox(
-            //   width: 160,
-            //   child: OutlinedButton(
-            //     style: OutlinedButton.styleFrom(padding: EdgeInsets.all(2)),
-            //     onPressed: () {
-            //       context.pushNamed(LeadsExplorerScreen.routeName);
-            //     },
-            //     child: Text('Go to explorer'),
-            //   ),
-            // ),
             trailing: InkWell(
               onTap: () {
                 context.pushNamed(LeadsExplorerScreen.routeName);

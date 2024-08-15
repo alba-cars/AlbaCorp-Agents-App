@@ -15,7 +15,7 @@ class ColdLeadState with _$ColdLeadState {
   }) = _ColdLeadState;
 }
 
-enum TaskFilterEnum { New, FollowUp, Favourites }
+enum TaskFilterEnum { New, FollowUp, Favourites, Expiring }
 
 extension TaskFilterEnumExtension on TaskFilterEnum {
   String getName() {
@@ -26,6 +26,8 @@ extension TaskFilterEnumExtension on TaskFilterEnum {
         return "Follow Up";
       case TaskFilterEnum.Favourites:
         return "Favourites";
+      case TaskFilterEnum.Expiring:
+        return "Expiring";
     }
   }
 }

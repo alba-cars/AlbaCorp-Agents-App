@@ -13,6 +13,8 @@ _$AppConfigImpl _$$AppConfigImplFromJson(Map<String, dynamic> json) =>
       latestVersion: json['latestVersion'] as String,
       currentVersion: json['currentVersion'] as String? ?? "1.0.0",
       playStoreUrl: json['playStoreUrl'] as String?,
+      companyPortfolioUrl: json['companyPortfolioUrl'] as String?,
+      internetAccessPortal: json['internetAccessPortal'] as String?,
       appStoreUrl: json['appStoreUrl'] as String?,
       huaweiUrl: json['huaweiUrl'] as String?,
     );
@@ -24,6 +26,8 @@ Map<String, dynamic> _$$AppConfigImplToJson(_$AppConfigImpl instance) =>
       'latestVersion': instance.latestVersion,
       'currentVersion': instance.currentVersion,
       'playStoreUrl': instance.playStoreUrl,
+      'companyPortfolioUrl': instance.companyPortfolioUrl,
+      'internetAccessPortal': instance.internetAccessPortal,
       'appStoreUrl': instance.appStoreUrl,
       'huaweiUrl': instance.huaweiUrl,
     };

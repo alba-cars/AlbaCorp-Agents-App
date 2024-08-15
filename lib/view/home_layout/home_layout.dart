@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/core/helpers/app_config_helper.dart';
+import 'package:real_estate_app/core/models/enums/quick_access_list_enum.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -21,6 +22,9 @@ import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
 import '../../model/user.dart';
@@ -155,43 +159,69 @@ class _HomeScreenState extends State<HomeScreen>
                             width: 60,
                             height: 60,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    bottomRight: Radius.circular(12)),
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://assets.architecturaldigest.in/photos/63806da6d2c4a1a597b273fd/1:1/w_2896,h_2896,c_limit/1442809583"),
-                                    fit: BoxFit.cover)),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  bottomRight: Radius.circular(12)),
+                              image: isValidPhoto(user?.photo)
+                                  ? DecorationImage(
+                                      image: NetworkImage(user?.photo ?? ""))
+                                  : DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/person_placeholder.jpeg")),
+                            ),
                           ),
                           SizedBox(
                             width: 12,
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              HeadingText(
-                                text:
-                                    "${user?.firstName.pascalCase ?? ""} ${user?.lastName.pascalCase ?? ""}",
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              LabelText(
-                                text: "${user?.phone ?? "Not available"}",
-                                color: Colors.white,
-                              ),
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              launchUrlString(
+                                  "https://alba.homes/agents/${user?.id}");
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    HeadingText(
+                                      text:
+                                          "${user?.firstName.pascalCase ?? ""} ${user?.lastName.pascalCase ?? ""}",
+                                      color: Colors.white,
+                                    ),
+                                    HorizontalSmallGap(),
+                                    Icon(
+                                      Icons.open_in_browser_outlined,
+                                      color: Colors.white,
+                                      size: 16,
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                LabelText(
+                                  text: "${user?.phone ?? "Not available"}",
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                       Column(
                         children: [
-                          Icon(
-                            Icons.share,
-                            color: Colors.white,
-                            size: 24,
+                          InkWell(
+                            onTap: () {
+                              Share.share(
+                                  "Hey, \n Check my profile \n https://alba.homes/agents/${user?.id}");
+                            },
+                            child: Icon(
+                              Icons.share,
+                              color: Colors.white,
+                              size: 24,
+                            ),
                           ),
                           VerticalSmallGap(),
                         ],
@@ -213,95 +243,21 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 SizedBox(
                   height: 80,
-                  child: ListView(
+                  child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      QuickAccessButton(
-                          text: "Alba Homes \nWebsite",
-                          iconData: CupertinoIcons.globe,
-                          action: () {
-                            // TODO: Navigate to alba homes web page
-                          }),
-                      HorizontalSmallGap(),
-                      QuickAccessButton(
-                          text: "Share company\nPortoflio",
-                          iconData: Icons.share,
-                          action: () {
-                            // TODO: Share company profile using share app
-                          }),
-                      HorizontalSmallGap(),
-                      QuickAccessButton(
-                          text: "Internet access",
-                          iconData: Icons.signal_wifi_0_bar,
-                          action: () {
-                            // TODO: Navigate to internet access
-                          }),
-                      // HorizontalSmallGap(),
-                      // QuickAccessButton(
-                      //     text: "Alba Homes Website",
-                      //     iconData: Icons.web,
-                      //     action: () {
-                      //       // TODO: Navigate to alba homes web page
-                      //     }),
-                    ],
+                    separatorBuilder: (_, __) => SizedBox(
+                      width: 8,
+                    ),
+                    itemCount: QuickAccessEnumList.values.length,
+                    itemBuilder: (_, pos) => QuickAccessButton(
+                        text: QuickAccessEnumList.values[pos].getName(),
+                        iconData: QuickAccessEnumList.values[pos].getIcon(),
+                        action: () {
+                          QuickAccessEnumList.values[pos].performAction();
+                        }),
                   ),
                 ), // if (user != null)
-                //   Container(
-                //     decoration: BoxDecoration(
-                //       color: Theme.of(context).colorScheme.background,
-                //       borderRadius: BorderRadius.circular(13),
-                //     ),
-                //     child: Padding(
-                //       padding: const EdgeInsets.symmetric(
-                //           horizontal: 15, vertical: 8),
-                //       child: Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           const VerticalSmallGap(),
-                //           InkWell(
-                //             onTap: () {
-                //               context.pushNamed('user_profile');
-                //             },
-                //             child: Row(
-                //               crossAxisAlignment: CrossAxisAlignment.center,
-                //               children: [
-                //                 Container(
-                //                   width: 65,
-                //                   height: 65,
-                //                   clipBehavior: Clip.hardEdge,
-                //                   decoration: BoxDecoration(
-                //                     shape: BoxShape.circle,
-                //                     color: Colors.grey[100]!,
-                //                   ),
-                //                   child: S3Image(
-                //                     url: user.photo,
-                //                     errorWidget: Image.asset(
-                //                         'assets/images/person_placeholder.jpeg'),
-                //                   ),
-                //                 ),
-                //                 const SizedBox(width: 6),
-                //                 Column(
-                //                   crossAxisAlignment: CrossAxisAlignment.start,
-                //                   children: [
-                //                     Text(
-                //                       user.firstName.titleCase,
-                //                       style: Theme.of(context)
-                //                           .textTheme
-                //                           .titleSmall
-                //                           ?.apply(
-                //                               color: const Color(0xFF000000),
-                //                               fontWeightDelta: 2),
-                //                     ),
-                //                   ],
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //           const VerticalSmallGap(),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
+
                 const VerticalSmallGap(),
                 KpisLayoutWidget(),
                 const VerticalSmallGap(),
@@ -645,6 +601,13 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
     );
+  }
+
+  bool isValidPhoto(String? photo) {
+    if (photo == null) {
+      return false;
+    }
+    return photo.isEmpty ? true : false;
   }
 }
 
