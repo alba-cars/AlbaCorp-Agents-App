@@ -340,7 +340,7 @@ class ActivityData implements ActivityRepo {
         'attachedActivityId': attachedActivityId
       });
 
-      return Success(res.data['requestFollowUp']);
+      return Success(res.data['requestFollowUp'] ?? true);
     } catch (e, stack) {
       return onError(e, stack, log);
     }

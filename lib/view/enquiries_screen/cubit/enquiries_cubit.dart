@@ -61,7 +61,11 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
   Map<String, dynamic> getPayload(TaskFilterEnum filterType) {
     switch (filterType) {
       case TaskFilterEnum.New:
-        return {"leadSourceType": "hot", "leadStatus": "Fresh"};
+        return {
+          "leadSourceType": "hot",
+          "leadStatus": "Fresh",
+          "sortBy": 'latest'
+        };
       case TaskFilterEnum.FollowUp:
         DateTime d = DateTime.now();
         return {

@@ -34,19 +34,23 @@ class PhoneStateReceiver : BroadcastReceiver() {
                     Log.d("flutter", "Incoming call from $phoneNumber")
                     val numberToSave = phoneNumber ?: "Unknown"
                     preferences.edit().putString("flutter.call", numberToSave).apply()
+                    preferences.edit().putString("flutter.CallDirection", "incoming").apply()
                 }
                 TelephonyManager.EXTRA_STATE_IDLE -> {
                     Log.d("flutter", "Call ended with $phoneNumber")
                     val savedNumber = preferences.getString("flutter.call", null)
                     if (savedNumber != null) {
-                        OverlayManager.showOverlay(context, savedNumber)
+                        OverlayManager.showOverlay(context, savedNumber,preferences)
                     }
                 }
                 TelephonyManager.EXTRA_STATE_OFFHOOK->{
                      Log.d("flutter", "Call offhook with $phoneNumber")
                      if(phoneNumber != null){
+
                       val numberToSave = phoneNumber 
                     preferences.edit().putString("flutter.call", numberToSave).apply()
+                    preferences.edit().putString("flutter.CallDirection", "outgoing").apply()
+                    
                      }
                 }
             }
@@ -62,7 +66,12 @@ object OverlayManager {
     private var windowManager: WindowManager? = null
     private var overlayView: View? = null
 
-    fun showOverlay(context: Context, number: String) {
+    fun showOverlay(context: Context, number: String,preferences:SharedPreferences) {
+        if(number == "042815555" || number == "+97142815555"){
+            preferences.edit().putString("flutter.call", "PROPERTY_FINDER").apply()
+            startActivity(context)
+            return;
+        }
         if (overlayView != null) {
             // If an overlay is already showing, remove it first
             removeOverlay()
@@ -108,20 +117,7 @@ object OverlayManager {
             preferences.edit().putString("flutter.calledNumber", number.replace("tel:", "")).apply()
             preferences.edit().remove("flutter.call").apply()
 
-            if (!MyApplication.isActivityVisible()) {
-                Intent().also { intents ->
-                                intents.component = ComponentName(
-                                    "com.alba.agent",
-                                    "com.alba.agent.MainActivity"
-                                )
-                                intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                context.startActivity(intents)
-                            }
-                //val intent = Intent(context, MainActivity::class.java).apply {
-                 //   addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                //}
-                //context.startActivity(intent)
-            }
+            startActivity(context)
             removeOverlay()
         }
     }
@@ -136,5 +132,22 @@ object OverlayManager {
         } catch (e: IllegalArgumentException) {
             Log.e("OverlayManager", "View not attached to WindowManager", e)
         }
+    }
+
+    fun startActivity(context: Context,){
+        if (!MyApplication.isActivityVisible()) {
+                Intent().also { intents ->
+                                intents.component = ComponentName(
+                                    "com.alba.agent",
+                                    "com.alba.agent.MainActivity"
+                                )
+                                intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity(intents)
+                            }
+                //val intent = Intent(context, MainActivity::class.java).apply {
+                 //   addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                //}
+                //context.startActivity(intent)
+            }
     }
 }

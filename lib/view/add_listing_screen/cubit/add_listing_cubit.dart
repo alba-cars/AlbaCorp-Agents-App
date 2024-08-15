@@ -66,7 +66,7 @@ class AddListingCubit extends Cubit<AddListingState> {
           "category": "Listing Acquired",
           "type": "Listing",
           "new_listing_request_id": s.value.id,
-          // "agreedSalePrice": s.value.price,
+          "agreedSalePrice": s.value.price,
           // "agreedCommission": values['agreedCommission'],
           'user_id': s.value.userId
         });

@@ -353,6 +353,36 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                       propertyTypesExcludeBedsBaths.contains(propertyType)
                           ? false
                           : true),
+              WrapSelectField(
+                label: 'Vacancy',
+                values: ['Vacant', 'Tenanted'],
+                name: 'vacancy',
+                isRequired: true,
+              ),
+              FormBuilderSwitch(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.zero),
+                  name: 'vacantOnTransfer',
+                  title: Text(
+                    'Vacant On Transfer',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF555555),
+                        ),
+                  )),
+              FormBuilderSwitch(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.zero),
+                  name: 'exclusive',
+                  title: Text(
+                    'Exclusive',
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF555555),
+                        ),
+                  )),
               NumberField(
                 isRequired: true,
                 name: 'size',
@@ -430,36 +460,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
               //     );
               //   },
               // ),
-              DropDownfield(
-                label: 'Vacancy',
-                items: ['Vacant', 'Tenanted'],
-                name: 'vacancy',
-                isRequired: true,
-              ),
-              FormBuilderSwitch(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.zero),
-                  name: 'vacantOnTransfer',
-                  title: Text(
-                    'Vacant On Transfer',
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF555555),
-                        ),
-                  )),
-              FormBuilderSwitch(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.zero),
-                  name: 'exclusive',
-                  title: Text(
-                    'Exclusive',
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF555555),
-                        ),
-                  )),
+
               VerticalSmallGap(
                 adjustment: 0.3,
               ),
@@ -481,11 +482,13 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   isRequired: true),
               if (val['isOffPlanResale'] == true)
                 CurrencyField(
+                  key: ValueKey('amountAlreadyPaid'),
                   isRequired: val['isOffPlanResale'] == true,
                   name: 'amountAlreadyPaid',
                   label: 'Amount Already Paid',
                 ),
               CurrencyField(
+                key: ValueKey('price'),
                 isRequired: true,
                 name: 'price',
                 label: 'Listing Price',

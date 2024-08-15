@@ -44,7 +44,7 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
       getIt<SharedPreferences>().setString('calledNumber', numberEntered);
     }
 
-    if (number != null && number != 'IPHONE' && number != 'Unknown') {
+    if (number != null && number != 'IPHONE' && number != 'Unknown' && number != "PROPERTY_FINDER") {
       String validatedNumber = number.replaceAll('+', '');
       if (validatedNumber.startsWith('0')) {
         validatedNumber = validatedNumber.replaceFirst('0', '');
@@ -128,9 +128,16 @@ class CallFeedbackCubit extends Cubit<CallFeedbackState> {
     emit(state.copyWith(getActivitiesStatus: AppStatus.loading));
     final result = await _leadRepo.getLeadActivities(leadId: state.lead!.id);
     switch (result) {
-      case (Success s):
+      case (Success<List<Activity>> s):
+        final ls = s.value.where((e) => e.status != 'Complete');
+        if (ls.isEmpty) {
+          return null;
+        }
+        final pendingActivity = ls.first;
         emit(state.copyWith(
-            getActivitiesStatus: AppStatus.success, activities: s.value));
+            getActivitiesStatus: AppStatus.success,
+            activities: s.value,
+            attachLastPendingActivityToTheCall: pendingActivity.id));
 
         break;
       case (Error e):

@@ -27,6 +27,7 @@ import 'package:real_estate_app/widgets/fields/phone_number_field.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
+import 'package:recase/recase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants/hot_leads.dart';
@@ -94,11 +95,10 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                             textAlign: TextAlign.center,
                           ),
                           VerticalSmallGap(),
-                          SmallText(
+                          NormalText(
                             text:
-                                "You received a ${getIt<SharedPreferences>().getString('CallDirection')} call at ${DateTime.fromMillisecondsSinceEpoch(getIt<SharedPreferences>().getInt('CallTime') ?? 0).formattedTime}.",
+                                "You received a ${getIt<SharedPreferences>().getString('CallDirection')} ${(getIt<SharedPreferences>().getString('calledNumber') ?? '').titleCase} call at ${DateTime.fromMillisecondsSinceEpoch(getIt<SharedPreferences>().getInt('CallTime') ?? 0).formattedTime}.",
                             textAlign: TextAlign.center,
-                            maxLines: 5,
                           ),
                           VerticalSmallGap(),
                           PhoneNumberField(name: 'number'),

@@ -57,7 +57,7 @@ class LastPendingActivity extends StatelessWidget {
                           context
                               .read<CallFeedbackCubit>()
                               .setAttachLastPendingActivity(
-                                  (val ?? false) ? activity.id : null);
+                                  (val ?? true) ? activity.id : null);
                         })
                   ],
                 );
