@@ -113,7 +113,8 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                         context,
                         state.activities[taskFilterEnum] ?? [],
                         currentPaginator,
-                        appStatus);
+                        appStatus,
+                        taskFilterEnum);
                   case AppStatus.failure:
                     return showError(
                         context,
@@ -130,7 +131,8 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                     context,
                     state.activities[taskFilterEnum] ?? [],
                     currentPaginator,
-                    appStatus);
+                    appStatus,
+                    taskFilterEnum);
               }
             },
           ),
@@ -147,8 +149,12 @@ class _ColdLeadPageState extends State<ColdLeadPage>
         .fetchColdLeads(TaskFilterEnum.values[tabIndex], paginator: null);
   }
 
-  Widget showActivities(BuildContext context, List<Activity> activities,
-      Paginator? paginator, AppStatus? appStatus) {
+  Widget showActivities(
+      BuildContext context,
+      List<Activity> activities,
+      Paginator? paginator,
+      AppStatus? appStatus,
+      TaskFilterEnum taskFilterEnum) {
     Logger().d("No of activitiess : ${activities.length}");
 
     return Expanded(
@@ -205,6 +211,8 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                       loadData(
                           context); // Reloading data after a call has performed or page pop event
                     },
+                    taskFiler: taskFilterEnum,
+                    taskType: TaskType.Cold,
                   );
                 },
                 separatorBuilder: (_, __) => SizedBox(

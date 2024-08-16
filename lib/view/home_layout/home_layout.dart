@@ -341,7 +341,7 @@ class _HomeScreenState extends State<HomeScreen>
                         iconImagePath: 'assets/images/deal.png',
                         onPressed: () {
                           Scaffold.of(context).closeDrawer();
-                          context.pushNamed(DealsScreen.routeName);
+                          context.goNamed(DealsScreen.routeName);
                         },
                       ),
 

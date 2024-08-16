@@ -13,6 +13,7 @@ import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
@@ -32,16 +33,31 @@ import '../../widgets/snackbar.dart';
 import '../lead_detail_screen/lead_detail_screen.dart';
 import 'widgets/feedback_dialog.dart';
 
+// enum TaskSortType {
+//   HotNew,
+//   HotFollowUp,
+//   HotFavourites,
+//   HotExpiring,
+//   ColdNew,
+//   ColdFollowUp,
+//   ColdFavourites,
+//   ColdExpiring
+// }
+
 class TaskDetailScreen extends StatefulWidget {
   static const routeName = '/taskDetailScreen';
   const TaskDetailScreen(
       {super.key,
       required this.taskId,
       this.activity,
-      required this.isBlocking});
+      required this.isBlocking,
+      this.taskType,
+      this.taskFilter});
   final String taskId;
   final Activity? activity;
   final bool isBlocking;
+  final home.TaskType? taskType;
+  final TaskFilterEnum? taskFilter;
 
   @override
   State<TaskDetailScreen> createState() => _TaskDetailScreenState();
@@ -76,8 +92,9 @@ class _TaskDetailScreenState extends State<TaskDetailScreen>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<TaskDetailCubit>(
-          param1: widget.taskId, param2: widget.activity),
+      create: (context) =>
+          getIt<TaskDetailCubit>(param1: widget.taskId, param2: widget.activity)
+            ..setTaskSortType(widget.taskType, widget.taskFilter),
       child: _TaskDetailScreenLayout(),
     );
   }

@@ -132,12 +132,6 @@ class AppRouter {
                           AppTransition(child: ColdLeadScreen()),
                     ),
                     GoRoute(
-                      path: LeadsScreen.routeName,
-                      name: LeadsScreen.routeName,
-                      pageBuilder: (context, state) =>
-                          AppTransition(child: LeadsScreen()),
-                    ),
-                    GoRoute(
                       path: HomePage.routeName,
                       name: HomePage.routeName,
                       pageBuilder: (context, state) =>
@@ -156,6 +150,12 @@ class AppRouter {
                           AppTransition(child: ListingsScreen()),
                     ),
                   ]),
+              GoRoute(
+                path: LeadsScreen.routeName,
+                name: LeadsScreen.routeName,
+                pageBuilder: (context, state) =>
+                    AppTransition(child: LeadsScreen()),
+              ),
               GoRoute(
                 path: '${HomePage.routeName}/:id',
                 name: LeadDetailScreen.routeName,
@@ -346,11 +346,18 @@ class AppRouter {
                   } catch (e) {}
                   final bool isBlocking =
                       state.uri.queryParameters['isBlocking'] as bool? ?? false;
+                  final String? taskType =
+                      state.uri.queryParameters['taskType'] as String?;
+                  final String? taskFilter =
+                      state.uri.queryParameters['taskFilter'] as String?;
+
                   return AppTransition(
                     child: TaskDetailScreen(
                       taskId: id,
                       activity: activity,
                       isBlocking: isBlocking,
+                      taskType: taskType?.toTaskType(),
+                      taskFilter: taskFilter?.toTaskFilter(),
                     ),
                   );
                 },

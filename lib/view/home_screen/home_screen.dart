@@ -10,6 +10,7 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
@@ -581,18 +582,52 @@ class CategorizedView extends StatelessWidget {
   }
 }
 
+enum TaskType { Hot, Cold }
+
+extension TaskTypeTo on String {
+  TaskType? toTaskType() {
+    switch (this) {
+      case "Hot":
+        return TaskType.Hot;
+      case "Cold":
+        return TaskType.Cold;
+      default:
+        return null;
+    }
+  }
+
+  TaskFilterEnum? toTaskFilter() {
+    switch (this) {
+      case "New":
+        return TaskFilterEnum.New;
+      case "FollowUp":
+        return TaskFilterEnum.FollowUp;
+      case "Favourites":
+        return TaskFilterEnum.Favourites;
+      case "Expiring":
+        return TaskFilterEnum.Expiring;
+      default:
+        return null;
+    }
+  }
+}
+
 class ActivityListItem extends StatelessWidget {
   const ActivityListItem(
       {super.key,
       required this.activity,
       required this.index,
       this.taskSection,
-      this.onActionPerformed});
+      this.onActionPerformed,
+      this.taskType,
+      this.taskFiler});
 
   final Activity activity;
   final int index;
   final int? taskSection;
   final VoidCallback? onActionPerformed;
+  final TaskType? taskType;
+  final TaskFilterEnum? taskFiler;
 
   @override
   Widget build(BuildContext context) {
@@ -610,7 +645,14 @@ class ActivityListItem extends StatelessWidget {
           onTap: () {
             context
                 .pushNamed(TaskDetailScreen.routeName,
-                    pathParameters: {'id': activity.id}, extra: activity)
+                    pathParameters: {
+                      'id': activity.id,
+                    },
+                    queryParameters: {
+                      "taskType": taskType?.name ?? '',
+                      "taskFilter": taskFiler?.name ?? ''
+                    },
+                    extra: activity)
                 .then((_) {
               if (onActionPerformed != null) {
                 onActionPerformed!();

@@ -11,6 +11,9 @@ import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
+import 'package:real_estate_app/view/home_screen/home_screen.dart';
+import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
@@ -42,7 +45,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         getExplorerList();
       });
     } else {
-      getSortedActivities();
       getLeadActivities();
       getExplorerList();
     }
@@ -52,6 +54,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   final LeadRepo _leadRepo;
   final AgentRepo _agentRepo;
   final ExplorerRepo _explorerRepo;
+  TaskType? taskType;
+  TaskFilterEnum? taskFilter;
+
+  void setTaskSortType(TaskType? taskType, TaskFilterEnum? taskFilter) {
+    this.taskFilter = taskFilter;
+    this.taskType = taskType;
+    getSortedActivities();
+  }
 
   Future<void> getTask() async {
     emit(state.copyWith(getTaskStatus: AppStatus.loading));
@@ -282,13 +292,16 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           getSortedActivitiesStatus: AppStatus.loadingMore,
           getSortedActivitiesError: null));
     }
-
+    final payload = getPayload(taskFilter, taskType);
+    Logger().d({payload, taskFilter, taskType});
     final result = await _activityRepo.fetchActivitiesSorted(
-        limit: 35, paginator: state.sortedActivityPaginator);
+        filter: payload, limit: 35, paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
-        final list = List<Activity>.from(s.value)
-          ..sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
+        final list = List<Activity>.from(s.value);
+        if (list.any((d) => d.activityWeight > 8)) {
+          list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
+        }
         list.removeWhere((element) => element.id == state.taskId);
         emit(state.copyWith(
             sortedActivity: [...state.sortedActivity, ...list],
@@ -300,6 +313,40 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         emit(state.copyWith(
             getSortedActivitiesError: e.exception,
             getSortedActivitiesStatus: AppStatus.failure));
+    }
+  }
+
+  Map<String, dynamic> getPayload(
+      TaskFilterEnum? filterType, TaskType? taskType) {
+    switch (filterType) {
+      case TaskFilterEnum.New:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": "Fresh",
+          "sortBy": 'latest'
+        };
+      case TaskFilterEnum.FollowUp:
+        DateTime d = DateTime.now();
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
+          "status": [
+            "Pending",
+          ],
+          "toDate": '${d.year}-${d.month}-${d.day}',
+        };
+      case TaskFilterEnum.Favourites:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": "Prospect"
+        };
+      case TaskFilterEnum.Expiring:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "expiring": true
+        };
+      default:
+        return {};
     }
   }
 

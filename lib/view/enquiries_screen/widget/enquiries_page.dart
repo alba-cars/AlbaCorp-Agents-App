@@ -63,7 +63,8 @@ class _EnquiriesPageState extends State<EnquiriesPage>
                         context,
                         state.activities[taskFilterEnum] ?? [],
                         currentPaginator,
-                        appStatus);
+                        appStatus,
+                        taskFilterEnum);
                   case AppStatus.failure:
                     return showError(
                         context,
@@ -80,7 +81,8 @@ class _EnquiriesPageState extends State<EnquiriesPage>
                     context,
                     state.activities[taskFilterEnum] ?? [],
                     currentPaginator,
-                    appStatus);
+                    appStatus,
+                    taskFilterEnum);
               }
             },
           ),
@@ -98,7 +100,7 @@ class _EnquiriesPageState extends State<EnquiriesPage>
   }
 
   Widget showActivities(BuildContext context, List<Activity> activities,
-      Paginator? paginator, AppStatus? appStatus) {
+      Paginator? paginator, AppStatus? appStatus, TaskFilterEnum taskFilter) {
     Logger().d("No of activitiess : ${activities.length}");
 
     return Expanded(
@@ -155,6 +157,8 @@ class _EnquiriesPageState extends State<EnquiriesPage>
                       loadData(
                           context); // Reloading data after a call has performed or page pop event
                     },
+                    taskFiler: taskFilter,
+                    taskType: TaskType.Hot,
                   );
                 },
                 separatorBuilder: (_, __) => SizedBox(

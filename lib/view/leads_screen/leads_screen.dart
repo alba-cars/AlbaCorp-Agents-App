@@ -192,17 +192,16 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
             //   ],
             //   pinned: true,
             // ),
-            SliverVerticalSmallGap(),
-            SliverVerticalSmallGap(),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TitleText(
-                  text: 'Leads List',
-                  fontWeight: FontWeight.bold,
-                ),
+            SliverAppBar(
+              title: BlockTitleText(
+                text: 'My Leads',
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
+              centerTitle: true,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
             ),
+            SliverVerticalSmallGap(),
             SliverVerticalSmallGap(),
             SliverToBoxAdapter(
               child: Padding(
