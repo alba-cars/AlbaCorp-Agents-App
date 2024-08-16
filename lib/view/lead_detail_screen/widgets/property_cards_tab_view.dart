@@ -24,7 +24,7 @@ class _PropertyCardsTabViewState extends State<PropertyCardsTabView> {
   @override
   void initState() {
     super.initState();
-    context.read<LeadDetailCubit>().getExplorerList();
+    context.read<LeadDetailCubit>().getLeadPropertyCards();
   }
 
   @override
@@ -53,7 +53,7 @@ class _PropertyCardsTabViewState extends State<PropertyCardsTabView> {
             onRefresh: () async {
               await context
                   .read<LeadDetailCubit>()
-                  .getExplorerList(refresh: true);
+                  .getLeadPropertyCards(refresh: true);
             },
             child: ListView.separated(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),

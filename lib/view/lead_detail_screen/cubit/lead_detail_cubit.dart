@@ -30,7 +30,7 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
     switch (result) {
       case (Success s):
         emit(state.copyWith(getLeadStatus: AppStatus.success, lead: s.value));
-        Future.wait([getLeadActivities(), getLeadDeals()]);
+        Future.wait([getLeadActivities(), getLeadPropertyCards()]);
         break;
       case (Error e):
         emit(state.copyWith(
@@ -91,7 +91,7 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
     }
   }
 
-  Future<void> getExplorerList({
+  Future<void> getLeadPropertyCards({
     bool refresh = false,
   }) async {
     if (refresh || state.propertyCardPaginator == null) {

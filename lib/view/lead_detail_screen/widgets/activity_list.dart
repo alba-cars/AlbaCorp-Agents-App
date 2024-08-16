@@ -21,7 +21,11 @@ class ActivityListLeadDetail extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: TitleText(text: "Last Five Activities"),
+          child: LabelText(
+            text: 'Lead Property Cards',
+            underline: true,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
         VerticalSmallGap(),
         ListView.builder(

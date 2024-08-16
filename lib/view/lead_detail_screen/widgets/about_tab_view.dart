@@ -11,6 +11,7 @@ import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/activity_list.dart';
+import 'package:real_estate_app/view/lead_detail_screen/widgets/lead_property_cards_list.dart';
 import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
@@ -227,6 +228,7 @@ class AboutTabView extends StatelessWidget {
                 VerticalSmallGap(
                   adjustment: 2,
                 ),
+                LeadsPropertyCarsdHorizontalList(),
                 BlocSelector<LeadDetailCubit, LeadDetailState, List<Activity>>(
                   selector: (state) {
                     return state.activities;
