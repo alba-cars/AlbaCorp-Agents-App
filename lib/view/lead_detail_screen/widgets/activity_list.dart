@@ -22,7 +22,7 @@ class ActivityListLeadDetail extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: LabelText(
-            text: 'Lead Property Cards',
+            text: 'Lead Last Activities',
             underline: true,
             color: Theme.of(context).primaryColor,
           ),

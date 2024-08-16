@@ -7,6 +7,7 @@ import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
+import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
@@ -367,6 +368,18 @@ class AppRouter {
                 name: LeadsExplorerScreen.routeName,
                 pageBuilder: (context, state) {
                   return AppTransition(child: LeadsExplorerScreen());
+                },
+              ),
+              GoRoute(
+                path: AddFollowUpScreen.routeName,
+                name: AddFollowUpScreen.routeName,
+                pageBuilder: (context, state) {
+                  final String leadId =
+                      state.uri.queryParameters['leadId'] ?? '';
+                  return AppTransition(
+                      child: AddFollowUpScreen(
+                    leadId: leadId,
+                  ));
                 },
               ),
               GoRoute(

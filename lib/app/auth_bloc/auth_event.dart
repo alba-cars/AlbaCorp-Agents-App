@@ -14,6 +14,8 @@ class AuthEvent with _$AuthEvent {
       _CheckForImportantActivity;
   const factory AuthEvent.checkForCallFeedback() = _CheckForCallFeedback;
   const factory AuthEvent.removeLastCallDetails() = _RemoveLastCallDetails;
+  const factory AuthEvent.setShowFollowup({required bool value}) =
+      _SetShowFollowup;
   const factory AuthEvent.getAppConfig() = _GetAppConfig;
   const factory AuthEvent.getSettings() = _GetSettings;
 }

@@ -22,6 +22,7 @@ import 'package:real_estate_app/model/pending_call_feedback.dart';
 import 'package:real_estate_app/model/user.dart';
 import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,6 +51,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_RemoveLastCallDetails>(_removeLastCallDetails);
     on<_GetSettings>(_getSettings);
     on<_GetAppConfig>(_getAppConfigData);
+    on<_SetShowFollowup>(_setShowFollowUp);
 
     awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
       if (v == null) {
@@ -131,6 +133,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             'data': json
                 .encode({'phone': number, "lead_source": 'Unkown Inbound Call'})
           });
+        }
+      } else if (data['type'] == 'PBX_LEAD_CALL_FOLLOW_UP') {
+        if (state.authStatus == AuthStatus.initial) {
+          await stream.firstWhere((e) => e.authStatus != AuthStatus.initial);
+        }
+        if (state.authStatus == AuthStatus.Authenticated) {
+          await Future.delayed(Duration(milliseconds: 500));
+          AppRouter.router.pushNamed(AddFollowUpScreen.routeName,
+              queryParameters: {'leadId': data['leadId']});
         }
       }
     } catch (e) {
@@ -289,5 +300,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(state.copyWith());
         break;
     }
+  }
+
+  FutureOr<void> _setShowFollowUp(
+      _SetShowFollowup event, Emitter<AuthState> emit) {
+    emit(state.copyWith(showFollowUpScreen: event.value));
   }
 }

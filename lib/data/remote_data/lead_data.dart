@@ -67,13 +67,22 @@ class LeadData implements LeadRepo {
       Paginator? paginator}) async {
     try {
       String url = 'v1/search/user/filter';
-      final Map<String, dynamic>? filterRemoved = (filter != null)
+      Map<String, dynamic>? filterRemoved = (filter != null)
           ? (Map.from(filter)..removeWhere((key, value) => value == null))
           : null;
 
       if (filterRemoved?.containsKey('active') == true) {
         filterRemoved!["active"] = filterRemoved['active']?['value'];
       }
+      filterRemoved = filterRemoved?.map((key, value) {
+        if (value is Map) {
+          return MapEntry(key, value['value']);
+        } else if (value is List<Map>) {
+          return MapEntry(key, value.map((e) => e['value']).toList());
+        } else {
+          return MapEntry(key, value);
+        }
+      });
       final response = await _dio.get(url, queryParameters: {
         'agent_id': getIt<AuthBloc>().state.agent?.id,
         'page': (paginator?.currentPage ?? 0) + 1,

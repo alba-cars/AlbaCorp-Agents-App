@@ -60,7 +60,7 @@ class AddLeadCubit extends Cubit<AddLeadState> {
   Future<void> onNextPressed({required Map<String, dynamic> values}) async {
     final Map<String, dynamic> val = Map.from(state.val)..addAll(values);
     emit(state.copyWith(val: val));
-    if (state.currentTab != 2) {
+    if (state.currentTab != 1) {
       emit(state.copyWith(
         currentTab: state.currentTab + 1,
         previousTab: state.currentTab,
