@@ -9,6 +9,7 @@ import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/view/leads_screen/cubit/leads_cubit.dart';
+import 'package:real_estate_app/view/leads_screen/widgets/return_leads_dialog.dart';
 import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
@@ -171,27 +172,6 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            // SliverAppBar(
-            //   title: SizedBox(
-            //     height: 50,
-            //     child: Image.asset(
-            //       'assets/images/logo-black.png',
-            //       fit: BoxFit.fitHeight,
-            //     ),
-            //   ),
-            //   centerTitle: true,
-            //   backgroundColor: Color.fromARGB(255, 240, 246, 250),
-            //   foregroundColor: pacificBlue,
-            //   leading: IconButton(
-            //     onPressed: () {},
-            //     icon: Icon(Icons.menu),
-            //     padding: EdgeInsetsDirectional.only(start: 8),
-            //   ),
-            //   actions: [
-            //     IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-            //   ],
-            //   pinned: true,
-            // ),
             SliverAppBar(
               title: BlockTitleText(
                 text: 'My Leads',
@@ -200,6 +180,18 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
               centerTitle: true,
               backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      showReturnLeadsDialog(context);
+                    },
+                    child: Text(
+                      "Return",
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                    ))
+              ],
             ),
             SliverVerticalSmallGap(),
             SliverVerticalSmallGap(),
@@ -231,7 +223,6 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                 name: '',
                 values: [
                   'New',
-                  'Recent',
                   'Prospect',
                   'Fresh',
                   'Hot',
@@ -525,8 +516,12 @@ class LeadItem extends StatelessWidget {
                 if (selectModeEnabled) {
                   context.read<LeadsCubit>().addToSelection(context, lead);
                 } else {
-                  context.pushNamed(LeadDetailScreen.routeName,
-                      pathParameters: {'id': lead.id, 'index': '0'});
+                  context
+                      .pushNamed(LeadDetailScreen.routeName, pathParameters: {
+                    'id': lead.id,
+                  }, queryParameters: {
+                    'index': '0'
+                  });
                 }
               },
               onLongPress: () {

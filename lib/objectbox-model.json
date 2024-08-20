@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:5795122159064061020",
-      "lastPropertyId": "6:3017629158783680701",
+      "lastPropertyId": "9:4826859756871750736",
       "name": "NotificationEntity",
       "properties": [
         {
@@ -37,6 +37,21 @@
         {
           "id": "6:3017629158783680701",
           "name": "notificationId",
+          "type": 9
+        },
+        {
+          "id": "7:3435081018230525370",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "8:3846285077600869935",
+          "name": "requiresAction",
+          "type": 1
+        },
+        {
+          "id": "9:4826859756871750736",
+          "name": "leadId",
           "type": 9
         }
       ],

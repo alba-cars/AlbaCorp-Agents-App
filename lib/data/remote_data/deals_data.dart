@@ -164,7 +164,11 @@ class DealData implements DealsRepo {
   @override
   Future<Result<void>> addDealDocuments(
       {required String dealId,
-      required String userId,
+      String? userId,
+      String? sellerUserId,
+      String? buyerUserId,
+      String? buyerAgencyId,
+      String? sellerAgencyId,
       required Map<String, dynamic> values}) async {
     try {
       String url = 'v1/Documents';

@@ -41,6 +41,10 @@ mixin _$DealResponse {
   User get createdBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
   Lead? get client => throw _privateConstructorUsedError;
+  Lead? get sellerInternalUser => throw _privateConstructorUsedError;
+  Lead? get buyerInternalUser => throw _privateConstructorUsedError;
+  Agency? get buyerExternalUser => throw _privateConstructorUsedError;
+  Agency? get sellerExternalUser => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,10 +72,18 @@ abstract class $DealResponseCopyWith<$Res> {
       @JsonKey(name: 'user_id') String? userId,
       bool active,
       @JsonKey(name: 'created_by') User createdBy,
-      @JsonKey(name: 'user') Lead? client});
+      @JsonKey(name: 'user') Lead? client,
+      Lead? sellerInternalUser,
+      Lead? buyerInternalUser,
+      Agency? buyerExternalUser,
+      Agency? sellerExternalUser});
 
   $UserCopyWith<$Res> get createdBy;
   $LeadCopyWith<$Res>? get client;
+  $LeadCopyWith<$Res>? get sellerInternalUser;
+  $LeadCopyWith<$Res>? get buyerInternalUser;
+  $AgencyCopyWith<$Res>? get buyerExternalUser;
+  $AgencyCopyWith<$Res>? get sellerExternalUser;
 }
 
 /// @nodoc
@@ -101,6 +113,10 @@ class _$DealResponseCopyWithImpl<$Res, $Val extends DealResponse>
     Object? active = null,
     Object? createdBy = null,
     Object? client = freezed,
+    Object? sellerInternalUser = freezed,
+    Object? buyerInternalUser = freezed,
+    Object? buyerExternalUser = freezed,
+    Object? sellerExternalUser = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -159,6 +175,22 @@ class _$DealResponseCopyWithImpl<$Res, $Val extends DealResponse>
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
               as Lead?,
+      sellerInternalUser: freezed == sellerInternalUser
+          ? _value.sellerInternalUser
+          : sellerInternalUser // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      buyerInternalUser: freezed == buyerInternalUser
+          ? _value.buyerInternalUser
+          : buyerInternalUser // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      buyerExternalUser: freezed == buyerExternalUser
+          ? _value.buyerExternalUser
+          : buyerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
+      sellerExternalUser: freezed == sellerExternalUser
+          ? _value.sellerExternalUser
+          : sellerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
     ) as $Val);
   }
 
@@ -179,6 +211,54 @@ class _$DealResponseCopyWithImpl<$Res, $Val extends DealResponse>
 
     return $LeadCopyWith<$Res>(_value.client!, (value) {
       return _then(_value.copyWith(client: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get sellerInternalUser {
+    if (_value.sellerInternalUser == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_value.sellerInternalUser!, (value) {
+      return _then(_value.copyWith(sellerInternalUser: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get buyerInternalUser {
+    if (_value.buyerInternalUser == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_value.buyerInternalUser!, (value) {
+      return _then(_value.copyWith(buyerInternalUser: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AgencyCopyWith<$Res>? get buyerExternalUser {
+    if (_value.buyerExternalUser == null) {
+      return null;
+    }
+
+    return $AgencyCopyWith<$Res>(_value.buyerExternalUser!, (value) {
+      return _then(_value.copyWith(buyerExternalUser: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AgencyCopyWith<$Res>? get sellerExternalUser {
+    if (_value.sellerExternalUser == null) {
+      return null;
+    }
+
+    return $AgencyCopyWith<$Res>(_value.sellerExternalUser!, (value) {
+      return _then(_value.copyWith(sellerExternalUser: value) as $Val);
     });
   }
 }
@@ -205,12 +285,24 @@ abstract class _$$DealResponseImplCopyWith<$Res>
       @JsonKey(name: 'user_id') String? userId,
       bool active,
       @JsonKey(name: 'created_by') User createdBy,
-      @JsonKey(name: 'user') Lead? client});
+      @JsonKey(name: 'user') Lead? client,
+      Lead? sellerInternalUser,
+      Lead? buyerInternalUser,
+      Agency? buyerExternalUser,
+      Agency? sellerExternalUser});
 
   @override
   $UserCopyWith<$Res> get createdBy;
   @override
   $LeadCopyWith<$Res>? get client;
+  @override
+  $LeadCopyWith<$Res>? get sellerInternalUser;
+  @override
+  $LeadCopyWith<$Res>? get buyerInternalUser;
+  @override
+  $AgencyCopyWith<$Res>? get buyerExternalUser;
+  @override
+  $AgencyCopyWith<$Res>? get sellerExternalUser;
 }
 
 /// @nodoc
@@ -238,6 +330,10 @@ class __$$DealResponseImplCopyWithImpl<$Res>
     Object? active = null,
     Object? createdBy = null,
     Object? client = freezed,
+    Object? sellerInternalUser = freezed,
+    Object? buyerInternalUser = freezed,
+    Object? buyerExternalUser = freezed,
+    Object? sellerExternalUser = freezed,
   }) {
     return _then(_$DealResponseImpl(
       id: null == id
@@ -296,6 +392,22 @@ class __$$DealResponseImplCopyWithImpl<$Res>
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
               as Lead?,
+      sellerInternalUser: freezed == sellerInternalUser
+          ? _value.sellerInternalUser
+          : sellerInternalUser // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      buyerInternalUser: freezed == buyerInternalUser
+          ? _value.buyerInternalUser
+          : buyerInternalUser // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      buyerExternalUser: freezed == buyerExternalUser
+          ? _value.buyerExternalUser
+          : buyerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
+      sellerExternalUser: freezed == sellerExternalUser
+          ? _value.sellerExternalUser
+          : sellerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
     ));
   }
 }
@@ -317,7 +429,11 @@ class _$DealResponseImpl implements _DealResponse {
       @JsonKey(name: 'user_id') this.userId,
       required this.active,
       @JsonKey(name: 'created_by') required this.createdBy,
-      @JsonKey(name: 'user') this.client})
+      @JsonKey(name: 'user') this.client,
+      this.sellerInternalUser,
+      this.buyerInternalUser,
+      this.buyerExternalUser,
+      this.sellerExternalUser})
       : _roleType = roleType,
         _rejection = rejection;
 
@@ -373,10 +489,18 @@ class _$DealResponseImpl implements _DealResponse {
   @override
   @JsonKey(name: 'user')
   final Lead? client;
+  @override
+  final Lead? sellerInternalUser;
+  @override
+  final Lead? buyerInternalUser;
+  @override
+  final Agency? buyerExternalUser;
+  @override
+  final Agency? sellerExternalUser;
 
   @override
   String toString() {
-    return 'DealResponse(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, status: $status, rejection: $rejection, userId: $userId, active: $active, createdBy: $createdBy, client: $client)';
+    return 'DealResponse(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, status: $status, rejection: $rejection, userId: $userId, active: $active, createdBy: $createdBy, client: $client, sellerInternalUser: $sellerInternalUser, buyerInternalUser: $buyerInternalUser, buyerExternalUser: $buyerExternalUser, sellerExternalUser: $sellerExternalUser)';
   }
 
   @override
@@ -405,7 +529,15 @@ class _$DealResponseImpl implements _DealResponse {
             (identical(other.active, active) || other.active == active) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
-            (identical(other.client, client) || other.client == client));
+            (identical(other.client, client) || other.client == client) &&
+            (identical(other.sellerInternalUser, sellerInternalUser) ||
+                other.sellerInternalUser == sellerInternalUser) &&
+            (identical(other.buyerInternalUser, buyerInternalUser) ||
+                other.buyerInternalUser == buyerInternalUser) &&
+            (identical(other.buyerExternalUser, buyerExternalUser) ||
+                other.buyerExternalUser == buyerExternalUser) &&
+            (identical(other.sellerExternalUser, sellerExternalUser) ||
+                other.sellerExternalUser == sellerExternalUser));
   }
 
   @JsonKey(ignore: true)
@@ -425,7 +557,11 @@ class _$DealResponseImpl implements _DealResponse {
       userId,
       active,
       createdBy,
-      client);
+      client,
+      sellerInternalUser,
+      buyerInternalUser,
+      buyerExternalUser,
+      sellerExternalUser);
 
   @JsonKey(ignore: true)
   @override
@@ -456,7 +592,11 @@ abstract class _DealResponse implements DealResponse {
       @JsonKey(name: 'user_id') final String? userId,
       required final bool active,
       @JsonKey(name: 'created_by') required final User createdBy,
-      @JsonKey(name: 'user') final Lead? client}) = _$DealResponseImpl;
+      @JsonKey(name: 'user') final Lead? client,
+      final Lead? sellerInternalUser,
+      final Lead? buyerInternalUser,
+      final Agency? buyerExternalUser,
+      final Agency? sellerExternalUser}) = _$DealResponseImpl;
 
   factory _DealResponse.fromJson(Map<String, dynamic> json) =
       _$DealResponseImpl.fromJson;
@@ -496,6 +636,14 @@ abstract class _DealResponse implements DealResponse {
   @override
   @JsonKey(name: 'user')
   Lead? get client;
+  @override
+  Lead? get sellerInternalUser;
+  @override
+  Lead? get buyerInternalUser;
+  @override
+  Agency? get buyerExternalUser;
+  @override
+  Agency? get sellerExternalUser;
   @override
   @JsonKey(ignore: true)
   _$$DealResponseImplCopyWith<_$DealResponseImpl> get copyWith =>

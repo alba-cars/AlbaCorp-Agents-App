@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:real_estate_app/model/agency_model.dart';
 
 import 'lead_model.dart';
 import 'user.dart';
@@ -23,6 +24,10 @@ class DealResponse with _$DealResponse {
     required bool active,
     @JsonKey(name: 'created_by') required User createdBy,
     @JsonKey(name: 'user') Lead? client,
+    Lead? sellerInternalUser,
+    Lead? buyerInternalUser,
+    Agency? buyerExternalUser,
+    Agency? sellerExternalUser,
   }) = _DealResponse;
 
   factory DealResponse.fromJson(Map<String, dynamic> json) =>

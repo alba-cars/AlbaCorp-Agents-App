@@ -40,6 +40,10 @@ class ReAssignLead extends StatelessWidget {
             ),
           );
         }
+        if (context.read<CallFeedbackCubit>().state.lead?.currentAgent?.id ==
+            getIt<AuthBloc>().state.agent?.id) {
+          return SizedBox();
+        }
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Container(

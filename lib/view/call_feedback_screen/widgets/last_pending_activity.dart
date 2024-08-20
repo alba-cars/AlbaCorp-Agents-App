@@ -48,6 +48,7 @@ class LastPendingActivity extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TitleText(text: "Pending Activity"),
                       ...(activity == null)

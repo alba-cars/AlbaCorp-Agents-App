@@ -8,5 +8,6 @@ class AddFollowupState with _$AddFollowupState {
     String? getLeadError,
     @Default(AppStatus.init) AppStatus addFollowupStatus,
     String? addFollowupError,
+    NotificationModel? notificationModel,
   }) = _AddFollowupState;
 }

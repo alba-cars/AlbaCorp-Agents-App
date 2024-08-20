@@ -538,28 +538,122 @@ class CollectDocumentsTab extends StatelessWidget {
                   thickness: 4,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
-                LabelText(
-                  text: 'Client Documents',
-                ),
-                Divider(
-                  thickness: 4,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                VerticalSmallGap(
-                  adjustment: 0.5,
-                ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'EID',
-                  label: 'Emirates Id',
-                ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'Passport',
-                  label: 'Passport',
-                ),
+                if (context.read<AddDealCubit>().state.dealResponse?.category ==
+                    "Primary Off Plan Property") ...[
+                  LabelText(
+                    text: 'Client Documents',
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.5,
+                  ),
+                  DocumentSelectionField(
+                    onSelected: (v) {},
+                    isEditting: false,
+                    name: 'EID',
+                    label: 'Emirates Id',
+                  ),
+                  DocumentSelectionField(
+                    onSelected: (v) {},
+                    isEditting: false,
+                    name: 'Passport',
+                    label: 'Passport',
+                  ),
+                ],
+                if (context.read<AddDealCubit>().state.dealResponse?.category ==
+                    "Secondary Market Property") ...[
+                  LabelText(
+                    text: 'Buyer Documents',
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.5,
+                  ),
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.buyerInternalUser !=
+                      null) ...[
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'buyer.EID',
+                      label: 'Emirates Id',
+                    ),
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'buyer.Passport',
+                      label: 'Passport',
+                    ),
+                  ],
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.buyerExternalUser !=
+                      null) ...[
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'buyer.trade_license',
+                      label: 'Trade License',
+                    ),
+                  ],
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  LabelText(
+                    text: 'Seller Documents',
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.5,
+                  ),
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.sellerInternalUser !=
+                      null) ...[
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'seller.EID',
+                      label: 'Emirates Id',
+                    ),
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'seller.Passport',
+                      label: 'Passport',
+                    ),
+                  ],
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.sellerExternalUser !=
+                      null) ...[
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'buyer.trade_license',
+                      label: 'Trade License',
+                    ),
+                  ],
+                ],
                 MultiDocumentUploadField(
                   name: 'Other',
                   label: 'Other Documents',

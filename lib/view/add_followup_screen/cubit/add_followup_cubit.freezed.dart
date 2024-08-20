@@ -21,6 +21,8 @@ mixin _$AddFollowupState {
   String? get getLeadError => throw _privateConstructorUsedError;
   AppStatus get addFollowupStatus => throw _privateConstructorUsedError;
   String? get addFollowupError => throw _privateConstructorUsedError;
+  NotificationModel? get notificationModel =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddFollowupStateCopyWith<AddFollowupState> get copyWith =>
@@ -38,9 +40,11 @@ abstract class $AddFollowupStateCopyWith<$Res> {
       AppStatus getLeadStatus,
       String? getLeadError,
       AppStatus addFollowupStatus,
-      String? addFollowupError});
+      String? addFollowupError,
+      NotificationModel? notificationModel});
 
   $LeadCopyWith<$Res>? get lead;
+  $NotificationModelCopyWith<$Res>? get notificationModel;
 }
 
 /// @nodoc
@@ -61,6 +65,7 @@ class _$AddFollowupStateCopyWithImpl<$Res, $Val extends AddFollowupState>
     Object? getLeadError = freezed,
     Object? addFollowupStatus = null,
     Object? addFollowupError = freezed,
+    Object? notificationModel = freezed,
   }) {
     return _then(_value.copyWith(
       lead: freezed == lead
@@ -83,6 +88,10 @@ class _$AddFollowupStateCopyWithImpl<$Res, $Val extends AddFollowupState>
           ? _value.addFollowupError
           : addFollowupError // ignore: cast_nullable_to_non_nullable
               as String?,
+      notificationModel: freezed == notificationModel
+          ? _value.notificationModel
+          : notificationModel // ignore: cast_nullable_to_non_nullable
+              as NotificationModel?,
     ) as $Val);
   }
 
@@ -95,6 +104,18 @@ class _$AddFollowupStateCopyWithImpl<$Res, $Val extends AddFollowupState>
 
     return $LeadCopyWith<$Res>(_value.lead!, (value) {
       return _then(_value.copyWith(lead: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NotificationModelCopyWith<$Res>? get notificationModel {
+    if (_value.notificationModel == null) {
+      return null;
+    }
+
+    return $NotificationModelCopyWith<$Res>(_value.notificationModel!, (value) {
+      return _then(_value.copyWith(notificationModel: value) as $Val);
     });
   }
 }
@@ -112,10 +133,13 @@ abstract class _$$AddFollowupStateImplCopyWith<$Res>
       AppStatus getLeadStatus,
       String? getLeadError,
       AppStatus addFollowupStatus,
-      String? addFollowupError});
+      String? addFollowupError,
+      NotificationModel? notificationModel});
 
   @override
   $LeadCopyWith<$Res>? get lead;
+  @override
+  $NotificationModelCopyWith<$Res>? get notificationModel;
 }
 
 /// @nodoc
@@ -134,6 +158,7 @@ class __$$AddFollowupStateImplCopyWithImpl<$Res>
     Object? getLeadError = freezed,
     Object? addFollowupStatus = null,
     Object? addFollowupError = freezed,
+    Object? notificationModel = freezed,
   }) {
     return _then(_$AddFollowupStateImpl(
       lead: freezed == lead
@@ -156,6 +181,10 @@ class __$$AddFollowupStateImplCopyWithImpl<$Res>
           ? _value.addFollowupError
           : addFollowupError // ignore: cast_nullable_to_non_nullable
               as String?,
+      notificationModel: freezed == notificationModel
+          ? _value.notificationModel
+          : notificationModel // ignore: cast_nullable_to_non_nullable
+              as NotificationModel?,
     ));
   }
 }
@@ -168,7 +197,8 @@ class _$AddFollowupStateImpl implements _AddFollowupState {
       this.getLeadStatus = AppStatus.init,
       this.getLeadError,
       this.addFollowupStatus = AppStatus.init,
-      this.addFollowupError});
+      this.addFollowupError,
+      this.notificationModel});
 
   @override
   final Lead? lead;
@@ -182,10 +212,12 @@ class _$AddFollowupStateImpl implements _AddFollowupState {
   final AppStatus addFollowupStatus;
   @override
   final String? addFollowupError;
+  @override
+  final NotificationModel? notificationModel;
 
   @override
   String toString() {
-    return 'AddFollowupState(lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, addFollowupStatus: $addFollowupStatus, addFollowupError: $addFollowupError)';
+    return 'AddFollowupState(lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, addFollowupStatus: $addFollowupStatus, addFollowupError: $addFollowupError, notificationModel: $notificationModel)';
   }
 
   @override
@@ -201,12 +233,14 @@ class _$AddFollowupStateImpl implements _AddFollowupState {
             (identical(other.addFollowupStatus, addFollowupStatus) ||
                 other.addFollowupStatus == addFollowupStatus) &&
             (identical(other.addFollowupError, addFollowupError) ||
-                other.addFollowupError == addFollowupError));
+                other.addFollowupError == addFollowupError) &&
+            (identical(other.notificationModel, notificationModel) ||
+                other.notificationModel == notificationModel));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, lead, getLeadStatus,
-      getLeadError, addFollowupStatus, addFollowupError);
+      getLeadError, addFollowupStatus, addFollowupError, notificationModel);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +256,8 @@ abstract class _AddFollowupState implements AddFollowupState {
       final AppStatus getLeadStatus,
       final String? getLeadError,
       final AppStatus addFollowupStatus,
-      final String? addFollowupError}) = _$AddFollowupStateImpl;
+      final String? addFollowupError,
+      final NotificationModel? notificationModel}) = _$AddFollowupStateImpl;
 
   @override
   Lead? get lead;
@@ -234,6 +269,8 @@ abstract class _AddFollowupState implements AddFollowupState {
   AppStatus get addFollowupStatus;
   @override
   String? get addFollowupError;
+  @override
+  NotificationModel? get notificationModel;
   @override
   @JsonKey(ignore: true)
   _$$AddFollowupStateImplCopyWith<_$AddFollowupStateImpl> get copyWith =>

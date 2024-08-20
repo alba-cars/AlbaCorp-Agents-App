@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/hot_leads.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
@@ -156,6 +157,36 @@ class LeadsCubit extends Cubit<LeadsState> {
   }) async {
     emit(state.copyWith(returnLeadsStatus: AppStatus.loading));
     final result = await _explorerRepo.checkInLeads(leads: state.selectedLeads);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            returnLeadsStatus: AppStatus.success,
+            selectModeEnabled: false,
+            selectedLeads: []));
+        getLeads(refresh: true);
+        if (context.mounted) {
+          showSnackbar(
+              context, 'Leads Returned Successfully', SnackBarType.success);
+        }
+        getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+        getIt<ListStateCubit>().setChangedTaskListState();
+        getIt<ListStateCubit>().setChangedLeadsListState();
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            returnLeadsStatus: AppStatus.failure,
+            returnLeadsError: e.exception));
+        if (context.mounted) {
+          showSnackbar(context, e.exception, SnackBarType.failure);
+        }
+    }
+  }
+
+  Future<void> returnLeadInBulkFromDialog(
+      {required BuildContext context, required List<String> leads}) async {
+    emit(state.copyWith(returnLeadsStatus: AppStatus.loading));
+    Logger().d(leads);
+    final result = await _explorerRepo.checkInLeads(leads: leads);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

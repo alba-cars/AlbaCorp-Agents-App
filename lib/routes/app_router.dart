@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
@@ -219,14 +220,20 @@ class AppRouter {
                 pageBuilder: (context, state) {
                   final isEdit = state.uri.queryParameters['isEdit'] == 'true';
                   Deal? deal;
+                  Lead? lead;
                   if (state.uri.queryParameters['deal'] != null) {
                     deal = Deal.fromJson(
                         json.decode(state.uri.queryParameters['deal']!));
+                  }
+                  if (state.uri.queryParameters['lead'] != null) {
+                    lead = Lead.fromJson(
+                        json.decode(state.uri.queryParameters['lead']!));
                   }
                   return AppTransition(
                       child: AddListingScreen(
                     isEdit: isEdit,
                     deal: deal,
+                    lead: lead,
                   ));
                 },
               ),

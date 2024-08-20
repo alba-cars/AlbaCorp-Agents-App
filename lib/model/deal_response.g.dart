@@ -30,6 +30,18 @@ _$DealResponseImpl _$$DealResponseImplFromJson(Map<String, dynamic> json) =>
       client: json['user'] == null
           ? null
           : Lead.fromJson(json['user'] as Map<String, dynamic>),
+      sellerInternalUser: json['sellerInternalUser'] == null
+          ? null
+          : Lead.fromJson(json['sellerInternalUser'] as Map<String, dynamic>),
+      buyerInternalUser: json['buyerInternalUser'] == null
+          ? null
+          : Lead.fromJson(json['buyerInternalUser'] as Map<String, dynamic>),
+      buyerExternalUser: json['buyerExternalUser'] == null
+          ? null
+          : Agency.fromJson(json['buyerExternalUser'] as Map<String, dynamic>),
+      sellerExternalUser: json['sellerExternalUser'] == null
+          ? null
+          : Agency.fromJson(json['sellerExternalUser'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$DealResponseImplToJson(_$DealResponseImpl instance) =>
@@ -48,4 +60,8 @@ Map<String, dynamic> _$$DealResponseImplToJson(_$DealResponseImpl instance) =>
       'active': instance.active,
       'created_by': instance.createdBy,
       'user': instance.client,
+      'sellerInternalUser': instance.sellerInternalUser,
+      'buyerInternalUser': instance.buyerInternalUser,
+      'buyerExternalUser': instance.buyerExternalUser,
+      'sellerExternalUser': instance.sellerExternalUser,
     };

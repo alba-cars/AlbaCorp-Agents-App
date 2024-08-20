@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
+import 'package:real_estate_app/data/repository/notification_repo.dart';
+import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
+import 'package:real_estate_app/util/result.dart';
+import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
 import '../../app/call_bloc/call_bloc.dart';
+import '../../model/notification_model.dart';
 
 class RootLayout extends StatefulWidget {
   const RootLayout({super.key, required this.child});
@@ -22,36 +28,53 @@ class RootLayout extends StatefulWidget {
 class _RootLayoutState extends State<RootLayout> {
   final ValueNotifier<String> feedBackValue = ValueNotifier('Interested');
   final TextEditingController _controller = TextEditingController();
+  @override
+  void initState() {
+    getPendingActions();
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant RootLayout oldWidget) {
+    getPendingActions();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void getPendingActions() async {
+    final notificationsResult =
+        await getIt<NotificationRepo>().getNotificationsWithActionsPending();
+
+    if (notificationsResult is Success) {
+      final notifications =
+          (notificationsResult as Success<List<NotificationModel>>).value;
+      if (notifications.isNotEmpty) {
+        ScaffoldMessenger.of(context).showMaterialBanner(
+          MaterialBanner(
+            content: Text('You have a follow-up task to schedule'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Navigate to the AddFollowUpScreen with the appropriate query parameters
+                  context.pushNamed(
+                    AddFollowUpScreen.routeName,
+                    queryParameters: {'leadId': notifications.first.leadId},
+                  );
+                },
+                child: Text('Schedule'),
+              ),
+            ],
+            backgroundColor: Colors.amber, // Optional: set the background color
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocListener<CallBloc, CallState>(
-        listener: (context, state) {
-          showGeneralDialog(
-              context: context,
-              barrierDismissible: false,
-              barrierLabel: 'call_feedback_dialog',
-              pageBuilder: (context, anim1, anim2) {
-                return CallFeedbackDialog(
-                    feedBackValue: feedBackValue, controller: _controller);
-              });
-        },
-        listenWhen: (previous, current) {
-          Logger().d(current);
-          return current.feedbackRequestDialogOpen == true &&
-              previous.phoneCallStatus == PhoneCallStatus.inCall &&
-              current.phoneCallStatus == PhoneCallStatus.callEnded;
-        },
-        child: BlocListener<ActivityCubit, ActivityState>(
-          listener: (context, state) {},
-          listenWhen: (previous, current) =>
-              previous.newSpecialLeadsTasks != current.newSpecialLeadsTasks &&
-              current.newSpecialLeadsTasks == true,
-          child: widget.child,
-        ),
-      ),
-    );
+    return Builder(builder: (context) {
+      return Scaffold(body: widget.child);
+    });
   }
 }
 

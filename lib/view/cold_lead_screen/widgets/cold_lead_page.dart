@@ -94,8 +94,24 @@ class _ColdLeadPageState extends State<ColdLeadPage>
             onTap: (index) {
               tabIndex = index;
               loadData(context);
+              if (mounted) setState(() {});
             },
           ),
+          SizedBox(
+            height: 12,
+          ),
+          if (tabIndex == 3)
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.blueGrey.withOpacity(.4)),
+              height: 56,
+              child: ListTile(
+                  leading: Icon(Icons.info_outline),
+                  title: Text(
+                      "These leads will get unassigned from you after 24 hrs",
+                      style: TextStyle(fontSize: 12))),
+            ),
           SizedBox(
             height: 24,
           ),

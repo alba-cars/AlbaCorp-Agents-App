@@ -2,7 +2,9 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/data/objectbox/entity/notification_entity.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/service_locator/objectbox.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../routes/app_router.dart';
@@ -142,6 +144,20 @@ class NotificationService {
     if (receivedAction.displayedLifeCycle == NotificationLifeCycle.Foreground &&
         receivedAction.payload != null) {
       getIt<AuthBloc>().onNotificationData(receivedAction.payload!);
+    } else {
+      final data = receivedAction.payload;
+      if (data != null) {
+        final store = (await ObjectBox.create()).store;
+        final box = store.box<NotificationEntity>();
+        await box.putAsync(NotificationEntity(
+            notificationId: data['id'],
+            title: data["title"] ?? '',
+            subTitle: data["body"],
+            type: data["type"],
+            requiresAction: data['requiresAction'] as bool? ?? false,
+            leadId: data['leadId']));
+        store.close();
+      }
     }
   }
 

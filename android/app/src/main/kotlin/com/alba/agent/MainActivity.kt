@@ -22,9 +22,9 @@ class MainActivity: FlutterFragmentActivity() {
     private val roleManager by lazy { getSystemService(RoleManager::class.java) }
     
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            requestRole()
-        };
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        //    requestRole()
+        //};
         super.onCreate(savedInstanceState)
     }
     @RequiresApi(Build.VERSION_CODES.Q)

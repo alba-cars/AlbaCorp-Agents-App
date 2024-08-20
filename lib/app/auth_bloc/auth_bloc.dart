@@ -109,7 +109,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         notification: NotificationModel(
             notificationId: data['id'],
             title: data["title"] ?? '',
-            subTitle: data["body"]));
+            subTitle: data["body"],
+            type: data["type"],
+            requiresAction: true,
+            leadId: data['leadId']));
   }
 
   void onNotificationData(Map<String, dynamic> data) async {
@@ -138,6 +141,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (state.authStatus == AuthStatus.initial) {
           await stream.firstWhere((e) => e.authStatus != AuthStatus.initial);
         }
+
         if (state.authStatus == AuthStatus.Authenticated) {
           await Future.delayed(Duration(milliseconds: 500));
           AppRouter.router.pushNamed(AddFollowUpScreen.routeName,

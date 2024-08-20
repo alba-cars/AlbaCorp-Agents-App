@@ -165,7 +165,11 @@ class AddDealCubit extends Cubit<AddDealState> {
   Future<void> addDealDocuments({required Map<String, dynamic> values}) async {
     emit(state.copyWith(addDealDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
-        userId: state.dealResponse!.client!.id,
+        userId: state.dealResponse!.client?.id,
+        sellerUserId: state.dealResponse!.sellerInternalUser?.id,
+        buyerUserId: state.dealResponse!.buyerInternalUser?.id,
+        buyerAgencyId: state.dealResponse!.buyerExternalUser?.id,
+        sellerAgencyId: state.dealResponse!.sellerExternalUser?.id,
         dealId: state.dealResponse!.id,
         values: values);
     switch (result) {

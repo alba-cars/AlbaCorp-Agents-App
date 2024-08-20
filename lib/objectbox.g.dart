@@ -23,7 +23,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 5795122159064061020),
       name: 'NotificationEntity',
-      lastPropertyId: const obx_int.IdUid(6, 3017629158783680701),
+      lastPropertyId: const obx_int.IdUid(9, 4826859756871750736),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -54,6 +54,21 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(6, 3017629158783680701),
             name: 'notificationId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 3435081018230525370),
+            name: 'type',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 3846285077600869935),
+            name: 'requiresAction',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 4826859756871750736),
+            name: 'leadId',
             type: 9,
             flags: 0)
       ],
@@ -165,13 +180,20 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final notificationIdOffset = object.notificationId == null
               ? null
               : fbb.writeString(object.notificationId!);
-          fbb.startTable(7);
+          final typeOffset =
+              object.type == null ? null : fbb.writeString(object.type!);
+          final leadIdOffset =
+              object.leadId == null ? null : fbb.writeString(object.leadId!);
+          fbb.startTable(10);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, titleOffset);
           fbb.addOffset(2, subTitleOffset);
           fbb.addBool(3, object.isRead);
           fbb.addInt64(4, object.createdAt?.millisecondsSinceEpoch);
           fbb.addOffset(5, notificationIdOffset);
+          fbb.addOffset(6, typeOffset);
+          fbb.addBool(7, object.requiresAction);
+          fbb.addOffset(8, leadIdOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -194,13 +216,22 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final createdAtParam = createdAtValue == null
               ? null
               : DateTime.fromMillisecondsSinceEpoch(createdAtValue);
+          final typeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 16);
+          final requiresActionParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
+          final leadIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 20);
           final object = NotificationEntity(
               id: idParam,
               notificationId: notificationIdParam,
               title: titleParam,
               subTitle: subTitleParam,
               isRead: isReadParam,
-              createdAt: createdAtParam);
+              createdAt: createdAtParam,
+              type: typeParam,
+              requiresAction: requiresActionParam,
+              leadId: leadIdParam);
 
           return object;
         }),
@@ -280,6 +311,18 @@ class NotificationEntity_ {
   /// See [NotificationEntity.notificationId].
   static final notificationId =
       obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[5]);
+
+  /// See [NotificationEntity.type].
+  static final type =
+      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[6]);
+
+  /// See [NotificationEntity.requiresAction].
+  static final requiresAction =
+      obx.QueryBooleanProperty<NotificationEntity>(_entities[0].properties[7]);
+
+  /// See [NotificationEntity.leadId].
+  static final leadId =
+      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[8]);
 }
 
 /// [PendingCallFeedbackEntity] entity fields to define ObjectBox queries.

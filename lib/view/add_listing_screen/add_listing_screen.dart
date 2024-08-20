@@ -38,21 +38,24 @@ import '../../widgets/fields/multi_select_autocomplete_field.dart';
 
 class AddListingScreen extends StatelessWidget {
   static const routeName = '/addListingScreen';
-  const AddListingScreen({super.key, required this.isEdit, this.deal});
+  const AddListingScreen(
+      {super.key, required this.isEdit, this.deal, this.lead});
   final bool isEdit;
   final Deal? deal;
+  final Lead? lead;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<AddListingCubit>(param1: isEdit, param2: deal),
-      child: AddListingScreenLayout(),
+      child: AddListingScreenLayout(lead: lead),
     );
   }
 }
 
 class AddListingScreenLayout extends StatefulWidget {
-  const AddListingScreenLayout({super.key});
+  const AddListingScreenLayout({super.key, this.lead});
+  final Lead? lead;
 
   @override
   State<AddListingScreenLayout> createState() => _AddListingScreenLayoutState();
@@ -160,7 +163,8 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
                     children: [
                       BasicInfoTab(
                           formKey: _formKey[0],
-                          propertyTypeList: propertyTypeList),
+                          propertyTypeList: propertyTypeList,
+                          lead: widget.lead),
                       CollectDocumentsTab(
                         formKey: _formKey[1],
                       ),
@@ -222,10 +226,12 @@ class BasicInfoTab extends StatefulWidget {
     super.key,
     required GlobalKey<FormBuilderState> formKey,
     required this.propertyTypeList,
+    this.lead,
   }) : _formKey = formKey;
 
   final GlobalKey<FormBuilderState> _formKey;
   final List<PropertyType> propertyTypeList;
+  final Lead? lead;
 
   @override
   State<BasicInfoTab> createState() => _BasicInfoTabState();
@@ -252,7 +258,10 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
   Widget build(BuildContext context) {
     return FormBuilder(
       key: widget._formKey,
-      initialValue: context.read<AddListingCubit>().state.initialValues ?? {},
+      initialValue: context.read<AddListingCubit>().state.initialValues ??
+          {
+            if (widget.lead != null) ...{"user_id": widget.lead}
+          },
       onChanged: () {
         val = widget._formKey.currentState?.instantValue ?? {};
         setState(() {});

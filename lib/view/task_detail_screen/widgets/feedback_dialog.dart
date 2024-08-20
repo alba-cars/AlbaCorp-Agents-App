@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -55,7 +57,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     feedBackValue.value = switch (widget.mode) {
       CardAction.Heart => 'Interested',
       CardAction.Charge => 'Very Interested',
-      CardAction.Star => 'Deal',
+      CardAction.Star => 'Listing',
       CardAction.ManuelSwipe =>
         widget.direction == DismissDirection.startToEnd ? 'Interested' : null,
       _ => null
@@ -424,8 +426,12 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                                   isInterested: true,
                                                   status: 'Complete',
                                                   notes: _controller.text));
+                                      final lead = widget.activity.lead;
                                       widget.parentContext.pushNamed(
-                                          AddListingScreen.routeName);
+                                          AddListingScreen.routeName,
+                                          queryParameters: {
+                                            "lead": json.encode(lead?.toJson())
+                                          });
                                     },
                                     text: ('Complete & Add Listing')),
                               if (value == "Not Interested") ...[

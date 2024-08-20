@@ -11,7 +11,10 @@ class NotificationModel with _$NotificationModel {
     String? subTitle,
     String? notificationId,
     @Default(false) bool isRead,
+    @Default(false) bool requiresAction,
+    @Default('Normal') String type,
     @JsonKey(name: 'createdAt') DateTime? createdAt,
+    String? leadId,
   }) = _NotificationModel;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>
