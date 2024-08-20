@@ -25,6 +25,7 @@ class AppAutoComplete<T extends Object> extends StatefulWidget {
     this.actionButton,
     this.disabled = false,
     this.value,
+    this.initialValue,
   })  : _displayStringForOption =
             displayStringForOption ?? _displayStringForOptions,
         super(key: key);
@@ -41,6 +42,7 @@ class AppAutoComplete<T extends Object> extends StatefulWidget {
   final Widget Function(GlobalKey<FormFieldState<T>> key)? actionButton;
   final bool disabled;
   final T? value;
+  final T? initialValue;
 
   static String _displayStringForOptions<T>(T val) => val.toString();
 
@@ -57,13 +59,11 @@ class _AppAutoCompleteState<T extends Object>
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      if (_fieldKey.currentState?.value != null) {
-        // _controller.text =
-        //     widget._displayStringForOption(_fieldKey.currentState!.value!);
-        // Logger().d(_fieldKey.currentState!.value!);
-      }
-    });
+    if (widget.initialValue != null) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _fieldKey.currentState?.didChange(widget.initialValue);
+      });
+    }
     if (widget.value != null) {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         _fieldKey.currentState?.didChange(widget.value);

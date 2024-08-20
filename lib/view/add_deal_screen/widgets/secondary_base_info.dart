@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
@@ -90,9 +91,17 @@ class SellerSourceAlbaFields extends StatefulWidget {
 class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
   late final DropDownFieldController _downFieldController =
       DropDownFieldController();
-  Property? property;
-  double? commissionPercentage;
-  double? agreedSalePrice;
+  ValueNotifier<Property?> property = ValueNotifier(null);
+  ValueNotifier<double?> commissionPercentage = ValueNotifier(null);
+  ValueNotifier<double?> agreedSalePrice = ValueNotifier(null);
+
+  @override
+  void initState() {
+    context.read<AddDealCubit>().getAgentProperties(
+        agentId: context.read<AuthBloc>().state.agent?.id ?? '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final types = context.select(
@@ -121,9 +130,13 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
           return state.agentList;
         }, builder: (context, agentList) {
           return AppAutoComplete(
+            key: ValueKey(agentList.hashCode),
             name: 'sellerAssignedAgent',
             label: 'Choose Agent',
             isRequired: true,
+            initialValue: context.read<AuthBloc>().state.agent,
+            disabled: context.read<AddDealCubit>().state.buyerSource ==
+                ClientSource.external,
             valueTransformer: (p0) => p0?.id,
             optionsBuilder: (v) async {
               return context.read<AddDealCubit>().getAgentsAutoComplete(v.text);
@@ -132,9 +145,8 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
               context
                   .read<AddDealCubit>()
                   .getAgentProperties(agentId: option.id);
-              property = null;
+              property.value = null;
               _downFieldController.reset();
-              setState(() {});
             },
             displayStringForOption: (option) =>
                 "${option.user.firstName} ${option.user.lastName}",
@@ -153,9 +165,9 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
             selectValue: (p0) => p0?.id,
             initialValue: null,
             onSelected: (option) {
-              property = option;
+              property.value = option;
 
-              context.read<AddDealCubit>().setSelectedProperty(property);
+              context.read<AddDealCubit>().setSelectedProperty(property.value);
               context
                   .read<AddDealCubit>()
                   .getPropertyOwner(ownerId: option.propertyOwnerId!);
@@ -186,27 +198,45 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
             );
           },
         ),
-        CurrencyField(
-          name: 'agreedSalePrice',
-          label: 'Agreed Sale Price',
-          isRequired: true,
-          value: (property != null)
-              ? context.read<AddDealCubit>().getPrice(property!)?.toDouble()
-              : null,
-          onChanged: (val) {
-            agreedSalePrice = val?.toDouble();
-          },
-        ),
-        CommissionField(
-          name: 'sellerAgreedComm',
-          isRequired: true,
-          commissionPercentage:
-              num.tryParse(property?.commission.toString() ?? ''),
-          price: agreedSalePrice ??
-              (property != null
-                  ? context.read<AddDealCubit>().getPrice(property!)
-                  : null),
-        ),
+        ValueListenableBuilder(
+            valueListenable: property,
+            builder: (context, _, r) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CurrencyField(
+                    name: 'agreedSalePrice',
+                    label: 'Agreed Sale Price',
+                    isRequired: true,
+                    value: (property.value != null)
+                        ? context
+                            .read<AddDealCubit>()
+                            .getPrice(property.value!)
+                            ?.toDouble()
+                        : null,
+                    onChanged: (val) {
+                      agreedSalePrice.value = val?.toDouble();
+                    },
+                  ),
+                  ValueListenableBuilder(
+                      valueListenable: agreedSalePrice,
+                      builder: (context, _, r) {
+                        return CommissionField(
+                          name: 'sellerAgreedComm',
+                          isRequired: true,
+                          commissionPercentage: num.tryParse(
+                              property.value?.commission.toString() ?? ''),
+                          price: agreedSalePrice.value ??
+                              (property.value != null
+                                  ? context
+                                      .read<AddDealCubit>()
+                                      .getPrice(property.value!)
+                                  : null),
+                        );
+                      }),
+                ],
+              );
+            }),
       ],
     );
   }

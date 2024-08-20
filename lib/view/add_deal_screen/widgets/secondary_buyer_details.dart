@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 
+import '../../../app/auth_bloc/auth_bloc.dart';
+import '../../../model/agent_model.dart';
 import '../../../model/lead_model.dart';
 import '../../../widgets/fields/autocomplete_field.dart';
 import '../../../widgets/fields/commission_field.dart';
@@ -14,10 +16,22 @@ import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 import '../cubit/add_deal_cubit.dart';
 
-class SecondaryAlbaBuyerDetails extends StatelessWidget {
+class SecondaryAlbaBuyerDetails extends StatefulWidget {
   const SecondaryAlbaBuyerDetails({super.key, required this.formKey});
 
   final GlobalKey<FormBuilderState> formKey;
+
+  @override
+  State<SecondaryAlbaBuyerDetails> createState() =>
+      _SecondaryAlbaBuyerDetailsState();
+}
+
+class _SecondaryAlbaBuyerDetailsState extends State<SecondaryAlbaBuyerDetails> {
+  @override
+  void initState() {
+    // widget.formKey.currentState?.instantValue
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +53,33 @@ class SecondaryAlbaBuyerDetails extends StatelessWidget {
         VerticalSmallGap(
           adjustment: 0.5,
         ),
+        BlocSelector<AddDealCubit, AddDealState, List<Agent>>(
+            selector: (state) {
+          return state.agentList;
+        }, builder: (context, agentList) {
+          return AppAutoComplete(
+            name: 'sellerAssignedAgent',
+            label: 'Choose Agent',
+            isRequired: true,
+            value: widget.formKey.currentState
+                        ?.instantValue['sellerAssignedAgent'] !=
+                    context.read<AuthBloc>().state.agent?.id
+                ? context.read<AuthBloc>().state.agent
+                : null,
+            disabled: context.read<AddDealCubit>().state.sellerSource ==
+                    ClientSource.external ||
+                widget.formKey.currentState
+                        ?.instantValue['sellerAssignedAgent'] !=
+                    context.read<AuthBloc>().state.agent?.id,
+            valueTransformer: (p0) => p0?.id,
+            optionsBuilder: (v) async {
+              return context.read<AddDealCubit>().getAgentsAutoComplete(v.text);
+            },
+            onSelected: (option) {},
+            displayStringForOption: (option) =>
+                "${option.user.firstName} ${option.user.lastName}",
+          );
+        }),
         AppAutoComplete(
           name: 'buyerInternalUserId',
           label: 'Client',
@@ -61,8 +102,9 @@ class SecondaryAlbaBuyerDetails extends StatelessWidget {
                     await context.pushNamed<Lead>(AddLeadScreen.routeName);
 
                 if (lead != null) {
-                  final fieldValues = formKey.currentState?.instantValue ?? {};
-                  formKey.currentState
+                  final fieldValues =
+                      widget.formKey.currentState?.instantValue ?? {};
+                  widget.formKey.currentState
                       ?.patchValue({...fieldValues, 'user_id': lead});
                 }
               },
@@ -80,8 +122,8 @@ class SecondaryAlbaBuyerDetails extends StatelessWidget {
               name: 'buyerAgreedComm',
               commissionPercentage:
                   num.tryParse(property?.commission.toString() ?? ''),
-              price: num.tryParse(formKey
-                          .currentState?.instantValue['agreedSalePrice']
+              price: num.tryParse(widget
+                          .formKey.currentState?.instantValue['agreedSalePrice']
                           ?.toString() ??
                       '') ??
                   (property != null
