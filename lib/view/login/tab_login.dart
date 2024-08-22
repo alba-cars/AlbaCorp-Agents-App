@@ -23,8 +23,8 @@ class TabLogin extends StatefulWidget {
 }
 
 class _TabLoginState extends State<TabLogin> {
-  TextEditingController emailController =
-      TextEditingController(text: "ismail@alba.homes");
+  TextEditingController emailController = TextEditingController(
+      text: "ismail@alba.homes"); // TOOD: Remove hardcoded credentials
   TextEditingController passwordController =
       TextEditingController(text: "1234@Abcd");
   final loginForm = GlobalKey<FormState>();

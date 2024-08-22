@@ -17,6 +17,7 @@ import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
+import 'package:real_estate_app/view/deals_screen/deal_congragulations_page.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
@@ -64,7 +65,8 @@ class AppRouter {
           if (state.matchedLocation == Routes.introRoute ||
               state.matchedLocation == Routes.homeRoute ||
               state.matchedLocation == Routes.loginRoute) {
-            return EnquiriesScreen.routeName;
+            return DealCongragulationsPage.routeName; // TODO: Remove hardcoded
+            // return EnquiriesScreen.routeName;
           } else if (authState.veryImportantActivities != null &&
               authState.veryImportantActivities!.isNotEmpty &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {
@@ -168,6 +170,20 @@ class AppRouter {
                       activeTabIndex: int.tryParse(index) ?? 0,
                     ),
                   );
+                },
+              ),
+              GoRoute(
+                path: DealCongragulationsPage.routeName,
+                name: DealCongragulationsPage.routeName,
+                pageBuilder: (context, state) {
+                  final agentName = state.pathParameters['agentName'] ?? '';
+                  final amountWorth =
+                      state.uri.queryParameters['amountWorth'] ?? '0';
+                  return AppTransition(
+                      child: DealCongragulationsPage(
+                    agentName: agentName,
+                    amountWorth: amountWorth,
+                  ));
                 },
               ),
               GoRoute(
