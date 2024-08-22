@@ -594,12 +594,8 @@ class CollectDocumentsTab extends StatelessWidget {
                       label: 'Passport',
                     ),
                   ],
-                  if (context
-                          .read<AddDealCubit>()
-                          .state
-                          .dealResponse
-                          ?.buyerExternalUser !=
-                      null) ...[
+                  if (context.read<AddDealCubit>().state.buyerSource ==
+                      ClientSource.external) ...[
                     DocumentSelectionField(
                       onSelected: (v) {},
                       isEditting: false,

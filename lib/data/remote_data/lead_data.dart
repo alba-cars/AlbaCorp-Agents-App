@@ -64,6 +64,7 @@ class LeadData implements LeadRepo {
   Future<Result<List<Lead>>> getLeads(
       {Map<String, dynamic>? filter,
       String? search,
+      String? agentId,
       Paginator? paginator}) async {
     try {
       String url = 'v1/search/user/filter';
@@ -84,14 +85,14 @@ class LeadData implements LeadRepo {
         }
       });
       final response = await _dio.get(url, queryParameters: {
-        'agent_id': getIt<AuthBloc>().state.agent?.id,
+        'agent_id': agentId ?? getIt<AuthBloc>().state.agent?.id,
         'page': (paginator?.currentPage ?? 0) + 1,
         'per_page': 15,
         'sort_by': 'createdAt',
         "sort_dir": 'DESC',
         'roles': ['User', 'Owner'],
         'active': true,
-        if (search != null) 'search': search,
+        if (search != null && search.isNotEmpty) 'search': search,
         if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['findUsersOutput'] as List;

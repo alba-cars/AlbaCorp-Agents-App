@@ -9,6 +9,7 @@ import 'package:real_estate_app/model/file_object.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../model/deal_document_model.dart';
+import '../../../model/deal_model.dart';
 import '../../../util/result.dart';
 import '../../../util/status.dart';
 
@@ -21,7 +22,9 @@ class DealAddDocumentCubit extends Cubit<DealAddDocumentState> {
       @factoryParam String dealId, @factoryParam String userId, this._dealsRepo)
       : _dealId = dealId,
         _userId = userId,
-        super(DealAddDocumentState());
+        super(DealAddDocumentState()) {
+    getDeal();
+  }
 
   final DealsRepo _dealsRepo;
   final String _dealId;
@@ -47,12 +50,33 @@ class DealAddDocumentCubit extends Cubit<DealAddDocumentState> {
     }
   }
 
+  Future<void> getDeal() async {
+    emit(state.copyWith(getDealStatus: AppStatus.loading));
+    final result = await _dealsRepo.getDeal(dealId: _dealId);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(deal: s.value, getDealStatus: AppStatus.success));
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getDealError: e.exception, getDealStatus: AppStatus.failure));
+        break;
+    }
+  }
+
   Future<void> addDealDocuments(
       {required BuildContext context,
       required Map<String, dynamic> values}) async {
     emit(state.copyWith(addDealDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
-        userId: _userId, dealId: _dealId, values: values);
+      userId: _userId,
+      dealId: _dealId,
+      values: values,
+      sellerUserId: state.deal!.sellerInternalUserId,
+      buyerUserId: state.deal!.buyerInternalUserId,
+      buyerAgencyId: state.deal!.buyerExternalUserId,
+      sellerAgencyId: state.deal!.sellerExternalUserId,
+    );
     switch (result) {
       case (Success s):
         emit(state.copyWith(addDealDocumentsStatus: AppStatus.success));

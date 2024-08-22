@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DealAddDocumentState {
   AppStatus get addDealDocumentsStatus => throw _privateConstructorUsedError;
   String? get addDealDocumentsError => throw _privateConstructorUsedError;
+  Deal? get deal => throw _privateConstructorUsedError;
+  AppStatus get getDealStatus => throw _privateConstructorUsedError;
+  String? get getDealError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DealAddDocumentStateCopyWith<DealAddDocumentState> get copyWith =>
@@ -30,7 +33,14 @@ abstract class $DealAddDocumentStateCopyWith<$Res> {
           $Res Function(DealAddDocumentState) then) =
       _$DealAddDocumentStateCopyWithImpl<$Res, DealAddDocumentState>;
   @useResult
-  $Res call({AppStatus addDealDocumentsStatus, String? addDealDocumentsError});
+  $Res call(
+      {AppStatus addDealDocumentsStatus,
+      String? addDealDocumentsError,
+      Deal? deal,
+      AppStatus getDealStatus,
+      String? getDealError});
+
+  $DealCopyWith<$Res>? get deal;
 }
 
 /// @nodoc
@@ -49,6 +59,9 @@ class _$DealAddDocumentStateCopyWithImpl<$Res,
   $Res call({
     Object? addDealDocumentsStatus = null,
     Object? addDealDocumentsError = freezed,
+    Object? deal = freezed,
+    Object? getDealStatus = null,
+    Object? getDealError = freezed,
   }) {
     return _then(_value.copyWith(
       addDealDocumentsStatus: null == addDealDocumentsStatus
@@ -59,7 +72,31 @@ class _$DealAddDocumentStateCopyWithImpl<$Res,
           ? _value.addDealDocumentsError
           : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
               as String?,
+      deal: freezed == deal
+          ? _value.deal
+          : deal // ignore: cast_nullable_to_non_nullable
+              as Deal?,
+      getDealStatus: null == getDealStatus
+          ? _value.getDealStatus
+          : getDealStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getDealError: freezed == getDealError
+          ? _value.getDealError
+          : getDealError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DealCopyWith<$Res>? get deal {
+    if (_value.deal == null) {
+      return null;
+    }
+
+    return $DealCopyWith<$Res>(_value.deal!, (value) {
+      return _then(_value.copyWith(deal: value) as $Val);
+    });
   }
 }
 
@@ -71,7 +108,15 @@ abstract class _$$DealAddDocumentStateImplCopyWith<$Res>
       __$$DealAddDocumentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppStatus addDealDocumentsStatus, String? addDealDocumentsError});
+  $Res call(
+      {AppStatus addDealDocumentsStatus,
+      String? addDealDocumentsError,
+      Deal? deal,
+      AppStatus getDealStatus,
+      String? getDealError});
+
+  @override
+  $DealCopyWith<$Res>? get deal;
 }
 
 /// @nodoc
@@ -87,6 +132,9 @@ class __$$DealAddDocumentStateImplCopyWithImpl<$Res>
   $Res call({
     Object? addDealDocumentsStatus = null,
     Object? addDealDocumentsError = freezed,
+    Object? deal = freezed,
+    Object? getDealStatus = null,
+    Object? getDealError = freezed,
   }) {
     return _then(_$DealAddDocumentStateImpl(
       addDealDocumentsStatus: null == addDealDocumentsStatus
@@ -97,6 +145,18 @@ class __$$DealAddDocumentStateImplCopyWithImpl<$Res>
           ? _value.addDealDocumentsError
           : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
               as String?,
+      deal: freezed == deal
+          ? _value.deal
+          : deal // ignore: cast_nullable_to_non_nullable
+              as Deal?,
+      getDealStatus: null == getDealStatus
+          ? _value.getDealStatus
+          : getDealStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getDealError: freezed == getDealError
+          ? _value.getDealError
+          : getDealError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -106,17 +166,27 @@ class __$$DealAddDocumentStateImplCopyWithImpl<$Res>
 class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
   const _$DealAddDocumentStateImpl(
       {this.addDealDocumentsStatus = AppStatus.init,
-      this.addDealDocumentsError});
+      this.addDealDocumentsError,
+      this.deal,
+      this.getDealStatus = AppStatus.init,
+      this.getDealError});
 
   @override
   @JsonKey()
   final AppStatus addDealDocumentsStatus;
   @override
   final String? addDealDocumentsError;
+  @override
+  final Deal? deal;
+  @override
+  @JsonKey()
+  final AppStatus getDealStatus;
+  @override
+  final String? getDealError;
 
   @override
   String toString() {
-    return 'DealAddDocumentState(addDealDocumentsStatus: $addDealDocumentsStatus, addDealDocumentsError: $addDealDocumentsError)';
+    return 'DealAddDocumentState(addDealDocumentsStatus: $addDealDocumentsStatus, addDealDocumentsError: $addDealDocumentsError, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError)';
   }
 
   @override
@@ -127,12 +197,17 @@ class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
             (identical(other.addDealDocumentsStatus, addDealDocumentsStatus) ||
                 other.addDealDocumentsStatus == addDealDocumentsStatus) &&
             (identical(other.addDealDocumentsError, addDealDocumentsError) ||
-                other.addDealDocumentsError == addDealDocumentsError));
+                other.addDealDocumentsError == addDealDocumentsError) &&
+            (identical(other.deal, deal) || other.deal == deal) &&
+            (identical(other.getDealStatus, getDealStatus) ||
+                other.getDealStatus == getDealStatus) &&
+            (identical(other.getDealError, getDealError) ||
+                other.getDealError == getDealError));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, addDealDocumentsStatus, addDealDocumentsError);
+  int get hashCode => Object.hash(runtimeType, addDealDocumentsStatus,
+      addDealDocumentsError, deal, getDealStatus, getDealError);
 
   @JsonKey(ignore: true)
   @override
@@ -146,12 +221,21 @@ class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
 abstract class _DealAddDocumentState implements DealAddDocumentState {
   const factory _DealAddDocumentState(
       {final AppStatus addDealDocumentsStatus,
-      final String? addDealDocumentsError}) = _$DealAddDocumentStateImpl;
+      final String? addDealDocumentsError,
+      final Deal? deal,
+      final AppStatus getDealStatus,
+      final String? getDealError}) = _$DealAddDocumentStateImpl;
 
   @override
   AppStatus get addDealDocumentsStatus;
   @override
   String? get addDealDocumentsError;
+  @override
+  Deal? get deal;
+  @override
+  AppStatus get getDealStatus;
+  @override
+  String? get getDealError;
   @override
   @JsonKey(ignore: true)
   _$$DealAddDocumentStateImplCopyWith<_$DealAddDocumentStateImpl>

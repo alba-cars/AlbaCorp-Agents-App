@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
@@ -49,9 +50,54 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
     switch (result) {
       case (Success<List<DealDocument>> s):
         emit(state.copyWith(
-            userDocuments: s.value.where((e) => e.dealId == null).toList(),
-            dealDocuments:
-                s.value.where((e) => e.dealId == state.dealId).toList(),
+            userDocuments: s.value
+                .where((e) =>
+                    (e.type.toLowerCase() == 'eid' ||
+                        e.type.toLowerCase() == 'passport') &&
+                    e.userId == state.deal?.userId)
+                .toList(),
+            buyerDocuments: s.value
+                .where((e) =>
+                    (e.type.toLowerCase() == 'eid' ||
+                        e.type.toLowerCase() == 'passport') &&
+                    e.userId == state.deal?.buyerInternalUserId)
+                .map((e) => e.copyWith(type: 'buyer.${e.type}'))
+                .toList(),
+            sellerDocuments: s.value
+                .where((e) =>
+                    (e.type.toLowerCase() == 'eid' ||
+                        e.type.toLowerCase() == 'passport') &&
+                    e.userId == state.deal?.sellerInternalUserId)
+                .map((e) => e.copyWith(type: 'seller.${e.type}'))
+                .toList(),
+            dealDocuments: s.value
+                .where((e) =>
+                    !(e.type.toLowerCase() == 'eid' ||
+                        e.type.toLowerCase() == 'passport') &&
+                    e.dealId == state.dealId)
+                .toList(),
+            buyerExternalDocuments:
+                state.deal?.buyerExternalUser?.document != null
+                    ? [
+                        DealDocument(
+                            id: "",
+                            userId: "",
+                            createdById: "",
+                            type: 'buyer.trade_license',
+                            path: state.deal?.buyerExternalUser?.document)
+                      ]
+                    : [],
+            sellerExternalDocuments:
+                state.deal?.sellerExternalUser?.document != null
+                    ? [
+                        DealDocument(
+                            id: "",
+                            userId: "",
+                            createdById: "",
+                            type: 'buyer.trade_license',
+                            path: state.deal?.sellerExternalUser?.document)
+                      ]
+                    : [],
             getDealDocumentsStatus: AppStatus.success));
         break;
       case (Error _):
@@ -62,16 +108,48 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
 
   Future<void> getUserDocuments() async {
     emit(state.copyWith(getDealDocumentsStatus: AppStatus.loading));
-    final result = await _leadRepo.getClientDocuments(
-        clientId: state.deal?.client?.id ?? '');
-    switch (result) {
-      case (Success s):
-        emit(state.copyWith(
-            userDocuments: s.value, getUserDocumentsStatus: AppStatus.success));
-        break;
-      case (Error _):
-        emit(state.copyWith(getDealDocumentsStatus: AppStatus.failure));
-        break;
+    Logger().d(state.deal?.toJson());
+    if (state.deal?.client != null) {
+      final result = await _leadRepo.getClientDocuments(
+          clientId: state.deal?.client?.id ?? '');
+      switch (result) {
+        case (Success s):
+          emit(state.copyWith(
+              userDocuments: s.value,
+              getUserDocumentsStatus: AppStatus.success));
+          break;
+        case (Error _):
+          emit(state.copyWith(getUserDocumentsStatus: AppStatus.failure));
+          break;
+      }
+    }
+    if (state.deal?.buyerInternalUserId != null) {
+      final result = await _leadRepo.getClientDocuments(
+          clientId: state.deal?.buyerInternalUserId ?? '');
+      switch (result) {
+        case (Success s):
+          emit(state.copyWith(
+              buyerDocuments: s.value,
+              getBuyerDocumentsStatus: AppStatus.success));
+          break;
+        case (Error _):
+          emit(state.copyWith(getBuyerDocumentsStatus: AppStatus.failure));
+          break;
+      }
+    }
+    if (state.deal?.sellerInternalUserId != null) {
+      final result = await _leadRepo.getClientDocuments(
+          clientId: state.deal?.sellerInternalUserId ?? '');
+      switch (result) {
+        case (Success s):
+          emit(state.copyWith(
+              sellerDocuments: s.value,
+              getSellerDocumentsStatus: AppStatus.success));
+          break;
+        case (Error _):
+          emit(state.copyWith(getSellerDocumentsStatus: AppStatus.failure));
+          break;
+      }
     }
   }
 

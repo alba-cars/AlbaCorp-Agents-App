@@ -51,10 +51,12 @@ class Deal with _$Deal {
     DealListingResponse? external_listing_property,
     //
     //external buyer
+    String? buyerExternalUserId,
     String? buyerExternalAgentName,
     String? buyerExternalAgentPhone,
     String? buyerExternalClientName,
     String? buyerExternalClientPhone,
+    Agency? buyerExternalUser,
     //
     @JsonKey(name: 'property_list_id') String? propertyListId,
     Lead? buyerInternalUser,

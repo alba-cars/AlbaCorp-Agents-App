@@ -253,9 +253,9 @@ class AddDealCubit extends Cubit<AddDealState> {
     }
   }
 
-  Future<List<Lead>> getLeads({String? search}) async {
+  Future<List<Lead>> getLeads({String? search, String? agentId}) async {
     emit(state.copyWith(getLeadListStatus: AppStatus.loadingMore));
-    final result = await _leadRepo.getLeads(search: search);
+    final result = await _leadRepo.getLeads(search: search, agentId: agentId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

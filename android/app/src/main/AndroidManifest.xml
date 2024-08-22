@@ -18,7 +18,9 @@
    <application
         android:label="Alba Homes - Agent"
         android:name=".MyApplication"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/launcher_icon"
+        android:enableOnBackInvokedCallback="true"
+        >
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyDTUI46cppBiRPLwRCrCKjjbsUKAWmMbx8"/>
         <activity

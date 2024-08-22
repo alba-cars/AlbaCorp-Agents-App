@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
@@ -22,7 +23,7 @@ import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 import 'secondary_external_property_details.dart';
 
-class SecondaryBasicInfoTab extends StatelessWidget {
+class SecondaryBasicInfoTab extends StatefulWidget {
   const SecondaryBasicInfoTab({
     super.key,
     required GlobalKey<FormBuilderState> formKey,
@@ -33,9 +34,22 @@ class SecondaryBasicInfoTab extends StatelessWidget {
   final List<PropertyType> propertyTypeList;
 
   @override
+  State<SecondaryBasicInfoTab> createState() => _SecondaryBasicInfoTabState();
+}
+
+class _SecondaryBasicInfoTabState extends State<SecondaryBasicInfoTab> {
+  final ValueNotifier<Map<String, dynamic>> valueNotifier = ValueNotifier({});
+
+  @override
   Widget build(BuildContext context) {
     return FormBuilder(
-      key: _formKey,
+      key: widget._formKey,
+      onChanged: () {
+        if (widget._formKey.currentState?.instantValue != valueNotifier.value) {
+          valueNotifier.value =
+              widget._formKey.currentState?.instantValue ?? {};
+        }
+      },
       child: ScrollShadow(
         color: Colors.indigo[50]!,
         child: SingleChildScrollView(
@@ -62,7 +76,8 @@ class SecondaryBasicInfoTab extends StatelessWidget {
                             return SizedBox();
                           } else if (buyerSource == ClientSource.alba) {
                             return SecondaryAlbaBuyerDetails(
-                              formKey: _formKey,
+                              formKey: widget._formKey,
+                              value: valueNotifier,
                             );
                           } else {
                             return SecondaryExternalBuyerDetails();
@@ -130,7 +145,7 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
           return state.agentList;
         }, builder: (context, agentList) {
           return AppAutoComplete(
-            key: ValueKey(agentList.hashCode),
+            key: ValueKey('sellerAssignedAgent'),
             name: 'sellerAssignedAgent',
             label: 'Choose Agent',
             isRequired: true,

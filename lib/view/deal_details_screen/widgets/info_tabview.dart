@@ -115,7 +115,6 @@ class InfoTabView extends StatelessWidget {
                               horizontal: 4.h, vertical: 1.h),
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.blueGrey),
-                              borderRadius: BorderRadius.circular(4),
                               color: Colors.blueGrey[100]),
                           child: SmallText(text: deal?.status ?? ''),
                         ),
@@ -237,7 +236,6 @@ class InfoTabView extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
                     children: [
@@ -303,7 +301,6 @@ class InfoTabView extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
                     children: [
@@ -579,7 +576,6 @@ class BuyerInternalUserInfo extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
@@ -640,7 +636,6 @@ class SellerInternalUserInfo extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
@@ -698,7 +693,6 @@ class SellerExternalUserInfo extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
@@ -753,7 +747,6 @@ class BuyerExternalUerInfo extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
@@ -803,7 +796,6 @@ class PrimaryClientInfo extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(4),
           ),
           child: Row(
             children: [
@@ -881,7 +873,6 @@ class InfoWithPhoneWidget extends StatelessWidget {
                             horizontal: 4.h, vertical: 1.h),
                         decoration: BoxDecoration(
                             border: Border.all(color: colorScheme.error),
-                            borderRadius: BorderRadius.circular(4),
                             color: colorScheme.errorContainer),
                         child: SmallText(text: 'DND'),
                       ),

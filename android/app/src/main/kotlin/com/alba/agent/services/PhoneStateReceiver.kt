@@ -67,6 +67,13 @@ object OverlayManager {
     private var overlayView: View? = null
 
     fun showOverlay(context: Context, number: String,preferences:SharedPreferences) {
+       val ignoreFeedback = preferences.getBoolean("IgnoreCallFeedback", false)
+        if (ignoreFeedback) {
+            preferences.edit()
+                .remove("IgnoreCallFeedback")
+                .apply()
+            return
+        }
         if(number == "042815555" || number == "+97142815555"){
             preferences.edit().putString("flutter.call", "PROPERTY_FINDER").apply()
             startActivity(context)

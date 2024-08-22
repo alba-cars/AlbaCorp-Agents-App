@@ -62,10 +62,12 @@ mixin _$Deal {
   DealListingResponse? get external_listing_property =>
       throw _privateConstructorUsedError; //
 //external buyer
+  String? get buyerExternalUserId => throw _privateConstructorUsedError;
   String? get buyerExternalAgentName => throw _privateConstructorUsedError;
   String? get buyerExternalAgentPhone => throw _privateConstructorUsedError;
   String? get buyerExternalClientName => throw _privateConstructorUsedError;
-  String? get buyerExternalClientPhone => throw _privateConstructorUsedError; //
+  String? get buyerExternalClientPhone => throw _privateConstructorUsedError;
+  Agency? get buyerExternalUser => throw _privateConstructorUsedError; //
   @JsonKey(name: 'property_list_id')
   String? get propertyListId => throw _privateConstructorUsedError;
   Lead? get buyerInternalUser => throw _privateConstructorUsedError;
@@ -124,10 +126,12 @@ abstract class $DealCopyWith<$Res> {
       String? sellerExternalClientPhone,
       Agency? sellerExternalUser,
       DealListingResponse? external_listing_property,
+      String? buyerExternalUserId,
       String? buyerExternalAgentName,
       String? buyerExternalAgentPhone,
       String? buyerExternalClientName,
       String? buyerExternalClientPhone,
+      Agency? buyerExternalUser,
       @JsonKey(name: 'property_list_id') String? propertyListId,
       Lead? buyerInternalUser,
       Agent? buyerAssignedAgent,
@@ -144,6 +148,7 @@ abstract class $DealCopyWith<$Res> {
   $LeadCopyWith<$Res>? get client;
   $AgencyCopyWith<$Res>? get sellerExternalUser;
   $DealListingResponseCopyWith<$Res>? get external_listing_property;
+  $AgencyCopyWith<$Res>? get buyerExternalUser;
   $LeadCopyWith<$Res>? get buyerInternalUser;
   $AgentCopyWith<$Res>? get buyerAssignedAgent;
   $LeadCopyWith<$Res>? get sellerInternalUser;
@@ -198,10 +203,12 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
     Object? sellerExternalClientPhone = freezed,
     Object? sellerExternalUser = freezed,
     Object? external_listing_property = freezed,
+    Object? buyerExternalUserId = freezed,
     Object? buyerExternalAgentName = freezed,
     Object? buyerExternalAgentPhone = freezed,
     Object? buyerExternalClientName = freezed,
     Object? buyerExternalClientPhone = freezed,
+    Object? buyerExternalUser = freezed,
     Object? propertyListId = freezed,
     Object? buyerInternalUser = freezed,
     Object? buyerAssignedAgent = freezed,
@@ -340,6 +347,10 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
           ? _value.external_listing_property
           : external_listing_property // ignore: cast_nullable_to_non_nullable
               as DealListingResponse?,
+      buyerExternalUserId: freezed == buyerExternalUserId
+          ? _value.buyerExternalUserId
+          : buyerExternalUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
       buyerExternalAgentName: freezed == buyerExternalAgentName
           ? _value.buyerExternalAgentName
           : buyerExternalAgentName // ignore: cast_nullable_to_non_nullable
@@ -356,6 +367,10 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
           ? _value.buyerExternalClientPhone
           : buyerExternalClientPhone // ignore: cast_nullable_to_non_nullable
               as String?,
+      buyerExternalUser: freezed == buyerExternalUser
+          ? _value.buyerExternalUser
+          : buyerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
       propertyListId: freezed == propertyListId
           ? _value.propertyListId
           : propertyListId // ignore: cast_nullable_to_non_nullable
@@ -449,6 +464,18 @@ class _$DealCopyWithImpl<$Res, $Val extends Deal>
     return $DealListingResponseCopyWith<$Res>(_value.external_listing_property!,
         (value) {
       return _then(_value.copyWith(external_listing_property: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AgencyCopyWith<$Res>? get buyerExternalUser {
+    if (_value.buyerExternalUser == null) {
+      return null;
+    }
+
+    return $AgencyCopyWith<$Res>(_value.buyerExternalUser!, (value) {
+      return _then(_value.copyWith(buyerExternalUser: value) as $Val);
     });
   }
 
@@ -577,10 +604,12 @@ abstract class _$$DealImplCopyWith<$Res> implements $DealCopyWith<$Res> {
       String? sellerExternalClientPhone,
       Agency? sellerExternalUser,
       DealListingResponse? external_listing_property,
+      String? buyerExternalUserId,
       String? buyerExternalAgentName,
       String? buyerExternalAgentPhone,
       String? buyerExternalClientName,
       String? buyerExternalClientPhone,
+      Agency? buyerExternalUser,
       @JsonKey(name: 'property_list_id') String? propertyListId,
       Lead? buyerInternalUser,
       Agent? buyerAssignedAgent,
@@ -602,6 +631,8 @@ abstract class _$$DealImplCopyWith<$Res> implements $DealCopyWith<$Res> {
   $AgencyCopyWith<$Res>? get sellerExternalUser;
   @override
   $DealListingResponseCopyWith<$Res>? get external_listing_property;
+  @override
+  $AgencyCopyWith<$Res>? get buyerExternalUser;
   @override
   $LeadCopyWith<$Res>? get buyerInternalUser;
   @override
@@ -660,10 +691,12 @@ class __$$DealImplCopyWithImpl<$Res>
     Object? sellerExternalClientPhone = freezed,
     Object? sellerExternalUser = freezed,
     Object? external_listing_property = freezed,
+    Object? buyerExternalUserId = freezed,
     Object? buyerExternalAgentName = freezed,
     Object? buyerExternalAgentPhone = freezed,
     Object? buyerExternalClientName = freezed,
     Object? buyerExternalClientPhone = freezed,
+    Object? buyerExternalUser = freezed,
     Object? propertyListId = freezed,
     Object? buyerInternalUser = freezed,
     Object? buyerAssignedAgent = freezed,
@@ -802,6 +835,10 @@ class __$$DealImplCopyWithImpl<$Res>
           ? _value.external_listing_property
           : external_listing_property // ignore: cast_nullable_to_non_nullable
               as DealListingResponse?,
+      buyerExternalUserId: freezed == buyerExternalUserId
+          ? _value.buyerExternalUserId
+          : buyerExternalUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
       buyerExternalAgentName: freezed == buyerExternalAgentName
           ? _value.buyerExternalAgentName
           : buyerExternalAgentName // ignore: cast_nullable_to_non_nullable
@@ -818,6 +855,10 @@ class __$$DealImplCopyWithImpl<$Res>
           ? _value.buyerExternalClientPhone
           : buyerExternalClientPhone // ignore: cast_nullable_to_non_nullable
               as String?,
+      buyerExternalUser: freezed == buyerExternalUser
+          ? _value.buyerExternalUser
+          : buyerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
       propertyListId: freezed == propertyListId
           ? _value.propertyListId
           : propertyListId // ignore: cast_nullable_to_non_nullable
@@ -890,10 +931,12 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
       this.sellerExternalClientPhone,
       this.sellerExternalUser,
       this.external_listing_property,
+      this.buyerExternalUserId,
       this.buyerExternalAgentName,
       this.buyerExternalAgentPhone,
       this.buyerExternalClientName,
       this.buyerExternalClientPhone,
+      this.buyerExternalUser,
       @JsonKey(name: 'property_list_id') this.propertyListId,
       this.buyerInternalUser,
       this.buyerAssignedAgent,
@@ -995,6 +1038,8 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
 //
 //external buyer
   @override
+  final String? buyerExternalUserId;
+  @override
   final String? buyerExternalAgentName;
   @override
   final String? buyerExternalAgentPhone;
@@ -1002,6 +1047,8 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
   final String? buyerExternalClientName;
   @override
   final String? buyerExternalClientPhone;
+  @override
+  final Agency? buyerExternalUser;
 //
   @override
   @JsonKey(name: 'property_list_id')
@@ -1026,7 +1073,7 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Deal(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, type: $type, status: $status, rejection: $rejection, userId: $userId, newListingRequestId: $newListingRequestId, active: $active, createdBy: $createdBy, client: $client, purpose: $purpose, buyerClientType: $buyerClientType, sellerclientType: $sellerclientType, buyerInternalUserId: $buyerInternalUserId, buyerAssignedAgentId: $buyerAssignedAgentId, buyerAgreedCommission: $buyerAgreedCommission, sellerInternalUserId: $sellerInternalUserId, sellerAssignedAgentId: $sellerAssignedAgentId, sellerAgreedCommission: $sellerAgreedCommission, sellerExternalUserId: $sellerExternalUserId, sellerExternalAgentName: $sellerExternalAgentName, sellerExternalAgentPhone: $sellerExternalAgentPhone, sellerExternalClientName: $sellerExternalClientName, sellerExternalClientPhone: $sellerExternalClientPhone, sellerExternalUser: $sellerExternalUser, external_listing_property: $external_listing_property, buyerExternalAgentName: $buyerExternalAgentName, buyerExternalAgentPhone: $buyerExternalAgentPhone, buyerExternalClientName: $buyerExternalClientName, buyerExternalClientPhone: $buyerExternalClientPhone, propertyListId: $propertyListId, buyerInternalUser: $buyerInternalUser, buyerAssignedAgent: $buyerAssignedAgent, sellerInternalUser: $sellerInternalUser, sellerAssignedAgent: $sellerAssignedAgent, propertyList: $propertyList, newListingRequest: $newListingRequest, offPlanProperty: $offPlanProperty)';
+    return 'Deal(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, type: $type, status: $status, rejection: $rejection, userId: $userId, newListingRequestId: $newListingRequestId, active: $active, createdBy: $createdBy, client: $client, purpose: $purpose, buyerClientType: $buyerClientType, sellerclientType: $sellerclientType, buyerInternalUserId: $buyerInternalUserId, buyerAssignedAgentId: $buyerAssignedAgentId, buyerAgreedCommission: $buyerAgreedCommission, sellerInternalUserId: $sellerInternalUserId, sellerAssignedAgentId: $sellerAssignedAgentId, sellerAgreedCommission: $sellerAgreedCommission, sellerExternalUserId: $sellerExternalUserId, sellerExternalAgentName: $sellerExternalAgentName, sellerExternalAgentPhone: $sellerExternalAgentPhone, sellerExternalClientName: $sellerExternalClientName, sellerExternalClientPhone: $sellerExternalClientPhone, sellerExternalUser: $sellerExternalUser, external_listing_property: $external_listing_property, buyerExternalUserId: $buyerExternalUserId, buyerExternalAgentName: $buyerExternalAgentName, buyerExternalAgentPhone: $buyerExternalAgentPhone, buyerExternalClientName: $buyerExternalClientName, buyerExternalClientPhone: $buyerExternalClientPhone, buyerExternalUser: $buyerExternalUser, propertyListId: $propertyListId, buyerInternalUser: $buyerInternalUser, buyerAssignedAgent: $buyerAssignedAgent, sellerInternalUser: $sellerInternalUser, sellerAssignedAgent: $sellerAssignedAgent, propertyList: $propertyList, newListingRequest: $newListingRequest, offPlanProperty: $offPlanProperty)';
   }
 
   @override
@@ -1072,6 +1119,7 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
       ..add(DiagnosticsProperty('sellerExternalUser', sellerExternalUser))
       ..add(DiagnosticsProperty(
           'external_listing_property', external_listing_property))
+      ..add(DiagnosticsProperty('buyerExternalUserId', buyerExternalUserId))
       ..add(
           DiagnosticsProperty('buyerExternalAgentName', buyerExternalAgentName))
       ..add(DiagnosticsProperty(
@@ -1080,6 +1128,7 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
           'buyerExternalClientName', buyerExternalClientName))
       ..add(DiagnosticsProperty(
           'buyerExternalClientPhone', buyerExternalClientPhone))
+      ..add(DiagnosticsProperty('buyerExternalUser', buyerExternalUser))
       ..add(DiagnosticsProperty('propertyListId', propertyListId))
       ..add(DiagnosticsProperty('buyerInternalUser', buyerInternalUser))
       ..add(DiagnosticsProperty('buyerAssignedAgent', buyerAssignedAgent))
@@ -1151,6 +1200,8 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
                 other.sellerExternalUser == sellerExternalUser) &&
             (identical(other.external_listing_property, external_listing_property) ||
                 other.external_listing_property == external_listing_property) &&
+            (identical(other.buyerExternalUserId, buyerExternalUserId) ||
+                other.buyerExternalUserId == buyerExternalUserId) &&
             (identical(other.buyerExternalAgentName, buyerExternalAgentName) ||
                 other.buyerExternalAgentName == buyerExternalAgentName) &&
             (identical(other.buyerExternalAgentPhone, buyerExternalAgentPhone) ||
@@ -1159,16 +1210,16 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
                 other.buyerExternalClientName == buyerExternalClientName) &&
             (identical(other.buyerExternalClientPhone, buyerExternalClientPhone) ||
                 other.buyerExternalClientPhone == buyerExternalClientPhone) &&
+            (identical(other.buyerExternalUser, buyerExternalUser) ||
+                other.buyerExternalUser == buyerExternalUser) &&
             (identical(other.propertyListId, propertyListId) ||
                 other.propertyListId == propertyListId) &&
             (identical(other.buyerInternalUser, buyerInternalUser) ||
                 other.buyerInternalUser == buyerInternalUser) &&
             (identical(other.buyerAssignedAgent, buyerAssignedAgent) ||
                 other.buyerAssignedAgent == buyerAssignedAgent) &&
-            (identical(other.sellerInternalUser, sellerInternalUser) ||
-                other.sellerInternalUser == sellerInternalUser) &&
-            (identical(other.sellerAssignedAgent, sellerAssignedAgent) ||
-                other.sellerAssignedAgent == sellerAssignedAgent) &&
+            (identical(other.sellerInternalUser, sellerInternalUser) || other.sellerInternalUser == sellerInternalUser) &&
+            (identical(other.sellerAssignedAgent, sellerAssignedAgent) || other.sellerAssignedAgent == sellerAssignedAgent) &&
             (identical(other.propertyList, propertyList) || other.propertyList == propertyList) &&
             (identical(other.newListingRequest, newListingRequest) || other.newListingRequest == newListingRequest) &&
             (identical(other.offPlanProperty, offPlanProperty) || other.offPlanProperty == offPlanProperty));
@@ -1210,10 +1261,12 @@ class _$DealImpl with DiagnosticableTreeMixin implements _Deal {
         sellerExternalClientPhone,
         sellerExternalUser,
         external_listing_property,
+        buyerExternalUserId,
         buyerExternalAgentName,
         buyerExternalAgentPhone,
         buyerExternalClientName,
         buyerExternalClientPhone,
+        buyerExternalUser,
         propertyListId,
         buyerInternalUser,
         buyerAssignedAgent,
@@ -1273,10 +1326,12 @@ abstract class _Deal implements Deal {
       final String? sellerExternalClientPhone,
       final Agency? sellerExternalUser,
       final DealListingResponse? external_listing_property,
+      final String? buyerExternalUserId,
       final String? buyerExternalAgentName,
       final String? buyerExternalAgentPhone,
       final String? buyerExternalClientName,
       final String? buyerExternalClientPhone,
+      final Agency? buyerExternalUser,
       @JsonKey(name: 'property_list_id') final String? propertyListId,
       final Lead? buyerInternalUser,
       final Agent? buyerAssignedAgent,
@@ -1363,6 +1418,8 @@ abstract class _Deal implements Deal {
   DealListingResponse? get external_listing_property;
   @override //
 //external buyer
+  String? get buyerExternalUserId;
+  @override
   String? get buyerExternalAgentName;
   @override
   String? get buyerExternalAgentPhone;
@@ -1370,6 +1427,8 @@ abstract class _Deal implements Deal {
   String? get buyerExternalClientName;
   @override
   String? get buyerExternalClientPhone;
+  @override
+  Agency? get buyerExternalUser;
   @override //
   @JsonKey(name: 'property_list_id')
   String? get propertyListId;

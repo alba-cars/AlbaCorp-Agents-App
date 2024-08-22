@@ -9,7 +9,7 @@ import '../../model/deal_model.dart';
 
 abstract class LeadRepo {
   Future<Result<List<Lead>>> getLeads(
-      {Map<String, dynamic>? filter, String? search, Paginator? paginator});
+      {Map<String, dynamic>? filter, String? search,String? agentId, Paginator? paginator});
   Future<Result<List<LeadSource>>> getLeadSources(
       {String? search, Paginator? paginator});
   Future<Result<Lead>> getLead({required String leadId});

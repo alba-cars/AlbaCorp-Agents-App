@@ -24,6 +24,14 @@ mixin _$DealDetailsState {
   AppStatus get getDealDocumentsStatus => throw _privateConstructorUsedError;
   List<DealDocument> get userDocuments => throw _privateConstructorUsedError;
   AppStatus get getUserDocumentsStatus => throw _privateConstructorUsedError;
+  List<DealDocument> get sellerDocuments => throw _privateConstructorUsedError;
+  AppStatus get getSellerDocumentsStatus => throw _privateConstructorUsedError;
+  List<DealDocument> get buyerDocuments => throw _privateConstructorUsedError;
+  AppStatus get getBuyerDocumentsStatus => throw _privateConstructorUsedError;
+  List<DealDocument> get buyerExternalDocuments =>
+      throw _privateConstructorUsedError;
+  List<DealDocument> get sellerExternalDocuments =>
+      throw _privateConstructorUsedError;
   List<Deal> get buyerDeals => throw _privateConstructorUsedError;
   AppStatus get buyerDealsStatus => throw _privateConstructorUsedError;
   List<Deal> get sellerDeals => throw _privateConstructorUsedError;
@@ -57,6 +65,12 @@ abstract class $DealDetailsStateCopyWith<$Res> {
       AppStatus getDealDocumentsStatus,
       List<DealDocument> userDocuments,
       AppStatus getUserDocumentsStatus,
+      List<DealDocument> sellerDocuments,
+      AppStatus getSellerDocumentsStatus,
+      List<DealDocument> buyerDocuments,
+      AppStatus getBuyerDocumentsStatus,
+      List<DealDocument> buyerExternalDocuments,
+      List<DealDocument> sellerExternalDocuments,
       List<Deal> buyerDeals,
       AppStatus buyerDealsStatus,
       List<Deal> sellerDeals,
@@ -94,6 +108,12 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
     Object? getDealDocumentsStatus = null,
     Object? userDocuments = null,
     Object? getUserDocumentsStatus = null,
+    Object? sellerDocuments = null,
+    Object? getSellerDocumentsStatus = null,
+    Object? buyerDocuments = null,
+    Object? getBuyerDocumentsStatus = null,
+    Object? buyerExternalDocuments = null,
+    Object? sellerExternalDocuments = null,
     Object? buyerDeals = null,
     Object? buyerDealsStatus = null,
     Object? sellerDeals = null,
@@ -140,6 +160,30 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
           ? _value.getUserDocumentsStatus
           : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      sellerDocuments: null == sellerDocuments
+          ? _value.sellerDocuments
+          : sellerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getSellerDocumentsStatus: null == getSellerDocumentsStatus
+          ? _value.getSellerDocumentsStatus
+          : getSellerDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buyerDocuments: null == buyerDocuments
+          ? _value.buyerDocuments
+          : buyerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getBuyerDocumentsStatus: null == getBuyerDocumentsStatus
+          ? _value.getBuyerDocumentsStatus
+          : getBuyerDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buyerExternalDocuments: null == buyerExternalDocuments
+          ? _value.buyerExternalDocuments
+          : buyerExternalDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      sellerExternalDocuments: null == sellerExternalDocuments
+          ? _value.sellerExternalDocuments
+          : sellerExternalDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
       buyerDeals: null == buyerDeals
           ? _value.buyerDeals
           : buyerDeals // ignore: cast_nullable_to_non_nullable
@@ -221,6 +265,12 @@ abstract class _$$DealDetailsStateImplCopyWith<$Res>
       AppStatus getDealDocumentsStatus,
       List<DealDocument> userDocuments,
       AppStatus getUserDocumentsStatus,
+      List<DealDocument> sellerDocuments,
+      AppStatus getSellerDocumentsStatus,
+      List<DealDocument> buyerDocuments,
+      AppStatus getBuyerDocumentsStatus,
+      List<DealDocument> buyerExternalDocuments,
+      List<DealDocument> sellerExternalDocuments,
       List<Deal> buyerDeals,
       AppStatus buyerDealsStatus,
       List<Deal> sellerDeals,
@@ -257,6 +307,12 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
     Object? getDealDocumentsStatus = null,
     Object? userDocuments = null,
     Object? getUserDocumentsStatus = null,
+    Object? sellerDocuments = null,
+    Object? getSellerDocumentsStatus = null,
+    Object? buyerDocuments = null,
+    Object? getBuyerDocumentsStatus = null,
+    Object? buyerExternalDocuments = null,
+    Object? sellerExternalDocuments = null,
     Object? buyerDeals = null,
     Object? buyerDealsStatus = null,
     Object? sellerDeals = null,
@@ -303,6 +359,30 @@ class __$$DealDetailsStateImplCopyWithImpl<$Res>
           ? _value.getUserDocumentsStatus
           : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      sellerDocuments: null == sellerDocuments
+          ? _value._sellerDocuments
+          : sellerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getSellerDocumentsStatus: null == getSellerDocumentsStatus
+          ? _value.getSellerDocumentsStatus
+          : getSellerDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buyerDocuments: null == buyerDocuments
+          ? _value._buyerDocuments
+          : buyerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getBuyerDocumentsStatus: null == getBuyerDocumentsStatus
+          ? _value.getBuyerDocumentsStatus
+          : getBuyerDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buyerExternalDocuments: null == buyerExternalDocuments
+          ? _value._buyerExternalDocuments
+          : buyerExternalDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      sellerExternalDocuments: null == sellerExternalDocuments
+          ? _value._sellerExternalDocuments
+          : sellerExternalDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
       buyerDeals: null == buyerDeals
           ? _value._buyerDeals
           : buyerDeals // ignore: cast_nullable_to_non_nullable
@@ -367,6 +447,12 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
       this.getDealDocumentsStatus = AppStatus.init,
       final List<DealDocument> userDocuments = const [],
       this.getUserDocumentsStatus = AppStatus.init,
+      final List<DealDocument> sellerDocuments = const [],
+      this.getSellerDocumentsStatus = AppStatus.init,
+      final List<DealDocument> buyerDocuments = const [],
+      this.getBuyerDocumentsStatus = AppStatus.init,
+      final List<DealDocument> buyerExternalDocuments = const [],
+      final List<DealDocument> sellerExternalDocuments = const [],
       final List<Deal> buyerDeals = const [],
       this.buyerDealsStatus = AppStatus.init,
       final List<Deal> sellerDeals = const [],
@@ -381,6 +467,10 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
       this.getPropertyTypeListStatus = AppStatus.init})
       : _dealDocuments = dealDocuments,
         _userDocuments = userDocuments,
+        _sellerDocuments = sellerDocuments,
+        _buyerDocuments = buyerDocuments,
+        _buyerExternalDocuments = buyerExternalDocuments,
+        _sellerExternalDocuments = sellerExternalDocuments,
         _buyerDeals = buyerDeals,
         _sellerDeals = sellerDeals,
         _buyerActivities = buyerActivities,
@@ -421,6 +511,50 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
   @override
   @JsonKey()
   final AppStatus getUserDocumentsStatus;
+  final List<DealDocument> _sellerDocuments;
+  @override
+  @JsonKey()
+  List<DealDocument> get sellerDocuments {
+    if (_sellerDocuments is EqualUnmodifiableListView) return _sellerDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sellerDocuments);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getSellerDocumentsStatus;
+  final List<DealDocument> _buyerDocuments;
+  @override
+  @JsonKey()
+  List<DealDocument> get buyerDocuments {
+    if (_buyerDocuments is EqualUnmodifiableListView) return _buyerDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_buyerDocuments);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getBuyerDocumentsStatus;
+  final List<DealDocument> _buyerExternalDocuments;
+  @override
+  @JsonKey()
+  List<DealDocument> get buyerExternalDocuments {
+    if (_buyerExternalDocuments is EqualUnmodifiableListView)
+      return _buyerExternalDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_buyerExternalDocuments);
+  }
+
+  final List<DealDocument> _sellerExternalDocuments;
+  @override
+  @JsonKey()
+  List<DealDocument> get sellerExternalDocuments {
+    if (_sellerExternalDocuments is EqualUnmodifiableListView)
+      return _sellerExternalDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sellerExternalDocuments);
+  }
+
   final List<Deal> _buyerDeals;
   @override
   @JsonKey()
@@ -499,7 +633,7 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
 
   @override
   String toString() {
-    return 'DealDetailsState(dealId: $dealId, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError, dealDocuments: $dealDocuments, getDealDocumentsStatus: $getDealDocumentsStatus, userDocuments: $userDocuments, getUserDocumentsStatus: $getUserDocumentsStatus, buyerDeals: $buyerDeals, buyerDealsStatus: $buyerDealsStatus, sellerDeals: $sellerDeals, sellerDealsStatus: $sellerDealsStatus, buyerActivities: $buyerActivities, buyerActivitiesStatus: $buyerActivitiesStatus, sellerActivities: $sellerActivities, sellerActivitiesStatus: $sellerActivitiesStatus, propertyActivities: $propertyActivities, propertyActivitiesStatus: $propertyActivitiesStatus, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus)';
+    return 'DealDetailsState(dealId: $dealId, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError, dealDocuments: $dealDocuments, getDealDocumentsStatus: $getDealDocumentsStatus, userDocuments: $userDocuments, getUserDocumentsStatus: $getUserDocumentsStatus, sellerDocuments: $sellerDocuments, getSellerDocumentsStatus: $getSellerDocumentsStatus, buyerDocuments: $buyerDocuments, getBuyerDocumentsStatus: $getBuyerDocumentsStatus, buyerExternalDocuments: $buyerExternalDocuments, sellerExternalDocuments: $sellerExternalDocuments, buyerDeals: $buyerDeals, buyerDealsStatus: $buyerDealsStatus, sellerDeals: $sellerDeals, sellerDealsStatus: $sellerDealsStatus, buyerActivities: $buyerActivities, buyerActivitiesStatus: $buyerActivitiesStatus, sellerActivities: $sellerActivities, sellerActivitiesStatus: $sellerActivitiesStatus, propertyActivities: $propertyActivities, propertyActivitiesStatus: $propertyActivitiesStatus, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus)';
   }
 
   @override
@@ -521,6 +655,18 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
                 .equals(other._userDocuments, _userDocuments) &&
             (identical(other.getUserDocumentsStatus, getUserDocumentsStatus) ||
                 other.getUserDocumentsStatus == getUserDocumentsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._sellerDocuments, _sellerDocuments) &&
+            (identical(other.getSellerDocumentsStatus, getSellerDocumentsStatus) ||
+                other.getSellerDocumentsStatus == getSellerDocumentsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._buyerDocuments, _buyerDocuments) &&
+            (identical(other.getBuyerDocumentsStatus, getBuyerDocumentsStatus) ||
+                other.getBuyerDocumentsStatus == getBuyerDocumentsStatus) &&
+            const DeepCollectionEquality().equals(
+                other._buyerExternalDocuments, _buyerExternalDocuments) &&
+            const DeepCollectionEquality().equals(
+                other._sellerExternalDocuments, _sellerExternalDocuments) &&
             const DeepCollectionEquality()
                 .equals(other._buyerDeals, _buyerDeals) &&
             (identical(other.buyerDealsStatus, buyerDealsStatus) ||
@@ -544,8 +690,8 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
                 other.propertyActivitiesStatus == propertyActivitiesStatus) &&
             const DeepCollectionEquality()
                 .equals(other._propertyTypeList, _propertyTypeList) &&
-            (identical(other.getPropertyTypeListStatus,
-                    getPropertyTypeListStatus) ||
+            (identical(
+                    other.getPropertyTypeListStatus, getPropertyTypeListStatus) ||
                 other.getPropertyTypeListStatus == getPropertyTypeListStatus));
   }
 
@@ -560,6 +706,12 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
         getDealDocumentsStatus,
         const DeepCollectionEquality().hash(_userDocuments),
         getUserDocumentsStatus,
+        const DeepCollectionEquality().hash(_sellerDocuments),
+        getSellerDocumentsStatus,
+        const DeepCollectionEquality().hash(_buyerDocuments),
+        getBuyerDocumentsStatus,
+        const DeepCollectionEquality().hash(_buyerExternalDocuments),
+        const DeepCollectionEquality().hash(_sellerExternalDocuments),
         const DeepCollectionEquality().hash(_buyerDeals),
         buyerDealsStatus,
         const DeepCollectionEquality().hash(_sellerDeals),
@@ -592,6 +744,12 @@ abstract class _DealDetailsState implements DealDetailsState {
       final AppStatus getDealDocumentsStatus,
       final List<DealDocument> userDocuments,
       final AppStatus getUserDocumentsStatus,
+      final List<DealDocument> sellerDocuments,
+      final AppStatus getSellerDocumentsStatus,
+      final List<DealDocument> buyerDocuments,
+      final AppStatus getBuyerDocumentsStatus,
+      final List<DealDocument> buyerExternalDocuments,
+      final List<DealDocument> sellerExternalDocuments,
       final List<Deal> buyerDeals,
       final AppStatus buyerDealsStatus,
       final List<Deal> sellerDeals,
@@ -621,6 +779,18 @@ abstract class _DealDetailsState implements DealDetailsState {
   List<DealDocument> get userDocuments;
   @override
   AppStatus get getUserDocumentsStatus;
+  @override
+  List<DealDocument> get sellerDocuments;
+  @override
+  AppStatus get getSellerDocumentsStatus;
+  @override
+  List<DealDocument> get buyerDocuments;
+  @override
+  AppStatus get getBuyerDocumentsStatus;
+  @override
+  List<DealDocument> get buyerExternalDocuments;
+  @override
+  List<DealDocument> get sellerExternalDocuments;
   @override
   List<Deal> get buyerDeals;
   @override

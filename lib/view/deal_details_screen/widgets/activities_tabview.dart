@@ -34,7 +34,6 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
@@ -73,7 +72,6 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [
@@ -112,7 +110,6 @@ class _ActivitiesTabViewState extends State<ActivitiesTabView> {
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
               children: [

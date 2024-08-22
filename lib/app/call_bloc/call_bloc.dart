@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:phone_state/phone_state.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/linkus_repo.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../util/status.dart';
 
@@ -42,18 +46,22 @@ class CallBloc extends Bloc<CallEvent, CallState> {
       _CallStarted event, Emitter<CallState> emit) async {
     emit(state.copyWith(
         makeACallStatus: AppStatus.loading, makeACallError: null));
-    final result = await _linkusRepo.makeACall(
-        number: event.phoneNumber, activityId: event.activityId);
-    switch (result) {
-      case (Success s):
-        emit(state.copyWith(makeACallStatus: AppStatus.success));
-        break;
-      case (Error e):
-        emit(state.copyWith(
-            makeACallStatus: AppStatus.failure, makeACallError: e.exception));
+    final settings = getIt<AuthBloc>().state.globalSettings;
+    if (settings?.enablePbx == true) {
+      final result = await _linkusRepo.makeACall(
+          number: event.phoneNumber, activityId: event.activityId);
+      switch (result) {
+        case (Success s):
+          emit(state.copyWith(makeACallStatus: AppStatus.success));
+          break;
+        case (Error e):
+          emit(state.copyWith(
+              makeACallStatus: AppStatus.failure, makeACallError: e.exception));
+      }
+    } else {
+      await getIt<SharedPreferences>().setBool('IgnoreCallFeedback', true);
+      await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
     }
-    // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
-    // getIt<SharedPreferences>().setBool(event.activityId, true);
   }
 
   FutureOr<void> _onUpdateActivity(
@@ -83,33 +91,16 @@ class CallBloc extends Bloc<CallEvent, CallState> {
     }
   }
 
-  FutureOr<void> _onCallEnded(_CallEnded event, Emitter<CallState> emit) {
-    // if (state.phoneCallStatus == PhoneCallStatus.inCall) {
-    //   emit(state.copyWith(
-    //       phoneCallStatus: PhoneCallStatus.callEnded,
-    //       feedbackRequestDialogOpen: true));
-    // }
-  }
+  FutureOr<void> _onCallEnded(_CallEnded event, Emitter<CallState> emit) {}
 
   FutureOr<void> _onClickToCall(
       _ClickToCall event, Emitter<CallState> emit) async {
-    await _linkusRepo.makeACall(number: event.phoneNumber);
-    // final result = await _activityRepo.createActivity(
-    //   leadId: event.leadId,
-    //   type: 'Call',
-    // );
-    // switch (result) {
-    //   case (Success<Activity> s):
-    //     emit(state.copyWith(
-    //       phoneCallStatus: PhoneCallStatus.inCall,
-    //       calledNumber: event.phoneNumber,
-    //       callStartTime: DateTime.now(),
-    //       activityId: s.value.id,
-    //       leadId: event.leadId,
-    //     ));
-    //     await LinkusSdk().makeACall(number: '1001');
-    //   // await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
-    //   case (Error e):
-    // }
+    final settings = getIt<AuthBloc>().state.globalSettings;
+    if (settings?.enablePbx == true) {
+      await _linkusRepo.makeACall(number: event.phoneNumber);
+    } else {
+      await getIt<SharedPreferences>().setBool('IgnoreCallFeedback', true);
+      await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
+    }
   }
 }

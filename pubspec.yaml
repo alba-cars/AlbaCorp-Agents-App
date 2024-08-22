@@ -46,7 +46,8 @@ dependencies:
   freezed_annotation: ^2.4.1
   dio: ^5.4.0
   flutter_secure_storage: ^9.0.0
-  # flutter_phone_direct_caller: ^2.1.1
+  flutter_phone_direct_caller:
+    git: https://github.com/ismail-alba/flutter-phone-direct-caller.git
   permission_handler: ^11.3.0
   phone_state: ^1.0.3
   uuid: ^4.3.3

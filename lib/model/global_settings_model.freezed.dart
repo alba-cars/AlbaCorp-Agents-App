@@ -29,6 +29,7 @@ mixin _$GlobalSettings {
   String get blockLeadFor => throw _privateConstructorUsedError;
   String get dealReminderAfter => throw _privateConstructorUsedError;
   String get newLeadFlagDateLimit => throw _privateConstructorUsedError;
+  dynamic get enablePbx => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +52,8 @@ abstract class $GlobalSettingsCopyWith<$Res> {
       DateTime updatedAt,
       String blockLeadFor,
       String dealReminderAfter,
-      String newLeadFlagDateLimit});
+      String newLeadFlagDateLimit,
+      dynamic enablePbx});
 
   $CheckoutLimitCopyWith<$Res> get checkoutLimit;
 }
@@ -78,6 +80,7 @@ class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
     Object? blockLeadFor = null,
     Object? dealReminderAfter = null,
     Object? newLeadFlagDateLimit = null,
+    Object? enablePbx = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -116,6 +119,10 @@ class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
           ? _value.newLeadFlagDateLimit
           : newLeadFlagDateLimit // ignore: cast_nullable_to_non_nullable
               as String,
+      enablePbx: freezed == enablePbx
+          ? _value.enablePbx
+          : enablePbx // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 
@@ -145,7 +152,8 @@ abstract class _$$GlobalSettingsImplCopyWith<$Res>
       DateTime updatedAt,
       String blockLeadFor,
       String dealReminderAfter,
-      String newLeadFlagDateLimit});
+      String newLeadFlagDateLimit,
+      dynamic enablePbx});
 
   @override
   $CheckoutLimitCopyWith<$Res> get checkoutLimit;
@@ -171,6 +179,7 @@ class __$$GlobalSettingsImplCopyWithImpl<$Res>
     Object? blockLeadFor = null,
     Object? dealReminderAfter = null,
     Object? newLeadFlagDateLimit = null,
+    Object? enablePbx = freezed,
   }) {
     return _then(_$GlobalSettingsImpl(
       id: null == id
@@ -209,6 +218,7 @@ class __$$GlobalSettingsImplCopyWithImpl<$Res>
           ? _value.newLeadFlagDateLimit
           : newLeadFlagDateLimit // ignore: cast_nullable_to_non_nullable
               as String,
+      enablePbx: freezed == enablePbx ? _value.enablePbx! : enablePbx,
     ));
   }
 }
@@ -225,7 +235,8 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
       required this.updatedAt,
       required this.blockLeadFor,
       required this.dealReminderAfter,
-      required this.newLeadFlagDateLimit});
+      required this.newLeadFlagDateLimit,
+      this.enablePbx = false});
 
   factory _$GlobalSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$GlobalSettingsImplFromJson(json);
@@ -248,10 +259,13 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
   final String dealReminderAfter;
   @override
   final String newLeadFlagDateLimit;
+  @override
+  @JsonKey()
+  final dynamic enablePbx;
 
   @override
   String toString() {
-    return 'GlobalSettings(id: $id, timeUntilTicketArchived: $timeUntilTicketArchived, checkoutLimit: $checkoutLimit, unAssignLeadAfter: $unAssignLeadAfter, createdAt: $createdAt, updatedAt: $updatedAt, blockLeadFor: $blockLeadFor, dealReminderAfter: $dealReminderAfter, newLeadFlagDateLimit: $newLeadFlagDateLimit)';
+    return 'GlobalSettings(id: $id, timeUntilTicketArchived: $timeUntilTicketArchived, checkoutLimit: $checkoutLimit, unAssignLeadAfter: $unAssignLeadAfter, createdAt: $createdAt, updatedAt: $updatedAt, blockLeadFor: $blockLeadFor, dealReminderAfter: $dealReminderAfter, newLeadFlagDateLimit: $newLeadFlagDateLimit, enablePbx: $enablePbx)';
   }
 
   @override
@@ -276,7 +290,8 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
             (identical(other.dealReminderAfter, dealReminderAfter) ||
                 other.dealReminderAfter == dealReminderAfter) &&
             (identical(other.newLeadFlagDateLimit, newLeadFlagDateLimit) ||
-                other.newLeadFlagDateLimit == newLeadFlagDateLimit));
+                other.newLeadFlagDateLimit == newLeadFlagDateLimit) &&
+            const DeepCollectionEquality().equals(other.enablePbx, enablePbx));
   }
 
   @JsonKey(ignore: true)
@@ -291,7 +306,8 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
       updatedAt,
       blockLeadFor,
       dealReminderAfter,
-      newLeadFlagDateLimit);
+      newLeadFlagDateLimit,
+      const DeepCollectionEquality().hash(enablePbx));
 
   @JsonKey(ignore: true)
   @override
@@ -318,7 +334,8 @@ abstract class _GlobalSettings implements GlobalSettings {
       required final DateTime updatedAt,
       required final String blockLeadFor,
       required final String dealReminderAfter,
-      required final String newLeadFlagDateLimit}) = _$GlobalSettingsImpl;
+      required final String newLeadFlagDateLimit,
+      final dynamic enablePbx}) = _$GlobalSettingsImpl;
 
   factory _GlobalSettings.fromJson(Map<String, dynamic> json) =
       _$GlobalSettingsImpl.fromJson;
@@ -341,6 +358,8 @@ abstract class _GlobalSettings implements GlobalSettings {
   String get dealReminderAfter;
   @override
   String get newLeadFlagDateLimit;
+  @override
+  dynamic get enablePbx;
   @override
   @JsonKey(ignore: true)
   _$$GlobalSettingsImplCopyWith<_$GlobalSettingsImpl> get copyWith =>

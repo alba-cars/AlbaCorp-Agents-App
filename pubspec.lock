@@ -582,6 +582,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  flutter_phone_direct_caller:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "4e306fe7d237a469caf173544953e3feb8299d51"
+      url: "https://github.com/ismail-alba/flutter-phone-direct-caller.git"
+    source: git
+    version: "2.1.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

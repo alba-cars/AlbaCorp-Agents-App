@@ -15,6 +15,7 @@ class GlobalSettings with _$GlobalSettings {
     required String blockLeadFor,
     required String dealReminderAfter,
     required String newLeadFlagDateLimit,
+    @Default(false) enablePbx,
   }) = _GlobalSettings;
 
   factory GlobalSettings.fromJson(Map<String, dynamic> json) =>

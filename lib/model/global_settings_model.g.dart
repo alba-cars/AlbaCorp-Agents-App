@@ -18,6 +18,7 @@ _$GlobalSettingsImpl _$$GlobalSettingsImplFromJson(Map<String, dynamic> json) =>
       blockLeadFor: json['blockLeadFor'] as String,
       dealReminderAfter: json['dealReminderAfter'] as String,
       newLeadFlagDateLimit: json['newLeadFlagDateLimit'] as String,
+      enablePbx: json['enablePbx'] ?? false,
     );
 
 Map<String, dynamic> _$$GlobalSettingsImplToJson(
@@ -32,6 +33,7 @@ Map<String, dynamic> _$$GlobalSettingsImplToJson(
       'blockLeadFor': instance.blockLeadFor,
       'dealReminderAfter': instance.dealReminderAfter,
       'newLeadFlagDateLimit': instance.newLeadFlagDateLimit,
+      'enablePbx': instance.enablePbx,
     };
 
 _$CheckoutLimitImpl _$$CheckoutLimitImplFromJson(Map<String, dynamic> json) =>
