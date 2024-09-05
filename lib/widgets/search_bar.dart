@@ -252,7 +252,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
                         } else {
                           widget.onFilterApplied?.call(filter);
                         }
-                        arrFilter.removeAt(index);
+                        arrFilter.removeAt(index - 1);
                         setState(() {});
                       },
                       child: Center(

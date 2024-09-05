@@ -23,10 +23,8 @@ class TabLogin extends StatefulWidget {
 }
 
 class _TabLoginState extends State<TabLogin> {
-  TextEditingController emailController =
-      TextEditingController(text: "ismail@alba.homes");
-  TextEditingController passwordController =
-      TextEditingController(text: "1234@Abcd");
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final loginForm = GlobalKey<FormState>();
   bool isPasswordVisible = false;
 
