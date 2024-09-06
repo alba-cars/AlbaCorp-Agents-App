@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:particles_flutter/component/particle/particle.dart';
-import 'package:particles_flutter/particles_engine.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
 class DealCongragulationsPage extends StatelessWidget {
