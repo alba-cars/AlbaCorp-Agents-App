@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:real_estate_app/core/helpers/currency_formatter.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -101,8 +102,8 @@ class _EarningsWidgetState extends State<EarningsWidget> {
                       color: Colors.white,
                     ),
                     HeadingText(
-                      text: CurrencyFormatterHelper.formatCurrency(
-                          state.earnings.totalEarnings),
+                      text: NumberFormat.compactCurrency(symbol: "AED ")
+                          .format(state.earnings.totalEarnings),
                       color: Colors.white,
                     ),
                     SizedBox(
@@ -128,8 +129,8 @@ class _EarningsWidgetState extends State<EarningsWidget> {
                       color: Colors.white,
                     ),
                     HeadingText(
-                      text: CurrencyFormatterHelper.formatCurrency(
-                          state.earnings.getTheMonthEarnigns(DateTime.now())),
+                      text: NumberFormat.compactCurrency(symbol: "AED ")
+                          .format(state.earnings.thisMonthEarning),
                       color: Colors.white,
                     ),
                     SizedBox(
