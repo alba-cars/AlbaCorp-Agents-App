@@ -43,16 +43,16 @@ class PhoneStateReceiver : BroadcastReceiver() {
                         OverlayManager.showOverlay(context, savedNumber,preferences)
                     }
                 }
-                TelephonyManager.EXTRA_STATE_OFFHOOK->{
-                     Log.d("flutter", "Call offhook with $phoneNumber")
-                     if(phoneNumber != null){
+                // TelephonyManager.EXTRA_STATE_OFFHOOK->{
+                //     Log.d("flutter", "Call offhook with $phoneNumber")
+                //     if(phoneNumber != null){
 
-                      val numberToSave = phoneNumber 
-                    preferences.edit().putString("flutter.call", numberToSave).apply()
-                    preferences.edit().putString("flutter.CallDirection", "outgoing").apply()
+                 //     val numberToSave = phoneNumber 
+                 //   preferences.edit().putString("flutter.call", numberToSave).apply()
+                 //   preferences.edit().putString("flutter.CallDirection", "outgoing").apply()
                     
-                     }
-                }
+                 //    }
+                // }
             }
         }
     }

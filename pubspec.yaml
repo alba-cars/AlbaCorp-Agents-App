@@ -88,6 +88,7 @@ dependencies:
   shimmer: ^3.0.0
   currency_formatter: ^2.2.1
   flutter_xlider: ^3.5.0
+  pdf: ^3.11.1
 
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"
