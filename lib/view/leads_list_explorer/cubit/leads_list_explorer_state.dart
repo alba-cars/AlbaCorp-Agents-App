@@ -24,7 +24,7 @@ class LeadsListExplorerState with _$LeadsListExplorerState {
     Map<String, dynamic>? checkedOutFilter,
     @Default([]) List<PropertyType> propertyTypeList,
     @Default(AppStatus.init) AppStatus getPropertyTypeListStatus,
-    @Default([]) List<Community> communityList,
+    @Default([]) List<CommunityTeamModel> communityList,
     @Default(AppStatus.init) AppStatus getCommunityListStatus,
     @Default([]) List<Building> buildingList,
     @Default(AppStatus.init) AppStatus getBuildingListStatus,

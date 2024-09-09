@@ -349,29 +349,21 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     }
   }
 
-  Future<List<Community>> getCommunities({String? search}) async {
+  Future<List<CommunityTeamModel>> getCommunities({String? search}) async {
     emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
     if (state.communityList.isNotEmpty && search != null) {
       return state.communityList
-          .where((element) =>
-              element.community.toLowerCase().contains(search.toLowerCase()))
+          .where((e) => e.teamName.contains(search))
           .toList();
     } else {
       final result = await _explorerRepo.getCommunityTeams(
           agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
         case (Success<List<CommunityTeamModel>> s):
-          final List<Community> communities = s.value.fold(
-              [],
-              (v, b) => [
-                    ...v,
-                    ...b.communities
-                        .map((e) => Community(id: e.id, community: e.community))
-                  ]);
           emit(state.copyWith(
-              communityList: communities,
+              communityList: s.value,
               getCommunityListStatus: AppStatus.success));
-          return communities;
+          return s.value;
         case (Error e):
           emit(state.copyWith(
             getCommunityListStatus: AppStatus.failure,

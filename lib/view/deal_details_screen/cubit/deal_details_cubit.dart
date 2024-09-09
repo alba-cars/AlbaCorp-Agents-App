@@ -59,21 +59,24 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
             buyerDocuments: s.value
                 .where((e) =>
                     (e.type.toLowerCase() == 'eid' ||
-                        e.type.toLowerCase() == 'passport') &&
+                        e.type.toLowerCase() == 'passport' ||
+                        e.type.toLowerCase() == 'visa') &&
                     e.userId == state.deal?.buyerInternalUserId)
                 .map((e) => e.copyWith(type: 'buyer.${e.type}'))
                 .toList(),
             sellerDocuments: s.value
                 .where((e) =>
                     (e.type.toLowerCase() == 'eid' ||
-                        e.type.toLowerCase() == 'passport') &&
+                        e.type.toLowerCase() == 'passport' ||
+                        e.type.toLowerCase() == 'visa') &&
                     e.userId == state.deal?.sellerInternalUserId)
                 .map((e) => e.copyWith(type: 'seller.${e.type}'))
                 .toList(),
             dealDocuments: s.value
                 .where((e) =>
                     !(e.type.toLowerCase() == 'eid' ||
-                        e.type.toLowerCase() == 'passport') &&
+                        e.type.toLowerCase() == 'passport' ||
+                        e.type.toLowerCase() == 'visa') &&
                     e.dealId == state.dealId)
                 .toList(),
             buyerExternalDocuments:
@@ -94,7 +97,7 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
                             id: "",
                             userId: "",
                             createdById: "",
-                            type: 'buyer.trade_license',
+                            type: 'seller.trade_license',
                             path: state.deal?.sellerExternalUser?.document)
                       ]
                     : [],

@@ -190,7 +190,9 @@ class AddDealCubit extends Cubit<AddDealState> {
       GlobalKey<FormBuilderState>? formKey}) async {
     switch (state.currentTab) {
       case 0:
-        if (state.selectedDealType == DealType.SecondaryMarket) {
+        if (state.selectedDealType == null) {
+          return 'Select Deal Type to Continue';
+        } else if (state.selectedDealType == DealType.SecondaryMarket) {
           if (state.dealPurpose == null) {
             return 'Select purpose to continue to next step';
           } else if (state.sellerSource == null) {

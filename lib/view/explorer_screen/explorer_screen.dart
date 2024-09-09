@@ -11,6 +11,7 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
+import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/explorer_screen/cubit/explorer_screen_cubit.dart';
 import 'package:real_estate_app/view/explorer_screen/widgets/property_card_list_item.dart';
 import 'package:real_estate_app/view/explorer_screen/widgets/select_community_widget.dart';
@@ -170,9 +171,12 @@ class _ExplorerTabState extends State<ExplorerTab> {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
-            return list.map((e) => {'value': e.id, 'label': e.community});
+            return list.map((e) => {
+                  'value': e.communities.map((e) => e.id).toList(),
+                  'label': e.teamName
+                });
           },
-          displayStringForOption: (option) => option['label'] ?? '',
+          displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'communities'),
       MultiSelectAutoCompleteField(
           label: 'Building',
@@ -491,9 +495,12 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
-            return list.map((e) => {'value': e.id, 'label': e.community});
+            return list.map((e) => {
+                  'value': e.communities.map((e) => e.id).toList(),
+                  'label': e.teamName
+                });
           },
-          displayStringForOption: (option) => option['label'] ?? '',
+          displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
@@ -514,6 +521,21 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
           name: 'baths',
           label: 'Baths',
           values: ['1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'propertyTypes',
+          label: 'Property Type',
+          values: [
+            'Apartment',
+            'Plot',
+            'Commercial',
+            'Townhouse',
+            'Hotel Apartment',
+            'Villa',
+            'Hotel Apartments',
+            'Other',
+          ].map((e) => {'value': getPropTypeRegex(e), 'label': e}).toList(),
+          displayOption: (option) => option['label'] ?? '',
           isRequired: true),
       // WrapSelectField(
       //     name: 'propertyType',

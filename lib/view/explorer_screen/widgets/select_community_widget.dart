@@ -50,7 +50,11 @@ class _SelectCommunityWidgetState extends State<SelectCommunityWidget> {
                                 .read<ExplorerScreenCubit>()
                                 .setExplorerFilter({
                               "communities": [
-                                {'label': e.community, "value": e.id}
+                                {
+                                  'value':
+                                      e.communities.map((e) => e.id).toList(),
+                                  'label': e.teamName
+                                }
                               ]
                             });
                           },
@@ -65,7 +69,7 @@ class _SelectCommunityWidgetState extends State<SelectCommunityWidget> {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              e.community,
+                              e.teamName,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme

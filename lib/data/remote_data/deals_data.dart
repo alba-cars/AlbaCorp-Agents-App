@@ -238,10 +238,10 @@ class DealData implements DealsRepo {
           String key = element.key;
           bool buyer = false;
           bool seller = false;
-          if (key.contains('seller')) {
+          if (key.contains('seller.')) {
             key = key.split('.').last;
             seller = true;
-          } else if (key.contains('buyer')) {
+          } else if (key.contains('buyer.')) {
             key = key.split('.').last;
             buyer = true;
           }
@@ -254,7 +254,7 @@ class DealData implements DealsRepo {
                 });
           } else {
             bool deal = false;
-            if (key == 'EID' || key == 'Passport') {
+            if (key == 'EID' || key == 'Passport' || key == 'Visa') {
               deal = false;
             } else {
               deal = true;

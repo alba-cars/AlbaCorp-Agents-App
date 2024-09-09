@@ -122,3 +122,140 @@ class RangeSliderField extends FormBuilderFieldDecoration<SfRangeValues> {
 
 class _RangeSliderFieldState
     extends FormBuilderFieldDecorationState<RangeSliderField, SfRangeValues> {}
+
+class RangeInputField extends FormBuilderField<SfRangeValues> {
+  final String? label;
+  final double min;
+  final double max;
+  final String? validationMessage;
+
+  RangeInputField({
+    super.key,
+    required super.name,
+    this.label,
+    super.validator,
+    super.initialValue,
+    super.onChanged,
+    super.valueTransformer,
+    super.focusNode,
+    required this.min,
+    required this.max,
+    this.validationMessage,
+  }) : super(
+          builder: (FormFieldState<SfRangeValues?> field) {
+            final state = field as _RangeInputFieldState;
+
+            return InputDecorator(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                errorText: field.errorText,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (label != null)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            label!,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF555555),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: state.fromController,
+                          decoration: const InputDecoration(labelText: "From"),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
+                          onChanged: (value) {
+                            state.updateRangeValues();
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: TextFormField(
+                          controller: state.toController,
+                          decoration: const InputDecoration(labelText: "To"),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
+                          onChanged: (value) {
+                            state.updateRangeValues();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (field.hasError)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        validationMessage ?? 'Invalid range values',
+                        style: const TextStyle(color: Colors.red, fontSize: 12),
+                      ),
+                    ),
+                ],
+              ),
+            );
+          },
+        );
+
+  @override
+  _RangeInputFieldState createState() => _RangeInputFieldState();
+}
+
+class _RangeInputFieldState
+    extends FormBuilderFieldState<RangeInputField, SfRangeValues> {
+  late TextEditingController fromController;
+  late TextEditingController toController;
+
+  @override
+  void initState() {
+    super.initState();
+    fromController = TextEditingController(
+      text: formatNumber(value?.start),
+    );
+    toController = TextEditingController(
+      text: formatNumber(value?.end),
+    );
+  }
+
+  String? formatNumber(num? value) {
+    if (value == null) return null;
+    return value % 1 == 0 ? value.toInt().toString() : value.toString();
+  }
+
+  void updateRangeValues() {
+    final fromValue = double.tryParse(fromController.text);
+    final toValue = double.tryParse(toController.text);
+
+    final newValue = SfRangeValues(
+      fromValue ?? widget.min,
+      toValue ?? widget.max,
+    );
+
+    didChange(newValue);
+  }
+
+  @override
+  void didChange(SfRangeValues? newValue) {
+    super.didChange(newValue);
+    // We don't update the controllers here to allow free editing
+  }
+
+  @override
+  void dispose() {
+    fromController.dispose();
+    toController.dispose();
+    super.dispose();
+  }
+}
