@@ -11,6 +11,7 @@ import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart'
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/cubit/deals_cubit.dart';
 import 'package:real_estate_app/view/deals_screen/widgets/client_name.dart';
+import 'package:real_estate_app/view/earnings/cubit/earnings_cubit.dart';
 import 'package:real_estate_app/view/earnings/widgets/earnings_widget.dart';
 import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
@@ -48,6 +49,8 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 2, vsync: this);
+
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -111,7 +114,13 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
             //     onTap: (index) {},
             //   ),
             // )),
-            SliverToBoxAdapter(child: EarningsWidget()),
+            SliverToBoxAdapter(
+                child: BlocProvider(
+              create: (context) => getIt<EarningsCubit>()..getAgentEarnings(),
+              child: EarningsWidget(
+                isExpectedEarnings: selectedIndex == 1,
+              ),
+            )),
 
             SliverToBoxAdapter(
                 child: Padding(
@@ -123,6 +132,9 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
                 tabs: ['Deals', 'Listings Acquired'],
                 onTap: (index) {
                   context.read<DealsCubit>().setSelectedTab(index);
+                  setState(() {
+                    selectedIndex = index;
+                  });
                 },
               ),
             )),

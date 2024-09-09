@@ -238,7 +238,6 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
                       builder: (context, _, r) {
                         return CommissionField(
                           name: 'sellerAgreedComm',
-                          isRequired: true,
                           commissionPercentage: num.tryParse(
                               property.value?.commission.toString() ?? ''),
                           price: agreedSalePrice.value ??

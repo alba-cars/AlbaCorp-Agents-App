@@ -27,6 +27,7 @@ class ListingsCubit extends Cubit<ListingsState> {
       : super(ListingsState()) {
     getPropertyTypes();
     getAmenities();
+    getAgents();
   }
 
   final ListingsRepo _listingsRepo;

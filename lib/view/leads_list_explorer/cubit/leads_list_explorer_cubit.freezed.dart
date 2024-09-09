@@ -43,7 +43,8 @@ mixin _$LeadsListExplorerState {
       throw _privateConstructorUsedError;
   List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
   AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
-  List<Community> get communityList => throw _privateConstructorUsedError;
+  List<CommunityTeamModel> get communityList =>
+      throw _privateConstructorUsedError;
   AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
   AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
@@ -85,7 +86,7 @@ abstract class $LeadsListExplorerStateCopyWith<$Res> {
       Map<String, dynamic>? checkedOutFilter,
       List<PropertyType> propertyTypeList,
       AppStatus getPropertyTypeListStatus,
-      List<Community> communityList,
+      List<CommunityTeamModel> communityList,
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
@@ -228,7 +229,7 @@ class _$LeadsListExplorerStateCopyWithImpl<$Res,
       communityList: null == communityList
           ? _value.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
-              as List<Community>,
+              as List<CommunityTeamModel>,
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
@@ -312,7 +313,7 @@ abstract class _$$LeadsListExplorerStateImplCopyWith<$Res>
       Map<String, dynamic>? checkedOutFilter,
       List<PropertyType> propertyTypeList,
       AppStatus getPropertyTypeListStatus,
-      List<Community> communityList,
+      List<CommunityTeamModel> communityList,
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
@@ -453,7 +454,7 @@ class __$$LeadsListExplorerStateImplCopyWithImpl<$Res>
       communityList: null == communityList
           ? _value._communityList
           : communityList // ignore: cast_nullable_to_non_nullable
-              as List<Community>,
+              as List<CommunityTeamModel>,
       getCommunityListStatus: null == getCommunityListStatus
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
@@ -507,7 +508,7 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
       final Map<String, dynamic>? checkedOutFilter,
       final List<PropertyType> propertyTypeList = const [],
       this.getPropertyTypeListStatus = AppStatus.init,
-      final List<Community> communityList = const [],
+      final List<CommunityTeamModel> communityList = const [],
       this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
       this.getBuildingListStatus = AppStatus.init,
@@ -611,10 +612,10 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
   @override
   @JsonKey()
   final AppStatus getPropertyTypeListStatus;
-  final List<Community> _communityList;
+  final List<CommunityTeamModel> _communityList;
   @override
   @JsonKey()
-  List<Community> get communityList {
+  List<CommunityTeamModel> get communityList {
     if (_communityList is EqualUnmodifiableListView) return _communityList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_communityList);
@@ -784,7 +785,7 @@ abstract class _LeadsListExplorerState implements LeadsListExplorerState {
       final Map<String, dynamic>? checkedOutFilter,
       final List<PropertyType> propertyTypeList,
       final AppStatus getPropertyTypeListStatus,
-      final List<Community> communityList,
+      final List<CommunityTeamModel> communityList,
       final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
       final AppStatus getBuildingListStatus,
@@ -835,7 +836,7 @@ abstract class _LeadsListExplorerState implements LeadsListExplorerState {
   @override
   AppStatus get getPropertyTypeListStatus;
   @override
-  List<Community> get communityList;
+  List<CommunityTeamModel> get communityList;
   @override
   AppStatus get getCommunityListStatus;
   @override

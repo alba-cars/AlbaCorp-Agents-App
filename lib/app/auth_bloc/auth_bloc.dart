@@ -111,7 +111,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             title: data["title"] ?? '',
             subTitle: data["body"],
             type: data["type"],
-            requiresAction: true,
+            requiresAction: data['requiresAction'],
             leadId: data['leadId']));
   }
 

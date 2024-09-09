@@ -16,13 +16,17 @@ class CallObserver: NSObject, CXCallObserverDelegate {
         
         if call.hasEnded {
             let preferences = UserDefaults.standard;
-            let dir = call.isOutgoing==true ? "Outgoing" : "Incoming";
-            preferences.set( "IPHONE",forKey:"flutter.calledNumber");
-            preferences.set( dir,forKey:"flutter.callDirection");
-            preferences.set( Date().timeIntervalSince1970,forKey:"flutter.callTime");
-            preferences.synchronize();
-            sendLocalNotification()
-                    }
+            if(!call.isOutgoing){
+                let dir = "Incoming";
+    
+                preferences.set( "IPHONE",forKey:"flutter.calledNumber");
+                preferences.set( dir,forKey:"flutter.callDirection");
+                preferences.set( Date().timeIntervalSince1970,forKey:"flutter.callTime");
+                preferences.synchronize();
+                sendLocalNotification()
+            }
+        }
+           
     }
 
 

@@ -6,6 +6,7 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:real_estate_app/view/listings_screen/widgets/listing_item.dart';
 import 'package:real_estate_app/view/listings_screen/widgets/my_listings_tab.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
+import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_select_autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
@@ -32,6 +34,7 @@ import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/tab_bar.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../util/constant.dart';
@@ -130,6 +133,23 @@ class ListingsTab extends StatefulWidget {
 class _ListingsTabState extends State<ListingsTab> {
   List<Widget> filterFields(BuildContext context) {
     return [
+      AppAutoComplete(
+        label: 'Agent',
+        optionsBuilder: (val) => context
+            .read<ListingsCubit>()
+            .state
+            .agentList
+            .where((e) => '${e.user.firstName} ${e.user.lastName}'
+                .toLowerCase()
+                .contains(val.text.toLowerCase()))
+            .map((e) => {
+                  'label': '${e.user.firstName} ${e.user.lastName}',
+                  "value": e.id
+                }),
+        isRequired: true,
+        name: 'agent_id',
+        displayStringForOption: (option) => option['label']?.toString() ?? '',
+      ),
       MultiSelectAutoCompleteField(
           label: 'Community',
           optionsBuilder: (v) async {
@@ -166,8 +186,48 @@ class _ListingsTabState extends State<ListingsTab> {
           },
           displayStringForOption: (option) => option['label'] ?? '',
           name: 'building'),
-      RangeSliderField(
-          name: 'price', label: 'Price Range', min: 10000, max: 1000000000),
+      RangeInputField(
+        name: 'price', label: 'Price Range', min: 0,
+        max: 1000000000, // 1 billion
+        initialValue: SfRangeValues(1000, 500000),
+        validator: (value) {
+          if (value!.start > value.end) {
+            return 'From value cannot be greater than To value';
+          }
+          return null; // Return null if no error
+        },
+        validationMessage: 'Please enter a valid price range',
+      ),
+      // FlutterSlider(
+      //     min: 1000,
+      //     max: 100 * 100 * 100 * 1000,
+      //     values: [10000, 100000000],
+      //     rangeSlider: true,
+      //     tooltip: FlutterSliderTooltip(
+      //       format: (String v) {
+      //         double value = (double.parse(v) / 1000);
+      //         if (value < 1000 * 1000) {
+      //           return (double.parse(value.toString()) / 1000).toString() + "K";
+      //         }
+      //         return (double.parse(value.toString()) / 1000 * 1000).toString() +
+      //             "M";
+      //       },
+      //       alwaysShowTooltip: true,
+      //     ),
+      //     step: FlutterSliderStep(rangeList: [
+      //       FlutterSliderRangeStep(
+      //         from: 10 * 1000,
+      //         to: 200 * 1000,
+      //       ),
+      //       FlutterSliderRangeStep(
+      //         from: 200 * 1000,
+      //         to: 1000 * 1000,
+      //       ),
+      //       FlutterSliderRangeStep(
+      //         from: 1000 * 1000,
+      //         to: 10 * 1000 * 1000,
+      //       ),
+      //     ])),
       WrapSelectField(
           name: 'listingType',
           label: 'Purpose',
@@ -790,11 +850,10 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                                           .colorScheme
                                                           .onPrimary),
                                               onPressed: () async {
-                                                final number =
-                                                    propertyCard.currentAgent?[
-                                                                "user"]
-                                                            ["userPBXNumbers"]
-                                                        ["publicNumber"];
+                                                final number = propertyCard
+                                                        .currentAgent?["user"]
+                                                    ["phone"];
+                                                Logger().d(number);
                                                 if (number != null) {
                                                   getIt<CallBloc>().add(
                                                       CallEvent.clickToCall(

@@ -268,8 +268,7 @@ class ListingItem extends StatelessWidget {
                                   foregroundColor:
                                       Theme.of(context).colorScheme.onPrimary),
                               onPressed: () async {
-                                final number = listing
-                                    .agent?.user.userPBXNumbers?.publicNumber;
+                                final number = listing.agent?.user.phone;
                                 if (number != null) {
                                   getIt<CallBloc>().add(CallEvent.clickToCall(
                                     phoneNumber: number,

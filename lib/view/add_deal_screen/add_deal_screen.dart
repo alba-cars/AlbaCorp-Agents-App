@@ -182,7 +182,7 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (currentTab != 0) ...[
+                        if (currentTab == 1) ...[
                           Expanded(
                             child: OutlinedButton(
                                 onPressed: () {
@@ -195,26 +195,24 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                           ),
                           HorizontalSmallGap(),
                         ],
-                        Expanded(
-                          child: AppPrimaryButton(
-                              onTap: () async {
-                                final error = await context
-                                    .read<AddDealCubit>()
-                                    .onNextPressed(context,
-                                        formKey: currentTab == 1
-                                            ? _formKeyStepOne
-                                            : currentTab == 2
-                                                ? _formKeyStepTwo
-                                                : _formKeyStepThree,
-                                        tabController: _tabController);
-                                if (error != null) {
-                                  showSnackbar(
-                                      context, error, SnackBarType.failure,
-                                      bottomSpace: 70);
-                                }
-                              },
-                              text: ('Next')),
-                        ),
+                        AppPrimaryButton(
+                            onTap: () async {
+                              final error = await context
+                                  .read<AddDealCubit>()
+                                  .onNextPressed(context,
+                                      formKey: currentTab == 1
+                                          ? _formKeyStepOne
+                                          : currentTab == 2
+                                              ? _formKeyStepTwo
+                                              : _formKeyStepThree,
+                                      tabController: _tabController);
+                              if (error != null) {
+                                showSnackbar(
+                                    context, error, SnackBarType.failure,
+                                    bottomSpace: 70);
+                              }
+                            },
+                            text: ('Next')),
                       ],
                     );
                   },
@@ -491,16 +489,25 @@ class DealTypeTab extends StatelessWidget {
   }
 }
 
-class CollectDocumentsTab extends StatelessWidget {
+class CollectDocumentsTab extends StatefulWidget {
   const CollectDocumentsTab(
       {super.key, required GlobalKey<FormBuilderState> formKey})
       : _formKey = formKey;
   final GlobalKey<FormBuilderState> _formKey;
 
   @override
+  State<CollectDocumentsTab> createState() => _CollectDocumentsTabState();
+}
+
+class _CollectDocumentsTabState extends State<CollectDocumentsTab> {
+  final ValueNotifier<bool> isClientResident = ValueNotifier(true);
+
+  final ValueNotifier<bool> isSellerResident = ValueNotifier(true);
+
+  @override
   Widget build(BuildContext context) {
     return FormBuilder(
-        key: _formKey,
+        key: widget._formKey,
         child: ScrollShadow(
           size: 12,
           child: SingleChildScrollView(
@@ -527,12 +534,12 @@ class CollectDocumentsTab extends StatelessWidget {
                   name: 'Title Deed',
                   label: 'Title Deed',
                 ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'Ejari',
-                  label: 'Ejari',
-                ),
+                // DocumentSelectionField(
+                //   onSelected: (v) {},
+                //   isEditting: false,
+                //   name: 'Ejari',
+                //   label: 'Ejari',
+                // ),
                 VerticalSmallGap(),
                 Divider(
                   thickness: 4,
@@ -550,12 +557,41 @@ class CollectDocumentsTab extends StatelessWidget {
                   VerticalSmallGap(
                     adjustment: 0.5,
                   ),
-                  DocumentSelectionField(
-                    onSelected: (v) {},
-                    isEditting: false,
-                    name: 'EID',
-                    label: 'Emirates Id',
-                  ),
+                  SwitchListTile.adaptive(
+                      value: isClientResident.value,
+                      onChanged: (val) {
+                        isClientResident.value = val;
+                      }),
+                  ValueListenableBuilder(
+                      valueListenable: isClientResident,
+                      builder: (context, state, _) {
+                        return Column(
+                          children: [
+                            SwitchListTile.adaptive(
+                                contentPadding: EdgeInsets.zero,
+                                visualDensity: VisualDensity.compact,
+                                title: Text("Is Buyer UAE Resident"),
+                                value: isClientResident.value,
+                                onChanged: (val) {
+                                  isClientResident.value = val;
+                                }),
+                            if (state)
+                              DocumentSelectionField(
+                                onSelected: (v) {},
+                                isEditting: false,
+                                name: 'EID',
+                                label: 'Emirates Id',
+                              ),
+                            if (state)
+                              DocumentSelectionField(
+                                onSelected: (v) {},
+                                isEditting: false,
+                                name: 'Visa',
+                                label: 'Visa',
+                              ),
+                          ],
+                        );
+                      }),
                   DocumentSelectionField(
                     onSelected: (v) {},
                     isEditting: false,
@@ -565,44 +601,6 @@ class CollectDocumentsTab extends StatelessWidget {
                 ],
                 if (context.read<AddDealCubit>().state.dealResponse?.category ==
                     "Secondary Market Property") ...[
-                  LabelText(
-                    text: 'Buyer Documents',
-                  ),
-                  Divider(
-                    thickness: 4,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  VerticalSmallGap(
-                    adjustment: 0.5,
-                  ),
-                  if (context
-                          .read<AddDealCubit>()
-                          .state
-                          .dealResponse
-                          ?.buyerInternalUser !=
-                      null) ...[
-                    DocumentSelectionField(
-                      onSelected: (v) {},
-                      isEditting: false,
-                      name: 'buyer.EID',
-                      label: 'Emirates Id',
-                    ),
-                    DocumentSelectionField(
-                      onSelected: (v) {},
-                      isEditting: false,
-                      name: 'buyer.Passport',
-                      label: 'Passport',
-                    ),
-                  ],
-                  if (context.read<AddDealCubit>().state.buyerSource ==
-                      ClientSource.external) ...[
-                    DocumentSelectionField(
-                      onSelected: (v) {},
-                      isEditting: false,
-                      name: 'buyer.trade_license',
-                      label: 'Trade License',
-                    ),
-                  ],
                   Divider(
                     thickness: 4,
                     color: Theme.of(context).colorScheme.secondary,
@@ -623,12 +621,36 @@ class CollectDocumentsTab extends StatelessWidget {
                           .dealResponse
                           ?.sellerInternalUser !=
                       null) ...[
-                    DocumentSelectionField(
-                      onSelected: (v) {},
-                      isEditting: false,
-                      name: 'seller.EID',
-                      label: 'Emirates Id',
-                    ),
+                    ValueListenableBuilder(
+                        valueListenable: isSellerResident,
+                        builder: (context, state, _) {
+                          return Column(
+                            children: [
+                              SwitchListTile.adaptive(
+                                  contentPadding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                  title: Text("Is Seller UAE Resident"),
+                                  value: state,
+                                  onChanged: (val) {
+                                    isSellerResident.value = val;
+                                  }),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'seller.EID',
+                                  label: 'Emirates Id',
+                                ),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'seller.Visa',
+                                  label: 'Visa',
+                                ),
+                            ],
+                          );
+                        }),
                     DocumentSelectionField(
                       onSelected: (v) {},
                       isEditting: false,
@@ -642,6 +664,68 @@ class CollectDocumentsTab extends StatelessWidget {
                           .dealResponse
                           ?.sellerExternalUser !=
                       null) ...[
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'seller.trade_license',
+                      label: 'Trade License',
+                    ),
+                  ],
+                  LabelText(
+                    text: 'Buyer Documents',
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.5,
+                  ),
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.buyerInternalUser !=
+                      null) ...[
+                    ValueListenableBuilder(
+                        valueListenable: isClientResident,
+                        builder: (context, state, _) {
+                          return Column(
+                            children: [
+                              SwitchListTile.adaptive(
+                                  contentPadding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                  title: Text("Is Buyer UAE Resident"),
+                                  value: isClientResident.value,
+                                  onChanged: (val) {
+                                    isClientResident.value = val;
+                                  }),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'buyer.EID',
+                                  label: 'Emirates Id',
+                                ),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'buyer.Visa',
+                                  label: 'Visa',
+                                ),
+                            ],
+                          );
+                        }),
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'buyer.Passport',
+                      label: 'Passport',
+                    ),
+                  ],
+                  if (context.read<AddDealCubit>().state.buyerSource ==
+                      ClientSource.external) ...[
                     DocumentSelectionField(
                       onSelected: (v) {},
                       isEditting: false,

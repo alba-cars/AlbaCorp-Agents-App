@@ -11,6 +11,7 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
+import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/leads_list_explorer/cubit/leads_list_explorer_cubit.dart';
 import 'package:real_estate_app/view/leads_list_explorer/widgets/select_community_widget.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
@@ -139,9 +140,12 @@ class _ExplorerTabState extends State<ExplorerTab> {
             final list = await context
                 .read<LeadsListExplorerCubit>()
                 .getCommunities(search: v.text);
-            return list.map((e) => {'value': e.id, 'label': e.community});
+            return list.map((e) => {
+                  'value': e.communities.map((e) => e.id).toList(),
+                  'label': e.teamName
+                });
           },
-          displayStringForOption: (option) => option['label'] ?? '',
+          displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'communities'),
       MultiSelectAutoCompleteField(
           label: 'Building',
@@ -174,13 +178,18 @@ class _ExplorerTabState extends State<ExplorerTab> {
           values: ['1', '2', '3', '4', '5', '6', '7+'],
           isRequired: true),
       WrapSelectField(
-          name: 'propertyType',
+          name: 'propertyTypes',
           label: 'Property Type',
-          values: context
-              .select<LeadsListExplorerCubit, List<Map<String, dynamic>>>(
-                  (cubit) => cubit.state.propertyTypeList
-                      .map((e) => {'value': e.id, 'label': e.propertyType})
-                      .toList()),
+          values: [
+            'Apartment',
+            'Plot',
+            'Commercial',
+            'Townhouse',
+            'Hotel Apartment',
+            'Villa',
+            'Hotel Apartments',
+            'Other',
+          ].map((e) => {'value': getPropTypeRegex(e), 'label': e}).toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
     ];

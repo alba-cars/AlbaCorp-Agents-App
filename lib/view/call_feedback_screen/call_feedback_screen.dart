@@ -26,6 +26,7 @@ import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/fields/phone_number_field.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
+import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
@@ -98,26 +99,35 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                           VerticalSmallGap(),
                           NormalText(
                             text:
-                                "You received a ${getIt<SharedPreferences>().getString('CallDirection')} ${(getIt<SharedPreferences>().getString('calledNumber') ?? '').titleCase} call at ${DateTime.fromMillisecondsSinceEpoch(getIt<SharedPreferences>().getInt('CallTime') ?? 0).formattedTime}.",
+                                "You received a ${(getIt<SharedPreferences>().getString('calledNumber') ?? '').titleCase} call at ${DateTime.fromMillisecondsSinceEpoch(getIt<SharedPreferences>().getInt('CallTime') ?? 0).formattedTime}.",
                             textAlign: TextAlign.center,
                           ),
                           VerticalSmallGap(),
                           PhoneNumberField(name: 'number'),
                           VerticalSmallGap(),
-                          AppPrimaryButton(
-                              text: 'Check lead',
-                              onTap: () async {
-                                final isValidated = _formNumberKey.currentState
-                                    ?.saveAndValidate();
-                                if (isValidated == true) {
-                                  final number = _formNumberKey
-                                          .currentState?.value['number'] ??
-                                      '';
-                                  context
-                                      .read<CallFeedbackCubit>()
-                                      .checkUerExist(numberEntered: number);
-                                }
-                              }),
+                          BlocListener<CallFeedbackCubit, CallFeedbackState>(
+                            listener: (context, state) {
+                              if (state.checkLeadStatus == AppStatus.failure) {
+                                showSnackbar(context, 'Some Error occured',
+                                    SnackBarType.failure);
+                              }
+                            },
+                            child: AppPrimaryButton(
+                                text: 'Check lead',
+                                onTap: () async {
+                                  final isValidated = _formNumberKey
+                                      .currentState
+                                      ?.saveAndValidate();
+                                  if (isValidated == true) {
+                                    final number = _formNumberKey
+                                            .currentState?.value['number'] ??
+                                        '';
+                                    context
+                                        .read<CallFeedbackCubit>()
+                                        .checkUerExist(numberEntered: number);
+                                  }
+                                }),
+                          ),
                           VerticalSmallGap(),
                           AppPrimaryButton(
                               text: 'Ignore',

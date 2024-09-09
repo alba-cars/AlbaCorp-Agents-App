@@ -16,6 +16,7 @@ import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/listing_request_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
@@ -291,9 +292,12 @@ class AddListingCubit extends Cubit<AddListingState> {
     emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
-      case (Success s):
+      case (Success<List<PropertyType>> s):
+        // Define the custom sort order
+        final properties = sortPropertyTypes(s.value);
+
         emit(state.copyWith(
-            propertyTypeList: s.value,
+            propertyTypeList: properties,
             getPropertyTypeListStatus: AppStatus.success));
         break;
       case (Error e):
