@@ -1,3 +1,5 @@
+import 'package:real_estate_app/model/property_type_model.dart';
+
 import '../model/property_model.dart';
 
 num? getPrice(Property property) {
@@ -54,4 +56,38 @@ getPropTypeRegex(propType) {
     default:
       return propType;
   }
+}
+
+sortPropertyTypes(List<PropertyType> propertyTypes) {
+  List<String> sortOrder = [
+    "apartment",
+    "villa",
+    "office",
+    "retail",
+    "penthouse",
+    "land",
+    "townhouse",
+    "warehouse"
+  ];
+  final properties = propertyTypes;
+  // Custom sorting function
+  properties.sort((a, b) {
+    int indexA = sortOrder.indexOf(a.propertyType.toLowerCase());
+    int indexB = sortOrder.indexOf(b.propertyType.toLowerCase());
+
+    // If both are found in the custom sort order, compare by their index
+    if (indexA != -1 && indexB != -1) {
+      return indexA.compareTo(indexB);
+    }
+
+    // If only 'a' is found in custom order, it should come first
+    if (indexA != -1) return -1;
+
+    // If only 'b' is found in custom order, it should come first
+    if (indexB != -1) return 1;
+
+    // If neither is in the custom order, keep the original order
+    return 0;
+  });
+  return properties;
 }

@@ -16,6 +16,7 @@ import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/listing_request_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
@@ -293,36 +294,7 @@ class AddListingCubit extends Cubit<AddListingState> {
     switch (result) {
       case (Success<List<PropertyType>> s):
         // Define the custom sort order
-        List<String> sortOrder = [
-          "apartment",
-          "villa",
-          "office",
-          "retail",
-          "penthouse",
-          "land",
-          "townhouse",
-          "warehouse"
-        ];
-        final properties = s.value;
-        // Custom sorting function
-        properties.sort((a, b) {
-          int indexA = sortOrder.indexOf(a.propertyType.toLowerCase());
-          int indexB = sortOrder.indexOf(b.propertyType.toLowerCase());
-
-          // If both are found in the custom sort order, compare by their index
-          if (indexA != -1 && indexB != -1) {
-            return indexA.compareTo(indexB);
-          }
-
-          // If only 'a' is found in custom order, it should come first
-          if (indexA != -1) return -1;
-
-          // If only 'b' is found in custom order, it should come first
-          if (indexB != -1) return 1;
-
-          // If neither is in the custom order, keep the original order
-          return 0;
-        });
+        final properties = sortPropertyTypes(s.value);
 
         emit(state.copyWith(
             propertyTypeList: properties,
