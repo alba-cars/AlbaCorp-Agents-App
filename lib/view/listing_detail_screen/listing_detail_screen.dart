@@ -13,6 +13,7 @@ import 'package:real_estate_app/view/deal_details_screen/widgets/info_label_valu
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/listing_detail_screen/cubit/listing_detail_cubit.dart';
 import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
+import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -76,7 +77,49 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
               slivers: [
                 SliverAppBar(
                   title: Text('Property Details'),
-                  centerTitle: true,
+                  centerTitle: false,
+                  actions: [
+                    InkWell(
+                      onTap: () {
+                        launchUrlString(
+                            "https://alba.homes/download/${listing.referNo}?source=agentApp");
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        width: 120,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              color: Theme.of(context).colorScheme.secondary),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.download,
+                                color: Colors.white,
+                              ),
+                              HorizontalSmallGap(),
+                              Text(
+                                "View PDF",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 4,
+                    )
+                  ],
                 ),
                 SliverToBoxAdapter(
                     child: CarouselSlider.builder(

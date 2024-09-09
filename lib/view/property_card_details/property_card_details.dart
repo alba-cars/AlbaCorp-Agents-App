@@ -69,6 +69,7 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
               BlocBuilder<PropertyCardDetailsCubit, PropertyCardDetailsState>(
             builder: (context, state) {
               final propertyCard = state.propertyCard;
+
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,51 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                         VerticalSmallGap(
                           adjustment: 2,
                         ),
-                        TitleText(text: 'Property Card Details'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TitleText(text: 'Property Card Details'),
+                            InkWell(
+                              onTap: () {
+                                launchUrlString(
+                                    "https://alba.homes/download-pocket/${propertyCard?.id ?? ""}?source=agentApp");
+                              },
+                              child: SizedBox(
+                                height: 30,
+                                width: 120,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.download,
+                                        color: Colors.white,
+                                      ),
+                                      HorizontalSmallGap(),
+                                      Text(
+                                        "View PDF",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         VerticalSmallGap(),
                         Row(
                           children: [
