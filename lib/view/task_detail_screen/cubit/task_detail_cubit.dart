@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -299,9 +301,21 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     switch (result) {
       case (Success<List<Activity>> s):
         final list = List<Activity>.from(s.value);
+        if (getIt<AuthBloc>().state.veryImportantActivities?.isNotEmpty ==
+            true) {
+          final imp = await _checkForImportantActivity();
+          if (imp != null && imp.isNotEmpty) {
+            list.addAll(imp);
+          }
+        }
         if (list.any((d) => d.activityWeight > 8)) {
           list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
         }
+        // Remove duplicate activities by id
+        final uniqueIds = <String>{}; // A set to track unique IDs
+        list.retainWhere(
+            (element) => uniqueIds.add(element.id)); // Keep only unique items
+
         list.removeWhere((element) => element.id == state.taskId);
         emit(state.copyWith(
             sortedActivity: [...state.sortedActivity, ...list],
@@ -453,5 +467,15 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         taskId: state.sortedActivity[taskIndex].id));
     getLeadActivities();
     getExplorerList();
+  }
+
+  FutureOr<List<Activity>?> _checkForImportantActivity() async {
+    final result = await _activityRepo.fetchActivitiesImportant();
+    switch (result) {
+      case (Success<List<Activity>> s):
+        return s.value;
+      case (Error _):
+        return null;
+    }
   }
 }

@@ -23,6 +23,7 @@ import 'package:real_estate_app/view/task_detail_screen/widgets/property_card_li
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
+import 'package:real_estate_app/widgets/url_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -437,7 +438,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                               ),
 
                                               (task.notes?.isNotEmpty == true)
-                                                  ? Text(task.notes ?? '')
+                                                  ? UrlText(
+                                                      text: task.notes ?? '')
                                                   : Text('No notes'),
                                               VerticalSmallGap(),
                                               LabelText(

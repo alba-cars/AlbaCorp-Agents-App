@@ -291,9 +291,41 @@ class AddListingCubit extends Cubit<AddListingState> {
     emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
-      case (Success s):
+      case (Success<List<PropertyType>> s):
+        // Define the custom sort order
+        List<String> sortOrder = [
+          "apartment",
+          "villa",
+          "office",
+          "retail",
+          "penthouse",
+          "land",
+          "townhouse",
+          "warehouse"
+        ];
+        final properties = s.value;
+        // Custom sorting function
+        properties.sort((a, b) {
+          int indexA = sortOrder.indexOf(a.propertyType.toLowerCase());
+          int indexB = sortOrder.indexOf(b.propertyType.toLowerCase());
+
+          // If both are found in the custom sort order, compare by their index
+          if (indexA != -1 && indexB != -1) {
+            return indexA.compareTo(indexB);
+          }
+
+          // If only 'a' is found in custom order, it should come first
+          if (indexA != -1) return -1;
+
+          // If only 'b' is found in custom order, it should come first
+          if (indexB != -1) return 1;
+
+          // If neither is in the custom order, keep the original order
+          return 0;
+        });
+
         emit(state.copyWith(
-            propertyTypeList: s.value,
+            propertyTypeList: properties,
             getPropertyTypeListStatus: AppStatus.success));
         break;
       case (Error e):
