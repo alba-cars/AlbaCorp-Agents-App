@@ -140,8 +140,10 @@ class _ExplorerTabState extends State<ExplorerTab> {
             final list = await context
                 .read<LeadsListExplorerCubit>()
                 .getCommunities(search: v.text);
-            return list.map((e) =>
-                {'value': e.communities.map((e) => e.id), 'label': e.teamName});
+            return list.map((e) => {
+                  'value': e.communities.map((e) => e.id).toList(),
+                  'label': e.teamName
+                });
           },
           displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'communities'),
