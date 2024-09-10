@@ -265,7 +265,7 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                                               .onPrimary),
                                       onPressed: () async {
                                         await launchWhatsApp(
-                                            context, listing.agent?.user.phone);
+                                            context, listing.agent?.user.phone,text: getWhatsAppMessageText(listing));
                                       },
                                       icon: ImageIcon(AssetImage(
                                           'assets/images/whatsapp.png'))),
