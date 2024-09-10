@@ -217,6 +217,20 @@ showConvertPropertyCard(
                                   SnackBarType.success);
                               Navigator.of(dContext).pop();
                             }
+                            if (state.convertToListingAquiredStatus ==
+                                AppStatus.failure) {
+                              showSnackbar(
+                                  context,
+                                  state.convertToListingAquiredError ?? '',
+                                  SnackBarType.failure);
+                            } else if (state.convertToListingAquiredStatus ==
+                                AppStatus.success) {
+                              showSnackbar(
+                                  context,
+                                  "Successfully created listing",
+                                  SnackBarType.success);
+                              Navigator.of(dContext).pop();
+                            }
                           },
                           listenWhen: (previous, current) =>
                               previous.updatePropertyCardStatus !=
