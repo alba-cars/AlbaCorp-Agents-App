@@ -96,7 +96,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen>
           getIt<TaskDetailCubit>(param1: widget.taskId, param2: widget.activity)
             ..setTaskSortType(widget.taskType, widget.taskFilter),
       child: _TaskDetailScreenLayout(
-          isEnquiry: home.TaskType == home.TaskType.Hot),
+          isEnquiry: widget.taskType == home.TaskType.Hot),
     );
   }
 }
