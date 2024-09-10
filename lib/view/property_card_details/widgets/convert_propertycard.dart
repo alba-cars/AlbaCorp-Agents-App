@@ -53,11 +53,6 @@ List<Widget> _ListingAcquiredFields(BuildContext context,
         PropertyCardDetailsModel propertyCard, ValueNotifier val) =>
     [
       WrapSelectField(
-          name: 'type',
-          label: 'Listing Type',
-          values: ['Buy', 'Rent', 'Holiday Homes'],
-          isRequired: true),
-      WrapSelectField(
           name: 'contractValidity',
           label: 'Duration of Contract',
           values: ['1 Month', '3 Months', '6 Months', '12 Months'],
