@@ -7,14 +7,16 @@ import 'dart:io' show Platform;
 
 Future<void> launchWhatsApp(BuildContext context, String? number,{String? text}) async {
   try {
+    print(text);
     if (number == null) {
       showSnackbar(context, 'Phone number not available', SnackBarType.failure);
     }
      var whatsappUrl = "https://wa.me/$number}";
     if(Platform.isIOS){
-      whatsappUrl = "whatsapp://send?phone=${(number??"").replaceAll("+","")}?text=${Uri.parse(text ?? "")}";
+      whatsappUrl = "whatsapp://send?phone=${(number??"").replaceAll("+","")}";
     }
-    print("Number $number");
+   
+    print("Url $whatsappUrl");
     await launchUrlString(whatsappUrl);
   } catch (e) {
     showSnackbar(context, 'Could not launch WhatsApp', SnackBarType.failure);
