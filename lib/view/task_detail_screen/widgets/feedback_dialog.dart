@@ -313,7 +313,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                     lastDate:
                                         DateTime.now().add(Duration(days: 90))),
                                 TimeField(
-                                  isRequired: true,
+                                  isRequired: false,
                                   name: 'time',
                                   label: 'Time',
                                 ),

@@ -6,10 +6,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
-import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -24,7 +22,6 @@ import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:real_estate_app/widgets/url_text.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/call_bloc/call_bloc.dart';
@@ -47,13 +44,14 @@ import 'widgets/feedback_dialog.dart';
 
 class TaskDetailScreen extends StatefulWidget {
   static const routeName = '/taskDetailScreen';
-  const TaskDetailScreen(
-      {super.key,
-      required this.taskId,
-      this.activity,
-      required this.isBlocking,
-      this.taskType,
-      this.taskFilter});
+  const TaskDetailScreen({
+    super.key,
+    required this.taskId,
+    this.activity,
+    required this.isBlocking,
+    this.taskType,
+    this.taskFilter,
+  });
   final String taskId;
   final Activity? activity;
   final bool isBlocking;
@@ -96,13 +94,15 @@ class _TaskDetailScreenState extends State<TaskDetailScreen>
       create: (context) =>
           getIt<TaskDetailCubit>(param1: widget.taskId, param2: widget.activity)
             ..setTaskSortType(widget.taskType, widget.taskFilter),
-      child: _TaskDetailScreenLayout(),
+      child: _TaskDetailScreenLayout(
+          isEnquiry: home.TaskType == home.TaskType.Hot),
     );
   }
 }
 
 class _TaskDetailScreenLayout extends StatefulWidget {
-  const _TaskDetailScreenLayout();
+  const _TaskDetailScreenLayout({required this.isEnquiry});
+  final bool isEnquiry;
 
   @override
   State<_TaskDetailScreenLayout> createState() =>
@@ -120,7 +120,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Task'),
+        title: Text(widget.isEnquiry ? 'Enquiry' : "Cold Lead"),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: BlocSelector<AuthBloc, AuthState, Set<String>?>(
