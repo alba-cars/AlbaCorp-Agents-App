@@ -61,9 +61,13 @@ class _MyListingsTabState extends State<MyListingsTab>
                   tabs: ['Public', 'Pocket'],
                   onTap: (index) {
                     if (index == 0) {
-                      context.read<ListingsCubit>().getMyListings();
+                      context
+                          .read<ListingsCubit>()
+                          .getMyListings(refresh: true);
                     } else {
-                      context.read<ListingsCubit>().getMyPocketListings();
+                      context
+                          .read<ListingsCubit>()
+                          .getMyPocketListings(refresh: true);
                     }
                   },
                 ),
@@ -463,6 +467,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                   ),
                                   if (propertyCard.currentAgent is Map)
                                     Container(
+                                      margin: EdgeInsets.only(top: 10),
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 2),
                                       decoration: BoxDecoration(
@@ -501,32 +506,6 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                           ),
                                           Spacer(),
                                           HorizontalSmallGap(),
-                                          IconButton.filledTonal(
-                                              style: IconButton.styleFrom(
-                                                  backgroundColor:
-                                                      Theme.of(context)
-                                                          .colorScheme
-                                                          .primary,
-                                                  foregroundColor:
-                                                      Theme.of(context)
-                                                          .colorScheme
-                                                          .onPrimary),
-                                              onPressed: () async {
-                                                final number =
-                                                    propertyCard.currentAgent?[
-                                                                "user"]
-                                                            ["userPBXNumbers"]
-                                                        ["publicNumber"];
-                                                if (number != null) {
-                                                  getIt<CallBloc>().add(
-                                                      CallEvent.clickToCall(
-                                                    phoneNumber: number,
-                                                  ));
-                                                }
-                                              },
-                                              icon: Icon(
-                                                Icons.call,
-                                              ))
                                         ],
                                       ),
                                     )
