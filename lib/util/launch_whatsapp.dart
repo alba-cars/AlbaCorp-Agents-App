@@ -7,6 +7,7 @@ import 'dart:io' show Platform;
 Future<void> launchWhatsApp(BuildContext context, String? number,
     {String? text}) async {
   try {
+    print(text);
     if (number == null) {
       showSnackbar(context, 'Phone number not available', SnackBarType.failure);
     }
