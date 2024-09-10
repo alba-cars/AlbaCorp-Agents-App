@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
@@ -239,24 +240,7 @@ class ListingItem extends StatelessWidget {
                                       Theme.of(context).colorScheme.onPrimary),
                               onPressed: () async {
                                 String? phoneNumber = listing.agent?.user.phone;
-                                if (phoneNumber == null) {
-                                  showSnackbar(
-                                      context,
-                                      'Can not launch the app',
-                                      SnackBarType.failure);
-                                  return;
-                                }
-                                Logger().d(phoneNumber);
-                                if (await canLaunchUrlString(
-                                    "https://wa.me/${phoneNumber}/?text=${getWhatsAppMessageText(listing)}")) {
-                                  launchUrlString(
-                                      "https://wa.me/$phoneNumber/?text=${getWhatsAppMessageText(listing)}");
-                                } else {
-                                  showSnackbar(
-                                      context,
-                                      'Can not launch the app',
-                                      SnackBarType.failure);
-                                }
+                                await launchWhatsApp(context, phoneNumber);
                               },
                               icon: ImageIcon(
                                   AssetImage('assets/images/whatsapp.png'))),

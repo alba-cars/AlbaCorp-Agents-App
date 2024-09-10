@@ -9,12 +9,14 @@ import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/view/deal_details_screen/widgets/info_label_value.dart';
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/listing_detail_screen/cubit/listing_detail_cubit.dart';
 import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
+import 'package:real_estate_app/widgets/share_location.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
@@ -262,26 +264,8 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                                               .colorScheme
                                               .onPrimary),
                                       onPressed: () async {
-                                        String? phoneNumber =
-                                            listing.agent?.user.phone;
-                                        if (phoneNumber == null) {
-                                          showSnackbar(
-                                              context,
-                                              'Can not launch the app',
-                                              SnackBarType.failure);
-                                          return;
-                                        }
-                                        Logger().d(phoneNumber);
-                                        if (await canLaunchUrlString(
-                                            "https://wa.me/${phoneNumber}/?text=${getWhatsAppMessageText(listing)}")) {
-                                          launchUrlString(
-                                              "https://wa.me/$phoneNumber/?text=${getWhatsAppMessageText(listing)}");
-                                        } else {
-                                          showSnackbar(
-                                              context,
-                                              'Can not launch the app',
-                                              SnackBarType.failure);
-                                        }
+                                        await launchWhatsApp(
+                                            context, listing.agent?.user.phone);
                                       },
                                       icon: ImageIcon(AssetImage(
                                           'assets/images/whatsapp.png'))),
@@ -366,8 +350,22 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        BlockTitleText(
-                          text: 'Location Info',
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BlockTitleText(
+                              text: 'Location Info',
+                            ),
+                            if (listing.lat != null && listing.lng != null)
+                              IconButton(
+                                  onPressed: () {
+                                    if (listing.lat != null &&
+                                        listing.lng != null) {
+                                      shareLocation(listing.lat!, listing.lng!);
+                                    }
+                                  },
+                                  icon: Icon(Icons.share))
+                          ],
                         ),
                         VerticalSmallGap(),
                         InfoLabelValue(

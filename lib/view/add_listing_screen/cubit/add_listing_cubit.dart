@@ -62,6 +62,7 @@ class AddListingCubit extends Cubit<AddListingState> {
         .addListingAcquired(values: {'multiple': false, ...val});
     switch (result) {
       case (Success<NewListingRequest> s):
+        emit(state.copyWith(dealListingResponse: s.value));
         final deal = await _dealsRepo.addDeal(values: {
           "assignedAgent": getIt<AuthBloc>().state.agent?.id,
           "category": "Listing Acquired",

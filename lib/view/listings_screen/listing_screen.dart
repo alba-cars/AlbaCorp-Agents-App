@@ -15,6 +15,7 @@ import 'package:real_estate_app/constants/listing_status_color.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
@@ -815,27 +816,13 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                               onPressed: () async {
                                                 var createdBy =
                                                     propertyCard.currentAgent;
-                                                Logger().d(createdBy);
-                                                if (createdBy == null) {
-                                                  showSnackbar(
-                                                      context,
-                                                      'Phone number not available',
-                                                      SnackBarType.failure);
-                                                }
+
                                                 String phoneNumber =
-                                                    createdBy["userId"]["phone"]
+                                                    createdBy?["userId"]
+                                                            ?["phone"]
                                                         ?.replaceFirst("+", "");
-                                                Logger().d(phoneNumber);
-                                                if (await canLaunchUrlString(
-                                                    "https://wa.me/${phoneNumber}/?text=${getWhatsAppMessageText(propertyCard)}")) {
-                                                  launchUrlString(
-                                                      "https://wa.me/$phoneNumber/?text=${getWhatsAppMessageText(propertyCard)}");
-                                                } else {
-                                                  showSnackbar(
-                                                      context,
-                                                      'Can not launch the app',
-                                                      SnackBarType.failure);
-                                                }
+                                                await launchWhatsApp(
+                                                    context, phoneNumber);
                                               },
                                               icon: ImageIcon(AssetImage(
                                                   'assets/images/whatsapp.png'))),

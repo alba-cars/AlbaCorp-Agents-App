@@ -11,6 +11,7 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
@@ -497,17 +498,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: OutlinedButton(
                                                         onPressed: () async {
-                                                          if (await canLaunchUrlString(
-                                                              "https://wa.me/${task.lead?.phone?.replaceFirst("+", "")}")) {
-                                                            launchUrlString(
-                                                                "https://wa.me/${task.lead?.phone?.replaceFirst("+", "")}");
-                                                          } else {
-                                                            showSnackbar(
-                                                                context,
-                                                                'Can not launch the app',
-                                                                SnackBarType
-                                                                    .failure);
-                                                          }
+                                                          await launchWhatsApp(
+                                                              context,
+                                                              task.lead?.phone);
                                                         },
                                                         child: ImageIcon(AssetImage(
                                                             'assets/images/whatsapp.png'))),
