@@ -13,7 +13,9 @@ import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
+import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/listing_request_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -181,33 +183,17 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
                   },
                   builder: (context, currentTab) {
                     return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (currentTab != 0) ...[
-                          Expanded(
-                            child: AppPrimaryButton(
-                                onTap: () {
-                                  context
-                                      .read<AddListingCubit>()
-                                      .onPreviousPressed(
-                                          tabController: _tabController);
-                                },
-                                outlined: true,
-                                text: 'Previous'),
-                          ),
-                          HorizontalSmallGap(),
-                        ],
-                        Expanded(
-                          child: AppPrimaryButton(
-                              onTap: () async {
-                                await context
-                                    .read<AddListingCubit>()
-                                    .onNextPressed(context,
-                                        formKey: _formKey[currentTab],
-                                        tabController: _tabController);
-                              },
-                              text: ('Next')),
-                        ),
+                        AppPrimaryButton(
+                            onTap: () async {
+                              await context
+                                  .read<AddListingCubit>()
+                                  .onNextPressed(context,
+                                      formKey: _formKey[currentTab],
+                                      tabController: _tabController);
+                            },
+                            text: ('Next')),
                       ],
                     );
                   },
@@ -529,16 +515,22 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
   }
 }
 
-class CollectDocumentsTab extends StatelessWidget {
+class CollectDocumentsTab extends StatefulWidget {
   const CollectDocumentsTab(
       {super.key, required GlobalKey<FormBuilderState> formKey})
       : _formKey = formKey;
   final GlobalKey<FormBuilderState> _formKey;
 
   @override
+  State<CollectDocumentsTab> createState() => _CollectDocumentsTabState();
+}
+
+class _CollectDocumentsTabState extends State<CollectDocumentsTab> {
+  final ValueNotifier<bool> isClientResident = ValueNotifier(true);
+  @override
   Widget build(BuildContext context) {
     return FormBuilder(
-        key: _formKey,
+        key: widget._formKey,
         child: ScrollShadow(
           size: 12,
           child: SingleChildScrollView(
@@ -565,11 +557,21 @@ class CollectDocumentsTab extends StatelessWidget {
                   name: 'Title Deed',
                   label: 'Title Deed',
                 ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'Ejari',
-                  label: 'Ejari',
+                BlocSelector<AddListingCubit, AddListingState,
+                    NewListingRequest?>(
+                  selector: (state) {
+                    return state.dealListingResponse;
+                  },
+                  builder: (context, state) {
+                    if (state?.type == 'Rent')
+                      return DocumentSelectionField(
+                        onSelected: (v) {},
+                        isEditting: false,
+                        name: 'Listing Form',
+                        label: 'Listing Form',
+                      );
+                    return SizedBox();
+                  },
                 ),
                 VerticalSmallGap(),
                 Divider(
@@ -586,12 +588,36 @@ class CollectDocumentsTab extends StatelessWidget {
                 VerticalSmallGap(
                   adjustment: 0.5,
                 ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'EID',
-                  label: 'Emirates Id',
-                ),
+                ValueListenableBuilder(
+                    valueListenable: isClientResident,
+                    builder: (context, state, _) {
+                      return Column(
+                        children: [
+                          SwitchListTile.adaptive(
+                              contentPadding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                              title: Text("Is Client UAE Resident"),
+                              value: isClientResident.value,
+                              onChanged: (val) {
+                                isClientResident.value = val;
+                              }),
+                          if (state)
+                            DocumentSelectionField(
+                              onSelected: (v) {},
+                              isEditting: false,
+                              name: 'EID',
+                              label: 'Emirates Id',
+                            ),
+                          if (state)
+                            DocumentSelectionField(
+                              onSelected: (v) {},
+                              isEditting: false,
+                              name: 'Visa',
+                              label: 'Visa',
+                            ),
+                        ],
+                      );
+                    }),
                 DocumentSelectionField(
                   onSelected: (v) {},
                   isEditting: false,

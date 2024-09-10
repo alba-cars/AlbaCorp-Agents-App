@@ -20,7 +20,6 @@ import com.alba.agent.R
 
 class PhoneStateReceiver : BroadcastReceiver() {
 
-
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == TelephonyManager.ACTION_PHONE_STATE_CHANGED) {
             val state = intent.getStringExtra(TelephonyManager.EXTRA_STATE)
@@ -28,39 +27,36 @@ class PhoneStateReceiver : BroadcastReceiver() {
 
             val preferences: SharedPreferences = context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
 
-
             when (state) {
+                // Incoming call ringing
                 TelephonyManager.EXTRA_STATE_RINGING -> {
                     Log.d("flutter", "Incoming call from $phoneNumber")
                     val numberToSave = phoneNumber ?: "Unknown"
                     preferences.edit().putString("flutter.call", numberToSave).apply()
                     preferences.edit().putString("flutter.CallDirection", "incoming").apply()
                 }
+
+                // Call ended
                 TelephonyManager.EXTRA_STATE_IDLE -> {
-                    Log.d("flutter", "Call ended with $phoneNumber")
+                    val callDirection = preferences.getString("flutter.CallDirection", null)
                     val savedNumber = preferences.getString("flutter.call", null)
-                    if (savedNumber != null) {
-                        OverlayManager.showOverlay(context, savedNumber,preferences)
+
+                    if (callDirection == "incoming" && savedNumber != null) {
+                        Log.d("flutter", "Incoming call ended with $savedNumber")
+                        // Your logic after call ends
+                        OverlayManager.showOverlay(context, savedNumber, preferences)
+
+                        // Clear the call info after the call ends
+                        preferences.edit().remove("flutter.call").apply()
+                        preferences.edit().remove("flutter.CallDirection").apply()
                     }
                 }
-                // TelephonyManager.EXTRA_STATE_OFFHOOK->{
-                //     Log.d("flutter", "Call offhook with $phoneNumber")
-                //     if(phoneNumber != null){
-
-                 //     val numberToSave = phoneNumber 
-                 //   preferences.edit().putString("flutter.call", numberToSave).apply()
-                 //   preferences.edit().putString("flutter.CallDirection", "outgoing").apply()
-                    
-                 //    }
-                // }
             }
         }
     }
-
-    
-
-    
 }
+
+
 
 object OverlayManager {
     private var windowManager: WindowManager? = null

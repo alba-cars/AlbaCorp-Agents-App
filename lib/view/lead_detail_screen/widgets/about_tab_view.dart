@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/activity_list.dart';
@@ -173,16 +174,7 @@ class AboutTabView extends StatelessWidget {
                           Expanded(
                             child: OutlinedButton(
                                 onPressed: () async {
-                                  if (await canLaunchUrlString(
-                                      "https://wa.me/${lead.phone?.replaceFirst("+", "")}")) {
-                                    launchUrlString(
-                                        "https://wa.me/${lead.phone?.replaceFirst("+", "")}");
-                                  } else {
-                                    showSnackbar(
-                                        context,
-                                        'Can not launch the app',
-                                        SnackBarType.failure);
-                                  }
+                                  await launchWhatsApp(context, lead.phone);
                                 },
                                 child: ImageIcon(
                                     AssetImage('assets/images/whatsapp.png'))),

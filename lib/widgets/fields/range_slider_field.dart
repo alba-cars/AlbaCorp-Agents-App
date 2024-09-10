@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
+import 'package:real_estate_app/widgets/fields/field_color.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class RangeSliderField extends FormBuilderFieldDecoration<SfRangeValues> {
@@ -171,26 +172,67 @@ class RangeInputField extends FormBuilderField<SfRangeValues> {
                   Row(
                     children: [
                       Expanded(
-                        child: TextFormField(
-                          controller: state.fromController,
-                          decoration: const InputDecoration(labelText: "From"),
-                          keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true),
-                          onChanged: (value) {
-                            state.updateRangeValues();
-                          },
-                        ),
+                        child: Builder(builder: (context) {
+                          return TextFormField(
+                            controller: state.fromController,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true),
+                            onChanged: (value) {
+                              state.updateRangeValues();
+                            },
+                            decoration: InputDecoration(
+                              hintStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                                fontSize: 12,
+                              ),
+                              filled: true,
+                              labelText: "From",
+                              fillColor: fieldColor,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: borderColor),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: borderColor),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              contentPadding: const EdgeInsets.fromLTRB(
+                                  14.0, 12.0, 14.0, 12.0),
+                            ),
+                          );
+                        }),
                       ),
                       const SizedBox(width: 20),
                       Expanded(
                         child: TextFormField(
                           controller: state.toController,
-                          decoration: const InputDecoration(labelText: "To"),
+                          // decoration: const InputDecoration(labelText: "To"),
                           keyboardType: const TextInputType.numberWithOptions(
                               decimal: true),
                           onChanged: (value) {
                             state.updateRangeValues();
                           },
+                          decoration: InputDecoration(
+                            hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
+                            filled: true,
+                            labelText: "To",
+                            fillColor: fieldColor,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: borderColor),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: borderColor),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            contentPadding: const EdgeInsets.fromLTRB(
+                                14.0, 12.0, 14.0, 12.0),
+                          ),
                         ),
                       ),
                     ],
