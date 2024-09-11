@@ -148,16 +148,16 @@ class ListingsData implements ListingsRepo {
 
   @override
   Future<Result<List<Building>>> getBuildingNames(
-      {String? search, String? communityId, Paginator? paginator}) async {
+      {String? search, List<String>? communityId, Paginator? paginator}) async {
     try {
-      String url = 'v1/buildings';
+      String url = '/v1/buildings/filter';
 
       final response = await _dio.get(url, queryParameters: {
         if (paginator != null) 'page': paginator.currentPage + 1,
         'search': search,
         'community': communityId
       });
-      final data = response.data as List;
+      final data = response.data['results'] as List;
       final list = data.map((e) => Building.fromJson(e)).toList();
       return Success(
         list,

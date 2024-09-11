@@ -49,7 +49,8 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
     super.initState();
   }
 
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? valuesues) {
     return [
       DropDownfield(
         label: 'Request Type',
@@ -137,7 +138,7 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: AppSearchBar(
                 onChanged: context.read<TicketsScreenCubit>().searchTickets,
-                filterFields: filterFields(context),
+                filterFields: filterFields,
                 filter: context.select(
                     (TicketsScreenCubit value) => value.state.ticketsFilter),
                 onFilterApplied:

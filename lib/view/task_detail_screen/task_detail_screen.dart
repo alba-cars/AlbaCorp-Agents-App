@@ -358,6 +358,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   ))
                                                 ],
                                               ),
+
                                               VerticalSmallGap(),
                                               Row(
                                                 children: [

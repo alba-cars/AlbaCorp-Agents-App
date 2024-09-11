@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -132,7 +133,8 @@ class ExplorerTab extends StatefulWidget {
 }
 
 class _ExplorerTabState extends State<ExplorerTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
@@ -150,9 +152,14 @@ class _ExplorerTabState extends State<ExplorerTab> {
       MultiSelectAutoCompleteField(
           label: 'Building',
           optionsBuilder: (v) async {
+            final List<String>? communities = (values?['communities'] as List?)
+                ?.map((e) => e['value'])
+                .expand<String>(
+                    (element) => element is List<String> ? element : [element])
+                .toList();
             final list = await context
                 .read<LeadsListExplorerCubit>()
-                .getBuildings(search: v.text);
+                .getBuildings(search: v.text, community: communities);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -249,7 +256,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                   )),
                 ],
-                filterFields: filterFields(context),
+                filterFields: filterFields,
                 filter: explorerFilter,
                 onFilterApplied: (filter) {
                   context

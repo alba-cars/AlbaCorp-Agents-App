@@ -361,7 +361,8 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
       switch (result) {
         case (Success<List<CommunityTeamModel>> s):
           emit(state.copyWith(
-              communityList: s.value,
+              communityList:
+                  s.value.where((e) => e.communities.isNotEmpty).toList(),
               getCommunityListStatus: AppStatus.success));
           return s.value;
         case (Error e):
@@ -373,36 +374,23 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
     }
   }
 
-  Future<List<Building>> getBuildings({String? search}) async {
+  Future<List<Building>> getBuildings(
+      {String? search, List<String>? community}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    if (state.buildingList.isNotEmpty && search != null) {
-      final list = state.buildingList
-          .where((element) =>
-              element.name.toLowerCase().contains(search.toLowerCase()))
-          .toList();
-      if (state.explorerFilter?.containsKey('communities') == true &&
-          state.explorerFilter?['communities'] != null) {
-        final communities = (state.explorerFilter?['communities'] as List)
-            .map((e) => e['value'])
-            .toList();
-        return list.where((e) => communities.contains(e.communityId)).toList();
-      } else {
-        return list;
-      }
-    } else {
-      final result = await _listingsRepo.getBuildingNames(search: search);
-      switch (result) {
-        case (Success s):
-          emit(state.copyWith(
-              buildingList: s.value, getBuildingListStatus: AppStatus.success));
-          return s.value;
 
-        case (Error e):
-          emit(state.copyWith(
-            getBuildingListStatus: AppStatus.failure,
-          ));
-          return [];
-      }
+    final result = await _listingsRepo.getBuildingNames(
+        search: search, communityId: community);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            buildingList: s.value, getBuildingListStatus: AppStatus.success));
+        return s.value;
+
+      case (Error e):
+        emit(state.copyWith(
+          getBuildingListStatus: AppStatus.failure,
+        ));
+        return [];
     }
   }
 

@@ -23,7 +23,7 @@ abstract class ListingsRepo {
   Future<Result<List<PropertyType>>> getPropertyTypes(
       {String? search, Paginator? paginator});
   Future<Result<List<Building>>> getBuildingNames(
-      {String? search, String? communityId, Paginator? paginator});
+      {String? search,List<String>? communityId, Paginator? paginator});
   Future<Result<List<Community>>> getCommunities(
       {String? search, Paginator? paginator});
   Future<Result<List<Amenity>>> getAmenities(
