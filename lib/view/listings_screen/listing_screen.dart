@@ -132,7 +132,7 @@ class ListingsTab extends StatefulWidget {
 }
 
 class _ListingsTabState extends State<ListingsTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(BuildContext context, values) {
     return [
       AppAutoComplete(
         label: 'Agent',
@@ -175,14 +175,20 @@ class _ListingsTabState extends State<ListingsTab> {
       MultiSelectAutoCompleteField(
           label: 'Building',
           optionsBuilder: (v) async {
-            final stateResult =
-                context.read<ListingsCubit>().state.buildingList;
-            if (stateResult.isEmpty) {
-              await context.read<ListingsCubit>().getBuildings(search: v.text);
-            }
-            final list = context.read<ListingsCubit>().state.buildingList.where(
-                (element) =>
-                    element.name.toLowerCase().contains(v.text.toLowerCase()));
+            // await context.read<ListingsCubit>().getBuildings(search: v.text);
+            // final list = context.read<ListingsCubit>().state.buildingList.where(
+            //     (element) =>
+            //         element.name.toLowerCase().contains(v.text.toLowerCase()));
+            // return list.map((e) => {'value': e.id, 'label': e.name});
+
+            final List<String>? communities = (values?['communities'] as List?)
+                ?.map((e) => e['value'])
+                .expand<String>(
+                    (element) => element is List<String> ? element : [element])
+                .toList();
+            final list = await context
+                .read<ListingsCubit>()
+                .getBuildings(search: v.text, community: communities);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -247,10 +253,12 @@ class _ListingsTabState extends State<ListingsTab> {
       WrapSelectField(
           name: 'propertyType',
           label: 'Property Type',
-          values: context.select<ListingsCubit, List<Map<String, dynamic>>>(
-              (cubit) => cubit.state.propertyTypeList
-                  .map((e) => {'value': e.id, 'label': e.propertyType})
-                  .toList()),
+          values: context
+              .read<ListingsCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
       MultiSelectAutoCompleteField(
@@ -343,7 +351,7 @@ class _ListingsTabState extends State<ListingsTab> {
                   fontWeight: FontWeight.bold,
                 ),
               ],
-              filterFields: filterFields(context),
+              filterFields: filterFields,
               onFilterApplied: (filter) {
                 context.read<ListingsCubit>().setListingsFilters(filter);
               },
@@ -468,7 +476,8 @@ class PocketListingsTab extends StatefulWidget {
 }
 
 class _PocketListingsTabState extends State<PocketListingsTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       WrapSelectField(
           name: 'timeFilter',
@@ -534,10 +543,12 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
       WrapSelectField(
           name: 'property_type_id',
           label: 'Property Type',
-          values: context.select<ListingsCubit, List<Map<String, dynamic>>>(
-              (cubit) => cubit.state.propertyTypeList
-                  .map((e) => {'value': e.id, 'label': e.propertyType})
-                  .toList()),
+          values: context
+              .read<ListingsCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
       WrapSelectField(
@@ -587,7 +598,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                   fontWeight: FontWeight.bold,
                 ),
               ],
-              filterFields: filterFields(context),
+              filterFields: filterFields,
               onFilterApplied: (filter) {
                 context.read<ListingsCubit>().setPocketListingFilters(filter);
               },

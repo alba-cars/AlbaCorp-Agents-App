@@ -543,15 +543,42 @@ class ExplorerData implements ExplorerRepo {
       String url = 'v1/property-cards/checkout-random-leads';
       Map<String, dynamic>? filterRemoved;
       if (values != null) {
-        filterRemoved =
-            (Map.from(values)..removeWhere((key, value) => value == null));
+        filterRemoved = Map.from(values)
+          ..removeWhere((key, value) => value == null);
 
         filterRemoved = filterRemoved.map((key, value) {
           if (value is Map) {
-            return MapEntry(key, value['value']);
-          } else if (value is List<Map>) {
-            return MapEntry(key, value.map((e) => e['value']).toList());
+            // Check if the value in the Map is a List and flatten it
+            final flattenedValue = (value['value'] is List)
+                ? (value['value'] as List)
+                    .expand((element) => element is List ? element : [element])
+                    .toList()
+                : value['value'];
+            return MapEntry(key, flattenedValue);
+          } else if (value is List) {
+            // Flatten the List, regardless of whether it contains Maps or other lists
+            final flattenedList = value.expand((element) {
+              if (element is Map && element['value'] != null) {
+                // Check if the value in the Map is a list and flatten it
+                return element['value'] is List
+                    ? (element['value'] as List)
+                        .expand((innerElement) => innerElement is List
+                            ? innerElement
+                            : [innerElement])
+                        .toList()
+                    : [element['value']];
+              } else if (element is List) {
+                // Flatten any nested lists
+                return element;
+              } else {
+                // Return non-list elements as is
+                return [element];
+              }
+            }).toList();
+
+            return MapEntry(key, flattenedList);
           } else {
+            // If it's a single value, return it as is
             return MapEntry(key, value);
           }
         });

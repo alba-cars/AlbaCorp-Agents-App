@@ -163,7 +163,8 @@ class ExplorerTab extends StatefulWidget {
 class _ExplorerTabState extends State<ExplorerTab> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey();
 
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
@@ -181,9 +182,19 @@ class _ExplorerTabState extends State<ExplorerTab> {
       MultiSelectAutoCompleteField(
           label: 'Building',
           optionsBuilder: (v) async {
+            // final list = await context.read<ExplorerScreenCubit>().getBuildings(
+            //     search: v.text,
+            //     community: values?['communities']?.map((e) => e['value']));
+            // return list.map((e) => {'value': e.id, 'label': e.name});
+
+            final List<String>? communities = (values?['communities'] as List?)
+                ?.map((e) => e['value'])
+                .expand<String>(
+                    (element) => element is List<String> ? element : [element])
+                .toList();
             final list = await context
                 .read<ExplorerScreenCubit>()
-                .getBuildings(search: v.text);
+                .getBuildings(search: v.text, community: communities);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -201,11 +212,12 @@ class _ExplorerTabState extends State<ExplorerTab> {
       WrapSelectField(
           name: 'propertyType',
           label: 'Property Type',
-          values:
-              context.select<ExplorerScreenCubit, List<Map<String, dynamic>>>(
-                  (cubit) => cubit.state.propertyTypeList
-                      .map((e) => {'value': e.id, 'label': e.propertyType})
-                      .toList()),
+          values: context
+              .read<ExplorerScreenCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
       WrapSelectField(
@@ -276,7 +288,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                   )),
                 ],
-                filterFields: filterFields(context),
+                filterFields: filterFields,
                 filter: explorerFilter,
                 onFilterApplied: (filter) {
                   context.read<ExplorerScreenCubit>().setExplorerFilter(filter);
@@ -487,7 +499,8 @@ class CheckedOutPoolTab extends StatefulWidget {
 }
 
 class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
@@ -568,7 +581,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
             onChanged: (val) {
               context.read<ExplorerScreenCubit>().searchCheckedOut(val);
             },
-            filterFields: filterFields(context),
+            filterFields: filterFields,
             filter: context.select(
                 (ExplorerScreenCubit value) => value.state.checkedOutFilter),
             onFilterApplied: (filter) {

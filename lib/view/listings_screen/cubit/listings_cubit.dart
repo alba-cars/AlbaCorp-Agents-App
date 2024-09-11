@@ -215,9 +215,11 @@ class ListingsCubit extends Cubit<ListingsState> {
     }
   }
 
-  Future<List<Building>> getBuildings({String? search}) async {
+  Future<List<Building>> getBuildings(
+      {String? search, List<String>? community}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    final result = await _listingsRepo.getBuildingNames(search: search);
+    final result = await _listingsRepo.getBuildingNames(
+        search: search, communityId: community);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

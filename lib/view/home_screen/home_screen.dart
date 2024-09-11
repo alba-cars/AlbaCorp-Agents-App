@@ -264,7 +264,7 @@ class SortedView extends StatelessWidget {
             onChanged: (val) {
               context.read<HomeCubit>().searchLeads(val);
             },
-            filterFields: filterFields(context),
+            filterFields: filterFields,
             onFilterApplied: (filter) {
               context.read<HomeCubit>().setActivityFilters(filter);
             },
@@ -333,7 +333,7 @@ class SortedView extends StatelessWidget {
   }
 }
 
-List<Widget> filterFields(BuildContext context) {
+List<Widget> filterFields(BuildContext context, Map<String, dynamic>? values) {
   return [
     MultiSelectAutoCompleteField(
         label: 'Community',

@@ -160,7 +160,8 @@ class DealsTab extends StatefulWidget {
 }
 
 class _DealsTabState extends State<DealsTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       WrapSelectField(
           name: 'category',
@@ -220,7 +221,7 @@ class _DealsTabState extends State<DealsTab> {
                 onChanged: (val) {
                   context.read<DealsCubit>().searchDeals(val);
                 },
-                filterFields: filterFields(context),
+                filterFields: filterFields,
                 onFilterApplied: (filter) {
                   context.read<DealsCubit>().setDealsFilter(filter);
                 },
@@ -325,7 +326,8 @@ class _ListingsTabState extends State<ListingsTab> {
     super.initState();
   }
 
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       DropDownfield(
           name: 'status',
@@ -377,7 +379,7 @@ class _ListingsTabState extends State<ListingsTab> {
                 onChanged: (val) {
                   context.read<DealsCubit>().searchYourListings(val);
                 },
-                filterFields: filterFields(context),
+                filterFields: filterFields,
                 onFilterApplied: (filter) {
                   context.read<DealsCubit>().setYourListingsFilter(filter);
                 },

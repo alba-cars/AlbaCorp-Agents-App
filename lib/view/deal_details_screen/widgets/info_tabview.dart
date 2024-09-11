@@ -326,12 +326,22 @@ class InfoTabView extends StatelessWidget {
                                 color: Colors.grey[100],
                                 borderRadius: BorderRadius.circular(4)),
                             child: S3Image(
-                              url: deal!.propertyList!.image,
+                              url: (deal!.propertyList?.image != null ||
+                                      deal.propertyList?.image?.isEmpty == true)
+                                  ? deal.propertyList?.image
+                                  : (deal.propertyList?.images?.isNotEmpty ==
+                                          true)
+                                      ? deal.propertyList?.images!.first
+                                              is String
+                                          ? deal.propertyList?.images!.first
+                                          : deal.propertyList?.images!
+                                              .first['thumbnail']
+                                      : null,
                               fit: BoxFit.contain,
                             )),
                         VerticalSmallGap(),
                         BlockTitleText(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: Theme.of(context).colorScheme.primary,
                           text: deal.propertyList!.propertyTitle,
                         ),
                         VerticalSmallGap(),

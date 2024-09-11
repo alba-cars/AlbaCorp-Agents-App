@@ -11,7 +11,7 @@ class DealListingResponse with _$DealListingResponse {
     required String propertyType,
     required String beds,
     required String baths,
-    required int size,
+    required int? size,
     Community? community,
     required double agreedSalesPrice,
     @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
@@ -22,5 +22,5 @@ class DealListingResponse with _$DealListingResponse {
       _$DealListingResponseFromJson(json);
 }
 
-double _stringToDouble(String number) => double.parse(number);
+double _stringToDouble(String number) => double.tryParse(number) ?? 0;
 String _stringFromDouble(double number) => number.toString();

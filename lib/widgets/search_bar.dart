@@ -16,6 +16,9 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../util/color_category.dart';
 import '../util/constant.dart';
 
+typedef WidgetsReturn = List<Widget> Function(
+    BuildContext context, Map<String, dynamic>? values);
+
 class AppSearchBar extends StatefulWidget {
   const AppSearchBar(
       {super.key,
@@ -29,7 +32,7 @@ class AppSearchBar extends StatefulWidget {
       this.leadWidgets,
       this.customFilterButtonWidget});
   final void Function(String? val) onChanged;
-  final List<Widget>? filterFields;
+  final WidgetsReturn? filterFields;
   final void Function(Map<String, dynamic>? filter)? onFilterApplied;
   final VoidCallback? onResetFilter;
   final Map<String, dynamic>? filter;
@@ -46,6 +49,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
   late final FocusNode _focusNode = FocusNode();
   late final TextEditingController _controller = TextEditingController();
   late final GlobalKey<FormBuilderState> _formKey = GlobalKey();
+  final ValueNotifier<Map<String, dynamic>> valueNotifier = ValueNotifier({});
 
   Map<String, dynamic>? filter;
   List<Map<String, dynamic>> arrFilter = [];
@@ -285,7 +289,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
     );
   }
 
-  Future<dynamic> showFilterBottonSheet(BuildContext context) {
+  Future<dynamic> showFilterBottonSheet(BuildContext pcontext) {
     return showModalBottomSheet(
         context: context,
         showDragHandle: true,
@@ -307,6 +311,12 @@ class _AppSearchBarState extends State<AppSearchBar> {
                       child: FormBuilder(
                           key: _formKey,
                           initialValue: filter ?? {},
+                          onChanged: () {
+                            final val = _formKey.currentState?.instantValue;
+                            if (val != valueNotifier.value) {
+                              valueNotifier.value = val ?? {};
+                            }
+                          },
                           child: Column(
                             children: [
                               VerticalSmallGap(),
@@ -323,10 +333,15 @@ class _AppSearchBarState extends State<AppSearchBar> {
                                         horizontal: 20),
                                     child: SingleChildScrollView(
                                       controller: scrollController,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: widget.filterFields!,
-                                      ),
+                                      child: ValueListenableBuilder(
+                                          valueListenable: valueNotifier,
+                                          builder: (context, values, _) {
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: widget.filterFields!(
+                                                  pcontext, values),
+                                            );
+                                          }),
                                     ),
                                   ),
                                 )),

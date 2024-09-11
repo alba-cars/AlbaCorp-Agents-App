@@ -53,7 +53,8 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
     super.initState();
   }
 
-  List<Widget> filterFields() {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       WrapSelectField(
         name: 'active',
@@ -204,7 +205,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                   onChanged: (val) {
                     context.read<LeadsCubit>().searchLeads(val);
                   },
-                  filterFields: filterFields(),
+                  filterFields: filterFields,
                   onFilterApplied: (filter) {
                     context.read<LeadsCubit>().setLeadFilters(filter);
                   },

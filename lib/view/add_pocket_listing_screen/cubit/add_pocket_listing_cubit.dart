@@ -136,17 +136,10 @@ class AddPocketListingCubit extends Cubit<AddPocketListingState> {
 
   Future<List<Building>> getBuildings(
       {String? search, String? communityId}) async {
-    if (state.buildingList.isNotEmpty) {
-      return state.buildingList
-          .where((element) =>
-              communityId != null || communityId?.isNotEmpty == true
-                  ? element.communityId == communityId
-                  : true)
-          .toList();
-    }
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getBuildingNames(
-        search: search, communityId: communityId);
+        search: search,
+        communityId: communityId != null ? [communityId] : null);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
