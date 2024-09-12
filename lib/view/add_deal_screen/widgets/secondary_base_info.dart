@@ -66,7 +66,7 @@ class _SecondaryBasicInfoTabState extends State<SecondaryBasicInfoTab> {
                     children: [
                       sellerSource == ClientSource.alba
                           ? SellerSourceAlbaFields()
-                          : SellerSourceExternalFields(),
+                          : SellerSourceExternalFields(valueNotifier),
                       BlocSelector<AddDealCubit, AddDealState, ClientSource?>(
                         selector: (state) {
                           return state.buyerSource;
@@ -257,7 +257,8 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
 }
 
 class SellerSourceExternalFields extends StatelessWidget {
-  const SellerSourceExternalFields({super.key});
+  final ValueNotifier<Map<String, dynamic>> value;
+  const SellerSourceExternalFields(this.value, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -305,7 +306,13 @@ class SellerSourceExternalFields extends StatelessWidget {
           name: 'sellerExternalClientPhone',
           label: 'Client Phone Number',
         ),
-        SecondaryExternalPropertyDetails(),
+        ValueListenableBuilder(
+            valueListenable: value,
+            builder: (context, value, _) {
+              return SecondaryExternalPropertyDetails(
+                values: value,
+              );
+            }),
       ],
     );
   }

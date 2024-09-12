@@ -387,16 +387,12 @@ class AddDealCubit extends Cubit<AddDealState> {
     }
   }
 
-  Future<List<Building>> getBuildings({String? search}) async {
-    if (state.buildingList.isNotEmpty && search != null) {
-      return state.buildingList
-          .where((element) =>
-              element.name.toLowerCase().contains(search.toLowerCase()))
-          .toList();
-    }
+  Future<List<Building>> getBuildings(
+      {String? search, required List<String>? communities}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
 
-    final result = await _listingsRepo.getBuildingNames(search: search);
+    final result = await _listingsRepo.getBuildingNames(
+        search: search, communityId: communities);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as cs;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -124,7 +124,7 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                   ],
                 ),
                 SliverToBoxAdapter(
-                    child: CarouselSlider.builder(
+                    child: cs.CarouselSlider.builder(
                         itemCount: listing.images?.length ?? 0,
                         itemBuilder: (context, index, _) {
                           if (listing.images == null ||
@@ -147,7 +147,7 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                               },
                               child: S3Image(url: image));
                         },
-                        options: CarouselOptions(
+                        options: cs.CarouselOptions(
                             height: 350, viewportFraction: 0.9))),
                 SliverVerticalSmallGap(),
                 SliverToBoxAdapter(
@@ -265,7 +265,9 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                                               .onPrimary),
                                       onPressed: () async {
                                         await launchWhatsApp(
-                                            context, listing.agent?.user.phone,text: getWhatsAppMessageText(listing));
+                                            context, listing.agent?.user.phone,
+                                            text: getWhatsAppMessageText(
+                                                listing));
                                       },
                                       icon: ImageIcon(AssetImage(
                                           'assets/images/whatsapp.png'))),

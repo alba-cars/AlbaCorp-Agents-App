@@ -151,7 +151,7 @@ class ListingsData implements ListingsRepo {
       {String? search, List<String>? communityId, Paginator? paginator}) async {
     try {
       String url = '/v1/buildings/filter';
-
+      Logger().d('dddddd');
       final response = await _dio.get(url, queryParameters: {
         if (paginator != null) 'page': paginator.currentPage + 1,
         'search': search,

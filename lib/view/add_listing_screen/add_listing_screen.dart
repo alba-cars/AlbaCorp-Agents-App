@@ -414,15 +414,15 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (p0) => p0.name,
                   optionsBuilder: (v) async {
-                    final list =
-                        await context.read<AddListingCubit>().getBuildings(
-                              search: v.text,
-                            );
-                    return list.where((element) =>
-                        (element.name
-                            .toLowerCase()
-                            .contains(v.text.toLowerCase())) &&
-                        (element.communityId == val['community_id']));
+                    Logger().d(val['community_id']);
+                    final list = await context
+                        .read<AddListingCubit>()
+                        .getBuildings(
+                            search: v.text,
+                            community: val['community_id'] != null
+                                ? [val['community_id']]
+                                : null);
+                    return list;
                   }),
               // BlocSelector<AddListingCubit, AddListingState, List<Amenity>>(
               //   selector: (state) {

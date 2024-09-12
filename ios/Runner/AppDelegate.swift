@@ -5,7 +5,7 @@ import awesome_notifications
 import awesome_notifications_fcm
 
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
     
     let callObserver = CallObserver();

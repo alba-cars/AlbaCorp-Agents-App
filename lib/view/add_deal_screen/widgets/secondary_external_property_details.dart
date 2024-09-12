@@ -14,7 +14,8 @@ import '../../../widgets/text.dart';
 import '../cubit/add_deal_cubit.dart';
 
 class SecondaryExternalPropertyDetails extends StatefulWidget {
-  const SecondaryExternalPropertyDetails({super.key});
+  final Map<String, dynamic> values;
+  const SecondaryExternalPropertyDetails({super.key, required this.values});
 
   @override
   State<SecondaryExternalPropertyDetails> createState() =>
@@ -99,11 +100,12 @@ class _SecondaryExternalPropertyDetailsState
               valueTransformer: (p0) => p0?.id,
               displayStringForOption: (p0) => p0.name,
               optionsBuilder: (v) async {
-                final list = await context
-                    .read<AddDealCubit>()
-                    .getBuildings(search: v.text);
-                return list.where((element) =>
-                    element.name.toLowerCase().contains(v.text.toLowerCase()));
+                final list = await context.read<AddDealCubit>().getBuildings(
+                    search: v.text,
+                    communities: widget.values["community_id"] != null
+                        ? [widget.values["community_id"]]
+                        : null);
+                return list;
               }),
         CurrencyField(
           isRequired: true,
