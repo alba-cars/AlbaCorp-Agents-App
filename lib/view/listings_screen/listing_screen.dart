@@ -175,16 +175,8 @@ class _ListingsTabState extends State<ListingsTab> {
       MultiSelectAutoCompleteField(
           label: 'Building',
           optionsBuilder: (v) async {
-            // await context.read<ListingsCubit>().getBuildings(search: v.text);
-            // final list = context.read<ListingsCubit>().state.buildingList.where(
-            //     (element) =>
-            //         element.name.toLowerCase().contains(v.text.toLowerCase()));
-            // return list.map((e) => {'value': e.id, 'label': e.name});
-
-            final List<String>? communities = (values?['communities'] as List?)
-                ?.map((e) => e['value'])
-                .expand<String>(
-                    (element) => element is List<String> ? element : [element])
+            final List<String>? communities = (values?['community'] as List?)
+                ?.map<String>((e) => (e['value'] ?? ''))
                 .toList();
             final list = await context
                 .read<ListingsCubit>()
