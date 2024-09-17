@@ -12,6 +12,7 @@ import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/activity_list.dart';
+import 'package:real_estate_app/view/lead_detail_screen/widgets/edit_client_dialog.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/lead_property_cards_list.dart';
 import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -60,6 +61,14 @@ class AboutTabView extends StatelessWidget {
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           LabelText(text: 'Client Info:'),
+                          IconButton(
+                              onPressed: () {
+                                showEditClientDialog(context);
+                              },
+                              icon: Icon(
+                                Icons.edit_note,
+                                color: Theme.of(context).colorScheme.primary,
+                              )),
                           Spacer(),
                           Container(
                             padding: EdgeInsets.symmetric(

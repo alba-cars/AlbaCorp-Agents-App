@@ -76,8 +76,16 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
 
   Future<bool> updateLead(Map<String, dynamic> value) async {
     emit(state.copyWith(updateLeadStatus: AppStatus.loading));
+
+    final Map<String, dynamic> values = {};
+    for (final val in value.entries) {
+      if (val.value?.toString().isEmpty == false) {
+        values.addEntries([val]);
+      }
+    }
+
     final result =
-        await _leadRepo.updateLead(leadId: state.leadId, value: value);
+        await _leadRepo.updateLead(leadId: state.leadId, value: values);
     switch (result) {
       case (Success s):
         emit(

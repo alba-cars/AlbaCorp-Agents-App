@@ -72,6 +72,18 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
         appBar: AppBar(
           title: Text('Feedback'),
           centerTitle: true,
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  getIt<AuthBloc>().add(AuthEvent.removeLastCallDetails());
+                  await Future.delayed(Durations.extralong1);
+                  context.goNamed(EnquiriesScreen.routeName);
+                },
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.white),
+                ))
+          ],
         ),
         body: BlocBuilder<CallFeedbackCubit, CallFeedbackState>(
           builder: (context, state) {

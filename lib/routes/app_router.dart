@@ -390,10 +390,13 @@ class AppRouter {
                 },
               ),
               GoRoute(
-                path: AddTaskScreen.routeName,
+                path: AddTaskScreen.routeName + '/:lead_id',
                 name: AddTaskScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: AddTaskScreen());
+                  return AppTransition(
+                      child: AddTaskScreen(
+                    leadId: state.pathParameters['lead_id'] ?? '',
+                  ));
                 },
               ),
               GoRoute(

@@ -96,318 +96,321 @@ class _HomeScreenState extends State<HomeScreen>
       resizeToAvoidBottomInset: false,
       drawer: Drawer(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, left: 12),
-                  child: Align(
-                    alignment: Alignment.centerRight,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0, left: 12),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                getgreetingIcon(),
+                                color: Colors.white,
+                              ),
+                              HorizontalSmallGap(),
+                              RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                  text: 'Hey,\n',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displaySmall
+                                      ?.copyWith(
+                                          fontSize: 12, color: Colors.white),
+                                ),
+                                TextSpan(
+                                  text: getGreeting(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                          fontSize: 16, color: Colors.white),
+                                )
+                              ])),
+                            ],
+                          ),
+                          Image.asset(
+                            'assets/images/logo-black.png',
+                            width: 100,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const VerticalSmallGap(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
-                              getgreetingIcon(),
-                              color: Colors.white,
-                            ),
-                            HorizontalSmallGap(),
-                            RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                text: 'Hey,\n',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displaySmall
-                                    ?.copyWith(
-                                        fontSize: 12, color: Colors.white),
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12)),
+                                image: isValidPhoto(user?.photo)
+                                    ? DecorationImage(
+                                        image: NetworkImage(user?.photo ?? ""))
+                                    : DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/person_placeholder.jpeg")),
                               ),
-                              TextSpan(
-                                text: getGreeting(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                        fontSize: 16, color: Colors.white),
-                              )
-                            ])),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                launchUrlString(
+                                    "https://alba.homes/agents/${user?.id}");
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      HeadingText(
+                                        text:
+                                            "${user?.firstName.pascalCase ?? ""} ${user?.lastName.pascalCase ?? ""}",
+                                        color: Colors.white,
+                                      ),
+                                      HorizontalSmallGap(),
+                                      Icon(
+                                        Icons.open_in_browser_outlined,
+                                        color: Colors.white,
+                                        size: 16,
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  LabelText(
+                                    text: "${user?.phone ?? "Not available"}",
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                        Image.asset(
-                          'assets/images/logo-black.png',
-                          width: 100,
-                          color: Theme.of(context).colorScheme.onPrimary,
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Share.share(
+                                    "Hey, \n Check my profile \n https://alba.homes/agents/${user?.id}");
+                              },
+                              child: Icon(
+                                Icons.share,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                            VerticalSmallGap(),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                ),
-                const VerticalSmallGap(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  VerticalSmallGap(),
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12)),
-                              image: isValidPhoto(user?.photo)
-                                  ? DecorationImage(
-                                      image: NetworkImage(user?.photo ?? ""))
-                                  : DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/person_placeholder.jpeg")),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              launchUrlString(
-                                  "https://alba.homes/agents/${user?.id}");
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    HeadingText(
-                                      text:
-                                          "${user?.firstName.pascalCase ?? ""} ${user?.lastName.pascalCase ?? ""}",
-                                      color: Colors.white,
-                                    ),
-                                    HorizontalSmallGap(),
-                                    Icon(
-                                      Icons.open_in_browser_outlined,
-                                      color: Colors.white,
-                                      size: 16,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                LabelText(
-                                  text: "${user?.phone ?? "Not available"}",
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Share.share(
-                                  "Hey, \n Check my profile \n https://alba.homes/agents/${user?.id}");
-                            },
-                            child: Icon(
-                              Icons.share,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ),
-                          VerticalSmallGap(),
-                        ],
+                      HeadingText(
+                        text: "Quick Access",
+                        color: Colors.white,
                       ),
                     ],
                   ),
-                ),
-                VerticalSmallGap(),
-                Row(
-                  children: [
-                    HeadingText(
-                      text: "Quick Access",
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                SizedBox(
-                  height: 80,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    separatorBuilder: (_, __) => SizedBox(
-                      width: 8,
-                    ),
-                    itemCount: QuickAccessEnumList.values.length,
-                    itemBuilder: (_, pos) => QuickAccessButton(
-                        text: QuickAccessEnumList.values[pos].getName(),
-                        iconData: QuickAccessEnumList.values[pos].getIcon(),
-                        action: () {
-                          QuickAccessEnumList.values[pos].performAction();
-                        }),
+                  SizedBox(
+                    height: 6,
                   ),
-                ), // if (user != null)
-
-                const VerticalSmallGap(),
-                KpisLayoutWidget(),
-                const VerticalSmallGap(),
-                Builder(builder: (context) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomListTileWithIcon(
-                        title: 'Explorer',
-                        iconImagePath: 'assets/images/compass.png',
-                        initiallyExpanded: true,
-                        children: [
-                          ListIcon(
-                            title: 'Property Cards',
-                            onPressed: () {
-                              Scaffold.of(context).closeDrawer();
-                              context.pushNamed(ExplorerScreen.routeName);
-                            },
-                          ),
-                          ListIcon(
-                            title: 'Leads',
-                            onPressed: () {
-                              Scaffold.of(context).closeDrawer();
-                              context.pushNamed(LeadsExplorerScreen.routeName);
-                            },
-                          ),
-                          ListIcon(
-                            title: 'Assigned Property Cards',
-                            onPressed: () {
-                              Scaffold.of(context).closeDrawer();
-                              context.pushNamed(ExplorerScreen.routeName,
-                                  queryParameters: {'tab': '1'});
-                            },
-                          )
-                        ],
+                  SizedBox(
+                    height: 80,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (_, __) => SizedBox(
+                        width: 8,
                       ),
-                      CustomListTileWithIcon(
-                          title: 'Add New',
-                          iconImagePath: 'assets/images/plus.png',
+                      itemCount: QuickAccessEnumList.values.length,
+                      itemBuilder: (_, pos) => QuickAccessButton(
+                          text: QuickAccessEnumList.values[pos].getName(),
+                          iconData: QuickAccessEnumList.values[pos].getIcon(),
+                          action: () {
+                            QuickAccessEnumList.values[pos].performAction();
+                          }),
+                    ),
+                  ), // if (user != null)
+
+                  const VerticalSmallGap(),
+                  KpisLayoutWidget(),
+                  const VerticalSmallGap(),
+                  Builder(builder: (context) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomListTileWithIcon(
+                          title: 'Explorer',
+                          iconImagePath: 'assets/images/compass.png',
+                          initiallyExpanded: true,
                           children: [
                             ListIcon(
-                              title: 'Add Leads',
+                              title: 'Property Cards',
                               onPressed: () {
                                 Scaffold.of(context).closeDrawer();
-                                context.pushNamed(AddLeadScreen.routeName);
+                                context.pushNamed(ExplorerScreen.routeName);
                               },
                             ),
                             ListIcon(
-                              title: 'Add Deal',
+                              title: 'Leads',
                               onPressed: () {
                                 Scaffold.of(context).closeDrawer();
-                                context.pushNamed(AddDealScreen.routeName);
+                                context
+                                    .pushNamed(LeadsExplorerScreen.routeName);
                               },
                             ),
                             ListIcon(
-                              title: 'Add Listing Acquired',
+                              title: 'Assigned Property Cards',
                               onPressed: () {
                                 Scaffold.of(context).closeDrawer();
-                                context.pushNamed(AddListingScreen.routeName);
+                                context.pushNamed(ExplorerScreen.routeName,
+                                    queryParameters: {'tab': '1'});
                               },
-                            ),
-                            ListIcon(
-                              title: 'Add Pocket Listing',
-                              onPressed: () {
-                                Scaffold.of(context).closeDrawer();
-                                context.pushNamed(
-                                    AddPocketListingScreen.routeName);
-                              },
-                            ),
-                          ]),
-                      CustomListTileWithIcon(
-                        title: 'My Leads',
-                        iconImagePath: 'assets/images/leads.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(LeadsScreen.routeName);
-                        },
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Deals',
-                        iconImagePath: 'assets/images/deal.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.goNamed(DealsScreen.routeName);
-                        },
-                      ),
+                            )
+                          ],
+                        ),
+                        CustomListTileWithIcon(
+                            title: 'Add New',
+                            iconImagePath: 'assets/images/plus.png',
+                            children: [
+                              ListIcon(
+                                title: 'Add Leads',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(AddLeadScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Add Deal',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(AddDealScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Add Listing Acquired',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(AddListingScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Add Pocket Listing',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(
+                                      AddPocketListingScreen.routeName);
+                                },
+                              ),
+                            ]),
+                        CustomListTileWithIcon(
+                          title: 'My Leads',
+                          iconImagePath: 'assets/images/leads.png',
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                            context.pushNamed(LeadsScreen.routeName);
+                          },
+                        ),
+                        CustomListTileWithIcon(
+                          title: 'Deals',
+                          iconImagePath: 'assets/images/deal.png',
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                            context.goNamed(DealsScreen.routeName);
+                          },
+                        ),
 
-                      // CustomListTileWithIcon(
-                      //   title: 'Tickets',
-                      //   iconImagePath: 'assets/images/ticket.png',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).closeDrawer();
-                      //     context.pushNamed(TicketsScreen.routeName);
-                      //   },
-                      // ),
-                      VerticalSmallGap(
-                        adjustment: 4,
-                      ),
-                      // CustomListTileWithIcon(
-                      //   title: 'Settings',
-                      //   iconImagePath: 'assets/images/settings.png',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).closeDrawer();
-                      //     // context.pushNamed('settings');
-                      //   },
-                      // ),
-                      CustomListTileWithIcon(
-                        title: 'Logout',
-                        iconImagePath: 'assets/images/logout_icon.png',
-                        onPressed: () async {
-                          final confirm = await showDialog<bool>(
-                              context: context,
-                              builder: (context) => const ConfirmLogOut());
-                          if (confirm == true && mounted) {
-                            getIt<AuthBloc>()
-                                .add(const AuthEvent.userLoggedOut());
-                            context.pop();
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      FutureBuilder(
-                          future: AppConfigHelper().getAppInfo(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError || !snapshot.hasData) {
-                              return SizedBox();
+                        // CustomListTileWithIcon(
+                        //   title: 'Tickets',
+                        //   iconImagePath: 'assets/images/ticket.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     context.pushNamed(TicketsScreen.routeName);
+                        //   },
+                        // ),
+                        VerticalSmallGap(
+                          adjustment: 4,
+                        ),
+                        // CustomListTileWithIcon(
+                        //   title: 'Settings',
+                        //   iconImagePath: 'assets/images/settings.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     // context.pushNamed('settings');
+                        //   },
+                        // ),
+                        CustomListTileWithIcon(
+                          title: 'Logout',
+                          iconImagePath: 'assets/images/logout_icon.png',
+                          onPressed: () async {
+                            final confirm = await showDialog<bool>(
+                                context: context,
+                                builder: (context) => const ConfirmLogOut());
+                            if (confirm == true && mounted) {
+                              getIt<AuthBloc>()
+                                  .add(const AuthEvent.userLoggedOut());
+                              context.pop();
                             }
-                            return Column(
-                              children: [
-                                LabelText(
-                                  text:
-                                      "Version: ${snapshot.data?.currentVersion ?? "1.0.0"}",
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                SmallText(
-                                  text: "Crafted with ❤︎ from Alba corp",
-                                  color: Colors.white,
-                                )
-                              ],
-                            );
-                          }),
-                    ],
-                  );
-                }),
-              ],
+                          },
+                        ),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        FutureBuilder(
+                            future: AppConfigHelper().getAppInfo(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError || !snapshot.hasData) {
+                                return SizedBox();
+                              }
+                              return Column(
+                                children: [
+                                  LabelText(
+                                    text:
+                                        "Version: ${snapshot.data?.currentVersion ?? "1.0.0"}",
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  SmallText(
+                                    text: "Crafted with ❤︎ from Alba corp",
+                                    color: Colors.white,
+                                  )
+                                ],
+                              );
+                            }),
+                      ],
+                    );
+                  }),
+                ],
+              ),
             ),
           ),
         ),
