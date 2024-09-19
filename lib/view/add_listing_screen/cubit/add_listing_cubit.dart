@@ -129,7 +129,6 @@ class AddListingCubit extends Cubit<AddListingState> {
 
   Future<void> addListingDocuments(
       {required Map<String, dynamic> values}) async {
-    Logger().d(values);
     emit(state.copyWith(addListingDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
         userId: state.dealResponse!.client!.id,
@@ -137,6 +136,7 @@ class AddListingCubit extends Cubit<AddListingState> {
         values: values);
     switch (result) {
       case (Success s):
+       await _dealsRepo.updateDealProgress(dealId: state.dealResponse!.id,);
         emit(state.copyWith(addListingDocumentsStatus: AppStatus.success));
 
         break;

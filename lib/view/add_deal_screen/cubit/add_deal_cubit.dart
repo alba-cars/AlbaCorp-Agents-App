@@ -174,6 +174,7 @@ class AddDealCubit extends Cubit<AddDealState> {
         values: values);
     switch (result) {
       case (Success s):
+      await _dealsRepo.updateDealProgress(dealId: state.dealResponse!.id,);
         emit(state.copyWith(addDealDocumentsStatus: AppStatus.success));
 
         break;

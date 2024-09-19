@@ -322,4 +322,21 @@ class DealData implements DealsRepo {
       return onError(e, stack, log);
     }
   }
+  
+  @override
+  Future<Result<String>> updateDealProgress({required String dealId}) async{
+    try {
+      String url = 'v1/deals/progress/$dealId';
+
+      final response = await _dio.post(
+        url,
+      );
+      final data =response.data['status'] ;
+      return Success(
+        data,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
 }

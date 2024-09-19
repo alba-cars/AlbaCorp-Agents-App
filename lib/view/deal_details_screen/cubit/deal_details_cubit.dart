@@ -296,4 +296,15 @@ class DealDetailsCubit extends Cubit<DealDetailsState> {
         ));
     }
   }
+  Future<void> updateDealProgress() async {
+    emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
+    final result = await _dealRepo.updateDealProgress(dealId: state.dealId);
+    switch (result) {
+      case (Success s):
+        getDeal();
+        break;
+      case (Error e):
+        
+    }
+  }
 }
