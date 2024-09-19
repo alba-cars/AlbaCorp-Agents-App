@@ -42,6 +42,7 @@ mixin _$ListingsState {
   AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
   AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
+  Paginator? get buildingsPaginator => throw _privateConstructorUsedError;
   List<Agent> get agentList => throw _privateConstructorUsedError;
   AppStatus get getAgentListStatus => throw _privateConstructorUsedError;
   List<Amenity> get amenityList => throw _privateConstructorUsedError;
@@ -88,6 +89,7 @@ abstract class $ListingsStateCopyWith<$Res> {
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
       List<Agent> agentList,
       AppStatus getAgentListStatus,
       List<Amenity> amenityList,
@@ -99,6 +101,7 @@ abstract class $ListingsStateCopyWith<$Res> {
   $PaginatorCopyWith<$Res>? get myListingsPaginator;
   $PaginatorCopyWith<$Res>? get pocketListingsPaginator;
   $PaginatorCopyWith<$Res>? get myPocketListingsPaginator;
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
 }
 
 /// @nodoc
@@ -139,6 +142,7 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
     Object? agentList = null,
     Object? getAgentListStatus = null,
     Object? amenityList = null,
@@ -247,6 +251,10 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _value.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       agentList: null == agentList
           ? _value.agentList
           : agentList // ignore: cast_nullable_to_non_nullable
@@ -321,6 +329,18 @@ class _$ListingsStateCopyWithImpl<$Res, $Val extends ListingsState>
       return _then(_value.copyWith(myPocketListingsPaginator: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get buildingsPaginator {
+    if (_value.buildingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.buildingsPaginator!, (value) {
+      return _then(_value.copyWith(buildingsPaginator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -357,6 +377,7 @@ abstract class _$$ListingsStateImplCopyWith<$Res>
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
       List<Agent> agentList,
       AppStatus getAgentListStatus,
       List<Amenity> amenityList,
@@ -372,6 +393,8 @@ abstract class _$$ListingsStateImplCopyWith<$Res>
   $PaginatorCopyWith<$Res>? get pocketListingsPaginator;
   @override
   $PaginatorCopyWith<$Res>? get myPocketListingsPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
 }
 
 /// @nodoc
@@ -410,6 +433,7 @@ class __$$ListingsStateImplCopyWithImpl<$Res>
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
     Object? agentList = null,
     Object? getAgentListStatus = null,
     Object? amenityList = null,
@@ -518,6 +542,10 @@ class __$$ListingsStateImplCopyWithImpl<$Res>
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _value.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       agentList: null == agentList
           ? _value._agentList
           : agentList // ignore: cast_nullable_to_non_nullable
@@ -575,6 +603,7 @@ class _$ListingsStateImpl implements _ListingsState {
       this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
       this.getBuildingListStatus = AppStatus.init,
+      this.buildingsPaginator,
       final List<Agent> agentList = const [],
       this.getAgentListStatus = AppStatus.init,
       final List<Amenity> amenityList = const [],
@@ -702,6 +731,8 @@ class _$ListingsStateImpl implements _ListingsState {
   @override
   @JsonKey()
   final AppStatus getBuildingListStatus;
+  @override
+  final Paginator? buildingsPaginator;
   final List<Agent> _agentList;
   @override
   @JsonKey()
@@ -749,7 +780,7 @@ class _$ListingsStateImpl implements _ListingsState {
 
   @override
   String toString() {
-    return 'ListingsState(listings: $listings, getListingsStatus: $getListingsStatus, getListingsError: $getListingsError, listingsPaginator: $listingsPaginator, myListings: $myListings, getMyListingsStatus: $getMyListingsStatus, getMyListingsError: $getMyListingsError, myListingsPaginator: $myListingsPaginator, pocketListings: $pocketListings, getPocketListingsStatus: $getPocketListingsStatus, getPocketListingsError: $getPocketListingsError, pocketListingsPaginator: $pocketListingsPaginator, myPocketListings: $myPocketListings, getMyPocketListingsStatus: $getMyPocketListingsStatus, getMyPocketListingsError: $getMyPocketListingsError, myPocketListingsPaginator: $myPocketListingsPaginator, currentTab: $currentTab, listingsSearch: $listingsSearch, pocketListingsSearch: $pocketListingsSearch, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, agentList: $agentList, getAgentListStatus: $getAgentListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, listingsFilter: $listingsFilter, pocketListingsFilter: $pocketListingsFilter)';
+    return 'ListingsState(listings: $listings, getListingsStatus: $getListingsStatus, getListingsError: $getListingsError, listingsPaginator: $listingsPaginator, myListings: $myListings, getMyListingsStatus: $getMyListingsStatus, getMyListingsError: $getMyListingsError, myListingsPaginator: $myListingsPaginator, pocketListings: $pocketListings, getPocketListingsStatus: $getPocketListingsStatus, getPocketListingsError: $getPocketListingsError, pocketListingsPaginator: $pocketListingsPaginator, myPocketListings: $myPocketListings, getMyPocketListingsStatus: $getMyPocketListingsStatus, getMyPocketListingsError: $getMyPocketListingsError, myPocketListingsPaginator: $myPocketListingsPaginator, currentTab: $currentTab, listingsSearch: $listingsSearch, pocketListingsSearch: $pocketListingsSearch, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, agentList: $agentList, getAgentListStatus: $getAgentListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, listingsFilter: $listingsFilter, pocketListingsFilter: $pocketListingsFilter)';
   }
 
   @override
@@ -784,7 +815,8 @@ class _$ListingsStateImpl implements _ListingsState {
                 .equals(other._myPocketListings, _myPocketListings) &&
             (identical(other.getMyPocketListingsStatus, getMyPocketListingsStatus) ||
                 other.getMyPocketListingsStatus == getMyPocketListingsStatus) &&
-            (identical(other.getMyPocketListingsError, getMyPocketListingsError) ||
+            (identical(
+                    other.getMyPocketListingsError, getMyPocketListingsError) ||
                 other.getMyPocketListingsError == getMyPocketListingsError) &&
             (identical(other.myPocketListingsPaginator, myPocketListingsPaginator) ||
                 other.myPocketListingsPaginator == myPocketListingsPaginator) &&
@@ -806,10 +838,10 @@ class _$ListingsStateImpl implements _ListingsState {
                 .equals(other._buildingList, _buildingList) &&
             (identical(other.getBuildingListStatus, getBuildingListStatus) ||
                 other.getBuildingListStatus == getBuildingListStatus) &&
-            const DeepCollectionEquality()
-                .equals(other._agentList, _agentList) &&
-            (identical(other.getAgentListStatus, getAgentListStatus) ||
-                other.getAgentListStatus == getAgentListStatus) &&
+            (identical(other.buildingsPaginator, buildingsPaginator) ||
+                other.buildingsPaginator == buildingsPaginator) &&
+            const DeepCollectionEquality().equals(other._agentList, _agentList) &&
+            (identical(other.getAgentListStatus, getAgentListStatus) || other.getAgentListStatus == getAgentListStatus) &&
             const DeepCollectionEquality().equals(other._amenityList, _amenityList) &&
             (identical(other.getAmenityListStatus, getAmenityListStatus) || other.getAmenityListStatus == getAmenityListStatus) &&
             const DeepCollectionEquality().equals(other._listingsFilter, _listingsFilter) &&
@@ -844,6 +876,7 @@ class _$ListingsStateImpl implements _ListingsState {
         getCommunityListStatus,
         const DeepCollectionEquality().hash(_buildingList),
         getBuildingListStatus,
+        buildingsPaginator,
         const DeepCollectionEquality().hash(_agentList),
         getAgentListStatus,
         const DeepCollectionEquality().hash(_amenityList),
@@ -886,6 +919,7 @@ abstract class _ListingsState implements ListingsState {
       final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
       final AppStatus getBuildingListStatus,
+      final Paginator? buildingsPaginator,
       final List<Agent> agentList,
       final AppStatus getAgentListStatus,
       final List<Amenity> amenityList,
@@ -943,6 +977,8 @@ abstract class _ListingsState implements ListingsState {
   List<Building> get buildingList;
   @override
   AppStatus get getBuildingListStatus;
+  @override
+  Paginator? get buildingsPaginator;
   @override
   List<Agent> get agentList;
   @override

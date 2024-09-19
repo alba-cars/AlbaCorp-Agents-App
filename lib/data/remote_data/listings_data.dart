@@ -153,14 +153,17 @@ class ListingsData implements ListingsRepo {
       String url = '/v1/buildings/filter';
       Logger().d('dddddd');
       final response = await _dio.get(url, queryParameters: {
+        'limit':30,
         if (paginator != null) 'page': paginator.currentPage + 1,
         'search': search,
         'community': communityId
       });
       final data = response.data['results'] as List;
       final list = data.map((e) => Building.fromJson(e)).toList();
+      
       return Success(
         list,
+        paginator: Paginator(itemCount:response.data['found'] ,perPage:30,currentPage:(paginator?.currentPage ??0) + 1  )
       );
     } catch (e, stack) {
       return onError(e, stack, log);

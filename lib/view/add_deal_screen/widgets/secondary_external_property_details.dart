@@ -79,7 +79,7 @@ class _SecondaryExternalPropertyDetailsState
             isRequired: true,
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (p0) => p0.community,
-            optionsBuilder: (v) async {
+            optionsBuilder: (v,refresh) async {
               final list = await context
                   .read<AddDealCubit>()
                   .getCommunities(search: v.text);
@@ -99,7 +99,7 @@ class _SecondaryExternalPropertyDetailsState
               isRequired: true,
               valueTransformer: (p0) => p0?.id,
               displayStringForOption: (p0) => p0.name,
-              optionsBuilder: (v) async {
+              optionsBuilder: (v,refresh) async {
                 final list = await context.read<AddDealCubit>().getBuildings(
                     search: v.text,
                     communities: widget.values["community_id"] != null

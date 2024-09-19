@@ -48,6 +48,7 @@ mixin _$LeadsListExplorerState {
   AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
   AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
+  Paginator? get buildingsPaginator => throw _privateConstructorUsedError;
   bool get selectModeEnabled => throw _privateConstructorUsedError;
   List<LeadExplorerItem> get selectedPropertyCards =>
       throw _privateConstructorUsedError;
@@ -90,12 +91,14 @@ abstract class $LeadsListExplorerStateCopyWith<$Res> {
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
       bool selectModeEnabled,
       List<LeadExplorerItem> selectedPropertyCards,
       bool showOnlyAvailable});
 
   $PaginatorCopyWith<$Res>? get explorerPaginator;
   $PaginatorCopyWith<$Res>? get checkedOutPaginator;
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
 }
 
 /// @nodoc
@@ -137,6 +140,7 @@ class _$LeadsListExplorerStateCopyWithImpl<$Res,
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
     Object? selectModeEnabled = null,
     Object? selectedPropertyCards = null,
     Object? showOnlyAvailable = null,
@@ -242,6 +246,10 @@ class _$LeadsListExplorerStateCopyWithImpl<$Res,
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _value.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       selectModeEnabled: null == selectModeEnabled
           ? _value.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
@@ -278,6 +286,18 @@ class _$LeadsListExplorerStateCopyWithImpl<$Res,
 
     return $PaginatorCopyWith<$Res>(_value.checkedOutPaginator!, (value) {
       return _then(_value.copyWith(checkedOutPaginator: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get buildingsPaginator {
+    if (_value.buildingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.buildingsPaginator!, (value) {
+      return _then(_value.copyWith(buildingsPaginator: value) as $Val);
     });
   }
 }
@@ -317,6 +337,7 @@ abstract class _$$LeadsListExplorerStateImplCopyWith<$Res>
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
       bool selectModeEnabled,
       List<LeadExplorerItem> selectedPropertyCards,
       bool showOnlyAvailable});
@@ -325,6 +346,8 @@ abstract class _$$LeadsListExplorerStateImplCopyWith<$Res>
   $PaginatorCopyWith<$Res>? get explorerPaginator;
   @override
   $PaginatorCopyWith<$Res>? get checkedOutPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
 }
 
 /// @nodoc
@@ -365,6 +388,7 @@ class __$$LeadsListExplorerStateImplCopyWithImpl<$Res>
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
     Object? selectModeEnabled = null,
     Object? selectedPropertyCards = null,
     Object? showOnlyAvailable = null,
@@ -467,6 +491,10 @@ class __$$LeadsListExplorerStateImplCopyWithImpl<$Res>
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _value.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       selectModeEnabled: null == selectModeEnabled
           ? _value.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
@@ -512,6 +540,7 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
       this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
       this.getBuildingListStatus = AppStatus.init,
+      this.buildingsPaginator,
       this.selectModeEnabled = false,
       final List<LeadExplorerItem> selectedPropertyCards = const [],
       this.showOnlyAvailable = true})
@@ -637,6 +666,8 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
   @JsonKey()
   final AppStatus getBuildingListStatus;
   @override
+  final Paginator? buildingsPaginator;
+  @override
   @JsonKey()
   final bool selectModeEnabled;
   final List<LeadExplorerItem> _selectedPropertyCards;
@@ -655,7 +686,7 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
 
   @override
   String toString() {
-    return 'LeadsListExplorerState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
+    return 'LeadsListExplorerState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
   }
 
   @override
@@ -716,6 +747,7 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
             const DeepCollectionEquality()
                 .equals(other._buildingList, _buildingList) &&
             (identical(other.getBuildingListStatus, getBuildingListStatus) || other.getBuildingListStatus == getBuildingListStatus) &&
+            (identical(other.buildingsPaginator, buildingsPaginator) || other.buildingsPaginator == buildingsPaginator) &&
             (identical(other.selectModeEnabled, selectModeEnabled) || other.selectModeEnabled == selectModeEnabled) &&
             const DeepCollectionEquality().equals(other._selectedPropertyCards, _selectedPropertyCards) &&
             (identical(other.showOnlyAvailable, showOnlyAvailable) || other.showOnlyAvailable == showOnlyAvailable));
@@ -749,6 +781,7 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
         getCommunityListStatus,
         const DeepCollectionEquality().hash(_buildingList),
         getBuildingListStatus,
+        buildingsPaginator,
         selectModeEnabled,
         const DeepCollectionEquality().hash(_selectedPropertyCards),
         showOnlyAvailable
@@ -789,6 +822,7 @@ abstract class _LeadsListExplorerState implements LeadsListExplorerState {
       final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
       final AppStatus getBuildingListStatus,
+      final Paginator? buildingsPaginator,
       final bool selectModeEnabled,
       final List<LeadExplorerItem> selectedPropertyCards,
       final bool showOnlyAvailable}) = _$LeadsListExplorerStateImpl;
@@ -843,6 +877,8 @@ abstract class _LeadsListExplorerState implements LeadsListExplorerState {
   List<Building> get buildingList;
   @override
   AppStatus get getBuildingListStatus;
+  @override
+  Paginator? get buildingsPaginator;
   @override
   bool get selectModeEnabled;
   @override

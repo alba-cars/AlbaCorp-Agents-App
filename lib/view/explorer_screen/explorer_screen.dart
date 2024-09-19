@@ -1,15 +1,12 @@
-import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/explorer_screen/cubit/explorer_screen_cubit.dart';
@@ -17,8 +14,6 @@ import 'package:real_estate_app/view/explorer_screen/widgets/property_card_list_
 import 'package:real_estate_app/view/explorer_screen/widgets/select_community_widget.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:recase/recase.dart';
 
 import '../../model/agent_model.dart';
@@ -26,7 +21,6 @@ import '../../util/color_category.dart';
 import '../../util/status.dart';
 import '../../widgets/fields/multi_select_autocomplete_field.dart';
 import '../../widgets/fields/wrap_select_field.dart';
-import '../../widgets/s3_image.dart';
 import '../../widgets/search_bar.dart';
 import '../../widgets/space.dart';
 import '../../widgets/tab_bar.dart';
@@ -168,7 +162,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
@@ -181,7 +175,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
           name: 'communities'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             // final list = await context.read<ExplorerScreenCubit>().getBuildings(
             //     search: v.text,
             //     community: values?['communities']?.map((e) => e['value']));
@@ -194,7 +188,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 .toList();
             final list = await context
                 .read<ExplorerScreenCubit>()
-                .getBuildings(search: v.text, community: communities);
+                .getBuildings(search: v.text, community: communities,refresh: refresh);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -266,8 +260,8 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 leadWidgets: [
                   Expanded(
                     child: AppPrimaryButton(
-                      onTap: () {
-                        context.read<ExplorerScreenCubit>().randomCheckout(
+                      onTap: ()async {
+                      await context.read<ExplorerScreenCubit>().randomCheckout(
                             context: context, numberOfLeads: 50);
                       },
                       text: "50",
@@ -279,8 +273,8 @@ class _ExplorerTabState extends State<ExplorerTab> {
                   ),
                   Expanded(
                       child: AppPrimaryButton(
-                    onTap: () {
-                      context
+                    onTap: ()async {
+                   await   context
                           .read<ExplorerScreenCubit>()
                           .randomCheckout(context: context, numberOfLeads: 100);
                     },
@@ -504,7 +498,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
@@ -517,7 +511,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getBuildings(search: v.text);

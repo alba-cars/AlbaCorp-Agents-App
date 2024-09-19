@@ -138,7 +138,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final list = await context
                 .read<LeadsListExplorerCubit>()
                 .getCommunities(search: v.text);
@@ -151,7 +151,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
           name: 'communities'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final List<String>? communities = (values?['communities'] as List?)
                 ?.map((e) => e['value'])
                 .expand<String>(
@@ -159,7 +159,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 .toList();
             final list = await context
                 .read<LeadsListExplorerCubit>()
-                .getBuildings(search: v.text, community: communities);
+                .getBuildings(search: v.text, community: communities,refresh: refresh);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -234,8 +234,8 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 leadWidgets: [
                   Expanded(
                     child: AppPrimaryButton(
-                      onTap: () {
-                        context.read<LeadsListExplorerCubit>().randomCheckout(
+                      onTap: () async{
+                       await context.read<LeadsListExplorerCubit>().randomCheckout(
                             context: context, numberOfLeads: 50);
                       },
                       text: "50",
@@ -247,8 +247,8 @@ class _ExplorerTabState extends State<ExplorerTab> {
                   ),
                   Expanded(
                       child: AppPrimaryButton(
-                    onTap: () {
-                      context
+                    onTap: () async{
+                    await  context
                           .read<LeadsListExplorerCubit>()
                           .randomCheckout(context: context, numberOfLeads: 100);
                     },

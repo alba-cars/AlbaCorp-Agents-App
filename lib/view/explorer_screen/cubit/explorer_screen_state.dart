@@ -28,6 +28,7 @@ class ExplorerScreenState with _$ExplorerScreenState {
     @Default(AppStatus.init) AppStatus getCommunityListStatus,
     @Default([]) List<Building> buildingList,
     @Default(AppStatus.init) AppStatus getBuildingListStatus,
+    Paginator? buildingsPaginator,
     @Default(false) bool selectModeEnabled,
     @Default([]) List<String> selectedPropertyCards,
     @Default(true) bool showOnlyAvailable,

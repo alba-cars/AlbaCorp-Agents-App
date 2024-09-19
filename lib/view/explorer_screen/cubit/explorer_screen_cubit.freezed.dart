@@ -48,6 +48,7 @@ mixin _$ExplorerScreenState {
   AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
   AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
+  Paginator? get buildingsPaginator => throw _privateConstructorUsedError;
   bool get selectModeEnabled => throw _privateConstructorUsedError;
   List<String> get selectedPropertyCards => throw _privateConstructorUsedError;
   bool get showOnlyAvailable => throw _privateConstructorUsedError;
@@ -89,12 +90,14 @@ abstract class $ExplorerScreenStateCopyWith<$Res> {
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
       bool selectModeEnabled,
       List<String> selectedPropertyCards,
       bool showOnlyAvailable});
 
   $PaginatorCopyWith<$Res>? get explorerPaginator;
   $PaginatorCopyWith<$Res>? get checkedOutPaginator;
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
 }
 
 /// @nodoc
@@ -135,6 +138,7 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
     Object? selectModeEnabled = null,
     Object? selectedPropertyCards = null,
     Object? showOnlyAvailable = null,
@@ -240,6 +244,10 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _value.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       selectModeEnabled: null == selectModeEnabled
           ? _value.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
@@ -278,6 +286,18 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
       return _then(_value.copyWith(checkedOutPaginator: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get buildingsPaginator {
+    if (_value.buildingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.buildingsPaginator!, (value) {
+      return _then(_value.copyWith(buildingsPaginator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -314,6 +334,7 @@ abstract class _$$ExplorerScreenStateImplCopyWith<$Res>
       AppStatus getCommunityListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
       bool selectModeEnabled,
       List<String> selectedPropertyCards,
       bool showOnlyAvailable});
@@ -322,6 +343,8 @@ abstract class _$$ExplorerScreenStateImplCopyWith<$Res>
   $PaginatorCopyWith<$Res>? get explorerPaginator;
   @override
   $PaginatorCopyWith<$Res>? get checkedOutPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
 }
 
 /// @nodoc
@@ -360,6 +383,7 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
     Object? getCommunityListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
     Object? selectModeEnabled = null,
     Object? selectedPropertyCards = null,
     Object? showOnlyAvailable = null,
@@ -462,6 +486,10 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
           ? _value.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _value.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       selectModeEnabled: null == selectModeEnabled
           ? _value.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
@@ -507,6 +535,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
       this.getCommunityListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
       this.getBuildingListStatus = AppStatus.init,
+      this.buildingsPaginator,
       this.selectModeEnabled = false,
       final List<String> selectedPropertyCards = const [],
       this.showOnlyAvailable = true})
@@ -632,6 +661,8 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
   @JsonKey()
   final AppStatus getBuildingListStatus;
   @override
+  final Paginator? buildingsPaginator;
+  @override
   @JsonKey()
   final bool selectModeEnabled;
   final List<String> _selectedPropertyCards;
@@ -650,7 +681,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
 
   @override
   String toString() {
-    return 'ExplorerScreenState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
+    return 'ExplorerScreenState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
   }
 
   @override
@@ -711,6 +742,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
             const DeepCollectionEquality()
                 .equals(other._buildingList, _buildingList) &&
             (identical(other.getBuildingListStatus, getBuildingListStatus) || other.getBuildingListStatus == getBuildingListStatus) &&
+            (identical(other.buildingsPaginator, buildingsPaginator) || other.buildingsPaginator == buildingsPaginator) &&
             (identical(other.selectModeEnabled, selectModeEnabled) || other.selectModeEnabled == selectModeEnabled) &&
             const DeepCollectionEquality().equals(other._selectedPropertyCards, _selectedPropertyCards) &&
             (identical(other.showOnlyAvailable, showOnlyAvailable) || other.showOnlyAvailable == showOnlyAvailable));
@@ -744,6 +776,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
         getCommunityListStatus,
         const DeepCollectionEquality().hash(_buildingList),
         getBuildingListStatus,
+        buildingsPaginator,
         selectModeEnabled,
         const DeepCollectionEquality().hash(_selectedPropertyCards),
         showOnlyAvailable
@@ -784,6 +817,7 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
       final AppStatus getCommunityListStatus,
       final List<Building> buildingList,
       final AppStatus getBuildingListStatus,
+      final Paginator? buildingsPaginator,
       final bool selectModeEnabled,
       final List<String> selectedPropertyCards,
       final bool showOnlyAvailable}) = _$ExplorerScreenStateImpl;
@@ -838,6 +872,8 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
   List<Building> get buildingList;
   @override
   AppStatus get getBuildingListStatus;
+  @override
+  Paginator? get buildingsPaginator;
   @override
   bool get selectModeEnabled;
   @override

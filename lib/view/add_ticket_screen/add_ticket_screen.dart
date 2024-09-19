@@ -116,7 +116,7 @@ class _AddTicketScreenLayoutState extends State<_AddTicketScreenLayout> {
                                       .propertyTypeList;
                                   return "${option.referNo} | ${types.firstWhereOrNull((element) => element.id == option.propertyTypeId)?.propertyType ?? ''} | ${option.communityName}";
                                 },
-                                optionsBuilder: (v) async {
+                                optionsBuilder: (v,refresh) async {
                                   return properties.where(
                                       (e) => e.propertyTitle.contains(v.text));
                                 });
@@ -129,7 +129,7 @@ class _AddTicketScreenLayoutState extends State<_AddTicketScreenLayout> {
                             valueTransformer: (p0) => p0?.id,
                             displayStringForOption: (deal) =>
                                 "${deal.referenceNumber} | ${deal.propertyList?.communityName ?? deal.newListingRequest?.community?.community ?? ''} | AED ${deal.agreedSalePrice?.toInt()}",
-                            optionsBuilder: (v) async {
+                            optionsBuilder: (v,refresh) async {
                               return context
                                   .read<AddTicketCubit>()
                                   .getAgentDeals(v.text);
@@ -141,7 +141,7 @@ class _AddTicketScreenLayoutState extends State<_AddTicketScreenLayout> {
                             valueTransformer: (p0) => p0?.id,
                             displayStringForOption: (client) =>
                                 "${client.firstName} ${client.lastName}",
-                            optionsBuilder: (v) async {
+                            optionsBuilder: (v,refresh) async {
                               return context
                                   .read<AddTicketCubit>()
                                   .getAgentLeads(v.text);

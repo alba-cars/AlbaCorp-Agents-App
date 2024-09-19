@@ -37,7 +37,7 @@ class AppAutoComplete<T extends Object> extends StatefulWidget {
   final String? hint;
   final dynamic Function(T?)? valueTransformer;
   final bool isRequired;
-  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final FutureOr<Iterable<T>> Function(TextEditingValue,bool refresh) optionsBuilder;
   final String Function(T) _displayStringForOption;
   final AutoCompleteFieldController? controller;
   final Widget Function(GlobalKey<FormFieldState<T>> key)? actionButton;
@@ -162,7 +162,7 @@ class _AppAutoCompleteState<T extends Object>
                     ),
                   );
                 },
-                optionsViewBuilder: (context, onSelected, options, loading) {
+                optionsViewBuilder: (context, onSelected, options, loading,loadMore) {
                   return Align(
                     alignment: Alignment.topLeft,
                     child: Material(

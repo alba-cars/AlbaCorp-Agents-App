@@ -38,7 +38,8 @@ class MultiSelectAutoCompleteField<T extends Object> extends StatefulWidget {
   final Function(Map<String, List<dynamic>?> val)? onChanged;
   final bool isRequired;
   final dynamic Function(List<T>?)? valueTransformer;
-  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final FutureOr<Iterable<T>> Function(TextEditingValue, bool refresh)
+      optionsBuilder;
   final String Function(T) _displayStringForOption;
   final AutoCompleteFieldController? controller;
 
@@ -55,6 +56,8 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
   late final TextEditingController _controller = TextEditingController();
   late final FocusNode _focusNode = FocusNode();
   late final _fieldKey = GlobalKey<FormFieldState<String>>();
+  late final GlobalKey _listKey = GlobalKey();
+  late final ScrollController _scrollController = ScrollController();
   AnimationController? _animationController;
   Tween<double> animation = Tween(begin: 0, end: 1);
 
@@ -87,6 +90,7 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
   void dispose() {
     _animationController?.dispose();
     _focusNode.dispose();
+    _scrollController.dispose();
 
     _controller.dispose();
     super.dispose();
@@ -236,88 +240,30 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
                   ),
                 );
               },
-              optionsViewBuilder: (context, onSelected, _options, loading) {
+              optionsViewBuilder:
+                  (context, onSelected, _options, loading, loadMore) {
                 final filteredOptions = _options.whereNot(
                   (element1) =>
                       state.value?.any((element2) {
                         if (element1 is Map) {
-                          return (element1 as Map)['value'] ==
-                              (element2 as Map)['value'];
+                          return (element1 as Map)['label'] ==
+                              (element2 as Map)['label'];
                         }
                         return element1 == element2;
                       }) ==
                       true,
                 );
 
-                return Align(
-                  alignment: Alignment.topLeft,
-                  child: Material(
-                    elevation: 4.0,
-                    borderRadius: BorderRadius.circular(8),
-                    clipBehavior: Clip.hardEdge,
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxHeight: 200, maxWidth: constrains.maxWidth),
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: loading
-                            ? filteredOptions.length + 1
-                            : filteredOptions.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index == filteredOptions.length && loading) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Loading'),
-                                  HorizontalSmallGap(),
-                                  Center(
-                                    child: SizedBox.square(
-                                        dimension: 25,
-                                        child: CircularProgressIndicator()),
-                                  )
-                                ],
-                              ),
-                            );
-                          }
-                          if (filteredOptions.isEmpty && !loading) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('No Options'),
-                            );
-                          }
-                          final T option = filteredOptions.elementAt(index);
-                          return InkWell(
-                            onTap: () {
-                              onSelected(option);
-                            },
-                            child: Builder(builder: (BuildContext context) {
-                              final bool highlight =
-                                  AutocompleteHighlightedOption.of(context) ==
-                                      index;
-                              if (highlight) {
-                                SchedulerBinding.instance
-                                    .addPostFrameCallback((Duration timeStamp) {
-                                  Scrollable.ensureVisible(context,
-                                      alignment: 0.5);
-                                });
-                              }
-                              return Container(
-                                color: highlight
-                                    ? Theme.of(context).focusColor
-                                    : null,
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                    widget._displayStringForOption(option)),
-                              );
-                            }),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+                return OptionsListWidget(
+                  key: ValueKey("multi au"),
+                  scrollController: _scrollController,
+                  filteredOptions: filteredOptions,
+                  displayStringForOption: widget._displayStringForOption,
+                  onSelected: onSelected,
+                  loadMore: loadMore,
+                  loading: loading,
+                  constrains: constrains,
+                  listKey: _listKey,
                 );
               },
               onSelected: (v) {
@@ -332,7 +278,13 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
                 }
                 _focusNode.unfocus();
               },
-              optionsBuilder: widget.optionsBuilder,
+              optionsBuilder:(v,refresh){ 
+                if(refresh){
+                  if(_scrollController.hasClients){
+                  _scrollController.jumpTo(0);
+                  }
+                }
+                return widget.optionsBuilder(v,refresh);},
             );
           }),
           if (state.hasError == true)
@@ -349,6 +301,114 @@ class _MultiSelectAutoCompleteFieldState<T extends Object>
               height: 6,
             )
         ],
+      ),
+    );
+  }
+}
+
+class OptionsListWidget<T> extends StatefulWidget {
+  const OptionsListWidget({
+    super.key,
+    required ScrollController scrollController,
+    required this.filteredOptions,
+    required this.constrains,
+    required this.loadMore,
+    required this.loading,
+    required this.onSelected,
+    required this.displayStringForOption, required this.listKey,
+  }) : _scrollController = scrollController;
+
+  final ScrollController _scrollController;
+  final Iterable filteredOptions;
+  final BoxConstraints constrains;
+  final VoidCallback loadMore;
+  final bool loading;
+  final void Function(T) onSelected;
+  final String Function(T) displayStringForOption;
+  final GlobalKey listKey;
+
+  @override
+  State<OptionsListWidget<T>> createState() => _OptionsListWidgetState<T>();
+}
+
+class _OptionsListWidgetState<T> extends State<OptionsListWidget<T>> {
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      
+      alignment: Alignment.topLeft,
+      child: Material(
+        elevation: 4.0,
+        borderRadius: BorderRadius.circular(8),
+        clipBehavior: Clip.hardEdge,
+        child: ConstrainedBox(
+          constraints:
+              BoxConstraints(maxHeight: 200, maxWidth: widget.constrains.maxWidth),
+          child: NotificationListener<ScrollNotification>(
+            onNotification: (scrollInfo) {
+              bool isScrollEnd = scrollInfo.metrics.pixels >=
+                  0.9 * scrollInfo.metrics.maxScrollExtent;
+              if (isScrollEnd) {
+                widget.loadMore();
+              }
+              return true;
+            },
+            child: ListView.builder(
+              key: widget.listKey,
+              controller: widget._scrollController,
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              itemCount:
+                  widget.loading ? widget.filteredOptions.length + 1 : widget.filteredOptions.length,
+              itemBuilder: (BuildContext context, int index) {
+                if (index == widget.filteredOptions.length && widget.loading) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Loading'),
+                        HorizontalSmallGap(),
+                        Center(
+                          child: SizedBox.square(
+                              dimension: 25,
+                              child: CircularProgressIndicator()),
+                        )
+                      ],
+                    ),
+                  );
+                }
+                if (widget.filteredOptions.isEmpty && !widget.loading) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('No Options'),
+                  );
+                }
+                final T option = widget.filteredOptions.elementAt(index);
+                return InkWell(
+                  onTap: () {
+                    widget.onSelected(option);
+                  },
+                  child: Builder(builder: (BuildContext context) {
+                    final bool highlight =
+                        AutocompleteHighlightedOption.of(context) == index;
+                    if (highlight) {
+                      SchedulerBinding.instance
+                          .addPostFrameCallback((Duration timeStamp) {
+                        Scrollable.ensureVisible(context, alignment: 0.5);
+                      });
+                    }
+                    return Container(
+                      color: highlight ? Theme.of(context).focusColor : null,
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(widget.displayStringForOption(option)),
+                    );
+                  }),
+                );
+              },
+            ),
+          ),
+        ),
       ),
     );
   }

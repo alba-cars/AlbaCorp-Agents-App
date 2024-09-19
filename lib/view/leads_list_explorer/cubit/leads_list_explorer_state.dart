@@ -28,6 +28,7 @@ class LeadsListExplorerState with _$LeadsListExplorerState {
     @Default(AppStatus.init) AppStatus getCommunityListStatus,
     @Default([]) List<Building> buildingList,
     @Default(AppStatus.init) AppStatus getBuildingListStatus,
+    Paginator? buildingsPaginator,
     @Default(false) bool selectModeEnabled,
     @Default([]) List<LeadExplorerItem> selectedPropertyCards,
     @Default(true) bool showOnlyAvailable,

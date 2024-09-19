@@ -28,6 +28,7 @@ class ListingsState with _$ListingsState {
     @Default(AppStatus.init) AppStatus getCommunityListStatus,
     @Default([]) List<Building> buildingList,
     @Default(AppStatus.init) AppStatus getBuildingListStatus,
+    Paginator? buildingsPaginator,
     @Default([]) List<Agent> agentList,
     @Default(AppStatus.init) AppStatus getAgentListStatus,
     @Default([]) List<Amenity> amenityList,

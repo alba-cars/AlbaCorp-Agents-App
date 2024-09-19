@@ -72,6 +72,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
     if (widget.filter != null) {
       filter = Map.from(widget.filter!)
         ..removeWhere((key, value) => value == null);
+        valueNotifier.value =filter ??{};
       getFilter();
     } else {
       arrFilter = [];

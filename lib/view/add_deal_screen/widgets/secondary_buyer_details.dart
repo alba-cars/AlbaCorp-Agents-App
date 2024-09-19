@@ -81,7 +81,7 @@ class _SecondaryAlbaBuyerDetailsState extends State<SecondaryAlbaBuyerDetails> {
                               value['sellerAssignedAgent'] !=
                                   context.read<AuthBloc>().state.agent?.id,
                       valueTransformer: (p0) => p0?.id,
-                      optionsBuilder: (v) async {
+                      optionsBuilder: (v,refresh) async {
                         return context
                             .read<AddDealCubit>()
                             .getAgentsAutoComplete(v.text);
@@ -97,7 +97,7 @@ class _SecondaryAlbaBuyerDetailsState extends State<SecondaryAlbaBuyerDetails> {
                       valueTransformer: (p0) => p0?.id,
                       displayStringForOption: (lead) =>
                           '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
-                      optionsBuilder: (v) async {
+                      optionsBuilder: (v,refresh) async {
                         return context.read<AddDealCubit>().getLeads(
                             search: v.text,
                             agentId: value['buyerAssignedAgent']);
@@ -184,7 +184,7 @@ class SecondaryExternalBuyerDetails extends StatelessWidget {
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (option) =>
                 "${option.firstName} ${option.lastName}",
-            optionsBuilder: (v) async {
+            optionsBuilder: (v,refresh) async {
               return context.read<AddDealCubit>().getAgencies(search: v.text);
             }),
         AppTextField(

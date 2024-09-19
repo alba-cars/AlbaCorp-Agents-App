@@ -99,7 +99,7 @@ class _PublicListingsTabState extends State<PublicListingsTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -120,7 +120,7 @@ class _PublicListingsTabState extends State<PublicListingsTab> {
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.buildingList;
             if (stateResult.isEmpty) {
@@ -163,7 +163,7 @@ class _PublicListingsTabState extends State<PublicListingsTab> {
         label: 'Amenities',
         name: "amenities",
         displayStringForOption: (option) => option['label']?.toString() ?? '',
-        optionsBuilder: (v) async {
+        optionsBuilder: (v,refresh) async {
           var list = context
               .read<ListingsCubit>()
               .state

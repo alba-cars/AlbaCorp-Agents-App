@@ -196,7 +196,7 @@ class _TryState extends State<AddLeadWidget> {
                                 onSelected: (value) {
                                   leadSourceListenable.value = value;
                                 },
-                                optionsBuilder: (v) => leadSources
+                                optionsBuilder: (v,refresh) => leadSources
                                     .where((e) => e.name
                                         .toLowerCase()
                                         .contains(v.text.toLowerCase()))

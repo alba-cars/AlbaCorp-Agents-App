@@ -288,7 +288,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (lead) =>
                       '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
-                  optionsBuilder: (v) async {
+                  optionsBuilder: (v,refresh) async {
                     return context
                         .read<AddPocketListingCubit>()
                         .getLeads(search: v.text);
@@ -340,7 +340,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   isRequired: true,
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (p0) => p0.community,
-                  optionsBuilder: (v) async {
+                  optionsBuilder: (v,refresh) async {
                     final list = await context
                         .read<AddPocketListingCubit>()
                         .getCommunities(search: v.text);
@@ -362,7 +362,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                     valueTransformer: (p0) => p0?.id,
                     displayStringForOption: (p0) => p0.name,
                     controller: _buildingController,
-                    optionsBuilder: (v) async {
+                    optionsBuilder: (v,refresh) async {
                       final list = await context
                           .read<AddPocketListingCubit>()
                           .getBuildings(

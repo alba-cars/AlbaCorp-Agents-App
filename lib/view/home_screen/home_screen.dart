@@ -337,7 +337,7 @@ List<Widget> filterFields(BuildContext context, Map<String, dynamic>? values) {
   return [
     MultiSelectAutoCompleteField(
         label: 'Community',
-        optionsBuilder: (v) async {
+        optionsBuilder: (v,refresh) async {
           final stateResult = context.read<HomeCubit>().state.communityList;
           if (stateResult.isEmpty) {
             await context.read<HomeCubit>().getCommunities(search: v.text);
@@ -352,7 +352,7 @@ List<Widget> filterFields(BuildContext context, Map<String, dynamic>? values) {
         name: 'communityId'),
     MultiSelectAutoCompleteField(
         label: 'Building',
-        optionsBuilder: (v) async {
+        optionsBuilder: (v,refresh) async {
           final stateResult = context.read<HomeCubit>().state.buildingList;
           if (stateResult.isEmpty) {
             await context.read<HomeCubit>().getBuildings(search: v.text);

@@ -153,7 +153,7 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
             disabled: context.read<AddDealCubit>().state.buyerSource ==
                 ClientSource.external,
             valueTransformer: (p0) => p0?.id,
-            optionsBuilder: (v) async {
+            optionsBuilder: (v,refresh) async {
               return context.read<AddDealCubit>().getAgentsAutoComplete(v.text);
             },
             onSelected: (option) {
@@ -287,7 +287,7 @@ class SellerSourceExternalFields extends StatelessWidget {
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (option) =>
                 "${option.firstName} ${option.lastName}",
-            optionsBuilder: (v) async {
+            optionsBuilder: (v,refresh) async {
               return context.read<AddDealCubit>().getAgencies(search: v.text);
             }),
         AppTextField(

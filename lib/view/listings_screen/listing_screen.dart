@@ -136,7 +136,7 @@ class _ListingsTabState extends State<ListingsTab> {
     return [
       AppAutoComplete(
         label: 'Agent',
-        optionsBuilder: (val) => context
+        optionsBuilder: (val,refresh) => context
             .read<ListingsCubit>()
             .state
             .agentList
@@ -153,7 +153,7 @@ class _ListingsTabState extends State<ListingsTab> {
       ),
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -174,7 +174,7 @@ class _ListingsTabState extends State<ListingsTab> {
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final List<String>? communities = (values?['community'] as List?)
                 ?.map<String>((e) => (e['value'] ?? ''))
                 .toList();
@@ -257,7 +257,7 @@ class _ListingsTabState extends State<ListingsTab> {
         label: 'Amenities',
         name: "amenities",
         displayStringForOption: (option) => option['label']?.toString() ?? '',
-        optionsBuilder: (v) async {
+        optionsBuilder: (v,refresh) async {
           var list = context
               .read<ListingsCubit>()
               .state
@@ -478,7 +478,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           isRequired: false),
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -499,7 +499,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           name: 'communities'),
       AppAutoComplete(
           label: 'Agent',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult = context.read<ListingsCubit>().state.agentList;
             if (stateResult.isEmpty) {
               await context.read<ListingsCubit>().getAgents(search: v.text);
@@ -519,7 +519,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           name: 'currentAgent'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.buildingList;
             if (stateResult.isEmpty) {

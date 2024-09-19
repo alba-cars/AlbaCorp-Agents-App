@@ -375,16 +375,20 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }
 
   Future<List<Building>> getBuildings(
-      {String? search, List<String>? community}) async {
+      {String? search, List<String>? community,bool refresh = false}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
+    if(refresh){
+      emit(state.copyWith(buildingsPaginator: null));
+    }
 
     final result = await _listingsRepo.getBuildingNames(
-        search: search, communityId: community);
+        search: search, communityId: community,paginator: refresh?null:state.buildingsPaginator);
     switch (result) {
       case (Success s):
+      final List<Building> buildings =refresh? s.value:[...state.buildingList,...s.value];
         emit(state.copyWith(
-            buildingList: s.value, getBuildingListStatus: AppStatus.success));
-        return s.value;
+            buildingList:buildings, getBuildingListStatus: AppStatus.success,buildingsPaginator: s.paginator));
+        return buildings;
 
       case (Error e):
         emit(state.copyWith(
