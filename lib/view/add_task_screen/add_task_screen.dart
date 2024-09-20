@@ -76,7 +76,7 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                     name: 'date',
                     label: 'Date',
                     firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(Duration(days: 90))),
+                    lastDate: DateTime.now().add(Duration(days: 365))),
                 TimeField(
                   isRequired: false,
                   name: 'time',

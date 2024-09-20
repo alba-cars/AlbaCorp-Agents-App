@@ -80,6 +80,17 @@ class ExplorerData implements ExplorerRepo {
           }
         });
       }
+      if (filterRemoved?.containsKey('places') == true &&
+          filterRemoved?['places'] is List) {
+        final places = filterRemoved!['places'] as List;
+
+        if (places.isNotEmpty) {
+          // Replace "communities" with "places" if "places" is not empty
+          filterRemoved['communities'] = places;
+          filterRemoved.remove(
+              'places'); // Remove "places" after copying it to "communities"
+        }
+      }
 
       Logger().d(filterRemoved);
 
@@ -151,6 +162,18 @@ class ExplorerData implements ExplorerRepo {
             return MapEntry(key, value);
           }
         });
+      }
+
+      if (filterRemoved?.containsKey('places') == true &&
+          filterRemoved?['places'] is List) {
+        final places = filterRemoved!['places'] as List;
+
+        if (places.isNotEmpty) {
+          // Replace "communities" with "places" if "places" is not empty
+          filterRemoved['communities'] = places;
+          filterRemoved.remove(
+              'places'); // Remove "places" after copying it to "communities"
+        }
       }
 
       Logger().d(filterRemoved);

@@ -46,6 +46,8 @@ mixin _$ExplorerScreenState {
   List<CommunityTeamModel> get communityList =>
       throw _privateConstructorUsedError;
   AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
+  List<CommunityName> get placesList => throw _privateConstructorUsedError;
+  AppStatus get getPlacesListStatus => throw _privateConstructorUsedError;
   List<Building> get buildingList => throw _privateConstructorUsedError;
   AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
   Paginator? get buildingsPaginator => throw _privateConstructorUsedError;
@@ -88,6 +90,8 @@ abstract class $ExplorerScreenStateCopyWith<$Res> {
       AppStatus getPropertyTypeListStatus,
       List<CommunityTeamModel> communityList,
       AppStatus getCommunityListStatus,
+      List<CommunityName> placesList,
+      AppStatus getPlacesListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
       Paginator? buildingsPaginator,
@@ -136,6 +140,8 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
     Object? getPropertyTypeListStatus = null,
     Object? communityList = null,
     Object? getCommunityListStatus = null,
+    Object? placesList = null,
+    Object? getPlacesListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
     Object? buildingsPaginator = freezed,
@@ -236,6 +242,14 @@ class _$ExplorerScreenStateCopyWithImpl<$Res, $Val extends ExplorerScreenState>
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      placesList: null == placesList
+          ? _value.placesList
+          : placesList // ignore: cast_nullable_to_non_nullable
+              as List<CommunityName>,
+      getPlacesListStatus: null == getPlacesListStatus
+          ? _value.getPlacesListStatus
+          : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
       buildingList: null == buildingList
           ? _value.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -332,6 +346,8 @@ abstract class _$$ExplorerScreenStateImplCopyWith<$Res>
       AppStatus getPropertyTypeListStatus,
       List<CommunityTeamModel> communityList,
       AppStatus getCommunityListStatus,
+      List<CommunityName> placesList,
+      AppStatus getPlacesListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
       Paginator? buildingsPaginator,
@@ -381,6 +397,8 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
     Object? getPropertyTypeListStatus = null,
     Object? communityList = null,
     Object? getCommunityListStatus = null,
+    Object? placesList = null,
+    Object? getPlacesListStatus = null,
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
     Object? buildingsPaginator = freezed,
@@ -478,6 +496,14 @@ class __$$ExplorerScreenStateImplCopyWithImpl<$Res>
           ? _value.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      placesList: null == placesList
+          ? _value._placesList
+          : placesList // ignore: cast_nullable_to_non_nullable
+              as List<CommunityName>,
+      getPlacesListStatus: null == getPlacesListStatus
+          ? _value.getPlacesListStatus
+          : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
       buildingList: null == buildingList
           ? _value._buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
@@ -533,6 +559,8 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
       this.getPropertyTypeListStatus = AppStatus.init,
       final List<CommunityTeamModel> communityList = const [],
       this.getCommunityListStatus = AppStatus.init,
+      final List<CommunityName> placesList = const [],
+      this.getPlacesListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
       this.getBuildingListStatus = AppStatus.init,
       this.buildingsPaginator,
@@ -545,6 +573,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
         _checkedOutFilter = checkedOutFilter,
         _propertyTypeList = propertyTypeList,
         _communityList = communityList,
+        _placesList = placesList,
         _buildingList = buildingList,
         _selectedPropertyCards = selectedPropertyCards;
 
@@ -648,6 +677,18 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
   @override
   @JsonKey()
   final AppStatus getCommunityListStatus;
+  final List<CommunityName> _placesList;
+  @override
+  @JsonKey()
+  List<CommunityName> get placesList {
+    if (_placesList is EqualUnmodifiableListView) return _placesList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_placesList);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getPlacesListStatus;
   final List<Building> _buildingList;
   @override
   @JsonKey()
@@ -681,7 +722,7 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
 
   @override
   String toString() {
-    return 'ExplorerScreenState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
+    return 'ExplorerScreenState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
   }
 
   @override
@@ -740,7 +781,9 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
             (identical(other.getCommunityListStatus, getCommunityListStatus) ||
                 other.getCommunityListStatus == getCommunityListStatus) &&
             const DeepCollectionEquality()
-                .equals(other._buildingList, _buildingList) &&
+                .equals(other._placesList, _placesList) &&
+            (identical(other.getPlacesListStatus, getPlacesListStatus) || other.getPlacesListStatus == getPlacesListStatus) &&
+            const DeepCollectionEquality().equals(other._buildingList, _buildingList) &&
             (identical(other.getBuildingListStatus, getBuildingListStatus) || other.getBuildingListStatus == getBuildingListStatus) &&
             (identical(other.buildingsPaginator, buildingsPaginator) || other.buildingsPaginator == buildingsPaginator) &&
             (identical(other.selectModeEnabled, selectModeEnabled) || other.selectModeEnabled == selectModeEnabled) &&
@@ -774,6 +817,8 @@ class _$ExplorerScreenStateImpl implements _ExplorerScreenState {
         getPropertyTypeListStatus,
         const DeepCollectionEquality().hash(_communityList),
         getCommunityListStatus,
+        const DeepCollectionEquality().hash(_placesList),
+        getPlacesListStatus,
         const DeepCollectionEquality().hash(_buildingList),
         getBuildingListStatus,
         buildingsPaginator,
@@ -815,6 +860,8 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
       final AppStatus getPropertyTypeListStatus,
       final List<CommunityTeamModel> communityList,
       final AppStatus getCommunityListStatus,
+      final List<CommunityName> placesList,
+      final AppStatus getPlacesListStatus,
       final List<Building> buildingList,
       final AppStatus getBuildingListStatus,
       final Paginator? buildingsPaginator,
@@ -868,6 +915,10 @@ abstract class _ExplorerScreenState implements ExplorerScreenState {
   List<CommunityTeamModel> get communityList;
   @override
   AppStatus get getCommunityListStatus;
+  @override
+  List<CommunityName> get placesList;
+  @override
+  AppStatus get getPlacesListStatus;
   @override
   List<Building> get buildingList;
   @override

@@ -162,7 +162,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
@@ -174,21 +174,57 @@ class _ExplorerTabState extends State<ExplorerTab> {
           displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'communities'),
       MultiSelectAutoCompleteField(
+        label: 'Places',
+        optionsBuilder: (v, refresh) async {
+          // Fetch the places based on the search input
+          final list = await context
+              .read<ExplorerScreenCubit>()
+              .getPlaces(search: v.text);
+
+          // Get the selected communities' values from the previous MultiSelectAutoCompleteField
+          final List<String>? flattenedValue = (values?['communities'] is List)
+              ? (values?['communities'] as List).expand((community) {
+                  return community['value'] is List
+                      ? community['value'] as List<String>
+                      : [community['value'].toString()];
+                }).toList()
+              : values?['communities']?['value'] as List<String>?;
+
+          Logger().d(flattenedValue); // Log the flattened values for debugging
+
+          // Filter the places list based on the flattened community IDs
+          final mapped = list
+              .where((place) {
+                return flattenedValue?.contains(place.id) ?? false;
+              })
+              .map((place) => {
+                    'value': place.id.toString(),
+                    'label': place.community.toString()
+                  })
+              .toList();
+
+          return mapped;
+        },
+        displayStringForOption: (option) => option['label']?.toString() ?? '',
+        name: 'places',
+      ),
+      MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             // final list = await context.read<ExplorerScreenCubit>().getBuildings(
             //     search: v.text,
             //     community: values?['communities']?.map((e) => e['value']));
             // return list.map((e) => {'value': e.id, 'label': e.name});
 
             final List<String>? communities = (values?['communities'] as List?)
-                ?.map((e) => e['value'])
-                .expand<String>(
-                    (element) => element is List<String> ? element : [element])
+                ?.map((e) => e['value'] as String)
                 .toList();
-            final list = await context
-                .read<ExplorerScreenCubit>()
-                .getBuildings(search: v.text, community: communities,refresh: refresh);
+            // ?.map((e) => e['value'])
+            // .expand<String>(
+            //     (element) => element is List<String> ? element : [element])
+            // .toList();
+            final list = await context.read<ExplorerScreenCubit>().getBuildings(
+                search: v.text, community: communities, refresh: refresh);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -260,9 +296,11 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 leadWidgets: [
                   Expanded(
                     child: AppPrimaryButton(
-                      onTap: ()async {
-                      await context.read<ExplorerScreenCubit>().randomCheckout(
-                            context: context, numberOfLeads: 50);
+                      onTap: () async {
+                        await context
+                            .read<ExplorerScreenCubit>()
+                            .randomCheckout(
+                                context: context, numberOfLeads: 50);
                       },
                       text: "50",
                       backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -273,8 +311,8 @@ class _ExplorerTabState extends State<ExplorerTab> {
                   ),
                   Expanded(
                       child: AppPrimaryButton(
-                    onTap: ()async {
-                   await   context
+                    onTap: () async {
+                      await context
                           .read<ExplorerScreenCubit>()
                           .randomCheckout(context: context, numberOfLeads: 100);
                     },
@@ -498,7 +536,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
@@ -511,7 +549,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getBuildings(search: v.text);
