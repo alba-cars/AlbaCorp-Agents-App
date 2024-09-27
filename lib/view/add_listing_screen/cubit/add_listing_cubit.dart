@@ -98,14 +98,11 @@ class AddListingCubit extends Cubit<AddListingState> {
     final result = await _listingsRepo.updateListingAcquired(
         id: deal!.newListingRequest!.id, values: {'multiple': false, ...val});
     switch (result) {
-      case (Success<NewListingRequest> s):
+      case (Success s):
         final updatedDeal = await _dealsRepo.updateDeal(id: deal!.id, values: {
           "assignedAgent": getIt<AuthBloc>().state.agent?.id,
           "category": "Listing Acquired",
           "type": "Listing",
-          "agreedSalePrice": s.value.price,
-          "agreedCommission": values['agreedCommission'],
-          'user_id': s.value.userId
         });
         switch (updatedDeal) {
           case (Success<DealResponse> dealResult):

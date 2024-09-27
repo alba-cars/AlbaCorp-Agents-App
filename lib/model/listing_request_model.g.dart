@@ -37,6 +37,7 @@ _$NewListingRequestImpl _$$NewListingRequestImplFromJson(
       exclusive: json['exclusive'] as bool? ?? false,
       isOffPlanResale: json['isOffPlanResale'] as bool? ?? false,
       vacantOnTransfer: json['vacantOnTransfer'] as bool? ?? false,
+      relatedInfo: json['relatedInfo'] as String?,
     );
 
 Map<String, dynamic> _$$NewListingRequestImplToJson(
@@ -63,4 +64,5 @@ Map<String, dynamic> _$$NewListingRequestImplToJson(
       'exclusive': instance.exclusive,
       'isOffPlanResale': instance.isOffPlanResale,
       'vacantOnTransfer': instance.vacantOnTransfer,
+      'relatedInfo': instance.relatedInfo,
     };

@@ -142,13 +142,34 @@ class _CollectDocumentsFormState extends State<CollectDocumentsForm> {
                         name: 'Title Deed',
                         label: 'Title Deed',
                       ),
+                    if (context
+                              .read<DealAddDocumentCubit>()
+                              .state
+                              .deal
+                              ?.type ==
+                          "Rent" && context
+                              .read<DealAddDocumentCubit>()
+                              .state
+                              .deal
+                              ?.category ==
+                          "Listing Acquired")    DocumentSelectionField(
+                        onSelected: (v) {},
+                        isEditting: false,
+                        name: 'Listing Form',
+                        label: 'Listing Form',
+                      ),
                       VerticalSmallGap(),
                       if (context
                               .read<DealAddDocumentCubit>()
                               .state
                               .deal
                               ?.category ==
-                          "Primary Off Plan Property") ...[
+                          "Primary Off Plan Property" || context
+                              .read<DealAddDocumentCubit>()
+                              .state
+                              .deal
+                              ?.category ==
+                          "Listing Acquired") ...[
                         Divider(
                           thickness: 4,
                           color: Theme.of(context).colorScheme.secondary,
@@ -200,7 +221,14 @@ class _CollectDocumentsFormState extends State<CollectDocumentsForm> {
                           label: 'Passport',
                         ),
                       ],
-                      Divider(
+                    
+                      if (context
+                              .read<DealAddDocumentCubit>()
+                              .state
+                              .deal
+                              ?.sellerInternalUserId !=
+                          null) ...[
+                              Divider(
                         thickness: 4,
                         color: Theme.of(context).colorScheme.secondary,
                       ),
@@ -214,12 +242,6 @@ class _CollectDocumentsFormState extends State<CollectDocumentsForm> {
                       VerticalSmallGap(
                         adjustment: 0.5,
                       ),
-                      if (context
-                              .read<DealAddDocumentCubit>()
-                              .state
-                              .deal
-                              ?.sellerInternalUserId !=
-                          null) ...[
                         ValueListenableBuilder(
                             valueListenable: isSellerResident,
                             builder: (context, state, _) {

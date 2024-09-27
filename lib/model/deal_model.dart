@@ -92,6 +92,11 @@ extension EditDeal on Deal {
       "contractValidity": newListingRequest?.contractValidity,
       "furnishing": newListingRequest?.furnishing,
       "type": newListingRequest?.type,
+      "isOffPlanResale":newListingRequest?.isOffPlanResale ?? false ? 
+                    {"label": 'Yes', "value": true}:
+                    {"label": 'No', "value": false},
+                    "relatedInfo":newListingRequest?.relatedInfo
+                  
     };
   }
 }

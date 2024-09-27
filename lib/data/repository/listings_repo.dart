@@ -18,7 +18,7 @@ abstract class ListingsRepo {
       {required String listingId, Paginator? paginator});
   Future<Result<NewListingRequest>> addListingAcquired(
       {required Map<String, dynamic> values});
-  Future<Result<NewListingRequest>> updateListingAcquired(
+  Future<Result<void>> updateListingAcquired(
       {required String id, required Map<String, dynamic> values});
   Future<Result<List<PropertyType>>> getPropertyTypes(
       {String? search, Paginator? paginator});

@@ -230,16 +230,16 @@ class ListingsData implements ListingsRepo {
   }
 
   @override
-  Future<Result<NewListingRequest>> updateListingAcquired(
+  Future<Result<void>> updateListingAcquired(
       {required String id, required Map<String, dynamic> values}) async {
     try {
       String url = 'v1/propList/request/$id';
 
-      final response = await _dio.put(url, data: values);
+      final response = await _dio.patch(url, data: values);
       final data = response.data;
-      final model = NewListingRequest.fromJson(data);
+
       return Success(
-        model,
+        null,
       );
     } catch (e, stack) {
       return onError(e, stack, log);

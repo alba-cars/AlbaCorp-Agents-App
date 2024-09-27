@@ -98,7 +98,7 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
         controller: _scrollController,
         headerSliverBuilder: (context, isScrolledBelow) => [
           SliverAppBar(
-            title: Text('Add Listing'),
+            title: Text(context.read<AddListingCubit>().isEdit? 'Edit Listing': 'Add Listing'),
             centerTitle: true,
             backgroundColor: primaryColor,
             foregroundColor: Colors.white,

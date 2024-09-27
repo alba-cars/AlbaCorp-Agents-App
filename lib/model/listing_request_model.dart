@@ -33,6 +33,7 @@ class NewListingRequest with _$NewListingRequest {
     @Default(false) bool exclusive,
     @Default(false) bool isOffPlanResale,
     @Default(false) bool vacantOnTransfer,
+    String? relatedInfo,
   }) = _NewListingRequest;
 
   factory NewListingRequest.fromJson(Map<String, dynamic> json) =>
