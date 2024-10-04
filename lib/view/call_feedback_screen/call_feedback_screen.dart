@@ -115,7 +115,10 @@ class _CallFeedbackScreenBodyState extends State<_CallFeedbackScreenBody> {
                             textAlign: TextAlign.center,
                           ),
                           VerticalSmallGap(),
-                          PhoneNumberField(name: 'number'),
+                          PhoneNumberField(
+                            name: 'number',
+                            isRequired: true,
+                          ),
                           VerticalSmallGap(),
                           BlocListener<CallFeedbackCubit, CallFeedbackState>(
                             listener: (context, state) {
