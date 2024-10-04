@@ -325,6 +325,32 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
     }
   }
 
+   Future<List<CommunityName>> getPlaces({String? search}) async {
+    emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
+    if (state.placesList.isNotEmpty && search != null) {
+      return state.placesList
+          .where((e) => e.community.contains(search))
+          .toList();
+    } else {
+      final result = await _explorerRepo.getCommunityTeams(
+          agentId: getIt<AuthBloc>().state.agent!.id);
+      switch (result) {
+        case (Success<List<CommunityTeamModel>> s):
+           emit(state.copyWith(
+              placesList:
+                  s.value.expand((e)=>e.communities).toList(),
+              getPlacesListStatus: AppStatus.success));
+     Logger().d(state.placesList);
+          return s.value.expand((e)=>e.communities).toList();
+        case (Error e):
+          emit(state.copyWith(
+            getPlacesListStatus: AppStatus.failure,
+          ));
+          return [];
+      }
+    }
+  }
+
   Future<void> getPropertyTypes() async {
     emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getPropertyTypes();

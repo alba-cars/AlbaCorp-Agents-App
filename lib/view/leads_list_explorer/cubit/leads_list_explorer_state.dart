@@ -26,6 +26,8 @@ class LeadsListExplorerState with _$LeadsListExplorerState {
     @Default(AppStatus.init) AppStatus getPropertyTypeListStatus,
     @Default([]) List<CommunityTeamModel> communityList,
     @Default(AppStatus.init) AppStatus getCommunityListStatus,
+         @Default([]) List<CommunityName> placesList,
+    @Default(AppStatus.init) AppStatus getPlacesListStatus,
     @Default([]) List<Building> buildingList,
     @Default(AppStatus.init) AppStatus getBuildingListStatus,
     Paginator? buildingsPaginator,

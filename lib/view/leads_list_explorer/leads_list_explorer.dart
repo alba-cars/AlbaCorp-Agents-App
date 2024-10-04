@@ -149,17 +149,53 @@ class _ExplorerTabState extends State<ExplorerTab> {
           },
           displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'communities'),
+     MultiSelectAutoCompleteField(
+        label: 'Places',
+        optionsBuilder: (v, refresh) async {
+          final list = await context
+              .read<LeadsListExplorerCubit>()
+              .getPlaces(search: v.text);
+          final List<String>? flattenedValue = (values?['communities'] is List)
+              ? (values?['communities'] as List).expand((community) {
+                  return community['value'] is List
+                      ? community['value'] as List<String>
+                      : [community['value'].toString()];
+                }).toList()
+              : values?['communities']?['value'] as List<String>?;
+          final mapped = list
+              .where((place) {
+                return flattenedValue?.contains(place.id) ?? false;
+              })
+              .map((place) => {
+                    'value': place.id.toString(),
+                    'label': place.community.toString()
+                  })
+              .toList();
+
+          return mapped;
+        },
+        displayStringForOption: (option) => option['label']?.toString() ?? '',
+        name: 'places',
+      ),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v,refresh) async {
-            final List<String>? communities = (values?['communities'] as List?)
-                ?.map((e) => e['value'])
-                .expand<String>(
-                    (element) => element is List<String> ? element : [element])
+          optionsBuilder: (v, refresh) async {
+            List<String>? communities =[];
+            if((values?.containsKey('places') ?? false) && (values!['places'] as List).isNotEmpty){
+             communities = (values['places'] as List?)
+                ?.map((e) => e['value'] as String)
                 .toList();
-            final list = await context
-                .read<LeadsListExplorerCubit>()
-                .getBuildings(search: v.text, community: communities,refresh: refresh);
+            }else{
+             communities = (values?['communities'] is List)
+              ? (values?['communities'] as List).expand((community) {
+                  return community['value'] is List
+                      ? community['value'] as List<String>
+                      : [community['value'].toString()];
+                }).toList()
+              : values?['communities']?['value'] as List<String>?;
+            }
+            final list = await context.read<LeadsListExplorerCubit>().getBuildings(
+                search: v.text, community: communities, refresh: refresh);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
