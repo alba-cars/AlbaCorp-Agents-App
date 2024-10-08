@@ -132,7 +132,7 @@ List<Widget> _ListingAcquiredFields(BuildContext context,
           }),
       CurrencyField(
         isRequired: true,
-        name: 'price',
+        name: 'listingPrice',
         label: 'Listing Price',
       ),
       VerticalSmallGap(
