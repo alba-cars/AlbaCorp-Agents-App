@@ -413,7 +413,7 @@ class CollectDocumentsTab extends StatelessWidget {
               MultipleImageuploadField(
                 name: 'photos',
                 label: 'Photos',
-                isRequired: true,
+                // isRequired: true,
               ),
               VerticalSmallGap(),
               AttachmentField(

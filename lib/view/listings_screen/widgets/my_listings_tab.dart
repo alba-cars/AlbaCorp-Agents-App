@@ -317,7 +317,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                           if (result == true) {
                             context
                                 .read<ListingsCubit>()
-                                .getPocketListings(refresh: true);
+                                .getMyPocketListings(refresh: true);
                           }
                         }),
                   );
@@ -329,7 +329,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                         scrollInfo.metrics.pixels >=
                             0.9 * scrollInfo.metrics.maxScrollExtent &&
                         state.myPocketListingsPaginator?.hasNextPage == true) {
-                      context.read<ListingsCubit>().getPocketListings();
+                      context.read<ListingsCubit>().getMyPocketListings();
                     }
                     return true;
                   },
@@ -337,7 +337,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                     onRefresh: () async {
                       await context
                           .read<ListingsCubit>()
-                          .getPocketListings(refresh: true);
+                          .getMyPocketListings(refresh: true);
                     },
                     child: ListView.separated(
                         key: _pageStorageKey,

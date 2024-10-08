@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -199,6 +200,14 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
     if (values['status'] == 'Listing Acquired') {
       emit(state.copyWith(convertToListingAquiredStatus: AppStatus.loading));
       final Map<String, dynamic> val = Map.from(values)..remove('status');
+      final client = state.propertyCardLeads.firstWhereOrNull((v)=>v.lead.id == state.propertyCard?.currentOwner?.id);
+      if(client == null){
+        emit(state.copyWith(
+              convertToListingAquiredStatus: AppStatus.failure,
+              convertToListingAquiredError: "No client is verified"));
+        return;
+      }
+      val.addAll({'agentId':getIt<AuthBloc>().state.agent?.id,'clientId':client.lead.id});
       final result = await _explorerRepo.convertPropertyCardToListing(
           propertyCardId: state.propertyCardId, values: val);
       switch (result) {

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
@@ -97,6 +98,8 @@ class ListingsCubit extends Cubit<ListingsState> {
   Future<void> getPocketListings({
     bool refresh = false,
   }) async {
+
+
     if (refresh || state.pocketListingsPaginator == null) {
       emit(state.copyWith(
           getPocketListingsStatus: AppStatus.loading,
@@ -105,12 +108,13 @@ class ListingsCubit extends Cubit<ListingsState> {
     } else {
       emit(state.copyWith(getPocketListingsStatus: AppStatus.loadingMore));
     }
-
+    
     final result = await _explorerRepo.getPocketListings(
         filter: state.pocketListingsFilter,
         paginator: state.pocketListingsPaginator);
     switch (result) {
       case (Success s):
+      Logger().d(s.paginator);
         emit(state.copyWith(
             pocketListings: [...state.pocketListings, ...s.value],
             pocketListingsPaginator: s.paginator,

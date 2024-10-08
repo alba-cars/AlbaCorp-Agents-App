@@ -63,7 +63,7 @@ class ListingsData implements ListingsRepo {
           paginator: Paginator(
               currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: response.data['resPerPage'],
-              itemCount: response.data['ListingCount']));
+              itemCount: response.data['filteredCount']));
     } catch (e, stack) {
       return onError(e, stack, log);
     }
@@ -84,7 +84,7 @@ class ListingsData implements ListingsRepo {
           paginator: Paginator(
               currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: response.data['resPerPage'],
-              itemCount: response.data['ListingCount']));
+              itemCount: response.data['filteredCount']));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

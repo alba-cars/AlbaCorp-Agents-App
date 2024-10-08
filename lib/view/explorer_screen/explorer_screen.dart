@@ -287,6 +287,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 onChanged: (val) {
                   context.read<ExplorerScreenCubit>().searchExplorer(val);
                 },
+                
                 showSearch: false,
                 leadWidgets: [
                   Expanded(

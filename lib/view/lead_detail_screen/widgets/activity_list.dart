@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
+import 'package:real_estate_app/widgets/button.dart';
 
 import '../../../model/activity_model.dart';
 import '../../../widgets/space.dart';
@@ -164,7 +168,17 @@ class ActivityListLeadDetail extends StatelessWidget {
                                                   .labelMedium
                                                   ?.copyWith(
                                                       color: Colors.blueGrey))
-                                        ]))
+                                        ])),
+                                        if (activity.status == 'Pending'||activity.status =="Overdue")
+                                        Row(
+                                          children: [
+                                            AppPrimaryButton(
+                                              height: 20,
+                                              onTap: (){
+                                                context.pushNamed(TaskDetailScreen.routeName,pathParameters: {'id':activity.id},extra: activity);
+                                              }, text:'Update Activity', ),
+                                          ],
+                                        )
                                 ],
                               ),
                             ),

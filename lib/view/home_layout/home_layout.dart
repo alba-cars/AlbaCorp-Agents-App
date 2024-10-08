@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/core/helpers/app_config_helper.dart';
 import 'package:real_estate_app/core/models/enums/quick_access_list_enum.dart';
+import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -91,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     final user = context.select<AuthBloc, User?>((bloc) => bloc.state.user);
+    final agent = context.select<AuthBloc, Agent?>((bloc) => bloc.state.agent);
     return Scaffold(
       backgroundColor: bgColor,
       resizeToAvoidBottomInset: false,
@@ -177,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen>
                             GestureDetector(
                               onTap: () {
                                 launchUrlString(
-                                    "https://alba.homes/agents/${user?.id}");
+                                    "https://alba.homes/agents/${agent?.id}");
                               },
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -216,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen>
                             InkWell(
                               onTap: () {
                                 Share.share(
-                                    "Hey, \n Check my profile \n https://alba.homes/agents/${user?.id}");
+                                    "Hey, \n Check my profile \n https://alba.homes/agents/${agent?.id}");
                               },
                               child: Icon(
                                 Icons.share,
