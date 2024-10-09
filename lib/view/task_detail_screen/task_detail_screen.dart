@@ -447,6 +447,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                               LabelText(
                                                 text: 'Description',
                                               ),
+                                              VerticalSmallGap(),
                                               (task.description?.isNotEmpty ==
                                                       true)
                                                   ? UrlText(

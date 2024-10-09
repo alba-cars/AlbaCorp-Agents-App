@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 
+import '../../../widgets/url_text.dart';
 import '../cubit/task_detail_cubit.dart';
 
 class ActivityList extends StatelessWidget {
@@ -52,12 +53,12 @@ class ActivityList extends StatelessWidget {
                       Divider(),
                       Row(
                         children: [
-                          Expanded(child: Text(activity.description ?? '')),
+                          Expanded(child: UrlText(text:activity.description ?? '')),
                         ],
                       ),
                       Row(
                         children: [
-                          Expanded(child: Text(activity.notes ?? '')),
+                          Expanded(child: UrlText(text:activity.notes ?? '')),
                         ],
                       ),
                     ],

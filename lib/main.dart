@@ -8,7 +8,7 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await configureDependencies(env: 'Stage');
+  await configureDependencies(env: 'Prod');
 
   runApp(const App());
 }
