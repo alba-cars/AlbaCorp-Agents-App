@@ -35,6 +35,7 @@ class QuickAccessButton extends StatelessWidget {
               text: text,
               color: Colors.white,
               textAlign: TextAlign.center,
+              maxLines: 2,
             )
           ],
         ),

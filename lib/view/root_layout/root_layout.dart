@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:awesome_notifications/awesome_notifications.dart' as an;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +31,7 @@ class RootLayout extends StatefulWidget {
 class _RootLayoutState extends State<RootLayout> {
   final ValueNotifier<String> feedBackValue = ValueNotifier('Interested');
   final TextEditingController _controller = TextEditingController();
-   bool _notificationsEnabled = false;
+  bool _notificationsEnabled = false;
   @override
   void initState() {
     getPendingActions();
@@ -37,13 +39,11 @@ class _RootLayoutState extends State<RootLayout> {
     super.initState();
   }
 
-
-
   // Function to check notification permissions
   Future<void> checkPushNotificationPermission() async {
-    var status = await Permission.notification.status;
-    
-    if (status.isGranted) {
+    bool isAllowed = await an.AwesomeNotifications().isNotificationAllowed();
+
+    if (isAllowed) {
       setState(() {
         _notificationsEnabled = true;
       });
@@ -57,18 +57,48 @@ class _RootLayoutState extends State<RootLayout> {
 
   // Function to request notification permission
   Future<void> requestNotificationPermission() async {
-    var result = await Permission.notification.request();
+    try {
+      bool isAllowed = await an.AwesomeNotifications().isNotificationAllowed();
 
-    if (result.isGranted) {
-      setState(() {
-        _notificationsEnabled = true;
-        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-      });
-    } else {
-      setState(() {
-        _notificationsEnabled = false;
-      });
+      if (!isAllowed) {
+        // Show a dialog requesting permission if not already allowed
+        // _showSettingsDialog();
+        await an.AwesomeNotifications().showNotificationConfigPage();
+      } else {
+        setState(() {
+          _notificationsEnabled = true;
+          ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+        });
+      }
+    } catch (e) {
+      Logger().e(e);
     }
+  }
+
+  void _showSettingsDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Notification Permission'),
+        content: Text(
+            'Notification permissions are permanently denied. Please enable them from settings to receive notifications.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              openAppSettings();
+              Navigator.of(context).pop();
+            },
+            child: Text('Open Settings'),
+          ),
+        ],
+      ),
+    );
   }
 
   // Function to show the Material Banner

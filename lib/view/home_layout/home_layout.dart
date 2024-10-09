@@ -233,34 +233,48 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                   VerticalSmallGap(),
-                  Row(
-                    children: [
-                      HeadingText(
-                        text: "Quick Access",
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  SizedBox(
-                    height: 80,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (_, __) => SizedBox(
-                        width: 8,
-                      ),
-                      itemCount: QuickAccessEnumList.values.length,
-                      itemBuilder: (_, pos) => QuickAccessButton(
-                          text: QuickAccessEnumList.values[pos].getName(),
-                          iconData: QuickAccessEnumList.values[pos].getIcon(),
-                          action: () {
-                            QuickAccessEnumList.values[pos].performAction();
-                          }),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            HeadingText(
+                              text: "Quick Access",
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        SizedBox(
+                          height: 80,
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [0, 1, 2]
+                                  .map((pos) => Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 4),
+                                          child: QuickAccessButton(
+                                              text: QuickAccessEnumList
+                                                  .values[pos]
+                                                  .getName(),
+                                              iconData: QuickAccessEnumList
+                                                  .values[pos]
+                                                  .getIcon(),
+                                              action: () {
+                                                QuickAccessEnumList.values[pos]
+                                                    .performAction();
+                                              }),
+                                        ),
+                                      ))
+                                  .toList()),
+                        ), // if (user != null)
+                      ],
                     ),
-                  ), // if (user != null)
-
+                  ),
                   const VerticalSmallGap(),
                   KpisLayoutWidget(),
                   const VerticalSmallGap(),

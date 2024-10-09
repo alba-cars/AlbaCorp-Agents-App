@@ -12,22 +12,22 @@ class KpisLayoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HeadingText(
-          text: "Your KPIs",
-          color: Colors.white,
-        ),
-        VerticalSmallGap(),
-        BlocProvider(
-          create: (context) => getIt<HomeCubit>(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HeadingText(
+            text: "Your KPIs",
+            color: Colors.white,
+          ),
+          VerticalSmallGap(),
+          BlocProvider(
+            create: (context) => getIt<HomeCubit>(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
+                Expanded(
                     flex: 1,
                     child: BlocSelector<HomeCubit, HomeState, int>(
                       selector: (state) {
@@ -40,7 +40,7 @@ class KpisLayoutWidget extends StatelessWidget {
                         );
                       },
                     )),
-                Flexible(
+                Expanded(
                     flex: 1,
                     child: BlocSelector<HomeCubit, HomeState, int>(
                       selector: (state) {
@@ -53,7 +53,7 @@ class KpisLayoutWidget extends StatelessWidget {
                         );
                       },
                     )),
-                Flexible(
+                Expanded(
                     flex: 1,
                     child: BlocSelector<HomeCubit, HomeState, int>(
                       selector: (state) {
@@ -68,9 +68,9 @@ class KpisLayoutWidget extends StatelessWidget {
                     )),
               ],
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
