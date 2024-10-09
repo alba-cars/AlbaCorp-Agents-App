@@ -71,7 +71,7 @@ class ActivityList extends StatelessWidget {
                 height: 6,
               );
             },
-            itemCount: activities.length > 4 ? 4 : activities.length);
+            itemCount: activities.length > 10 ? 10 : activities.length);
       },
     );
   }

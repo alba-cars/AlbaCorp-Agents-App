@@ -383,7 +383,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                       child: NormalText(
                                                           text:
-                                                              'Task Type Call'))
+                                                              'Phone: ${task.lead?.phone ?? ''}'))
                                                 ],
                                               ),
                                               VerticalSmallGap(),
