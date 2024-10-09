@@ -445,6 +445,16 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   : Text('No notes'),
                                               VerticalSmallGap(),
                                               LabelText(
+                                                text: 'Description',
+                                              ),
+                                              (task.description?.isNotEmpty ==
+                                                      true)
+                                                  ? UrlText(
+                                                      text: task.description ??
+                                                          '')
+                                                  : Text('No description'),
+                                              VerticalSmallGap(),
+                                              LabelText(
                                                 text: 'Actions',
                                               ),
                                               VerticalSmallGap(),
