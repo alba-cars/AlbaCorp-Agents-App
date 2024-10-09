@@ -234,7 +234,9 @@ showConvertPropertyCard(
                           },
                           listenWhen: (previous, current) =>
                               previous.updatePropertyCardStatus !=
-                              current.updatePropertyCardStatus || previous.convertToListingAquiredStatus != current.convertToListingAquiredStatus,
+                                  current.updatePropertyCardStatus ||
+                              previous.convertToListingAquiredStatus !=
+                                  current.convertToListingAquiredStatus,
                           child: AppPrimaryButton(
                               text: 'Save',
                               onTap: () async {
