@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/data/repository/notification_repo.dart';
 import 'package:real_estate_app/routes/app_router.dart';
@@ -28,10 +29,64 @@ class RootLayout extends StatefulWidget {
 class _RootLayoutState extends State<RootLayout> {
   final ValueNotifier<String> feedBackValue = ValueNotifier('Interested');
   final TextEditingController _controller = TextEditingController();
+   bool _notificationsEnabled = false;
   @override
   void initState() {
     getPendingActions();
+    checkPushNotificationPermission();
     super.initState();
+  }
+
+
+
+  // Function to check notification permissions
+  Future<void> checkPushNotificationPermission() async {
+    var status = await Permission.notification.status;
+    
+    if (status.isGranted) {
+      setState(() {
+        _notificationsEnabled = true;
+      });
+    } else {
+      // If notifications are disabled, show MaterialBanner
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showNotificationBanner();
+      });
+    }
+  }
+
+  // Function to request notification permission
+  Future<void> requestNotificationPermission() async {
+    var result = await Permission.notification.request();
+
+    if (result.isGranted) {
+      setState(() {
+        _notificationsEnabled = true;
+        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+      });
+    } else {
+      setState(() {
+        _notificationsEnabled = false;
+      });
+    }
+  }
+
+  // Function to show the Material Banner
+  void showNotificationBanner() {
+    ScaffoldMessenger.of(context).showMaterialBanner(
+      MaterialBanner(
+        content: Text('Push notifications are disabled. Please enable them.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              requestNotificationPermission();
+            },
+            child: Text('ENABLE'),
+          ),
+        ],
+        backgroundColor: Colors.amber,
+      ),
+    );
   }
 
   @override
@@ -73,7 +128,7 @@ class _RootLayoutState extends State<RootLayout> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      return Scaffold(body: widget.child);
+      return Material(child: widget.child);
     });
   }
 }

@@ -39,13 +39,13 @@ List<Widget> get _pocketListingFields => [
       MultipleImageuploadField(
         name: 'photos',
         label: 'Photos',
-        isRequired: true,
+        isRequired: false,
       ),
       VerticalSmallGap(),
       AttachmentField(
         name: 'documents',
         label: 'Documents',
-        isRequired: true,
+        isRequired: false,
       )
     ];
 

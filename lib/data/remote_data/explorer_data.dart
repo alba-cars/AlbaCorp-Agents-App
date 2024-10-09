@@ -406,8 +406,16 @@ class ExplorerData implements ExplorerRepo {
           );
         } else if (v.value is List<FileObject>) {
           final List<Map<String, String>> files = [];
-          for (final fileObject in v.value) {
-            final file = File(fileObject!.localImage!);
+          for (final FileObject fileObject in v.value) {
+            if (fileObject.localImage == null &&
+                fileObject.networkImageUrl != null) {
+              files.add({
+                'original': fileObject.networkImageUrl!,
+                if (v.key == 'documents') 'type': 'Other'
+              });
+              continue;
+            }
+            final file = File(fileObject.localImage!);
             final ext = extension(file.path);
             final uploaded = await uploadFileToS3AndGetPath(file,
                 fullPath:

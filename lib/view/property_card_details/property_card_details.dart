@@ -17,6 +17,7 @@ import 'package:real_estate_app/view/property_card_details/cubit/property_card_d
 import 'package:real_estate_app/view/property_card_details/widgets/convert_propertycard.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/lead_property_action_button.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/show_add_note_dialog.dart';
+import 'package:real_estate_app/view/property_card_details/widgets/show_add_photos_dialog.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/unlink_confirmation_dialog.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
@@ -741,11 +742,32 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         BlockTitleText(
                           color: Theme.of(context).colorScheme.onPrimary,
                           text: 'Photos',
                         ),
+                        if (propertyCard?.currentAgent?['_id'] ==
+                            getIt<AuthBloc>().state.agent?.id)
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  padding: EdgeInsets.symmetric(vertical: 0)),
+                              onPressed: () {
+                                showAddPhotosDialog(context,propertyCard?.photos);
+                              },
+                              child: Row(
+                                children: [
+                                  BlockTitleText(
+                                    text: '+ Add',
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer,
+                                  ),
+                                ],
+                              ))
                       ],
                     ),
                   ),
