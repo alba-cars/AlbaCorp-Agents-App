@@ -207,18 +207,57 @@ class ExplorerData implements ExplorerRepo {
           'v1/property-cards/checkout-leads?currentAgent=${getIt<AuthBloc>().state.agent?.id}&withLeadsCount=true';
       Map<String, dynamic>? filterRemoved;
       if (filter != null) {
-        filterRemoved =
-            (Map.from(filter)..removeWhere((key, value) => value == null));
+        filterRemoved = Map.from(filter)
+          ..removeWhere((key, value) => value == null);
 
         filterRemoved = filterRemoved.map((key, value) {
           if (value is Map) {
-            return MapEntry(key, value['value']);
-          } else if (value is List<Map>) {
-            return MapEntry(key, value.map((e) => e['value']).toList());
+            // Check if the value in the Map is a List and flatten it
+            final flattenedValue = (value['value'] is List)
+                ? (value['value'] as List)
+                    .expand((element) => element is List ? element : [element])
+                    .toList()
+                : value['value'];
+            return MapEntry(key, flattenedValue);
+          } else if (value is List) {
+            // Flatten the List, regardless of whether it contains Maps or other lists
+            final flattenedList = value.expand((element) {
+              if (element is Map && element['value'] != null) {
+                // Check if the value in the Map is a list and flatten it
+                return element['value'] is List
+                    ? (element['value'] as List)
+                        .expand((innerElement) => innerElement is List
+                            ? innerElement
+                            : [innerElement])
+                        .toList()
+                    : [element['value']];
+              } else if (element is List) {
+                // Flatten any nested lists
+                return element;
+              } else {
+                // Return non-list elements as is
+                return [element];
+              }
+            }).toList();
+
+            return MapEntry(key, flattenedList);
           } else {
+            // If it's a single value, return it as is
             return MapEntry(key, value);
           }
         });
+      }
+
+      if (filterRemoved?.containsKey('places') == true &&
+          filterRemoved?['places'] is List) {
+        final places = filterRemoved!['places'] as List;
+
+        if (places.isNotEmpty) {
+          // Replace "communities" with "places" if "places" is not empty
+          filterRemoved['communities'] = places;
+          filterRemoved.remove(
+              'places'); // Remove "places" after copying it to "communities"
+        }
       }
       final response = await _dio.get(url, queryParameters: {
         'limit': 15,
@@ -660,6 +699,7 @@ class ExplorerData implements ExplorerRepo {
       final data = response.data['results'] as List;
       final list = data.map((e) => CommunityTeamModel.fromJson(e)).toList();
       // final paginator = Paginator(itemCount: 30, perPage: 30, currentPage: 1);
+
       return Success(
         list,
       );
