@@ -126,18 +126,16 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
             )),
           ];
         },
-        body: SafeArea(
-          child: BlocListener<ExplorerScreenCubit, ExplorerScreenState>(
-            listenWhen: (previous, current) =>
-                previous.currentTab != current.currentTab,
-            listener: (context, state) {
-              _tabController.animateTo(state.currentTab);
-            },
-            child: TabBarView(
-              controller: _tabController,
-              physics: NeverScrollableScrollPhysics(),
-              children: [ExplorerTab(), CheckedOutPoolTab()],
-            ),
+        body: BlocListener<ExplorerScreenCubit, ExplorerScreenState>(
+          listenWhen: (previous, current) =>
+              previous.currentTab != current.currentTab,
+          listener: (context, state) {
+            _tabController.animateTo(state.currentTab);
+          },
+          child: TabBarView(
+            controller: _tabController,
+            physics: NeverScrollableScrollPhysics(),
+            children: [ExplorerTab(), CheckedOutPoolTab()],
           ),
         ),
       ),
