@@ -72,154 +72,156 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
     final propertyTypeList = context.select<AddDealCubit, List<PropertyType>>(
       (value) => value.state.propertyTypeList,
     );
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, isScrolledBelow) => [
-          SliverAppBar(
-            title: Text('Add Deal'),
-            centerTitle: true,
-            backgroundColor: primaryColor,
-            foregroundColor: Colors.white,
-          ),
-          if (!widget.isEdit)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-                child: BlocSelector<AddDealCubit, AddDealState, int>(
-                  selector: (state) {
-                    return state.currentTab;
-                  },
-                  builder: (context, currentTab) {
-                    return Row(
-                      children: [
-                        SizedBox.square(
-                          dimension: 60,
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              CircularProgressIndicator(
-                                strokeWidth: 8,
-                                value: (currentTab + 1) / 4,
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer,
-                                color: primaryColor,
-                                strokeCap: StrokeCap.round,
-                                // valueColor: AlwaysStoppedAnimation(Colors.blue),
-                              ),
-                              Align(
-                                  alignment: Alignment.center,
-                                  child:
-                                      LabelText(text: '${currentTab + 1} of 3'))
-                            ],
-                          ),
-                        ),
-                        HorizontalSmallGap(),
-                        Expanded(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            BlockTitleText(
-                                text: context
-                                    .read<AddDealCubit>()
-                                    .stepNames[currentTab]),
-                            NormalText(
-                                text:
-                                    '${currentTab != 2 ? "Next" : 'Previous'} : ${currentTab != 2 ? context.read<AddDealCubit>().stepNames[currentTab + 1] : context.read<AddDealCubit>().stepNames[currentTab - 1]}')
-                          ],
-                        ))
-                      ],
-                    );
-                  },
-                ),
-              ),
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (context, isScrolledBelow) => [
+            SliverAppBar(
+              title: Text('Add Deal'),
+              centerTitle: true,
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
             ),
-        ],
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
+            if (!widget.isEdit)
+              SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                  ),
-                  child: BlocSelector<AddDealCubit, AddDealState, DealType?>(
+                  padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
+                  child: BlocSelector<AddDealCubit, AddDealState, int>(
                     selector: (state) {
-                      return state.selectedDealType;
+                      return state.currentTab;
                     },
-                    builder: (context, selectedDealType) {
-                      return TabBarView(
-                        controller: _tabController,
-                        physics: NeverScrollableScrollPhysics(),
+                    builder: (context, currentTab) {
+                      return Row(
                         children: [
-                          if (!widget.isEdit) DealTypeTab(),
-                          selectedDealType == DealType.primaryOffPlan
-                              ? PrimaryBasicInfoTab(
-                                  formKey: _formKeyStepOne,
-                                  propertyTypeList: propertyTypeList)
-                              : SecondaryBasicInfoTab(
-                                  formKey: _formKeyStepOne,
-                                  propertyTypeList: propertyTypeList),
-                          CollectDocumentsTab(
-                            formKey: _formKeyStepTwo,
+                          SizedBox.square(
+                            dimension: 60,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                CircularProgressIndicator(
+                                  strokeWidth: 8,
+                                  value: (currentTab + 1) / 4,
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                  color: primaryColor,
+                                  strokeCap: StrokeCap.round,
+                                  // valueColor: AlwaysStoppedAnimation(Colors.blue),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child:
+                                        LabelText(text: '${currentTab + 1} of 3'))
+                              ],
+                            ),
                           ),
+                          HorizontalSmallGap(),
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              BlockTitleText(
+                                  text: context
+                                      .read<AddDealCubit>()
+                                      .stepNames[currentTab]),
+                              NormalText(
+                                  text:
+                                      '${currentTab != 2 ? "Next" : 'Previous'} : ${currentTab != 2 ? context.read<AddDealCubit>().stepNames[currentTab + 1] : context.read<AddDealCubit>().stepNames[currentTab - 1]}')
+                            ],
+                          ))
                         ],
                       );
                     },
                   ),
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                child: BlocSelector<AddDealCubit, AddDealState, int>(
-                  selector: (state) {
-                    return state.currentTab;
-                  },
-                  builder: (context, currentTab) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (currentTab == 1) ...[
-                          Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  context
-                                      .read<AddDealCubit>()
-                                      .onPreviousPressed(
-                                          tabController: _tabController);
-                                },
-                                child: Text('Previous')),
-                          ),
-                          HorizontalSmallGap(),
-                        ],
-                        AppPrimaryButton(
-                            onTap: () async {
-                              final error = await context
-                                  .read<AddDealCubit>()
-                                  .onNextPressed(context,
-                                      formKey: currentTab == 1
-                                          ? _formKeyStepOne
-                                          : currentTab == 2
-                                              ? _formKeyStepTwo
-                                              : _formKeyStepThree,
-                                      tabController: _tabController);
-                              if (error != null) {
-                                showSnackbar(
-                                    context, error, SnackBarType.failure,
-                                    bottomSpace: 70);
-                              }
-                            },
-                            text: ('Next')),
-                      ],
-                    );
-                  },
+          ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    child: BlocSelector<AddDealCubit, AddDealState, DealType?>(
+                      selector: (state) {
+                        return state.selectedDealType;
+                      },
+                      builder: (context, selectedDealType) {
+                        return TabBarView(
+                          controller: _tabController,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            if (!widget.isEdit) DealTypeTab(),
+                            selectedDealType == DealType.primaryOffPlan
+                                ? PrimaryBasicInfoTab(
+                                    formKey: _formKeyStepOne,
+                                    propertyTypeList: propertyTypeList)
+                                : SecondaryBasicInfoTab(
+                                    formKey: _formKeyStepOne,
+                                    propertyTypeList: propertyTypeList),
+                            CollectDocumentsTab(
+                              formKey: _formKeyStepTwo,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
-              VerticalSmallGap(),
-            ],
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: BlocSelector<AddDealCubit, AddDealState, int>(
+                    selector: (state) {
+                      return state.currentTab;
+                    },
+                    builder: (context, currentTab) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (currentTab == 1) ...[
+                            Expanded(
+                              child: OutlinedButton(
+                                  onPressed: () {
+                                    context
+                                        .read<AddDealCubit>()
+                                        .onPreviousPressed(
+                                            tabController: _tabController);
+                                  },
+                                  child: Text('Previous')),
+                            ),
+                            HorizontalSmallGap(),
+                          ],
+                          AppPrimaryButton(
+                              onTap: () async {
+                                final error = await context
+                                    .read<AddDealCubit>()
+                                    .onNextPressed(context,
+                                        formKey: currentTab == 1
+                                            ? _formKeyStepOne
+                                            : currentTab == 2
+                                                ? _formKeyStepTwo
+                                                : _formKeyStepThree,
+                                        tabController: _tabController);
+                                if (error != null) {
+                                  showSnackbar(
+                                      context, error, SnackBarType.failure,
+                                      bottomSpace: 70);
+                                }
+                              },
+                              text: ('Next')),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                VerticalSmallGap(),
+              ],
+            ),
           ),
         ),
       ),

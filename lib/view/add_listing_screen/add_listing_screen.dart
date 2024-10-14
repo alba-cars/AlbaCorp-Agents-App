@@ -92,114 +92,116 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
         context.select<AddListingCubit, List<PropertyType>>(
       (value) => value.state.propertyTypeList,
     );
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, isScrolledBelow) => [
-          SliverAppBar(
-            title: Text(context.read<AddListingCubit>().isEdit? 'Edit Listing': 'Add Listing'),
-            centerTitle: true,
-            backgroundColor: primaryColor,
-            foregroundColor: Colors.white,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-              child: BlocSelector<AddListingCubit, AddListingState, int>(
-                selector: (state) {
-                  return state.currentTab;
-                },
-                builder: (context, currentTab) {
-                  return Row(
-                    children: [
-                      SizedBox.square(
-                        dimension: 60,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            CircularProgressIndicator(
-                              strokeWidth: 8,
-                              value: (currentTab + 1) / 4,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                              color: primaryColor,
-                              strokeCap: StrokeCap.round,
-                              // valueColor: AlwaysStoppedAnimation(Colors.blue),
-                            ),
-                            Align(
-                                alignment: Alignment.center,
-                                child:
-                                    LabelText(text: '${currentTab + 1} of 2'))
-                          ],
-                        ),
-                      ),
-                      HorizontalSmallGap(),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          BlockTitleText(text: 'Basic Info'),
-                          NormalText(text: 'Next : Collect Documents')
-                        ],
-                      ))
-                    ],
-                  );
-                },
-              ),
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (context, isScrolledBelow) => [
+            SliverAppBar(
+              title: Text(context.read<AddListingCubit>().isEdit? 'Edit Listing': 'Add Listing'),
+              centerTitle: true,
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
             ),
-          ),
-        ],
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                  ),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      BasicInfoTab(
-                          formKey: _formKey[0],
-                          propertyTypeList: propertyTypeList,
-                          lead: widget.lead),
-                      CollectDocumentsTab(
-                        formKey: _formKey[1],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
                 child: BlocSelector<AddListingCubit, AddListingState, int>(
                   selector: (state) {
                     return state.currentTab;
                   },
                   builder: (context, currentTab) {
                     return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        AppPrimaryButton(
-                            onTap: () async {
-                              await context
-                                  .read<AddListingCubit>()
-                                  .onNextPressed(context,
-                                      formKey: _formKey[currentTab],
-                                      tabController: _tabController);
-                            },
-                            text: ('Next')),
+                        SizedBox.square(
+                          dimension: 60,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              CircularProgressIndicator(
+                                strokeWidth: 8,
+                                value: (currentTab + 1) / 4,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
+                                color: primaryColor,
+                                strokeCap: StrokeCap.round,
+                                // valueColor: AlwaysStoppedAnimation(Colors.blue),
+                              ),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child:
+                                      LabelText(text: '${currentTab + 1} of 2'))
+                            ],
+                          ),
+                        ),
+                        HorizontalSmallGap(),
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            BlockTitleText(text: 'Basic Info'),
+                            NormalText(text: 'Next : Collect Documents')
+                          ],
+                        ))
                       ],
                     );
                   },
                 ),
-              )
-            ],
+              ),
+            ),
+          ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    child: TabBarView(
+                      controller: _tabController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        BasicInfoTab(
+                            formKey: _formKey[0],
+                            propertyTypeList: propertyTypeList,
+                            lead: widget.lead),
+                        CollectDocumentsTab(
+                          formKey: _formKey[1],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: BlocSelector<AddListingCubit, AddListingState, int>(
+                    selector: (state) {
+                      return state.currentTab;
+                    },
+                    builder: (context, currentTab) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppPrimaryButton(
+                              onTap: () async {
+                                await context
+                                    .read<AddListingCubit>()
+                                    .onNextPressed(context,
+                                        formKey: _formKey[currentTab],
+                                        tabController: _tabController);
+                              },
+                              text: ('Next')),
+                        ],
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

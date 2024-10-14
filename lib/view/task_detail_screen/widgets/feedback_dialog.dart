@@ -30,18 +30,20 @@ import '../../add_deal_screen/add_deal_screen.dart';
 import '../task_detail_screen.dart';
 
 class ActivityFeedbackDialog extends StatefulWidget {
+
   const ActivityFeedbackDialog({
     super.key,
     required this.activity,
     required this.parentContext,
     this.direction,
-    this.mode,
+    this.mode, this.notes,
   });
 
   final Activity activity;
   final BuildContext parentContext;
   final DismissDirection? direction;
   final CardAction? mode;
+  final String? notes;
 
   @override
   State<ActivityFeedbackDialog> createState() => _ActivityFeedbackDialogState();
@@ -49,7 +51,7 @@ class ActivityFeedbackDialog extends StatefulWidget {
 
 class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   late final ValueNotifier<String?> feedBackValue = ValueNotifier(null);
-  final TextEditingController _controller = TextEditingController();
+   TextEditingController _controller = TextEditingController();
   final GlobalKey<FormBuilderState> _formKey = GlobalKey();
 
   @override
@@ -63,6 +65,9 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       _ => null
     };
 
+  Logger().d("Widget notes:: ${widget.notes}");
+    String notesValue = (widget.notes ?? "" );
+    _controller = TextEditingController(text: notesValue);
     super.initState();
   }
 
@@ -333,7 +338,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                   },
                                 ),
                                 MultiLineField(
-                                  label: 'Description',
+                                  label: 'Add a note for next activity',
                                   name: 'description',
                                 ),
                                 VerticalSmallGap(),
@@ -374,7 +379,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                             .completeAndAddFollowUp(
                                                 context: context,
                                                 values: val,
-                                                description: val['description'],
+                                               currentActivityNotes: val['notes'],
                                                 markAsProspect:
                                                     feedBackValue.value ==
                                                         'Very Interested');
@@ -487,7 +492,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                           .read<TaskDetailCubit>()
                                           .completeAndAddFollowUp(
                                               context: widget.parentContext,
-                                              description: "Not Answered",
+                                              currentActivityNotes: "Not Answered",
                                               markAsProspect: false,
                                               values: {
                                             ...context

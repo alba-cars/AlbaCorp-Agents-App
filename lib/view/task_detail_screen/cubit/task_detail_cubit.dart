@@ -83,14 +83,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> updateActivity(
       {required BuildContext context,
-      String? description,
+      String? notes,
       required bool addFollowUp,
       bool refresh = false,
       bool completed = true,
       Map<String, dynamic>? values,
       Future<void> Function()? onSuccess}) async {
     final result = await _activityRepo.updateActivity(
-        activityId: state.task!.id, notes: description, completed: completed);
+        activityId: state.task!.id, notes: notes, completed: completed);
     switch (result) {
       case (Success s):
         if (onSuccess != null) {
@@ -120,10 +120,10 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           Navigator.of(context).pop(true);
         }
         if (refresh) {
-          final activity = state.task?.copyWith(notes: description);
+          final activity = state.task?.copyWith(notes: notes);
           final activities = state.activities
               .map((e) =>
-                  e.id == state.taskId ? e.copyWith(notes: description) : e)
+                  e.id == state.taskId ? e.copyWith(notes: notes) : e)
               .toList();
           emit(state.copyWith(task: activity, sortedActivity: activities));
         }
@@ -139,7 +139,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> completeAndAddFollowUp(
       {required BuildContext context,
-      String? description,
+      String? currentActivityNotes,
       required bool markAsProspect,
       Map<String, dynamic>? values}) async {
     final date = (values?["date"] as DateTime?)?.addTime(
@@ -153,7 +153,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (markAsProspect) {
       await makeProspect(
           context: context,
-          description: description,
+          description: currentActivityNotes,
           addFollowUp: true,
           values: values);
     } else {
@@ -161,7 +161,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           context: context,
           addFollowUp: true,
           values: values,
-          description: description);
+          notes: currentActivityNotes);
     }
   }
 
@@ -174,7 +174,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
-        description: description,
+        notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
@@ -206,7 +206,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
-        description: description,
+        notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
@@ -234,7 +234,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
-        description: description,
+        notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
@@ -268,7 +268,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       case (Success s):
         await updateActivity(
             context: context,
-            description: description,
+            notes: description,
             addFollowUp: true,
             values: values);
       case (Error e):

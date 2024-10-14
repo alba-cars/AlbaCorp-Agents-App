@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 
@@ -24,6 +26,12 @@ abstract class ActivityRepo {
       {required int filterCode,
       LeadStatus? status,
       String? nameSearch,
+      Paginator? paginator});
+  Future<Result<List<Activity>>> getActivitiesByAgent(
+      {
+      LeadStatus? status,
+      List<DateTime>? dates,
+      String? userId,
       Paginator? paginator});
   Future<Result<List<Activity>>> fetchActivitiesSorted(
       {Map<String, dynamic>? filter,

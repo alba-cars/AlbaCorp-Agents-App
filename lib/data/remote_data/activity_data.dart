@@ -67,6 +67,8 @@ class ActivityData implements ActivityRepo {
       String? notes,
       String? feedback}) async {
     try {
+
+      Logger().d("Updated notes: :: $notes");
       await _dio.patch('/v1/activities/$activityId', data: {
         if (completed) 'status': 'Complete',
         if (duration != null) 'duration': duration,
@@ -344,6 +346,31 @@ class ActivityData implements ActivityRepo {
 
       return Success(res.data['requestFollowUp'] ?? true);
     } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+  
+  @override
+  Future<Result<List<Activity>>> getActivitiesByAgent({LeadStatus? status, List<DateTime>? dates, String? userId, Paginator? paginator}) async {
+    try {
+      Map<String, dynamic> query = {
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        'limit':  20,
+      };
+      final res =
+          await _dio.post('/v1/activities/agent/', data: {
+        // 'date': dates,
+        // 'userId' : dates, 
+        //  status : status?.name,
+      },
+      queryParameters: query);
+      Logger().d(res.data);
+      List<dynamic> data = res.data['activities'] as List;
+
+      List<Activity> activities = (data ?? []).map((e) => Activity.fromJson(e)).toList();
+
+      return Success(activities);
+    } catch (e,stack) {
       return onError(e, stack, log);
     }
   }

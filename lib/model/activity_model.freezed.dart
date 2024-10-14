@@ -43,7 +43,9 @@ mixin _$Activity {
   String? get offplanId => throw _privateConstructorUsedError;
   String? get propertyType => throw _privateConstructorUsedError;
   DateTime? get overdueAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -78,8 +80,8 @@ abstract class $ActivityCopyWith<$Res> {
       String? offplanId,
       String? propertyType,
       DateTime? overdueAt,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -254,8 +256,8 @@ abstract class _$$ActivityImplCopyWith<$Res>
       String? offplanId,
       String? propertyType,
       DateTime? overdueAt,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -412,8 +414,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       this.offplanId,
       this.propertyType,
       this.overdueAt,
-      this.createdAt,
-      this.updatedAt})
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt})
       : _preferredLanguages = preferredLanguages,
         _tags = tags;
 
@@ -483,8 +485,10 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
   @override
   final DateTime? overdueAt;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
 
   @override
@@ -628,8 +632,8 @@ abstract class _Activity implements Activity {
       final String? offplanId,
       final String? propertyType,
       final DateTime? overdueAt,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$ActivityImpl;
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$ActivityImpl;
 
   factory _Activity.fromJson(Map<String, dynamic> json) =
       _$ActivityImpl.fromJson;
@@ -678,8 +682,10 @@ abstract class _Activity implements Activity {
   @override
   DateTime? get overdueAt;
   @override
+  @JsonKey(name: 'created_at')
   DateTime? get createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)

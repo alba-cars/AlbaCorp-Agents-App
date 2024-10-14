@@ -69,6 +69,12 @@ class Lead with _$Lead {
     int completedActivityCount,
   }) = _Lead;
 
+  const Lead._();
+
+  String getFullName(){
+    return "${firstName} ${lastName}";
+  }
+
   factory Lead.fromJson(Map<String, dynamic> json) => _$LeadFromJson(json);
 }
 

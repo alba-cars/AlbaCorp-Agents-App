@@ -535,7 +535,7 @@ class __$$LeadImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
+class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   const _$LeadImpl(
       {@JsonKey(readValue: readId) required this.id,
       @JsonKey(name: 'first_name') required this.firstName,
@@ -573,7 +573,8 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
       this.completedActivityCount = 0})
       : _languages = languages,
         _preferredLanguages = preferredLanguages,
-        _tags = tags;
+        _tags = tags,
+        super._();
 
   factory _$LeadImpl.fromJson(Map<String, dynamic> json) =>
       _$$LeadImplFromJson(json);
@@ -834,7 +835,7 @@ class _$LeadImpl with DiagnosticableTreeMixin implements _Lead {
   }
 }
 
-abstract class _Lead implements Lead {
+abstract class _Lead extends Lead {
   const factory _Lead(
       {@JsonKey(readValue: readId) required final String id,
       @JsonKey(name: 'first_name') required final String firstName,
@@ -870,6 +871,7 @@ abstract class _Lead implements Lead {
       @JsonKey(name: 'DndStatus') final bool dndStatus,
       @JsonKey(readValue: readCompletedActivityCount)
       final int completedActivityCount}) = _$LeadImpl;
+  const _Lead._() : super._();
 
   factory _Lead.fromJson(Map<String, dynamic> json) = _$LeadImpl.fromJson;
 

@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -231,6 +232,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                 parentContext: context,
                                 direction: DismissDirection.startToEnd,
                                 mode: mode,
+                                notes:  context.read<TaskDetailCubit>().state.task?.notes,
                                 activity:
                                     context.read<TaskDetailCubit>().state.task!,
                               ));
@@ -252,6 +254,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                               ActivityFeedbackDialog(
                                 parentContext: context,
                                 direction: DismissDirection.endToStart,
+                                notes:  context.read<TaskDetailCubit>().state.task?.notes,
                                 activity:
                                     context.read<TaskDetailCubit>().state.task!,
                               ));
@@ -431,7 +434,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                 value: context.read<
                                                                     TaskDetailCubit>(),
                                                                 child:
-                                                                    AddNoteDialog(),
+                                                                    AddNoteDialog(preNote: task.notes ??"",),
                                                               );
                                                             });
                                                       },
@@ -702,13 +705,26 @@ class ContainerIcon extends StatelessWidget {
 }
 
 class AddNoteDialog extends StatefulWidget {
-  const AddNoteDialog({super.key});
+  const AddNoteDialog({super.key, required this.preNote});
+
+  final String preNote;
 
   @override
   State<AddNoteDialog> createState() => _AddNoteDialogState();
 }
 
 class _AddNoteDialogState extends State<AddNoteDialog> {
+  String note = "";
+  TextEditingController _controller = TextEditingController();
+  
+  @override
+  void initState() {
+    Logger().d("Pre notes :: ${widget.preNote}");
+    note = widget.preNote;
+    _controller = TextEditingController(text: note);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormBuilderState> key = GlobalKey();
@@ -724,6 +740,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
               MultiLineField(
                 name: 'notes',
                 label: 'Note',
+                controller: _controller,
               )
             ],
           ),
@@ -751,7 +768,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                           context: context,
                           completed: false,
                           refresh: true,
-                          description: values["notes"],
+                          notes: _controller.text.trim(),
                           addFollowUp: false);
                     }
                   }),

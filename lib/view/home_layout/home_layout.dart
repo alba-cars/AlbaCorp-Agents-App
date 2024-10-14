@@ -20,6 +20,7 @@ import 'package:real_estate_app/view/home_layout/quick_access_button.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
+import 'package:real_estate_app/view/my_activities/presentation/my_actvities_page.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
@@ -352,6 +353,14 @@ class _HomeScreenState extends State<HomeScreen>
                           onPressed: () {
                             Scaffold.of(context).closeDrawer();
                             context.pushNamed(LeadsScreen.routeName);
+                          },
+                        ),
+                             CustomListTileWithIcon(
+                          title: 'My Activities',
+                          iconImagePath: 'assets/images/leads.png',
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                            context.pushNamed(MyActvitiesPage.routeName);
                           },
                         ),
                         CustomListTileWithIcon(

@@ -82,132 +82,135 @@ class _AddListingScreenLayoutState extends State<_AddPocketListingScreenLayout>
     final currentTab = context.select<AddPocketListingCubit, int>(
       (value) => value.state.currentTab,
     );
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, isScrolledBelow) => [
-          SliverAppBar(
-            title: Text('Add Pocket Listing'),
-            centerTitle: true,
-            backgroundColor: primaryColor,
-            foregroundColor: Colors.white,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-              child: BlocSelector<AddPocketListingCubit, AddPocketListingState,
-                  int>(
-                selector: (state) {
-                  return state.currentTab;
-                },
-                builder: (context, currentTab) {
-                  return Row(
-                    children: [
-                      SizedBox.square(
-                        dimension: 60,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            CircularProgressIndicator(
-                              strokeWidth: 8,
-                              value: (currentTab + 1) / 2,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                              color: primaryColor,
-                              strokeCap: StrokeCap.round,
-                              // valueColor: AlwaysStoppedAnimation(Colors.blue),
-                            ),
-                            Align(
-                                alignment: Alignment.center,
-                                child:
-                                    LabelText(text: '${currentTab + 1} of 2'))
-                          ],
-                        ),
-                      ),
-                      HorizontalSmallGap(),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          BlockTitleText(text: steps[currentTab]),
-                          NormalText(
-                              text:
-                                  '${currentTab < 1 ? "Next" : 'Previous'} : ${currentTab < 1 ? steps[currentTab + 1] : steps[currentTab - 1]}')
-                        ],
-                      ))
-                    ],
-                  );
-                },
-              ),
+    return Scaffold(
+      body: GestureDetector(
+        
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (context, isScrolledBelow) => [
+            SliverAppBar(
+              title: Text('Add Pocket Listing'),
+              centerTitle: true,
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
             ),
-          ),
-        ],
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                  ),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      BasicInfoTab(
-                          formKey: _formKey[0],
-                          propertyTypeList: propertyTypeList),
-                      CollectDocumentsTab(
-                        formKey: _formKey[1],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                child: BlocSelector<AddPocketListingCubit,
-                    AddPocketListingState, int>(
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
+                child: BlocSelector<AddPocketListingCubit, AddPocketListingState,
+                    int>(
                   selector: (state) {
                     return state.currentTab;
                   },
                   builder: (context, currentTab) {
                     return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        if (currentTab != 0) ...[
-                          Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  context
-                                      .read<AddPocketListingCubit>()
-                                      .onPreviousPressed(
-                                          tabController: _tabController);
-                                },
-                                child: Text('Previous')),
+                        SizedBox.square(
+                          dimension: 60,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              CircularProgressIndicator(
+                                strokeWidth: 8,
+                                value: (currentTab + 1) / 2,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
+                                color: primaryColor,
+                                strokeCap: StrokeCap.round,
+                                // valueColor: AlwaysStoppedAnimation(Colors.blue),
+                              ),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child:
+                                      LabelText(text: '${currentTab + 1} of 2'))
+                            ],
                           ),
-                          HorizontalSmallGap(),
-                        ],
-                        Expanded(
-                          child: AppPrimaryButton(
-                              onTap: () async {
-                                await context
-                                    .read<AddPocketListingCubit>()
-                                    .onNextPressed(context,
-                                        formKey: _formKey[currentTab],
-                                        tabController: _tabController);
-                              },
-                              text: currentTab != 1 ? 'Next' : 'Save'),
                         ),
+                        HorizontalSmallGap(),
+                        Expanded(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            BlockTitleText(text: steps[currentTab]),
+                            NormalText(
+                                text:
+                                    '${currentTab < 1 ? "Next" : 'Previous'} : ${currentTab < 1 ? steps[currentTab + 1] : steps[currentTab - 1]}')
+                          ],
+                        ))
                       ],
                     );
                   },
                 ),
-              )
-            ],
+              ),
+            ),
+          ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    child: TabBarView(
+                      controller: _tabController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        BasicInfoTab(
+                            formKey: _formKey[0],
+                            propertyTypeList: propertyTypeList),
+                        CollectDocumentsTab(
+                          formKey: _formKey[1],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: BlocSelector<AddPocketListingCubit,
+                      AddPocketListingState, int>(
+                    selector: (state) {
+                      return state.currentTab;
+                    },
+                    builder: (context, currentTab) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          if (currentTab != 0) ...[
+                            Expanded(
+                              child: OutlinedButton(
+                                  onPressed: () {
+                                    context
+                                        .read<AddPocketListingCubit>()
+                                        .onPreviousPressed(
+                                            tabController: _tabController);
+                                  },
+                                  child: Text('Previous')),
+                            ),
+                            HorizontalSmallGap(),
+                          ],
+                          Expanded(
+                            child: AppPrimaryButton(
+                                onTap: () async {
+                                  await context
+                                      .read<AddPocketListingCubit>()
+                                      .onNextPressed(context,
+                                          formKey: _formKey[currentTab],
+                                          tabController: _tabController);
+                                },
+                                text: currentTab != 1 ? 'Next' : 'Save'),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
