@@ -12,8 +12,6 @@ class Activity with _$Activity {
     @JsonKey(name: 'user_id') required String userId,
     String? propertyListId,
     @JsonKey(name: 'user') Lead? lead,
-    String? createdBy,
-    String? completedBy,
     @Default(0) double activityWeight,
     required String type,
     String? description,

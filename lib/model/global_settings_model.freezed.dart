@@ -23,12 +23,12 @@ mixin _$GlobalSettings {
   String get id => throw _privateConstructorUsedError;
   String? get timeUntilTicketArchived => throw _privateConstructorUsedError;
   CheckoutLimit get checkoutLimit => throw _privateConstructorUsedError;
-  String get unAssignLeadAfter => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
-  String get blockLeadFor => throw _privateConstructorUsedError;
-  String get dealReminderAfter => throw _privateConstructorUsedError;
-  String get newLeadFlagDateLimit => throw _privateConstructorUsedError;
+  String? get unAssignLeadAfter => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String? get blockLeadFor => throw _privateConstructorUsedError;
+  String? get dealReminderAfter => throw _privateConstructorUsedError;
+  String? get newLeadFlagDateLimit => throw _privateConstructorUsedError;
   dynamic get enablePbx => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,12 +47,12 @@ abstract class $GlobalSettingsCopyWith<$Res> {
       {String id,
       String? timeUntilTicketArchived,
       CheckoutLimit checkoutLimit,
-      String unAssignLeadAfter,
-      DateTime createdAt,
-      DateTime updatedAt,
-      String blockLeadFor,
-      String dealReminderAfter,
-      String newLeadFlagDateLimit,
+      String? unAssignLeadAfter,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      String? blockLeadFor,
+      String? dealReminderAfter,
+      String? newLeadFlagDateLimit,
       dynamic enablePbx});
 
   $CheckoutLimitCopyWith<$Res> get checkoutLimit;
@@ -74,12 +74,12 @@ class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
     Object? id = null,
     Object? timeUntilTicketArchived = freezed,
     Object? checkoutLimit = null,
-    Object? unAssignLeadAfter = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? blockLeadFor = null,
-    Object? dealReminderAfter = null,
-    Object? newLeadFlagDateLimit = null,
+    Object? unAssignLeadAfter = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? blockLeadFor = freezed,
+    Object? dealReminderAfter = freezed,
+    Object? newLeadFlagDateLimit = freezed,
     Object? enablePbx = freezed,
   }) {
     return _then(_value.copyWith(
@@ -95,30 +95,30 @@ class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
           ? _value.checkoutLimit
           : checkoutLimit // ignore: cast_nullable_to_non_nullable
               as CheckoutLimit,
-      unAssignLeadAfter: null == unAssignLeadAfter
+      unAssignLeadAfter: freezed == unAssignLeadAfter
           ? _value.unAssignLeadAfter
           : unAssignLeadAfter // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      blockLeadFor: null == blockLeadFor
+              as DateTime?,
+      blockLeadFor: freezed == blockLeadFor
           ? _value.blockLeadFor
           : blockLeadFor // ignore: cast_nullable_to_non_nullable
-              as String,
-      dealReminderAfter: null == dealReminderAfter
+              as String?,
+      dealReminderAfter: freezed == dealReminderAfter
           ? _value.dealReminderAfter
           : dealReminderAfter // ignore: cast_nullable_to_non_nullable
-              as String,
-      newLeadFlagDateLimit: null == newLeadFlagDateLimit
+              as String?,
+      newLeadFlagDateLimit: freezed == newLeadFlagDateLimit
           ? _value.newLeadFlagDateLimit
           : newLeadFlagDateLimit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       enablePbx: freezed == enablePbx
           ? _value.enablePbx
           : enablePbx // ignore: cast_nullable_to_non_nullable
@@ -147,12 +147,12 @@ abstract class _$$GlobalSettingsImplCopyWith<$Res>
       {String id,
       String? timeUntilTicketArchived,
       CheckoutLimit checkoutLimit,
-      String unAssignLeadAfter,
-      DateTime createdAt,
-      DateTime updatedAt,
-      String blockLeadFor,
-      String dealReminderAfter,
-      String newLeadFlagDateLimit,
+      String? unAssignLeadAfter,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      String? blockLeadFor,
+      String? dealReminderAfter,
+      String? newLeadFlagDateLimit,
       dynamic enablePbx});
 
   @override
@@ -173,12 +173,12 @@ class __$$GlobalSettingsImplCopyWithImpl<$Res>
     Object? id = null,
     Object? timeUntilTicketArchived = freezed,
     Object? checkoutLimit = null,
-    Object? unAssignLeadAfter = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? blockLeadFor = null,
-    Object? dealReminderAfter = null,
-    Object? newLeadFlagDateLimit = null,
+    Object? unAssignLeadAfter = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? blockLeadFor = freezed,
+    Object? dealReminderAfter = freezed,
+    Object? newLeadFlagDateLimit = freezed,
     Object? enablePbx = freezed,
   }) {
     return _then(_$GlobalSettingsImpl(
@@ -194,30 +194,30 @@ class __$$GlobalSettingsImplCopyWithImpl<$Res>
           ? _value.checkoutLimit
           : checkoutLimit // ignore: cast_nullable_to_non_nullable
               as CheckoutLimit,
-      unAssignLeadAfter: null == unAssignLeadAfter
+      unAssignLeadAfter: freezed == unAssignLeadAfter
           ? _value.unAssignLeadAfter
           : unAssignLeadAfter // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      blockLeadFor: null == blockLeadFor
+              as DateTime?,
+      blockLeadFor: freezed == blockLeadFor
           ? _value.blockLeadFor
           : blockLeadFor // ignore: cast_nullable_to_non_nullable
-              as String,
-      dealReminderAfter: null == dealReminderAfter
+              as String?,
+      dealReminderAfter: freezed == dealReminderAfter
           ? _value.dealReminderAfter
           : dealReminderAfter // ignore: cast_nullable_to_non_nullable
-              as String,
-      newLeadFlagDateLimit: null == newLeadFlagDateLimit
+              as String?,
+      newLeadFlagDateLimit: freezed == newLeadFlagDateLimit
           ? _value.newLeadFlagDateLimit
           : newLeadFlagDateLimit // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       enablePbx: freezed == enablePbx ? _value.enablePbx! : enablePbx,
     ));
   }
@@ -230,12 +230,12 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
       {required this.id,
       this.timeUntilTicketArchived,
       required this.checkoutLimit,
-      required this.unAssignLeadAfter,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.blockLeadFor,
-      required this.dealReminderAfter,
-      required this.newLeadFlagDateLimit,
+      this.unAssignLeadAfter,
+      this.createdAt,
+      this.updatedAt,
+      this.blockLeadFor,
+      this.dealReminderAfter,
+      this.newLeadFlagDateLimit,
       this.enablePbx = false});
 
   factory _$GlobalSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -248,17 +248,17 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
   @override
   final CheckoutLimit checkoutLimit;
   @override
-  final String unAssignLeadAfter;
+  final String? unAssignLeadAfter;
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   @override
-  final String blockLeadFor;
+  final String? blockLeadFor;
   @override
-  final String dealReminderAfter;
+  final String? dealReminderAfter;
   @override
-  final String newLeadFlagDateLimit;
+  final String? newLeadFlagDateLimit;
   @override
   @JsonKey()
   final dynamic enablePbx;
@@ -329,12 +329,12 @@ abstract class _GlobalSettings implements GlobalSettings {
       {required final String id,
       final String? timeUntilTicketArchived,
       required final CheckoutLimit checkoutLimit,
-      required final String unAssignLeadAfter,
-      required final DateTime createdAt,
-      required final DateTime updatedAt,
-      required final String blockLeadFor,
-      required final String dealReminderAfter,
-      required final String newLeadFlagDateLimit,
+      final String? unAssignLeadAfter,
+      final DateTime? createdAt,
+      final DateTime? updatedAt,
+      final String? blockLeadFor,
+      final String? dealReminderAfter,
+      final String? newLeadFlagDateLimit,
       final dynamic enablePbx}) = _$GlobalSettingsImpl;
 
   factory _GlobalSettings.fromJson(Map<String, dynamic> json) =
@@ -347,17 +347,17 @@ abstract class _GlobalSettings implements GlobalSettings {
   @override
   CheckoutLimit get checkoutLimit;
   @override
-  String get unAssignLeadAfter;
+  String? get unAssignLeadAfter;
   @override
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
   @override
-  String get blockLeadFor;
+  String? get blockLeadFor;
   @override
-  String get dealReminderAfter;
+  String? get dealReminderAfter;
   @override
-  String get newLeadFlagDateLimit;
+  String? get newLeadFlagDateLimit;
   @override
   dynamic get enablePbx;
   @override
