@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
@@ -29,6 +30,7 @@ import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dar
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/listings_screen/listing_screen.dart';
 import 'package:real_estate_app/view/maintenance/maintenance_screen.dart';
+import 'package:real_estate_app/view/my_activities/cubit/my_activities_cubit.dart';
 import 'package:real_estate_app/view/my_activities/presentation/my_actvities_page.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
 import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
@@ -356,9 +358,9 @@ class AppRouter {
                   final bool isBlocking =
                       state.uri.queryParameters['isBlocking'] as bool? ?? false;
                   final String? taskType =
-                      state.uri.queryParameters['taskType'] as String?;
+                      state.uri.queryParameters['taskType'];
                   final String? taskFilter =
-                      state.uri.queryParameters['taskFilter'] as String?;
+                      state.uri.queryParameters['taskFilter'];
 
                   return AppTransition(
                     child: TaskDetailScreen(
@@ -378,11 +380,15 @@ class AppRouter {
                   return AppTransition(child: LeadsExplorerScreen());
                 },
               ),
-                GoRoute(
+              GoRoute(
                 path: MyActvitiesPage.routeName,
                 name: MyActvitiesPage.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: MyActvitiesPage());
+                  return AppTransition(
+                      child: BlocProvider(
+                          create: (context) =>
+                              getIt<MyActivitiesCubit>()..getAgentActivities(),
+                          child: MyActvitiesPage()));
                 },
               ),
               GoRoute(

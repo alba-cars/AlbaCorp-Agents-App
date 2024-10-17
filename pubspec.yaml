@@ -89,6 +89,7 @@ dependencies:
   currency_formatter: ^2.2.1
   flutter_xlider: ^3.5.0
   pdf: ^3.11.1
+  horizontal_week_calendar: ^0.0.18
 
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"
