@@ -355,14 +355,14 @@ class _HomeScreenState extends State<HomeScreen>
                             context.pushNamed(LeadsScreen.routeName);
                           },
                         ),
-                        CustomListTileWithIcon(
-                          title: 'My Activities',
-                          iconImagePath: 'assets/images/leads.png',
-                          onPressed: () {
-                            Scaffold.of(context).closeDrawer();
-                            context.pushNamed(MyActvitiesPage.routeName);
-                          },
-                        ),
+                        // CustomListTileWithIcon(
+                        //   title: 'My Activities',
+                        //   iconImagePath: 'assets/images/leads.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     context.pushNamed(MyActvitiesPage.routeName);
+                        //   },
+                        // ),
                         CustomListTileWithIcon(
                           title: 'Deals',
                           iconImagePath: 'assets/images/deal.png',

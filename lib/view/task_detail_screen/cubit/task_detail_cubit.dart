@@ -104,7 +104,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           final propertyId = values?['property'];
           final description = values?["description"];
           final date = (values?["date"] as DateTime?)?.addTime(
-              (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 0, minute: 0)));
+              (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0)));
           final res = await addActivity(
               context: context,
               leadId: state.task!.lead!.id,
@@ -142,7 +142,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       required bool markAsProspect,
       Map<String, dynamic>? values}) async {
     final date = (values?["date"] as DateTime?)?.addTime(
-        (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 0, minute: 0)));
+        (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0)));
     if (date == null || date.compareTo(DateTime.now()) == -1) {
       if (context.mounted) {
         showSnackbar(context, 'Choose a valid date time', SnackBarType.failure);
