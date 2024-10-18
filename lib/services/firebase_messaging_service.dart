@@ -75,14 +75,18 @@ class AwesomeFcm {
   static Future<void> initializeRemoteNotifications(
       {required bool debug}) async {
     await AwesomeNotificationsFcm().initialize(
-        onFcmSilentDataHandle: AwesomeFcm.mySilentDataHandle,
-        onFcmTokenHandle: AwesomeFcm.myFcmTokenHandle,
-        onNativeTokenHandle: AwesomeFcm.myNativeTokenHandle,
-        // This license key is necessary only to remove the watermark for
-        // push notifications in release mode. To know more about it, please
-        // visit http://awesome-notifications.carda.me#prices
-        licenseKeys: [],
-        debug: debug);
+      onFcmSilentDataHandle: AwesomeFcm.mySilentDataHandle,
+      onFcmTokenHandle: AwesomeFcm.myFcmTokenHandle,
+      onNativeTokenHandle: AwesomeFcm.myNativeTokenHandle,
+      // This license key is necessary only to remove the watermark for
+      // push notifications in release mode. To know more about it, please
+      // visit http://awesome-notifications.carda.me#prices
+      licenseKeys: [
+        "2024-10-12==C3nQf/qapeSsmQ41+6OOgO1J0oUmX60MBx832S41LWZ0cXsB1cKI/fQ9teEfvIOQYW+QnJJfN3/GWphBH899VW9crTGebMgvODiprKWTtX7+rmtC/ibUOA2rtQle0nTh3g9qqoWE4aLdnrDzzCrCZLJCOAb/qCG9MQElXYwfdHlEqBXmPqEv9ttRFgUp+UfSFm9FlSBteqkbAzRUn/xLDGsmpYTXguNl4Wl4xwwln/WUN9Lp0CWBbWoA/V591wHnpU02xzdlxGfKgeGv35mVd9bOGQwbyQdfGR7SAVR8QwwS+sv01jL9e+LTWqMm2BC/cE2NgMfqLOCiUAwYOrZ+lw==",
+        "2024-10-12==CLEr2WQzWDcKEGA6VtLNPlh0TYP/ZELfATrYwGkg3TC+ThaB21IM2pobYvpCekcPvQmvBQPrgOo2mg07yqduVN2EQ7z44Z7W2kU/hdhVkQlAJ5k0oViRM/1X62FDclqjQpMLXjxgVvqkeIWls9NCGSmUOnRFUDGdYYyI7++xrr6rw0aH0mHJvXj8matSfAWagi5WjaCNa1b8Cncz15qYsAlPSR+KVhQS3YHukFeJ1jJcYAZMWuCRQmZ5l7RFuKMEsgtjCq/MLalVOJf87QGy+BSYBBbS/dz2Gun6h4hL41t0UWSEynSrFS43UGb0hEqm67Mk8Eq1Hvq3gC9P/DR+oQ=="
+      ],
+      debug: false,
+    );
   }
 
   static Future<String> getFirebaseMessagingToken() async {

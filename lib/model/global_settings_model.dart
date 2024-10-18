@@ -9,12 +9,12 @@ class GlobalSettings with _$GlobalSettings {
     required String id,
     String? timeUntilTicketArchived,
     required CheckoutLimit checkoutLimit,
-    required String unAssignLeadAfter,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    required String blockLeadFor,
-    required String dealReminderAfter,
-    required String newLeadFlagDateLimit,
+     String? unAssignLeadAfter,
+     DateTime? createdAt,
+     DateTime? updatedAt,
+     String? blockLeadFor,
+     String? dealReminderAfter,
+     String? newLeadFlagDateLimit,
     @Default(false) enablePbx,
   }) = _GlobalSettings;
 

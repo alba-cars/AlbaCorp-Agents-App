@@ -287,7 +287,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       emit(state.copyWith(
           sortedActivityPaginator: null,
           getSortedActivitiesStatus: AppStatus.loading,
-          sortedActivity: [state.task!],
+          sortedActivity:state.task!=null? [state.task!]:[],
           getSortedActivitiesError: null));
     } else {
       emit(state.copyWith(

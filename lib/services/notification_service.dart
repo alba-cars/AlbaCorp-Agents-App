@@ -13,45 +13,46 @@ import '../view/task_detail_screen/task_detail_screen.dart';
 class NotificationService {
   static Future<void> initializeNotification() async {
     await AwesomeNotifications().initialize(
-        null,
-        [
-          NotificationChannel(
-            channelKey: 'call_channel',
-            channelName: 'Call Notifications',
-            channelDescription: 'Notification channel for calls',
+      null,
+      [
+        NotificationChannel(
+          channelKey: 'call_channel',
+          channelName: 'Call Notifications',
+          channelDescription: 'Notification channel for calls',
+          defaultColor: Colors.blue,
+          ledColor: Colors.white,
+          importance: NotificationImportance.Max,
+          channelShowBadge: true,
+          criticalAlerts: true,
+          playSound: true,
+          defaultRingtoneType: DefaultRingtoneType.Ringtone,
+        ),
+        NotificationChannel(
+          channelKey: 'my_app_channel',
+          channelName: 'Default Notifications',
+          channelDescription: 'Notification channel',
+          defaultColor: Colors.blue,
+          ledColor: Colors.white,
+          importance: NotificationImportance.Max,
+          channelShowBadge: true,
+          criticalAlerts: true,
+          playSound: true,
+        ),
+        NotificationChannel(
+            channelKey: 'important_channel',
+            channelName: 'Important Notifications',
+            channelDescription: 'Notification channel for important',
             defaultColor: Colors.blue,
             ledColor: Colors.white,
             importance: NotificationImportance.Max,
             channelShowBadge: true,
             criticalAlerts: true,
+            defaultRingtoneType: DefaultRingtoneType.Notification,
             playSound: true,
-            defaultRingtoneType: DefaultRingtoneType.Ringtone,
-          ),
-          NotificationChannel(
-            channelKey: 'my_app_channel',
-            channelName: 'Default Notifications',
-            channelDescription: 'Notification channel',
-            defaultColor: Colors.blue,
-            ledColor: Colors.white,
-            importance: NotificationImportance.Max,
-            channelShowBadge: true,
-            criticalAlerts: true,
-            playSound: true,
-          ),
-          NotificationChannel(
-              channelKey: 'important_channel',
-              channelName: 'Important Notifications',
-              channelDescription: 'Notification channel for important',
-              defaultColor: Colors.blue,
-              ledColor: Colors.white,
-              importance: NotificationImportance.Max,
-              channelShowBadge: true,
-              criticalAlerts: true,
-              defaultRingtoneType: DefaultRingtoneType.Notification,
-              playSound: true,
-              soundSource: 'resource://raw/res_buzz')
-        ],
-        debug: true);
+            soundSource: 'resource://raw/res_buzz')
+      ],
+      debug: false,
+    );
 
     await AwesomeNotifications()
         .isNotificationAllowed()
