@@ -300,23 +300,28 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         filter: payload, limit: 35, paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
-        final list = List<Activity>.from(s.value);
+        List<Activity> list = List<Activity>.from(s.value);
         if (getIt<AuthBloc>().state.veryImportantActivities?.isNotEmpty ==
             true) {
           final imp = await _checkForImportantActivity();
+         
           if (imp != null && imp.isNotEmpty) {
             list.addAll(imp);
           }
         }
-        if (list.any((d) => d.activityWeight > 8)) {
+        if (list.any((d) => d.activityWeight > .8)) {
+           
           list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
         }
-        // Remove duplicate activities by id
+
+        
         final uniqueIds = <String>{}; // A set to track unique IDs
         list.retainWhere(
             (element) => uniqueIds.add(element.id)); // Keep only unique items
 
+        if(state.task == null){
         list.removeWhere((element) => element.id == state.taskId);
+        }
         emit(state.copyWith(
             sortedActivity: [...state.sortedActivity, ...list],
             getSortedActivitiesStatus: AppStatus.success,
@@ -360,7 +365,9 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           "expiring": true
         };
       default:
-        return {};
+        return {
+           if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+        };
     }
   }
 
