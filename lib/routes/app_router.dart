@@ -73,7 +73,7 @@ class AppRouter {
           } else if (authState.veryImportantActivities != null &&
               authState.veryImportantActivities!.isNotEmpty &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {
-            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}';
+            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}?taskType=Hot';
           } else if (authState.showFeedbackScreen &&
               state.uri.path.contains(CallFeedbackScreen.routeName) == false &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {

@@ -122,8 +122,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         if (refresh) {
           final activity = state.task?.copyWith(notes: notes);
           final activities = state.activities
-              .map((e) =>
-                  e.id == state.taskId ? e.copyWith(notes: notes) : e)
+              .map((e) => e.id == state.taskId ? e.copyWith(notes: notes) : e)
               .toList();
           emit(state.copyWith(task: activity, sortedActivity: activities));
         }
@@ -287,7 +286,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       emit(state.copyWith(
           sortedActivityPaginator: null,
           getSortedActivitiesStatus: AppStatus.loading,
-          sortedActivity:state.task!=null? [state.task!]:[],
+          sortedActivity: state.task != null ? [state.task!] : [],
           getSortedActivitiesError: null));
     } else {
       emit(state.copyWith(
@@ -308,7 +307,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
             list.addAll(imp);
           }
         }
-        if (list.any((d) => d.activityWeight > 8)) {
+        if (list.any((d) => d.activityWeight > .8)) {
           list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
         }
         // Remove duplicate activities by id
@@ -360,7 +359,9 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           "expiring": true
         };
       default:
-        return {};
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+        };
     }
   }
 
