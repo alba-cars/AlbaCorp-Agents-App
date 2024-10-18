@@ -122,8 +122,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         if (refresh) {
           final activity = state.task?.copyWith(notes: notes);
           final activities = state.activities
-              .map((e) =>
-                  e.id == state.taskId ? e.copyWith(notes: notes) : e)
+              .map((e) => e.id == state.taskId ? e.copyWith(notes: notes) : e)
               .toList();
           emit(state.copyWith(task: activity, sortedActivity: activities));
         }
@@ -287,7 +286,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       emit(state.copyWith(
           sortedActivityPaginator: null,
           getSortedActivitiesStatus: AppStatus.loading,
-          sortedActivity:state.task!=null? [state.task!]:[],
+          sortedActivity: state.task != null ? [state.task!] : [],
           getSortedActivitiesError: null));
     } else {
       emit(state.copyWith(
@@ -304,23 +303,21 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         if (getIt<AuthBloc>().state.veryImportantActivities?.isNotEmpty ==
             true) {
           final imp = await _checkForImportantActivity();
-         
+
           if (imp != null && imp.isNotEmpty) {
             list.addAll(imp);
           }
         }
         if (list.any((d) => d.activityWeight > .8)) {
-           
           list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
         }
 
-        
         final uniqueIds = <String>{}; // A set to track unique IDs
         list.retainWhere(
             (element) => uniqueIds.add(element.id)); // Keep only unique items
 
-        if(state.task == null){
-        list.removeWhere((element) => element.id == state.taskId);
+        if (state.task == null) {
+          list.removeWhere((element) => element.id == state.taskId);
         }
         emit(state.copyWith(
             sortedActivity: [...state.sortedActivity, ...list],
@@ -366,7 +363,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         };
       default:
         return {
-           if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
         };
     }
   }

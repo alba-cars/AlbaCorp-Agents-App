@@ -130,6 +130,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
             return state.veryImportantActivities;
           },
           builder: (context, veryImportantActivities) {
+           
             if (veryImportantActivities == null ||
                 veryImportantActivities.isEmpty == true) {
               return IconButton(
@@ -232,7 +233,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                 parentContext: context,
                                 direction: DismissDirection.startToEnd,
                                 mode: mode,
-                                notes:  context.read<TaskDetailCubit>().state.task?.notes,
+                                notes: context
+                                    .read<TaskDetailCubit>()
+                                    .state
+                                    .task
+                                    ?.notes,
                                 activity:
                                     context.read<TaskDetailCubit>().state.task!,
                               ));
@@ -254,7 +259,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                               ActivityFeedbackDialog(
                                 parentContext: context,
                                 direction: DismissDirection.endToStart,
-                                notes:  context.read<TaskDetailCubit>().state.task?.notes,
+                                notes: context
+                                    .read<TaskDetailCubit>()
+                                    .state
+                                    .task
+                                    ?.notes,
                                 activity:
                                     context.read<TaskDetailCubit>().state.task!,
                               ));
@@ -434,7 +443,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                 value: context.read<
                                                                     TaskDetailCubit>(),
                                                                 child:
-                                                                    AddNoteDialog(preNote: task.notes ??"",),
+                                                                    AddNoteDialog(
+                                                                  preNote:
+                                                                      task.notes ??
+                                                                          "",
+                                                                ),
                                                               );
                                                             });
                                                       },
@@ -716,7 +729,7 @@ class AddNoteDialog extends StatefulWidget {
 class _AddNoteDialogState extends State<AddNoteDialog> {
   String note = "";
   TextEditingController _controller = TextEditingController();
-  
+
   @override
   void initState() {
     Logger().d("Pre notes :: ${widget.preNote}");

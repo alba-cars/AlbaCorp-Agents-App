@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
+import 'package:real_estate_app/model/user_list_data.dart';
 
 import '../../model/activity_model.dart';
 import '../../util/result.dart';
@@ -28,11 +29,12 @@ abstract class ActivityRepo {
       String? nameSearch,
       Paginator? paginator});
   Future<Result<List<Activity>>> getActivitiesByAgent(
-      {
-      LeadStatus? status,
+      {String? status,
       List<DateTime>? dates,
       String? userId,
       Paginator? paginator});
+  Future<Result<List<UserListData>>> getActivitiesUserByAgent(
+      {String? searchText, Paginator? paginator});
   Future<Result<List<Activity>>> fetchActivitiesSorted(
       {Map<String, dynamic>? filter,
       int? limit,

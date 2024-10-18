@@ -193,6 +193,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  carousel_slider_plus:
+    dependency: transitive
+    description:
+      name: carousel_slider_plus
+      sha256: ae21c6589eb684e39f60ce0a994920b119f2e4860436ad3e8c77bb680cbb4af9
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.1"
   characters:
     dependency: transitive
     description:
@@ -857,6 +865,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  horizontal_week_calendar:
+    dependency: "direct main"
+    description:
+      name: horizontal_week_calendar
+      sha256: "8a8bb0e746f89e14b1d3227ab13958e69428d65d43d8a680d71fdb8243f06c42"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.18"
   html:
     dependency: transitive
     description:

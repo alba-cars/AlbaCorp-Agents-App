@@ -19,6 +19,9 @@ mixin _$MyActivitiesState {
   List<Activity> get activities => throw _privateConstructorUsedError;
   Paginator? get paginator => throw _privateConstructorUsedError;
   AppStatus get status => throw _privateConstructorUsedError;
+  AppStatus get userLoadStatus => throw _privateConstructorUsedError;
+  List<UserListData> get activityUsers => throw _privateConstructorUsedError;
+  Paginator? get userPaginator => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MyActivitiesStateCopyWith<MyActivitiesState> get copyWith =>
@@ -32,9 +35,15 @@ abstract class $MyActivitiesStateCopyWith<$Res> {
       _$MyActivitiesStateCopyWithImpl<$Res, MyActivitiesState>;
   @useResult
   $Res call(
-      {List<Activity> activities, Paginator? paginator, AppStatus status});
+      {List<Activity> activities,
+      Paginator? paginator,
+      AppStatus status,
+      AppStatus userLoadStatus,
+      List<UserListData> activityUsers,
+      Paginator? userPaginator});
 
   $PaginatorCopyWith<$Res>? get paginator;
+  $PaginatorCopyWith<$Res>? get userPaginator;
 }
 
 /// @nodoc
@@ -53,6 +62,9 @@ class _$MyActivitiesStateCopyWithImpl<$Res, $Val extends MyActivitiesState>
     Object? activities = null,
     Object? paginator = freezed,
     Object? status = null,
+    Object? userLoadStatus = null,
+    Object? activityUsers = null,
+    Object? userPaginator = freezed,
   }) {
     return _then(_value.copyWith(
       activities: null == activities
@@ -67,6 +79,18 @@ class _$MyActivitiesStateCopyWithImpl<$Res, $Val extends MyActivitiesState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      userLoadStatus: null == userLoadStatus
+          ? _value.userLoadStatus
+          : userLoadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      activityUsers: null == activityUsers
+          ? _value.activityUsers
+          : activityUsers // ignore: cast_nullable_to_non_nullable
+              as List<UserListData>,
+      userPaginator: freezed == userPaginator
+          ? _value.userPaginator
+          : userPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
     ) as $Val);
   }
 
@@ -81,6 +105,18 @@ class _$MyActivitiesStateCopyWithImpl<$Res, $Val extends MyActivitiesState>
       return _then(_value.copyWith(paginator: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get userPaginator {
+    if (_value.userPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.userPaginator!, (value) {
+      return _then(_value.copyWith(userPaginator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -92,10 +128,17 @@ abstract class _$$MyActivitiesStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Activity> activities, Paginator? paginator, AppStatus status});
+      {List<Activity> activities,
+      Paginator? paginator,
+      AppStatus status,
+      AppStatus userLoadStatus,
+      List<UserListData> activityUsers,
+      Paginator? userPaginator});
 
   @override
   $PaginatorCopyWith<$Res>? get paginator;
+  @override
+  $PaginatorCopyWith<$Res>? get userPaginator;
 }
 
 /// @nodoc
@@ -112,6 +155,9 @@ class __$$MyActivitiesStateImplCopyWithImpl<$Res>
     Object? activities = null,
     Object? paginator = freezed,
     Object? status = null,
+    Object? userLoadStatus = null,
+    Object? activityUsers = null,
+    Object? userPaginator = freezed,
   }) {
     return _then(_$MyActivitiesStateImpl(
       activities: null == activities
@@ -126,6 +172,18 @@ class __$$MyActivitiesStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as AppStatus,
+      userLoadStatus: null == userLoadStatus
+          ? _value.userLoadStatus
+          : userLoadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      activityUsers: null == activityUsers
+          ? _value._activityUsers
+          : activityUsers // ignore: cast_nullable_to_non_nullable
+              as List<UserListData>,
+      userPaginator: freezed == userPaginator
+          ? _value.userPaginator
+          : userPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
     ));
   }
 }
@@ -136,8 +194,12 @@ class _$MyActivitiesStateImpl implements _MyActivitiesState {
   const _$MyActivitiesStateImpl(
       {final List<Activity> activities = const [],
       this.paginator,
-      this.status = AppStatus.init})
-      : _activities = activities;
+      this.status = AppStatus.init,
+      this.userLoadStatus = AppStatus.init,
+      final List<UserListData> activityUsers = const [],
+      this.userPaginator})
+      : _activities = activities,
+        _activityUsers = activityUsers;
 
   final List<Activity> _activities;
   @override
@@ -153,10 +215,24 @@ class _$MyActivitiesStateImpl implements _MyActivitiesState {
   @override
   @JsonKey()
   final AppStatus status;
+  @override
+  @JsonKey()
+  final AppStatus userLoadStatus;
+  final List<UserListData> _activityUsers;
+  @override
+  @JsonKey()
+  List<UserListData> get activityUsers {
+    if (_activityUsers is EqualUnmodifiableListView) return _activityUsers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activityUsers);
+  }
+
+  @override
+  final Paginator? userPaginator;
 
   @override
   String toString() {
-    return 'MyActivitiesState(activities: $activities, paginator: $paginator, status: $status)';
+    return 'MyActivitiesState(activities: $activities, paginator: $paginator, status: $status, userLoadStatus: $userLoadStatus, activityUsers: $activityUsers, userPaginator: $userPaginator)';
   }
 
   @override
@@ -168,12 +244,24 @@ class _$MyActivitiesStateImpl implements _MyActivitiesState {
                 .equals(other._activities, _activities) &&
             (identical(other.paginator, paginator) ||
                 other.paginator == paginator) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.userLoadStatus, userLoadStatus) ||
+                other.userLoadStatus == userLoadStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._activityUsers, _activityUsers) &&
+            (identical(other.userPaginator, userPaginator) ||
+                other.userPaginator == userPaginator));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_activities), paginator, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_activities),
+      paginator,
+      status,
+      userLoadStatus,
+      const DeepCollectionEquality().hash(_activityUsers),
+      userPaginator);
 
   @JsonKey(ignore: true)
   @override
@@ -187,7 +275,10 @@ abstract class _MyActivitiesState implements MyActivitiesState {
   const factory _MyActivitiesState(
       {final List<Activity> activities,
       final Paginator? paginator,
-      final AppStatus status}) = _$MyActivitiesStateImpl;
+      final AppStatus status,
+      final AppStatus userLoadStatus,
+      final List<UserListData> activityUsers,
+      final Paginator? userPaginator}) = _$MyActivitiesStateImpl;
 
   @override
   List<Activity> get activities;
@@ -195,6 +286,12 @@ abstract class _MyActivitiesState implements MyActivitiesState {
   Paginator? get paginator;
   @override
   AppStatus get status;
+  @override
+  AppStatus get userLoadStatus;
+  @override
+  List<UserListData> get activityUsers;
+  @override
+  Paginator? get userPaginator;
   @override
   @JsonKey(ignore: true)
   _$$MyActivitiesStateImplCopyWith<_$MyActivitiesStateImpl> get copyWith =>
