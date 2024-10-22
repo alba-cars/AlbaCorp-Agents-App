@@ -104,7 +104,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           final propertyId = values?['property'];
           final description = values?["description"];
           final date = (values?["date"] as DateTime?)?.addTime(
-              (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0)));
+              (values?["time"] as TimeOfDay? ??
+                  TimeOfDay(hour: 10, minute: 0)));
           final res = await addActivity(
               context: context,
               leadId: state.task!.lead!.id,
@@ -178,6 +179,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         onSuccess: () async {
           final result =
               await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+            'currentAgent': null,
             'lead_status': 'Disqualified',
             'activity': {'notes': description}
           });
@@ -211,6 +213,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           final result =
               await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
             'lead_status': 'Lost',
+            'currentAgent': null,
             'activity': {'notes': description}
           });
           switch (result) {
@@ -239,6 +242,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           final result =
               await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
             'lead_status': 'Lost',
+            'currentAgent': null,
             'activity': {'notes': description},
             "DndStatus": true
           });
@@ -312,15 +316,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
         }
 
-        final uniqueIds = <String>{}; // A set to track unique IDs
-        list.retainWhere(
-            (element) => uniqueIds.add(element.id)); // Keep only unique items
+        final activities = [...state.sortedActivity, ...list];
 
-        if (state.task == null) {
-          list.removeWhere((element) => element.id == state.taskId);
-        }
+        final uniqueIds = <String>{}; // A set to track unique IDs
+        activities.retainWhere(
+            (element) => uniqueIds.add(element.id)); // Keep only unique items
+            
         emit(state.copyWith(
-            sortedActivity: [...state.sortedActivity, ...list],
+            sortedActivity: activities,
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
 
