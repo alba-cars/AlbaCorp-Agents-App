@@ -110,7 +110,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                   backgroundColor: Color(0xff004B85),
                   foregroundColor: Colors.white,
                   titleTextStyle:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp)),
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xff004B85),

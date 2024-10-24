@@ -30,7 +30,6 @@ class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
     @JsonKey(name: 'currentAgent') dynamic currentAgent,
     @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
     dynamic currentOwner,
-    @JsonKey(name: 'updatedBy') User? updatedBy,
     @JsonKey(name: 'referenceNumber') String? referenceNumber,
     @JsonKey(name: 'expirationDate') DateTime? expirationDate,
     @JsonKey(name: 'availableForCheckout')

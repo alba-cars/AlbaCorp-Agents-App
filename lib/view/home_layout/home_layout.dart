@@ -34,6 +34,7 @@ import '../../service_locator/injectable.dart';
 import '../../widgets/button.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';
+import '../check_in_page/check_in_page.dart';
 import '../listings_screen/listing_screen.dart';
 import 'kpis_layout_widget.dart';
 
@@ -388,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen>
                         //   iconImagePath: 'assets/images/settings.png',
                         //   onPressed: () {
                         //     Scaffold.of(context).closeDrawer();
-                        //     // context.pushNamed('settings');
+                        //     context.pushNamed(CheckInPage.routeName);
                         //   },
                         // ),
                         CustomListTileWithIcon(

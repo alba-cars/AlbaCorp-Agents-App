@@ -37,9 +37,6 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
           : DateTime.parse(json['checkedOutDate'] as String),
       currentAgent: json['currentAgent'],
       currentOwner: readCreatedBy(json, 'currentOwner'),
-      updatedBy: json['updatedBy'] == null
-          ? null
-          : User.fromJson(json['updatedBy'] as Map<String, dynamic>),
       referenceNumber: json['referenceNumber'] as String?,
       expirationDate: json['expirationDate'] == null
           ? null
@@ -76,7 +73,6 @@ Map<String, dynamic> _$$PropertyCardDetailsModelImplToJson(
       'checkedOutDate': instance.checkedOutDate?.toIso8601String(),
       'currentAgent': instance.currentAgent,
       'currentOwner': instance.currentOwner,
-      'updatedBy': instance.updatedBy,
       'referenceNumber': instance.referenceNumber,
       'expirationDate': instance.expirationDate?.toIso8601String(),
       'availableForCheckout': instance.availableForCheckout,

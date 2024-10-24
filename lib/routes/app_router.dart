@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,7 @@ import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/call_feedback_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
+import 'package:real_estate_app/view/check_in_page/check_in_page.dart';
 import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
@@ -90,6 +92,11 @@ class AppRouter {
         GoRoute(
           path: Routes.homeRoute,
           pageBuilder: (context, state) => AppTransition(child: SplashScreen()),
+        ),
+        GoRoute(
+          path: CheckInPage.routeName,
+          name: CheckInPage.routeName,
+          pageBuilder: (context, state) => CupertinoPage(child: CheckInPage()),
         ),
         GoRoute(
           path: Routes.maintenanceRoute,
@@ -181,7 +188,7 @@ class AppRouter {
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
 
-                  return AppTransition(
+                  return CupertinoPage(
                     child: ListingDetailsScreen(
                       listingId: id,
                     ),
@@ -193,7 +200,7 @@ class AppRouter {
                 name: DealDetailsScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  return AppTransition(
+                  return CupertinoPage(
                     child: DealDetailsScreen(
                       dealId: id,
                     ),
@@ -210,7 +217,7 @@ class AppRouter {
                     deal = Deal.fromJson(
                         json.decode(state.uri.queryParameters['deal']!));
                   }
-                  return AppTransition(
+                  return CupertinoPage(
                       child: AddDealScreen(
                     isEdit: isEdit,
                     deal: deal,
@@ -232,7 +239,7 @@ class AppRouter {
                     lead = Lead.fromJson(
                         json.decode(state.uri.queryParameters['lead']!));
                   }
-                  return AppTransition(
+                  return CupertinoPage(
                       child: AddListingScreen(
                     isEdit: isEdit,
                     deal: deal,
@@ -244,14 +251,14 @@ class AppRouter {
                 path: AddPocketListingScreen.routeName,
                 name: AddPocketListingScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: AddPocketListingScreen());
+                  return CupertinoPage(child: AddPocketListingScreen());
                 },
               ),
               GoRoute(
                 path: AddTicketScreen.routeName,
                 name: AddTicketScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: AddTicketScreen());
+                  return CupertinoPage(child: AddTicketScreen());
                 },
               ),
               GoRoute(
@@ -259,7 +266,7 @@ class AppRouter {
                 name: TicketDetailScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  return AppTransition(
+                  return CupertinoPage(
                       child: TicketDetailScreen(
                     ticketId: id,
                   ));
@@ -270,7 +277,7 @@ class AppRouter {
                 name: PropertyCardDetailsScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  return AppTransition(
+                  return CupertinoPage(
                       child: PropertyCardDetailsScreen(
                     propertyCardId: id,
                   ));
@@ -281,7 +288,7 @@ class AppRouter {
                 name: ChatScreen.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  return AppTransition(
+                  return CupertinoPage(
                       child: ChatScreen(
                     ticketId: id,
                   ));
@@ -296,7 +303,7 @@ class AppRouter {
                           ? json.decode(state.uri.queryParameters['data']!)
                               as Map<String, dynamic>
                           : null;
-                  return AppTransition(
+                  return CupertinoPage(
                       child: AddLeadScreen(
                     data: data,
                   ));
@@ -308,7 +315,7 @@ class AppRouter {
                 pageBuilder: (context, state) {
                   final tab =
                       int.tryParse(state.uri.queryParameters['tab'] ?? '');
-                  return AppTransition(
+                  return CupertinoPage(
                       child: ExplorerScreen(
                     tab: tab,
                   ));
@@ -318,7 +325,7 @@ class AppRouter {
                 path: TicketsScreen.routeName,
                 name: TicketsScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: TicketsScreen());
+                  return CupertinoPage(child: TicketsScreen());
                 },
               ),
               GoRoute(
@@ -326,7 +333,7 @@ class AppRouter {
                 name: PdfViewScreen.routeName,
                 pageBuilder: (context, state) {
                   final url = state.pathParameters['url'] ?? '';
-                  return AppTransition(
+                  return CupertinoPage(
                     child: PdfViewScreen(
                       pdfUrl: url,
                     ),
@@ -338,7 +345,7 @@ class AppRouter {
                 name: ImageViewerScreen.routeName,
                 pageBuilder: (context, state) {
                   final url = state.pathParameters['url'] ?? '';
-                  return AppTransition(
+                  return CupertinoPage(
                     child: ImageViewerScreen(
                       url: url,
                       imageUrls: [],
@@ -362,7 +369,7 @@ class AppRouter {
                   final String? taskFilter =
                       state.uri.queryParameters['taskFilter'];
 
-                  return AppTransition(
+                  return CupertinoPage(
                     child: TaskDetailScreen(
                       taskId: id,
                       activity: activity,
@@ -377,14 +384,14 @@ class AppRouter {
                 path: LeadsExplorerScreen.routeName,
                 name: LeadsExplorerScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: LeadsExplorerScreen());
+                  return CupertinoPage(child: LeadsExplorerScreen());
                 },
               ),
               GoRoute(
                 path: MyActvitiesPage.routeName,
                 name: MyActvitiesPage.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(
+                  return CupertinoPage(
                       child: BlocProvider(
                           create: (context) =>
                               getIt<MyActivitiesCubit>()..getAgentActivities(),
@@ -397,7 +404,7 @@ class AppRouter {
                 pageBuilder: (context, state) {
                   final String leadId =
                       state.uri.queryParameters['leadId'] ?? '';
-                  return AppTransition(
+                  return CupertinoPage(
                       child: AddFollowUpScreen(
                     leadId: leadId,
                   ));
@@ -407,7 +414,7 @@ class AppRouter {
                 path: AddTaskScreen.routeName + '/:lead_id',
                 name: AddTaskScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(
+                  return CupertinoPage(
                       child: AddTaskScreen(
                     leadId: state.pathParameters['lead_id'] ?? '',
                   ));
@@ -417,14 +424,14 @@ class AppRouter {
                 path: NotificationsScreen.routeName,
                 name: NotificationsScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: NotificationsScreen());
+                  return CupertinoPage(child: NotificationsScreen());
                 },
               ),
               GoRoute(
                 path: CallFeedbackScreen.routeName,
                 name: CallFeedbackScreen.routeName,
                 pageBuilder: (context, state) {
-                  return AppTransition(child: CallFeedbackScreen());
+                  return CupertinoPage(child: CallFeedbackScreen());
                 },
               ),
               GoRoute(
@@ -441,7 +448,7 @@ class AppRouter {
                             as List)
                         .map((e) => DealDocument.fromJson(e))
                         .toList();
-                  return AppTransition(
+                  return CupertinoPage(
                       child: DealAddDocumentScreen(
                     dealId: id,
                     userId: userId,
@@ -453,16 +460,16 @@ class AppRouter {
             ]),
         GoRoute(
           path: Routes.forgotRoute,
-          pageBuilder: (context, state) => AppTransition(child: ForgotScreen()),
+          pageBuilder: (context, state) => CupertinoPage(child: ForgotScreen()),
         ),
         GoRoute(
           path: Routes.resetRoute,
-          pageBuilder: (context, state) => AppTransition(child: ResetScreen()),
+          pageBuilder: (context, state) => CupertinoPage(child: ResetScreen()),
         ),
         GoRoute(
           path: Routes.passChangeRoute,
           pageBuilder: (context, state) =>
-              AppTransition(child: PassChangeScreen()),
+              CupertinoPage(child: PassChangeScreen()),
         ),
       ]);
 }

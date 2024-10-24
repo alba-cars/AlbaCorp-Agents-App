@@ -117,7 +117,6 @@ class _EnquiriesPageState extends State<EnquiriesPage>
 
   Widget showActivities(BuildContext context, List<Activity> activities,
       Paginator? paginator, AppStatus? appStatus, TaskFilterEnum taskFilter) {
-    Logger().d("No of activitiess : ${activities.length}");
 
     return Expanded(
       child: NotificationListener<ScrollNotification>(
