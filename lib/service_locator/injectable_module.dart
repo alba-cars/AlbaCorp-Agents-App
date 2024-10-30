@@ -32,7 +32,7 @@ abstract class RegisterModules {
   Dio getDio(@Named('BaseUrl') String baseUrl) {
     final dio = Dio(BaseOptions(
         baseUrl: baseUrl,
-        connectTimeout: const Duration(seconds: 30),
+        connectTimeout: const Duration(seconds: 120),
         sendTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 30)));
     dio.interceptors.add(TokenInterceptor());

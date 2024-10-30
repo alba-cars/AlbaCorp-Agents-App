@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/ticket_detail_screen/cubit/ticket_details_cubit.dart';
@@ -56,6 +57,7 @@ class _TicketDetailScreenLayoutState extends State<_TicketDetailScreenLayout> {
       appBar: AppBar(
         title: Text('Ticket Details'),
         centerTitle: true,
+       
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

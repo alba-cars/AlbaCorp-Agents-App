@@ -10,5 +10,14 @@ class ListStateState with _$ListStateState {
     String? pocketListingsView,
     String? dealsView,
     String? listingAcquiredView,
+        @Default([]) List<PropertyType> propertyTypeList,
+    @Default(AppStatus.init) AppStatus getPropertyTypeListStatus,
+    @Default([]) List<CommunityTeamModel> communityList,
+    @Default(AppStatus.init) AppStatus getCommunityListStatus,
+     @Default([]) List<CommunityName> placesList,
+    @Default(AppStatus.init) AppStatus getPlacesListStatus,
+    @Default([]) List<Building> buildingList,
+    @Default(AppStatus.init) AppStatus getBuildingListStatus,
+    Paginator? buildingsPaginator,
   }) = _ListStateState;
 }

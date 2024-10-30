@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/enquiries_screen/cubit/enquiries_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
+import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
+import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
+import 'package:real_estate_app/widgets/search_bar.dart';
+import 'package:real_estate_app/widgets/space.dart';
 
+import '../../../widgets/fields/date_field.dart';
+import '../../../widgets/fields/multi_select_autocomplete_field.dart';
 import '../../../widgets/tab_bar.dart';
 import '../../../widgets/text.dart';
 import '../../cold_lead_screen/cubit/cold_lead_cubit.dart';
@@ -26,16 +34,93 @@ class _EnquiriesPageState extends State<EnquiriesPage>
       TabController(length: TaskFilterEnum.values.length, vsync: this);
   int tabIndex = 0;
 
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
+    return [
+      MultiSelectAutoCompleteField(
+          label: 'Community',
+          optionsBuilder: (v, refresh) async {
+            final stateResult = context.read<ListStateCubit>().state.placesList;
+            if (stateResult.isEmpty) {
+              await context.read<ListStateCubit>().getPlaces(search: v.text);
+            }
+            final list = context.read<ListStateCubit>().state.placesList.where(
+                (element) => element.community
+                    .toLowerCase()
+                    .contains(v.text.toLowerCase()));
+            return list.map((e) => {'value': e.id, 'label': e.community});
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          name: 'communityId'),
+      MultiSelectAutoCompleteField(
+          label: 'Building',
+          optionsBuilder: (v, refresh) async {
+            final stateResult =
+                context.read<ListStateCubit>().state.buildingList;
+            if (stateResult.isEmpty) {
+              await context.read<ListStateCubit>().getBuildings(search: v.text);
+            }
+            final list = context
+                .read<ListStateCubit>()
+                .state
+                .buildingList
+                .where((element) =>
+                    element.name.toLowerCase().contains(v.text.toLowerCase()));
+            return list.map((e) => {'value': e.id, 'label': e.name});
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          name: 'buildingId'),
+          WrapSelectField(
+          name: 'beds',
+          label: 'Beds',
+          values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'baths',
+          label: 'Baths',
+          values: ['1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'propertyType',
+          label: 'Property Type',
+          values: context
+              .read<ListStateCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .toList(),
+          displayOption: (option) => option['label'] ?? '',
+          isRequired: true),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          ListTile(
-            title: HeadingText(text: "Enquiries"),
-            contentPadding: EdgeInsets.zero,
+          AppSearchBar(
+            filterFields: filterFields,
+            filter: context.select<EnquiriesCubit, Map<String, dynamic>?>(
+                (state) => state.state.activityFilter),
+            leadWidgets: [
+              Expanded(
+                child: ListTile(
+                  title: HeadingText(text: "Enquiries"),
+                  contentPadding: EdgeInsets.zero,
+                ),
+              ),
+              HorizontalSmallGap(),
+            ],
+            showSearch: false,
+            onChanged: (v) {},
+            onFilterApplied: (filter) {
+              context.read<EnquiriesCubit>().setActivityFilters(
+                  filter, TaskFilterEnum.values[tabIndex]);
+            },
           ),
+          VerticalSmallGap(),
           AppTabBar(
             backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             selectedColor: Theme.of(context).primaryColor,
@@ -117,7 +202,6 @@ class _EnquiriesPageState extends State<EnquiriesPage>
 
   Widget showActivities(BuildContext context, List<Activity> activities,
       Paginator? paginator, AppStatus? appStatus, TaskFilterEnum taskFilter) {
-
     return Expanded(
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollInfo) {

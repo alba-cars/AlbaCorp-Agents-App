@@ -9,8 +9,12 @@ import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
+import '../../../app/list_state_cubit/list_state_cubit.dart';
 import '../../../model/activity_model.dart';
 import '../../../widgets/button.dart';
+import '../../../widgets/fields/multi_select_autocomplete_field.dart';
+import '../../../widgets/fields/wrap_select_field.dart';
+import '../../../widgets/search_bar.dart';
 import '../../../widgets/tab_bar.dart';
 import '../../home_screen/home_screen.dart';
 import '../../leads_list_explorer/leads_list_explorer.dart';
@@ -28,27 +32,138 @@ class _ColdLeadPageState extends State<ColdLeadPage>
       TabController(length: TaskFilterEnum.values.length, vsync: this);
   int tabIndex = 0;
 
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
+    return [
+      MultiSelectAutoCompleteField(
+          label: 'Community',
+          optionsBuilder: (v, refresh) async {
+            final stateResult = context.read<ListStateCubit>().state.placesList;
+            if (stateResult.isEmpty) {
+              await context.read<ListStateCubit>().getPlaces(search: v.text);
+            }
+            final list = context.read<ListStateCubit>().state.placesList.where(
+                (element) => element.community
+                    .toLowerCase()
+                    .contains(v.text.toLowerCase()));
+            return list.map((e) => {'value': e.id, 'label': e.community});
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          name: 'communityId'),
+      MultiSelectAutoCompleteField(
+          label: 'Building',
+          optionsBuilder: (v, refresh) async {
+            final stateResult =
+                context.read<ListStateCubit>().state.buildingList;
+            if (stateResult.isEmpty) {
+              await context.read<ListStateCubit>().getBuildings(search: v.text);
+            }
+            final list = context
+                .read<ListStateCubit>()
+                .state
+                .buildingList
+                .where((element) =>
+                    element.name.toLowerCase().contains(v.text.toLowerCase()));
+            return list.map((e) => {'value': e.id, 'label': e.name});
+          },
+          displayStringForOption: (option) => option['label'] ?? '',
+          name: 'buildingId'),
+          WrapSelectField(
+          name: 'beds',
+          label: 'Beds',
+          values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'baths',
+          label: 'Baths',
+          values: ['1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'propertyType',
+          label: 'Property Type',
+          values: context
+              .read<ListStateCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .toList(),
+          displayOption: (option) => option['label'] ?? '',
+          isRequired: true),
+    ];
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: ListTile(
-              title: HeadingText(text: "Explorer Leads"),
-              // trailing: SizedBox(
-              //   width: 160,
-              //   child: OutlinedButton(
-              //     style: OutlinedButton.styleFrom(padding: EdgeInsets.all(2)),
-              //     onPressed: () {
-              //       context.pushNamed(LeadsExplorerScreen.routeName);
-              //     },
-              //     child: Text('Go to explorer'),
-              //   ),
-              // ),
-              trailing: InkWell(
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(vertical: 4),
+          //   child: ListTile(
+          //     title: HeadingText(text: "Explorer Leads"),
+          //     // trailing: SizedBox(
+          //     //   width: 160,
+          //     //   child: OutlinedButton(
+          //     //     style: OutlinedButton.styleFrom(padding: EdgeInsets.all(2)),
+          //     //     onPressed: () {
+          //     //       context.pushNamed(LeadsExplorerScreen.routeName);
+          //     //     },
+          //     //     child: Text('Go to explorer'),
+          //     //   ),
+          //     // ),
+          //     trailing: InkWell(
+          //       onTap: () {
+          //         context.pushNamed(LeadsExplorerScreen.routeName);
+          //       },
+          //       child: SizedBox(
+          //         height: 40,
+          //         width: 150,
+          //         child: Container(
+          //           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          //           decoration: BoxDecoration(
+          //               borderRadius: BorderRadius.circular(6),
+          //               color: Theme.of(context).colorScheme.secondary),
+          //           child: Row(
+          //             mainAxisSize: MainAxisSize.min,
+          //             children: [
+          //               Icon(
+          //                 Icons.explore,
+          //                 color: Colors.white,
+          //               ),
+          //               HorizontalSmallGap(),
+          //               Text(
+          //                 "Go to explorer",
+          //                 style: Theme.of(context)
+          //                     .textTheme
+          //                     .labelLarge
+          //                     ?.copyWith(
+          //                         color: Theme.of(context)
+          //                             .colorScheme
+          //                             .onSecondary),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     contentPadding: EdgeInsets.zero,
+          //   ),
+          // ),
+          AppSearchBar(
+            filterFields: filterFields,
+            filter: context.select<ColdLeadCubit, Map<String, dynamic>?>(
+                (state) => state.state.activityFilter),
+            leadWidgets: [
+              Expanded(
+                child: ListTile(
+                  title: HeadingText(text: "Explorer Leads"),
+                  contentPadding: EdgeInsets.zero,
+                ),
+              ),
+              HorizontalSmallGap(),
+              InkWell(
                 onTap: () {
                   context.pushNamed(LeadsExplorerScreen.routeName);
                 },
@@ -81,11 +196,16 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                       ],
                     ),
                   ),
-                ),
-              ),
-              contentPadding: EdgeInsets.zero,
-            ),
+                ),)
+            ],
+            showSearch: false,
+            onChanged: (v) {},
+            onFilterApplied: (filter) {
+              context.read<ColdLeadCubit>().setActivityFilters(
+                  filter, TaskFilterEnum.values[tabIndex]);
+            },
           ),
+          VerticalSmallGap(),
           AppTabBar(
             backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             selectedColor: Theme.of(context).primaryColor,

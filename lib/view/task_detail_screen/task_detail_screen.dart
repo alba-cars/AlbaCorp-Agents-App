@@ -130,7 +130,6 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
             return state.veryImportantActivities;
           },
           builder: (context, veryImportantActivities) {
-           
             if (veryImportantActivities == null ||
                 veryImportantActivities.isEmpty == true) {
               return IconButton(
@@ -146,6 +145,21 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
             return SizedBox();
           },
         ),
+        actions: [
+          if (context.select<TaskDetailCubit, double>(
+                      (state) => state.state.task?.activityWeight ?? 0) >=
+                  0.8 &&
+              context.select<AuthBloc, bool>((state) =>
+                  state.state.veryImportantActivities?.isNotEmpty ?? false))
+            IconButton(
+                onPressed: () {
+                  context
+                      .read<AuthBloc>()
+                      .add(AuthEvent.clearImportantActivity());
+                  setState(() {});
+                },
+                icon: Icon(Icons.close))
+        ],
       ),
       backgroundColor: Colors.blueGrey[100],
       body: Padding(
@@ -282,8 +296,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                         (AuthBloc authBloc) =>
                             authBloc.state.veryImportantActivities);
                     final task = tasks[index];
-                    final isBlockingActivity =
-                        blockingActivities?.contains(task.id) ?? false;
+                    final isBlockingActivity = task.activityWeight >= 0.8;
                     return SizedBox(
                       key: ValueKey(task.id),
                       child: Column(
@@ -395,7 +408,27 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                       child: NormalText(
                                                           text:
-                                                              'Phone: ${task.lead?.phone ?? ''}'))
+                                                              'Phone: ${task.lead?.phone ?? ''}')),
+                                                  if (task.lead?.dndStatus ??
+                                                      false)
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 4,
+                                                              vertical: 1),
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .error),
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .colorScheme
+                                                              .errorContainer),
+                                                      child: SmallText(
+                                                          text: 'DND'),
+                                                    ),
                                                 ],
                                               ),
                                               VerticalSmallGap(),

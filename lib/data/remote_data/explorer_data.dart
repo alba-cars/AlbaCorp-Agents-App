@@ -182,7 +182,7 @@ class ExplorerData implements ExplorerRepo {
         'limit': 15,
         'page': (paginator?.currentPage ?? 0) + 1,
         if (filterRemoved != null) ...filterRemoved,
-        if (search != null) 'search': search,
+        if (search != null) 'searchTerm': search,
         // if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
       });
       final data = response.data['data']['data'] as List;
@@ -652,6 +652,17 @@ class ExplorerData implements ExplorerRepo {
             return MapEntry(key, value);
           }
         });
+      }
+       if (filterRemoved?.containsKey('places') == true &&
+          filterRemoved?['places'] is List) {
+        final places = filterRemoved!['places'] as List;
+
+        if (places.isNotEmpty) {
+          // Replace "communities" with "places" if "places" is not empty
+          filterRemoved['communities'] = places;
+          filterRemoved.remove(
+              'places'); // Remove "places" after copying it to "communities"
+        }
       }
 
       await _dio.post(url,

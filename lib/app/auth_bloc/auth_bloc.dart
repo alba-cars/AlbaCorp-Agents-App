@@ -46,6 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_RefreshAgentData>(_refreshAgentData);
     on<_NewImportantActivity>(_newImportantActivity);
     on<_CompletedImportantActivity>(_completedImportantActivity);
+    on<_ClearImportantActivity>(_clearImportantActivity);
     on<_CheckForImportantActivity>(_checkForImportantActivity);
     on<_CheckForCallFeedback>(_checkForCallFeedback);
     on<_RemoveLastCallDetails>(_removeLastCallDetails);
@@ -309,5 +310,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _setShowFollowUp(
       _SetShowFollowup event, Emitter<AuthState> emit) {
     emit(state.copyWith(showFollowUpScreen: event.value));
+  }
+
+  FutureOr<void> _clearImportantActivity(_ClearImportantActivity event, Emitter<AuthState> emit) {
+     emit(state.copyWith(
+            veryImportantActivities: {}));
   }
 }

@@ -266,32 +266,6 @@ class _ExplorerTabState extends State<ExplorerTab> {
                 onChanged: (val) {
                   context.read<LeadsListExplorerCubit>().searchExplorer(val);
                 },
-                showSearch: false,
-                leadWidgets: [
-                  Expanded(
-                    child: AppPrimaryButton(
-                      onTap: () async{
-                       await context.read<LeadsListExplorerCubit>().randomCheckout(
-                            context: context, numberOfLeads: 50);
-                      },
-                      text: "50",
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                      child: AppPrimaryButton(
-                    onTap: () async{
-                    await  context
-                          .read<LeadsListExplorerCubit>()
-                          .randomCheckout(context: context, numberOfLeads: 100);
-                    },
-                    text: "100",
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                  )),
-                ],
                 filterFields: filterFields,
                 filter: explorerFilter,
                 onFilterApplied: (filter) {
@@ -300,6 +274,34 @@ class _ExplorerTabState extends State<ExplorerTab> {
                       .setExplorerFilter(filter);
                 },
               ),
+            ),
+            Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+              child: Row(children: [
+                Expanded(
+                      child: AppPrimaryButton(
+                        onTap: () async{
+                         await context.read<LeadsListExplorerCubit>().randomCheckout(
+                              context: context, numberOfLeads: 50);
+                        },
+                        text: "50",
+                        backgroundColor: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                        child: AppPrimaryButton(
+                      onTap: () async{
+                      await  context
+                            .read<LeadsListExplorerCubit>()
+                            .randomCheckout(context: context, numberOfLeads: 100);
+                      },
+                      text: "100",
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                    )),
+              ],),
             ),
             BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
               builder: (context, state) {
