@@ -87,7 +87,7 @@ class _EnquiriesPageState extends State<EnquiriesPage>
               .read<ListStateCubit>()
               .state
               .propertyTypeList
-              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .map((e) => {'value': e.propertyType, 'label': e.propertyType})
               .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
