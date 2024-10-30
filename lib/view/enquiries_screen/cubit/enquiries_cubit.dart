@@ -38,8 +38,10 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
       }
 
       final Result<List<Activity>> result =
-          await activityRepo.fetchActivitiesSorted(
-              filter: getPayload(filterType), paginator: paginator);
+          await activityRepo.fetchActivitiesSorted(filter: {
+        if (state.activityFilter != null) ...state.activityFilter!,
+        ...getPayload(filterType)
+      }, paginator: paginator);
 
       switch (result) {
         case (Success<List<Activity>> success):
@@ -119,5 +121,14 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
     Logger()
         .d("Going to emit the errror status with message $currentErrorMessage");
     emit(state.copyWith(fetchStatus: fetchStatus, error: currentErrorMessage));
+  }
+
+  void setActivityFilters(Map<String, dynamic>? filter, TaskFilterEnum valu) {
+    emit(state.copyWith(activityFilter: filter));
+
+    fetchHoteads(
+      valu,
+      paginator: null,
+    );
   }
 }

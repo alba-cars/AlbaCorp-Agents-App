@@ -85,7 +85,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
       children: [
         Row(
           children: [
-            Expanded(
+        if(widget.showSearch || widget.leadWidgets != null)    Expanded(
               child: widget.showSearch
                   ? TextFormField(
                       controller: _controller,
@@ -150,7 +150,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
                       children: widget.leadWidgets ?? [],
                     ),
             ),
-            HorizontalSmallGap(),
+          if(widget.showSearch || widget.leadWidgets != null)  HorizontalSmallGap(),
             InkWell(
               onTap: () {
                 showFilterBottonSheet(context);

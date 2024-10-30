@@ -110,4 +110,13 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
         .d("Going to emit the errror status with message $currentErrorMessage");
     emit(state.copyWith(fetchStatus: fetchStatus, error: currentErrorMessage));
   }
+
+   void setActivityFilters(Map<String, dynamic>? filter, TaskFilterEnum valu) {
+    emit(state.copyWith(activityFilter: filter));
+
+    fetchColdLeads(
+      valu,
+      paginator: null,
+    );
+  }
 }

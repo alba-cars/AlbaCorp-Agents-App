@@ -182,7 +182,7 @@ class ExplorerData implements ExplorerRepo {
         'limit': 15,
         'page': (paginator?.currentPage ?? 0) + 1,
         if (filterRemoved != null) ...filterRemoved,
-        if (search != null) 'search': search,
+        if (search != null) 'searchTerm': search,
         // if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
       });
       final data = response.data['data']['data'] as List;

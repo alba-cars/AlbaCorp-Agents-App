@@ -12,6 +12,7 @@ class ColdLeadState with _$ColdLeadState {
     @Default({}) Map<TaskFilterEnum, Paginator?> paginator,
     @Default({}) Map<TaskFilterEnum, List<Activity>> activities,
     @Default({}) Map<TaskFilterEnum, String> error,
+    Map<String, dynamic>? activityFilter,
   }) = _ColdLeadState;
 }
 

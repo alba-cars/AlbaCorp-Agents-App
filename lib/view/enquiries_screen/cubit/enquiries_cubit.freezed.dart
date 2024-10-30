@@ -23,6 +23,8 @@ mixin _$EnquiriesState {
   Map<TaskFilterEnum, List<Activity>> get activities =>
       throw _privateConstructorUsedError;
   Map<TaskFilterEnum, String> get error => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get activityFilter =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EnquiriesStateCopyWith<EnquiriesState> get copyWith =>
@@ -39,7 +41,8 @@ abstract class $EnquiriesStateCopyWith<$Res> {
       {Map<TaskFilterEnum, AppStatus> fetchStatus,
       Map<TaskFilterEnum, Paginator?> paginator,
       Map<TaskFilterEnum, List<Activity>> activities,
-      Map<TaskFilterEnum, String> error});
+      Map<TaskFilterEnum, String> error,
+      Map<String, dynamic>? activityFilter});
 }
 
 /// @nodoc
@@ -59,6 +62,7 @@ class _$EnquiriesStateCopyWithImpl<$Res, $Val extends EnquiriesState>
     Object? paginator = null,
     Object? activities = null,
     Object? error = null,
+    Object? activityFilter = freezed,
   }) {
     return _then(_value.copyWith(
       fetchStatus: null == fetchStatus
@@ -77,6 +81,10 @@ class _$EnquiriesStateCopyWithImpl<$Res, $Val extends EnquiriesState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Map<TaskFilterEnum, String>,
+      activityFilter: freezed == activityFilter
+          ? _value.activityFilter
+          : activityFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -93,7 +101,8 @@ abstract class _$$EnquiriesStateImplCopyWith<$Res>
       {Map<TaskFilterEnum, AppStatus> fetchStatus,
       Map<TaskFilterEnum, Paginator?> paginator,
       Map<TaskFilterEnum, List<Activity>> activities,
-      Map<TaskFilterEnum, String> error});
+      Map<TaskFilterEnum, String> error,
+      Map<String, dynamic>? activityFilter});
 }
 
 /// @nodoc
@@ -111,6 +120,7 @@ class __$$EnquiriesStateImplCopyWithImpl<$Res>
     Object? paginator = null,
     Object? activities = null,
     Object? error = null,
+    Object? activityFilter = freezed,
   }) {
     return _then(_$EnquiriesStateImpl(
       fetchStatus: null == fetchStatus
@@ -129,6 +139,10 @@ class __$$EnquiriesStateImplCopyWithImpl<$Res>
           ? _value._error
           : error // ignore: cast_nullable_to_non_nullable
               as Map<TaskFilterEnum, String>,
+      activityFilter: freezed == activityFilter
+          ? _value._activityFilter
+          : activityFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -144,11 +158,13 @@ class _$EnquiriesStateImpl implements _EnquiriesState {
       },
       final Map<TaskFilterEnum, Paginator?> paginator = const {},
       final Map<TaskFilterEnum, List<Activity>> activities = const {},
-      final Map<TaskFilterEnum, String> error = const {}})
+      final Map<TaskFilterEnum, String> error = const {},
+      final Map<String, dynamic>? activityFilter})
       : _fetchStatus = fetchStatus,
         _paginator = paginator,
         _activities = activities,
-        _error = error;
+        _error = error,
+        _activityFilter = activityFilter;
 
   final Map<TaskFilterEnum, AppStatus> _fetchStatus;
   @override
@@ -186,9 +202,19 @@ class _$EnquiriesStateImpl implements _EnquiriesState {
     return EqualUnmodifiableMapView(_error);
   }
 
+  final Map<String, dynamic>? _activityFilter;
+  @override
+  Map<String, dynamic>? get activityFilter {
+    final value = _activityFilter;
+    if (value == null) return null;
+    if (_activityFilter is EqualUnmodifiableMapView) return _activityFilter;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   String toString() {
-    return 'EnquiriesState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error)';
+    return 'EnquiriesState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter)';
   }
 
   @override
@@ -202,7 +228,9 @@ class _$EnquiriesStateImpl implements _EnquiriesState {
                 .equals(other._paginator, _paginator) &&
             const DeepCollectionEquality()
                 .equals(other._activities, _activities) &&
-            const DeepCollectionEquality().equals(other._error, _error));
+            const DeepCollectionEquality().equals(other._error, _error) &&
+            const DeepCollectionEquality()
+                .equals(other._activityFilter, _activityFilter));
   }
 
   @override
@@ -211,7 +239,8 @@ class _$EnquiriesStateImpl implements _EnquiriesState {
       const DeepCollectionEquality().hash(_fetchStatus),
       const DeepCollectionEquality().hash(_paginator),
       const DeepCollectionEquality().hash(_activities),
-      const DeepCollectionEquality().hash(_error));
+      const DeepCollectionEquality().hash(_error),
+      const DeepCollectionEquality().hash(_activityFilter));
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +255,8 @@ abstract class _EnquiriesState implements EnquiriesState {
       {final Map<TaskFilterEnum, AppStatus> fetchStatus,
       final Map<TaskFilterEnum, Paginator?> paginator,
       final Map<TaskFilterEnum, List<Activity>> activities,
-      final Map<TaskFilterEnum, String> error}) = _$EnquiriesStateImpl;
+      final Map<TaskFilterEnum, String> error,
+      final Map<String, dynamic>? activityFilter}) = _$EnquiriesStateImpl;
 
   @override
   Map<TaskFilterEnum, AppStatus> get fetchStatus;
@@ -236,6 +266,8 @@ abstract class _EnquiriesState implements EnquiriesState {
   Map<TaskFilterEnum, List<Activity>> get activities;
   @override
   Map<TaskFilterEnum, String> get error;
+  @override
+  Map<String, dynamic>? get activityFilter;
   @override
   @JsonKey(ignore: true)
   _$$EnquiriesStateImplCopyWith<_$EnquiriesStateImpl> get copyWith =>

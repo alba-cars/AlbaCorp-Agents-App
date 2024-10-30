@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:real_estate_app/routes/app_routes.dart';
 import 'package:real_estate_app/util/constant.dart';
@@ -28,24 +29,43 @@ class _TabLoginState extends State<TabLogin> {
   final loginForm = GlobalKey<FormState>();
   bool isPasswordVisible = false;
 
+@override
+  void initState() {
+    super.initState();
+   ()async{
+     final email =  await FlutterSecureStorage().read(key: 'login_email');
+     final password = await FlutterSecureStorage().read(key: 'login_password');
+     if(email != null && password != null){
+       emailController.text = email;
+       passwordController.text = password;
+     }
+   }();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: loginForm,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              getVerSpace(60.h),
-              buildTextFieldWidget(context),
-              getVerSpace(20.h),
-              buildForgotButton(),
-              getVerSpace(50.h),
-              buildLoginButton(context),
-              getVerSpace(30.h),
-            ],
-          ).marginSymmetric(horizontal: 20.h),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Form(
+            key: loginForm,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                getVerSpace(60.h),
+                buildTextFieldWidget(context),
+                getVerSpace(20.h),
+                buildForgotButton(),
+                getVerSpace(50.h),
+                buildLoginButton(context),
+                getVerSpace(30.h),
+              ],
+            ).marginSymmetric(horizontal: 20.h),
+          ),
         ),
       ),
     );
@@ -113,7 +133,7 @@ class _TabLoginState extends State<TabLogin> {
             }
           }
           return null;
-        }),
+        },keyboardType: TextInputType.emailAddress),
         getVerSpace(20.h),
         getCustomFont("Password", 14.sp, Colors.black, 1,
             fontWeight: FontWeight.w600, txtHeight: 1.5),
