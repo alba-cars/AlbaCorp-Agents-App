@@ -244,8 +244,11 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   Future<void> randomCheckout(
       {required BuildContext context, required int numberOfLeads}) async {
     emit(state.copyWith(randomLeadsAssignmentStatus: AppStatus.loading));
-    final result = await _explorerRepo.randomLeadsAssignment(
-        numberOfLeads: numberOfLeads, values: state.explorerFilter ?? {});
+    final result = await _explorerRepo
+        .randomLeadsAssignment(numberOfLeads: numberOfLeads, values: {
+      if (state.explorerSearch != null) "searchTerm": state.explorerSearch,
+      ...(state.explorerFilter ?? {})
+    });
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -302,19 +305,24 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   }
 
   Future<List<Building>> getBuildings(
-      {String? search, List<String>? community,bool refresh = false}) async {
+      {String? search, List<String>? community, bool refresh = false}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    if(refresh){
+    if (refresh) {
       emit(state.copyWith(buildingsPaginator: null));
     }
 
     final result = await _listingsRepo.getBuildingNames(
-        search: search, communityId: community,paginator: refresh?null:state.buildingsPaginator);
+        search: search,
+        communityId: community,
+        paginator: refresh ? null : state.buildingsPaginator);
     switch (result) {
       case (Success s):
-      final List<Building> buildings =refresh? s.value:[...state.buildingList,...s.value];
+        final List<Building> buildings =
+            refresh ? s.value : [...state.buildingList, ...s.value];
         emit(state.copyWith(
-            buildingList:buildings, getBuildingListStatus: AppStatus.success,buildingsPaginator: s.paginator));
+            buildingList: buildings,
+            getBuildingListStatus: AppStatus.success,
+            buildingsPaginator: s.paginator));
         return buildings;
 
       case (Error e):
@@ -325,23 +333,23 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
     }
   }
 
-   Future<List<CommunityName>> getPlaces({String? search}) async {
+  Future<List<CommunityName>> getPlaces({String? search}) async {
     emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
     if (state.placesList.isNotEmpty && search != null) {
       return state.placesList
-          .where((e) => e.community.contains(search))
+          .where(
+              (e) => e.community.toLowerCase().contains(search.toLowerCase()))
           .toList();
     } else {
       final result = await _explorerRepo.getCommunityTeams(
           agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
         case (Success<List<CommunityTeamModel>> s):
-           emit(state.copyWith(
-              placesList:
-                  s.value.expand((e)=>e.communities).toList(),
+          emit(state.copyWith(
+              placesList: s.value.expand((e) => e.communities).toList(),
               getPlacesListStatus: AppStatus.success));
-     Logger().d(state.placesList);
-          return s.value.expand((e)=>e.communities).toList();
+          Logger().d(state.placesList);
+          return s.value.expand((e) => e.communities).toList();
         case (Error e):
           emit(state.copyWith(
             getPlacesListStatus: AppStatus.failure,

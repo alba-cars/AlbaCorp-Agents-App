@@ -155,6 +155,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
           final list = await context
               .read<LeadsListExplorerCubit>()
               .getPlaces(search: v.text);
+              Logger().d(list);
           final List<String>? flattenedValue = (values?['communities'] is List)
               ? (values?['communities'] as List).expand((community) {
                   return community['value'] is List
@@ -164,7 +165,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
               : values?['communities']?['value'] as List<String>?;
           final mapped = list
               .where((place) {
-                return flattenedValue?.contains(place.id) ?? false;
+                return (flattenedValue?.contains(place.id) ?? false);
               })
               .map((place) => {
                     'value': place.id.toString(),

@@ -82,6 +82,7 @@ class ListingsCubit extends Cubit<ListingsState> {
         await _listingsRepo.getMyListings(paginator: state.myListingsPaginator);
     switch (result) {
       case (Success s):
+
         emit(state.copyWith(
             myListings: [...state.myListings, ...s.value],
             myListingsPaginator: s.paginator,
