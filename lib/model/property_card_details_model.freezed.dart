@@ -37,6 +37,7 @@ mixin _$PropertyCardDetailsModel {
   dynamic get createdBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'partyType')
   String? get partyType => throw _privateConstructorUsedError;
+  String? get cluster => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get purpose => throw _privateConstructorUsedError;
   List<dynamic>? get amenities => throw _privateConstructorUsedError;
@@ -85,6 +86,7 @@ abstract class $PropertyCardDetailsModelCopyWith<$Res> {
       @JsonKey(name: 'propertyType') String? propertyType,
       @JsonKey(readValue: readCreatedBy) dynamic createdBy,
       @JsonKey(name: 'partyType') String? partyType,
+      String? cluster,
       String? status,
       String? purpose,
       List<dynamic>? amenities,
@@ -130,6 +132,7 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
     Object? propertyType = freezed,
     Object? createdBy = freezed,
     Object? partyType = freezed,
+    Object? cluster = freezed,
     Object? status = freezed,
     Object? purpose = freezed,
     Object? amenities = freezed,
@@ -186,6 +189,10 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
       partyType: freezed == partyType
           ? _value.partyType
           : partyType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cluster: freezed == cluster
+          ? _value.cluster
+          : cluster // ignore: cast_nullable_to_non_nullable
               as String?,
       status: freezed == status
           ? _value.status
@@ -295,6 +302,7 @@ abstract class _$$PropertyCardDetailsModelImplCopyWith<$Res>
       @JsonKey(name: 'propertyType') String? propertyType,
       @JsonKey(readValue: readCreatedBy) dynamic createdBy,
       @JsonKey(name: 'partyType') String? partyType,
+      String? cluster,
       String? status,
       String? purpose,
       List<dynamic>? amenities,
@@ -341,6 +349,7 @@ class __$$PropertyCardDetailsModelImplCopyWithImpl<$Res>
     Object? propertyType = freezed,
     Object? createdBy = freezed,
     Object? partyType = freezed,
+    Object? cluster = freezed,
     Object? status = freezed,
     Object? purpose = freezed,
     Object? amenities = freezed,
@@ -397,6 +406,10 @@ class __$$PropertyCardDetailsModelImplCopyWithImpl<$Res>
       partyType: freezed == partyType
           ? _value.partyType
           : partyType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cluster: freezed == cluster
+          ? _value.cluster
+          : cluster // ignore: cast_nullable_to_non_nullable
               as String?,
       status: freezed == status
           ? _value.status
@@ -476,6 +489,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
       @JsonKey(name: 'propertyType') this.propertyType,
       @JsonKey(readValue: readCreatedBy) this.createdBy,
       @JsonKey(name: 'partyType') this.partyType,
+      this.cluster,
       this.status,
       this.purpose,
       final List<dynamic>? amenities,
@@ -524,6 +538,8 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
   @override
   @JsonKey(name: 'partyType')
   final String? partyType;
+  @override
+  final String? cluster;
   @override
   final String? status;
   @override
@@ -581,7 +597,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
 
   @override
   String toString() {
-    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
+    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, cluster: $cluster, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
   }
 
   @override
@@ -604,6 +620,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
             const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
             (identical(other.partyType, partyType) ||
                 other.partyType == partyType) &&
+            (identical(other.cluster, cluster) || other.cluster == cluster) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.purpose, purpose) || other.purpose == purpose) &&
             const DeepCollectionEquality()
@@ -647,6 +664,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
         propertyType,
         const DeepCollectionEquality().hash(createdBy),
         partyType,
+        cluster,
         status,
         purpose,
         const DeepCollectionEquality().hash(_amenities),
@@ -691,6 +709,7 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
       @JsonKey(name: 'propertyType') final String? propertyType,
       @JsonKey(readValue: readCreatedBy) final dynamic createdBy,
       @JsonKey(name: 'partyType') final String? partyType,
+      final String? cluster,
       final String? status,
       final String? purpose,
       final List<dynamic>? amenities,
@@ -737,6 +756,8 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
   @override
   @JsonKey(name: 'partyType')
   String? get partyType;
+  @override
+  String? get cluster;
   @override
   String? get status;
   @override

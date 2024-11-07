@@ -30,7 +30,7 @@ class InfoLabelValue extends StatelessWidget {
                   adjustment: 0.1,
                 ),
                 NormalText(
-                  text: valueOne ?? '',
+                  text: valueOne ?? 'No info',
                   fontWeight: FontWeight.w400,
                 )
               ],
@@ -49,7 +49,7 @@ class InfoLabelValue extends StatelessWidget {
                     adjustment: 0.1,
                   ),
                   NormalText(
-                    text: valueTwo ?? '',
+                    text: valueTwo ?? 'No info',
                     fontWeight: FontWeight.w400,
                   )
                 ],

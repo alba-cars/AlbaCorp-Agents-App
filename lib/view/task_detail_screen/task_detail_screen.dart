@@ -586,6 +586,22 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   LabelText(
                                                     text: 'Property cards',
                                                   ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        context.pushNamed(
+                                                            LeadDetailScreen
+                                                                .routeName,
+                                                            pathParameters: {
+                                                              'id': task.lead
+                                                                      ?.id ??
+                                                                  "",
+                                                            },
+                                                            queryParameters: {
+                                                              'index': "3"
+                                                            });
+                                                      },
+                                                      child: LinkText(
+                                                          text: "View all"))
                                                 ],
                                               ),
                                               VerticalSmallGap(),

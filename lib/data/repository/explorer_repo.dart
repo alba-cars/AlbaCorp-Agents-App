@@ -30,9 +30,9 @@ abstract class ExplorerRepo {
   Future<Result<void>> checkOutLead(
       {List<String>? propertyCardIds, List<String>? leadIds});
   Future<Result<List<LeadPropertyCardModel>>> getPropertyCardLeads(
-      {required String propertyCardId});
+      {required String propertyCardId, Paginator? paginator});
   Future<Result<List<LeadPropertyCardModel>>> getLeadPropertyCards(
-      {required String leadId});
+      {required String leadId, Paginator? paginator});
   Future<Result<List<PropertyCardNoteModel>>> getPropertyCardNotes(
       {required String propertyCardId});
   Future<Result<void>> addPropertyCardNotes(

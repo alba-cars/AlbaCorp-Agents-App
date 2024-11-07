@@ -321,7 +321,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         final uniqueIds = <String>{}; // A set to track unique IDs
         activities.retainWhere(
             (element) => uniqueIds.add(element.id)); // Keep only unique items
-            
+
         emit(state.copyWith(
             sortedActivity: activities,
             getSortedActivitiesStatus: AppStatus.success,
@@ -452,14 +452,17 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
     final result =
         await _explorerRepo.getLeadPropertyCards(leadId: state.task!.lead!.id);
+
     switch (result) {
       case (Success s):
+        Logger().i(s.value);
         emit(state.copyWith(
             propertyCardsList: s.value,
             getPropertyCardsListStatus: AppStatus.success,
             propertyCardPaginator: s.paginator));
         break;
       case (Error e):
+        Logger().e(e);
         emit(state.copyWith(
             getPropertyCardsListStatus: AppStatus.failure,
             getPropertyCardsListError: e.exception));

@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -20,17 +19,11 @@ import 'package:real_estate_app/view/property_card_details/widgets/show_add_note
 import 'package:real_estate_app/view/property_card_details/widgets/show_add_photos_dialog.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/unlink_confirmation_dialog.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:recase/recase.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/call_bloc/call_bloc.dart';
-import '../../widgets/fields/attachment_field.dart';
-import '../../widgets/fields/currency_field.dart';
-import '../../widgets/fields/multi_image_field.dart';
-import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';
 import '../../widgets/text.dart';
@@ -414,8 +407,16 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InfoLabelValue(
-                          labelOne: 'Building Name',
-                          valueOne: propertyCard?.building?.name,
+                          labelOne:
+                              (propertyCard?.building?.name.isEmpty ?? false)
+                                  ? 'Building Name'
+                                  : "Cluster Name",
+                          valueOne:
+                              (propertyCard?.building?.name.isEmpty ?? false)
+                                  ? propertyCard?.building?.name
+                                  : (propertyCard?.cluster?.length ?? 0) < 2
+                                      ? propertyCard?.cluster
+                                      : "Not info available",
                           labelTwo: 'Community',
                           valueTwo: propertyCard?.community?.community,
                         ),
@@ -756,7 +757,8 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                                       MaterialTapTargetSize.shrinkWrap,
                                   padding: EdgeInsets.symmetric(vertical: 0)),
                               onPressed: () {
-                                showAddPhotosDialog(context,propertyCard?.photos);
+                                showAddPhotosDialog(
+                                    context, propertyCard?.photos);
                               },
                               child: Row(
                                 children: [

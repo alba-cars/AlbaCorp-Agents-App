@@ -5,7 +5,6 @@ import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
-import 'package:real_estate_app/view/call_feedback_screen/call_feedback_screen.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/deals_tab_view.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/property_cards_tab_view.dart';

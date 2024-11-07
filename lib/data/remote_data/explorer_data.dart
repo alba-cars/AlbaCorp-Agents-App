@@ -323,7 +323,7 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<List<LeadPropertyCardModel>>> getPropertyCardLeads(
-      {required String propertyCardId}) async {
+      {required String propertyCardId, Paginator? paginator}) async {
     try {
       String url =
           'v1/property-cards/lead-to-card/?propertyCard=$propertyCardId&extraPopulate=true';
@@ -612,50 +612,47 @@ class ExplorerData implements ExplorerRepo {
     try {
       String url = 'v1/property-cards/checkout-random-leads';
       Map<String, dynamic>? filterRemoved;
-      if (values != null) {
-        filterRemoved = Map.from(values)
-          ..removeWhere((key, value) => value == null);
+      filterRemoved = Map.from(values)
+        ..removeWhere((key, value) => value == null);
 
-        filterRemoved = filterRemoved.map((key, value) {
-          if (value is Map) {
-            // Check if the value in the Map is a List and flatten it
-            final flattenedValue = (value['value'] is List)
-                ? (value['value'] as List)
-                    .expand((element) => element is List ? element : [element])
-                    .toList()
-                : value['value'];
-            return MapEntry(key, flattenedValue);
-          } else if (value is List) {
-            // Flatten the List, regardless of whether it contains Maps or other lists
-            final flattenedList = value.expand((element) {
-              if (element is Map && element['value'] != null) {
-                // Check if the value in the Map is a list and flatten it
-                return element['value'] is List
-                    ? (element['value'] as List)
-                        .expand((innerElement) => innerElement is List
-                            ? innerElement
-                            : [innerElement])
-                        .toList()
-                    : [element['value']];
-              } else if (element is List) {
-                // Flatten any nested lists
-                return element;
-              } else {
-                // Return non-list elements as is
-                return [element];
-              }
-            }).toList();
+      filterRemoved = filterRemoved.map((key, value) {
+        if (value is Map) {
+          // Check if the value in the Map is a List and flatten it
+          final flattenedValue = (value['value'] is List)
+              ? (value['value'] as List)
+                  .expand((element) => element is List ? element : [element])
+                  .toList()
+              : value['value'];
+          return MapEntry(key, flattenedValue);
+        } else if (value is List) {
+          // Flatten the List, regardless of whether it contains Maps or other lists
+          final flattenedList = value.expand((element) {
+            if (element is Map && element['value'] != null) {
+              // Check if the value in the Map is a list and flatten it
+              return element['value'] is List
+                  ? (element['value'] as List)
+                      .expand((innerElement) =>
+                          innerElement is List ? innerElement : [innerElement])
+                      .toList()
+                  : [element['value']];
+            } else if (element is List) {
+              // Flatten any nested lists
+              return element;
+            } else {
+              // Return non-list elements as is
+              return [element];
+            }
+          }).toList();
 
-            return MapEntry(key, flattenedList);
-          } else {
-            // If it's a single value, return it as is
-            return MapEntry(key, value);
-          }
-        });
-      }
-       if (filterRemoved?.containsKey('places') == true &&
-          filterRemoved?['places'] is List) {
-        final places = filterRemoved!['places'] as List;
+          return MapEntry(key, flattenedList);
+        } else {
+          // If it's a single value, return it as is
+          return MapEntry(key, value);
+        }
+      });
+      if (filterRemoved.containsKey('places') == true &&
+          filterRemoved['places'] is List) {
+        final places = filterRemoved['places'] as List;
 
         if (places.isNotEmpty) {
           // Replace "communities" with "places" if "places" is not empty
@@ -680,19 +677,23 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<List<LeadPropertyCardModel>>> getLeadPropertyCards(
-      {required String leadId}) async {
+      {required String leadId, Paginator? paginator}) async {
     try {
       String url = 'v1/property-cards/lead-to-card/?lead=$leadId';
 
-      final response = await _dio.get(
-        url,
-      );
+      final response = await _dio.get(url, queryParameters: {
+        'limit': 15,
+        if (paginator != null) 'page': paginator.currentPage + 1,
+      });
       final data = response.data['data'] as List;
       final list = data.map((e) => LeadPropertyCardModel.fromJson(e)).toList();
+
       // final paginator = Paginator(itemCount: 10, perPage: 10, currentPage: 1)
-      return Success(
-        list,
-      );
+      return Success(list,
+          paginator: Paginator(
+              currentPage: (paginator?.currentPage ?? 0) + 1,
+              perPage: 15,
+              itemCount: 15));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

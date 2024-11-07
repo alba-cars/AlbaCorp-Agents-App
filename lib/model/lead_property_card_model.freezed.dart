@@ -30,7 +30,7 @@ mixin _$LeadPropertyCardModel {
   bool get isOwner => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   double? get amount => throw _privateConstructorUsedError;
-  CreatedBy get createdBy => throw _privateConstructorUsedError;
+  CreatedBy? get createdBy => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -54,13 +54,13 @@ abstract class $LeadPropertyCardModelCopyWith<$Res> {
       bool isOwner,
       DateTime? date,
       double? amount,
-      CreatedBy createdBy,
+      CreatedBy? createdBy,
       DateTime? createdAt,
       DateTime? updatedAt});
 
   $LeadCopyWith<$Res> get lead;
   $PropertyCardDetailsModelCopyWith<$Res> get propertyCard;
-  $CreatedByCopyWith<$Res> get createdBy;
+  $CreatedByCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
     Object? isOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
-    Object? createdBy = null,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -117,10 +117,10 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy,
+              as CreatedBy?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -151,8 +151,12 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $CreatedByCopyWith<$Res> get createdBy {
-    return $CreatedByCopyWith<$Res>(_value.createdBy, (value) {
+  $CreatedByCopyWith<$Res>? get createdBy {
+    if (_value.createdBy == null) {
+      return null;
+    }
+
+    return $CreatedByCopyWith<$Res>(_value.createdBy!, (value) {
       return _then(_value.copyWith(createdBy: value) as $Val);
     });
   }
@@ -175,7 +179,7 @@ abstract class _$$LeadPropertyCardModelImplCopyWith<$Res>
       bool isOwner,
       DateTime? date,
       double? amount,
-      CreatedBy createdBy,
+      CreatedBy? createdBy,
       DateTime? createdAt,
       DateTime? updatedAt});
 
@@ -184,7 +188,7 @@ abstract class _$$LeadPropertyCardModelImplCopyWith<$Res>
   @override
   $PropertyCardDetailsModelCopyWith<$Res> get propertyCard;
   @override
-  $CreatedByCopyWith<$Res> get createdBy;
+  $CreatedByCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -206,7 +210,7 @@ class __$$LeadPropertyCardModelImplCopyWithImpl<$Res>
     Object? isOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
-    Object? createdBy = null,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -239,10 +243,10 @@ class __$$LeadPropertyCardModelImplCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy,
+              as CreatedBy?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -266,7 +270,7 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
       this.isOwner = false,
       this.date,
       this.amount,
-      required this.createdBy,
+      this.createdBy,
       this.createdAt,
       this.updatedAt});
 
@@ -291,7 +295,7 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
   @override
   final double? amount;
   @override
-  final CreatedBy createdBy;
+  final CreatedBy? createdBy;
   @override
   final DateTime? createdAt;
   @override
@@ -353,7 +357,7 @@ abstract class _LeadPropertyCardModel implements LeadPropertyCardModel {
       final bool isOwner,
       final DateTime? date,
       final double? amount,
-      required final CreatedBy createdBy,
+      final CreatedBy? createdBy,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$LeadPropertyCardModelImpl;
 
@@ -376,7 +380,7 @@ abstract class _LeadPropertyCardModel implements LeadPropertyCardModel {
   @override
   double? get amount;
   @override
-  CreatedBy get createdBy;
+  CreatedBy? get createdBy;
   @override
   DateTime? get createdAt;
   @override

@@ -18,7 +18,9 @@ _$LeadPropertyCardModelImpl _$$LeadPropertyCardModelImplFromJson(
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       amount: (json['amount'] as num?)?.toDouble(),
-      createdBy: CreatedBy.fromJson(json['createdBy'] as Map<String, dynamic>),
+      createdBy: json['createdBy'] == null
+          ? null
+          : CreatedBy.fromJson(json['createdBy'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),

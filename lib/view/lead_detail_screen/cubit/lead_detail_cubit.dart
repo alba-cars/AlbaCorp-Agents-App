@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/deal_model.dart';
@@ -99,10 +100,10 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
     }
   }
 
-  Future<void> getLeadPropertyCards({
-    bool refresh = false,
-  }) async {
-    if (refresh || state.propertyCardPaginator == null) {
+  Future<void> getLeadPropertyCards(
+      {bool refresh = false, Paginator? paginator}) async {
+    Logger().d("Paginator ${paginator?.currentPage ?? 0}");
+    if (refresh || paginator == null) {
       emit(state.copyWith(
           getPropertyCardsListStatus: AppStatus.loading,
           propertyCardsList: []));
@@ -110,15 +111,17 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
       if (state.getPropertyCardsListStatus == AppStatus.loadingMore) {
         return;
       }
-      emit(state.copyWith(getPropertyCardsListStatus: AppStatus.loadingMore));
+      emit(state.copyWith(
+          getPropertyCardsListStatus: AppStatus.loadingMore,
+          propertyCardPaginator: paginator));
     }
 
-    final result =
-        await _explorerRepo.getLeadPropertyCards(leadId: state.leadId);
+    final result = await _explorerRepo.getLeadPropertyCards(
+        leadId: state.leadId, paginator: paginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            propertyCardsList: s.value,
+            propertyCardsList: [...state.propertyCardsList, ...s.value],
             getPropertyCardsListStatus: AppStatus.success,
             propertyCardPaginator: s.paginator));
         break;
