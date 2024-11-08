@@ -1,22 +1,32 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/core/helpers/app_config_helper.dart';
+import 'package:real_estate_app/core/models/enums/quick_access_list_enum.dart';
+import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
+import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
+import 'package:real_estate_app/view/home_layout/quick_access_button.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
+import 'package:real_estate_app/view/my_activities/presentation/my_actvities_page.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
-import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
 import '../../model/user.dart';
@@ -24,7 +34,9 @@ import '../../service_locator/injectable.dart';
 import '../../widgets/button.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';
+import '../check_in_page/check_in_page.dart';
 import '../listings_screen/listing_screen.dart';
+import 'kpis_layout_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.child, required this.location})
@@ -56,190 +68,375 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
+  String getGreeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning';
+    }
+    if (hour < 17) {
+      return 'Good Afternoon';
+    }
+    return 'Good Evening';
+  }
+
+  IconData getgreetingIcon() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return Icons.sunny_snowing;
+    }
+    if (hour < 17) {
+      return Icons.sunny;
+    }
+
+    return Icons.coffee;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.select<AuthBloc, User?>((bloc) => bloc.state.user);
+    final agent = context.select<AuthBloc, Agent?>((bloc) => bloc.state.agent);
     return Scaffold(
       backgroundColor: bgColor,
       resizeToAvoidBottomInset: false,
       drawer: Drawer(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Image.asset(
-                    'assets/images/logo-black.png',
-                    width: 100,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                ),
-                const VerticalSmallGap(),
-                if (user != null)
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(13),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0, left: 12),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const VerticalSmallGap(),
-                          InkWell(
-                            onTap: () {
-                              context.pushNamed('user_profile');
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 65,
-                                  height: 65,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey[100]!,
-                                  ),
-                                  child: S3Image(
-                                    url: user.photo,
-                                    errorWidget: Image.asset(
-                                        'assets/images/person_placeholder.jpeg'),
-                                  ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                getgreetingIcon(),
+                                color: Colors.white,
+                              ),
+                              HorizontalSmallGap(),
+                              RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                  text: 'Hey,\n',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displaySmall
+                                      ?.copyWith(
+                                          fontSize: 12, color: Colors.white),
                                 ),
-                                const SizedBox(width: 6),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      user.firstName.titleCase,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall
-                                          ?.apply(
-                                              color: const Color(0xFF000000),
-                                              fontWeightDelta: 2),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                TextSpan(
+                                  text: getGreeting(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                          fontSize: 16, color: Colors.white),
+                                )
+                              ])),
+                            ],
+                          ),
+                          Image.asset(
+                            'assets/images/logo-black.png',
+                            width: 100,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const VerticalSmallGap(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12)),
+                                image: isValidPhoto(user?.photo)
+                                    ? DecorationImage(
+                                        image: NetworkImage(user?.photo ?? ""))
+                                    : DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/person_placeholder.jpeg")),
+                              ),
                             ),
-                          ),
-                          const VerticalSmallGap(),
-                        ],
-                      ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                launchUrlString(
+                                    "https://alba.homes/agents/${agent?.id}");
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      HeadingText(
+                                        text:
+                                            "${user?.firstName.pascalCase ?? ""} ${user?.lastName.pascalCase ?? ""}",
+                                        color: Colors.white,
+                                      ),
+                                      HorizontalSmallGap(),
+                                      Icon(
+                                        Icons.open_in_browser_outlined,
+                                        color: Colors.white,
+                                        size: 16,
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  LabelText(
+                                    text: "${user?.phone ?? "Not available"}",
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Share.share(
+                                    "Hey, \n Check my profile \n https://alba.homes/agents/${agent?.id}");
+                              },
+                              child: Icon(
+                                Icons.share,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                            VerticalSmallGap(),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                const VerticalSmallGap(),
-                const VerticalSmallGap(),
-                Builder(builder: (context) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomListTileWithIcon(
-                        title: 'Explorer',
-                        iconImagePath: 'assets/images/compass.png',
-                        children: [
-                          ListIcon(
-                            title: 'Property Cards',
-                            onPressed: () {
-                              Scaffold.of(context).closeDrawer();
-                              context.pushNamed(ExplorerScreen.routeName);
-                            },
-                          ),
-                          ListIcon(
-                            title: 'Leads',
-                            onPressed: () {
-                              Scaffold.of(context).closeDrawer();
-                              context.pushNamed(LeadsExplorerScreen.routeName);
-                            },
-                          ),
-                          ListIcon(
-                            title: 'Assigned Property Cards',
-                            onPressed: () {
-                              Scaffold.of(context).closeDrawer();
-                              context.pushNamed(ExplorerScreen.routeName,
-                                  queryParameters: {'tab': '1'});
-                            },
-                          )
-                        ],
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Lead',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddLeadScreen.routeName);
-                        },
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Deal',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddDealScreen.routeName);
-                        },
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Listing Acquired',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddListingScreen.routeName);
-                        },
-                      ),
-                      CustomListTileWithIcon(
-                        title: 'Pocket Listing',
-                        iconImagePath: 'assets/images/plus.png',
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                          context.pushNamed(AddPocketListingScreen.routeName);
-                        },
-                      ),
+                  VerticalSmallGap(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            HeadingText(
+                              text: "Quick Access",
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        SizedBox(
+                          height: 80,
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [0, 1, 2]
+                                  .map((pos) => Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 4),
+                                          child: QuickAccessButton(
+                                              text: QuickAccessEnumList
+                                                  .values[pos]
+                                                  .getName(),
+                                              iconData: QuickAccessEnumList
+                                                  .values[pos]
+                                                  .getIcon(),
+                                              action: () {
+                                                QuickAccessEnumList.values[pos]
+                                                    .performAction();
+                                              }),
+                                        ),
+                                      ))
+                                  .toList()),
+                        ), // if (user != null)
+                      ],
+                    ),
+                  ),
+                  const VerticalSmallGap(),
+                  KpisLayoutWidget(),
+                  const VerticalSmallGap(),
+                  Builder(builder: (context) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomListTileWithIcon(
+                          title: 'Explorer',
+                          iconImagePath: 'assets/images/compass.png',
+                          initiallyExpanded: true,
+                          children: [
+                            ListIcon(
+                              title: 'Property Cards',
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context.pushNamed(ExplorerScreen.routeName);
+                              },
+                            ),
+                            ListIcon(
+                              title: 'Leads',
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context
+                                    .pushNamed(LeadsExplorerScreen.routeName);
+                              },
+                            ),
+                            ListIcon(
+                              title: 'Assigned Property Cards',
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context.pushNamed(ExplorerScreen.routeName,
+                                    queryParameters: {'tab': '1'});
+                              },
+                            )
+                          ],
+                        ),
+                        CustomListTileWithIcon(
+                            title: 'Add New',
+                            iconImagePath: 'assets/images/plus.png',
+                            children: [
+                              ListIcon(
+                                title: 'Add Leads',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(AddLeadScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Add Deal',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(AddDealScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Add Listing Acquired',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(AddListingScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Add Pocket Listing',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(
+                                      AddPocketListingScreen.routeName);
+                                },
+                              ),
+                            ]),
+                        CustomListTileWithIcon(
+                          title: 'My Leads',
+                          iconImagePath: 'assets/images/leads.png',
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                            context.pushNamed(LeadsScreen.routeName);
+                          },
+                        ),
+                        // CustomListTileWithIcon(
+                        //   title: 'My Activities',
+                        //   iconImagePath: 'assets/images/leads.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     context.pushNamed(MyActvitiesPage.routeName);
+                        //   },
+                        // ),
+                        CustomListTileWithIcon(
+                          title: 'Deals',
+                          iconImagePath: 'assets/images/deal.png',
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                            context.goNamed(DealsScreen.routeName);
+                          },
+                        ),
 
-                      // CustomListTileWithIcon(
-                      //   title: 'Tickets',
-                      //   iconImagePath: 'assets/images/ticket.png',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).closeDrawer();
-                      //     context.pushNamed(TicketsScreen.routeName);
-                      //   },
-                      // ),
-                      VerticalSmallGap(
-                        adjustment: 4,
-                      ),
-                      // CustomListTileWithIcon(
-                      //   title: 'Settings',
-                      //   iconImagePath: 'assets/images/settings.png',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).closeDrawer();
-                      //     // context.pushNamed('settings');
-                      //   },
-                      // ),
-                      CustomListTileWithIcon(
-                        title: 'Logout',
-                        iconImagePath: 'assets/images/logout_icon.png',
-                        onPressed: () async {
-                          final confirm = await showDialog<bool>(
-                              context: context,
-                              builder: (context) => const ConfirmLogOut());
-                          if (confirm == true && mounted) {
-                            getIt<AuthBloc>()
-                                .add(const AuthEvent.userLoggedOut());
-                            context.pop();
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                }),
-              ],
+                        // CustomListTileWithIcon(
+                        //   title: 'Tickets',
+                        //   iconImagePath: 'assets/images/ticket.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     context.pushNamed(TicketsScreen.routeName);
+                        //   },
+                        // ),
+                        VerticalSmallGap(
+                          adjustment: 4,
+                        ),
+                        // CustomListTileWithIcon(
+                        //   title: 'Settings',
+                        //   iconImagePath: 'assets/images/settings.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     context.pushNamed(CheckInPage.routeName);
+                        //   },
+                        // ),
+                        CustomListTileWithIcon(
+                          title: 'Logout',
+                          iconImagePath: 'assets/images/logout_icon.png',
+                          onPressed: () async {
+                            final confirm = await showDialog<bool>(
+                                context: context,
+                                builder: (context) => const ConfirmLogOut());
+                            if (confirm == true && mounted) {
+                              getIt<AuthBloc>()
+                                  .add(const AuthEvent.userLoggedOut());
+                              context.pop();
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        FutureBuilder(
+                            future: AppConfigHelper().getAppInfo(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError || !snapshot.hasData) {
+                                return SizedBox();
+                              }
+                              return Column(
+                                children: [
+                                  LabelText(
+                                    text:
+                                        "Version: ${snapshot.data?.currentVersion ?? "1.0.0"}",
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  SmallText(
+                                    text: "Crafted with ❤︎ from Alba corp",
+                                    color: Colors.white,
+                                  )
+                                ],
+                              );
+                            }),
+                      ],
+                    );
+                  }),
+                ],
+              ),
             ),
           ),
         ),
@@ -370,8 +567,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget bottomBar(String matchedLocation) {
     final currentindex = switch (matchedLocation) {
-      HomePage.routeName => 0,
-      LeadsScreen.routeName => 1,
+      EnquiriesScreen.routeName => 0,
+      ColdLeadScreen.routeName => 1,
       ListingsScreen.routeName => 2,
       DealsScreen.routeName => 3,
       _ => 0
@@ -379,10 +576,10 @@ class _HomeScreenState extends State<HomeScreen>
     void onTap(value) {
       switch (value) {
         case 0:
-          context.goNamed(HomePage.routeName);
+          context.goNamed(EnquiriesScreen.routeName);
           return;
         case 1:
-          context.goNamed(LeadsScreen.routeName);
+          context.goNamed(ColdLeadScreen.routeName);
           return;
         case 2:
           context.goNamed(ListingsScreen.routeName);
@@ -392,24 +589,25 @@ class _HomeScreenState extends State<HomeScreen>
           return;
 
         default:
-          context.goNamed(HomePage.routeName);
+          context.goNamed(EnquiriesScreen.routeName);
           return;
       }
     }
 
     return Container(
       decoration: BoxDecoration(color: Colors.white),
+      padding: EdgeInsets.zero,
       child: Row(
         children: [
           BottomNavBarItem(
-            text: 'Tasks',
+            text: 'Enquiries',
             iconPath: 'assets/images/task.png',
             index: 0,
             onTap: onTap,
             selectedIndex: currentindex,
           ),
           BottomNavBarItem(
-            text: 'Leads',
+            text: 'Explorer',
             iconPath: 'assets/images/leads.png',
             index: 1,
             onTap: onTap,
@@ -418,21 +616,35 @@ class _HomeScreenState extends State<HomeScreen>
           Spacer(),
           BottomNavBarItem(
             text: 'Listings',
-            icon: Icons.business_outlined,
+            iconPath: 'assets/images/task.png',
             index: 2,
             onTap: onTap,
             selectedIndex: currentindex,
           ),
           BottomNavBarItem(
             text: 'Deals',
-            iconPath: 'assets/images/deal.png',
+            icon: Icons.business_outlined,
             index: 3,
             onTap: onTap,
             selectedIndex: currentindex,
           ),
+          // BottomNavBarItem(
+          //   text: 'Deals',
+          //   iconPath: 'assets/images/deal.png',
+          //   index: 3,
+          //   onTap: onTap,
+          //   selectedIndex: currentindex,
+          // ),
         ],
       ),
     );
+  }
+
+  bool isValidPhoto(String? photo) {
+    if (photo == null) {
+      return false;
+    }
+    return photo.isEmpty ? true : false;
   }
 }
 
@@ -524,7 +736,7 @@ class BottomNavBarItem extends StatelessWidget {
         Theme.of(context).textTheme.labelLarge?.copyWith(color: primaryColor);
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Container(
           decoration: selectedIndex == index
               ? BoxDecoration(
@@ -558,75 +770,6 @@ class BottomNavBarItem extends StatelessWidget {
     );
   }
 }
-
-// BottomNavigationBar buildBottomnavigation(
-//     BuildContext context, String matchedLocation) {
-//   return BottomNavigationBar(
-//     onTap: (value) {
-//       switch (value) {
-//         case 0:
-//           context.goNamed(HomePage.routeName);
-//           return;
-//         case 1:
-//           context.goNamed(TabExplore.routeName);
-//           return;
-//         case 2:
-//           context.goNamed(TabSaved.routeName);
-//           return;
-//         case 3:
-//           context.goNamed(TabMessage.routeName);
-//           return;
-//         case 4:
-//           context.goNamed(TabMore.routeName);
-//           return;
-//         default:
-//           context.goNamed(HomePage.routeName);
-//           return;
-//       }
-//     },
-//     currentIndex: switch (matchedLocation) {
-//       HomePage.routeName => 0,
-//       TabExplore.routeName => 1,
-//       TabSaved.routeName => 2,
-//       TabMessage.routeName => 3,
-//       TabMore.routeName => 4,
-//       _ => 0
-//     },
-//     elevation: 0,
-//     showUnselectedLabels: false,
-//     backgroundColor: Colors.red.withAlpha(80),
-//     selectedItemColor: pacificBlue,
-//     selectedFontSize: 16.sp,
-//     selectedLabelStyle: TextStyle(
-//         fontWeight: FontWeight.w600, color: pacificBlue, fontSize: 16.sp),
-//     items: [
-//       BottomNavigationBarItem(
-//         label: "Home",
-//         icon: getSvgImage("home.svg", height: 24.h, width: 24.w),
-//         activeIcon: getSvgImage("home_bold.svg", height: 24.h, width: 24.w),
-//       ),
-//       BottomNavigationBarItem(
-//           label: "Explore",
-//           icon: getSvgImage("explore.svg", height: 24.h, width: 24.w),
-//           activeIcon:
-//               getSvgImage("explorer_bold.svg", height: 24.h, width: 24.w)),
-//       BottomNavigationBarItem(
-//           label: "Saved",
-//           icon: getSvgImage("saved.svg", height: 24.h, width: 24.w),
-//           activeIcon: getSvgImage("saved_bold.svg", height: 24.h, width: 24.w)),
-//       BottomNavigationBarItem(
-//           label: "Message",
-//           icon: getSvgImage("messages.svg", height: 24.h, width: 24.w),
-//           activeIcon:
-//               getSvgImage("message_bold.svg", height: 24.h, width: 24.w)),
-//       BottomNavigationBarItem(
-//           label: "More",
-//           icon: getSvgImage("setting.svg", height: 24.h, width: 24.w),
-//           activeIcon:
-//               getSvgImage("setting_bold_icon.svg", height: 24.h, width: 24.w)),
-//     ],
-//   );
-// }
 
 class ConfirmLogOut extends StatefulWidget {
   const ConfirmLogOut({
@@ -728,6 +871,7 @@ class CustomListTileWithIcon extends StatelessWidget {
   final String iconImagePath;
   final VoidCallback? onPressed;
   final List<ListIcon>? children;
+  final bool initiallyExpanded;
 
   const CustomListTileWithIcon({
     super.key,
@@ -735,6 +879,7 @@ class CustomListTileWithIcon extends StatelessWidget {
     required this.iconImagePath,
     this.onPressed,
     this.children,
+    this.initiallyExpanded = false,
   });
 
   @override
@@ -745,7 +890,7 @@ class CustomListTileWithIcon extends StatelessWidget {
             shape: Border.fromBorderSide(BorderSide.none),
             tilePadding: EdgeInsets.zero,
             title: widget(context, title, iconImagePath, onPressed),
-            initiallyExpanded: true,
+            initiallyExpanded: initiallyExpanded,
             iconColor: Theme.of(context).colorScheme.onPrimary,
             collapsedIconColor: Theme.of(context).colorScheme.onPrimary,
             children: children!

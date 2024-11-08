@@ -13,7 +13,9 @@ import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
+import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/listing_request_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
@@ -38,21 +40,24 @@ import '../../widgets/fields/multi_select_autocomplete_field.dart';
 
 class AddListingScreen extends StatelessWidget {
   static const routeName = '/addListingScreen';
-  const AddListingScreen({super.key, required this.isEdit, this.deal});
+  const AddListingScreen(
+      {super.key, required this.isEdit, this.deal, this.lead});
   final bool isEdit;
   final Deal? deal;
+  final Lead? lead;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<AddListingCubit>(param1: isEdit, param2: deal),
-      child: AddListingScreenLayout(),
+      child: AddListingScreenLayout(lead: lead),
     );
   }
 }
 
 class AddListingScreenLayout extends StatefulWidget {
-  const AddListingScreenLayout({super.key});
+  const AddListingScreenLayout({super.key, this.lead});
+  final Lead? lead;
 
   @override
   State<AddListingScreenLayout> createState() => _AddListingScreenLayoutState();
@@ -87,114 +92,101 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
         context.select<AddListingCubit, List<PropertyType>>(
       (value) => value.state.propertyTypeList,
     );
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, isScrolledBelow) => [
-          SliverAppBar(
-            title: Text('Add Listing'),
-            centerTitle: true,
-            backgroundColor: primaryColor,
-            foregroundColor: Colors.white,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-              child: BlocSelector<AddListingCubit, AddListingState, int>(
-                selector: (state) {
-                  return state.currentTab;
-                },
-                builder: (context, currentTab) {
-                  return Row(
-                    children: [
-                      SizedBox.square(
-                        dimension: 60,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            CircularProgressIndicator(
-                              strokeWidth: 8,
-                              value: (currentTab + 1) / 4,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                              color: primaryColor,
-                              strokeCap: StrokeCap.round,
-                              // valueColor: AlwaysStoppedAnimation(Colors.blue),
-                            ),
-                            Align(
-                                alignment: Alignment.center,
-                                child:
-                                    LabelText(text: '${currentTab + 1} of 2'))
-                          ],
-                        ),
-                      ),
-                      HorizontalSmallGap(),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          BlockTitleText(text: 'Basic Info'),
-                          NormalText(text: 'Next : Collect Documents')
-                        ],
-                      ))
-                    ],
-                  );
-                },
-              ),
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (context, isScrolledBelow) => [
+            SliverAppBar(
+              title: Text(context.read<AddListingCubit>().isEdit? 'Edit Listing': 'Add Listing'),
+              centerTitle: true,
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
             ),
-          ),
-        ],
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                  ),
-                  child: TabBarView(
-                    controller: _tabController,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      BasicInfoTab(
-                          formKey: _formKey[0],
-                          propertyTypeList: propertyTypeList),
-                      CollectDocumentsTab(
-                        formKey: _formKey[1],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
                 child: BlocSelector<AddListingCubit, AddListingState, int>(
                   selector: (state) {
                     return state.currentTab;
                   },
                   builder: (context, currentTab) {
                     return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        if (currentTab != 0) ...[
-                          Expanded(
-                            child: AppPrimaryButton(
-                                onTap: () {
-                                  context
-                                      .read<AddListingCubit>()
-                                      .onPreviousPressed(
-                                          tabController: _tabController);
-                                },
-                                outlined: true,
-                                text: 'Previous'),
+                        SizedBox.square(
+                          dimension: 60,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              CircularProgressIndicator(
+                                strokeWidth: 8,
+                                value: (currentTab + 1) / 4,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
+                                color: primaryColor,
+                                strokeCap: StrokeCap.round,
+                                // valueColor: AlwaysStoppedAnimation(Colors.blue),
+                              ),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child:
+                                      LabelText(text: '${currentTab + 1} of 2'))
+                            ],
                           ),
-                          HorizontalSmallGap(),
-                        ],
+                        ),
+                        HorizontalSmallGap(),
                         Expanded(
-                          child: AppPrimaryButton(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            BlockTitleText(text: 'Basic Info'),
+                            NormalText(text: 'Next : Collect Documents')
+                          ],
+                        ))
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    child: TabBarView(
+                      controller: _tabController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        BasicInfoTab(
+                            formKey: _formKey[0],
+                            propertyTypeList: propertyTypeList,
+                            lead: widget.lead),
+                        CollectDocumentsTab(
+                          formKey: _formKey[1],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: BlocSelector<AddListingCubit, AddListingState, int>(
+                    selector: (state) {
+                      return state.currentTab;
+                    },
+                    builder: (context, currentTab) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppPrimaryButton(
                               onTap: () async {
                                 await context
                                     .read<AddListingCubit>()
@@ -203,13 +195,13 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
                                         tabController: _tabController);
                               },
                               text: ('Next')),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              )
-            ],
+                        ],
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -222,10 +214,12 @@ class BasicInfoTab extends StatefulWidget {
     super.key,
     required GlobalKey<FormBuilderState> formKey,
     required this.propertyTypeList,
+    this.lead,
   }) : _formKey = formKey;
 
   final GlobalKey<FormBuilderState> _formKey;
   final List<PropertyType> propertyTypeList;
+  final Lead? lead;
 
   @override
   State<BasicInfoTab> createState() => _BasicInfoTabState();
@@ -252,7 +246,10 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
   Widget build(BuildContext context) {
     return FormBuilder(
       key: widget._formKey,
-      initialValue: context.read<AddListingCubit>().state.initialValues ?? {},
+      initialValue: context.read<AddListingCubit>().state.initialValues ??
+          {
+            if (widget.lead != null) ...{"user_id": widget.lead}
+          },
       onChanged: () {
         val = widget._formKey.currentState?.instantValue ?? {};
         setState(() {});
@@ -296,7 +293,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (lead) =>
                       '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
-                  optionsBuilder: (v) async {
+                  optionsBuilder: (v,refresh) async {
                     return context
                         .read<AddListingCubit>()
                         .getLeads(search: v.text);
@@ -336,7 +333,14 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
               WrapSelectField(
                   name: 'contractValidity',
                   label: 'Duration of Contract',
-                  values: ['1 Month', '3 Months', '6 Months'],
+                  values: [
+                    '1 Month',
+                    '3 Months',
+                    '6 Months',
+                    '9 Months',
+                    '1 Year',
+                    'Over a year'
+                  ],
                   isRequired: true),
               WrapSelectField(
                   name: 'furnishing',
@@ -346,90 +350,9 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                       propertyTypesExcludeBedsBaths.contains(propertyType)
                           ? false
                           : true),
-              NumberField(
-                isRequired: true,
-                name: 'size',
-                label: 'Area',
-                unit: 'Sqft',
-                convertToString: true,
-              ),
-              AppAutoComplete<Community>(
-                  onSelected: (v) {
-                    _controller.reset();
-                  },
-                  name: 'community_id',
-                  label: 'Community',
-                  isRequired: true,
-                  valueTransformer: (p0) => p0?.id,
-                  displayStringForOption: (p0) => p0.community,
-                  optionsBuilder: (v) async {
-                    final list = await context
-                        .read<AddListingCubit>()
-                        .getCommunities(search: v.text);
-                    return list.where((element) => element.community
-                        .toLowerCase()
-                        .contains(v.text.toLowerCase()));
-                  }),
-              AppTextField(
-                name: 'subCommunity',
-                label: 'Sub Community',
-              ),
-              AppAutoComplete<Building>(
-                  controller: _controller,
-                  name: 'building_id',
-                  label: 'Building Name',
-                  isRequired: (!buildingOptionalPropertyTypes.contains(widget
-                      .propertyTypeList
-                      .firstWhereOrNull(
-                          (element) => element.id == val['property_type_id'])
-                      ?.propertyType)),
-                  valueTransformer: (p0) => p0?.id,
-                  displayStringForOption: (p0) => p0.name,
-                  optionsBuilder: (v) async {
-                    final list =
-                        await context.read<AddListingCubit>().getBuildings(
-                              search: v.text,
-                            );
-                    return list.where((element) =>
-                        (element.name
-                            .toLowerCase()
-                            .contains(v.text.toLowerCase())) &&
-                        (element.communityId == val['community_id']));
-                  }),
-              BlocSelector<AddListingCubit, AddListingState, List<Amenity>>(
-                selector: (state) {
-                  return state.amenityList;
-                },
-                builder: (context, amenityList) {
-                  return MultiSelectAutoCompleteField(
-                    label: 'Amenities',
-                    name: "amenities",
-                    displayStringForOption: (option) =>
-                        option['label']?.toString() ?? '',
-                    optionsBuilder: (v) async {
-                      var list = amenityList
-                          .map((e) => {'label': e.amenity, 'value': e.id})
-                          .toList();
-                      if (v.text.trim().isNotEmpty) {
-                        list = list
-                            .where((e) => e["label"]
-                                .toString()
-                                .toLowerCase()
-                                .contains(v.text.toString()))
-                            .toList();
-                      }
-
-                      return list;
-                    },
-                    valueTransformer: (p0) {
-                      return p0?.map((e) => e['value']).toList();
-                    },
-                  );
-                },
-              ),
-              DropDownfield(
+              WrapSelectField(
                 label: 'Vacancy',
-                items: ['Vacant', 'Tenanted'],
+                values: ['Vacant', 'Tenanted'],
                 name: 'vacancy',
                 isRequired: true,
               ),
@@ -457,6 +380,84 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                           color: const Color(0xFF555555),
                         ),
                   )),
+              NumberField(
+                isRequired: true,
+                name: 'size',
+                label: 'Area',
+                unit: 'Sqft',
+                convertToString: true,
+              ),
+              AppAutoComplete<Community>(
+                  onSelected: (v) {
+                    _controller.reset();
+                  },
+                  name: 'community_id',
+                  label: 'Community',
+                  isRequired: true,
+                  valueTransformer: (p0) => p0?.id,
+                  displayStringForOption: (p0) => p0.community,
+                  optionsBuilder: (v,refresh) async {
+                    final list = await context
+                        .read<AddListingCubit>()
+                        .getCommunities(search: v.text);
+                    return list.where((element) => element.community
+                        .toLowerCase()
+                        .contains(v.text.toLowerCase()));
+                  }),
+              AppAutoComplete<Building>(
+                  controller: _controller,
+                  name: 'building_id',
+                  label: 'Building Name',
+                  isRequired: (!buildingOptionalPropertyTypes.contains(widget
+                      .propertyTypeList
+                      .firstWhereOrNull(
+                          (element) => element.id == val['property_type_id'])
+                      ?.propertyType)),
+                  valueTransformer: (p0) => p0?.id,
+                  displayStringForOption: (p0) => p0.name,
+                  optionsBuilder: (v,refresh) async {
+                    Logger().d(val['community_id']);
+                    final list = await context
+                        .read<AddListingCubit>()
+                        .getBuildings(
+                            search: v.text,
+                            community: val['community_id'] != null
+                                ? [val['community_id']]
+                                : null);
+                    return list;
+                  }),
+              // BlocSelector<AddListingCubit, AddListingState, List<Amenity>>(
+              //   selector: (state) {
+              //     return state.amenityList;
+              //   },
+              //   builder: (context, amenityList) {
+              //     return MultiSelectAutoCompleteField(
+              //       label: 'Amenities',
+              //       name: "amenities",
+              //       displayStringForOption: (option) =>
+              //           option['label']?.toString() ?? '',
+              //       optionsBuilder: (v) async {
+              //         var list = amenityList
+              //             .map((e) => {'label': e.amenity, 'value': e.id})
+              //             .toList();
+              //         if (v.text.trim().isNotEmpty) {
+              //           list = list
+              //               .where((e) => e["label"]
+              //                   .toString()
+              //                   .toLowerCase()
+              //                   .contains(v.text.toString()))
+              //               .toList();
+              //         }
+
+              //         return list;
+              //       },
+              //       valueTransformer: (p0) {
+              //         return p0?.map((e) => e['value']).toList();
+              //       },
+              //     );
+              //   },
+              // ),
+
               VerticalSmallGap(
                 adjustment: 0.3,
               ),
@@ -478,11 +479,13 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   isRequired: true),
               if (val['isOffPlanResale'] == true)
                 CurrencyField(
+                  key: ValueKey('amountAlreadyPaid'),
                   isRequired: val['isOffPlanResale'] == true,
                   name: 'amountAlreadyPaid',
                   label: 'Amount Already Paid',
                 ),
               CurrencyField(
+                key: ValueKey('price'),
                 isRequired: true,
                 name: 'price',
                 label: 'Listing Price',
@@ -493,12 +496,12 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   });
                 },
               ),
-              CommissionField(
-                name: 'agreedCommission',
-                isRequired: true,
-                price: val['price'],
-                commissionPercentage: val['agreedCommission'],
-              ),
+              // CommissionField(
+              //   name: 'agreedCommission',
+              //   isRequired: true,
+              //   price: val['price'],
+              //   commissionPercentage: val['agreedCommission'],
+              // ),
               VerticalSmallGap(
                 adjustment: 0.3,
               ),
@@ -514,16 +517,22 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
   }
 }
 
-class CollectDocumentsTab extends StatelessWidget {
+class CollectDocumentsTab extends StatefulWidget {
   const CollectDocumentsTab(
       {super.key, required GlobalKey<FormBuilderState> formKey})
       : _formKey = formKey;
   final GlobalKey<FormBuilderState> _formKey;
 
   @override
+  State<CollectDocumentsTab> createState() => _CollectDocumentsTabState();
+}
+
+class _CollectDocumentsTabState extends State<CollectDocumentsTab> {
+  final ValueNotifier<bool> isClientResident = ValueNotifier(true);
+  @override
   Widget build(BuildContext context) {
     return FormBuilder(
-        key: _formKey,
+        key: widget._formKey,
         child: ScrollShadow(
           size: 12,
           child: SingleChildScrollView(
@@ -550,11 +559,21 @@ class CollectDocumentsTab extends StatelessWidget {
                   name: 'Title Deed',
                   label: 'Title Deed',
                 ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'Ejari',
-                  label: 'Ejari',
+                BlocSelector<AddListingCubit, AddListingState,
+                    NewListingRequest?>(
+                  selector: (state) {
+                    return state.dealListingResponse;
+                  },
+                  builder: (context, state) {
+                    if (state?.type == 'Rent')
+                      return DocumentSelectionField(
+                        onSelected: (v) {},
+                        isEditting: false,
+                        name: 'Listing Form',
+                        label: 'Listing Form',
+                      );
+                    return SizedBox();
+                  },
                 ),
                 VerticalSmallGap(),
                 Divider(
@@ -571,12 +590,36 @@ class CollectDocumentsTab extends StatelessWidget {
                 VerticalSmallGap(
                   adjustment: 0.5,
                 ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'EID',
-                  label: 'Emirates Id',
-                ),
+                ValueListenableBuilder(
+                    valueListenable: isClientResident,
+                    builder: (context, state, _) {
+                      return Column(
+                        children: [
+                          SwitchListTile.adaptive(
+                              contentPadding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                              title: Text("Is Client UAE Resident"),
+                              value: isClientResident.value,
+                              onChanged: (val) {
+                                isClientResident.value = val;
+                              }),
+                          if (state)
+                            DocumentSelectionField(
+                              onSelected: (v) {},
+                              isEditting: false,
+                              name: 'EID',
+                              label: 'Emirates Id',
+                            ),
+                          if (state)
+                            DocumentSelectionField(
+                              onSelected: (v) {},
+                              isEditting: false,
+                              name: 'Visa',
+                              label: 'Visa',
+                            ),
+                        ],
+                      );
+                    }),
                 DocumentSelectionField(
                   onSelected: (v) {},
                   isEditting: false,

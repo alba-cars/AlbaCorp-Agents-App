@@ -22,6 +22,18 @@ mixin _$CallFeedbackState {
   AppStatus get addActivityStatus => throw _privateConstructorUsedError;
   bool get requestNumber => throw _privateConstructorUsedError;
   String? get number => throw _privateConstructorUsedError;
+  AppStatus get addLeadStatus => throw _privateConstructorUsedError;
+  String? get addLeadError => throw _privateConstructorUsedError;
+  List<LeadSource> get leadSources => throw _privateConstructorUsedError;
+  AppStatus get getLeadSourceStatus => throw _privateConstructorUsedError;
+  Map<String, dynamic> get val => throw _privateConstructorUsedError;
+  List<Activity> get activities => throw _privateConstructorUsedError;
+  AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
+  String? get getActivitiesError => throw _privateConstructorUsedError;
+  String? get attachLastPendingActivityToTheCall =>
+      throw _privateConstructorUsedError;
+  bool get requestFollowUpTask => throw _privateConstructorUsedError;
+  bool get leadIsReAssignable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CallFeedbackStateCopyWith<CallFeedbackState> get copyWith =>
@@ -40,7 +52,18 @@ abstract class $CallFeedbackStateCopyWith<$Res> {
       String? feedback,
       AppStatus addActivityStatus,
       bool requestNumber,
-      String? number});
+      String? number,
+      AppStatus addLeadStatus,
+      String? addLeadError,
+      List<LeadSource> leadSources,
+      AppStatus getLeadSourceStatus,
+      Map<String, dynamic> val,
+      List<Activity> activities,
+      AppStatus getActivitiesStatus,
+      String? getActivitiesError,
+      String? attachLastPendingActivityToTheCall,
+      bool requestFollowUpTask,
+      bool leadIsReAssignable});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -64,6 +87,17 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
     Object? addActivityStatus = null,
     Object? requestNumber = null,
     Object? number = freezed,
+    Object? addLeadStatus = null,
+    Object? addLeadError = freezed,
+    Object? leadSources = null,
+    Object? getLeadSourceStatus = null,
+    Object? val = null,
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = freezed,
+    Object? attachLastPendingActivityToTheCall = freezed,
+    Object? requestFollowUpTask = null,
+    Object? leadIsReAssignable = null,
   }) {
     return _then(_value.copyWith(
       checkLeadStatus: null == checkLeadStatus
@@ -90,6 +124,51 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as String?,
+      addLeadStatus: null == addLeadStatus
+          ? _value.addLeadStatus
+          : addLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addLeadError: freezed == addLeadError
+          ? _value.addLeadError
+          : addLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadSources: null == leadSources
+          ? _value.leadSources
+          : leadSources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSource>,
+      getLeadSourceStatus: null == getLeadSourceStatus
+          ? _value.getLeadSourceStatus
+          : getLeadSourceStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      val: null == val
+          ? _value.val
+          : val // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      activities: null == activities
+          ? _value.activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _value.getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getActivitiesError: freezed == getActivitiesError
+          ? _value.getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attachLastPendingActivityToTheCall: freezed ==
+              attachLastPendingActivityToTheCall
+          ? _value.attachLastPendingActivityToTheCall
+          : attachLastPendingActivityToTheCall // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requestFollowUpTask: null == requestFollowUpTask
+          ? _value.requestFollowUpTask
+          : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
+              as bool,
+      leadIsReAssignable: null == leadIsReAssignable
+          ? _value.leadIsReAssignable
+          : leadIsReAssignable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -120,7 +199,18 @@ abstract class _$$CallFeedbackStateImplCopyWith<$Res>
       String? feedback,
       AppStatus addActivityStatus,
       bool requestNumber,
-      String? number});
+      String? number,
+      AppStatus addLeadStatus,
+      String? addLeadError,
+      List<LeadSource> leadSources,
+      AppStatus getLeadSourceStatus,
+      Map<String, dynamic> val,
+      List<Activity> activities,
+      AppStatus getActivitiesStatus,
+      String? getActivitiesError,
+      String? attachLastPendingActivityToTheCall,
+      bool requestFollowUpTask,
+      bool leadIsReAssignable});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -143,6 +233,17 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
     Object? addActivityStatus = null,
     Object? requestNumber = null,
     Object? number = freezed,
+    Object? addLeadStatus = null,
+    Object? addLeadError = freezed,
+    Object? leadSources = null,
+    Object? getLeadSourceStatus = null,
+    Object? val = null,
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = freezed,
+    Object? attachLastPendingActivityToTheCall = freezed,
+    Object? requestFollowUpTask = null,
+    Object? leadIsReAssignable = null,
   }) {
     return _then(_$CallFeedbackStateImpl(
       checkLeadStatus: null == checkLeadStatus
@@ -169,6 +270,51 @@ class __$$CallFeedbackStateImplCopyWithImpl<$Res>
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as String?,
+      addLeadStatus: null == addLeadStatus
+          ? _value.addLeadStatus
+          : addLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addLeadError: freezed == addLeadError
+          ? _value.addLeadError
+          : addLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadSources: null == leadSources
+          ? _value._leadSources
+          : leadSources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSource>,
+      getLeadSourceStatus: null == getLeadSourceStatus
+          ? _value.getLeadSourceStatus
+          : getLeadSourceStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      val: null == val
+          ? _value._val
+          : val // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      activities: null == activities
+          ? _value._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _value.getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getActivitiesError: freezed == getActivitiesError
+          ? _value.getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attachLastPendingActivityToTheCall: freezed ==
+              attachLastPendingActivityToTheCall
+          ? _value.attachLastPendingActivityToTheCall
+          : attachLastPendingActivityToTheCall // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requestFollowUpTask: null == requestFollowUpTask
+          ? _value.requestFollowUpTask
+          : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
+              as bool,
+      leadIsReAssignable: null == leadIsReAssignable
+          ? _value.leadIsReAssignable
+          : leadIsReAssignable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -182,7 +328,21 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
       this.feedback,
       this.addActivityStatus = AppStatus.init,
       this.requestNumber = false,
-      this.number});
+      this.number,
+      this.addLeadStatus = AppStatus.init,
+      this.addLeadError,
+      final List<LeadSource> leadSources = const [],
+      this.getLeadSourceStatus = AppStatus.init,
+      final Map<String, dynamic> val = const {},
+      final List<Activity> activities = const [],
+      this.getActivitiesStatus = AppStatus.init,
+      this.getActivitiesError,
+      this.attachLastPendingActivityToTheCall,
+      this.requestFollowUpTask = false,
+      this.leadIsReAssignable = false})
+      : _leadSources = leadSources,
+        _val = val,
+        _activities = activities;
 
   @override
   @JsonKey()
@@ -199,10 +359,58 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
   final bool requestNumber;
   @override
   final String? number;
+  @override
+  @JsonKey()
+  final AppStatus addLeadStatus;
+  @override
+  final String? addLeadError;
+  final List<LeadSource> _leadSources;
+  @override
+  @JsonKey()
+  List<LeadSource> get leadSources {
+    if (_leadSources is EqualUnmodifiableListView) return _leadSources;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_leadSources);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getLeadSourceStatus;
+  final Map<String, dynamic> _val;
+  @override
+  @JsonKey()
+  Map<String, dynamic> get val {
+    if (_val is EqualUnmodifiableMapView) return _val;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_val);
+  }
+
+  final List<Activity> _activities;
+  @override
+  @JsonKey()
+  List<Activity> get activities {
+    if (_activities is EqualUnmodifiableListView) return _activities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activities);
+  }
+
+  @override
+  @JsonKey()
+  final AppStatus getActivitiesStatus;
+  @override
+  final String? getActivitiesError;
+  @override
+  final String? attachLastPendingActivityToTheCall;
+  @override
+  @JsonKey()
+  final bool requestFollowUpTask;
+  @override
+  @JsonKey()
+  final bool leadIsReAssignable;
 
   @override
   String toString() {
-    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number)';
+    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, attachLastPendingActivityToTheCall: $attachLastPendingActivityToTheCall, requestFollowUpTask: $requestFollowUpTask, leadIsReAssignable: $leadIsReAssignable)';
   }
 
   @override
@@ -219,12 +427,52 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
                 other.addActivityStatus == addActivityStatus) &&
             (identical(other.requestNumber, requestNumber) ||
                 other.requestNumber == requestNumber) &&
-            (identical(other.number, number) || other.number == number));
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.addLeadStatus, addLeadStatus) ||
+                other.addLeadStatus == addLeadStatus) &&
+            (identical(other.addLeadError, addLeadError) ||
+                other.addLeadError == addLeadError) &&
+            const DeepCollectionEquality()
+                .equals(other._leadSources, _leadSources) &&
+            (identical(other.getLeadSourceStatus, getLeadSourceStatus) ||
+                other.getLeadSourceStatus == getLeadSourceStatus) &&
+            const DeepCollectionEquality().equals(other._val, _val) &&
+            const DeepCollectionEquality()
+                .equals(other._activities, _activities) &&
+            (identical(other.getActivitiesStatus, getActivitiesStatus) ||
+                other.getActivitiesStatus == getActivitiesStatus) &&
+            (identical(other.getActivitiesError, getActivitiesError) ||
+                other.getActivitiesError == getActivitiesError) &&
+            (identical(other.attachLastPendingActivityToTheCall,
+                    attachLastPendingActivityToTheCall) ||
+                other.attachLastPendingActivityToTheCall ==
+                    attachLastPendingActivityToTheCall) &&
+            (identical(other.requestFollowUpTask, requestFollowUpTask) ||
+                other.requestFollowUpTask == requestFollowUpTask) &&
+            (identical(other.leadIsReAssignable, leadIsReAssignable) ||
+                other.leadIsReAssignable == leadIsReAssignable));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, checkLeadStatus, lead, feedback,
-      addActivityStatus, requestNumber, number);
+  int get hashCode => Object.hash(
+      runtimeType,
+      checkLeadStatus,
+      lead,
+      feedback,
+      addActivityStatus,
+      requestNumber,
+      number,
+      addLeadStatus,
+      addLeadError,
+      const DeepCollectionEquality().hash(_leadSources),
+      getLeadSourceStatus,
+      const DeepCollectionEquality().hash(_val),
+      const DeepCollectionEquality().hash(_activities),
+      getActivitiesStatus,
+      getActivitiesError,
+      attachLastPendingActivityToTheCall,
+      requestFollowUpTask,
+      leadIsReAssignable);
 
   @JsonKey(ignore: true)
   @override
@@ -241,7 +489,18 @@ abstract class _CallFeedbackState implements CallFeedbackState {
       final String? feedback,
       final AppStatus addActivityStatus,
       final bool requestNumber,
-      final String? number}) = _$CallFeedbackStateImpl;
+      final String? number,
+      final AppStatus addLeadStatus,
+      final String? addLeadError,
+      final List<LeadSource> leadSources,
+      final AppStatus getLeadSourceStatus,
+      final Map<String, dynamic> val,
+      final List<Activity> activities,
+      final AppStatus getActivitiesStatus,
+      final String? getActivitiesError,
+      final String? attachLastPendingActivityToTheCall,
+      final bool requestFollowUpTask,
+      final bool leadIsReAssignable}) = _$CallFeedbackStateImpl;
 
   @override
   AppStatus get checkLeadStatus;
@@ -255,6 +514,28 @@ abstract class _CallFeedbackState implements CallFeedbackState {
   bool get requestNumber;
   @override
   String? get number;
+  @override
+  AppStatus get addLeadStatus;
+  @override
+  String? get addLeadError;
+  @override
+  List<LeadSource> get leadSources;
+  @override
+  AppStatus get getLeadSourceStatus;
+  @override
+  Map<String, dynamic> get val;
+  @override
+  List<Activity> get activities;
+  @override
+  AppStatus get getActivitiesStatus;
+  @override
+  String? get getActivitiesError;
+  @override
+  String? get attachLastPendingActivityToTheCall;
+  @override
+  bool get requestFollowUpTask;
+  @override
+  bool get leadIsReAssignable;
   @override
   @JsonKey(ignore: true)
   _$$CallFeedbackStateImplCopyWith<_$CallFeedbackStateImpl> get copyWith =>

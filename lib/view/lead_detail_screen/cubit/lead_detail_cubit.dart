@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/deal_model.dart';
@@ -30,7 +31,7 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
     switch (result) {
       case (Success s):
         emit(state.copyWith(getLeadStatus: AppStatus.success, lead: s.value));
-        Future.wait([getLeadActivities(), getLeadDeals()]);
+        Future.wait([getLeadActivities(), getLeadPropertyCards()]);
         break;
       case (Error e):
         emit(state.copyWith(
@@ -76,8 +77,16 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
 
   Future<bool> updateLead(Map<String, dynamic> value) async {
     emit(state.copyWith(updateLeadStatus: AppStatus.loading));
+
+    final Map<String, dynamic> values = {};
+    for (final val in value.entries) {
+      if (val.value?.toString().isEmpty == false) {
+        values.addEntries([val]);
+      }
+    }
+
     final result =
-        await _leadRepo.updateLead(leadId: state.leadId, value: value);
+        await _leadRepo.updateLead(leadId: state.leadId, value: values);
     switch (result) {
       case (Success s):
         emit(
@@ -91,10 +100,10 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
     }
   }
 
-  Future<void> getExplorerList({
-    bool refresh = false,
-  }) async {
-    if (refresh || state.propertyCardPaginator == null) {
+  Future<void> getLeadPropertyCards(
+      {bool refresh = false, Paginator? paginator}) async {
+    Logger().d("Paginator ${paginator?.currentPage ?? 0}");
+    if (refresh || paginator == null) {
       emit(state.copyWith(
           getPropertyCardsListStatus: AppStatus.loading,
           propertyCardsList: []));
@@ -102,15 +111,17 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
       if (state.getPropertyCardsListStatus == AppStatus.loadingMore) {
         return;
       }
-      emit(state.copyWith(getPropertyCardsListStatus: AppStatus.loadingMore));
+      emit(state.copyWith(
+          getPropertyCardsListStatus: AppStatus.loadingMore,
+          propertyCardPaginator: paginator));
     }
 
-    final result =
-        await _explorerRepo.getLeadPropertyCards(leadId: state.leadId);
+    final result = await _explorerRepo.getLeadPropertyCards(
+        leadId: state.leadId, paginator: paginator);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            propertyCardsList: s.value,
+            propertyCardsList: [...state.propertyCardsList, ...s.value],
             getPropertyCardsListStatus: AppStatus.success,
             propertyCardPaginator: s.paginator));
         break;

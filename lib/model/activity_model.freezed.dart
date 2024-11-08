@@ -26,8 +26,6 @@ mixin _$Activity {
   String? get propertyListId => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
   Lead? get lead => throw _privateConstructorUsedError;
-  String? get createdBy => throw _privateConstructorUsedError;
-  String? get completedBy => throw _privateConstructorUsedError;
   double get activityWeight => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -43,7 +41,9 @@ mixin _$Activity {
   String? get offplanId => throw _privateConstructorUsedError;
   String? get propertyType => throw _privateConstructorUsedError;
   DateTime? get overdueAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,8 +62,6 @@ abstract class $ActivityCopyWith<$Res> {
       @JsonKey(name: 'user_id') String userId,
       String? propertyListId,
       @JsonKey(name: 'user') Lead? lead,
-      String? createdBy,
-      String? completedBy,
       double activityWeight,
       String type,
       String? description,
@@ -78,8 +76,8 @@ abstract class $ActivityCopyWith<$Res> {
       String? offplanId,
       String? propertyType,
       DateTime? overdueAt,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   $LeadCopyWith<$Res>? get lead;
 }
@@ -101,8 +99,6 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
     Object? userId = null,
     Object? propertyListId = freezed,
     Object? lead = freezed,
-    Object? createdBy = freezed,
-    Object? completedBy = freezed,
     Object? activityWeight = null,
     Object? type = null,
     Object? description = freezed,
@@ -137,14 +133,6 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
           ? _value.lead
           : lead // ignore: cast_nullable_to_non_nullable
               as Lead?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      completedBy: freezed == completedBy
-          ? _value.completedBy
-          : completedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
       activityWeight: null == activityWeight
           ? _value.activityWeight
           : activityWeight // ignore: cast_nullable_to_non_nullable
@@ -238,8 +226,6 @@ abstract class _$$ActivityImplCopyWith<$Res>
       @JsonKey(name: 'user_id') String userId,
       String? propertyListId,
       @JsonKey(name: 'user') Lead? lead,
-      String? createdBy,
-      String? completedBy,
       double activityWeight,
       String type,
       String? description,
@@ -254,8 +240,8 @@ abstract class _$$ActivityImplCopyWith<$Res>
       String? offplanId,
       String? propertyType,
       DateTime? overdueAt,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -276,8 +262,6 @@ class __$$ActivityImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? propertyListId = freezed,
     Object? lead = freezed,
-    Object? createdBy = freezed,
-    Object? completedBy = freezed,
     Object? activityWeight = null,
     Object? type = null,
     Object? description = freezed,
@@ -312,14 +296,6 @@ class __$$ActivityImplCopyWithImpl<$Res>
           ? _value.lead
           : lead // ignore: cast_nullable_to_non_nullable
               as Lead?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      completedBy: freezed == completedBy
-          ? _value.completedBy
-          : completedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
       activityWeight: null == activityWeight
           ? _value.activityWeight
           : activityWeight // ignore: cast_nullable_to_non_nullable
@@ -396,8 +372,6 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       @JsonKey(name: 'user_id') required this.userId,
       this.propertyListId,
       @JsonKey(name: 'user') this.lead,
-      this.createdBy,
-      this.completedBy,
       this.activityWeight = 0,
       required this.type,
       this.description,
@@ -412,8 +386,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       this.offplanId,
       this.propertyType,
       this.overdueAt,
-      this.createdAt,
-      this.updatedAt})
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt})
       : _preferredLanguages = preferredLanguages,
         _tags = tags;
 
@@ -430,10 +404,6 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
   @override
   @JsonKey(name: 'user')
   final Lead? lead;
-  @override
-  final String? createdBy;
-  @override
-  final String? completedBy;
   @override
   @JsonKey()
   final double activityWeight;
@@ -483,13 +453,15 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
   @override
   final DateTime? overdueAt;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, createdBy: $createdBy, completedBy: $completedBy, activityWeight: $activityWeight, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, activityWeight: $activityWeight, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -501,8 +473,6 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       ..add(DiagnosticsProperty('userId', userId))
       ..add(DiagnosticsProperty('propertyListId', propertyListId))
       ..add(DiagnosticsProperty('lead', lead))
-      ..add(DiagnosticsProperty('createdBy', createdBy))
-      ..add(DiagnosticsProperty('completedBy', completedBy))
       ..add(DiagnosticsProperty('activityWeight', activityWeight))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('description', description))
@@ -531,10 +501,6 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
             (identical(other.propertyListId, propertyListId) ||
                 other.propertyListId == propertyListId) &&
             (identical(other.lead, lead) || other.lead == lead) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
-            (identical(other.completedBy, completedBy) ||
-                other.completedBy == completedBy) &&
             (identical(other.activityWeight, activityWeight) ||
                 other.activityWeight == activityWeight) &&
             (identical(other.type, type) || other.type == type) &&
@@ -572,8 +538,6 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
         userId,
         propertyListId,
         lead,
-        createdBy,
-        completedBy,
         activityWeight,
         type,
         description,
@@ -612,8 +576,6 @@ abstract class _Activity implements Activity {
       @JsonKey(name: 'user_id') required final String userId,
       final String? propertyListId,
       @JsonKey(name: 'user') final Lead? lead,
-      final String? createdBy,
-      final String? completedBy,
       final double activityWeight,
       required final String type,
       final String? description,
@@ -628,8 +590,8 @@ abstract class _Activity implements Activity {
       final String? offplanId,
       final String? propertyType,
       final DateTime? overdueAt,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$ActivityImpl;
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$ActivityImpl;
 
   factory _Activity.fromJson(Map<String, dynamic> json) =
       _$ActivityImpl.fromJson;
@@ -644,10 +606,6 @@ abstract class _Activity implements Activity {
   @override
   @JsonKey(name: 'user')
   Lead? get lead;
-  @override
-  String? get createdBy;
-  @override
-  String? get completedBy;
   @override
   double get activityWeight;
   @override
@@ -678,8 +636,10 @@ abstract class _Activity implements Activity {
   @override
   DateTime? get overdueAt;
   @override
+  @JsonKey(name: 'created_at')
   DateTime? get createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)

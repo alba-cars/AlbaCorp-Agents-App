@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/add_task_screen/add_task_screen.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/deals_tab_view.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/property_cards_tab_view.dart';
@@ -24,14 +26,19 @@ class LeadDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<LeadDetailCubit>(param1: leadId),
-      child: LeadDetailScreenLayout(activeTabIndex: activeTabIndex),
+      child: LeadDetailScreenLayout(
+        activeTabIndex: activeTabIndex,
+        leadId: leadId,
+      ),
     );
   }
 }
 
 class LeadDetailScreenLayout extends StatefulWidget {
-  const LeadDetailScreenLayout({super.key, this.activeTabIndex});
+  const LeadDetailScreenLayout(
+      {super.key, this.activeTabIndex, required this.leadId});
   final int? activeTabIndex;
+  final String leadId;
   @override
   State<LeadDetailScreenLayout> createState() => _LeadDetailScreenLayoutState();
 }
@@ -53,6 +60,12 @@ class _LeadDetailScreenLayoutState extends State<LeadDetailScreenLayout>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            context.pushNamed(AddTaskScreen.routeName,
+                pathParameters: {"lead_id": widget.leadId});
+          }),
       body: BlocSelector<LeadDetailCubit, LeadDetailState, Lead?>(
         selector: (state) {
           return state.lead;

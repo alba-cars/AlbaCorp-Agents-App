@@ -165,11 +165,16 @@ class AddDealCubit extends Cubit<AddDealState> {
   Future<void> addDealDocuments({required Map<String, dynamic> values}) async {
     emit(state.copyWith(addDealDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
-        userId: state.dealResponse!.client!.id,
+        userId: state.dealResponse!.client?.id,
+        sellerUserId: state.dealResponse!.sellerInternalUser?.id,
+        buyerUserId: state.dealResponse!.buyerInternalUser?.id,
+        buyerAgencyId: state.dealResponse!.buyerExternalUser?.id,
+        sellerAgencyId: state.dealResponse!.sellerExternalUser?.id,
         dealId: state.dealResponse!.id,
         values: values);
     switch (result) {
       case (Success s):
+      await _dealsRepo.updateDealProgress(dealId: state.dealResponse!.id,);
         emit(state.copyWith(addDealDocumentsStatus: AppStatus.success));
 
         break;
@@ -186,7 +191,9 @@ class AddDealCubit extends Cubit<AddDealState> {
       GlobalKey<FormBuilderState>? formKey}) async {
     switch (state.currentTab) {
       case 0:
-        if (state.selectedDealType == DealType.SecondaryMarket) {
+        if (state.selectedDealType == null) {
+          return 'Select Deal Type to Continue';
+        } else if (state.selectedDealType == DealType.SecondaryMarket) {
           if (state.dealPurpose == null) {
             return 'Select purpose to continue to next step';
           } else if (state.sellerSource == null) {
@@ -249,9 +256,9 @@ class AddDealCubit extends Cubit<AddDealState> {
     }
   }
 
-  Future<List<Lead>> getLeads({String? search}) async {
+  Future<List<Lead>> getLeads({String? search, String? agentId}) async {
     emit(state.copyWith(getLeadListStatus: AppStatus.loadingMore));
-    final result = await _leadRepo.getLeads(search: search);
+    final result = await _leadRepo.getLeads(search: search, agentId: agentId);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -381,16 +388,12 @@ class AddDealCubit extends Cubit<AddDealState> {
     }
   }
 
-  Future<List<Building>> getBuildings({String? search}) async {
-    if (state.buildingList.isNotEmpty && search != null) {
-      return state.buildingList
-          .where((element) =>
-              element.name.toLowerCase().contains(search.toLowerCase()))
-          .toList();
-    }
+  Future<List<Building>> getBuildings(
+      {String? search, required List<String>? communities}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
 
-    final result = await _listingsRepo.getBuildingNames(search: search);
+    final result = await _listingsRepo.getBuildingNames(
+        search: search, communityId: communities);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

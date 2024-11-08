@@ -10,7 +10,11 @@ import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
+import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
+import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
@@ -19,7 +23,7 @@ import 'package:real_estate_app/view/task_detail_screen/widgets/property_card_li
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:real_estate_app/widgets/url_text.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/call_bloc/call_bloc.dart';
@@ -29,16 +33,32 @@ import '../../widgets/snackbar.dart';
 import '../lead_detail_screen/lead_detail_screen.dart';
 import 'widgets/feedback_dialog.dart';
 
+// enum TaskSortType {
+//   HotNew,
+//   HotFollowUp,
+//   HotFavourites,
+//   HotExpiring,
+//   ColdNew,
+//   ColdFollowUp,
+//   ColdFavourites,
+//   ColdExpiring
+// }
+
 class TaskDetailScreen extends StatefulWidget {
   static const routeName = '/taskDetailScreen';
-  const TaskDetailScreen(
-      {super.key,
-      required this.taskId,
-      this.activity,
-      required this.isBlocking});
+  const TaskDetailScreen({
+    super.key,
+    required this.taskId,
+    this.activity,
+    required this.isBlocking,
+    this.taskType,
+    this.taskFilter,
+  });
   final String taskId;
   final Activity? activity;
   final bool isBlocking;
+  final home.TaskType? taskType;
+  final TaskFilterEnum? taskFilter;
 
   @override
   State<TaskDetailScreen> createState() => _TaskDetailScreenState();
@@ -64,7 +84,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen>
         context.read<AuthBloc>().state.veryImportantActivities;
     if (veryImportantActivities == null ||
         veryImportantActivities.isEmpty == true) {
-      context.goNamed(home.HomePage.routeName);
+      context.goNamed(EnquiriesScreen.routeName);
       return true;
     }
     return super.didPopRoute();
@@ -73,15 +93,18 @@ class _TaskDetailScreenState extends State<TaskDetailScreen>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<TaskDetailCubit>(
-          param1: widget.taskId, param2: widget.activity),
-      child: _TaskDetailScreenLayout(),
+      create: (context) =>
+          getIt<TaskDetailCubit>(param1: widget.taskId, param2: widget.activity)
+            ..setTaskSortType(widget.taskType, widget.taskFilter),
+      child: _TaskDetailScreenLayout(
+          isEnquiry: widget.taskType == home.TaskType.Hot),
     );
   }
 }
 
 class _TaskDetailScreenLayout extends StatefulWidget {
-  const _TaskDetailScreenLayout();
+  const _TaskDetailScreenLayout({required this.isEnquiry});
+  final bool isEnquiry;
 
   @override
   State<_TaskDetailScreenLayout> createState() =>
@@ -99,7 +122,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Task'),
+        title: Text(widget.isEnquiry ? 'Enquiry' : "Cold Lead"),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: BlocSelector<AuthBloc, AuthState, Set<String>?>(
@@ -114,7 +137,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.goNamed(home.HomePage.routeName);
+                      context.goNamed(EnquiriesScreen.routeName);
                     }
                   },
                   icon: Icon(Icons.arrow_back));
@@ -122,6 +145,21 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
             return SizedBox();
           },
         ),
+        actions: [
+          if (context.select<TaskDetailCubit, double>(
+                      (state) => state.state.task?.activityWeight ?? 0) >=
+                  0.8 &&
+              context.select<AuthBloc, bool>((state) =>
+                  state.state.veryImportantActivities?.isNotEmpty ?? false))
+            IconButton(
+                onPressed: () {
+                  context
+                      .read<AuthBloc>()
+                      .add(AuthEvent.clearImportantActivity());
+                  setState(() {});
+                },
+                icon: Icon(Icons.close))
+        ],
       ),
       backgroundColor: Colors.blueGrey[100],
       body: Padding(
@@ -209,6 +247,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                 parentContext: context,
                                 direction: DismissDirection.startToEnd,
                                 mode: mode,
+                                notes: context
+                                    .read<TaskDetailCubit>()
+                                    .state
+                                    .task
+                                    ?.notes,
                                 activity:
                                     context.read<TaskDetailCubit>().state.task!,
                               ));
@@ -230,6 +273,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                               ActivityFeedbackDialog(
                                 parentContext: context,
                                 direction: DismissDirection.endToStart,
+                                notes: context
+                                    .read<TaskDetailCubit>()
+                                    .state
+                                    .task
+                                    ?.notes,
                                 activity:
                                     context.read<TaskDetailCubit>().state.task!,
                               ));
@@ -248,8 +296,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                         (AuthBloc authBloc) =>
                             authBloc.state.veryImportantActivities);
                     final task = tasks[index];
-                    final isBlockingActivity =
-                        blockingActivities?.contains(task.id) ?? false;
+                    final isBlockingActivity = task.activityWeight >= 0.8;
                     return SizedBox(
                       key: ValueKey(task.id),
                       child: Column(
@@ -314,13 +361,29 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                       icon: CupertinoIcons
                                                           .person),
                                                   HorizontalSmallGap(),
-                                                  Expanded(
-                                                    child: NormalText(
-                                                        text:
-                                                            '${task.lead?.firstName ?? ''} ${task.lead?.lastName ?? ''}'),
-                                                  )
+                                                  Flexible(
+                                                      child: TextButton(
+                                                    style: TextButton.styleFrom(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 0)),
+                                                    child: Text(
+                                                      '${task.lead?.firstName ?? ''} ${task.lead?.lastName ?? ''}',
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                    onPressed: () {
+                                                      context.pushNamed(
+                                                          LeadDetailScreen
+                                                              .routeName,
+                                                          pathParameters: {
+                                                            "id": task.lead!.id,
+                                                          });
+                                                    },
+                                                  ))
                                                 ],
                                               ),
+
                                               VerticalSmallGap(),
                                               Row(
                                                 children: [
@@ -345,7 +408,27 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                       child: NormalText(
                                                           text:
-                                                              'Task Type Call'))
+                                                              'Phone: ${task.lead?.phone ?? ''}')),
+                                                  if (task.lead?.dndStatus ??
+                                                      false)
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 4,
+                                                              vertical: 1),
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .error),
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .colorScheme
+                                                              .errorContainer),
+                                                      child: SmallText(
+                                                          text: 'DND'),
+                                                    ),
                                                 ],
                                               ),
                                               VerticalSmallGap(),
@@ -393,7 +476,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                 value: context.read<
                                                                     TaskDetailCubit>(),
                                                                 child:
-                                                                    AddNoteDialog(),
+                                                                    AddNoteDialog(
+                                                                  preNote:
+                                                                      task.notes ??
+                                                                          "",
+                                                                ),
                                                               );
                                                             });
                                                       },
@@ -402,8 +489,20 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                               ),
 
                                               (task.notes?.isNotEmpty == true)
-                                                  ? Text(task.notes ?? '')
+                                                  ? UrlText(
+                                                      text: task.notes ?? '')
                                                   : Text('No notes'),
+                                              VerticalSmallGap(),
+                                              LabelText(
+                                                text: 'Description',
+                                              ),
+                                              VerticalSmallGap(),
+                                              (task.description?.isNotEmpty ==
+                                                      true)
+                                                  ? UrlText(
+                                                      text: task.description ??
+                                                          '')
+                                                  : Text('No description'),
                                               VerticalSmallGap(),
                                               LabelText(
                                                 text: 'Actions',
@@ -460,17 +559,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: OutlinedButton(
                                                         onPressed: () async {
-                                                          if (await canLaunchUrlString(
-                                                              'whatsapp://send?phone=${task.lead?.phone}')) {
-                                                            launchUrlString(
-                                                                'whatsapp://send?phone=${task.lead?.phone}');
-                                                          } else {
-                                                            showSnackbar(
-                                                                context,
-                                                                'Can not launch the app',
-                                                                SnackBarType
-                                                                    .failure);
-                                                          }
+                                                          await launchWhatsApp(
+                                                              context,
+                                                              task.lead?.phone);
                                                         },
                                                         child: ImageIcon(AssetImage(
                                                             'assets/images/whatsapp.png'))),
@@ -479,22 +570,10 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: OutlinedButton(
                                                         onPressed: () async {
-                                                          final uri = Uri.parse(
-                                                              'mailto:${task.lead?.email}');
-                                                          if (await canLaunchUrl(
-                                                              uri)) {
-                                                            await launchUrl(
-                                                                uri);
-                                                          } else {
-                                                            showSnackbar(
-                                                                context,
-                                                                'Can not launch the app',
-                                                                SnackBarType
-                                                                    .failure);
-                                                          }
+                                                          shareCompanyProfile();
                                                         },
-                                                        child: Icon(Icons
-                                                            .email_outlined)),
+                                                        child:
+                                                            Icon(Icons.share)),
                                                   )
                                                 ],
                                               ),
@@ -507,6 +586,22 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   LabelText(
                                                     text: 'Property cards',
                                                   ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        context.pushNamed(
+                                                            LeadDetailScreen
+                                                                .routeName,
+                                                            pathParameters: {
+                                                              'id': task.lead
+                                                                      ?.id ??
+                                                                  "",
+                                                            },
+                                                            queryParameters: {
+                                                              'index': "3"
+                                                            });
+                                                      },
+                                                      child: LinkText(
+                                                          text: "View all"))
                                                 ],
                                               ),
                                               VerticalSmallGap(),
@@ -529,6 +624,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                               'id': task.lead
                                                                       ?.id ??
                                                                   "",
+                                                            },
+                                                            queryParameters: {
                                                               'index': "1"
                                                             });
                                                       },
@@ -563,7 +660,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   side: BorderSide(
                                                       color: Colors.red)),
                                               icon: Icon(
-                                                Icons.close,
+                                                CupertinoIcons.hand_thumbsdown,
                                                 color: Colors.red,
                                               )),
                                         ),
@@ -571,32 +668,38 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                         Expanded(
                                           child: IconButton.filled(
                                               style: IconButton.styleFrom(
-                                                  backgroundColor: Colors.red),
+                                                  backgroundColor: Colors.green,
+                                                  side: BorderSide(
+                                                      color: Colors.green)),
                                               onPressed: () {
                                                 mode = CardAction.Heart;
                                                 _appinioSwiperController
                                                     .swipeRight();
                                               },
                                               icon: Icon(
-                                                  CupertinoIcons.heart_fill)),
+                                                CupertinoIcons
+                                                    .hand_thumbsup_fill,
+                                                color: Colors.white,
+                                              )),
                                         ),
                                         HorizontalSmallGap(),
                                         Expanded(
                                             child: IconButton.filled(
                                                 style: IconButton.styleFrom(
                                                     backgroundColor:
-                                                        Colors.purple),
+                                                        Colors.red),
                                                 onPressed: () async {
-                                                  mode = CardAction.Star;
+                                                  mode = CardAction.Charge;
                                                   _appinioSwiperController
                                                       .swipeRight();
                                                 },
-                                                icon: Icon(Icons.star))),
+                                                icon: Icon(CupertinoIcons
+                                                    .heart_fill))),
                                         HorizontalSmallGap(),
                                         Expanded(
                                           child: IconButton.filled(
                                               onPressed: () async {
-                                                mode = CardAction.Charge;
+                                                mode = CardAction.Star;
                                                 _appinioSwiperController
                                                     .swipeRight();
                                               },
@@ -664,13 +767,26 @@ class ContainerIcon extends StatelessWidget {
 }
 
 class AddNoteDialog extends StatefulWidget {
-  const AddNoteDialog({super.key});
+  const AddNoteDialog({super.key, required this.preNote});
+
+  final String preNote;
 
   @override
   State<AddNoteDialog> createState() => _AddNoteDialogState();
 }
 
 class _AddNoteDialogState extends State<AddNoteDialog> {
+  String note = "";
+  TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    Logger().d("Pre notes :: ${widget.preNote}");
+    note = widget.preNote;
+    _controller = TextEditingController(text: note);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormBuilderState> key = GlobalKey();
@@ -686,6 +802,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
               MultiLineField(
                 name: 'notes',
                 label: 'Note',
+                controller: _controller,
               )
             ],
           ),
@@ -713,7 +830,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                           context: context,
                           completed: false,
                           refresh: true,
-                          description: values["notes"],
+                          notes: _controller.text.trim(),
                           addFollowUp: false);
                     }
                   }),

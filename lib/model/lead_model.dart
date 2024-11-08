@@ -40,6 +40,7 @@ class Lead with _$Lead {
     String? address,
     String? nationality,
     String? photo,
+    String? role,
     @JsonKey(name: 'provider_id') String? providerId,
     String? provider,
     @Default(true) bool active,
@@ -67,6 +68,12 @@ class Lead with _$Lead {
     @Default(0)
     int completedActivityCount,
   }) = _Lead;
+
+  const Lead._();
+
+  String getFullName(){
+    return "${firstName} ${lastName}";
+  }
 
   factory Lead.fromJson(Map<String, dynamic> json) => _$LeadFromJson(json);
 }

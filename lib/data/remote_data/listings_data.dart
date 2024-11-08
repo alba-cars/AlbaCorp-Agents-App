@@ -53,7 +53,6 @@ class ListingsData implements ListingsRepo {
       }
 
       final response = await _dio.get(url, queryParameters: {
-        'agentId': getIt<AuthBloc>().state.agent?.id,
         if (search != null) 'search': search,
         if (paginator != null) 'page': paginator.currentPage + 1,
         if (filterRemoved != null) ...filterRemoved
@@ -64,7 +63,28 @@ class ListingsData implements ListingsRepo {
           paginator: Paginator(
               currentPage: (paginator?.currentPage ?? 0) + 1,
               perPage: response.data['resPerPage'],
-              itemCount: response.data['ListingCount']));
+              itemCount: response.data['filteredCount']));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<Property>>> getMyListings({Paginator? paginator}) async {
+    try {
+      String url = '/v1/filter/propList';
+
+      final response = await _dio.get(url, queryParameters: {
+        'agent_id': getIt<AuthBloc>().state.agent?.id,
+        if (paginator != null) 'page': paginator.currentPage + 1,
+      });
+      final data = response.data['findPropListsOutput'] as List;
+      final list = data.map((e) => Property.fromJson(e)).toList();
+      return Success(list,
+          paginator: Paginator(
+              currentPage: (paginator?.currentPage ?? 0) + 1,
+              perPage: response.data['resPerPage'],
+              itemCount: response.data['filteredCount']));
     } catch (e, stack) {
       return onError(e, stack, log);
     }
@@ -128,19 +148,22 @@ class ListingsData implements ListingsRepo {
 
   @override
   Future<Result<List<Building>>> getBuildingNames(
-      {String? search, String? communityId, Paginator? paginator}) async {
+      {String? search, List<String>? communityId, Paginator? paginator}) async {
     try {
-      String url = 'v1/buildings';
-
+      String url = '/v1/buildings/filter';
+      Logger().d('dddddd');
       final response = await _dio.get(url, queryParameters: {
+        'limit':30,
         if (paginator != null) 'page': paginator.currentPage + 1,
         'search': search,
         'community': communityId
       });
-      final data = response.data as List;
+      final data = response.data['results'] as List;
       final list = data.map((e) => Building.fromJson(e)).toList();
+      
       return Success(
         list,
+        paginator: Paginator(itemCount:response.data['found'] ,perPage:30,currentPage:(paginator?.currentPage ??0) + 1  )
       );
     } catch (e, stack) {
       return onError(e, stack, log);
@@ -207,16 +230,16 @@ class ListingsData implements ListingsRepo {
   }
 
   @override
-  Future<Result<NewListingRequest>> updateListingAcquired(
+  Future<Result<void>> updateListingAcquired(
       {required String id, required Map<String, dynamic> values}) async {
     try {
       String url = 'v1/propList/request/$id';
 
-      final response = await _dio.put(url, data: values);
+      final response = await _dio.patch(url, data: values);
       final data = response.data;
-      final model = NewListingRequest.fromJson(data);
+
       return Success(
-        model,
+        null,
       );
     } catch (e, stack) {
       return onError(e, stack, log);

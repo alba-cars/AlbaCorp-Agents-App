@@ -1,20 +1,19 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/paginator.dart';
+import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/explorer_screen/cubit/explorer_screen_cubit.dart';
+import 'package:real_estate_app/view/explorer_screen/widgets/property_card_list_item.dart';
+import 'package:real_estate_app/view/explorer_screen/widgets/select_community_widget.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:recase/recase.dart';
 
 import '../../model/agent_model.dart';
@@ -22,7 +21,6 @@ import '../../util/color_category.dart';
 import '../../util/status.dart';
 import '../../widgets/fields/multi_select_autocomplete_field.dart';
 import '../../widgets/fields/wrap_select_field.dart';
-import '../../widgets/s3_image.dart';
 import '../../widgets/search_bar.dart';
 import '../../widgets/space.dart';
 import '../../widgets/tab_bar.dart';
@@ -128,18 +126,16 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
             )),
           ];
         },
-        body: SafeArea(
-          child: BlocListener<ExplorerScreenCubit, ExplorerScreenState>(
-            listenWhen: (previous, current) =>
-                previous.currentTab != current.currentTab,
-            listener: (context, state) {
-              _tabController.animateTo(state.currentTab);
-            },
-            child: TabBarView(
-              controller: _tabController,
-              physics: NeverScrollableScrollPhysics(),
-              children: [ExplorerTab(), CheckedOutPoolTab()],
-            ),
+        body: BlocListener<ExplorerScreenCubit, ExplorerScreenState>(
+          listenWhen: (previous, current) =>
+              previous.currentTab != current.currentTab,
+          listener: (context, state) {
+            _tabController.animateTo(state.currentTab);
+          },
+          child: TabBarView(
+            controller: _tabController,
+            physics: NeverScrollableScrollPhysics(),
+            children: [ExplorerTab(), CheckedOutPoolTab()],
           ),
         ),
       ),
@@ -159,24 +155,69 @@ class ExplorerTab extends StatefulWidget {
 class _ExplorerTabState extends State<ExplorerTab> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey();
 
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v, refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
-            return list.map((e) => {'value': e.id, 'label': e.community});
+            return list.map((e) => {
+                  'value': e.communities.map((e) => e.id).toList(),
+                  'label': e.teamName
+                });
           },
-          displayStringForOption: (option) => option['label'] ?? '',
+          displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'communities'),
       MultiSelectAutoCompleteField(
+        label: 'Places',
+        optionsBuilder: (v, refresh) async {
+          final list = await context
+              .read<ExplorerScreenCubit>()
+              .getPlaces(search: v.text);
+          final List<String>? flattenedValue = (values?['communities'] is List)
+              ? (values?['communities'] as List).expand((community) {
+                  return community['value'] is List
+                      ? community['value'] as List<String>
+                      : [community['value'].toString()];
+                }).toList()
+              : values?['communities']?['value'] as List<String>?;
+          final mapped = list
+              .where((place) {
+                return flattenedValue?.contains(place.id) ?? false;
+              })
+              .map((place) => {
+                    'value': place.id.toString(),
+                    'label': place.community.toString()
+                  })
+              .toList();
+
+          return mapped;
+        },
+        displayStringForOption: (option) => option['label']?.toString() ?? '',
+        name: 'places',
+      ),
+      MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
-            final list = await context
-                .read<ExplorerScreenCubit>()
-                .getBuildings(search: v.text);
+          optionsBuilder: (v, refresh) async {
+            List<String>? communities =[];
+            if((values?.containsKey('places') ?? false) && (values!['places'] as List).isNotEmpty){
+             communities = (values['places'] as List?)
+                ?.map((e) => e['value'] as String)
+                .toList();
+            }else{
+             communities = (values?['communities'] is List)
+              ? (values?['communities'] as List).expand((community) {
+                  return community['value'] is List
+                      ? community['value'] as List<String>
+                      : [community['value'].toString()];
+                }).toList()
+              : values?['communities']?['value'] as List<String>?;
+            }
+            final list = await context.read<ExplorerScreenCubit>().getBuildings(
+                search: v.text, community: communities, refresh: refresh);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -194,13 +235,24 @@ class _ExplorerTabState extends State<ExplorerTab> {
       WrapSelectField(
           name: 'propertyType',
           label: 'Property Type',
-          values:
-              context.select<ExplorerScreenCubit, List<Map<String, dynamic>>>(
-                  (cubit) => cubit.state.propertyTypeList
-                      .map((e) => {'value': e.id, 'label': e.propertyType})
-                      .toList()),
+          values: context
+              .read<ExplorerScreenCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.propertyType, 'label': e.propertyType})
+              .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
+      WrapSelectField(
+        name: 'showOnlyAvailable',
+        label: 'Show Only Availbale',
+        values: [
+          {'value': true, 'label': 'Yes'},
+          {'value': false, 'label': 'No'}
+        ],
+        isRequired: false,
+        displayOption: (option) => option['label'] as String,
+      ),
     ];
   }
 
@@ -212,510 +264,253 @@ class _ExplorerTabState extends State<ExplorerTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-          child: AppSearchBar(
-            onChanged: (val) {
-              context.read<ExplorerScreenCubit>().searchExplorer(val);
-            },
-            filterFields: filterFields(context),
-            filter: context.select(
-                (ExplorerScreenCubit value) => value.state.explorerFilter),
-            onFilterApplied: (filter) {
-              context.read<ExplorerScreenCubit>().setExplorerFilter(filter);
-            },
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Text('Show only available'),
-                        BlocSelector<ExplorerScreenCubit, ExplorerScreenState,
-                            bool>(
-                          selector: (state) {
-                            return state.showOnlyAvailable;
-                          },
-                          builder: (context, showOnlyAvailable) {
-                            return Switch.adaptive(
-                                value: showOnlyAvailable,
-                                onChanged: (e) {
-                                  context
-                                      .read<ExplorerScreenCubit>()
-                                      .setShowOnlyAvailable(e);
-                                });
-                          },
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                // ElevatedButton(
-                //     style: ElevatedButton.styleFrom(
-                //       backgroundColor: Colors.green[700],
-                //       side: BorderSide.none,
-                //       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                //       maximumSize: Size(150, 34),
-                //       minimumSize: Size(150, 34),
-                //       fixedSize: Size(150, 34),
-                //     ),
-                //     onPressed: () {
-                //       showGeneralDialog(
-                //           context: context,
-                //           useRootNavigator: false,
-                //           barrierDismissible: true,
-                //           barrierLabel: 'random-leads-assignment-property-card',
-                //           pageBuilder: (dContext, anim1, anim2) {
-                //             final GlobalKey<FormBuilderState> key = GlobalKey();
-                //
-                //             return AlertDialog(
-                //               title: Text('Random Leads Checkout'),
-                //               content: FormBuilder(
-                //                 key: key,
-                //                 child: SingleChildScrollView(
-                //                   child: Column(
-                //                     mainAxisSize: MainAxisSize.min,
-                //                     children: [
-                //                       AppAutoComplete(
-                //                           label: 'Community',
-                //                           isRequired: true,
-                //                           optionsBuilder: (v) async {
-                //                             return await context
-                //                                 .read<ExplorerScreenCubit>()
-                //                                 .getCommunities(search: v.text);
-                //                           },
-                //                           displayStringForOption: (option) =>
-                //                               option.community,
-                //                           valueTransformer: (p0) => p0?.id,
-                //                           name: 'community'),
-                //                       DropDownfield(
-                //                           label: 'Select number of Leads',
-                //                           items: [
-                //                             1,
-                //                             5,
-                //                             10,
-                //                             15,
-                //                             20,
-                //                             25,
-                //                             50,
-                //                             100
-                //                           ],
-                //                           name: 'numberOfLeads')
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //               actions: [
-                //                 Row(
-                //                   children: [
-                //                     Expanded(
-                //                       child: OutlinedButton(
-                //                           child: Text('Cancel'),
-                //                           onPressed: () {
-                //                             Navigator.of(dContext).pop();
-                //                           }),
-                //                     ),
-                //                     HorizontalSmallGap(),
-                //                     Expanded(
-                //                       child: AppPrimaryButton(
-                //                           text: 'Assign Leads',
-                //                           onTap: () async {
-                //                             final validated = key.currentState
-                //                                 ?.saveAndValidate();
-                //                             if (validated == true) {
-                //                               final values =
-                //                                   key.currentState!.value;
-                //                               await context
-                //                                   .read<ExplorerScreenCubit>()
-                //                                   .randomCheckout(
-                //                                       context: dContext,
-                //                                       values: values);
-                //                             }
-                //                           }),
-                //                     )
-                //                   ],
-                //                 ),
-                //               ],
-                //             );
-                //           });
-                //     },
-                //     child: Text('Get Bulk Leads'))
-              ],
-            )),
-        BlocConsumer<ExplorerScreenCubit, ExplorerScreenState>(
-          listenWhen: (previous, current) =>
-              previous.checkOutLeadStatus != current.checkOutLeadStatus &&
-              current.checkOutLeadStatus == AppStatus.success,
-          listener: (context, state) {
-            showGeneralDialog(
-                barrierDismissible: true,
-                barrierLabel: "success",
-                context: context,
-                pageBuilder: (dContext, anim1, anim2) {
-                  return BlocProvider.value(
-                    value: context.read<ExplorerScreenCubit>(),
-                    child: Builder(builder: (context) {
-                      return Dialog(
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.check_circle_rounded,
-                                  color: Colors.green,
-                                  size: 100,
-                                ),
-                                VerticalSmallGap(),
-                                Text(
-                                  'You have successfully assigned Leads to yourself.',
-                                  textAlign: TextAlign.center,
-                                ),
-                                VerticalSmallGap(),
-                                Text(
-                                  'Please hold on for a bit before making another assignment or try using bulk assignment, thank you.',
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(dContext)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.copyWith(fontWeight: FontWeight.w500),
-                                ),
-                                VerticalSmallGap(
-                                  adjustment: 1.5,
-                                ),
-                                AppPrimaryButton(
-                                    text: 'Show Assigned',
-                                    onTap: () {
-                                      context
-                                          .read<ExplorerScreenCubit>()
-                                          .setSelectedTab(1);
-                                      Navigator.of(dContext).pop();
-                                    })
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  );
-                });
-          },
-          builder: (context, state) {
-            if (!state.selectModeEnabled) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: Colors.blueGrey.withOpacity(.4)),
-                  height: 56,
-                  child: ListTile(
-                      leading: Icon(Icons.info_outline),
-                      title: Text(
-                          "Press and hold on any leads card for enabling multi select",
-                          style: TextStyle(fontSize: 12))),
-                ),
-              );
-            }
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: 8),
-              padding: EdgeInsets.symmetric(
+    return BlocSelector<ExplorerScreenCubit, ExplorerScreenState,
+        Map<String, dynamic>?>(
+      selector: (state) {
+        return state.explorerFilter;
+      },
+      builder: (context, explorerFilter) {
+        if (explorerFilter == null ||
+            explorerFilter.containsKey("communities") == false ||
+            explorerFilter['communities'] == null) {
+          return SelectCommunityWidget();
+        }
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey[100],
-              ),
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        context
+              child: AppSearchBar(
+                onChanged: (val) {
+                  context.read<ExplorerScreenCubit>().searchExplorer(val);
+                },
+                
+                showSearch: false,
+                leadWidgets: [
+                  Expanded(
+                    child: AppPrimaryButton(
+                      onTap: () async {
+                        await context
                             .read<ExplorerScreenCubit>()
-                            .setSelectionModeDisabled();
+                            .randomCheckout(
+                                context: context, numberOfLeads: 50);
                       },
-                      icon: Icon(Icons.close)),
-                  Text(
-                      "${state.selectedPropertyCards.length.toString()} Selected"),
-                  Spacer(),
-                  state.checkOutLeadStatus == AppStatus.loading
-                      ? SizedBox.square(
-                          dimension: 24, child: CircularProgressIndicator())
-                      : TextButton(
-                          onPressed: () {
-                            context
-                                .read<ExplorerScreenCubit>()
-                                .checkOutLeadInBulk(context: context);
-                          },
-                          child: Text('Bulk Assign'))
-                ],
-              ),
-            );
-          },
-        ),
-        Expanded(
-          child: BlocBuilder<ExplorerScreenCubit, ExplorerScreenState>(
-            // buildWhen: (previous, current) =>
-            //     previous.getExplorerListStatus !=
-            //         current.getExplorerListStatus ||
-            //     previous.explorerList != current.explorerList,
-            builder: (context, state) {
-              if (state.getExplorerListStatus == AppStatus.loading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.getExplorerListStatus == AppStatus.success &&
-                  state.explorerList.length == 0) {
-                return Center(
-                  child: Text('No Property Card Found'),
-                );
-              }
-              return ScrollShadow(
-                color: Colors.grey[300]!,
-                size: 6,
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: (scrollInfo) {
-                    if (state.getExplorerListStatus != AppStatus.loadingMore &&
-                        state.explorerPaginator?.hasNextPage == true &&
-                        scrollInfo.metrics.pixels >=
-                            0.9 * scrollInfo.metrics.maxScrollExtent) {
-                      EasyDebounce.debounce(
-                          'explorer-pool-list', Durations.medium2, () {
-                        context.read<ExplorerScreenCubit>().getExplorerList();
-                      });
-                    }
-                    return true;
-                  },
-                  child: RefreshIndicator.adaptive(
-                    onRefresh: () async {
+                      text: "50",
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                      child: AppPrimaryButton(
+                    onTap: () async {
                       await context
                           .read<ExplorerScreenCubit>()
-                          .getExplorerList(refresh: true);
+                          .randomCheckout(context: context, numberOfLeads: 100);
                     },
-                    child: ListView.separated(
-                        key: _listKey,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        itemBuilder: (context, index) {
-                          if (index == state.explorerList.length) {
-                            return SizedBox(
-                              height: 50,
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          }
-                          final propertyCard = state.explorerList[index];
-                          return InkWell(
-                            onTap: () {
-                              if (state.selectModeEnabled) {
-                                context
-                                    .read<ExplorerScreenCubit>()
-                                    .addToSelection(context, propertyCard);
-                              } else {
-                                context.pushNamed(
-                                    PropertyCardDetailsScreen.routeName,
-                                    pathParameters: {'id': propertyCard.id});
-                              }
-                            },
-                            onLongPress: () {
-                              context
-                                  .read<ExplorerScreenCubit>()
-                                  .setSelectionModeEnabled(
-                                      context, propertyCard);
-                            },
+                    text: "100",
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                  )),
+                ],
+                filterFields: filterFields,
+                filter: explorerFilter,
+                onFilterApplied: (filter) {
+                  context.read<ExplorerScreenCubit>().setExplorerFilter(filter);
+                },
+              ),
+            ),
+            BlocConsumer<ExplorerScreenCubit, ExplorerScreenState>(
+              listenWhen: (previous, current) =>
+                  previous.checkOutLeadStatus != current.checkOutLeadStatus &&
+                  current.checkOutLeadStatus == AppStatus.success,
+              listener: (context, state) {
+                showGeneralDialog(
+                    barrierDismissible: true,
+                    barrierLabel: "success",
+                    context: context,
+                    pageBuilder: (dContext, anim1, anim2) {
+                      return BlocProvider.value(
+                        value: context.read<ExplorerScreenCubit>(),
+                        child: Builder(builder: (context) {
+                          return Dialog(
                             child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Colors.white,
-                                  border: state.selectModeEnabled &&
-                                          state.selectedPropertyCards
-                                              .contains(propertyCard.id)
-                                      ? Border.all(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          width: 2)
-                                      : null,
-                                  boxShadow: state.selectModeEnabled &&
-                                          state.selectedPropertyCards
-                                              .contains(propertyCard.id)
-                                      ? [
-                                          BoxShadow(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary
-                                                  .withOpacity(.5),
-                                              offset: Offset(-4, 5),
-                                              blurRadius: 19)
-                                        ]
-                                      : [
-                                          BoxShadow(
-                                              color: shadowColor,
-                                              offset: Offset(-4, 5),
-                                              blurRadius: 11)
-                                        ]),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      LabelText(
-                                        text:
-                                            propertyCard.referenceNumber ?? '',
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 4.h, vertical: 1.h),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.blueGrey),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            color: Colors.blueGrey[100]),
-                                        child: SmallText(
-                                            text: propertyCard
-                                                    .status?.titleCase ??
-                                                ''),
-                                      ),
-                                    ],
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Community',
-                                    valueOne: propertyCard.community?.community
-                                        .trim(),
-                                    labelTwo: 'Building',
-                                    valueTwo:
-                                        propertyCard.building?.name.trim() ??
-                                            'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Property Type',
-                                    valueOne: propertyCard.propertyType?.trim(),
-                                    labelTwo: 'Beds',
-                                    valueTwo: propertyCard.beds ?? 'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'purpose',
-                                    valueOne: propertyCard.purpose,
-                                    labelTwo: 'Size',
-                                    valueTwo:
-                                        propertyCard.size?.currency ?? 'N/A',
-                                  ),
-                                  if (propertyCard.currentAgent is Map)
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 2),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primaryContainer
-                                              .withOpacity(.5)),
-                                      child: Row(
-                                        children: [
-                                          // HorizontalSmallGap(),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SmallText(text: 'Agent'),
-                                              LabelText(
-                                                  text:
-                                                      "${propertyCard.currentAgent["userId"]["first_name"] ?? ''} ${propertyCard.currentAgent["userId"]["last_name"] ?? ''}"),
-                                            ],
-                                          ),
-                                          Spacer(),
-                                          HorizontalSmallGap(),
-                                          Container(
-                                            height: 40,
-                                            width: 40,
-                                            clipBehavior: Clip.hardEdge,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle),
-                                            child: S3Image(
-                                              url: propertyCard.currentAgent[
-                                                      "userId"]["photo"] ??
-                                                  '',
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Colors.green,
+                                      size: 100,
                                     ),
-                                  if (propertyCard.availableForCheckout &&
-                                      propertyCard.currentAgent == null)
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        AppPrimaryButton(
-                                            backgroundColor: Theme.of(context)
-                                                .colorScheme
-                                                .primaryContainer,
-                                            foregroundColor: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                            text: 'Assign to me',
-                                            onTap: () async {
-                                              await context
-                                                  .read<ExplorerScreenCubit>()
-                                                  .checkOutLead(
-                                                      context: context,
-                                                      card: propertyCard);
-                                            })
-                                      ],
+                                    VerticalSmallGap(),
+                                    Text(
+                                      'You have successfully assigned Leads to yourself.',
+                                      textAlign: TextAlign.center,
                                     ),
-                                  if (!propertyCard.availableForCheckout &&
-                                      propertyCard.currentAgent == null)
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.h, vertical: 1.h),
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.red[800]!),
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              color: Colors.red[100]),
-                                          child:
-                                              SmallText(text: 'Not Available'),
-                                        )
-                                      ],
+                                    VerticalSmallGap(),
+                                    Text(
+                                      'Please hold on for a bit before making another assignment or try using bulk assignment, thank you.',
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(dContext)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w500),
                                     ),
-                                ],
+                                    VerticalSmallGap(
+                                      adjustment: 1.5,
+                                    ),
+                                    AppPrimaryButton(
+                                        text: 'Show Assigned',
+                                        onTap: () {
+                                          context
+                                              .read<ExplorerScreenCubit>()
+                                              .setSelectedTab(1);
+                                          Navigator.of(dContext).pop();
+                                        })
+                                  ],
+                                ),
                               ),
                             ),
                           );
+                        }),
+                      );
+                    });
+              },
+              builder: (context, state) {
+                if (!state.selectModeEnabled) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Colors.blueGrey.withOpacity(.4)),
+                      height: 56,
+                      child: ListTile(
+                          leading: Icon(Icons.info_outline),
+                          title: Text(
+                              "Press and hold on any leads card for enabling multi select",
+                              style: TextStyle(fontSize: 12))),
+                    ),
+                  );
+                }
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[100],
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            context
+                                .read<ExplorerScreenCubit>()
+                                .setSelectionModeDisabled();
+                          },
+                          icon: Icon(Icons.close)),
+                      Text(
+                          "${state.selectedPropertyCards.length.toString()} Selected"),
+                      Spacer(),
+                      state.checkOutLeadStatus == AppStatus.loading
+                          ? SizedBox.square(
+                              dimension: 24, child: CircularProgressIndicator())
+                          : TextButton(
+                              onPressed: () {
+                                context
+                                    .read<ExplorerScreenCubit>()
+                                    .checkOutLeadInBulk(context: context);
+                              },
+                              child: Text('Bulk Assign'))
+                    ],
+                  ),
+                );
+              },
+            ),
+            Expanded(
+              child: BlocBuilder<ExplorerScreenCubit, ExplorerScreenState>(
+                // buildWhen: (previous, current) =>
+                //     previous.getExplorerListStatus !=
+                //         current.getExplorerListStatus ||
+                //     previous.explorerList != current.explorerList,
+                builder: (context, state) {
+                  if (state.getExplorerListStatus == AppStatus.loading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state.getExplorerListStatus == AppStatus.success &&
+                      state.explorerList.length == 0) {
+                    return Center(
+                      child: Text('No Property Card Found'),
+                    );
+                  }
+                  return ScrollShadow(
+                    color: Colors.grey[300]!,
+                    size: 6,
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: (scrollInfo) {
+                        if (state.getExplorerListStatus !=
+                                AppStatus.loadingMore &&
+                            state.explorerPaginator?.hasNextPage == true &&
+                            scrollInfo.metrics.pixels >=
+                                0.9 * scrollInfo.metrics.maxScrollExtent) {
+                          EasyDebounce.debounce(
+                              'explorer-pool-list', Durations.medium2, () {
+                            context
+                                .read<ExplorerScreenCubit>()
+                                .getExplorerList();
+                          });
+                        }
+                        return true;
+                      },
+                      child: RefreshIndicator.adaptive(
+                        onRefresh: () async {
+                          await context
+                              .read<ExplorerScreenCubit>()
+                              .getExplorerList(refresh: true);
                         },
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: 8,
-                            ),
-                        itemCount:
-                            state.getExplorerListStatus == AppStatus.loadingMore
+                        child: ListView.separated(
+                            key: _listKey,
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            itemBuilder: (context, index) {
+                              if (index == state.explorerList.length) {
+                                return SizedBox(
+                                  height: 50,
+                                  child: Center(
+                                      child: CircularProgressIndicator()),
+                                );
+                              }
+                              final propertyCard = state.explorerList[index];
+                              return PropertyCardListItem(
+                                  propertyCard: propertyCard,
+                                  selectModeEnabled: state.selectModeEnabled,
+                                  selectedPropertyCards:
+                                      state.selectedPropertyCards);
+                            },
+                            separatorBuilder: (context, index) => SizedBox(
+                                  height: 8,
+                                ),
+                            itemCount: state.getExplorerListStatus ==
+                                    AppStatus.loadingMore
                                 ? state.explorerList.length + 1
                                 : state.explorerList.length),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -730,24 +525,69 @@ class CheckedOutPoolTab extends StatefulWidget {
 }
 
 class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v, refresh) async {
             final list = await context
                 .read<ExplorerScreenCubit>()
                 .getCommunities(search: v.text);
-            return list.map((e) => {'value': e.id, 'label': e.community});
+            return list.map((e) => {
+                  'value': e.communities.map((e) => e.id).toList(),
+                  'label': e.teamName
+                });
           },
-          displayStringForOption: (option) => option['label'] ?? '',
-          name: 'community'),
+          displayStringForOption: (option) => option['label']?.toString() ?? '',
+          name: 'communities'),
+      MultiSelectAutoCompleteField(
+        label: 'Places',
+        optionsBuilder: (v, refresh) async {
+          final list = await context
+              .read<ExplorerScreenCubit>()
+              .getPlaces(search: v.text);
+          final List<String>? flattenedValue = (values?['communities'] is List)
+              ? (values?['communities'] as List).expand((community) {
+                  return community['value'] is List
+                      ? community['value'] as List<String>
+                      : [community['value'].toString()];
+                }).toList()
+              : values?['communities']?['value'] as List<String>?;
+          final mapped = list
+              .where((place) {
+                return flattenedValue?.contains(place.id) ?? false;
+              })
+              .map((place) => {
+                    'value': place.id.toString(),
+                    'label': place.community.toString()
+                  })
+              .toList();
+
+          return mapped;
+        },
+        displayStringForOption: (option) => option['label']?.toString() ?? '',
+        name: 'places',
+      ),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
-            final list = await context
-                .read<ExplorerScreenCubit>()
-                .getBuildings(search: v.text);
+          optionsBuilder: (v, refresh) async {
+            List<String>? communities =[];
+            if((values?.containsKey('places') ?? false) && (values!['places'] as List).isNotEmpty){
+             communities = (values['places'] as List?)
+                ?.map((e) => e['value'] as String)
+                .toList();
+            }else{
+             communities = (values?['communities'] is List)
+              ? (values?['communities'] as List).expand((community) {
+                  return community['value'] is List
+                      ? community['value'] as List<String>
+                      : [community['value'].toString()];
+                }).toList()
+              : values?['communities']?['value'] as List<String>?;
+            }
+            final list = await context.read<ExplorerScreenCubit>().getBuildings(
+                search: v.text, community: communities, refresh: refresh);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -761,6 +601,21 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
           name: 'baths',
           label: 'Baths',
           values: ['1', '2', '3', '4', '5', '6', '7+'],
+          isRequired: true),
+      WrapSelectField(
+          name: 'propertyTypes',
+          label: 'Property Type',
+          values: [
+            'Apartment',
+            'Plot',
+            'Commercial',
+            'Townhouse',
+            'Hotel Apartment',
+            'Villa',
+            'Hotel Apartments',
+            'Other',
+          ].map((e) => {'value': getPropTypeRegex(e), 'label': e}).toList(),
+          displayOption: (option) => option['label'] ?? '',
           isRequired: true),
       // WrapSelectField(
       //     name: 'propertyType',
@@ -793,7 +648,7 @@ class _CheckedOutPoolTabState extends State<CheckedOutPoolTab> {
             onChanged: (val) {
               context.read<ExplorerScreenCubit>().searchCheckedOut(val);
             },
-            filterFields: filterFields(context),
+            filterFields: filterFields,
             filter: context.select(
                 (ExplorerScreenCubit value) => value.state.checkedOutFilter),
             onFilterApplied: (filter) {

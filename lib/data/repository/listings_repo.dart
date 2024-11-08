@@ -18,14 +18,15 @@ abstract class ListingsRepo {
       {required String listingId, Paginator? paginator});
   Future<Result<NewListingRequest>> addListingAcquired(
       {required Map<String, dynamic> values});
-  Future<Result<NewListingRequest>> updateListingAcquired(
+  Future<Result<void>> updateListingAcquired(
       {required String id, required Map<String, dynamic> values});
   Future<Result<List<PropertyType>>> getPropertyTypes(
       {String? search, Paginator? paginator});
   Future<Result<List<Building>>> getBuildingNames(
-      {String? search, String? communityId, Paginator? paginator});
+      {String? search,List<String>? communityId, Paginator? paginator});
   Future<Result<List<Community>>> getCommunities(
       {String? search, Paginator? paginator});
   Future<Result<List<Amenity>>> getAmenities(
       {String? search, Paginator? paginator});
+  Future<Result<List<Property>>> getMyListings({Paginator? paginator});
 }

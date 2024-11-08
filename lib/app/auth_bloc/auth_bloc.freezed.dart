@@ -24,9 +24,11 @@ mixin _$AuthEvent {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) =>
@@ -39,9 +41,11 @@ mixin _$AuthEvent {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) =>
@@ -54,9 +58,11 @@ mixin _$AuthEvent {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -71,11 +77,14 @@ mixin _$AuthEvent {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) =>
@@ -89,10 +98,12 @@ mixin _$AuthEvent {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) =>
@@ -106,10 +117,12 @@ mixin _$AuthEvent {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -214,9 +227,11 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -232,9 +247,11 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -250,9 +267,11 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -273,11 +292,14 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -294,10 +316,12 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -314,10 +338,12 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -382,9 +408,11 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -400,9 +428,11 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -418,9 +448,11 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -441,11 +473,14 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -462,10 +497,12 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -482,10 +519,12 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -545,9 +584,11 @@ class _$StartedImpl implements _Started {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -563,9 +604,11 @@ class _$StartedImpl implements _Started {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -581,9 +624,11 @@ class _$StartedImpl implements _Started {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -604,11 +649,14 @@ class _$StartedImpl implements _Started {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -625,10 +673,12 @@ class _$StartedImpl implements _Started {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -645,10 +695,12 @@ class _$StartedImpl implements _Started {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -708,9 +760,11 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -726,9 +780,11 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -744,9 +800,11 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -767,11 +825,14 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -788,10 +849,12 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -808,10 +871,12 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -907,9 +972,11 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -925,9 +992,11 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -943,9 +1012,11 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -966,11 +1037,14 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -987,10 +1061,12 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -1007,10 +1083,12 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -1106,9 +1184,11 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -1124,9 +1204,11 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -1142,9 +1224,11 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -1165,11 +1249,14 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -1186,10 +1273,12 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -1206,10 +1295,12 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -1229,6 +1320,185 @@ abstract class _CompletedImportantActivity implements AuthEvent {
   @JsonKey(ignore: true)
   _$$CompletedImportantActivityImplCopyWith<_$CompletedImportantActivityImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClearImportantActivityImplCopyWith<$Res> {
+  factory _$$ClearImportantActivityImplCopyWith(
+          _$ClearImportantActivityImpl value,
+          $Res Function(_$ClearImportantActivityImpl) then) =
+      __$$ClearImportantActivityImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearImportantActivityImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ClearImportantActivityImpl>
+    implements _$$ClearImportantActivityImplCopyWith<$Res> {
+  __$$ClearImportantActivityImplCopyWithImpl(
+      _$ClearImportantActivityImpl _value,
+      $Res Function(_$ClearImportantActivityImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ClearImportantActivityImpl implements _ClearImportantActivity {
+  const _$ClearImportantActivityImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.clearImportantActivity()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClearImportantActivityImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
+    required TResult Function() getAppConfig,
+    required TResult Function() getSettings,
+  }) {
+    return clearImportantActivity();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
+    TResult? Function()? getAppConfig,
+    TResult? Function()? getSettings,
+  }) {
+    return clearImportantActivity?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
+    TResult Function()? getAppConfig,
+    TResult Function()? getSettings,
+    required TResult orElse(),
+  }) {
+    if (clearImportantActivity != null) {
+      return clearImportantActivity();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+    required TResult Function(_GetSettings value) getSettings,
+  }) {
+    return clearImportantActivity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+    TResult? Function(_GetSettings value)? getSettings,
+  }) {
+    return clearImportantActivity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    TResult Function(_GetSettings value)? getSettings,
+    required TResult orElse(),
+  }) {
+    if (clearImportantActivity != null) {
+      return clearImportantActivity(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearImportantActivity implements AuthEvent {
+  const factory _ClearImportantActivity() = _$ClearImportantActivityImpl;
 }
 
 /// @nodoc
@@ -1278,9 +1548,11 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -1296,9 +1568,11 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -1314,9 +1588,11 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -1337,11 +1613,14 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -1358,10 +1637,12 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -1378,10 +1659,12 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -1442,9 +1725,11 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -1460,9 +1745,11 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -1478,9 +1765,11 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -1501,11 +1790,14 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -1522,10 +1814,12 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -1542,10 +1836,12 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -1607,9 +1903,11 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -1625,9 +1923,11 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -1643,9 +1943,11 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -1666,11 +1968,14 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -1687,10 +1992,12 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -1707,10 +2014,12 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -1724,6 +2033,215 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
 
 abstract class _RemoveLastCallDetails implements AuthEvent {
   const factory _RemoveLastCallDetails() = _$RemoveLastCallDetailsImpl;
+}
+
+/// @nodoc
+abstract class _$$SetShowFollowupImplCopyWith<$Res> {
+  factory _$$SetShowFollowupImplCopyWith(_$SetShowFollowupImpl value,
+          $Res Function(_$SetShowFollowupImpl) then) =
+      __$$SetShowFollowupImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool value});
+}
+
+/// @nodoc
+class __$$SetShowFollowupImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SetShowFollowupImpl>
+    implements _$$SetShowFollowupImplCopyWith<$Res> {
+  __$$SetShowFollowupImplCopyWithImpl(
+      _$SetShowFollowupImpl _value, $Res Function(_$SetShowFollowupImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$SetShowFollowupImpl(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetShowFollowupImpl implements _SetShowFollowup {
+  const _$SetShowFollowupImpl({required this.value});
+
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'AuthEvent.setShowFollowup(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetShowFollowupImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetShowFollowupImplCopyWith<_$SetShowFollowupImpl> get copyWith =>
+      __$$SetShowFollowupImplCopyWithImpl<_$SetShowFollowupImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
+    required TResult Function() getAppConfig,
+    required TResult Function() getSettings,
+  }) {
+    return setShowFollowup(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
+    TResult? Function()? getAppConfig,
+    TResult? Function()? getSettings,
+  }) {
+    return setShowFollowup?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
+    TResult Function()? getAppConfig,
+    TResult Function()? getSettings,
+    required TResult orElse(),
+  }) {
+    if (setShowFollowup != null) {
+      return setShowFollowup(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+    required TResult Function(_GetSettings value) getSettings,
+  }) {
+    return setShowFollowup(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+    TResult? Function(_GetSettings value)? getSettings,
+  }) {
+    return setShowFollowup?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    TResult Function(_GetSettings value)? getSettings,
+    required TResult orElse(),
+  }) {
+    if (setShowFollowup != null) {
+      return setShowFollowup(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetShowFollowup implements AuthEvent {
+  const factory _SetShowFollowup({required final bool value}) =
+      _$SetShowFollowupImpl;
+
+  bool get value;
+  @JsonKey(ignore: true)
+  _$$SetShowFollowupImplCopyWith<_$SetShowFollowupImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1770,9 +2288,11 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -1788,9 +2308,11 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -1806,9 +2328,11 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -1829,11 +2353,14 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -1850,10 +2377,12 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -1870,10 +2399,12 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -1933,9 +2464,11 @@ class _$GetSettingsImpl implements _GetSettings {
     required TResult Function() refreshAgentData,
     required TResult Function(List<String> activityIds) newImportantActivity,
     required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
     required TResult Function() checkForImportantActivity,
     required TResult Function() checkForCallFeedback,
     required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
   }) {
@@ -1951,9 +2484,11 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult? Function()? refreshAgentData,
     TResult? Function(List<String> activityIds)? newImportantActivity,
     TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
     TResult? Function()? checkForImportantActivity,
     TResult? Function()? checkForCallFeedback,
     TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
   }) {
@@ -1969,9 +2504,11 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult Function()? refreshAgentData,
     TResult Function(List<String> activityIds)? newImportantActivity,
     TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
     TResult Function()? checkForImportantActivity,
     TResult Function()? checkForCallFeedback,
     TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
     required TResult orElse(),
@@ -1992,11 +2529,14 @@ class _$GetSettingsImpl implements _GetSettings {
     required TResult Function(_NewImportantActivity value) newImportantActivity,
     required TResult Function(_CompletedImportantActivity value)
         completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
     required TResult Function(_CheckForImportantActivity value)
         checkForImportantActivity,
     required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
     required TResult Function(_RemoveLastCallDetails value)
         removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
   }) {
@@ -2013,10 +2553,12 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult? Function(_NewImportantActivity value)? newImportantActivity,
     TResult? Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult? Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
   }) {
@@ -2033,10 +2575,12 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult Function(_NewImportantActivity value)? newImportantActivity,
     TResult Function(_CompletedImportantActivity value)?
         completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
     TResult Function(_CheckForImportantActivity value)?
         checkForImportantActivity,
     TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
     TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
     required TResult orElse(),
@@ -2062,6 +2606,7 @@ mixin _$AuthState {
   String? get lastCalledNumber => throw _privateConstructorUsedError;
   AppConfig? get appConfig => throw _privateConstructorUsedError;
   bool get showFeedbackScreen => throw _privateConstructorUsedError;
+  bool get showFollowUpScreen => throw _privateConstructorUsedError;
   GlobalSettings? get globalSettings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2082,6 +2627,7 @@ abstract class $AuthStateCopyWith<$Res> {
       String? lastCalledNumber,
       AppConfig? appConfig,
       bool showFeedbackScreen,
+      bool showFollowUpScreen,
       GlobalSettings? globalSettings});
 
   $UserCopyWith<$Res>? get user;
@@ -2110,6 +2656,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? lastCalledNumber = freezed,
     Object? appConfig = freezed,
     Object? showFeedbackScreen = null,
+    Object? showFollowUpScreen = null,
     Object? globalSettings = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2140,6 +2687,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
       showFeedbackScreen: null == showFeedbackScreen
           ? _value.showFeedbackScreen
           : showFeedbackScreen // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showFollowUpScreen: null == showFollowUpScreen
+          ? _value.showFollowUpScreen
+          : showFollowUpScreen // ignore: cast_nullable_to_non_nullable
               as bool,
       globalSettings: freezed == globalSettings
           ? _value.globalSettings
@@ -2213,6 +2764,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       String? lastCalledNumber,
       AppConfig? appConfig,
       bool showFeedbackScreen,
+      bool showFollowUpScreen,
       GlobalSettings? globalSettings});
 
   @override
@@ -2243,6 +2795,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? lastCalledNumber = freezed,
     Object? appConfig = freezed,
     Object? showFeedbackScreen = null,
+    Object? showFollowUpScreen = null,
     Object? globalSettings = freezed,
   }) {
     return _then(_$AuthStateImpl(
@@ -2274,6 +2827,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.showFeedbackScreen
           : showFeedbackScreen // ignore: cast_nullable_to_non_nullable
               as bool,
+      showFollowUpScreen: null == showFollowUpScreen
+          ? _value.showFollowUpScreen
+          : showFollowUpScreen // ignore: cast_nullable_to_non_nullable
+              as bool,
       globalSettings: freezed == globalSettings
           ? _value.globalSettings
           : globalSettings // ignore: cast_nullable_to_non_nullable
@@ -2293,6 +2850,7 @@ class _$AuthStateImpl implements _AuthState {
       this.lastCalledNumber,
       this.appConfig,
       this.showFeedbackScreen = false,
+      this.showFollowUpScreen = false,
       this.globalSettings})
       : _veryImportantActivities = veryImportantActivities;
 
@@ -2322,11 +2880,14 @@ class _$AuthStateImpl implements _AuthState {
   @JsonKey()
   final bool showFeedbackScreen;
   @override
+  @JsonKey()
+  final bool showFollowUpScreen;
+  @override
   final GlobalSettings? globalSettings;
 
   @override
   String toString() {
-    return 'AuthState(authStatus: $authStatus, user: $user, agent: $agent, veryImportantActivities: $veryImportantActivities, lastCalledNumber: $lastCalledNumber, appConfig: $appConfig, showFeedbackScreen: $showFeedbackScreen, globalSettings: $globalSettings)';
+    return 'AuthState(authStatus: $authStatus, user: $user, agent: $agent, veryImportantActivities: $veryImportantActivities, lastCalledNumber: $lastCalledNumber, appConfig: $appConfig, showFeedbackScreen: $showFeedbackScreen, showFollowUpScreen: $showFollowUpScreen, globalSettings: $globalSettings)';
   }
 
   @override
@@ -2346,6 +2907,8 @@ class _$AuthStateImpl implements _AuthState {
                 other.appConfig == appConfig) &&
             (identical(other.showFeedbackScreen, showFeedbackScreen) ||
                 other.showFeedbackScreen == showFeedbackScreen) &&
+            (identical(other.showFollowUpScreen, showFollowUpScreen) ||
+                other.showFollowUpScreen == showFollowUpScreen) &&
             (identical(other.globalSettings, globalSettings) ||
                 other.globalSettings == globalSettings));
   }
@@ -2360,6 +2923,7 @@ class _$AuthStateImpl implements _AuthState {
       lastCalledNumber,
       appConfig,
       showFeedbackScreen,
+      showFollowUpScreen,
       globalSettings);
 
   @JsonKey(ignore: true)
@@ -2378,6 +2942,7 @@ abstract class _AuthState implements AuthState {
       final String? lastCalledNumber,
       final AppConfig? appConfig,
       final bool showFeedbackScreen,
+      final bool showFollowUpScreen,
       final GlobalSettings? globalSettings}) = _$AuthStateImpl;
 
   @override
@@ -2394,6 +2959,8 @@ abstract class _AuthState implements AuthState {
   AppConfig? get appConfig;
   @override
   bool get showFeedbackScreen;
+  @override
+  bool get showFollowUpScreen;
   @override
   GlobalSettings? get globalSettings;
   @override

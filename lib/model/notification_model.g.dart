@@ -14,9 +14,12 @@ _$NotificationModelImpl _$$NotificationModelImplFromJson(
       subTitle: json['subTitle'] as String?,
       notificationId: json['notificationId'] as String?,
       isRead: json['isRead'] as bool? ?? false,
+      requiresAction: json['requiresAction'] as bool? ?? false,
+      type: json['type'] as String? ?? 'Normal',
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
+      leadId: json['leadId'] as String?,
     );
 
 Map<String, dynamic> _$$NotificationModelImplToJson(
@@ -27,5 +30,8 @@ Map<String, dynamic> _$$NotificationModelImplToJson(
       'subTitle': instance.subTitle,
       'notificationId': instance.notificationId,
       'isRead': instance.isRead,
+      'requiresAction': instance.requiresAction,
+      'type': instance.type,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'leadId': instance.leadId,
     };

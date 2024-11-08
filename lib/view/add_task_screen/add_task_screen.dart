@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/add_task_screen/cubit/add_task_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/card_picker_field.dart';
@@ -12,21 +14,24 @@ import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
+import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
 
 import '../../util/color_category.dart';
 import '../../util/property_price.dart';
+import '../../widgets/fields/time_field.dart';
 import '../../widgets/s3_image.dart';
 import '../../widgets/text.dart';
 
 class AddTaskScreen extends StatelessWidget {
   static const routeName = '/addTaskScreen';
-  const AddTaskScreen({super.key});
+  const AddTaskScreen({super.key, required this.leadId});
+  final String leadId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddTaskCubit>(),
+      create: (context) => getIt<AddTaskCubit>(param1: leadId),
       child: _AddTaskScreenLayout(),
     );
   }
@@ -57,13 +62,6 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               children: [
-                AppTextField(
-                  name: 'lead',
-                  label: 'Lead Name',
-                  disabled: true,
-                  value:
-                      "${activity?.lead?.firstName} ${activity?.lead?.lastName}",
-                ),
                 WrapSelectField(
                   name: 'type',
                   label: 'Type',
@@ -71,9 +69,6 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                     'Call',
                     'WhatsApp',
                     'Viewing',
-                    'Appointment',
-                    'Email',
-                    'SMSMessage'
                   ],
                   isRequired: true,
                 ),
@@ -81,7 +76,12 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                     name: 'date',
                     label: 'Date',
                     firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(Duration(days: 90))),
+                    lastDate: DateTime.now().add(Duration(days: 365))),
+                TimeField(
+                  isRequired: false,
+                  name: 'time',
+                  label: 'Time',
+                ),
                 CardPickerDialogField<Property>(
                   name: 'property',
                   label: 'Property',
@@ -234,22 +234,34 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                   name: 'description',
                 ),
                 VerticalSmallGap(),
-                AppPrimaryButton(
-                    text: 'Confirm',
-                    onTap: () async {
-                      final validated =
-                          _formKey.currentState?.saveAndValidate();
-                      if (validated == true) {
-                        final val = _formKey.currentState!.value;
-                        await context.read<AddTaskCubit>().addActivity(
-                            context: context,
-                            leadId: activity?.lead?.id ?? '',
-                            type: val['type'],
-                            date: val['date'],
-                            description: val['description'],
-                            propertyId: val['property']);
-                      }
-                    })
+                BlocListener<AddTaskCubit, AddTaskState>(
+                  listener: (context, state) {
+                    if (state.addLeadStatus == AppStatus.success) {
+                      showSnackbar(context, 'Successfully created task',
+                          SnackBarType.success);
+                      context.pop();
+                    } else if (state.addLeadStatus == AppStatus.failure) {
+                      showSnackbar(context, 'Error : ${state.addLeadError}',
+                          SnackBarType.failure);
+                    }
+                  },
+                  child: AppPrimaryButton(
+                      text: 'Confirm',
+                      onTap: () async {
+                        final validated =
+                            _formKey.currentState?.saveAndValidate();
+                        if (validated == true) {
+                          final val = _formKey.currentState!.value;
+                          await context.read<AddTaskCubit>().addActivity(
+                              context: context,
+                              type: val['type'],
+                              date: val['date'],
+                              time: val['time'],
+                              description: val['description'],
+                              propertyId: val['property']);
+                        }
+                      }),
+                )
               ],
             ),
           ),

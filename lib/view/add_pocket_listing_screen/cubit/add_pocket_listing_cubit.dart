@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
+import 'package:real_estate_app/util/property_price.dart';
 
 import '../../../data/repository/lead_repo.dart';
 import '../../../data/repository/listings_repo.dart';
@@ -135,17 +136,10 @@ class AddPocketListingCubit extends Cubit<AddPocketListingState> {
 
   Future<List<Building>> getBuildings(
       {String? search, String? communityId}) async {
-    if (state.buildingList.isNotEmpty) {
-      return state.buildingList
-          .where((element) =>
-              communityId != null || communityId?.isNotEmpty == true
-                  ? element.communityId == communityId
-                  : true)
-          .toList();
-    }
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getBuildingNames(
-        search: search, communityId: communityId);
+        search: search,
+        communityId: communityId != null ? [communityId] : null);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -165,8 +159,9 @@ class AddPocketListingCubit extends Cubit<AddPocketListingState> {
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
       case (Success s):
+        final properties = sortPropertyTypes(s.value);
         emit(state.copyWith(
-            propertyTypeList: s.value,
+            propertyTypeList: properties,
             getPropertyTypeListStatus: AppStatus.success));
         break;
       case (Error e):

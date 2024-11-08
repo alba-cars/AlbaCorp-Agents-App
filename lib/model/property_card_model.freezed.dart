@@ -58,6 +58,7 @@ mixin _$PropertyCard {
   String? get expirationDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'availableForCheckout')
   bool get availableForCheckout => throw _privateConstructorUsedError;
+  List<PropertyCardPhoto> get photos => throw _privateConstructorUsedError;
   @JsonKey(name: 'leadsCount')
   int? get leadsCount => throw _privateConstructorUsedError;
 
@@ -96,6 +97,7 @@ abstract class $PropertyCardCopyWith<$Res> {
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') String? expirationDate,
       @JsonKey(name: 'availableForCheckout') bool availableForCheckout,
+      List<PropertyCardPhoto> photos,
       @JsonKey(name: 'leadsCount') int? leadsCount});
 
   $BuildingCopyWith<$Res>? get building;
@@ -137,6 +139,7 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
     Object? referenceNumber = freezed,
     Object? expirationDate = freezed,
     Object? availableForCheckout = null,
+    Object? photos = null,
     Object? leadsCount = freezed,
   }) {
     return _then(_value.copyWith(
@@ -228,6 +231,10 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
           ? _value.availableForCheckout
           : availableForCheckout // ignore: cast_nullable_to_non_nullable
               as bool,
+      photos: null == photos
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCardPhoto>,
       leadsCount: freezed == leadsCount
           ? _value.leadsCount
           : leadsCount // ignore: cast_nullable_to_non_nullable
@@ -291,6 +298,7 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') String? expirationDate,
       @JsonKey(name: 'availableForCheckout') bool availableForCheckout,
+      List<PropertyCardPhoto> photos,
       @JsonKey(name: 'leadsCount') int? leadsCount});
 
   @override
@@ -332,6 +340,7 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
     Object? referenceNumber = freezed,
     Object? expirationDate = freezed,
     Object? availableForCheckout = null,
+    Object? photos = null,
     Object? leadsCount = freezed,
   }) {
     return _then(_$PropertyCardImpl(
@@ -423,6 +432,10 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
           ? _value.availableForCheckout
           : availableForCheckout // ignore: cast_nullable_to_non_nullable
               as bool,
+      photos: null == photos
+          ? _value._photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCardPhoto>,
       leadsCount: freezed == leadsCount
           ? _value.leadsCount
           : leadsCount // ignore: cast_nullable_to_non_nullable
@@ -457,8 +470,10 @@ class _$PropertyCardImpl implements _PropertyCard {
       @JsonKey(name: 'referenceNumber') this.referenceNumber,
       @JsonKey(name: 'expirationDate') this.expirationDate,
       @JsonKey(name: 'availableForCheckout') this.availableForCheckout = false,
+      final List<PropertyCardPhoto> photos = const [],
       @JsonKey(name: 'leadsCount') this.leadsCount})
-      : _amenities = amenities;
+      : _amenities = amenities,
+        _photos = photos;
 
   factory _$PropertyCardImpl.fromJson(Map<String, dynamic> json) =>
       _$$PropertyCardImplFromJson(json);
@@ -531,13 +546,22 @@ class _$PropertyCardImpl implements _PropertyCard {
   @override
   @JsonKey(name: 'availableForCheckout')
   final bool availableForCheckout;
+  final List<PropertyCardPhoto> _photos;
+  @override
+  @JsonKey()
+  List<PropertyCardPhoto> get photos {
+    if (_photos is EqualUnmodifiableListView) return _photos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_photos);
+  }
+
   @override
   @JsonKey(name: 'leadsCount')
   final int? leadsCount;
 
   @override
   String toString() {
-    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, leadsCount: $leadsCount)';
+    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount)';
   }
 
   @override
@@ -582,6 +606,7 @@ class _$PropertyCardImpl implements _PropertyCard {
                 other.expirationDate == expirationDate) &&
             (identical(other.availableForCheckout, availableForCheckout) ||
                 other.availableForCheckout == availableForCheckout) &&
+            const DeepCollectionEquality().equals(other._photos, _photos) &&
             (identical(other.leadsCount, leadsCount) ||
                 other.leadsCount == leadsCount));
   }
@@ -612,6 +637,7 @@ class _$PropertyCardImpl implements _PropertyCard {
         referenceNumber,
         expirationDate,
         availableForCheckout,
+        const DeepCollectionEquality().hash(_photos),
         leadsCount
       ]);
 
@@ -653,6 +679,7 @@ abstract class _PropertyCard implements PropertyCard {
       @JsonKey(name: 'referenceNumber') final String? referenceNumber,
       @JsonKey(name: 'expirationDate') final String? expirationDate,
       @JsonKey(name: 'availableForCheckout') final bool availableForCheckout,
+      final List<PropertyCardPhoto> photos,
       @JsonKey(name: 'leadsCount') final int? leadsCount}) = _$PropertyCardImpl;
 
   factory _PropertyCard.fromJson(Map<String, dynamic> json) =
@@ -718,6 +745,8 @@ abstract class _PropertyCard implements PropertyCard {
   @override
   @JsonKey(name: 'availableForCheckout')
   bool get availableForCheckout;
+  @override
+  List<PropertyCardPhoto> get photos;
   @override
   @JsonKey(name: 'leadsCount')
   int? get leadsCount;

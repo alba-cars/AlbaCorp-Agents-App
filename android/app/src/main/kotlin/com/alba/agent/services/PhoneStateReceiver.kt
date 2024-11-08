@@ -20,7 +20,6 @@ import com.alba.agent.R
 
 class PhoneStateReceiver : BroadcastReceiver() {
 
-
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == TelephonyManager.ACTION_PHONE_STATE_CHANGED) {
             val state = intent.getStringExtra(TelephonyManager.EXTRA_STATE)
@@ -28,41 +27,54 @@ class PhoneStateReceiver : BroadcastReceiver() {
 
             val preferences: SharedPreferences = context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
 
-
             when (state) {
+                // Incoming call ringing
                 TelephonyManager.EXTRA_STATE_RINGING -> {
                     Log.d("flutter", "Incoming call from $phoneNumber")
                     val numberToSave = phoneNumber ?: "Unknown"
                     preferences.edit().putString("flutter.call", numberToSave).apply()
+                    preferences.edit().putString("flutter.CallDirection", "incoming").apply()
                 }
+
+                // Call ended
                 TelephonyManager.EXTRA_STATE_IDLE -> {
-                    Log.d("flutter", "Call ended with $phoneNumber")
+                    val callDirection = preferences.getString("flutter.CallDirection", null)
                     val savedNumber = preferences.getString("flutter.call", null)
-                    if (savedNumber != null) {
-                        OverlayManager.showOverlay(context, savedNumber)
+
+                    if (callDirection == "incoming" && savedNumber != null) {
+                        Log.d("flutter", "Incoming call ended with $savedNumber")
+                        // Your logic after call ends
+                        OverlayManager.showOverlay(context, savedNumber, preferences)
+
+                        // Clear the call info after the call ends
+                        preferences.edit().remove("flutter.call").apply()
+                        preferences.edit().remove("flutter.CallDirection").apply()
                     }
-                }
-                TelephonyManager.EXTRA_STATE_OFFHOOK->{
-                     Log.d("flutter", "Call offhook with $phoneNumber")
-                     if(phoneNumber != null){
-                      val numberToSave = phoneNumber 
-                    preferences.edit().putString("flutter.call", numberToSave).apply()
-                     }
                 }
             }
         }
     }
-
-    
-
-    
 }
+
+
 
 object OverlayManager {
     private var windowManager: WindowManager? = null
     private var overlayView: View? = null
 
-    fun showOverlay(context: Context, number: String) {
+    fun showOverlay(context: Context, number: String,preferences:SharedPreferences) {
+       val ignoreFeedback = preferences.getBoolean("IgnoreCallFeedback", false)
+        if (ignoreFeedback) {
+            preferences.edit()
+                .remove("IgnoreCallFeedback")
+                .apply()
+            return
+        }
+        if(number == "042815555" || number == "+97142815555"){
+            preferences.edit().putString("flutter.call", "PROPERTY_FINDER").apply()
+            startActivity(context)
+            return;
+        }
         if (overlayView != null) {
             // If an overlay is already showing, remove it first
             removeOverlay()
@@ -108,20 +120,7 @@ object OverlayManager {
             preferences.edit().putString("flutter.calledNumber", number.replace("tel:", "")).apply()
             preferences.edit().remove("flutter.call").apply()
 
-            if (!MyApplication.isActivityVisible()) {
-                Intent().also { intents ->
-                                intents.component = ComponentName(
-                                    "com.alba.agent",
-                                    "com.alba.agent.MainActivity"
-                                )
-                                intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                context.startActivity(intents)
-                            }
-                //val intent = Intent(context, MainActivity::class.java).apply {
-                 //   addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                //}
-                //context.startActivity(intent)
-            }
+            startActivity(context)
             removeOverlay()
         }
     }
@@ -136,5 +135,22 @@ object OverlayManager {
         } catch (e: IllegalArgumentException) {
             Log.e("OverlayManager", "View not attached to WindowManager", e)
         }
+    }
+
+    fun startActivity(context: Context,){
+        if (!MyApplication.isActivityVisible()) {
+                Intent().also { intents ->
+                                intents.component = ComponentName(
+                                    "com.alba.agent",
+                                    "com.alba.agent.MainActivity"
+                                )
+                                intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity(intents)
+                            }
+                //val intent = Intent(context, MainActivity::class.java).apply {
+                 //   addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                //}
+                //context.startActivity(intent)
+            }
     }
 }

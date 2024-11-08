@@ -1,14 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/constants/listing_status_color.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
@@ -16,8 +23,10 @@ import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listin
 import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/listings_screen/cubit/listings_cubit.dart';
 import 'package:real_estate_app/view/listings_screen/widgets/listing_item.dart';
+import 'package:real_estate_app/view/listings_screen/widgets/my_listings_tab.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
+import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_select_autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
@@ -26,11 +35,15 @@ import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/tab_bar.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../util/constant.dart';
 import '../../util/status.dart';
 import '../../widgets/button.dart';
 import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/search_bar.dart';
+import '../../widgets/snackbar.dart';
 import '../deal_details_screen/widgets/info_label_value.dart';
 
 class ListingsScreen extends StatelessWidget {
@@ -63,37 +76,22 @@ class _ListingScreenLayoutState extends State<ListingScreenLayout>
   }
 
   late final TabController _tabController =
-      TabController(length: 2, vsync: this);
+      TabController(length: 3, vsync: this);
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            // SliverAppBar(
-            //   title: SizedBox(
-            //     height: 50,
-            //     child: Image.asset(
-            //       'assets/images/logo-black.png',
-            //       fit: BoxFit.fitHeight,
-            //     ),
-            //   ),
-            //   centerTitle: true,
-            //   backgroundColor: Color.fromARGB(255, 240, 246, 250),
-            //   foregroundColor: pacificBlue,
-            //   leading: IconButton(
-            //     onPressed: () {},
-            //     icon: Icon(Icons.menu),
-            //     padding: EdgeInsetsDirectional.only(start: 8),
-            //   ),
-            //   actions: [
-            //     IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
-            //   ],
-            //   pinned: true,
-            // ),
             SliverVerticalSmallGap(),
             SliverVerticalSmallGap(),
-
             SliverToBoxAdapter(
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -101,17 +99,12 @@ class _ListingScreenLayoutState extends State<ListingScreenLayout>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: ['Listings', 'Pocket Listings'],
+                tabs: ['Listings', 'Pocket Listings', "My Listings"],
                 onTap: (index) {
                   context.read<ListingsCubit>().setSelectedTab(index);
                 },
               ),
             )),
-            // SliverToBoxAdapter(
-            //     child: Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            //   child: AppSearchBar(),
-            // ))
           ];
         },
         body: BlocSelector<ListingsCubit, ListingsState, int>(
@@ -122,7 +115,7 @@ class _ListingScreenLayoutState extends State<ListingScreenLayout>
             return TabBarView(
               physics: NeverScrollableScrollPhysics(),
               controller: _tabController,
-              children: [ListingsTab(), PocketListingsTab()],
+              children: [ListingsTab(), PocketListingsTab(), MyListingsTab()],
             );
           },
         ),
@@ -139,11 +132,28 @@ class ListingsTab extends StatefulWidget {
 }
 
 class _ListingsTabState extends State<ListingsTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(BuildContext context, values) {
     return [
+      AppAutoComplete(
+        label: 'Agent',
+        optionsBuilder: (val,refresh) => context
+            .read<ListingsCubit>()
+            .state
+            .agentList
+            .where((e) => '${e.user.firstName} ${e.user.lastName}'
+                .toLowerCase()
+                .contains(val.text.toLowerCase()))
+            .map((e) => {
+                  'label': '${e.user.firstName} ${e.user.lastName}',
+                  "value": e.id
+                }),
+        isRequired: true,
+        name: 'agent_id',
+        displayStringForOption: (option) => option['label']?.toString() ?? '',
+      ),
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -164,21 +174,59 @@ class _ListingsTabState extends State<ListingsTab> {
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
-            final stateResult =
-                context.read<ListingsCubit>().state.buildingList;
-            if (stateResult.isEmpty) {
-              await context.read<ListingsCubit>().getBuildings(search: v.text);
-            }
-            final list = context.read<ListingsCubit>().state.buildingList.where(
-                (element) =>
-                    element.name.toLowerCase().contains(v.text.toLowerCase()));
+          optionsBuilder: (v,refresh) async {
+            final List<String>? communities = (values?['community'] as List?)
+                ?.map<String>((e) => (e['value'] ?? ''))
+                .toList();
+            final list = await context
+                .read<ListingsCubit>()
+                .getBuildings(search: v.text, community: communities);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
           name: 'building'),
-      RangeSliderField(
-          name: 'price', label: 'Price Range', min: 10000, max: 1000000000),
+      RangeInputField(
+        name: 'price', label: 'Price Range', min: 0,
+        max: 1000000000, // 1 billion
+        initialValue: SfRangeValues(1000, 500000),
+        validator: (value) {
+          if (value!.start > value.end) {
+            return 'From value cannot be greater than To value';
+          }
+          return null; // Return null if no error
+        },
+        validationMessage: 'Please enter a valid price range',
+      ),
+      // FlutterSlider(
+      //     min: 1000,
+      //     max: 100 * 100 * 100 * 1000,
+      //     values: [10000, 100000000],
+      //     rangeSlider: true,
+      //     tooltip: FlutterSliderTooltip(
+      //       format: (String v) {
+      //         double value = (double.parse(v) / 1000);
+      //         if (value < 1000 * 1000) {
+      //           return (double.parse(value.toString()) / 1000).toString() + "K";
+      //         }
+      //         return (double.parse(value.toString()) / 1000 * 1000).toString() +
+      //             "M";
+      //       },
+      //       alwaysShowTooltip: true,
+      //     ),
+      //     step: FlutterSliderStep(rangeList: [
+      //       FlutterSliderRangeStep(
+      //         from: 10 * 1000,
+      //         to: 200 * 1000,
+      //       ),
+      //       FlutterSliderRangeStep(
+      //         from: 200 * 1000,
+      //         to: 1000 * 1000,
+      //       ),
+      //       FlutterSliderRangeStep(
+      //         from: 1000 * 1000,
+      //         to: 10 * 1000 * 1000,
+      //       ),
+      //     ])),
       WrapSelectField(
           name: 'listingType',
           label: 'Purpose',
@@ -197,17 +245,19 @@ class _ListingsTabState extends State<ListingsTab> {
       WrapSelectField(
           name: 'propertyType',
           label: 'Property Type',
-          values: context.select<ListingsCubit, List<Map<String, dynamic>>>(
-              (cubit) => cubit.state.propertyTypeList
-                  .map((e) => {'value': e.id, 'label': e.propertyType})
-                  .toList()),
+          values: context
+              .read<ListingsCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
       MultiSelectAutoCompleteField(
         label: 'Amenities',
         name: "amenities",
         displayStringForOption: (option) => option['label']?.toString() ?? '',
-        optionsBuilder: (v) async {
+        optionsBuilder: (v,refresh) async {
           var list = context
               .read<ListingsCubit>()
               .state
@@ -242,39 +292,39 @@ class _ListingsTabState extends State<ListingsTab> {
           VerticalSmallGap(
             adjustment: 0.5,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                TitleText(
-                  text: 'Listings List',
-                  fontWeight: FontWeight.bold,
-                ),
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(40, 34),
-                        maximumSize: Size(110, 34),
-                        fixedSize: null,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onTertiary,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.tertiary),
-                    child: Text('Add New'),
-                    onPressed: () async {
-                      final result =
-                          await context.pushNamed(AddListingScreen.routeName);
-                      if (result == true) {
-                        context
-                            .read<ListingsCubit>()
-                            .getListings(refresh: true);
-                      }
-                    })
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20),
+          //   child: Row(
+          //     children: [
+          //       TitleText(
+          //         text: 'Listings List',
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //       Spacer(),
+          //       ElevatedButton(
+          //           style: ElevatedButton.styleFrom(
+          //               minimumSize: Size(40, 34),
+          //               maximumSize: Size(110, 34),
+          //               fixedSize: null,
+          //               shape: RoundedRectangleBorder(
+          //                   borderRadius: BorderRadius.circular(12)),
+          //               foregroundColor:
+          //                   Theme.of(context).colorScheme.onTertiary,
+          //               backgroundColor:
+          //                   Theme.of(context).colorScheme.tertiary),
+          //           child: Text('Add New'),
+          //           onPressed: () async {
+          //             final result =
+          //                 await context.pushNamed(AddListingScreen.routeName);
+          //             if (result == true) {
+          //               context
+          //                   .read<ListingsCubit>()
+          //                   .getListings(refresh: true);
+          //             }
+          //           })
+          //     ],
+          //   ),
+          // ),
           VerticalSmallGap(
             adjustment: 0.5,
           ),
@@ -285,7 +335,15 @@ class _ListingsTabState extends State<ListingsTab> {
               onChanged: (val) {
                 context.read<ListingsCubit>().searchListings(val);
               },
-              filterFields: filterFields(context),
+              showSearch: false,
+              customFilterButtonWidget: FilterButton(),
+              leadWidgets: [
+                TitleText(
+                  text: 'Listings List',
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
+              filterFields: filterFields,
               onFilterApplied: (filter) {
                 context.read<ListingsCubit>().setListingsFilters(filter);
               },
@@ -366,6 +424,42 @@ class _ListingsTabState extends State<ListingsTab> {
   }
 }
 
+class FilterButton extends StatelessWidget {
+  const FilterButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: Theme.of(context).colorScheme.secondary),
+      child: Row(
+        children: [
+          Text(
+            "Filter",
+            style: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(color: Theme.of(context).colorScheme.onSecondary),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          SvgPicture.asset(
+            "${Constant.assetImagePath}filter.svg",
+            height: 18,
+            width: 18,
+            color: Colors.white,
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class PocketListingsTab extends StatefulWidget {
   const PocketListingsTab({super.key});
 
@@ -374,7 +468,8 @@ class PocketListingsTab extends StatefulWidget {
 }
 
 class _PocketListingsTabState extends State<PocketListingsTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       WrapSelectField(
           name: 'timeFilter',
@@ -383,7 +478,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           isRequired: false),
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -404,7 +499,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           name: 'communities'),
       AppAutoComplete(
           label: 'Agent',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult = context.read<ListingsCubit>().state.agentList;
             if (stateResult.isEmpty) {
               await context.read<ListingsCubit>().getAgents(search: v.text);
@@ -424,7 +519,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           name: 'currentAgent'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v) async {
+          optionsBuilder: (v,refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.buildingList;
             if (stateResult.isEmpty) {
@@ -440,10 +535,12 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
       WrapSelectField(
           name: 'property_type_id',
           label: 'Property Type',
-          values: context.select<ListingsCubit, List<Map<String, dynamic>>>(
-              (cubit) => cubit.state.propertyTypeList
-                  .map((e) => {'value': e.id, 'label': e.propertyType})
-                  .toList()),
+          values: context
+              .read<ListingsCubit>()
+              .state
+              .propertyTypeList
+              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),
       WrapSelectField(
@@ -480,48 +577,20 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
             adjustment: 0.5,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                TitleText(
-                  text: 'Pocket Listings',
-                  fontWeight: FontWeight.bold,
-                ),
-                Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(40, 34),
-                        maximumSize: Size(110, 34),
-                        fixedSize: null,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onTertiary,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.tertiary),
-                    child: Text('Add New'),
-                    onPressed: () async {
-                      final result = await context
-                          .pushNamed(AddPocketListingScreen.routeName);
-                      if (result == true) {
-                        context
-                            .read<ListingsCubit>()
-                            .getPocketListings(refresh: true);
-                      }
-                    })
-              ],
-            ),
-          ),
-          VerticalSmallGap(
-            adjustment: 0.5,
-          ),
-          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: AppSearchBar(
               onChanged: (val) {
                 context.read<ListingsCubit>().searchPocketListings(val);
               },
-              filterFields: filterFields(context),
+              showSearch: false,
+              customFilterButtonWidget: FilterButton(),
+              leadWidgets: [
+                TitleText(
+                  text: 'Pocket Listings',
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
+              filterFields: filterFields,
               onFilterApplied: (filter) {
                 context.read<ListingsCubit>().setPocketListingFilters(filter);
               },
@@ -606,53 +675,96 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      LabelText(
-                                        text:
-                                            propertyCard.referenceNumber ?? '',
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
                                       Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 4.h, vertical: 1.h),
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                2.5,
+                                        height: min(
+                                            MediaQuery.sizeOf(context).width /
+                                                2.5,
+                                            200),
+                                        clipBehavior: Clip.hardEdge,
                                         decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.blueGrey),
                                             borderRadius:
-                                                BorderRadius.circular(4),
-                                            color: Colors.blueGrey[100]),
-                                        child: SmallText(
-                                            text: propertyCard
-                                                    .status?.titleCase ??
-                                                ''),
+                                                BorderRadius.circular(12)),
+                                        child: S3Image(
+                                          url: propertyCard.photos.isNotEmpty
+                                              ? propertyCard
+                                                  .photos.first.original
+                                              : null,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Expanded(
+                                        child: Column(children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              LabelText(
+                                                text: propertyCard
+                                                        .referenceNumber ??
+                                                    '',
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.h,
+                                                    vertical: 1.h),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.blueGrey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color:
+                                                        Colors.blueGrey[100]),
+                                                child: SmallText(
+                                                    text: propertyCard.status
+                                                            ?.titleCase ??
+                                                        ''),
+                                              ),
+                                            ],
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Community',
+                                            valueOne: propertyCard
+                                                .community?.community
+                                                .trim(),
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Building',
+                                            valueOne: propertyCard
+                                                    .building?.name
+                                                    .trim() ??
+                                                'N/A',
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'Property Type',
+                                            valueOne: propertyCard.propertyType
+                                                ?.trim(),
+                                            labelTwo: 'Beds',
+                                            valueTwo:
+                                                propertyCard.beds ?? 'N/A',
+                                          ),
+                                          InfoLabelValue(
+                                            labelOne: 'purpose',
+                                            valueOne:
+                                                propertyCard.purpose?.trim(),
+                                            labelTwo: 'Size',
+                                            valueTwo:
+                                                propertyCard.size?.toString() ??
+                                                    'N/A',
+                                          ),
+                                        ]),
                                       ),
                                     ],
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Community',
-                                    valueOne: propertyCard.community?.community
-                                        .trim(),
-                                    labelTwo: 'Building',
-                                    valueTwo:
-                                        propertyCard.building?.name.trim() ??
-                                            'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'Property Type',
-                                    valueOne: propertyCard.propertyType?.trim(),
-                                    labelTwo: 'Beds',
-                                    valueTwo: propertyCard.beds ?? 'N/A',
-                                  ),
-                                  InfoLabelValue(
-                                    labelOne: 'purpose',
-                                    valueOne: propertyCard.purpose?.trim(),
-                                    labelTwo: 'Size',
-                                    valueTwo:
-                                        propertyCard.size?.toString() ?? 'N/A',
                                   ),
                                   if (propertyCard.currentAgent is Map)
                                     Container(
@@ -705,11 +817,33 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                                           .colorScheme
                                                           .onPrimary),
                                               onPressed: () async {
-                                                final number =
-                                                    propertyCard.currentAgent?[
-                                                                "user"]
-                                                            ["userPBXNumbers"]
-                                                        ["publicNumber"];
+                                                var createdBy =
+                                                    propertyCard.currentAgent;
+
+                                                String phoneNumber =
+                                                    createdBy?["userId"]
+                                                            ?["phone"]
+                                                        ?.replaceFirst("+", "");
+                                                await launchWhatsApp(
+                                                    context, phoneNumber);
+                                              },
+                                              icon: ImageIcon(AssetImage(
+                                                  'assets/images/whatsapp.png'))),
+                                          IconButton.filledTonal(
+                                              style: IconButton.styleFrom(
+                                                  backgroundColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .primary,
+                                                  foregroundColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimary),
+                                              onPressed: () async {
+                                                final number = propertyCard
+                                                        .currentAgent?["user"]
+                                                    ["phone"];
+                                                Logger().d(number);
                                                 if (number != null) {
                                                   getIt<CallBloc>().add(
                                                       CallEvent.clickToCall(
@@ -743,5 +877,9 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
         ],
       ),
     );
+  }
+
+  String getWhatsAppMessageText(PropertyCard? propertyCard) {
+    return "Hey ${propertyCard?.currentAgent["userId"]["first_name"] ?? ""}, \n I want to enquire about this property on ${propertyCard?.building?.name ?? ""}, ${propertyCard?.community?.community ?? ""} under ${propertyCard?.status} for ${propertyCard?.purpose ?? ""}";
   }
 }

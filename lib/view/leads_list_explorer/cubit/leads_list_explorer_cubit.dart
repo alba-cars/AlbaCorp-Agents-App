@@ -242,10 +242,13 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   }
 
   Future<void> randomCheckout(
-      {required BuildContext context,
-      required Map<String, dynamic> values}) async {
+      {required BuildContext context, required int numberOfLeads}) async {
     emit(state.copyWith(randomLeadsAssignmentStatus: AppStatus.loading));
-    final result = await _explorerRepo.randomLeadsAssignment(values: values);
+    final result = await _explorerRepo
+        .randomLeadsAssignment(numberOfLeads: numberOfLeads, values: {
+      if (state.explorerSearch != null) "searchTerm": state.explorerSearch,
+      ...(state.explorerFilter ?? {})
+    });
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -254,7 +257,6 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
         if (context.mounted) {
           showSnackbar(context, 'Leads Randomly Checked In Successfully',
               SnackBarType.success);
-          Navigator.of(context).pop();
         }
         getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
         break;
@@ -277,29 +279,22 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
     }
   }
 
-  Future<List<Community>> getCommunities({String? search}) async {
+  Future<List<CommunityTeamModel>> getCommunities({String? search}) async {
     emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
     if (state.communityList.isNotEmpty && search != null) {
       return state.communityList
-          .where((element) =>
-              element.community.toLowerCase().contains(search.toLowerCase()))
+          .where((element) => element.teamName.toLowerCase().contains(search))
           .toList();
     } else {
       final result = await _explorerRepo.getCommunityTeams(
           agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
         case (Success<List<CommunityTeamModel>> s):
-          final List<Community> communities = s.value.fold(
-              [],
-              (v, b) => [
-                    ...v,
-                    ...b.communities
-                        .map((e) => Community(id: e.id, community: e.community))
-                  ]);
           emit(state.copyWith(
-              communityList: communities,
+              communityList:
+                  s.value.where((e) => e.communities.isNotEmpty).toList(),
               getCommunityListStatus: AppStatus.success));
-          return communities;
+          return s.value;
         case (Error e):
           emit(state.copyWith(
             getCommunityListStatus: AppStatus.failure,
@@ -309,24 +304,55 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
     }
   }
 
-  Future<List<Building>> getBuildings({String? search}) async {
+  Future<List<Building>> getBuildings(
+      {String? search, List<String>? community, bool refresh = false}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    if (state.buildingList.isNotEmpty && search != null) {
-      return state.buildingList
-          .where((element) =>
-              element.name.toLowerCase().contains(search.toLowerCase()))
+    if (refresh) {
+      emit(state.copyWith(buildingsPaginator: null));
+    }
+
+    final result = await _listingsRepo.getBuildingNames(
+        search: search,
+        communityId: community,
+        paginator: refresh ? null : state.buildingsPaginator);
+    switch (result) {
+      case (Success s):
+        final List<Building> buildings =
+            refresh ? s.value : [...state.buildingList, ...s.value];
+        emit(state.copyWith(
+            buildingList: buildings,
+            getBuildingListStatus: AppStatus.success,
+            buildingsPaginator: s.paginator));
+        return buildings;
+
+      case (Error e):
+        emit(state.copyWith(
+          getBuildingListStatus: AppStatus.failure,
+        ));
+        return [];
+    }
+  }
+
+  Future<List<CommunityName>> getPlaces({String? search}) async {
+    emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
+    if (state.placesList.isNotEmpty && search != null) {
+      return state.placesList
+          .where(
+              (e) => e.community.toLowerCase().contains(search.toLowerCase()))
           .toList();
     } else {
-      final result = await _listingsRepo.getBuildingNames(search: search);
+      final result = await _explorerRepo.getCommunityTeams(
+          agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
-        case (Success s):
+        case (Success<List<CommunityTeamModel>> s):
           emit(state.copyWith(
-              buildingList: s.value, getBuildingListStatus: AppStatus.success));
-          return s.value;
-
+              placesList: s.value.expand((e) => e.communities).toList(),
+              getPlacesListStatus: AppStatus.success));
+          Logger().d(state.placesList);
+          return s.value.expand((e) => e.communities).toList();
         case (Error e):
           emit(state.copyWith(
-            getBuildingListStatus: AppStatus.failure,
+            getPlacesListStatus: AppStatus.failure,
           ));
           return [];
       }

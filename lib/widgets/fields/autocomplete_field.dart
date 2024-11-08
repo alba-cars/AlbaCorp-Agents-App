@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/widgets/space.dart';
 
 import '../raw_autocomplete.dart';
@@ -24,6 +25,9 @@ class AppAutoComplete<T extends Object> extends StatefulWidget {
     this.controller,
     this.actionButton,
     this.disabled = false,
+    this.value,
+    this.fontSize,
+    this.initialValue,
   })  : _displayStringForOption =
             displayStringForOption ?? _displayStringForOptions,
         super(key: key);
@@ -34,11 +38,15 @@ class AppAutoComplete<T extends Object> extends StatefulWidget {
   final String? hint;
   final dynamic Function(T?)? valueTransformer;
   final bool isRequired;
-  final FutureOr<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final FutureOr<Iterable<T>> Function(TextEditingValue, bool refresh)
+      optionsBuilder;
   final String Function(T) _displayStringForOption;
   final AutoCompleteFieldController? controller;
   final Widget Function(GlobalKey<FormFieldState<T>> key)? actionButton;
   final bool disabled;
+  final T? value;
+  final T? initialValue;
+  final double? fontSize;
 
   static String _displayStringForOptions<T>(T val) => val.toString();
 
@@ -55,14 +63,27 @@ class _AppAutoCompleteState<T extends Object>
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      if (_fieldKey.currentState?.value != null) {
-        // _controller.text =
-        //     widget._displayStringForOption(_fieldKey.currentState!.value!);
-        // Logger().d(_fieldKey.currentState!.value!);
-      }
-    });
+    if (widget.initialValue != null) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _fieldKey.currentState?.didChange(widget.initialValue);
+      });
+    }
+    if (widget.value != null) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _fieldKey.currentState?.didChange(widget.value);
+      });
+    }
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant AppAutoComplete<T> oldWidget) {
+    if (widget.value != null) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _fieldKey.currentState?.didChange(widget.value);
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -112,6 +133,7 @@ class _AppAutoCompleteState<T extends Object>
                 controller: widget.controller,
                 textEditingController: _controller,
                 focusNode: _focusNode,
+                
                 initialValue: _fieldKey.currentState!.value,
                 displayStringForOption: widget._displayStringForOption,
                 fieldViewBuilder: (context, textEditingController, focusNode,
@@ -127,7 +149,7 @@ class _AppAutoCompleteState<T extends Object>
                       hintText: val,
                       hintStyle: TextStyle(
                         color: focusNode.hasFocus ? Colors.grey : Colors.black,
-                        fontSize: 14,
+                        fontSize: 12,
                       ),
                       filled: true,
                       fillColor: fieldColor,
@@ -140,11 +162,12 @@ class _AppAutoCompleteState<T extends Object>
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       contentPadding:
-                          const EdgeInsets.fromLTRB(14.0, 12.0, 14.0, 12.0),
+                          const EdgeInsets.fromLTRB(14.0, 6.0, 14.0, 6.0),
                     ),
                   );
                 },
-                optionsViewBuilder: (context, onSelected, options, loading) {
+                optionsViewBuilder:
+                    (context, onSelected, options, loading, loadMore) {
                   return Align(
                     alignment: Alignment.topLeft,
                     child: Material(
@@ -212,7 +235,13 @@ class _AppAutoCompleteState<T extends Object>
                                       : null,
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                      widget._displayStringForOption(option)),
+                                    widget._displayStringForOption(option),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                            fontSize: widget.fontSize ?? 9),
+                                  ),
                                 );
                               }),
                             );
@@ -236,10 +265,13 @@ class _AppAutoCompleteState<T extends Object>
                 onTap: () {
                   _focusNode.requestFocus();
                 },
-                child: const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Color(0xFF555555),
-                  size: 24,
+                child: Container(
+                  color: Colors.white10,
+                  child: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Color(0xFF555555),
+                    size: 24,
+                  ),
                 ),
               ),
             ),

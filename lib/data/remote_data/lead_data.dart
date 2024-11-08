@@ -64,25 +64,35 @@ class LeadData implements LeadRepo {
   Future<Result<List<Lead>>> getLeads(
       {Map<String, dynamic>? filter,
       String? search,
+      String? agentId,
       Paginator? paginator}) async {
     try {
       String url = 'v1/search/user/filter';
-      final Map<String, dynamic>? filterRemoved = (filter != null)
+      Map<String, dynamic>? filterRemoved = (filter != null)
           ? (Map.from(filter)..removeWhere((key, value) => value == null))
           : null;
 
       if (filterRemoved?.containsKey('active') == true) {
         filterRemoved!["active"] = filterRemoved['active']?['value'];
       }
+      filterRemoved = filterRemoved?.map((key, value) {
+        if (value is Map) {
+          return MapEntry(key, value['value']);
+        } else if (value is List<Map>) {
+          return MapEntry(key, value.map((e) => e['value']).toList());
+        } else {
+          return MapEntry(key, value);
+        }
+      });
       final response = await _dio.get(url, queryParameters: {
-        'agent_id': getIt<AuthBloc>().state.agent?.id,
+        'agent_id': agentId ?? getIt<AuthBloc>().state.agent?.id,
         'page': (paginator?.currentPage ?? 0) + 1,
         'per_page': 15,
         'sort_by': 'createdAt',
         "sort_dir": 'DESC',
         'roles': ['User', 'Owner'],
         'active': true,
-        if (search != null) 'search': search,
+        if (search != null && search.isNotEmpty) 'search': search,
         if (filterRemoved != null) ...filterRemoved
       });
       final data = response.data['findUsersOutput'] as List;
@@ -117,19 +127,19 @@ class LeadData implements LeadRepo {
   }
 
   @override
-  Future<Result<Lead?>> getLeadByPhone({required String phone}) async {
+  Future<Result<(Lead, bool)?>> getLeadByPhone({required String phone}) async {
     try {
-      String url = 'v1/users/getUserByPhone';
+      String url = 'v1/users/check-exists-and-reAssignable';
 
-      final response = await _dio.post(url, data: {'phone': phone});
+      final response = await _dio.get(url, queryParameters: {'phone': phone});
       final data = response.data;
-      if (data == null || data["error"] != null) {
+      if (data == null || data?["error"] != null) {
         return Success(null);
       }
-      final lead = Lead.fromJson(data);
-      return Success(
-        lead,
-      );
+      final lead = Lead.fromJson(data['user']);
+      final reAssignable = data['reAssignable'];
+      Logger().d("lead data is reAssignable : $reAssignable");
+      return Success((lead, reAssignable));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

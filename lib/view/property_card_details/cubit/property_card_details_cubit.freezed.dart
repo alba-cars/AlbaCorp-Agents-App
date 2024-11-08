@@ -43,6 +43,10 @@ mixin _$PropertyCardDetailsState {
   String? get checkInError => throw _privateConstructorUsedError;
   AppStatus get checkOutLeadStatus => throw _privateConstructorUsedError;
   String? get checkOutLeadError => throw _privateConstructorUsedError;
+  AppStatus get convertToListingAquiredStatus =>
+      throw _privateConstructorUsedError;
+  String? get convertToListingAquiredError =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PropertyCardDetailsStateCopyWith<PropertyCardDetailsState> get copyWith =>
@@ -76,7 +80,9 @@ abstract class $PropertyCardDetailsStateCopyWith<$Res> {
       AppStatus checkInStatus,
       String? checkInError,
       AppStatus checkOutLeadStatus,
-      String? checkOutLeadError});
+      String? checkOutLeadError,
+      AppStatus convertToListingAquiredStatus,
+      String? convertToListingAquiredError});
 
   $PropertyCardDetailsModelCopyWith<$Res>? get propertyCard;
 }
@@ -116,6 +122,8 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
     Object? checkInError = freezed,
     Object? checkOutLeadStatus = null,
     Object? checkOutLeadError = freezed,
+    Object? convertToListingAquiredStatus = null,
+    Object? convertToListingAquiredError = freezed,
   }) {
     return _then(_value.copyWith(
       propertyCardId: null == propertyCardId
@@ -202,6 +210,14 @@ class _$PropertyCardDetailsStateCopyWithImpl<$Res,
           ? _value.checkOutLeadError
           : checkOutLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
+      convertToListingAquiredStatus: null == convertToListingAquiredStatus
+          ? _value.convertToListingAquiredStatus
+          : convertToListingAquiredStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      convertToListingAquiredError: freezed == convertToListingAquiredError
+          ? _value.convertToListingAquiredError
+          : convertToListingAquiredError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -249,7 +265,9 @@ abstract class _$$PropertyCardDetailsStateImplCopyWith<$Res>
       AppStatus checkInStatus,
       String? checkInError,
       AppStatus checkOutLeadStatus,
-      String? checkOutLeadError});
+      String? checkOutLeadError,
+      AppStatus convertToListingAquiredStatus,
+      String? convertToListingAquiredError});
 
   @override
   $PropertyCardDetailsModelCopyWith<$Res>? get propertyCard;
@@ -289,6 +307,8 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
     Object? checkInError = freezed,
     Object? checkOutLeadStatus = null,
     Object? checkOutLeadError = freezed,
+    Object? convertToListingAquiredStatus = null,
+    Object? convertToListingAquiredError = freezed,
   }) {
     return _then(_$PropertyCardDetailsStateImpl(
       propertyCardId: null == propertyCardId
@@ -375,6 +395,14 @@ class __$$PropertyCardDetailsStateImplCopyWithImpl<$Res>
           ? _value.checkOutLeadError
           : checkOutLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
+      convertToListingAquiredStatus: null == convertToListingAquiredStatus
+          ? _value.convertToListingAquiredStatus
+          : convertToListingAquiredStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      convertToListingAquiredError: freezed == convertToListingAquiredError
+          ? _value.convertToListingAquiredError
+          : convertToListingAquiredError // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -403,7 +431,9 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
       this.checkInStatus = AppStatus.init,
       this.checkInError,
       this.checkOutLeadStatus = AppStatus.init,
-      this.checkOutLeadError})
+      this.checkOutLeadError,
+      this.convertToListingAquiredStatus = AppStatus.init,
+      this.convertToListingAquiredError})
       : _propertyCardLeads = propertyCardLeads,
         _propertyCardLogs = propertyCardLogs,
         _propertyCardNotes = propertyCardNotes;
@@ -482,10 +512,15 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
   final AppStatus checkOutLeadStatus;
   @override
   final String? checkOutLeadError;
+  @override
+  @JsonKey()
+  final AppStatus convertToListingAquiredStatus;
+  @override
+  final String? convertToListingAquiredError;
 
   @override
   String toString() {
-    return 'PropertyCardDetailsState(propertyCardId: $propertyCardId, propertyCardLeads: $propertyCardLeads, getPropertyCardLeadsStatus: $getPropertyCardLeadsStatus, getPropertyCardLeadsError: $getPropertyCardLeadsError, propertyCardLogs: $propertyCardLogs, getPropertyCardLogsStatus: $getPropertyCardLogsStatus, getPropertyCardLogsError: $getPropertyCardLogsError, propertyCardNotes: $propertyCardNotes, getPropertyCardNotesStatus: $getPropertyCardNotesStatus, getPropertyCardNotesError: $getPropertyCardNotesError, propertyCard: $propertyCard, getPropertyCardStatus: $getPropertyCardStatus, getPropertyCardError: $getPropertyCardError, addPropertyCardNoteStatus: $addPropertyCardNoteStatus, addPropertyCardNoteError: $addPropertyCardNoteError, updatePropertyCardStatus: $updatePropertyCardStatus, updatePropertyCardError: $updatePropertyCardError, checkInStatus: $checkInStatus, checkInError: $checkInError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError)';
+    return 'PropertyCardDetailsState(propertyCardId: $propertyCardId, propertyCardLeads: $propertyCardLeads, getPropertyCardLeadsStatus: $getPropertyCardLeadsStatus, getPropertyCardLeadsError: $getPropertyCardLeadsError, propertyCardLogs: $propertyCardLogs, getPropertyCardLogsStatus: $getPropertyCardLogsStatus, getPropertyCardLogsError: $getPropertyCardLogsError, propertyCardNotes: $propertyCardNotes, getPropertyCardNotesStatus: $getPropertyCardNotesStatus, getPropertyCardNotesError: $getPropertyCardNotesError, propertyCard: $propertyCard, getPropertyCardStatus: $getPropertyCardStatus, getPropertyCardError: $getPropertyCardError, addPropertyCardNoteStatus: $addPropertyCardNoteStatus, addPropertyCardNoteError: $addPropertyCardNoteError, updatePropertyCardStatus: $updatePropertyCardStatus, updatePropertyCardError: $updatePropertyCardError, checkInStatus: $checkInStatus, checkInError: $checkInError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, convertToListingAquiredStatus: $convertToListingAquiredStatus, convertToListingAquiredError: $convertToListingAquiredError)';
   }
 
   @override
@@ -536,7 +571,9 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
             (identical(other.checkOutLeadStatus, checkOutLeadStatus) ||
                 other.checkOutLeadStatus == checkOutLeadStatus) &&
             (identical(other.checkOutLeadError, checkOutLeadError) ||
-                other.checkOutLeadError == checkOutLeadError));
+                other.checkOutLeadError == checkOutLeadError) &&
+            (identical(other.convertToListingAquiredStatus, convertToListingAquiredStatus) || other.convertToListingAquiredStatus == convertToListingAquiredStatus) &&
+            (identical(other.convertToListingAquiredError, convertToListingAquiredError) || other.convertToListingAquiredError == convertToListingAquiredError));
   }
 
   @override
@@ -562,7 +599,9 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
         checkInStatus,
         checkInError,
         checkOutLeadStatus,
-        checkOutLeadError
+        checkOutLeadError,
+        convertToListingAquiredStatus,
+        convertToListingAquiredError
       ]);
 
   @JsonKey(ignore: true)
@@ -575,27 +614,30 @@ class _$PropertyCardDetailsStateImpl implements _PropertyCardDetailsState {
 
 abstract class _PropertyCardDetailsState implements PropertyCardDetailsState {
   const factory _PropertyCardDetailsState(
-      {required final String propertyCardId,
-      final List<LeadPropertyCardModel> propertyCardLeads,
-      final AppStatus getPropertyCardLeadsStatus,
-      final String? getPropertyCardLeadsError,
-      final List<PropertyCardLog> propertyCardLogs,
-      final AppStatus getPropertyCardLogsStatus,
-      final String? getPropertyCardLogsError,
-      final List<PropertyCardNoteModel> propertyCardNotes,
-      final AppStatus getPropertyCardNotesStatus,
-      final String? getPropertyCardNotesError,
-      final PropertyCardDetailsModel? propertyCard,
-      final AppStatus getPropertyCardStatus,
-      final String? getPropertyCardError,
-      final AppStatus addPropertyCardNoteStatus,
-      final String? addPropertyCardNoteError,
-      final AppStatus updatePropertyCardStatus,
-      final String? updatePropertyCardError,
-      final AppStatus checkInStatus,
-      final String? checkInError,
-      final AppStatus checkOutLeadStatus,
-      final String? checkOutLeadError}) = _$PropertyCardDetailsStateImpl;
+          {required final String propertyCardId,
+          final List<LeadPropertyCardModel> propertyCardLeads,
+          final AppStatus getPropertyCardLeadsStatus,
+          final String? getPropertyCardLeadsError,
+          final List<PropertyCardLog> propertyCardLogs,
+          final AppStatus getPropertyCardLogsStatus,
+          final String? getPropertyCardLogsError,
+          final List<PropertyCardNoteModel> propertyCardNotes,
+          final AppStatus getPropertyCardNotesStatus,
+          final String? getPropertyCardNotesError,
+          final PropertyCardDetailsModel? propertyCard,
+          final AppStatus getPropertyCardStatus,
+          final String? getPropertyCardError,
+          final AppStatus addPropertyCardNoteStatus,
+          final String? addPropertyCardNoteError,
+          final AppStatus updatePropertyCardStatus,
+          final String? updatePropertyCardError,
+          final AppStatus checkInStatus,
+          final String? checkInError,
+          final AppStatus checkOutLeadStatus,
+          final String? checkOutLeadError,
+          final AppStatus convertToListingAquiredStatus,
+          final String? convertToListingAquiredError}) =
+      _$PropertyCardDetailsStateImpl;
 
   @override
   String get propertyCardId;
@@ -639,6 +681,10 @@ abstract class _PropertyCardDetailsState implements PropertyCardDetailsState {
   AppStatus get checkOutLeadStatus;
   @override
   String? get checkOutLeadError;
+  @override
+  AppStatus get convertToListingAquiredStatus;
+  @override
+  String? get convertToListingAquiredError;
   @override
   @JsonKey(ignore: true)
   _$$PropertyCardDetailsStateImplCopyWith<_$PropertyCardDetailsStateImpl>

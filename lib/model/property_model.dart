@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:real_estate_app/model/agent_model.dart';
+import 'package:real_estate_app/util/currency_formatter.dart';
 
 part 'property_model.freezed.dart';
 part 'property_model.g.dart';
@@ -12,7 +13,7 @@ class Property with _$Property {
     required String listingType,
     String? categoryId,
     String? propertyTypeId,
-    required String propertyTitle,
+    @Default("") String propertyTitle,
     String? propertyDesc,
     required bool featured,
     @Default(false) bool? dealOfWeek,
@@ -95,4 +96,24 @@ class PropertyImage with _$PropertyImage {
 
   factory PropertyImage.fromJson(Map<String, dynamic> json) =>
       _$PropertyImageFromJson(json);
+}
+
+extension PropertyExtension on Property {
+  String getFormattedPrice() {
+    if (this.askingPrice != null) {
+      return "AED ${this.askingPrice!.currency}";
+    } else if (this.oneCheqPrice != null) {
+      return "AED ${this.oneCheqPrice!.currency} Per Year";
+    } else if (this.twoCheqPrice != null) {
+      return "AED ${this.twoCheqPrice!.currency} Every 6 Month";
+    } else if (this.fourCheqPrice != null) {
+      return "AED ${this.fourCheqPrice!.currency} Every 3 Month ";
+    } else if (this.sixCheqPrice != null) {
+      return "AED ${this.sixCheqPrice!.currency} Every 2 Month";
+    } else if (this.twelveCheqPrice != null) {
+      return "AED ${this.twelveCheqPrice!.currency} Per Month";
+    } else {
+      return "";
+    }
+  }
 }

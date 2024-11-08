@@ -9,6 +9,7 @@ class AppPrimaryButton extends StatefulWidget {
     required this.text,
     required this.onTap,
     this.fullWidth = false,
+    this.width,
     this.backgroundImage,
     this.backgroundColor,
     this.foregroundColor,
@@ -39,6 +40,7 @@ class AppPrimaryButton extends StatefulWidget {
   final bool outlined;
   final Color? borderColor;
   final double? borderRadious;
+  final double? width;
 
   @override
   State<AppPrimaryButton> createState() => _AppPrimaryButtonState();
@@ -90,7 +92,7 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton>
     final textSlyle = Theme.of(context).textTheme.labelLarge!.copyWith(
         color: widget.foregroundColor ??
             (widget.outlined ? colorScheme.primary : colorScheme.onPrimary),
-        fontSize: 14.sp,
+        fontSize: 15,
         fontWeight: FontWeight.w600);
     if (widget.animate) {
       _startPulseAnimation();

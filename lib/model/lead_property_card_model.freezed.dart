@@ -27,9 +27,10 @@ mixin _$LeadPropertyCardModel {
   PropertyCardDetailsModel get propertyCard =>
       throw _privateConstructorUsedError;
   bool get wasOwner => throw _privateConstructorUsedError;
+  bool get isOwner => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   double? get amount => throw _privateConstructorUsedError;
-  CreatedBy get createdBy => throw _privateConstructorUsedError;
+  CreatedBy? get createdBy => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -50,15 +51,16 @@ abstract class $LeadPropertyCardModelCopyWith<$Res> {
       Lead lead,
       PropertyCardDetailsModel propertyCard,
       bool wasOwner,
+      bool isOwner,
       DateTime? date,
       double? amount,
-      CreatedBy createdBy,
+      CreatedBy? createdBy,
       DateTime? createdAt,
       DateTime? updatedAt});
 
   $LeadCopyWith<$Res> get lead;
   $PropertyCardDetailsModelCopyWith<$Res> get propertyCard;
-  $CreatedByCopyWith<$Res> get createdBy;
+  $CreatedByCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -79,9 +81,10 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
     Object? lead = null,
     Object? propertyCard = null,
     Object? wasOwner = null,
+    Object? isOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
-    Object? createdBy = null,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -102,6 +105,10 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
           ? _value.wasOwner
           : wasOwner // ignore: cast_nullable_to_non_nullable
               as bool,
+      isOwner: null == isOwner
+          ? _value.isOwner
+          : isOwner // ignore: cast_nullable_to_non_nullable
+              as bool,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -110,10 +117,10 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy,
+              as CreatedBy?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -144,8 +151,12 @@ class _$LeadPropertyCardModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $CreatedByCopyWith<$Res> get createdBy {
-    return $CreatedByCopyWith<$Res>(_value.createdBy, (value) {
+  $CreatedByCopyWith<$Res>? get createdBy {
+    if (_value.createdBy == null) {
+      return null;
+    }
+
+    return $CreatedByCopyWith<$Res>(_value.createdBy!, (value) {
       return _then(_value.copyWith(createdBy: value) as $Val);
     });
   }
@@ -165,9 +176,10 @@ abstract class _$$LeadPropertyCardModelImplCopyWith<$Res>
       Lead lead,
       PropertyCardDetailsModel propertyCard,
       bool wasOwner,
+      bool isOwner,
       DateTime? date,
       double? amount,
-      CreatedBy createdBy,
+      CreatedBy? createdBy,
       DateTime? createdAt,
       DateTime? updatedAt});
 
@@ -176,7 +188,7 @@ abstract class _$$LeadPropertyCardModelImplCopyWith<$Res>
   @override
   $PropertyCardDetailsModelCopyWith<$Res> get propertyCard;
   @override
-  $CreatedByCopyWith<$Res> get createdBy;
+  $CreatedByCopyWith<$Res>? get createdBy;
 }
 
 /// @nodoc
@@ -195,9 +207,10 @@ class __$$LeadPropertyCardModelImplCopyWithImpl<$Res>
     Object? lead = null,
     Object? propertyCard = null,
     Object? wasOwner = null,
+    Object? isOwner = null,
     Object? date = freezed,
     Object? amount = freezed,
-    Object? createdBy = null,
+    Object? createdBy = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -218,6 +231,10 @@ class __$$LeadPropertyCardModelImplCopyWithImpl<$Res>
           ? _value.wasOwner
           : wasOwner // ignore: cast_nullable_to_non_nullable
               as bool,
+      isOwner: null == isOwner
+          ? _value.isOwner
+          : isOwner // ignore: cast_nullable_to_non_nullable
+              as bool,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -226,10 +243,10 @@ class __$$LeadPropertyCardModelImplCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy,
+              as CreatedBy?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -250,9 +267,10 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
       required this.lead,
       required this.propertyCard,
       this.wasOwner = false,
+      this.isOwner = false,
       this.date,
       this.amount,
-      required this.createdBy,
+      this.createdBy,
       this.createdAt,
       this.updatedAt});
 
@@ -270,11 +288,14 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
   @JsonKey()
   final bool wasOwner;
   @override
+  @JsonKey()
+  final bool isOwner;
+  @override
   final DateTime? date;
   @override
   final double? amount;
   @override
-  final CreatedBy createdBy;
+  final CreatedBy? createdBy;
   @override
   final DateTime? createdAt;
   @override
@@ -282,7 +303,7 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
 
   @override
   String toString() {
-    return 'LeadPropertyCardModel(id: $id, lead: $lead, propertyCard: $propertyCard, wasOwner: $wasOwner, date: $date, amount: $amount, createdBy: $createdBy, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'LeadPropertyCardModel(id: $id, lead: $lead, propertyCard: $propertyCard, wasOwner: $wasOwner, isOwner: $isOwner, date: $date, amount: $amount, createdBy: $createdBy, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -296,6 +317,7 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
                 other.propertyCard == propertyCard) &&
             (identical(other.wasOwner, wasOwner) ||
                 other.wasOwner == wasOwner) &&
+            (identical(other.isOwner, isOwner) || other.isOwner == isOwner) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.createdBy, createdBy) ||
@@ -309,7 +331,7 @@ class _$LeadPropertyCardModelImpl implements _LeadPropertyCardModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, lead, propertyCard, wasOwner,
-      date, amount, createdBy, createdAt, updatedAt);
+      isOwner, date, amount, createdBy, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -332,9 +354,10 @@ abstract class _LeadPropertyCardModel implements LeadPropertyCardModel {
       required final Lead lead,
       required final PropertyCardDetailsModel propertyCard,
       final bool wasOwner,
+      final bool isOwner,
       final DateTime? date,
       final double? amount,
-      required final CreatedBy createdBy,
+      final CreatedBy? createdBy,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$LeadPropertyCardModelImpl;
 
@@ -351,11 +374,13 @@ abstract class _LeadPropertyCardModel implements LeadPropertyCardModel {
   @override
   bool get wasOwner;
   @override
+  bool get isOwner;
+  @override
   DateTime? get date;
   @override
   double? get amount;
   @override
-  CreatedBy get createdBy;
+  CreatedBy? get createdBy;
   @override
   DateTime? get createdAt;
   @override

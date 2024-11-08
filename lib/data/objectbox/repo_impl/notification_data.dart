@@ -60,4 +60,34 @@ class NotificationData implements NotificationRepo {
       return Error(e.toString());
     }
   }
+
+  @override
+  Future<Result<List<NotificationModel>>>
+      getNotificationsWithActionsPending() async {
+    try {
+      final res = await _notificationBox
+          .query(NotificationEntity_.requiresAction.equals(true))
+          .build()
+          .findAsync();
+
+      return Success(res.reversed.map((e) => e.toModel()).toList());
+    } catch (e) {
+      log.d(e);
+      return Error(e.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool>> updateNotification(
+      {required NotificationModel notificationModel}) async {
+    try {
+      final entity = NotificationEntity.fromModel(notificationModel);
+      await _notificationBox.putAsync(entity);
+
+      return Success(true);
+    } catch (e) {
+      log.d(e);
+      return Error(e.toString());
+    }
+  }
 }

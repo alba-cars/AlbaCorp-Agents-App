@@ -10,10 +10,13 @@ class AuthEvent with _$AuthEvent {
       {required List<String> activityIds}) = _NewImportantActivity;
   const factory AuthEvent.completedImportantActivity(
       {required String activityId}) = _CompletedImportantActivity;
+      const factory AuthEvent.clearImportantActivity() = _ClearImportantActivity;
   const factory AuthEvent.checkForImportantActivity() =
       _CheckForImportantActivity;
   const factory AuthEvent.checkForCallFeedback() = _CheckForCallFeedback;
   const factory AuthEvent.removeLastCallDetails() = _RemoveLastCallDetails;
+  const factory AuthEvent.setShowFollowup({required bool value}) =
+      _SetShowFollowup;
   const factory AuthEvent.getAppConfig() = _GetAppConfig;
   const factory AuthEvent.getSettings() = _GetSettings;
 }

@@ -119,12 +119,12 @@ class _S3ImageState extends State<S3Image> {
         }
       }
     } catch (e) {
-      Logger().d(e);
-    }
-
-    isLoading = false;
-    if (mounted) {
-      setState(() {});
+      Logger().e(e);
+    } finally {
+      isLoading = false;
+      if (mounted) {
+        setState(() {});
+      }
     }
   }
 
@@ -180,10 +180,11 @@ class _S3ImageState extends State<S3Image> {
             ),
           );
         }
-        return Image.asset(
+        return //SizedBox();
+            Image(
+                image: AssetImage(
           "assets/images/placeholder.webp",
-          fit: widget.fit,
-        );
+        ));
       }
     } else {
       if (widget.placeHolder != null) {

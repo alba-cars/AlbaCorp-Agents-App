@@ -164,9 +164,21 @@ class DealData implements DealsRepo {
   @override
   Future<Result<void>> addDealDocuments(
       {required String dealId,
-      required String userId,
+      String? userId,
+      String? sellerUserId,
+      String? buyerUserId,
+      String? buyerAgencyId,
+      String? sellerAgencyId,
       required Map<String, dynamic> values}) async {
     try {
+      Logger().d(values);
+      Logger().d({
+        "userId": userId,
+        "sellerUserId": sellerUserId,
+        "buyerUserId": buyerUserId,
+        "buyerAgencyId": buyerAgencyId,
+        "sellerAgencyId": sellerAgencyId,
+      });
       String url = 'v1/Documents';
       Map<String, Map<String, dynamic>> updateDocuments = {};
       final futures = values.entries.map((v) async {
@@ -222,19 +234,42 @@ class DealData implements DealsRepo {
       futureResults.forEach((element) async {
         if (element != null) {
           Logger().d(element);
-          bool deal = false;
-          if (element.key == 'EID' || element.key == 'Passport') {
-            deal = false;
-          } else {
-            deal = true;
+
+          String key = element.key;
+          bool buyer = false;
+          bool seller = false;
+          if (key.contains('seller.')) {
+            key = key.split('.').last;
+            seller = true;
+          } else if (key.contains('buyer.')) {
+            key = key.split('.').last;
+            buyer = true;
           }
-          await _dio.post(url, data: {
-            if (deal) 'deal_id': dealId,
-            if (element.value is String) 'path': element.value,
-            if (element.value is List) 'documents': element.value,
-            'type': element.key,
-            if (!deal) 'user_id': userId
-          });
+          if (key == 'trade_license') {
+            await _dio.patch(
+                'v1/agency/${buyer ? buyerAgencyId : sellerAgencyId}',
+                data: {
+                  'document': element.value,
+                  'documentType': 'Trade License'
+                });
+          } else {
+            bool deal = false;
+            if (key == 'EID' || key == 'Passport' || key == 'Visa') {
+              deal = false;
+            } else {
+              deal = true;
+            }
+            await _dio.post(url, data: {
+              if (deal) 'deal_id': dealId,
+              if (element.value is String) 'path': element.value,
+              if (element.value is List) 'documents': element.value,
+              'type': key,
+              if (!deal && userId != null && !buyer && !seller)
+                'user_id': userId,
+              if (buyerUserId != null && buyer) 'user_id': buyerUserId,
+              if (sellerUserId != null && seller) 'user_id': sellerUserId,
+            });
+          }
         }
       });
       if (updateDocuments.isNotEmpty) {
@@ -282,6 +317,23 @@ class DealData implements DealsRepo {
       final list = data.map((e) => DealDocument.fromJson(e)).toList();
       return Success(
         list,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+  
+  @override
+  Future<Result<String>> updateDealProgress({required String dealId}) async{
+    try {
+      String url = 'v1/deals/progress/$dealId';
+
+      final response = await _dio.post(
+        url,
+      );
+      final data =response.data['status'] ;
+      return Success(
+        data,
       );
     } catch (e, stack) {
       return onError(e, stack, log);

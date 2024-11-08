@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
@@ -10,6 +11,8 @@ import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart'
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/cubit/deals_cubit.dart';
 import 'package:real_estate_app/view/deals_screen/widgets/client_name.dart';
+import 'package:real_estate_app/view/earnings/cubit/earnings_cubit.dart';
+import 'package:real_estate_app/view/earnings/widgets/earnings_widget.dart';
 import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
@@ -46,6 +49,8 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 2, vsync: this);
+
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -110,6 +115,14 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
             //   ),
             // )),
             SliverToBoxAdapter(
+                child: BlocProvider(
+              create: (context) => getIt<EarningsCubit>()..getAgentEarnings(),
+              child: EarningsWidget(
+                isExpectedEarnings: selectedIndex == 1,
+              ),
+            )),
+
+            SliverToBoxAdapter(
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: AppTabBar(
@@ -119,6 +132,9 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
                 tabs: ['Deals', 'Listings Acquired'],
                 onTap: (index) {
                   context.read<DealsCubit>().setSelectedTab(index);
+                  setState(() {
+                    selectedIndex = index;
+                  });
                 },
               ),
             )),
@@ -144,7 +160,8 @@ class DealsTab extends StatefulWidget {
 }
 
 class _DealsTabState extends State<DealsTab> {
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       WrapSelectField(
           name: 'category',
@@ -204,7 +221,7 @@ class _DealsTabState extends State<DealsTab> {
                 onChanged: (val) {
                   context.read<DealsCubit>().searchDeals(val);
                 },
-                filterFields: filterFields(context),
+                filterFields: filterFields,
                 onFilterApplied: (filter) {
                   context.read<DealsCubit>().setDealsFilter(filter);
                 },
@@ -309,7 +326,8 @@ class _ListingsTabState extends State<ListingsTab> {
     super.initState();
   }
 
-  List<Widget> filterFields(BuildContext context) {
+  List<Widget> filterFields(
+      BuildContext context, Map<String, dynamic>? values) {
     return [
       DropDownfield(
           name: 'status',
@@ -361,7 +379,7 @@ class _ListingsTabState extends State<ListingsTab> {
                 onChanged: (val) {
                   context.read<DealsCubit>().searchYourListings(val);
                 },
-                filterFields: filterFields(context),
+                filterFields: filterFields,
                 onFilterApplied: (filter) {
                   context.read<DealsCubit>().setYourListingsFilter(filter);
                 },

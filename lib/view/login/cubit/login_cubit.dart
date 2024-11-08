@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -19,6 +20,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> login({required String email, required String password}) async {
     emit(state.copyWith(loginStatus: AppStatus.loading));
+    FlutterSecureStorage().write(key: 'login_email', value: email);
+    FlutterSecureStorage().write(key: 'login_password', value: password);
     final result = await _authRepo.login(username: email, password: password);
     switch (result) {
       case (Success s):

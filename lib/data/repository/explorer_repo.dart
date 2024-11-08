@@ -30,9 +30,9 @@ abstract class ExplorerRepo {
   Future<Result<void>> checkOutLead(
       {List<String>? propertyCardIds, List<String>? leadIds});
   Future<Result<List<LeadPropertyCardModel>>> getPropertyCardLeads(
-      {required String propertyCardId});
+      {required String propertyCardId, Paginator? paginator});
   Future<Result<List<LeadPropertyCardModel>>> getLeadPropertyCards(
-      {required String leadId});
+      {required String leadId, Paginator? paginator});
   Future<Result<List<PropertyCardNoteModel>>> getPropertyCardNotes(
       {required String propertyCardId});
   Future<Result<void>> addPropertyCardNotes(
@@ -47,7 +47,9 @@ abstract class ExplorerRepo {
       {required String propertyCardId, required String leadId});
   Future<Result<void>> unLinkPropertyFromLead({required String leadCardId});
   Future<Result<void>> randomLeadsAssignment(
-      {required Map<String, dynamic> values});
+      {required int numberOfLeads, required Map<String, dynamic> values});
   Future<Result<List<CommunityTeamModel>>> getCommunityTeams(
       {required String agentId});
+  Future<Result<String>> convertPropertyCardToListing(
+      {required String propertyCardId, required Map<String, dynamic> values});
 }

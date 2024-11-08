@@ -1,12 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 
 import '../../../model/building_model.dart';
@@ -25,6 +28,7 @@ class ListingsCubit extends Cubit<ListingsState> {
       : super(ListingsState()) {
     getPropertyTypes();
     getAmenities();
+    getAgents();
   }
 
   final ListingsRepo _listingsRepo;
@@ -62,9 +66,41 @@ class ListingsCubit extends Cubit<ListingsState> {
     }
   }
 
+  Future<void> getMyListings({
+    bool refresh = false,
+  }) async {
+    if (refresh || state.myListingsPaginator == null) {
+      emit(state.copyWith(
+          getMyListingsStatus: AppStatus.loading,
+          myListingsPaginator: null,
+          myListings: []));
+    } else {
+      emit(state.copyWith(getMyListingsStatus: AppStatus.loadingMore));
+    }
+
+    final result =
+        await _listingsRepo.getMyListings(paginator: state.myListingsPaginator);
+    switch (result) {
+      case (Success s):
+
+        emit(state.copyWith(
+            myListings: [...state.myListings, ...s.value],
+            myListingsPaginator: s.paginator,
+            getMyListingsStatus: AppStatus.success));
+        // Logger().d(state.listings);
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getMyListingsStatus: AppStatus.failure,
+            getMyListingsError: e.exception));
+    }
+  }
+
   Future<void> getPocketListings({
     bool refresh = false,
   }) async {
+
+
     if (refresh || state.pocketListingsPaginator == null) {
       emit(state.copyWith(
           getPocketListingsStatus: AppStatus.loading,
@@ -73,12 +109,13 @@ class ListingsCubit extends Cubit<ListingsState> {
     } else {
       emit(state.copyWith(getPocketListingsStatus: AppStatus.loadingMore));
     }
-
+    
     final result = await _explorerRepo.getPocketListings(
         filter: state.pocketListingsFilter,
         paginator: state.pocketListingsPaginator);
     switch (result) {
       case (Success s):
+      Logger().d(s.paginator);
         emit(state.copyWith(
             pocketListings: [...state.pocketListings, ...s.value],
             pocketListingsPaginator: s.paginator,
@@ -89,6 +126,34 @@ class ListingsCubit extends Cubit<ListingsState> {
         emit(state.copyWith(
             getPocketListingsStatus: AppStatus.failure,
             getListingsError: e.exception));
+    }
+  }
+
+  Future<void> getMyPocketListings({
+    bool refresh = false,
+  }) async {
+    if (refresh || state.myPocketListingsPaginator == null) {
+      emit(state.copyWith(
+          getMyPocketListingsStatus: AppStatus.loading,
+          myPocketListingsPaginator: null,
+          myPocketListings: []));
+    } else {
+      emit(state.copyWith(getMyPocketListingsStatus: AppStatus.loadingMore));
+    }
+    final result = await _explorerRepo.getPocketListings(
+        filter: {"currentAgent": getIt<AuthBloc>().state.agent?.id},
+        paginator: state.myPocketListingsPaginator);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(
+            myPocketListings: [...state.myPocketListings, ...s.value],
+            myPocketListingsPaginator: s.paginator,
+            getMyPocketListingsStatus: AppStatus.success));
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            getMyPocketListingsStatus: AppStatus.failure,
+            getMyPocketListingsError: e.exception));
     }
   }
 
@@ -155,9 +220,11 @@ class ListingsCubit extends Cubit<ListingsState> {
     }
   }
 
-  Future<List<Building>> getBuildings({String? search}) async {
+  Future<List<Building>> getBuildings(
+      {String? search, List<String>? community}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    final result = await _listingsRepo.getBuildingNames(search: search);
+    final result = await _listingsRepo.getBuildingNames(
+        search: search, communityId: community);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

@@ -20,9 +20,14 @@ abstract class DealsRepo {
   Future<Result<DealResponse>> addDeal({required Map<String, dynamic> values});
   Future<Result<void>> addDealDocuments(
       {required String dealId,
-      required String userId,
+      String? userId,
+      String? sellerUserId,
+      String? buyerUserId,
+      String? buyerAgencyId,
+      String? sellerAgencyId,
       required Map<String, dynamic> values});
   Future<Result<List<DealDocument>>> getDealDocuments({required String dealId});
   Future<Result<DealResponse>> updateDeal(
       {required String id, required Map<String, dynamic> values});
+  Future<Result<String>> updateDealProgress({required String dealId});
 }

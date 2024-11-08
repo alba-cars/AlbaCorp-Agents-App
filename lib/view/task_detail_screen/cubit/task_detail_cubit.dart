@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,6 +13,9 @@ import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
+import 'package:real_estate_app/view/home_screen/home_screen.dart';
+import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
@@ -42,7 +47,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         getExplorerList();
       });
     } else {
-      getSortedActivities();
       getLeadActivities();
       getExplorerList();
     }
@@ -52,6 +56,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   final LeadRepo _leadRepo;
   final AgentRepo _agentRepo;
   final ExplorerRepo _explorerRepo;
+  TaskType? taskType;
+  TaskFilterEnum? taskFilter;
+
+  void setTaskSortType(TaskType? taskType, TaskFilterEnum? taskFilter) {
+    this.taskFilter = taskFilter;
+    this.taskType = taskType;
+    getSortedActivities();
+  }
 
   Future<void> getTask() async {
     emit(state.copyWith(getTaskStatus: AppStatus.loading));
@@ -71,14 +83,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> updateActivity(
       {required BuildContext context,
-      String? description,
+      String? notes,
       required bool addFollowUp,
       bool refresh = false,
       bool completed = true,
       Map<String, dynamic>? values,
       Future<void> Function()? onSuccess}) async {
     final result = await _activityRepo.updateActivity(
-        activityId: state.task!.id, notes: description, completed: completed);
+        activityId: state.task!.id, notes: notes, completed: completed);
     switch (result) {
       case (Success s):
         if (onSuccess != null) {
@@ -92,7 +104,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           final propertyId = values?['property'];
           final description = values?["description"];
           final date = (values?["date"] as DateTime?)?.addTime(
-              (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 0, minute: 0)));
+              (values?["time"] as TimeOfDay? ??
+                  TimeOfDay(hour: 10, minute: 0)));
           final res = await addActivity(
               context: context,
               leadId: state.task!.lead!.id,
@@ -108,10 +121,9 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           Navigator.of(context).pop(true);
         }
         if (refresh) {
-          final activity = state.task?.copyWith(notes: description);
+          final activity = state.task?.copyWith(notes: notes);
           final activities = state.activities
-              .map((e) =>
-                  e.id == state.taskId ? e.copyWith(notes: description) : e)
+              .map((e) => e.id == state.taskId ? e.copyWith(notes: notes) : e)
               .toList();
           emit(state.copyWith(task: activity, sortedActivity: activities));
         }
@@ -127,11 +139,11 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> completeAndAddFollowUp(
       {required BuildContext context,
-      String? description,
+      String? currentActivityNotes,
       required bool markAsProspect,
       Map<String, dynamic>? values}) async {
     final date = (values?["date"] as DateTime?)?.addTime(
-        (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 0, minute: 0)));
+        (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0)));
     if (date == null || date.compareTo(DateTime.now()) == -1) {
       if (context.mounted) {
         showSnackbar(context, 'Choose a valid date time', SnackBarType.failure);
@@ -141,7 +153,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (markAsProspect) {
       await makeProspect(
           context: context,
-          description: description,
+          description: currentActivityNotes,
           addFollowUp: true,
           values: values);
     } else {
@@ -149,7 +161,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           context: context,
           addFollowUp: true,
           values: values,
-          description: description);
+          notes: currentActivityNotes);
     }
   }
 
@@ -162,11 +174,12 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
-        description: description,
+        notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
               await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+            'currentAgent': null,
             'lead_status': 'Disqualified',
             'activity': {'notes': description}
           });
@@ -194,12 +207,13 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
-        description: description,
+        notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
               await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
             'lead_status': 'Lost',
+            'currentAgent': null,
             'activity': {'notes': description}
           });
           switch (result) {
@@ -222,12 +236,13 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
-        description: description,
+        notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
               await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
             'lead_status': 'Lost',
+            'currentAgent': null,
             'activity': {'notes': description},
             "DndStatus": true
           });
@@ -256,7 +271,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       case (Success s):
         await updateActivity(
             context: context,
-            description: description,
+            notes: description,
             addFollowUp: true,
             values: values);
       case (Error e):
@@ -275,23 +290,40 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       emit(state.copyWith(
           sortedActivityPaginator: null,
           getSortedActivitiesStatus: AppStatus.loading,
-          sortedActivity: [state.task!],
+          sortedActivity: state.task != null ? [state.task!] : [],
           getSortedActivitiesError: null));
     } else {
       emit(state.copyWith(
           getSortedActivitiesStatus: AppStatus.loadingMore,
           getSortedActivitiesError: null));
     }
-
+    final payload = getPayload(taskFilter, taskType);
+    Logger().d({payload, taskFilter, taskType});
     final result = await _activityRepo.fetchActivitiesSorted(
-        limit: 35, paginator: state.sortedActivityPaginator);
+        filter: payload, limit: 35, paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
-        final list = List<Activity>.from(s.value)
-          ..sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
-        list.removeWhere((element) => element.id == state.taskId);
+        List<Activity> list = List<Activity>.from(s.value);
+        if (getIt<AuthBloc>().state.veryImportantActivities?.isNotEmpty ==
+            true) {
+          final imp = await _checkForImportantActivity();
+
+          if (imp != null && imp.isNotEmpty) {
+            list.addAll(imp);
+          }
+        }
+        if (list.any((d) => d.activityWeight > .8)) {
+          list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
+        }
+
+        final activities = [...state.sortedActivity, ...list];
+
+        final uniqueIds = <String>{}; // A set to track unique IDs
+        activities.retainWhere(
+            (element) => uniqueIds.add(element.id)); // Keep only unique items
+
         emit(state.copyWith(
-            sortedActivity: [...state.sortedActivity, ...list],
+            sortedActivity: activities,
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
 
@@ -300,6 +332,42 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         emit(state.copyWith(
             getSortedActivitiesError: e.exception,
             getSortedActivitiesStatus: AppStatus.failure));
+    }
+  }
+
+  Map<String, dynamic> getPayload(
+      TaskFilterEnum? filterType, TaskType? taskType) {
+    switch (filterType) {
+      case TaskFilterEnum.New:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": "Fresh",
+          "sortBy": 'latest'
+        };
+      case TaskFilterEnum.FollowUp:
+        DateTime d = DateTime.now();
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
+          "status": [
+            "Pending",
+          ],
+          "toDate": '${d.year}-${d.month}-${d.day}',
+        };
+      case TaskFilterEnum.Favourites:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": "Prospect"
+        };
+      case TaskFilterEnum.Expiring:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "expiring": true
+        };
+      default:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+        };
     }
   }
 
@@ -384,14 +452,17 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
     final result =
         await _explorerRepo.getLeadPropertyCards(leadId: state.task!.lead!.id);
+
     switch (result) {
       case (Success s):
+        Logger().i(s.value);
         emit(state.copyWith(
             propertyCardsList: s.value,
             getPropertyCardsListStatus: AppStatus.success,
             propertyCardPaginator: s.paginator));
         break;
       case (Error e):
+        Logger().e(e);
         emit(state.copyWith(
             getPropertyCardsListStatus: AppStatus.failure,
             getPropertyCardsListError: e.exception));
@@ -406,5 +477,15 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         taskId: state.sortedActivity[taskIndex].id));
     getLeadActivities();
     getExplorerList();
+  }
+
+  FutureOr<List<Activity>?> _checkForImportantActivity() async {
+    final result = await _activityRepo.fetchActivitiesImportant();
+    switch (result) {
+      case (Success<List<Activity>> s):
+        return s.value;
+      case (Error _):
+        return null;
+    }
   }
 }

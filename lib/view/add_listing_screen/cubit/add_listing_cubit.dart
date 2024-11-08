@@ -16,6 +16,7 @@ import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/listing_request_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
@@ -61,13 +62,14 @@ class AddListingCubit extends Cubit<AddListingState> {
         .addListingAcquired(values: {'multiple': false, ...val});
     switch (result) {
       case (Success<NewListingRequest> s):
+        emit(state.copyWith(dealListingResponse: s.value));
         final deal = await _dealsRepo.addDeal(values: {
           "assignedAgent": getIt<AuthBloc>().state.agent?.id,
           "category": "Listing Acquired",
           "type": "Listing",
           "new_listing_request_id": s.value.id,
           "agreedSalePrice": s.value.price,
-          "agreedCommission": values['agreedCommission'],
+          // "agreedCommission": values['agreedCommission'],
           'user_id': s.value.userId
         });
         switch (deal) {
@@ -96,14 +98,11 @@ class AddListingCubit extends Cubit<AddListingState> {
     final result = await _listingsRepo.updateListingAcquired(
         id: deal!.newListingRequest!.id, values: {'multiple': false, ...val});
     switch (result) {
-      case (Success<NewListingRequest> s):
+      case (Success s):
         final updatedDeal = await _dealsRepo.updateDeal(id: deal!.id, values: {
           "assignedAgent": getIt<AuthBloc>().state.agent?.id,
           "category": "Listing Acquired",
           "type": "Listing",
-          "agreedSalePrice": s.value.price,
-          "agreedCommission": values['agreedCommission'],
-          'user_id': s.value.userId
         });
         switch (updatedDeal) {
           case (Success<DealResponse> dealResult):
@@ -127,7 +126,6 @@ class AddListingCubit extends Cubit<AddListingState> {
 
   Future<void> addListingDocuments(
       {required Map<String, dynamic> values}) async {
-    Logger().d(values);
     emit(state.copyWith(addListingDocumentsStatus: AppStatus.loadingMore));
     final result = await _dealsRepo.addDealDocuments(
         userId: state.dealResponse!.client!.id,
@@ -135,6 +133,7 @@ class AddListingCubit extends Cubit<AddListingState> {
         values: values);
     switch (result) {
       case (Success s):
+       await _dealsRepo.updateDealProgress(dealId: state.dealResponse!.id,);
         emit(state.copyWith(addListingDocumentsStatus: AppStatus.success));
 
         break;
@@ -270,9 +269,12 @@ class AddListingCubit extends Cubit<AddListingState> {
     }
   }
 
-  Future<List<Building>> getBuildings({String? search}) async {
+  Future<List<Building>> getBuildings(
+      {String? search, required List<String>? community}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    final result = await _listingsRepo.getBuildingNames(search: search);
+    Logger().d(community);
+    final result = await _listingsRepo.getBuildingNames(
+        search: search, communityId: community);
     switch (result) {
       case (Success s):
         emit(state.copyWith(
@@ -291,9 +293,12 @@ class AddListingCubit extends Cubit<AddListingState> {
     emit(state.copyWith(getPropertyTypeListStatus: AppStatus.loadingMore));
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
-      case (Success s):
+      case (Success<List<PropertyType>> s):
+        // Define the custom sort order
+        final properties = sortPropertyTypes(s.value);
+
         emit(state.copyWith(
-            propertyTypeList: s.value,
+            propertyTypeList: properties,
             getPropertyTypeListStatus: AppStatus.success));
         break;
       case (Error e):

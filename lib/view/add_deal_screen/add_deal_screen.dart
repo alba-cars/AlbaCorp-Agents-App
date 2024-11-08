@@ -72,131 +72,131 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
     final propertyTypeList = context.select<AddDealCubit, List<PropertyType>>(
       (value) => value.state.propertyTypeList,
     );
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, isScrolledBelow) => [
-          SliverAppBar(
-            title: Text('Add Deal'),
-            centerTitle: true,
-            backgroundColor: primaryColor,
-            foregroundColor: Colors.white,
-          ),
-          if (!widget.isEdit)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-                child: BlocSelector<AddDealCubit, AddDealState, int>(
-                  selector: (state) {
-                    return state.currentTab;
-                  },
-                  builder: (context, currentTab) {
-                    return Row(
-                      children: [
-                        SizedBox.square(
-                          dimension: 60,
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              CircularProgressIndicator(
-                                strokeWidth: 8,
-                                value: (currentTab + 1) / 4,
-                                backgroundColor: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer,
-                                color: primaryColor,
-                                strokeCap: StrokeCap.round,
-                                // valueColor: AlwaysStoppedAnimation(Colors.blue),
-                              ),
-                              Align(
-                                  alignment: Alignment.center,
-                                  child:
-                                      LabelText(text: '${currentTab + 1} of 3'))
-                            ],
-                          ),
-                        ),
-                        HorizontalSmallGap(),
-                        Expanded(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            BlockTitleText(
-                                text: context
-                                    .read<AddDealCubit>()
-                                    .stepNames[currentTab]),
-                            NormalText(
-                                text:
-                                    '${currentTab != 2 ? "Next" : 'Previous'} : ${currentTab != 2 ? context.read<AddDealCubit>().stepNames[currentTab + 1] : context.read<AddDealCubit>().stepNames[currentTab - 1]}')
-                          ],
-                        ))
-                      ],
-                    );
-                  },
-                ),
-              ),
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (context, isScrolledBelow) => [
+            SliverAppBar(
+              title: Text('Add Deal'),
+              centerTitle: true,
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
             ),
-        ],
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
+            if (!widget.isEdit)
+              SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                  ),
-                  child: BlocSelector<AddDealCubit, AddDealState, DealType?>(
+                  padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
+                  child: BlocSelector<AddDealCubit, AddDealState, int>(
                     selector: (state) {
-                      return state.selectedDealType;
+                      return state.currentTab;
                     },
-                    builder: (context, selectedDealType) {
-                      return TabBarView(
-                        controller: _tabController,
-                        physics: NeverScrollableScrollPhysics(),
+                    builder: (context, currentTab) {
+                      return Row(
                         children: [
-                          if (!widget.isEdit) DealTypeTab(),
-                          selectedDealType == DealType.primaryOffPlan
-                              ? PrimaryBasicInfoTab(
-                                  formKey: _formKeyStepOne,
-                                  propertyTypeList: propertyTypeList)
-                              : SecondaryBasicInfoTab(
-                                  formKey: _formKeyStepOne,
-                                  propertyTypeList: propertyTypeList),
-                          CollectDocumentsTab(
-                            formKey: _formKeyStepTwo,
+                          SizedBox.square(
+                            dimension: 60,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                CircularProgressIndicator(
+                                  strokeWidth: 8,
+                                  value: (currentTab + 1) / 4,
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                  color: primaryColor,
+                                  strokeCap: StrokeCap.round,
+                                  // valueColor: AlwaysStoppedAnimation(Colors.blue),
+                                ),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child:
+                                        LabelText(text: '${currentTab + 1} of 3'))
+                              ],
+                            ),
                           ),
+                          HorizontalSmallGap(),
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              BlockTitleText(
+                                  text: context
+                                      .read<AddDealCubit>()
+                                      .stepNames[currentTab]),
+                              NormalText(
+                                  text:
+                                      '${currentTab != 2 ? "Next" : 'Previous'} : ${currentTab != 2 ? context.read<AddDealCubit>().stepNames[currentTab + 1] : context.read<AddDealCubit>().stepNames[currentTab - 1]}')
+                            ],
+                          ))
                         ],
                       );
                     },
                   ),
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                child: BlocSelector<AddDealCubit, AddDealState, int>(
-                  selector: (state) {
-                    return state.currentTab;
-                  },
-                  builder: (context, currentTab) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (currentTab != 0) ...[
-                          Expanded(
-                            child: OutlinedButton(
-                                onPressed: () {
-                                  context
-                                      .read<AddDealCubit>()
-                                      .onPreviousPressed(
-                                          tabController: _tabController);
-                                },
-                                child: Text('Previous')),
-                          ),
-                          HorizontalSmallGap(),
-                        ],
-                        Expanded(
-                          child: AppPrimaryButton(
+          ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    child: BlocSelector<AddDealCubit, AddDealState, DealType?>(
+                      selector: (state) {
+                        return state.selectedDealType;
+                      },
+                      builder: (context, selectedDealType) {
+                        return TabBarView(
+                          controller: _tabController,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            if (!widget.isEdit) DealTypeTab(),
+                            selectedDealType == DealType.primaryOffPlan
+                                ? PrimaryBasicInfoTab(
+                                    formKey: _formKeyStepOne,
+                                    propertyTypeList: propertyTypeList)
+                                : SecondaryBasicInfoTab(
+                                    formKey: _formKeyStepOne,
+                                    propertyTypeList: propertyTypeList),
+                            CollectDocumentsTab(
+                              formKey: _formKeyStepTwo,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: BlocSelector<AddDealCubit, AddDealState, int>(
+                    selector: (state) {
+                      return state.currentTab;
+                    },
+                    builder: (context, currentTab) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (currentTab == 1) ...[
+                            Expanded(
+                              child: OutlinedButton(
+                                  onPressed: () {
+                                    context
+                                        .read<AddDealCubit>()
+                                        .onPreviousPressed(
+                                            tabController: _tabController);
+                                  },
+                                  child: Text('Previous')),
+                            ),
+                            HorizontalSmallGap(),
+                          ],
+                          AppPrimaryButton(
                               onTap: () async {
                                 final error = await context
                                     .read<AddDealCubit>()
@@ -214,14 +214,14 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                                 }
                               },
                               text: ('Next')),
-                        ),
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-              VerticalSmallGap(),
-            ],
+                VerticalSmallGap(),
+              ],
+            ),
           ),
         ),
       ),
@@ -491,16 +491,25 @@ class DealTypeTab extends StatelessWidget {
   }
 }
 
-class CollectDocumentsTab extends StatelessWidget {
+class CollectDocumentsTab extends StatefulWidget {
   const CollectDocumentsTab(
       {super.key, required GlobalKey<FormBuilderState> formKey})
       : _formKey = formKey;
   final GlobalKey<FormBuilderState> _formKey;
 
   @override
+  State<CollectDocumentsTab> createState() => _CollectDocumentsTabState();
+}
+
+class _CollectDocumentsTabState extends State<CollectDocumentsTab> {
+  final ValueNotifier<bool> isClientResident = ValueNotifier(true);
+
+  final ValueNotifier<bool> isSellerResident = ValueNotifier(true);
+
+  @override
   Widget build(BuildContext context) {
     return FormBuilder(
-        key: _formKey,
+        key: widget._formKey,
         child: ScrollShadow(
           size: 12,
           child: SingleChildScrollView(
@@ -527,39 +536,206 @@ class CollectDocumentsTab extends StatelessWidget {
                   name: 'Title Deed',
                   label: 'Title Deed',
                 ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'Ejari',
-                  label: 'Ejari',
-                ),
+                // DocumentSelectionField(
+                //   onSelected: (v) {},
+                //   isEditting: false,
+                //   name: 'Ejari',
+                //   label: 'Ejari',
+                // ),
                 VerticalSmallGap(),
                 Divider(
                   thickness: 4,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
-                LabelText(
-                  text: 'Client Documents',
-                ),
-                Divider(
-                  thickness: 4,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                VerticalSmallGap(
-                  adjustment: 0.5,
-                ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'EID',
-                  label: 'Emirates Id',
-                ),
-                DocumentSelectionField(
-                  onSelected: (v) {},
-                  isEditting: false,
-                  name: 'Passport',
-                  label: 'Passport',
-                ),
+                if (context.read<AddDealCubit>().state.dealResponse?.category ==
+                    "Primary Off Plan Property") ...[
+                  LabelText(
+                    text: 'Client Documents',
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.5,
+                  ),
+                  SwitchListTile.adaptive(
+                      value: isClientResident.value,
+                      onChanged: (val) {
+                        isClientResident.value = val;
+                      }),
+                  ValueListenableBuilder(
+                      valueListenable: isClientResident,
+                      builder: (context, state, _) {
+                        return Column(
+                          children: [
+                            SwitchListTile.adaptive(
+                                contentPadding: EdgeInsets.zero,
+                                visualDensity: VisualDensity.compact,
+                                title: Text("Is Buyer UAE Resident"),
+                                value: isClientResident.value,
+                                onChanged: (val) {
+                                  isClientResident.value = val;
+                                }),
+                            if (state)
+                              DocumentSelectionField(
+                                onSelected: (v) {},
+                                isEditting: false,
+                                name: 'EID',
+                                label: 'Emirates Id',
+                              ),
+                            if (state)
+                              DocumentSelectionField(
+                                onSelected: (v) {},
+                                isEditting: false,
+                                name: 'Visa',
+                                label: 'Visa',
+                              ),
+                          ],
+                        );
+                      }),
+                  DocumentSelectionField(
+                    onSelected: (v) {},
+                    isEditting: false,
+                    name: 'Passport',
+                    label: 'Passport',
+                  ),
+                ],
+                if (context.read<AddDealCubit>().state.dealResponse?.category ==
+                    "Secondary Market Property") ...[
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  LabelText(
+                    text: 'Seller Documents',
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.5,
+                  ),
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.sellerInternalUser !=
+                      null) ...[
+                    ValueListenableBuilder(
+                        valueListenable: isSellerResident,
+                        builder: (context, state, _) {
+                          return Column(
+                            children: [
+                              SwitchListTile.adaptive(
+                                  contentPadding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                  title: Text("Is Seller UAE Resident"),
+                                  value: state,
+                                  onChanged: (val) {
+                                    isSellerResident.value = val;
+                                  }),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'seller.EID',
+                                  label: 'Emirates Id',
+                                ),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'seller.Visa',
+                                  label: 'Visa',
+                                ),
+                            ],
+                          );
+                        }),
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'seller.Passport',
+                      label: 'Passport',
+                    ),
+                  ],
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.sellerExternalUser !=
+                      null) ...[
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'seller.trade_license',
+                      label: 'Trade License',
+                    ),
+                  ],
+                  LabelText(
+                    text: 'Buyer Documents',
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.5,
+                  ),
+                  if (context
+                          .read<AddDealCubit>()
+                          .state
+                          .dealResponse
+                          ?.buyerInternalUser !=
+                      null) ...[
+                    ValueListenableBuilder(
+                        valueListenable: isClientResident,
+                        builder: (context, state, _) {
+                          return Column(
+                            children: [
+                              SwitchListTile.adaptive(
+                                  contentPadding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                  title: Text("Is Buyer UAE Resident"),
+                                  value: isClientResident.value,
+                                  onChanged: (val) {
+                                    isClientResident.value = val;
+                                  }),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'buyer.EID',
+                                  label: 'Emirates Id',
+                                ),
+                              if (state)
+                                DocumentSelectionField(
+                                  onSelected: (v) {},
+                                  isEditting: false,
+                                  name: 'buyer.Visa',
+                                  label: 'Visa',
+                                ),
+                            ],
+                          );
+                        }),
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'buyer.Passport',
+                      label: 'Passport',
+                    ),
+                  ],
+                  if (context.read<AddDealCubit>().state.buyerSource ==
+                      ClientSource.external) ...[
+                    DocumentSelectionField(
+                      onSelected: (v) {},
+                      isEditting: false,
+                      name: 'buyer.trade_license',
+                      label: 'Trade License',
+                    ),
+                  ],
+                ],
                 MultiDocumentUploadField(
                   name: 'Other',
                   label: 'Other Documents',

@@ -47,6 +47,7 @@ mixin _$NewListingRequest {
   bool get exclusive => throw _privateConstructorUsedError;
   bool get isOffPlanResale => throw _privateConstructorUsedError;
   bool get vacantOnTransfer => throw _privateConstructorUsedError;
+  String? get relatedInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -81,7 +82,8 @@ abstract class $NewListingRequestCopyWith<$Res> {
       int? numberOfCheques,
       bool exclusive,
       bool isOffPlanResale,
-      bool vacantOnTransfer});
+      bool vacantOnTransfer,
+      String? relatedInfo});
 
   $PropertyTypeCopyWith<$Res>? get propertyType;
   $CommunityCopyWith<$Res>? get community;
@@ -122,6 +124,7 @@ class _$NewListingRequestCopyWithImpl<$Res, $Val extends NewListingRequest>
     Object? exclusive = null,
     Object? isOffPlanResale = null,
     Object? vacantOnTransfer = null,
+    Object? relatedInfo = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -208,6 +211,10 @@ class _$NewListingRequestCopyWithImpl<$Res, $Val extends NewListingRequest>
           ? _value.vacantOnTransfer
           : vacantOnTransfer // ignore: cast_nullable_to_non_nullable
               as bool,
+      relatedInfo: freezed == relatedInfo
+          ? _value.relatedInfo
+          : relatedInfo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -277,7 +284,8 @@ abstract class _$$NewListingRequestImplCopyWith<$Res>
       int? numberOfCheques,
       bool exclusive,
       bool isOffPlanResale,
-      bool vacantOnTransfer});
+      bool vacantOnTransfer,
+      String? relatedInfo});
 
   @override
   $PropertyTypeCopyWith<$Res>? get propertyType;
@@ -319,6 +327,7 @@ class __$$NewListingRequestImplCopyWithImpl<$Res>
     Object? exclusive = null,
     Object? isOffPlanResale = null,
     Object? vacantOnTransfer = null,
+    Object? relatedInfo = freezed,
   }) {
     return _then(_$NewListingRequestImpl(
       id: null == id
@@ -405,6 +414,10 @@ class __$$NewListingRequestImplCopyWithImpl<$Res>
           ? _value.vacantOnTransfer
           : vacantOnTransfer // ignore: cast_nullable_to_non_nullable
               as bool,
+      relatedInfo: freezed == relatedInfo
+          ? _value.relatedInfo
+          : relatedInfo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -435,7 +448,8 @@ class _$NewListingRequestImpl
       this.numberOfCheques,
       this.exclusive = false,
       this.isOffPlanResale = false,
-      this.vacantOnTransfer = false});
+      this.vacantOnTransfer = false,
+      this.relatedInfo});
 
   factory _$NewListingRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewListingRequestImplFromJson(json);
@@ -491,10 +505,12 @@ class _$NewListingRequestImpl
   @override
   @JsonKey()
   final bool vacantOnTransfer;
+  @override
+  final String? relatedInfo;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NewListingRequest(id: $id, userId: $userId, propertyTypeId: $propertyTypeId, communityId: $communityId, buildingId: $buildingId, multiple: $multiple, type: $type, beds: $beds, baths: $baths, price: $price, size: $size, propertyType: $propertyType, community: $community, building: $building, furnishing: $furnishing, contractValidity: $contractValidity, vacancy: $vacancy, numberOfCheques: $numberOfCheques, exclusive: $exclusive, isOffPlanResale: $isOffPlanResale, vacantOnTransfer: $vacantOnTransfer)';
+    return 'NewListingRequest(id: $id, userId: $userId, propertyTypeId: $propertyTypeId, communityId: $communityId, buildingId: $buildingId, multiple: $multiple, type: $type, beds: $beds, baths: $baths, price: $price, size: $size, propertyType: $propertyType, community: $community, building: $building, furnishing: $furnishing, contractValidity: $contractValidity, vacancy: $vacancy, numberOfCheques: $numberOfCheques, exclusive: $exclusive, isOffPlanResale: $isOffPlanResale, vacantOnTransfer: $vacantOnTransfer, relatedInfo: $relatedInfo)';
   }
 
   @override
@@ -522,7 +538,8 @@ class _$NewListingRequestImpl
       ..add(DiagnosticsProperty('numberOfCheques', numberOfCheques))
       ..add(DiagnosticsProperty('exclusive', exclusive))
       ..add(DiagnosticsProperty('isOffPlanResale', isOffPlanResale))
-      ..add(DiagnosticsProperty('vacantOnTransfer', vacantOnTransfer));
+      ..add(DiagnosticsProperty('vacantOnTransfer', vacantOnTransfer))
+      ..add(DiagnosticsProperty('relatedInfo', relatedInfo));
   }
 
   @override
@@ -563,7 +580,9 @@ class _$NewListingRequestImpl
             (identical(other.isOffPlanResale, isOffPlanResale) ||
                 other.isOffPlanResale == isOffPlanResale) &&
             (identical(other.vacantOnTransfer, vacantOnTransfer) ||
-                other.vacantOnTransfer == vacantOnTransfer));
+                other.vacantOnTransfer == vacantOnTransfer) &&
+            (identical(other.relatedInfo, relatedInfo) ||
+                other.relatedInfo == relatedInfo));
   }
 
   @JsonKey(ignore: true)
@@ -590,7 +609,8 @@ class _$NewListingRequestImpl
         numberOfCheques,
         exclusive,
         isOffPlanResale,
-        vacantOnTransfer
+        vacantOnTransfer,
+        relatedInfo
       ]);
 
   @JsonKey(ignore: true)
@@ -630,7 +650,8 @@ abstract class _NewListingRequest implements NewListingRequest {
       final int? numberOfCheques,
       final bool exclusive,
       final bool isOffPlanResale,
-      final bool vacantOnTransfer}) = _$NewListingRequestImpl;
+      final bool vacantOnTransfer,
+      final String? relatedInfo}) = _$NewListingRequestImpl;
 
   factory _NewListingRequest.fromJson(Map<String, dynamic> json) =
       _$NewListingRequestImpl.fromJson;
@@ -682,6 +703,8 @@ abstract class _NewListingRequest implements NewListingRequest {
   bool get isOffPlanResale;
   @override
   bool get vacantOnTransfer;
+  @override
+  String? get relatedInfo;
   @override
   @JsonKey(ignore: true)
   _$$NewListingRequestImplCopyWith<_$NewListingRequestImpl> get copyWith =>

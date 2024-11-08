@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -196,18 +197,44 @@ class PropertyCardDetailsCubit extends Cubit<PropertyCardDetailsState> {
 
   Future<void> updatePropertyCard(
       {required Map<String, dynamic> values}) async {
-    emit(state.copyWith(updatePropertyCardStatus: AppStatus.loading));
-    final result = await _explorerRepo.updatePropertyCard(
-        propertyCardId: state.propertyCardId, values: values);
-    switch (result) {
-      case (Success s):
-        emit(state.copyWith(updatePropertyCardStatus: AppStatus.success));
-        getPropertyCard();
-        break;
-      case (Error e):
+    if (values['status'] == 'Listing Acquired') {
+      emit(state.copyWith(convertToListingAquiredStatus: AppStatus.loading));
+      final Map<String, dynamic> val = Map.from(values)..remove('status');
+      final client = state.propertyCardLeads.firstWhereOrNull((v)=>v.lead.id == state.propertyCard?.currentOwner?.id);
+      if(client == null){
         emit(state.copyWith(
-            updatePropertyCardStatus: AppStatus.failure,
-            updatePropertyCardError: e.exception));
+              convertToListingAquiredStatus: AppStatus.failure,
+              convertToListingAquiredError: "No client is verified"));
+        return;
+      }
+      val.addAll({'agentId':getIt<AuthBloc>().state.agent?.id,'clientId':client.lead.id});
+      final result = await _explorerRepo.convertPropertyCardToListing(
+          propertyCardId: state.propertyCardId, values: val);
+      switch (result) {
+        case (Success s):
+          emit(
+              state.copyWith(convertToListingAquiredStatus: AppStatus.success));
+
+          break;
+        case (Error e):
+          emit(state.copyWith(
+              convertToListingAquiredStatus: AppStatus.failure,
+              convertToListingAquiredError: e.exception));
+      }
+    } else {
+      emit(state.copyWith(updatePropertyCardStatus: AppStatus.loading));
+      final result = await _explorerRepo.updatePropertyCard(
+          propertyCardId: state.propertyCardId, values: values);
+      switch (result) {
+        case (Success s):
+          emit(state.copyWith(updatePropertyCardStatus: AppStatus.success));
+          getPropertyCard();
+          break;
+        case (Error e):
+          emit(state.copyWith(
+              updatePropertyCardStatus: AppStatus.failure,
+              updatePropertyCardError: e.exception));
+      }
     }
   }
 

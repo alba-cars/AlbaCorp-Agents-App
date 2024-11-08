@@ -14,9 +14,10 @@ class LeadPropertyCardModel with _$LeadPropertyCardModel {
     required Lead lead,
     required PropertyCardDetailsModel propertyCard,
     @Default(false) bool wasOwner,
+    @Default(false) bool isOwner,
     DateTime? date,
     double? amount,
-    required CreatedBy createdBy,
+    CreatedBy? createdBy,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _LeadPropertyCardModel;

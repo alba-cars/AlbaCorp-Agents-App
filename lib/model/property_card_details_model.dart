@@ -21,6 +21,7 @@ class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
     @JsonKey(name: 'propertyType') String? propertyType,
     @JsonKey(readValue: readCreatedBy) dynamic createdBy,
     @JsonKey(name: 'partyType') String? partyType,
+    String? cluster,
     String? status,
     String? purpose,
     List<dynamic>? amenities,
@@ -30,7 +31,6 @@ class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
     @JsonKey(name: 'currentAgent') dynamic currentAgent,
     @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
     dynamic currentOwner,
-    @JsonKey(name: 'updatedBy') User? updatedBy,
     @JsonKey(name: 'referenceNumber') String? referenceNumber,
     @JsonKey(name: 'expirationDate') DateTime? expirationDate,
     @JsonKey(name: 'availableForCheckout')

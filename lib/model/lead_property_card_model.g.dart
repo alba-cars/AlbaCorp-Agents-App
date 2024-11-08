@@ -14,10 +14,13 @@ _$LeadPropertyCardModelImpl _$$LeadPropertyCardModelImplFromJson(
       propertyCard: PropertyCardDetailsModel.fromJson(
           json['propertyCard'] as Map<String, dynamic>),
       wasOwner: json['wasOwner'] as bool? ?? false,
+      isOwner: json['isOwner'] as bool? ?? false,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       amount: (json['amount'] as num?)?.toDouble(),
-      createdBy: CreatedBy.fromJson(json['createdBy'] as Map<String, dynamic>),
+      createdBy: json['createdBy'] == null
+          ? null
+          : CreatedBy.fromJson(json['createdBy'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -33,6 +36,7 @@ Map<String, dynamic> _$$LeadPropertyCardModelImplToJson(
       'lead': instance.lead,
       'propertyCard': instance.propertyCard,
       'wasOwner': instance.wasOwner,
+      'isOwner': instance.isOwner,
       'date': instance.date?.toIso8601String(),
       'amount': instance.amount,
       'createdBy': instance.createdBy,

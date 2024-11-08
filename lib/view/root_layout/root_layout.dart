@@ -1,14 +1,23 @@
+import 'dart:io';
+import 'package:awesome_notifications/awesome_notifications.dart' as an;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
+import 'package:real_estate_app/data/repository/notification_repo.dart';
+import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
+import 'package:real_estate_app/util/result.dart';
+import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
 import '../../app/call_bloc/call_bloc.dart';
+import '../../model/notification_model.dart';
 
 class RootLayout extends StatefulWidget {
   const RootLayout({super.key, required this.child});
@@ -22,36 +31,135 @@ class RootLayout extends StatefulWidget {
 class _RootLayoutState extends State<RootLayout> {
   final ValueNotifier<String> feedBackValue = ValueNotifier('Interested');
   final TextEditingController _controller = TextEditingController();
+  bool _notificationsEnabled = false;
+  @override
+  void initState() {
+    getPendingActions();
+    checkPushNotificationPermission();
+    super.initState();
+  }
+
+  // Function to check notification permissions
+  Future<void> checkPushNotificationPermission() async {
+    bool isAllowed = await an.AwesomeNotifications().isNotificationAllowed();
+
+    if (isAllowed) {
+      setState(() {
+        _notificationsEnabled = true;
+      });
+    } else {
+      // If notifications are disabled, show MaterialBanner
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showNotificationBanner();
+      });
+    }
+  }
+
+  // Function to request notification permission
+  Future<void> requestNotificationPermission() async {
+    try {
+      bool isAllowed = await an.AwesomeNotifications().isNotificationAllowed();
+
+      if (!isAllowed) {
+        // Show a dialog requesting permission if not already allowed
+        // _showSettingsDialog();
+        await an.AwesomeNotifications().showNotificationConfigPage();
+      } else {
+        setState(() {
+          _notificationsEnabled = true;
+          ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+        });
+      }
+    } catch (e) {
+      Logger().e(e);
+    }
+  }
+
+  void _showSettingsDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Notification Permission'),
+        content: Text(
+            'Notification permissions are permanently denied. Please enable them from settings to receive notifications.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              openAppSettings();
+              Navigator.of(context).pop();
+            },
+            child: Text('Open Settings'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Function to show the Material Banner
+  void showNotificationBanner() {
+    ScaffoldMessenger.of(context).showMaterialBanner(
+      MaterialBanner(
+        content: Text('Push notifications are disabled. Please enable them.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              requestNotificationPermission();
+            },
+            child: Text('ENABLE'),
+          ),
+        ],
+        backgroundColor: Colors.amber,
+      ),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant RootLayout oldWidget) {
+    getPendingActions();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void getPendingActions() async {
+    final notificationsResult =
+        await getIt<NotificationRepo>().getNotificationsWithActionsPending();
+
+    if (notificationsResult is Success) {
+      final notifications =
+          (notificationsResult as Success<List<NotificationModel>>).value;
+      if (notifications.isNotEmpty) {
+        ScaffoldMessenger.of(context).showMaterialBanner(
+          MaterialBanner(
+            content: Text('You have a follow-up task to schedule'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Navigate to the AddFollowUpScreen with the appropriate query parameters
+                  context.pushNamed(
+                    AddFollowUpScreen.routeName,
+                    queryParameters: {'leadId': notifications.first.leadId},
+                  );
+                },
+                child: Text('Schedule'),
+              ),
+            ],
+            backgroundColor: Colors.amber, // Optional: set the background color
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocListener<CallBloc, CallState>(
-        listener: (context, state) {
-          showGeneralDialog(
-              context: context,
-              barrierDismissible: false,
-              barrierLabel: 'call_feedback_dialog',
-              pageBuilder: (context, anim1, anim2) {
-                return CallFeedbackDialog(
-                    feedBackValue: feedBackValue, controller: _controller);
-              });
-        },
-        listenWhen: (previous, current) {
-          Logger().d(current);
-          return current.feedbackRequestDialogOpen == true &&
-              previous.phoneCallStatus == PhoneCallStatus.inCall &&
-              current.phoneCallStatus == PhoneCallStatus.callEnded;
-        },
-        child: BlocListener<ActivityCubit, ActivityState>(
-          listener: (context, state) {},
-          listenWhen: (previous, current) =>
-              previous.newSpecialLeadsTasks != current.newSpecialLeadsTasks &&
-              current.newSpecialLeadsTasks == true,
-          child: widget.child,
-        ),
-      ),
-    );
+    return Builder(builder: (context) {
+      return Material(child: widget.child);
+    });
   }
 }
 

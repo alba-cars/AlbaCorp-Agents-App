@@ -2,7 +2,9 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/data/objectbox/entity/notification_entity.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/service_locator/objectbox.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../routes/app_router.dart';
@@ -11,45 +13,46 @@ import '../view/task_detail_screen/task_detail_screen.dart';
 class NotificationService {
   static Future<void> initializeNotification() async {
     await AwesomeNotifications().initialize(
-        null,
-        [
-          NotificationChannel(
-            channelKey: 'call_channel',
-            channelName: 'Call Notifications',
-            channelDescription: 'Notification channel for calls',
+      null,
+      [
+        NotificationChannel(
+          channelKey: 'call_channel',
+          channelName: 'Call Notifications',
+          channelDescription: 'Notification channel for calls',
+          defaultColor: Colors.blue,
+          ledColor: Colors.white,
+          importance: NotificationImportance.Max,
+          channelShowBadge: true,
+          criticalAlerts: true,
+          playSound: true,
+          defaultRingtoneType: DefaultRingtoneType.Ringtone,
+        ),
+        NotificationChannel(
+          channelKey: 'my_app_channel',
+          channelName: 'Default Notifications',
+          channelDescription: 'Notification channel',
+          defaultColor: Colors.blue,
+          ledColor: Colors.white,
+          importance: NotificationImportance.Max,
+          channelShowBadge: true,
+          criticalAlerts: true,
+          playSound: true,
+        ),
+        NotificationChannel(
+            channelKey: 'important_channel',
+            channelName: 'Important Notifications',
+            channelDescription: 'Notification channel for important',
             defaultColor: Colors.blue,
             ledColor: Colors.white,
             importance: NotificationImportance.Max,
             channelShowBadge: true,
             criticalAlerts: true,
+            defaultRingtoneType: DefaultRingtoneType.Notification,
             playSound: true,
-            defaultRingtoneType: DefaultRingtoneType.Ringtone,
-          ),
-          NotificationChannel(
-            channelKey: 'my_app_channel',
-            channelName: 'Default Notifications',
-            channelDescription: 'Notification channel',
-            defaultColor: Colors.blue,
-            ledColor: Colors.white,
-            importance: NotificationImportance.Max,
-            channelShowBadge: true,
-            criticalAlerts: true,
-            playSound: true,
-          ),
-          NotificationChannel(
-              channelKey: 'important_channel',
-              channelName: 'Important Notifications',
-              channelDescription: 'Notification channel for important',
-              defaultColor: Colors.blue,
-              ledColor: Colors.white,
-              importance: NotificationImportance.Max,
-              channelShowBadge: true,
-              criticalAlerts: true,
-              defaultRingtoneType: DefaultRingtoneType.Notification,
-              playSound: true,
-              soundSource: 'resource://raw/res_buzz')
-        ],
-        debug: true);
+            soundSource: 'resource://raw/res_buzz')
+      ],
+      debug: false,
+    );
 
     await AwesomeNotifications()
         .isNotificationAllowed()
@@ -142,6 +145,20 @@ class NotificationService {
     if (receivedAction.displayedLifeCycle == NotificationLifeCycle.Foreground &&
         receivedAction.payload != null) {
       getIt<AuthBloc>().onNotificationData(receivedAction.payload!);
+    } else {
+      final data = receivedAction.payload;
+      if (data != null) {
+        final store = (await ObjectBox.create()).store;
+        final box = store.box<NotificationEntity>();
+        await box.putAsync(NotificationEntity(
+            notificationId: data['id'],
+            title: data["title"] ?? '',
+            subTitle: data["body"],
+            type: data["type"],
+            requiresAction: data['requiresAction'] as bool? ?? false,
+            leadId: data['leadId']));
+        store.close();
+      }
     }
   }
 
@@ -155,10 +172,14 @@ class NotificationService {
   }
 
   static Future<void> makeWhatsApp(String phoneNumber) async {
-    final Uri launchUri = Uri(
-        scheme: 'whatsapp',
-        path: 'send',
-        queryParameters: {'phone': phoneNumber.replaceFirst('+', '')});
-    await launchUrl(launchUri);
+    try {
+      final Uri launchUri = Uri(
+          scheme: 'whatsapp',
+          path: 'send',
+          queryParameters: {'phone': phoneNumber.replaceFirst('+', '')});
+      await launchUrl(launchUri);
+    } catch (e) {
+      Logger().d(e);
+    }
   }
 }

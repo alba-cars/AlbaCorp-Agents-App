@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -15,6 +16,9 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../util/color_category.dart';
 import '../util/constant.dart';
 
+typedef WidgetsReturn = List<Widget> Function(
+    BuildContext context, Map<String, dynamic>? values);
+
 class AppSearchBar extends StatefulWidget {
   const AppSearchBar(
       {super.key,
@@ -22,14 +26,20 @@ class AppSearchBar extends StatefulWidget {
       this.filterFields,
       this.onFilterApplied,
       this.onResetFilter,
-        this.searchText,
-      this.filter});
+      this.searchText,
+      this.filter,
+      this.showSearch = true,
+      this.leadWidgets,
+      this.customFilterButtonWidget});
   final void Function(String? val) onChanged;
-  final List<Widget>? filterFields;
+  final WidgetsReturn? filterFields;
   final void Function(Map<String, dynamic>? filter)? onFilterApplied;
   final VoidCallback? onResetFilter;
   final Map<String, dynamic>? filter;
   final String? searchText;
+  final bool showSearch;
+  final List<Widget>? leadWidgets;
+  final Widget? customFilterButtonWidget;
 
   @override
   State<AppSearchBar> createState() => _AppSearchBarState();
@@ -39,6 +49,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
   late final FocusNode _focusNode = FocusNode();
   late final TextEditingController _controller = TextEditingController();
   late final GlobalKey<FormBuilderState> _formKey = GlobalKey();
+  final ValueNotifier<Map<String, dynamic>> valueNotifier = ValueNotifier({});
 
   Map<String, dynamic>? filter;
   List<Map<String, dynamic>> arrFilter = [];
@@ -56,169 +67,121 @@ class _AppSearchBarState extends State<AppSearchBar> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.filter != null) {
+      filter = Map.from(widget.filter!)
+        ..removeWhere((key, value) => value == null);
+        valueNotifier.value =filter ??{};
+      getFilter();
+    } else {
+      arrFilter = [];
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
           children: [
-            Expanded(
-              child: TextFormField(
-                  controller: _controller,
-                  focusNode: _focusNode,
-                  onChanged: (v) {
-                    EasyDebounce.debounce('search-bar', Durations.long3, () {
-                      widget.onChanged.call(v);
-                    });
-                  },
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(8),
-                      constraints: BoxConstraints.tightFor(height: 50),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: pacificBlue, width: 1.w),
-                          borderRadius: BorderRadius.circular(12.h)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer,
-                              width: 1.w),
-                          borderRadius: BorderRadius.circular(12.h)),
-                      filled: true,
-                      fillColor: Theme.of(context)
-                          .colorScheme
-                          .primaryContainer
-                          .withOpacity(0.2),
-                      hintText: widget.searchText ?? 'Search...',
-                      hintStyle: TextStyle(fontSize: 11),
-                      prefixIcon: Padding(
-                          padding: EdgeInsets.only(left: 8.w, right: 8.w),
-                          child: Icon(Icons.search)),
-                      suffixIcon: _focusNode.hasFocus
-                          ? GestureDetector(
-                              onTap: () {
-                                _focusNode.unfocus();
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: 8.h, right: 16.w, bottom: 8.h),
-                                child: SizedBox(
-                                    height: 24.h,
-                                    width: 24.w,
-                                    child: Icon(Icons.close)),
-                              ),
-                            )
-                          : _controller.text.isNotEmpty
-                              ? TextButton(
-                                  onPressed: () {
-                                    _controller.clear();
-                                    widget.onChanged.call(null);
-                                    setState(() {});
+        if(widget.showSearch || widget.leadWidgets != null)    Expanded(
+              child: widget.showSearch
+                  ? TextFormField(
+                      controller: _controller,
+                      focusNode: _focusNode,
+                      onChanged: (v) {
+                        EasyDebounce.debounce('search-bar', Durations.long3,
+                            () {
+                          widget.onChanged.call(v);
+                        });
+                      },
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(8),
+                          constraints: BoxConstraints.tightFor(height: 50),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: pacificBlue, width: 1.w),
+                              borderRadius: BorderRadius.circular(12.h)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer,
+                                  width: 1.w),
+                              borderRadius: BorderRadius.circular(12.h)),
+                          filled: true,
+                          fillColor: Theme.of(context)
+                              .colorScheme
+                              .primaryContainer
+                              .withOpacity(0.2),
+                          hintText: widget.searchText ?? 'Search...',
+                          hintStyle: TextStyle(fontSize: 11),
+                          prefixIcon: Padding(
+                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                              child: Icon(Icons.search)),
+                          suffixIcon: _focusNode.hasFocus
+                              ? GestureDetector(
+                                  onTap: () {
+                                    _focusNode.unfocus();
                                   },
-                                  child: Text('clear'))
-                              : null,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.h)))),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 8.h, right: 16.w, bottom: 8.h),
+                                    child: SizedBox(
+                                        height: 24.h,
+                                        width: 24.w,
+                                        child: Icon(Icons.close)),
+                                  ),
+                                )
+                              : _controller.text.isNotEmpty
+                                  ? TextButton(
+                                      onPressed: () {
+                                        _controller.clear();
+                                        widget.onChanged.call(null);
+                                        setState(() {});
+                                      },
+                                      child: Text('clear'))
+                                  : null,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.h))))
+                  : Row(
+                      children: widget.leadWidgets ?? [],
+                    ),
             ),
-            HorizontalSmallGap(),
+          if(widget.showSearch || widget.leadWidgets != null)  HorizontalSmallGap(),
             InkWell(
               onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    showDragHandle: true,
-                    // useRootNavigator: true,
-                    isScrollControlled: true,
-                    enableDrag: false,
-                    builder: (context) => DraggableScrollableSheet(
-                          maxChildSize: 0.85,
-                          minChildSize: 0.85,
-                          initialChildSize: 0.85,
-                          expand: false,
-                          builder: (context, scrollController) {
-                            return GestureDetector(
-                              onTap: () => FocusScope.of(context).unfocus(),
-                              child: Scaffold(
-                                body: Container(
-                                  color: Colors.white,
-                                  width: double.maxFinite,
-                                  child: FormBuilder(
-                                      key: _formKey,
-                                      initialValue: filter ?? {},
-                                      child: Column(
-                                        children: [
-                                          VerticalSmallGap(),
-                                          if (widget.filterFields != null)
-                                            Expanded(
-                                                child: ScrollShadow(
-                                              size: 10,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primaryContainer
-                                                  .withOpacity(0.5),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 20),
-                                                child: SingleChildScrollView(
-                                                  controller: scrollController,
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children:
-                                                        widget.filterFields!,
-                                                  ),
-                                                ),
-                                              ),
-                                            )),
-                                          VerticalSmallGap(),
-                                          AppPrimaryButton(
-                                              text: 'Filter',
-                                              onTap: () {
-                                                _formKey.currentState?.save();
-                                                final val = _formKey
-                                                    .currentState?.value;
-                                                if (val != null) {
-                                                  widget.onFilterApplied
-                                                      ?.call(val);
-                                                  Navigator.of(context).pop();
-                                                }
-                                              }),
-                                          VerticalSmallGap(
-                                            adjustment: 2,
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                              ),
-                            );
-                          },
-                        ));
+                showFilterBottonSheet(context);
               },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primaryContainer
-                      .withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      width: 1.w),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: SizedBox(
-                      height: 24.h,
-                      width: 24.w,
-                      child: SvgPicture.asset(
-                        "${Constant.assetImagePath}filter.svg",
-                        height: 24.h,
-                        width: 24.w,
-                      )),
-                ),
-              ),
+              child: widget.customFilterButtonWidget != null
+                  ? widget.customFilterButtonWidget
+                  : Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primaryContainer
+                            .withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                            width: 1.w),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: SizedBox(
+                            height: 24.h,
+                            width: 24.w,
+                            child: SvgPicture.asset(
+                              "${Constant.assetImagePath}filter.svg",
+                              height: 24.h,
+                              width: 24.w,
+                            )),
+                      ),
+                    ),
             ),
           ],
         ),
@@ -274,46 +237,48 @@ class _AppSearchBarState extends State<AppSearchBar> {
                         border: Border.all(
                             color: Theme.of(context).colorScheme.primary),
                         borderRadius: BorderRadius.circular(12)),
-                    child: Center(
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12),
-                            child: Row(
-                              children: [
-                                SmallText(text: "${key.titleCase}"),
-                                Text(" : ${getFilterValue(value)}"),
-                              ],
-                            ),
-                          ),
-                          IconButton(
-                            visualDensity: VisualDensity.compact,
-                            onPressed: () {
-                              if (filter?[key] is List) {
-                                final val = filter?[key] as List;
-                                val.remove(value);
-                                if (val.isEmpty) {
-                                  filter?.remove(key);
-                                } else {
-                                  filter?[key] = val;
-                                }
-                              } else {
-                                filter?.remove(key);
-                              }
-                              if (filter?.isEmpty == true) {
-                                filter = null;
+                    child: InkWell(
+                      onTap: () {
+                        if (filter?[key] is List) {
+                          final val = filter?[key] as List;
+                          val.remove(value);
+                          if (val.isEmpty) {
+                            filter?.remove(key);
+                          } else {
+                            filter?[key] = val;
+                          }
+                        } else {
+                          filter?.remove(key);
+                        }
+                        if (filter?.isEmpty == true) {
+                          filter = null;
 
-                                widget.onFilterApplied?.call(null);
-                              } else {
-                                widget.onFilterApplied?.call(filter);
-                              }
-                              arrFilter.removeAt(index);
-                              setState(() {});
-                            },
-                            icon: Icon(Icons.close),
-                            padding: EdgeInsets.zero,
-                          )
-                        ],
+                          widget.onFilterApplied?.call(null);
+                        } else {
+                          widget.onFilterApplied?.call(filter);
+                        }
+                        arrFilter.removeAt(index - 1);
+                        setState(() {});
+                      },
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12),
+                              child: Row(
+                                children: [
+                                  SmallText(text: "${key.titleCase}"),
+                                  Text(" : ${getFilterValue(value)}"),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: Icon(Icons.close),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -323,6 +288,85 @@ class _AppSearchBarState extends State<AppSearchBar> {
           ),
       ],
     );
+  }
+
+  Future<dynamic> showFilterBottonSheet(BuildContext pcontext) {
+    return showModalBottomSheet(
+        context: context,
+        showDragHandle: true,
+        // useRootNavigator: true,
+        isScrollControlled: true,
+        enableDrag: false,
+        builder: (context) => DraggableScrollableSheet(
+              maxChildSize: 0.85,
+              minChildSize: 0.85,
+              initialChildSize: 0.85,
+              expand: false,
+              builder: (context, scrollController) {
+                return GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: Scaffold(
+                    body: Container(
+                      color: Colors.white,
+                      width: double.maxFinite,
+                      child: FormBuilder(
+                          key: _formKey,
+                          initialValue: filter ?? {},
+                          onChanged: () {
+                            final val = _formKey.currentState?.instantValue;
+                            if (val != valueNotifier.value) {
+                              valueNotifier.value = val ?? {};
+                            }
+                          },
+                          child: Column(
+                            children: [
+                              VerticalSmallGap(),
+                              if (widget.filterFields != null)
+                                Expanded(
+                                    child: ScrollShadow(
+                                  size: 10,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryContainer
+                                      .withOpacity(0.5),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: SingleChildScrollView(
+                                      controller: scrollController,
+                                      child: ValueListenableBuilder(
+                                          valueListenable: valueNotifier,
+                                          builder: (context, values, _) {
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: widget.filterFields!(
+                                                  pcontext, values),
+                                            );
+                                          }),
+                                    ),
+                                  ),
+                                )),
+                              VerticalSmallGap(),
+                              AppPrimaryButton(
+                                  text: 'Filter',
+                                  onTap: () {
+                                    _formKey.currentState?.save();
+                                    final val = _formKey.currentState?.value;
+                                    if (val != null) {
+                                      widget.onFilterApplied?.call(val);
+                                      Navigator.of(context).pop();
+                                    }
+                                  }),
+                              VerticalSmallGap(
+                                adjustment: 2,
+                              ),
+                            ],
+                          )),
+                    ),
+                  ),
+                );
+              },
+            ));
   }
 
   String getFilterValue(dynamic value) {

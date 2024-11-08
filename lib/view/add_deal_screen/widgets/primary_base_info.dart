@@ -53,7 +53,7 @@ class _PrimaryBasicInfoTabState extends State<PrimaryBasicInfoTab> {
                 valueTransformer: (p0) => p0?.id,
                 displayStringForOption: (lead) =>
                     '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
-                optionsBuilder: (v) async {
+                optionsBuilder: (v,refresh) async {
                   return context.read<AddDealCubit>().getLeads(search: v.text);
                 },
                 actionButton: (key) {
@@ -89,7 +89,7 @@ class _PrimaryBasicInfoTabState extends State<PrimaryBasicInfoTab> {
                   },
                   displayStringForOption: (offPlan) =>
                       '${offPlan.developmentName}',
-                  optionsBuilder: (v) async {
+                  optionsBuilder: (v,refresh) async {
                     return context
                         .read<AddDealCubit>()
                         .getOffPlans(search: v.text);

@@ -12,9 +12,13 @@ abstract class RegisterModules {
 
   @Environment('Stage')
   @Named('BaseUrl')
-  String get baseUrl => 'https://admin.dev.homes.albacars.app/api/';
-  // 'http://10.0.2.2:4000/api/';
+  String get baseUrl => // 'https://admin.dev.homes.albacars.app/api/';
+      // 'http://10.0.2.2:4000/api/';
+      'http://172.20.10.17:4000/api/';
+  //   'http://172.20.10.17:4000/api/';
   // 'http://192.168.2.160:4000/api/';
+  // 'http://172.15.10.247:4000/api/';
+  // 'http://172.20.8.251:4000/api/';
   // 'https://backend.alba.homes/api/';
   @Environment('Prod')
   @Named('AwsBucket')
@@ -29,7 +33,7 @@ abstract class RegisterModules {
   Dio getDio(@Named('BaseUrl') String baseUrl) {
     final dio = Dio(BaseOptions(
         baseUrl: baseUrl,
-        connectTimeout: const Duration(seconds: 30),
+        connectTimeout: const Duration(seconds: 120),
         sendTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 30)));
     dio.interceptors.add(TokenInterceptor());

@@ -22,7 +22,7 @@ import 'fields/autocomplete_field.dart';
 ///
 ///   * [AppRawAutocomplete.optionsBuilder], which is of this type.
 typedef AutocompleteOptionsBuilder<T extends Object> = FutureOr<Iterable<T>>
-    Function(TextEditingValue textEditingValue);
+    Function(TextEditingValue textEditingValue,bool refresh);
 
 /// The type of the callback used by the [AppRawAutocomplete] widget to indicate
 /// that the user has selected an option.
@@ -48,7 +48,7 @@ typedef AutocompleteOptionsViewBuilder<T extends Object> = Widget Function(
     BuildContext context,
     AutocompleteOnSelected<T> onSelected,
     Iterable<T> options,
-    bool loading);
+    bool loading,VoidCallback loadMore);
 
 /// The type of the Autocomplete callback which returns the widget that
 /// contains the input [TextField] or [TextFormField].
@@ -240,7 +240,7 @@ class _RawAutocompleteState<T extends Object>
       }
 
       final Iterable<T> options = await widget.optionsBuilder(
-        value,
+        value, true
       );
       if (!mounted) {
         return;
@@ -348,6 +348,28 @@ class _RawAutocompleteState<T extends Object>
     _hideOptionsAction.enabled = enabled;
   }
 
+  void _loadMore(){
+    final TextEditingValue value = _textEditingController.value;
+
+    EasyDebounce.debounce('app-autocomplete', Duration(milliseconds: 250),
+        () async {
+      if (!mounted) {
+        return;
+      }
+
+      final Iterable<T> options = await widget.optionsBuilder(
+        value, false
+      );
+      if (!mounted) {
+        return;
+      }
+      _options = options;
+      _updateHighlight(_highlightedOptionIndex.value);
+      _updateOverlay();
+    });
+
+  }
+
   void _updateActions() {
     _setActionsEnabled(
         _focusNode.hasFocus && _selection == null && _options.isNotEmpty);
@@ -389,7 +411,7 @@ class _RawAutocompleteState<T extends Object>
                   highlightIndexNotifier: _highlightedOptionIndex,
                   child: Builder(builder: (BuildContext context) {
                     return widget.optionsViewBuilder(
-                        context, _select, _options, _loading);
+                        context, _select, _options, _loading,_loadMore);
                   })),
             ),
           );
@@ -476,6 +498,9 @@ class _RawAutocompleteState<T extends Object>
   @override
   void didUpdateWidget(AppRawAutocomplete<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != null) {
+      _selection = widget.initialValue;
+    }
     _updateTextEditingController(
       oldWidget.textEditingController,
       widget.textEditingController,

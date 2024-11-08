@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/property_price.dart';
@@ -14,6 +15,7 @@ import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart'
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/cubit/deal_details_cubit.dart';
 import 'package:real_estate_app/view/deal_details_screen/widgets/info_label_value.dart';
+import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
@@ -115,7 +117,6 @@ class InfoTabView extends StatelessWidget {
                               horizontal: 4.h, vertical: 1.h),
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.blueGrey),
-                              borderRadius: BorderRadius.circular(4),
                               color: Colors.blueGrey[100]),
                           child: SmallText(text: deal?.status ?? ''),
                         ),
@@ -139,6 +140,28 @@ class InfoTabView extends StatelessWidget {
                                 }
                               },
                               label: Text('Add Documents'))
+                        ],
+                        if (deal?.status == 'Collecting Documents') ...[
+                          VerticalSmallGap(
+                            adjustment: 1,
+                          ),
+                          BlocBuilder<DealDetailsCubit, DealDetailsState
+                              >(
+                           
+                            builder: (context, state) {
+                              if(state.userDocuments.isEmpty&&state.buyerDocuments.isEmpty&&state.sellerDocuments.isEmpty &&state.dealDocuments.isEmpty ){
+                                return SizedBox();
+                              }
+                              return AppPrimaryButton(
+                                text: 'Submit for Approval',
+                                onTap: () async {
+                                  await context
+                                      .read<DealDetailsCubit>()
+                                      .updateDealProgress();
+                                },
+                              );
+                            },
+                          ),
                         ],
                         if (deal?.category == 'Secondary Market Property') ...[
                           VerticalSmallGap(),
@@ -236,12 +259,12 @@ class InfoTabView extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(4),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   child: Row(
                     children: [
                       BlockTitleText(
+                        color: Theme.of(context).colorScheme.onPrimary,
                         text: 'Deal Info',
                       ),
                     ],
@@ -301,12 +324,12 @@ class InfoTabView extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(4),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   child: Row(
                     children: [
                       BlockTitleText(
+                        color: Theme.of(context).colorScheme.onPrimary,
                         text: 'Property Info',
                       ),
                     ],
@@ -327,11 +350,22 @@ class InfoTabView extends StatelessWidget {
                                 color: Colors.grey[100],
                                 borderRadius: BorderRadius.circular(4)),
                             child: S3Image(
-                              url: deal!.propertyList!.image,
+                              url: (deal!.propertyList?.image != null ||
+                                      deal.propertyList?.image?.isEmpty == true)
+                                  ? deal.propertyList?.image
+                                  : (deal.propertyList?.images?.isNotEmpty ==
+                                          true)
+                                      ? deal.propertyList?.images!.first
+                                              is String
+                                          ? deal.propertyList?.images!.first
+                                          : deal.propertyList?.images!
+                                              .first['thumbnail']
+                                      : null,
                               fit: BoxFit.contain,
                             )),
                         VerticalSmallGap(),
                         BlockTitleText(
+                          color: Theme.of(context).colorScheme.primary,
                           text: deal.propertyList!.propertyTitle,
                         ),
                         VerticalSmallGap(),
@@ -394,6 +428,7 @@ class InfoTabView extends StatelessWidget {
                         //     )),
                         // VerticalSmallGap(),
                         // BlockTitleText(
+                        // color:Theme.of(context).colorScheme.onPrimary,
                         //   text: deal.propertyList!.propertyTitle,
                         // ),
                         VerticalSmallGap(),
@@ -454,6 +489,7 @@ class InfoTabView extends StatelessWidget {
                         //     )),
                         // VerticalSmallGap(),
                         // BlockTitleText(
+                        // color:Theme.of(context).colorScheme.onPrimary,
                         //   text: deal.propertyList!.propertyTitle,
                         // ),
                         VerticalSmallGap(),
@@ -516,6 +552,7 @@ class InfoTabView extends StatelessWidget {
                         //     )),
                         // VerticalSmallGap(),
                         // BlockTitleText(
+                        // color:Theme.of(context).colorScheme.onPrimary,
                         //   text: deal.propertyList!.propertyTitle,
                         // ),
                         VerticalSmallGap(),
@@ -572,12 +609,12 @@ class BuyerInternalUserInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(4),
+            color: Theme.of(context).colorScheme.primary,
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Buyer/Tenant Info',
               ),
             ],
@@ -632,12 +669,12 @@ class SellerInternalUserInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(4),
+            color: Theme.of(context).colorScheme.primary,
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Seller/landlord Info',
               ),
             ],
@@ -689,12 +726,12 @@ class SellerExternalUserInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(4),
+            color: Theme.of(context).colorScheme.primary,
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Seller/landlord Info',
               ),
             ],
@@ -743,12 +780,12 @@ class BuyerExternalUerInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(4),
+            color: Theme.of(context).colorScheme.primary,
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Buyer/Tenant Info',
               ),
             ],
@@ -792,12 +829,12 @@ class PrimaryClientInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(4),
+            color: Theme.of(context).colorScheme.primary,
           ),
           child: Row(
             children: [
               BlockTitleText(
+                color: Theme.of(context).colorScheme.onPrimary,
                 text: 'Client Info',
               ),
             ],
@@ -870,7 +907,6 @@ class InfoWithPhoneWidget extends StatelessWidget {
                             horizontal: 4.h, vertical: 1.h),
                         decoration: BoxDecoration(
                             border: Border.all(color: colorScheme.error),
-                            borderRadius: BorderRadius.circular(4),
                             color: colorScheme.errorContainer),
                         child: SmallText(text: 'DND'),
                       ),

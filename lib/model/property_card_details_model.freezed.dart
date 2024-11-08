@@ -37,6 +37,7 @@ mixin _$PropertyCardDetailsModel {
   dynamic get createdBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'partyType')
   String? get partyType => throw _privateConstructorUsedError;
+  String? get cluster => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get purpose => throw _privateConstructorUsedError;
   List<dynamic>? get amenities => throw _privateConstructorUsedError;
@@ -50,8 +51,6 @@ mixin _$PropertyCardDetailsModel {
   dynamic get currentAgent => throw _privateConstructorUsedError;
   @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
   dynamic get currentOwner => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updatedBy')
-  User? get updatedBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNumber')
   String? get referenceNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'expirationDate')
@@ -87,6 +86,7 @@ abstract class $PropertyCardDetailsModelCopyWith<$Res> {
       @JsonKey(name: 'propertyType') String? propertyType,
       @JsonKey(readValue: readCreatedBy) dynamic createdBy,
       @JsonKey(name: 'partyType') String? partyType,
+      String? cluster,
       String? status,
       String? purpose,
       List<dynamic>? amenities,
@@ -96,7 +96,6 @@ abstract class $PropertyCardDetailsModelCopyWith<$Res> {
       @JsonKey(name: 'currentAgent') dynamic currentAgent,
       @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
       dynamic currentOwner,
-      @JsonKey(name: 'updatedBy') User? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') DateTime? expirationDate,
       @JsonKey(name: 'availableForCheckout') bool availableForCheckout,
@@ -107,7 +106,6 @@ abstract class $PropertyCardDetailsModelCopyWith<$Res> {
 
   $BuildingCopyWith<$Res>? get building;
   $CommunityCopyWith<$Res>? get community;
-  $UserCopyWith<$Res>? get updatedBy;
 }
 
 /// @nodoc
@@ -134,6 +132,7 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
     Object? propertyType = freezed,
     Object? createdBy = freezed,
     Object? partyType = freezed,
+    Object? cluster = freezed,
     Object? status = freezed,
     Object? purpose = freezed,
     Object? amenities = freezed,
@@ -142,7 +141,6 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
     Object? checkedOutDate = freezed,
     Object? currentAgent = freezed,
     Object? currentOwner = freezed,
-    Object? updatedBy = freezed,
     Object? referenceNumber = freezed,
     Object? expirationDate = freezed,
     Object? availableForCheckout = null,
@@ -192,6 +190,10 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
           ? _value.partyType
           : partyType // ignore: cast_nullable_to_non_nullable
               as String?,
+      cluster: freezed == cluster
+          ? _value.cluster
+          : cluster // ignore: cast_nullable_to_non_nullable
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -224,10 +226,6 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
           ? _value.currentOwner
           : currentOwner // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      updatedBy: freezed == updatedBy
-          ? _value.updatedBy
-          : updatedBy // ignore: cast_nullable_to_non_nullable
-              as User?,
       referenceNumber: freezed == referenceNumber
           ? _value.referenceNumber
           : referenceNumber // ignore: cast_nullable_to_non_nullable
@@ -282,18 +280,6 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res,
       return _then(_value.copyWith(community: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get updatedBy {
-    if (_value.updatedBy == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.updatedBy!, (value) {
-      return _then(_value.copyWith(updatedBy: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -316,6 +302,7 @@ abstract class _$$PropertyCardDetailsModelImplCopyWith<$Res>
       @JsonKey(name: 'propertyType') String? propertyType,
       @JsonKey(readValue: readCreatedBy) dynamic createdBy,
       @JsonKey(name: 'partyType') String? partyType,
+      String? cluster,
       String? status,
       String? purpose,
       List<dynamic>? amenities,
@@ -325,7 +312,6 @@ abstract class _$$PropertyCardDetailsModelImplCopyWith<$Res>
       @JsonKey(name: 'currentAgent') dynamic currentAgent,
       @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
       dynamic currentOwner,
-      @JsonKey(name: 'updatedBy') User? updatedBy,
       @JsonKey(name: 'referenceNumber') String? referenceNumber,
       @JsonKey(name: 'expirationDate') DateTime? expirationDate,
       @JsonKey(name: 'availableForCheckout') bool availableForCheckout,
@@ -338,8 +324,6 @@ abstract class _$$PropertyCardDetailsModelImplCopyWith<$Res>
   $BuildingCopyWith<$Res>? get building;
   @override
   $CommunityCopyWith<$Res>? get community;
-  @override
-  $UserCopyWith<$Res>? get updatedBy;
 }
 
 /// @nodoc
@@ -365,6 +349,7 @@ class __$$PropertyCardDetailsModelImplCopyWithImpl<$Res>
     Object? propertyType = freezed,
     Object? createdBy = freezed,
     Object? partyType = freezed,
+    Object? cluster = freezed,
     Object? status = freezed,
     Object? purpose = freezed,
     Object? amenities = freezed,
@@ -373,7 +358,6 @@ class __$$PropertyCardDetailsModelImplCopyWithImpl<$Res>
     Object? checkedOutDate = freezed,
     Object? currentAgent = freezed,
     Object? currentOwner = freezed,
-    Object? updatedBy = freezed,
     Object? referenceNumber = freezed,
     Object? expirationDate = freezed,
     Object? availableForCheckout = null,
@@ -423,6 +407,10 @@ class __$$PropertyCardDetailsModelImplCopyWithImpl<$Res>
           ? _value.partyType
           : partyType // ignore: cast_nullable_to_non_nullable
               as String?,
+      cluster: freezed == cluster
+          ? _value.cluster
+          : cluster // ignore: cast_nullable_to_non_nullable
+              as String?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -455,10 +443,6 @@ class __$$PropertyCardDetailsModelImplCopyWithImpl<$Res>
           ? _value.currentOwner
           : currentOwner // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      updatedBy: freezed == updatedBy
-          ? _value.updatedBy
-          : updatedBy // ignore: cast_nullable_to_non_nullable
-              as User?,
       referenceNumber: freezed == referenceNumber
           ? _value.referenceNumber
           : referenceNumber // ignore: cast_nullable_to_non_nullable
@@ -505,6 +489,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
       @JsonKey(name: 'propertyType') this.propertyType,
       @JsonKey(readValue: readCreatedBy) this.createdBy,
       @JsonKey(name: 'partyType') this.partyType,
+      this.cluster,
       this.status,
       this.purpose,
       final List<dynamic>? amenities,
@@ -514,7 +499,6 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
       @JsonKey(name: 'currentAgent') this.currentAgent,
       @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
       this.currentOwner,
-      @JsonKey(name: 'updatedBy') this.updatedBy,
       @JsonKey(name: 'referenceNumber') this.referenceNumber,
       @JsonKey(name: 'expirationDate') this.expirationDate,
       @JsonKey(name: 'availableForCheckout') this.availableForCheckout = false,
@@ -555,6 +539,8 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
   @JsonKey(name: 'partyType')
   final String? partyType;
   @override
+  final String? cluster;
+  @override
   final String? status;
   @override
   final String? purpose;
@@ -584,9 +570,6 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
   @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
   final dynamic currentOwner;
   @override
-  @JsonKey(name: 'updatedBy')
-  final User? updatedBy;
-  @override
   @JsonKey(name: 'referenceNumber')
   final String? referenceNumber;
   @override
@@ -614,7 +597,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
 
   @override
   String toString() {
-    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
+    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, cluster: $cluster, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
   }
 
   @override
@@ -637,6 +620,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
             const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
             (identical(other.partyType, partyType) ||
                 other.partyType == partyType) &&
+            (identical(other.cluster, cluster) || other.cluster == cluster) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.purpose, purpose) || other.purpose == purpose) &&
             const DeepCollectionEquality()
@@ -651,8 +635,6 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
                 .equals(other.currentAgent, currentAgent) &&
             const DeepCollectionEquality()
                 .equals(other.currentOwner, currentOwner) &&
-            (identical(other.updatedBy, updatedBy) ||
-                other.updatedBy == updatedBy) &&
             (identical(other.referenceNumber, referenceNumber) ||
                 other.referenceNumber == referenceNumber) &&
             (identical(other.expirationDate, expirationDate) ||
@@ -682,6 +664,7 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
         propertyType,
         const DeepCollectionEquality().hash(createdBy),
         partyType,
+        cluster,
         status,
         purpose,
         const DeepCollectionEquality().hash(_amenities),
@@ -690,7 +673,6 @@ class _$PropertyCardDetailsModelImpl implements _PropertyCardDetailsModel {
         checkedOutDate,
         const DeepCollectionEquality().hash(currentAgent),
         const DeepCollectionEquality().hash(currentOwner),
-        updatedBy,
         referenceNumber,
         expirationDate,
         availableForCheckout,
@@ -727,6 +709,7 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
       @JsonKey(name: 'propertyType') final String? propertyType,
       @JsonKey(readValue: readCreatedBy) final dynamic createdBy,
       @JsonKey(name: 'partyType') final String? partyType,
+      final String? cluster,
       final String? status,
       final String? purpose,
       final List<dynamic>? amenities,
@@ -736,7 +719,6 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
       @JsonKey(name: 'currentAgent') final dynamic currentAgent,
       @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
       final dynamic currentOwner,
-      @JsonKey(name: 'updatedBy') final User? updatedBy,
       @JsonKey(name: 'referenceNumber') final String? referenceNumber,
       @JsonKey(name: 'expirationDate') final DateTime? expirationDate,
       @JsonKey(name: 'availableForCheckout') final bool availableForCheckout,
@@ -775,6 +757,8 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
   @JsonKey(name: 'partyType')
   String? get partyType;
   @override
+  String? get cluster;
+  @override
   String? get status;
   @override
   String? get purpose;
@@ -795,9 +779,6 @@ abstract class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
   @override
   @JsonKey(name: 'currentOwner', readValue: readCreatedBy)
   dynamic get currentOwner;
-  @override
-  @JsonKey(name: 'updatedBy')
-  User? get updatedBy;
   @override
   @JsonKey(name: 'referenceNumber')
   String? get referenceNumber;

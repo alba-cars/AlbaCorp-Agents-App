@@ -53,10 +53,14 @@ _$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
           ? null
           : DealListingResponse.fromJson(
               json['external_listing_property'] as Map<String, dynamic>),
+      buyerExternalUserId: json['buyerExternalUserId'] as String?,
       buyerExternalAgentName: json['buyerExternalAgentName'] as String?,
       buyerExternalAgentPhone: json['buyerExternalAgentPhone'] as String?,
       buyerExternalClientName: json['buyerExternalClientName'] as String?,
       buyerExternalClientPhone: json['buyerExternalClientPhone'] as String?,
+      buyerExternalUser: json['buyerExternalUser'] == null
+          ? null
+          : Agency.fromJson(json['buyerExternalUser'] as Map<String, dynamic>),
       propertyListId: json['property_list_id'] as String?,
       buyerInternalUser: json['buyerInternalUser'] == null
           ? null
@@ -117,10 +121,12 @@ Map<String, dynamic> _$$DealImplToJson(_$DealImpl instance) =>
       'sellerExternalClientPhone': instance.sellerExternalClientPhone,
       'sellerExternalUser': instance.sellerExternalUser,
       'external_listing_property': instance.external_listing_property,
+      'buyerExternalUserId': instance.buyerExternalUserId,
       'buyerExternalAgentName': instance.buyerExternalAgentName,
       'buyerExternalAgentPhone': instance.buyerExternalAgentPhone,
       'buyerExternalClientName': instance.buyerExternalClientName,
       'buyerExternalClientPhone': instance.buyerExternalClientPhone,
+      'buyerExternalUser': instance.buyerExternalUser,
       'property_list_id': instance.propertyListId,
       'buyerInternalUser': instance.buyerInternalUser,
       'buyerAssignedAgent': instance.buyerAssignedAgent,

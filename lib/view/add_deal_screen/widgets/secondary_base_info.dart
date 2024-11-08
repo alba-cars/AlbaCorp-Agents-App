@@ -4,6 +4,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
+import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
@@ -21,7 +23,7 @@ import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 import 'secondary_external_property_details.dart';
 
-class SecondaryBasicInfoTab extends StatelessWidget {
+class SecondaryBasicInfoTab extends StatefulWidget {
   const SecondaryBasicInfoTab({
     super.key,
     required GlobalKey<FormBuilderState> formKey,
@@ -32,9 +34,22 @@ class SecondaryBasicInfoTab extends StatelessWidget {
   final List<PropertyType> propertyTypeList;
 
   @override
+  State<SecondaryBasicInfoTab> createState() => _SecondaryBasicInfoTabState();
+}
+
+class _SecondaryBasicInfoTabState extends State<SecondaryBasicInfoTab> {
+  final ValueNotifier<Map<String, dynamic>> valueNotifier = ValueNotifier({});
+
+  @override
   Widget build(BuildContext context) {
     return FormBuilder(
-      key: _formKey,
+      key: widget._formKey,
+      onChanged: () {
+        if (widget._formKey.currentState?.instantValue != valueNotifier.value) {
+          valueNotifier.value =
+              widget._formKey.currentState?.instantValue ?? {};
+        }
+      },
       child: ScrollShadow(
         color: Colors.indigo[50]!,
         child: SingleChildScrollView(
@@ -51,7 +66,7 @@ class SecondaryBasicInfoTab extends StatelessWidget {
                     children: [
                       sellerSource == ClientSource.alba
                           ? SellerSourceAlbaFields()
-                          : SellerSourceExternalFields(),
+                          : SellerSourceExternalFields(valueNotifier),
                       BlocSelector<AddDealCubit, AddDealState, ClientSource?>(
                         selector: (state) {
                           return state.buyerSource;
@@ -61,7 +76,8 @@ class SecondaryBasicInfoTab extends StatelessWidget {
                             return SizedBox();
                           } else if (buyerSource == ClientSource.alba) {
                             return SecondaryAlbaBuyerDetails(
-                              formKey: _formKey,
+                              formKey: widget._formKey,
+                              value: valueNotifier,
                             );
                           } else {
                             return SecondaryExternalBuyerDetails();
@@ -90,9 +106,17 @@ class SellerSourceAlbaFields extends StatefulWidget {
 class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
   late final DropDownFieldController _downFieldController =
       DropDownFieldController();
-  Property? property;
-  double? commissionPercentage;
-  double? agreedSalePrice;
+  ValueNotifier<Property?> property = ValueNotifier(null);
+  ValueNotifier<double?> commissionPercentage = ValueNotifier(null);
+  ValueNotifier<double?> agreedSalePrice = ValueNotifier(null);
+
+  @override
+  void initState() {
+    context.read<AddDealCubit>().getAgentProperties(
+        agentId: context.read<AuthBloc>().state.agent?.id ?? '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final types = context.select(
@@ -121,20 +145,23 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
           return state.agentList;
         }, builder: (context, agentList) {
           return AppAutoComplete(
+            key: ValueKey('sellerAssignedAgent'),
             name: 'sellerAssignedAgent',
             label: 'Choose Agent',
             isRequired: true,
+            initialValue: context.read<AuthBloc>().state.agent,
+            disabled: context.read<AddDealCubit>().state.buyerSource ==
+                ClientSource.external,
             valueTransformer: (p0) => p0?.id,
-            optionsBuilder: (v) async {
+            optionsBuilder: (v,refresh) async {
               return context.read<AddDealCubit>().getAgentsAutoComplete(v.text);
             },
             onSelected: (option) {
               context
                   .read<AddDealCubit>()
                   .getAgentProperties(agentId: option.id);
-              property = null;
+              property.value = null;
               _downFieldController.reset();
-              setState(() {});
             },
             displayStringForOption: (option) =>
                 "${option.user.firstName} ${option.user.lastName}",
@@ -153,9 +180,9 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
             selectValue: (p0) => p0?.id,
             initialValue: null,
             onSelected: (option) {
-              property = option;
+              property.value = option;
 
-              context.read<AddDealCubit>().setSelectedProperty(property);
+              context.read<AddDealCubit>().setSelectedProperty(property.value);
               context
                   .read<AddDealCubit>()
                   .getPropertyOwner(ownerId: option.propertyOwnerId!);
@@ -186,34 +213,52 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
             );
           },
         ),
-        CurrencyField(
-          name: 'agreedSalePrice',
-          label: 'Agreed Sale Price',
-          isRequired: true,
-          value: (property != null)
-              ? context.read<AddDealCubit>().getPrice(property!)?.toDouble()
-              : null,
-          onChanged: (val) {
-            agreedSalePrice = val?.toDouble();
-          },
-        ),
-        CommissionField(
-          name: 'sellerAgreedComm',
-          isRequired: true,
-          commissionPercentage:
-              num.tryParse(property?.commission.toString() ?? ''),
-          price: agreedSalePrice ??
-              (property != null
-                  ? context.read<AddDealCubit>().getPrice(property!)
-                  : null),
-        ),
+        ValueListenableBuilder(
+            valueListenable: property,
+            builder: (context, _, r) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CurrencyField(
+                    name: 'agreedSalePrice',
+                    label: 'Agreed Sale Price',
+                    isRequired: true,
+                    value: (property.value != null)
+                        ? context
+                            .read<AddDealCubit>()
+                            .getPrice(property.value!)
+                            ?.toDouble()
+                        : null,
+                    onChanged: (val) {
+                      agreedSalePrice.value = val?.toDouble();
+                    },
+                  ),
+                  ValueListenableBuilder(
+                      valueListenable: agreedSalePrice,
+                      builder: (context, _, r) {
+                        return CommissionField(
+                          name: 'sellerAgreedComm',
+                          commissionPercentage: num.tryParse(
+                              property.value?.commission.toString() ?? ''),
+                          price: agreedSalePrice.value ??
+                              (property.value != null
+                                  ? context
+                                      .read<AddDealCubit>()
+                                      .getPrice(property.value!)
+                                  : null),
+                        );
+                      }),
+                ],
+              );
+            }),
       ],
     );
   }
 }
 
 class SellerSourceExternalFields extends StatelessWidget {
-  const SellerSourceExternalFields({super.key});
+  final ValueNotifier<Map<String, dynamic>> value;
+  const SellerSourceExternalFields(this.value, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +287,7 @@ class SellerSourceExternalFields extends StatelessWidget {
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (option) =>
                 "${option.firstName} ${option.lastName}",
-            optionsBuilder: (v) async {
+            optionsBuilder: (v,refresh) async {
               return context.read<AddDealCubit>().getAgencies(search: v.text);
             }),
         AppTextField(
@@ -261,7 +306,13 @@ class SellerSourceExternalFields extends StatelessWidget {
           name: 'sellerExternalClientPhone',
           label: 'Client Phone Number',
         ),
-        SecondaryExternalPropertyDetails(),
+        ValueListenableBuilder(
+            valueListenable: value,
+            builder: (context, value, _) {
+              return SecondaryExternalPropertyDetails(
+                values: value,
+              );
+            }),
       ],
     );
   }

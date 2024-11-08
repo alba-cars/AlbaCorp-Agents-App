@@ -12,8 +12,6 @@ class Activity with _$Activity {
     @JsonKey(name: 'user_id') required String userId,
     String? propertyListId,
     @JsonKey(name: 'user') Lead? lead,
-    String? createdBy,
-    String? completedBy,
     @Default(0) double activityWeight,
     required String type,
     String? description,
@@ -28,8 +26,8 @@ class Activity with _$Activity {
     String? offplanId,
     String? propertyType,
     DateTime? overdueAt,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    @JsonKey(name: 'created_at') DateTime?  createdAt,
+   @JsonKey(name: 'updated_at')   DateTime? updatedAt,
   }) = _Activity;
 
   factory Activity.fromJson(Map<String, dynamic> json) =>

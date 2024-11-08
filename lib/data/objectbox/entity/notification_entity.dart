@@ -11,6 +11,9 @@ class NotificationEntity {
   bool isRead = false;
   @Property(type: PropertyType.date)
   DateTime? createdAt;
+  String? type;
+  bool requiresAction;
+  String? leadId;
 
   NotificationEntity(
       {this.id = 0,
@@ -18,7 +21,10 @@ class NotificationEntity {
       required this.title,
       this.subTitle,
       this.isRead = false,
-      this.createdAt});
+      this.createdAt,
+      this.type,
+      this.requiresAction = false,
+      this.leadId});
 
   NotificationModel toModel() {
     return NotificationModel(
@@ -27,7 +33,10 @@ class NotificationEntity {
         subTitle: subTitle,
         notificationId: notificationId,
         isRead: isRead,
-        createdAt: createdAt);
+        createdAt: createdAt,
+        type: this.type ?? 'Normal',
+        requiresAction: this.requiresAction,
+        leadId: this.leadId);
   }
 
   factory NotificationEntity.fromModel(NotificationModel model) {
@@ -37,6 +46,9 @@ class NotificationEntity {
         notificationId: model.notificationId,
         subTitle: model.subTitle,
         isRead: model.isRead,
-        createdAt: model.createdAt);
+        createdAt: model.createdAt,
+        requiresAction: model.requiresAction,
+        type: model.type,
+        leadId: model.leadId);
   }
 }

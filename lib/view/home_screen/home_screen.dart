@@ -10,6 +10,7 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
@@ -263,7 +264,7 @@ class SortedView extends StatelessWidget {
             onChanged: (val) {
               context.read<HomeCubit>().searchLeads(val);
             },
-            filterFields: filterFields(context),
+            filterFields: filterFields,
             onFilterApplied: (filter) {
               context.read<HomeCubit>().setActivityFilters(filter);
             },
@@ -332,11 +333,11 @@ class SortedView extends StatelessWidget {
   }
 }
 
-List<Widget> filterFields(BuildContext context) {
+List<Widget> filterFields(BuildContext context, Map<String, dynamic>? values) {
   return [
     MultiSelectAutoCompleteField(
         label: 'Community',
-        optionsBuilder: (v) async {
+        optionsBuilder: (v,refresh) async {
           final stateResult = context.read<HomeCubit>().state.communityList;
           if (stateResult.isEmpty) {
             await context.read<HomeCubit>().getCommunities(search: v.text);
@@ -351,7 +352,7 @@ List<Widget> filterFields(BuildContext context) {
         name: 'communityId'),
     MultiSelectAutoCompleteField(
         label: 'Building',
-        optionsBuilder: (v) async {
+        optionsBuilder: (v,refresh) async {
           final stateResult = context.read<HomeCubit>().state.buildingList;
           if (stateResult.isEmpty) {
             await context.read<HomeCubit>().getBuildings(search: v.text);
@@ -581,17 +582,52 @@ class CategorizedView extends StatelessWidget {
   }
 }
 
+enum TaskType { Hot, Cold }
+
+extension TaskTypeTo on String {
+  TaskType? toTaskType() {
+    switch (this) {
+      case "Hot":
+        return TaskType.Hot;
+      case "Cold":
+        return TaskType.Cold;
+      default:
+        return null;
+    }
+  }
+
+  TaskFilterEnum? toTaskFilter() {
+    switch (this) {
+      case "New":
+        return TaskFilterEnum.New;
+      case "FollowUp":
+        return TaskFilterEnum.FollowUp;
+      case "Favourites":
+        return TaskFilterEnum.Favourites;
+      case "Expiring":
+        return TaskFilterEnum.Expiring;
+      default:
+        return null;
+    }
+  }
+}
+
 class ActivityListItem extends StatelessWidget {
-  const ActivityListItem({
-    super.key,
-    required this.activity,
-    required this.index,
-    this.taskSection,
-  });
+  const ActivityListItem(
+      {super.key,
+      required this.activity,
+      required this.index,
+      this.taskSection,
+      this.onActionPerformed,
+      this.taskType,
+      this.taskFiler});
 
   final Activity activity;
   final int index;
   final int? taskSection;
+  final VoidCallback? onActionPerformed;
+  final TaskType? taskType;
+  final TaskFilterEnum? taskFiler;
 
   @override
   Widget build(BuildContext context) {
@@ -607,8 +643,21 @@ class ActivityListItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 6.h),
         child: InkWell(
           onTap: () {
-            context.pushNamed(TaskDetailScreen.routeName,
-                pathParameters: {'id': activity.id}, extra: activity);
+            context
+                .pushNamed(TaskDetailScreen.routeName,
+                    pathParameters: {
+                      'id': activity.id,
+                    },
+                    queryParameters: {
+                      "taskType": taskType?.name ?? '',
+                      "taskFilter": taskFiler?.name ?? ''
+                    },
+                    extra: activity)
+                .then((_) {
+              if (onActionPerformed != null) {
+                onActionPerformed!();
+              }
+            });
           },
           child: Row(children: [
             Container(
@@ -723,6 +772,10 @@ class ActivityListItem extends StatelessWidget {
                           context,
                           'Call request sent successfully. please open linkus app to receieve call',
                           SnackBarType.success);
+
+                      if (onActionPerformed != null) {
+                        onActionPerformed!();
+                      }
                     } else {
                       showSnackbar(
                           context,

@@ -23,6 +23,7 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
       propertyType: json['propertyType'] as String?,
       createdBy: readCreatedBy(json, 'createdBy'),
       partyType: json['partyType'] as String?,
+      cluster: json['cluster'] as String?,
       status: json['status'] as String?,
       purpose: json['purpose'] as String?,
       amenities: json['amenities'] as List<dynamic>?,
@@ -37,9 +38,6 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
           : DateTime.parse(json['checkedOutDate'] as String),
       currentAgent: json['currentAgent'],
       currentOwner: readCreatedBy(json, 'currentOwner'),
-      updatedBy: json['updatedBy'] == null
-          ? null
-          : User.fromJson(json['updatedBy'] as Map<String, dynamic>),
       referenceNumber: json['referenceNumber'] as String?,
       expirationDate: json['expirationDate'] == null
           ? null
@@ -68,6 +66,7 @@ Map<String, dynamic> _$$PropertyCardDetailsModelImplToJson(
       'propertyType': instance.propertyType,
       'createdBy': instance.createdBy,
       'partyType': instance.partyType,
+      'cluster': instance.cluster,
       'status': instance.status,
       'purpose': instance.purpose,
       'amenities': instance.amenities,
@@ -76,7 +75,6 @@ Map<String, dynamic> _$$PropertyCardDetailsModelImplToJson(
       'checkedOutDate': instance.checkedOutDate?.toIso8601String(),
       'currentAgent': instance.currentAgent,
       'currentOwner': instance.currentOwner,
-      'updatedBy': instance.updatedBy,
       'referenceNumber': instance.referenceNumber,
       'expirationDate': instance.expirationDate?.toIso8601String(),
       'availableForCheckout': instance.availableForCheckout,

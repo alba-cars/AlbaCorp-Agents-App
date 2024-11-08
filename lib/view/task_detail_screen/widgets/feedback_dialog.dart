@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -6,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/activity_types.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -27,26 +30,28 @@ import '../../add_deal_screen/add_deal_screen.dart';
 import '../task_detail_screen.dart';
 
 class ActivityFeedbackDialog extends StatefulWidget {
+
   const ActivityFeedbackDialog({
     super.key,
     required this.activity,
     required this.parentContext,
     this.direction,
-    this.mode,
+    this.mode, this.notes,
   });
 
   final Activity activity;
   final BuildContext parentContext;
   final DismissDirection? direction;
   final CardAction? mode;
+  final String? notes;
 
   @override
   State<ActivityFeedbackDialog> createState() => _ActivityFeedbackDialogState();
 }
 
 class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
-  final ValueNotifier<String?> feedBackValue = ValueNotifier(null);
-  final TextEditingController _controller = TextEditingController();
+  late final ValueNotifier<String?> feedBackValue = ValueNotifier(null);
+   TextEditingController _controller = TextEditingController();
   final GlobalKey<FormBuilderState> _formKey = GlobalKey();
 
   @override
@@ -54,10 +59,15 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     feedBackValue.value = switch (widget.mode) {
       CardAction.Heart => 'Interested',
       CardAction.Charge => 'Very Interested',
-      CardAction.Star => 'Deal',
+      CardAction.Star => 'Listing',
+      CardAction.ManuelSwipe =>
+        widget.direction == DismissDirection.startToEnd ? 'Interested' : null,
       _ => null
     };
 
+  Logger().d("Widget notes:: ${widget.notes}");
+    String notesValue = (widget.notes ?? "" );
+    _controller = TextEditingController(text: notesValue);
     super.initState();
   }
 
@@ -67,417 +77,469 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       // backgroundColor: Colors.white,
       clipBehavior: Clip.hardEdge,
 
-      child: ValueListenableBuilder(
-          valueListenable: feedBackValue,
-          builder: (context, value, child) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TitleText(
-                          text: widget.direction == DismissDirection.endToStart
-                              ? 'Leave Feedback'
-                              : switch (widget.mode) {
-                                  CardAction.Heart => 'Interested',
-                                  CardAction.Charge => 'Make Prospect',
-                                  CardAction.Star => 'Deal',
-                                  _ => 'Complete task'
-                                }),
-                      IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: Icon(
-                            Icons.close,
-                            size: 20,
-                          ))
-                    ],
+      child: BlocProvider.value(
+        value: widget.parentContext.read<TaskDetailCubit>(),
+        child: ValueListenableBuilder(
+            valueListenable: feedBackValue,
+            builder: (context, value, child) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TitleText(
+                            text:
+                                widget.direction == DismissDirection.endToStart
+                                    ? 'Leave Feedback'
+                                    : switch (widget.mode) {
+                                        CardAction.Heart => 'Interested',
+                                        CardAction.Charge => 'Make Prospect',
+                                        CardAction.Star => 'Deal',
+                                        _ => 'Complete task'
+                                      }),
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              size: 20,
+                            ))
+                      ],
+                    ),
+                    height: 60,
+                    padding: EdgeInsets.only(
+                        top: 20, left: 25, right: 25, bottom: 12),
+                    width: double.infinity,
+                    color: widget.direction == DismissDirection.startToEnd
+                        ? Colors.green[200]
+                        : widget.direction == DismissDirection.endToStart
+                            ? Colors.red[200]
+                            : lightPacific,
                   ),
-                  height: 60,
-                  padding:
-                      EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 12),
-                  width: double.infinity,
-                  color: widget.direction == DismissDirection.startToEnd
-                      ? Colors.green[200]
-                      : widget.direction == DismissDirection.endToStart
-                          ? Colors.red[200]
-                          : lightPacific,
-                ),
-                VerticalSmallGap(),
-                Flexible(
-                  child: ScrollShadow(
-                    child: SingleChildScrollView(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: FormBuilder(
-                        key: _formKey,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            LabelText(
-                              text: 'Feedback Note',
-                              underline: true,
-                            ),
-                            VerticalSmallGap(),
-                            if ((widget.direction ==
-                                    DismissDirection.startToEnd &&
-                                (widget.mode == CardAction.ManuelSwipe ||
-                                    widget.mode == CardAction.Star)))
-                              RadioListTile(
-                                  value: 'Listing',
-                                  title: Text('Win / Create new listing'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if ((widget.direction ==
-                                    DismissDirection.startToEnd &&
-                                (widget.mode == CardAction.ManuelSwipe ||
-                                    widget.mode == CardAction.Star)))
-                              RadioListTile(
-                                  value: 'Deal',
-                                  title: Text('Win / Create new deal'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if ((widget.direction ==
-                                    DismissDirection.startToEnd &&
-                                widget.mode == CardAction.ManuelSwipe))
-                              RadioListTile(
-                                  value: 'Very Interested',
-                                  title:
-                                      Text('Very Interested / Make Prospect'),
-                                  groupValue: value,
-                                  contentPadding: EdgeInsets.zero,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if ((widget.direction ==
-                                    DismissDirection.startToEnd &&
-                                widget.mode == CardAction.ManuelSwipe))
-                              RadioListTile(
-                                  value: 'Interested',
-                                  title: Text('Interested'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if (widget.direction == null ||
-                                widget.direction == DismissDirection.endToStart)
-                              RadioListTile(
-                                  value: 'Not Interested',
-                                  title: Text('Not Interested'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if (widget.direction == null ||
-                                widget.direction == DismissDirection.endToStart)
-                              RadioListTile(
-                                  value: 'Not Answered',
-                                  title: Text('No Answer'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if (widget.direction == null ||
-                                widget.direction == DismissDirection.endToStart)
-                              RadioListTile(
-                                  value: 'Invalid Number',
-                                  title: Text('Invalid Number'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if (widget.direction == null ||
-                                widget.direction == DismissDirection.endToStart)
-                              RadioListTile(
-                                  value: 'Disqualify',
-                                  title: Text('Disqualify'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            if (widget.direction == null ||
-                                widget.direction == DismissDirection.endToStart)
-                              RadioListTile(
-                                  value: 'Do not Call',
-                                  title: Text('Do not call'),
-                                  groupValue: value,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  contentPadding: EdgeInsets.zero,
-                                  onChanged: (val) {
-                                    if (val != null) feedBackValue.value = val;
-                                  }),
-                            MultiLineField(
-                              controller: _controller,
-                              placeHolder: "Write a brief note!",
-                              label: "Notes",
-                              name: 'notes',
-                              validator: (val) {
-                                if (val == null || val.length < 5) {
-                                  return 'Please write a valid note';
-                                }
-                                return null;
-                              },
-                            ),
-                            if (feedBackValue.value == 'Interested' ||
-                                feedBackValue.value == 'Very Interested') ...[
+                  VerticalSmallGap(),
+                  Flexible(
+                    child: ScrollShadow(
+                      child: SingleChildScrollView(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: FormBuilder(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                               LabelText(
-                                text: 'New Task',
+                                text: 'Feedback Note',
                                 underline: true,
                               ),
                               VerticalSmallGap(),
-                              WrapSelectField(
-                                name: 'type',
-                                label: 'Type',
-                                values: activityTypes,
-                                isRequired: true,
-                              ),
-                              DateField(
+                              if ((widget.direction ==
+                                      DismissDirection.startToEnd &&
+                                  (widget.mode == CardAction.Star)))
+                                RadioListTile(
+                                    value: 'Listing',
+                                    title: Text('Win / Create new listing'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if ((widget.direction ==
+                                      DismissDirection.startToEnd &&
+                                  (widget.mode == CardAction.Star)))
+                                RadioListTile(
+                                    value: 'Deal',
+                                    title: Text('Win / Create new deal'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if ((widget.direction ==
+                                      DismissDirection.startToEnd &&
+                                  widget.mode == CardAction.ManuelSwipe))
+                                RadioListTile(
+                                    value: 'Very Interested',
+                                    title:
+                                        Text('Very Interested / Make Prospect'),
+                                    groupValue: value,
+                                    contentPadding: EdgeInsets.zero,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if ((widget.direction ==
+                                      DismissDirection.startToEnd &&
+                                  widget.mode == CardAction.ManuelSwipe))
+                                RadioListTile(
+                                    value: 'Interested',
+                                    title: Text('Interested'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if (widget.direction == null ||
+                                  widget.direction ==
+                                      DismissDirection.endToStart)
+                                RadioListTile(
+                                    value: 'Not Interested',
+                                    title: Text('Not Interested'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if (widget.direction == null ||
+                                  widget.direction ==
+                                      DismissDirection.endToStart)
+                                RadioListTile(
+                                    value: 'Not Answered',
+                                    title: Text('No Answer'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if (widget.direction == null ||
+                                  widget.direction ==
+                                      DismissDirection.endToStart)
+                                RadioListTile(
+                                    value: 'Invalid Number',
+                                    title: Text('Invalid Number'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if (widget.direction == null ||
+                                  widget.direction ==
+                                      DismissDirection.endToStart)
+                                RadioListTile(
+                                    value: 'Disqualify',
+                                    title: Text('Disqualify'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if (widget.direction == null ||
+                                  widget.direction ==
+                                      DismissDirection.endToStart)
+                                RadioListTile(
+                                    value: 'Do not Call',
+                                    title: Text('Do not call'),
+                                    groupValue: value,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    contentPadding: EdgeInsets.zero,
+                                    onChanged: (val) {
+                                      if (val != null)
+                                        feedBackValue.value = val;
+                                    }),
+                              if (value == "Not Interested" ||
+                                  value == "Disqualify" ||
+                                  value == "Interested" ||
+                                  value == "Very Interested")
+                                MultiLineField(
+                                  controller: _controller,
+                                  placeHolder: "Write a brief note!",
+                                  label: "Notes",
+                                  name: 'notes',
+                                  validator: (val) {
+                                    if (val == null || val.length < 5) {
+                                      return 'Please write a valid note';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              if (value == "Invalid Number" ||
+                                  value == "Do not Call")
+                                FormBuilderCheckbox(
+                                    name: 'acknowledgement',
+                                    validator: (value) {
+                                      if (value != true) {
+                                        return "Please acknwoledge your action";
+                                      }
+                                    },
+                                    contentPadding: EdgeInsets.zero,
+                                    initialValue: false,
+                                    title: NormalText(
+                                      text:
+                                          "Acknowledge your action by checking the box",
+                                    ),
+                                    onChanged: (val) {}),
+                              if (feedBackValue.value == 'Interested' ||
+                                  feedBackValue.value == 'Very Interested') ...[
+                                LabelText(
+                                  text: 'New Task',
+                                  underline: true,
+                                ),
+                                VerticalSmallGap(),
+                                WrapSelectField(
+                                  name: 'type',
+                                  label: 'Type',
+                                  values: activityTypes,
                                   isRequired: true,
-                                  name: 'date',
-                                  label: 'Date',
-                                  firstDate: DateTime.now(),
-                                  lastDate:
-                                      DateTime.now().add(Duration(days: 90))),
-                              TimeField(
-                                isRequired: true,
-                                name: 'time',
-                                label: 'Time',
-                              ),
-                              CardPickerDialogField<Property>(
-                                name: 'property',
-                                label: 'Property',
-                                isRequired: false,
-                                valueTransformer: (option) => option?.id,
-                                optionsBuilder: (v) async {
-                                  return widget.parentContext
-                                      .read<TaskDetailCubit>()
-                                      .getListings(search: v.text);
-                                },
-                                optionBuilder: (context, listing) {
-                                  return PropertyCardPickerItem(
-                                      listing: listing);
-                                },
-                              ),
-                              MultiLineField(
-                                label: 'Description',
-                                name: 'description',
-                              ),
-                              VerticalSmallGap(),
-                            ]
-                          ],
+                                ),
+                                DateField(
+                                    isRequired: true,
+                                    name: 'date',
+                                    label: 'Date',
+                                    firstDate: DateTime.now(),
+                                    lastDate:
+                                        DateTime.now().add(Duration(days: 365))),
+                                TimeField(
+                                  isRequired: false,
+                                  name: 'time',
+                                  label: 'Time',
+                                ),
+                                CardPickerDialogField<Property>(
+                                  name: 'property',
+                                  label: 'Property',
+                                  isRequired: false,
+                                  valueTransformer: (option) => option?.id,
+                                  optionsBuilder: (v) async {
+                                    return widget.parentContext
+                                        .read<TaskDetailCubit>()
+                                        .getListings(search: v.text);
+                                  },
+                                  optionBuilder: (context, listing) {
+                                    return PropertyCardPickerItem(
+                                        listing: listing);
+                                  },
+                                ),
+                                MultiLineField(
+                                  label: 'Add a note for next activity',
+                                  name: 'description',
+                                ),
+                                VerticalSmallGap(),
+                              ]
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  width: double.maxFinite,
-                  // color: lightPacific,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: ValueListenableBuilder(
-                      valueListenable: feedBackValue,
-                      builder: (context, value, _) {
-                        return Column(
-                          children: [
-                            if (value == "Interested" ||
-                                value == 'Very Interested') ...[
-                              if (widget.mode != CardAction.Star)
-                                AppPrimaryButton(
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
-                                      final val = _formKey.currentState!.value;
-                                      Logger().d({
-                                        ...val,
-                                        'interested': feedBackValue.value
-                                      });
-                                      await widget.parentContext
-                                          .read<TaskDetailCubit>()
-                                          .completeAndAddFollowUp(
-                                              context: context,
-                                              values: val,
-                                              description: val['description'],
-                                              markAsProspect:
-                                                  feedBackValue.value ==
-                                                      'Very Interested');
-                                    },
-                                    text: ('Add Followup')),
-                              VerticalSmallGap(
-                                adjustment: 1,
-                              ),
-                            ],
-                            if (((widget.mode == CardAction.ManuelSwipe ||
-                                    widget.mode == CardAction.Star) &&
-                                feedBackValue.value == 'Deal'))
-                              AppPrimaryButton(
-                                  backgroundColor: Colors.green[800],
-                                  onTap: () async {
-                                    if (_formKey.currentState
-                                            ?.saveAndValidate() !=
-                                        true) {
-                                      return;
-                                    }
-                                    Navigator.of(context).pop(false);
-                                    getIt<ActivityCubit>()
-                                        .setLastActivityFeedback(
-                                            widget.activity,
-                                            ActivityFeedback(
-                                                isInterested: true,
-                                                status: 'Complete',
-                                                notes: _controller.text));
-                                    widget.parentContext
-                                        .pushNamed(AddDealScreen.routeName);
-                                  },
-                                  text: ('Complete & Add Deal')),
-                            if (((widget.mode == CardAction.ManuelSwipe ||
-                                    widget.mode == CardAction.Star) &&
-                                feedBackValue.value == 'Listing'))
-                              AppPrimaryButton(
-                                  backgroundColor: Colors.green[800],
-                                  onTap: () async {
-                                    if (_formKey.currentState
-                                            ?.saveAndValidate() !=
-                                        true) {
-                                      return;
-                                    }
-                                    Navigator.of(context).pop(false);
-                                    getIt<ActivityCubit>()
-                                        .setLastActivityFeedback(
-                                            widget.activity,
-                                            ActivityFeedback(
-                                                isInterested: true,
-                                                status: 'Complete',
-                                                notes: _controller.text));
-                                    widget.parentContext
-                                        .pushNamed(AddDealScreen.routeName);
-                                  },
-                                  text: ('Complete & Add Listing')),
-                            if (value == "Not Interested") ...[
-                              AppPrimaryButton(
-                                  onTap: () async {
-                                    if (_formKey.currentState
-                                            ?.saveAndValidate() !=
-                                        true) {
-                                      return;
-                                    }
-                                    await widget.parentContext
-                                        .read<TaskDetailCubit>()
-                                        .makeLost(
-                                          context: context,
-                                          description: _controller.text,
-                                        );
-                                  },
-                                  text: ('Complete')),
-                            ],
-                            if (value == "Do not Call") ...[
-                              AppPrimaryButton(
-                                  foregroundColor: Colors.red[800]!,
-                                  borderShow: true,
-                                  backgroundColor: Colors.white,
-                                  onTap: () async {
-                                    if (_formKey.currentState
-                                            ?.saveAndValidate() !=
-                                        true) {
-                                      return;
-                                    }
-                                    await widget.parentContext
-                                        .read<TaskDetailCubit>()
-                                        .doNotCall(
-                                          context: context,
-                                          description: _controller.text,
-                                        );
-                                  },
-                                  text: ('Mark as DND')),
-                            ],
-                            if (value == "Not Answered" ||
-                                value == "Invalid Number" ||
-                                value == "Disqualify") ...[
-                              if (value == "Not Answered")
-                                AppPrimaryButton(
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
-
-                                      await widget.parentContext
-                                          .read<TaskDetailCubit>()
-                                          .makeLost(
-                                            context: widget.parentContext,
-                                            description: _controller.text,
-                                          );
-                                      // Navigator.of(context).pop();
-                                    },
-                                    text: ('Complete')),
-                              if (value == "Not Answered")
+                  Container(
+                    width: double.maxFinite,
+                    // color: lightPacific,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    child: ValueListenableBuilder(
+                        valueListenable: feedBackValue,
+                        builder: (context, value, _) {
+                          return Column(
+                            children: [
+                              if (value == "Interested" ||
+                                  value == 'Very Interested') ...[
+                                if (widget.mode != CardAction.Star)
+                                  AppPrimaryButton(
+                                      onTap: () async {
+                                        if (_formKey.currentState
+                                                ?.saveAndValidate() !=
+                                            true) {
+                                          return;
+                                        }
+                                        final val =
+                                            _formKey.currentState!.value;
+                                        Logger().d({
+                                          ...val,
+                                          'interested': feedBackValue.value
+                                        });
+                                        await widget.parentContext
+                                            .read<TaskDetailCubit>()
+                                            .completeAndAddFollowUp(
+                                                context: context,
+                                                values: val,
+                                               currentActivityNotes: val['notes'],
+                                                markAsProspect:
+                                                    feedBackValue.value ==
+                                                        'Very Interested');
+                                      },
+                                      text: ('Add Followup')),
                                 VerticalSmallGap(
                                   adjustment: 1,
                                 ),
-                              AppPrimaryButton(
-                                  foregroundColor: Colors.red[800]!,
-                                  borderShow: true,
-                                  backgroundColor: Colors.white,
-                                  onTap: () async {
-                                    if (_formKey.currentState
-                                            ?.saveAndValidate() !=
-                                        true) {
-                                      return;
-                                    }
+                              ],
+                              if (((widget.mode == CardAction.ManuelSwipe ||
+                                      widget.mode == CardAction.Star) &&
+                                  feedBackValue.value == 'Deal'))
+                                AppPrimaryButton(
+                                    backgroundColor: Colors.green[800],
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
+                                      Navigator.of(context).pop(false);
+                                      getIt<ActivityCubit>()
+                                          .setLastActivityFeedback(
+                                              widget.activity,
+                                              ActivityFeedback(
+                                                  isInterested: true,
+                                                  status: 'Complete',
+                                                  notes: _controller.text));
+                                      widget.parentContext
+                                          .pushNamed(AddDealScreen.routeName);
+                                    },
+                                    text: ('Complete & Add Deal')),
+                              if (((widget.mode == CardAction.ManuelSwipe ||
+                                      widget.mode == CardAction.Star) &&
+                                  feedBackValue.value == 'Listing'))
+                                AppPrimaryButton(
+                                    backgroundColor: Colors.green[800],
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
+                                      Navigator.of(context).pop(false);
+                                      getIt<ActivityCubit>()
+                                          .setLastActivityFeedback(
+                                              widget.activity,
+                                              ActivityFeedback(
+                                                  isInterested: true,
+                                                  status: 'Complete',
+                                                  notes: _controller.text));
+                                      final lead = widget.activity.lead;
+                                      widget.parentContext.pushNamed(
+                                          AddListingScreen.routeName,
+                                          queryParameters: {
+                                            "lead": json.encode(lead?.toJson())
+                                          });
+                                    },
+                                    text: ('Complete & Add Listing')),
+                              if (value == "Not Interested") ...[
+                                AppPrimaryButton(
+                                    foregroundColor: Colors.red[800]!,
+                                    borderShow: true,
+                                    backgroundColor: Colors.white,
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
+                                      await widget.parentContext
+                                          .read<TaskDetailCubit>()
+                                          .makeLost(
+                                            context: context,
+                                            description: _controller.text,
+                                          );
+                                    },
+                                    text: ('Mark Lost')),
+                              ],
+                              if (value == "Do not Call") ...[
+                                AppPrimaryButton(
+                                    foregroundColor: Colors.red[800]!,
+                                    borderShow: true,
+                                    backgroundColor: Colors.white,
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
+                                      await widget.parentContext
+                                          .read<TaskDetailCubit>()
+                                          .doNotCall(
+                                            context: context,
+                                            description: _controller.text,
+                                          );
+                                    },
+                                    text: ('Mark as DND')),
+                              ],
+                              if (value == "Not Answered")
+                                AppPrimaryButton(
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
 
-                                    await widget.parentContext
-                                        .read<TaskDetailCubit>()
-                                        .disqualify(
-                                            context: widget.parentContext,
-                                            description: _controller.text);
-                                    // Navigator.of(context).pop();
-                                  },
-                                  text: 'Disqualify'),
-                            ]
-                          ],
-                        );
-                      }),
-                )
-              ],
-            );
-          }),
+                                      await widget.parentContext
+                                          .read<TaskDetailCubit>()
+                                          .completeAndAddFollowUp(
+                                              context: widget.parentContext,
+                                              currentActivityNotes: "Not Answered",
+                                              markAsProspect: false,
+                                              values: {
+                                            ...context
+                                                    .read<TaskDetailCubit>()
+                                                    .state
+                                                    .task
+                                                    ?.toJson() ??
+                                                {},
+                                            "date": DateTime.now()
+                                                .add(Duration(days: 1))
+                                          });
+                                      // Navigator.of(context).pop();
+                                    },
+                                    text: ('Schedule New Task')),
+                              if (value == "Invalid Number" ||
+                                  value == "Disqualify") ...[
+                                AppPrimaryButton(
+                                    foregroundColor: Colors.red[800]!,
+                                    borderShow: true,
+                                    backgroundColor: Colors.white,
+                                    onTap: () async {
+                                      if (_formKey.currentState
+                                              ?.saveAndValidate() !=
+                                          true) {
+                                        return;
+                                      }
+
+                                      await widget.parentContext
+                                          .read<TaskDetailCubit>()
+                                          .disqualify(
+                                              context: widget.parentContext,
+                                              description:
+                                                  value == "Invalid Number"
+                                                      ? "Invalid Number"
+                                                      : _controller.text);
+                                      // Navigator.of(context).pop();
+                                    },
+                                    text: 'Disqualify'),
+                              ]
+                            ],
+                          );
+                        }),
+                  )
+                ],
+              );
+            }),
+      ),
     );
   }
 }

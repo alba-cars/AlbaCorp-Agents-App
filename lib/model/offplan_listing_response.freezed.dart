@@ -24,7 +24,7 @@ mixin _$DealListingResponse {
   String get propertyType => throw _privateConstructorUsedError;
   String get beds => throw _privateConstructorUsedError;
   String get baths => throw _privateConstructorUsedError;
-  int get size => throw _privateConstructorUsedError;
+  int? get size => throw _privateConstructorUsedError;
   Community? get community => throw _privateConstructorUsedError;
   double get agreedSalesPrice => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
@@ -47,7 +47,7 @@ abstract class $DealListingResponseCopyWith<$Res> {
       String propertyType,
       String beds,
       String baths,
-      int size,
+      int? size,
       Community? community,
       double agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
@@ -73,7 +73,7 @@ class _$DealListingResponseCopyWithImpl<$Res, $Val extends DealListingResponse>
     Object? propertyType = null,
     Object? beds = null,
     Object? baths = null,
-    Object? size = null,
+    Object? size = freezed,
     Object? community = freezed,
     Object? agreedSalesPrice = null,
     Object? agreedCommission = null,
@@ -95,10 +95,10 @@ class _$DealListingResponseCopyWithImpl<$Res, $Val extends DealListingResponse>
           ? _value.baths
           : baths // ignore: cast_nullable_to_non_nullable
               as String,
-      size: null == size
+      size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       community: freezed == community
           ? _value.community
           : community // ignore: cast_nullable_to_non_nullable
@@ -140,7 +140,7 @@ abstract class _$$DealListingResponseImplCopyWith<$Res>
       String propertyType,
       String beds,
       String baths,
-      int size,
+      int? size,
       Community? community,
       double agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
@@ -165,7 +165,7 @@ class __$$DealListingResponseImplCopyWithImpl<$Res>
     Object? propertyType = null,
     Object? beds = null,
     Object? baths = null,
-    Object? size = null,
+    Object? size = freezed,
     Object? community = freezed,
     Object? agreedSalesPrice = null,
     Object? agreedCommission = null,
@@ -187,10 +187,10 @@ class __$$DealListingResponseImplCopyWithImpl<$Res>
           ? _value.baths
           : baths // ignore: cast_nullable_to_non_nullable
               as String,
-      size: null == size
+      size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       community: freezed == community
           ? _value.community
           : community // ignore: cast_nullable_to_non_nullable
@@ -233,7 +233,7 @@ class _$DealListingResponseImpl implements _DealListingResponse {
   @override
   final String baths;
   @override
-  final int size;
+  final int? size;
   @override
   final Community? community;
   @override
@@ -292,7 +292,7 @@ abstract class _DealListingResponse implements DealListingResponse {
       required final String propertyType,
       required final String beds,
       required final String baths,
-      required final int size,
+      required final int? size,
       final Community? community,
       required final double agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
@@ -310,7 +310,7 @@ abstract class _DealListingResponse implements DealListingResponse {
   @override
   String get baths;
   @override
-  int get size;
+  int? get size;
   @override
   Community? get community;
   @override

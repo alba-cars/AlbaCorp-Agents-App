@@ -5,6 +5,7 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/user_list_data.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 
@@ -67,6 +68,7 @@ class ActivityData implements ActivityRepo {
       String? notes,
       String? feedback}) async {
     try {
+      Logger().d("Updated notes: :: $notes");
       await _dio.patch('/v1/activities/$activityId', data: {
         if (completed) 'status': 'Complete',
         if (duration != null) 'duration': duration,
@@ -328,15 +330,86 @@ class ActivityData implements ActivityRepo {
   }
 
   @override
-  Future<Result<void>> createCallFeedbackActivity(
-      {required String leadId, required String feedback}) async {
+  Future<Result<bool>> createCallFeedbackActivity(
+      {required String leadId,
+      required String feedback,
+      String? attachedActivityId,
+      bool reAssignLeadtoAgent = false}) async {
     try {
-      await _dio.post('/v1/activities/call-feedback-activity', data: {
+      final res =
+          await _dio.post('/v1/activities/call-feedback-activity', data: {
         'lead_id': leadId,
         'feedback': feedback,
+        'attachedActivityId': attachedActivityId,
+        "reAssignLeadtoAgent": reAssignLeadtoAgent
       });
 
-      return Success(null);
+      return Success(res.data['requestFollowUp'] ?? true);
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<Activity>>> getActivitiesByAgent(
+      {String? status,
+      List<DateTime>? dates,
+      String? userId,
+      Paginator? paginator}) async {
+    try {
+      Map<String, dynamic> query = {
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        'limit': 20,
+      };
+      Logger().d("Query = ${query}");
+      var payload = {
+        'date': dates?.map((e) => e.toIso8601String()).toList(),
+        'userId': userId,
+        "status": status,
+      };
+      Logger().d(payload);
+      final res = await _dio.post('/v1/activities/agent/',
+          data: payload, queryParameters: query);
+
+      List<dynamic> data = res.data['activities'] as List;
+
+      List<Activity> activities =
+          (data ?? []).map((e) => Activity.fromJson(e)).toList();
+
+      return Success(activities,
+          paginator: Paginator(
+              currentPage:
+                  res.data['page'] ?? (paginator?.currentPage ?? 0) + 1,
+              perPage: res.data['pageSize'] ?? 0,
+              itemCount: res.data['totalItems'] ?? 0));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<UserListData>>> getActivitiesUserByAgent(
+      {String? searchText, Paginator? paginator}) async {
+    try {
+      Map<String, dynamic> query = {
+        if (paginator != null) 'page': paginator.currentPage + 1,
+        'limit': 20,
+      };
+
+      final res = await _dio.post('/v1/activities/agent-user/',
+          data: {"searchText": searchText}, queryParameters: query);
+      Logger().d(res.data);
+      List<dynamic> data = res.data['userList'] as List;
+
+      List<UserListData> userListData =
+          (data ?? []).map((e) => UserListData.fromJson(e)).toList();
+
+      return Success(userListData,
+          paginator: Paginator(
+              currentPage:
+                  res.data['page'] ?? (paginator?.currentPage ?? 0) + 1,
+              perPage: res.data['pageSize'] ?? 0,
+              itemCount: res.data['totalItems'] ?? 0));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

@@ -30,30 +30,31 @@ class InfoLabelValue extends StatelessWidget {
                   adjustment: 0.1,
                 ),
                 NormalText(
-                  text: valueOne ?? '',
+                  text: valueOne ?? 'No info',
                   fontWeight: FontWeight.w400,
                 )
               ],
             ),
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SmallText(
-                  text: labelTwo ?? '',
-                  color: Colors.blueGrey,
-                ),
-                VerticalSmallGap(
-                  adjustment: 0.1,
-                ),
-                NormalText(
-                  text: valueTwo ?? '',
-                  fontWeight: FontWeight.w400,
-                )
-              ],
-            ),
-          )
+          if (labelTwo != null)
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SmallText(
+                    text: labelTwo ?? '',
+                    color: Colors.blueGrey,
+                  ),
+                  VerticalSmallGap(
+                    adjustment: 0.1,
+                  ),
+                  NormalText(
+                    text: valueTwo ?? 'No info',
+                    fontWeight: FontWeight.w400,
+                  )
+                ],
+              ),
+            )
         ],
       ),
     );

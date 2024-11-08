@@ -26,11 +26,11 @@ mixin _$Agency {
   String get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name')
   String get lastName => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentType')
   String get documentType => throw _privateConstructorUsedError;
-  String get document => throw _privateConstructorUsedError;
+  String? get document => throw _privateConstructorUsedError;
   List<dynamic> get documents => throw _privateConstructorUsedError;
   bool get active => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
@@ -55,10 +55,10 @@ abstract class $AgencyCopyWith<$Res> {
       String type,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
-      String email,
-      String phone,
+      String? email,
+      String? phone,
       @JsonKey(name: 'documentType') String documentType,
-      String document,
+      String? document,
       List<dynamic> documents,
       bool active,
       @JsonKey(name: 'created_at') DateTime createdAt,
@@ -83,10 +83,10 @@ class _$AgencyCopyWithImpl<$Res, $Val extends Agency>
     Object? type = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? email = null,
-    Object? phone = null,
+    Object? email = freezed,
+    Object? phone = freezed,
     Object? documentType = null,
-    Object? document = null,
+    Object? document = freezed,
     Object? documents = null,
     Object? active = null,
     Object? createdAt = null,
@@ -110,22 +110,22 @@ class _$AgencyCopyWithImpl<$Res, $Val extends Agency>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       documentType: null == documentType
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
               as String,
-      document: null == document
+      document: freezed == document
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       documents: null == documents
           ? _value.documents
           : documents // ignore: cast_nullable_to_non_nullable
@@ -162,10 +162,10 @@ abstract class _$$AgencyImplCopyWith<$Res> implements $AgencyCopyWith<$Res> {
       String type,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
-      String email,
-      String phone,
+      String? email,
+      String? phone,
       @JsonKey(name: 'documentType') String documentType,
-      String document,
+      String? document,
       List<dynamic> documents,
       bool active,
       @JsonKey(name: 'created_at') DateTime createdAt,
@@ -188,10 +188,10 @@ class __$$AgencyImplCopyWithImpl<$Res>
     Object? type = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? email = null,
-    Object? phone = null,
+    Object? email = freezed,
+    Object? phone = freezed,
     Object? documentType = null,
-    Object? document = null,
+    Object? document = freezed,
     Object? documents = null,
     Object? active = null,
     Object? createdAt = null,
@@ -215,22 +215,22 @@ class __$$AgencyImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       documentType: null == documentType
           ? _value.documentType
           : documentType // ignore: cast_nullable_to_non_nullable
               as String,
-      document: null == document
+      document: freezed == document
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       documents: null == documents
           ? _value._documents
           : documents // ignore: cast_nullable_to_non_nullable
@@ -261,13 +261,13 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
   const _$AgencyImpl(
       {required this.id,
       required this.type,
-      @JsonKey(name: 'first_name') required this.firstName,
-      @JsonKey(name: 'last_name') required this.lastName,
-      required this.email,
-      required this.phone,
+      @JsonKey(name: 'first_name') this.firstName = '',
+      @JsonKey(name: 'last_name') this.lastName = '',
+      this.email,
+      this.phone,
       @JsonKey(name: 'documentType') required this.documentType,
-      required this.document,
-      required final List<dynamic> documents,
+      this.document,
+      final List<dynamic> documents = const [],
       required this.active,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt,
@@ -288,16 +288,17 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
   @JsonKey(name: 'last_name')
   final String lastName;
   @override
-  final String email;
+  final String? email;
   @override
-  final String phone;
+  final String? phone;
   @override
   @JsonKey(name: 'documentType')
   final String documentType;
   @override
-  final String document;
+  final String? document;
   final List<dynamic> _documents;
   @override
+  @JsonKey()
   List<dynamic> get documents {
     if (_documents is EqualUnmodifiableListView) return _documents;
     // ignore: implicit_dynamic_type
@@ -405,13 +406,13 @@ abstract class _Agency implements Agency {
   const factory _Agency(
           {required final String id,
           required final String type,
-          @JsonKey(name: 'first_name') required final String firstName,
-          @JsonKey(name: 'last_name') required final String lastName,
-          required final String email,
-          required final String phone,
+          @JsonKey(name: 'first_name') final String firstName,
+          @JsonKey(name: 'last_name') final String lastName,
+          final String? email,
+          final String? phone,
           @JsonKey(name: 'documentType') required final String documentType,
-          required final String document,
-          required final List<dynamic> documents,
+          final String? document,
+          final List<dynamic> documents,
           required final bool active,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') required final DateTime updatedAt,
@@ -431,14 +432,14 @@ abstract class _Agency implements Agency {
   @JsonKey(name: 'last_name')
   String get lastName;
   @override
-  String get email;
+  String? get email;
   @override
-  String get phone;
+  String? get phone;
   @override
   @JsonKey(name: 'documentType')
   String get documentType;
   @override
-  String get document;
+  String? get document;
   @override
   List<dynamic> get documents;
   @override

@@ -26,6 +26,33 @@ class TitleText extends StatelessWidget {
   }
 }
 
+class HeadingText extends StatelessWidget {
+  const HeadingText(
+      {super.key,
+      required this.text,
+      this.color,
+      this.fontSize,
+      this.fontWeight,
+      this.textAlign});
+  final String text;
+  final Color? color;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final TextAlign? textAlign;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: textAlign,
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          fontSize: fontSize ?? 20,
+          fontWeight: fontWeight ?? FontWeight.w500,
+          color: color),
+    );
+  }
+}
+
 class LabelText extends StatelessWidget {
   const LabelText(
       {super.key,
@@ -131,10 +158,11 @@ class SmallText extends StatelessWidget {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
-      style: Theme.of(context)
-          .textTheme
-          .bodySmall
-          ?.copyWith(fontSize: 9, color: color, fontWeight: fontWeight),
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            fontSize: 9,
+            color: color,
+            fontWeight: fontWeight,
+          ),
     );
   }
 }
