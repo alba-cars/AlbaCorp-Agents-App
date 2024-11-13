@@ -38,6 +38,7 @@ mixin _$PropertyCard {
   @JsonKey(name: 'partyType')
   String? get partyType => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  String? get cluster => throw _privateConstructorUsedError;
   String? get purpose => throw _privateConstructorUsedError;
   List<dynamic>? get amenities => throw _privateConstructorUsedError;
   @JsonKey(name: 'createdAt')
@@ -86,6 +87,7 @@ abstract class $PropertyCardCopyWith<$Res> {
       @JsonKey(name: 'createdBy') dynamic createdBy,
       @JsonKey(name: 'partyType') String? partyType,
       String? status,
+      String? cluster,
       String? purpose,
       List<dynamic>? amenities,
       @JsonKey(name: 'createdAt') String? createdAt,
@@ -128,6 +130,7 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
     Object? createdBy = freezed,
     Object? partyType = freezed,
     Object? status = freezed,
+    Object? cluster = freezed,
     Object? purpose = freezed,
     Object? amenities = freezed,
     Object? createdAt = freezed,
@@ -186,6 +189,10 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cluster: freezed == cluster
+          ? _value.cluster
+          : cluster // ignore: cast_nullable_to_non_nullable
               as String?,
       purpose: freezed == purpose
           ? _value.purpose
@@ -287,6 +294,7 @@ abstract class _$$PropertyCardImplCopyWith<$Res>
       @JsonKey(name: 'createdBy') dynamic createdBy,
       @JsonKey(name: 'partyType') String? partyType,
       String? status,
+      String? cluster,
       String? purpose,
       List<dynamic>? amenities,
       @JsonKey(name: 'createdAt') String? createdAt,
@@ -329,6 +337,7 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
     Object? createdBy = freezed,
     Object? partyType = freezed,
     Object? status = freezed,
+    Object? cluster = freezed,
     Object? purpose = freezed,
     Object? amenities = freezed,
     Object? createdAt = freezed,
@@ -387,6 +396,10 @@ class __$$PropertyCardImplCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cluster: freezed == cluster
+          ? _value.cluster
+          : cluster // ignore: cast_nullable_to_non_nullable
               as String?,
       purpose: freezed == purpose
           ? _value.purpose
@@ -459,6 +472,7 @@ class _$PropertyCardImpl implements _PropertyCard {
       @JsonKey(name: 'createdBy') this.createdBy,
       @JsonKey(name: 'partyType') this.partyType,
       this.status,
+      this.cluster,
       this.purpose,
       final List<dynamic>? amenities,
       @JsonKey(name: 'createdAt') this.createdAt,
@@ -507,6 +521,8 @@ class _$PropertyCardImpl implements _PropertyCard {
   final String? partyType;
   @override
   final String? status;
+  @override
+  final String? cluster;
   @override
   final String? purpose;
   final List<dynamic>? _amenities;
@@ -561,7 +577,7 @@ class _$PropertyCardImpl implements _PropertyCard {
 
   @override
   String toString() {
-    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount)';
+    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, cluster: $cluster, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount)';
   }
 
   @override
@@ -585,6 +601,7 @@ class _$PropertyCardImpl implements _PropertyCard {
             (identical(other.partyType, partyType) ||
                 other.partyType == partyType) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.cluster, cluster) || other.cluster == cluster) &&
             (identical(other.purpose, purpose) || other.purpose == purpose) &&
             const DeepCollectionEquality()
                 .equals(other._amenities, _amenities) &&
@@ -626,6 +643,7 @@ class _$PropertyCardImpl implements _PropertyCard {
         const DeepCollectionEquality().hash(createdBy),
         partyType,
         status,
+        cluster,
         purpose,
         const DeepCollectionEquality().hash(_amenities),
         createdAt,
@@ -668,6 +686,7 @@ abstract class _PropertyCard implements PropertyCard {
       @JsonKey(name: 'createdBy') final dynamic createdBy,
       @JsonKey(name: 'partyType') final String? partyType,
       final String? status,
+      final String? cluster,
       final String? purpose,
       final List<dynamic>? amenities,
       @JsonKey(name: 'createdAt') final String? createdAt,
@@ -714,6 +733,8 @@ abstract class _PropertyCard implements PropertyCard {
   String? get partyType;
   @override
   String? get status;
+  @override
+  String? get cluster;
   @override
   String? get purpose;
   @override

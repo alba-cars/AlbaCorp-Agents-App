@@ -138,7 +138,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final list = await context
                 .read<LeadsListExplorerCubit>()
                 .getCommunities(search: v.text);
@@ -149,13 +149,13 @@ class _ExplorerTabState extends State<ExplorerTab> {
           },
           displayStringForOption: (option) => option['label']?.toString() ?? '',
           name: 'communities'),
-     MultiSelectAutoCompleteField(
+      MultiSelectAutoCompleteField(
         label: 'Places',
         optionsBuilder: (v, refresh) async {
           final list = await context
               .read<LeadsListExplorerCubit>()
               .getPlaces(search: v.text);
-              Logger().d(list);
+          Logger().d(list);
           final List<String>? flattenedValue = (values?['communities'] is List)
               ? (values?['communities'] as List).expand((community) {
                   return community['value'] is List
@@ -181,22 +181,25 @@ class _ExplorerTabState extends State<ExplorerTab> {
       MultiSelectAutoCompleteField(
           label: 'Building',
           optionsBuilder: (v, refresh) async {
-            List<String>? communities =[];
-            if((values?.containsKey('places') ?? false) && (values!['places'] as List).isNotEmpty){
-             communities = (values['places'] as List?)
-                ?.map((e) => e['value'] as String)
-                .toList();
-            }else{
-             communities = (values?['communities'] is List)
-              ? (values?['communities'] as List).expand((community) {
-                  return community['value'] is List
-                      ? community['value'] as List<String>
-                      : [community['value'].toString()];
-                }).toList()
-              : values?['communities']?['value'] as List<String>?;
+            List<String>? communities = [];
+            if ((values?.containsKey('places') ?? false) &&
+                (values!['places'] as List).isNotEmpty) {
+              communities = (values['places'] as List?)
+                  ?.map((e) => e['value'] as String)
+                  .toList();
+            } else {
+              communities = (values?['communities'] is List)
+                  ? (values?['communities'] as List).expand((community) {
+                      return community['value'] is List
+                          ? community['value'] as List<String>
+                          : [community['value'].toString()];
+                    }).toList()
+                  : values?['communities']?['value'] as List<String>?;
             }
-            final list = await context.read<LeadsListExplorerCubit>().getBuildings(
-                search: v.text, community: communities, refresh: refresh);
+            final list = await context
+                .read<LeadsListExplorerCubit>()
+                .getBuildings(
+                    search: v.text, community: communities, refresh: refresh);
             return list.map((e) => {'value': e.id, 'label': e.name});
           },
           displayStringForOption: (option) => option['label'] ?? '',
@@ -277,32 +280,36 @@ class _ExplorerTabState extends State<ExplorerTab> {
               ),
             ),
             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-              child: Row(children: [
-                Expanded(
-                      child: AppPrimaryButton(
-                        onTap: () async{
-                         await context.read<LeadsListExplorerCubit>().randomCheckout(
-                              context: context, numberOfLeads: 50);
-                        },
-                        text: "50",
-                        backgroundColor: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                        child: AppPrimaryButton(
-                      onTap: () async{
-                      await  context
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: AppPrimaryButton(
+                      onTap: () async {
+                        await context
                             .read<LeadsListExplorerCubit>()
-                            .randomCheckout(context: context, numberOfLeads: 100);
+                            .randomCheckout(
+                                context: context, numberOfLeads: 50);
                       },
-                      text: "100",
+                      text: "50",
                       backgroundColor: Theme.of(context).colorScheme.secondary,
-                    )),
-              ],),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                      child: AppPrimaryButton(
+                    onTap: () async {
+                      await context
+                          .read<LeadsListExplorerCubit>()
+                          .randomCheckout(context: context, numberOfLeads: 100);
+                    },
+                    text: "100",
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                  )),
+                ],
+              ),
             ),
             BlocBuilder<LeadsListExplorerCubit, LeadsListExplorerState>(
               builder: (context, state) {
@@ -543,7 +550,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                       ),
                                       children: [
                                         SizedBox(
-                                          height: 150,
+                                          height: 180,
                                           child: ListView.separated(
                                               scrollDirection: Axis.horizontal,
                                               itemBuilder: (lcontext, index) {
@@ -556,7 +563,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                                         .primary;
                                                 return Container(
                                                   width: 190,
-                                                  height: 150,
+                                                  height: 180,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -621,25 +628,33 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                                                 text: card
                                                                         .community
                                                                         ?.community ??
-                                                                    '',
+                                                                    'N/A',
                                                                 iconColor:
                                                                     primaryColor,
                                                                 iconSize: 18,
                                                               ),
-                                                              if (card.building
-                                                                      ?.name !=
-                                                                  null)
-                                                                TextWithIcon(
-                                                                  icon: Icons
-                                                                      .location_city,
-                                                                  text: card
-                                                                          .building
-                                                                          ?.name ??
-                                                                      '',
-                                                                  iconColor:
-                                                                      primaryColor,
-                                                                  iconSize: 18,
-                                                                ),
+                                                              TextWithIcon(
+                                                                icon: Icons
+                                                                    .location_city,
+                                                                text: card
+                                                                        .building
+                                                                        ?.name ??
+                                                                    'N/A',
+                                                                iconColor:
+                                                                    primaryColor,
+                                                                iconSize: 18,
+                                                              ),
+                                                              TextWithIcon(
+                                                                icon: Icons
+                                                                    .location_searching,
+                                                                text: card
+                                                                        .cluster
+                                                                         ??
+                                                                    'N/A',
+                                                                iconColor:
+                                                                    primaryColor,
+                                                                iconSize: 18,
+                                                              ),
                                                               VerticalSmallGap(
                                                                 adjustment: .3,
                                                               ),
@@ -663,8 +678,9 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                                                       Expanded(
                                                                         child:
                                                                             TextWithIcon(
-                                                                          text: card.beds?.toString() ??
-                                                                              '0',
+                                                                          text: (card.beds?.isNotEmpty ?? false)
+                                                                              ? card.beds!
+                                                                              : 'N/A',
                                                                           iconPath:
                                                                               'assets/images/bed.png',
                                                                           iconColor:
@@ -685,7 +701,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                                                         child:
                                                                             TextWithIcon(
                                                                           text: card.baths?.toString() ??
-                                                                              '0',
+                                                                              'N/A',
                                                                           iconPath:
                                                                               'assets/images/shower.png',
                                                                           iconColor:
@@ -698,7 +714,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                                                         child:
                                                                             TextWithIcon(
                                                                           text: (card.size?.currency ??
-                                                                              '0'),
+                                                                              'N/A'),
                                                                           iconPath:
                                                                               'assets/images/area.png',
                                                                           iconColor:

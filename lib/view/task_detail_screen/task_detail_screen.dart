@@ -477,6 +477,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                     TaskDetailCubit>(),
                                                                 child:
                                                                     AddNoteDialog(
+                                                                      activity: task,
                                                                   preNote:
                                                                       task.notes ??
                                                                           "",
@@ -767,9 +768,10 @@ class ContainerIcon extends StatelessWidget {
 }
 
 class AddNoteDialog extends StatefulWidget {
-  const AddNoteDialog({super.key, required this.preNote});
+  const AddNoteDialog({super.key, required this.preNote, required this.activity});
 
   final String preNote;
+  final Activity activity;
 
   @override
   State<AddNoteDialog> createState() => _AddNoteDialogState();
@@ -828,6 +830,7 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                       final values = key.currentState!.value;
                       await context.read<TaskDetailCubit>().updateActivity(
                           context: context,
+                          task:widget.activity ,
                           completed: false,
                           refresh: true,
                           notes: _controller.text.trim(),

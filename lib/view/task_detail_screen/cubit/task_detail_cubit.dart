@@ -83,6 +83,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> updateActivity(
       {required BuildContext context,
+      required Activity task,
       String? notes,
       required bool addFollowUp,
       bool refresh = false,
@@ -139,6 +140,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> completeAndAddFollowUp(
       {required BuildContext context,
+      required Activity task,
       String? currentActivityNotes,
       required bool markAsProspect,
       Map<String, dynamic>? values}) async {
@@ -153,12 +155,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (markAsProspect) {
       await makeProspect(
           context: context,
+          task: task,
           description: currentActivityNotes,
           addFollowUp: true,
           values: values);
     } else {
       await updateActivity(
           context: context,
+          task: task,
           addFollowUp: true,
           values: values,
           notes: currentActivityNotes);
@@ -167,6 +171,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> disqualify({
     required BuildContext context,
+    required Activity task,
     String? description,
   }) async {
     if (state.task?.lead?.id == null) {
@@ -174,11 +179,12 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
+        task: task,
         notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
-              await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+              await _leadRepo.updateLead(leadId: task.lead!.id, value: {
             'currentAgent': null,
             'lead_status': 'Disqualified',
             'activity': {'notes': description}
@@ -200,6 +206,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> makeLost({
     required BuildContext context,
+    required Activity task,
     String? description,
   }) async {
     if (state.task?.lead?.id == null) {
@@ -207,11 +214,12 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
     await updateActivity(
         context: context,
+        task: task,
         notes: description,
         addFollowUp: false,
         onSuccess: () async {
           final result =
-              await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+              await _leadRepo.updateLead(leadId: task.lead!.id, value: {
             'lead_status': 'Lost',
             'currentAgent': null,
             'activity': {'notes': description}
@@ -229,6 +237,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> doNotCall({
     required BuildContext context,
+    required Activity task,
     String? description,
   }) async {
     if (state.task?.lead?.id == null) {
@@ -237,10 +246,11 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     await updateActivity(
         context: context,
         notes: description,
+        task:task ,
         addFollowUp: false,
         onSuccess: () async {
           final result =
-              await _leadRepo.updateLead(leadId: state.task!.lead!.id, value: {
+              await _leadRepo.updateLead(leadId: task.lead!.id, value: {
             'lead_status': 'Lost',
             'currentAgent': null,
             'activity': {'notes': description},
@@ -259,6 +269,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
   Future<void> makeProspect(
       {required BuildContext context,
+      required Activity task,
       String? description,
       required bool addFollowUp,
       Map<String, dynamic>? values}) async {
@@ -266,11 +277,12 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       return;
     }
     final result = await _leadRepo.updateLead(
-        leadId: state.task!.lead!.id, value: {"lead_status": "Prospect"});
+        leadId: task.lead!.id, value: {"lead_status": "Prospect"});
     switch (result) {
       case (Success s):
         await updateActivity(
             context: context,
+            task: task,
             notes: description,
             addFollowUp: true,
             values: values);
@@ -323,6 +335,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
             (element) => uniqueIds.add(element.id)); // Keep only unique items
 
         emit(state.copyWith(
+          task: activities.firstOrNull,
             sortedActivity: activities,
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));

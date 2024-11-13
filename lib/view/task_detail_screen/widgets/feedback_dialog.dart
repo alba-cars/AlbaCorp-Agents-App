@@ -378,6 +378,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                             .read<TaskDetailCubit>()
                                             .completeAndAddFollowUp(
                                                 context: context,
+                                                task: widget.activity,
                                                 values: val,
                                                currentActivityNotes: val['notes'],
                                                 markAsProspect:
@@ -454,6 +455,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                           .read<TaskDetailCubit>()
                                           .makeLost(
                                             context: context,
+                                            task: widget.activity,
                                             description: _controller.text,
                                           );
                                     },
@@ -474,6 +476,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                           .read<TaskDetailCubit>()
                                           .doNotCall(
                                             context: context,
+                                            task: widget.activity,
                                             description: _controller.text,
                                           );
                                     },
@@ -492,6 +495,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                           .read<TaskDetailCubit>()
                                           .completeAndAddFollowUp(
                                               context: widget.parentContext,
+                                              task: widget.activity,
                                               currentActivityNotes: "Not Answered",
                                               markAsProspect: false,
                                               values: {
@@ -524,6 +528,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                           .read<TaskDetailCubit>()
                                           .disqualify(
                                               context: widget.parentContext,
+                                              task: widget.activity,
                                               description:
                                                   value == "Invalid Number"
                                                       ? "Invalid Number"
