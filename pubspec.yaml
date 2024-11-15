@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.23+29
+version: 1.0.24+30
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
@@ -92,6 +92,7 @@ dependencies:
   horizontal_week_calendar: ^0.0.18
   geolocator: ^13.0.1
   geocoding: ^3.0.0
+  table_calendar: ^3.1.2
 
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"

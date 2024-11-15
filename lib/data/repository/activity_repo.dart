@@ -30,6 +30,7 @@ abstract class ActivityRepo {
       Paginator? paginator});
   Future<Result<List<Activity>>> getActivitiesByAgent(
       {String? status,
+      String? type,
       List<DateTime>? dates,
       String? userId,
       Paginator? paginator});

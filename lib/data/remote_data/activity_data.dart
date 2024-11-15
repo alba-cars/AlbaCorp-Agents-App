@@ -30,7 +30,7 @@ class ActivityData implements ActivityRepo {
       final response = await _dio.post('/v1/activities', data: {
         'user_id': leadId,
         'type': type,
-        'date': date?.toIso8601String() ?? DateTime.now().toIso8601String(),
+        'date': date?.toUtc().toIso8601String() ?? DateTime.now().toUtc().toIso8601String(),
         if (date == null) 'disableDateChecking': true,
         'description': description,
         'property_id': propertyId,
@@ -352,23 +352,24 @@ class ActivityData implements ActivityRepo {
 
   @override
   Future<Result<List<Activity>>> getActivitiesByAgent(
-      {String? status,
+      {String? status,String? type,
       List<DateTime>? dates,
       String? userId,
       Paginator? paginator}) async {
     try {
       Map<String, dynamic> query = {
         if (paginator != null) 'page': paginator.currentPage + 1,
-        'limit': 20,
+        'pageSize': 20,
       };
       Logger().d("Query = ${query}");
       var payload = {
         'date': dates?.map((e) => e.toIso8601String()).toList(),
         'userId': userId,
         "status": status,
+        "type":type
       };
       Logger().d(payload);
-      final res = await _dio.post('/v1/activities/agent/',
+      final res = await _dio.post('/v1/activities/agent',
           data: payload, queryParameters: query);
 
       List<dynamic> data = res.data['activities'] as List;
