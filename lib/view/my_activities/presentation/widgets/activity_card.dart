@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
+import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../../model/activity_model.dart';
 
@@ -35,7 +37,11 @@ class ActivityCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: (){
+          if(activity.lead?.currentAgent?.id == getIt<AuthBloc>().state.agent?.id){
           context.pushNamed(LeadDetailScreen.routeName,pathParameters: {'id':activity.userId});
+          }else{
+            showSnackbar(context, "Lead is no longer with you", SnackBarType.failure);
+          }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +84,7 @@ class ActivityCard extends StatelessWidget {
                 if (activity.lead != null) ...[
                   const SizedBox(height: 4),
                   Text(
-                    activity.lead!.firstName +(activity.lead!.lastName),
+                     ("${activity.lead!.firstName} ${activity.lead!.lastName}"),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
                     ),

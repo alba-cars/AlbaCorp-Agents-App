@@ -62,7 +62,7 @@ class _ActivityFiltersSectionState extends State<ActivityFiltersSection> {
         hintText: 'Type',
       ),
       value: state.activityType ?? 'All',
-      items: ["All", 'CheckIn', 'Call', 'Whatsapp', 'Assign','Viewing']
+      items: ["All", 'CheckIn', 'Call', 'Whatsapp', 'Assign','Viewing','Unassigned']
           .map((status) => DropdownMenuItem(
                 value: status,
                 child: Text(status),
