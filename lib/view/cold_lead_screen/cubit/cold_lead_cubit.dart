@@ -65,12 +65,12 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
           "sortBy": 'latest'
         };
       case TaskFilterEnum.FollowUp:
-        DateTime d = DateTime.now();
+        DateTime d = DateTime.now().toUtc();
         return {
           "leadSourceType": 'cold',
           "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
           "status": [
-            "Pending",
+            "Pending","Overdue"
           ],
           "toDate": '${d.year}-${d.month}-${d.day}',
         };

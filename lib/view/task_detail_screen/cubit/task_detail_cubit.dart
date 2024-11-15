@@ -358,12 +358,12 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           "sortBy": 'latest'
         };
       case TaskFilterEnum.FollowUp:
-        DateTime d = DateTime.now();
+        DateTime d = DateTime.now().toUtc();
         return {
           if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
-          "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal",'Prospect'],
           "status": [
-            "Pending",
+            "Pending","Overdue"
           ],
           "toDate": '${d.year}-${d.month}-${d.day}',
         };
