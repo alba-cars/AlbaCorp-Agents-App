@@ -21,8 +21,10 @@ class AddLeadCubit extends Cubit<AddLeadState> {
             step2Values: data ?? {},
             step1Values: data?['lead_source'] != null
                 ? {
-                    'lead_source':
-                        LeadSource(name: data?['lead_source'], id: "", key: "")
+                    'lead_source': LeadSource(
+                      name: data?['lead_source'],
+                      id: "",
+                    )
                   }
                 : null)) {
     getLeadSources();

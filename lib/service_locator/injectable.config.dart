@@ -63,6 +63,7 @@ import '../view/enquiries_screen/cubit/enquiries_cubit.dart' as _i35;
 import '../view/explorer_screen/cubit/explorer_screen_cubit.dart' as _i31;
 import '../view/home_screen/cubit/home_cubit.dart' as _i48;
 import '../view/lead_detail_screen/cubit/lead_detail_cubit.dart' as _i40;
+import '../view/lead_source/presentation/cubit/lead_source_cubit.dart' as _i65;
 import '../view/leads_list_explorer/cubit/leads_list_explorer_cubit.dart'
     as _i62;
 import '../view/leads_screen/cubit/leads_cubit.dart' as _i37;
@@ -77,7 +78,7 @@ import '../view/property_card_details/cubit/property_card_details_cubit.dart'
 import '../view/task_detail_screen/cubit/task_detail_cubit.dart' as _i55;
 import '../view/ticket_detail_screen/cubit/ticket_details_cubit.dart' as _i39;
 import '../view/tickets_screen/cubit/tickets_screen_cubit.dart' as _i49;
-import 'injectable_module.dart' as _i65;
+import 'injectable_module.dart' as _i66;
 import 'objectbox.dart' as _i3;
 
 const String _Stage = 'Stage';
@@ -338,8 +339,10 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i22.ExplorerRepo>(),
           gh<_i17.AgentRepo>(),
         ));
+    gh.factory<_i65.LeadSourceCubit>(
+        () => _i65.LeadSourceCubit(leadData: gh<_i27.LeadRepo>()));
     return this;
   }
 }
 
-class _$RegisterModules extends _i65.RegisterModules {}
+class _$RegisterModules extends _i66.RegisterModules {}
