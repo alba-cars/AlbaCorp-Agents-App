@@ -81,127 +81,104 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
   }
 
-  Future<void> updateActivity(
-      {required BuildContext context,
-      required Activity task,
-      String? notes,
-      required bool addFollowUp,
-      bool refresh = false,
-      bool completed = true,
-      Map<String, dynamic>? values,
-      Future<void> Function()? onSuccess}) async {
-    final result = await _activityRepo.updateActivity(
-        activityId: state.task!.id, notes: notes, completed: completed);
-    switch (result) {
-      case (Success s):
-        if (onSuccess != null) {
-          await onSuccess();
-        }
-        getIt<AuthBloc>().add(
-            AuthEvent.completedImportantActivity(activityId: state.task!.id));
-        emit(state.copyWith(updateTaskStatus: AppStatus.success));
-        if (addFollowUp) {
-          final type = values?['type'];
-          final propertyId = values?['property'];
-          final description = values?["description"];
-          final date = (values?["date"] as DateTime?)?.addTime(
-              (values?["time"] as TimeOfDay? ??
-                  TimeOfDay(hour: 10, minute: 0)));
-          final res = await addActivity(
-              context: context,
-              leadId: state.task!.lead!.id,
-              type: type,
-              date: date,
-              description: description,
-              propertyId: propertyId);
-          if (!res) {
-            return;
-          }
-        }
-        if (context.mounted) {
-          Navigator.of(context).pop(true);
-        }
-        if (refresh) {
-          final activity = state.task?.copyWith(notes: notes);
-          final activities = state.activities
-              .map((e) => e.id == state.taskId ? e.copyWith(notes: notes) : e)
-              .toList();
-          emit(state.copyWith(task: activity, sortedActivity: activities));
-        }
-        getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
-      case (Error e):
-        emit(state.copyWith(
-            updateTaskError: e.exception, updateTaskStatus: AppStatus.failure));
-        if (context.mounted) {
-          showSnackbar(context, e.exception, SnackBarType.failure);
-        }
-    }
+  void onRAtingChanged(double value) {
+    emit(state.copyWith(ratingValue: value));
   }
 
-  Future<void> completeAndAddFollowUp(
-      {required BuildContext context,
-      required Activity task,
-      String? currentActivityNotes,
-      required bool markAsProspect,
-      Map<String, dynamic>? values}) async {
-    final date = (values?["date"] as DateTime?)?.addTime(
-        (values?["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0)));
-    if (date == null || date.compareTo(DateTime.now()) == -1) {
+  Future<void> updateAndCompleteActivity({
+    required BuildContext context,
+    required Activity task,
+    String? notes,
+    required bool addFollowUp,
+    bool refresh = false,
+    Map<String, dynamic>? values,
+    FeedbackTypeEnum? feedbackType,
+    Future<void> Function()? onSuccess,
+  }) async {
+    try {
+      // Prepare follow up data if needed
+      Map<String, dynamic>? followUpData;
+      if (addFollowUp && values != null) {
+        final date = (values["date"] as DateTime?)?.addTime(
+            values["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0));
+
+        if (date != null) {
+          followUpData = {
+            "date": date.toUtc().toIso8601String(),
+            "type": values['type'],
+            "description": values['description']
+          };
+        }
+      }
+
+      // Prepare the completion request
+      final result = await _activityRepo.completeActivity(
+        activityId: state.task!.id,
+        type: feedbackType?.value ?? 'interested',
+        feedback: notes,
+        leadRating: state.ratingValue,
+        followUp: followUpData,
+      );
+
+      switch (result) {
+        case (Success s):
+          if (onSuccess != null) {
+            await onSuccess();
+          }
+
+          getIt<AuthBloc>().add(
+              AuthEvent.completedImportantActivity(activityId: state.task!.id));
+
+          emit(state.copyWith(updateTaskStatus: AppStatus.success));
+
+          if (context.mounted) {
+            Navigator.of(context).pop(true);
+          }
+
+          if (refresh) {
+            final activity = state.task?.copyWith(notes: notes);
+            final activities = state.activities
+                .map((e) => e.id == state.taskId ? e.copyWith(notes: notes) : e)
+                .toList();
+            emit(state.copyWith(task: activity, sortedActivity: activities));
+          }
+
+          getIt<AuthBloc>().add(AuthEvent.refreshAgentData());
+          break;
+
+        case (Error e):
+          emit(state.copyWith(
+              updateTaskError: e.exception,
+              updateTaskStatus: AppStatus.failure));
+          if (context.mounted) {
+            showSnackbar(context, e.exception, SnackBarType.failure);
+          }
+          break;
+      }
+    } catch (e) {
+      emit(state.copyWith(
+          updateTaskError: e.toString(), updateTaskStatus: AppStatus.failure));
       if (context.mounted) {
-        showSnackbar(context, 'Choose a valid date time', SnackBarType.failure);
-        return;
+        showSnackbar(context, e.toString(), SnackBarType.failure);
       }
     }
-    if (markAsProspect) {
-      await makeProspect(
-          context: context,
-          task: task,
-          description: currentActivityNotes,
-          addFollowUp: true,
-          values: values);
-    } else {
-      await updateActivity(
-          context: context,
-          task: task,
-          addFollowUp: true,
-          values: values,
-          notes: currentActivityNotes);
-    }
   }
 
-  Future<void> disqualify({
+  Future<void> disqualifyOrInvalidNumber({
     required BuildContext context,
     required Activity task,
     String? description,
+   FeedbackTypeEnum feedbackType= FeedbackTypeEnum.disqualify,
   }) async {
-    if (state.task?.lead?.id == null) {
-      return;
-    }
-    await updateActivity(
-        context: context,
-        task: task,
-        notes: description,
-        addFollowUp: false,
-        onSuccess: () async {
-          final result =
-              await _leadRepo.updateLead(leadId: task.lead!.id, value: {
-            'currentAgent': null,
-            'lead_status': 'Disqualified',
-            'activity': {'notes': description}
-          });
-          switch (result) {
-            case (Success s):
-              {
-                break;
-              }
-            case (Error e):
-              {
-                if (context.mounted) {
-                  showSnackbar(context, e.exception, SnackBarType.failure);
-                }
-              }
-          }
-        });
+    if (state.task?.lead?.id == null) return;
+
+    await updateAndCompleteActivity(
+      context: context,
+      task: task,
+      notes: description,
+      addFollowUp: false,
+      feedbackType: feedbackType,
+    );
   }
 
   Future<void> makeLost({
@@ -209,30 +186,15 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     required Activity task,
     String? description,
   }) async {
-    if (state.task?.lead?.id == null) {
-      return;
-    }
-    await updateActivity(
-        context: context,
-        task: task,
-        notes: description,
-        addFollowUp: false,
-        onSuccess: () async {
-          final result =
-              await _leadRepo.updateLead(leadId: task.lead!.id, value: {
-            'lead_status': 'Lost',
-            'currentAgent': null,
-            'activity': {'notes': description}
-          });
-          switch (result) {
-            case (Success s):
-              break;
-            case (Error e):
-              if (context.mounted) {
-                showSnackbar(context, e.exception, SnackBarType.failure);
-              }
-          }
-        });
+    if (state.task?.lead?.id == null) return;
+
+    await updateAndCompleteActivity(
+      context: context,
+      task: task,
+      notes: description,
+      addFollowUp: false,
+      feedbackType: FeedbackTypeEnum.notInterested,
+    );
   }
 
   Future<void> doNotCall({
@@ -240,31 +202,15 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     required Activity task,
     String? description,
   }) async {
-    if (state.task?.lead?.id == null) {
-      return;
-    }
-    await updateActivity(
-        context: context,
-        notes: description,
-        task:task ,
-        addFollowUp: false,
-        onSuccess: () async {
-          final result =
-              await _leadRepo.updateLead(leadId: task.lead!.id, value: {
-            'lead_status': 'Lost',
-            'currentAgent': null,
-            'activity': {'notes': description},
-            "DndStatus": true
-          });
-          switch (result) {
-            case (Success s):
-              break;
-            case (Error e):
-              if (context.mounted) {
-                showSnackbar(context, e.exception, SnackBarType.failure);
-              }
-          }
-        });
+    if (state.task?.lead?.id == null) return;
+
+    await updateAndCompleteActivity(
+      context: context,
+      task: task,
+      notes: description,
+      addFollowUp: false,
+      feedbackType: FeedbackTypeEnum.doNotDial,
+    );
   }
 
   Future<void> makeProspect(
@@ -273,23 +219,52 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       String? description,
       required bool addFollowUp,
       Map<String, dynamic>? values}) async {
-    if (state.task?.lead?.id == null) {
-      return;
+    if (state.task?.lead?.id == null) return;
+    
+
+    await updateAndCompleteActivity(
+      context: context,
+      task: task,
+      notes: description,
+      addFollowUp: true,
+      values: values,
+      feedbackType: FeedbackTypeEnum.veryInterested,
+    );
+  }
+
+  Future<void> completeAndAddFollowUp(
+      {required BuildContext context,
+      required Activity task,
+      String? currentActivityNotes,
+      required bool markAsProspect,
+     required Map<String, dynamic> values}) async {
+    final date = (values["date"] as DateTime?)?.addTime(
+        values["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0));
+
+    if (date == null || date.compareTo(DateTime.now()) == -1) {
+      if (context.mounted) {
+        showSnackbar(context, 'Choose a valid date time', SnackBarType.failure);
+        return;
+      }
     }
-    final result = await _leadRepo.updateLead(
-        leadId: task.lead!.id, value: {"lead_status": "Prospect"});
-    switch (result) {
-      case (Success s):
-        await updateActivity(
-            context: context,
-            task: task,
-            notes: description,
-            addFollowUp: true,
-            values: values);
-      case (Error e):
-        if (context.mounted) {
-          showSnackbar(context, e.exception, SnackBarType.failure);
-        }
+
+    if (markAsProspect) {
+      await makeProspect(
+        context: context,
+        task: task,
+        description: currentActivityNotes,
+        addFollowUp: true,
+        values: values,
+      );
+    } else {
+      await updateAndCompleteActivity(
+        context: context,
+        task: task,
+        addFollowUp: true,
+        values: values,
+        notes: currentActivityNotes,
+        feedbackType: FeedbackTypeEnum.interested,
+      );
     }
   }
 
@@ -335,7 +310,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
             (element) => uniqueIds.add(element.id)); // Keep only unique items
 
         emit(state.copyWith(
-          task: activities.firstOrNull,
+            task: activities.firstOrNull,
             sortedActivity: activities,
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
@@ -361,10 +336,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         DateTime d = DateTime.now().toUtc();
         return {
           if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
-          "leadStatus": ["Follow up", "Viewing", "Won", "Deal",'Prospect'],
-          "status": [
-            "Pending","Overdue"
-          ],
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal", 'Prospect'],
+          "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}',
         };
       case TaskFilterEnum.Favourites:
@@ -384,31 +357,24 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
   }
 
-  Future<bool> addActivity({
-    required BuildContext context,
-    required String leadId,
-    required String type,
-    DateTime? date,
-    String? propertyId,
-    String? description,
-  }) async {
-    final result = await _activityRepo.createActivity(
-        leadId: leadId,
-        type: type,
-        date: date,
-        description: description,
-        propertyId: propertyId);
+  Future<void> updateActivity(
+      {required BuildContext context, String? notes}) async {
+    final result = await _activityRepo.updateActivity(
+        activityId: state.task!.id, notes: notes, completed: false);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(addTaskStatus: AppStatus.success));
-        return true;
+        emit(state.copyWith(updateTaskStatus: AppStatus.success));
+        final activity = state.task?.copyWith(notes: notes);
+        final activities = state.sortedActivity
+            .map((e) => e.id == state.taskId ? e.copyWith(notes: notes) : e)
+            .toList();
+        emit(state.copyWith(task: activity, sortedActivity: activities));
       case (Error e):
         emit(state.copyWith(
-            addTaskError: e.exception, addTaskStatus: AppStatus.failure));
+            updateTaskError: e.exception, updateTaskStatus: AppStatus.failure));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
-        return false;
     }
   }
 
@@ -500,5 +466,24 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       case (Error _):
         return null;
     }
+  }
+}
+
+enum FeedbackTypeEnum {
+  interested,
+  veryInterested,
+  notInterested,
+  noAnswer,
+  disqualify,
+  invalidNumber,
+  doNotDial,
+  createListing,
+  createPocketListing,
+  createDeal
+}
+
+extension FeedbackTypeExtension on FeedbackTypeEnum {
+  String get value {
+    return toString().split('.').last;
   }
 }

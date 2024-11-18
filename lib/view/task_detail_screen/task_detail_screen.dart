@@ -242,23 +242,28 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                       final val = await showGeneralDialog(
                           context: context,
                           useRootNavigator: false,
-                          pageBuilder: (dContext, anim1, anim2) =>
-                              ActivityFeedbackDialog(
-                                parentContext: context,
-                                direction: DismissDirection.startToEnd,
-                                mode: mode,
-                                notes: context
-                                    .read<TaskDetailCubit>()
-                                    .state
-                                    .task
-                                    ?.notes,
-                                activity:
-                                    context.read<TaskDetailCubit>().state.task!,
+                          pageBuilder: (dContext, anim1, anim2) => BlocProvider.value(
+                                    value: context.read<TaskDetailCubit>(),
+                                child: ActivityFeedbackDialog(
+                                  parentContext: context,
+                                  direction: DismissDirection.startToEnd,
+                                  mode: mode,
+                                  notes: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task
+                                      ?.notes,
+                                  activity: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task!,
+                                ),
                               ));
                       if (val == null &&
                           mounted &&
-                          context.read<TaskDetailCubit>().state.taskId !=
-                              tasks[targetIndex].id) {
+                          (tasks.length == targetIndex ||
+                              context.read<TaskDetailCubit>().state.taskId !=
+                                  tasks[targetIndex].id)) {
                         _appinioSwiperController.unswipe();
                       } else {
                         context
@@ -270,16 +275,21 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                           context: context,
                           useRootNavigator: false,
                           pageBuilder: (dContext, anim1, anim2) =>
-                              ActivityFeedbackDialog(
-                                parentContext: context,
-                                direction: DismissDirection.endToStart,
-                                notes: context
-                                    .read<TaskDetailCubit>()
-                                    .state
-                                    .task
-                                    ?.notes,
-                                activity:
-                                    context.read<TaskDetailCubit>().state.task!,
+                              BlocProvider.value(
+                                value: context.read<TaskDetailCubit>(),
+                                child: ActivityFeedbackDialog(
+                                  parentContext: context,
+                                  direction: DismissDirection.endToStart,
+                                  notes: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task
+                                      ?.notes,
+                                  activity: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task!,
+                                ),
                               ));
                       if (val == null && mounted) {
                         mode = CardAction.Skip;
@@ -477,7 +487,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                     TaskDetailCubit>(),
                                                                 child:
                                                                     AddNoteDialog(
-                                                                      activity: task,
+                                                                  activity:
+                                                                      task,
                                                                   preNote:
                                                                       task.notes ??
                                                                           "",
@@ -768,7 +779,8 @@ class ContainerIcon extends StatelessWidget {
 }
 
 class AddNoteDialog extends StatefulWidget {
-  const AddNoteDialog({super.key, required this.preNote, required this.activity});
+  const AddNoteDialog(
+      {super.key, required this.preNote, required this.activity});
 
   final String preNote;
   final Activity activity;
@@ -829,12 +841,9 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                     if (validated == true) {
                       final values = key.currentState!.value;
                       await context.read<TaskDetailCubit>().updateActivity(
-                          context: context,
-                          task:widget.activity ,
-                          completed: false,
-                          refresh: true,
-                          notes: _controller.text.trim(),
-                          addFollowUp: false);
+                            context: context,
+                            notes: _controller.text.trim(),
+                          );
                     }
                   }),
             )

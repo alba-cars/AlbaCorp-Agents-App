@@ -52,4 +52,13 @@ abstract class ActivityRepo {
       int? duration,
       String? notes,
       String? feedback});
+      Future<Result<dynamic>> completeActivity({
+    required String activityId,
+    required String type,
+    String? feedback,
+    double? leadRating,
+    Map<String, dynamic>? followUp,
+  });
+
+      
 }

@@ -38,6 +38,7 @@ mixin _$TaskDetailState {
       throw _privateConstructorUsedError;
   String? get getPropertyCardsListError => throw _privateConstructorUsedError;
   Paginator? get propertyCardPaginator => throw _privateConstructorUsedError;
+  double? get ratingValue => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskDetailStateCopyWith<TaskDetailState> get copyWith =>
@@ -69,7 +70,8 @@ abstract class $TaskDetailStateCopyWith<$Res> {
       AppStatus getPropertyCardsListStatus,
       List<LeadPropertyCardModel> propertyCardsList,
       String? getPropertyCardsListError,
-      Paginator? propertyCardPaginator});
+      Paginator? propertyCardPaginator,
+      double? ratingValue});
 
   $ActivityCopyWith<$Res>? get task;
   $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
@@ -108,6 +110,7 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
     Object? propertyCardsList = null,
     Object? getPropertyCardsListError = freezed,
     Object? propertyCardPaginator = freezed,
+    Object? ratingValue = freezed,
   }) {
     return _then(_value.copyWith(
       taskId: null == taskId
@@ -186,6 +189,10 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
           ? _value.propertyCardPaginator
           : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      ratingValue: freezed == ratingValue
+          ? _value.ratingValue
+          : ratingValue // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 
@@ -253,7 +260,8 @@ abstract class _$$TaskDetailStateImplCopyWith<$Res>
       AppStatus getPropertyCardsListStatus,
       List<LeadPropertyCardModel> propertyCardsList,
       String? getPropertyCardsListError,
-      Paginator? propertyCardPaginator});
+      Paginator? propertyCardPaginator,
+      double? ratingValue});
 
   @override
   $ActivityCopyWith<$Res>? get task;
@@ -293,6 +301,7 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
     Object? propertyCardsList = null,
     Object? getPropertyCardsListError = freezed,
     Object? propertyCardPaginator = freezed,
+    Object? ratingValue = freezed,
   }) {
     return _then(_$TaskDetailStateImpl(
       taskId: null == taskId
@@ -371,6 +380,10 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
           ? _value.propertyCardPaginator
           : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      ratingValue: freezed == ratingValue
+          ? _value.ratingValue
+          : ratingValue // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -397,7 +410,8 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
       this.getPropertyCardsListStatus = AppStatus.init,
       final List<LeadPropertyCardModel> propertyCardsList = const [],
       this.getPropertyCardsListError,
-      this.propertyCardPaginator})
+      this.propertyCardPaginator,
+      this.ratingValue = null})
       : _sortedActivity = sortedActivity,
         _activities = activities,
         _propertyCardsList = propertyCardsList;
@@ -468,10 +482,13 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
   final String? getPropertyCardsListError;
   @override
   final Paginator? propertyCardPaginator;
+  @override
+  @JsonKey()
+  final double? ratingValue;
 
   @override
   String toString() {
-    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator)';
+    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, ratingValue: $ratingValue)';
   }
 
   @override
@@ -493,7 +510,8 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
                 .equals(other._sortedActivity, _sortedActivity) &&
             (identical(other.getSortedActivitiesStatus, getSortedActivitiesStatus) ||
                 other.getSortedActivitiesStatus == getSortedActivitiesStatus) &&
-            (identical(other.getSortedActivitiesError, getSortedActivitiesError) ||
+            (identical(
+                    other.getSortedActivitiesError, getSortedActivitiesError) ||
                 other.getSortedActivitiesError == getSortedActivitiesError) &&
             (identical(other.sortedActivityPaginator, sortedActivityPaginator) ||
                 other.sortedActivityPaginator == sortedActivityPaginator) &&
@@ -513,11 +531,12 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
                     getPropertyCardsListStatus) &&
             const DeepCollectionEquality()
                 .equals(other._propertyCardsList, _propertyCardsList) &&
-            (identical(other.getPropertyCardsListError,
-                    getPropertyCardsListError) ||
+            (identical(other.getPropertyCardsListError, getPropertyCardsListError) ||
                 other.getPropertyCardsListError == getPropertyCardsListError) &&
             (identical(other.propertyCardPaginator, propertyCardPaginator) ||
-                other.propertyCardPaginator == propertyCardPaginator));
+                other.propertyCardPaginator == propertyCardPaginator) &&
+            (identical(other.ratingValue, ratingValue) ||
+                other.ratingValue == ratingValue));
   }
 
   @override
@@ -541,7 +560,8 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
         getPropertyCardsListStatus,
         const DeepCollectionEquality().hash(_propertyCardsList),
         getPropertyCardsListError,
-        propertyCardPaginator
+        propertyCardPaginator,
+        ratingValue
       ]);
 
   @JsonKey(ignore: true)
@@ -572,7 +592,8 @@ abstract class _TaskDetailState implements TaskDetailState {
       final AppStatus getPropertyCardsListStatus,
       final List<LeadPropertyCardModel> propertyCardsList,
       final String? getPropertyCardsListError,
-      final Paginator? propertyCardPaginator}) = _$TaskDetailStateImpl;
+      final Paginator? propertyCardPaginator,
+      final double? ratingValue}) = _$TaskDetailStateImpl;
 
   @override
   String get taskId;
@@ -612,6 +633,8 @@ abstract class _TaskDetailState implements TaskDetailState {
   String? get getPropertyCardsListError;
   @override
   Paginator? get propertyCardPaginator;
+  @override
+  double? get ratingValue;
   @override
   @JsonKey(ignore: true)
   _$$TaskDetailStateImplCopyWith<_$TaskDetailStateImpl> get copyWith =>

@@ -93,6 +93,7 @@ dependencies:
   geolocator: ^13.0.1
   geocoding: ^3.0.0
   table_calendar: ^3.1.2
+  toastification: ^2.3.0
 
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"
