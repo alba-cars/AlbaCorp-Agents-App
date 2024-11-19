@@ -492,7 +492,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           style: Theme.of(context).textTheme.displayMedium?.copyWith(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Colors.purpleAccent),
+              color: Theme.of(context).colorScheme.primary),
         ))
         // Padding(
         //   padding:  EdgeInsets.zero,

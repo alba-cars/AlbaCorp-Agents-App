@@ -242,8 +242,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                       final val = await showGeneralDialog(
                           context: context,
                           useRootNavigator: false,
-                          pageBuilder: (dContext, anim1, anim2) => BlocProvider.value(
-                                    value: context.read<TaskDetailCubit>(),
+                          pageBuilder: (dContext, anim1, anim2) =>
+                              BlocProvider.value(
+                                value: context.read<TaskDetailCubit>(),
                                 child: ActivityFeedbackDialog(
                                   parentContext: context,
                                   direction: DismissDirection.startToEnd,
@@ -451,7 +452,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: NormalText(
                                                         text:
-                                                            'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date)}'),
+                                                            'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date.toLocal())}'),
                                                   )
                                                 ],
                                               ),
