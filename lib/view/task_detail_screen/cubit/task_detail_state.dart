@@ -22,6 +22,6 @@ class TaskDetailState with _$TaskDetailState {
     @Default([]) List<LeadPropertyCardModel> propertyCardsList,
     String? getPropertyCardsListError,
     Paginator? propertyCardPaginator,
-    @Default(null) double? ratingValue,
+    @Default(5.0) double? ratingValue,
   }) = _TaskDetailState;
 }

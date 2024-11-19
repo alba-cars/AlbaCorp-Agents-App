@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/activity_types.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/util/color_category.dart';
@@ -306,6 +305,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   Widget _buildFollowUpButton(BuildContext context) {
     return AppPrimaryButton(
       onTap: () async {
+        FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
 
         final val = _formKey.currentState!.value;
@@ -326,6 +326,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     return AppPrimaryButton(
       backgroundColor: Colors.green[800],
       onTap: () async {
+        FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
 
         Navigator.of(context).pop(false);
@@ -349,6 +350,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     return AppPrimaryButton(
       backgroundColor: Colors.green[800],
       onTap: () async {
+        FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
 
         Navigator.of(context).pop(false);
@@ -380,6 +382,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       borderShow: true,
       backgroundColor: Colors.white,
       onTap: () async {
+        FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
 
         await context.read<TaskDetailCubit>().makeLost(
@@ -399,6 +402,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       borderShow: true,
       backgroundColor: Colors.white,
       onTap: () async {
+        FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
 
         await context.read<TaskDetailCubit>().doNotCall(
@@ -415,6 +419,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   Widget _buildNewTaskButton(BuildContext context) {
     return AppPrimaryButton(
       onTap: () async {
+        FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
 
         await context.read<TaskDetailCubit>().completeAndAddFollowUp(
@@ -439,6 +444,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       borderShow: true,
       backgroundColor: Colors.white,
       onTap: () async {
+        FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
 
         await context.read<TaskDetailCubit>().disqualifyOrInvalidNumber(
@@ -463,18 +469,42 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Lead Rating"),
-        
-        Padding(
-          padding:  EdgeInsets.zero,
-          child: SfSlider(
-            stepSize: 0.05,
-              value: value ?? 0.5,
-              interval: 20,
-              onChanged: (v) {
-                context.read<TaskDetailCubit>().onRAtingChanged(v);
-              }),
+        Divider(),
+        SizedBox(
+          height: 4,
         ),
+        Text("Lead Rating"),
+        SizedBox(
+          height: 4,
+        ),
+        Slider(
+            value: value ?? 5.0,
+            min: 0,
+            max: 10,
+            label: value.toString(),
+            divisions: 20,
+            onChanged: (v) {
+              context.read<TaskDetailCubit>().onRAtingChanged(v);
+            }),
+        Center(
+            child: Text(
+          "Your rating is $value out of 10",
+          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.purpleAccent),
+        ))
+        // Padding(
+        //   padding:  EdgeInsets.zero,
+        //   child: SfSlider(
+
+        //     stepSize: 0.05,
+        //       value: value ?? 0.5,
+        //       interval: 20,
+        //       onChanged: (v) {
+        //         context.read<TaskDetailCubit>().onRAtingChanged(v);
+        //       }),
+        // ),
       ],
     );
   }
@@ -507,7 +537,10 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                             VerticalSmallGap(),
                             _buildFeedbackOptions(),
                             _buildNoteField(),
-                            _buildRatingBar(context),
+                            Visibility(
+                              visible: shouldShowRating(feedbackValue.value),
+                              child: _buildRatingBar(context),
+                            ),
                             _buildFollowUpForm(),
                           ],
                         ),
@@ -525,6 +558,18 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           }),
     );
   }
+}
+
+bool shouldShowRating(FeedbackType? selectedFeedbackType) {
+  if (selectedFeedbackType == null) return false;
+  const ratingBypassStatus = [
+    FeedbackType.doNotCall,
+    FeedbackType.invalidNumber,
+    FeedbackType.notAnswered,
+    FeedbackTypeEnum.doNotDial
+  ];
+
+  return !ratingBypassStatus.contains(selectedFeedbackType);
 }
 
 // Extracted Header Component

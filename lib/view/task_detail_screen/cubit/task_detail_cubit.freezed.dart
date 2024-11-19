@@ -411,7 +411,7 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
       final List<LeadPropertyCardModel> propertyCardsList = const [],
       this.getPropertyCardsListError,
       this.propertyCardPaginator,
-      this.ratingValue = null})
+      this.ratingValue = 5.0})
       : _sortedActivity = sortedActivity,
         _activities = activities,
         _propertyCardsList = propertyCardsList;
