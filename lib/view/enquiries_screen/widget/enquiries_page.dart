@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/model/activity_model.dart';
@@ -7,6 +8,7 @@ import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/enquiries_screen/cubit/enquiries_cubit.dart';
+import 'package:real_estate_app/view/expired_hot_lead_explorer/expired_hot_lead_explorer.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
@@ -20,6 +22,7 @@ import '../../../widgets/tab_bar.dart';
 import '../../../widgets/text.dart';
 import '../../cold_lead_screen/cubit/cold_lead_cubit.dart';
 import '../../home_screen/home_screen.dart';
+import '../../leads_list_explorer/leads_list_explorer.dart';
 
 class EnquiriesPage extends StatefulWidget {
   const EnquiriesPage({super.key});
@@ -112,6 +115,40 @@ class _EnquiriesPageState extends State<EnquiriesPage>
                 ),
               ),
               HorizontalSmallGap(),
+              InkWell(
+                onTap: () {
+                  context.pushNamed(ExpiredHotLeadExplorer.routeName);
+                },
+                child: SizedBox(
+                  height: 40,
+                  width: 150,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Theme.of(context).colorScheme.secondary),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.explore,
+                          color: Colors.white,
+                        ),
+                        HorizontalSmallGap(),
+                        Text(
+                          "Hot explorer",
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge
+                              ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondary),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),)
             ],
             showSearch: false,
             onChanged: (v) {},

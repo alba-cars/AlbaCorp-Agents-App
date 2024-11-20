@@ -6,6 +6,7 @@ import 'package:real_estate_app/model/property_card_log_model.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/model/property_card_note_model.dart';
 
+import '../../model/lead_expiration_model.dart';
 import '../../util/result.dart';
 
 abstract class ExplorerRepo {
@@ -28,7 +29,7 @@ abstract class ExplorerRepo {
   Future<Result<void>> checkInLead({required List<String> propertyCardIds});
   Future<Result<void>> checkInLeads({required List<String> leads});
   Future<Result<void>> checkOutLead(
-      {List<String>? propertyCardIds, List<String>? leadIds});
+      {List<String>? propertyCardIds, List<String>? leadIds ,String? source});
   Future<Result<List<LeadPropertyCardModel>>> getPropertyCardLeads(
       {required String propertyCardId, Paginator? paginator});
   Future<Result<List<LeadPropertyCardModel>>> getLeadPropertyCards(
@@ -52,4 +53,6 @@ abstract class ExplorerRepo {
       {required String agentId});
   Future<Result<String>> convertPropertyCardToListing(
       {required String propertyCardId, required Map<String, dynamic> values});
+  Future<Result<List<LeadExpirationModel>>> getHotExplorerLeads(
+      { List<String>? leadSourceFilter, Paginator? paginator});
 }
