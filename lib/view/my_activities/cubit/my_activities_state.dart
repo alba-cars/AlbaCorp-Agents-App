@@ -9,5 +9,9 @@ class MyActivitiesState with _$MyActivitiesState {
     @Default(AppStatus.init) AppStatus userLoadStatus,
     @Default([]) List<UserListData> activityUsers,
     Paginator? userPaginator,
+    DateTime? startDate,
+    DateTime? endDate,
+    String? activityStatus,
+    String? activityType,
   }) = _MyActivitiesState;
 }

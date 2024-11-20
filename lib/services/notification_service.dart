@@ -5,7 +5,9 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/objectbox/entity/notification_entity.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/service_locator/objectbox.dart';
+import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../routes/app_router.dart';
 import '../view/task_detail_screen/task_detail_screen.dart';
@@ -173,11 +175,10 @@ class NotificationService {
 
   static Future<void> makeWhatsApp(String phoneNumber) async {
     try {
-      final Uri launchUri = Uri(
-          scheme: 'whatsapp',
-          path: 'send',
-          queryParameters: {'phone': phoneNumber.replaceFirst('+', '')});
-      await launchUrl(launchUri);
+      var whatsappUrl =
+          "whatsapp://send?phone=${(phoneNumber ?? "").replaceAll("+", "")}";
+
+      await launchUrlString(whatsappUrl);
     } catch (e) {
       Logger().d(e);
     }

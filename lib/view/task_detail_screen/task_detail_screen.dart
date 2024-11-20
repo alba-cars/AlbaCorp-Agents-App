@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
@@ -17,6 +18,7 @@ import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
+import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/property_card_list.dart';
@@ -243,22 +245,28 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                           context: context,
                           useRootNavigator: false,
                           pageBuilder: (dContext, anim1, anim2) =>
-                              ActivityFeedbackDialog(
-                                parentContext: context,
-                                direction: DismissDirection.startToEnd,
-                                mode: mode,
-                                notes: context
-                                    .read<TaskDetailCubit>()
-                                    .state
-                                    .task
-                                    ?.notes,
-                                activity:
-                                    context.read<TaskDetailCubit>().state.task!,
+                              BlocProvider.value(
+                                value: context.read<TaskDetailCubit>(),
+                                child: ActivityFeedbackDialog(
+                                  parentContext: context,
+                                  direction: DismissDirection.startToEnd,
+                                  mode: mode,
+                                  notes: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task
+                                      ?.notes,
+                                  activity: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task!,
+                                ),
                               ));
                       if (val == null &&
                           mounted &&
-                          context.read<TaskDetailCubit>().state.taskId !=
-                              tasks[targetIndex].id) {
+                          (tasks.length == targetIndex ||
+                              context.read<TaskDetailCubit>().state.taskId !=
+                                  tasks[targetIndex].id)) {
                         _appinioSwiperController.unswipe();
                       } else {
                         context
@@ -270,16 +278,21 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                           context: context,
                           useRootNavigator: false,
                           pageBuilder: (dContext, anim1, anim2) =>
-                              ActivityFeedbackDialog(
-                                parentContext: context,
-                                direction: DismissDirection.endToStart,
-                                notes: context
-                                    .read<TaskDetailCubit>()
-                                    .state
-                                    .task
-                                    ?.notes,
-                                activity:
-                                    context.read<TaskDetailCubit>().state.task!,
+                              BlocProvider.value(
+                                value: context.read<TaskDetailCubit>(),
+                                child: ActivityFeedbackDialog(
+                                  parentContext: context,
+                                  direction: DismissDirection.endToStart,
+                                  notes: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task
+                                      ?.notes,
+                                  activity: context
+                                      .read<TaskDetailCubit>()
+                                      .state
+                                      .task!,
+                                ),
                               ));
                       if (val == null && mounted) {
                         mode = CardAction.Skip;
@@ -441,13 +454,42 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: NormalText(
                                                         text:
-                                                            'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date)}'),
+                                                            'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date.toLocal())}'),
                                                   )
                                                 ],
                                               ),
                                               VerticalSmallGap(),
                                               // show property cards as horizontal scroll
-
+                                              if (task.type == "Viewing" &&
+                                                  task.property_list != null)
+                                                InkWell(
+                                                  onTap: () {
+                                                    context.pushNamed(
+                                                        ListingDetailsScreen
+                                                            .routeName,
+                                                        pathParameters: {
+                                                          'id': task
+                                                                  .property_list
+                                                                  ?.id ??
+                                                              ""
+                                                        });
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.grey,
+                                                            width: .5)),
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                            "Property for viewing"),
+                                                        PropertyCardPickerItem(
+                                                            listing: task
+                                                                .property_list!),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                               VerticalSmallGap(),
                                               Row(
                                                 mainAxisAlignment:
@@ -477,6 +519,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                                     TaskDetailCubit>(),
                                                                 child:
                                                                     AddNoteDialog(
+                                                                  activity:
+                                                                      task,
                                                                   preNote:
                                                                       task.notes ??
                                                                           "",
@@ -767,9 +811,11 @@ class ContainerIcon extends StatelessWidget {
 }
 
 class AddNoteDialog extends StatefulWidget {
-  const AddNoteDialog({super.key, required this.preNote});
+  const AddNoteDialog(
+      {super.key, required this.preNote, required this.activity});
 
   final String preNote;
+  final Activity activity;
 
   @override
   State<AddNoteDialog> createState() => _AddNoteDialogState();
@@ -781,7 +827,6 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
 
   @override
   void initState() {
-    Logger().d("Pre notes :: ${widget.preNote}");
     note = widget.preNote;
     _controller = TextEditingController(text: note);
     super.initState();
@@ -827,11 +872,9 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
                     if (validated == true) {
                       final values = key.currentState!.value;
                       await context.read<TaskDetailCubit>().updateActivity(
-                          context: context,
-                          completed: false,
-                          refresh: true,
-                          notes: _controller.text.trim(),
-                          addFollowUp: false);
+                            context: context,
+                            notes: _controller.text.trim(),
+                          );
                     }
                   }),
             )

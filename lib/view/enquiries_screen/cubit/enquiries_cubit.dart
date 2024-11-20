@@ -69,12 +69,12 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
           "sortBy": 'latest'
         };
       case TaskFilterEnum.FollowUp:
-        DateTime d = DateTime.now();
+        DateTime d = DateTime.now().toUtc();
         return {
           "leadSourceType": 'hot',
           "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
           "status": [
-            "Pending",
+            "Pending","Overdue"
           ],
           "toDate": '${d.year}-${d.month}-${d.day}',
         };

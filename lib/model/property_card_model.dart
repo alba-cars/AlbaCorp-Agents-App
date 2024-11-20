@@ -23,6 +23,7 @@ class PropertyCard with _$PropertyCard {
     @JsonKey(name: 'createdBy') dynamic createdBy,
     @JsonKey(name: 'partyType') String? partyType,
     String? status,
+    String? cluster,
     String? purpose,
     List<dynamic>? amenities,
     @JsonKey(name: 'createdAt') String? createdAt,
