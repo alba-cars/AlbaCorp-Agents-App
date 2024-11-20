@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
@@ -17,6 +18,7 @@ import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
+import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/property_card_list.dart';
@@ -458,7 +460,36 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                               ),
                                               VerticalSmallGap(),
                                               // show property cards as horizontal scroll
-
+                                              if (task.type == "Viewing" &&
+                                                  task.property_list != null)
+                                                InkWell(
+                                                  onTap: () {
+                                                    context.pushNamed(
+                                                        ListingDetailsScreen
+                                                            .routeName,
+                                                        pathParameters: {
+                                                          'id': task
+                                                                  .property_list
+                                                                  ?.id ??
+                                                              ""
+                                                        });
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.grey,
+                                                            width: .5)),
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                            "Property for viewing"),
+                                                        PropertyCardPickerItem(
+                                                            listing: task
+                                                                .property_list!),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                               VerticalSmallGap(),
                                               Row(
                                                 mainAxisAlignment:
@@ -796,7 +827,6 @@ class _AddNoteDialogState extends State<AddNoteDialog> {
 
   @override
   void initState() {
-    Logger().d("Pre notes :: ${widget.preNote}");
     note = widget.preNote;
     _controller = TextEditingController(text: note);
     super.initState();

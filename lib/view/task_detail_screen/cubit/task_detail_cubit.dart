@@ -106,7 +106,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           followUpData = {
             "date": date.toUtc().toIso8601String(),
             "type": values['type'],
-            "description": values['description']
+            "description": values['description'],
+            "property": values["property"]
           };
         }
       }
@@ -168,7 +169,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     required BuildContext context,
     required Activity task,
     String? description,
-   FeedbackTypeEnum feedbackType= FeedbackTypeEnum.disqualify,
+    FeedbackTypeEnum feedbackType = FeedbackTypeEnum.disqualify,
   }) async {
     if (state.task?.lead?.id == null) return;
 
@@ -220,7 +221,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       required bool addFollowUp,
       Map<String, dynamic>? values}) async {
     if (state.task?.lead?.id == null) return;
-    
 
     await updateAndCompleteActivity(
       context: context,
@@ -237,7 +237,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       required Activity task,
       String? currentActivityNotes,
       required bool markAsProspect,
-     required Map<String, dynamic> values}) async {
+      required Map<String, dynamic> values}) async {
     final date = (values["date"] as DateTime?)?.addTime(
         values["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0));
 

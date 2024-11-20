@@ -41,6 +41,7 @@ mixin _$Activity {
   String? get offplanId => throw _privateConstructorUsedError;
   String? get propertyType => throw _privateConstructorUsedError;
   DateTime? get overdueAt => throw _privateConstructorUsedError;
+  Property? get property_list => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -76,10 +77,12 @@ abstract class $ActivityCopyWith<$Res> {
       String? offplanId,
       String? propertyType,
       DateTime? overdueAt,
+      Property? property_list,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   $LeadCopyWith<$Res>? get lead;
+  $PropertyCopyWith<$Res>? get property_list;
 }
 
 /// @nodoc
@@ -113,6 +116,7 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
     Object? offplanId = freezed,
     Object? propertyType = freezed,
     Object? overdueAt = freezed,
+    Object? property_list = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -189,6 +193,10 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
           ? _value.overdueAt
           : overdueAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      property_list: freezed == property_list
+          ? _value.property_list
+          : property_list // ignore: cast_nullable_to_non_nullable
+              as Property?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -209,6 +217,18 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
 
     return $LeadCopyWith<$Res>(_value.lead!, (value) {
       return _then(_value.copyWith(lead: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PropertyCopyWith<$Res>? get property_list {
+    if (_value.property_list == null) {
+      return null;
+    }
+
+    return $PropertyCopyWith<$Res>(_value.property_list!, (value) {
+      return _then(_value.copyWith(property_list: value) as $Val);
     });
   }
 }
@@ -240,11 +260,14 @@ abstract class _$$ActivityImplCopyWith<$Res>
       String? offplanId,
       String? propertyType,
       DateTime? overdueAt,
+      Property? property_list,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 
   @override
   $LeadCopyWith<$Res>? get lead;
+  @override
+  $PropertyCopyWith<$Res>? get property_list;
 }
 
 /// @nodoc
@@ -276,6 +299,7 @@ class __$$ActivityImplCopyWithImpl<$Res>
     Object? offplanId = freezed,
     Object? propertyType = freezed,
     Object? overdueAt = freezed,
+    Object? property_list = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -352,6 +376,10 @@ class __$$ActivityImplCopyWithImpl<$Res>
           ? _value.overdueAt
           : overdueAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      property_list: freezed == property_list
+          ? _value.property_list
+          : property_list // ignore: cast_nullable_to_non_nullable
+              as Property?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -386,6 +414,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       this.offplanId,
       this.propertyType,
       this.overdueAt,
+      this.property_list,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt})
       : _preferredLanguages = preferredLanguages,
@@ -453,6 +482,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
   @override
   final DateTime? overdueAt;
   @override
+  final Property? property_list;
+  @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @override
@@ -461,7 +492,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, activityWeight: $activityWeight, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, activityWeight: $activityWeight, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, property_list: $property_list, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -487,6 +518,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       ..add(DiagnosticsProperty('offplanId', offplanId))
       ..add(DiagnosticsProperty('propertyType', propertyType))
       ..add(DiagnosticsProperty('overdueAt', overdueAt))
+      ..add(DiagnosticsProperty('property_list', property_list))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt));
   }
@@ -524,6 +556,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
                 other.propertyType == propertyType) &&
             (identical(other.overdueAt, overdueAt) ||
                 other.overdueAt == overdueAt) &&
+            (identical(other.property_list, property_list) ||
+                other.property_list == property_list) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -552,6 +586,7 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
         offplanId,
         propertyType,
         overdueAt,
+        property_list,
         createdAt,
         updatedAt
       ]);
@@ -590,6 +625,7 @@ abstract class _Activity implements Activity {
       final String? offplanId,
       final String? propertyType,
       final DateTime? overdueAt,
+      final Property? property_list,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$ActivityImpl;
 
@@ -635,6 +671,8 @@ abstract class _Activity implements Activity {
   String? get propertyType;
   @override
   DateTime? get overdueAt;
+  @override
+  Property? get property_list;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

@@ -125,9 +125,10 @@ class ActivityListLeadDetail extends StatelessWidget {
                                               .labelMedium,
                                           text: 'Description : ',
                                           children: [
-                                        WidgetSpan(child: UrlText(text: 
-                                            activity.description ?? '')
-                                          )
+                                        WidgetSpan(
+                                            child: UrlText(
+                                                text:
+                                                    activity.description ?? ''))
                                       ])),
                                   RichText(
                                       text: TextSpan(
@@ -136,9 +137,9 @@ class ActivityListLeadDetail extends StatelessWidget {
                                               .labelMedium,
                                           text: 'Notes : ',
                                           children: [
-                                        WidgetSpan(child: UrlText(text: 
-                                            activity.notes ?? '')
-                                          )
+                                        WidgetSpan(
+                                            child: UrlText(
+                                                text: activity.notes ?? ''))
                                       ])),
                                   if (activity.status == 'Complete')
                                     RichText(
@@ -162,16 +163,27 @@ class ActivityListLeadDetail extends StatelessWidget {
                                                   ?.copyWith(
                                                       color: Colors.blueGrey))
                                         ])),
-                                        if (activity.status == 'Pending'||activity.status =="Overdue")
-                                        Row(
-                                          children: [
-                                            AppPrimaryButton(
-                                              height: 20,
-                                              onTap: (){
-                                                context.pushNamed(TaskDetailScreen.routeName,pathParameters: {'id':activity.id},extra: activity);
-                                              }, text:'Update Activity', ),
-                                          ],
-                                        )
+                                  if (activity.status == 'Pending' ||
+                                      activity.status == "Overdue")
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: AppPrimaryButton(
+                                            height: 20,
+                                            width: 40,
+                                            onTap: () {
+                                              context.pushNamed(
+                                                  TaskDetailScreen.routeName,
+                                                  pathParameters: {
+                                                    'id': activity.id
+                                                  },
+                                                  extra: activity);
+                                            },
+                                            text: 'Update Activity',
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                 ],
                               ),
                             ),
@@ -200,7 +212,7 @@ class ActivityListLeadDetail extends StatelessWidget {
                     child: Container(
                       height: double.infinity,
                       width: 1.0,
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   PositionedDirectional(
@@ -211,7 +223,9 @@ class ActivityListLeadDetail extends StatelessWidget {
                       width: 15.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Theme.of(context).colorScheme.surfaceVariant,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
                       ),
                     ),
                   ),
