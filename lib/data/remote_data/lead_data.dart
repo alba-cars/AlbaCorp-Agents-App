@@ -7,6 +7,7 @@ import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/lead_source_category_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
@@ -226,6 +227,23 @@ class LeadData implements LeadRepo {
       final model = Lead.fromJson(data);
       return Success(
         model,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<LeadSourceCategory>>> getLeadSourceCategories() async{
+     try {
+      String url = 'v1/leadsource/categories';
+      final response = await _dio.get(
+        url,
+      );
+      final data = response.data as List;
+      final list = data.map((e) => LeadSourceCategory.fromJson(e)).toList();
+      return Success(
+        list,
       );
     } catch (e, stack) {
       return onError(e, stack, log);

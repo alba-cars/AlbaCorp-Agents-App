@@ -299,7 +299,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
             list.addAll(imp);
           }
         }
-        if (list.any((d) => d.activityWeight > .8)) {
+        if (list.any((d) => d.activityWeight >= .8)) {
           list.sort((a, b) => b.activityWeight.compareTo(a.activityWeight));
         }
 
