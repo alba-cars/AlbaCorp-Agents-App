@@ -31,6 +31,18 @@ class ExplorerData implements ExplorerRepo {
   final Dio _dio;
   ExplorerData({required Dio dio}) : _dio = dio;
 
+  Map<String,CancelToken> _cancelTokens = {};
+
+  CancelToken _getCancelToken(String url) {
+    if (_cancelTokens.containsKey(url)) {
+     _cancelTokens[url]?.cancel();
+    }
+    
+    final cancelToken = CancelToken();
+    _cancelTokens[url] = cancelToken;
+    return cancelToken;
+  }
+
   @override
   Future<Result<List<PropertyCard>>> getPropertyCards(
       {Map<String, dynamic>? filter,
@@ -99,9 +111,9 @@ class ExplorerData implements ExplorerRepo {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,
         if (filterRemoved != null) ...filterRemoved,
-        if (search != null) 'search': search,
+        if (search != null && search.isNotEmpty) 'search': search,
         if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
-      });
+      },cancelToken: _getCancelToken(url));
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();
       return Success(list,
@@ -183,9 +195,9 @@ class ExplorerData implements ExplorerRepo {
         'limit': 15,
         'page': (paginator?.currentPage ?? 0) + 1,
         if (filterRemoved != null) ...filterRemoved,
-        if (search != null) 'searchTerm': search,
+        if (search != null && search.isNotEmpty) 'searchTerm': search,
         // if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
-      });
+      },cancelToken: _getCancelToken(url));
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => LeadExplorerItem.fromJson(e)).toList();
       return Success(list,

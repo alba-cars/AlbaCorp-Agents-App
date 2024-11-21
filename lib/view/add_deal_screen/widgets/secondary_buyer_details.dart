@@ -178,12 +178,12 @@ class SecondaryExternalBuyerDetails extends StatelessWidget {
           adjustment: 0.5,
         ),
         AppAutoComplete(
-            name: 'agency_id',
+            name: 'buyerExternalUserId',
             label: 'Choose Agency',
             isRequired: true,
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (option) =>
-                "${option.firstName} ${option.lastName}",
+                "${option.agencyName} - ${option.firstName} ${option.lastName}",
             optionsBuilder: (v,refresh) async {
               return context.read<AddDealCubit>().getAgencies(search: v.text);
             }),

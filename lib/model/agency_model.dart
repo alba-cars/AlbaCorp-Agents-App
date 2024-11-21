@@ -9,6 +9,7 @@ class Agency with _$Agency {
   const factory Agency({
     required String id,
     required String type,
+    @JsonKey(name: 'agency_name') @Default('') String agencyName,
     @JsonKey(name: 'first_name') @Default('') String firstName,
     @JsonKey(name: 'last_name') @Default('') String lastName,
     String? email,
