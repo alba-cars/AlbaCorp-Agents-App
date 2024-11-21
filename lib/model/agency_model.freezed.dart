@@ -22,6 +22,8 @@ Agency _$AgencyFromJson(Map<String, dynamic> json) {
 mixin _$Agency {
   String get id => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'agency_name')
+  String get agencyName => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_name')
   String get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name')
@@ -53,6 +55,7 @@ abstract class $AgencyCopyWith<$Res> {
   $Res call(
       {String id,
       String type,
+      @JsonKey(name: 'agency_name') String agencyName,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
       String? email,
@@ -81,6 +84,7 @@ class _$AgencyCopyWithImpl<$Res, $Val extends Agency>
   $Res call({
     Object? id = null,
     Object? type = null,
+    Object? agencyName = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? email = freezed,
@@ -101,6 +105,10 @@ class _$AgencyCopyWithImpl<$Res, $Val extends Agency>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      agencyName: null == agencyName
+          ? _value.agencyName
+          : agencyName // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: null == firstName
           ? _value.firstName
@@ -160,6 +168,7 @@ abstract class _$$AgencyImplCopyWith<$Res> implements $AgencyCopyWith<$Res> {
   $Res call(
       {String id,
       String type,
+      @JsonKey(name: 'agency_name') String agencyName,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
       String? email,
@@ -186,6 +195,7 @@ class __$$AgencyImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? type = null,
+    Object? agencyName = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? email = freezed,
@@ -206,6 +216,10 @@ class __$$AgencyImplCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      agencyName: null == agencyName
+          ? _value.agencyName
+          : agencyName // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: null == firstName
           ? _value.firstName
@@ -261,6 +275,7 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
   const _$AgencyImpl(
       {required this.id,
       required this.type,
+      @JsonKey(name: 'agency_name') this.agencyName = '',
       @JsonKey(name: 'first_name') this.firstName = '',
       @JsonKey(name: 'last_name') this.lastName = '',
       this.email,
@@ -281,6 +296,9 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
   final String id;
   @override
   final String type;
+  @override
+  @JsonKey(name: 'agency_name')
+  final String agencyName;
   @override
   @JsonKey(name: 'first_name')
   final String firstName;
@@ -319,7 +337,7 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Agency(id: $id, type: $type, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, documentType: $documentType, document: $document, documents: $documents, active: $active, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy)';
+    return 'Agency(id: $id, type: $type, agencyName: $agencyName, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, documentType: $documentType, document: $document, documents: $documents, active: $active, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy)';
   }
 
   @override
@@ -329,6 +347,7 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
       ..add(DiagnosticsProperty('type', 'Agency'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('agencyName', agencyName))
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('email', email))
@@ -349,6 +368,8 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
             other is _$AgencyImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.agencyName, agencyName) ||
+                other.agencyName == agencyName) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -376,6 +397,7 @@ class _$AgencyImpl with DiagnosticableTreeMixin implements _Agency {
       runtimeType,
       id,
       type,
+      agencyName,
       firstName,
       lastName,
       email,
@@ -406,6 +428,7 @@ abstract class _Agency implements Agency {
   const factory _Agency(
           {required final String id,
           required final String type,
+          @JsonKey(name: 'agency_name') final String agencyName,
           @JsonKey(name: 'first_name') final String firstName,
           @JsonKey(name: 'last_name') final String lastName,
           final String? email,
@@ -425,6 +448,9 @@ abstract class _Agency implements Agency {
   String get id;
   @override
   String get type;
+  @override
+  @JsonKey(name: 'agency_name')
+  String get agencyName;
   @override
   @JsonKey(name: 'first_name')
   String get firstName;

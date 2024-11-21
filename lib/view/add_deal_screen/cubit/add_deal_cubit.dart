@@ -107,12 +107,13 @@ class AddDealCubit extends Cubit<AddDealState> {
     emit(state.copyWith(addDealStatus: AppStatus.loadingMore));
 
     final dealResult = await _dealsRepo.addDeal(values: {
+      ...values,
       'category': state.selectedDealType?.toJson(),
       'purpose': state.dealPurpose?.toJson(),
       'buyerClientType': state.buyerSource?.toJson(),
       'sellerClientType': state.sellerSource?.toJson(),
       'buyerAssignedAgent': getIt<AuthBloc>().state.agent?.id,
-      ...values
+      
     });
     switch (dealResult) {
       case (Success s):
@@ -133,6 +134,7 @@ class AddDealCubit extends Cubit<AddDealState> {
     switch (result) {
       case (Success<DealListingResponse> s):
         final dealResult = await _dealsRepo.addDeal(values: {
+          ...values,
           'category': state.selectedDealType?.toJson(),
           'purpose': state.dealPurpose?.toJson(),
           'buyerClientType': state.buyerSource?.toJson(),
@@ -140,9 +142,9 @@ class AddDealCubit extends Cubit<AddDealState> {
           'buyerAssignedAgent': getIt<AuthBloc>().state.agent?.id,
           'agreedSalePrice': s.value.agreedSalesPrice,
           'sellerAgreedComm': s.value.agreedCommission,
-          'sellerExternalUserId': values['agency_id'],
+          'sellerExternalUserId': values['sellerExternalUserId'],
           'external_listing_property_id': s.value.id,
-          ...values
+          
         });
         switch (dealResult) {
           case (Success s):
