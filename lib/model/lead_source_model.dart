@@ -9,7 +9,6 @@ class LeadSource with _$LeadSource {
   const factory LeadSource({
     required String id,
     required String name,
-    required String key,
   }) = _LeadSource;
 
   factory LeadSource.fromJson(Map<String, dynamic> json) =>

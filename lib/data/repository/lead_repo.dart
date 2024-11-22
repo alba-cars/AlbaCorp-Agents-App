@@ -3,6 +3,7 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/result.dart';
+import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
 
 import '../../model/deal_document_model.dart';
 import '../../model/deal_model.dart';
@@ -10,9 +11,15 @@ import '../../model/lead_source_category_model.dart';
 
 abstract class LeadRepo {
   Future<Result<List<Lead>>> getLeads(
-      {Map<String, dynamic>? filter, String? search,String? agentId, Paginator? paginator});
+      {Map<String, dynamic>? filter,
+      String? search,
+      String? agentId,
+      Paginator? paginator});
   Future<Result<List<LeadSource>>> getLeadSources(
       {String? search, Paginator? paginator});
+
+  Future<Result<List<LeadSource>>> getLeadSourcesRefactored(
+      {String? search, LeadSourceType? leadSourceType, Paginator? paginator});
   Future<Result<Lead>> getLead({required String leadId});
   Future<Result<Lead>> addLead({required Map<String, dynamic> lead});
   Future<Result<Lead>> updateLead(

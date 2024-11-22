@@ -28,6 +28,9 @@ abstract class ActivityRepo {
       LeadStatus? status,
       String? nameSearch,
       Paginator? paginator});
+       Future<Result<List<Activity>>> fetchHotLeadsAssignedTodayActivities(
+      {
+      Paginator? paginator});
   Future<Result<List<Activity>>> getActivitiesByAgent(
       {String? status,
       String? type,

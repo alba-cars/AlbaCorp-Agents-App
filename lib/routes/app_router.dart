@@ -27,6 +27,7 @@ import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/expired_hot_lead_explorer/expired_hot_lead_explorer.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
+import 'package:real_estate_app/view/hot_leads_assigned_today_screen/hot_leads_assigned_today_screen.dart';
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
@@ -76,7 +77,7 @@ class AppRouter {
           } else if (authState.veryImportantActivities != null &&
               authState.veryImportantActivities!.isNotEmpty &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {
-            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}?taskType=Hot';
+            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}?taskType=Hot&taskFilter=New';
           } else if (authState.showFeedbackScreen &&
               state.uri.path.contains(CallFeedbackScreen.routeName) == false &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {
@@ -270,6 +271,16 @@ class AppRouter {
                   return CupertinoPage(
                       child: TicketDetailScreen(
                     ticketId: id,
+                  ));
+                },
+              ),
+               GoRoute(
+                path: HotLeadsAssignedToday.routeName,
+                name: HotLeadsAssignedToday.routeName,
+                pageBuilder: (context, state) {
+                  final id = state.pathParameters['id'] ?? '';
+                  return CupertinoPage(
+                      child: HotLeadsAssignedToday(
                   ));
                 },
               ),

@@ -33,6 +33,11 @@ mixin _$ListStateState {
   List<Building> get buildingList => throw _privateConstructorUsedError;
   AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
   Paginator? get buildingsPaginator => throw _privateConstructorUsedError;
+  AppStatus get getLeadSourcestatus => throw _privateConstructorUsedError;
+  List<LeadSource>? get leadSources => throw _privateConstructorUsedError;
+  Paginator? get leadSourcePaginator => throw _privateConstructorUsedError;
+  String? get leadSourceError => throw _privateConstructorUsedError;
+  String? get leadSourceSearch => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListStateStateCopyWith<ListStateState> get copyWith =>
@@ -61,9 +66,15 @@ abstract class $ListStateStateCopyWith<$Res> {
       AppStatus getPlacesListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
-      Paginator? buildingsPaginator});
+      Paginator? buildingsPaginator,
+      AppStatus getLeadSourcestatus,
+      List<LeadSource>? leadSources,
+      Paginator? leadSourcePaginator,
+      String? leadSourceError,
+      String? leadSourceSearch});
 
   $PaginatorCopyWith<$Res>? get buildingsPaginator;
+  $PaginatorCopyWith<$Res>? get leadSourcePaginator;
 }
 
 /// @nodoc
@@ -95,6 +106,11 @@ class _$ListStateStateCopyWithImpl<$Res, $Val extends ListStateState>
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
     Object? buildingsPaginator = freezed,
+    Object? getLeadSourcestatus = null,
+    Object? leadSources = freezed,
+    Object? leadSourcePaginator = freezed,
+    Object? leadSourceError = freezed,
+    Object? leadSourceSearch = freezed,
   }) {
     return _then(_value.copyWith(
       tasksCategorizedView: freezed == tasksCategorizedView
@@ -161,6 +177,26 @@ class _$ListStateStateCopyWithImpl<$Res, $Val extends ListStateState>
           ? _value.buildingsPaginator
           : buildingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      getLeadSourcestatus: null == getLeadSourcestatus
+          ? _value.getLeadSourcestatus
+          : getLeadSourcestatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      leadSources: freezed == leadSources
+          ? _value.leadSources
+          : leadSources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSource>?,
+      leadSourcePaginator: freezed == leadSourcePaginator
+          ? _value.leadSourcePaginator
+          : leadSourcePaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      leadSourceError: freezed == leadSourceError
+          ? _value.leadSourceError
+          : leadSourceError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadSourceSearch: freezed == leadSourceSearch
+          ? _value.leadSourceSearch
+          : leadSourceSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -173,6 +209,18 @@ class _$ListStateStateCopyWithImpl<$Res, $Val extends ListStateState>
 
     return $PaginatorCopyWith<$Res>(_value.buildingsPaginator!, (value) {
       return _then(_value.copyWith(buildingsPaginator: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get leadSourcePaginator {
+    if (_value.leadSourcePaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.leadSourcePaginator!, (value) {
+      return _then(_value.copyWith(leadSourcePaginator: value) as $Val);
     });
   }
 }
@@ -201,10 +249,17 @@ abstract class _$$ListStateStateImplCopyWith<$Res>
       AppStatus getPlacesListStatus,
       List<Building> buildingList,
       AppStatus getBuildingListStatus,
-      Paginator? buildingsPaginator});
+      Paginator? buildingsPaginator,
+      AppStatus getLeadSourcestatus,
+      List<LeadSource>? leadSources,
+      Paginator? leadSourcePaginator,
+      String? leadSourceError,
+      String? leadSourceSearch});
 
   @override
   $PaginatorCopyWith<$Res>? get buildingsPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get leadSourcePaginator;
 }
 
 /// @nodoc
@@ -234,6 +289,11 @@ class __$$ListStateStateImplCopyWithImpl<$Res>
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
     Object? buildingsPaginator = freezed,
+    Object? getLeadSourcestatus = null,
+    Object? leadSources = freezed,
+    Object? leadSourcePaginator = freezed,
+    Object? leadSourceError = freezed,
+    Object? leadSourceSearch = freezed,
   }) {
     return _then(_$ListStateStateImpl(
       tasksCategorizedView: freezed == tasksCategorizedView
@@ -300,6 +360,26 @@ class __$$ListStateStateImplCopyWithImpl<$Res>
           ? _value.buildingsPaginator
           : buildingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      getLeadSourcestatus: null == getLeadSourcestatus
+          ? _value.getLeadSourcestatus
+          : getLeadSourcestatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      leadSources: freezed == leadSources
+          ? _value._leadSources
+          : leadSources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSource>?,
+      leadSourcePaginator: freezed == leadSourcePaginator
+          ? _value.leadSourcePaginator
+          : leadSourcePaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      leadSourceError: freezed == leadSourceError
+          ? _value.leadSourceError
+          : leadSourceError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadSourceSearch: freezed == leadSourceSearch
+          ? _value.leadSourceSearch
+          : leadSourceSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -323,11 +403,17 @@ class _$ListStateStateImpl implements _ListStateState {
       this.getPlacesListStatus = AppStatus.init,
       final List<Building> buildingList = const [],
       this.getBuildingListStatus = AppStatus.init,
-      this.buildingsPaginator})
+      this.buildingsPaginator,
+      this.getLeadSourcestatus = AppStatus.init,
+      final List<LeadSource>? leadSources = const [],
+      this.leadSourcePaginator,
+      this.leadSourceError,
+      this.leadSourceSearch})
       : _propertyTypeList = propertyTypeList,
         _communityList = communityList,
         _placesList = placesList,
-        _buildingList = buildingList;
+        _buildingList = buildingList,
+        _leadSources = leadSources;
 
   @override
   final String? tasksCategorizedView;
@@ -394,10 +480,30 @@ class _$ListStateStateImpl implements _ListStateState {
   final AppStatus getBuildingListStatus;
   @override
   final Paginator? buildingsPaginator;
+  @override
+  @JsonKey()
+  final AppStatus getLeadSourcestatus;
+  final List<LeadSource>? _leadSources;
+  @override
+  @JsonKey()
+  List<LeadSource>? get leadSources {
+    final value = _leadSources;
+    if (value == null) return null;
+    if (_leadSources is EqualUnmodifiableListView) return _leadSources;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final Paginator? leadSourcePaginator;
+  @override
+  final String? leadSourceError;
+  @override
+  final String? leadSourceSearch;
 
   @override
   String toString() {
-    return 'ListStateState(tasksCategorizedView: $tasksCategorizedView, taskSortedView: $taskSortedView, leadsView: $leadsView, listingsView: $listingsView, pocketListingsView: $pocketListingsView, dealsView: $dealsView, listingAcquiredView: $listingAcquiredView, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator)';
+    return 'ListStateState(tasksCategorizedView: $tasksCategorizedView, taskSortedView: $taskSortedView, leadsView: $leadsView, listingsView: $listingsView, pocketListingsView: $pocketListingsView, dealsView: $dealsView, listingAcquiredView: $listingAcquiredView, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, getLeadSourcestatus: $getLeadSourcestatus, leadSources: $leadSources, leadSourcePaginator: $leadSourcePaginator, leadSourceError: $leadSourceError, leadSourceSearch: $leadSourceSearch)';
   }
 
   @override
@@ -437,28 +543,44 @@ class _$ListStateStateImpl implements _ListStateState {
             (identical(other.getBuildingListStatus, getBuildingListStatus) ||
                 other.getBuildingListStatus == getBuildingListStatus) &&
             (identical(other.buildingsPaginator, buildingsPaginator) ||
-                other.buildingsPaginator == buildingsPaginator));
+                other.buildingsPaginator == buildingsPaginator) &&
+            (identical(other.getLeadSourcestatus, getLeadSourcestatus) ||
+                other.getLeadSourcestatus == getLeadSourcestatus) &&
+            const DeepCollectionEquality()
+                .equals(other._leadSources, _leadSources) &&
+            (identical(other.leadSourcePaginator, leadSourcePaginator) ||
+                other.leadSourcePaginator == leadSourcePaginator) &&
+            (identical(other.leadSourceError, leadSourceError) ||
+                other.leadSourceError == leadSourceError) &&
+            (identical(other.leadSourceSearch, leadSourceSearch) ||
+                other.leadSourceSearch == leadSourceSearch));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      tasksCategorizedView,
-      taskSortedView,
-      leadsView,
-      listingsView,
-      pocketListingsView,
-      dealsView,
-      listingAcquiredView,
-      const DeepCollectionEquality().hash(_propertyTypeList),
-      getPropertyTypeListStatus,
-      const DeepCollectionEquality().hash(_communityList),
-      getCommunityListStatus,
-      const DeepCollectionEquality().hash(_placesList),
-      getPlacesListStatus,
-      const DeepCollectionEquality().hash(_buildingList),
-      getBuildingListStatus,
-      buildingsPaginator);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        tasksCategorizedView,
+        taskSortedView,
+        leadsView,
+        listingsView,
+        pocketListingsView,
+        dealsView,
+        listingAcquiredView,
+        const DeepCollectionEquality().hash(_propertyTypeList),
+        getPropertyTypeListStatus,
+        const DeepCollectionEquality().hash(_communityList),
+        getCommunityListStatus,
+        const DeepCollectionEquality().hash(_placesList),
+        getPlacesListStatus,
+        const DeepCollectionEquality().hash(_buildingList),
+        getBuildingListStatus,
+        buildingsPaginator,
+        getLeadSourcestatus,
+        const DeepCollectionEquality().hash(_leadSources),
+        leadSourcePaginator,
+        leadSourceError,
+        leadSourceSearch
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -485,7 +607,12 @@ abstract class _ListStateState implements ListStateState {
       final AppStatus getPlacesListStatus,
       final List<Building> buildingList,
       final AppStatus getBuildingListStatus,
-      final Paginator? buildingsPaginator}) = _$ListStateStateImpl;
+      final Paginator? buildingsPaginator,
+      final AppStatus getLeadSourcestatus,
+      final List<LeadSource>? leadSources,
+      final Paginator? leadSourcePaginator,
+      final String? leadSourceError,
+      final String? leadSourceSearch}) = _$ListStateStateImpl;
 
   @override
   String? get tasksCategorizedView;
@@ -519,6 +646,16 @@ abstract class _ListStateState implements ListStateState {
   AppStatus get getBuildingListStatus;
   @override
   Paginator? get buildingsPaginator;
+  @override
+  AppStatus get getLeadSourcestatus;
+  @override
+  List<LeadSource>? get leadSources;
+  @override
+  Paginator? get leadSourcePaginator;
+  @override
+  String? get leadSourceError;
+  @override
+  String? get leadSourceSearch;
   @override
   @JsonKey(ignore: true)
   _$$ListStateStateImplCopyWith<_$ListStateStateImpl> get copyWith =>

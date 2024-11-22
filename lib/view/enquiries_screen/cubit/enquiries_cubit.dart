@@ -15,7 +15,7 @@ part 'enquiries_cubit.freezed.dart';
 
 @injectable
 class EnquiriesCubit extends Cubit<EnquiriesState> {
-  EnquiriesCubit({required this.activityRepo}) : super(EnquiriesState());
+  EnquiriesCubit({required this.activityRepo}) : super(EnquiriesState(activityFilter: {'sortBy':{"label": "Latest", "value": 'latest'}}));
 
   final ActivityRepo activityRepo;
 
@@ -39,8 +39,9 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
 
       final Result<List<Activity>> result =
           await activityRepo.fetchActivitiesSorted(filter: {
+              ...getPayload(filterType),
         if (state.activityFilter != null) ...state.activityFilter!,
-        ...getPayload(filterType)
+      
       }, paginator: paginator);
 
       switch (result) {

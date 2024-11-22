@@ -22,7 +22,6 @@ LeadSource _$LeadSourceFromJson(Map<String, dynamic> json) {
 mixin _$LeadSource {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get key => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +35,7 @@ abstract class $LeadSourceCopyWith<$Res> {
           LeadSource value, $Res Function(LeadSource) then) =
       _$LeadSourceCopyWithImpl<$Res, LeadSource>;
   @useResult
-  $Res call({String id, String name, String key});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -54,7 +53,6 @@ class _$LeadSourceCopyWithImpl<$Res, $Val extends LeadSource>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? key = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -64,10 +62,6 @@ class _$LeadSourceCopyWithImpl<$Res, $Val extends LeadSource>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      key: null == key
-          ? _value.key
-          : key // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -81,7 +75,7 @@ abstract class _$$LeadSourceImplCopyWith<$Res>
       __$$LeadSourceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String key});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -97,7 +91,6 @@ class __$$LeadSourceImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? key = null,
   }) {
     return _then(_$LeadSourceImpl(
       id: null == id
@@ -108,10 +101,6 @@ class __$$LeadSourceImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      key: null == key
-          ? _value.key
-          : key // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -119,8 +108,7 @@ class __$$LeadSourceImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LeadSourceImpl with DiagnosticableTreeMixin implements _LeadSource {
-  const _$LeadSourceImpl(
-      {required this.id, required this.name, required this.key});
+  const _$LeadSourceImpl({required this.id, required this.name});
 
   factory _$LeadSourceImpl.fromJson(Map<String, dynamic> json) =>
       _$$LeadSourceImplFromJson(json);
@@ -129,12 +117,10 @@ class _$LeadSourceImpl with DiagnosticableTreeMixin implements _LeadSource {
   final String id;
   @override
   final String name;
-  @override
-  final String key;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LeadSource(id: $id, name: $name, key: $key)';
+    return 'LeadSource(id: $id, name: $name)';
   }
 
   @override
@@ -143,8 +129,7 @@ class _$LeadSourceImpl with DiagnosticableTreeMixin implements _LeadSource {
     properties
       ..add(DiagnosticsProperty('type', 'LeadSource'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('key', key));
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
@@ -153,13 +138,12 @@ class _$LeadSourceImpl with DiagnosticableTreeMixin implements _LeadSource {
         (other.runtimeType == runtimeType &&
             other is _$LeadSourceImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.key, key) || other.key == key));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, key);
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
@@ -178,8 +162,7 @@ class _$LeadSourceImpl with DiagnosticableTreeMixin implements _LeadSource {
 abstract class _LeadSource implements LeadSource {
   const factory _LeadSource(
       {required final String id,
-      required final String name,
-      required final String key}) = _$LeadSourceImpl;
+      required final String name}) = _$LeadSourceImpl;
 
   factory _LeadSource.fromJson(Map<String, dynamic> json) =
       _$LeadSourceImpl.fromJson;
@@ -188,8 +171,6 @@ abstract class _LeadSource implements LeadSource {
   String get id;
   @override
   String get name;
-  @override
-  String get key;
   @override
   @JsonKey(ignore: true)
   _$$LeadSourceImplCopyWith<_$LeadSourceImpl> get copyWith =>

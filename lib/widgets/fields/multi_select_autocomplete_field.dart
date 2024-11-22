@@ -395,6 +395,7 @@ class _OptionsListWidgetState<T> extends State<OptionsListWidget<T>> {
                     if (highlight) {
                       SchedulerBinding.instance
                           .addPostFrameCallback((Duration timeStamp) {
+                            if(mounted)
                         Scrollable.ensureVisible(context, alignment: 0.5);
                       });
                     }

@@ -11,6 +11,7 @@ import 'package:real_estate_app/model/lead_source_category_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
+import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
 
 import '../../model/lead_source_model.dart';
 import '../../util/api_error.dart';
@@ -228,6 +229,37 @@ class LeadData implements LeadRepo {
       return Success(
         model,
       );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<LeadSource>>> getLeadSourcesRefactored(
+      {String? search,
+      LeadSourceType? leadSourceType,
+      Paginator? paginator}) async {
+    try {
+      String url = 'v1/leadsource';
+      Map<String, dynamic> queryParams = {
+        "page": (paginator?.currentPage ?? 0) + 1
+      };
+      if (leadSourceType != null && leadSourceType != LeadSourceType.All) {
+        queryParams.putIfAbsent("leadSourceType", () => leadSourceType.name);
+      }
+
+      if ((search ?? "").isNotEmpty) {
+        queryParams.putIfAbsent("search", () => search);
+      }
+
+      final response = await _dio.get(url, queryParameters: queryParams);
+      final data = response.data["data"] as List;
+      final list = data.map((e) => LeadSource.fromJson(e)).toList();
+      final newPaginator = Paginator(
+          itemCount: response.data['filtered'],
+          perPage: 10,
+          currentPage: (paginator?.currentPage ?? 0) + 1);
+      return Success(list, paginator: newPaginator);
     } catch (e, stack) {
       return onError(e, stack, log);
     }

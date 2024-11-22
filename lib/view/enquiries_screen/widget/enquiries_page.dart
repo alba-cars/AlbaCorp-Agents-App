@@ -8,20 +8,18 @@ import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/enquiries_screen/cubit/enquiries_cubit.dart';
+import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
 import 'package:real_estate_app/view/expired_hot_lead_explorer/expired_hot_lead_explorer.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/search_bar.dart';
 import 'package:real_estate_app/widgets/space.dart';
-
-import '../../../widgets/fields/date_field.dart';
 import '../../../widgets/fields/multi_select_autocomplete_field.dart';
 import '../../../widgets/tab_bar.dart';
 import '../../../widgets/text.dart';
 import '../../cold_lead_screen/cubit/cold_lead_cubit.dart';
 import '../../home_screen/home_screen.dart';
+import 'activity_sort_control_widget.dart';
 import '../../leads_list_explorer/leads_list_explorer.dart';
 
 class EnquiriesPage extends StatefulWidget {
@@ -40,6 +38,16 @@ class _EnquiriesPageState extends State<EnquiriesPage>
   List<Widget> filterFields(
       BuildContext context, Map<String, dynamic>? values) {
     return [
+      WrapSelectField(
+        name: 'sortBy',
+        label: "Sort By",
+        values: [
+          {"label": "Latest", "value": 'latest'},
+          {"label": "Oldest", "value": 'oldest'}
+        ],
+        displayOption: (option) => option['label'] ?? '',
+      ),
+      LeadSourceFilterWidget(),
       MultiSelectAutoCompleteField(
           label: 'Community',
           optionsBuilder: (v, refresh) async {
@@ -73,7 +81,7 @@ class _EnquiriesPageState extends State<EnquiriesPage>
           },
           displayStringForOption: (option) => option['label'] ?? '',
           name: 'buildingId'),
-          WrapSelectField(
+      WrapSelectField(
           name: 'beds',
           label: 'Beds',
           values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
@@ -151,10 +159,12 @@ class _EnquiriesPageState extends State<EnquiriesPage>
                 ),)
             ],
             showSearch: false,
+            skipDisplayFilterKeys: ['sortBy'],
             onChanged: (v) {},
             onFilterApplied: (filter) {
-              context.read<EnquiriesCubit>().setActivityFilters(
-                  filter, TaskFilterEnum.values[tabIndex]);
+              context
+                  .read<EnquiriesCubit>()
+                  .setActivityFilters(filter, TaskFilterEnum.values[tabIndex]);
             },
           ),
           VerticalSmallGap(),

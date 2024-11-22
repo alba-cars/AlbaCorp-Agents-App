@@ -22,9 +22,9 @@ Lead _$LeadFromJson(Map<String, dynamic> json) {
 mixin _$Lead {
   @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'first_name')
+  @JsonKey(readValue: readFirstName)
   String get firstName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_name')
+  @JsonKey(readValue: readLastName)
   String get lastName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
@@ -34,37 +34,37 @@ mixin _$Lead {
   String? get nationality => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
   String? get role => throw _privateConstructorUsedError;
-  @JsonKey(name: 'provider_id')
+  @JsonKey(readValue: readProviderId)
   String? get providerId => throw _privateConstructorUsedError;
   String? get provider => throw _privateConstructorUsedError;
   bool get active => throw _privateConstructorUsedError;
-  @JsonKey(name: 'lead_source')
+  @JsonKey(readValue: readLeadSource)
   String get leadSource => throw _privateConstructorUsedError;
-  @JsonKey(name: 'lead_status')
+  @JsonKey(readValue: readLeadStatus)
   LeadStatus? get leadStatus => throw _privateConstructorUsedError;
   List<dynamic> get languages => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_activity_type')
+  @JsonKey(readValue: readLastActivityType)
   String? get lastActivityType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_activity_date')
+  @JsonKey(readValue: readLastActivityDate)
   DateTime? get lastActivityDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_activity_is_complete')
+  @JsonKey(readValue: readLastActivityIsComplete)
   bool get lastActivityIsComplete => throw _privateConstructorUsedError;
   @JsonKey(readValue: readCreatedAt)
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_at')
+  @JsonKey(readValue: readUpdatedAt)
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_by')
+  @JsonKey(readValue: readCreatedBy)
   String? get createdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: 'modified_by')
+  @JsonKey(readValue: readModifiedBy)
   String? get modifiedBy => throw _privateConstructorUsedError;
   Preference? get preference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'preferred_languages')
+  @JsonKey(readValue: readPreferredLanguages)
   List<dynamic> get preferredLanguages => throw _privateConstructorUsedError;
   @JsonKey(readValue: readCurrentAgent)
   Agent? get currentAgent => throw _privateConstructorUsedError;
   String? get notes => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
-  @JsonKey(name: 'DndStatus')
+  @JsonKey(readValue: readDndStatus)
   bool get dndStatus => throw _privateConstructorUsedError;
   @JsonKey(readValue: readCompletedActivityCount)
   int get completedActivityCount => throw _privateConstructorUsedError;
@@ -81,8 +81,8 @@ abstract class $LeadCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
-      @JsonKey(name: 'first_name') String firstName,
-      @JsonKey(name: 'last_name') String lastName,
+      @JsonKey(readValue: readFirstName) String firstName,
+      @JsonKey(readValue: readLastName) String lastName,
       String? email,
       String? phone,
       String? country,
@@ -91,25 +91,27 @@ abstract class $LeadCopyWith<$Res> {
       String? nationality,
       String? photo,
       String? role,
-      @JsonKey(name: 'provider_id') String? providerId,
+      @JsonKey(readValue: readProviderId) String? providerId,
       String? provider,
       bool active,
-      @JsonKey(name: 'lead_source') String leadSource,
-      @JsonKey(name: 'lead_status') LeadStatus? leadStatus,
+      @JsonKey(readValue: readLeadSource) String leadSource,
+      @JsonKey(readValue: readLeadStatus) LeadStatus? leadStatus,
       List<dynamic> languages,
-      @JsonKey(name: 'last_activity_type') String? lastActivityType,
-      @JsonKey(name: 'last_activity_date') DateTime? lastActivityDate,
-      @JsonKey(name: 'last_activity_is_complete') bool lastActivityIsComplete,
+      @JsonKey(readValue: readLastActivityType) String? lastActivityType,
+      @JsonKey(readValue: readLastActivityDate) DateTime? lastActivityDate,
+      @JsonKey(readValue: readLastActivityIsComplete)
+      bool lastActivityIsComplete,
       @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
-      @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'created_by') String? createdBy,
-      @JsonKey(name: 'modified_by') String? modifiedBy,
+      @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
+      @JsonKey(readValue: readCreatedBy) String? createdBy,
+      @JsonKey(readValue: readModifiedBy) String? modifiedBy,
       Preference? preference,
-      @JsonKey(name: 'preferred_languages') List<dynamic> preferredLanguages,
+      @JsonKey(readValue: readPreferredLanguages)
+      List<dynamic> preferredLanguages,
       @JsonKey(readValue: readCurrentAgent) Agent? currentAgent,
       String? notes,
       List<String> tags,
-      @JsonKey(name: 'DndStatus') bool dndStatus,
+      @JsonKey(readValue: readDndStatus) bool dndStatus,
       @JsonKey(readValue: readCompletedActivityCount)
       int completedActivityCount});
 
@@ -324,8 +326,8 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
-      @JsonKey(name: 'first_name') String firstName,
-      @JsonKey(name: 'last_name') String lastName,
+      @JsonKey(readValue: readFirstName) String firstName,
+      @JsonKey(readValue: readLastName) String lastName,
       String? email,
       String? phone,
       String? country,
@@ -334,25 +336,27 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       String? nationality,
       String? photo,
       String? role,
-      @JsonKey(name: 'provider_id') String? providerId,
+      @JsonKey(readValue: readProviderId) String? providerId,
       String? provider,
       bool active,
-      @JsonKey(name: 'lead_source') String leadSource,
-      @JsonKey(name: 'lead_status') LeadStatus? leadStatus,
+      @JsonKey(readValue: readLeadSource) String leadSource,
+      @JsonKey(readValue: readLeadStatus) LeadStatus? leadStatus,
       List<dynamic> languages,
-      @JsonKey(name: 'last_activity_type') String? lastActivityType,
-      @JsonKey(name: 'last_activity_date') DateTime? lastActivityDate,
-      @JsonKey(name: 'last_activity_is_complete') bool lastActivityIsComplete,
+      @JsonKey(readValue: readLastActivityType) String? lastActivityType,
+      @JsonKey(readValue: readLastActivityDate) DateTime? lastActivityDate,
+      @JsonKey(readValue: readLastActivityIsComplete)
+      bool lastActivityIsComplete,
       @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
-      @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'created_by') String? createdBy,
-      @JsonKey(name: 'modified_by') String? modifiedBy,
+      @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
+      @JsonKey(readValue: readCreatedBy) String? createdBy,
+      @JsonKey(readValue: readModifiedBy) String? modifiedBy,
       Preference? preference,
-      @JsonKey(name: 'preferred_languages') List<dynamic> preferredLanguages,
+      @JsonKey(readValue: readPreferredLanguages)
+      List<dynamic> preferredLanguages,
       @JsonKey(readValue: readCurrentAgent) Agent? currentAgent,
       String? notes,
       List<String> tags,
-      @JsonKey(name: 'DndStatus') bool dndStatus,
+      @JsonKey(readValue: readDndStatus) bool dndStatus,
       @JsonKey(readValue: readCompletedActivityCount)
       int completedActivityCount});
 
@@ -538,8 +542,8 @@ class __$$LeadImplCopyWithImpl<$Res>
 class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   const _$LeadImpl(
       {@JsonKey(readValue: readId) required this.id,
-      @JsonKey(name: 'first_name') required this.firstName,
-      @JsonKey(name: 'last_name') this.lastName = '',
+      @JsonKey(readValue: readFirstName) required this.firstName,
+      @JsonKey(readValue: readLastName) this.lastName = '',
       this.email,
       this.phone,
       this.country,
@@ -548,27 +552,27 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
       this.nationality,
       this.photo,
       this.role,
-      @JsonKey(name: 'provider_id') this.providerId,
+      @JsonKey(readValue: readProviderId) this.providerId,
       this.provider,
       this.active = true,
-      @JsonKey(name: 'lead_source') required this.leadSource,
-      @JsonKey(name: 'lead_status') this.leadStatus,
+      @JsonKey(readValue: readLeadSource) required this.leadSource,
+      @JsonKey(readValue: readLeadStatus) this.leadStatus,
       final List<dynamic> languages = const [],
-      @JsonKey(name: 'last_activity_type') this.lastActivityType,
-      @JsonKey(name: 'last_activity_date') this.lastActivityDate,
-      @JsonKey(name: 'last_activity_is_complete')
+      @JsonKey(readValue: readLastActivityType) this.lastActivityType,
+      @JsonKey(readValue: readLastActivityDate) this.lastActivityDate,
+      @JsonKey(readValue: readLastActivityIsComplete)
       this.lastActivityIsComplete = false,
       @JsonKey(readValue: readCreatedAt) this.createdAt,
-      @JsonKey(name: 'updated_at') this.updatedAt,
-      @JsonKey(name: 'created_by') this.createdBy,
-      @JsonKey(name: 'modified_by') this.modifiedBy,
+      @JsonKey(readValue: readUpdatedAt) this.updatedAt,
+      @JsonKey(readValue: readCreatedBy) this.createdBy,
+      @JsonKey(readValue: readModifiedBy) this.modifiedBy,
       this.preference,
-      @JsonKey(name: 'preferred_languages')
+      @JsonKey(readValue: readPreferredLanguages)
       final List<dynamic> preferredLanguages = const [],
       @JsonKey(readValue: readCurrentAgent) this.currentAgent,
       this.notes,
       final List<String> tags = const [],
-      @JsonKey(name: 'DndStatus') this.dndStatus = false,
+      @JsonKey(readValue: readDndStatus) this.dndStatus = false,
       @JsonKey(readValue: readCompletedActivityCount)
       this.completedActivityCount = 0})
       : _languages = languages,
@@ -583,10 +587,10 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   @JsonKey(readValue: readId)
   final String id;
   @override
-  @JsonKey(name: 'first_name')
+  @JsonKey(readValue: readFirstName)
   final String firstName;
   @override
-  @JsonKey(name: 'last_name')
+  @JsonKey(readValue: readLastName)
   final String lastName;
   @override
   final String? email;
@@ -605,7 +609,7 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   @override
   final String? role;
   @override
-  @JsonKey(name: 'provider_id')
+  @JsonKey(readValue: readProviderId)
   final String? providerId;
   @override
   final String? provider;
@@ -613,10 +617,10 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   @JsonKey()
   final bool active;
   @override
-  @JsonKey(name: 'lead_source')
+  @JsonKey(readValue: readLeadSource)
   final String leadSource;
   @override
-  @JsonKey(name: 'lead_status')
+  @JsonKey(readValue: readLeadStatus)
   final LeadStatus? leadStatus;
   final List<dynamic> _languages;
   @override
@@ -628,31 +632,31 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   }
 
   @override
-  @JsonKey(name: 'last_activity_type')
+  @JsonKey(readValue: readLastActivityType)
   final String? lastActivityType;
   @override
-  @JsonKey(name: 'last_activity_date')
+  @JsonKey(readValue: readLastActivityDate)
   final DateTime? lastActivityDate;
   @override
-  @JsonKey(name: 'last_activity_is_complete')
+  @JsonKey(readValue: readLastActivityIsComplete)
   final bool lastActivityIsComplete;
   @override
   @JsonKey(readValue: readCreatedAt)
   final DateTime? createdAt;
   @override
-  @JsonKey(name: 'updated_at')
+  @JsonKey(readValue: readUpdatedAt)
   final DateTime? updatedAt;
   @override
-  @JsonKey(name: 'created_by')
+  @JsonKey(readValue: readCreatedBy)
   final String? createdBy;
   @override
-  @JsonKey(name: 'modified_by')
+  @JsonKey(readValue: readModifiedBy)
   final String? modifiedBy;
   @override
   final Preference? preference;
   final List<dynamic> _preferredLanguages;
   @override
-  @JsonKey(name: 'preferred_languages')
+  @JsonKey(readValue: readPreferredLanguages)
   List<dynamic> get preferredLanguages {
     if (_preferredLanguages is EqualUnmodifiableListView)
       return _preferredLanguages;
@@ -675,7 +679,7 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   }
 
   @override
-  @JsonKey(name: 'DndStatus')
+  @JsonKey(readValue: readDndStatus)
   final bool dndStatus;
   @override
   @JsonKey(readValue: readCompletedActivityCount)
@@ -838,8 +842,8 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
 abstract class _Lead extends Lead {
   const factory _Lead(
       {@JsonKey(readValue: readId) required final String id,
-      @JsonKey(name: 'first_name') required final String firstName,
-      @JsonKey(name: 'last_name') final String lastName,
+      @JsonKey(readValue: readFirstName) required final String firstName,
+      @JsonKey(readValue: readLastName) final String lastName,
       final String? email,
       final String? phone,
       final String? country,
@@ -848,27 +852,28 @@ abstract class _Lead extends Lead {
       final String? nationality,
       final String? photo,
       final String? role,
-      @JsonKey(name: 'provider_id') final String? providerId,
+      @JsonKey(readValue: readProviderId) final String? providerId,
       final String? provider,
       final bool active,
-      @JsonKey(name: 'lead_source') required final String leadSource,
-      @JsonKey(name: 'lead_status') final LeadStatus? leadStatus,
+      @JsonKey(readValue: readLeadSource) required final String leadSource,
+      @JsonKey(readValue: readLeadStatus) final LeadStatus? leadStatus,
       final List<dynamic> languages,
-      @JsonKey(name: 'last_activity_type') final String? lastActivityType,
-      @JsonKey(name: 'last_activity_date') final DateTime? lastActivityDate,
-      @JsonKey(name: 'last_activity_is_complete')
+      @JsonKey(readValue: readLastActivityType) final String? lastActivityType,
+      @JsonKey(readValue: readLastActivityDate)
+      final DateTime? lastActivityDate,
+      @JsonKey(readValue: readLastActivityIsComplete)
       final bool lastActivityIsComplete,
       @JsonKey(readValue: readCreatedAt) final DateTime? createdAt,
-      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
-      @JsonKey(name: 'created_by') final String? createdBy,
-      @JsonKey(name: 'modified_by') final String? modifiedBy,
+      @JsonKey(readValue: readUpdatedAt) final DateTime? updatedAt,
+      @JsonKey(readValue: readCreatedBy) final String? createdBy,
+      @JsonKey(readValue: readModifiedBy) final String? modifiedBy,
       final Preference? preference,
-      @JsonKey(name: 'preferred_languages')
+      @JsonKey(readValue: readPreferredLanguages)
       final List<dynamic> preferredLanguages,
       @JsonKey(readValue: readCurrentAgent) final Agent? currentAgent,
       final String? notes,
       final List<String> tags,
-      @JsonKey(name: 'DndStatus') final bool dndStatus,
+      @JsonKey(readValue: readDndStatus) final bool dndStatus,
       @JsonKey(readValue: readCompletedActivityCount)
       final int completedActivityCount}) = _$LeadImpl;
   const _Lead._() : super._();
@@ -879,10 +884,10 @@ abstract class _Lead extends Lead {
   @JsonKey(readValue: readId)
   String get id;
   @override
-  @JsonKey(name: 'first_name')
+  @JsonKey(readValue: readFirstName)
   String get firstName;
   @override
-  @JsonKey(name: 'last_name')
+  @JsonKey(readValue: readLastName)
   String get lastName;
   @override
   String? get email;
@@ -901,45 +906,45 @@ abstract class _Lead extends Lead {
   @override
   String? get role;
   @override
-  @JsonKey(name: 'provider_id')
+  @JsonKey(readValue: readProviderId)
   String? get providerId;
   @override
   String? get provider;
   @override
   bool get active;
   @override
-  @JsonKey(name: 'lead_source')
+  @JsonKey(readValue: readLeadSource)
   String get leadSource;
   @override
-  @JsonKey(name: 'lead_status')
+  @JsonKey(readValue: readLeadStatus)
   LeadStatus? get leadStatus;
   @override
   List<dynamic> get languages;
   @override
-  @JsonKey(name: 'last_activity_type')
+  @JsonKey(readValue: readLastActivityType)
   String? get lastActivityType;
   @override
-  @JsonKey(name: 'last_activity_date')
+  @JsonKey(readValue: readLastActivityDate)
   DateTime? get lastActivityDate;
   @override
-  @JsonKey(name: 'last_activity_is_complete')
+  @JsonKey(readValue: readLastActivityIsComplete)
   bool get lastActivityIsComplete;
   @override
   @JsonKey(readValue: readCreatedAt)
   DateTime? get createdAt;
   @override
-  @JsonKey(name: 'updated_at')
+  @JsonKey(readValue: readUpdatedAt)
   DateTime? get updatedAt;
   @override
-  @JsonKey(name: 'created_by')
+  @JsonKey(readValue: readCreatedBy)
   String? get createdBy;
   @override
-  @JsonKey(name: 'modified_by')
+  @JsonKey(readValue: readModifiedBy)
   String? get modifiedBy;
   @override
   Preference? get preference;
   @override
-  @JsonKey(name: 'preferred_languages')
+  @JsonKey(readValue: readPreferredLanguages)
   List<dynamic> get preferredLanguages;
   @override
   @JsonKey(readValue: readCurrentAgent)
@@ -949,7 +954,7 @@ abstract class _Lead extends Lead {
   @override
   List<String> get tags;
   @override
-  @JsonKey(name: 'DndStatus')
+  @JsonKey(readValue: readDndStatus)
   bool get dndStatus;
   @override
   @JsonKey(readValue: readCompletedActivityCount)

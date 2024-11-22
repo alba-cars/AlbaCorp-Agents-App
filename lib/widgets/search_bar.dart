@@ -30,7 +30,7 @@ class AppSearchBar extends StatefulWidget {
       this.filter,
       this.showSearch = true,
       this.leadWidgets,
-      this.customFilterButtonWidget});
+      this.customFilterButtonWidget, this.skipDisplayFilterKeys});
   final void Function(String? val) onChanged;
   final WidgetsReturn? filterFields;
   final void Function(Map<String, dynamic>? filter)? onFilterApplied;
@@ -40,6 +40,7 @@ class AppSearchBar extends StatefulWidget {
   final bool showSearch;
   final List<Widget>? leadWidgets;
   final Widget? customFilterButtonWidget;
+  final List<String>? skipDisplayFilterKeys;
 
   @override
   State<AppSearchBar> createState() => _AppSearchBarState();
@@ -384,16 +385,20 @@ class _AppSearchBarState extends State<AppSearchBar> {
     return value.toString();
   }
 
-  List<Map<String, dynamic>> getFilter() {
+   List<Map<String, dynamic>> getFilter() {
     arrFilter.clear();
-    filter!.entries.forEach((element) {
+    for (var element in filter!.entries) {
+      if(!(widget.skipDisplayFilterKeys?.contains(element.key) ?? false)){
+       
+      
       if (element.value is List) {
         final list = (element.value as List);
         arrFilter.addAll(list.map((e) => {element.key: e}));
       } else {
         arrFilter.add({element.key: element.value});
       }
-    });
+      }
+    }
     return arrFilter;
   }
 }

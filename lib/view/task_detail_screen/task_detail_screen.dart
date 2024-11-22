@@ -163,7 +163,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 icon: Icon(Icons.close))
         ],
       ),
-      backgroundColor: Colors.blueGrey[100],
+      backgroundColor: const Color(0xFFF5F7FA),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: BlocSelector<TaskDetailCubit, TaskDetailState, List<Activity>>(
@@ -322,18 +322,19 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                               decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      color: shadowColor,
+                                      color:shadowColor,
                                       blurRadius: 9,
                                     )
                                   ],
-                                  color: Colors.white,
+                                  color:  Colors.white,
                                   borderRadius: BorderRadius.circular(12)),
                               child: Column(
                                 children: [
+                                  SizedBox(height: 8,),
                                   Expanded(
                                     child: ScrollShadow(
-                                      size: 12,
-                                      color: Colors.grey[200]!,
+                                      size: 6,
+                                      color: shadowColor,
                                       child: SingleChildScrollView(
                                         child: Padding(
                                           padding: const EdgeInsets.all(20.0),
