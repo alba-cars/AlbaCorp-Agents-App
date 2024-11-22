@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/model/community_team_model.dart';
+import 'package:real_estate_app/model/lead_expiration_model.dart';
 import 'package:real_estate_app/model/lead_property_card_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/property_card_log_model.dart';
@@ -29,6 +30,18 @@ class ExplorerData implements ExplorerRepo {
   final log = Logger();
   final Dio _dio;
   ExplorerData({required Dio dio}) : _dio = dio;
+
+  Map<String,CancelToken> _cancelTokens = {};
+
+  CancelToken _getCancelToken(String url) {
+    if (_cancelTokens.containsKey(url)) {
+     _cancelTokens[url]?.cancel();
+    }
+    
+    final cancelToken = CancelToken();
+    _cancelTokens[url] = cancelToken;
+    return cancelToken;
+  }
 
   @override
   Future<Result<List<PropertyCard>>> getPropertyCards(
@@ -98,9 +111,9 @@ class ExplorerData implements ExplorerRepo {
         'limit': 15,
         if (paginator != null) 'page': paginator.currentPage + 1,
         if (filterRemoved != null) ...filterRemoved,
-        if (search != null) 'search': search,
+        if (search != null && search.isNotEmpty) 'search': search,
         if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
-      });
+      },cancelToken: _getCancelToken(url));
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => PropertyCard.fromJson(e)).toList();
       return Success(list,
@@ -182,9 +195,9 @@ class ExplorerData implements ExplorerRepo {
         'limit': 15,
         'page': (paginator?.currentPage ?? 0) + 1,
         if (filterRemoved != null) ...filterRemoved,
-        if (search != null) 'searchTerm': search,
+        if (search != null && search.isNotEmpty) 'searchTerm': search,
         // if (showOnlyAvailable) 'availableForCheckout': showOnlyAvailable
-      });
+      },cancelToken: _getCancelToken(url));
       final data = response.data['data']['data'] as List;
       final list = data.map((e) => LeadExplorerItem.fromJson(e)).toList();
       return Success(list,
@@ -306,12 +319,13 @@ class ExplorerData implements ExplorerRepo {
 
   @override
   Future<Result<void>> checkOutLead(
-      {List<String>? propertyCardIds, List<String>? leadIds}) async {
+      {List<String>? propertyCardIds, List<String>? leadIds,String? source}) async {
     try {
       String url = 'v1/property-cards/checkout-leads';
       await _dio.post(url, data: {
         if (propertyCardIds != null) 'cards': propertyCardIds,
-        if (leadIds != null) 'leads': leadIds
+        if (leadIds != null) 'leads': leadIds,
+        if(source != null) 'source':source
       });
       return Success(
         null,
@@ -714,6 +728,30 @@ class ExplorerData implements ExplorerRepo {
 
       return Success(
         list,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+  @override
+  Future<Result<List<LeadExpirationModel>>> getHotExplorerLeads(
+      {List<String>? leadSourceFilter,Paginator? paginator}) async {
+    try {
+      String url = 'v1/expired-records/expired-hot-leads';
+
+      final response = await _dio.get(
+        url,queryParameters: {
+          'page':(paginator?.currentPage ?? 0) + 1,
+          "limit":25,
+          if(leadSourceFilter!=null && leadSourceFilter.isNotEmpty) "leadSource":leadSourceFilter
+        }
+      );
+      final data = response.data['data'] as List;
+      final list = data.map((e) => LeadExpirationModel.fromJson(e)).toList();
+      final newPaginator = Paginator(itemCount:response.data['found'] , perPage: response.data["itemsPerPage"], currentPage: response.data['page'] );
+
+      return Success(
+        list,paginator: newPaginator
       );
     } catch (e, stack) {
       return onError(e, stack, log);

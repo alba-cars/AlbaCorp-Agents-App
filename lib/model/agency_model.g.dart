@@ -9,6 +9,7 @@ part of 'agency_model.dart';
 _$AgencyImpl _$$AgencyImplFromJson(Map<String, dynamic> json) => _$AgencyImpl(
       id: json['id'] as String,
       type: json['type'] as String,
+      agencyName: json['agency_name'] as String? ?? '',
       firstName: json['first_name'] as String? ?? '',
       lastName: json['last_name'] as String? ?? '',
       email: json['email'] as String?,
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$AgencyImplToJson(_$AgencyImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': instance.type,
+      'agency_name': instance.agencyName,
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'email': instance.email,

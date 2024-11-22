@@ -7,6 +7,7 @@ import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_w
 
 import '../../model/deal_document_model.dart';
 import '../../model/deal_model.dart';
+import '../../model/lead_source_category_model.dart';
 
 abstract class LeadRepo {
   Future<Result<List<Lead>>> getLeads(
@@ -32,4 +33,6 @@ abstract class LeadRepo {
   });
   Future<Result<List<DealDocument>>> getClientDocuments(
       {required String clientId});
+
+      Future<Result<List<LeadSourceCategory>>> getLeadSourceCategories();
 }

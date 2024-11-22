@@ -24,6 +24,7 @@ import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
+import 'package:real_estate_app/view/expired_hot_lead_explorer/expired_hot_lead_explorer.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/hot_leads_assigned_today_screen/hot_leads_assigned_today_screen.dart';
@@ -396,6 +397,13 @@ class AppRouter {
                 name: LeadsExplorerScreen.routeName,
                 pageBuilder: (context, state) {
                   return CupertinoPage(child: LeadsExplorerScreen());
+                },
+              ),
+               GoRoute(
+                path: ExpiredHotLeadExplorer.routeName,
+                name: ExpiredHotLeadExplorer.routeName,
+                pageBuilder: (context, state) {
+                  return CupertinoPage(child: ExpiredHotLeadExplorer());
                 },
               ),
               GoRoute(

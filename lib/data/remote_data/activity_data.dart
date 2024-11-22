@@ -419,6 +419,31 @@ class ActivityData implements ActivityRepo {
     }
   }
 
+   Future<Result<dynamic>> completeActivity({
+    required String activityId,
+    required String type,
+    String? feedback,
+    double? leadRating,
+    Map<String, dynamic>? followUp,
+  }) async {
+    try {
+      Logger().d(followUp);
+      final response = await _dio.post(
+        '/v1/activities/$activityId/complete',
+        data: {
+          'type': type,
+          'feedback': feedback,
+         if(leadRating !=null) 'leadRating': leadRating,
+          if (followUp != null) 'followUp': followUp,
+        },
+      );
+
+      return Success(response.data);
+    } catch (e,stack) {
+       return onError(e, stack, log);
+    }
+  }
+
   @override
   Future<Result<List<Activity>>> fetchHotLeadsAssignedTodayActivities(
       {Paginator? paginator}) async {

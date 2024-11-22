@@ -10,7 +10,6 @@ import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../../model/activity_model.dart';
 
-
 class ActivityCard extends StatelessWidget {
   final Activity activity;
   final VoidCallback? onEdit;
@@ -36,11 +35,14 @@ class ActivityCard extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: (){
-          if(activity.lead?.currentAgent?.id == getIt<AuthBloc>().state.agent?.id){
-          context.pushNamed(LeadDetailScreen.routeName,pathParameters: {'id':activity.userId});
-          }else{
-            showSnackbar(context, "Lead is no longer with you", SnackBarType.failure);
+        onTap: () {
+          if (activity.lead?.currentAgent?.id ==
+              getIt<AuthBloc>().state.agent?.id) {
+            context.pushNamed(LeadDetailScreen.routeName,
+                pathParameters: {'id': activity.userId});
+          } else {
+            showSnackbar(
+                context, "Lead is no longer with you", SnackBarType.failure);
           }
         },
         child: Column(
@@ -48,8 +50,7 @@ class ActivityCard extends StatelessWidget {
           children: [
             _buildHeader(context),
             _buildBody(context),
-            if (activity.notes?.isNotEmpty ?? false)
-              _buildNotes(context),
+            if (activity.notes?.isNotEmpty ?? false) _buildNotes(context),
           ],
         ),
       ),
@@ -77,17 +78,20 @@ class ActivityCard extends StatelessWidget {
                 Text(
                   _getActivityTitle(),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
                 if (activity.lead != null) ...[
                   const SizedBox(height: 4),
                   Text(
-                     ("${activity.lead!.firstName} ${activity.lead!.lastName}"),
+                    ("${activity.lead!.firstName} ${activity.lead!.lastName}"),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-                    ),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.7),
+                        ),
                   ),
                 ],
               ],
@@ -122,7 +126,8 @@ class ActivityCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildInfoRow(context),
-          if (activity.propertyType != null || activity.propertyListId != null) ...[
+          if (activity.propertyType != null ||
+              activity.propertyListId != null) ...[
             const SizedBox(height: 8),
             _buildPropertyInfo(context),
           ],
@@ -141,7 +146,7 @@ class ActivityCard extends StatelessWidget {
         ),
         const SizedBox(width: 4),
         Text(
-         DateFormat.yMd( ).add_Hms().format(activity.date),
+          DateFormat.yMd().add_Hms().format(activity.date.toUtc().toLocal()),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         if (activity.overdueAt != null) ...[
@@ -155,8 +160,8 @@ class ActivityCard extends StatelessWidget {
           Text(
             'Overdue',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.error,
-            ),
+                  color: Theme.of(context).colorScheme.error,
+                ),
           ),
         ],
       ],
@@ -204,8 +209,8 @@ class ActivityCard extends StatelessWidget {
           child: Text(
             tag,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
         );
       }).toList(),
@@ -228,8 +233,8 @@ class ActivityCard extends StatelessWidget {
           Text(
             'Notes',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           const SizedBox(height: 8),
           Text(
@@ -316,9 +321,9 @@ class ActivityCard extends StatelessWidget {
       child: Text(
         activity.status,
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: statusColor,
-          fontWeight: FontWeight.w600,
-        ),
+              color: statusColor,
+              fontWeight: FontWeight.w600,
+            ),
       ),
     );
   }

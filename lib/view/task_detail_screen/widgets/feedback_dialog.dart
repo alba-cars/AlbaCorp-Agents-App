@@ -1,42 +1,57 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/activity_types.dart';
-import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/model/property_model.dart';
+import 'package:real_estate_app/util/color_category.dart';
+import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
+import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/fields/card_picker_field.dart';
+import 'package:real_estate_app/widgets/fields/date_field.dart';
+import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
+import 'package:real_estate_app/widgets/fields/time_field.dart';
+import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
+import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
+import 'package:real_estate_app/widgets/text.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../../app/activity_cubit/activity_cubit.dart';
 import '../../../model/activity_feedback_model.dart';
 import '../../../model/activity_model.dart';
-import '../../../model/property_model.dart';
-import '../../../util/color_category.dart';
-import '../../../util/property_price.dart';
-import '../../../widgets/fields/card_picker_field.dart';
-import '../../../widgets/fields/date_field.dart';
-import '../../../widgets/fields/multi_line_textfield.dart';
-import '../../../widgets/fields/time_field.dart';
-import '../../../widgets/fields/wrap_select_field.dart';
-import '../../../widgets/s3_image.dart';
-import '../../../widgets/text.dart';
+import '../../../service_locator/injectable.dart';
 import '../../add_deal_screen/add_deal_screen.dart';
-import '../task_detail_screen.dart';
+
+// Enums for better type safety
+enum FeedbackType {
+  interested('Interested'),
+  veryInterested('Very Interested'),
+  notInterested('Not Interested'),
+  notAnswered('Not Answered'),
+  invalidNumber('Invalid Number'),
+  disqualify('Disqualify'),
+  doNotCall('Do not Call'),
+  listing('Listing'),
+  deal('Deal');
+
+  final String value;
+  const FeedbackType(this.value);
+}
 
 class ActivityFeedbackDialog extends StatefulWidget {
-
   const ActivityFeedbackDialog({
     super.key,
     required this.activity,
-    required this.parentContext,
     this.direction,
-    this.mode, this.notes,
+    this.mode,
+    this.notes,
+    required this.parentContext,
   });
 
   final Activity activity;
@@ -50,501 +65,531 @@ class ActivityFeedbackDialog extends StatefulWidget {
 }
 
 class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
-  late final ValueNotifier<String?> feedBackValue = ValueNotifier(null);
-   TextEditingController _controller = TextEditingController();
+  late final ValueNotifier<FeedbackType?> feedbackValue;
+  late final TextEditingController _controller;
   final GlobalKey<FormBuilderState> _formKey = GlobalKey();
 
   @override
   void initState() {
-    feedBackValue.value = switch (widget.mode) {
-      CardAction.Heart => 'Interested',
-      CardAction.Charge => 'Very Interested',
-      CardAction.Star => 'Listing',
-      CardAction.ManuelSwipe =>
-        widget.direction == DismissDirection.startToEnd ? 'Interested' : null,
+    super.initState();
+    _initializeFeedbackValue();
+    _initializeController();
+  }
+
+  void _initializeFeedbackValue() {
+    FeedbackType? initialValue = switch (widget.mode) {
+      CardAction.Heart => FeedbackType.interested,
+      CardAction.Charge => FeedbackType.veryInterested,
+      CardAction.Star => FeedbackType.listing,
+      CardAction.ManuelSwipe => widget.direction == DismissDirection.startToEnd
+          ? FeedbackType.interested
+          : null,
       _ => null
     };
+    feedbackValue = ValueNotifier(initialValue);
+  }
 
-  Logger().d("Widget notes:: ${widget.notes}");
-    String notesValue = (widget.notes ?? "" );
-    _controller = TextEditingController(text: notesValue);
-    super.initState();
+  void _initializeController() {
+    _controller = TextEditingController(text: widget.notes ?? "");
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    feedbackValue.dispose();
+    super.dispose();
+  }
+
+  Widget _buildHeader() {
+    String title = widget.direction == DismissDirection.endToStart
+        ? 'Leave Feedback'
+        : switch (widget.mode) {
+            CardAction.Heart => 'Interested',
+            CardAction.Charge => 'Make Prospect',
+            CardAction.Star => 'Deal',
+            _ => 'Complete task'
+          };
+
+    Color backgroundColor = widget.direction == DismissDirection.startToEnd
+        ? Colors.green[200]!
+        : widget.direction == DismissDirection.endToStart
+            ? Colors.red[200]!
+            : lightPacific;
+
+    return Container(
+      height: 60,
+      padding: EdgeInsets.only(top: 20, left: 25, right: 25, bottom: 12),
+      width: double.infinity,
+      color: backgroundColor,
+      child: _HeaderContent(title: title),
+    );
+  }
+
+  Widget _buildFeedbackOptions() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (_shouldShowPositiveFeedback()) ..._buildPositiveFeedbackOptions(),
+        if (_shouldShowNegativeFeedback()) ..._buildNegativeFeedbackOptions(),
+      ],
+    );
+  }
+
+  bool _shouldShowPositiveFeedback() {
+    return widget.direction == DismissDirection.startToEnd ||
+        widget.mode == CardAction.Star ||
+        widget.mode == CardAction.ManuelSwipe;
+  }
+
+  bool _shouldShowNegativeFeedback() {
+    return widget.direction == null ||
+        widget.direction == DismissDirection.endToStart;
+  }
+
+  List<Widget> _buildPositiveFeedbackOptions() {
+    return [
+      if (widget.mode == CardAction.Star) ...[
+        _buildFeedbackRadio(FeedbackType.listing, 'Win / Create new listing'),
+        _buildFeedbackRadio(FeedbackType.deal, 'Win / Create new deal'),
+      ],
+      if (widget.mode == CardAction.ManuelSwipe) ...[
+        _buildFeedbackRadio(
+            FeedbackType.veryInterested, 'Very Interested / Make Prospect'),
+        _buildFeedbackRadio(FeedbackType.interested, 'Interested'),
+      ],
+    ];
+  }
+
+  List<Widget> _buildNegativeFeedbackOptions() {
+    return [
+      _buildFeedbackRadio(FeedbackType.notInterested, 'Not Interested'),
+      _buildFeedbackRadio(FeedbackType.notAnswered, 'No Answer'),
+      _buildFeedbackRadio(FeedbackType.invalidNumber, 'Invalid Number'),
+      _buildFeedbackRadio(FeedbackType.disqualify, 'Disqualify'),
+      _buildFeedbackRadio(FeedbackType.doNotCall, 'Do not call'),
+    ];
+  }
+
+  Widget _buildFeedbackRadio(FeedbackType type, String label) {
+    return RadioListTile<FeedbackType>(
+      value: type,
+      groupValue: feedbackValue.value,
+      title: Text(label),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      contentPadding: EdgeInsets.zero,
+      onChanged: (val) {
+        if (val != null) feedbackValue.value = val;
+      },
+    );
+  }
+
+  Widget _buildNoteField() {
+    bool shouldShowNotes = [
+      FeedbackType.notInterested,
+      FeedbackType.disqualify,
+      FeedbackType.interested,
+      FeedbackType.veryInterested,
+    ].contains(feedbackValue.value);
+
+    if (!shouldShowNotes) return SizedBox();
+
+    return MultiLineField(
+      controller: _controller,
+      placeHolder: "Write a brief note!",
+      label: "Notes",
+      name: 'notes',
+      validator: _noteValidator,
+    );
+  }
+
+  String? _noteValidator(String? val) {
+    if (val == null || val.length < 5) {
+      return 'Please write a valid note';
+    }
+    return null;
+  }
+
+  Widget _buildFollowUpForm() {
+    if (![FeedbackType.interested, FeedbackType.veryInterested]
+        .contains(feedbackValue.value)) {
+      return SizedBox();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        LabelText(text: 'New Task', underline: true),
+        VerticalSmallGap(),
+        WrapSelectField(
+          name: 'type',
+          label: 'Type',
+          values: activityTypes,
+          isRequired: true,
+        ),
+        DateField(
+          isRequired: true,
+          name: 'date',
+          label: 'Date',
+          firstDate: DateTime.now(),
+          lastDate: DateTime.now().add(Duration(days: 365)),
+        ),
+        TimeField(
+          isRequired: false,
+          name: 'time',
+          label: 'Time',
+        ),
+        CardPickerDialogField<Property>(
+          name: 'property',
+          label: 'Property',
+          isRequired: false,
+          valueTransformer: (option) => option?.id,
+          optionsBuilder: (v) async {
+            return context.read<TaskDetailCubit>().getListings(search: v.text);
+          },
+          optionBuilder: (context, listing) {
+            return PropertyCardPickerItem(listing: listing);
+          },
+        ),
+        MultiLineField(
+          label: 'Add a note for next activity',
+          name: 'description',
+        ),
+        VerticalSmallGap(),
+      ],
+    );
+  }
+
+  Widget _buildActionButtons(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: feedbackValue,
+      builder: (context, FeedbackType? value, _) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (_shouldShowFollowUpButton(value)) _buildFollowUpButton(context),
+            if (_shouldShowDealButton(value)) _buildDealButton(context),
+            if (_shouldShowListingButton(value)) _buildListingButton(),
+            if (value == FeedbackType.notInterested) _buildLostButton(context),
+            if (value == FeedbackType.doNotCall) _buildDNDButton(context),
+            if (value == FeedbackType.notAnswered) _buildNewTaskButton(context),
+            if ([FeedbackType.invalidNumber, FeedbackType.disqualify]
+                .contains(value))
+              _buildDisqualifyButton(value, context),
+          ],
+        );
+      },
+    );
+  }
+
+  bool _shouldShowFollowUpButton(FeedbackType? value) {
+    return [FeedbackType.interested, FeedbackType.veryInterested]
+            .contains(value) &&
+        widget.mode != CardAction.Star;
+  }
+
+  bool _shouldShowDealButton(FeedbackType? value) {
+    return value == FeedbackType.deal &&
+        (widget.mode == CardAction.ManuelSwipe ||
+            widget.mode == CardAction.Star);
+  }
+
+  bool _shouldShowListingButton(FeedbackType? value) {
+    return value == FeedbackType.listing &&
+        (widget.mode == CardAction.ManuelSwipe ||
+            widget.mode == CardAction.Star);
+  }
+
+  // Action Button Builders
+  Widget _buildFollowUpButton(BuildContext context) {
+    return AppPrimaryButton(
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        final val = _formKey.currentState!.value;
+        await context.read<TaskDetailCubit>().completeAndAddFollowUp(
+              context: context,
+              task: widget.activity,
+              values: Map.from(val),
+              currentActivityNotes: val['notes'],
+              markAsProspect:
+                  feedbackValue.value == FeedbackType.veryInterested,
+            );
+      },
+      text: 'Add Followup',
+    );
+  }
+
+  Widget _buildDealButton(BuildContext context) {
+    return AppPrimaryButton(
+      backgroundColor: Colors.green[800],
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        Navigator.of(context).pop(false);
+        getIt<ActivityCubit>().setLastActivityFeedback(
+          widget.activity,
+          ActivityFeedback(
+            isInterested: true,
+            status: 'Complete',
+            notes: _controller.text,
+          ),
+        );
+
+        widget.parentContext.pushNamed(AddDealScreen.routeName);
+      },
+      text: 'Complete & Add Deal',
+    );
+  }
+
+// Listing Button
+  Widget _buildListingButton() {
+    return AppPrimaryButton(
+      backgroundColor: Colors.green[800],
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        Navigator.of(context).pop(false);
+        getIt<ActivityCubit>().setLastActivityFeedback(
+          widget.activity,
+          ActivityFeedback(
+            isInterested: true,
+            status: 'Complete',
+            notes: _controller.text,
+          ),
+        );
+
+        final lead = widget.activity.lead;
+        widget.parentContext.pushNamed(
+          AddListingScreen.routeName,
+          queryParameters: {
+            "lead": json.encode(lead?.toJson()),
+          },
+        );
+      },
+      text: 'Complete & Add Listing',
+    );
+  }
+
+// Lost Button
+  Widget _buildLostButton(BuildContext context) {
+    return AppPrimaryButton(
+      foregroundColor: Colors.red[800]!,
+      borderShow: true,
+      backgroundColor: Colors.white,
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        await context.read<TaskDetailCubit>().makeLost(
+              context: context,
+              task: widget.activity,
+              description: _controller.text,
+            );
+      },
+      text: 'Mark Lost',
+    );
+  }
+
+// Do Not Disturb Button
+  Widget _buildDNDButton(BuildContext context) {
+    return AppPrimaryButton(
+      foregroundColor: Colors.red[800]!,
+      borderShow: true,
+      backgroundColor: Colors.white,
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        await context.read<TaskDetailCubit>().doNotCall(
+              context: context,
+              task: widget.activity,
+              description: _controller.text,
+            );
+      },
+      text: 'Mark as DND',
+    );
+  }
+
+// New Task Button
+  Widget _buildNewTaskButton(BuildContext context) {
+    return AppPrimaryButton(
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        await context.read<TaskDetailCubit>().completeAndAddFollowUp(
+          context: context,
+          task: widget.activity,
+          currentActivityNotes: "Not Answered",
+          markAsProspect: false,
+          values: {
+            ...context.read<TaskDetailCubit>().state.task?.toJson() ?? {},
+            "date": DateTime.now().add(Duration(days: 1)),
+          },
+        );
+      },
+      text: 'Schedule New Task',
+    );
+  }
+
+// Disqualify Button
+  Widget _buildDisqualifyButton(FeedbackType? value, BuildContext context) {
+    return AppPrimaryButton(
+      foregroundColor: Colors.red[800]!,
+      borderShow: true,
+      backgroundColor: Colors.white,
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        await context.read<TaskDetailCubit>().disqualifyOrInvalidNumber(
+              context: context,
+              task: widget.activity,
+              feedbackType: value == FeedbackType.invalidNumber
+                  ? FeedbackTypeEnum.invalidNumber
+                  : FeedbackTypeEnum.disqualify,
+              description: value == FeedbackType.invalidNumber
+                  ? "Invalid Number"
+                  : _controller.text,
+            );
+      },
+      text: 'Disqualify',
+    );
+  }
+
+  _buildRatingBar(BuildContext context) {
+    final value = context.select(
+      (TaskDetailCubit value) => value.state.ratingValue,
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Divider(),
+        SizedBox(
+          height: 4,
+        ),
+        Text("Lead Rating"),
+        SizedBox(
+          height: 4,
+        ),
+        Slider(
+            value: value ?? 5.0,
+            min: 0,
+            max: 10,
+            label: value.toString(),
+            divisions: 20,
+            onChanged: (v) {
+              context.read<TaskDetailCubit>().onRAtingChanged(v);
+            }),
+        Center(
+            child: Text(
+          "Your rating is $value out of 10",
+          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary),
+        ))
+        // Padding(
+        //   padding:  EdgeInsets.zero,
+        //   child: SfSlider(
+
+        //     stepSize: 0.05,
+        //       value: value ?? 0.5,
+        //       interval: 20,
+        //       onChanged: (v) {
+        //         context.read<TaskDetailCubit>().onRAtingChanged(v);
+        //       }),
+        // ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      // backgroundColor: Colors.white,
       clipBehavior: Clip.hardEdge,
-
-      child: BlocProvider.value(
-        value: widget.parentContext.read<TaskDetailCubit>(),
-        child: ValueListenableBuilder(
-            valueListenable: feedBackValue,
-            builder: (context, value, child) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TitleText(
-                            text:
-                                widget.direction == DismissDirection.endToStart
-                                    ? 'Leave Feedback'
-                                    : switch (widget.mode) {
-                                        CardAction.Heart => 'Interested',
-                                        CardAction.Charge => 'Make Prospect',
-                                        CardAction.Star => 'Deal',
-                                        _ => 'Complete task'
-                                      }),
-                        IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            icon: Icon(
-                              Icons.close,
-                              size: 20,
-                            ))
-                      ],
-                    ),
-                    height: 60,
-                    padding: EdgeInsets.only(
-                        top: 20, left: 25, right: 25, bottom: 12),
-                    width: double.infinity,
-                    color: widget.direction == DismissDirection.startToEnd
-                        ? Colors.green[200]
-                        : widget.direction == DismissDirection.endToStart
-                            ? Colors.red[200]
-                            : lightPacific,
-                  ),
-                  VerticalSmallGap(),
-                  Flexible(
-                    child: ScrollShadow(
-                      child: SingleChildScrollView(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: FormBuilder(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              LabelText(
-                                text: 'Feedback Note',
-                                underline: true,
-                              ),
-                              VerticalSmallGap(),
-                              if ((widget.direction ==
-                                      DismissDirection.startToEnd &&
-                                  (widget.mode == CardAction.Star)))
-                                RadioListTile(
-                                    value: 'Listing',
-                                    title: Text('Win / Create new listing'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if ((widget.direction ==
-                                      DismissDirection.startToEnd &&
-                                  (widget.mode == CardAction.Star)))
-                                RadioListTile(
-                                    value: 'Deal',
-                                    title: Text('Win / Create new deal'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if ((widget.direction ==
-                                      DismissDirection.startToEnd &&
-                                  widget.mode == CardAction.ManuelSwipe))
-                                RadioListTile(
-                                    value: 'Very Interested',
-                                    title:
-                                        Text('Very Interested / Make Prospect'),
-                                    groupValue: value,
-                                    contentPadding: EdgeInsets.zero,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if ((widget.direction ==
-                                      DismissDirection.startToEnd &&
-                                  widget.mode == CardAction.ManuelSwipe))
-                                RadioListTile(
-                                    value: 'Interested',
-                                    title: Text('Interested'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if (widget.direction == null ||
-                                  widget.direction ==
-                                      DismissDirection.endToStart)
-                                RadioListTile(
-                                    value: 'Not Interested',
-                                    title: Text('Not Interested'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if (widget.direction == null ||
-                                  widget.direction ==
-                                      DismissDirection.endToStart)
-                                RadioListTile(
-                                    value: 'Not Answered',
-                                    title: Text('No Answer'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if (widget.direction == null ||
-                                  widget.direction ==
-                                      DismissDirection.endToStart)
-                                RadioListTile(
-                                    value: 'Invalid Number',
-                                    title: Text('Invalid Number'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if (widget.direction == null ||
-                                  widget.direction ==
-                                      DismissDirection.endToStart)
-                                RadioListTile(
-                                    value: 'Disqualify',
-                                    title: Text('Disqualify'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if (widget.direction == null ||
-                                  widget.direction ==
-                                      DismissDirection.endToStart)
-                                RadioListTile(
-                                    value: 'Do not Call',
-                                    title: Text('Do not call'),
-                                    groupValue: value,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    onChanged: (val) {
-                                      if (val != null)
-                                        feedBackValue.value = val;
-                                    }),
-                              if (value == "Not Interested" ||
-                                  value == "Disqualify" ||
-                                  value == "Interested" ||
-                                  value == "Very Interested")
-                                MultiLineField(
-                                  controller: _controller,
-                                  placeHolder: "Write a brief note!",
-                                  label: "Notes",
-                                  name: 'notes',
-                                  validator: (val) {
-                                    if (val == null || val.length < 5) {
-                                      return 'Please write a valid note';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              if (value == "Invalid Number" ||
-                                  value == "Do not Call")
-                                FormBuilderCheckbox(
-                                    name: 'acknowledgement',
-                                    validator: (value) {
-                                      if (value != true) {
-                                        return "Please acknwoledge your action";
-                                      }
-                                    },
-                                    contentPadding: EdgeInsets.zero,
-                                    initialValue: false,
-                                    title: NormalText(
-                                      text:
-                                          "Acknowledge your action by checking the box",
-                                    ),
-                                    onChanged: (val) {}),
-                              if (feedBackValue.value == 'Interested' ||
-                                  feedBackValue.value == 'Very Interested') ...[
-                                LabelText(
-                                  text: 'New Task',
-                                  underline: true,
-                                ),
-                                VerticalSmallGap(),
-                                WrapSelectField(
-                                  name: 'type',
-                                  label: 'Type',
-                                  values: activityTypes,
-                                  isRequired: true,
-                                ),
-                                DateField(
-                                    isRequired: true,
-                                    name: 'date',
-                                    label: 'Date',
-                                    firstDate: DateTime.now(),
-                                    lastDate:
-                                        DateTime.now().add(Duration(days: 365))),
-                                TimeField(
-                                  isRequired: false,
-                                  name: 'time',
-                                  label: 'Time',
-                                ),
-                                CardPickerDialogField<Property>(
-                                  name: 'property',
-                                  label: 'Property',
-                                  isRequired: false,
-                                  valueTransformer: (option) => option?.id,
-                                  optionsBuilder: (v) async {
-                                    return widget.parentContext
-                                        .read<TaskDetailCubit>()
-                                        .getListings(search: v.text);
-                                  },
-                                  optionBuilder: (context, listing) {
-                                    return PropertyCardPickerItem(
-                                        listing: listing);
-                                  },
-                                ),
-                                MultiLineField(
-                                  label: 'Add a note for next activity',
-                                  name: 'description',
-                                ),
-                                VerticalSmallGap(),
-                              ]
-                            ],
-                          ),
+      child: ValueListenableBuilder(
+          valueListenable: feedbackValue,
+          builder: (context, value, _) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildHeader(),
+                VerticalSmallGap(),
+                Flexible(
+                  child: ScrollShadow(
+                    child: SingleChildScrollView(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: FormBuilder(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            LabelText(text: 'Feedback Note', underline: true),
+                            VerticalSmallGap(),
+                            _buildFeedbackOptions(),
+                            _buildNoteField(),
+                            Visibility(
+                              visible: shouldShowRating(feedbackValue.value),
+                              child: _buildRatingBar(context),
+                            ),
+                            _buildFollowUpForm(),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  Container(
-                    width: double.maxFinite,
-                    // color: lightPacific,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: ValueListenableBuilder(
-                        valueListenable: feedBackValue,
-                        builder: (context, value, _) {
-                          return Column(
-                            children: [
-                              if (value == "Interested" ||
-                                  value == 'Very Interested') ...[
-                                if (widget.mode != CardAction.Star)
-                                  AppPrimaryButton(
-                                      onTap: () async {
-                                        if (_formKey.currentState
-                                                ?.saveAndValidate() !=
-                                            true) {
-                                          return;
-                                        }
-                                        final val =
-                                            _formKey.currentState!.value;
-                                        Logger().d({
-                                          ...val,
-                                          'interested': feedBackValue.value
-                                        });
-                                        await widget.parentContext
-                                            .read<TaskDetailCubit>()
-                                            .completeAndAddFollowUp(
-                                                context: context,
-                                                task: widget.activity,
-                                                values: val,
-                                               currentActivityNotes: val['notes'],
-                                                markAsProspect:
-                                                    feedBackValue.value ==
-                                                        'Very Interested');
-                                      },
-                                      text: ('Add Followup')),
-                                VerticalSmallGap(
-                                  adjustment: 1,
-                                ),
-                              ],
-                              if (((widget.mode == CardAction.ManuelSwipe ||
-                                      widget.mode == CardAction.Star) &&
-                                  feedBackValue.value == 'Deal'))
-                                AppPrimaryButton(
-                                    backgroundColor: Colors.green[800],
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
-                                      Navigator.of(context).pop(false);
-                                      getIt<ActivityCubit>()
-                                          .setLastActivityFeedback(
-                                              widget.activity,
-                                              ActivityFeedback(
-                                                  isInterested: true,
-                                                  status: 'Complete',
-                                                  notes: _controller.text));
-                                      widget.parentContext
-                                          .pushNamed(AddDealScreen.routeName);
-                                    },
-                                    text: ('Complete & Add Deal')),
-                              if (((widget.mode == CardAction.ManuelSwipe ||
-                                      widget.mode == CardAction.Star) &&
-                                  feedBackValue.value == 'Listing'))
-                                AppPrimaryButton(
-                                    backgroundColor: Colors.green[800],
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
-                                      Navigator.of(context).pop(false);
-                                      getIt<ActivityCubit>()
-                                          .setLastActivityFeedback(
-                                              widget.activity,
-                                              ActivityFeedback(
-                                                  isInterested: true,
-                                                  status: 'Complete',
-                                                  notes: _controller.text));
-                                      final lead = widget.activity.lead;
-                                      widget.parentContext.pushNamed(
-                                          AddListingScreen.routeName,
-                                          queryParameters: {
-                                            "lead": json.encode(lead?.toJson())
-                                          });
-                                    },
-                                    text: ('Complete & Add Listing')),
-                              if (value == "Not Interested") ...[
-                                AppPrimaryButton(
-                                    foregroundColor: Colors.red[800]!,
-                                    borderShow: true,
-                                    backgroundColor: Colors.white,
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
-                                      await widget.parentContext
-                                          .read<TaskDetailCubit>()
-                                          .makeLost(
-                                            context: context,
-                                            task: widget.activity,
-                                            description: _controller.text,
-                                          );
-                                    },
-                                    text: ('Mark Lost')),
-                              ],
-                              if (value == "Do not Call") ...[
-                                AppPrimaryButton(
-                                    foregroundColor: Colors.red[800]!,
-                                    borderShow: true,
-                                    backgroundColor: Colors.white,
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
-                                      await widget.parentContext
-                                          .read<TaskDetailCubit>()
-                                          .doNotCall(
-                                            context: context,
-                                            task: widget.activity,
-                                            description: _controller.text,
-                                          );
-                                    },
-                                    text: ('Mark as DND')),
-                              ],
-                              if (value == "Not Answered")
-                                AppPrimaryButton(
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
+                ),
+                Container(
+                  width: double.maxFinite,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: _buildActionButtons(context),
+                ),
+              ],
+            );
+          }),
+    );
+  }
+}
 
-                                      await widget.parentContext
-                                          .read<TaskDetailCubit>()
-                                          .completeAndAddFollowUp(
-                                              context: widget.parentContext,
-                                              task: widget.activity,
-                                              currentActivityNotes: "Not Answered",
-                                              markAsProspect: false,
-                                              values: {
-                                            ...context
-                                                    .read<TaskDetailCubit>()
-                                                    .state
-                                                    .task
-                                                    ?.toJson() ??
-                                                {},
-                                            "date": DateTime.now()
-                                                .add(Duration(days: 1))
-                                          });
-                                      // Navigator.of(context).pop();
-                                    },
-                                    text: ('Schedule New Task')),
-                              if (value == "Invalid Number" ||
-                                  value == "Disqualify") ...[
-                                AppPrimaryButton(
-                                    foregroundColor: Colors.red[800]!,
-                                    borderShow: true,
-                                    backgroundColor: Colors.white,
-                                    onTap: () async {
-                                      if (_formKey.currentState
-                                              ?.saveAndValidate() !=
-                                          true) {
-                                        return;
-                                      }
+bool shouldShowRating(FeedbackType? selectedFeedbackType) {
+  if (selectedFeedbackType == null) return false;
+  const ratingBypassStatus = [
+    FeedbackType.doNotCall,
+    FeedbackType.invalidNumber,
+    FeedbackType.notAnswered,
+    FeedbackTypeEnum.doNotDial
+  ];
 
-                                      await widget.parentContext
-                                          .read<TaskDetailCubit>()
-                                          .disqualify(
-                                              context: widget.parentContext,
-                                              task: widget.activity,
-                                              description:
-                                                  value == "Invalid Number"
-                                                      ? "Invalid Number"
-                                                      : _controller.text);
-                                      // Navigator.of(context).pop();
-                                    },
-                                    text: 'Disqualify'),
-                              ]
-                            ],
-                          );
-                        }),
-                  )
-                ],
-              );
-            }),
-      ),
+  return !ratingBypassStatus.contains(selectedFeedbackType);
+}
+
+// Extracted Header Component
+class _HeaderContent extends StatelessWidget {
+  final String title;
+
+  const _HeaderContent({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        TitleText(text: title),
+        IconButton(
+          padding: EdgeInsets.zero,
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(Icons.close, size: 20),
+        ),
+      ],
     );
   }
 }
@@ -579,6 +624,7 @@ class PropertyCardPickerItem extends StatelessWidget {
                 flex: 4,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Expanded(
                       child: Container(
@@ -605,6 +651,7 @@ class PropertyCardPickerItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     LabelText(
                       text: listing.propertyTitle,
@@ -645,6 +692,7 @@ class PropertyCardPickerItem extends StatelessWidget {
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               SmallText(text: 'Agent'),
                               LabelText(
@@ -670,5 +718,23 @@ class PropertyCardPickerItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
+  const CustomSliderTrackShape();
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final trackHeight = sliderTheme.trackHeight;
+    final trackLeft = offset.dx;
+    final trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
+    final trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

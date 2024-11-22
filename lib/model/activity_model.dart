@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/property_model.dart';
 
 part 'activity_model.freezed.dart';
 part 'activity_model.g.dart'; // Generated file for JSON serialization
@@ -26,6 +27,7 @@ class Activity with _$Activity {
     @JsonKey( readValue: readOffplanId) String? offplanId,
     @JsonKey( readValue: readPropertyType) String? propertyType,
     @JsonKey( readValue: readOverdueAt) DateTime? overdueAt,
+    Property? property_list,
     @JsonKey( readValue: readCreatedAt) DateTime? createdAt,
     @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
   }) = _Activity;
