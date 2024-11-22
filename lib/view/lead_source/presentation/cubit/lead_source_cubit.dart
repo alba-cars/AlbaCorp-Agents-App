@@ -18,29 +18,38 @@ class LeadSourceCubit extends Cubit<LeadSourceState> {
   LeadSourceCubit({required this.leadData})
       : super(LeadSourceState(status: AppStatus.initial));
 
-  getLeadSources(
+  Future<List<LeadSource>> getLeadSources(
       {LeadSourceType leadSourceType = LeadSourceType.All,
       String? search,
-      Paginator? paginator}) async {
+      bool isRefresh = false
+      }) async {
+    if(search != state.search || isRefresh){
+       emit(state.copyWith(paginator: null,leadSources: []));
+    }
     emit(state.copyWith(status: AppStatus.loading));
+
     final result = await leadData.getLeadSourcesRefactored(
-        leadSourceType: leadSourceType, search: search, paginator: paginator);
+        leadSourceType: leadSourceType, search: search, paginator: state.paginator);
 
     switch (result) {
       case (Success success):
-        _handleSucccess(success);
+       return _handleSucccess(success);
       case (Error error):
-        _handleError(error);
+       return  _handleError(error);
     }
   }
 
-  void _handleSucccess(Success success) {
+  List<LeadSource> _handleSucccess(Success success) {
+    final List<LeadSource> list =[...(state.leadSources ?? []),...(success.value as List<LeadSource>)];
     emit(state.copyWith(
         status: AppStatus.success,
-        leadSources: (success.value as List<LeadSource>)));
+        paginator: success.paginator,
+        leadSources: list));
+        return list;
   }
 
-  void _handleError(Error error) {
+  List<LeadSource> _handleError(Error error) {
     emit(state.copyWith(status: AppStatus.failure, error: error.exception));
+    return <LeadSource>[];
   }
 }

@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LeadSourceState {
   AppStatus get status => throw _privateConstructorUsedError;
   List<LeadSource>? get leadSources => throw _privateConstructorUsedError;
+  Paginator? get paginator => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  String? get search => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LeadSourceStateCopyWith<LeadSourceState> get copyWith =>
@@ -31,7 +33,14 @@ abstract class $LeadSourceStateCopyWith<$Res> {
           LeadSourceState value, $Res Function(LeadSourceState) then) =
       _$LeadSourceStateCopyWithImpl<$Res, LeadSourceState>;
   @useResult
-  $Res call({AppStatus status, List<LeadSource>? leadSources, String? error});
+  $Res call(
+      {AppStatus status,
+      List<LeadSource>? leadSources,
+      Paginator? paginator,
+      String? error,
+      String? search});
+
+  $PaginatorCopyWith<$Res>? get paginator;
 }
 
 /// @nodoc
@@ -49,7 +58,9 @@ class _$LeadSourceStateCopyWithImpl<$Res, $Val extends LeadSourceState>
   $Res call({
     Object? status = null,
     Object? leadSources = freezed,
+    Object? paginator = freezed,
     Object? error = freezed,
+    Object? search = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -60,11 +71,31 @@ class _$LeadSourceStateCopyWithImpl<$Res, $Val extends LeadSourceState>
           ? _value.leadSources
           : leadSources // ignore: cast_nullable_to_non_nullable
               as List<LeadSource>?,
+      paginator: freezed == paginator
+          ? _value.paginator
+          : paginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      search: freezed == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get paginator {
+    if (_value.paginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.paginator!, (value) {
+      return _then(_value.copyWith(paginator: value) as $Val);
+    });
   }
 }
 
@@ -76,7 +107,15 @@ abstract class _$$LeadSourceStateImplCopyWith<$Res>
       __$$LeadSourceStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppStatus status, List<LeadSource>? leadSources, String? error});
+  $Res call(
+      {AppStatus status,
+      List<LeadSource>? leadSources,
+      Paginator? paginator,
+      String? error,
+      String? search});
+
+  @override
+  $PaginatorCopyWith<$Res>? get paginator;
 }
 
 /// @nodoc
@@ -92,7 +131,9 @@ class __$$LeadSourceStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? leadSources = freezed,
+    Object? paginator = freezed,
     Object? error = freezed,
+    Object? search = freezed,
   }) {
     return _then(_$LeadSourceStateImpl(
       status: null == status
@@ -103,9 +144,17 @@ class __$$LeadSourceStateImplCopyWithImpl<$Res>
           ? _value._leadSources
           : leadSources // ignore: cast_nullable_to_non_nullable
               as List<LeadSource>?,
+      paginator: freezed == paginator
+          ? _value.paginator
+          : paginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      search: freezed == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -117,7 +166,9 @@ class _$LeadSourceStateImpl implements _LeadSourceState {
   const _$LeadSourceStateImpl(
       {this.status = AppStatus.init,
       final List<LeadSource>? leadSources = const [],
-      this.error})
+      this.paginator,
+      this.error,
+      this.search})
       : _leadSources = leadSources;
 
   @override
@@ -135,11 +186,15 @@ class _$LeadSourceStateImpl implements _LeadSourceState {
   }
 
   @override
+  final Paginator? paginator;
+  @override
   final String? error;
+  @override
+  final String? search;
 
   @override
   String toString() {
-    return 'LeadSourceState(status: $status, leadSources: $leadSources, error: $error)';
+    return 'LeadSourceState(status: $status, leadSources: $leadSources, paginator: $paginator, error: $error, search: $search)';
   }
 
   @override
@@ -150,12 +205,20 @@ class _$LeadSourceStateImpl implements _LeadSourceState {
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality()
                 .equals(other._leadSources, _leadSources) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.paginator, paginator) ||
+                other.paginator == paginator) &&
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.search, search) || other.search == search));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status,
-      const DeepCollectionEquality().hash(_leadSources), error);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      const DeepCollectionEquality().hash(_leadSources),
+      paginator,
+      error,
+      search);
 
   @JsonKey(ignore: true)
   @override
@@ -169,14 +232,20 @@ abstract class _LeadSourceState implements LeadSourceState {
   const factory _LeadSourceState(
       {final AppStatus status,
       final List<LeadSource>? leadSources,
-      final String? error}) = _$LeadSourceStateImpl;
+      final Paginator? paginator,
+      final String? error,
+      final String? search}) = _$LeadSourceStateImpl;
 
   @override
   AppStatus get status;
   @override
   List<LeadSource>? get leadSources;
   @override
+  Paginator? get paginator;
+  @override
   String? get error;
+  @override
+  String? get search;
   @override
   @JsonKey(ignore: true)
   _$$LeadSourceStateImplCopyWith<_$LeadSourceStateImpl> get copyWith =>

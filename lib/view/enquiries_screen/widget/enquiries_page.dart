@@ -35,10 +35,14 @@ class _EnquiriesPageState extends State<EnquiriesPage>
   List<Widget> filterFields(
       BuildContext context, Map<String, dynamic>? values) {
     return [
-      Row(
-        children: [
-          ActivitySortControlWidget(),
+      WrapSelectField(
+        name: 'sortBy',
+        label: "Sort By",
+        values: [
+          {"label": "Latest", "value": 'latest'},
+          {"label": "Oldest", "value": 'oldest'}
         ],
+        displayOption: (option) => option['label'] ?? '',
       ),
       LeadSourceFilterWidget(),
       MultiSelectAutoCompleteField(
@@ -118,6 +122,7 @@ class _EnquiriesPageState extends State<EnquiriesPage>
               HorizontalSmallGap(),
             ],
             showSearch: false,
+            skipDisplayFilterKeys: ['sortBy'],
             onChanged: (v) {},
             onFilterApplied: (filter) {
               context

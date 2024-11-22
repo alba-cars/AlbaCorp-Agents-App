@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -30,7 +31,8 @@ class ActivityData implements ActivityRepo {
       final response = await _dio.post('/v1/activities', data: {
         'user_id': leadId,
         'type': type,
-        'date': date?.toUtc().toIso8601String() ?? DateTime.now().toUtc().toIso8601String(),
+        'date': date?.toUtc().toIso8601String() ??
+            DateTime.now().toUtc().toIso8601String(),
         if (date == null) 'disableDateChecking': true,
         'description': description,
         'property_id': propertyId,
@@ -352,7 +354,8 @@ class ActivityData implements ActivityRepo {
 
   @override
   Future<Result<List<Activity>>> getActivitiesByAgent(
-      {String? status,String? type,
+      {String? status,
+      String? type,
       List<DateTime>? dates,
       String? userId,
       Paginator? paginator}) async {
@@ -366,7 +369,7 @@ class ActivityData implements ActivityRepo {
         'date': dates?.map((e) => e.toIso8601String()).toList(),
         'userId': userId,
         "status": status,
-        "type":type
+        "type": type
       };
       Logger().d(payload);
       final res = await _dio.post('/v1/activities/agent',
@@ -411,6 +414,31 @@ class ActivityData implements ActivityRepo {
                   res.data['page'] ?? (paginator?.currentPage ?? 0) + 1,
               perPage: res.data['pageSize'] ?? 0,
               itemCount: res.data['totalItems'] ?? 0));
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<List<Activity>>> fetchHotLeadsAssignedTodayActivities(
+      {Paginator? paginator}) async {
+    try {
+      final date = DateUtils.dateOnly(DateTime.now()).toUtc();
+      final endDate = date.add(Duration(hours: 24));
+
+      final res = await _dio.get(
+        'v1/activities/hot-leads/filter?fromCompletionDate=${date.toIso8601String()}&toCompletionDate=${endDate.toIso8601String()}&agents=${getIt<AuthBloc>().state.agent?.id}&page=${(paginator?.currentPage ?? 0) + 1}&sortOrder=oldest&leadStatus=Fresh&assigned=1',
+      );
+
+      List<Activity> userListData =
+          res.data['data'].map<Activity>((e) => Activity.fromJson(e)).toList();
+
+      return Success(userListData,
+          paginator: Paginator(
+              currentPage:
+                  res.data['page'] ?? (paginator?.currentPage ?? 0) + 1,
+              perPage: res.data['itemsPerPage'] ?? 0,
+              itemCount: res.data['found'] ?? 0));
     } catch (e, stack) {
       return onError(e, stack, log);
     }

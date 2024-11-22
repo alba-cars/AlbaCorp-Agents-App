@@ -240,7 +240,9 @@ class LeadData implements LeadRepo {
       Paginator? paginator}) async {
     try {
       String url = 'v1/leadsource';
-      Map<String, dynamic> queryParams = {};
+      Map<String, dynamic> queryParams = {
+        "page": (paginator?.currentPage ?? 0) + 1
+      };
       if (leadSourceType != null && leadSourceType != LeadSourceType.All) {
         queryParams.putIfAbsent("leadSourceType", () => leadSourceType.name);
       }
@@ -250,12 +252,13 @@ class LeadData implements LeadRepo {
       }
 
       final response = await _dio.get(url, queryParameters: queryParams);
-      Logger().d(response.data);
       final data = response.data["data"] as List;
       final list = data.map((e) => LeadSource.fromJson(e)).toList();
-      return Success(
-        list,
-      );
+      final newPaginator = Paginator(
+          itemCount: response.data['filtered'],
+          perPage: 10,
+          currentPage: (paginator?.currentPage ?? 0) + 1);
+      return Success(list, paginator: newPaginator);
     } catch (e, stack) {
       return onError(e, stack, log);
     }

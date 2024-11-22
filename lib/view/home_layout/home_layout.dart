@@ -18,6 +18,7 @@ import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_layout/quick_access_button.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
+import 'package:real_estate_app/view/hot_leads_assigned_today_screen/hot_leads_assigned_today_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/my_activities/presentation/my_actvities_page.dart';
@@ -370,6 +371,14 @@ class _HomeScreenState extends State<HomeScreen>
                           onPressed: () {
                             Scaffold.of(context).closeDrawer();
                             context.goNamed(DealsScreen.routeName);
+                          },
+                        ),
+                        CustomListTileWithIcon(
+                          title: 'Hot Leads Today',
+                          iconImagePath: 'assets/images/deal.png',
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                            context.pushNamed(HotLeadsAssignedToday.routeName);
                           },
                         ),
 

@@ -8,8 +8,8 @@ part of 'lead_model.dart';
 
 _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       id: readId(json, 'id') as String,
-      firstName: json['first_name'] as String,
-      lastName: json['last_name'] as String? ?? '',
+      firstName: readFirstName(json, 'firstName') as String,
+      lastName: readLastName(json, 'lastName') as String? ?? '',
       email: json['email'] as String?,
       phone: json['phone'] as String?,
       country: json['country'] as String?,
@@ -18,31 +18,36 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       nationality: json['nationality'] as String?,
       photo: json['photo'] as String?,
       role: json['role'] as String?,
-      providerId: json['provider_id'] as String?,
+      providerId: readProviderId(json, 'providerId') as String?,
       provider: json['provider'] as String?,
       active: json['active'] as bool? ?? true,
-      leadSource: json['lead_source'] as String,
-      leadStatus: $enumDecodeNullable(_$LeadStatusEnumMap, json['lead_status']),
+      leadSource: readLeadSource(json, 'leadSource') as String,
+      leadStatus: $enumDecodeNullable(
+          _$LeadStatusEnumMap, readLeadStatus(json, 'leadStatus')),
       languages: json['languages'] as List<dynamic>? ?? const [],
-      lastActivityType: json['last_activity_type'] as String?,
-      lastActivityDate: json['last_activity_date'] == null
+      lastActivityType:
+          readLastActivityType(json, 'lastActivityType') as String?,
+      lastActivityDate: readLastActivityDate(json, 'lastActivityDate') == null
           ? null
-          : DateTime.parse(json['last_activity_date'] as String),
+          : DateTime.parse(
+              readLastActivityDate(json, 'lastActivityDate') as String),
       lastActivityIsComplete:
-          json['last_activity_is_complete'] as bool? ?? false,
+          readLastActivityIsComplete(json, 'lastActivityIsComplete') as bool? ??
+              false,
       createdAt: readCreatedAt(json, 'createdAt') == null
           ? null
           : DateTime.parse(readCreatedAt(json, 'createdAt') as String),
-      updatedAt: json['updated_at'] == null
+      updatedAt: readUpdatedAt(json, 'updatedAt') == null
           ? null
-          : DateTime.parse(json['updated_at'] as String),
-      createdBy: json['created_by'] as String?,
-      modifiedBy: json['modified_by'] as String?,
+          : DateTime.parse(readUpdatedAt(json, 'updatedAt') as String),
+      createdBy: readCreatedBy(json, 'createdBy') as String?,
+      modifiedBy: readModifiedBy(json, 'modifiedBy') as String?,
       preference: json['preference'] == null
           ? null
           : Preference.fromJson(json['preference'] as Map<String, dynamic>),
-      preferredLanguages:
-          json['preferred_languages'] as List<dynamic>? ?? const [],
+      preferredLanguages: readPreferredLanguages(json, 'preferredLanguages')
+              as List<dynamic>? ??
+          const [],
       currentAgent: readCurrentAgent(json, 'currentAgent') == null
           ? null
           : Agent.fromJson(
@@ -51,7 +56,7 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const [],
-      dndStatus: json['DndStatus'] as bool? ?? false,
+      dndStatus: readDndStatus(json, 'dndStatus') as bool? ?? false,
       completedActivityCount:
           (readCompletedActivityCount(json, 'completedActivityCount') as num?)
                   ?.toInt() ??
@@ -61,8 +66,8 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
 Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
       'email': instance.email,
       'phone': instance.phone,
       'country': instance.country,
@@ -71,25 +76,25 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'nationality': instance.nationality,
       'photo': instance.photo,
       'role': instance.role,
-      'provider_id': instance.providerId,
+      'providerId': instance.providerId,
       'provider': instance.provider,
       'active': instance.active,
-      'lead_source': instance.leadSource,
-      'lead_status': _$LeadStatusEnumMap[instance.leadStatus],
+      'leadSource': instance.leadSource,
+      'leadStatus': _$LeadStatusEnumMap[instance.leadStatus],
       'languages': instance.languages,
-      'last_activity_type': instance.lastActivityType,
-      'last_activity_date': instance.lastActivityDate?.toIso8601String(),
-      'last_activity_is_complete': instance.lastActivityIsComplete,
+      'lastActivityType': instance.lastActivityType,
+      'lastActivityDate': instance.lastActivityDate?.toIso8601String(),
+      'lastActivityIsComplete': instance.lastActivityIsComplete,
       'createdAt': instance.createdAt?.toIso8601String(),
-      'updated_at': instance.updatedAt?.toIso8601String(),
-      'created_by': instance.createdBy,
-      'modified_by': instance.modifiedBy,
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdBy': instance.createdBy,
+      'modifiedBy': instance.modifiedBy,
       'preference': instance.preference,
-      'preferred_languages': instance.preferredLanguages,
+      'preferredLanguages': instance.preferredLanguages,
       'currentAgent': instance.currentAgent,
       'notes': instance.notes,
       'tags': instance.tags,
-      'DndStatus': instance.dndStatus,
+      'dndStatus': instance.dndStatus,
       'completedActivityCount': instance.completedActivityCount,
     };
 

@@ -48,7 +48,7 @@ class _ActivitySortControlWidgetState extends State<ActivitySortControlWidget> {
                         sortOrderGrpVlaue = val ?? 1;
                       });
                     }),
-                Text("Older"),
+                Text("Oldest"),
               ],
             ),
           ],

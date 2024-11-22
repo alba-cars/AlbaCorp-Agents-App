@@ -174,13 +174,10 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverAppBar(
-              title: BlockTitleText(
-                text: 'My Leads',
-                color: Theme.of(context).colorScheme.onPrimary,
+              title: Text(
+                 'My Leads',
               ),
               centerTitle: true,
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               actions: [
                 TextButton(
                     onPressed: () {
@@ -188,9 +185,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                     },
                     child: Text(
                       "Return",
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
+                     
                     ))
               ],
             ),
