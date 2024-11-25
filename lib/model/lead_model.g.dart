@@ -41,7 +41,6 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
           ? null
           : DateTime.parse(readUpdatedAt(json, 'updatedAt') as String),
       createdBy: readCreatedBy(json, 'createdBy') as String?,
-      modifiedBy: readModifiedBy(json, 'modifiedBy') as String?,
       preference: json['preference'] == null
           ? null
           : Preference.fromJson(json['preference'] as Map<String, dynamic>),
@@ -88,7 +87,6 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'createdBy': instance.createdBy,
-      'modifiedBy': instance.modifiedBy,
       'preference': instance.preference,
       'preferredLanguages': instance.preferredLanguages,
       'currentAgent': instance.currentAgent,
