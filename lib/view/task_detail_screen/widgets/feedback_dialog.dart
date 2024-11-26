@@ -5,6 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/constants/activity_types.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/property_price.dart';
@@ -51,7 +52,7 @@ class ActivityFeedbackDialog extends StatefulWidget {
     this.direction,
     this.mode,
     this.notes,
-    required this.parentContext,
+    required this.parentContext
   });
 
   final Activity activity;
@@ -591,6 +592,27 @@ class _HeaderContent extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Duration getFollowUpDateLimit() {
+    if ([
+      LeadStatus.Prospect,
+      LeadStatus.Appointment,
+      LeadStatus.Negotiating,
+      LeadStatus.Viewing,
+      LeadStatus.ForListing
+    ].contains(widget.activity.lead?.leadStatus)) {
+      return Duration(days: 30);
+    }
+    if (widget.activity.lead?.leadStatus ==
+        [
+          LeadStatus.Deal,
+          LeadStatus.Won,
+        ]) {
+      return Duration(days: 2 * 30);
+    }
+
+    return Duration(days: 15);
   }
 }
 
