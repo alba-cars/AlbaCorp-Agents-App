@@ -55,8 +55,6 @@ mixin _$Lead {
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(readValue: readCreatedBy)
   String? get createdBy => throw _privateConstructorUsedError;
-  @JsonKey(readValue: readModifiedBy)
-  String? get modifiedBy => throw _privateConstructorUsedError;
   Preference? get preference => throw _privateConstructorUsedError;
   @JsonKey(readValue: readPreferredLanguages)
   List<dynamic> get preferredLanguages => throw _privateConstructorUsedError;
@@ -104,7 +102,6 @@ abstract class $LeadCopyWith<$Res> {
       @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
       @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
       @JsonKey(readValue: readCreatedBy) String? createdBy,
-      @JsonKey(readValue: readModifiedBy) String? modifiedBy,
       Preference? preference,
       @JsonKey(readValue: readPreferredLanguages)
       List<dynamic> preferredLanguages,
@@ -155,7 +152,6 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? createdBy = freezed,
-    Object? modifiedBy = freezed,
     Object? preference = freezed,
     Object? preferredLanguages = null,
     Object? currentAgent = freezed,
@@ -257,10 +253,6 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      modifiedBy: freezed == modifiedBy
-          ? _value.modifiedBy
-          : modifiedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
       preference: freezed == preference
           ? _value.preference
           : preference // ignore: cast_nullable_to_non_nullable
@@ -349,7 +341,6 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
       @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
       @JsonKey(readValue: readCreatedBy) String? createdBy,
-      @JsonKey(readValue: readModifiedBy) String? modifiedBy,
       Preference? preference,
       @JsonKey(readValue: readPreferredLanguages)
       List<dynamic> preferredLanguages,
@@ -399,7 +390,6 @@ class __$$LeadImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? createdBy = freezed,
-    Object? modifiedBy = freezed,
     Object? preference = freezed,
     Object? preferredLanguages = null,
     Object? currentAgent = freezed,
@@ -501,10 +491,6 @@ class __$$LeadImplCopyWithImpl<$Res>
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      modifiedBy: freezed == modifiedBy
-          ? _value.modifiedBy
-          : modifiedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
       preference: freezed == preference
           ? _value.preference
           : preference // ignore: cast_nullable_to_non_nullable
@@ -565,7 +551,6 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
       @JsonKey(readValue: readCreatedAt) this.createdAt,
       @JsonKey(readValue: readUpdatedAt) this.updatedAt,
       @JsonKey(readValue: readCreatedBy) this.createdBy,
-      @JsonKey(readValue: readModifiedBy) this.modifiedBy,
       this.preference,
       @JsonKey(readValue: readPreferredLanguages)
       final List<dynamic> preferredLanguages = const [],
@@ -650,9 +635,6 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   @JsonKey(readValue: readCreatedBy)
   final String? createdBy;
   @override
-  @JsonKey(readValue: readModifiedBy)
-  final String? modifiedBy;
-  @override
   final Preference? preference;
   final List<dynamic> _preferredLanguages;
   @override
@@ -687,7 +669,7 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, modifiedBy: $modifiedBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount)';
+    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount)';
   }
 
   @override
@@ -719,7 +701,6 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('createdBy', createdBy))
-      ..add(DiagnosticsProperty('modifiedBy', modifiedBy))
       ..add(DiagnosticsProperty('preference', preference))
       ..add(DiagnosticsProperty('preferredLanguages', preferredLanguages))
       ..add(DiagnosticsProperty('currentAgent', currentAgent))
@@ -772,8 +753,6 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
                 other.updatedAt == updatedAt) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
-            (identical(other.modifiedBy, modifiedBy) ||
-                other.modifiedBy == modifiedBy) &&
             (identical(other.preference, preference) ||
                 other.preference == preference) &&
             const DeepCollectionEquality()
@@ -815,7 +794,6 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
         createdAt,
         updatedAt,
         createdBy,
-        modifiedBy,
         preference,
         const DeepCollectionEquality().hash(_preferredLanguages),
         currentAgent,
@@ -866,7 +844,6 @@ abstract class _Lead extends Lead {
       @JsonKey(readValue: readCreatedAt) final DateTime? createdAt,
       @JsonKey(readValue: readUpdatedAt) final DateTime? updatedAt,
       @JsonKey(readValue: readCreatedBy) final String? createdBy,
-      @JsonKey(readValue: readModifiedBy) final String? modifiedBy,
       final Preference? preference,
       @JsonKey(readValue: readPreferredLanguages)
       final List<dynamic> preferredLanguages,
@@ -938,9 +915,6 @@ abstract class _Lead extends Lead {
   @override
   @JsonKey(readValue: readCreatedBy)
   String? get createdBy;
-  @override
-  @JsonKey(readValue: readModifiedBy)
-  String? get modifiedBy;
   @override
   Preference? get preference;
   @override

@@ -54,7 +54,6 @@ class Lead with _$Lead {
     @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
     @JsonKey( readValue: readUpdatedAt) DateTime? updatedAt,
     @JsonKey( readValue: readCreatedBy) String? createdBy,
-    @JsonKey( readValue: readModifiedBy) String? modifiedBy,
     Preference? preference,
     @JsonKey( readValue: readPreferredLanguages)
     @Default([])
