@@ -274,14 +274,12 @@ class AppRouter {
                   ));
                 },
               ),
-               GoRoute(
+              GoRoute(
                 path: HotLeadsAssignedToday.routeName,
                 name: HotLeadsAssignedToday.routeName,
                 pageBuilder: (context, state) {
                   final id = state.pathParameters['id'] ?? '';
-                  return CupertinoPage(
-                      child: HotLeadsAssignedToday(
-                  ));
+                  return CupertinoPage(child: HotLeadsAssignedToday());
                 },
               ),
               GoRoute(
@@ -399,7 +397,7 @@ class AppRouter {
                   return CupertinoPage(child: LeadsExplorerScreen());
                 },
               ),
-               GoRoute(
+              GoRoute(
                 path: ExpiredHotLeadExplorer.routeName,
                 name: ExpiredHotLeadExplorer.routeName,
                 pageBuilder: (context, state) {
@@ -430,12 +428,14 @@ class AppRouter {
                 },
               ),
               GoRoute(
-                path: AddTaskScreen.routeName + '/:lead_id',
+                path: AddTaskScreen.routeName + '/:lead_id/:lead_status',
                 name: AddTaskScreen.routeName,
                 pageBuilder: (context, state) {
                   return CupertinoPage(
                       child: AddTaskScreen(
                     leadId: state.pathParameters['lead_id'] ?? '',
+                    leadStatus: state.pathParameters['lead_status'] ??
+                        LeadStatus.Fresh.toString(),
                   ));
                 },
               ),

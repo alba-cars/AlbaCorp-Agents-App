@@ -9,14 +9,17 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
 import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
+import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/widgets/activity_list.dart';
@@ -120,6 +123,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
       AppinioSwiperController();
 
   CardAction mode = CardAction.ManuelSwipe;
+
+  final ValueNotifier<bool> isProspect = ValueNotifier(false);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,8 +199,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                         AppPrimaryButton(
                             text: 'Go To Explorer',
                             onTap: () {
-                              context
-                                  .replaceNamed(LeadsExplorerScreen.routeName);
+                              context.pushNamed(LeadsExplorerScreen.routeName);
                             }),
                         VerticalSmallGap(),
                         AppPrimaryButton(
@@ -205,7 +210,11 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                             foregroundColor:
                                 Theme.of(context).colorScheme.primary,
                             onTap: () {
-                              context.pop();
+                              if (context.canPop()) {
+                                context.pop();
+                              } else {
+                                context.goNamed(ColdLeadScreen.routeName);
+                              }
                             })
                       ],
                     ),
@@ -309,6 +318,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                         (AuthBloc authBloc) =>
                             authBloc.state.veryImportantActivities);
                     final task = tasks[index];
+                    isProspect.value =
+                        task.lead?.leadStatus == LeadStatus.Prospect;
                     final isBlockingActivity = task.activityWeight >= 0.8;
                     return SizedBox(
                       key: ValueKey(task.id),
@@ -322,15 +333,17 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                               decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      color:shadowColor,
+                                      color: shadowColor,
                                       blurRadius: 9,
                                     )
                                   ],
-                                  color:  Colors.white,
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(12)),
                               child: Column(
                                 children: [
-                                  SizedBox(height: 8,),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
                                   Expanded(
                                     child: ScrollShadow(
                                       size: 6,
@@ -365,8 +378,106 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                 ),
                                               ],
                                               VerticalSmallGap(),
-                                              TitleText(
-                                                text: task.type,
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  TitleText(
+                                                    text: task.type,
+                                                  ),
+                                                  BlocProvider(
+                                                    create: (context) =>
+                                                        getIt<LeadDetailCubit>(
+                                                            param1:
+                                                                task.lead?.id ??
+                                                                    ""),
+                                                    child: Visibility(
+                                                      visible: isProspect.value,
+                                                      child: BlocBuilder<
+                                                          LeadDetailCubit,
+                                                          LeadDetailState>(
+                                                        builder: (context,
+                                                                state) =>
+                                                            IconButton(
+                                                                // style: IconButton.styleFrom(
+                                                                //     backgroundColor: Colors.red[100]),
+                                                                onPressed:
+                                                                    () async {
+                                                                  if (task.lead
+                                                                          ?.leadStatus ==
+                                                                      LeadStatus
+                                                                          .Prospect) {
+                                                                    final result = await context
+                                                                        .read<
+                                                                            LeadDetailCubit>()
+                                                                        .removeProspect();
+
+                                                                    if (result) {
+                                                                      isProspect
+                                                                              .value =
+                                                                          false;
+                                                                      showSnackbar(
+                                                                          context,
+                                                                          'Successfully removed prospect tag',
+                                                                          SnackBarType
+                                                                              .success);
+                                                                    } else {
+                                                                      final error = context
+                                                                          .read<
+                                                                              LeadDetailCubit>()
+                                                                          .state
+                                                                          .updateLeadError;
+                                                                      showSnackbar(
+                                                                          context,
+                                                                          error ??
+                                                                              'Failed to remove prospect tag',
+                                                                          SnackBarType
+                                                                              .failure);
+                                                                    }
+                                                                  } else {
+                                                                    final result = await context
+                                                                        .read<
+                                                                            LeadDetailCubit>()
+                                                                        .updateLead({
+                                                                      "lead_status":
+                                                                          "Prospect"
+                                                                    });
+                                                                    if (result) {
+                                                                      showSnackbar(
+                                                                          context,
+                                                                          'Successfully marked as prospect',
+                                                                          SnackBarType
+                                                                              .success);
+                                                                    } else {
+                                                                      final error = context
+                                                                          .read<
+                                                                              LeadDetailCubit>()
+                                                                          .state
+                                                                          .updateLeadError;
+                                                                      showSnackbar(
+                                                                          context,
+                                                                          error ??
+                                                                              'Failed to mark as prospect',
+                                                                          SnackBarType
+                                                                              .failure);
+                                                                    }
+                                                                  }
+                                                                },
+                                                                icon: Icon(
+                                                                  isProspect
+                                                                          .value
+                                                                      ? CupertinoIcons
+                                                                          .heart_fill
+                                                                      : CupertinoIcons
+                                                                          .heart,
+                                                                  color: Colors
+                                                                      .red,
+                                                                )),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
                                               VerticalSmallGap(),
                                               Row(

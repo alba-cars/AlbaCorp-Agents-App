@@ -46,14 +46,13 @@ enum FeedbackType {
 }
 
 class ActivityFeedbackDialog extends StatefulWidget {
-  const ActivityFeedbackDialog({
-    super.key,
-    required this.activity,
-    this.direction,
-    this.mode,
-    this.notes,
-    required this.parentContext
-  });
+  const ActivityFeedbackDialog(
+      {super.key,
+      required this.activity,
+      this.direction,
+      this.mode,
+      this.notes,
+      required this.parentContext});
 
   final Activity activity;
   final BuildContext parentContext;
@@ -75,6 +74,30 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     super.initState();
     _initializeFeedbackValue();
     _initializeController();
+  }
+
+  Duration getFollowUpDateLimit() {
+    if ([
+          LeadStatus.Prospect,
+          LeadStatus.Appointment,
+          LeadStatus.Negotiating,
+          LeadStatus.Viewing,
+          LeadStatus.ForListing
+        ].contains(widget.activity.lead?.leadStatus) ||
+        ([FeedbackType.veryInterested].contains(feedbackValue.value))) {
+      return Duration(days: 30);
+    }
+    if (widget.activity.lead?.leadStatus ==
+            [
+              LeadStatus.Deal,
+              LeadStatus.Won,
+            ] ||
+        ([FeedbackType.listing, FeedbackType.deal]
+            .contains(feedbackValue.value))) {
+      return Duration(days: 2 * 30);
+    }
+
+    return Duration(days: 15);
   }
 
   void _initializeFeedbackValue() {
@@ -234,7 +257,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           name: 'date',
           label: 'Date',
           firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(Duration(days: 365)),
+          lastDate: DateTime.now().add(getFollowUpDateLimit()),
         ),
         TimeField(
           isRequired: false,
@@ -592,27 +615,6 @@ class _HeaderContent extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Duration getFollowUpDateLimit() {
-    if ([
-      LeadStatus.Prospect,
-      LeadStatus.Appointment,
-      LeadStatus.Negotiating,
-      LeadStatus.Viewing,
-      LeadStatus.ForListing
-    ].contains(widget.activity.lead?.leadStatus)) {
-      return Duration(days: 30);
-    }
-    if (widget.activity.lead?.leadStatus ==
-        [
-          LeadStatus.Deal,
-          LeadStatus.Won,
-        ]) {
-      return Duration(days: 2 * 30);
-    }
-
-    return Duration(days: 15);
   }
 }
 

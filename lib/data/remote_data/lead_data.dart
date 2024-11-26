@@ -266,8 +266,8 @@ class LeadData implements LeadRepo {
   }
 
   @override
-  Future<Result<List<LeadSourceCategory>>> getLeadSourceCategories() async{
-     try {
+  Future<Result<List<LeadSourceCategory>>> getLeadSourceCategories() async {
+    try {
       String url = 'v1/leadsource/categories';
       final response = await _dio.get(
         url,
@@ -276,6 +276,21 @@ class LeadData implements LeadRepo {
       final list = data.map((e) => LeadSourceCategory.fromJson(e)).toList();
       return Success(
         list,
+      );
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<Lead>> removeProspect({required String leadId}) async {
+    try {
+      String url = 'v1/users/removeProspect';
+      final response = await _dio.post(url, data: {"leadID": leadId});
+      final data = response.data;
+      final model = Lead.fromJson(data);
+      return Success(
+        model,
       );
     } catch (e, stack) {
       return onError(e, stack, log);

@@ -25,6 +25,10 @@ abstract class LeadRepo {
   Future<Result<Lead>> updateLead(
       {required String leadId, required Map<String, dynamic> value});
 
+  Future<Result<Lead>> removeProspect({
+    required String leadId,
+  });
+
   Future<Result<List<Activity>>> getLeadActivities({required String leadId});
   Future<Result<List<Deal>>> getLeadDeals({required String leadId});
   Future<Result<(Lead, bool)?>> getLeadByPhone({required String phone});
@@ -34,5 +38,5 @@ abstract class LeadRepo {
   Future<Result<List<DealDocument>>> getClientDocuments(
       {required String clientId});
 
-      Future<Result<List<LeadSourceCategory>>> getLeadSourceCategories();
+  Future<Result<List<LeadSourceCategory>>> getLeadSourceCategories();
 }
