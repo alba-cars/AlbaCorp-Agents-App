@@ -285,14 +285,16 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           getSortedActivitiesError: null));
     }
     final payload = getPayload(taskFilter, taskType);
-    Logger().d({payload, taskFilter, taskType});
+
     final result = await _activityRepo.fetchActivitiesSorted(
         filter: payload, limit: 35, paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
         List<Activity> list = List<Activity>.from(s.value);
+        Logger().d(getIt<AuthBloc>().state.veryImportantActivities);
         if (getIt<AuthBloc>().state.veryImportantActivities?.isNotEmpty ==
             true) {
+          Logger().d("sssssssssssssssssssssssssss");
           final imp = await _checkForImportantActivity();
 
           if (imp != null && imp.isNotEmpty) {

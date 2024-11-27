@@ -100,6 +100,25 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
     }
   }
 
+  Future<bool> removeProspect() async {
+    emit(state.copyWith(updateLeadStatus: AppStatus.loading));
+
+    final result = await _leadRepo.removeProspect(
+      leadId: state.leadId,
+    );
+    switch (result) {
+      case (Success s):
+        emit(
+            state.copyWith(updateLeadStatus: AppStatus.success, lead: s.value));
+        return true;
+
+      case (Error e):
+        emit(state.copyWith(
+            updateLeadStatus: AppStatus.failure, updateLeadError: e.exception));
+        return false;
+    }
+  }
+
   Future<void> getLeadPropertyCards(
       {bool refresh = false, Paginator? paginator}) async {
     Logger().d("Paginator ${paginator?.currentPage ?? 0}");

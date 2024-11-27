@@ -59,69 +59,71 @@ class _LeadDetailScreenLayoutState extends State<LeadDetailScreenLayout>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            context.pushNamed(AddTaskScreen.routeName,
-                pathParameters: {"lead_id": widget.leadId});
-          }),
-      body: BlocSelector<LeadDetailCubit, LeadDetailState, Lead?>(
+    return BlocSelector<LeadDetailCubit, LeadDetailState, Lead?>(
         selector: (state) {
-          return state.lead;
-        },
-        builder: (context, lead) {
-          return NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                title: BlockTitleText(
-                  text: 'Lead Details',
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                centerTitle: true,
-                backgroundColor: Colors.white,
-                foregroundColor: Theme.of(context).colorScheme.primary,
+      return state.lead;
+    }, builder: (context, lead) {
+      return Scaffold(
+        floatingActionButton: lead != null
+            ? FloatingActionButton(
+                child: Icon(Icons.add),
+                onPressed: () {
+                  context.pushNamed(AddTaskScreen.routeName, pathParameters: {
+                    "lead_id": widget.leadId,
+                    "lead_status": lead.leadStatus.toString()
+                  });
+                })
+            : null,
+        body: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              title: BlockTitleText(
+                text: 'Lead Details',
+                color: Theme.of(context).colorScheme.primary,
               ),
-              SliverPersistentHeader(
-                  delegate:
-                      LeadDetailScreenTabHeader(tabController: _tabController)),
-            ];
-          }, body: Builder(builder: (context) {
-            if (lead == null) {
-              return SizedBox();
-            }
-            return TabBarView(
-              controller: _tabController,
-              children: [
-                AboutTabView(
-                  lead: lead,
-                ),
-                BlocSelector<LeadDetailCubit, LeadDetailState, List<Activity>>(
-                  selector: (state) {
-                    return state.activities;
-                  },
-                  builder: (context, activities) {
-                    return ActivitiesTabView(
-                      activities: activities,
-                    );
-                  },
-                ),
-                BlocSelector<LeadDetailCubit, LeadDetailState, List<Deal>>(
-                  selector: (state) {
-                    return state.deals;
-                  },
-                  builder: (context, deals) {
-                    return DealsTabView(deals: deals);
-                  },
-                ),
-                PropertyCardsTabView()
-              ],
-            );
-          }));
-        },
-      ),
-    );
+              centerTitle: true,
+              backgroundColor: Colors.white,
+              foregroundColor: Theme.of(context).colorScheme.primary,
+            ),
+            SliverPersistentHeader(
+                delegate:
+                    LeadDetailScreenTabHeader(tabController: _tabController)),
+          ];
+        }, body: Builder(builder: (context) {
+          if (lead == null) {
+            return SizedBox();
+          }
+          return TabBarView(
+            controller: _tabController,
+            children: [
+              AboutTabView(
+                lead: lead,
+              ),
+              BlocSelector<LeadDetailCubit, LeadDetailState, List<Activity>>(
+                selector: (state) {
+                  return state.activities;
+                },
+                builder: (context, activities) {
+                  return ActivitiesTabView(
+                    activities: activities,
+                  );
+                },
+              ),
+              BlocSelector<LeadDetailCubit, LeadDetailState, List<Deal>>(
+                selector: (state) {
+                  return state.deals;
+                },
+                builder: (context, deals) {
+                  return DealsTabView(deals: deals);
+                },
+              ),
+              PropertyCardsTabView()
+            ],
+          );
+        })),
+      );
+    });
   }
 }
 

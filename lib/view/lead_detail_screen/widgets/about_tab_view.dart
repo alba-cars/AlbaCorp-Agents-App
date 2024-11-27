@@ -94,23 +94,45 @@ class AboutTabView extends StatelessWidget {
                               // style: IconButton.styleFrom(
                               //     backgroundColor: Colors.red[100]),
                               onPressed: () async {
-                                final result = await context
-                                    .read<LeadDetailCubit>()
-                                    .updateLead({"lead_status": "Prospect"});
-                                if (result) {
-                                  showSnackbar(
-                                      context,
-                                      'Successfully marked as prospect',
-                                      SnackBarType.success);
-                                } else {
-                                  final error = context
+                                if (lead.leadStatus == LeadStatus.Prospect) {
+                                  final result = await context
                                       .read<LeadDetailCubit>()
-                                      .state
-                                      .updateLeadError;
-                                  showSnackbar(
-                                      context,
-                                      error ?? 'Failed to mark as prospect',
-                                      SnackBarType.failure);
+                                      .removeProspect();
+                                  if (result) {
+                                    showSnackbar(
+                                        context,
+                                        'Successfully removed prospect tag',
+                                        SnackBarType.success);
+                                  } else {
+                                    final error = context
+                                        .read<LeadDetailCubit>()
+                                        .state
+                                        .updateLeadError;
+                                    showSnackbar(
+                                        context,
+                                        error ??
+                                            'Failed to remove prospect tag',
+                                        SnackBarType.failure);
+                                  }
+                                } else {
+                                  final result = await context
+                                      .read<LeadDetailCubit>()
+                                      .updateLead({"lead_status": "Prospect"});
+                                  if (result) {
+                                    showSnackbar(
+                                        context,
+                                        'Successfully marked as prospect',
+                                        SnackBarType.success);
+                                  } else {
+                                    final error = context
+                                        .read<LeadDetailCubit>()
+                                        .state
+                                        .updateLeadError;
+                                    showSnackbar(
+                                        context,
+                                        error ?? 'Failed to mark as prospect',
+                                        SnackBarType.failure);
+                                  }
                                 }
                               },
                               icon: Icon(
