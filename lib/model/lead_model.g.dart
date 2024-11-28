@@ -107,6 +107,7 @@ const _$LeadStatusEnumMap = {
   LeadStatus.Won: 'Won',
   LeadStatus.Lost: 'Lost',
   LeadStatus.ForListing: 'For Listing',
+  LeadStatus.InvalidNumber: 'Invalid Number',
   LeadStatus.Prospect: 'Prospect',
   LeadStatus.Negotiating: 'Negotiating',
 };
