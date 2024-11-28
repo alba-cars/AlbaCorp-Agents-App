@@ -339,7 +339,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                     );
                   }
                   Activity activity = activities[pos];
-                  "${activity.lead?.firstName ?? ""} ${activity.lead?.lastName ?? ""}";
+                   "${activity.lead?.firstName ?? ""} ${activity.lead?.lastName ?? ""}";
                   return ActivityListItem(
                     activity: activity,
                     index: pos,
