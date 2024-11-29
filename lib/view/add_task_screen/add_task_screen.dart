@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -25,20 +26,25 @@ import '../../widgets/text.dart';
 
 class AddTaskScreen extends StatelessWidget {
   static const routeName = '/addTaskScreen';
-  const AddTaskScreen({super.key, required this.leadId});
+  const AddTaskScreen(
+      {super.key, required this.leadId, required this.leadStatus});
   final String leadId;
+  final String leadStatus;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<AddTaskCubit>(param1: leadId),
-      child: _AddTaskScreenLayout(),
+      child: _AddTaskScreenLayout(
+        leadStatus: leadStatus,
+      ),
     );
   }
 }
 
 class _AddTaskScreenLayout extends StatefulWidget {
-  const _AddTaskScreenLayout();
+  const _AddTaskScreenLayout({required this.leadStatus});
+  final String leadStatus;
 
   @override
   State<_AddTaskScreenLayout> createState() => _AddTaskScreenLayoutState();
@@ -46,6 +52,28 @@ class _AddTaskScreenLayout extends StatefulWidget {
 
 class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
   late final GlobalKey<FormBuilderState> _formKey = GlobalKey();
+
+  Duration getFollowUpDateLimit() {
+    if ([
+      LeadStatus.Prospect.toString(),
+      LeadStatus.Appointment.toString(),
+      LeadStatus.Negotiating.toString(),
+      LeadStatus.Viewing.toString(),
+      LeadStatus.ForListing.toString()
+    ].contains(widget.leadStatus)) {
+      return Duration(days: 30);
+    }
+    if (widget.leadStatus ==
+        [
+          LeadStatus.Deal,
+          LeadStatus.Won,
+        ]) {
+      return Duration(days: 2 * 30);
+    }
+
+    return Duration(days: 15);
+  }
+
   @override
   Widget build(BuildContext context) {
     final activity = context.read<ActivityCubit>().state.lastActivity;
@@ -76,7 +104,7 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                     name: 'date',
                     label: 'Date',
                     firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(Duration(days: 365))),
+                    lastDate: DateTime.now().add(getFollowUpDateLimit())),
                 TimeField(
                   isRequired: false,
                   name: 'time',

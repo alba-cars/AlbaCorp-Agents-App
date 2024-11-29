@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -42,6 +44,8 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
       switch (result) {
         case (Success<List<Activity>> success):
           Logger().d("On success scenario ${success.paginator}");
+          String value = jsonEncode(success.value);
+          print(value);
           _handleEnquiriesFetchSuccess(
               success.value, success.paginator, filterType);
           break;
@@ -69,9 +73,7 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
         return {
           "leadSourceType": 'cold',
           "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
-          "status": [
-            "Pending","Overdue"
-          ],
+          "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}',
         };
       case TaskFilterEnum.Favourites:
@@ -111,7 +113,7 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
     emit(state.copyWith(fetchStatus: fetchStatus, error: currentErrorMessage));
   }
 
-   void setActivityFilters(Map<String, dynamic>? filter, TaskFilterEnum valu) {
+  void setActivityFilters(Map<String, dynamic>? filter, TaskFilterEnum valu) {
     emit(state.copyWith(activityFilter: filter));
 
     fetchColdLeads(

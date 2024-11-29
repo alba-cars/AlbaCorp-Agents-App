@@ -22,6 +22,8 @@ enum LeadStatus {
   Lost,
   @JsonValue("For Listing")
   ForListing,
+  @JsonValue("Invalid Number")
+  InvalidNumber,
   Prospect,
   Negotiating,
 }

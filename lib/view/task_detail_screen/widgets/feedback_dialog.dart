@@ -5,6 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/constants/activity_types.dart';
+import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/property_price.dart';
@@ -45,14 +46,13 @@ enum FeedbackType {
 }
 
 class ActivityFeedbackDialog extends StatefulWidget {
-  const ActivityFeedbackDialog({
-    super.key,
-    required this.activity,
-    this.direction,
-    this.mode,
-    this.notes,
-    required this.parentContext,
-  });
+  const ActivityFeedbackDialog(
+      {super.key,
+      required this.activity,
+      this.direction,
+      this.mode,
+      this.notes,
+      required this.parentContext});
 
   final Activity activity;
   final BuildContext parentContext;
@@ -74,6 +74,30 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     super.initState();
     _initializeFeedbackValue();
     _initializeController();
+  }
+
+  Duration getFollowUpDateLimit() {
+    if ([
+          LeadStatus.Prospect,
+          LeadStatus.Appointment,
+          LeadStatus.Negotiating,
+          LeadStatus.Viewing,
+          LeadStatus.ForListing
+        ].contains(widget.activity.lead?.leadStatus) ||
+        ([FeedbackType.veryInterested].contains(feedbackValue.value))) {
+      return Duration(days: 30);
+    }
+    if (widget.activity.lead?.leadStatus ==
+            [
+              LeadStatus.Deal,
+              LeadStatus.Won,
+            ] ||
+        ([FeedbackType.listing, FeedbackType.deal]
+            .contains(feedbackValue.value))) {
+      return Duration(days: 2 * 30);
+    }
+
+    return Duration(days: 15);
   }
 
   void _initializeFeedbackValue() {
@@ -233,7 +257,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           name: 'date',
           label: 'Date',
           firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(Duration(days: 365)),
+          lastDate: DateTime.now().add(getFollowUpDateLimit()),
         ),
         TimeField(
           isRequired: false,
