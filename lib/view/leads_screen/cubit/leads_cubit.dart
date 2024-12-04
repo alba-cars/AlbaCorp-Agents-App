@@ -148,15 +148,22 @@ class LeadsCubit extends Cubit<LeadsState> {
     emit(state.copyWith(selectedLeads: [...state.selectedLeads, lead.id]));
   }
 
+  void addMultipleToSelection(BuildContext context, List<Lead> leads) {
+    emit(state.copyWith(selectModeEnabled: true, selectedLeads: [
+      ...(leads.map((e) => e.id).toList()),
+    ]));
+  }
+
   void setSelectionModeEnabled(BuildContext context, Lead lead) {
     emit(state.copyWith(selectModeEnabled: true, selectedLeads: [lead.id]));
   }
 
-  Future<void> returnLeadInBulk({
-    required BuildContext context,
-  }) async {
+  Future<void> returnLeadInBulk(
+      {required BuildContext context,
+      List<String> selectedLeads = const []}) async {
     emit(state.copyWith(returnLeadsStatus: AppStatus.loading));
-    final result = await _explorerRepo.checkInLeads(leads: state.selectedLeads);
+    final result = await _explorerRepo.checkInLeads(
+        leads: selectedLeads.isNotEmpty ? selectedLeads : state.selectedLeads);
     switch (result) {
       case (Success s):
         emit(state.copyWith(

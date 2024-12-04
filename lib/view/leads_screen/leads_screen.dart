@@ -175,7 +175,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
           return [
             SliverAppBar(
               title: Text(
-                 'My Leads',
+                'My Leads',
               ),
               centerTitle: true,
               actions: [
@@ -185,7 +185,6 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                     },
                     child: Text(
                       "Return",
-                     
                     ))
               ],
             ),
@@ -406,6 +405,283 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                 );
               },
             ),
+            BlocSelector<LeadsCubit, LeadsState, BulkLeadSelection?>(
+                selector: (state) {
+              if ((state.leads ?? []).isNotEmpty) {
+                return BulkLeadSelection(
+                    allLeads: state.leads,
+                    selectedLeadIDs: state.selectedLeads);
+              }
+              return null;
+            }, builder: (blocContext, bulkLeadSelection) {
+              return Visibility(
+                  visible: bulkLeadSelection != null,
+                  child: (bulkLeadSelection?.selectedLeadIDs ?? []).isNotEmpty
+                      ? AppPrimaryButton(
+                          text:
+                              "Return all ${(bulkLeadSelection?.selectedLeadIDs.length ?? 0)} leads",
+                          onTap: () {
+                            var selectedLeadDetailList =
+                                bulkLeadSelection?.allLeads.where((e) {
+                              return bulkLeadSelection.selectedLeadIDs
+                                  .contains(e.id);
+                            }).toList();
+
+                            Map<LeadStatus, bool> leadsStatusSelected = {
+                              LeadStatus.Fresh: true,
+                              LeadStatus.FollowUp: true,
+                              LeadStatus.Prospect: false,
+                              LeadStatus.Viewing: false,
+                              LeadStatus.Deal: false
+                            };
+
+                            var freshLeads = selectedLeadDetailList?.where(
+                                    (e) => e.leadStatus == LeadStatus.Fresh) ??
+                                [];
+                            var followUpLeads = selectedLeadDetailList?.where(
+                                    (e) =>
+                                        e.leadStatus == LeadStatus.FollowUp) ??
+                                [];
+                            var prospectsLeads = selectedLeadDetailList?.where(
+                                    (e) =>
+                                        e.leadStatus == LeadStatus.Prospect) ??
+                                [];
+                            var viewingLeads = selectedLeadDetailList?.where(
+                                    (e) => [
+                                          LeadStatus.Viewing,
+                                          LeadStatus.Appointment
+                                        ].contains(e.leadStatus)) ??
+                                [];
+                            var dealsOrListingsLeads =
+                                selectedLeadDetailList?.where((e) => [
+                                          LeadStatus.Deal,
+                                          LeadStatus.ForListing,
+                                          LeadStatus.Negotiating,
+                                          LeadStatus.Won
+                                        ].contains(e.leadStatus)) ??
+                                    [];
+
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return StatefulBuilder(
+                                    builder: (BuildContext _,
+                                        void Function(void Function())
+                                            setState) {
+                                      return AlertDialog(
+                                        title: Text(
+                                            "Are you sure to return leads?"),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "You have selected ${bulkLeadSelection?.selectedLeadIDs.length} leads",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall
+                                                  ?.copyWith(color: Colors.red),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              "Note: By submitting you agree to return leads.Leads will be moved back to the pool.",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.copyWith(
+                                                      color: Colors.grey,
+                                                      fontSize: 11),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                    value: leadsStatusSelected[
+                                                        LeadStatus.Fresh],
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        leadsStatusSelected[
+                                                                LeadStatus
+                                                                    .Fresh] =
+                                                            value ?? false;
+                                                      });
+                                                    }),
+                                                Text(
+                                                  "${freshLeads.length ?? 0} Fresh leads",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                    value: leadsStatusSelected[
+                                                        LeadStatus.FollowUp],
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        leadsStatusSelected[
+                                                                LeadStatus
+                                                                    .FollowUp] =
+                                                            value ?? false;
+                                                      });
+                                                    }),
+                                                Text(
+                                                  "${followUpLeads.length ?? 0} Follow-up leads",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                    value: leadsStatusSelected[
+                                                        LeadStatus.Prospect],
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        leadsStatusSelected[
+                                                                LeadStatus
+                                                                    .Prospect] =
+                                                            value ?? false;
+                                                      });
+                                                    }),
+                                                Text(
+                                                  "${prospectsLeads.length ?? 0} Prospect leads",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                    value: leadsStatusSelected[
+                                                        LeadStatus.Viewing],
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        leadsStatusSelected[
+                                                                LeadStatus
+                                                                    .Viewing] =
+                                                            value ?? false;
+                                                      });
+                                                    }),
+                                                Text(
+                                                  "${viewingLeads.length ?? 0} Viewings",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Checkbox(
+                                                    value: leadsStatusSelected[
+                                                        LeadStatus.Deal],
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        leadsStatusSelected[
+                                                                LeadStatus
+                                                                    .Deal] =
+                                                            value ?? false;
+                                                      });
+                                                    }),
+                                                Text(
+                                                  "${dealsOrListingsLeads.length ?? 0} Deals/Listings",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("CANCEL")),
+                                          TextButton(
+                                              onPressed: () {
+                                                List<Lead> finalSelectedLeads =
+                                                    [];
+                                                if (leadsStatusSelected[
+                                                        LeadStatus.Fresh] ??
+                                                    false) {
+                                                  finalSelectedLeads.addAll(
+                                                      freshLeads.toList());
+                                                }
+                                                if (leadsStatusSelected[
+                                                        LeadStatus.FollowUp] ??
+                                                    false) {
+                                                  finalSelectedLeads.addAll(
+                                                      followUpLeads.toList());
+                                                }
+
+                                                if (leadsStatusSelected[
+                                                        LeadStatus.Prospect] ??
+                                                    false) {
+                                                  finalSelectedLeads.addAll(
+                                                      prospectsLeads.toList());
+                                                }
+
+                                                if (leadsStatusSelected[
+                                                        LeadStatus.Viewing] ??
+                                                    false) {
+                                                  finalSelectedLeads.addAll(
+                                                      viewingLeads.toList());
+                                                }
+
+                                                if (leadsStatusSelected[
+                                                        LeadStatus.Deal] ??
+                                                    false) {
+                                                  finalSelectedLeads.addAll(
+                                                      dealsOrListingsLeads
+                                                          .toList());
+                                                }
+
+                                                List<String>
+                                                    finalSelectedLeadIDs =
+                                                    finalSelectedLeads
+                                                        .map((e) => e.id)
+                                                        .toList();
+                                                blocContext
+                                                    .read<LeadsCubit>()
+                                                    .returnLeadInBulk(
+                                                        context: context,
+                                                        selectedLeads:
+                                                            finalSelectedLeadIDs);
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("SUBMIT")),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                });
+                          })
+                      : AppPrimaryButton(
+                          text:
+                              "Select (${(bulkLeadSelection?.allLeads.length ?? 0) < 50 ? bulkLeadSelection?.allLeads.length : "50"})",
+                          onTap: () {
+                            int selectionCount =
+                                (bulkLeadSelection?.allLeads.length ?? 0) < 50
+                                    ? ((bulkLeadSelection?.allLeads ?? [])
+                                        .length)
+                                    : 50;
+                            context.read<LeadsCubit>().addMultipleToSelection(
+                                context,
+                                (bulkLeadSelection?.allLeads ?? [])
+                                    .sublist(0, selectionCount));
+                          }));
+            }),
             Expanded(
               child: BlocBuilder<LeadsCubit, LeadsState>(
                 builder: (context, state) {
@@ -661,4 +937,12 @@ class LeadItem extends StatelessWidget {
       },
     );
   }
+}
+
+class BulkLeadSelection {
+  final List<Lead> allLeads;
+  final List<String> selectedLeadIDs;
+
+  const BulkLeadSelection(
+      {required this.allLeads, required this.selectedLeadIDs});
 }
