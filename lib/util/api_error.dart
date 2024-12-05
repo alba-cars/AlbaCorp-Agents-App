@@ -7,7 +7,7 @@ import 'package:logger/logger.dart';
 Result<T> onError<T>(Object e, StackTrace stack, Logger log) {
   SlackService().sendSlackMessage(
       message:
-          "Error occured for ${getIt<AuthBloc>().state.user?.firstName} ${getIt<AuthBloc>().state.user?.lastName}.",
+          "Error occured for ${getIt<AuthBloc>().state.user?.firstName ?? ''} ${getIt<AuthBloc>().state.user?.lastName ?? ''}.",
       stackTrace: stack,
       errorMessage: e.toString());
   try {
@@ -137,35 +137,4 @@ class SlackService {
   }
 }
 
-// Usage examples:
-void main() async {
-  final slackService = SlackService();
 
-  // Example 1: Simple message
-  try {
-    await slackService.sendSlackMessage(
-      message: 'Hello from Flutter!',
-    );
-  } catch (e, stackTrace) {
-    print('Failed to send message: $e');
-    print(stackTrace);
-  }
-
-  // Example 2: Error reporting with stack trace
-  try {
-    throw Exception('Sample error');
-  } catch (e, stackTrace) {
-    await slackService.sendSlackMessage(
-      message: '🚨 Error in application',
-      errorMessage: e.toString(),
-      stackTrace: stackTrace,
-    );
-  }
-
-  // Example 3: Custom error report
-  await slackService.sendSlackMessage(
-    message: '🔴 Critical Error in Payment Service',
-    errorMessage: 'Transaction failed: Invalid card',
-    stackTrace: StackTrace.current,
-  );
-}
