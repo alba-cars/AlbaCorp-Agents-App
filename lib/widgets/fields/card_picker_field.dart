@@ -28,7 +28,8 @@ class CardPickerDialogField<T extends Object> extends StatefulWidget {
   final bool isRequired;
   final T? initialValue;
   final bool disabled;
-  final Future<Iterable<T>> Function(TextEditingValue) optionsBuilder;
+  final Future<Iterable<T>> Function(TextEditingValue, {bool? isRefresh})
+      optionsBuilder;
   final String? Function(T? val)? validator;
   final dynamic Function(T?)? valueTransformer;
   final Widget Function(BuildContext context, T option) optionBuilder;
@@ -146,7 +147,34 @@ class _CardPickerDialogState<T extends Object>
 
   Future<dynamic> showCardDialog() {
     final ValueNotifier<String> valueNotifier = ValueNotifier('');
-    widget.optionsBuilder.call(TextEditingValue(text: ''));
+    final ValueNotifier<int> pageNumber = ValueNotifier(1);
+    final ScrollController scrollController = ScrollController();
+    bool isLoading = false;
+
+    // Store accumulated data
+    final List<T> accumulatedData = [];
+
+    // Initialize with first page
+    widget.optionsBuilder.call(
+      TextEditingValue(text: ''),
+    );
+
+    // Add scroll listener for pagination
+    scrollController.addListener(() async {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          !isLoading) {
+        // Load more data when reaching the bottom
+        isLoading = true;
+        pageNumber.value++;
+        final data = await widget.optionsBuilder.call(
+          TextEditingValue(text: ''),
+        );
+        accumulatedData.addAll(data);
+        isLoading = false;
+      }
+    });
+
     return showGeneralDialog(
         barrierDismissible: true,
         barrierLabel: "card selector dialog",
@@ -167,6 +195,9 @@ class _CardPickerDialogState<T extends Object>
                       EasyDebounce.debounce('sssssddddaa', Durations.medium4,
                           () {
                         valueNotifier.value = val;
+                        pageNumber.value = 1; // Reset page number on new search
+                        accumulatedData
+                            .clear(); // Clear accumulated data on new search
                       });
                     },
                     decoration: InputDecoration(
@@ -197,30 +228,75 @@ class _CardPickerDialogState<T extends Object>
                       child: ValueListenableBuilder(
                           valueListenable: valueNotifier,
                           builder: (context, textValue, _) {
-                            return FutureBuilder(
-                                future: widget.optionsBuilder
-                                    .call(TextEditingValue(text: textValue)),
-                                builder: (context, val) {
-                                  return ListView.separated(
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) {
-                                        final option =
-                                            val.data!.elementAt(index);
-                                        return InkWell(
-                                          onTap: () {
-                                            _fieldKey.currentState
-                                                ?.didChange(option);
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: widget.optionBuilder(
-                                              context, option),
+                            return ValueListenableBuilder(
+                                valueListenable: pageNumber,
+                                builder: (context, currentPage, _) {
+                                  return FutureBuilder<Iterable<T>>(
+                                      future: widget.optionsBuilder.call(
+                                        TextEditingValue(text: textValue),
+                                      ),
+                                      builder: (context,
+                                          AsyncSnapshot<Iterable<T>> val) {
+                                        if (val.hasData) {
+                                          isLoading = false;
+                                          // Add new data to accumulated list
+                                          if (currentPage == 1) {
+                                            accumulatedData.clear();
+                                          }
+                                          accumulatedData.addAll(val.data!);
+                                        }
+
+                                        if (val.hasError) {
+                                          return Center(
+                                              child:
+                                                  Text('Error loading data'));
+                                        }
+
+                                        return Column(
+                                          children: [
+                                            Expanded(
+                                              child: ListView.separated(
+                                                controller: scrollController,
+                                                shrinkWrap: true,
+                                                itemBuilder: (context, index) {
+                                                  if (index <
+                                                      accumulatedData.length) {
+                                                    final option =
+                                                        accumulatedData[index];
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        _fieldKey.currentState
+                                                            ?.didChange(option);
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child:
+                                                          widget.optionBuilder(
+                                                              context, option),
+                                                    );
+                                                  } else {
+                                                    return Center(
+                                                        child:
+                                                            CircularProgressIndicator());
+                                                  }
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        SizedBox(height: 8),
+                                                itemCount: isLoading
+                                                    ? accumulatedData.length + 1
+                                                    : accumulatedData.length,
+                                              ),
+                                            ),
+                                            if (isLoading)
+                                              Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                          ],
                                         );
-                                      },
-                                      separatorBuilder: (context, index) =>
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                      itemCount: val.data?.length ?? 0);
+                                      });
                                 });
                           }),
                     ),

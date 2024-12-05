@@ -37,9 +37,9 @@ class TokenInterceptor extends InterceptorsWrapper {
       if (response.data is Map && response.data?['access_token'] != null) {
         accessToken = response.data?['access_token'];
         refreshToken = response.headers['set-cookie']?.firstOrNull?.splitMapJoin(
-            RegExp(r'refreshToken=(.*?);'),
+            RegExp(r'agentRefreshToken=(.*?);'),
             onMatch: (m) =>
-                '${m[0]?.replaceFirst('refreshToken=', '').replaceFirst(';', '')}',
+                '${m[0]?.replaceFirst('agentRefreshToken=', '').replaceFirst(';', '')}',
             onNonMatch: (m) => '');
 
         _tokenRefreshAttempted = false;
@@ -96,13 +96,14 @@ class TokenInterceptor extends InterceptorsWrapper {
         return null;
       }
       final response = await getIt<Dio>().get('/v1/auth/refresh-token',
-          options: Options(headers: {'cookie': 'refreshToken=$rToken'}));
+          options: Options(headers: {'cookie': 'agentRefreshToken=$rToken'}));
       final accessToken = response.data?['access_token'];
       final refreshToken = response.headers['set-cookie']?.firstOrNull
-          ?.splitMapJoin(RegExp(r'refreshToken=(.*?);'),
+          ?.splitMapJoin(RegExp(r'agentRefreshToken=(.*?);'),
               onMatch: (m) =>
-                  '${m[0]?.replaceFirst('refreshToken=', '').replaceFirst(';', '')}',
+                  '${m[0]?.replaceFirst('agentRefreshToken=', '').replaceFirst(';', '')}',
               onNonMatch: (m) => '');
+        Logger().d(response);
 
       storage.write(key: 'refreshToken', value: refreshToken);
       storage.write(key: 'accessToken', value: accessToken);

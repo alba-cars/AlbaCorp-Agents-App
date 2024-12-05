@@ -38,6 +38,7 @@ mixin _$TaskDetailState {
       throw _privateConstructorUsedError;
   String? get getPropertyCardsListError => throw _privateConstructorUsedError;
   Paginator? get propertyCardPaginator => throw _privateConstructorUsedError;
+  Paginator? get listingsPaginator => throw _privateConstructorUsedError;
   double? get ratingValue => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -71,11 +72,13 @@ abstract class $TaskDetailStateCopyWith<$Res> {
       List<LeadPropertyCardModel> propertyCardsList,
       String? getPropertyCardsListError,
       Paginator? propertyCardPaginator,
+      Paginator? listingsPaginator,
       double? ratingValue});
 
   $ActivityCopyWith<$Res>? get task;
   $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
   $PaginatorCopyWith<$Res>? get propertyCardPaginator;
+  $PaginatorCopyWith<$Res>? get listingsPaginator;
 }
 
 /// @nodoc
@@ -110,6 +113,7 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
     Object? propertyCardsList = null,
     Object? getPropertyCardsListError = freezed,
     Object? propertyCardPaginator = freezed,
+    Object? listingsPaginator = freezed,
     Object? ratingValue = freezed,
   }) {
     return _then(_value.copyWith(
@@ -189,6 +193,10 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
           ? _value.propertyCardPaginator
           : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      listingsPaginator: freezed == listingsPaginator
+          ? _value.listingsPaginator
+          : listingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       ratingValue: freezed == ratingValue
           ? _value.ratingValue
           : ratingValue // ignore: cast_nullable_to_non_nullable
@@ -231,6 +239,18 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
       return _then(_value.copyWith(propertyCardPaginator: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get listingsPaginator {
+    if (_value.listingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_value.listingsPaginator!, (value) {
+      return _then(_value.copyWith(listingsPaginator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -261,6 +281,7 @@ abstract class _$$TaskDetailStateImplCopyWith<$Res>
       List<LeadPropertyCardModel> propertyCardsList,
       String? getPropertyCardsListError,
       Paginator? propertyCardPaginator,
+      Paginator? listingsPaginator,
       double? ratingValue});
 
   @override
@@ -269,6 +290,8 @@ abstract class _$$TaskDetailStateImplCopyWith<$Res>
   $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
   @override
   $PaginatorCopyWith<$Res>? get propertyCardPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get listingsPaginator;
 }
 
 /// @nodoc
@@ -301,6 +324,7 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
     Object? propertyCardsList = null,
     Object? getPropertyCardsListError = freezed,
     Object? propertyCardPaginator = freezed,
+    Object? listingsPaginator = freezed,
     Object? ratingValue = freezed,
   }) {
     return _then(_$TaskDetailStateImpl(
@@ -380,6 +404,10 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
           ? _value.propertyCardPaginator
           : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
+      listingsPaginator: freezed == listingsPaginator
+          ? _value.listingsPaginator
+          : listingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
       ratingValue: freezed == ratingValue
           ? _value.ratingValue
           : ratingValue // ignore: cast_nullable_to_non_nullable
@@ -411,6 +439,7 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
       final List<LeadPropertyCardModel> propertyCardsList = const [],
       this.getPropertyCardsListError,
       this.propertyCardPaginator,
+      this.listingsPaginator,
       this.ratingValue = 5.0})
       : _sortedActivity = sortedActivity,
         _activities = activities,
@@ -483,12 +512,14 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
   @override
   final Paginator? propertyCardPaginator;
   @override
+  final Paginator? listingsPaginator;
+  @override
   @JsonKey()
   final double? ratingValue;
 
   @override
   String toString() {
-    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, ratingValue: $ratingValue)';
+    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, listingsPaginator: $listingsPaginator, ratingValue: $ratingValue)';
   }
 
   @override
@@ -510,8 +541,7 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
                 .equals(other._sortedActivity, _sortedActivity) &&
             (identical(other.getSortedActivitiesStatus, getSortedActivitiesStatus) ||
                 other.getSortedActivitiesStatus == getSortedActivitiesStatus) &&
-            (identical(
-                    other.getSortedActivitiesError, getSortedActivitiesError) ||
+            (identical(other.getSortedActivitiesError, getSortedActivitiesError) ||
                 other.getSortedActivitiesError == getSortedActivitiesError) &&
             (identical(other.sortedActivityPaginator, sortedActivityPaginator) ||
                 other.sortedActivityPaginator == sortedActivityPaginator) &&
@@ -535,6 +565,8 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
                 other.getPropertyCardsListError == getPropertyCardsListError) &&
             (identical(other.propertyCardPaginator, propertyCardPaginator) ||
                 other.propertyCardPaginator == propertyCardPaginator) &&
+            (identical(other.listingsPaginator, listingsPaginator) ||
+                other.listingsPaginator == listingsPaginator) &&
             (identical(other.ratingValue, ratingValue) ||
                 other.ratingValue == ratingValue));
   }
@@ -561,6 +593,7 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
         const DeepCollectionEquality().hash(_propertyCardsList),
         getPropertyCardsListError,
         propertyCardPaginator,
+        listingsPaginator,
         ratingValue
       ]);
 
@@ -593,6 +626,7 @@ abstract class _TaskDetailState implements TaskDetailState {
       final List<LeadPropertyCardModel> propertyCardsList,
       final String? getPropertyCardsListError,
       final Paginator? propertyCardPaginator,
+      final Paginator? listingsPaginator,
       final double? ratingValue}) = _$TaskDetailStateImpl;
 
   @override
@@ -633,6 +667,8 @@ abstract class _TaskDetailState implements TaskDetailState {
   String? get getPropertyCardsListError;
   @override
   Paginator? get propertyCardPaginator;
+  @override
+  Paginator? get listingsPaginator;
   @override
   double? get ratingValue;
   @override

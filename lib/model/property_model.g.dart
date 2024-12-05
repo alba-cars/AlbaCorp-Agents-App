@@ -14,7 +14,7 @@ _$PropertyImpl _$$PropertyImplFromJson(Map<String, dynamic> json) =>
       propertyTypeId: json['propertyTypeId'] as String?,
       propertyTitle: json['propertyTitle'] as String? ?? "",
       propertyDesc: json['propertyDesc'] as String?,
-      featured: json['featured'] as bool,
+      featured: json['featured'] as bool? ?? false,
       dealOfWeek: json['dealOfWeek'] as bool? ?? false,
       agent: json['agent'] == null
           ? null
@@ -27,7 +27,7 @@ _$PropertyImpl _$$PropertyImplFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as String)
           .toList(),
       metaDesc: json['metaDesc'] as String?,
-      commission: json['commission'] as String,
+      commission: json['commission'] as String? ?? '0',
       securityDeposit: json['securityDeposit'] as String?,
       referNo: json['referNo'] as String,
       permitNo: json['permitNo'] as String?,
@@ -50,8 +50,10 @@ _$PropertyImpl _$$PropertyImplFromJson(Map<String, dynamic> json) =>
       priceHistory: json['priceHistory'] as List<dynamic>?,
       zipCode: json['zipCode'] as String?,
       emi: json['emi'] as String?,
-      amenities:
-          (json['amenities'] as List<dynamic>).map((e) => e as String).toList(),
+      amenities: (json['amenities'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       amenityIds: json['amenityIds'] as List<dynamic>?,
       amenityObjs: json['amenityObjs'] as List<dynamic>?,
       customField: json['customField'] as List<dynamic>?,

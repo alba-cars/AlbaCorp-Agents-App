@@ -115,7 +115,7 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                   label: 'Property',
                   isRequired: false,
                   valueTransformer: (option) => option?.id,
-                  optionsBuilder: (v) async {
+                  optionsBuilder: (v,{isRefresh}) async {
                     return context
                         .read<AddTaskCubit>()
                         .getListings(search: v.text);

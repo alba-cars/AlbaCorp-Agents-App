@@ -1046,7 +1046,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
       this.propertyTypeId,
       this.propertyTitle = "",
       this.propertyDesc,
-      required this.featured,
+      this.featured = false,
       this.dealOfWeek = false,
       this.agent,
       this.premium,
@@ -1055,7 +1055,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
       this.completionDate,
       final List<String>? metaTags,
       this.metaDesc,
-      required this.commission,
+      this.commission = '0',
       this.securityDeposit,
       required this.referNo,
       this.permitNo,
@@ -1078,7 +1078,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
       final List<dynamic>? priceHistory,
       this.zipCode,
       this.emi,
-      required final List<String> amenities,
+      final List<String> amenities = const [],
       final List<dynamic>? amenityIds,
       final List<dynamic>? amenityObjs,
       final List<dynamic>? customField,
@@ -1143,6 +1143,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
   @override
   final String? propertyDesc;
   @override
+  @JsonKey()
   final bool featured;
   @override
   @JsonKey()
@@ -1170,6 +1171,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
   @override
   final String? metaDesc;
   @override
+  @JsonKey()
   final String commission;
   @override
   final String? securityDeposit;
@@ -1234,6 +1236,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
   final String? emi;
   final List<String> _amenities;
   @override
+  @JsonKey()
   List<String> get amenities {
     if (_amenities is EqualUnmodifiableListView) return _amenities;
     // ignore: implicit_dynamic_type
@@ -1686,7 +1689,7 @@ abstract class _Property implements Property {
       final String? propertyTypeId,
       final String propertyTitle,
       final String? propertyDesc,
-      required final bool featured,
+      final bool featured,
       final bool? dealOfWeek,
       final Agent? agent,
       final bool? premium,
@@ -1695,7 +1698,7 @@ abstract class _Property implements Property {
       final String? completionDate,
       final List<String>? metaTags,
       final String? metaDesc,
-      required final String commission,
+      final String commission,
       final String? securityDeposit,
       required final String referNo,
       final String? permitNo,
@@ -1718,7 +1721,7 @@ abstract class _Property implements Property {
       final List<dynamic>? priceHistory,
       final String? zipCode,
       final String? emi,
-      required final List<String> amenities,
+      final List<String> amenities,
       final List<dynamic>? amenityIds,
       final List<dynamic>? amenityObjs,
       final List<dynamic>? customField,

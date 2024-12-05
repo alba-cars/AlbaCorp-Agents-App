@@ -9,6 +9,7 @@ import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
+import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/result.dart';
@@ -35,7 +36,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       @factoryParam Activity? activity,
       this._leadRepo,
       this._agentRepo,
-      this._explorerRepo)
+      this._explorerRepo, this._listingsRepo)
       : super(TaskDetailState(
           taskId: activity?.id ?? taskId,
           task: activity,
@@ -55,6 +56,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   final ActivityRepo _activityRepo;
   final LeadRepo _leadRepo;
   final AgentRepo _agentRepo;
+  final ListingsRepo _listingsRepo;
   final ExplorerRepo _explorerRepo;
   TaskType? taskType;
   TaskFilterEnum? taskFilter;
@@ -380,12 +382,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
   }
 
-  Future<List<Property>> getListings({String? search}) async {
-    final result = await _agentRepo.getAgentProperties(
-      agentId: getIt<AuthBloc>().state.agent?.id ?? '',
+  Future<List<Property>> getListings({String? search ,bool isRefresh = false }) async {
+    final result = await _listingsRepo.getListings(
+      search: search,
+      paginator: isRefresh? null: state.listingsPaginator
     );
     switch (result) {
       case (Success s):
+      emit(state.copyWith(listingsPaginator: s.paginator));
         return s.value;
       case (Error e):
         return [];
