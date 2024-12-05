@@ -143,7 +143,7 @@ class _AddFollowUpLayoutState extends State<_AddFollowUpLayout> {
                           label: 'Property',
                           isRequired: false,
                           valueTransformer: (option) => option?.id,
-                          optionsBuilder: (v) async {
+                          optionsBuilder: (v,{isRefresh}) async {
                             return context
                                 .read<AddFollowupCubit>()
                                 .getListings(search: v.text);

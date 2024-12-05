@@ -13,7 +13,7 @@ abstract class RegisterModules {
   @Environment('Stage')
   @Named('BaseUrl')
   String get baseUrl => //'https://admin.dev.homes.albacars.app/api/';
-      'http://172.20.10.17:4000/api/';
+      'http://10.0.2.2:4000/api/';
   // 'http://172.20.10.17:4000/api/';
   //   'http://172.20.10.17:4000/api/';
   // 'http://192.168.2.160:4000/api/';

@@ -81,7 +81,7 @@ class _FollowUpTaskState extends State<FollowUpTask> {
                       label: 'Property',
                       isRequired: false,
                       valueTransformer: (option) => option?.id,
-                      optionsBuilder: (v) async {
+                      optionsBuilder: (v,{isRefresh}) async {
                         return context
                             .read<CallFeedbackCubit>()
                             .getListings(search: v.text);

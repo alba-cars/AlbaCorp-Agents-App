@@ -269,8 +269,8 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           label: 'Property',
           isRequired: false,
           valueTransformer: (option) => option?.id,
-          optionsBuilder: (v) async {
-            return context.read<TaskDetailCubit>().getListings(search: v.text);
+          optionsBuilder: (v,{isRefresh}) async {
+            return context.read<TaskDetailCubit>().getListings(search: v.text,isRefresh: isRefresh ?? false);
           },
           optionBuilder: (context, listing) {
             return PropertyCardPickerItem(listing: listing);
@@ -714,14 +714,16 @@ class PropertyCardPickerItem extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SmallText(text: 'Agent'),
-                              LabelText(
-                                  text: listing.agent?.user.firstName ?? ''),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SmallText(text: 'Agent',maxLines: 1,),
+                                LabelText(
+                                    text: listing.agent?.user.firstName ?? ''),
+                              ],
+                            ),
                           ),
                           HorizontalSmallGap(),
                           Container(
