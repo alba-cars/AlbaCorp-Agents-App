@@ -32,7 +32,7 @@ Result<T> onError<T>(Object e, StackTrace stack, Logger log) {
 class SlackService {
   final Dio _dio = Dio();
   static const String _slackWebHookUrl =
-      'https://hooks.slack.com/services/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';
+      'https://hooks.slack.com/services/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';
 
   Future<void> sendSlackMessage({
     required String message,
