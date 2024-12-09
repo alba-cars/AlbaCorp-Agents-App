@@ -10,6 +10,7 @@ import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
+import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -39,7 +40,8 @@ enum FeedbackType {
   disqualify('Disqualify'),
   doNotCall('Do not Call'),
   listing('Listing'),
-  deal('Deal');
+  deal('Deal'),
+  pocketListing('Pocket Listing');
 
   final String value;
   const FeedbackType(this.value);
@@ -176,6 +178,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       if (widget.mode == CardAction.Star) ...[
         _buildFeedbackRadio(FeedbackType.listing, 'Win / Create new listing'),
         _buildFeedbackRadio(FeedbackType.deal, 'Win / Create new deal'),
+        _buildFeedbackRadio(FeedbackType.pocketListing, 'Create pocket listing'),
       ],
       if (widget.mode == CardAction.ManuelSwipe) ...[
         _buildFeedbackRadio(
@@ -295,6 +298,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
             if (_shouldShowFollowUpButton(value)) _buildFollowUpButton(context),
             if (_shouldShowDealButton(value)) _buildDealButton(context),
             if (_shouldShowListingButton(value)) _buildListingButton(),
+            if (_shouldShowPocketListingButton(value)) _buildPocketListingButton(),
             if (value == FeedbackType.notInterested) _buildLostButton(context),
             if (value == FeedbackType.doNotCall) _buildDNDButton(context),
             if (value == FeedbackType.notAnswered) _buildNewTaskButton(context),
@@ -321,6 +325,11 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
 
   bool _shouldShowListingButton(FeedbackType? value) {
     return value == FeedbackType.listing &&
+        (widget.mode == CardAction.ManuelSwipe ||
+            widget.mode == CardAction.Star);
+  }
+  bool _shouldShowPocketListingButton(FeedbackType? value) {
+    return value == FeedbackType.pocketListing &&
         (widget.mode == CardAction.ManuelSwipe ||
             widget.mode == CardAction.Star);
   }
@@ -396,6 +405,34 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
         );
       },
       text: 'Complete & Add Listing',
+    );
+  }
+   Widget _buildPocketListingButton() {
+    return AppPrimaryButton(
+      backgroundColor: Colors.green[800],
+      onTap: () async {
+        FocusScope.of(context).unfocus();
+        if (!_formKey.currentState!.saveAndValidate()) return;
+
+        Navigator.of(context).pop(false);
+        getIt<ActivityCubit>().setLastActivityFeedback(
+          widget.activity,
+          ActivityFeedback(
+            isInterested: true,
+            status: 'Complete',
+            notes: _controller.text,
+          ),
+        );
+
+        final lead = widget.activity.lead;
+        widget.parentContext.pushNamed(
+          AddPocketListingScreen.routeName,
+          queryParameters: {
+            "lead": json.encode(lead?.toJson()),
+          },
+        );
+      },
+      text: 'Complete & Add Pocket Listing',
     );
   }
 

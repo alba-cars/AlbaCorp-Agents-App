@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/util/property_price.dart';
 
 import '../../../data/repository/lead_repo.dart';
@@ -23,8 +24,8 @@ part 'add_pocket_listing_cubit.freezed.dart';
 
 @injectable
 class AddPocketListingCubit extends Cubit<AddPocketListingState> {
-  AddPocketListingCubit(this._leadRepo, this._listingsRepo, this._explorerRepo)
-      : super(AddPocketListingState()) {
+  AddPocketListingCubit(this._leadRepo, this._listingsRepo, this._explorerRepo,  @factoryParam bool _isEdit, @factoryParam Lead? _lead)
+      : super(AddPocketListingState(rawValues: {'lead':_lead})) {
     getPropertyTypes();
   }
   final LeadRepo _leadRepo;

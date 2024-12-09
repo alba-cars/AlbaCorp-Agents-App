@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
@@ -64,6 +66,7 @@ class AppRouter {
       refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
       // observers: [routerObserver],
       redirect: (context, state) {
+      
         final authState = getIt<AuthBloc>().state;
         if ([AuthStatus.Maintenance, AuthStatus.Update]
             .contains(authState.authStatus)) {
@@ -76,7 +79,11 @@ class AppRouter {
             return EnquiriesScreen.routeName;
           } else if (authState.veryImportantActivities != null &&
               authState.veryImportantActivities!.isNotEmpty &&
-              state.uri.path.contains(TaskDetailScreen.routeName) == false) {
+              state.uri.path.startsWith(TaskDetailScreen.routeName) == false &&
+              state.uri.path.startsWith(AddDealScreen.routeName) == false &&
+              state.uri.path.startsWith(AddListingScreen.routeName) == false &&
+              state.uri.path.startsWith(AddPocketListingScreen.routeName) ==
+                  false) {
             return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}?taskType=Hot&taskFilter=New';
           } else if (authState.showFeedbackScreen &&
               state.uri.path.contains(CallFeedbackScreen.routeName) == false &&
@@ -253,7 +260,18 @@ class AppRouter {
                 path: AddPocketListingScreen.routeName,
                 name: AddPocketListingScreen.routeName,
                 pageBuilder: (context, state) {
-                  return CupertinoPage(child: AddPocketListingScreen());
+                   final isEdit = state.uri.queryParameters['isEdit'] == 'true';
+                  PropertyCard? pocketListing;
+                  Lead? lead;
+                  if (state.uri.queryParameters['deal'] != null) {
+                    pocketListing = PropertyCard.fromJson(
+                        json.decode(state.uri.queryParameters['pocketListing']!));
+                  }
+                  if (state.uri.queryParameters['lead'] != null) {
+                    lead = Lead.fromJson(
+                        json.decode(state.uri.queryParameters['lead']!));
+                  }
+                  return CupertinoPage(child: AddPocketListingScreen(lead: lead,pocketlisting: pocketListing,isEdit: isEdit,));
                 },
               ),
               GoRoute(
@@ -500,15 +518,31 @@ class GoRouterRefreshStream extends ChangeNotifier {
     final s = stream;
     _subscription = s.listen(
       (AuthState element) {
-        if (element.authStatus != lastElement?.authStatus ||
-            element.veryImportantActivities?.length !=
-                lastElement?.veryImportantActivities?.length ||
-            (element.lastCalledNumber != null &&
-                lastElement?.lastCalledNumber != element.lastCalledNumber &&
-                element.showFeedbackScreen)) {
-          notifyListeners();
-        }
-        lastElement = element;
+         // Only notify if there's a significant state change that should trigger navigation
+      bool shouldNotify = false;
+      
+      // Auth status change
+      if (element.authStatus != lastElement?.authStatus) {
+        shouldNotify = true;
+      }
+      
+      // Very important activities change, but only if we're not already on a protected route
+      if (element.veryImportantActivities?.length != lastElement?.veryImportantActivities?.length) {
+        shouldNotify = true;
+      }
+      
+      // Feedback screen condition
+      if (element.lastCalledNumber != null &&
+          lastElement?.lastCalledNumber != element.lastCalledNumber &&
+          element.showFeedbackScreen) {
+        shouldNotify = true;
+      }
+      
+      if (shouldNotify) {
+        notifyListeners();
+      }
+      
+      lastElement = element;
       },
     );
   }

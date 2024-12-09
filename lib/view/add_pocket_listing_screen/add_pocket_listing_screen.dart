@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/constants/beds_baths_optional_list.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/cubit/add_pocket_listing_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
@@ -27,12 +28,16 @@ import '../add_lead_screen/add_lead_screen.dart';
 
 class AddPocketListingScreen extends StatelessWidget {
   static const routeName = '/addPocketListingScreen';
-  const AddPocketListingScreen({super.key});
+  const AddPocketListingScreen({super.key, this.lead,  this.isEdit = false, this.pocketlisting});
+
+  final Lead? lead;
+  final bool isEdit;
+  final PropertyCard? pocketlisting;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddPocketListingCubit>(),
+      create: (context) => getIt<AddPocketListingCubit>(param1: isEdit,param2:lead),
       child: _AddPocketListingScreenLayout(),
     );
   }
