@@ -5,6 +5,7 @@ import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/add_deal_screen/cubit/add_deal_cubit.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
@@ -112,8 +113,8 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                                 ),
                                 Align(
                                     alignment: Alignment.center,
-                                    child:
-                                        LabelText(text: '${currentTab + 1} of 3'))
+                                    child: LabelText(
+                                        text: '${currentTab + 1} of 3'))
                               ],
                             ),
                           ),
@@ -196,24 +197,32 @@ class _AddDealScreenLayoutState extends State<AddDealScreenLayout>
                             ),
                             HorizontalSmallGap(),
                           ],
-                          AppPrimaryButton(
-                              onTap: () async {
-                                final error = await context
-                                    .read<AddDealCubit>()
-                                    .onNextPressed(context,
-                                        formKey: currentTab == 1
-                                            ? _formKeyStepOne
-                                            : currentTab == 2
-                                                ? _formKeyStepTwo
-                                                : _formKeyStepThree,
-                                        tabController: _tabController);
-                                if (error != null) {
-                                  showSnackbar(
-                                      context, error, SnackBarType.failure,
-                                      bottomSpace: 70);
-                                }
-                              },
-                              text: ('Next')),
+                          BlocListener<AddDealCubit, AddDealState>(
+                            listener: (context, state) {
+                              if(state.addDealStatus == AppStatus.failure){
+                                showSnackbar(context, state.addDealError ?? "Some Error Occured", SnackBarType.failure);
+                              }
+                            },
+                            listenWhen:(previous,current) => previous.addDealStatus != current.addDealStatus,
+                            child: AppPrimaryButton(
+                                onTap: () async {
+                                  final error = await context
+                                      .read<AddDealCubit>()
+                                      .onNextPressed(context,
+                                          formKey: currentTab == 1
+                                              ? _formKeyStepOne
+                                              : currentTab == 2
+                                                  ? _formKeyStepTwo
+                                                  : _formKeyStepThree,
+                                          tabController: _tabController);
+                                  if (error != null) {
+                                    showSnackbar(
+                                        context, error, SnackBarType.failure,
+                                        bottomSpace: 70);
+                                  }
+                                },
+                                text: ('Next')),
+                          ),
                         ],
                       );
                     },

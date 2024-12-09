@@ -36,7 +36,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       @factoryParam Activity? activity,
       this._leadRepo,
       this._agentRepo,
-      this._explorerRepo, this._listingsRepo)
+      this._explorerRepo,
+      this._listingsRepo)
       : super(TaskDetailState(
           taskId: activity?.id ?? taskId,
           task: activity,
@@ -95,7 +96,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     bool refresh = false,
     Map<String, dynamic>? values,
     FeedbackTypeEnum? feedbackType,
-    Future<void> Function()? onSuccess,
   }) async {
     try {
       // Prepare follow up data if needed
@@ -125,10 +125,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
       switch (result) {
         case (Success s):
-          if (onSuccess != null) {
-            await onSuccess();
-          }
-
           getIt<AuthBloc>().add(
               AuthEvent.completedImportantActivity(activityId: state.task!.id));
 
@@ -216,24 +212,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     );
   }
 
-  Future<void> makeProspect(
-      {required BuildContext context,
-      required Activity task,
-      String? description,
-      required bool addFollowUp,
-      Map<String, dynamic>? values}) async {
-    if (state.task?.lead?.id == null) return;
-
-    await updateAndCompleteActivity(
-      context: context,
-      task: task,
-      notes: description,
-      addFollowUp: true,
-      values: values,
-      feedbackType: FeedbackTypeEnum.veryInterested,
-    );
-  }
-
   Future<void> completeAndAddFollowUp(
       {required BuildContext context,
       required Activity task,
@@ -246,28 +224,19 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (date == null || date.compareTo(DateTime.now()) == -1) {
       if (context.mounted) {
         showSnackbar(context, 'Choose a valid date time', SnackBarType.failure);
-        return;
       }
+      return;
     }
-
-    if (markAsProspect) {
-      await makeProspect(
-        context: context,
-        task: task,
-        description: currentActivityNotes,
-        addFollowUp: true,
-        values: values,
-      );
-    } else {
-      await updateAndCompleteActivity(
-        context: context,
-        task: task,
-        addFollowUp: true,
-        values: values,
-        notes: currentActivityNotes,
-        feedbackType: FeedbackTypeEnum.interested,
-      );
-    }
+    await updateAndCompleteActivity(
+      context: context,
+      task: task,
+      addFollowUp: true,
+      values: values,
+      notes: currentActivityNotes,
+      feedbackType: markAsProspect
+          ? FeedbackTypeEnum.veryInterested
+          : FeedbackTypeEnum.interested,
+    );
   }
 
   Future<void> getSortedActivities({bool refresh = false}) async {
@@ -296,7 +265,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         Logger().d(getIt<AuthBloc>().state.veryImportantActivities);
         if (getIt<AuthBloc>().state.veryImportantActivities?.isNotEmpty ==
             true) {
-          Logger().d("sssssssssssssssssssssssssss");
           final imp = await _checkForImportantActivity();
 
           if (imp != null && imp.isNotEmpty) {
@@ -382,14 +350,13 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     }
   }
 
-  Future<List<Property>> getListings({String? search ,bool isRefresh = false }) async {
+  Future<List<Property>> getListings(
+      {String? search, bool isRefresh = false}) async {
     final result = await _listingsRepo.getListings(
-      search: search,
-      paginator: isRefresh? null: state.listingsPaginator
-    );
+        search: search, paginator: isRefresh ? null : state.listingsPaginator);
     switch (result) {
       case (Success s):
-      emit(state.copyWith(listingsPaginator: s.paginator));
+        emit(state.copyWith(listingsPaginator: s.paginator));
         return s.value;
       case (Error e):
         return [];
