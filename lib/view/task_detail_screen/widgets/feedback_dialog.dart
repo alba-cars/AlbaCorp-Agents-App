@@ -66,8 +66,11 @@ class ActivityFeedbackDialog extends StatefulWidget {
   State<ActivityFeedbackDialog> createState() => _ActivityFeedbackDialogState();
 }
 
+enum CallLaterValue { ONE_HOUR, ONE_DAY }
+
 class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   late final ValueNotifier<FeedbackType?> feedbackValue;
+  late final ValueNotifier<CallLaterValue> callLaterValue;
   late final TextEditingController _controller;
   final GlobalKey<FormBuilderState> _formKey = GlobalKey();
 
@@ -76,6 +79,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     super.initState();
     _initializeFeedbackValue();
     _initializeController();
+    callLaterValue = ValueNotifier(CallLaterValue.ONE_DAY);
   }
 
   Duration getFollowUpDateLimit() {
@@ -178,7 +182,8 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       if (widget.mode == CardAction.Star) ...[
         _buildFeedbackRadio(FeedbackType.listing, 'Win / Create new listing'),
         _buildFeedbackRadio(FeedbackType.deal, 'Win / Create new deal'),
-        _buildFeedbackRadio(FeedbackType.pocketListing, 'Create pocket listing'),
+        _buildFeedbackRadio(
+            FeedbackType.pocketListing, 'Create pocket listing'),
       ],
       if (widget.mode == CardAction.ManuelSwipe) ...[
         _buildFeedbackRadio(
@@ -272,8 +277,10 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           label: 'Property',
           isRequired: false,
           valueTransformer: (option) => option?.id,
-          optionsBuilder: (v,{isRefresh}) async {
-            return context.read<TaskDetailCubit>().getListings(search: v.text,isRefresh: isRefresh ?? false);
+          optionsBuilder: (v, {isRefresh}) async {
+            return context
+                .read<TaskDetailCubit>()
+                .getListings(search: v.text, isRefresh: isRefresh ?? false);
           },
           optionBuilder: (context, listing) {
             return PropertyCardPickerItem(listing: listing);
@@ -298,7 +305,8 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
             if (_shouldShowFollowUpButton(value)) _buildFollowUpButton(context),
             if (_shouldShowDealButton(value)) _buildDealButton(context),
             if (_shouldShowListingButton(value)) _buildListingButton(),
-            if (_shouldShowPocketListingButton(value)) _buildPocketListingButton(),
+            if (_shouldShowPocketListingButton(value))
+              _buildPocketListingButton(),
             if (value == FeedbackType.notInterested) _buildLostButton(context),
             if (value == FeedbackType.doNotCall) _buildDNDButton(context),
             if (value == FeedbackType.notAnswered) _buildNewTaskButton(context),
@@ -328,6 +336,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
         (widget.mode == CardAction.ManuelSwipe ||
             widget.mode == CardAction.Star);
   }
+
   bool _shouldShowPocketListingButton(FeedbackType? value) {
     return value == FeedbackType.pocketListing &&
         (widget.mode == CardAction.ManuelSwipe ||
@@ -407,7 +416,8 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       text: 'Complete & Add Listing',
     );
   }
-   Widget _buildPocketListingButton() {
+
+  Widget _buildPocketListingButton() {
     return AppPrimaryButton(
       backgroundColor: Colors.green[800],
       onTap: () async {
@@ -482,7 +492,9 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       onTap: () async {
         FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
-
+        final hours = callLaterValue.value == CallLaterValue.ONE_DAY ? 24 : 1;
+        final now = DateTime.now();
+        final scheduledDate = now.add(Duration(hours: hours));
         await context.read<TaskDetailCubit>().completeAndAddFollowUp(
           context: context,
           task: widget.activity,
@@ -490,7 +502,11 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           markAsProspect: false,
           values: {
             ...context.read<TaskDetailCubit>().state.task?.toJson() ?? {},
-            "date": DateTime.now().add(Duration(days: 1)),
+            "date": scheduledDate,
+            "time": TimeOfDay(
+              hour: scheduledDate.hour,
+              minute: scheduledDate.minute,
+            ),
           },
         );
       },
@@ -570,6 +586,45 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     );
   }
 
+  _buildScheduleTimeForNoAnswer(BuildContext context) {
+    return ValueListenableBuilder(
+        valueListenable: callLaterValue,
+        builder: (context, value, _) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Divider(),
+              SizedBox(
+                height: 4,
+              ),
+              Text("Schedule Time"),
+              SizedBox(
+                height: 4,
+              ),
+              RadioListTile<CallLaterValue>(
+                contentPadding: EdgeInsets.zero,
+                title: Text("After 1 hour"),
+                value: CallLaterValue.ONE_HOUR,
+                groupValue: value, // Add this variable to your state
+                onChanged: (value) {
+                  if (value != null) callLaterValue.value = value;
+                },
+              ),
+              RadioListTile<CallLaterValue>(
+                contentPadding: EdgeInsets.zero,
+                title: Text("After 1 day"),
+                value: CallLaterValue.ONE_DAY,
+                groupValue: value,
+                onChanged: (value) {
+                  if (value != null) callLaterValue.value = value;
+                },
+              ),
+              SizedBox(height: 8),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -601,6 +656,11 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                             Visibility(
                               visible: shouldShowRating(feedbackValue.value),
                               child: _buildRatingBar(context),
+                            ),
+                            Visibility(
+                              visible: feedbackValue.value ==
+                                  FeedbackType.notAnswered,
+                              child: _buildScheduleTimeForNoAnswer(context),
                             ),
                             _buildFollowUpForm(),
                           ],
@@ -756,7 +816,10 @@ class PropertyCardPickerItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                SmallText(text: 'Agent',maxLines: 1,),
+                                SmallText(
+                                  text: 'Agent',
+                                  maxLines: 1,
+                                ),
                                 LabelText(
                                     text: listing.agent?.user.firstName ?? ''),
                               ],

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
@@ -31,8 +32,7 @@ Result<T> onError<T>(Object e, StackTrace stack, Logger log) {
 
 class SlackService {
   final Dio _dio = Dio();
-  static const String _slackWebHookUrl =
-      'https://hooks.slack.com/services/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';
+  final  String _slackWebHookUrl = dotenv.get('SLACK_WEBHOOK_URL');
 
   Future<void> sendSlackMessage({
     required String message,
