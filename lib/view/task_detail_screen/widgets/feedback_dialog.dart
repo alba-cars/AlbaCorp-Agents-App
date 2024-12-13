@@ -754,6 +754,7 @@ class PropertyCardPickerItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12)),
                         child: S3Image(
                           url: image,
+                          publicImage: true,
                         ),
                       ),
                     ),
@@ -833,6 +834,7 @@ class PropertyCardPickerItem extends StatelessWidget {
                             decoration: BoxDecoration(shape: BoxShape.circle),
                             child: S3Image(
                               url: listing.agent?.user.photo ?? '',
+                              publicImage: true,
                             ),
                           ),
                         ],
