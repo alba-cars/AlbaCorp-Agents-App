@@ -257,7 +257,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     final payload = getPayload(taskFilter, taskType);
 
     final result = await _activityRepo.fetchActivitiesSorted(
-        filter: payload, limit: 5, paginator: state.sortedActivityPaginator);
+        filter: payload, limit: 20, paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
         List<Activity> list = List<Activity>.from(s.value);
