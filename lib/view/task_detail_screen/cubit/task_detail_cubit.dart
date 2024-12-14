@@ -116,7 +116,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
       // Prepare the completion request
       final result = await _activityRepo.completeActivity(
-        activityId: state.task!.id,
+        activityId: task.id,
         type: feedbackType?.value ?? 'interested',
         feedback: notes,
         leadRating: state.ratingValue,
@@ -127,7 +127,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         case (Success s):
           getIt<AuthBloc>().add(
               AuthEvent.completedImportantActivity(activityId: state.task!.id));
-
           emit(state.copyWith(updateTaskStatus: AppStatus.success));
 
           if (context.mounted) {
@@ -258,7 +257,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     final payload = getPayload(taskFilter, taskType);
 
     final result = await _activityRepo.fetchActivitiesSorted(
-        filter: payload, limit: 35, paginator: state.sortedActivityPaginator);
+        filter: payload, limit: 5, paginator: state.sortedActivityPaginator);
     switch (result) {
       case (Success<List<Activity>> s):
         List<Activity> list = List<Activity>.from(s.value);
@@ -282,7 +281,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
             (element) => uniqueIds.add(element.id)); // Keep only unique items
 
         emit(state.copyWith(
-            task: activities.firstOrNull,
+            task: state.sortedActivityPaginator == null ? activities.firstOrNull:state.task,
             sortedActivity: activities,
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
@@ -429,6 +428,9 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         taskId: state.sortedActivity[taskIndex].id));
     getLeadActivities();
     getExplorerList();
+    if (taskIndex == state.sortedActivity.length - 1) {
+                      getSortedActivities();
+    }
   }
 
   FutureOr<List<Activity>?> _checkForImportantActivity() async {
