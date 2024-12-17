@@ -11,6 +11,7 @@ import 'package:real_estate_app/data/repository/linkus_repo.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../util/status.dart';
 
@@ -53,6 +54,11 @@ class CallBloc extends Bloc<CallEvent, CallState> {
       switch (result) {
         case (Success s):
           emit(state.copyWith(makeACallStatus: AppStatus.success));
+          try{
+            // await launchUrlString(urlString)
+          }catch(e){
+
+          }
           break;
         case (Error e):
           emit(state.copyWith(

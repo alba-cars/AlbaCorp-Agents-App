@@ -2,6 +2,12 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
+
+import '../data/objectbox/entity/call_processing_entity.dart';
+import '../service_locator/objectbox.dart';
+import '../view/task_detail_screen/cubit/task_detail_cubit.dart';
 
 class AwesomeFcm {
   static String? fcmToken;
@@ -47,11 +53,32 @@ class AwesomeFcm {
   static Future<void> mySilentDataHandle(FcmSilentData silentData) async {
     print('"SilentData": ${silentData.toString()}');
 
-    if (silentData.createdLifeCycle != NotificationLifeCycle.Foreground) {
-      print("bg");
-    } else {
-      print("FOREGROUND");
+     try {
+    if (silentData.data?['type'] == 'CALL_PROCESSING_STATUS') {
+      ObjectBox? objectBox;
+      try {
+        objectBox = getIt<ObjectBox>();
+      } catch (e) {
+        
+      }
+      if(objectBox == null){
+        objectBox = await ObjectBox.create();
+      }
+      final store = objectBox.store;
+      final box = store.box<CallProcessingEntity>();
+      
+      await box.putAsync(CallProcessingEntity(
+        activityId: silentData.data?['activityId'] ?? '',
+        status: silentData.data?['status'] ?? '',
+        summary: silentData.data?['summary'],
+        error: silentData.data?['error'],
+      ));
+      
+      store.close();
     }
+  } catch (error) {
+    Logger().e('Error saving call processing status: $error');
+  }
   }
 
   /// Use this method to detect when a new fcm token is received

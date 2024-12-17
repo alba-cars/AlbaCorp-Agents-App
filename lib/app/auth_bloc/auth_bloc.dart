@@ -138,17 +138,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 .encode({'phone': number, "lead_source": 'Unkown Inbound Call'})
           });
         }
-      } else if (data['type'] == 'PBX_LEAD_CALL_FOLLOW_UP') {
-        if (state.authStatus == AuthStatus.initial) {
-          await stream.firstWhere((e) => e.authStatus != AuthStatus.initial);
-        }
+      } 
+      // else if (data['type'] == 'PBX_LEAD_CALL_FOLLOW_UP') {
+      //   if (state.authStatus == AuthStatus.initial) {
+      //     await stream.firstWhere((e) => e.authStatus != AuthStatus.initial);
+      //   }
 
-        if (state.authStatus == AuthStatus.Authenticated) {
-          await Future.delayed(Duration(milliseconds: 500));
-          AppRouter.router.pushNamed(AddFollowUpScreen.routeName,
-              queryParameters: {'leadId': data['leadId']});
-        }
-      }
+      //   if (state.authStatus == AuthStatus.Authenticated) {
+      //     await Future.delayed(Duration(milliseconds: 500));
+      //     AppRouter.router.pushNamed(AddFollowUpScreen.routeName,
+      //         queryParameters: {'leadId': data['leadId']});
+      //   }
+      // }
     } catch (e) {
       Logger().e(e);
     }

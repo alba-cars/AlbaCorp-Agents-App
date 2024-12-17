@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,6 +12,7 @@ import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
+import 'package:real_estate_app/objectbox.g.dart' as obj;
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
@@ -20,16 +22,19 @@ import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart'
 import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
+import '../../../data/objectbox/entity/call_processing_entity.dart';
 import '../../../model/lead_property_card_model.dart';
 import '../../../model/paginator.dart';
 import '../../../model/property_model.dart';
 import '../../../service_locator/injectable.dart';
+import '../../../service_locator/objectbox.dart' as ob;
 
 part 'task_detail_state.dart';
 part 'task_detail_cubit.freezed.dart';
 
 @injectable
 class TaskDetailCubit extends Cubit<TaskDetailState> {
+  static TaskDetailCubit? _instance; 
   TaskDetailCubit(
       this._activityRepo,
       @factoryParam String taskId,
@@ -42,7 +47,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           taskId: activity?.id ?? taskId,
           task: activity,
         )) {
-    if (activity == null) {
+          _instance = this;
+              if (activity == null) {
       getTask().then((v) {
         getSortedActivities();
         getLeadActivities();
@@ -52,8 +58,12 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       getLeadActivities();
       getExplorerList();
     }
+     _loadProcessingStatus();
+    // Listen for updates
+    _subscribeToProcessingUpdates();
   }
 
+StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
   final ActivityRepo _activityRepo;
   final LeadRepo _leadRepo;
   final AgentRepo _agentRepo;
@@ -441,6 +451,110 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       case (Error _):
         return null;
     }
+  }
+
+ 
+
+ Future<void> handleMessage(CallProcessingEntity data) async {
+  Logger().d(data);
+   
+
+    final status = data.status;
+    final callId = '';
+    final activityId = data.activityId;
+
+    switch (status) {
+      case 'STARTED':
+        emit(state.copyWith(
+           callProcessingState: CallProcessingState(activityId: activityId,
+          isProcessing: true,
+          callId: callId,
+          status: CallProcessingStatus.started,
+           )
+        ));
+        break;
+
+      case 'RECORDING_FOUND':
+        emit(state.copyWith(
+           callProcessingState: CallProcessingState(activityId: activityId,
+          status: CallProcessingStatus.recordingFound,
+           )
+        ));
+        break;
+
+      case 'GENERATING_SUMMARY':
+        emit(state.copyWith(
+           callProcessingState: CallProcessingState(activityId: activityId,
+          status: CallProcessingStatus.generatingSummary,
+           )
+        ));
+        break;
+
+      case 'COMPLETED':
+        final summary = data.summary;
+        emit(state.copyWith(
+          callProcessingState: CallProcessingState(activityId: activityId,
+          isProcessing: false,
+          status: CallProcessingStatus.completed,
+          summary: summary,
+        )));
+        break;
+
+      case 'FAILED':
+        final error = data.error;
+        emit(state.copyWith(
+          callProcessingState: CallProcessingState(activityId: activityId,
+          isProcessing: false,
+          status: CallProcessingStatus.failed,
+          error: error,)
+        ));
+        break;
+    }
+  }
+
+  Future<void> _loadProcessingStatus() async {
+    try {
+       final store = getIt<ob.ObjectBox>().store;
+      final box = store.box<CallProcessingEntity>();
+      
+      // Get latest status for this call
+      final query = box.query(obj.CallProcessingEntity_.activityId.equals(state.task?.id ?? 'ss'))
+        ..order(obj.CallProcessingEntity_.timestamp, flags: obj.Order.descending);
+      
+      final latestStatus = query.build().findFirst();
+      
+      if (latestStatus != null) {
+        handleMessage(latestStatus);
+      }
+    } catch (error) {
+      Logger().e('Error loading call processing status: $error');
+    }
+  }
+
+  void _subscribeToProcessingUpdates() {
+    final store = getIt<ob.ObjectBox>().store;
+  
+    final box = store.box<CallProcessingEntity>();
+    
+    final query = box.query(obj.CallProcessingEntity_.activityId.equals(state.task?.id ?? 'sss'))
+      ..order(obj.CallProcessingEntity_.timestamp, flags: obj.Order.descending);
+    
+    _processingSubscription = query.watch()
+      .map((query) => query.find())
+      .listen((updates) {
+        if (updates.isNotEmpty) {
+          handleMessage(updates.first);
+        }
+      });
+  }
+
+@override
+  Future<void> close() {
+     if (_instance == this) {
+      _instance = null;
+    }
+    _processingSubscription?.cancel();
+    return super.close();
   }
 }
 

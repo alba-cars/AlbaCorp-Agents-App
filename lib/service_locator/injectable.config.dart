@@ -105,7 +105,7 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModules.getStore(),
       preResolve: true,
     );
-    await gh.factoryAsync<_i4.SharedPreferences>(
+    await gh.singletonAsync<_i4.SharedPreferences>(
       () => registerModules.getSharedPreference(),
       preResolve: true,
     );

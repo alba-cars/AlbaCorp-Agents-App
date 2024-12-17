@@ -649,6 +649,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            CallProcessing(),
                             LabelText(text: 'Feedback Note', underline: true),
                             VerticalSmallGap(),
                             _buildFeedbackOptions(),
@@ -681,6 +682,10 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   }
 }
 
+
+
+
+
 bool shouldShowRating(FeedbackType? selectedFeedbackType) {
   if (selectedFeedbackType == null) return false;
   const ratingBypassStatus = [
@@ -691,6 +696,101 @@ bool shouldShowRating(FeedbackType? selectedFeedbackType) {
   ];
 
   return !ratingBypassStatus.contains(selectedFeedbackType);
+}
+
+class CallProcessing extends StatelessWidget {
+  const CallProcessing({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+     return BlocBuilder<TaskDetailCubit, TaskDetailState>(
+    builder: (context, state) {
+      if(state.callProcessingState?.activityId != state.task?.id){
+        return SizedBox();
+      }
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (state.callProcessingState?.isProcessing ?? false) ...[
+            _buildStatusIndicator(state.callProcessingState!.status),
+            const SizedBox(height: 16),
+          ],
+          if (state.callProcessingState?.summary != null) ...[
+            const Text(
+              'Call Summary:',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            SelectableText(state.callProcessingState!.summary!),
+          ],
+          if (state.callProcessingState?.error != null)
+            Text(
+              'Error: ${state.callProcessingState?.error}',
+              style: const TextStyle(color: Colors.red),
+            ),
+        ],
+      );
+    },
+  );
+  }
+  Widget _buildStatusIndicator(CallProcessingStatus status) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const CircularProgressIndicator(),
+            const SizedBox(width: 16),
+            Text(
+              _getStatusMessage(status),
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        LinearProgressIndicator(
+          value: _getProgressValue(status),
+        ),
+      ],
+    );
+  }
+
+  String _getStatusMessage(CallProcessingStatus status) {
+    switch (status) {
+      case CallProcessingStatus.started:
+        return 'Processing call...';
+      case CallProcessingStatus.recordingFound:
+        return 'Recording found, preparing...';
+      case CallProcessingStatus.generatingSummary:
+        return 'Generating call summary...';
+      case CallProcessingStatus.completed:
+        return 'Summary completed';
+      case CallProcessingStatus.failed:
+        return 'Processing failed';
+      default:
+        return 'Initializing...';
+    }
+  }
+
+  double _getProgressValue(CallProcessingStatus status) {
+    switch (status) {
+      case CallProcessingStatus.started:
+        return 0.2;
+      case CallProcessingStatus.recordingFound:
+        return 0.4;
+      case CallProcessingStatus.generatingSummary:
+        return 0.7;
+      case CallProcessingStatus.completed:
+        return 1.0;
+      case CallProcessingStatus.failed:
+        return 1.0;
+      default:
+        return 0.0;
+    }
+  }
 }
 
 // Extracted Header Component
@@ -847,6 +947,8 @@ class PropertyCardPickerItem extends StatelessWidget {
       ),
     );
   }
+
+  
 }
 
 class CustomSliderTrackShape extends RoundedRectSliderTrackShape {

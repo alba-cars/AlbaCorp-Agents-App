@@ -40,6 +40,8 @@ mixin _$TaskDetailState {
   Paginator? get propertyCardPaginator => throw _privateConstructorUsedError;
   Paginator? get listingsPaginator => throw _privateConstructorUsedError;
   double? get ratingValue => throw _privateConstructorUsedError;
+  CallProcessingState? get callProcessingState =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskDetailStateCopyWith<TaskDetailState> get copyWith =>
@@ -73,12 +75,14 @@ abstract class $TaskDetailStateCopyWith<$Res> {
       String? getPropertyCardsListError,
       Paginator? propertyCardPaginator,
       Paginator? listingsPaginator,
-      double? ratingValue});
+      double? ratingValue,
+      CallProcessingState? callProcessingState});
 
   $ActivityCopyWith<$Res>? get task;
   $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
   $PaginatorCopyWith<$Res>? get propertyCardPaginator;
   $PaginatorCopyWith<$Res>? get listingsPaginator;
+  $CallProcessingStateCopyWith<$Res>? get callProcessingState;
 }
 
 /// @nodoc
@@ -115,6 +119,7 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
     Object? propertyCardPaginator = freezed,
     Object? listingsPaginator = freezed,
     Object? ratingValue = freezed,
+    Object? callProcessingState = freezed,
   }) {
     return _then(_value.copyWith(
       taskId: null == taskId
@@ -201,6 +206,10 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
           ? _value.ratingValue
           : ratingValue // ignore: cast_nullable_to_non_nullable
               as double?,
+      callProcessingState: freezed == callProcessingState
+          ? _value.callProcessingState
+          : callProcessingState // ignore: cast_nullable_to_non_nullable
+              as CallProcessingState?,
     ) as $Val);
   }
 
@@ -251,6 +260,19 @@ class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
       return _then(_value.copyWith(listingsPaginator: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CallProcessingStateCopyWith<$Res>? get callProcessingState {
+    if (_value.callProcessingState == null) {
+      return null;
+    }
+
+    return $CallProcessingStateCopyWith<$Res>(_value.callProcessingState!,
+        (value) {
+      return _then(_value.copyWith(callProcessingState: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -282,7 +304,8 @@ abstract class _$$TaskDetailStateImplCopyWith<$Res>
       String? getPropertyCardsListError,
       Paginator? propertyCardPaginator,
       Paginator? listingsPaginator,
-      double? ratingValue});
+      double? ratingValue,
+      CallProcessingState? callProcessingState});
 
   @override
   $ActivityCopyWith<$Res>? get task;
@@ -292,6 +315,8 @@ abstract class _$$TaskDetailStateImplCopyWith<$Res>
   $PaginatorCopyWith<$Res>? get propertyCardPaginator;
   @override
   $PaginatorCopyWith<$Res>? get listingsPaginator;
+  @override
+  $CallProcessingStateCopyWith<$Res>? get callProcessingState;
 }
 
 /// @nodoc
@@ -326,6 +351,7 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
     Object? propertyCardPaginator = freezed,
     Object? listingsPaginator = freezed,
     Object? ratingValue = freezed,
+    Object? callProcessingState = freezed,
   }) {
     return _then(_$TaskDetailStateImpl(
       taskId: null == taskId
@@ -412,6 +438,10 @@ class __$$TaskDetailStateImplCopyWithImpl<$Res>
           ? _value.ratingValue
           : ratingValue // ignore: cast_nullable_to_non_nullable
               as double?,
+      callProcessingState: freezed == callProcessingState
+          ? _value.callProcessingState
+          : callProcessingState // ignore: cast_nullable_to_non_nullable
+              as CallProcessingState?,
     ));
   }
 }
@@ -440,7 +470,8 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
       this.getPropertyCardsListError,
       this.propertyCardPaginator,
       this.listingsPaginator,
-      this.ratingValue = 5.0})
+      this.ratingValue = 5.0,
+      this.callProcessingState})
       : _sortedActivity = sortedActivity,
         _activities = activities,
         _propertyCardsList = propertyCardsList;
@@ -516,10 +547,12 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
   @override
   @JsonKey()
   final double? ratingValue;
+  @override
+  final CallProcessingState? callProcessingState;
 
   @override
   String toString() {
-    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, listingsPaginator: $listingsPaginator, ratingValue: $ratingValue)';
+    return 'TaskDetailState(taskId: $taskId, getTaskStatus: $getTaskStatus, getTaskError: $getTaskError, task: $task, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, addTaskStatus: $addTaskStatus, addTaskError: $addTaskError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, listingsPaginator: $listingsPaginator, ratingValue: $ratingValue, callProcessingState: $callProcessingState)';
   }
 
   @override
@@ -568,7 +601,9 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
             (identical(other.listingsPaginator, listingsPaginator) ||
                 other.listingsPaginator == listingsPaginator) &&
             (identical(other.ratingValue, ratingValue) ||
-                other.ratingValue == ratingValue));
+                other.ratingValue == ratingValue) &&
+            (identical(other.callProcessingState, callProcessingState) ||
+                other.callProcessingState == callProcessingState));
   }
 
   @override
@@ -594,7 +629,8 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
         getPropertyCardsListError,
         propertyCardPaginator,
         listingsPaginator,
-        ratingValue
+        ratingValue,
+        callProcessingState
       ]);
 
   @JsonKey(ignore: true)
@@ -627,7 +663,8 @@ abstract class _TaskDetailState implements TaskDetailState {
       final String? getPropertyCardsListError,
       final Paginator? propertyCardPaginator,
       final Paginator? listingsPaginator,
-      final double? ratingValue}) = _$TaskDetailStateImpl;
+      final double? ratingValue,
+      final CallProcessingState? callProcessingState}) = _$TaskDetailStateImpl;
 
   @override
   String get taskId;
@@ -672,7 +709,237 @@ abstract class _TaskDetailState implements TaskDetailState {
   @override
   double? get ratingValue;
   @override
+  CallProcessingState? get callProcessingState;
+  @override
   @JsonKey(ignore: true)
   _$$TaskDetailStateImplCopyWith<_$TaskDetailStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$CallProcessingState {
+  bool get isProcessing => throw _privateConstructorUsedError;
+  String get callId => throw _privateConstructorUsedError;
+  String get activityId => throw _privateConstructorUsedError;
+  String? get summary => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
+  CallProcessingStatus get status => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CallProcessingStateCopyWith<CallProcessingState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CallProcessingStateCopyWith<$Res> {
+  factory $CallProcessingStateCopyWith(
+          CallProcessingState value, $Res Function(CallProcessingState) then) =
+      _$CallProcessingStateCopyWithImpl<$Res, CallProcessingState>;
+  @useResult
+  $Res call(
+      {bool isProcessing,
+      String callId,
+      String activityId,
+      String? summary,
+      String? error,
+      CallProcessingStatus status});
+}
+
+/// @nodoc
+class _$CallProcessingStateCopyWithImpl<$Res, $Val extends CallProcessingState>
+    implements $CallProcessingStateCopyWith<$Res> {
+  _$CallProcessingStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isProcessing = null,
+    Object? callId = null,
+    Object? activityId = null,
+    Object? summary = freezed,
+    Object? error = freezed,
+    Object? status = null,
+  }) {
+    return _then(_value.copyWith(
+      isProcessing: null == isProcessing
+          ? _value.isProcessing
+          : isProcessing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      callId: null == callId
+          ? _value.callId
+          : callId // ignore: cast_nullable_to_non_nullable
+              as String,
+      activityId: null == activityId
+          ? _value.activityId
+          : activityId // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: freezed == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CallProcessingStatus,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CallProcessingStateImplCopyWith<$Res>
+    implements $CallProcessingStateCopyWith<$Res> {
+  factory _$$CallProcessingStateImplCopyWith(_$CallProcessingStateImpl value,
+          $Res Function(_$CallProcessingStateImpl) then) =
+      __$$CallProcessingStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool isProcessing,
+      String callId,
+      String activityId,
+      String? summary,
+      String? error,
+      CallProcessingStatus status});
+}
+
+/// @nodoc
+class __$$CallProcessingStateImplCopyWithImpl<$Res>
+    extends _$CallProcessingStateCopyWithImpl<$Res, _$CallProcessingStateImpl>
+    implements _$$CallProcessingStateImplCopyWith<$Res> {
+  __$$CallProcessingStateImplCopyWithImpl(_$CallProcessingStateImpl _value,
+      $Res Function(_$CallProcessingStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isProcessing = null,
+    Object? callId = null,
+    Object? activityId = null,
+    Object? summary = freezed,
+    Object? error = freezed,
+    Object? status = null,
+  }) {
+    return _then(_$CallProcessingStateImpl(
+      isProcessing: null == isProcessing
+          ? _value.isProcessing
+          : isProcessing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      callId: null == callId
+          ? _value.callId
+          : callId // ignore: cast_nullable_to_non_nullable
+              as String,
+      activityId: null == activityId
+          ? _value.activityId
+          : activityId // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: freezed == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as CallProcessingStatus,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CallProcessingStateImpl implements _CallProcessingState {
+  const _$CallProcessingStateImpl(
+      {this.isProcessing = false,
+      this.callId = '',
+      required this.activityId,
+      this.summary,
+      this.error,
+      this.status = CallProcessingStatus.initial});
+
+  @override
+  @JsonKey()
+  final bool isProcessing;
+  @override
+  @JsonKey()
+  final String callId;
+  @override
+  final String activityId;
+  @override
+  final String? summary;
+  @override
+  final String? error;
+  @override
+  @JsonKey()
+  final CallProcessingStatus status;
+
+  @override
+  String toString() {
+    return 'CallProcessingState(isProcessing: $isProcessing, callId: $callId, activityId: $activityId, summary: $summary, error: $error, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CallProcessingStateImpl &&
+            (identical(other.isProcessing, isProcessing) ||
+                other.isProcessing == isProcessing) &&
+            (identical(other.callId, callId) || other.callId == callId) &&
+            (identical(other.activityId, activityId) ||
+                other.activityId == activityId) &&
+            (identical(other.summary, summary) || other.summary == summary) &&
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, isProcessing, callId, activityId, summary, error, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CallProcessingStateImplCopyWith<_$CallProcessingStateImpl> get copyWith =>
+      __$$CallProcessingStateImplCopyWithImpl<_$CallProcessingStateImpl>(
+          this, _$identity);
+}
+
+abstract class _CallProcessingState implements CallProcessingState {
+  const factory _CallProcessingState(
+      {final bool isProcessing,
+      final String callId,
+      required final String activityId,
+      final String? summary,
+      final String? error,
+      final CallProcessingStatus status}) = _$CallProcessingStateImpl;
+
+  @override
+  bool get isProcessing;
+  @override
+  String get callId;
+  @override
+  String get activityId;
+  @override
+  String? get summary;
+  @override
+  String? get error;
+  @override
+  CallProcessingStatus get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$CallProcessingStateImplCopyWith<_$CallProcessingStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

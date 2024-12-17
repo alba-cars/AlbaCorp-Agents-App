@@ -603,6 +603,8 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   ),
                                                 ),
                                               VerticalSmallGap(),
+                                              CallProcessing(),
+                                              VerticalSmallGap(),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment

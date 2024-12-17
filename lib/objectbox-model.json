@@ -90,9 +90,48 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:1208503366736226862",
+      "lastPropertyId": "6:2128252149180248977",
+      "name": "CallProcessingEntity",
+      "properties": [
+        {
+          "id": "1:5081670185257514151",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1854805436785469817",
+          "name": "activityId",
+          "type": 9
+        },
+        {
+          "id": "3:8404441264755814850",
+          "name": "status",
+          "type": 9
+        },
+        {
+          "id": "4:1022977080298713095",
+          "name": "summary",
+          "type": 9
+        },
+        {
+          "id": "5:1878887552391388850",
+          "name": "error",
+          "type": 9
+        },
+        {
+          "id": "6:2128252149180248977",
+          "name": "timestamp",
+          "type": 10
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:7049694244653760523",
+  "lastEntityId": "4:1208503366736226862",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
