@@ -32,6 +32,7 @@ mixin _$Agent {
   int get creditsLimit => throw _privateConstructorUsedError;
   @JsonKey(readValue: userFromJson)
   User get user => throw _privateConstructorUsedError;
+  bool get usePbx => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +54,8 @@ abstract class $AgentCopyWith<$Res> {
       bool RICSCertified,
       int creditsBalance,
       int creditsLimit,
-      @JsonKey(readValue: userFromJson) User user});
+      @JsonKey(readValue: userFromJson) User user,
+      bool usePbx});
 
   $UserCopyWith<$Res> get user;
 }
@@ -81,6 +83,7 @@ class _$AgentCopyWithImpl<$Res, $Val extends Agent>
     Object? creditsBalance = null,
     Object? creditsLimit = null,
     Object? user = null,
+    Object? usePbx = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -123,6 +126,10 @@ class _$AgentCopyWithImpl<$Res, $Val extends Agent>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      usePbx: null == usePbx
+          ? _value.usePbx
+          : usePbx // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -152,7 +159,8 @@ abstract class _$$AgentImplCopyWith<$Res> implements $AgentCopyWith<$Res> {
       bool RICSCertified,
       int creditsBalance,
       int creditsLimit,
-      @JsonKey(readValue: userFromJson) User user});
+      @JsonKey(readValue: userFromJson) User user,
+      bool usePbx});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -179,6 +187,7 @@ class __$$AgentImplCopyWithImpl<$Res>
     Object? creditsBalance = null,
     Object? creditsLimit = null,
     Object? user = null,
+    Object? usePbx = null,
   }) {
     return _then(_$AgentImpl(
       id: null == id
@@ -221,6 +230,10 @@ class __$$AgentImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      usePbx: null == usePbx
+          ? _value.usePbx
+          : usePbx // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -238,7 +251,8 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       this.RICSCertified = false,
       this.creditsBalance = 0,
       this.creditsLimit = 0,
-      @JsonKey(readValue: userFromJson) required this.user})
+      @JsonKey(readValue: userFromJson) required this.user,
+      this.usePbx = false})
       : _languages = languages;
 
   factory _$AgentImpl.fromJson(Map<String, dynamic> json) =>
@@ -276,10 +290,13 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
   @override
   @JsonKey(readValue: userFromJson)
   final User user;
+  @override
+  @JsonKey()
+  final bool usePbx;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Agent(id: $id, userId: $userId, languages: $languages, RERANo: $RERANo, DEDNo: $DEDNo, PERMITNo: $PERMITNo, RICSCertified: $RICSCertified, creditsBalance: $creditsBalance, creditsLimit: $creditsLimit, user: $user)';
+    return 'Agent(id: $id, userId: $userId, languages: $languages, RERANo: $RERANo, DEDNo: $DEDNo, PERMITNo: $PERMITNo, RICSCertified: $RICSCertified, creditsBalance: $creditsBalance, creditsLimit: $creditsLimit, user: $user, usePbx: $usePbx)';
   }
 
   @override
@@ -296,7 +313,8 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       ..add(DiagnosticsProperty('RICSCertified', RICSCertified))
       ..add(DiagnosticsProperty('creditsBalance', creditsBalance))
       ..add(DiagnosticsProperty('creditsLimit', creditsLimit))
-      ..add(DiagnosticsProperty('user', user));
+      ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('usePbx', usePbx));
   }
 
   @override
@@ -318,7 +336,8 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
                 other.creditsBalance == creditsBalance) &&
             (identical(other.creditsLimit, creditsLimit) ||
                 other.creditsLimit == creditsLimit) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.usePbx, usePbx) || other.usePbx == usePbx));
   }
 
   @JsonKey(ignore: true)
@@ -334,7 +353,8 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       RICSCertified,
       creditsBalance,
       creditsLimit,
-      user);
+      user,
+      usePbx);
 
   @JsonKey(ignore: true)
   @override
@@ -352,17 +372,17 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
 
 abstract class _Agent implements Agent {
   const factory _Agent(
-          {required final String id,
-          @JsonKey(readValue: userIdFromJson) required final String userId,
-          final List<String> languages,
-          final String? RERANo,
-          final String? DEDNo,
-          final String? PERMITNo,
-          final bool RICSCertified,
-          final int creditsBalance,
-          final int creditsLimit,
-          @JsonKey(readValue: userFromJson) required final User user}) =
-      _$AgentImpl;
+      {required final String id,
+      @JsonKey(readValue: userIdFromJson) required final String userId,
+      final List<String> languages,
+      final String? RERANo,
+      final String? DEDNo,
+      final String? PERMITNo,
+      final bool RICSCertified,
+      final int creditsBalance,
+      final int creditsLimit,
+      @JsonKey(readValue: userFromJson) required final User user,
+      final bool usePbx}) = _$AgentImpl;
 
   factory _Agent.fromJson(Map<String, dynamic> json) = _$AgentImpl.fromJson;
 
@@ -388,6 +408,8 @@ abstract class _Agent implements Agent {
   @override
   @JsonKey(readValue: userFromJson)
   User get user;
+  @override
+  bool get usePbx;
   @override
   @JsonKey(ignore: true)
   _$$AgentImplCopyWith<_$AgentImpl> get copyWith =>

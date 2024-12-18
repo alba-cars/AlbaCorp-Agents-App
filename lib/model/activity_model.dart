@@ -30,6 +30,7 @@ class Activity with _$Activity {
     Property? property_list,
     @JsonKey( readValue: readCreatedAt) DateTime? createdAt,
     @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
+    String? summary
   }) = _Activity;
 
   factory Activity.fromJson(Map<String, dynamic> json) => _$ActivityFromJson(json);

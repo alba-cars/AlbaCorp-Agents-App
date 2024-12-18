@@ -34,7 +34,7 @@ part 'task_detail_cubit.freezed.dart';
 
 @injectable
 class TaskDetailCubit extends Cubit<TaskDetailState> {
-  static TaskDetailCubit? _instance; 
+  static TaskDetailCubit? _instance;
   TaskDetailCubit(
       this._activityRepo,
       @factoryParam String taskId,
@@ -47,23 +47,20 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           taskId: activity?.id ?? taskId,
           task: activity,
         )) {
-          _instance = this;
-              if (activity == null) {
+    _instance = this;
+    if (activity == null) {
       getTask().then((v) {
         getSortedActivities();
-        getLeadActivities();
-        getExplorerList();
       });
     } else {
-      getLeadActivities();
-      getExplorerList();
+      getSortedActivities();
     }
-     _loadProcessingStatus();
+    _loadProcessingStatus();
     // Listen for updates
     _subscribeToProcessingUpdates();
   }
 
-StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
+  StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
   final ActivityRepo _activityRepo;
   final LeadRepo _leadRepo;
   final AgentRepo _agentRepo;
@@ -271,7 +268,6 @@ StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
     switch (result) {
       case (Success<List<Activity>> s):
         List<Activity> list = List<Activity>.from(s.value);
-        Logger().d(getIt<AuthBloc>().state.veryImportantActivities);
         if (getIt<AuthBloc>().state.veryImportantActivities?.isNotEmpty ==
             true) {
           final imp = await _checkForImportantActivity();
@@ -291,10 +287,17 @@ StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
             (element) => uniqueIds.add(element.id)); // Keep only unique items
 
         emit(state.copyWith(
-            task: state.sortedActivityPaginator == null ? activities.firstOrNull:state.task,
+            task: state.sortedActivityPaginator == null
+                ? activities.firstOrNull
+                : state.task,
+            taskId: state.sortedActivityPaginator == null
+                ? activities.firstOrNull?.id ?? state.taskId
+                : state.task?.id ?? state.taskId,
             sortedActivity: activities,
             getSortedActivitiesStatus: AppStatus.success,
             sortedActivityPaginator: s.paginator));
+        getLeadActivities();
+        getExplorerList();
 
         break;
       case (Error e):
@@ -433,13 +436,20 @@ StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
   void setCurrentTask(int taskIndex) {
     print(taskIndex);
     if (taskIndex > (state.sortedActivity.length - 1)) return;
+    final task = state.sortedActivity[taskIndex];
     emit(state.copyWith(
         task: state.sortedActivity[taskIndex],
-        taskId: state.sortedActivity[taskIndex].id));
+        taskId: task.id,
+        callProcessingState: task.summary != null
+            ? CallProcessingState(
+                activityId: task.id,
+                summary: task.summary,
+                status: CallProcessingStatus.completed)
+            : null));
     getLeadActivities();
     getExplorerList();
     if (taskIndex == state.sortedActivity.length - 1) {
-                      getSortedActivities();
+      getSortedActivities();
     }
   }
 
@@ -453,11 +463,8 @@ StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
     }
   }
 
- 
-
- Future<void> handleMessage(CallProcessingEntity data) async {
-  Logger().d(data);
-   
+  Future<void> handleMessage(CallProcessingEntity data) async {
+    Logger().d(data);
 
     final status = data.status;
     final callId = '';
@@ -466,34 +473,35 @@ StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
     switch (status) {
       case 'STARTED':
         emit(state.copyWith(
-           callProcessingState: CallProcessingState(activityId: activityId,
+            callProcessingState: CallProcessingState(
+          activityId: activityId,
           isProcessing: true,
           callId: callId,
           status: CallProcessingStatus.started,
-           )
-        ));
+        )));
         break;
 
       case 'RECORDING_FOUND':
         emit(state.copyWith(
-           callProcessingState: CallProcessingState(activityId: activityId,
+            callProcessingState: CallProcessingState(
+          activityId: activityId,
           status: CallProcessingStatus.recordingFound,
-           )
-        ));
+        )));
         break;
 
       case 'GENERATING_SUMMARY':
         emit(state.copyWith(
-           callProcessingState: CallProcessingState(activityId: activityId,
+            callProcessingState: CallProcessingState(
+          activityId: activityId,
           status: CallProcessingStatus.generatingSummary,
-           )
-        ));
+        )));
         break;
 
       case 'COMPLETED':
         final summary = data.summary;
         emit(state.copyWith(
-          callProcessingState: CallProcessingState(activityId: activityId,
+            callProcessingState: CallProcessingState(
+          activityId: activityId,
           isProcessing: false,
           status: CallProcessingStatus.completed,
           summary: summary,
@@ -503,26 +511,29 @@ StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
       case 'FAILED':
         final error = data.error;
         emit(state.copyWith(
-          callProcessingState: CallProcessingState(activityId: activityId,
+            callProcessingState: CallProcessingState(
+          activityId: activityId,
           isProcessing: false,
           status: CallProcessingStatus.failed,
-          error: error,)
-        ));
+          error: error,
+        )));
         break;
     }
   }
 
   Future<void> _loadProcessingStatus() async {
     try {
-       final store = getIt<ob.ObjectBox>().store;
+      final store = getIt<ob.ObjectBox>().store;
       final box = store.box<CallProcessingEntity>();
-      
+
       // Get latest status for this call
-      final query = box.query(obj.CallProcessingEntity_.activityId.equals(state.task?.id ?? 'ss'))
-        ..order(obj.CallProcessingEntity_.timestamp, flags: obj.Order.descending);
-      
+      final query = box.query(
+          obj.CallProcessingEntity_.activityId.equals(state.task?.id ?? 'ss'))
+        ..order(obj.CallProcessingEntity_.timestamp,
+            flags: obj.Order.descending);
+
       final latestStatus = query.build().findFirst();
-      
+
       if (latestStatus != null) {
         handleMessage(latestStatus);
       }
@@ -533,24 +544,24 @@ StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
 
   void _subscribeToProcessingUpdates() {
     final store = getIt<ob.ObjectBox>().store;
-  
+
     final box = store.box<CallProcessingEntity>();
-    
-    final query = box.query(obj.CallProcessingEntity_.activityId.equals(state.task?.id ?? 'sss'))
+
+    final query = box.query(
+        obj.CallProcessingEntity_.activityId.equals(state.task?.id ?? 'sss'))
       ..order(obj.CallProcessingEntity_.timestamp, flags: obj.Order.descending);
-    
-    _processingSubscription = query.watch()
-      .map((query) => query.find())
-      .listen((updates) {
-        if (updates.isNotEmpty) {
-          handleMessage(updates.first);
-        }
-      });
+
+    _processingSubscription =
+        query.watch().map((query) => query.find()).listen((updates) {
+      if (updates.isNotEmpty) {
+        handleMessage(updates.first);
+      }
+    });
   }
 
-@override
+  @override
   Future<void> close() {
-     if (_instance == this) {
+    if (_instance == this) {
       _instance = null;
     }
     _processingSubscription?.cancel();

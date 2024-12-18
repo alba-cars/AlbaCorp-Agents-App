@@ -19,6 +19,7 @@ class Agent with _$Agent {
     @Default(0) int creditsBalance,
     @Default(0) int creditsLimit,
     @JsonKey(readValue: userFromJson) required User user,
+    @Default(false) bool usePbx,
   }) = _Agent;
 
   factory Agent.fromJson(Map<String, dynamic> json) => _$AgentFromJson(json);

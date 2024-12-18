@@ -236,9 +236,6 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                     if (activity is Unswipe) {
                       return;
                     }
-                    if (targetIndex == tasks.length - 1) {
-                      context.read<TaskDetailCubit>().getSortedActivities();
-                    }
                     if (previousIndex >= targetIndex &&
                         mode != CardAction.Negative) {
                       return;

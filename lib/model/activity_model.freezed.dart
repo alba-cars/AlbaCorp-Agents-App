@@ -55,6 +55,7 @@ mixin _$Activity {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(readValue: readUpdatedAt)
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String? get summary => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -89,7 +90,8 @@ abstract class $ActivityCopyWith<$Res> {
       @JsonKey(readValue: readOverdueAt) DateTime? overdueAt,
       Property? property_list,
       @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
-      @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt});
+      @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
+      String? summary});
 
   $LeadCopyWith<$Res>? get lead;
   $PropertyCopyWith<$Res>? get property_list;
@@ -129,6 +131,7 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
     Object? property_list = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? summary = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -215,6 +218,10 @@ class _$ActivityCopyWithImpl<$Res, $Val extends Activity>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      summary: freezed == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -273,7 +280,8 @@ abstract class _$$ActivityImplCopyWith<$Res>
       @JsonKey(readValue: readOverdueAt) DateTime? overdueAt,
       Property? property_list,
       @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
-      @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt});
+      @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
+      String? summary});
 
   @override
   $LeadCopyWith<$Res>? get lead;
@@ -313,6 +321,7 @@ class __$$ActivityImplCopyWithImpl<$Res>
     Object? property_list = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? summary = freezed,
   }) {
     return _then(_$ActivityImpl(
       id: null == id
@@ -399,6 +408,10 @@ class __$$ActivityImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      summary: freezed == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -428,7 +441,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       @JsonKey(readValue: readOverdueAt) this.overdueAt,
       this.property_list,
       @JsonKey(readValue: readCreatedAt) this.createdAt,
-      @JsonKey(readValue: readUpdatedAt) this.updatedAt})
+      @JsonKey(readValue: readUpdatedAt) this.updatedAt,
+      this.summary})
       : _preferredLanguages = preferredLanguages,
         _tags = tags;
 
@@ -509,10 +523,12 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
   @override
   @JsonKey(readValue: readUpdatedAt)
   final DateTime? updatedAt;
+  @override
+  final String? summary;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, activityWeight: $activityWeight, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, property_list: $property_list, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Activity(id: $id, userId: $userId, propertyListId: $propertyListId, lead: $lead, activityWeight: $activityWeight, type: $type, description: $description, date: $date, completedDate: $completedDate, isScheduled: $isScheduled, status: $status, preferredLanguages: $preferredLanguages, notes: $notes, tags: $tags, isInterested: $isInterested, offplanId: $offplanId, propertyType: $propertyType, overdueAt: $overdueAt, property_list: $property_list, createdAt: $createdAt, updatedAt: $updatedAt, summary: $summary)';
   }
 
   @override
@@ -540,7 +556,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
       ..add(DiagnosticsProperty('overdueAt', overdueAt))
       ..add(DiagnosticsProperty('property_list', property_list))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('summary', summary));
   }
 
   @override
@@ -581,7 +598,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.summary, summary) || other.summary == summary));
   }
 
   @JsonKey(ignore: true)
@@ -608,7 +626,8 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
         overdueAt,
         property_list,
         createdAt,
-        updatedAt
+        updatedAt,
+        summary
       ]);
 
   @JsonKey(ignore: true)
@@ -627,29 +646,29 @@ class _$ActivityImpl with DiagnosticableTreeMixin implements _Activity {
 
 abstract class _Activity implements Activity {
   factory _Activity(
-          {required final String id,
-          @JsonKey(readValue: readUserId) required final String userId,
-          @JsonKey(readValue: readPropertyListId) final String? propertyListId,
-          @JsonKey(readValue: readLead) final Lead? lead,
-          @JsonKey(readValue: readActivityWeight) final double activityWeight,
-          required final String type,
-          final String? description,
-          @JsonKey(readValue: readDate) required final DateTime date,
-          @JsonKey(readValue: readCompletedDate) final DateTime? completedDate,
-          @JsonKey(readValue: readIsScheduled) final bool? isScheduled,
-          final String status,
-          @JsonKey(readValue: readPreferredLanguages)
-          final List<String>? preferredLanguages,
-          final String? notes,
-          final List<String>? tags,
-          @JsonKey(readValue: readIsInterested) final bool? isInterested,
-          @JsonKey(readValue: readOffplanId) final String? offplanId,
-          @JsonKey(readValue: readPropertyType) final String? propertyType,
-          @JsonKey(readValue: readOverdueAt) final DateTime? overdueAt,
-          final Property? property_list,
-          @JsonKey(readValue: readCreatedAt) final DateTime? createdAt,
-          @JsonKey(readValue: readUpdatedAt) final DateTime? updatedAt}) =
-      _$ActivityImpl;
+      {required final String id,
+      @JsonKey(readValue: readUserId) required final String userId,
+      @JsonKey(readValue: readPropertyListId) final String? propertyListId,
+      @JsonKey(readValue: readLead) final Lead? lead,
+      @JsonKey(readValue: readActivityWeight) final double activityWeight,
+      required final String type,
+      final String? description,
+      @JsonKey(readValue: readDate) required final DateTime date,
+      @JsonKey(readValue: readCompletedDate) final DateTime? completedDate,
+      @JsonKey(readValue: readIsScheduled) final bool? isScheduled,
+      final String status,
+      @JsonKey(readValue: readPreferredLanguages)
+      final List<String>? preferredLanguages,
+      final String? notes,
+      final List<String>? tags,
+      @JsonKey(readValue: readIsInterested) final bool? isInterested,
+      @JsonKey(readValue: readOffplanId) final String? offplanId,
+      @JsonKey(readValue: readPropertyType) final String? propertyType,
+      @JsonKey(readValue: readOverdueAt) final DateTime? overdueAt,
+      final Property? property_list,
+      @JsonKey(readValue: readCreatedAt) final DateTime? createdAt,
+      @JsonKey(readValue: readUpdatedAt) final DateTime? updatedAt,
+      final String? summary}) = _$ActivityImpl;
 
   factory _Activity.fromJson(Map<String, dynamic> json) =
       _$ActivityImpl.fromJson;
@@ -710,6 +729,8 @@ abstract class _Activity implements Activity {
   @override
   @JsonKey(readValue: readUpdatedAt)
   DateTime? get updatedAt;
+  @override
+  String? get summary;
   @override
   @JsonKey(ignore: true)
   _$$ActivityImplCopyWith<_$ActivityImpl> get copyWith =>

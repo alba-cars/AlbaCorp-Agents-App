@@ -20,6 +20,7 @@ _$AgentImpl _$$AgentImplFromJson(Map<String, dynamic> json) => _$AgentImpl(
       creditsBalance: (json['creditsBalance'] as num?)?.toInt() ?? 0,
       creditsLimit: (json['creditsLimit'] as num?)?.toInt() ?? 0,
       user: User.fromJson(userFromJson(json, 'user') as Map<String, dynamic>),
+      usePbx: json['usePbx'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$AgentImplToJson(_$AgentImpl instance) =>
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$AgentImplToJson(_$AgentImpl instance) =>
       'creditsBalance': instance.creditsBalance,
       'creditsLimit': instance.creditsLimit,
       'user': instance.user,
+      'usePbx': instance.usePbx,
     };

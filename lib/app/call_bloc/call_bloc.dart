@@ -48,7 +48,8 @@ class CallBloc extends Bloc<CallEvent, CallState> {
     emit(state.copyWith(
         makeACallStatus: AppStatus.loading, makeACallError: null));
     final settings = getIt<AuthBloc>().state.globalSettings;
-    if (settings?.enablePbx == true) {
+    final agent = getIt<AuthBloc>().state.agent;
+    if (settings?.enablePbx == true || agent?.usePbx == true) {
       final result = await _linkusRepo.makeACall(
           number: event.phoneNumber, activityId: event.activityId);
       switch (result) {
