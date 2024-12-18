@@ -45,7 +45,7 @@ _$ActivityImpl _$$ActivityImplFromJson(Map<String, dynamic> json) =>
       updatedAt: readUpdatedAt(json, 'updatedAt') == null
           ? null
           : DateTime.parse(readUpdatedAt(json, 'updatedAt') as String),
-      summary: json['summary'] as String?,
+      transcript: json['transcript'] as String?,
     );
 
 Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
@@ -71,5 +71,5 @@ Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
       'property_list': instance.property_list,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
-      'summary': instance.summary,
+      'transcript': instance.transcript,
     };

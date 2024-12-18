@@ -379,7 +379,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (state.task == null) {
       return;
     }
-    emit(state.copyWith(getActivitiesStatus: AppStatus.loading));
+    emit(state.copyWith(getActivitiesStatus: AppStatus.loading,activities: []));
     final result =
         await _leadRepo.getLeadActivities(leadId: state.task!.lead!.id);
     switch (result) {
@@ -440,10 +440,10 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     emit(state.copyWith(
         task: state.sortedActivity[taskIndex],
         taskId: task.id,
-        callProcessingState: task.summary != null
+        callProcessingState: task.transcript != null
             ? CallProcessingState(
                 activityId: task.id,
-                summary: task.summary,
+                summary: task.transcript,
                 status: CallProcessingStatus.completed)
             : null));
     getLeadActivities();
