@@ -9,8 +9,10 @@ import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
+import '../../../app/auth_bloc/auth_bloc.dart';
 import '../../../app/list_state_cubit/list_state_cubit.dart';
 import '../../../model/activity_model.dart';
+import '../../../service_locator/injectable.dart';
 import '../../../widgets/button.dart';
 import '../../../widgets/fields/multi_select_autocomplete_field.dart';
 import '../../../widgets/fields/wrap_select_field.dart';
@@ -163,7 +165,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                 ),
               ),
               HorizontalSmallGap(),
-              InkWell(
+        if(getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')        InkWell(
                 onTap: () {
                   context.pushNamed(LeadsExplorerScreen.routeName);
                 },

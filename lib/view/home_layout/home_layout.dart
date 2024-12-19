@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen>
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CustomListTileWithIcon(
+                   if(user?.role != 'AnonymousAgent')     CustomListTileWithIcon(
                           title: 'Explorer',
                           iconImagePath: 'assets/images/compass.png',
                           initiallyExpanded: true,
@@ -326,14 +326,14 @@ class _HomeScreenState extends State<HomeScreen>
                                   context.pushNamed(AddLeadScreen.routeName);
                                 },
                               ),
-                              ListIcon(
+                           if(user?.role != 'AnonymousAgent')     ListIcon(
                                 title: 'Add Deal',
                                 onPressed: () {
                                   Scaffold.of(context).closeDrawer();
                                   context.pushNamed(AddDealScreen.routeName);
                                 },
                               ),
-                              ListIcon(
+                         if(user?.role != 'AnonymousAgent')       ListIcon(
                                 title: 'Add Listing Acquired',
                                 onPressed: () {
                                   Scaffold.of(context).closeDrawer();
@@ -365,7 +365,7 @@ class _HomeScreenState extends State<HomeScreen>
                             context.pushNamed(MyActvitiesPage.routeName);
                           },
                         ),
-                        CustomListTileWithIcon(
+                     if(user?.role != 'AnonymousAgent')     CustomListTileWithIcon(
                           title: 'Deals',
                           iconImagePath: 'assets/images/deal.png',
                           onPressed: () {
@@ -373,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen>
                             context.goNamed(DealsScreen.routeName);
                           },
                         ),
-                        CustomListTileWithIcon(
+                    if(user?.role != 'AnonymousAgent')      CustomListTileWithIcon(
                           title: 'Hot Leads Today',
                           iconImagePath: 'assets/images/deal.png',
                           onPressed: () {

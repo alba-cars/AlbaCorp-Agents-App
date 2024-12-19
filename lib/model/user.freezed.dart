@@ -31,6 +31,7 @@ mixin _$User {
   String get lastName => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get photo => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
   UserPBXNumbers? get userPBXNumbers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,6 +53,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: "last_name") String lastName,
       String? city,
       String? photo,
+      String? role,
       UserPBXNumbers? userPBXNumbers});
 
   $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers;
@@ -78,6 +80,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? lastName = null,
     Object? city = freezed,
     Object? photo = freezed,
+    Object? role = freezed,
     Object? userPBXNumbers = freezed,
   }) {
     return _then(_value.copyWith(
@@ -112,6 +115,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String?,
       userPBXNumbers: freezed == userPBXNumbers
           ? _value.userPBXNumbers
@@ -149,6 +156,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: "last_name") String lastName,
       String? city,
       String? photo,
+      String? role,
       UserPBXNumbers? userPBXNumbers});
 
   @override
@@ -173,6 +181,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? city = freezed,
     Object? photo = freezed,
+    Object? role = freezed,
     Object? userPBXNumbers = freezed,
   }) {
     return _then(_$UserImpl(
@@ -208,6 +217,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
       userPBXNumbers: freezed == userPBXNumbers
           ? _value.userPBXNumbers
           : userPBXNumbers // ignore: cast_nullable_to_non_nullable
@@ -228,6 +241,7 @@ class _$UserImpl implements _User {
       @JsonKey(name: "last_name") this.lastName = '',
       this.city,
       this.photo,
+      this.role,
       this.userPBXNumbers});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -254,11 +268,13 @@ class _$UserImpl implements _User {
   @override
   final String? photo;
   @override
+  final String? role;
+  @override
   final UserPBXNumbers? userPBXNumbers;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, userPBXNumbers: $userPBXNumbers)';
+    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers)';
   }
 
   @override
@@ -277,6 +293,7 @@ class _$UserImpl implements _User {
                 other.lastName == lastName) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.photo, photo) || other.photo == photo) &&
+            (identical(other.role, role) || other.role == role) &&
             (identical(other.userPBXNumbers, userPBXNumbers) ||
                 other.userPBXNumbers == userPBXNumbers));
   }
@@ -284,7 +301,7 @@ class _$UserImpl implements _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, email, phone, whatsapp,
-      firstName, lastName, city, photo, userPBXNumbers);
+      firstName, lastName, city, photo, role, userPBXNumbers);
 
   @JsonKey(ignore: true)
   @override
@@ -310,6 +327,7 @@ abstract class _User implements User {
       @JsonKey(name: "last_name") final String lastName,
       final String? city,
       final String? photo,
+      final String? role,
       final UserPBXNumbers? userPBXNumbers}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -333,6 +351,8 @@ abstract class _User implements User {
   String? get city;
   @override
   String? get photo;
+  @override
+  String? get role;
   @override
   UserPBXNumbers? get userPBXNumbers;
   @override

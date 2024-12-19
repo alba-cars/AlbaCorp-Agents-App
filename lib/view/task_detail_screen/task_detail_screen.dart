@@ -196,7 +196,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                       children: [
                         TitleText(text: "You have reached the end"),
                         VerticalSmallGap(),
-                        AppPrimaryButton(
+              if(getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')            AppPrimaryButton(
                             text: 'Go To Explorer',
                             onTap: () {
                               context.pushNamed(LeadsExplorerScreen.routeName);
