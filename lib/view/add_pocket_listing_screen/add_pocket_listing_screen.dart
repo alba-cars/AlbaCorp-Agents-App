@@ -28,7 +28,8 @@ import '../add_lead_screen/add_lead_screen.dart';
 
 class AddPocketListingScreen extends StatelessWidget {
   static const routeName = '/addPocketListingScreen';
-  const AddPocketListingScreen({super.key, this.lead,  this.isEdit = false, this.pocketlisting});
+  const AddPocketListingScreen(
+      {super.key, this.lead, this.isEdit = false, this.pocketlisting});
 
   final Lead? lead;
   final bool isEdit;
@@ -37,7 +38,8 @@ class AddPocketListingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AddPocketListingCubit>(param1: isEdit,param2:lead),
+      create: (context) =>
+          getIt<AddPocketListingCubit>(param1: isEdit, param2: lead),
       child: _AddPocketListingScreenLayout(),
     );
   }
@@ -89,7 +91,6 @@ class _AddListingScreenLayoutState extends State<_AddPocketListingScreenLayout>
     );
     return Scaffold(
       body: GestureDetector(
-        
         onTap: () => FocusScope.of(context).unfocus(),
         child: NestedScrollView(
           controller: _scrollController,
@@ -103,8 +104,8 @@ class _AddListingScreenLayoutState extends State<_AddPocketListingScreenLayout>
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-                child: BlocSelector<AddPocketListingCubit, AddPocketListingState,
-                    int>(
+                child: BlocSelector<AddPocketListingCubit,
+                    AddPocketListingState, int>(
                   selector: (state) {
                     return state.currentTab;
                   },
@@ -295,7 +296,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   },
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (lead) =>
-                      '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
+                      '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 4, lead.phone!.length) : ""})',
                   optionsBuilder: (v, refresh) async {
                     return context
                         .read<AddPocketListingCubit>()

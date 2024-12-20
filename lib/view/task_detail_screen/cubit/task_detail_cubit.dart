@@ -48,13 +48,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           task: activity,
         )) {
     _instance = this;
-    if (activity == null) {
-      getTask().then((v) {
-        getSortedActivities();
-      });
-    } else {
-      getSortedActivities();
-    }
+
     _loadProcessingStatus();
     // Listen for updates
     _subscribeToProcessingUpdates();
@@ -250,6 +244,9 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         state.getSortedActivitiesStatus == AppStatus.loadingMore) {
       return;
     }
+    if (state.task == null) {
+      await getTask();
+    }
     if (refresh || state.sortedActivityPaginator == null) {
       emit(state.copyWith(
           sortedActivityPaginator: null,
@@ -379,7 +376,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     if (state.task == null) {
       return;
     }
-    emit(state.copyWith(getActivitiesStatus: AppStatus.loading,activities: []));
+    emit(
+        state.copyWith(getActivitiesStatus: AppStatus.loading, activities: []));
     final result =
         await _leadRepo.getLeadActivities(leadId: state.task!.lead!.id);
     switch (result) {

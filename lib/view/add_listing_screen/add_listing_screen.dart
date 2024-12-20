@@ -99,7 +99,9 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
           controller: _scrollController,
           headerSliverBuilder: (context, isScrolledBelow) => [
             SliverAppBar(
-              title: Text(context.read<AddListingCubit>().isEdit? 'Edit Listing': 'Add Listing'),
+              title: Text(context.read<AddListingCubit>().isEdit
+                  ? 'Edit Listing'
+                  : 'Add Listing'),
               centerTitle: true,
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
@@ -292,8 +294,8 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   },
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (lead) =>
-                      '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 5, lead.phone!.length - 1) : ""})',
-                  optionsBuilder: (v,refresh) async {
+                      '${lead.firstName} ${lead.lastName} (*****${lead.phone != null ? lead.phone!.substring(lead.phone!.length - 4, lead.phone!.length) : ""})',
+                  optionsBuilder: (v, refresh) async {
                     return context
                         .read<AddListingCubit>()
                         .getLeads(search: v.text);
@@ -396,7 +398,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                   isRequired: true,
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (p0) => p0.community,
-                  optionsBuilder: (v,refresh) async {
+                  optionsBuilder: (v, refresh) async {
                     final list = await context
                         .read<AddListingCubit>()
                         .getCommunities(search: v.text);
@@ -415,7 +417,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                       ?.propertyType)),
                   valueTransformer: (p0) => p0?.id,
                   displayStringForOption: (p0) => p0.name,
-                  optionsBuilder: (v,refresh) async {
+                  optionsBuilder: (v, refresh) async {
                     Logger().d(val['community_id']);
                     final list = await context
                         .read<AddListingCubit>()
