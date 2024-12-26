@@ -106,6 +106,7 @@ class DealData implements DealsRepo {
   Future<Result<DealListingResponse>> addExternalListingDeal(
       {required Map<String, dynamic> values}) async {
     try {
+      Logger().d(values);
       String url = 'v1/propList/listingProperty';
 
       final response = await _dio.post(url, data: values);
@@ -322,16 +323,16 @@ class DealData implements DealsRepo {
       return onError(e, stack, log);
     }
   }
-  
+
   @override
-  Future<Result<String>> updateDealProgress({required String dealId}) async{
+  Future<Result<String>> updateDealProgress({required String dealId}) async {
     try {
       String url = 'v1/deals/progress/$dealId';
 
       final response = await _dio.post(
         url,
       );
-      final data =response.data['status'] ;
+      final data = response.data['status'];
       return Success(
         data,
       );

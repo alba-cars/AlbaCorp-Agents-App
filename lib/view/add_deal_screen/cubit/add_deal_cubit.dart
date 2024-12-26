@@ -113,7 +113,6 @@ class AddDealCubit extends Cubit<AddDealState> {
       'buyerClientType': state.buyerSource?.toJson(),
       'sellerClientType': state.sellerSource?.toJson(),
       'buyerAssignedAgent': getIt<AuthBloc>().state.agent?.id,
-      
     });
     switch (dealResult) {
       case (Success s):
@@ -130,7 +129,8 @@ class AddDealCubit extends Cubit<AddDealState> {
   Future<void> addSecondaryExternalDeal(
       {required Map<String, dynamic> values}) async {
     emit(state.copyWith(addDealStatus: AppStatus.loadingMore));
-    final result = await _dealsRepo.addExternalListingDeal(values: values);
+    final result = await _dealsRepo.addExternalListingDeal(
+        values: {...values, 'agency_id': values['sellerExternalUserId']});
     switch (result) {
       case (Success<DealListingResponse> s):
         final dealResult = await _dealsRepo.addDeal(values: {
@@ -144,7 +144,6 @@ class AddDealCubit extends Cubit<AddDealState> {
           'sellerAgreedComm': s.value.agreedCommission,
           'sellerExternalUserId': values['sellerExternalUserId'],
           'external_listing_property_id': s.value.id,
-          
         });
         switch (dealResult) {
           case (Success s):
@@ -176,7 +175,9 @@ class AddDealCubit extends Cubit<AddDealState> {
         values: values);
     switch (result) {
       case (Success s):
-      await _dealsRepo.updateDealProgress(dealId: state.dealResponse!.id,);
+        await _dealsRepo.updateDealProgress(
+          dealId: state.dealResponse!.id,
+        );
         emit(state.copyWith(addDealDocumentsStatus: AppStatus.success));
 
         break;
