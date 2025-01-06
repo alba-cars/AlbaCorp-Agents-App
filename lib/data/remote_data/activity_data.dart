@@ -55,6 +55,7 @@ class ActivityData implements ActivityRepo {
         '/v1/activities/$activityId',
       );
       final data = response.data;
+      Logger().d(data);
       final model = Activity.fromJson(data);
       return Success(model);
     } catch (e, stack) {
@@ -419,7 +420,7 @@ class ActivityData implements ActivityRepo {
     }
   }
 
-   Future<Result<dynamic>> completeActivity({
+  Future<Result<dynamic>> completeActivity({
     required String activityId,
     required String type,
     String? feedback,
@@ -433,14 +434,14 @@ class ActivityData implements ActivityRepo {
         data: {
           'type': type,
           'feedback': feedback,
-         if(leadRating !=null) 'leadRating': leadRating,
+          if (leadRating != null) 'leadRating': leadRating,
           if (followUp != null) 'followUp': followUp,
         },
       );
 
       return Success(response.data);
-    } catch (e,stack) {
-       return onError(e, stack, log);
+    } catch (e, stack) {
+      return onError(e, stack, log);
     }
   }
 

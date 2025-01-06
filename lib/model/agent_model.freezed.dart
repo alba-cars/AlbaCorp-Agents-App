@@ -20,6 +20,7 @@ Agent _$AgentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Agent {
+  @JsonKey(readValue: readId)
   String get id => throw _privateConstructorUsedError;
   @JsonKey(readValue: userIdFromJson)
   String get userId => throw _privateConstructorUsedError;
@@ -45,7 +46,7 @@ abstract class $AgentCopyWith<$Res> {
       _$AgentCopyWithImpl<$Res, Agent>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       @JsonKey(readValue: userIdFromJson) String userId,
       List<String> languages,
       String? RERANo,
@@ -150,7 +151,7 @@ abstract class _$$AgentImplCopyWith<$Res> implements $AgentCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: readId) String id,
       @JsonKey(readValue: userIdFromJson) String userId,
       List<String> languages,
       String? RERANo,
@@ -242,7 +243,7 @@ class __$$AgentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
   const _$AgentImpl(
-      {required this.id,
+      {@JsonKey(readValue: readId) required this.id,
       @JsonKey(readValue: userIdFromJson) required this.userId,
       final List<String> languages = const [],
       this.RERANo,
@@ -259,6 +260,7 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
       _$$AgentImplFromJson(json);
 
   @override
+  @JsonKey(readValue: readId)
   final String id;
   @override
   @JsonKey(readValue: userIdFromJson)
@@ -372,7 +374,7 @@ class _$AgentImpl with DiagnosticableTreeMixin implements _Agent {
 
 abstract class _Agent implements Agent {
   const factory _Agent(
-      {required final String id,
+      {@JsonKey(readValue: readId) required final String id,
       @JsonKey(readValue: userIdFromJson) required final String userId,
       final List<String> languages,
       final String? RERANo,
@@ -387,6 +389,7 @@ abstract class _Agent implements Agent {
   factory _Agent.fromJson(Map<String, dynamic> json) = _$AgentImpl.fromJson;
 
   @override
+  @JsonKey(readValue: readId)
   String get id;
   @override
   @JsonKey(readValue: userIdFromJson)

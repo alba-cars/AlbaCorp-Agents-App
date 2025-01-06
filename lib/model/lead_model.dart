@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:real_estate_app/model/lead_source_category_model.dart';
 
 import '../app/auth_bloc/auth_bloc.dart';
 import '../service_locator/injectable.dart';
@@ -32,8 +33,8 @@ enum LeadStatus {
 class Lead with _$Lead {
   const factory Lead({
     @JsonKey(readValue: readId) required String id,
-    @JsonKey( readValue: readFirstName) required String firstName,
-    @JsonKey( readValue: readLastName) @Default('') String lastName,
+    @JsonKey(readValue: readFirstName) required String firstName,
+    @JsonKey(readValue: readLastName) @Default('') String lastName,
     String? email,
     String? phone,
     String? country,
@@ -42,36 +43,37 @@ class Lead with _$Lead {
     String? nationality,
     String? photo,
     String? role,
-    @JsonKey( readValue: readProviderId) String? providerId,
+    @JsonKey(readValue: readProviderId) String? providerId,
     String? provider,
     @Default(true) bool active,
-    @JsonKey( readValue: readLeadSource) required String leadSource,
-    @JsonKey( readValue: readLeadStatus) LeadStatus? leadStatus,
+    @JsonKey(readValue: readLeadSource) required String leadSource,
+    @JsonKey(readValue: readLeadStatus) LeadStatus? leadStatus,
     @Default([]) List<dynamic> languages,
-    @JsonKey( readValue: readLastActivityType) String? lastActivityType,
-    @JsonKey( readValue: readLastActivityDate) DateTime? lastActivityDate,
-    @JsonKey( readValue: readLastActivityIsComplete)
+    @JsonKey(readValue: readLastActivityType) String? lastActivityType,
+    @JsonKey(readValue: readLastActivityDate) DateTime? lastActivityDate,
+    @JsonKey(readValue: readLastActivityIsComplete)
     @Default(false)
     bool lastActivityIsComplete,
     @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
-    @JsonKey( readValue: readUpdatedAt) DateTime? updatedAt,
-    @JsonKey( readValue: readCreatedBy) String? createdBy,
+    @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
+    @JsonKey(readValue: readCreatedBy) String? createdBy,
     Preference? preference,
-    @JsonKey( readValue: readPreferredLanguages)
+    @JsonKey(readValue: readPreferredLanguages)
     @Default([])
     List<dynamic> preferredLanguages,
     @JsonKey(readValue: readCurrentAgent) Agent? currentAgent,
     String? notes,
     @Default([]) List<String> tags,
-    @JsonKey( readValue: readDndStatus) @Default(false) bool dndStatus,
+    @JsonKey(readValue: readDndStatus) @Default(false) bool dndStatus,
     @JsonKey(readValue: readCompletedActivityCount)
     @Default(0)
     int completedActivityCount,
+    @JsonKey(name: 'leadSourceObject') LeadSourceItem? leadSourceObject,
   }) = _Lead;
 
   const Lead._();
 
-  String getFullName(){
+  String getFullName() {
     return "${firstName} ${lastName}";
   }
 
@@ -112,7 +114,9 @@ Object? readLastActivityDate(Map json, String key) {
 }
 
 bool readLastActivityIsComplete(Map json, String key) {
-  return json['last_activity_is_complete'] ?? json['lastActivityIsComplete'] ?? false;
+  return json['last_activity_is_complete'] ??
+      json['lastActivityIsComplete'] ??
+      false;
 }
 
 Object? readUpdatedAt(Map json, String key) {

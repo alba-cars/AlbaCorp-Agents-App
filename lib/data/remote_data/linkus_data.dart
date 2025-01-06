@@ -12,12 +12,19 @@ class LinkusData implements LinkusRepo {
   LinkusData({required Dio dio}) : _dio = dio;
   @override
   Future<Result<bool>> makeACall(
-      {required String number, String? activityId}) async {
+      {required String number,
+      String? activityId,
+      String? leadSourceType}) async {
     try {
       String url = 'v1/yeastarPBX/initiate-call';
 
-      await _dio
-          .post(url, data: {'phoneNumber': number, 'activityId': activityId});
+      await _dio.post(url, data: {
+        'phoneNumber': number,
+        if (activityId != null && activityId.isNotEmpty)
+          'activityId': activityId,
+        if (leadSourceType != null && leadSourceType.isNotEmpty)
+          'leadSourceType': leadSourceType
+      });
 
       return Success(
         true,

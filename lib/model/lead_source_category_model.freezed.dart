@@ -185,11 +185,11 @@ LeadSourceItem _$LeadSourceItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LeadSourceItem {
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', readValue: readId)
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get leadSourceType => throw _privateConstructorUsedError;
-  String get tags => throw _privateConstructorUsedError;
+  List<String>? get tags => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -204,10 +204,10 @@ abstract class $LeadSourceItemCopyWith<$Res> {
       _$LeadSourceItemCopyWithImpl<$Res, LeadSourceItem>;
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') String id,
+      {@JsonKey(name: '_id', readValue: readId) String id,
       String name,
       String leadSourceType,
-      String tags});
+      List<String>? tags});
 }
 
 /// @nodoc
@@ -226,7 +226,7 @@ class _$LeadSourceItemCopyWithImpl<$Res, $Val extends LeadSourceItem>
     Object? id = null,
     Object? name = null,
     Object? leadSourceType = null,
-    Object? tags = null,
+    Object? tags = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -241,10 +241,10 @@ class _$LeadSourceItemCopyWithImpl<$Res, $Val extends LeadSourceItem>
           ? _value.leadSourceType
           : leadSourceType // ignore: cast_nullable_to_non_nullable
               as String,
-      tags: null == tags
+      tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -258,10 +258,10 @@ abstract class _$$LeadSourceItemImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') String id,
+      {@JsonKey(name: '_id', readValue: readId) String id,
       String name,
       String leadSourceType,
-      String tags});
+      List<String>? tags});
 }
 
 /// @nodoc
@@ -278,7 +278,7 @@ class __$$LeadSourceItemImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? leadSourceType = null,
-    Object? tags = null,
+    Object? tags = freezed,
   }) {
     return _then(_$LeadSourceItemImpl(
       id: null == id
@@ -293,10 +293,10 @@ class __$$LeadSourceItemImplCopyWithImpl<$Res>
           ? _value.leadSourceType
           : leadSourceType // ignore: cast_nullable_to_non_nullable
               as String,
-      tags: null == tags
-          ? _value.tags
+      tags: freezed == tags
+          ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>?,
     ));
   }
 }
@@ -305,23 +305,31 @@ class __$$LeadSourceItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LeadSourceItemImpl implements _LeadSourceItem {
   const _$LeadSourceItemImpl(
-      {@JsonKey(name: '_id') required this.id,
+      {@JsonKey(name: '_id', readValue: readId) required this.id,
       required this.name,
       required this.leadSourceType,
-      required this.tags});
+      final List<String>? tags})
+      : _tags = tags;
 
   factory _$LeadSourceItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$LeadSourceItemImplFromJson(json);
 
   @override
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', readValue: readId)
   final String id;
   @override
   final String name;
   @override
   final String leadSourceType;
+  final List<String>? _tags;
   @override
-  final String tags;
+  List<String>? get tags {
+    final value = _tags;
+    if (value == null) return null;
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
@@ -337,12 +345,13 @@ class _$LeadSourceItemImpl implements _LeadSourceItem {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.leadSourceType, leadSourceType) ||
                 other.leadSourceType == leadSourceType) &&
-            (identical(other.tags, tags) || other.tags == tags));
+            const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, leadSourceType, tags);
+  int get hashCode => Object.hash(runtimeType, id, name, leadSourceType,
+      const DeepCollectionEquality().hash(_tags));
 
   @JsonKey(ignore: true)
   @override
@@ -361,23 +370,23 @@ class _$LeadSourceItemImpl implements _LeadSourceItem {
 
 abstract class _LeadSourceItem implements LeadSourceItem {
   const factory _LeadSourceItem(
-      {@JsonKey(name: '_id') required final String id,
+      {@JsonKey(name: '_id', readValue: readId) required final String id,
       required final String name,
       required final String leadSourceType,
-      required final String tags}) = _$LeadSourceItemImpl;
+      final List<String>? tags}) = _$LeadSourceItemImpl;
 
   factory _LeadSourceItem.fromJson(Map<String, dynamic> json) =
       _$LeadSourceItemImpl.fromJson;
 
   @override
-  @JsonKey(name: '_id')
+  @JsonKey(name: '_id', readValue: readId)
   String get id;
   @override
   String get name;
   @override
   String get leadSourceType;
   @override
-  String get tags;
+  List<String>? get tags;
   @override
   @JsonKey(ignore: true)
   _$$LeadSourceItemImplCopyWith<_$LeadSourceItemImpl> get copyWith =>

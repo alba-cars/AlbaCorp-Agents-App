@@ -175,7 +175,7 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
           return [
             SliverAppBar(
               title: Text(
-                 'My Leads',
+                'My Leads',
               ),
               centerTitle: true,
               actions: [
@@ -185,7 +185,6 @@ class _LeadScreenLayoutState extends State<LeadScreenLayout> {
                     },
                     child: Text(
                       "Return",
-                     
                     ))
               ],
             ),
@@ -633,7 +632,10 @@ class LeadItem extends StatelessWidget {
                             context.read<CallBloc>().add(CallEvent.callStarted(
                                 phoneNumber: lead.phone ?? '',
                                 activityId: "",
-                                leadId: lead.id));
+                                leadId: lead.id,
+                                leadSource:
+                                    lead.leadSourceObject?.leadSourceType ??
+                                        "Cold"));
                             final state = await getIt<CallBloc>()
                                 .stream
                                 .firstWhere((e) =>
