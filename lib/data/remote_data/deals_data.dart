@@ -106,7 +106,6 @@ class DealData implements DealsRepo {
   Future<Result<DealListingResponse>> addExternalListingDeal(
       {required Map<String, dynamic> values}) async {
     try {
-      Logger().d(values);
       String url = 'v1/propList/listingProperty';
 
       final response = await _dio.post(url, data: values);
