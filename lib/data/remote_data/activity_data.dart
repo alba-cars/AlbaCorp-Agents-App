@@ -55,7 +55,6 @@ class ActivityData implements ActivityRepo {
         '/v1/activities/$activityId',
       );
       final data = response.data;
-      Logger().d(data);
       final model = Activity.fromJson(data);
       return Success(model);
     } catch (e, stack) {
