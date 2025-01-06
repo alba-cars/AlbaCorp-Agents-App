@@ -49,17 +49,16 @@ class CallBloc extends Bloc<CallEvent, CallState> {
         makeACallStatus: AppStatus.loading, makeACallError: null));
     final settings = getIt<AuthBloc>().state.globalSettings;
     final agent = getIt<AuthBloc>().state.agent;
-    if (settings?.enablePbx == true || agent?.usePbx == true) {
+    if ((settings?.enablePbx == true || agent?.usePbx == true) &&
+        event.leadSource == 'Hot') {
       final result = await _linkusRepo.makeACall(
           number: event.phoneNumber, activityId: event.activityId);
       switch (result) {
         case (Success s):
           emit(state.copyWith(makeACallStatus: AppStatus.success));
-          try{
+          try {
             // await launchUrlString(urlString)
-          }catch(e){
-
-          }
+          } catch (e) {}
           break;
         case (Error e):
           emit(state.copyWith(
@@ -103,7 +102,8 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   FutureOr<void> _onClickToCall(
       _ClickToCall event, Emitter<CallState> emit) async {
     final settings = getIt<AuthBloc>().state.globalSettings;
-    if (settings?.enablePbx == true) {
+    final agent = getIt<AuthBloc>().state.agent;
+    if ((settings?.enablePbx == true || agent?.usePbx == true)) {
       await _linkusRepo.makeACall(number: event.phoneNumber);
     } else {
       await getIt<SharedPreferences>().setBool('IgnoreCallFeedback', true);

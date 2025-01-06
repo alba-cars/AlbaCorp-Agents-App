@@ -337,7 +337,7 @@ List<Widget> filterFields(BuildContext context, Map<String, dynamic>? values) {
   return [
     MultiSelectAutoCompleteField(
         label: 'Community',
-        optionsBuilder: (v,refresh) async {
+        optionsBuilder: (v, refresh) async {
           final stateResult = context.read<HomeCubit>().state.communityList;
           if (stateResult.isEmpty) {
             await context.read<HomeCubit>().getCommunities(search: v.text);
@@ -352,7 +352,7 @@ List<Widget> filterFields(BuildContext context, Map<String, dynamic>? values) {
         name: 'communityId'),
     MultiSelectAutoCompleteField(
         label: 'Building',
-        optionsBuilder: (v,refresh) async {
+        optionsBuilder: (v, refresh) async {
           final stateResult = context.read<HomeCubit>().state.buildingList;
           if (stateResult.isEmpty) {
             await context.read<HomeCubit>().getBuildings(search: v.text);
@@ -764,7 +764,10 @@ class ActivityListItem extends StatelessWidget {
                     context.read<CallBloc>().add(CallEvent.callStarted(
                         phoneNumber: activity.lead!.phone ?? '',
                         activityId: activity.id,
-                        leadId: activity.lead!.id));
+                        leadId: activity.lead!.id,
+                        leadSource:
+                            activity.lead!.leadSourceObject?.leadSourceType ??
+                                "Cold"));
                     final state = await getIt<CallBloc>().stream.firstWhere(
                         (e) => e.makeACallStatus != AppStatus.loading);
                     if (state.makeACallStatus == AppStatus.success) {

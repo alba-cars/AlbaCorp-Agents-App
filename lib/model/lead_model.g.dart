@@ -60,6 +60,10 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
           (readCompletedActivityCount(json, 'completedActivityCount') as num?)
                   ?.toInt() ??
               0,
+      leadSourceObject: json['leadSourceObject'] == null
+          ? null
+          : LeadSourceItem.fromJson(
+              json['leadSourceObject'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
@@ -94,6 +98,7 @@ Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
       'tags': instance.tags,
       'dndStatus': instance.dndStatus,
       'completedActivityCount': instance.completedActivityCount,
+      'leadSourceObject': instance.leadSourceObject,
     };
 
 const _$LeadStatusEnumMap = {

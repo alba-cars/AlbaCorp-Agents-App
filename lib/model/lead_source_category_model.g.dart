@@ -24,10 +24,10 @@ Map<String, dynamic> _$$LeadSourceCategoryImplToJson(
 
 _$LeadSourceItemImpl _$$LeadSourceItemImplFromJson(Map<String, dynamic> json) =>
     _$LeadSourceItemImpl(
-      id: json['_id'] as String,
+      id: readId(json, '_id') as String,
       name: json['name'] as String,
       leadSourceType: json['leadSourceType'] as String,
-      tags: json['tags'] as String,
+      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$LeadSourceItemImplToJson(

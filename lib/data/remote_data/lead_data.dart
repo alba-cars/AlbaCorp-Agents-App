@@ -190,7 +190,7 @@ class LeadData implements LeadRepo {
             'AskAQuestion,GetMatchedAssistance,Register,NewListing,Viewing,Newsletter,Imported,NewDevelopment',
         'search': search
       });
-      final data = response.data as List;
+      final data = response.data['data'] as List;
       final list = data.map((e) => LeadSource.fromJson(e)).toList();
       return Success(
         list,

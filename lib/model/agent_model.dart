@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
+import 'property_type_model.dart';
 import 'user.dart';
 
 part 'agent_model.freezed.dart';
@@ -9,7 +10,7 @@ part 'agent_model.g.dart';
 @freezed
 class Agent with _$Agent {
   const factory Agent({
-    required String id,
+    @JsonKey(readValue: readId) required String id,
     @JsonKey(readValue: userIdFromJson) required String userId,
     @Default([]) List<String> languages,
     String? RERANo,

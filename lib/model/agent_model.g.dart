@@ -7,7 +7,7 @@ part of 'agent_model.dart';
 // **************************************************************************
 
 _$AgentImpl _$$AgentImplFromJson(Map<String, dynamic> json) => _$AgentImpl(
-      id: json['id'] as String,
+      id: readId(json, 'id') as String,
       userId: userIdFromJson(json, 'userId') as String,
       languages: (json['languages'] as List<dynamic>?)
               ?.map((e) => e as String)

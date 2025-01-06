@@ -196,11 +196,14 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                       children: [
                         TitleText(text: "You have reached the end"),
                         VerticalSmallGap(),
-              if(getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')            AppPrimaryButton(
-                            text: 'Go To Explorer',
-                            onTap: () {
-                              context.pushNamed(LeadsExplorerScreen.routeName);
-                            }),
+                        if (getIt<AuthBloc>().state.user?.role !=
+                            'AnonymousAgent')
+                          AppPrimaryButton(
+                              text: 'Go To Explorer',
+                              onTap: () {
+                                context
+                                    .pushNamed(LeadsExplorerScreen.routeName);
+                              }),
                         VerticalSmallGap(),
                         AppPrimaryButton(
                             text: 'Go Back',
@@ -671,18 +674,21 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                                                   Expanded(
                                                     child: OutlinedButton(
                                                         onPressed: () async {
-                                                          getIt<CallBloc>().add(
-                                                              CallEvent.callStarted(
-                                                                  activityId:
-                                                                      task.id,
-                                                                  phoneNumber: task
-                                                                          .lead
-                                                                          ?.phone ??
-                                                                      '',
-                                                                  leadId: task
-                                                                          .lead
-                                                                          ?.id ??
-                                                                      ''));
+                                                          getIt<CallBloc>().add(CallEvent.callStarted(
+                                                              activityId:
+                                                                  task.id,
+                                                              phoneNumber: task
+                                                                      .lead
+                                                                      ?.phone ??
+                                                                  '',
+                                                              leadId: task.lead
+                                                                      ?.id ??
+                                                                  '',
+                                                              leadSource: task
+                                                                      .lead!
+                                                                      .leadSourceObject
+                                                                      ?.leadSourceType ??
+                                                                  "Cold"));
                                                           final state = await getIt<
                                                                   CallBloc>()
                                                               .stream

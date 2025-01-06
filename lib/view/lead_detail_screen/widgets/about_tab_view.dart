@@ -178,8 +178,13 @@ class AboutTabView extends StatelessWidget {
                           Expanded(
                             child: OutlinedButton(
                                 onPressed: () async {
-                                  getIt<CallBloc>().add(CallEvent.clickToCall(
+                                  getIt<CallBloc>().add(CallEvent.callStarted(
                                     phoneNumber: lead.phone ?? '',
+                                    leadId: lead.id,
+                                    activityId: '',
+                                    leadSource:
+                                        lead.leadSourceObject?.leadSourceType ??
+                                            'Cold',
                                   ));
                                   final state = await getIt<CallBloc>()
                                       .stream

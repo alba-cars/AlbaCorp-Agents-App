@@ -13,6 +13,7 @@ class CallEvent with _$CallEvent {
     required String phoneNumber,
     required String activityId,
     required String leadId,
+    required String leadSource,
   }) = _CallStarted;
   const factory CallEvent.clickToCall({
     required String phoneNumber,
