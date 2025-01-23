@@ -23,6 +23,7 @@ import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dar
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/my_activities/presentation/my_actvities_page.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
+import 'package:real_estate_app/view/twilio_screen/twilio_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 import 'package:share_plus/share_plus.dart';
@@ -285,36 +286,37 @@ class _HomeScreenState extends State<HomeScreen>
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                   if(user?.role != 'AnonymousAgent')     CustomListTileWithIcon(
-                          title: 'Explorer',
-                          iconImagePath: 'assets/images/compass.png',
-                          initiallyExpanded: true,
-                          children: [
-                            ListIcon(
-                              title: 'Property Cards',
-                              onPressed: () {
-                                Scaffold.of(context).closeDrawer();
-                                context.pushNamed(ExplorerScreen.routeName);
-                              },
-                            ),
-                            ListIcon(
-                              title: 'Leads',
-                              onPressed: () {
-                                Scaffold.of(context).closeDrawer();
-                                context
-                                    .pushNamed(LeadsExplorerScreen.routeName);
-                              },
-                            ),
-                            ListIcon(
-                              title: 'Assigned Property Cards',
-                              onPressed: () {
-                                Scaffold.of(context).closeDrawer();
-                                context.pushNamed(ExplorerScreen.routeName,
-                                    queryParameters: {'tab': '1'});
-                              },
-                            )
-                          ],
-                        ),
+                        if (user?.role != 'AnonymousAgent')
+                          CustomListTileWithIcon(
+                            title: 'Explorer',
+                            iconImagePath: 'assets/images/compass.png',
+                            initiallyExpanded: true,
+                            children: [
+                              ListIcon(
+                                title: 'Property Cards',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(ExplorerScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Leads',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context
+                                      .pushNamed(LeadsExplorerScreen.routeName);
+                                },
+                              ),
+                              ListIcon(
+                                title: 'Assigned Property Cards',
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.pushNamed(ExplorerScreen.routeName,
+                                      queryParameters: {'tab': '1'});
+                                },
+                              )
+                            ],
+                          ),
                         CustomListTileWithIcon(
                             title: 'Add New',
                             iconImagePath: 'assets/images/plus.png',
@@ -326,20 +328,23 @@ class _HomeScreenState extends State<HomeScreen>
                                   context.pushNamed(AddLeadScreen.routeName);
                                 },
                               ),
-                           if(user?.role != 'AnonymousAgent')     ListIcon(
-                                title: 'Add Deal',
-                                onPressed: () {
-                                  Scaffold.of(context).closeDrawer();
-                                  context.pushNamed(AddDealScreen.routeName);
-                                },
-                              ),
-                         if(user?.role != 'AnonymousAgent')       ListIcon(
-                                title: 'Add Listing Acquired',
-                                onPressed: () {
-                                  Scaffold.of(context).closeDrawer();
-                                  context.pushNamed(AddListingScreen.routeName);
-                                },
-                              ),
+                              if (user?.role != 'AnonymousAgent')
+                                ListIcon(
+                                  title: 'Add Deal',
+                                  onPressed: () {
+                                    Scaffold.of(context).closeDrawer();
+                                    context.pushNamed(AddDealScreen.routeName);
+                                  },
+                                ),
+                              if (user?.role != 'AnonymousAgent')
+                                ListIcon(
+                                  title: 'Add Listing Acquired',
+                                  onPressed: () {
+                                    Scaffold.of(context).closeDrawer();
+                                    context
+                                        .pushNamed(AddListingScreen.routeName);
+                                  },
+                                ),
                               ListIcon(
                                 title: 'Add Pocket Listing',
                                 onPressed: () {
@@ -365,22 +370,33 @@ class _HomeScreenState extends State<HomeScreen>
                             context.pushNamed(MyActvitiesPage.routeName);
                           },
                         ),
-                     if(user?.role != 'AnonymousAgent')     CustomListTileWithIcon(
-                          title: 'Deals',
-                          iconImagePath: 'assets/images/deal.png',
+                        CustomListTileWithIcon(
+                          title: 'Twilio',
+                          iconImagePath: 'assets/images/leads.png',
                           onPressed: () {
                             Scaffold.of(context).closeDrawer();
-                            context.goNamed(DealsScreen.routeName);
+                            context.pushNamed(TwilioCallPage.routeName);
                           },
                         ),
-                    if(user?.role != 'AnonymousAgent')      CustomListTileWithIcon(
-                          title: 'Hot Leads Today',
-                          iconImagePath: 'assets/images/deal.png',
-                          onPressed: () {
-                            Scaffold.of(context).closeDrawer();
-                            context.pushNamed(HotLeadsAssignedToday.routeName);
-                          },
-                        ),
+                        if (user?.role != 'AnonymousAgent')
+                          CustomListTileWithIcon(
+                            title: 'Deals',
+                            iconImagePath: 'assets/images/deal.png',
+                            onPressed: () {
+                              Scaffold.of(context).closeDrawer();
+                              context.goNamed(DealsScreen.routeName);
+                            },
+                          ),
+                        if (user?.role != 'AnonymousAgent')
+                          CustomListTileWithIcon(
+                            title: 'Hot Leads Today',
+                            iconImagePath: 'assets/images/deal.png',
+                            onPressed: () {
+                              Scaffold.of(context).closeDrawer();
+                              context
+                                  .pushNamed(HotLeadsAssignedToday.routeName);
+                            },
+                          ),
 
                         // CustomListTileWithIcon(
                         //   title: 'Tickets',

@@ -57,6 +57,7 @@ import '../view/login/login_screen.dart';
 import '../view/login/pass_change_screen.dart';
 import '../view/login/reset_screen.dart';
 
+import '../view/twilio_screen/twilio_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
@@ -66,7 +67,6 @@ class AppRouter {
       refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
       // observers: [routerObserver],
       redirect: (context, state) {
-      
         final authState = getIt<AuthBloc>().state;
         if ([AuthStatus.Maintenance, AuthStatus.Update]
             .contains(authState.authStatus)) {
@@ -260,18 +260,23 @@ class AppRouter {
                 path: AddPocketListingScreen.routeName,
                 name: AddPocketListingScreen.routeName,
                 pageBuilder: (context, state) {
-                   final isEdit = state.uri.queryParameters['isEdit'] == 'true';
+                  final isEdit = state.uri.queryParameters['isEdit'] == 'true';
                   PropertyCard? pocketListing;
                   Lead? lead;
                   if (state.uri.queryParameters['deal'] != null) {
-                    pocketListing = PropertyCard.fromJson(
-                        json.decode(state.uri.queryParameters['pocketListing']!));
+                    pocketListing = PropertyCard.fromJson(json
+                        .decode(state.uri.queryParameters['pocketListing']!));
                   }
                   if (state.uri.queryParameters['lead'] != null) {
                     lead = Lead.fromJson(
                         json.decode(state.uri.queryParameters['lead']!));
                   }
-                  return CupertinoPage(child: AddPocketListingScreen(lead: lead,pocketlisting: pocketListing,isEdit: isEdit,));
+                  return CupertinoPage(
+                      child: AddPocketListingScreen(
+                    lead: lead,
+                    pocketlisting: pocketListing,
+                    isEdit: isEdit,
+                  ));
                 },
               ),
               GoRoute(
@@ -465,6 +470,18 @@ class AppRouter {
                 },
               ),
               GoRoute(
+                path: TwilioCallPage.routeName,
+                name: TwilioCallPage.routeName,
+                pageBuilder: (context, state) {
+                  final extras = state.extra as Map<String, dynamic>?;
+                  return CupertinoPage(
+                      child: TwilioCallPage(
+                    callSid: extras?['callSid'] ?? '',
+                    from: extras?['from'] ?? '',
+                  ));
+                },
+              ),
+              GoRoute(
                 path: CallFeedbackScreen.routeName,
                 name: CallFeedbackScreen.routeName,
                 pageBuilder: (context, state) {
@@ -518,31 +535,32 @@ class GoRouterRefreshStream extends ChangeNotifier {
     final s = stream;
     _subscription = s.listen(
       (AuthState element) {
-         // Only notify if there's a significant state change that should trigger navigation
-      bool shouldNotify = false;
-      
-      // Auth status change
-      if (element.authStatus != lastElement?.authStatus) {
-        shouldNotify = true;
-      }
-      
-      // Very important activities change, but only if we're not already on a protected route
-      if (element.veryImportantActivities?.length != lastElement?.veryImportantActivities?.length) {
-        shouldNotify = true;
-      }
-      
-      // Feedback screen condition
-      if (element.lastCalledNumber != null &&
-          lastElement?.lastCalledNumber != element.lastCalledNumber &&
-          element.showFeedbackScreen) {
-        shouldNotify = true;
-      }
-      
-      if (shouldNotify) {
-        notifyListeners();
-      }
-      
-      lastElement = element;
+        // Only notify if there's a significant state change that should trigger navigation
+        bool shouldNotify = false;
+
+        // Auth status change
+        if (element.authStatus != lastElement?.authStatus) {
+          shouldNotify = true;
+        }
+
+        // Very important activities change, but only if we're not already on a protected route
+        if (element.veryImportantActivities?.length !=
+            lastElement?.veryImportantActivities?.length) {
+          shouldNotify = true;
+        }
+
+        // Feedback screen condition
+        if (element.lastCalledNumber != null &&
+            lastElement?.lastCalledNumber != element.lastCalledNumber &&
+            element.showFeedbackScreen) {
+          shouldNotify = true;
+        }
+
+        if (shouldNotify) {
+          notifyListeners();
+        }
+
+        lastElement = element;
       },
     );
   }

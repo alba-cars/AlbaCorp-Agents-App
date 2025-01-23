@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "'Replace with your value'",
+    "project_id": "Replace with your value",
+    "storage_bucket": "twiliodemo-9cbd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "'Replace with your value'",
+        "android_client_info": {
+          "package_name": "com.example.demo_twilio_voicecall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "Replace with your value",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.demo_twilio_voicecall",
+            "certificate_hash": "0c1174be101a16172ba9b77746db5f900121485a"
+          }
+        },
+        {
+          "client_id": "Replace with your value",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "-"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "Replace with your value",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "Replace with your value",
+        "android_client_info": {
+          "package_name": "com.twilio.voice.flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "Replace with your value",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "Replace with your value"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "Replace with your value",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

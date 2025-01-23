@@ -2,49 +2,78 @@ package com.alba.agent
 
 import android.app.role.RoleManager
 import android.app.role.RoleManager.ROLE_CALL_SCREENING
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.annotation.RequiresApi
-import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodChannel
 import com.alba.agent.MyApplication
-
+import com.twilio.voice.flutter.Utils.TwilioConstants
 
 @RequiresApi(Build.VERSION_CODES.Q)
 class MainActivity: FlutterFragmentActivity() {
     companion object {
         private const val REQUEST_ID_BECOME_CALL_SCREENER = 1
         private const val REQUEST_ID_REQUEST_READ_CONTACTS_PERMISSION = 1
-
         private const val EXTRA_CONTACT_READ_PERMISSION_DENIED = "contact_permission_denied_forever"
+        private const val CHANNEL = "com.alba.agent/calling"
     }
+    
     private val roleManager by lazy { getSystemService(RoleManager::class.java) }
+    private lateinit var methodChannel: MethodChannel
     
     override fun onCreate(savedInstanceState: Bundle?) {
-        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        //    requestRole()
-        //};
         super.onCreate(savedInstanceState)
     }
+
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        
+        methodChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
+        methodChannel.setMethodCallHandler { call, result ->
+            // Handle method calls from Flutter if needed
+            result.success(null)
+        }
+        
+        // Handle intent if activity was launched with one
+        handleIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent?) {
+        if (intent?.action == TwilioConstants.ACTION_ACCEPT) {
+            val callSid = intent.getStringExtra("callSid")
+            val from = intent.getStringExtra("from")
+            
+            methodChannel.invokeMethod("navigateToCallingScreen", 
+                mapOf(
+                    "callSid" to callSid,
+                    "from" to from
+                )
+            )
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun requestRole() {
-    val intent = roleManager.createRequestRoleIntent(ROLE_CALL_SCREENING)
-
+        val intent = roleManager.createRequestRoleIntent(ROLE_CALL_SCREENING)
         @Suppress("DEPRECATION")
-    startActivityForResult(intent,
-      REQUEST_ID_BECOME_CALL_SCREENER
-    )
-  }
+        startActivityForResult(intent, REQUEST_ID_BECOME_CALL_SCREENER)
+    }
 
-  override fun onResume() {
-    super.onResume()
-    MyApplication.activityResumed()
-}
+    override fun onResume() {
+        super.onResume()
+        MyApplication.activityResumed()
+    }
 
-override fun onPause() {
-    super.onPause()
-    MyApplication.activityPaused()
-}
-    
+    override fun onPause() {
+        super.onPause()
+        MyApplication.activityPaused()
+    }
 }

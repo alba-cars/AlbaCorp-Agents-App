@@ -96,6 +96,8 @@ dependencies:
   toastification: ^2.3.0
   opentelemetry:
   flutter_dotenv: ^5.2.1
+  twilio_voice_flutter:
+    path: ./twilio_voice_flutter
 
   # flutter_phone_state:
   #   path: "./flutter_phone_state-master/"
