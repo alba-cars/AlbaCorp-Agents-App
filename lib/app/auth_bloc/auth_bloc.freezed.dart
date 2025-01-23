@@ -31,6 +31,7 @@ mixin _$AuthEvent {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +49,7 @@ mixin _$AuthEvent {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +67,7 @@ mixin _$AuthEvent {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,6 +90,7 @@ mixin _$AuthEvent {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,6 +110,7 @@ mixin _$AuthEvent {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -125,6 +130,7 @@ mixin _$AuthEvent {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -234,6 +240,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return userLoggedIn(user);
   }
@@ -254,6 +261,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return userLoggedIn?.call(user);
   }
@@ -274,6 +282,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (userLoggedIn != null) {
@@ -302,6 +311,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return userLoggedIn(this);
   }
@@ -324,6 +334,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return userLoggedIn?.call(this);
   }
@@ -346,6 +357,7 @@ class _$UserLoggedInImpl implements _UserLoggedIn {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (userLoggedIn != null) {
@@ -415,6 +427,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return userLoggedOut();
   }
@@ -435,6 +448,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return userLoggedOut?.call();
   }
@@ -455,6 +469,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (userLoggedOut != null) {
@@ -483,6 +498,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return userLoggedOut(this);
   }
@@ -505,6 +521,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return userLoggedOut?.call(this);
   }
@@ -527,6 +544,7 @@ class _$UserLoggedOutImpl implements _UserLoggedOut {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (userLoggedOut != null) {
@@ -591,6 +609,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return started();
   }
@@ -611,6 +630,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return started?.call();
   }
@@ -631,6 +651,7 @@ class _$StartedImpl implements _Started {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -659,6 +680,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return started(this);
   }
@@ -681,6 +703,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return started?.call(this);
   }
@@ -703,6 +726,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -767,6 +791,7 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return refreshAgentData();
   }
@@ -787,6 +812,7 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return refreshAgentData?.call();
   }
@@ -807,6 +833,7 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (refreshAgentData != null) {
@@ -835,6 +862,7 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return refreshAgentData(this);
   }
@@ -857,6 +885,7 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return refreshAgentData?.call(this);
   }
@@ -879,6 +908,7 @@ class _$RefreshAgentDataImpl implements _RefreshAgentData {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (refreshAgentData != null) {
@@ -979,6 +1009,7 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return newImportantActivity(activityIds);
   }
@@ -999,6 +1030,7 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return newImportantActivity?.call(activityIds);
   }
@@ -1019,6 +1051,7 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (newImportantActivity != null) {
@@ -1047,6 +1080,7 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return newImportantActivity(this);
   }
@@ -1069,6 +1103,7 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return newImportantActivity?.call(this);
   }
@@ -1091,6 +1126,7 @@ class _$NewImportantActivityImpl implements _NewImportantActivity {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (newImportantActivity != null) {
@@ -1191,6 +1227,7 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return completedImportantActivity(activityId);
   }
@@ -1211,6 +1248,7 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return completedImportantActivity?.call(activityId);
   }
@@ -1231,6 +1269,7 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (completedImportantActivity != null) {
@@ -1259,6 +1298,7 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return completedImportantActivity(this);
   }
@@ -1281,6 +1321,7 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return completedImportantActivity?.call(this);
   }
@@ -1303,6 +1344,7 @@ class _$CompletedImportantActivityImpl implements _CompletedImportantActivity {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (completedImportantActivity != null) {
@@ -1376,6 +1418,7 @@ class _$ClearImportantActivityImpl implements _ClearImportantActivity {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return clearImportantActivity();
   }
@@ -1396,6 +1439,7 @@ class _$ClearImportantActivityImpl implements _ClearImportantActivity {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return clearImportantActivity?.call();
   }
@@ -1416,6 +1460,7 @@ class _$ClearImportantActivityImpl implements _ClearImportantActivity {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (clearImportantActivity != null) {
@@ -1444,6 +1489,7 @@ class _$ClearImportantActivityImpl implements _ClearImportantActivity {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return clearImportantActivity(this);
   }
@@ -1466,6 +1512,7 @@ class _$ClearImportantActivityImpl implements _ClearImportantActivity {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return clearImportantActivity?.call(this);
   }
@@ -1488,6 +1535,7 @@ class _$ClearImportantActivityImpl implements _ClearImportantActivity {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (clearImportantActivity != null) {
@@ -1555,6 +1603,7 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return checkForImportantActivity();
   }
@@ -1575,6 +1624,7 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return checkForImportantActivity?.call();
   }
@@ -1595,6 +1645,7 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (checkForImportantActivity != null) {
@@ -1623,6 +1674,7 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return checkForImportantActivity(this);
   }
@@ -1645,6 +1697,7 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return checkForImportantActivity?.call(this);
   }
@@ -1667,6 +1720,7 @@ class _$CheckForImportantActivityImpl implements _CheckForImportantActivity {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (checkForImportantActivity != null) {
@@ -1732,6 +1786,7 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return checkForCallFeedback();
   }
@@ -1752,6 +1807,7 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return checkForCallFeedback?.call();
   }
@@ -1772,6 +1828,7 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (checkForCallFeedback != null) {
@@ -1800,6 +1857,7 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return checkForCallFeedback(this);
   }
@@ -1822,6 +1880,7 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return checkForCallFeedback?.call(this);
   }
@@ -1844,6 +1903,7 @@ class _$CheckForCallFeedbackImpl implements _CheckForCallFeedback {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (checkForCallFeedback != null) {
@@ -1910,6 +1970,7 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return removeLastCallDetails();
   }
@@ -1930,6 +1991,7 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return removeLastCallDetails?.call();
   }
@@ -1950,6 +2012,7 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (removeLastCallDetails != null) {
@@ -1978,6 +2041,7 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return removeLastCallDetails(this);
   }
@@ -2000,6 +2064,7 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return removeLastCallDetails?.call(this);
   }
@@ -2022,6 +2087,7 @@ class _$RemoveLastCallDetailsImpl implements _RemoveLastCallDetails {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (removeLastCallDetails != null) {
@@ -2113,6 +2179,7 @@ class _$SetShowFollowupImpl implements _SetShowFollowup {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return setShowFollowup(value);
   }
@@ -2133,6 +2200,7 @@ class _$SetShowFollowupImpl implements _SetShowFollowup {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return setShowFollowup?.call(value);
   }
@@ -2153,6 +2221,7 @@ class _$SetShowFollowupImpl implements _SetShowFollowup {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (setShowFollowup != null) {
@@ -2181,6 +2250,7 @@ class _$SetShowFollowupImpl implements _SetShowFollowup {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return setShowFollowup(this);
   }
@@ -2203,6 +2273,7 @@ class _$SetShowFollowupImpl implements _SetShowFollowup {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return setShowFollowup?.call(this);
   }
@@ -2225,6 +2296,7 @@ class _$SetShowFollowupImpl implements _SetShowFollowup {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (setShowFollowup != null) {
@@ -2295,6 +2367,7 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return getAppConfig();
   }
@@ -2315,6 +2388,7 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return getAppConfig?.call();
   }
@@ -2335,6 +2409,7 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (getAppConfig != null) {
@@ -2363,6 +2438,7 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return getAppConfig(this);
   }
@@ -2385,6 +2461,7 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return getAppConfig?.call(this);
   }
@@ -2407,6 +2484,7 @@ class _$GetAppConfigImpl implements _GetAppConfig {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (getAppConfig != null) {
@@ -2471,6 +2549,7 @@ class _$GetSettingsImpl implements _GetSettings {
     required TResult Function(bool value) setShowFollowup,
     required TResult Function() getAppConfig,
     required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
   }) {
     return getSettings();
   }
@@ -2491,6 +2570,7 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult? Function(bool value)? setShowFollowup,
     TResult? Function()? getAppConfig,
     TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
   }) {
     return getSettings?.call();
   }
@@ -2511,6 +2591,7 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult Function(bool value)? setShowFollowup,
     TResult Function()? getAppConfig,
     TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
     required TResult orElse(),
   }) {
     if (getSettings != null) {
@@ -2539,6 +2620,7 @@ class _$GetSettingsImpl implements _GetSettings {
     required TResult Function(_SetShowFollowup value) setShowFollowup,
     required TResult Function(_GetAppConfig value) getAppConfig,
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
   }) {
     return getSettings(this);
   }
@@ -2561,6 +2643,7 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult? Function(_SetShowFollowup value)? setShowFollowup,
     TResult? Function(_GetAppConfig value)? getAppConfig,
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
   }) {
     return getSettings?.call(this);
   }
@@ -2583,6 +2666,7 @@ class _$GetSettingsImpl implements _GetSettings {
     TResult Function(_SetShowFollowup value)? setShowFollowup,
     TResult Function(_GetAppConfig value)? getAppConfig,
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
     required TResult orElse(),
   }) {
     if (getSettings != null) {
@@ -2594,6 +2678,188 @@ class _$GetSettingsImpl implements _GetSettings {
 
 abstract class _GetSettings implements AuthEvent {
   const factory _GetSettings() = _$GetSettingsImpl;
+}
+
+/// @nodoc
+abstract class _$$InitializeTwilioImplCopyWith<$Res> {
+  factory _$$InitializeTwilioImplCopyWith(_$InitializeTwilioImpl value,
+          $Res Function(_$InitializeTwilioImpl) then) =
+      __$$InitializeTwilioImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitializeTwilioImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$InitializeTwilioImpl>
+    implements _$$InitializeTwilioImplCopyWith<$Res> {
+  __$$InitializeTwilioImplCopyWithImpl(_$InitializeTwilioImpl _value,
+      $Res Function(_$InitializeTwilioImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$InitializeTwilioImpl implements _InitializeTwilio {
+  const _$InitializeTwilioImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.initializeTwilio()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitializeTwilioImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user) userLoggedIn,
+    required TResult Function() userLoggedOut,
+    required TResult Function() started,
+    required TResult Function() refreshAgentData,
+    required TResult Function(List<String> activityIds) newImportantActivity,
+    required TResult Function(String activityId) completedImportantActivity,
+    required TResult Function() clearImportantActivity,
+    required TResult Function() checkForImportantActivity,
+    required TResult Function() checkForCallFeedback,
+    required TResult Function() removeLastCallDetails,
+    required TResult Function(bool value) setShowFollowup,
+    required TResult Function() getAppConfig,
+    required TResult Function() getSettings,
+    required TResult Function() initializeTwilio,
+  }) {
+    return initializeTwilio();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user)? userLoggedIn,
+    TResult? Function()? userLoggedOut,
+    TResult? Function()? started,
+    TResult? Function()? refreshAgentData,
+    TResult? Function(List<String> activityIds)? newImportantActivity,
+    TResult? Function(String activityId)? completedImportantActivity,
+    TResult? Function()? clearImportantActivity,
+    TResult? Function()? checkForImportantActivity,
+    TResult? Function()? checkForCallFeedback,
+    TResult? Function()? removeLastCallDetails,
+    TResult? Function(bool value)? setShowFollowup,
+    TResult? Function()? getAppConfig,
+    TResult? Function()? getSettings,
+    TResult? Function()? initializeTwilio,
+  }) {
+    return initializeTwilio?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user)? userLoggedIn,
+    TResult Function()? userLoggedOut,
+    TResult Function()? started,
+    TResult Function()? refreshAgentData,
+    TResult Function(List<String> activityIds)? newImportantActivity,
+    TResult Function(String activityId)? completedImportantActivity,
+    TResult Function()? clearImportantActivity,
+    TResult Function()? checkForImportantActivity,
+    TResult Function()? checkForCallFeedback,
+    TResult Function()? removeLastCallDetails,
+    TResult Function(bool value)? setShowFollowup,
+    TResult Function()? getAppConfig,
+    TResult Function()? getSettings,
+    TResult Function()? initializeTwilio,
+    required TResult orElse(),
+  }) {
+    if (initializeTwilio != null) {
+      return initializeTwilio();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserLoggedIn value) userLoggedIn,
+    required TResult Function(_UserLoggedOut value) userLoggedOut,
+    required TResult Function(_Started value) started,
+    required TResult Function(_RefreshAgentData value) refreshAgentData,
+    required TResult Function(_NewImportantActivity value) newImportantActivity,
+    required TResult Function(_CompletedImportantActivity value)
+        completedImportantActivity,
+    required TResult Function(_ClearImportantActivity value)
+        clearImportantActivity,
+    required TResult Function(_CheckForImportantActivity value)
+        checkForImportantActivity,
+    required TResult Function(_CheckForCallFeedback value) checkForCallFeedback,
+    required TResult Function(_RemoveLastCallDetails value)
+        removeLastCallDetails,
+    required TResult Function(_SetShowFollowup value) setShowFollowup,
+    required TResult Function(_GetAppConfig value) getAppConfig,
+    required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_InitializeTwilio value) initializeTwilio,
+  }) {
+    return initializeTwilio(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserLoggedIn value)? userLoggedIn,
+    TResult? Function(_UserLoggedOut value)? userLoggedOut,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_RefreshAgentData value)? refreshAgentData,
+    TResult? Function(_NewImportantActivity value)? newImportantActivity,
+    TResult? Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult? Function(_ClearImportantActivity value)? clearImportantActivity,
+    TResult? Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult? Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult? Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult? Function(_SetShowFollowup value)? setShowFollowup,
+    TResult? Function(_GetAppConfig value)? getAppConfig,
+    TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_InitializeTwilio value)? initializeTwilio,
+  }) {
+    return initializeTwilio?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserLoggedIn value)? userLoggedIn,
+    TResult Function(_UserLoggedOut value)? userLoggedOut,
+    TResult Function(_Started value)? started,
+    TResult Function(_RefreshAgentData value)? refreshAgentData,
+    TResult Function(_NewImportantActivity value)? newImportantActivity,
+    TResult Function(_CompletedImportantActivity value)?
+        completedImportantActivity,
+    TResult Function(_ClearImportantActivity value)? clearImportantActivity,
+    TResult Function(_CheckForImportantActivity value)?
+        checkForImportantActivity,
+    TResult Function(_CheckForCallFeedback value)? checkForCallFeedback,
+    TResult Function(_RemoveLastCallDetails value)? removeLastCallDetails,
+    TResult Function(_SetShowFollowup value)? setShowFollowup,
+    TResult Function(_GetAppConfig value)? getAppConfig,
+    TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_InitializeTwilio value)? initializeTwilio,
+    required TResult orElse(),
+  }) {
+    if (initializeTwilio != null) {
+      return initializeTwilio(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitializeTwilio implements AuthEvent {
+  const factory _InitializeTwilio() = _$InitializeTwilioImpl;
 }
 
 /// @nodoc

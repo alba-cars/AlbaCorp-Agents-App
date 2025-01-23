@@ -22,11 +22,13 @@ import 'package:real_estate_app/model/pending_call_feedback.dart';
 import 'package:real_estate_app/model/user.dart';
 import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/services/twilio_service.dart';
 import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/repository/twilio_repo.dart';
 import '../../model/activity_model.dart';
 import '../../model/agent_model.dart';
 import '../../util/result.dart';
@@ -38,7 +40,7 @@ part 'auth_bloc.freezed.dart';
 @singleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this._authRepo, this._notificationRepo, this._activityRepo,
-      this._pendingCallFeedbackRepo)
+      this._pendingCallFeedbackRepo, this._twilioRepo)
       : super(_AuthState()) {
     on<_UserLoggedIn>(_userLoggedIn);
     on<_UserLoggedOut>(_userLoggedOut);
@@ -53,6 +55,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_GetSettings>(_getSettings);
     on<_GetAppConfig>(_getAppConfigData);
     on<_SetShowFollowup>(_setShowFollowUp);
+    on<_InitializeTwilio>(_initializeTwilio);
 
     awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
       if (v == null) {
@@ -66,6 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final ActivityRepo _activityRepo;
   final NotificationRepo _notificationRepo;
   final PendingCallFeedbackRepo _pendingCallFeedbackRepo;
+  final TwilioRepo _twilioRepo;
   StreamSubscription? _fcmForegroundStream;
   StreamSubscription? _fcmBackgroundStream;
   void onNotificationOpenedApp(awesome.ReceivedAction receivedAction) async {
@@ -138,7 +142,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 .encode({'phone': number, "lead_source": 'Unkown Inbound Call'})
           });
         }
-      } 
+      }
       // else if (data['type'] == 'PBX_LEAD_CALL_FOLLOW_UP') {
       //   if (state.authStatus == AuthStatus.initial) {
       //     await stream.firstWhere((e) => e.authStatus != AuthStatus.initial);
@@ -161,6 +165,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
     add(AuthEvent.checkForImportantActivity());
     add(_GetSettings());
+    add(AuthEvent.initializeTwilio());
+
     await getAgentData(emit);
   }
 
@@ -180,6 +186,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await getAgentData(emit);
         add(AuthEvent.checkForImportantActivity());
         add(_GetSettings());
+        add(AuthEvent.initializeTwilio());
         break;
       case (Error _):
         emit(state.copyWith(
@@ -313,8 +320,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(showFollowUpScreen: event.value));
   }
 
-  FutureOr<void> _clearImportantActivity(_ClearImportantActivity event, Emitter<AuthState> emit) {
-     emit(state.copyWith(
-            veryImportantActivities: {}));
+  FutureOr<void> _clearImportantActivity(
+      _ClearImportantActivity event, Emitter<AuthState> emit) {
+    emit(state.copyWith(veryImportantActivities: {}));
+  }
+
+  FutureOr<void> _initializeTwilio(
+      _InitializeTwilio event, Emitter<AuthState> emit) async {
+    try {
+      final twilioResult =
+          await _twilioRepo.getToken(identity: state.user?.id ?? '');
+      switch (twilioResult) {
+        case (Success s):
+          await TwilioVoiceServices.initialize(
+            accessToken: s.value,
+            identity: state.user?.id ?? '', // Using user ID as identity
+          );
+          break;
+        case (Error e):
+          Logger().e('Failed to initialize Twilio: ${e}');
+          break;
+      }
+    } catch (e) {
+      Logger().e('Error initializing Twilio: $e');
+    }
   }
 }

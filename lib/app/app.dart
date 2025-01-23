@@ -10,11 +10,13 @@ import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/services/twilio_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
 import '../services/firebase_messaging_service.dart';
 import '../services/notification_service.dart';
+import 'call_manager.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -37,6 +39,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     checkPreference();
     getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
     getIt<AuthBloc>().add(AuthEvent.checkForImportantActivity());
+    CallManager.initialize(AppRouter.router);
+
     super.initState();
   }
 
@@ -50,15 +54,22 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Future<bool> requestPermission() async {
     var s = await Permission.systemAlertWindow.request();
 
-    var status = await Permission.phone.request();
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.bluetooth,
+      Permission.bluetoothConnect,
+      Permission.bluetoothScan,
+      Permission.phone,
+      Permission.microphone
+    ].request();
 
-    return switch (status) {
+    return switch (statuses[Permission.phone]) {
       PermissionStatus.denied ||
       PermissionStatus.restricted ||
       PermissionStatus.limited ||
       PermissionStatus.permanentlyDenied =>
         false,
       PermissionStatus.provisional || PermissionStatus.granted => true,
+      _ => false,
     };
   }
 
@@ -111,8 +122,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                 appBarTheme: AppBarTheme(
                     backgroundColor: Color(0xff004B85),
                     foregroundColor: Colors.white,
-                    titleTextStyle:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp)),
+                    titleTextStyle: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16.sp)),
                 elevatedButtonTheme: ElevatedButtonThemeData(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff004B85),
@@ -120,7 +131,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                         // minimumSize: Size.fromWidth(70),
                         fixedSize: Size.fromWidth(200),
                         shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Color(0xff004B85), width: 2),
+                            side:
+                                BorderSide(color: Color(0xff004B85), width: 2),
                             borderRadius: BorderRadius.circular(12)))),
                 outlinedButtonTheme: OutlinedButtonThemeData(
                     style: ButtonStyle(
@@ -129,7 +141,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                         fixedSize: WidgetStatePropertyAll(Size.fromWidth(
                           200,
                         )),
-                        minimumSize: WidgetStatePropertyAll(Size.fromHeight(43)),
+                        minimumSize:
+                            WidgetStatePropertyAll(Size.fromHeight(43)),
                         side: WidgetStatePropertyAll(BorderSide(
                           color: const Color(0xff004B85),
                           width: 1,
