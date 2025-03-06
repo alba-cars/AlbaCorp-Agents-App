@@ -91,7 +91,20 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           LeadStatus.ForListing
         ].contains(widget.activity.lead?.leadStatus) ||
         ([FeedbackType.veryInterested].contains(feedbackValue.value))) {
-      return Duration(days: 30);
+      return Duration(days: 2 * 30);
+    }
+    print("Feedback Value");
+    print(feedbackValue.value);
+    if ([
+      FeedbackType.interested,
+      FeedbackType.deal,
+      FeedbackType.veryInterested,
+      FeedbackType.listing,
+      FeedbackType.pocketListing,
+      FeedbackType.interested,
+    ].contains(feedbackValue.value)) {
+      print("Inside loop");
+      return Duration(days: 2 * 30);
     }
     if (widget.activity.lead?.leadStatus ==
             [
@@ -682,10 +695,6 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   }
 }
 
-
-
-
-
 bool shouldShowRating(FeedbackType? selectedFeedbackType) {
   if (selectedFeedbackType == null) return false;
   const ratingBypassStatus = [
@@ -703,39 +712,40 @@ class CallProcessing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return BlocBuilder<TaskDetailCubit, TaskDetailState>(
-    builder: (context, state) {
-      if(state.callProcessingState?.activityId != state.task?.id){
-        return SizedBox();
-      }
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (state.callProcessingState?.isProcessing ?? false) ...[
-            _buildStatusIndicator(state.callProcessingState!.status),
-            const SizedBox(height: 16),
-          ],
-          if (state.callProcessingState?.summary != null) ...[
-            const Text(
-              'Call Summary:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+    return BlocBuilder<TaskDetailCubit, TaskDetailState>(
+      builder: (context, state) {
+        if (state.callProcessingState?.activityId != state.task?.id) {
+          return SizedBox();
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (state.callProcessingState?.isProcessing ?? false) ...[
+              _buildStatusIndicator(state.callProcessingState!.status),
+              const SizedBox(height: 16),
+            ],
+            if (state.callProcessingState?.summary != null) ...[
+              const Text(
+                'Call Summary:',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            SelectableText(state.callProcessingState!.summary!),
+              const SizedBox(height: 8),
+              SelectableText(state.callProcessingState!.summary!),
+            ],
+            if (state.callProcessingState?.error != null)
+              Text(
+                'Error: ${state.callProcessingState?.error}',
+                style: const TextStyle(color: Colors.red),
+              ),
           ],
-          if (state.callProcessingState?.error != null)
-            Text(
-              'Error: ${state.callProcessingState?.error}',
-              style: const TextStyle(color: Colors.red),
-            ),
-        ],
-      );
-    },
-  );
+        );
+      },
+    );
   }
+
   Widget _buildStatusIndicator(CallProcessingStatus status) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -947,8 +957,6 @@ class PropertyCardPickerItem extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
