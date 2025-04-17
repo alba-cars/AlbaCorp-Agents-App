@@ -92,6 +92,10 @@
             android:exported="true" />
 
         <!-- Existing meta-data -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDgleA7tIk8lVcxr_jZ0-rIUWVXhoVPtzg" />
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

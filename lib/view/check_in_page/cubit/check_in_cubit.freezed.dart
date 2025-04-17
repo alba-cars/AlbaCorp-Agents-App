@@ -16,8 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CheckInState {
-  AppStatus get checkInStatus => throw _privateConstructorUsedError;
-  String? get checkInError => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isInOffice => throw _privateConstructorUsedError;
+  String get currentAddress => throw _privateConstructorUsedError;
+  Position? get currentPosition => throw _privateConstructorUsedError;
+  bool get hasLocationPermission => throw _privateConstructorUsedError;
+  String? get errorMessage => throw _privateConstructorUsedError;
+  bool get isCheckedIn => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CheckInStateCopyWith<CheckInState> get copyWith =>
@@ -30,7 +35,14 @@ abstract class $CheckInStateCopyWith<$Res> {
           CheckInState value, $Res Function(CheckInState) then) =
       _$CheckInStateCopyWithImpl<$Res, CheckInState>;
   @useResult
-  $Res call({AppStatus checkInStatus, String? checkInError});
+  $Res call(
+      {bool isLoading,
+      bool isInOffice,
+      String currentAddress,
+      Position? currentPosition,
+      bool hasLocationPermission,
+      String? errorMessage,
+      bool isCheckedIn});
 }
 
 /// @nodoc
@@ -46,18 +58,43 @@ class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? checkInStatus = null,
-    Object? checkInError = freezed,
+    Object? isLoading = null,
+    Object? isInOffice = null,
+    Object? currentAddress = null,
+    Object? currentPosition = freezed,
+    Object? hasLocationPermission = null,
+    Object? errorMessage = freezed,
+    Object? isCheckedIn = null,
   }) {
     return _then(_value.copyWith(
-      checkInStatus: null == checkInStatus
-          ? _value.checkInStatus
-          : checkInStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      checkInError: freezed == checkInError
-          ? _value.checkInError
-          : checkInError // ignore: cast_nullable_to_non_nullable
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isInOffice: null == isInOffice
+          ? _value.isInOffice
+          : isInOffice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      currentAddress: null == currentAddress
+          ? _value.currentAddress
+          : currentAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentPosition: freezed == currentPosition
+          ? _value.currentPosition
+          : currentPosition // ignore: cast_nullable_to_non_nullable
+              as Position?,
+      hasLocationPermission: null == hasLocationPermission
+          ? _value.hasLocationPermission
+          : hasLocationPermission // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCheckedIn: null == isCheckedIn
+          ? _value.isCheckedIn
+          : isCheckedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -70,7 +107,14 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
       __$$CheckInStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppStatus checkInStatus, String? checkInError});
+  $Res call(
+      {bool isLoading,
+      bool isInOffice,
+      String currentAddress,
+      Position? currentPosition,
+      bool hasLocationPermission,
+      String? errorMessage,
+      bool isCheckedIn});
 }
 
 /// @nodoc
@@ -84,18 +128,43 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? checkInStatus = null,
-    Object? checkInError = freezed,
+    Object? isLoading = null,
+    Object? isInOffice = null,
+    Object? currentAddress = null,
+    Object? currentPosition = freezed,
+    Object? hasLocationPermission = null,
+    Object? errorMessage = freezed,
+    Object? isCheckedIn = null,
   }) {
     return _then(_$CheckInStateImpl(
-      checkInStatus: null == checkInStatus
-          ? _value.checkInStatus
-          : checkInStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      checkInError: freezed == checkInError
-          ? _value.checkInError
-          : checkInError // ignore: cast_nullable_to_non_nullable
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isInOffice: null == isInOffice
+          ? _value.isInOffice
+          : isInOffice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      currentAddress: null == currentAddress
+          ? _value.currentAddress
+          : currentAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentPosition: freezed == currentPosition
+          ? _value.currentPosition
+          : currentPosition // ignore: cast_nullable_to_non_nullable
+              as Position?,
+      hasLocationPermission: null == hasLocationPermission
+          ? _value.hasLocationPermission
+          : hasLocationPermission // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCheckedIn: null == isCheckedIn
+          ? _value.isCheckedIn
+          : isCheckedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,17 +173,37 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 
 class _$CheckInStateImpl implements _CheckInState {
   const _$CheckInStateImpl(
-      {this.checkInStatus = AppStatus.init, this.checkInError});
+      {this.isLoading = false,
+      this.isInOffice = false,
+      this.currentAddress = "Loading location...",
+      this.currentPosition,
+      this.hasLocationPermission = false,
+      this.errorMessage,
+      this.isCheckedIn = false});
 
   @override
   @JsonKey()
-  final AppStatus checkInStatus;
+  final bool isLoading;
   @override
-  final String? checkInError;
+  @JsonKey()
+  final bool isInOffice;
+  @override
+  @JsonKey()
+  final String currentAddress;
+  @override
+  final Position? currentPosition;
+  @override
+  @JsonKey()
+  final bool hasLocationPermission;
+  @override
+  final String? errorMessage;
+  @override
+  @JsonKey()
+  final bool isCheckedIn;
 
   @override
   String toString() {
-    return 'CheckInState(checkInStatus: $checkInStatus, checkInError: $checkInError)';
+    return 'CheckInState(isLoading: $isLoading, isInOffice: $isInOffice, currentAddress: $currentAddress, currentPosition: $currentPosition, hasLocationPermission: $hasLocationPermission, errorMessage: $errorMessage, isCheckedIn: $isCheckedIn)';
   }
 
   @override
@@ -122,14 +211,32 @@ class _$CheckInStateImpl implements _CheckInState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CheckInStateImpl &&
-            (identical(other.checkInStatus, checkInStatus) ||
-                other.checkInStatus == checkInStatus) &&
-            (identical(other.checkInError, checkInError) ||
-                other.checkInError == checkInError));
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isInOffice, isInOffice) ||
+                other.isInOffice == isInOffice) &&
+            (identical(other.currentAddress, currentAddress) ||
+                other.currentAddress == currentAddress) &&
+            (identical(other.currentPosition, currentPosition) ||
+                other.currentPosition == currentPosition) &&
+            (identical(other.hasLocationPermission, hasLocationPermission) ||
+                other.hasLocationPermission == hasLocationPermission) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(other.isCheckedIn, isCheckedIn) ||
+                other.isCheckedIn == isCheckedIn));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, checkInStatus, checkInError);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isInOffice,
+      currentAddress,
+      currentPosition,
+      hasLocationPermission,
+      errorMessage,
+      isCheckedIn);
 
   @JsonKey(ignore: true)
   @override
@@ -140,13 +247,28 @@ class _$CheckInStateImpl implements _CheckInState {
 
 abstract class _CheckInState implements CheckInState {
   const factory _CheckInState(
-      {final AppStatus checkInStatus,
-      final String? checkInError}) = _$CheckInStateImpl;
+      {final bool isLoading,
+      final bool isInOffice,
+      final String currentAddress,
+      final Position? currentPosition,
+      final bool hasLocationPermission,
+      final String? errorMessage,
+      final bool isCheckedIn}) = _$CheckInStateImpl;
 
   @override
-  AppStatus get checkInStatus;
+  bool get isLoading;
   @override
-  String? get checkInError;
+  bool get isInOffice;
+  @override
+  String get currentAddress;
+  @override
+  Position? get currentPosition;
+  @override
+  bool get hasLocationPermission;
+  @override
+  String? get errorMessage;
+  @override
+  bool get isCheckedIn;
   @override
   @JsonKey(ignore: true)
   _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
