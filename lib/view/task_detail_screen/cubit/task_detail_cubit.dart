@@ -417,7 +417,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
 
     switch (result) {
       case (Success s):
-        Logger().i(s.value);
         emit(state.copyWith(
             propertyCardsList: s.value,
             getPropertyCardsListStatus: AppStatus.success,

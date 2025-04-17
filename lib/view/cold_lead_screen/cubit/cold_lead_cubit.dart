@@ -43,7 +43,6 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
 
       switch (result) {
         case (Success<List<Activity>> success):
-          Logger().d("On success scenario ${success.paginator}");
           String value = jsonEncode(success.value);
           print(value);
           _handleEnquiriesFetchSuccess(
@@ -90,8 +89,6 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
 
     var currentPaginator = {...state.paginator};
     currentPaginator[filterType] = paginator;
-
-    Logger().d("Going to emit the success fetch status");
 
     emit(state.copyWith(
         fetchStatus: fetchStatus,

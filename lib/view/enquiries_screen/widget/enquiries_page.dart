@@ -125,40 +125,42 @@ class _EnquiriesPageState extends State<EnquiriesPage>
                 ),
               ),
               HorizontalSmallGap(),
-            if(getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')    InkWell(
-                onTap: () {
-                  context.pushNamed(ExpiredHotLeadExplorer.routeName);
-                },
-                child: SizedBox(
-                  height: 40,
-                  width: 150,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: Theme.of(context).colorScheme.secondary),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.explore,
-                          color: Colors.white,
-                        ),
-                        HorizontalSmallGap(),
-                        Text(
-                          "Hot explorer",
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondary),
-                        ),
-                      ],
+              if (getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')
+                InkWell(
+                  onTap: () {
+                    context.pushNamed(ExpiredHotLeadExplorer.routeName);
+                  },
+                  child: SizedBox(
+                    height: 40,
+                    width: 150,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Theme.of(context).colorScheme.secondary),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.explore,
+                            color: Colors.white,
+                          ),
+                          HorizontalSmallGap(),
+                          Text(
+                            "Hot explorer",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),)
+                )
             ],
             showSearch: false,
             skipDisplayFilterKeys: ['sortBy'],
@@ -206,7 +208,6 @@ class _EnquiriesPageState extends State<EnquiriesPage>
               Paginator? currentPaginator = state.paginator[taskFilterEnum];
               if (currentPaginator == null) {
                 // First load with  out pagination
-                Logger().d("Status : $appStatus");
                 switch (appStatus) {
                   case AppStatus.success:
                     return showActivities(

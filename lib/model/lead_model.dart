@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/lead_source_category_model.dart';
 
 import '../app/auth_bloc/auth_bloc.dart';
@@ -68,7 +69,7 @@ class Lead with _$Lead {
     @JsonKey(readValue: readCompletedActivityCount)
     @Default(0)
     int completedActivityCount,
-    @JsonKey(name: 'leadSourceObject') LeadSourceItem? leadSourceObject,
+    @JsonKey(readValue: readLeadSourceObject) LeadSourceItem? leadSourceObject,
   }) = _Lead;
 
   const Lead._();
@@ -83,6 +84,12 @@ class Lead with _$Lead {
 // Read value helpers
 String readFirstName(Map json, String key) {
   return json['first_name'] ?? json['firstName'] ?? '';
+}
+
+Map<String, dynamic>? readLeadSourceObject(Map json, String key) {
+  return json['leadSourceData'] != null && json['leadSourceData'] is Map
+      ? json['leadSourceData']
+      : json[key];
 }
 
 String readLastName(Map json, String key) {

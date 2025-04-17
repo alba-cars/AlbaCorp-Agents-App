@@ -37,7 +37,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     requestPermission();
     // firebaseMessaging.requestPermission();
     checkPreference();
-    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    // getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
     getIt<AuthBloc>().add(AuthEvent.checkForImportantActivity());
     CallManager.initialize(AppRouter.router);
 
@@ -76,7 +76,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+      // getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
       getIt<AuthBloc>().add(AuthEvent.checkForImportantActivity());
     }
     super.didChangeAppLifecycleState(state);

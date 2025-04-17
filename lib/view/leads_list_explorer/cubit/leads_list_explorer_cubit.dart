@@ -36,6 +36,9 @@ class LeadsListExplorerCubit extends Cubit<LeadsListExplorerState> {
   Future<void> getLeadsExplorerList({
     bool refresh = false,
   }) async {
+    if (state.explorerFilter == null || state.explorerFilter?.isEmpty == true) {
+      return;
+    }
     if (refresh || state.explorerPaginator == null) {
       emit(state.copyWith(
           getExplorerListStatus: AppStatus.loading,

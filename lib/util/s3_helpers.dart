@@ -52,6 +52,9 @@ Future<String> uploadFileToS3AndGetPath(File file,
 
 Future<String> getFileSignedURLFromS3(String path) async {
   try {
+    if (path.isEmpty) {
+      throw Exception('File path is empty');
+    }
     var getAccessResponse = await getIt<Dio>().post(
       'v1/upload',
       data: {'action': 'getObject', 'fileName': path},

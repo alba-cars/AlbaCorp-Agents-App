@@ -66,7 +66,7 @@ mixin _$Lead {
   bool get dndStatus => throw _privateConstructorUsedError;
   @JsonKey(readValue: readCompletedActivityCount)
   int get completedActivityCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'leadSourceObject')
+  @JsonKey(readValue: readLeadSourceObject)
   LeadSourceItem? get leadSourceObject => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -113,7 +113,8 @@ abstract class $LeadCopyWith<$Res> {
       @JsonKey(readValue: readDndStatus) bool dndStatus,
       @JsonKey(readValue: readCompletedActivityCount)
       int completedActivityCount,
-      @JsonKey(name: 'leadSourceObject') LeadSourceItem? leadSourceObject});
+      @JsonKey(readValue: readLeadSourceObject)
+      LeadSourceItem? leadSourceObject});
 
   $PreferenceCopyWith<$Res>? get preference;
   $AgentCopyWith<$Res>? get currentAgent;
@@ -371,7 +372,8 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       @JsonKey(readValue: readDndStatus) bool dndStatus,
       @JsonKey(readValue: readCompletedActivityCount)
       int completedActivityCount,
-      @JsonKey(name: 'leadSourceObject') LeadSourceItem? leadSourceObject});
+      @JsonKey(readValue: readLeadSourceObject)
+      LeadSourceItem? leadSourceObject});
 
   @override
   $PreferenceCopyWith<$Res>? get preference;
@@ -589,7 +591,7 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
       @JsonKey(readValue: readDndStatus) this.dndStatus = false,
       @JsonKey(readValue: readCompletedActivityCount)
       this.completedActivityCount = 0,
-      @JsonKey(name: 'leadSourceObject') this.leadSourceObject})
+      @JsonKey(readValue: readLeadSourceObject) this.leadSourceObject})
       : _languages = languages,
         _preferredLanguages = preferredLanguages,
         _tags = tags,
@@ -697,7 +699,7 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   @JsonKey(readValue: readCompletedActivityCount)
   final int completedActivityCount;
   @override
-  @JsonKey(name: 'leadSourceObject')
+  @JsonKey(readValue: readLeadSourceObject)
   final LeadSourceItem? leadSourceObject;
 
   @override
@@ -890,7 +892,7 @@ abstract class _Lead extends Lead {
       @JsonKey(readValue: readDndStatus) final bool dndStatus,
       @JsonKey(readValue: readCompletedActivityCount)
       final int completedActivityCount,
-      @JsonKey(name: 'leadSourceObject')
+      @JsonKey(readValue: readLeadSourceObject)
       final LeadSourceItem? leadSourceObject}) = _$LeadImpl;
   const _Lead._() : super._();
 
@@ -973,7 +975,7 @@ abstract class _Lead extends Lead {
   @JsonKey(readValue: readCompletedActivityCount)
   int get completedActivityCount;
   @override
-  @JsonKey(name: 'leadSourceObject')
+  @JsonKey(readValue: readLeadSourceObject)
   LeadSourceItem? get leadSourceObject;
   @override
   @JsonKey(ignore: true)

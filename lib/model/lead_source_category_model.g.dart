@@ -27,7 +27,9 @@ _$LeadSourceItemImpl _$$LeadSourceItemImplFromJson(Map<String, dynamic> json) =>
       id: readId(json, '_id') as String,
       name: json['name'] as String,
       leadSourceType: json['leadSourceType'] as String,
-      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      tags: (readTags(json, 'tags') as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$LeadSourceItemImplToJson(

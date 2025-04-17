@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    // getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
     super.initState();
   }
 
@@ -370,14 +370,14 @@ class _HomeScreenState extends State<HomeScreen>
                             context.pushNamed(MyActvitiesPage.routeName);
                           },
                         ),
-                        CustomListTileWithIcon(
-                          title: 'Twilio',
-                          iconImagePath: 'assets/images/leads.png',
-                          onPressed: () {
-                            Scaffold.of(context).closeDrawer();
-                            context.pushNamed(TwilioCallPage.routeName);
-                          },
-                        ),
+                        // CustomListTileWithIcon(
+                        //   title: 'Twilio',
+                        //   iconImagePath: 'assets/images/leads.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     context.pushNamed(TwilioCallPage.routeName);
+                        //   },
+                        // ),
                         if (user?.role != 'AnonymousAgent')
                           CustomListTileWithIcon(
                             title: 'Deals',

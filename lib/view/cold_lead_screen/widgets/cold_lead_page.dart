@@ -70,7 +70,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
           },
           displayStringForOption: (option) => option['label'] ?? '',
           name: 'buildingId'),
-          WrapSelectField(
+      WrapSelectField(
           name: 'beds',
           label: 'Beds',
           values: ['Studio', '1', '2', '3', '4', '5', '6', '7+'],
@@ -93,7 +93,6 @@ class _ColdLeadPageState extends State<ColdLeadPage>
           isRequired: true),
     ];
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -165,46 +164,49 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                 ),
               ),
               HorizontalSmallGap(),
-        if(getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')        InkWell(
-                onTap: () {
-                  context.pushNamed(LeadsExplorerScreen.routeName);
-                },
-                child: SizedBox(
-                  height: 40,
-                  width: 150,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: Theme.of(context).colorScheme.secondary),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.explore,
-                          color: Colors.white,
-                        ),
-                        HorizontalSmallGap(),
-                        Text(
-                          "Go to explorer",
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondary),
-                        ),
-                      ],
+              if (getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')
+                InkWell(
+                  onTap: () {
+                    context.pushNamed(LeadsExplorerScreen.routeName);
+                  },
+                  child: SizedBox(
+                    height: 40,
+                    width: 150,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: Theme.of(context).colorScheme.secondary),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.explore,
+                            color: Colors.white,
+                          ),
+                          HorizontalSmallGap(),
+                          Text(
+                            "Go to explorer",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),)
+                )
             ],
             showSearch: false,
             onChanged: (v) {},
             onFilterApplied: (filter) {
-              context.read<ColdLeadCubit>().setActivityFilters(
-                  filter, TaskFilterEnum.values[tabIndex]);
+              context
+                  .read<ColdLeadCubit>()
+                  .setActivityFilters(filter, TaskFilterEnum.values[tabIndex]);
             },
           ),
           VerticalSmallGap(),
@@ -244,7 +246,6 @@ class _ColdLeadPageState extends State<ColdLeadPage>
               Paginator? currentPaginator = state.paginator[taskFilterEnum];
               if (currentPaginator == null) {
                 // First load with  out pagination
-                Logger().d("Status : $appStatus");
                 switch (appStatus) {
                   case AppStatus.success:
                     return showActivities(
@@ -293,8 +294,6 @@ class _ColdLeadPageState extends State<ColdLeadPage>
       Paginator? paginator,
       AppStatus? appStatus,
       TaskFilterEnum taskFilterEnum) {
-    Logger().d("No of activitiess : ${activities.length}");
-
     return Expanded(
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollInfo) {
@@ -341,7 +340,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                     );
                   }
                   Activity activity = activities[pos];
-                   "${activity.lead?.firstName ?? ""} ${activity.lead?.lastName ?? ""}";
+                  "${activity.lead?.firstName ?? ""} ${activity.lead?.lastName ?? ""}";
                   return ActivityListItem(
                     activity: activity,
                     index: pos,

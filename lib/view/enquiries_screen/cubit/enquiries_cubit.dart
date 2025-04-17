@@ -15,7 +15,10 @@ part 'enquiries_cubit.freezed.dart';
 
 @injectable
 class EnquiriesCubit extends Cubit<EnquiriesState> {
-  EnquiriesCubit({required this.activityRepo}) : super(EnquiriesState(activityFilter: {'sortBy':{"label": "Latest", "value": 'latest'}}));
+  EnquiriesCubit({required this.activityRepo})
+      : super(EnquiriesState(activityFilter: {
+          'sortBy': {"label": "Latest", "value": 'latest'}
+        }));
 
   final ActivityRepo activityRepo;
 
@@ -39,14 +42,12 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
 
       final Result<List<Activity>> result =
           await activityRepo.fetchActivitiesSorted(filter: {
-              ...getPayload(filterType),
+        ...getPayload(filterType),
         if (state.activityFilter != null) ...state.activityFilter!,
-      
       }, paginator: paginator);
 
       switch (result) {
         case (Success<List<Activity>> success):
-          Logger().d("On success scenario");
           _handleEnquiriesFetchSuccess(
               success.value, success.paginator, filterType);
           break;
@@ -74,9 +75,7 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
         return {
           "leadSourceType": 'hot',
           "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
-          "status": [
-            "Pending","Overdue"
-          ],
+          "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}',
         };
       case TaskFilterEnum.Favourites:
@@ -104,8 +103,6 @@ class EnquiriesCubit extends Cubit<EnquiriesState> {
         ...activities
       ];
     }
-
-    Logger().d("Going to emit the success fetch status");
 
     emit(state.copyWith(
         fetchStatus: fetchStatus,

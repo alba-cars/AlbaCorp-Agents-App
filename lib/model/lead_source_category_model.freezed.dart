@@ -189,6 +189,7 @@ mixin _$LeadSourceItem {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get leadSourceType => throw _privateConstructorUsedError;
+  @JsonKey(readValue: readTags)
   List<String>? get tags => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -207,7 +208,7 @@ abstract class $LeadSourceItemCopyWith<$Res> {
       {@JsonKey(name: '_id', readValue: readId) String id,
       String name,
       String leadSourceType,
-      List<String>? tags});
+      @JsonKey(readValue: readTags) List<String>? tags});
 }
 
 /// @nodoc
@@ -261,7 +262,7 @@ abstract class _$$LeadSourceItemImplCopyWith<$Res>
       {@JsonKey(name: '_id', readValue: readId) String id,
       String name,
       String leadSourceType,
-      List<String>? tags});
+      @JsonKey(readValue: readTags) List<String>? tags});
 }
 
 /// @nodoc
@@ -308,7 +309,7 @@ class _$LeadSourceItemImpl implements _LeadSourceItem {
       {@JsonKey(name: '_id', readValue: readId) required this.id,
       required this.name,
       required this.leadSourceType,
-      final List<String>? tags})
+      @JsonKey(readValue: readTags) final List<String>? tags})
       : _tags = tags;
 
   factory _$LeadSourceItemImpl.fromJson(Map<String, dynamic> json) =>
@@ -323,6 +324,7 @@ class _$LeadSourceItemImpl implements _LeadSourceItem {
   final String leadSourceType;
   final List<String>? _tags;
   @override
+  @JsonKey(readValue: readTags)
   List<String>? get tags {
     final value = _tags;
     if (value == null) return null;
@@ -370,10 +372,11 @@ class _$LeadSourceItemImpl implements _LeadSourceItem {
 
 abstract class _LeadSourceItem implements LeadSourceItem {
   const factory _LeadSourceItem(
-      {@JsonKey(name: '_id', readValue: readId) required final String id,
-      required final String name,
-      required final String leadSourceType,
-      final List<String>? tags}) = _$LeadSourceItemImpl;
+          {@JsonKey(name: '_id', readValue: readId) required final String id,
+          required final String name,
+          required final String leadSourceType,
+          @JsonKey(readValue: readTags) final List<String>? tags}) =
+      _$LeadSourceItemImpl;
 
   factory _LeadSourceItem.fromJson(Map<String, dynamic> json) =
       _$LeadSourceItemImpl.fromJson;
@@ -386,6 +389,7 @@ abstract class _LeadSourceItem implements LeadSourceItem {
   @override
   String get leadSourceType;
   @override
+  @JsonKey(readValue: readTags)
   List<String>? get tags;
   @override
   @JsonKey(ignore: true)

@@ -91,34 +91,9 @@ class _ExplorerScreenLayoutState extends State<_ExplorerScreenLayout>
                 ),
               ),
               SliverVerticalSmallGap(),
-              // SliverToBoxAdapter(
-              //     child: Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 20),
-              //   child: AppTabBar(
-              //     backgroundColor:
-              //         Theme.of(context).colorScheme.primaryContainer,
-              //     selectedColor: Theme.of(context).primaryColor,
-              //     tabController: _tabController,
-              //     tabs: ['Available', 'Assigned to Me'],
-              //     onTap: (index) {
-              //       context
-              //           .read<LeadsListExplorerCubit>()
-              //           .setSelectedTab(index);
-              //     },
-              //   ),
-              // )),
-              // SliverVerticalSmallGap(
-              //   height: 4,
-              // ),
             ];
           },
-          body: ExplorerTab()
-          // TabBarView(
-          //   controller: _tabController,
-          //   physics: NeverScrollableScrollPhysics(),
-          //   children: [ExplorerTab(), CheckedOutPoolTab()],
-          // ),
-          ),
+          body: ExplorerTab()),
     );
   }
 }
@@ -647,10 +622,9 @@ class _ExplorerTabState extends State<ExplorerTab> {
                                                               TextWithIcon(
                                                                 icon: Icons
                                                                     .location_searching,
-                                                                text: card
-                                                                        .cluster
-                                                                         ??
-                                                                    'N/A',
+                                                                text:
+                                                                    card.cluster ??
+                                                                        'N/A',
                                                                 iconColor:
                                                                     primaryColor,
                                                                 iconSize: 18,

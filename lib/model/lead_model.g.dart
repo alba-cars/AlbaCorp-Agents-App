@@ -60,10 +60,11 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
           (readCompletedActivityCount(json, 'completedActivityCount') as num?)
                   ?.toInt() ??
               0,
-      leadSourceObject: json['leadSourceObject'] == null
+      leadSourceObject: readLeadSourceObject(json, 'leadSourceObject') == null
           ? null
           : LeadSourceItem.fromJson(
-              json['leadSourceObject'] as Map<String, dynamic>),
+              readLeadSourceObject(json, 'leadSourceObject')
+                  as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>

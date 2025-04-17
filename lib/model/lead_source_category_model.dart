@@ -1,5 +1,6 @@
 // lead_source_model.freezed.dart
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:logger/logger.dart';
 
 import 'property_type_model.dart';
 
@@ -23,15 +24,17 @@ class LeadSourceItem with _$LeadSourceItem {
     @JsonKey(name: '_id', readValue: readId) required String id,
     required String name,
     required String leadSourceType,
-    List<String>? tags,
+    @JsonKey(readValue: readTags) List<String>? tags,
   }) = _LeadSourceItem;
 
   factory LeadSourceItem.fromJson(Map<String, dynamic> json) =>
       _$LeadSourceItemFromJson(json);
+}
 
-  // static Object? _readId(Map map, String key) {
-  //   return map['_id'] ?? map['id'];
-  // }
+List<String>? readTags(Map map, String key) {
+  return map[key] is String
+      ? [map[key] as String]
+      : List<String>.from(map[key] ?? []);
 }
 
 // Build with:

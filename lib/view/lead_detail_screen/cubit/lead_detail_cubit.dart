@@ -29,7 +29,8 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
     emit(state.copyWith(getLeadStatus: AppStatus.loading));
     final result = await _leadRepo.getLead(leadId: state.leadId);
     switch (result) {
-      case (Success s):
+      case (Success<Lead> s):
+        Logger().d(s.value.toJson());
         emit(state.copyWith(getLeadStatus: AppStatus.success, lead: s.value));
         Future.wait([getLeadActivities(), getLeadPropertyCards()]);
         break;
