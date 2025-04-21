@@ -79,7 +79,7 @@ class _MyListingsTabState extends State<MyListingsTab>
           child: TabBarView(
             physics: NeverScrollableScrollPhysics(),
             controller: _tabController,
-            children: [PublicListingsTab(), PocketListingsTab()],
+            children: [PublicListingsTab(), MyPocketListingsTab()],
           ),
         )
       ],
@@ -99,7 +99,7 @@ class _PublicListingsTabState extends State<PublicListingsTab> {
     return [
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -120,7 +120,7 @@ class _PublicListingsTabState extends State<PublicListingsTab> {
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.buildingList;
             if (stateResult.isEmpty) {
@@ -163,7 +163,7 @@ class _PublicListingsTabState extends State<PublicListingsTab> {
         label: 'Amenities',
         name: "amenities",
         displayStringForOption: (option) => option['label']?.toString() ?? '',
-        optionsBuilder: (v,refresh) async {
+        optionsBuilder: (v, refresh) async {
           var list = context
               .read<ListingsCubit>()
               .state
@@ -274,14 +274,14 @@ class _PublicListingsTabState extends State<PublicListingsTab> {
   }
 }
 
-class PocketListingsTab extends StatefulWidget {
-  const PocketListingsTab({super.key});
+class MyPocketListingsTab extends StatefulWidget {
+  const MyPocketListingsTab({super.key});
 
   @override
-  State<PocketListingsTab> createState() => _PocketListingsTabState();
+  State<MyPocketListingsTab> createState() => _PocketListingsTabState();
 }
 
-class _PocketListingsTabState extends State<PocketListingsTab> {
+class _PocketListingsTabState extends State<MyPocketListingsTab> {
   late final PageStorageBucket _bucket = PageStorageBucket();
 
   late final PageStorageKey _pageStorageKey = PageStorageKey('pocket screen');

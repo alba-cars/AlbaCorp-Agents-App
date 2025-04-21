@@ -470,7 +470,7 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
       this.getPropertyCardsListError,
       this.propertyCardPaginator,
       this.listingsPaginator,
-      this.ratingValue = 5.0,
+      this.ratingValue,
       this.callProcessingState})
       : _sortedActivity = sortedActivity,
         _activities = activities,
@@ -545,7 +545,6 @@ class _$TaskDetailStateImpl implements _TaskDetailState {
   @override
   final Paginator? listingsPaginator;
   @override
-  @JsonKey()
   final double? ratingValue;
   @override
   final CallProcessingState? callProcessingState;

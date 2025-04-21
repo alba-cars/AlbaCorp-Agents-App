@@ -33,18 +33,24 @@ class HeadingText extends StatelessWidget {
       this.color,
       this.fontSize,
       this.fontWeight,
-      this.textAlign});
+      this.textAlign,
+      this.maxLines,
+      this.overflow});
   final String text;
   final Color? color;
   final double? fontSize;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
+  final int? maxLines;
+  final TextOverflow? overflow;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       textAlign: textAlign,
+      overflow: overflow,
+      maxLines: maxLines,
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
           fontSize: fontSize ?? 20,
           fontWeight: fontWeight ?? FontWeight.w500,
@@ -60,21 +66,25 @@ class LabelText extends StatelessWidget {
       this.underline = false,
       this.color,
       this.textAlign,
-      this.maxLines});
+      this.maxLines,
+      this.overflow,
+      this.fontWeight});
   final String text;
   final bool underline;
   final Color? color;
   final TextAlign? textAlign;
   final int? maxLines;
+  final TextOverflow? overflow;
+  final FontWeight? fontWeight;
 
   Widget textWidget(BuildContext context) => Text(
         text,
         textAlign: textAlign,
         maxLines: maxLines,
-        overflow: (maxLines != null) ? TextOverflow.ellipsis : null,
+        overflow: (maxLines != null) ? TextOverflow.ellipsis : overflow,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               fontSize: 13,
-              fontWeight: FontWeight.w600,
+              fontWeight: fontWeight ?? FontWeight.w600,
               color: color,
             ),
       );
@@ -103,15 +113,18 @@ class BlockTitleText extends StatelessWidget {
       required this.text,
       this.underline = false,
       this.color,
-      this.textAlign});
+      this.textAlign,
+      this.overflow});
   final String text;
   final bool underline;
   final Color? color;
   final TextAlign? textAlign;
+  final TextOverflow? overflow;
 
   Widget textWidget(BuildContext context) => Text(
         text,
         textAlign: textAlign,
+        overflow: overflow,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -144,12 +157,14 @@ class SmallText extends StatelessWidget {
       this.color = Colors.black,
       this.textAlign,
       this.fontWeight,
-      this.maxLines});
+      this.maxLines,
+      this.overflow});
   final String text;
   final Color color;
   final TextAlign? textAlign;
   final FontWeight? fontWeight;
   final int? maxLines;
+  final TextOverflow? overflow;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +172,7 @@ class SmallText extends StatelessWidget {
       text,
       textAlign: textAlign,
       maxLines: maxLines,
-      overflow: TextOverflow.ellipsis,
+      overflow: overflow ?? TextOverflow.ellipsis,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
             fontSize: 9,
             color: color,

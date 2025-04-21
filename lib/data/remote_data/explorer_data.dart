@@ -388,7 +388,6 @@ class ExplorerData implements ExplorerRepo {
         url,
       );
       final data = response.data['data'] as List;
-      log.d(data);
       final list = data.map((e) => PropertyCardLog.fromJson(e)).toList();
       return Success(
         list,

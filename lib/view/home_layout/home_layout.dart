@@ -406,14 +406,14 @@ class _HomeScreenState extends State<HomeScreen>
                         //     context.pushNamed(TicketsScreen.routeName);
                         //   },
                         // ),
-                        CustomListTileWithIcon(
-                          title: 'Attendance',
-                          iconImagePath: 'assets/images/ticket.png',
-                          onPressed: () {
-                            Scaffold.of(context).closeDrawer();
-                            context.pushNamed(CheckInPage.routeName);
-                          },
-                        ),
+                        // CustomListTileWithIcon(
+                        //   title: 'Attendance',
+                        //   iconImagePath: 'assets/images/ticket.png',
+                        //   onPressed: () {
+                        //     Scaffold.of(context).closeDrawer();
+                        //     context.pushNamed(CheckInPage.routeName);
+                        //   },
+                        // ),
                         VerticalSmallGap(
                           adjustment: 4,
                         ),

@@ -29,6 +29,7 @@ import '../../../model/activity_feedback_model.dart';
 import '../../../model/activity_model.dart';
 import '../../../service_locator/injectable.dart';
 import '../../add_deal_screen/add_deal_screen.dart';
+import 'quick_date_field.dart';
 
 // Enums for better type safety
 enum FeedbackType {
@@ -272,33 +273,36 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           label: 'Type',
           values: activityTypes,
           isRequired: true,
+          defaultValue: "Call",
+          onSelected: (val) {
+            setState(() {});
+          },
         ),
-        DateField(
+        DateOptionField(
           isRequired: true,
           name: 'date',
           label: 'Date',
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(getFollowUpDateLimit()),
         ),
         TimeField(
           isRequired: false,
           name: 'time',
           label: 'Time',
         ),
-        CardPickerDialogField<Property>(
-          name: 'property',
-          label: 'Property',
-          isRequired: false,
-          valueTransformer: (option) => option?.id,
-          optionsBuilder: (v, {isRefresh}) async {
-            return context
-                .read<TaskDetailCubit>()
-                .getListings(search: v.text, isRefresh: isRefresh ?? false);
-          },
-          optionBuilder: (context, listing) {
-            return PropertyCardPickerItem(listing: listing);
-          },
-        ),
+        if (_formKey.currentState?.fields['type']?.value == "Viewing")
+          CardPickerDialogField<Property>(
+            name: 'property',
+            label: 'Property',
+            isRequired: false,
+            valueTransformer: (option) => option?.id,
+            optionsBuilder: (v, {isRefresh}) async {
+              return context
+                  .read<TaskDetailCubit>()
+                  .getListings(search: v.text, isRefresh: isRefresh ?? false);
+            },
+            optionBuilder: (context, listing) {
+              return PropertyCardPickerItem(listing: listing);
+            },
+          ),
         MultiLineField(
           label: 'Add a note for next activity',
           name: 'description',
@@ -362,6 +366,25 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       onTap: () async {
         FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
+        final ratingValue = context.read<TaskDetailCubit>().state.ratingValue;
+        if (shouldShowRating(feedbackValue.value) &&
+            (ratingValue == null || ratingValue == 0)) {
+          // Show a more noticeable error for missing rating
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Rating Required'),
+              content: Text('Please provide a lead rating before proceeding.'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('OK'),
+                ),
+              ],
+            ),
+          );
+          return;
+        }
 
         final val = _formKey.currentState!.value;
         await context.read<TaskDetailCubit>().completeAndAddFollowUp(

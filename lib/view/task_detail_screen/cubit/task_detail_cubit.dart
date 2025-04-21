@@ -102,10 +102,13 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       // Prepare follow up data if needed
       Map<String, dynamic>? followUpData;
       if (addFollowUp && values != null) {
-        final date = (values["date"] as DateTime?)?.addTime(
-            values["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0));
+        DateTime? date = (values["date"] as DateTime?);
 
         if (date != null) {
+          if (values['time'] != null) {
+            date = date.addTime(
+                values["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0));
+          }
           followUpData = {
             "date": date.toUtc().toIso8601String(),
             "type": values['type'],
@@ -128,7 +131,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         case (Success s):
           getIt<AuthBloc>().add(
               AuthEvent.completedImportantActivity(activityId: state.task!.id));
-          emit(state.copyWith(updateTaskStatus: AppStatus.success));
+          emit(state.copyWith(
+              updateTaskStatus: AppStatus.success, ratingValue: null));
 
           if (context.mounted) {
             Navigator.of(context).pop(true);
@@ -218,8 +222,11 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       String? currentActivityNotes,
       required bool markAsProspect,
       required Map<String, dynamic> values}) async {
-    final date = (values["date"] as DateTime?)?.addTime(
-        values["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0));
+    DateTime? date = (values["date"] as DateTime?);
+    if (values['time'] != null && date != null) {
+      date = date.addTime(
+          values["time"] as TimeOfDay? ?? TimeOfDay(hour: 10, minute: 0));
+    }
 
     if (date == null || date.compareTo(DateTime.now()) == -1) {
       if (context.mounted) {
