@@ -68,6 +68,7 @@ mixin _$Lead {
   int get completedActivityCount => throw _privateConstructorUsedError;
   @JsonKey(readValue: readLeadSourceObject)
   LeadSourceItem? get leadSourceObject => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -114,7 +115,8 @@ abstract class $LeadCopyWith<$Res> {
       @JsonKey(readValue: readCompletedActivityCount)
       int completedActivityCount,
       @JsonKey(readValue: readLeadSourceObject)
-      LeadSourceItem? leadSourceObject});
+      LeadSourceItem? leadSourceObject,
+      double? rating});
 
   $PreferenceCopyWith<$Res>? get preference;
   $AgentCopyWith<$Res>? get currentAgent;
@@ -165,6 +167,7 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
     Object? dndStatus = null,
     Object? completedActivityCount = null,
     Object? leadSourceObject = freezed,
+    Object? rating = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -291,6 +294,10 @@ class _$LeadCopyWithImpl<$Res, $Val extends Lead>
           ? _value.leadSourceObject
           : leadSourceObject // ignore: cast_nullable_to_non_nullable
               as LeadSourceItem?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 
@@ -373,7 +380,8 @@ abstract class _$$LeadImplCopyWith<$Res> implements $LeadCopyWith<$Res> {
       @JsonKey(readValue: readCompletedActivityCount)
       int completedActivityCount,
       @JsonKey(readValue: readLeadSourceObject)
-      LeadSourceItem? leadSourceObject});
+      LeadSourceItem? leadSourceObject,
+      double? rating});
 
   @override
   $PreferenceCopyWith<$Res>? get preference;
@@ -424,6 +432,7 @@ class __$$LeadImplCopyWithImpl<$Res>
     Object? dndStatus = null,
     Object? completedActivityCount = null,
     Object? leadSourceObject = freezed,
+    Object? rating = freezed,
   }) {
     return _then(_$LeadImpl(
       id: null == id
@@ -550,6 +559,10 @@ class __$$LeadImplCopyWithImpl<$Res>
           ? _value.leadSourceObject
           : leadSourceObject // ignore: cast_nullable_to_non_nullable
               as LeadSourceItem?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -591,7 +604,8 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
       @JsonKey(readValue: readDndStatus) this.dndStatus = false,
       @JsonKey(readValue: readCompletedActivityCount)
       this.completedActivityCount = 0,
-      @JsonKey(readValue: readLeadSourceObject) this.leadSourceObject})
+      @JsonKey(readValue: readLeadSourceObject) this.leadSourceObject,
+      this.rating})
       : _languages = languages,
         _preferredLanguages = preferredLanguages,
         _tags = tags,
@@ -701,10 +715,12 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
   @override
   @JsonKey(readValue: readLeadSourceObject)
   final LeadSourceItem? leadSourceObject;
+  @override
+  final double? rating;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount, leadSourceObject: $leadSourceObject)';
+    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount, leadSourceObject: $leadSourceObject, rating: $rating)';
   }
 
   @override
@@ -744,7 +760,8 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('dndStatus', dndStatus))
       ..add(
           DiagnosticsProperty('completedActivityCount', completedActivityCount))
-      ..add(DiagnosticsProperty('leadSourceObject', leadSourceObject));
+      ..add(DiagnosticsProperty('leadSourceObject', leadSourceObject))
+      ..add(DiagnosticsProperty('rating', rating));
   }
 
   @override
@@ -802,7 +819,8 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
             (identical(other.completedActivityCount, completedActivityCount) ||
                 other.completedActivityCount == completedActivityCount) &&
             (identical(other.leadSourceObject, leadSourceObject) ||
-                other.leadSourceObject == leadSourceObject));
+                other.leadSourceObject == leadSourceObject) &&
+            (identical(other.rating, rating) || other.rating == rating));
   }
 
   @JsonKey(ignore: true)
@@ -839,7 +857,8 @@ class _$LeadImpl extends _Lead with DiagnosticableTreeMixin {
         const DeepCollectionEquality().hash(_tags),
         dndStatus,
         completedActivityCount,
-        leadSourceObject
+        leadSourceObject,
+        rating
       ]);
 
   @JsonKey(ignore: true)
@@ -893,7 +912,8 @@ abstract class _Lead extends Lead {
       @JsonKey(readValue: readCompletedActivityCount)
       final int completedActivityCount,
       @JsonKey(readValue: readLeadSourceObject)
-      final LeadSourceItem? leadSourceObject}) = _$LeadImpl;
+      final LeadSourceItem? leadSourceObject,
+      final double? rating}) = _$LeadImpl;
   const _Lead._() : super._();
 
   factory _Lead.fromJson(Map<String, dynamic> json) = _$LeadImpl.fromJson;
@@ -977,6 +997,8 @@ abstract class _Lead extends Lead {
   @override
   @JsonKey(readValue: readLeadSourceObject)
   LeadSourceItem? get leadSourceObject;
+  @override
+  double? get rating;
   @override
   @JsonKey(ignore: true)
   _$$LeadImplCopyWith<_$LeadImpl> get copyWith =>

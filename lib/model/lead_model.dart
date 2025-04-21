@@ -70,6 +70,7 @@ class Lead with _$Lead {
     @Default(0)
     int completedActivityCount,
     @JsonKey(readValue: readLeadSourceObject) LeadSourceItem? leadSourceObject,
+    double? rating,
   }) = _Lead;
 
   const Lead._();

@@ -420,26 +420,49 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TitleText(text: task.type),
-        BlocProvider(
-          create: (context) =>
-              getIt<LeadDetailCubit>(param1: task.lead?.id ?? ""),
-          child: ValueListenableBuilder<bool>(
-            valueListenable: isProspect,
-            builder: (context, value, child) {
-              if (!value) return const SizedBox();
-
-              return BlocBuilder<LeadDetailCubit, LeadDetailState>(
-                builder: (context, state) => IconButton(
-                  onPressed: () => _handleProspectToggle(context, task),
-                  icon: Icon(
-                    value ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
-                    color: Colors.red,
-                  ),
+        Row(
+          children: [
+            // Add Lead Score Display
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                'Score: ${(task.lead?.rating ?? 0)}',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
-              );
-            },
-          ),
-        )
+              ),
+            ),
+            const SizedBox(width: 8),
+            // Existing Prospect Heart Icon
+            BlocProvider(
+              create: (context) =>
+                  getIt<LeadDetailCubit>(param1: task.lead?.id ?? ""),
+              child: ValueListenableBuilder<bool>(
+                valueListenable: isProspect,
+                builder: (context, value, child) {
+                  if (!value) return const SizedBox();
+
+                  return BlocBuilder<LeadDetailCubit, LeadDetailState>(
+                    builder: (context, state) => IconButton(
+                      onPressed: () => _handleProspectToggle(context, task),
+                      icon: Icon(
+                        value
+                            ? CupertinoIcons.heart_fill
+                            : CupertinoIcons.heart,
+                        color: Colors.red,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }

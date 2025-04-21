@@ -713,6 +713,21 @@ class ActivityListItem extends StatelessWidget {
                             text: activity.lead?.leadStatus?.name ?? ''),
                       ),
                       HorizontalSmallGap(),
+                      // Lead Score Container
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 4.h, vertical: 1.h),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: colorScheme.primary),
+                            borderRadius: BorderRadius.circular(4),
+                            color: colorScheme.primaryContainer),
+                        child: SmallText(
+                          text:
+                              'Score: ${(activity.lead?.rating ?? 0).toStringAsFixed(1)}',
+                          color: colorScheme.primary,
+                        ),
+                      ),
+                      HorizontalSmallGap(),
                       if (activity.lead?.dndStatus == true)
                         Container(
                           padding: EdgeInsets.symmetric(

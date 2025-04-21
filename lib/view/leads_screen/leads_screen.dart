@@ -580,6 +580,21 @@ class LeadItem extends StatelessWidget {
                             child: SmallText(text: lead.leadStatus?.name ?? ''),
                           ),
                           HorizontalSmallGap(),
+                          // Lead Score Container
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4.h, vertical: 1.h),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: colorScheme.primary),
+                                borderRadius: BorderRadius.circular(4),
+                                color: colorScheme.primaryContainer),
+                            child: SmallText(
+                              text:
+                                  'Score: ${(lead.rating ?? 0).toStringAsFixed(1)}',
+                              color: colorScheme.primary,
+                            ),
+                          ),
+                          HorizontalSmallGap(),
                           if (hotLeads.contains(lead.leadSource))
                             Image.asset(
                               'assets/images/flame.png',
