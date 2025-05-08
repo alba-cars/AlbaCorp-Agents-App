@@ -69,7 +69,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await dotenv.load(fileName: ".env");
-  await configureDependencies(env: 'Stage');
+  await configureDependencies(env: 'Prod');
   // TwilioVoiceFlutter.init();
   runApp(const App());
 }

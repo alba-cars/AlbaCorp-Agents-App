@@ -49,24 +49,18 @@ class CallBloc extends Bloc<CallEvent, CallState> {
         makeACallStatus: AppStatus.loading, makeACallError: null));
     final settings = getIt<AuthBloc>().state.globalSettings;
     final agent = getIt<AuthBloc>().state.agent;
-    if ((settings?.enablePbx == true || agent?.usePbx == true) &&
-        event.leadSource == 'Hot') {
-      final result = await _linkusRepo.makeACall(
-          number: event.phoneNumber, activityId: event.activityId);
-      switch (result) {
-        case (Success s):
-          emit(state.copyWith(makeACallStatus: AppStatus.success));
-          try {
-            // await launchUrlString(urlString)
-          } catch (e) {}
-          break;
-        case (Error e):
-          emit(state.copyWith(
-              makeACallStatus: AppStatus.failure, makeACallError: e.exception));
-      }
-    } else {
-      await getIt<SharedPreferences>().setBool('IgnoreCallFeedback', true);
-      await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
+    final result = await _linkusRepo.makeACall(
+        number: event.phoneNumber, activityId: event.activityId);
+    switch (result) {
+      case (Success s):
+        emit(state.copyWith(makeACallStatus: AppStatus.success));
+        try {
+          // await launchUrlString(urlString)
+        } catch (e) {}
+        break;
+      case (Error e):
+        emit(state.copyWith(
+            makeACallStatus: AppStatus.failure, makeACallError: e.exception));
     }
   }
 
@@ -103,11 +97,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
       _ClickToCall event, Emitter<CallState> emit) async {
     final settings = getIt<AuthBloc>().state.globalSettings;
     final agent = getIt<AuthBloc>().state.agent;
-    if ((settings?.enablePbx == true || agent?.usePbx == true)) {
-      await _linkusRepo.makeACall(number: event.phoneNumber);
-    } else {
-      await getIt<SharedPreferences>().setBool('IgnoreCallFeedback', true);
-      await FlutterPhoneDirectCaller.callNumber('tel://${event.phoneNumber}');
-    }
+
+    await _linkusRepo.makeACall(number: event.phoneNumber);
   }
 }
