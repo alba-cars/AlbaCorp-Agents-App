@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    // getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
     super.initState();
   }
 
