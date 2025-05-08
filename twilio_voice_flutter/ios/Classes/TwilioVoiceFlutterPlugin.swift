@@ -60,7 +60,7 @@ public class TwilioVoiceFlutterPlugin: NSObject, FlutterPlugin, NotificationDele
         let appDelegate = UIApplication.shared.delegate
         guard let window = appDelegate?.window, let rootViewController = window?.rootViewController as? FlutterViewController else {
             // Handle by creating a default channel that will be replaced later
-            channel = createEmptyMethodChannel()
+//            channel = createEmptyMethodChannel()  
             return
         }
 
@@ -564,11 +564,10 @@ public class TwilioVoiceFlutterPlugin: NSObject, FlutterPlugin, NotificationDele
         var result: String? = nil
         
         if let callInvite = self.callInvite {
-            let params = callInvite.customParameters
-            if let fromName = params["fromDisplayName"] {
+            if let fromName = callInvite.customParameters?["fromDisplayName"] {
                 result = fromName
             }
-
+            
             if result == nil || result == "" {
                 let contactName = self.getContactDisplayName(phoneNumber: callInvite.from ?? "")
                 if contactName != "" {
@@ -578,7 +577,6 @@ public class TwilioVoiceFlutterPlugin: NSObject, FlutterPlugin, NotificationDele
         } else {
             result = self.fromDisplayName ?? ""
         }
-
         if result == nil || result == "" {
             return "Unknown name"
         }
@@ -591,7 +589,7 @@ public class TwilioVoiceFlutterPlugin: NSObject, FlutterPlugin, NotificationDele
         
         if let callInvite = self.callInvite {
             let params = callInvite.customParameters
-            if let toName = params["toDisplayName"] {
+            if let toName = params?["toDisplayName"] {
                 result = toName
             }
 
@@ -767,12 +765,8 @@ public class TwilioVoiceFlutterPlugin: NSObject, FlutterPlugin, NotificationDele
         self.call?.sendDigits(digits)
     }
     
-    // Using a stub approach for initialization without a proper binary messenger
-    private func createEmptyMethodChannel() -> FlutterMethodChannel {
-        // Create a dummy channel that will be replaced later when a proper one can be established
-        // This avoids the need for a custom class that might not conform to the protocol
-        return FlutterMethodChannel(name: "twilio_voice_flutter", binaryMessenger: FlutterViewController())
-    }
+
+    
 }
 
 // MARK: PKPushRegistryDelegate
@@ -1163,3 +1157,4 @@ extension UIWindow {
         }
     }
 }
+
