@@ -45,7 +45,7 @@ class DefaultFirebaseOptions {
     appId: '1:496432202958:android:188bdc214daf3c6802fc9f',
     messagingSenderId: '496432202958',
     projectId: 'agent-app-2cc24',
-    storageBucket: 'agent-app-2cc24.appspot.com',
+    storageBucket: 'agent-app-2cc24.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -53,7 +53,7 @@ class DefaultFirebaseOptions {
     appId: '1:496432202958:ios:73f99163e691c05302fc9f',
     messagingSenderId: '496432202958',
     projectId: 'agent-app-2cc24',
-    storageBucket: 'agent-app-2cc24.appspot.com',
+    storageBucket: 'agent-app-2cc24.firebasestorage.app',
     iosBundleId: 'com.alba.agent-app',
   );
 
