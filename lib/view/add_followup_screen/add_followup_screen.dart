@@ -39,7 +39,7 @@ class AddFollowUpScreen extends StatelessWidget {
 }
 
 class _AddFollowUpLayout extends StatefulWidget {
-  const _AddFollowUpLayout({super.key});
+  const _AddFollowUpLayout();
 
   @override
   State<_AddFollowUpLayout> createState() => _AddFollowUpLayoutState();
@@ -143,7 +143,7 @@ class _AddFollowUpLayoutState extends State<_AddFollowUpLayout> {
                           label: 'Property',
                           isRequired: false,
                           valueTransformer: (option) => option?.id,
-                          optionsBuilder: (v,{isRefresh}) async {
+                          optionsBuilder: (v, {isRefresh}) async {
                             return context
                                 .read<AddFollowupCubit>()
                                 .getListings(search: v.text);

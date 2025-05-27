@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:real_estate_app/view/explorer_screen/cubit/explorer_screen_cubit.dart';
 import 'package:real_estate_app/view/leads_list_explorer/cubit/leads_list_explorer_cubit.dart';
 import 'package:real_estate_app/widgets/text.dart';
 

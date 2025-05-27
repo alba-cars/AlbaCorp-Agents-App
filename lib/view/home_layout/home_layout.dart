@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -17,26 +16,21 @@ import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_layout/quick_access_button.dart';
-import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/view/hot_leads_assigned_today_screen/hot_leads_assigned_today_screen.dart';
 import 'package:real_estate_app/view/leads_list_explorer/leads_list_explorer.dart';
 import 'package:real_estate_app/view/leads_screen/leads_screen.dart';
 import 'package:real_estate_app/view/my_activities/presentation/my_actvities_page.dart';
 import 'package:real_estate_app/view/notifications_screen/notifications_screen.dart';
-import 'package:real_estate_app/view/twilio_screen/twilio_screen.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../app/auth_bloc/auth_bloc.dart';
 import '../../model/user.dart';
 import '../../service_locator/injectable.dart';
 import '../../widgets/button.dart';
-import '../../widgets/s3_image.dart';
 import '../../widgets/space.dart';
-import '../check_in_page/check_in_page.dart';
 import '../listings_screen/listing_screen.dart';
 import 'kpis_layout_widget.dart';
 

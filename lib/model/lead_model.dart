@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/lead_source_category_model.dart';
 
 import '../app/auth_bloc/auth_bloc.dart';

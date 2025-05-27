@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class UrlText extends StatelessWidget {

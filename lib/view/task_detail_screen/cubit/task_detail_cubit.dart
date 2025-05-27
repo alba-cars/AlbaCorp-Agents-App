@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,7 +17,6 @@ import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
-import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';

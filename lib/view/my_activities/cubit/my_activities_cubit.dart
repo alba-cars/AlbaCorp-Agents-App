@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/model/activity_model.dart';
-import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/user_list_data.dart';
 import 'package:real_estate_app/util/paginator.dart';
@@ -37,15 +36,17 @@ class MyActivitiesCubit extends Cubit<MyActivitiesState> {
     try {
       if (state.status == AppStatus.loading) {
         return;
-      }else if(loadMore && !(state.paginator?.hasNextPage ?? false)){
+      } else if (loadMore && !(state.paginator?.hasNextPage ?? false)) {
         return;
       }
 
       if (loadMore && (state.paginator?.hasNextPage ?? false)) {
         emit(state.copyWith(
-            status: AppStatus.loading,));
+          status: AppStatus.loading,
+        ));
       } else {
-        emit(state.copyWith(status: AppStatus.loading, paginator: null,activities: []));
+        emit(state.copyWith(
+            status: AppStatus.loading, paginator: null, activities: []));
       }
 
       final datesL = dates ?? <DateTime>[];
@@ -57,7 +58,6 @@ class MyActivitiesCubit extends Cubit<MyActivitiesState> {
       }
 
       Logger().d(state.paginator);
-
 
       final Result<List<Activity>> result =
           await activityRepo.getActivitiesByAgent(
@@ -71,7 +71,7 @@ class MyActivitiesCubit extends Cubit<MyActivitiesState> {
         case (Success<List<Activity>> success):
           Logger().d("On success scenario ${success.paginator}");
           emit(state.copyWith(
-              activities:[...state.activities,...success.value],
+              activities: [...state.activities, ...success.value],
               paginator: success.paginator,
               status: AppStatus.success));
           break;

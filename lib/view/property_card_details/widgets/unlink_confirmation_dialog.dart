@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/lead_property_card_model.dart';
 
 import '../../../widgets/button.dart';

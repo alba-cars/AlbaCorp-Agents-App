@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:real_estate_app/model/agent_model.dart';
-import 'package:real_estate_app/model/lead_model.dart';
 
 part 'lead_expiration_model.freezed.dart';
 part 'lead_expiration_model.g.dart';
@@ -35,12 +33,12 @@ class ExpirationRecord with _$ExpirationRecord {
 @freezed
 class AgentModel with _$AgentModel {
   const factory AgentModel({
-     required String id,
+    required String id,
     required String userId,
     required String name,
     required String phone,
-     String? photo,
-     String? leader,
+    String? photo,
+    String? leader,
     @Default(false) bool isLeader,
     @JsonKey(name: '_id') required String recordId,
   }) = _AgentModel;

@@ -4,15 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/activity_model.dart';
-import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/call_feedback_screen/cubit/call_feedback_cubit.dart';
 
 import '../../../util/color_category.dart';
-import '../../../widgets/call_button.dart';
 import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
-import '../../../widgets/timer_text.dart';
 
 class LastPendingActivity extends StatelessWidget {
   const LastPendingActivity({super.key});

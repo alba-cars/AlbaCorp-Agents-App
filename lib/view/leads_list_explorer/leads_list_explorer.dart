@@ -191,7 +191,7 @@ class _ExplorerTabState extends State<ExplorerTab> {
             {"label": "Yes", "value": true},
             {"label": "No", "value": false}
           ],
-          displayOption: (option) => option?['label']?.toString() ?? '',
+          displayOption: (option) => option['label']?.toString() ?? '',
           valueTransformer: (p0) => p0?['value'],
           isRequired: true),
       WrapSelectField(

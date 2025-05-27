@@ -9,11 +9,9 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/beds_baths_optional_list.dart';
 import 'package:real_estate_app/constants/building_optional_propertytype_list.dart';
-import 'package:real_estate_app/model/amenity_model.dart';
 import 'package:real_estate_app/model/building_model.dart';
 import 'package:real_estate_app/model/community_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
-import 'package:real_estate_app/model/deal_response.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/listing_request_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
@@ -25,18 +23,11 @@ import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/currency_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field.dart';
 import 'package:real_estate_app/widgets/fields/document_upload_field_multi.dart';
-import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_image_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/fields/number_field.dart';
-import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
-
-import '../../widgets/fields/commission_field.dart';
-import '../../widgets/fields/multi_select_autocomplete_field.dart';
 
 class AddListingScreen extends StatelessWidget {
   static const routeName = '/addListingScreen';

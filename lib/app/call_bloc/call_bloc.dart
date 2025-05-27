@@ -1,17 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:phone_state/phone_state.dart';
+
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/linkus_repo.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../util/status.dart';
 
@@ -34,14 +31,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   final ActivityRepo _activityRepo;
   final LinkusRepo _linkusRepo;
 
-  FutureOr<void> _onStarted(_Started event, Emitter<CallState> emit) {
-    phoneCallStateSubscription = PhoneState.stream.listen((event) {
-      if (event.status == PhoneStateStatus.CALL_STARTED) {
-      } else if (event.status == PhoneStateStatus.CALL_ENDED) {
-        add(_CallEnded());
-      }
-    });
-  }
+  FutureOr<void> _onStarted(_Started event, Emitter<CallState> emit) {}
 
   FutureOr<void> _onCallStarted(
       _CallStarted event, Emitter<CallState> emit) async {

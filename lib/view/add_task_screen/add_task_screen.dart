@@ -13,7 +13,6 @@ import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/card_picker_field.dart';
 import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
-import 'package:real_estate_app/widgets/fields/text_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -115,7 +114,7 @@ class _AddTaskScreenLayoutState extends State<_AddTaskScreenLayout> {
                   label: 'Property',
                   isRequired: false,
                   valueTransformer: (option) => option?.id,
-                  optionsBuilder: (v,{isRefresh}) async {
+                  optionsBuilder: (v, {isRefresh}) async {
                     return context
                         .read<AddTaskCubit>()
                         .getListings(search: v.text);

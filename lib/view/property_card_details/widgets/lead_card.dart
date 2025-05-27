@@ -135,7 +135,7 @@ class LeadCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      lead.lead.leadStatus?.name?.titleCase ?? 'Unknown',
+                      lead.lead.leadStatus?.name.titleCase ?? 'Unknown',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

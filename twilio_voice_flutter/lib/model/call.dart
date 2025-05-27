@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import '../model/status.dart';
-import '../twilio_voice_flutter.dart';
 
 /// Represents a Twilio voice call with all its associated properties.
 /// This class extends [Equatable] for value comparison.

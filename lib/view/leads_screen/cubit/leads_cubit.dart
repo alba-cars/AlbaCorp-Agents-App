@@ -12,7 +12,6 @@ import 'package:real_estate_app/model/lead_model.dart';
 import '../../../app/auth_bloc/auth_bloc.dart';
 import '../../../app/list_state_cubit/list_state_cubit.dart';
 import '../../../model/paginator.dart';
-import '../../../model/property_card_model.dart';
 import '../../../service_locator/injectable.dart';
 import '../../../util/result.dart';
 import '../../../util/status.dart';

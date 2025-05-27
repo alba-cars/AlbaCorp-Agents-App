@@ -1,7 +1,5 @@
 // lib/features/activities/presentation/widgets/activity_filters_section.dart
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate_app/view/my_activities/cubit/my_activities_cubit.dart';
@@ -62,7 +60,15 @@ class _ActivityFiltersSectionState extends State<ActivityFiltersSection> {
         hintText: 'Type',
       ),
       value: state.activityType ?? 'All',
-      items: ["All", 'CheckIn', 'Call', 'Whatsapp', 'Assign','Viewing','Unassigned']
+      items: [
+        "All",
+        'CheckIn',
+        'Call',
+        'Whatsapp',
+        'Assign',
+        'Viewing',
+        'Unassigned'
+      ]
           .map((status) => DropdownMenuItem(
                 value: status,
                 child: Text(status),
@@ -73,7 +79,7 @@ class _ActivityFiltersSectionState extends State<ActivityFiltersSection> {
             selectedType: value == "All" ? null : value,
             startDate: state.startDate,
             endDate: state.endDate,
-            selectedStatus:state.activityStatus);
+            selectedStatus: state.activityStatus);
       },
     );
   }

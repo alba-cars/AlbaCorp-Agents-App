@@ -2,32 +2,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
-import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
-import 'package:real_estate_app/constants/listing_status_color.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/paginator.dart';
-import 'package:real_estate_app/util/property_price.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
-import 'package:real_estate_app/view/listing_detail_screen/listing_detail_screen.dart';
 import 'package:real_estate_app/view/listings_screen/cubit/listings_cubit.dart';
 import 'package:real_estate_app/view/listings_screen/widgets/listing_item.dart';
 import 'package:real_estate_app/view/listings_screen/widgets/my_listings_tab.dart';
 import 'package:real_estate_app/view/property_card_details/property_card_details.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/drop_down_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_select_autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
@@ -36,14 +28,12 @@ import 'package:real_estate_app/widgets/tab_bar.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:recase/recase.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../util/constant.dart';
 import '../../util/status.dart';
 import '../../widgets/button.dart';
 import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/search_bar.dart';
-import '../../widgets/snackbar.dart';
 import '../deal_details_screen/widgets/info_label_value.dart';
 
 class ListingsScreen extends StatelessWidget {
@@ -136,7 +126,7 @@ class _ListingsTabState extends State<ListingsTab> {
     return [
       AppAutoComplete(
         label: 'Agent',
-        optionsBuilder: (val,refresh) => context
+        optionsBuilder: (val, refresh) => context
             .read<ListingsCubit>()
             .state
             .agentList
@@ -153,7 +143,7 @@ class _ListingsTabState extends State<ListingsTab> {
       ),
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -174,7 +164,7 @@ class _ListingsTabState extends State<ListingsTab> {
           name: 'community'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final List<String>? communities = (values?['community'] as List?)
                 ?.map<String>((e) => (e['value'] ?? ''))
                 .toList();
@@ -257,7 +247,7 @@ class _ListingsTabState extends State<ListingsTab> {
         label: 'Amenities',
         name: "amenities",
         displayStringForOption: (option) => option['label']?.toString() ?? '',
-        optionsBuilder: (v,refresh) async {
+        optionsBuilder: (v, refresh) async {
           var list = context
               .read<ListingsCubit>()
               .state
@@ -478,7 +468,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           isRequired: false),
       MultiSelectAutoCompleteField(
           label: 'Community',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.communityList;
             if (stateResult.isEmpty) {
@@ -499,7 +489,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           name: 'communities'),
       AppAutoComplete(
           label: 'Agent',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final stateResult = context.read<ListingsCubit>().state.agentList;
             if (stateResult.isEmpty) {
               await context.read<ListingsCubit>().getAgents(search: v.text);
@@ -519,7 +509,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
           name: 'currentAgent'),
       MultiSelectAutoCompleteField(
           label: 'Building',
-          optionsBuilder: (v,refresh) async {
+          optionsBuilder: (v, refresh) async {
             final stateResult =
                 context.read<ListingsCubit>().state.buildingList;
             if (stateResult.isEmpty) {

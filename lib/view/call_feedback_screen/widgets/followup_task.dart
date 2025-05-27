@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
@@ -81,7 +80,7 @@ class _FollowUpTaskState extends State<FollowUpTask> {
                       label: 'Property',
                       isRequired: false,
                       valueTransformer: (option) => option?.id,
-                      optionsBuilder: (v,{isRefresh}) async {
+                      optionsBuilder: (v, {isRefresh}) async {
                         return context
                             .read<CallFeedbackCubit>()
                             .getListings(search: v.text);

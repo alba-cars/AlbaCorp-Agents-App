@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
 import 'package:real_estate_app/util/paginator.dart';
-import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../data/repository/explorer_repo.dart';
@@ -25,7 +24,8 @@ part 'list_state_cubit.freezed.dart';
 
 @lazySingleton
 class ListStateCubit extends Cubit<ListStateState> {
-  ListStateCubit(this._explorerRepo, this._listingsRepo, this._leadRepo) : super(ListStateState()){
+  ListStateCubit(this._explorerRepo, this._listingsRepo, this._leadRepo)
+      : super(ListStateState()) {
     getPropertyTypes();
   }
 
@@ -84,6 +84,7 @@ class ListStateCubit extends Cubit<ListStateState> {
       }
     }
   }
+
   Future<List<CommunityName>> getPlaces({String? search}) async {
     emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
     if (state.placesList.isNotEmpty && search != null) {
@@ -95,11 +96,10 @@ class ListStateCubit extends Cubit<ListStateState> {
           agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
         case (Success<List<CommunityTeamModel>> s):
-           emit(state.copyWith(
-              placesList:
-                  s.value.expand((e)=>e.communities).toList(),
+          emit(state.copyWith(
+              placesList: s.value.expand((e) => e.communities).toList(),
               getPlacesListStatus: AppStatus.success));
-          return s.value.expand((e)=>e.communities).toList();
+          return s.value.expand((e) => e.communities).toList();
         case (Error e):
           emit(state.copyWith(
             getPlacesListStatus: AppStatus.failure,
@@ -110,19 +110,24 @@ class ListStateCubit extends Cubit<ListStateState> {
   }
 
   Future<List<Building>> getBuildings(
-      {String? search, List<String>? community,bool refresh = false}) async {
+      {String? search, List<String>? community, bool refresh = false}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    if(refresh){
+    if (refresh) {
       emit(state.copyWith(buildingsPaginator: null));
     }
 
     final result = await _listingsRepo.getBuildingNames(
-        search: search, communityId: community,paginator: refresh?null:state.buildingsPaginator);
+        search: search,
+        communityId: community,
+        paginator: refresh ? null : state.buildingsPaginator);
     switch (result) {
       case (Success s):
-      final List<Building> buildings =refresh? s.value:[...state.buildingList,...s.value];
+        final List<Building> buildings =
+            refresh ? s.value : [...state.buildingList, ...s.value];
         emit(state.copyWith(
-            buildingList:buildings, getBuildingListStatus: AppStatus.success,buildingsPaginator: s.paginator));
+            buildingList: buildings,
+            getBuildingListStatus: AppStatus.success,
+            buildingsPaginator: s.paginator));
         return buildings;
 
       case (Error e):
@@ -138,7 +143,7 @@ class ListStateCubit extends Cubit<ListStateState> {
     final result = await _listingsRepo.getPropertyTypes();
     switch (result) {
       case (Success s):
-      final properties = sortPropertyTypes(s.value);
+        final properties = sortPropertyTypes(s.value);
         emit(state.copyWith(
             propertyTypeList: properties,
             getPropertyTypeListStatus: AppStatus.success));
@@ -150,40 +155,49 @@ class ListStateCubit extends Cubit<ListStateState> {
     }
   }
 
-   Future<List<LeadSource>> getLeadSources(
+  Future<List<LeadSource>> getLeadSources(
       {LeadSourceType leadSourceType = LeadSourceType.All,
       String? search,
-      bool isRefresh = false
-      }) async {
-    if(search != state.leadSourceSearch || isRefresh){
-       emit(state.copyWith(leadSourcePaginator: null,leadSources: [],leadSourceSearch: search));
-    }else if(!(state.leadSourcePaginator?.hasNextPage ??false)){
+      bool isRefresh = false}) async {
+    if (search != state.leadSourceSearch || isRefresh) {
+      emit(state.copyWith(
+          leadSourcePaginator: null,
+          leadSources: [],
+          leadSourceSearch: search));
+    } else if (!(state.leadSourcePaginator?.hasNextPage ?? false)) {
       return state.leadSources ?? [];
     }
     emit(state.copyWith(getLeadSourcestatus: AppStatus.loading));
 
     final result = await _leadRepo.getLeadSourcesRefactored(
-        leadSourceType: leadSourceType, search: search, paginator: state.leadSourcePaginator);
+        leadSourceType: leadSourceType,
+        search: search,
+        paginator: state.leadSourcePaginator);
 
     switch (result) {
       case (Success success):
-       return _handleSucccess(success);
+        return _handleSucccess(success);
       case (Error error):
-       return  _handleError(error);
+        return _handleError(error);
     }
   }
 
   List<LeadSource> _handleSucccess(Success success) {
-    final List<LeadSource> list =[...(state.leadSources ?? []),...(success.value as List<LeadSource>)];
+    final List<LeadSource> list = [
+      ...(state.leadSources ?? []),
+      ...(success.value as List<LeadSource>)
+    ];
     emit(state.copyWith(
         getLeadSourcestatus: AppStatus.success,
         leadSourcePaginator: success.paginator,
         leadSources: list));
-        return list;
+    return list;
   }
 
   List<LeadSource> _handleError(Error error) {
-    emit(state.copyWith(getLeadSourcestatus: AppStatus.failure, leadSourceError: error.exception));
+    emit(state.copyWith(
+        getLeadSourcestatus: AppStatus.failure,
+        leadSourceError: error.exception));
     return <LeadSource>[];
   }
 }

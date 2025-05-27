@@ -250,6 +250,7 @@ class AddDealCubit extends Cubit<AddDealState> {
       default:
         return null;
     }
+    return null;
   }
 
   Future<void> onPreviousPressed({required TabController tabController}) async {

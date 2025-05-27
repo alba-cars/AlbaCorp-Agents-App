@@ -115,7 +115,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                     onSecondary: Colors.white,
                     tertiary: Color(0xff7c9885),
                     tertiaryContainer: Color(0xffD9D9D9)),
-                dialogBackgroundColor: Colors.white,
                 buttonTheme: ButtonThemeData(
                   buttonColor: Color(0xff004B85),
                 ),

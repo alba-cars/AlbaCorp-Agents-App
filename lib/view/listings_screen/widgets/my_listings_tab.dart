@@ -10,8 +10,6 @@ import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/tab_bar.dart';
 import 'package:recase/recase.dart';
 
-import '../../../app/call_bloc/call_bloc.dart';
-import '../../../service_locator/injectable.dart';
 import '../../../util/color_category.dart';
 import '../../../util/status.dart';
 import '../../../widgets/fields/multi_select_autocomplete_field.dart';

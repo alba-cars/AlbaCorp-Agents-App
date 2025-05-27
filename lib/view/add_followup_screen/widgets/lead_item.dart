@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/widgets/text.dart';
@@ -7,7 +6,6 @@ import 'package:real_estate_app/widgets/text.dart';
 import '../../../constants/hot_leads.dart';
 import '../../../model/lead_model.dart';
 import '../../../util/color_category.dart';
-import '../../../widgets/call_button.dart';
 import '../../../widgets/space.dart';
 import '../../lead_detail_screen/lead_detail_screen.dart';
 

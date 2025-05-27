@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:recase/recase.dart';
@@ -72,12 +71,15 @@ class MyActivitiesItemWidget extends StatelessWidget {
       ),
       children: [
         Padding(
-          padding: const EdgeInsets.only(left:  16.0),
+          padding: const EdgeInsets.only(left: 16.0),
           child: Row(
             children: [
               Text(
                 "Description: ${activity.description}",
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontSize: 12),
               ),
             ],
           ),

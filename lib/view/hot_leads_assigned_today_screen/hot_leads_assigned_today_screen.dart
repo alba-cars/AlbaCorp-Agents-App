@@ -20,7 +20,7 @@ class HotLeadsAssignedToday extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({super.key});
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +37,24 @@ class _Body extends StatelessWidget {
               builder: (context, state) {
                 return Expanded(
                   child: RefreshIndicator(
-                    onRefresh: ()async{
-                      await context.read<HotLeadsAssignedTodayCubit>().getLeadsExplorerList(refresh: true);
+                    onRefresh: () async {
+                      await context
+                          .read<HotLeadsAssignedTodayCubit>()
+                          .getLeadsExplorerList(refresh: true);
                     },
                     child: NotificationListener<ScrollNotification>(
                       onNotification: (notification) {
-                        if(notification.metrics.pixels >= notification.metrics.maxScrollExtent *0.8 && (state.paginator?.hasNextPage ?? false)){
-                          context.read<HotLeadsAssignedTodayCubit>().getLeadsExplorerList();
+                        if (notification.metrics.pixels >=
+                                notification.metrics.maxScrollExtent * 0.8 &&
+                            (state.paginator?.hasNextPage ?? false)) {
+                          context
+                              .read<HotLeadsAssignedTodayCubit>()
+                              .getLeadsExplorerList();
                         }
                         return true;
                       },
                       child: ListView.separated(
-                        padding: EdgeInsets.symmetric(vertical: 20),
+                          padding: EdgeInsets.symmetric(vertical: 20),
                           itemBuilder: (context, index) {
                             final activity = state.activities[index];
                             return LeadCard(
@@ -57,7 +63,8 @@ class _Body extends StatelessWidget {
                                 phone: activity.lead?.phone ?? '',
                                 leadSource: activity.lead?.leadSource ?? "",
                                 assignedAt: activity.completedDate!,
-                                dueAt: activity.lead?.lastActivityDate ?? DateTime.now());
+                                dueAt: activity.lead?.lastActivityDate ??
+                                    DateTime.now());
                           },
                           separatorBuilder: (context, index) => SizedBox(
                                 height: 8,

@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/property_type_model.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/property_price.dart';
@@ -145,11 +144,12 @@ class InfoTabView extends StatelessWidget {
                           VerticalSmallGap(
                             adjustment: 1,
                           ),
-                          BlocBuilder<DealDetailsCubit, DealDetailsState
-                              >(
-                           
+                          BlocBuilder<DealDetailsCubit, DealDetailsState>(
                             builder: (context, state) {
-                              if(state.userDocuments.isEmpty&&state.buyerDocuments.isEmpty&&state.sellerDocuments.isEmpty &&state.dealDocuments.isEmpty ){
+                              if (state.userDocuments.isEmpty &&
+                                  state.buyerDocuments.isEmpty &&
+                                  state.sellerDocuments.isEmpty &&
+                                  state.dealDocuments.isEmpty) {
                                 return SizedBox();
                               }
                               return AppPrimaryButton(

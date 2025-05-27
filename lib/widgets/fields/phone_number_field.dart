@@ -359,7 +359,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
                                 child: Row(
                                   children: [
                                     Image.asset(
-                                      countryCode!.flagUri!,
+                                      countryCode.flagUri!,
                                       package: 'country_code_picker',
                                       width: 40,
                                       height: 40,

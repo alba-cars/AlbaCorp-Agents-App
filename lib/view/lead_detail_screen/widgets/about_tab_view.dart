@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/launch_whatsapp.dart';
@@ -14,13 +12,8 @@ import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.
 import 'package:real_estate_app/view/lead_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/edit_client_dialog.dart';
 import 'package:real_estate_app/view/lead_detail_screen/widgets/lead_property_cards_list.dart';
-import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/call_bloc/call_bloc.dart';
 import '../../../model/lead_model.dart';

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:real_estate_app/core/helpers/currency_formatter.dart';
-import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/earnings/cubit/earnings_cubit.dart';
 import 'package:real_estate_app/widgets/text.dart';
 

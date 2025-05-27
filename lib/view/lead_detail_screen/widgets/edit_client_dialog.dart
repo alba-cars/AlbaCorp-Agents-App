@@ -20,9 +20,7 @@ showEditClientDialog(BuildContext pcontext) {
 }
 
 class _DialogContent extends StatefulWidget {
-  const _DialogContent({
-    super.key,
-  });
+  const _DialogContent();
 
   @override
   State<_DialogContent> createState() => _DialogContentState();

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
@@ -14,10 +13,8 @@ import 'package:real_estate_app/view/deal_details_screen/widgets/info_label_valu
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/listing_detail_screen/cubit/listing_detail_cubit.dart';
 import 'package:real_estate_app/view/listing_detail_screen/widgets/activity_list.dart';
-import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/share_location.dart';
-import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:url_launcher/url_launcher_string.dart';

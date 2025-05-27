@@ -20,45 +20,69 @@ class ExpiredHotLeadExplorer extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({super.key});
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Hot Lead Explorer"),centerTitle: true,),body: BlocBuilder<ExpiredHotLeadExplorerCubit, ExpiredHotLeadExplorerState>(
-      builder: (context, state) {
-        return Column(children: [
-          LeadSourceFilter(state: state),
-          Expanded(child: RefreshIndicator(
-            onRefresh: ()async{
-             await context.read<ExpiredHotLeadExplorerCubit>().getExpiredHotLeads(refresh: true);
-            },
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (notification) {
-                if(notification.metrics.pixels >= notification.metrics.maxScrollExtent * 0.8){
-                  context.read<ExpiredHotLeadExplorerCubit>().getExpiredHotLeads();
-                }
-                return true;
-              },
-              child: ListView.separated(itemBuilder: (context,index){
-                final card = state.expiredHotLeads[index];
-                return ExpiredHotLeadCard(
-                  lastExpiredAt: DateFormat.yMEd().format( card.lastExpirationRecord.createdAt),
-                  leadSource: card.lastExpirationRecord.lead.leadSource.name,
-                  agentName: card.lastExpirationRecord.agent.name,
-                  agentPhone: card.lastExpirationRecord.agent.phone,
-                  name: card.lastExpirationRecord.lead.name,
-                  agentInitials: card.lastExpirationRecord.agent.photo ?? '',
-                  expirationCount: card.numberOfExpirations,
-                  onAssign: ()async {
-                  await  context.read<ExpiredHotLeadExplorerCubit>().checkOutLead(context: context, card: card);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Hot Lead Explorer"),
+        centerTitle: true,
+      ),
+      body:
+          BlocBuilder<ExpiredHotLeadExplorerCubit, ExpiredHotLeadExplorerState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              LeadSourceFilter(state: state),
+              Expanded(
+                  child: RefreshIndicator(
+                onRefresh: () async {
+                  await context
+                      .read<ExpiredHotLeadExplorerCubit>()
+                      .getExpiredHotLeads(refresh: true);
+                },
+                child: NotificationListener<ScrollNotification>(
+                  onNotification: (notification) {
+                    if (notification.metrics.pixels >=
+                        notification.metrics.maxScrollExtent * 0.8) {
+                      context
+                          .read<ExpiredHotLeadExplorerCubit>()
+                          .getExpiredHotLeads();
+                    }
+                    return true;
                   },
-              
-                );
-              }, separatorBuilder: (context,index) => SizedBox(height: 8,), itemCount: state.expiredHotLeads.length),
-            ),
-          ))
-        ],);
-      },
-    ),);
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        final card = state.expiredHotLeads[index];
+                        return ExpiredHotLeadCard(
+                          lastExpiredAt: DateFormat.yMEd()
+                              .format(card.lastExpirationRecord.createdAt),
+                          leadSource:
+                              card.lastExpirationRecord.lead.leadSource.name,
+                          agentName: card.lastExpirationRecord.agent.name,
+                          agentPhone: card.lastExpirationRecord.agent.phone,
+                          name: card.lastExpirationRecord.lead.name,
+                          agentInitials:
+                              card.lastExpirationRecord.agent.photo ?? '',
+                          expirationCount: card.numberOfExpirations,
+                          onAssign: () async {
+                            await context
+                                .read<ExpiredHotLeadExplorerCubit>()
+                                .checkOutLead(context: context, card: card);
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                            height: 8,
+                          ),
+                      itemCount: state.expiredHotLeads.length),
+                ),
+              ))
+            ],
+          );
+        },
+      ),
+    );
   }
 }

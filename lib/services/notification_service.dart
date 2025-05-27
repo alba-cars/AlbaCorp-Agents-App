@@ -5,13 +5,8 @@ import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/data/objectbox/entity/notification_entity.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/service_locator/objectbox.dart';
-import 'package:real_estate_app/util/launch_whatsapp.dart';
-import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
-import '../routes/app_router.dart';
-import '../view/task_detail_screen/task_detail_screen.dart';
 
 class NotificationService {
   static Future<void> initializeNotification() async {
@@ -147,9 +142,7 @@ class NotificationService {
     Logger().d("received noyification ${receivedAction.toMap()}");
     if (receivedAction.displayedLifeCycle == NotificationLifeCycle.Foreground &&
         receivedAction.payload != null) {
-       
       getIt<AuthBloc>().onNotificationData(receivedAction.payload!);
-          
     } else {
       final data = receivedAction.payload;
       if (data != null) {

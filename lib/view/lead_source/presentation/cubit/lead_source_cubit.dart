@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:real_estate_app/data/remote_data/lead_data.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
@@ -21,31 +20,35 @@ class LeadSourceCubit extends Cubit<LeadSourceState> {
   Future<List<LeadSource>> getLeadSources(
       {LeadSourceType leadSourceType = LeadSourceType.All,
       String? search,
-      bool isRefresh = false
-      }) async {
-    if(search != state.search || isRefresh){
-       emit(state.copyWith(paginator: null,leadSources: []));
+      bool isRefresh = false}) async {
+    if (search != state.search || isRefresh) {
+      emit(state.copyWith(paginator: null, leadSources: []));
     }
     emit(state.copyWith(status: AppStatus.loading));
 
     final result = await leadData.getLeadSourcesRefactored(
-        leadSourceType: leadSourceType, search: search, paginator: state.paginator);
+        leadSourceType: leadSourceType,
+        search: search,
+        paginator: state.paginator);
 
     switch (result) {
       case (Success success):
-       return _handleSucccess(success);
+        return _handleSucccess(success);
       case (Error error):
-       return  _handleError(error);
+        return _handleError(error);
     }
   }
 
   List<LeadSource> _handleSucccess(Success success) {
-    final List<LeadSource> list =[...(state.leadSources ?? []),...(success.value as List<LeadSource>)];
+    final List<LeadSource> list = [
+      ...(state.leadSources ?? []),
+      ...(success.value as List<LeadSource>)
+    ];
     emit(state.copyWith(
         status: AppStatus.success,
         paginator: success.paginator,
         leadSources: list));
-        return list;
+    return list;
   }
 
   List<LeadSource> _handleError(Error error) {

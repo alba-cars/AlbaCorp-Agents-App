@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/model/user_list_data.dart';
@@ -28,9 +26,8 @@ abstract class ActivityRepo {
       LeadStatus? status,
       String? nameSearch,
       Paginator? paginator});
-       Future<Result<List<Activity>>> fetchHotLeadsAssignedTodayActivities(
-      {
-      Paginator? paginator});
+  Future<Result<List<Activity>>> fetchHotLeadsAssignedTodayActivities(
+      {Paginator? paginator});
   Future<Result<List<Activity>>> getActivitiesByAgent(
       {String? status,
       String? type,
@@ -55,13 +52,11 @@ abstract class ActivityRepo {
       int? duration,
       String? notes,
       String? feedback});
-      Future<Result<dynamic>> completeActivity({
+  Future<Result<dynamic>> completeActivity({
     required String activityId,
     required String type,
     String? feedback,
     double? leadRating,
     Map<String, dynamic>? followUp,
   });
-
-      
 }

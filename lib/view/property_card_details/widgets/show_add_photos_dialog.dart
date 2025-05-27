@@ -7,10 +7,10 @@ import 'package:real_estate_app/view/property_card_details/cubit/property_card_d
 
 import '../../../widgets/button.dart';
 import '../../../widgets/fields/multi_image_field.dart';
-import '../../../widgets/fields/multi_line_textfield.dart';
 import '../../../widgets/space.dart';
 
-void showAddPhotosDialog(BuildContext context, List<PropertyCardPhoto>? photos) {
+void showAddPhotosDialog(
+    BuildContext context, List<PropertyCardPhoto>? photos) {
   showGeneralDialog(
       context: context,
       useRootNavigator: false,
@@ -25,17 +25,19 @@ void showAddPhotosDialog(BuildContext context, List<PropertyCardPhoto>? photos) 
             content: FormBuilder(
               key: key,
               initialValue: {
-                'photos':photos?.map((e)=>FileObject(networkImageUrl: e.original)).toList()
+                'photos': photos
+                    ?.map((e) => FileObject(networkImageUrl: e.original))
+                    .toList()
               },
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                   MultipleImageuploadField(
-        name: 'photos',
-        label: 'Photos',
-        isRequired: false,
-      ),
+                    MultipleImageuploadField(
+                      name: 'photos',
+                      label: 'Photos',
+                      isRequired: false,
+                    ),
                   ],
                 ),
               ),
@@ -60,9 +62,8 @@ void showAddPhotosDialog(BuildContext context, List<PropertyCardPhoto>? photos) 
                             final values = key.currentState!.value;
                             await context
                                 .read<PropertyCardDetailsCubit>()
-                                .updatePropertyCard(
-                                    values: values);
-                                    Navigator.of(dContext).pop();
+                                .updatePropertyCard(values: values);
+                            Navigator.of(dContext).pop();
                           }
                         }),
                   )

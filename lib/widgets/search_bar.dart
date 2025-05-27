@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/space.dart';
@@ -30,7 +29,8 @@ class AppSearchBar extends StatefulWidget {
       this.filter,
       this.showSearch = true,
       this.leadWidgets,
-      this.customFilterButtonWidget, this.skipDisplayFilterKeys});
+      this.customFilterButtonWidget,
+      this.skipDisplayFilterKeys});
   final void Function(String? val) onChanged;
   final WidgetsReturn? filterFields;
   final void Function(Map<String, dynamic>? filter)? onFilterApplied;
@@ -73,7 +73,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
     if (widget.filter != null) {
       filter = Map.from(widget.filter!)
         ..removeWhere((key, value) => value == null);
-        valueNotifier.value =filter ??{};
+      valueNotifier.value = filter ?? {};
       getFilter();
     } else {
       arrFilter = [];
@@ -86,72 +86,74 @@ class _AppSearchBarState extends State<AppSearchBar> {
       children: [
         Row(
           children: [
-        if(widget.showSearch || widget.leadWidgets != null)    Expanded(
-              child: widget.showSearch
-                  ? TextFormField(
-                      controller: _controller,
-                      focusNode: _focusNode,
-                      onChanged: (v) {
-                        EasyDebounce.debounce('search-bar', Durations.long3,
-                            () {
-                          widget.onChanged.call(v);
-                        });
-                      },
-                      textAlignVertical: TextAlignVertical.center,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(8),
-                          constraints: BoxConstraints.tightFor(height: 50),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: pacificBlue, width: 1.w),
-                              borderRadius: BorderRadius.circular(12.h)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                  width: 1.w),
-                              borderRadius: BorderRadius.circular(12.h)),
-                          filled: true,
-                          fillColor: Theme.of(context)
-                              .colorScheme
-                              .primaryContainer
-                              .withOpacity(0.2),
-                          hintText: widget.searchText ?? 'Search...',
-                          hintStyle: TextStyle(fontSize: 11),
-                          prefixIcon: Padding(
-                              padding: EdgeInsets.only(left: 8.w, right: 8.w),
-                              child: Icon(Icons.search)),
-                          suffixIcon: _focusNode.hasFocus
-                              ? GestureDetector(
-                                  onTap: () {
-                                    _focusNode.unfocus();
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8.h, right: 16.w, bottom: 8.h),
-                                    child: SizedBox(
-                                        height: 24.h,
-                                        width: 24.w,
-                                        child: Icon(Icons.close)),
-                                  ),
-                                )
-                              : _controller.text.isNotEmpty
-                                  ? TextButton(
-                                      onPressed: () {
-                                        _controller.clear();
-                                        widget.onChanged.call(null);
-                                        setState(() {});
-                                      },
-                                      child: Text('clear'))
-                                  : null,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.h))))
-                  : Row(
-                      children: widget.leadWidgets ?? [],
-                    ),
-            ),
-          if(widget.showSearch || widget.leadWidgets != null)  HorizontalSmallGap(),
+            if (widget.showSearch || widget.leadWidgets != null)
+              Expanded(
+                child: widget.showSearch
+                    ? TextFormField(
+                        controller: _controller,
+                        focusNode: _focusNode,
+                        onChanged: (v) {
+                          EasyDebounce.debounce('search-bar', Durations.long3,
+                              () {
+                            widget.onChanged.call(v);
+                          });
+                        },
+                        textAlignVertical: TextAlignVertical.center,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(8),
+                            constraints: BoxConstraints.tightFor(height: 50),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: pacificBlue, width: 1.w),
+                                borderRadius: BorderRadius.circular(12.h)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer,
+                                    width: 1.w),
+                                borderRadius: BorderRadius.circular(12.h)),
+                            filled: true,
+                            fillColor: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withOpacity(0.2),
+                            hintText: widget.searchText ?? 'Search...',
+                            hintStyle: TextStyle(fontSize: 11),
+                            prefixIcon: Padding(
+                                padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                                child: Icon(Icons.search)),
+                            suffixIcon: _focusNode.hasFocus
+                                ? GestureDetector(
+                                    onTap: () {
+                                      _focusNode.unfocus();
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 8.h, right: 16.w, bottom: 8.h),
+                                      child: SizedBox(
+                                          height: 24.h,
+                                          width: 24.w,
+                                          child: Icon(Icons.close)),
+                                    ),
+                                  )
+                                : _controller.text.isNotEmpty
+                                    ? TextButton(
+                                        onPressed: () {
+                                          _controller.clear();
+                                          widget.onChanged.call(null);
+                                          setState(() {});
+                                        },
+                                        child: Text('clear'))
+                                    : null,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.h))))
+                    : Row(
+                        children: widget.leadWidgets ?? [],
+                      ),
+              ),
+            if (widget.showSearch || widget.leadWidgets != null)
+              HorizontalSmallGap(),
             InkWell(
               onTap: () {
                 showFilterBottonSheet(context);
@@ -385,18 +387,16 @@ class _AppSearchBarState extends State<AppSearchBar> {
     return value.toString();
   }
 
-   List<Map<String, dynamic>> getFilter() {
+  List<Map<String, dynamic>> getFilter() {
     arrFilter.clear();
     for (var element in filter!.entries) {
-      if(!(widget.skipDisplayFilterKeys?.contains(element.key) ?? false)){
-       
-      
-      if (element.value is List) {
-        final list = (element.value as List);
-        arrFilter.addAll(list.map((e) => {element.key: e}));
-      } else {
-        arrFilter.add({element.key: element.value});
-      }
+      if (!(widget.skipDisplayFilterKeys?.contains(element.key) ?? false)) {
+        if (element.value is List) {
+          final list = (element.value as List);
+          arrFilter.addAll(list.map((e) => {element.key: e}));
+        } else {
+          arrFilter.add({element.key: element.value});
+        }
       }
     }
     return arrFilter;

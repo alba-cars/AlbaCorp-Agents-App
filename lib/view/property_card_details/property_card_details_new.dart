@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/property_card_details/cubit/property_card_details_cubit.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/property_header.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/property_info_card.dart';

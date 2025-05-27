@@ -1,4 +1,3 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -8,9 +7,7 @@ import '../../../constants/beds_baths_optional_list.dart';
 import '../../../util/status.dart';
 import '../../../widgets/button.dart';
 import '../../../widgets/fields/attachment_field.dart';
-import '../../../widgets/fields/commission_field.dart';
 import '../../../widgets/fields/currency_field.dart';
-import '../../../widgets/fields/drop_down_field.dart';
 import '../../../widgets/fields/multi_image_field.dart';
 import '../../../widgets/fields/multi_line_textfield.dart';
 import '../../../widgets/fields/number_field.dart';

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'dart:io' show Platform;
 
 Future<void> launchWhatsApp(BuildContext context, String? number,
     {String? text}) async {

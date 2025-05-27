@@ -15,14 +15,12 @@ import 'package:real_estate_app/view/task_detail_screen/cubit/task_detail_cubit.
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/card_picker_field.dart';
-import 'package:real_estate_app/widgets/fields/date_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/fields/time_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../../app/activity_cubit/activity_cubit.dart';
 import '../../../model/activity_feedback_model.dart';

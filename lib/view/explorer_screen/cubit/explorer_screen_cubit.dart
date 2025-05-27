@@ -15,7 +15,6 @@ import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
 import '../../../model/building_model.dart';
-import '../../../model/community_model.dart';
 import '../../../model/paginator.dart';
 import '../../../model/property_type_model.dart';
 
@@ -373,6 +372,7 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
       }
     }
   }
+
   Future<List<CommunityName>> getPlaces({String? search}) async {
     emit(state.copyWith(getCommunityListStatus: AppStatus.loadingMore));
     if (state.placesList.isNotEmpty && search != null) {
@@ -384,12 +384,11 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
           agentId: getIt<AuthBloc>().state.agent!.id);
       switch (result) {
         case (Success<List<CommunityTeamModel>> s):
-           emit(state.copyWith(
-              placesList:
-                  s.value.expand((e)=>e.communities).toList(),
+          emit(state.copyWith(
+              placesList: s.value.expand((e) => e.communities).toList(),
               getPlacesListStatus: AppStatus.success));
-     Logger().d(state.placesList);
-          return s.value.expand((e)=>e.communities).toList();
+          Logger().d(state.placesList);
+          return s.value.expand((e) => e.communities).toList();
         case (Error e):
           emit(state.copyWith(
             getPlacesListStatus: AppStatus.failure,
@@ -400,19 +399,24 @@ class ExplorerScreenCubit extends Cubit<ExplorerScreenState> {
   }
 
   Future<List<Building>> getBuildings(
-      {String? search, List<String>? community,bool refresh = false}) async {
+      {String? search, List<String>? community, bool refresh = false}) async {
     emit(state.copyWith(getBuildingListStatus: AppStatus.loadingMore));
-    if(refresh){
+    if (refresh) {
       emit(state.copyWith(buildingsPaginator: null));
     }
 
     final result = await _listingsRepo.getBuildingNames(
-        search: search, communityId: community,paginator: refresh?null:state.buildingsPaginator);
+        search: search,
+        communityId: community,
+        paginator: refresh ? null : state.buildingsPaginator);
     switch (result) {
       case (Success s):
-      final List<Building> buildings =refresh? s.value:[...state.buildingList,...s.value];
+        final List<Building> buildings =
+            refresh ? s.value : [...state.buildingList, ...s.value];
         emit(state.copyWith(
-            buildingList:buildings, getBuildingListStatus: AppStatus.success,buildingsPaginator: s.paginator));
+            buildingList: buildings,
+            getBuildingListStatus: AppStatus.success,
+            buildingsPaginator: s.paginator));
         return buildings;
 
       case (Error e):

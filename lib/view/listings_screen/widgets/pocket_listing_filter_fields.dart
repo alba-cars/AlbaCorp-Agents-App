@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate_app/view/listings_screen/cubit/listings_cubit.dart';
 import 'package:real_estate_app/widgets/fields/autocomplete_field.dart';
-import 'package:real_estate_app/widgets/fields/multi_dropdown_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_select_autocomplete_field.dart';
 import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';

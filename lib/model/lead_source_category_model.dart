@@ -1,6 +1,5 @@
 // lead_source_model.freezed.dart
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logger/logger.dart';
 
 import 'property_type_model.dart';
 

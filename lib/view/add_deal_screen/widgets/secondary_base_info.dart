@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
-import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/agent_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
@@ -153,7 +152,7 @@ class _SellerSourceAlbaFieldsState extends State<SellerSourceAlbaFields> {
             disabled: context.read<AddDealCubit>().state.buyerSource ==
                 ClientSource.external,
             valueTransformer: (p0) => p0?.id,
-            optionsBuilder: (v,refresh) async {
+            optionsBuilder: (v, refresh) async {
               return context.read<AddDealCubit>().getAgentsAutoComplete(v.text);
             },
             onSelected: (option) {
@@ -287,7 +286,7 @@ class SellerSourceExternalFields extends StatelessWidget {
             valueTransformer: (p0) => p0?.id,
             displayStringForOption: (option) =>
                 "${option.agencyName} - ${option.firstName} ${option.lastName}",
-            optionsBuilder: (v,refresh) async {
+            optionsBuilder: (v, refresh) async {
               return context.read<AddDealCubit>().getAgencies(search: v.text);
             }),
         AppTextField(

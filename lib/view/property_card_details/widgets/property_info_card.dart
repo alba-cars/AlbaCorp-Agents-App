@@ -220,19 +220,19 @@ class PropertyInfoCard extends StatelessWidget {
                               HorizontalSmallGap(),
                               Expanded(
                                 child: _buildDetailItem(
-                                  label: propertyCard
-                                              ?.building?.name?.isNotEmpty ==
-                                          true
-                                      ? 'Building'
-                                      : 'Cluster',
-                                  value: propertyCard
-                                              ?.building?.name?.isNotEmpty ==
-                                          true
-                                      ? propertyCard?.building?.name
-                                      : propertyCard?.cluster?.isNotEmpty ==
+                                  label:
+                                      propertyCard?.building?.name.isNotEmpty ==
                                               true
-                                          ? propertyCard?.cluster
-                                          : 'N/A',
+                                          ? 'Building'
+                                          : 'Cluster',
+                                  value:
+                                      propertyCard?.building?.name.isNotEmpty ==
+                                              true
+                                          ? propertyCard?.building?.name
+                                          : propertyCard?.cluster?.isNotEmpty ==
+                                                  true
+                                              ? propertyCard?.cluster
+                                              : 'N/A',
                                 ),
                               ),
                             ],
@@ -248,12 +248,12 @@ class PropertyInfoCard extends StatelessWidget {
                               VerticalSmallGap(adjustment: 0.5),
                               _buildDetailItem(
                                 label:
-                                    propertyCard?.building?.name?.isNotEmpty ==
+                                    propertyCard?.building?.name.isNotEmpty ==
                                             true
                                         ? 'Building'
                                         : 'Cluster',
                                 value: propertyCard
-                                            ?.building?.name?.isNotEmpty ==
+                                            ?.building?.name.isNotEmpty ==
                                         true
                                     ? propertyCard?.building?.name
                                     : propertyCard?.cluster?.isNotEmpty == true

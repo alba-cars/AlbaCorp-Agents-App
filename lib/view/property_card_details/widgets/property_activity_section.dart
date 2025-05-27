@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:real_estate_app/model/property_card_log_model.dart';
 import 'package:real_estate_app/view/property_card_details/helpers/status_helpers.dart';
-import 'package:real_estate_app/widgets/space.dart';
 import 'package:recase/recase.dart';
 
 class PropertyActivitySection extends StatelessWidget {

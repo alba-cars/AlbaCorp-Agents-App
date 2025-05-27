@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/widgets/button.dart';
-import 'package:real_estate_app/widgets/space.dart';
 
 /// Empty state UI when no pocket listings are available
 class EmptyState extends StatelessWidget {

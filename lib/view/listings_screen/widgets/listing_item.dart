@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/launch_whatsapp.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
 import '../../../app/call_bloc/call_bloc.dart';
@@ -14,7 +12,6 @@ import '../../../model/property_model.dart';
 import '../../../util/color_category.dart';
 import '../../../util/property_price.dart';
 import '../../../widgets/s3_image.dart';
-import '../../../widgets/snackbar.dart';
 import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 import '../../listing_detail_screen/listing_detail_screen.dart';

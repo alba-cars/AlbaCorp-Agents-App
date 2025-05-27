@@ -21,8 +21,6 @@ import '../../../widgets/tab_bar.dart';
 import '../../../widgets/text.dart';
 import '../../cold_lead_screen/cubit/cold_lead_cubit.dart';
 import '../../home_screen/home_screen.dart';
-import 'activity_sort_control_widget.dart';
-import '../../leads_list_explorer/leads_list_explorer.dart';
 
 class EnquiriesPage extends StatefulWidget {
   const EnquiriesPage({super.key});

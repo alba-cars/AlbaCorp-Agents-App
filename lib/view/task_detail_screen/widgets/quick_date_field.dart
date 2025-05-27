@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
-import 'package:real_estate_app/widgets/text.dart';
-import 'package:real_estate_app/widgets/space.dart';
 
 /// Simple date option for selecting a date
 class DateOption {

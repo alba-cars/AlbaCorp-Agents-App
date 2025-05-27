@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
-import 'package:real_estate_app/view/leads_list_explorer/cubit/leads_list_explorer_cubit.dart';
 
-import '../../../model/lead_property_card_model.dart';
 import '../../../widgets/space.dart';
 import '../../../widgets/text.dart';
 import '../../property_card_details/property_card_details.dart';

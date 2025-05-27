@@ -117,7 +117,7 @@ class _EnhancedTwilioCallPageState extends State<TwilioCallPage>
             _callStatus = "Ringing...";
             break;
           default:
-            _callStatus = event.status?.toString() ?? "";
+            _callStatus = event.status.toString() ?? "";
         }
       });
     });

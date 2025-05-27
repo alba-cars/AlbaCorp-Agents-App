@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:real_estate_app/model/lead_property_card_model.dart';
 import 'package:real_estate_app/model/property_card_details_model.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/lead_card.dart';
-import 'package:real_estate_app/widgets/space.dart';
 
 class PropertyLeadsSection extends StatelessWidget {
   final PropertyCardDetailsModel? propertyCard;

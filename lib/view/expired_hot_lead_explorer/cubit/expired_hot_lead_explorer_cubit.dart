@@ -9,7 +9,6 @@ import 'package:real_estate_app/model/lead_source_category_model.dart';
 
 import '../../../app/auth_bloc/auth_bloc.dart';
 import '../../../model/paginator.dart';
-import '../../../model/property_card_model.dart';
 import '../../../service_locator/injectable.dart';
 import '../../../util/result.dart';
 import '../../../util/status.dart';
@@ -18,10 +17,10 @@ import '../../../widgets/snackbar.dart';
 part 'expired_hot_lead_explorer_state.dart';
 part 'expired_hot_lead_explorer_cubit.freezed.dart';
 
-
 @injectable
 class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
-  ExpiredHotLeadExplorerCubit(this._explorerRepo, this._leadRepo) : super(ExpiredHotLeadExplorerState()){
+  ExpiredHotLeadExplorerCubit(this._explorerRepo, this._leadRepo)
+      : super(ExpiredHotLeadExplorerState()) {
     getExpiredHotLeads();
     getLeadSourceCtegories();
   }
@@ -29,10 +28,10 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
   final ExplorerRepo _explorerRepo;
   final LeadRepo _leadRepo;
 
-   Future<void> getExpiredHotLeads({
+  Future<void> getExpiredHotLeads({
     bool refresh = false,
   }) async {
-    if(state.getExpiredHotLeadStatus == AppStatus.loading){
+    if (state.getExpiredHotLeadStatus == AppStatus.loading) {
       return;
     }
     if (refresh || state.expiredHotLeadsPaginator == null) {
@@ -43,7 +42,8 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
     } else {
       emit(state.copyWith(getExpiredHotLeadStatus: AppStatus.loading));
     }
-    final result = await _explorerRepo.getHotExplorerLeads(leadSourceFilter: state.selectedLeadSources.map((e)=>e.name).toList(),
+    final result = await _explorerRepo.getHotExplorerLeads(
+        leadSourceFilter: state.selectedLeadSources.map((e) => e.name).toList(),
         paginator: state.expiredHotLeadsPaginator);
     switch (result) {
       case (Success s):
@@ -60,9 +60,12 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
   }
 
   Future<void> checkOutLead(
-      {required BuildContext context, required LeadExpirationModel card}) async {
+      {required BuildContext context,
+      required LeadExpirationModel card}) async {
     emit(state.copyWith(assignLeadStatus: AppStatus.loading));
-    final result = await _explorerRepo.checkOutLead(leadIds: [card.lastExpirationRecord.lead.id],source: "hot-leads-explorer");
+    final result = await _explorerRepo.checkOutLead(
+        leadIds: [card.lastExpirationRecord.lead.id],
+        source: "hot-leads-explorer");
     switch (result) {
       case (Success s):
         final newList = List<LeadExpirationModel>.from(state.expiredHotLeads);
@@ -77,8 +80,7 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            assignLeadStatus: AppStatus.failure,
-            assignLeadError: e.exception));
+            assignLeadStatus: AppStatus.failure, assignLeadError: e.exception));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }
@@ -86,31 +88,32 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
   }
 
   Future<void> getLeadSourceCtegories() async {
-  
     final result = await _leadRepo.getLeadSourceCategories();
     switch (result) {
       case (Success s):
         emit(state.copyWith(
-            leadSourceCategories: s.value,
-            getLeadSourceCategories: AppStatus.success,));
+          leadSourceCategories: s.value,
+          getLeadSourceCategories: AppStatus.success,
+        ));
         break;
       case (Error _):
         emit(state.copyWith(
-            getLeadSourceCategories: AppStatus.failure,
-            ));
+          getLeadSourceCategories: AppStatus.failure,
+        ));
     }
   }
 
-  Future<void> selectedLeadSources(List<LeadSourceItem>? leadSourceItems) async {
-    emit(state.copyWith(selectedLeadSources: leadSourceItems??[] ));
+  Future<void> selectedLeadSources(
+      List<LeadSourceItem>? leadSourceItems) async {
+    emit(state.copyWith(selectedLeadSources: leadSourceItems ?? []));
     getExpiredHotLeads(refresh: true);
   }
-  Future<void> removeFromSelectedLeadSources(LeadSourceItem leadSourceItem) async {
+
+  Future<void> removeFromSelectedLeadSources(
+      LeadSourceItem leadSourceItem) async {
     final leadSources = List<LeadSourceItem>.from(state.selectedLeadSources);
     leadSources.remove(leadSourceItem);
-    emit(state.copyWith(selectedLeadSources: leadSources ));
+    emit(state.copyWith(selectedLeadSources: leadSources));
     getExpiredHotLeads(refresh: true);
   }
-
-
 }

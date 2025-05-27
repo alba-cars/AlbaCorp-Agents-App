@@ -159,7 +159,7 @@ class RangeInputField extends FormBuilderField<SfRangeValues> {
                       children: [
                         Expanded(
                           child: Text(
-                            label!,
+                            label,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF555555),
