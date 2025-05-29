@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,71 +10,154 @@ part of 'property_card_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PropertyCard _$PropertyCardFromJson(Map<String, dynamic> json) {
-  return _PropertyCard.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PropertyCard {
   @JsonKey(readValue: readId)
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @JsonKey(name: 'plCreationDate')
-  dynamic get plCreationDate => throw _privateConstructorUsedError;
-  Building? get building => throw _privateConstructorUsedError;
+  dynamic get plCreationDate;
+  Building? get building;
   @JsonKey(name: 'community')
-  Community? get community => throw _privateConstructorUsedError;
+  Community? get community;
   @JsonKey(readValue: readBeds)
-  String? get beds => throw _privateConstructorUsedError;
-  int? get baths => throw _privateConstructorUsedError;
-  double? get size => throw _privateConstructorUsedError;
+  String? get beds;
+  int? get baths;
+  double? get size;
   @JsonKey(name: 'propertyType')
-  String? get propertyType => throw _privateConstructorUsedError;
+  String? get propertyType;
   @JsonKey(name: 'createdBy')
-  dynamic get createdBy => throw _privateConstructorUsedError;
+  dynamic get createdBy;
   @JsonKey(name: 'partyType')
-  String? get partyType => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
-  String? get cluster => throw _privateConstructorUsedError;
-  String? get purpose => throw _privateConstructorUsedError;
-  List<dynamic>? get amenities => throw _privateConstructorUsedError;
+  String? get partyType;
+  String? get status;
+  String? get cluster;
+  String? get purpose;
+  List<dynamic>? get amenities;
   @JsonKey(name: 'createdAt')
-  String? get createdAt => throw _privateConstructorUsedError;
+  String? get createdAt;
   @JsonKey(name: 'updatedAt')
-  String? get updatedAt => throw _privateConstructorUsedError;
+  String? get updatedAt;
   @JsonKey(name: 'checkedOutDate')
-  String? get checkedOutDate => throw _privateConstructorUsedError;
+  String? get checkedOutDate;
   @JsonKey(name: 'currentAgent')
-  dynamic get currentAgent => throw _privateConstructorUsedError;
+  dynamic get currentAgent;
   @JsonKey(name: 'currentOwner')
-  String? get currentOwner => throw _privateConstructorUsedError;
+  String? get currentOwner;
   @JsonKey(name: 'updatedBy')
-  String? get updatedBy => throw _privateConstructorUsedError;
+  String? get updatedBy;
   @JsonKey(name: 'referenceNumber')
-  String? get referenceNumber => throw _privateConstructorUsedError;
+  String? get referenceNumber;
   @JsonKey(name: 'expirationDate')
-  String? get expirationDate => throw _privateConstructorUsedError;
+  String? get expirationDate;
   @JsonKey(name: 'availableForCheckout')
-  bool get availableForCheckout => throw _privateConstructorUsedError;
-  List<PropertyCardPhoto> get photos => throw _privateConstructorUsedError;
+  bool get availableForCheckout;
+  List<PropertyCardPhoto> get photos;
   @JsonKey(name: 'leadsCount')
-  int? get leadsCount => throw _privateConstructorUsedError;
+  int? get leadsCount;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $PropertyCardCopyWith<PropertyCard> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$PropertyCardCopyWithImpl<PropertyCard>(
+          this as PropertyCard, _$identity);
+
+  /// Serializes this PropertyCard to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PropertyCard &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other.plCreationDate, plCreationDate) &&
+            (identical(other.building, building) ||
+                other.building == building) &&
+            (identical(other.community, community) ||
+                other.community == community) &&
+            (identical(other.beds, beds) || other.beds == beds) &&
+            (identical(other.baths, baths) || other.baths == baths) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.propertyType, propertyType) ||
+                other.propertyType == propertyType) &&
+            const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
+            (identical(other.partyType, partyType) ||
+                other.partyType == partyType) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.cluster, cluster) || other.cluster == cluster) &&
+            (identical(other.purpose, purpose) || other.purpose == purpose) &&
+            const DeepCollectionEquality().equals(other.amenities, amenities) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.checkedOutDate, checkedOutDate) ||
+                other.checkedOutDate == checkedOutDate) &&
+            const DeepCollectionEquality()
+                .equals(other.currentAgent, currentAgent) &&
+            (identical(other.currentOwner, currentOwner) ||
+                other.currentOwner == currentOwner) &&
+            (identical(other.updatedBy, updatedBy) ||
+                other.updatedBy == updatedBy) &&
+            (identical(other.referenceNumber, referenceNumber) ||
+                other.referenceNumber == referenceNumber) &&
+            (identical(other.expirationDate, expirationDate) ||
+                other.expirationDate == expirationDate) &&
+            (identical(other.availableForCheckout, availableForCheckout) ||
+                other.availableForCheckout == availableForCheckout) &&
+            const DeepCollectionEquality().equals(other.photos, photos) &&
+            (identical(other.leadsCount, leadsCount) ||
+                other.leadsCount == leadsCount));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        const DeepCollectionEquality().hash(plCreationDate),
+        building,
+        community,
+        beds,
+        baths,
+        size,
+        propertyType,
+        const DeepCollectionEquality().hash(createdBy),
+        partyType,
+        status,
+        cluster,
+        purpose,
+        const DeepCollectionEquality().hash(amenities),
+        createdAt,
+        updatedAt,
+        checkedOutDate,
+        const DeepCollectionEquality().hash(currentAgent),
+        currentOwner,
+        updatedBy,
+        referenceNumber,
+        expirationDate,
+        availableForCheckout,
+        const DeepCollectionEquality().hash(photos),
+        leadsCount
+      ]);
+
+  @override
+  String toString() {
+    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, cluster: $cluster, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount)';
+  }
 }
 
 /// @nodoc
-abstract class $PropertyCardCopyWith<$Res> {
+abstract mixin class $PropertyCardCopyWith<$Res> {
   factory $PropertyCardCopyWith(
-          PropertyCard value, $Res Function(PropertyCard) then) =
-      _$PropertyCardCopyWithImpl<$Res, PropertyCard>;
+          PropertyCard value, $Res Function(PropertyCard) _then) =
+      _$PropertyCardCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
@@ -107,15 +191,14 @@ abstract class $PropertyCardCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
-    implements $PropertyCardCopyWith<$Res> {
-  _$PropertyCardCopyWithImpl(this._value, this._then);
+class _$PropertyCardCopyWithImpl<$Res> implements $PropertyCardCopyWith<$Res> {
+  _$PropertyCardCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PropertyCard _self;
+  final $Res Function(PropertyCard) _then;
 
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,322 +228,143 @@ class _$PropertyCardCopyWithImpl<$Res, $Val extends PropertyCard>
     Object? photos = null,
     Object? leadsCount = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       plCreationDate: freezed == plCreationDate
-          ? _value.plCreationDate
+          ? _self.plCreationDate
           : plCreationDate // ignore: cast_nullable_to_non_nullable
               as dynamic,
       building: freezed == building
-          ? _value.building
+          ? _self.building
           : building // ignore: cast_nullable_to_non_nullable
               as Building?,
       community: freezed == community
-          ? _value.community
+          ? _self.community
           : community // ignore: cast_nullable_to_non_nullable
               as Community?,
       beds: freezed == beds
-          ? _value.beds
+          ? _self.beds
           : beds // ignore: cast_nullable_to_non_nullable
               as String?,
       baths: freezed == baths
-          ? _value.baths
+          ? _self.baths
           : baths // ignore: cast_nullable_to_non_nullable
               as int?,
       size: freezed == size
-          ? _value.size
+          ? _self.size
           : size // ignore: cast_nullable_to_non_nullable
               as double?,
       propertyType: freezed == propertyType
-          ? _value.propertyType
+          ? _self.propertyType
           : propertyType // ignore: cast_nullable_to_non_nullable
               as String?,
       createdBy: freezed == createdBy
-          ? _value.createdBy
+          ? _self.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as dynamic,
       partyType: freezed == partyType
-          ? _value.partyType
+          ? _self.partyType
           : partyType // ignore: cast_nullable_to_non_nullable
               as String?,
       status: freezed == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
       cluster: freezed == cluster
-          ? _value.cluster
+          ? _self.cluster
           : cluster // ignore: cast_nullable_to_non_nullable
               as String?,
       purpose: freezed == purpose
-          ? _value.purpose
+          ? _self.purpose
           : purpose // ignore: cast_nullable_to_non_nullable
               as String?,
       amenities: freezed == amenities
-          ? _value.amenities
+          ? _self.amenities
           : amenities // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
       checkedOutDate: freezed == checkedOutDate
-          ? _value.checkedOutDate
+          ? _self.checkedOutDate
           : checkedOutDate // ignore: cast_nullable_to_non_nullable
               as String?,
       currentAgent: freezed == currentAgent
-          ? _value.currentAgent
+          ? _self.currentAgent
           : currentAgent // ignore: cast_nullable_to_non_nullable
               as dynamic,
       currentOwner: freezed == currentOwner
-          ? _value.currentOwner
+          ? _self.currentOwner
           : currentOwner // ignore: cast_nullable_to_non_nullable
               as String?,
       updatedBy: freezed == updatedBy
-          ? _value.updatedBy
+          ? _self.updatedBy
           : updatedBy // ignore: cast_nullable_to_non_nullable
               as String?,
       referenceNumber: freezed == referenceNumber
-          ? _value.referenceNumber
+          ? _self.referenceNumber
           : referenceNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       expirationDate: freezed == expirationDate
-          ? _value.expirationDate
+          ? _self.expirationDate
           : expirationDate // ignore: cast_nullable_to_non_nullable
               as String?,
       availableForCheckout: null == availableForCheckout
-          ? _value.availableForCheckout
+          ? _self.availableForCheckout
           : availableForCheckout // ignore: cast_nullable_to_non_nullable
               as bool,
       photos: null == photos
-          ? _value.photos
+          ? _self.photos
           : photos // ignore: cast_nullable_to_non_nullable
               as List<PropertyCardPhoto>,
       leadsCount: freezed == leadsCount
-          ? _value.leadsCount
-          : leadsCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BuildingCopyWith<$Res>? get building {
-    if (_value.building == null) {
-      return null;
-    }
-
-    return $BuildingCopyWith<$Res>(_value.building!, (value) {
-      return _then(_value.copyWith(building: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CommunityCopyWith<$Res>? get community {
-    if (_value.community == null) {
-      return null;
-    }
-
-    return $CommunityCopyWith<$Res>(_value.community!, (value) {
-      return _then(_value.copyWith(community: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$PropertyCardImplCopyWith<$Res>
-    implements $PropertyCardCopyWith<$Res> {
-  factory _$$PropertyCardImplCopyWith(
-          _$PropertyCardImpl value, $Res Function(_$PropertyCardImpl) then) =
-      __$$PropertyCardImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(readValue: readId) String id,
-      @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
-      Building? building,
-      @JsonKey(name: 'community') Community? community,
-      @JsonKey(readValue: readBeds) String? beds,
-      int? baths,
-      double? size,
-      @JsonKey(name: 'propertyType') String? propertyType,
-      @JsonKey(name: 'createdBy') dynamic createdBy,
-      @JsonKey(name: 'partyType') String? partyType,
-      String? status,
-      String? cluster,
-      String? purpose,
-      List<dynamic>? amenities,
-      @JsonKey(name: 'createdAt') String? createdAt,
-      @JsonKey(name: 'updatedAt') String? updatedAt,
-      @JsonKey(name: 'checkedOutDate') String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') dynamic currentAgent,
-      @JsonKey(name: 'currentOwner') String? currentOwner,
-      @JsonKey(name: 'updatedBy') String? updatedBy,
-      @JsonKey(name: 'referenceNumber') String? referenceNumber,
-      @JsonKey(name: 'expirationDate') String? expirationDate,
-      @JsonKey(name: 'availableForCheckout') bool availableForCheckout,
-      List<PropertyCardPhoto> photos,
-      @JsonKey(name: 'leadsCount') int? leadsCount});
-
-  @override
-  $BuildingCopyWith<$Res>? get building;
-  @override
-  $CommunityCopyWith<$Res>? get community;
-}
-
-/// @nodoc
-class __$$PropertyCardImplCopyWithImpl<$Res>
-    extends _$PropertyCardCopyWithImpl<$Res, _$PropertyCardImpl>
-    implements _$$PropertyCardImplCopyWith<$Res> {
-  __$$PropertyCardImplCopyWithImpl(
-      _$PropertyCardImpl _value, $Res Function(_$PropertyCardImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? plCreationDate = freezed,
-    Object? building = freezed,
-    Object? community = freezed,
-    Object? beds = freezed,
-    Object? baths = freezed,
-    Object? size = freezed,
-    Object? propertyType = freezed,
-    Object? createdBy = freezed,
-    Object? partyType = freezed,
-    Object? status = freezed,
-    Object? cluster = freezed,
-    Object? purpose = freezed,
-    Object? amenities = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? checkedOutDate = freezed,
-    Object? currentAgent = freezed,
-    Object? currentOwner = freezed,
-    Object? updatedBy = freezed,
-    Object? referenceNumber = freezed,
-    Object? expirationDate = freezed,
-    Object? availableForCheckout = null,
-    Object? photos = null,
-    Object? leadsCount = freezed,
-  }) {
-    return _then(_$PropertyCardImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      plCreationDate: freezed == plCreationDate
-          ? _value.plCreationDate
-          : plCreationDate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      building: freezed == building
-          ? _value.building
-          : building // ignore: cast_nullable_to_non_nullable
-              as Building?,
-      community: freezed == community
-          ? _value.community
-          : community // ignore: cast_nullable_to_non_nullable
-              as Community?,
-      beds: freezed == beds
-          ? _value.beds
-          : beds // ignore: cast_nullable_to_non_nullable
-              as String?,
-      baths: freezed == baths
-          ? _value.baths
-          : baths // ignore: cast_nullable_to_non_nullable
-              as int?,
-      size: freezed == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as double?,
-      propertyType: freezed == propertyType
-          ? _value.propertyType
-          : propertyType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      partyType: freezed == partyType
-          ? _value.partyType
-          : partyType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      cluster: freezed == cluster
-          ? _value.cluster
-          : cluster // ignore: cast_nullable_to_non_nullable
-              as String?,
-      purpose: freezed == purpose
-          ? _value.purpose
-          : purpose // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amenities: freezed == amenities
-          ? _value._amenities
-          : amenities // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      checkedOutDate: freezed == checkedOutDate
-          ? _value.checkedOutDate
-          : checkedOutDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      currentAgent: freezed == currentAgent
-          ? _value.currentAgent
-          : currentAgent // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      currentOwner: freezed == currentOwner
-          ? _value.currentOwner
-          : currentOwner // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedBy: freezed == updatedBy
-          ? _value.updatedBy
-          : updatedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      referenceNumber: freezed == referenceNumber
-          ? _value.referenceNumber
-          : referenceNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expirationDate: freezed == expirationDate
-          ? _value.expirationDate
-          : expirationDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      availableForCheckout: null == availableForCheckout
-          ? _value.availableForCheckout
-          : availableForCheckout // ignore: cast_nullable_to_non_nullable
-              as bool,
-      photos: null == photos
-          ? _value._photos
-          : photos // ignore: cast_nullable_to_non_nullable
-              as List<PropertyCardPhoto>,
-      leadsCount: freezed == leadsCount
-          ? _value.leadsCount
+          ? _self.leadsCount
           : leadsCount // ignore: cast_nullable_to_non_nullable
               as int?,
     ));
+  }
+
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BuildingCopyWith<$Res>? get building {
+    if (_self.building == null) {
+      return null;
+    }
+
+    return $BuildingCopyWith<$Res>(_self.building!, (value) {
+      return _then(_self.copyWith(building: value));
+    });
+  }
+
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CommunityCopyWith<$Res>? get community {
+    if (_self.community == null) {
+      return null;
+    }
+
+    return $CommunityCopyWith<$Res>(_self.community!, (value) {
+      return _then(_self.copyWith(community: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$PropertyCardImpl implements _PropertyCard {
-  const _$PropertyCardImpl(
+class _PropertyCard implements PropertyCard {
+  const _PropertyCard(
       {@JsonKey(readValue: readId) required this.id,
       @JsonKey(name: 'plCreationDate') this.plCreationDate,
       this.building,
@@ -488,9 +392,8 @@ class _$PropertyCardImpl implements _PropertyCard {
       @JsonKey(name: 'leadsCount') this.leadsCount})
       : _amenities = amenities,
         _photos = photos;
-
-  factory _$PropertyCardImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PropertyCardImplFromJson(json);
+  factory _PropertyCard.fromJson(Map<String, dynamic> json) =>
+      _$PropertyCardFromJson(json);
 
   @override
   @JsonKey(readValue: readId)
@@ -575,16 +478,26 @@ class _$PropertyCardImpl implements _PropertyCard {
   @JsonKey(name: 'leadsCount')
   final int? leadsCount;
 
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, cluster: $cluster, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PropertyCardCopyWith<_PropertyCard> get copyWith =>
+      __$PropertyCardCopyWithImpl<_PropertyCard>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PropertyCardToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PropertyCardImpl &&
+            other is _PropertyCard &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other.plCreationDate, plCreationDate) &&
@@ -628,7 +541,7 @@ class _$PropertyCardImpl implements _PropertyCard {
                 other.leadsCount == leadsCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -659,202 +572,273 @@ class _$PropertyCardImpl implements _PropertyCard {
         leadsCount
       ]);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PropertyCardImplCopyWith<_$PropertyCardImpl> get copyWith =>
-      __$$PropertyCardImplCopyWithImpl<_$PropertyCardImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PropertyCardImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PropertyCard(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, status: $status, cluster: $cluster, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, updatedBy: $updatedBy, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount)';
   }
 }
 
-abstract class _PropertyCard implements PropertyCard {
-  const factory _PropertyCard(
-      {@JsonKey(readValue: readId) required final String id,
-      @JsonKey(name: 'plCreationDate') final dynamic plCreationDate,
-      final Building? building,
-      @JsonKey(name: 'community') final Community? community,
-      @JsonKey(readValue: readBeds) final String? beds,
-      final int? baths,
-      final double? size,
-      @JsonKey(name: 'propertyType') final String? propertyType,
-      @JsonKey(name: 'createdBy') final dynamic createdBy,
-      @JsonKey(name: 'partyType') final String? partyType,
-      final String? status,
-      final String? cluster,
-      final String? purpose,
-      final List<dynamic>? amenities,
-      @JsonKey(name: 'createdAt') final String? createdAt,
-      @JsonKey(name: 'updatedAt') final String? updatedAt,
-      @JsonKey(name: 'checkedOutDate') final String? checkedOutDate,
-      @JsonKey(name: 'currentAgent') final dynamic currentAgent,
-      @JsonKey(name: 'currentOwner') final String? currentOwner,
-      @JsonKey(name: 'updatedBy') final String? updatedBy,
-      @JsonKey(name: 'referenceNumber') final String? referenceNumber,
-      @JsonKey(name: 'expirationDate') final String? expirationDate,
-      @JsonKey(name: 'availableForCheckout') final bool availableForCheckout,
-      final List<PropertyCardPhoto> photos,
-      @JsonKey(name: 'leadsCount') final int? leadsCount}) = _$PropertyCardImpl;
+/// @nodoc
+abstract mixin class _$PropertyCardCopyWith<$Res>
+    implements $PropertyCardCopyWith<$Res> {
+  factory _$PropertyCardCopyWith(
+          _PropertyCard value, $Res Function(_PropertyCard) _then) =
+      __$PropertyCardCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(readValue: readId) String id,
+      @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
+      Building? building,
+      @JsonKey(name: 'community') Community? community,
+      @JsonKey(readValue: readBeds) String? beds,
+      int? baths,
+      double? size,
+      @JsonKey(name: 'propertyType') String? propertyType,
+      @JsonKey(name: 'createdBy') dynamic createdBy,
+      @JsonKey(name: 'partyType') String? partyType,
+      String? status,
+      String? cluster,
+      String? purpose,
+      List<dynamic>? amenities,
+      @JsonKey(name: 'createdAt') String? createdAt,
+      @JsonKey(name: 'updatedAt') String? updatedAt,
+      @JsonKey(name: 'checkedOutDate') String? checkedOutDate,
+      @JsonKey(name: 'currentAgent') dynamic currentAgent,
+      @JsonKey(name: 'currentOwner') String? currentOwner,
+      @JsonKey(name: 'updatedBy') String? updatedBy,
+      @JsonKey(name: 'referenceNumber') String? referenceNumber,
+      @JsonKey(name: 'expirationDate') String? expirationDate,
+      @JsonKey(name: 'availableForCheckout') bool availableForCheckout,
+      List<PropertyCardPhoto> photos,
+      @JsonKey(name: 'leadsCount') int? leadsCount});
 
-  factory _PropertyCard.fromJson(Map<String, dynamic> json) =
-      _$PropertyCardImpl.fromJson;
-
   @override
-  @JsonKey(readValue: readId)
-  String get id;
+  $BuildingCopyWith<$Res>? get building;
   @override
-  @JsonKey(name: 'plCreationDate')
-  dynamic get plCreationDate;
-  @override
-  Building? get building;
-  @override
-  @JsonKey(name: 'community')
-  Community? get community;
-  @override
-  @JsonKey(readValue: readBeds)
-  String? get beds;
-  @override
-  int? get baths;
-  @override
-  double? get size;
-  @override
-  @JsonKey(name: 'propertyType')
-  String? get propertyType;
-  @override
-  @JsonKey(name: 'createdBy')
-  dynamic get createdBy;
-  @override
-  @JsonKey(name: 'partyType')
-  String? get partyType;
-  @override
-  String? get status;
-  @override
-  String? get cluster;
-  @override
-  String? get purpose;
-  @override
-  List<dynamic>? get amenities;
-  @override
-  @JsonKey(name: 'createdAt')
-  String? get createdAt;
-  @override
-  @JsonKey(name: 'updatedAt')
-  String? get updatedAt;
-  @override
-  @JsonKey(name: 'checkedOutDate')
-  String? get checkedOutDate;
-  @override
-  @JsonKey(name: 'currentAgent')
-  dynamic get currentAgent;
-  @override
-  @JsonKey(name: 'currentOwner')
-  String? get currentOwner;
-  @override
-  @JsonKey(name: 'updatedBy')
-  String? get updatedBy;
-  @override
-  @JsonKey(name: 'referenceNumber')
-  String? get referenceNumber;
-  @override
-  @JsonKey(name: 'expirationDate')
-  String? get expirationDate;
-  @override
-  @JsonKey(name: 'availableForCheckout')
-  bool get availableForCheckout;
-  @override
-  List<PropertyCardPhoto> get photos;
-  @override
-  @JsonKey(name: 'leadsCount')
-  int? get leadsCount;
-  @override
-  @JsonKey(ignore: true)
-  _$$PropertyCardImplCopyWith<_$PropertyCardImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CommunityCopyWith<$Res>? get community;
 }
 
-CreatedBy _$CreatedByFromJson(Map<String, dynamic> json) {
-  return _CreatedBy.fromJson(json);
+/// @nodoc
+class __$PropertyCardCopyWithImpl<$Res>
+    implements _$PropertyCardCopyWith<$Res> {
+  __$PropertyCardCopyWithImpl(this._self, this._then);
+
+  final _PropertyCard _self;
+  final $Res Function(_PropertyCard) _then;
+
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? plCreationDate = freezed,
+    Object? building = freezed,
+    Object? community = freezed,
+    Object? beds = freezed,
+    Object? baths = freezed,
+    Object? size = freezed,
+    Object? propertyType = freezed,
+    Object? createdBy = freezed,
+    Object? partyType = freezed,
+    Object? status = freezed,
+    Object? cluster = freezed,
+    Object? purpose = freezed,
+    Object? amenities = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? checkedOutDate = freezed,
+    Object? currentAgent = freezed,
+    Object? currentOwner = freezed,
+    Object? updatedBy = freezed,
+    Object? referenceNumber = freezed,
+    Object? expirationDate = freezed,
+    Object? availableForCheckout = null,
+    Object? photos = null,
+    Object? leadsCount = freezed,
+  }) {
+    return _then(_PropertyCard(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      plCreationDate: freezed == plCreationDate
+          ? _self.plCreationDate
+          : plCreationDate // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      building: freezed == building
+          ? _self.building
+          : building // ignore: cast_nullable_to_non_nullable
+              as Building?,
+      community: freezed == community
+          ? _self.community
+          : community // ignore: cast_nullable_to_non_nullable
+              as Community?,
+      beds: freezed == beds
+          ? _self.beds
+          : beds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      baths: freezed == baths
+          ? _self.baths
+          : baths // ignore: cast_nullable_to_non_nullable
+              as int?,
+      size: freezed == size
+          ? _self.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as double?,
+      propertyType: freezed == propertyType
+          ? _self.propertyType
+          : propertyType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdBy: freezed == createdBy
+          ? _self.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      partyType: freezed == partyType
+          ? _self.partyType
+          : partyType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cluster: freezed == cluster
+          ? _self.cluster
+          : cluster // ignore: cast_nullable_to_non_nullable
+              as String?,
+      purpose: freezed == purpose
+          ? _self.purpose
+          : purpose // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amenities: freezed == amenities
+          ? _self._amenities
+          : amenities // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkedOutDate: freezed == checkedOutDate
+          ? _self.checkedOutDate
+          : checkedOutDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentAgent: freezed == currentAgent
+          ? _self.currentAgent
+          : currentAgent // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      currentOwner: freezed == currentOwner
+          ? _self.currentOwner
+          : currentOwner // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedBy: freezed == updatedBy
+          ? _self.updatedBy
+          : updatedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      referenceNumber: freezed == referenceNumber
+          ? _self.referenceNumber
+          : referenceNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      expirationDate: freezed == expirationDate
+          ? _self.expirationDate
+          : expirationDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      availableForCheckout: null == availableForCheckout
+          ? _self.availableForCheckout
+          : availableForCheckout // ignore: cast_nullable_to_non_nullable
+              as bool,
+      photos: null == photos
+          ? _self._photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCardPhoto>,
+      leadsCount: freezed == leadsCount
+          ? _self.leadsCount
+          : leadsCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BuildingCopyWith<$Res>? get building {
+    if (_self.building == null) {
+      return null;
+    }
+
+    return $BuildingCopyWith<$Res>(_self.building!, (value) {
+      return _then(_self.copyWith(building: value));
+    });
+  }
+
+  /// Create a copy of PropertyCard
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CommunityCopyWith<$Res>? get community {
+    if (_self.community == null) {
+      return null;
+    }
+
+    return $CommunityCopyWith<$Res>(_self.community!, (value) {
+      return _then(_self.copyWith(community: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$CreatedBy {
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @JsonKey(name: 'first_name')
-  String get firstName => throw _privateConstructorUsedError;
+  String get firstName;
   @JsonKey(name: 'last_name')
-  String? get lastName => throw _privateConstructorUsedError;
-  dynamic get phone => throw _privateConstructorUsedError;
+  String? get lastName;
+  dynamic get phone;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $CreatedByCopyWith<CreatedBy> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CreatedByCopyWith<$Res> {
-  factory $CreatedByCopyWith(CreatedBy value, $Res Function(CreatedBy) then) =
-      _$CreatedByCopyWithImpl<$Res, CreatedBy>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      @JsonKey(name: 'first_name') String firstName,
-      @JsonKey(name: 'last_name') String? lastName,
-      dynamic phone});
-}
-
-/// @nodoc
-class _$CreatedByCopyWithImpl<$Res, $Val extends CreatedBy>
-    implements $CreatedByCopyWith<$Res> {
-  _$CreatedByCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of CreatedBy
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $CreatedByCopyWith<CreatedBy> get copyWith =>
+      _$CreatedByCopyWithImpl<CreatedBy>(this as CreatedBy, _$identity);
+
+  /// Serializes this CreatedBy to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? firstName = null,
-    Object? lastName = freezed,
-    Object? phone = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phone: freezed == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CreatedBy &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            const DeepCollectionEquality().equals(other.phone, phone));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, firstName, lastName,
+      const DeepCollectionEquality().hash(phone));
+
+  @override
+  String toString() {
+    return 'CreatedBy(id: $id, firstName: $firstName, lastName: $lastName, phone: $phone)';
   }
 }
 
 /// @nodoc
-abstract class _$$CreatedByImplCopyWith<$Res>
-    implements $CreatedByCopyWith<$Res> {
-  factory _$$CreatedByImplCopyWith(
-          _$CreatedByImpl value, $Res Function(_$CreatedByImpl) then) =
-      __$$CreatedByImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CreatedByCopyWith<$Res> {
+  factory $CreatedByCopyWith(CreatedBy value, $Res Function(CreatedBy) _then) =
+      _$CreatedByCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
@@ -864,13 +848,14 @@ abstract class _$$CreatedByImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CreatedByImplCopyWithImpl<$Res>
-    extends _$CreatedByCopyWithImpl<$Res, _$CreatedByImpl>
-    implements _$$CreatedByImplCopyWith<$Res> {
-  __$$CreatedByImplCopyWithImpl(
-      _$CreatedByImpl _value, $Res Function(_$CreatedByImpl) _then)
-      : super(_value, _then);
+class _$CreatedByCopyWithImpl<$Res> implements $CreatedByCopyWith<$Res> {
+  _$CreatedByCopyWithImpl(this._self, this._then);
 
+  final CreatedBy _self;
+  final $Res Function(CreatedBy) _then;
+
+  /// Create a copy of CreatedBy
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -879,21 +864,21 @@ class __$$CreatedByImplCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? phone = freezed,
   }) {
-    return _then(_$CreatedByImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: null == firstName
-          ? _value.firstName
+          ? _self.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
       lastName: freezed == lastName
-          ? _value.lastName
+          ? _self.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       phone: freezed == phone
-          ? _value.phone
+          ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ));
@@ -902,15 +887,14 @@ class __$$CreatedByImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CreatedByImpl implements _CreatedBy {
-  const _$CreatedByImpl(
+class _CreatedBy implements CreatedBy {
+  const _CreatedBy(
       {@JsonKey(name: '_id') required this.id,
       @JsonKey(name: 'first_name') required this.firstName,
       @JsonKey(name: 'last_name') this.lastName,
       this.phone});
-
-  factory _$CreatedByImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CreatedByImplFromJson(json);
+  factory _CreatedBy.fromJson(Map<String, dynamic> json) =>
+      _$CreatedByFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -924,16 +908,26 @@ class _$CreatedByImpl implements _CreatedBy {
   @override
   final dynamic phone;
 
+  /// Create a copy of CreatedBy
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CreatedBy(id: $id, firstName: $firstName, lastName: $lastName, phone: $phone)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CreatedByCopyWith<_CreatedBy> get copyWith =>
+      __$CreatedByCopyWithImpl<_CreatedBy>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CreatedByToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreatedByImpl &&
+            other is _CreatedBy &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
@@ -942,216 +936,252 @@ class _$CreatedByImpl implements _CreatedBy {
             const DeepCollectionEquality().equals(other.phone, phone));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, firstName, lastName,
       const DeepCollectionEquality().hash(phone));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CreatedByImplCopyWith<_$CreatedByImpl> get copyWith =>
-      __$$CreatedByImplCopyWithImpl<_$CreatedByImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CreatedByImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _CreatedBy implements CreatedBy {
-  const factory _CreatedBy(
-      {@JsonKey(name: '_id') required final String id,
-      @JsonKey(name: 'first_name') required final String firstName,
-      @JsonKey(name: 'last_name') final String? lastName,
-      final dynamic phone}) = _$CreatedByImpl;
-
-  factory _CreatedBy.fromJson(Map<String, dynamic> json) =
-      _$CreatedByImpl.fromJson;
-
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  @JsonKey(name: 'first_name')
-  String get firstName;
-  @override
-  @JsonKey(name: 'last_name')
-  String? get lastName;
-  @override
-  dynamic get phone;
-  @override
-  @JsonKey(ignore: true)
-  _$$CreatedByImplCopyWith<_$CreatedByImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-PropertyCardAgent _$PropertyCardAgentFromJson(Map<String, dynamic> json) {
-  return _PropertyCardAgent.fromJson(json);
-}
-
-/// @nodoc
-mixin _$PropertyCardAgent {
-  String get id => throw _privateConstructorUsedError;
-  User get userId => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PropertyCardAgentCopyWith<PropertyCardAgent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PropertyCardAgentCopyWith<$Res> {
-  factory $PropertyCardAgentCopyWith(
-          PropertyCardAgent value, $Res Function(PropertyCardAgent) then) =
-      _$PropertyCardAgentCopyWithImpl<$Res, PropertyCardAgent>;
-  @useResult
-  $Res call({String id, User userId});
-
-  $UserCopyWith<$Res> get userId;
-}
-
-/// @nodoc
-class _$PropertyCardAgentCopyWithImpl<$Res, $Val extends PropertyCardAgent>
-    implements $PropertyCardAgentCopyWith<$Res> {
-  _$PropertyCardAgentCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? userId = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as User,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get userId {
-    return $UserCopyWith<$Res>(_value.userId, (value) {
-      return _then(_value.copyWith(userId: value) as $Val);
-    });
+  String toString() {
+    return 'CreatedBy(id: $id, firstName: $firstName, lastName: $lastName, phone: $phone)';
   }
 }
 
 /// @nodoc
-abstract class _$$PropertyCardAgentImplCopyWith<$Res>
-    implements $PropertyCardAgentCopyWith<$Res> {
-  factory _$$PropertyCardAgentImplCopyWith(_$PropertyCardAgentImpl value,
-          $Res Function(_$PropertyCardAgentImpl) then) =
-      __$$PropertyCardAgentImplCopyWithImpl<$Res>;
+abstract mixin class _$CreatedByCopyWith<$Res>
+    implements $CreatedByCopyWith<$Res> {
+  factory _$CreatedByCopyWith(
+          _CreatedBy value, $Res Function(_CreatedBy) _then) =
+      __$CreatedByCopyWithImpl;
   @override
   @useResult
-  $Res call({String id, User userId});
-
-  @override
-  $UserCopyWith<$Res> get userId;
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      @JsonKey(name: 'first_name') String firstName,
+      @JsonKey(name: 'last_name') String? lastName,
+      dynamic phone});
 }
 
 /// @nodoc
-class __$$PropertyCardAgentImplCopyWithImpl<$Res>
-    extends _$PropertyCardAgentCopyWithImpl<$Res, _$PropertyCardAgentImpl>
-    implements _$$PropertyCardAgentImplCopyWith<$Res> {
-  __$$PropertyCardAgentImplCopyWithImpl(_$PropertyCardAgentImpl _value,
-      $Res Function(_$PropertyCardAgentImpl) _then)
-      : super(_value, _then);
+class __$CreatedByCopyWithImpl<$Res> implements _$CreatedByCopyWith<$Res> {
+  __$CreatedByCopyWithImpl(this._self, this._then);
 
-  @pragma('vm:prefer-inline')
+  final _CreatedBy _self;
+  final $Res Function(_CreatedBy) _then;
+
+  /// Create a copy of CreatedBy
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? userId = null,
+    Object? firstName = null,
+    Object? lastName = freezed,
+    Object? phone = freezed,
   }) {
-    return _then(_$PropertyCardAgentImpl(
+    return _then(_CreatedBy(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as User,
+      firstName: null == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: freezed == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _self.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$PropertyCardAgentImpl implements _PropertyCardAgent {
-  const _$PropertyCardAgentImpl({required this.id, required this.userId});
+mixin _$PropertyCardAgent {
+  String get id;
+  User get userId;
 
-  factory _$PropertyCardAgentImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PropertyCardAgentImplFromJson(json);
+  /// Create a copy of PropertyCardAgent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $PropertyCardAgentCopyWith<PropertyCardAgent> get copyWith =>
+      _$PropertyCardAgentCopyWithImpl<PropertyCardAgent>(
+          this as PropertyCardAgent, _$identity);
+
+  /// Serializes this PropertyCardAgent to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PropertyCardAgent &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, userId);
+
+  @override
+  String toString() {
+    return 'PropertyCardAgent(id: $id, userId: $userId)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $PropertyCardAgentCopyWith<$Res> {
+  factory $PropertyCardAgentCopyWith(
+          PropertyCardAgent value, $Res Function(PropertyCardAgent) _then) =
+      _$PropertyCardAgentCopyWithImpl;
+  @useResult
+  $Res call({String id, User userId});
+
+  $UserCopyWith<$Res> get userId;
+}
+
+/// @nodoc
+class _$PropertyCardAgentCopyWithImpl<$Res>
+    implements $PropertyCardAgentCopyWith<$Res> {
+  _$PropertyCardAgentCopyWithImpl(this._self, this._then);
+
+  final PropertyCardAgent _self;
+  final $Res Function(PropertyCardAgent) _then;
+
+  /// Create a copy of PropertyCardAgent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _self.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  /// Create a copy of PropertyCardAgent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get userId {
+    return $UserCopyWith<$Res>(_self.userId, (value) {
+      return _then(_self.copyWith(userId: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _PropertyCardAgent implements PropertyCardAgent {
+  const _PropertyCardAgent({required this.id, required this.userId});
+  factory _PropertyCardAgent.fromJson(Map<String, dynamic> json) =>
+      _$PropertyCardAgentFromJson(json);
 
   @override
   final String id;
   @override
   final User userId;
 
+  /// Create a copy of PropertyCardAgent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PropertyCardAgent(id: $id, userId: $userId)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PropertyCardAgentCopyWith<_PropertyCardAgent> get copyWith =>
+      __$PropertyCardAgentCopyWithImpl<_PropertyCardAgent>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PropertyCardAgentToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PropertyCardAgentImpl &&
+            other is _PropertyCardAgent &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PropertyCardAgentImplCopyWith<_$PropertyCardAgentImpl> get copyWith =>
-      __$$PropertyCardAgentImplCopyWithImpl<_$PropertyCardAgentImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PropertyCardAgentImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PropertyCardAgent(id: $id, userId: $userId)';
   }
 }
 
-abstract class _PropertyCardAgent implements PropertyCardAgent {
-  const factory _PropertyCardAgent(
-      {required final String id,
-      required final User userId}) = _$PropertyCardAgentImpl;
+/// @nodoc
+abstract mixin class _$PropertyCardAgentCopyWith<$Res>
+    implements $PropertyCardAgentCopyWith<$Res> {
+  factory _$PropertyCardAgentCopyWith(
+          _PropertyCardAgent value, $Res Function(_PropertyCardAgent) _then) =
+      __$PropertyCardAgentCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, User userId});
 
-  factory _PropertyCardAgent.fromJson(Map<String, dynamic> json) =
-      _$PropertyCardAgentImpl.fromJson;
-
   @override
-  String get id;
-  @override
-  User get userId;
-  @override
-  @JsonKey(ignore: true)
-  _$$PropertyCardAgentImplCopyWith<_$PropertyCardAgentImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserCopyWith<$Res> get userId;
 }
+
+/// @nodoc
+class __$PropertyCardAgentCopyWithImpl<$Res>
+    implements _$PropertyCardAgentCopyWith<$Res> {
+  __$PropertyCardAgentCopyWithImpl(this._self, this._then);
+
+  final _PropertyCardAgent _self;
+  final $Res Function(_PropertyCardAgent) _then;
+
+  /// Create a copy of PropertyCardAgent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? userId = null,
+  }) {
+    return _then(_PropertyCardAgent(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _self.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  /// Create a copy of PropertyCardAgent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get userId {
+    return $UserCopyWith<$Res>(_self.userId, (value) {
+      return _then(_self.copyWith(userId: value));
+    });
+  }
+}
+
+// dart format on

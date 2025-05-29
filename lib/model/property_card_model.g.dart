@@ -6,8 +6,8 @@ part of 'property_card_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
-    _$PropertyCardImpl(
+_PropertyCard _$PropertyCardFromJson(Map<String, dynamic> json) =>
+    _PropertyCard(
       id: readId(json, 'id') as String,
       plCreationDate: json['plCreationDate'],
       building: json['building'] == null
@@ -43,7 +43,7 @@ _$PropertyCardImpl _$$PropertyCardImplFromJson(Map<String, dynamic> json) =>
       leadsCount: (json['leadsCount'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$PropertyCardImplToJson(_$PropertyCardImpl instance) =>
+Map<String, dynamic> _$PropertyCardToJson(_PropertyCard instance) =>
     <String, dynamic>{
       'id': instance.id,
       'plCreationDate': instance.plCreationDate,
@@ -72,15 +72,14 @@ Map<String, dynamic> _$$PropertyCardImplToJson(_$PropertyCardImpl instance) =>
       'leadsCount': instance.leadsCount,
     };
 
-_$CreatedByImpl _$$CreatedByImplFromJson(Map<String, dynamic> json) =>
-    _$CreatedByImpl(
+_CreatedBy _$CreatedByFromJson(Map<String, dynamic> json) => _CreatedBy(
       id: json['_id'] as String,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String?,
       phone: json['phone'],
     );
 
-Map<String, dynamic> _$$CreatedByImplToJson(_$CreatedByImpl instance) =>
+Map<String, dynamic> _$CreatedByToJson(_CreatedBy instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'first_name': instance.firstName,
@@ -88,15 +87,13 @@ Map<String, dynamic> _$$CreatedByImplToJson(_$CreatedByImpl instance) =>
       'phone': instance.phone,
     };
 
-_$PropertyCardAgentImpl _$$PropertyCardAgentImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PropertyCardAgentImpl(
+_PropertyCardAgent _$PropertyCardAgentFromJson(Map<String, dynamic> json) =>
+    _PropertyCardAgent(
       id: json['id'] as String,
       userId: User.fromJson(json['userId'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$PropertyCardAgentImplToJson(
-        _$PropertyCardAgentImpl instance) =>
+Map<String, dynamic> _$PropertyCardAgentToJson(_PropertyCardAgent instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,

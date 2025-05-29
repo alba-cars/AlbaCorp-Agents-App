@@ -5,7 +5,7 @@ part 'agency_model.freezed.dart';
 part 'agency_model.g.dart';
 
 @freezed
-class Agency with _$Agency {
+abstract class Agency with _$Agency {
   const factory Agency({
     required String id,
     required String type,

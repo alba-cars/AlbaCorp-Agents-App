@@ -1,12 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-
 part 'amenity_model.freezed.dart';
 part 'amenity_model.g.dart';
 
 @freezed
-class Amenity with _$Amenity {
+abstract class Amenity with _$Amenity {
   const factory Amenity({
     required String id,
     required String amenity,

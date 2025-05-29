@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,36 +10,62 @@ part of 'property_card_log_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PropertyCardLog _$PropertyCardLogFromJson(Map<String, dynamic> json) {
-  return _PropertyCardLog.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PropertyCardLog {
-  String get message => throw _privateConstructorUsedError;
-  CreatedBy? get createdBy => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get updatedAt => throw _privateConstructorUsedError;
+  String get message;
+  CreatedBy? get createdBy;
+  String get type;
+  String get createdAt;
+  String get updatedAt;
   @JsonKey(readValue: readId)
-  String get id => throw _privateConstructorUsedError;
+  String get id;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of PropertyCardLog
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $PropertyCardLogCopyWith<PropertyCardLog> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$PropertyCardLogCopyWithImpl<PropertyCardLog>(
+          this as PropertyCardLog, _$identity);
+
+  /// Serializes this PropertyCardLog to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PropertyCardLog &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, message, createdBy, type, createdAt, updatedAt, id);
+
+  @override
+  String toString() {
+    return 'PropertyCardLog(message: $message, createdBy: $createdBy, type: $type, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
+  }
 }
 
 /// @nodoc
-abstract class $PropertyCardLogCopyWith<$Res> {
+abstract mixin class $PropertyCardLogCopyWith<$Res> {
   factory $PropertyCardLogCopyWith(
-          PropertyCardLog value, $Res Function(PropertyCardLog) then) =
-      _$PropertyCardLogCopyWithImpl<$Res, PropertyCardLog>;
+          PropertyCardLog value, $Res Function(PropertyCardLog) _then) =
+      _$PropertyCardLogCopyWithImpl;
   @useResult
   $Res call(
       {String message,
@@ -52,15 +79,15 @@ abstract class $PropertyCardLogCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PropertyCardLogCopyWithImpl<$Res, $Val extends PropertyCardLog>
+class _$PropertyCardLogCopyWithImpl<$Res>
     implements $PropertyCardLogCopyWith<$Res> {
-  _$PropertyCardLogCopyWithImpl(this._value, this._then);
+  _$PropertyCardLogCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PropertyCardLog _self;
+  final $Res Function(PropertyCardLog) _then;
 
+  /// Create a copy of PropertyCardLog
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -71,127 +98,61 @@ class _$PropertyCardLogCopyWithImpl<$Res, $Val extends PropertyCardLog>
     Object? updatedAt = null,
     Object? id = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       message: null == message
-          ? _value.message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
       createdBy: freezed == createdBy
-          ? _value.createdBy
+          ? _self.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as CreatedBy?,
       type: null == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of PropertyCardLog
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CreatedByCopyWith<$Res>? get createdBy {
-    if (_value.createdBy == null) {
+    if (_self.createdBy == null) {
       return null;
     }
 
-    return $CreatedByCopyWith<$Res>(_value.createdBy!, (value) {
-      return _then(_value.copyWith(createdBy: value) as $Val);
+    return $CreatedByCopyWith<$Res>(_self.createdBy!, (value) {
+      return _then(_self.copyWith(createdBy: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$PropertyCardLogImplCopyWith<$Res>
-    implements $PropertyCardLogCopyWith<$Res> {
-  factory _$$PropertyCardLogImplCopyWith(_$PropertyCardLogImpl value,
-          $Res Function(_$PropertyCardLogImpl) then) =
-      __$$PropertyCardLogImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String message,
-      CreatedBy? createdBy,
-      String type,
-      String createdAt,
-      String updatedAt,
-      @JsonKey(readValue: readId) String id});
-
-  @override
-  $CreatedByCopyWith<$Res>? get createdBy;
-}
-
-/// @nodoc
-class __$$PropertyCardLogImplCopyWithImpl<$Res>
-    extends _$PropertyCardLogCopyWithImpl<$Res, _$PropertyCardLogImpl>
-    implements _$$PropertyCardLogImplCopyWith<$Res> {
-  __$$PropertyCardLogImplCopyWithImpl(
-      _$PropertyCardLogImpl _value, $Res Function(_$PropertyCardLogImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-    Object? createdBy = freezed,
-    Object? type = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? id = null,
-  }) {
-    return _then(_$PropertyCardLogImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$PropertyCardLogImpl implements _PropertyCardLog {
-  const _$PropertyCardLogImpl(
+class _PropertyCardLog implements PropertyCardLog {
+  const _PropertyCardLog(
       {required this.message,
       required this.createdBy,
       required this.type,
       required this.createdAt,
       required this.updatedAt,
       @JsonKey(readValue: readId) required this.id});
-
-  factory _$PropertyCardLogImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PropertyCardLogImplFromJson(json);
+  factory _PropertyCardLog.fromJson(Map<String, dynamic> json) =>
+      _$PropertyCardLogFromJson(json);
 
   @override
   final String message;
@@ -207,16 +168,26 @@ class _$PropertyCardLogImpl implements _PropertyCardLog {
   @JsonKey(readValue: readId)
   final String id;
 
+  /// Create a copy of PropertyCardLog
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PropertyCardLog(message: $message, createdBy: $createdBy, type: $type, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PropertyCardLogCopyWith<_PropertyCardLog> get copyWith =>
+      __$PropertyCardLogCopyWithImpl<_PropertyCardLog>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PropertyCardLogToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PropertyCardLogImpl &&
+            other is _PropertyCardLog &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
@@ -228,54 +199,98 @@ class _$PropertyCardLogImpl implements _PropertyCardLog {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, message, createdBy, type, createdAt, updatedAt, id);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PropertyCardLogImplCopyWith<_$PropertyCardLogImpl> get copyWith =>
-      __$$PropertyCardLogImplCopyWithImpl<_$PropertyCardLogImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PropertyCardLogImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PropertyCardLog(message: $message, createdBy: $createdBy, type: $type, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
   }
 }
 
-abstract class _PropertyCardLog implements PropertyCardLog {
-  const factory _PropertyCardLog(
-          {required final String message,
-          required final CreatedBy? createdBy,
-          required final String type,
-          required final String createdAt,
-          required final String updatedAt,
-          @JsonKey(readValue: readId) required final String id}) =
-      _$PropertyCardLogImpl;
+/// @nodoc
+abstract mixin class _$PropertyCardLogCopyWith<$Res>
+    implements $PropertyCardLogCopyWith<$Res> {
+  factory _$PropertyCardLogCopyWith(
+          _PropertyCardLog value, $Res Function(_PropertyCardLog) _then) =
+      __$PropertyCardLogCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String message,
+      CreatedBy? createdBy,
+      String type,
+      String createdAt,
+      String updatedAt,
+      @JsonKey(readValue: readId) String id});
 
-  factory _PropertyCardLog.fromJson(Map<String, dynamic> json) =
-      _$PropertyCardLogImpl.fromJson;
-
   @override
-  String get message;
-  @override
-  CreatedBy? get createdBy;
-  @override
-  String get type;
-  @override
-  String get createdAt;
-  @override
-  String get updatedAt;
-  @override
-  @JsonKey(readValue: readId)
-  String get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$PropertyCardLogImplCopyWith<_$PropertyCardLogImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CreatedByCopyWith<$Res>? get createdBy;
 }
+
+/// @nodoc
+class __$PropertyCardLogCopyWithImpl<$Res>
+    implements _$PropertyCardLogCopyWith<$Res> {
+  __$PropertyCardLogCopyWithImpl(this._self, this._then);
+
+  final _PropertyCardLog _self;
+  final $Res Function(_PropertyCardLog) _then;
+
+  /// Create a copy of PropertyCardLog
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? message = null,
+    Object? createdBy = freezed,
+    Object? type = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? id = null,
+  }) {
+    return _then(_PropertyCardLog(
+      message: null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdBy: freezed == createdBy
+          ? _self.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as CreatedBy?,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  /// Create a copy of PropertyCardLog
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CreatedByCopyWith<$Res>? get createdBy {
+    if (_self.createdBy == null) {
+      return null;
+    }
+
+    return $CreatedByCopyWith<$Res>(_self.createdBy!, (value) {
+      return _then(_self.copyWith(createdBy: value));
+    });
+  }
+}
+
+// dart format on

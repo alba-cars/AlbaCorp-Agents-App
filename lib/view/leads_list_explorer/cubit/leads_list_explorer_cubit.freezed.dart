@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,63 +10,164 @@ part of 'leads_list_explorer_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LeadsListExplorerState {
-  AppStatus get getExplorerListStatus => throw _privateConstructorUsedError;
-  List<LeadExplorerItem> get explorerList => throw _privateConstructorUsedError;
-  String? get getExplorerListError => throw _privateConstructorUsedError;
-  Paginator? get explorerPaginator => throw _privateConstructorUsedError;
-  AppStatus get getCheckedOutExplorerListStatus =>
-      throw _privateConstructorUsedError;
-  List<PropertyCard> get checkedOutExplorerList =>
-      throw _privateConstructorUsedError;
-  String? get getCheckedOutExplorerListError =>
-      throw _privateConstructorUsedError;
-  Paginator? get checkedOutPaginator => throw _privateConstructorUsedError;
-  AppStatus get checkInLeadStatus => throw _privateConstructorUsedError;
-  String? get checkInLeadError => throw _privateConstructorUsedError;
-  AppStatus get checkOutLeadStatus => throw _privateConstructorUsedError;
-  String? get checkOutLeadError => throw _privateConstructorUsedError;
-  AppStatus get randomLeadsAssignmentStatus =>
-      throw _privateConstructorUsedError;
-  String? get randomLeadsAssignmentError => throw _privateConstructorUsedError;
-  dynamic get currentTab => throw _privateConstructorUsedError;
-  String? get explorerSearch => throw _privateConstructorUsedError;
-  String? get checkedOutSearch => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get explorerFilter =>
-      throw _privateConstructorUsedError;
-  Map<String, dynamic>? get checkedOutFilter =>
-      throw _privateConstructorUsedError;
-  List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
-  List<CommunityTeamModel> get communityList =>
-      throw _privateConstructorUsedError;
-  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
-  List<CommunityName> get placesList => throw _privateConstructorUsedError;
-  AppStatus get getPlacesListStatus => throw _privateConstructorUsedError;
-  List<Building> get buildingList => throw _privateConstructorUsedError;
-  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
-  Paginator? get buildingsPaginator => throw _privateConstructorUsedError;
-  bool get selectModeEnabled => throw _privateConstructorUsedError;
-  List<LeadExplorerItem> get selectedPropertyCards =>
-      throw _privateConstructorUsedError;
-  bool get showOnlyAvailable => throw _privateConstructorUsedError;
+  AppStatus get getExplorerListStatus;
+  List<LeadExplorerItem> get explorerList;
+  String? get getExplorerListError;
+  Paginator? get explorerPaginator;
+  AppStatus get getCheckedOutExplorerListStatus;
+  List<PropertyCard> get checkedOutExplorerList;
+  String? get getCheckedOutExplorerListError;
+  Paginator? get checkedOutPaginator;
+  AppStatus get checkInLeadStatus;
+  String? get checkInLeadError;
+  AppStatus get checkOutLeadStatus;
+  String? get checkOutLeadError;
+  AppStatus get randomLeadsAssignmentStatus;
+  String? get randomLeadsAssignmentError;
+  dynamic get currentTab;
+  String? get explorerSearch;
+  String? get checkedOutSearch;
+  Map<String, dynamic>? get explorerFilter;
+  Map<String, dynamic>? get checkedOutFilter;
+  List<PropertyType> get propertyTypeList;
+  AppStatus get getPropertyTypeListStatus;
+  List<CommunityTeamModel> get communityList;
+  AppStatus get getCommunityListStatus;
+  List<CommunityName> get placesList;
+  AppStatus get getPlacesListStatus;
+  List<Building> get buildingList;
+  AppStatus get getBuildingListStatus;
+  Paginator? get buildingsPaginator;
+  bool get selectModeEnabled;
+  List<LeadExplorerItem> get selectedPropertyCards;
+  bool get showOnlyAvailable;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $LeadsListExplorerStateCopyWith<LeadsListExplorerState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$LeadsListExplorerStateCopyWithImpl<LeadsListExplorerState>(
+          this as LeadsListExplorerState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LeadsListExplorerState &&
+            (identical(other.getExplorerListStatus, getExplorerListStatus) ||
+                other.getExplorerListStatus == getExplorerListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.explorerList, explorerList) &&
+            (identical(other.getExplorerListError, getExplorerListError) ||
+                other.getExplorerListError == getExplorerListError) &&
+            (identical(other.explorerPaginator, explorerPaginator) ||
+                other.explorerPaginator == explorerPaginator) &&
+            (identical(other.getCheckedOutExplorerListStatus, getCheckedOutExplorerListStatus) ||
+                other.getCheckedOutExplorerListStatus ==
+                    getCheckedOutExplorerListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.checkedOutExplorerList, checkedOutExplorerList) &&
+            (identical(other.getCheckedOutExplorerListError, getCheckedOutExplorerListError) ||
+                other.getCheckedOutExplorerListError ==
+                    getCheckedOutExplorerListError) &&
+            (identical(other.checkedOutPaginator, checkedOutPaginator) ||
+                other.checkedOutPaginator == checkedOutPaginator) &&
+            (identical(other.checkInLeadStatus, checkInLeadStatus) ||
+                other.checkInLeadStatus == checkInLeadStatus) &&
+            (identical(other.checkInLeadError, checkInLeadError) ||
+                other.checkInLeadError == checkInLeadError) &&
+            (identical(other.checkOutLeadStatus, checkOutLeadStatus) ||
+                other.checkOutLeadStatus == checkOutLeadStatus) &&
+            (identical(other.checkOutLeadError, checkOutLeadError) ||
+                other.checkOutLeadError == checkOutLeadError) &&
+            (identical(other.randomLeadsAssignmentStatus, randomLeadsAssignmentStatus) ||
+                other.randomLeadsAssignmentStatus ==
+                    randomLeadsAssignmentStatus) &&
+            (identical(other.randomLeadsAssignmentError, randomLeadsAssignmentError) ||
+                other.randomLeadsAssignmentError ==
+                    randomLeadsAssignmentError) &&
+            const DeepCollectionEquality()
+                .equals(other.currentTab, currentTab) &&
+            (identical(other.explorerSearch, explorerSearch) ||
+                other.explorerSearch == explorerSearch) &&
+            (identical(other.checkedOutSearch, checkedOutSearch) ||
+                other.checkedOutSearch == checkedOutSearch) &&
+            const DeepCollectionEquality()
+                .equals(other.explorerFilter, explorerFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.checkedOutFilter, checkedOutFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyTypeList, propertyTypeList) &&
+            (identical(other.getPropertyTypeListStatus, getPropertyTypeListStatus) ||
+                other.getPropertyTypeListStatus == getPropertyTypeListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.communityList, communityList) &&
+            (identical(other.getCommunityListStatus, getCommunityListStatus) ||
+                other.getCommunityListStatus == getCommunityListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.placesList, placesList) &&
+            (identical(other.getPlacesListStatus, getPlacesListStatus) || other.getPlacesListStatus == getPlacesListStatus) &&
+            const DeepCollectionEquality().equals(other.buildingList, buildingList) &&
+            (identical(other.getBuildingListStatus, getBuildingListStatus) || other.getBuildingListStatus == getBuildingListStatus) &&
+            (identical(other.buildingsPaginator, buildingsPaginator) || other.buildingsPaginator == buildingsPaginator) &&
+            (identical(other.selectModeEnabled, selectModeEnabled) || other.selectModeEnabled == selectModeEnabled) &&
+            const DeepCollectionEquality().equals(other.selectedPropertyCards, selectedPropertyCards) &&
+            (identical(other.showOnlyAvailable, showOnlyAvailable) || other.showOnlyAvailable == showOnlyAvailable));
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        getExplorerListStatus,
+        const DeepCollectionEquality().hash(explorerList),
+        getExplorerListError,
+        explorerPaginator,
+        getCheckedOutExplorerListStatus,
+        const DeepCollectionEquality().hash(checkedOutExplorerList),
+        getCheckedOutExplorerListError,
+        checkedOutPaginator,
+        checkInLeadStatus,
+        checkInLeadError,
+        checkOutLeadStatus,
+        checkOutLeadError,
+        randomLeadsAssignmentStatus,
+        randomLeadsAssignmentError,
+        const DeepCollectionEquality().hash(currentTab),
+        explorerSearch,
+        checkedOutSearch,
+        const DeepCollectionEquality().hash(explorerFilter),
+        const DeepCollectionEquality().hash(checkedOutFilter),
+        const DeepCollectionEquality().hash(propertyTypeList),
+        getPropertyTypeListStatus,
+        const DeepCollectionEquality().hash(communityList),
+        getCommunityListStatus,
+        const DeepCollectionEquality().hash(placesList),
+        getPlacesListStatus,
+        const DeepCollectionEquality().hash(buildingList),
+        getBuildingListStatus,
+        buildingsPaginator,
+        selectModeEnabled,
+        const DeepCollectionEquality().hash(selectedPropertyCards),
+        showOnlyAvailable
+      ]);
+
+  @override
+  String toString() {
+    return 'LeadsListExplorerState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
+  }
 }
 
 /// @nodoc
-abstract class $LeadsListExplorerStateCopyWith<$Res> {
+abstract mixin class $LeadsListExplorerStateCopyWith<$Res> {
   factory $LeadsListExplorerStateCopyWith(LeadsListExplorerState value,
-          $Res Function(LeadsListExplorerState) then) =
-      _$LeadsListExplorerStateCopyWithImpl<$Res, LeadsListExplorerState>;
+          $Res Function(LeadsListExplorerState) _then) =
+      _$LeadsListExplorerStateCopyWithImpl;
   @useResult
   $Res call(
       {AppStatus getExplorerListStatus,
@@ -106,16 +208,15 @@ abstract class $LeadsListExplorerStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LeadsListExplorerStateCopyWithImpl<$Res,
-        $Val extends LeadsListExplorerState>
+class _$LeadsListExplorerStateCopyWithImpl<$Res>
     implements $LeadsListExplorerStateCopyWith<$Res> {
-  _$LeadsListExplorerStateCopyWithImpl(this._value, this._then);
+  _$LeadsListExplorerStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final LeadsListExplorerState _self;
+  final $Res Function(LeadsListExplorerState) _then;
 
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,396 +252,181 @@ class _$LeadsListExplorerStateCopyWithImpl<$Res,
     Object? selectedPropertyCards = null,
     Object? showOnlyAvailable = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       getExplorerListStatus: null == getExplorerListStatus
-          ? _value.getExplorerListStatus
+          ? _self.getExplorerListStatus
           : getExplorerListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       explorerList: null == explorerList
-          ? _value.explorerList
+          ? _self.explorerList
           : explorerList // ignore: cast_nullable_to_non_nullable
               as List<LeadExplorerItem>,
       getExplorerListError: freezed == getExplorerListError
-          ? _value.getExplorerListError
+          ? _self.getExplorerListError
           : getExplorerListError // ignore: cast_nullable_to_non_nullable
               as String?,
       explorerPaginator: freezed == explorerPaginator
-          ? _value.explorerPaginator
+          ? _self.explorerPaginator
           : explorerPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       getCheckedOutExplorerListStatus: null == getCheckedOutExplorerListStatus
-          ? _value.getCheckedOutExplorerListStatus
+          ? _self.getCheckedOutExplorerListStatus
           : getCheckedOutExplorerListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       checkedOutExplorerList: null == checkedOutExplorerList
-          ? _value.checkedOutExplorerList
+          ? _self.checkedOutExplorerList
           : checkedOutExplorerList // ignore: cast_nullable_to_non_nullable
               as List<PropertyCard>,
       getCheckedOutExplorerListError: freezed == getCheckedOutExplorerListError
-          ? _value.getCheckedOutExplorerListError
+          ? _self.getCheckedOutExplorerListError
           : getCheckedOutExplorerListError // ignore: cast_nullable_to_non_nullable
               as String?,
       checkedOutPaginator: freezed == checkedOutPaginator
-          ? _value.checkedOutPaginator
+          ? _self.checkedOutPaginator
           : checkedOutPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       checkInLeadStatus: null == checkInLeadStatus
-          ? _value.checkInLeadStatus
+          ? _self.checkInLeadStatus
           : checkInLeadStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       checkInLeadError: freezed == checkInLeadError
-          ? _value.checkInLeadError
+          ? _self.checkInLeadError
           : checkInLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
       checkOutLeadStatus: null == checkOutLeadStatus
-          ? _value.checkOutLeadStatus
+          ? _self.checkOutLeadStatus
           : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       checkOutLeadError: freezed == checkOutLeadError
-          ? _value.checkOutLeadError
+          ? _self.checkOutLeadError
           : checkOutLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
       randomLeadsAssignmentStatus: null == randomLeadsAssignmentStatus
-          ? _value.randomLeadsAssignmentStatus
+          ? _self.randomLeadsAssignmentStatus
           : randomLeadsAssignmentStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       randomLeadsAssignmentError: freezed == randomLeadsAssignmentError
-          ? _value.randomLeadsAssignmentError
+          ? _self.randomLeadsAssignmentError
           : randomLeadsAssignmentError // ignore: cast_nullable_to_non_nullable
               as String?,
       currentTab: freezed == currentTab
-          ? _value.currentTab
+          ? _self.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as dynamic,
       explorerSearch: freezed == explorerSearch
-          ? _value.explorerSearch
+          ? _self.explorerSearch
           : explorerSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       checkedOutSearch: freezed == checkedOutSearch
-          ? _value.checkedOutSearch
+          ? _self.checkedOutSearch
           : checkedOutSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       explorerFilter: freezed == explorerFilter
-          ? _value.explorerFilter
+          ? _self.explorerFilter
           : explorerFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       checkedOutFilter: freezed == checkedOutFilter
-          ? _value.checkedOutFilter
+          ? _self.checkedOutFilter
           : checkedOutFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       propertyTypeList: null == propertyTypeList
-          ? _value.propertyTypeList
+          ? _self.propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
               as List<PropertyType>,
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       communityList: null == communityList
-          ? _value.communityList
+          ? _self.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
               as List<CommunityTeamModel>,
       getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
+          ? _self.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       placesList: null == placesList
-          ? _value.placesList
+          ? _self.placesList
           : placesList // ignore: cast_nullable_to_non_nullable
               as List<CommunityName>,
       getPlacesListStatus: null == getPlacesListStatus
-          ? _value.getPlacesListStatus
+          ? _self.getPlacesListStatus
           : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buildingList: null == buildingList
-          ? _value.buildingList
+          ? _self.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
               as List<Building>,
       getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
+          ? _self.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buildingsPaginator: freezed == buildingsPaginator
-          ? _value.buildingsPaginator
+          ? _self.buildingsPaginator
           : buildingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       selectModeEnabled: null == selectModeEnabled
-          ? _value.selectModeEnabled
+          ? _self.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedPropertyCards: null == selectedPropertyCards
-          ? _value.selectedPropertyCards
+          ? _self.selectedPropertyCards
           : selectedPropertyCards // ignore: cast_nullable_to_non_nullable
               as List<LeadExplorerItem>,
       showOnlyAvailable: null == showOnlyAvailable
-          ? _value.showOnlyAvailable
-          : showOnlyAvailable // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get explorerPaginator {
-    if (_value.explorerPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.explorerPaginator!, (value) {
-      return _then(_value.copyWith(explorerPaginator: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get checkedOutPaginator {
-    if (_value.checkedOutPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.checkedOutPaginator!, (value) {
-      return _then(_value.copyWith(checkedOutPaginator: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get buildingsPaginator {
-    if (_value.buildingsPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.buildingsPaginator!, (value) {
-      return _then(_value.copyWith(buildingsPaginator: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$LeadsListExplorerStateImplCopyWith<$Res>
-    implements $LeadsListExplorerStateCopyWith<$Res> {
-  factory _$$LeadsListExplorerStateImplCopyWith(
-          _$LeadsListExplorerStateImpl value,
-          $Res Function(_$LeadsListExplorerStateImpl) then) =
-      __$$LeadsListExplorerStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {AppStatus getExplorerListStatus,
-      List<LeadExplorerItem> explorerList,
-      String? getExplorerListError,
-      Paginator? explorerPaginator,
-      AppStatus getCheckedOutExplorerListStatus,
-      List<PropertyCard> checkedOutExplorerList,
-      String? getCheckedOutExplorerListError,
-      Paginator? checkedOutPaginator,
-      AppStatus checkInLeadStatus,
-      String? checkInLeadError,
-      AppStatus checkOutLeadStatus,
-      String? checkOutLeadError,
-      AppStatus randomLeadsAssignmentStatus,
-      String? randomLeadsAssignmentError,
-      dynamic currentTab,
-      String? explorerSearch,
-      String? checkedOutSearch,
-      Map<String, dynamic>? explorerFilter,
-      Map<String, dynamic>? checkedOutFilter,
-      List<PropertyType> propertyTypeList,
-      AppStatus getPropertyTypeListStatus,
-      List<CommunityTeamModel> communityList,
-      AppStatus getCommunityListStatus,
-      List<CommunityName> placesList,
-      AppStatus getPlacesListStatus,
-      List<Building> buildingList,
-      AppStatus getBuildingListStatus,
-      Paginator? buildingsPaginator,
-      bool selectModeEnabled,
-      List<LeadExplorerItem> selectedPropertyCards,
-      bool showOnlyAvailable});
-
-  @override
-  $PaginatorCopyWith<$Res>? get explorerPaginator;
-  @override
-  $PaginatorCopyWith<$Res>? get checkedOutPaginator;
-  @override
-  $PaginatorCopyWith<$Res>? get buildingsPaginator;
-}
-
-/// @nodoc
-class __$$LeadsListExplorerStateImplCopyWithImpl<$Res>
-    extends _$LeadsListExplorerStateCopyWithImpl<$Res,
-        _$LeadsListExplorerStateImpl>
-    implements _$$LeadsListExplorerStateImplCopyWith<$Res> {
-  __$$LeadsListExplorerStateImplCopyWithImpl(
-      _$LeadsListExplorerStateImpl _value,
-      $Res Function(_$LeadsListExplorerStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? getExplorerListStatus = null,
-    Object? explorerList = null,
-    Object? getExplorerListError = freezed,
-    Object? explorerPaginator = freezed,
-    Object? getCheckedOutExplorerListStatus = null,
-    Object? checkedOutExplorerList = null,
-    Object? getCheckedOutExplorerListError = freezed,
-    Object? checkedOutPaginator = freezed,
-    Object? checkInLeadStatus = null,
-    Object? checkInLeadError = freezed,
-    Object? checkOutLeadStatus = null,
-    Object? checkOutLeadError = freezed,
-    Object? randomLeadsAssignmentStatus = null,
-    Object? randomLeadsAssignmentError = freezed,
-    Object? currentTab = freezed,
-    Object? explorerSearch = freezed,
-    Object? checkedOutSearch = freezed,
-    Object? explorerFilter = freezed,
-    Object? checkedOutFilter = freezed,
-    Object? propertyTypeList = null,
-    Object? getPropertyTypeListStatus = null,
-    Object? communityList = null,
-    Object? getCommunityListStatus = null,
-    Object? placesList = null,
-    Object? getPlacesListStatus = null,
-    Object? buildingList = null,
-    Object? getBuildingListStatus = null,
-    Object? buildingsPaginator = freezed,
-    Object? selectModeEnabled = null,
-    Object? selectedPropertyCards = null,
-    Object? showOnlyAvailable = null,
-  }) {
-    return _then(_$LeadsListExplorerStateImpl(
-      getExplorerListStatus: null == getExplorerListStatus
-          ? _value.getExplorerListStatus
-          : getExplorerListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      explorerList: null == explorerList
-          ? _value._explorerList
-          : explorerList // ignore: cast_nullable_to_non_nullable
-              as List<LeadExplorerItem>,
-      getExplorerListError: freezed == getExplorerListError
-          ? _value.getExplorerListError
-          : getExplorerListError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      explorerPaginator: freezed == explorerPaginator
-          ? _value.explorerPaginator
-          : explorerPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      getCheckedOutExplorerListStatus: null == getCheckedOutExplorerListStatus
-          ? _value.getCheckedOutExplorerListStatus
-          : getCheckedOutExplorerListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      checkedOutExplorerList: null == checkedOutExplorerList
-          ? _value._checkedOutExplorerList
-          : checkedOutExplorerList // ignore: cast_nullable_to_non_nullable
-              as List<PropertyCard>,
-      getCheckedOutExplorerListError: freezed == getCheckedOutExplorerListError
-          ? _value.getCheckedOutExplorerListError
-          : getCheckedOutExplorerListError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      checkedOutPaginator: freezed == checkedOutPaginator
-          ? _value.checkedOutPaginator
-          : checkedOutPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      checkInLeadStatus: null == checkInLeadStatus
-          ? _value.checkInLeadStatus
-          : checkInLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      checkInLeadError: freezed == checkInLeadError
-          ? _value.checkInLeadError
-          : checkInLeadError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      checkOutLeadStatus: null == checkOutLeadStatus
-          ? _value.checkOutLeadStatus
-          : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      checkOutLeadError: freezed == checkOutLeadError
-          ? _value.checkOutLeadError
-          : checkOutLeadError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      randomLeadsAssignmentStatus: null == randomLeadsAssignmentStatus
-          ? _value.randomLeadsAssignmentStatus
-          : randomLeadsAssignmentStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      randomLeadsAssignmentError: freezed == randomLeadsAssignmentError
-          ? _value.randomLeadsAssignmentError
-          : randomLeadsAssignmentError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      currentTab: freezed == currentTab ? _value.currentTab! : currentTab,
-      explorerSearch: freezed == explorerSearch
-          ? _value.explorerSearch
-          : explorerSearch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      checkedOutSearch: freezed == checkedOutSearch
-          ? _value.checkedOutSearch
-          : checkedOutSearch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      explorerFilter: freezed == explorerFilter
-          ? _value._explorerFilter
-          : explorerFilter // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      checkedOutFilter: freezed == checkedOutFilter
-          ? _value._checkedOutFilter
-          : checkedOutFilter // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      propertyTypeList: null == propertyTypeList
-          ? _value._propertyTypeList
-          : propertyTypeList // ignore: cast_nullable_to_non_nullable
-              as List<PropertyType>,
-      getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
-          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      communityList: null == communityList
-          ? _value._communityList
-          : communityList // ignore: cast_nullable_to_non_nullable
-              as List<CommunityTeamModel>,
-      getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
-          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      placesList: null == placesList
-          ? _value._placesList
-          : placesList // ignore: cast_nullable_to_non_nullable
-              as List<CommunityName>,
-      getPlacesListStatus: null == getPlacesListStatus
-          ? _value.getPlacesListStatus
-          : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buildingList: null == buildingList
-          ? _value._buildingList
-          : buildingList // ignore: cast_nullable_to_non_nullable
-              as List<Building>,
-      getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
-          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buildingsPaginator: freezed == buildingsPaginator
-          ? _value.buildingsPaginator
-          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      selectModeEnabled: null == selectModeEnabled
-          ? _value.selectModeEnabled
-          : selectModeEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      selectedPropertyCards: null == selectedPropertyCards
-          ? _value._selectedPropertyCards
-          : selectedPropertyCards // ignore: cast_nullable_to_non_nullable
-              as List<LeadExplorerItem>,
-      showOnlyAvailable: null == showOnlyAvailable
-          ? _value.showOnlyAvailable
+          ? _self.showOnlyAvailable
           : showOnlyAvailable // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
+
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get explorerPaginator {
+    if (_self.explorerPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.explorerPaginator!, (value) {
+      return _then(_self.copyWith(explorerPaginator: value));
+    });
+  }
+
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get checkedOutPaginator {
+    if (_self.checkedOutPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.checkedOutPaginator!, (value) {
+      return _then(_self.copyWith(checkedOutPaginator: value));
+    });
+  }
+
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get buildingsPaginator {
+    if (_self.buildingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.buildingsPaginator!, (value) {
+      return _then(_self.copyWith(buildingsPaginator: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
-  const _$LeadsListExplorerStateImpl(
+class _LeadsListExplorerState implements LeadsListExplorerState {
+  const _LeadsListExplorerState(
       {this.getExplorerListStatus = AppStatus.init,
       final List<LeadExplorerItem> explorerList = const [],
       this.getExplorerListError,
@@ -725,16 +611,20 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
   @JsonKey()
   final bool showOnlyAvailable;
 
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'LeadsListExplorerState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LeadsListExplorerStateCopyWith<_LeadsListExplorerState> get copyWith =>
+      __$LeadsListExplorerStateCopyWithImpl<_LeadsListExplorerState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LeadsListExplorerStateImpl &&
+            other is _LeadsListExplorerState &&
             (identical(other.getExplorerListStatus, getExplorerListStatus) ||
                 other.getExplorerListStatus == getExplorerListStatus) &&
             const DeepCollectionEquality()
@@ -832,112 +722,275 @@ class _$LeadsListExplorerStateImpl implements _LeadsListExplorerState {
         showOnlyAvailable
       ]);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'LeadsListExplorerState(getExplorerListStatus: $getExplorerListStatus, explorerList: $explorerList, getExplorerListError: $getExplorerListError, explorerPaginator: $explorerPaginator, getCheckedOutExplorerListStatus: $getCheckedOutExplorerListStatus, checkedOutExplorerList: $checkedOutExplorerList, getCheckedOutExplorerListError: $getCheckedOutExplorerListError, checkedOutPaginator: $checkedOutPaginator, checkInLeadStatus: $checkInLeadStatus, checkInLeadError: $checkInLeadError, checkOutLeadStatus: $checkOutLeadStatus, checkOutLeadError: $checkOutLeadError, randomLeadsAssignmentStatus: $randomLeadsAssignmentStatus, randomLeadsAssignmentError: $randomLeadsAssignmentError, currentTab: $currentTab, explorerSearch: $explorerSearch, checkedOutSearch: $checkedOutSearch, explorerFilter: $explorerFilter, checkedOutFilter: $checkedOutFilter, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, selectModeEnabled: $selectModeEnabled, selectedPropertyCards: $selectedPropertyCards, showOnlyAvailable: $showOnlyAvailable)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LeadsListExplorerStateCopyWith<$Res>
+    implements $LeadsListExplorerStateCopyWith<$Res> {
+  factory _$LeadsListExplorerStateCopyWith(_LeadsListExplorerState value,
+          $Res Function(_LeadsListExplorerState) _then) =
+      __$LeadsListExplorerStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {AppStatus getExplorerListStatus,
+      List<LeadExplorerItem> explorerList,
+      String? getExplorerListError,
+      Paginator? explorerPaginator,
+      AppStatus getCheckedOutExplorerListStatus,
+      List<PropertyCard> checkedOutExplorerList,
+      String? getCheckedOutExplorerListError,
+      Paginator? checkedOutPaginator,
+      AppStatus checkInLeadStatus,
+      String? checkInLeadError,
+      AppStatus checkOutLeadStatus,
+      String? checkOutLeadError,
+      AppStatus randomLeadsAssignmentStatus,
+      String? randomLeadsAssignmentError,
+      dynamic currentTab,
+      String? explorerSearch,
+      String? checkedOutSearch,
+      Map<String, dynamic>? explorerFilter,
+      Map<String, dynamic>? checkedOutFilter,
+      List<PropertyType> propertyTypeList,
+      AppStatus getPropertyTypeListStatus,
+      List<CommunityTeamModel> communityList,
+      AppStatus getCommunityListStatus,
+      List<CommunityName> placesList,
+      AppStatus getPlacesListStatus,
+      List<Building> buildingList,
+      AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
+      bool selectModeEnabled,
+      List<LeadExplorerItem> selectedPropertyCards,
+      bool showOnlyAvailable});
+
+  @override
+  $PaginatorCopyWith<$Res>? get explorerPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get checkedOutPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
+}
+
+/// @nodoc
+class __$LeadsListExplorerStateCopyWithImpl<$Res>
+    implements _$LeadsListExplorerStateCopyWith<$Res> {
+  __$LeadsListExplorerStateCopyWithImpl(this._self, this._then);
+
+  final _LeadsListExplorerState _self;
+  final $Res Function(_LeadsListExplorerState) _then;
+
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$LeadsListExplorerStateImplCopyWith<_$LeadsListExplorerStateImpl>
-      get copyWith => __$$LeadsListExplorerStateImplCopyWithImpl<
-          _$LeadsListExplorerStateImpl>(this, _$identity);
+  $Res call({
+    Object? getExplorerListStatus = null,
+    Object? explorerList = null,
+    Object? getExplorerListError = freezed,
+    Object? explorerPaginator = freezed,
+    Object? getCheckedOutExplorerListStatus = null,
+    Object? checkedOutExplorerList = null,
+    Object? getCheckedOutExplorerListError = freezed,
+    Object? checkedOutPaginator = freezed,
+    Object? checkInLeadStatus = null,
+    Object? checkInLeadError = freezed,
+    Object? checkOutLeadStatus = null,
+    Object? checkOutLeadError = freezed,
+    Object? randomLeadsAssignmentStatus = null,
+    Object? randomLeadsAssignmentError = freezed,
+    Object? currentTab = freezed,
+    Object? explorerSearch = freezed,
+    Object? checkedOutSearch = freezed,
+    Object? explorerFilter = freezed,
+    Object? checkedOutFilter = freezed,
+    Object? propertyTypeList = null,
+    Object? getPropertyTypeListStatus = null,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? placesList = null,
+    Object? getPlacesListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
+    Object? selectModeEnabled = null,
+    Object? selectedPropertyCards = null,
+    Object? showOnlyAvailable = null,
+  }) {
+    return _then(_LeadsListExplorerState(
+      getExplorerListStatus: null == getExplorerListStatus
+          ? _self.getExplorerListStatus
+          : getExplorerListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      explorerList: null == explorerList
+          ? _self._explorerList
+          : explorerList // ignore: cast_nullable_to_non_nullable
+              as List<LeadExplorerItem>,
+      getExplorerListError: freezed == getExplorerListError
+          ? _self.getExplorerListError
+          : getExplorerListError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      explorerPaginator: freezed == explorerPaginator
+          ? _self.explorerPaginator
+          : explorerPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      getCheckedOutExplorerListStatus: null == getCheckedOutExplorerListStatus
+          ? _self.getCheckedOutExplorerListStatus
+          : getCheckedOutExplorerListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      checkedOutExplorerList: null == checkedOutExplorerList
+          ? _self._checkedOutExplorerList
+          : checkedOutExplorerList // ignore: cast_nullable_to_non_nullable
+              as List<PropertyCard>,
+      getCheckedOutExplorerListError: freezed == getCheckedOutExplorerListError
+          ? _self.getCheckedOutExplorerListError
+          : getCheckedOutExplorerListError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkedOutPaginator: freezed == checkedOutPaginator
+          ? _self.checkedOutPaginator
+          : checkedOutPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      checkInLeadStatus: null == checkInLeadStatus
+          ? _self.checkInLeadStatus
+          : checkInLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      checkInLeadError: freezed == checkInLeadError
+          ? _self.checkInLeadError
+          : checkInLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkOutLeadStatus: null == checkOutLeadStatus
+          ? _self.checkOutLeadStatus
+          : checkOutLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      checkOutLeadError: freezed == checkOutLeadError
+          ? _self.checkOutLeadError
+          : checkOutLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      randomLeadsAssignmentStatus: null == randomLeadsAssignmentStatus
+          ? _self.randomLeadsAssignmentStatus
+          : randomLeadsAssignmentStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      randomLeadsAssignmentError: freezed == randomLeadsAssignmentError
+          ? _self.randomLeadsAssignmentError
+          : randomLeadsAssignmentError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currentTab: freezed == currentTab
+          ? _self.currentTab
+          : currentTab // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      explorerSearch: freezed == explorerSearch
+          ? _self.explorerSearch
+          : explorerSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkedOutSearch: freezed == checkedOutSearch
+          ? _self.checkedOutSearch
+          : checkedOutSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      explorerFilter: freezed == explorerFilter
+          ? _self._explorerFilter
+          : explorerFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      checkedOutFilter: freezed == checkedOutFilter
+          ? _self._checkedOutFilter
+          : checkedOutFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      propertyTypeList: null == propertyTypeList
+          ? _self._propertyTypeList
+          : propertyTypeList // ignore: cast_nullable_to_non_nullable
+              as List<PropertyType>,
+      getPropertyTypeListStatus: null == getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
+          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      communityList: null == communityList
+          ? _self._communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<CommunityTeamModel>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _self.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      placesList: null == placesList
+          ? _self._placesList
+          : placesList // ignore: cast_nullable_to_non_nullable
+              as List<CommunityName>,
+      getPlacesListStatus: null == getPlacesListStatus
+          ? _self.getPlacesListStatus
+          : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingList: null == buildingList
+          ? _self._buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _self.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _self.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      selectModeEnabled: null == selectModeEnabled
+          ? _self.selectModeEnabled
+          : selectModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedPropertyCards: null == selectedPropertyCards
+          ? _self._selectedPropertyCards
+          : selectedPropertyCards // ignore: cast_nullable_to_non_nullable
+              as List<LeadExplorerItem>,
+      showOnlyAvailable: null == showOnlyAvailable
+          ? _self.showOnlyAvailable
+          : showOnlyAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get explorerPaginator {
+    if (_self.explorerPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.explorerPaginator!, (value) {
+      return _then(_self.copyWith(explorerPaginator: value));
+    });
+  }
+
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get checkedOutPaginator {
+    if (_self.checkedOutPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.checkedOutPaginator!, (value) {
+      return _then(_self.copyWith(checkedOutPaginator: value));
+    });
+  }
+
+  /// Create a copy of LeadsListExplorerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get buildingsPaginator {
+    if (_self.buildingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.buildingsPaginator!, (value) {
+      return _then(_self.copyWith(buildingsPaginator: value));
+    });
+  }
 }
 
-abstract class _LeadsListExplorerState implements LeadsListExplorerState {
-  const factory _LeadsListExplorerState(
-      {final AppStatus getExplorerListStatus,
-      final List<LeadExplorerItem> explorerList,
-      final String? getExplorerListError,
-      final Paginator? explorerPaginator,
-      final AppStatus getCheckedOutExplorerListStatus,
-      final List<PropertyCard> checkedOutExplorerList,
-      final String? getCheckedOutExplorerListError,
-      final Paginator? checkedOutPaginator,
-      final AppStatus checkInLeadStatus,
-      final String? checkInLeadError,
-      final AppStatus checkOutLeadStatus,
-      final String? checkOutLeadError,
-      final AppStatus randomLeadsAssignmentStatus,
-      final String? randomLeadsAssignmentError,
-      final dynamic currentTab,
-      final String? explorerSearch,
-      final String? checkedOutSearch,
-      final Map<String, dynamic>? explorerFilter,
-      final Map<String, dynamic>? checkedOutFilter,
-      final List<PropertyType> propertyTypeList,
-      final AppStatus getPropertyTypeListStatus,
-      final List<CommunityTeamModel> communityList,
-      final AppStatus getCommunityListStatus,
-      final List<CommunityName> placesList,
-      final AppStatus getPlacesListStatus,
-      final List<Building> buildingList,
-      final AppStatus getBuildingListStatus,
-      final Paginator? buildingsPaginator,
-      final bool selectModeEnabled,
-      final List<LeadExplorerItem> selectedPropertyCards,
-      final bool showOnlyAvailable}) = _$LeadsListExplorerStateImpl;
-
-  @override
-  AppStatus get getExplorerListStatus;
-  @override
-  List<LeadExplorerItem> get explorerList;
-  @override
-  String? get getExplorerListError;
-  @override
-  Paginator? get explorerPaginator;
-  @override
-  AppStatus get getCheckedOutExplorerListStatus;
-  @override
-  List<PropertyCard> get checkedOutExplorerList;
-  @override
-  String? get getCheckedOutExplorerListError;
-  @override
-  Paginator? get checkedOutPaginator;
-  @override
-  AppStatus get checkInLeadStatus;
-  @override
-  String? get checkInLeadError;
-  @override
-  AppStatus get checkOutLeadStatus;
-  @override
-  String? get checkOutLeadError;
-  @override
-  AppStatus get randomLeadsAssignmentStatus;
-  @override
-  String? get randomLeadsAssignmentError;
-  @override
-  dynamic get currentTab;
-  @override
-  String? get explorerSearch;
-  @override
-  String? get checkedOutSearch;
-  @override
-  Map<String, dynamic>? get explorerFilter;
-  @override
-  Map<String, dynamic>? get checkedOutFilter;
-  @override
-  List<PropertyType> get propertyTypeList;
-  @override
-  AppStatus get getPropertyTypeListStatus;
-  @override
-  List<CommunityTeamModel> get communityList;
-  @override
-  AppStatus get getCommunityListStatus;
-  @override
-  List<CommunityName> get placesList;
-  @override
-  AppStatus get getPlacesListStatus;
-  @override
-  List<Building> get buildingList;
-  @override
-  AppStatus get getBuildingListStatus;
-  @override
-  Paginator? get buildingsPaginator;
-  @override
-  bool get selectModeEnabled;
-  @override
-  List<LeadExplorerItem> get selectedPropertyCards;
-  @override
-  bool get showOnlyAvailable;
-  @override
-  @JsonKey(ignore: true)
-  _$$LeadsListExplorerStateImplCopyWith<_$LeadsListExplorerStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,7 +1,7 @@
 part of 'leads_list_explorer_cubit.dart';
 
 @freezed
-class LeadsListExplorerState with _$LeadsListExplorerState {
+abstract class LeadsListExplorerState with _$LeadsListExplorerState {
   const factory LeadsListExplorerState({
     @Default(AppStatus.init) AppStatus getExplorerListStatus,
     @Default([]) List<LeadExplorerItem> explorerList,
@@ -26,7 +26,7 @@ class LeadsListExplorerState with _$LeadsListExplorerState {
     @Default(AppStatus.init) AppStatus getPropertyTypeListStatus,
     @Default([]) List<CommunityTeamModel> communityList,
     @Default(AppStatus.init) AppStatus getCommunityListStatus,
-         @Default([]) List<CommunityName> placesList,
+    @Default([]) List<CommunityName> placesList,
     @Default(AppStatus.init) AppStatus getPlacesListStatus,
     @Default([]) List<Building> buildingList,
     @Default(AppStatus.init) AppStatus getBuildingListStatus,

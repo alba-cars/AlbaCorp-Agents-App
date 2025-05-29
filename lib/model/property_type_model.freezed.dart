@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,95 +10,59 @@ part of 'property_type_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PropertyType _$PropertyTypeFromJson(Map<String, dynamic> json) {
-  return _PropertyType.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PropertyType {
   @JsonKey(readValue: readId)
-  String get id => throw _privateConstructorUsedError;
-  String get propertyType => throw _privateConstructorUsedError;
-  String? get icon => throw _privateConstructorUsedError;
-  String? get categoryId => throw _privateConstructorUsedError;
-  List<Bed> get beds => throw _privateConstructorUsedError;
+  String get id;
+  String get propertyType;
+  String? get icon;
+  String? get categoryId;
+  List<Bed> get beds;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PropertyTypeCopyWith<PropertyType> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PropertyTypeCopyWith<$Res> {
-  factory $PropertyTypeCopyWith(
-          PropertyType value, $Res Function(PropertyType) then) =
-      _$PropertyTypeCopyWithImpl<$Res, PropertyType>;
-  @useResult
-  $Res call(
-      {@JsonKey(readValue: readId) String id,
-      String propertyType,
-      String? icon,
-      String? categoryId,
-      List<Bed> beds});
-}
-
-/// @nodoc
-class _$PropertyTypeCopyWithImpl<$Res, $Val extends PropertyType>
-    implements $PropertyTypeCopyWith<$Res> {
-  _$PropertyTypeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of PropertyType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $PropertyTypeCopyWith<PropertyType> get copyWith =>
+      _$PropertyTypeCopyWithImpl<PropertyType>(
+          this as PropertyType, _$identity);
+
+  /// Serializes this PropertyType to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? propertyType = null,
-    Object? icon = freezed,
-    Object? categoryId = freezed,
-    Object? beds = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      propertyType: null == propertyType
-          ? _value.propertyType
-          : propertyType // ignore: cast_nullable_to_non_nullable
-              as String,
-      icon: freezed == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as String?,
-      categoryId: freezed == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      beds: null == beds
-          ? _value.beds
-          : beds // ignore: cast_nullable_to_non_nullable
-              as List<Bed>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PropertyType &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.propertyType, propertyType) ||
+                other.propertyType == propertyType) &&
+            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
+            const DeepCollectionEquality().equals(other.beds, beds));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, propertyType, icon,
+      categoryId, const DeepCollectionEquality().hash(beds));
+
+  @override
+  String toString() {
+    return 'PropertyType(id: $id, propertyType: $propertyType, icon: $icon, categoryId: $categoryId, beds: $beds)';
   }
 }
 
 /// @nodoc
-abstract class _$$PropertyTypeImplCopyWith<$Res>
-    implements $PropertyTypeCopyWith<$Res> {
-  factory _$$PropertyTypeImplCopyWith(
-          _$PropertyTypeImpl value, $Res Function(_$PropertyTypeImpl) then) =
-      __$$PropertyTypeImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PropertyTypeCopyWith<$Res> {
+  factory $PropertyTypeCopyWith(
+          PropertyType value, $Res Function(PropertyType) _then) =
+      _$PropertyTypeCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
@@ -108,13 +73,14 @@ abstract class _$$PropertyTypeImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PropertyTypeImplCopyWithImpl<$Res>
-    extends _$PropertyTypeCopyWithImpl<$Res, _$PropertyTypeImpl>
-    implements _$$PropertyTypeImplCopyWith<$Res> {
-  __$$PropertyTypeImplCopyWithImpl(
-      _$PropertyTypeImpl _value, $Res Function(_$PropertyTypeImpl) _then)
-      : super(_value, _then);
+class _$PropertyTypeCopyWithImpl<$Res> implements $PropertyTypeCopyWith<$Res> {
+  _$PropertyTypeCopyWithImpl(this._self, this._then);
 
+  final PropertyType _self;
+  final $Res Function(PropertyType) _then;
+
+  /// Create a copy of PropertyType
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -124,25 +90,25 @@ class __$$PropertyTypeImplCopyWithImpl<$Res>
     Object? categoryId = freezed,
     Object? beds = null,
   }) {
-    return _then(_$PropertyTypeImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       propertyType: null == propertyType
-          ? _value.propertyType
+          ? _self.propertyType
           : propertyType // ignore: cast_nullable_to_non_nullable
               as String,
       icon: freezed == icon
-          ? _value.icon
+          ? _self.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String?,
       categoryId: freezed == categoryId
-          ? _value.categoryId
+          ? _self.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
               as String?,
       beds: null == beds
-          ? _value._beds
+          ? _self.beds
           : beds // ignore: cast_nullable_to_non_nullable
               as List<Bed>,
     ));
@@ -151,17 +117,16 @@ class __$$PropertyTypeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PropertyTypeImpl implements _PropertyType {
-  const _$PropertyTypeImpl(
+class _PropertyType implements PropertyType {
+  const _PropertyType(
       {@JsonKey(readValue: readId) required this.id,
       required this.propertyType,
       this.icon,
       this.categoryId,
       final List<Bed> beds = const []})
       : _beds = beds;
-
-  factory _$PropertyTypeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PropertyTypeImplFromJson(json);
+  factory _PropertyType.fromJson(Map<String, dynamic> json) =>
+      _$PropertyTypeFromJson(json);
 
   @override
   @JsonKey(readValue: readId)
@@ -181,16 +146,26 @@ class _$PropertyTypeImpl implements _PropertyType {
     return EqualUnmodifiableListView(_beds);
   }
 
+  /// Create a copy of PropertyType
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PropertyType(id: $id, propertyType: $propertyType, icon: $icon, categoryId: $categoryId, beds: $beds)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PropertyTypeCopyWith<_PropertyType> get copyWith =>
+      __$PropertyTypeCopyWithImpl<_PropertyType>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PropertyTypeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PropertyTypeImpl &&
+            other is _PropertyType &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.propertyType, propertyType) ||
                 other.propertyType == propertyType) &&
@@ -200,125 +175,131 @@ class _$PropertyTypeImpl implements _PropertyType {
             const DeepCollectionEquality().equals(other._beds, _beds));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, propertyType, icon,
       categoryId, const DeepCollectionEquality().hash(_beds));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PropertyTypeImplCopyWith<_$PropertyTypeImpl> get copyWith =>
-      __$$PropertyTypeImplCopyWithImpl<_$PropertyTypeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PropertyTypeImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PropertyType(id: $id, propertyType: $propertyType, icon: $icon, categoryId: $categoryId, beds: $beds)';
   }
 }
 
-abstract class _PropertyType implements PropertyType {
-  const factory _PropertyType(
-      {@JsonKey(readValue: readId) required final String id,
-      required final String propertyType,
-      final String? icon,
-      final String? categoryId,
-      final List<Bed> beds}) = _$PropertyTypeImpl;
-
-  factory _PropertyType.fromJson(Map<String, dynamic> json) =
-      _$PropertyTypeImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$PropertyTypeCopyWith<$Res>
+    implements $PropertyTypeCopyWith<$Res> {
+  factory _$PropertyTypeCopyWith(
+          _PropertyType value, $Res Function(_PropertyType) _then) =
+      __$PropertyTypeCopyWithImpl;
   @override
-  @JsonKey(readValue: readId)
-  String get id;
-  @override
-  String get propertyType;
-  @override
-  String? get icon;
-  @override
-  String? get categoryId;
-  @override
-  List<Bed> get beds;
-  @override
-  @JsonKey(ignore: true)
-  _$$PropertyTypeImplCopyWith<_$PropertyTypeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {@JsonKey(readValue: readId) String id,
+      String propertyType,
+      String? icon,
+      String? categoryId,
+      List<Bed> beds});
 }
 
-Bed _$BedFromJson(Map<String, dynamic> json) {
-  return _Bed.fromJson(json);
+/// @nodoc
+class __$PropertyTypeCopyWithImpl<$Res>
+    implements _$PropertyTypeCopyWith<$Res> {
+  __$PropertyTypeCopyWithImpl(this._self, this._then);
+
+  final _PropertyType _self;
+  final $Res Function(_PropertyType) _then;
+
+  /// Create a copy of PropertyType
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? propertyType = null,
+    Object? icon = freezed,
+    Object? categoryId = freezed,
+    Object? beds = null,
+  }) {
+    return _then(_PropertyType(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      propertyType: null == propertyType
+          ? _self.propertyType
+          : propertyType // ignore: cast_nullable_to_non_nullable
+              as String,
+      icon: freezed == icon
+          ? _self.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoryId: freezed == categoryId
+          ? _self.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      beds: null == beds
+          ? _self._beds
+          : beds // ignore: cast_nullable_to_non_nullable
+              as List<Bed>,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$Bed {
-  String get name => throw _privateConstructorUsedError;
-  int get startingPrice => throw _privateConstructorUsedError;
+  String get name;
+  int get startingPrice;
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
+  String get id;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $BedCopyWith<Bed> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $BedCopyWith<$Res> {
-  factory $BedCopyWith(Bed value, $Res Function(Bed) then) =
-      _$BedCopyWithImpl<$Res, Bed>;
-  @useResult
-  $Res call({String name, int startingPrice, @JsonKey(name: '_id') String id});
-}
-
-/// @nodoc
-class _$BedCopyWithImpl<$Res, $Val extends Bed> implements $BedCopyWith<$Res> {
-  _$BedCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Bed
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $BedCopyWith<Bed> get copyWith =>
+      _$BedCopyWithImpl<Bed>(this as Bed, _$identity);
+
+  /// Serializes this Bed to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? startingPrice = null,
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      startingPrice: null == startingPrice
-          ? _value.startingPrice
-          : startingPrice // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Bed &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.startingPrice, startingPrice) ||
+                other.startingPrice == startingPrice) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, startingPrice, id);
+
+  @override
+  String toString() {
+    return 'Bed(name: $name, startingPrice: $startingPrice, id: $id)';
   }
 }
 
 /// @nodoc
-abstract class _$$BedImplCopyWith<$Res> implements $BedCopyWith<$Res> {
-  factory _$$BedImplCopyWith(_$BedImpl value, $Res Function(_$BedImpl) then) =
-      __$$BedImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $BedCopyWith<$Res> {
+  factory $BedCopyWith(Bed value, $Res Function(Bed) _then) = _$BedCopyWithImpl;
   @useResult
   $Res call({String name, int startingPrice, @JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
-class __$$BedImplCopyWithImpl<$Res> extends _$BedCopyWithImpl<$Res, _$BedImpl>
-    implements _$$BedImplCopyWith<$Res> {
-  __$$BedImplCopyWithImpl(_$BedImpl _value, $Res Function(_$BedImpl) _then)
-      : super(_value, _then);
+class _$BedCopyWithImpl<$Res> implements $BedCopyWith<$Res> {
+  _$BedCopyWithImpl(this._self, this._then);
 
+  final Bed _self;
+  final $Res Function(Bed) _then;
+
+  /// Create a copy of Bed
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -326,17 +307,17 @@ class __$$BedImplCopyWithImpl<$Res> extends _$BedCopyWithImpl<$Res, _$BedImpl>
     Object? startingPrice = null,
     Object? id = null,
   }) {
-    return _then(_$BedImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       startingPrice: null == startingPrice
-          ? _value.startingPrice
+          ? _self.startingPrice
           : startingPrice // ignore: cast_nullable_to_non_nullable
               as int,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -345,14 +326,12 @@ class __$$BedImplCopyWithImpl<$Res> extends _$BedCopyWithImpl<$Res, _$BedImpl>
 
 /// @nodoc
 @JsonSerializable()
-class _$BedImpl implements _Bed {
-  _$BedImpl(
+class _Bed implements Bed {
+  _Bed(
       {required this.name,
       required this.startingPrice,
       @JsonKey(name: '_id') required this.id});
-
-  factory _$BedImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BedImplFromJson(json);
+  factory _Bed.fromJson(Map<String, dynamic> json) => _$BedFromJson(json);
 
   @override
   final String name;
@@ -362,57 +341,82 @@ class _$BedImpl implements _Bed {
   @JsonKey(name: '_id')
   final String id;
 
+  /// Create a copy of Bed
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Bed(name: $name, startingPrice: $startingPrice, id: $id)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$BedCopyWith<_Bed> get copyWith =>
+      __$BedCopyWithImpl<_Bed>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$BedToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BedImpl &&
+            other is _Bed &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.startingPrice, startingPrice) ||
                 other.startingPrice == startingPrice) &&
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, startingPrice, id);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$BedImplCopyWith<_$BedImpl> get copyWith =>
-      __$$BedImplCopyWithImpl<_$BedImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BedImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Bed(name: $name, startingPrice: $startingPrice, id: $id)';
   }
 }
 
-abstract class _Bed implements Bed {
-  factory _Bed(
-      {required final String name,
-      required final int startingPrice,
-      @JsonKey(name: '_id') required final String id}) = _$BedImpl;
-
-  factory _Bed.fromJson(Map<String, dynamic> json) = _$BedImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$BedCopyWith<$Res> implements $BedCopyWith<$Res> {
+  factory _$BedCopyWith(_Bed value, $Res Function(_Bed) _then) =
+      __$BedCopyWithImpl;
   @override
-  String get name;
-  @override
-  int get startingPrice;
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$BedImplCopyWith<_$BedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({String name, int startingPrice, @JsonKey(name: '_id') String id});
 }
+
+/// @nodoc
+class __$BedCopyWithImpl<$Res> implements _$BedCopyWith<$Res> {
+  __$BedCopyWithImpl(this._self, this._then);
+
+  final _Bed _self;
+  final $Res Function(_Bed) _then;
+
+  /// Create a copy of Bed
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? name = null,
+    Object? startingPrice = null,
+    Object? id = null,
+  }) {
+    return _then(_Bed(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      startingPrice: null == startingPrice
+          ? _self.startingPrice
+          : startingPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

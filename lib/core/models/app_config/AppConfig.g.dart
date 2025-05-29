@@ -6,8 +6,7 @@ part of 'AppConfig.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AppConfigImpl _$$AppConfigImplFromJson(Map<String, dynamic> json) =>
-    _$AppConfigImpl(
+_AppConfig _$AppConfigFromJson(Map<String, dynamic> json) => _AppConfig(
       underMaintenance: json['underMaintenance'] as bool,
       minVersion: json['minVersion'] as String,
       latestVersion: json['latestVersion'] as String,
@@ -19,7 +18,7 @@ _$AppConfigImpl _$$AppConfigImplFromJson(Map<String, dynamic> json) =>
       huaweiUrl: json['huaweiUrl'] as String?,
     );
 
-Map<String, dynamic> _$$AppConfigImplToJson(_$AppConfigImpl instance) =>
+Map<String, dynamic> _$AppConfigToJson(_AppConfig instance) =>
     <String, dynamic>{
       'underMaintenance': instance.underMaintenance,
       'minVersion': instance.minVersion,

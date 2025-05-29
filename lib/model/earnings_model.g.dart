@@ -6,8 +6,8 @@ part of 'earnings_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$EarningsModelImpl _$$EarningsModelImplFromJson(Map<String, dynamic> json) =>
-    _$EarningsModelImpl(
+_EarningsModel _$EarningsModelFromJson(Map<String, dynamic> json) =>
+    _EarningsModel(
       totalEarnings: (json['totalEarnings'] as num?)?.toDouble() ?? 0,
       thisMonthEarning: (json['thisMonthEarning'] as num?)?.toDouble() ?? 0,
       allMonthlyEarnings:
@@ -17,7 +17,7 @@ _$EarningsModelImpl _$$EarningsModelImplFromJson(Map<String, dynamic> json) =>
               const {},
     );
 
-Map<String, dynamic> _$$EarningsModelImplToJson(_$EarningsModelImpl instance) =>
+Map<String, dynamic> _$EarningsModelToJson(_EarningsModel instance) =>
     <String, dynamic>{
       'totalEarnings': instance.totalEarnings,
       'thisMonthEarning': instance.thisMonthEarning,

@@ -6,8 +6,8 @@ part of 'deal_document_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DealDocumentImpl _$$DealDocumentImplFromJson(Map<String, dynamic> json) =>
-    _$DealDocumentImpl(
+_DealDocument _$DealDocumentFromJson(Map<String, dynamic> json) =>
+    _DealDocument(
       id: json['id'] as String,
       userId: json['user_id'] as String,
       createdById: json['created_by_id'] as String,
@@ -20,7 +20,7 @@ _$DealDocumentImpl _$$DealDocumentImplFromJson(Map<String, dynamic> json) =>
           : User.fromJson(json['created_by'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DealDocumentImplToJson(_$DealDocumentImpl instance) =>
+Map<String, dynamic> _$DealDocumentToJson(_DealDocument instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,

@@ -6,14 +6,14 @@ part of 'expected_earnings_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ExpectedEarningsModelImpl _$$ExpectedEarningsModelImplFromJson(
+_ExpectedEarningsModel _$ExpectedEarningsModelFromJson(
         Map<String, dynamic> json) =>
-    _$ExpectedEarningsModelImpl(
+    _ExpectedEarningsModel(
       expectedCommission: (json['expectedCommission'] as num?)?.toDouble() ?? 0,
     );
 
-Map<String, dynamic> _$$ExpectedEarningsModelImplToJson(
-        _$ExpectedEarningsModelImpl instance) =>
+Map<String, dynamic> _$ExpectedEarningsModelToJson(
+        _ExpectedEarningsModel instance) =>
     <String, dynamic>{
       'expectedCommission': instance.expectedCommission,
     };

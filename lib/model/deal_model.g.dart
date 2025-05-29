@@ -6,7 +6,7 @@ part of 'deal_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
+_Deal _$DealFromJson(Map<String, dynamic> json) => _Deal(
       id: readId(json, 'id') as String,
       referenceNumber: json['reference_number'] as String,
       creationDate: DateTime.parse(json['creation_date'] as String),
@@ -87,8 +87,7 @@ _$DealImpl _$$DealImplFromJson(Map<String, dynamic> json) => _$DealImpl(
               json['new_listing_offplan'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DealImplToJson(_$DealImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DealToJson(_Deal instance) => <String, dynamic>{
       'id': instance.id,
       'reference_number': instance.referenceNumber,
       'creation_date': instance.creationDate.toIso8601String(),

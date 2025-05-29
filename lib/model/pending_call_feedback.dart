@@ -6,7 +6,7 @@ part 'pending_call_feedback.g.dart';
 enum CallDirection { incoming, outgoing }
 
 @freezed
-class PendingCallFeedback with _$PendingCallFeedback {
+abstract class PendingCallFeedback with _$PendingCallFeedback {
   const factory PendingCallFeedback({
     required int id,
     required String number,

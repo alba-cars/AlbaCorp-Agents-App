@@ -6,13 +6,12 @@ part of 'offplan_listing_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DealListingResponseImpl _$$DealListingResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DealListingResponseImpl(
+_DealListingResponse _$DealListingResponseFromJson(Map<String, dynamic> json) =>
+    _DealListingResponse(
       id: json['id'] as String,
-      propertyType: json['propertyType'] as String,
-      beds: json['beds'] as String,
-      baths: json['baths'] as String,
+      propertyType: json['propertyType'] as String?,
+      beds: json['beds'] as String?,
+      baths: json['baths'] as String?,
       size: (json['size'] as num?)?.toInt(),
       community: json['community'] == null
           ? null
@@ -21,8 +20,8 @@ _$DealListingResponseImpl _$$DealListingResponseImplFromJson(
       agreedCommission: _stringToDouble(json['agreedCommission'] as String),
     );
 
-Map<String, dynamic> _$$DealListingResponseImplToJson(
-        _$DealListingResponseImpl instance) =>
+Map<String, dynamic> _$DealListingResponseToJson(
+        _DealListingResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'propertyType': instance.propertyType,

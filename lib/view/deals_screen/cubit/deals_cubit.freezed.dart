@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,38 +10,92 @@ part of 'deals_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DealsState {
-  List<Deal> get deals => throw _privateConstructorUsedError;
-  AppStatus get getDealsStatus => throw _privateConstructorUsedError;
-  String? get getDealsError => throw _privateConstructorUsedError;
-  Paginator? get dealsPaginator => throw _privateConstructorUsedError;
-  String? get dealsSearch => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get dealsFilter => throw _privateConstructorUsedError;
-  List<Deal> get yourListings => throw _privateConstructorUsedError;
-  AppStatus get getYourListingsStatus => throw _privateConstructorUsedError;
-  String? get getYourListingsError => throw _privateConstructorUsedError;
-  Paginator? get yourListingsPaginator => throw _privateConstructorUsedError;
-  String? get yourListingsSearch => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get yourListingsFilter =>
-      throw _privateConstructorUsedError;
-  int get currentTab => throw _privateConstructorUsedError;
+  List<Deal> get deals;
+  AppStatus get getDealsStatus;
+  String? get getDealsError;
+  Paginator? get dealsPaginator;
+  String? get dealsSearch;
+  Map<String, dynamic>? get dealsFilter;
+  List<Deal> get yourListings;
+  AppStatus get getYourListingsStatus;
+  String? get getYourListingsError;
+  Paginator? get yourListingsPaginator;
+  String? get yourListingsSearch;
+  Map<String, dynamic>? get yourListingsFilter;
+  int get currentTab;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DealsStateCopyWith<DealsState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$DealsStateCopyWithImpl<DealsState>(this as DealsState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DealsState &&
+            const DeepCollectionEquality().equals(other.deals, deals) &&
+            (identical(other.getDealsStatus, getDealsStatus) ||
+                other.getDealsStatus == getDealsStatus) &&
+            (identical(other.getDealsError, getDealsError) ||
+                other.getDealsError == getDealsError) &&
+            (identical(other.dealsPaginator, dealsPaginator) ||
+                other.dealsPaginator == dealsPaginator) &&
+            (identical(other.dealsSearch, dealsSearch) ||
+                other.dealsSearch == dealsSearch) &&
+            const DeepCollectionEquality()
+                .equals(other.dealsFilter, dealsFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.yourListings, yourListings) &&
+            (identical(other.getYourListingsStatus, getYourListingsStatus) ||
+                other.getYourListingsStatus == getYourListingsStatus) &&
+            (identical(other.getYourListingsError, getYourListingsError) ||
+                other.getYourListingsError == getYourListingsError) &&
+            (identical(other.yourListingsPaginator, yourListingsPaginator) ||
+                other.yourListingsPaginator == yourListingsPaginator) &&
+            (identical(other.yourListingsSearch, yourListingsSearch) ||
+                other.yourListingsSearch == yourListingsSearch) &&
+            const DeepCollectionEquality()
+                .equals(other.yourListingsFilter, yourListingsFilter) &&
+            (identical(other.currentTab, currentTab) ||
+                other.currentTab == currentTab));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(deals),
+      getDealsStatus,
+      getDealsError,
+      dealsPaginator,
+      dealsSearch,
+      const DeepCollectionEquality().hash(dealsFilter),
+      const DeepCollectionEquality().hash(yourListings),
+      getYourListingsStatus,
+      getYourListingsError,
+      yourListingsPaginator,
+      yourListingsSearch,
+      const DeepCollectionEquality().hash(yourListingsFilter),
+      currentTab);
+
+  @override
+  String toString() {
+    return 'DealsState(deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, dealsPaginator: $dealsPaginator, dealsSearch: $dealsSearch, dealsFilter: $dealsFilter, yourListings: $yourListings, getYourListingsStatus: $getYourListingsStatus, getYourListingsError: $getYourListingsError, yourListingsPaginator: $yourListingsPaginator, yourListingsSearch: $yourListingsSearch, yourListingsFilter: $yourListingsFilter, currentTab: $currentTab)';
+  }
 }
 
 /// @nodoc
-abstract class $DealsStateCopyWith<$Res> {
+abstract mixin class $DealsStateCopyWith<$Res> {
   factory $DealsStateCopyWith(
-          DealsState value, $Res Function(DealsState) then) =
-      _$DealsStateCopyWithImpl<$Res, DealsState>;
+          DealsState value, $Res Function(DealsState) _then) =
+      _$DealsStateCopyWithImpl;
   @useResult
   $Res call(
       {List<Deal> deals,
@@ -62,15 +117,14 @@ abstract class $DealsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DealsStateCopyWithImpl<$Res, $Val extends DealsState>
-    implements $DealsStateCopyWith<$Res> {
-  _$DealsStateCopyWithImpl(this._value, this._then);
+class _$DealsStateCopyWithImpl<$Res> implements $DealsStateCopyWith<$Res> {
+  _$DealsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DealsState _self;
+  final $Res Function(DealsState) _then;
 
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,202 +142,95 @@ class _$DealsStateCopyWithImpl<$Res, $Val extends DealsState>
     Object? yourListingsFilter = freezed,
     Object? currentTab = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       deals: null == deals
-          ? _value.deals
+          ? _self.deals
           : deals // ignore: cast_nullable_to_non_nullable
               as List<Deal>,
       getDealsStatus: null == getDealsStatus
-          ? _value.getDealsStatus
+          ? _self.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getDealsError: freezed == getDealsError
-          ? _value.getDealsError
+          ? _self.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
               as String?,
       dealsPaginator: freezed == dealsPaginator
-          ? _value.dealsPaginator
+          ? _self.dealsPaginator
           : dealsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       dealsSearch: freezed == dealsSearch
-          ? _value.dealsSearch
+          ? _self.dealsSearch
           : dealsSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       dealsFilter: freezed == dealsFilter
-          ? _value.dealsFilter
+          ? _self.dealsFilter
           : dealsFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       yourListings: null == yourListings
-          ? _value.yourListings
+          ? _self.yourListings
           : yourListings // ignore: cast_nullable_to_non_nullable
               as List<Deal>,
       getYourListingsStatus: null == getYourListingsStatus
-          ? _value.getYourListingsStatus
+          ? _self.getYourListingsStatus
           : getYourListingsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getYourListingsError: freezed == getYourListingsError
-          ? _value.getYourListingsError
+          ? _self.getYourListingsError
           : getYourListingsError // ignore: cast_nullable_to_non_nullable
               as String?,
       yourListingsPaginator: freezed == yourListingsPaginator
-          ? _value.yourListingsPaginator
+          ? _self.yourListingsPaginator
           : yourListingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       yourListingsSearch: freezed == yourListingsSearch
-          ? _value.yourListingsSearch
+          ? _self.yourListingsSearch
           : yourListingsSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       yourListingsFilter: freezed == yourListingsFilter
-          ? _value.yourListingsFilter
+          ? _self.yourListingsFilter
           : yourListingsFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       currentTab: null == currentTab
-          ? _value.currentTab
-          : currentTab // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get dealsPaginator {
-    if (_value.dealsPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.dealsPaginator!, (value) {
-      return _then(_value.copyWith(dealsPaginator: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get yourListingsPaginator {
-    if (_value.yourListingsPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.yourListingsPaginator!, (value) {
-      return _then(_value.copyWith(yourListingsPaginator: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$DealsStateImplCopyWith<$Res>
-    implements $DealsStateCopyWith<$Res> {
-  factory _$$DealsStateImplCopyWith(
-          _$DealsStateImpl value, $Res Function(_$DealsStateImpl) then) =
-      __$$DealsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {List<Deal> deals,
-      AppStatus getDealsStatus,
-      String? getDealsError,
-      Paginator? dealsPaginator,
-      String? dealsSearch,
-      Map<String, dynamic>? dealsFilter,
-      List<Deal> yourListings,
-      AppStatus getYourListingsStatus,
-      String? getYourListingsError,
-      Paginator? yourListingsPaginator,
-      String? yourListingsSearch,
-      Map<String, dynamic>? yourListingsFilter,
-      int currentTab});
-
-  @override
-  $PaginatorCopyWith<$Res>? get dealsPaginator;
-  @override
-  $PaginatorCopyWith<$Res>? get yourListingsPaginator;
-}
-
-/// @nodoc
-class __$$DealsStateImplCopyWithImpl<$Res>
-    extends _$DealsStateCopyWithImpl<$Res, _$DealsStateImpl>
-    implements _$$DealsStateImplCopyWith<$Res> {
-  __$$DealsStateImplCopyWithImpl(
-      _$DealsStateImpl _value, $Res Function(_$DealsStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? deals = null,
-    Object? getDealsStatus = null,
-    Object? getDealsError = freezed,
-    Object? dealsPaginator = freezed,
-    Object? dealsSearch = freezed,
-    Object? dealsFilter = freezed,
-    Object? yourListings = null,
-    Object? getYourListingsStatus = null,
-    Object? getYourListingsError = freezed,
-    Object? yourListingsPaginator = freezed,
-    Object? yourListingsSearch = freezed,
-    Object? yourListingsFilter = freezed,
-    Object? currentTab = null,
-  }) {
-    return _then(_$DealsStateImpl(
-      deals: null == deals
-          ? _value._deals
-          : deals // ignore: cast_nullable_to_non_nullable
-              as List<Deal>,
-      getDealsStatus: null == getDealsStatus
-          ? _value.getDealsStatus
-          : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getDealsError: freezed == getDealsError
-          ? _value.getDealsError
-          : getDealsError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dealsPaginator: freezed == dealsPaginator
-          ? _value.dealsPaginator
-          : dealsPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      dealsSearch: freezed == dealsSearch
-          ? _value.dealsSearch
-          : dealsSearch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dealsFilter: freezed == dealsFilter
-          ? _value._dealsFilter
-          : dealsFilter // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      yourListings: null == yourListings
-          ? _value._yourListings
-          : yourListings // ignore: cast_nullable_to_non_nullable
-              as List<Deal>,
-      getYourListingsStatus: null == getYourListingsStatus
-          ? _value.getYourListingsStatus
-          : getYourListingsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getYourListingsError: freezed == getYourListingsError
-          ? _value.getYourListingsError
-          : getYourListingsError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      yourListingsPaginator: freezed == yourListingsPaginator
-          ? _value.yourListingsPaginator
-          : yourListingsPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      yourListingsSearch: freezed == yourListingsSearch
-          ? _value.yourListingsSearch
-          : yourListingsSearch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      yourListingsFilter: freezed == yourListingsFilter
-          ? _value._yourListingsFilter
-          : yourListingsFilter // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      currentTab: null == currentTab
-          ? _value.currentTab
+          ? _self.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
+
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get dealsPaginator {
+    if (_self.dealsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.dealsPaginator!, (value) {
+      return _then(_self.copyWith(dealsPaginator: value));
+    });
+  }
+
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get yourListingsPaginator {
+    if (_self.yourListingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.yourListingsPaginator!, (value) {
+      return _then(_self.copyWith(yourListingsPaginator: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$DealsStateImpl implements _DealsState {
-  const _$DealsStateImpl(
+class _DealsState implements DealsState {
+  const _DealsState(
       {final List<Deal> deals = const [],
       this.getDealsStatus = AppStatus.init,
       this.getDealsError,
@@ -363,16 +310,19 @@ class _$DealsStateImpl implements _DealsState {
   @JsonKey()
   final int currentTab;
 
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DealsState(deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, dealsPaginator: $dealsPaginator, dealsSearch: $dealsSearch, dealsFilter: $dealsFilter, yourListings: $yourListings, getYourListingsStatus: $getYourListingsStatus, getYourListingsError: $getYourListingsError, yourListingsPaginator: $yourListingsPaginator, yourListingsSearch: $yourListingsSearch, yourListingsFilter: $yourListingsFilter, currentTab: $currentTab)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DealsStateCopyWith<_DealsState> get copyWith =>
+      __$DealsStateCopyWithImpl<_DealsState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DealsStateImpl &&
+            other is _DealsState &&
             const DeepCollectionEquality().equals(other._deals, _deals) &&
             (identical(other.getDealsStatus, getDealsStatus) ||
                 other.getDealsStatus == getDealsStatus) &&
@@ -417,57 +367,150 @@ class _$DealsStateImpl implements _DealsState {
       const DeepCollectionEquality().hash(_yourListingsFilter),
       currentTab);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'DealsState(deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, dealsPaginator: $dealsPaginator, dealsSearch: $dealsSearch, dealsFilter: $dealsFilter, yourListings: $yourListings, getYourListingsStatus: $getYourListingsStatus, getYourListingsError: $getYourListingsError, yourListingsPaginator: $yourListingsPaginator, yourListingsSearch: $yourListingsSearch, yourListingsFilter: $yourListingsFilter, currentTab: $currentTab)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DealsStateCopyWith<$Res>
+    implements $DealsStateCopyWith<$Res> {
+  factory _$DealsStateCopyWith(
+          _DealsState value, $Res Function(_DealsState) _then) =
+      __$DealsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {List<Deal> deals,
+      AppStatus getDealsStatus,
+      String? getDealsError,
+      Paginator? dealsPaginator,
+      String? dealsSearch,
+      Map<String, dynamic>? dealsFilter,
+      List<Deal> yourListings,
+      AppStatus getYourListingsStatus,
+      String? getYourListingsError,
+      Paginator? yourListingsPaginator,
+      String? yourListingsSearch,
+      Map<String, dynamic>? yourListingsFilter,
+      int currentTab});
+
+  @override
+  $PaginatorCopyWith<$Res>? get dealsPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get yourListingsPaginator;
+}
+
+/// @nodoc
+class __$DealsStateCopyWithImpl<$Res> implements _$DealsStateCopyWith<$Res> {
+  __$DealsStateCopyWithImpl(this._self, this._then);
+
+  final _DealsState _self;
+  final $Res Function(_DealsState) _then;
+
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$DealsStateImplCopyWith<_$DealsStateImpl> get copyWith =>
-      __$$DealsStateImplCopyWithImpl<_$DealsStateImpl>(this, _$identity);
+  $Res call({
+    Object? deals = null,
+    Object? getDealsStatus = null,
+    Object? getDealsError = freezed,
+    Object? dealsPaginator = freezed,
+    Object? dealsSearch = freezed,
+    Object? dealsFilter = freezed,
+    Object? yourListings = null,
+    Object? getYourListingsStatus = null,
+    Object? getYourListingsError = freezed,
+    Object? yourListingsPaginator = freezed,
+    Object? yourListingsSearch = freezed,
+    Object? yourListingsFilter = freezed,
+    Object? currentTab = null,
+  }) {
+    return _then(_DealsState(
+      deals: null == deals
+          ? _self._deals
+          : deals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      getDealsStatus: null == getDealsStatus
+          ? _self.getDealsStatus
+          : getDealsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getDealsError: freezed == getDealsError
+          ? _self.getDealsError
+          : getDealsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealsPaginator: freezed == dealsPaginator
+          ? _self.dealsPaginator
+          : dealsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      dealsSearch: freezed == dealsSearch
+          ? _self.dealsSearch
+          : dealsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealsFilter: freezed == dealsFilter
+          ? _self._dealsFilter
+          : dealsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      yourListings: null == yourListings
+          ? _self._yourListings
+          : yourListings // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      getYourListingsStatus: null == getYourListingsStatus
+          ? _self.getYourListingsStatus
+          : getYourListingsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getYourListingsError: freezed == getYourListingsError
+          ? _self.getYourListingsError
+          : getYourListingsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      yourListingsPaginator: freezed == yourListingsPaginator
+          ? _self.yourListingsPaginator
+          : yourListingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      yourListingsSearch: freezed == yourListingsSearch
+          ? _self.yourListingsSearch
+          : yourListingsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      yourListingsFilter: freezed == yourListingsFilter
+          ? _self._yourListingsFilter
+          : yourListingsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      currentTab: null == currentTab
+          ? _self.currentTab
+          : currentTab // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get dealsPaginator {
+    if (_self.dealsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.dealsPaginator!, (value) {
+      return _then(_self.copyWith(dealsPaginator: value));
+    });
+  }
+
+  /// Create a copy of DealsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get yourListingsPaginator {
+    if (_self.yourListingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.yourListingsPaginator!, (value) {
+      return _then(_self.copyWith(yourListingsPaginator: value));
+    });
+  }
 }
 
-abstract class _DealsState implements DealsState {
-  const factory _DealsState(
-      {final List<Deal> deals,
-      final AppStatus getDealsStatus,
-      final String? getDealsError,
-      final Paginator? dealsPaginator,
-      final String? dealsSearch,
-      final Map<String, dynamic>? dealsFilter,
-      final List<Deal> yourListings,
-      final AppStatus getYourListingsStatus,
-      final String? getYourListingsError,
-      final Paginator? yourListingsPaginator,
-      final String? yourListingsSearch,
-      final Map<String, dynamic>? yourListingsFilter,
-      final int currentTab}) = _$DealsStateImpl;
-
-  @override
-  List<Deal> get deals;
-  @override
-  AppStatus get getDealsStatus;
-  @override
-  String? get getDealsError;
-  @override
-  Paginator? get dealsPaginator;
-  @override
-  String? get dealsSearch;
-  @override
-  Map<String, dynamic>? get dealsFilter;
-  @override
-  List<Deal> get yourListings;
-  @override
-  AppStatus get getYourListingsStatus;
-  @override
-  String? get getYourListingsError;
-  @override
-  Paginator? get yourListingsPaginator;
-  @override
-  String? get yourListingsSearch;
-  @override
-  Map<String, dynamic>? get yourListingsFilter;
-  @override
-  int get currentTab;
-  @override
-  @JsonKey(ignore: true)
-  _$$DealsStateImplCopyWith<_$DealsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -6,7 +6,7 @@ part of 'ticket_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TicketImpl _$$TicketImplFromJson(Map<String, dynamic> json) => _$TicketImpl(
+_Ticket _$TicketFromJson(Map<String, dynamic> json) => _Ticket(
       id: readId(json, 'id') as String,
       agentId: json['agentId'] as String,
       assignedUser: json['assignedUser'],
@@ -58,8 +58,7 @@ _$TicketImpl _$$TicketImplFromJson(Map<String, dynamic> json) => _$TicketImpl(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$TicketImplToJson(_$TicketImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TicketToJson(_Ticket instance) => <String, dynamic>{
       'id': instance.id,
       'agentId': instance.agentId,
       'assignedUser': instance.assignedUser,
@@ -120,8 +119,8 @@ const _$TicketStatusEnumMap = {
   TicketStatus.Closed: 'Closed',
 };
 
-_$TicketMessageImpl _$$TicketMessageImplFromJson(Map<String, dynamic> json) =>
-    _$TicketMessageImpl(
+_TicketMessage _$TicketMessageFromJson(Map<String, dynamic> json) =>
+    _TicketMessage(
       id: json['_id'] as String,
       ticketId: json['ticketId'] as String,
       senderId: json['senderId'] as String,
@@ -133,7 +132,7 @@ _$TicketMessageImpl _$$TicketMessageImplFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$TicketMessageImplToJson(_$TicketMessageImpl instance) =>
+Map<String, dynamic> _$TicketMessageToJson(_TicketMessage instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'ticketId': instance.ticketId,

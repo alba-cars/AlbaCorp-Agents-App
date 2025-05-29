@@ -6,7 +6,7 @@ part of 'agent_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AgentImpl _$$AgentImplFromJson(Map<String, dynamic> json) => _$AgentImpl(
+_Agent _$AgentFromJson(Map<String, dynamic> json) => _Agent(
       id: readId(json, 'id') as String,
       userId: userIdFromJson(json, 'userId') as String,
       languages: (json['languages'] as List<dynamic>?)
@@ -23,8 +23,7 @@ _$AgentImpl _$$AgentImplFromJson(Map<String, dynamic> json) => _$AgentImpl(
       usePbx: json['usePbx'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$AgentImplToJson(_$AgentImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AgentToJson(_Agent instance) => <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
       'languages': instance.languages,

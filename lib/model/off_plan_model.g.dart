@@ -6,8 +6,8 @@ part of 'off_plan_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OffPlanModelImpl _$$OffPlanModelImplFromJson(Map<String, dynamic> json) =>
-    _$OffPlanModelImpl(
+_OffPlanModel _$OffPlanModelFromJson(Map<String, dynamic> json) =>
+    _OffPlanModel(
       id: json['_id'] as String,
       templateVersion: json['templateVersion'] as String,
       developmentName: json['developmentName'] as String,
@@ -45,7 +45,7 @@ _$OffPlanModelImpl _$$OffPlanModelImplFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$$OffPlanModelImplToJson(_$OffPlanModelImpl instance) =>
+Map<String, dynamic> _$OffPlanModelToJson(_OffPlanModel instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'templateVersion': instance.templateVersion,
@@ -75,52 +75,45 @@ Map<String, dynamic> _$$OffPlanModelImplToJson(_$OffPlanModelImpl instance) =>
       'status': instance.status,
     };
 
-_$OffPlanCommunityImpl _$$OffPlanCommunityImplFromJson(
-        Map<String, dynamic> json) =>
-    _$OffPlanCommunityImpl(
+_OffPlanCommunity _$OffPlanCommunityFromJson(Map<String, dynamic> json) =>
+    _OffPlanCommunity(
       name: json['name'] as String,
       position: Position.fromJson(json['position'] as Map<String, dynamic>),
       id: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$OffPlanCommunityImplToJson(
-        _$OffPlanCommunityImpl instance) =>
+Map<String, dynamic> _$OffPlanCommunityToJson(_OffPlanCommunity instance) =>
     <String, dynamic>{
       'name': instance.name,
       'position': instance.position,
       '_id': instance.id,
     };
 
-_$PositionImpl _$$PositionImplFromJson(Map<String, dynamic> json) =>
-    _$PositionImpl(
+_Position _$PositionFromJson(Map<String, dynamic> json) => _Position(
       lat: (json['lat'] as num).toDouble(),
       lng: (json['lng'] as num).toDouble(),
       id: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$PositionImplToJson(_$PositionImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PositionToJson(_Position instance) => <String, dynamic>{
       'lat': instance.lat,
       'lng': instance.lng,
       '_id': instance.id,
     };
 
-_$AmenityImpl _$$AmenityImplFromJson(Map<String, dynamic> json) =>
-    _$AmenityImpl(
+_Amenity _$AmenityFromJson(Map<String, dynamic> json) => _Amenity(
       title: json['title'] as String,
       photo: json['photo'] as String,
       id: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$AmenityImplToJson(_$AmenityImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AmenityToJson(_Amenity instance) => <String, dynamic>{
       'title': instance.title,
       'photo': instance.photo,
       '_id': instance.id,
     };
 
-_$DeveloperImpl _$$DeveloperImplFromJson(Map<String, dynamic> json) =>
-    _$DeveloperImpl(
+_Developer _$DeveloperFromJson(Map<String, dynamic> json) => _Developer(
       id: json['_id'] as String,
       name: json['name'] as String,
       description: json['description'] as String?,
@@ -131,7 +124,7 @@ _$DeveloperImpl _$$DeveloperImplFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$DeveloperImplToJson(_$DeveloperImpl instance) =>
+Map<String, dynamic> _$DeveloperToJson(_Developer instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
@@ -143,7 +136,7 @@ Map<String, dynamic> _$$DeveloperImplToJson(_$DeveloperImpl instance) =>
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
-_$FooterImpl _$$FooterImplFromJson(Map<String, dynamic> json) => _$FooterImpl(
+_Footer _$FooterFromJson(Map<String, dynamic> json) => _Footer(
       id: json['_id'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
@@ -153,8 +146,7 @@ _$FooterImpl _$$FooterImplFromJson(Map<String, dynamic> json) => _$FooterImpl(
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$FooterImplToJson(_$FooterImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$FooterToJson(_Footer instance) => <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
       'description': instance.description,
@@ -164,16 +156,14 @@ Map<String, dynamic> _$$FooterImplToJson(_$FooterImpl instance) =>
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
-_$DevelopmentPhotoImpl _$$DevelopmentPhotoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DevelopmentPhotoImpl(
+_DevelopmentPhoto _$DevelopmentPhotoFromJson(Map<String, dynamic> json) =>
+    _DevelopmentPhoto(
       file: json['file'] as String,
       label: json['label'] as String,
       id: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$DevelopmentPhotoImplToJson(
-        _$DevelopmentPhotoImpl instance) =>
+Map<String, dynamic> _$DevelopmentPhotoToJson(_DevelopmentPhoto instance) =>
     <String, dynamic>{
       'file': instance.file,
       'label': instance.label,

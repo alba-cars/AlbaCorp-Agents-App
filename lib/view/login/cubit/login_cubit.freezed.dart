@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,119 +10,26 @@ part of 'login_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LoginState {
-  AppStatus get loginStatus => throw _privateConstructorUsedError;
-  String? get loginErrorMessage => throw _privateConstructorUsedError;
+  AppStatus get loginStatus;
+  String? get loginErrorMessage;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $LoginStateCopyWith<LoginState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LoginStateCopyWith<$Res> {
-  factory $LoginStateCopyWith(
-          LoginState value, $Res Function(LoginState) then) =
-      _$LoginStateCopyWithImpl<$Res, LoginState>;
-  @useResult
-  $Res call({AppStatus loginStatus, String? loginErrorMessage});
-}
-
-/// @nodoc
-class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
-    implements $LoginStateCopyWith<$Res> {
-  _$LoginStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? loginStatus = null,
-    Object? loginErrorMessage = freezed,
-  }) {
-    return _then(_value.copyWith(
-      loginStatus: null == loginStatus
-          ? _value.loginStatus
-          : loginStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      loginErrorMessage: freezed == loginErrorMessage
-          ? _value.loginErrorMessage
-          : loginErrorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$LoginStateImplCopyWith<$Res>
-    implements $LoginStateCopyWith<$Res> {
-  factory _$$LoginStateImplCopyWith(
-          _$LoginStateImpl value, $Res Function(_$LoginStateImpl) then) =
-      __$$LoginStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({AppStatus loginStatus, String? loginErrorMessage});
-}
-
-/// @nodoc
-class __$$LoginStateImplCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$LoginStateImpl>
-    implements _$$LoginStateImplCopyWith<$Res> {
-  __$$LoginStateImplCopyWithImpl(
-      _$LoginStateImpl _value, $Res Function(_$LoginStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? loginStatus = null,
-    Object? loginErrorMessage = freezed,
-  }) {
-    return _then(_$LoginStateImpl(
-      loginStatus: null == loginStatus
-          ? _value.loginStatus
-          : loginStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      loginErrorMessage: freezed == loginErrorMessage
-          ? _value.loginErrorMessage
-          : loginErrorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LoginStateImpl implements _LoginState {
-  const _$LoginStateImpl(
-      {this.loginStatus = AppStatus.init, this.loginErrorMessage});
-
-  @override
-  @JsonKey()
-  final AppStatus loginStatus;
-  @override
-  final String? loginErrorMessage;
-
-  @override
-  String toString() {
-    return 'LoginState(loginStatus: $loginStatus, loginErrorMessage: $loginErrorMessage)';
-  }
+      _$LoginStateCopyWithImpl<LoginState>(this as LoginState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginStateImpl &&
+            other is LoginState &&
             (identical(other.loginStatus, loginStatus) ||
                 other.loginStatus == loginStatus) &&
             (identical(other.loginErrorMessage, loginErrorMessage) ||
@@ -131,24 +39,126 @@ class _$LoginStateImpl implements _LoginState {
   @override
   int get hashCode => Object.hash(runtimeType, loginStatus, loginErrorMessage);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'LoginState(loginStatus: $loginStatus, loginErrorMessage: $loginErrorMessage)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $LoginStateCopyWith<$Res> {
+  factory $LoginStateCopyWith(
+          LoginState value, $Res Function(LoginState) _then) =
+      _$LoginStateCopyWithImpl;
+  @useResult
+  $Res call({AppStatus loginStatus, String? loginErrorMessage});
+}
+
+/// @nodoc
+class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
+  _$LoginStateCopyWithImpl(this._self, this._then);
+
+  final LoginState _self;
+  final $Res Function(LoginState) _then;
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? loginStatus = null,
+    Object? loginErrorMessage = freezed,
+  }) {
+    return _then(_self.copyWith(
+      loginStatus: null == loginStatus
+          ? _self.loginStatus
+          : loginStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      loginErrorMessage: freezed == loginErrorMessage
+          ? _self.loginErrorMessage
+          : loginErrorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _LoginState implements LoginState {
+  const _LoginState(
+      {this.loginStatus = AppStatus.init, this.loginErrorMessage});
+
+  @override
+  @JsonKey()
+  final AppStatus loginStatus;
+  @override
+  final String? loginErrorMessage;
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LoginStateCopyWith<_LoginState> get copyWith =>
+      __$LoginStateCopyWithImpl<_LoginState>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LoginState &&
+            (identical(other.loginStatus, loginStatus) ||
+                other.loginStatus == loginStatus) &&
+            (identical(other.loginErrorMessage, loginErrorMessage) ||
+                other.loginErrorMessage == loginErrorMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, loginStatus, loginErrorMessage);
+
+  @override
+  String toString() {
+    return 'LoginState(loginStatus: $loginStatus, loginErrorMessage: $loginErrorMessage)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LoginStateCopyWith<$Res>
+    implements $LoginStateCopyWith<$Res> {
+  factory _$LoginStateCopyWith(
+          _LoginState value, $Res Function(_LoginState) _then) =
+      __$LoginStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({AppStatus loginStatus, String? loginErrorMessage});
+}
+
+/// @nodoc
+class __$LoginStateCopyWithImpl<$Res> implements _$LoginStateCopyWith<$Res> {
+  __$LoginStateCopyWithImpl(this._self, this._then);
+
+  final _LoginState _self;
+  final $Res Function(_LoginState) _then;
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
-      __$$LoginStateImplCopyWithImpl<_$LoginStateImpl>(this, _$identity);
+  $Res call({
+    Object? loginStatus = null,
+    Object? loginErrorMessage = freezed,
+  }) {
+    return _then(_LoginState(
+      loginStatus: null == loginStatus
+          ? _self.loginStatus
+          : loginStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      loginErrorMessage: freezed == loginErrorMessage
+          ? _self.loginErrorMessage
+          : loginErrorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _LoginState implements LoginState {
-  const factory _LoginState(
-      {final AppStatus loginStatus,
-      final String? loginErrorMessage}) = _$LoginStateImpl;
-
-  @override
-  AppStatus get loginStatus;
-  @override
-  String? get loginErrorMessage;
-  @override
-  @JsonKey(ignore: true)
-  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

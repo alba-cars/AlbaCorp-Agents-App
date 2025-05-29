@@ -1,7 +1,7 @@
 part of 'add_followup_cubit.dart';
 
 @freezed
-class AddFollowupState with _$AddFollowupState {
+abstract class AddFollowupState with _$AddFollowupState {
   const factory AddFollowupState({
     Lead? lead,
     @Default(AppStatus.init) AppStatus getLeadStatus,

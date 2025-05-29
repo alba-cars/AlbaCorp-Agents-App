@@ -10,7 +10,7 @@ enum CallProcessingStatus {
 }
 
 @freezed
-class TaskDetailState with _$TaskDetailState {
+abstract class TaskDetailState with _$TaskDetailState {
   const factory TaskDetailState(
       {required String taskId,
       @Default(AppStatus.init) AppStatus getTaskStatus,
@@ -37,7 +37,7 @@ class TaskDetailState with _$TaskDetailState {
 }
 
 @freezed
-class CallProcessingState with _$CallProcessingState {
+abstract class CallProcessingState with _$CallProcessingState {
   const factory CallProcessingState({
     @Default(false) bool isProcessing,
     @Default('') String callId,

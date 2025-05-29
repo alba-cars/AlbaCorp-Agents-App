@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,103 +10,70 @@ part of 'check_in_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CheckInState {
-  bool get isLoading => throw _privateConstructorUsedError;
-  bool get isInOffice => throw _privateConstructorUsedError;
-  String get currentAddress => throw _privateConstructorUsedError;
-  Position? get currentPosition => throw _privateConstructorUsedError;
-  bool get hasLocationPermission => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
-  bool get isCheckedIn => throw _privateConstructorUsedError;
+  bool get isLoading;
+  bool get isInOffice;
+  String get currentAddress;
+  Position? get currentPosition;
+  bool get hasLocationPermission;
+  String? get errorMessage;
+  bool get isCheckedIn;
 
-  @JsonKey(ignore: true)
-  $CheckInStateCopyWith<CheckInState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CheckInStateCopyWith<$Res> {
-  factory $CheckInStateCopyWith(
-          CheckInState value, $Res Function(CheckInState) then) =
-      _$CheckInStateCopyWithImpl<$Res, CheckInState>;
-  @useResult
-  $Res call(
-      {bool isLoading,
-      bool isInOffice,
-      String currentAddress,
-      Position? currentPosition,
-      bool hasLocationPermission,
-      String? errorMessage,
-      bool isCheckedIn});
-}
-
-/// @nodoc
-class _$CheckInStateCopyWithImpl<$Res, $Val extends CheckInState>
-    implements $CheckInStateCopyWith<$Res> {
-  _$CheckInStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $CheckInStateCopyWith<CheckInState> get copyWith =>
+      _$CheckInStateCopyWithImpl<CheckInState>(
+          this as CheckInState, _$identity);
+
   @override
-  $Res call({
-    Object? isLoading = null,
-    Object? isInOffice = null,
-    Object? currentAddress = null,
-    Object? currentPosition = freezed,
-    Object? hasLocationPermission = null,
-    Object? errorMessage = freezed,
-    Object? isCheckedIn = null,
-  }) {
-    return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isInOffice: null == isInOffice
-          ? _value.isInOffice
-          : isInOffice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      currentAddress: null == currentAddress
-          ? _value.currentAddress
-          : currentAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      currentPosition: freezed == currentPosition
-          ? _value.currentPosition
-          : currentPosition // ignore: cast_nullable_to_non_nullable
-              as Position?,
-      hasLocationPermission: null == hasLocationPermission
-          ? _value.hasLocationPermission
-          : hasLocationPermission // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isCheckedIn: null == isCheckedIn
-          ? _value.isCheckedIn
-          : isCheckedIn // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CheckInState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isInOffice, isInOffice) ||
+                other.isInOffice == isInOffice) &&
+            (identical(other.currentAddress, currentAddress) ||
+                other.currentAddress == currentAddress) &&
+            (identical(other.currentPosition, currentPosition) ||
+                other.currentPosition == currentPosition) &&
+            (identical(other.hasLocationPermission, hasLocationPermission) ||
+                other.hasLocationPermission == hasLocationPermission) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(other.isCheckedIn, isCheckedIn) ||
+                other.isCheckedIn == isCheckedIn));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isInOffice,
+      currentAddress,
+      currentPosition,
+      hasLocationPermission,
+      errorMessage,
+      isCheckedIn);
+
+  @override
+  String toString() {
+    return 'CheckInState(isLoading: $isLoading, isInOffice: $isInOffice, currentAddress: $currentAddress, currentPosition: $currentPosition, hasLocationPermission: $hasLocationPermission, errorMessage: $errorMessage, isCheckedIn: $isCheckedIn)';
   }
 }
 
 /// @nodoc
-abstract class _$$CheckInStateImplCopyWith<$Res>
-    implements $CheckInStateCopyWith<$Res> {
-  factory _$$CheckInStateImplCopyWith(
-          _$CheckInStateImpl value, $Res Function(_$CheckInStateImpl) then) =
-      __$$CheckInStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CheckInStateCopyWith<$Res> {
+  factory $CheckInStateCopyWith(
+          CheckInState value, $Res Function(CheckInState) _then) =
+      _$CheckInStateCopyWithImpl;
   @useResult
   $Res call(
       {bool isLoading,
@@ -118,13 +86,14 @@ abstract class _$$CheckInStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CheckInStateImplCopyWithImpl<$Res>
-    extends _$CheckInStateCopyWithImpl<$Res, _$CheckInStateImpl>
-    implements _$$CheckInStateImplCopyWith<$Res> {
-  __$$CheckInStateImplCopyWithImpl(
-      _$CheckInStateImpl _value, $Res Function(_$CheckInStateImpl) _then)
-      : super(_value, _then);
+class _$CheckInStateCopyWithImpl<$Res> implements $CheckInStateCopyWith<$Res> {
+  _$CheckInStateCopyWithImpl(this._self, this._then);
 
+  final CheckInState _self;
+  final $Res Function(CheckInState) _then;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,33 +105,33 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? isCheckedIn = null,
   }) {
-    return _then(_$CheckInStateImpl(
+    return _then(_self.copyWith(
       isLoading: null == isLoading
-          ? _value.isLoading
+          ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       isInOffice: null == isInOffice
-          ? _value.isInOffice
+          ? _self.isInOffice
           : isInOffice // ignore: cast_nullable_to_non_nullable
               as bool,
       currentAddress: null == currentAddress
-          ? _value.currentAddress
+          ? _self.currentAddress
           : currentAddress // ignore: cast_nullable_to_non_nullable
               as String,
       currentPosition: freezed == currentPosition
-          ? _value.currentPosition
+          ? _self.currentPosition
           : currentPosition // ignore: cast_nullable_to_non_nullable
               as Position?,
       hasLocationPermission: null == hasLocationPermission
-          ? _value.hasLocationPermission
+          ? _self.hasLocationPermission
           : hasLocationPermission // ignore: cast_nullable_to_non_nullable
               as bool,
       errorMessage: freezed == errorMessage
-          ? _value.errorMessage
+          ? _self.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       isCheckedIn: null == isCheckedIn
-          ? _value.isCheckedIn
+          ? _self.isCheckedIn
           : isCheckedIn // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -171,8 +140,8 @@ class __$$CheckInStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckInStateImpl implements _CheckInState {
-  const _$CheckInStateImpl(
+class _CheckInState implements CheckInState {
+  const _CheckInState(
       {this.isLoading = false,
       this.isInOffice = false,
       this.currentAddress = "Loading location...",
@@ -201,16 +170,19 @@ class _$CheckInStateImpl implements _CheckInState {
   @JsonKey()
   final bool isCheckedIn;
 
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CheckInState(isLoading: $isLoading, isInOffice: $isInOffice, currentAddress: $currentAddress, currentPosition: $currentPosition, hasLocationPermission: $hasLocationPermission, errorMessage: $errorMessage, isCheckedIn: $isCheckedIn)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CheckInStateCopyWith<_CheckInState> get copyWith =>
+      __$CheckInStateCopyWithImpl<_CheckInState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CheckInStateImpl &&
+            other is _CheckInState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isInOffice, isInOffice) ||
@@ -238,39 +210,82 @@ class _$CheckInStateImpl implements _CheckInState {
       errorMessage,
       isCheckedIn);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'CheckInState(isLoading: $isLoading, isInOffice: $isInOffice, currentAddress: $currentAddress, currentPosition: $currentPosition, hasLocationPermission: $hasLocationPermission, errorMessage: $errorMessage, isCheckedIn: $isCheckedIn)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CheckInStateCopyWith<$Res>
+    implements $CheckInStateCopyWith<$Res> {
+  factory _$CheckInStateCopyWith(
+          _CheckInState value, $Res Function(_CheckInState) _then) =
+      __$CheckInStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {bool isLoading,
+      bool isInOffice,
+      String currentAddress,
+      Position? currentPosition,
+      bool hasLocationPermission,
+      String? errorMessage,
+      bool isCheckedIn});
+}
+
+/// @nodoc
+class __$CheckInStateCopyWithImpl<$Res>
+    implements _$CheckInStateCopyWith<$Res> {
+  __$CheckInStateCopyWithImpl(this._self, this._then);
+
+  final _CheckInState _self;
+  final $Res Function(_CheckInState) _then;
+
+  /// Create a copy of CheckInState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
-      __$$CheckInStateImplCopyWithImpl<_$CheckInStateImpl>(this, _$identity);
+  $Res call({
+    Object? isLoading = null,
+    Object? isInOffice = null,
+    Object? currentAddress = null,
+    Object? currentPosition = freezed,
+    Object? hasLocationPermission = null,
+    Object? errorMessage = freezed,
+    Object? isCheckedIn = null,
+  }) {
+    return _then(_CheckInState(
+      isLoading: null == isLoading
+          ? _self.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isInOffice: null == isInOffice
+          ? _self.isInOffice
+          : isInOffice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      currentAddress: null == currentAddress
+          ? _self.currentAddress
+          : currentAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentPosition: freezed == currentPosition
+          ? _self.currentPosition
+          : currentPosition // ignore: cast_nullable_to_non_nullable
+              as Position?,
+      hasLocationPermission: null == hasLocationPermission
+          ? _self.hasLocationPermission
+          : hasLocationPermission // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errorMessage: freezed == errorMessage
+          ? _self.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isCheckedIn: null == isCheckedIn
+          ? _self.isCheckedIn
+          : isCheckedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _CheckInState implements CheckInState {
-  const factory _CheckInState(
-      {final bool isLoading,
-      final bool isInOffice,
-      final String currentAddress,
-      final Position? currentPosition,
-      final bool hasLocationPermission,
-      final String? errorMessage,
-      final bool isCheckedIn}) = _$CheckInStateImpl;
-
-  @override
-  bool get isLoading;
-  @override
-  bool get isInOffice;
-  @override
-  String get currentAddress;
-  @override
-  Position? get currentPosition;
-  @override
-  bool get hasLocationPermission;
-  @override
-  String? get errorMessage;
-  @override
-  bool get isCheckedIn;
-  @override
-  @JsonKey(ignore: true)
-  _$$CheckInStateImplCopyWith<_$CheckInStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

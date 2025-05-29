@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,44 +10,116 @@ part of 'lead_detail_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LeadDetailState {
-  String get leadId => throw _privateConstructorUsedError;
-  Lead? get lead => throw _privateConstructorUsedError;
-  AppStatus get getLeadStatus => throw _privateConstructorUsedError;
-  String? get getLeadError => throw _privateConstructorUsedError;
-  List<Activity> get activities => throw _privateConstructorUsedError;
-  AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
-  String? get getActivitiesError => throw _privateConstructorUsedError;
-  List<Deal> get deals => throw _privateConstructorUsedError;
-  AppStatus get getDealsStatus => throw _privateConstructorUsedError;
-  String? get getDealsError => throw _privateConstructorUsedError;
-  AppStatus get updateLeadStatus => throw _privateConstructorUsedError;
-  String? get updateLeadError => throw _privateConstructorUsedError;
-  AppStatus get getPropertyCardsListStatus =>
-      throw _privateConstructorUsedError;
-  List<LeadPropertyCardModel> get propertyCardsList =>
-      throw _privateConstructorUsedError;
-  String? get getPropertyCardsListError => throw _privateConstructorUsedError;
-  Paginator? get propertyCardPaginator => throw _privateConstructorUsedError;
-  AppStatus get updatePropertyCardStatus => throw _privateConstructorUsedError;
-  String? get updatePropertyCardError => throw _privateConstructorUsedError;
+  String get leadId;
+  Lead? get lead;
+  AppStatus get getLeadStatus;
+  String? get getLeadError;
+  List<Activity> get activities;
+  AppStatus get getActivitiesStatus;
+  String? get getActivitiesError;
+  List<Deal> get deals;
+  AppStatus get getDealsStatus;
+  String? get getDealsError;
+  AppStatus get updateLeadStatus;
+  String? get updateLeadError;
+  AppStatus get getPropertyCardsListStatus;
+  List<LeadPropertyCardModel> get propertyCardsList;
+  String? get getPropertyCardsListError;
+  Paginator? get propertyCardPaginator;
+  AppStatus get updatePropertyCardStatus;
+  String? get updatePropertyCardError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $LeadDetailStateCopyWith<LeadDetailState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$LeadDetailStateCopyWithImpl<LeadDetailState>(
+          this as LeadDetailState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LeadDetailState &&
+            (identical(other.leadId, leadId) || other.leadId == leadId) &&
+            (identical(other.lead, lead) || other.lead == lead) &&
+            (identical(other.getLeadStatus, getLeadStatus) ||
+                other.getLeadStatus == getLeadStatus) &&
+            (identical(other.getLeadError, getLeadError) ||
+                other.getLeadError == getLeadError) &&
+            const DeepCollectionEquality()
+                .equals(other.activities, activities) &&
+            (identical(other.getActivitiesStatus, getActivitiesStatus) ||
+                other.getActivitiesStatus == getActivitiesStatus) &&
+            (identical(other.getActivitiesError, getActivitiesError) ||
+                other.getActivitiesError == getActivitiesError) &&
+            const DeepCollectionEquality().equals(other.deals, deals) &&
+            (identical(other.getDealsStatus, getDealsStatus) ||
+                other.getDealsStatus == getDealsStatus) &&
+            (identical(other.getDealsError, getDealsError) ||
+                other.getDealsError == getDealsError) &&
+            (identical(other.updateLeadStatus, updateLeadStatus) ||
+                other.updateLeadStatus == updateLeadStatus) &&
+            (identical(other.updateLeadError, updateLeadError) ||
+                other.updateLeadError == updateLeadError) &&
+            (identical(other.getPropertyCardsListStatus,
+                    getPropertyCardsListStatus) ||
+                other.getPropertyCardsListStatus ==
+                    getPropertyCardsListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyCardsList, propertyCardsList) &&
+            (identical(other.getPropertyCardsListError,
+                    getPropertyCardsListError) ||
+                other.getPropertyCardsListError == getPropertyCardsListError) &&
+            (identical(other.propertyCardPaginator, propertyCardPaginator) ||
+                other.propertyCardPaginator == propertyCardPaginator) &&
+            (identical(
+                    other.updatePropertyCardStatus, updatePropertyCardStatus) ||
+                other.updatePropertyCardStatus == updatePropertyCardStatus) &&
+            (identical(
+                    other.updatePropertyCardError, updatePropertyCardError) ||
+                other.updatePropertyCardError == updatePropertyCardError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      leadId,
+      lead,
+      getLeadStatus,
+      getLeadError,
+      const DeepCollectionEquality().hash(activities),
+      getActivitiesStatus,
+      getActivitiesError,
+      const DeepCollectionEquality().hash(deals),
+      getDealsStatus,
+      getDealsError,
+      updateLeadStatus,
+      updateLeadError,
+      getPropertyCardsListStatus,
+      const DeepCollectionEquality().hash(propertyCardsList),
+      getPropertyCardsListError,
+      propertyCardPaginator,
+      updatePropertyCardStatus,
+      updatePropertyCardError);
+
+  @override
+  String toString() {
+    return 'LeadDetailState(leadId: $leadId, lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, updateLeadStatus: $updateLeadStatus, updateLeadError: $updateLeadError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, updatePropertyCardStatus: $updatePropertyCardStatus, updatePropertyCardError: $updatePropertyCardError)';
+  }
 }
 
 /// @nodoc
-abstract class $LeadDetailStateCopyWith<$Res> {
+abstract mixin class $LeadDetailStateCopyWith<$Res> {
   factory $LeadDetailStateCopyWith(
-          LeadDetailState value, $Res Function(LeadDetailState) then) =
-      _$LeadDetailStateCopyWithImpl<$Res, LeadDetailState>;
+          LeadDetailState value, $Res Function(LeadDetailState) _then) =
+      _$LeadDetailStateCopyWithImpl;
   @useResult
   $Res call(
       {String leadId,
@@ -73,15 +146,15 @@ abstract class $LeadDetailStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
+class _$LeadDetailStateCopyWithImpl<$Res>
     implements $LeadDetailStateCopyWith<$Res> {
-  _$LeadDetailStateCopyWithImpl(this._value, this._then);
+  _$LeadDetailStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final LeadDetailState _self;
+  final $Res Function(LeadDetailState) _then;
 
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,252 +177,115 @@ class _$LeadDetailStateCopyWithImpl<$Res, $Val extends LeadDetailState>
     Object? updatePropertyCardStatus = null,
     Object? updatePropertyCardError = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       leadId: null == leadId
-          ? _value.leadId
+          ? _self.leadId
           : leadId // ignore: cast_nullable_to_non_nullable
               as String,
       lead: freezed == lead
-          ? _value.lead
+          ? _self.lead
           : lead // ignore: cast_nullable_to_non_nullable
               as Lead?,
       getLeadStatus: null == getLeadStatus
-          ? _value.getLeadStatus
+          ? _self.getLeadStatus
           : getLeadStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getLeadError: freezed == getLeadError
-          ? _value.getLeadError
+          ? _self.getLeadError
           : getLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
       activities: null == activities
-          ? _value.activities
+          ? _self.activities
           : activities // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
+          ? _self.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getActivitiesError: freezed == getActivitiesError
-          ? _value.getActivitiesError
+          ? _self.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
               as String?,
       deals: null == deals
-          ? _value.deals
+          ? _self.deals
           : deals // ignore: cast_nullable_to_non_nullable
               as List<Deal>,
       getDealsStatus: null == getDealsStatus
-          ? _value.getDealsStatus
+          ? _self.getDealsStatus
           : getDealsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getDealsError: freezed == getDealsError
-          ? _value.getDealsError
+          ? _self.getDealsError
           : getDealsError // ignore: cast_nullable_to_non_nullable
               as String?,
       updateLeadStatus: null == updateLeadStatus
-          ? _value.updateLeadStatus
+          ? _self.updateLeadStatus
           : updateLeadStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       updateLeadError: freezed == updateLeadError
-          ? _value.updateLeadError
+          ? _self.updateLeadError
           : updateLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
       getPropertyCardsListStatus: null == getPropertyCardsListStatus
-          ? _value.getPropertyCardsListStatus
+          ? _self.getPropertyCardsListStatus
           : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       propertyCardsList: null == propertyCardsList
-          ? _value.propertyCardsList
+          ? _self.propertyCardsList
           : propertyCardsList // ignore: cast_nullable_to_non_nullable
               as List<LeadPropertyCardModel>,
       getPropertyCardsListError: freezed == getPropertyCardsListError
-          ? _value.getPropertyCardsListError
+          ? _self.getPropertyCardsListError
           : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyCardPaginator: freezed == propertyCardPaginator
-          ? _value.propertyCardPaginator
+          ? _self.propertyCardPaginator
           : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       updatePropertyCardStatus: null == updatePropertyCardStatus
-          ? _value.updatePropertyCardStatus
+          ? _self.updatePropertyCardStatus
           : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       updatePropertyCardError: freezed == updatePropertyCardError
-          ? _value.updatePropertyCardError
-          : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LeadCopyWith<$Res>? get lead {
-    if (_value.lead == null) {
-      return null;
-    }
-
-    return $LeadCopyWith<$Res>(_value.lead!, (value) {
-      return _then(_value.copyWith(lead: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get propertyCardPaginator {
-    if (_value.propertyCardPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.propertyCardPaginator!, (value) {
-      return _then(_value.copyWith(propertyCardPaginator: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$LeadDetailStateImplCopyWith<$Res>
-    implements $LeadDetailStateCopyWith<$Res> {
-  factory _$$LeadDetailStateImplCopyWith(_$LeadDetailStateImpl value,
-          $Res Function(_$LeadDetailStateImpl) then) =
-      __$$LeadDetailStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String leadId,
-      Lead? lead,
-      AppStatus getLeadStatus,
-      String? getLeadError,
-      List<Activity> activities,
-      AppStatus getActivitiesStatus,
-      String? getActivitiesError,
-      List<Deal> deals,
-      AppStatus getDealsStatus,
-      String? getDealsError,
-      AppStatus updateLeadStatus,
-      String? updateLeadError,
-      AppStatus getPropertyCardsListStatus,
-      List<LeadPropertyCardModel> propertyCardsList,
-      String? getPropertyCardsListError,
-      Paginator? propertyCardPaginator,
-      AppStatus updatePropertyCardStatus,
-      String? updatePropertyCardError});
-
-  @override
-  $LeadCopyWith<$Res>? get lead;
-  @override
-  $PaginatorCopyWith<$Res>? get propertyCardPaginator;
-}
-
-/// @nodoc
-class __$$LeadDetailStateImplCopyWithImpl<$Res>
-    extends _$LeadDetailStateCopyWithImpl<$Res, _$LeadDetailStateImpl>
-    implements _$$LeadDetailStateImplCopyWith<$Res> {
-  __$$LeadDetailStateImplCopyWithImpl(
-      _$LeadDetailStateImpl _value, $Res Function(_$LeadDetailStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? leadId = null,
-    Object? lead = freezed,
-    Object? getLeadStatus = null,
-    Object? getLeadError = freezed,
-    Object? activities = null,
-    Object? getActivitiesStatus = null,
-    Object? getActivitiesError = freezed,
-    Object? deals = null,
-    Object? getDealsStatus = null,
-    Object? getDealsError = freezed,
-    Object? updateLeadStatus = null,
-    Object? updateLeadError = freezed,
-    Object? getPropertyCardsListStatus = null,
-    Object? propertyCardsList = null,
-    Object? getPropertyCardsListError = freezed,
-    Object? propertyCardPaginator = freezed,
-    Object? updatePropertyCardStatus = null,
-    Object? updatePropertyCardError = freezed,
-  }) {
-    return _then(_$LeadDetailStateImpl(
-      leadId: null == leadId
-          ? _value.leadId
-          : leadId // ignore: cast_nullable_to_non_nullable
-              as String,
-      lead: freezed == lead
-          ? _value.lead
-          : lead // ignore: cast_nullable_to_non_nullable
-              as Lead?,
-      getLeadStatus: null == getLeadStatus
-          ? _value.getLeadStatus
-          : getLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getLeadError: freezed == getLeadError
-          ? _value.getLeadError
-          : getLeadError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      activities: null == activities
-          ? _value._activities
-          : activities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
-          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getActivitiesError: freezed == getActivitiesError
-          ? _value.getActivitiesError
-          : getActivitiesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deals: null == deals
-          ? _value._deals
-          : deals // ignore: cast_nullable_to_non_nullable
-              as List<Deal>,
-      getDealsStatus: null == getDealsStatus
-          ? _value.getDealsStatus
-          : getDealsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getDealsError: freezed == getDealsError
-          ? _value.getDealsError
-          : getDealsError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updateLeadStatus: null == updateLeadStatus
-          ? _value.updateLeadStatus
-          : updateLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      updateLeadError: freezed == updateLeadError
-          ? _value.updateLeadError
-          : updateLeadError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      getPropertyCardsListStatus: null == getPropertyCardsListStatus
-          ? _value.getPropertyCardsListStatus
-          : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      propertyCardsList: null == propertyCardsList
-          ? _value._propertyCardsList
-          : propertyCardsList // ignore: cast_nullable_to_non_nullable
-              as List<LeadPropertyCardModel>,
-      getPropertyCardsListError: freezed == getPropertyCardsListError
-          ? _value.getPropertyCardsListError
-          : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyCardPaginator: freezed == propertyCardPaginator
-          ? _value.propertyCardPaginator
-          : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      updatePropertyCardStatus: null == updatePropertyCardStatus
-          ? _value.updatePropertyCardStatus
-          : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      updatePropertyCardError: freezed == updatePropertyCardError
-          ? _value.updatePropertyCardError
+          ? _self.updatePropertyCardError
           : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
+
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get lead {
+    if (_self.lead == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.lead!, (value) {
+      return _then(_self.copyWith(lead: value));
+    });
+  }
+
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator {
+    if (_self.propertyCardPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.propertyCardPaginator!, (value) {
+      return _then(_self.copyWith(propertyCardPaginator: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$LeadDetailStateImpl implements _LeadDetailState {
-  const _$LeadDetailStateImpl(
+class _LeadDetailState implements LeadDetailState {
+  const _LeadDetailState(
       {required this.leadId,
       this.lead,
       this.getLeadStatus = AppStatus.init,
@@ -437,16 +373,19 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
   @override
   final String? updatePropertyCardError;
 
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'LeadDetailState(leadId: $leadId, lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, updateLeadStatus: $updateLeadStatus, updateLeadError: $updateLeadError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, updatePropertyCardStatus: $updatePropertyCardStatus, updatePropertyCardError: $updatePropertyCardError)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LeadDetailStateCopyWith<_LeadDetailState> get copyWith =>
+      __$LeadDetailStateCopyWithImpl<_LeadDetailState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LeadDetailStateImpl &&
+            other is _LeadDetailState &&
             (identical(other.leadId, leadId) || other.leadId == leadId) &&
             (identical(other.lead, lead) || other.lead == lead) &&
             (identical(other.getLeadStatus, getLeadStatus) ||
@@ -509,73 +448,181 @@ class _$LeadDetailStateImpl implements _LeadDetailState {
       updatePropertyCardStatus,
       updatePropertyCardError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'LeadDetailState(leadId: $leadId, lead: $lead, getLeadStatus: $getLeadStatus, getLeadError: $getLeadError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, deals: $deals, getDealsStatus: $getDealsStatus, getDealsError: $getDealsError, updateLeadStatus: $updateLeadStatus, updateLeadError: $updateLeadError, getPropertyCardsListStatus: $getPropertyCardsListStatus, propertyCardsList: $propertyCardsList, getPropertyCardsListError: $getPropertyCardsListError, propertyCardPaginator: $propertyCardPaginator, updatePropertyCardStatus: $updatePropertyCardStatus, updatePropertyCardError: $updatePropertyCardError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LeadDetailStateCopyWith<$Res>
+    implements $LeadDetailStateCopyWith<$Res> {
+  factory _$LeadDetailStateCopyWith(
+          _LeadDetailState value, $Res Function(_LeadDetailState) _then) =
+      __$LeadDetailStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String leadId,
+      Lead? lead,
+      AppStatus getLeadStatus,
+      String? getLeadError,
+      List<Activity> activities,
+      AppStatus getActivitiesStatus,
+      String? getActivitiesError,
+      List<Deal> deals,
+      AppStatus getDealsStatus,
+      String? getDealsError,
+      AppStatus updateLeadStatus,
+      String? updateLeadError,
+      AppStatus getPropertyCardsListStatus,
+      List<LeadPropertyCardModel> propertyCardsList,
+      String? getPropertyCardsListError,
+      Paginator? propertyCardPaginator,
+      AppStatus updatePropertyCardStatus,
+      String? updatePropertyCardError});
+
+  @override
+  $LeadCopyWith<$Res>? get lead;
+  @override
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator;
+}
+
+/// @nodoc
+class __$LeadDetailStateCopyWithImpl<$Res>
+    implements _$LeadDetailStateCopyWith<$Res> {
+  __$LeadDetailStateCopyWithImpl(this._self, this._then);
+
+  final _LeadDetailState _self;
+  final $Res Function(_LeadDetailState) _then;
+
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$LeadDetailStateImplCopyWith<_$LeadDetailStateImpl> get copyWith =>
-      __$$LeadDetailStateImplCopyWithImpl<_$LeadDetailStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? leadId = null,
+    Object? lead = freezed,
+    Object? getLeadStatus = null,
+    Object? getLeadError = freezed,
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = freezed,
+    Object? deals = null,
+    Object? getDealsStatus = null,
+    Object? getDealsError = freezed,
+    Object? updateLeadStatus = null,
+    Object? updateLeadError = freezed,
+    Object? getPropertyCardsListStatus = null,
+    Object? propertyCardsList = null,
+    Object? getPropertyCardsListError = freezed,
+    Object? propertyCardPaginator = freezed,
+    Object? updatePropertyCardStatus = null,
+    Object? updatePropertyCardError = freezed,
+  }) {
+    return _then(_LeadDetailState(
+      leadId: null == leadId
+          ? _self.leadId
+          : leadId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lead: freezed == lead
+          ? _self.lead
+          : lead // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      getLeadStatus: null == getLeadStatus
+          ? _self.getLeadStatus
+          : getLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getLeadError: freezed == getLeadError
+          ? _self.getLeadError
+          : getLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      activities: null == activities
+          ? _self._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _self.getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getActivitiesError: freezed == getActivitiesError
+          ? _self.getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deals: null == deals
+          ? _self._deals
+          : deals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      getDealsStatus: null == getDealsStatus
+          ? _self.getDealsStatus
+          : getDealsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getDealsError: freezed == getDealsError
+          ? _self.getDealsError
+          : getDealsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updateLeadStatus: null == updateLeadStatus
+          ? _self.updateLeadStatus
+          : updateLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      updateLeadError: freezed == updateLeadError
+          ? _self.updateLeadError
+          : updateLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      getPropertyCardsListStatus: null == getPropertyCardsListStatus
+          ? _self.getPropertyCardsListStatus
+          : getPropertyCardsListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      propertyCardsList: null == propertyCardsList
+          ? _self._propertyCardsList
+          : propertyCardsList // ignore: cast_nullable_to_non_nullable
+              as List<LeadPropertyCardModel>,
+      getPropertyCardsListError: freezed == getPropertyCardsListError
+          ? _self.getPropertyCardsListError
+          : getPropertyCardsListError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyCardPaginator: freezed == propertyCardPaginator
+          ? _self.propertyCardPaginator
+          : propertyCardPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      updatePropertyCardStatus: null == updatePropertyCardStatus
+          ? _self.updatePropertyCardStatus
+          : updatePropertyCardStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      updatePropertyCardError: freezed == updatePropertyCardError
+          ? _self.updatePropertyCardError
+          : updatePropertyCardError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get lead {
+    if (_self.lead == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.lead!, (value) {
+      return _then(_self.copyWith(lead: value));
+    });
+  }
+
+  /// Create a copy of LeadDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get propertyCardPaginator {
+    if (_self.propertyCardPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.propertyCardPaginator!, (value) {
+      return _then(_self.copyWith(propertyCardPaginator: value));
+    });
+  }
 }
 
-abstract class _LeadDetailState implements LeadDetailState {
-  const factory _LeadDetailState(
-      {required final String leadId,
-      final Lead? lead,
-      final AppStatus getLeadStatus,
-      final String? getLeadError,
-      final List<Activity> activities,
-      final AppStatus getActivitiesStatus,
-      final String? getActivitiesError,
-      final List<Deal> deals,
-      final AppStatus getDealsStatus,
-      final String? getDealsError,
-      final AppStatus updateLeadStatus,
-      final String? updateLeadError,
-      final AppStatus getPropertyCardsListStatus,
-      final List<LeadPropertyCardModel> propertyCardsList,
-      final String? getPropertyCardsListError,
-      final Paginator? propertyCardPaginator,
-      final AppStatus updatePropertyCardStatus,
-      final String? updatePropertyCardError}) = _$LeadDetailStateImpl;
-
-  @override
-  String get leadId;
-  @override
-  Lead? get lead;
-  @override
-  AppStatus get getLeadStatus;
-  @override
-  String? get getLeadError;
-  @override
-  List<Activity> get activities;
-  @override
-  AppStatus get getActivitiesStatus;
-  @override
-  String? get getActivitiesError;
-  @override
-  List<Deal> get deals;
-  @override
-  AppStatus get getDealsStatus;
-  @override
-  String? get getDealsError;
-  @override
-  AppStatus get updateLeadStatus;
-  @override
-  String? get updateLeadError;
-  @override
-  AppStatus get getPropertyCardsListStatus;
-  @override
-  List<LeadPropertyCardModel> get propertyCardsList;
-  @override
-  String? get getPropertyCardsListError;
-  @override
-  Paginator? get propertyCardPaginator;
-  @override
-  AppStatus get updatePropertyCardStatus;
-  @override
-  String? get updatePropertyCardError;
-  @override
-  @JsonKey(ignore: true)
-  _$$LeadDetailStateImplCopyWith<_$LeadDetailStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,83 +10,54 @@ part of 'user_list_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-UserListData _$UserListDataFromJson(Map<String, dynamic> json) {
-  return _UserListData.fromJson(json);
-}
 
 /// @nodoc
 mixin _$UserListData {
   @JsonKey(name: "_id")
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @JsonKey(name: "user_name")
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @JsonKey(name: "user_phone")
-  String? get phone => throw _privateConstructorUsedError;
+  String? get phone;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $UserListDataCopyWith<UserListData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UserListDataCopyWith<$Res> {
-  factory $UserListDataCopyWith(
-          UserListData value, $Res Function(UserListData) then) =
-      _$UserListDataCopyWithImpl<$Res, UserListData>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: "_id") String id,
-      @JsonKey(name: "user_name") String? name,
-      @JsonKey(name: "user_phone") String? phone});
-}
-
-/// @nodoc
-class _$UserListDataCopyWithImpl<$Res, $Val extends UserListData>
-    implements $UserListDataCopyWith<$Res> {
-  _$UserListDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of UserListData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $UserListDataCopyWith<UserListData> get copyWith =>
+      _$UserListDataCopyWithImpl<UserListData>(
+          this as UserListData, _$identity);
+
+  /// Serializes this UserListData to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = freezed,
-    Object? phone = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phone: freezed == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UserListData &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.phone, phone) || other.phone == phone));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, phone);
+
+  @override
+  String toString() {
+    return 'UserListData(id: $id, name: $name, phone: $phone)';
   }
 }
 
 /// @nodoc
-abstract class _$$UserListDataImplCopyWith<$Res>
-    implements $UserListDataCopyWith<$Res> {
-  factory _$$UserListDataImplCopyWith(
-          _$UserListDataImpl value, $Res Function(_$UserListDataImpl) then) =
-      __$$UserListDataImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $UserListDataCopyWith<$Res> {
+  factory $UserListDataCopyWith(
+          UserListData value, $Res Function(UserListData) _then) =
+      _$UserListDataCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: "_id") String id,
@@ -94,13 +66,14 @@ abstract class _$$UserListDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UserListDataImplCopyWithImpl<$Res>
-    extends _$UserListDataCopyWithImpl<$Res, _$UserListDataImpl>
-    implements _$$UserListDataImplCopyWith<$Res> {
-  __$$UserListDataImplCopyWithImpl(
-      _$UserListDataImpl _value, $Res Function(_$UserListDataImpl) _then)
-      : super(_value, _then);
+class _$UserListDataCopyWithImpl<$Res> implements $UserListDataCopyWith<$Res> {
+  _$UserListDataCopyWithImpl(this._self, this._then);
 
+  final UserListData _self;
+  final $Res Function(UserListData) _then;
+
+  /// Create a copy of UserListData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,17 +81,17 @@ class __$$UserListDataImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? phone = freezed,
   }) {
-    return _then(_$UserListDataImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: freezed == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
       phone: freezed == phone
-          ? _value.phone
+          ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -127,14 +100,13 @@ class __$$UserListDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserListDataImpl implements _UserListData {
-  const _$UserListDataImpl(
+class _UserListData implements UserListData {
+  const _UserListData(
       {@JsonKey(name: "_id") required this.id,
       @JsonKey(name: "user_name") this.name,
       @JsonKey(name: "user_phone") this.phone});
-
-  factory _$UserListDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserListDataImplFromJson(json);
+  factory _UserListData.fromJson(Map<String, dynamic> json) =>
+      _$UserListDataFromJson(json);
 
   @override
   @JsonKey(name: "_id")
@@ -146,59 +118,87 @@ class _$UserListDataImpl implements _UserListData {
   @JsonKey(name: "user_phone")
   final String? phone;
 
+  /// Create a copy of UserListData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'UserListData(id: $id, name: $name, phone: $phone)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UserListDataCopyWith<_UserListData> get copyWith =>
+      __$UserListDataCopyWithImpl<_UserListData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UserListDataToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserListDataImpl &&
+            other is _UserListData &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.phone, phone) || other.phone == phone));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, phone);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UserListDataImplCopyWith<_$UserListDataImpl> get copyWith =>
-      __$$UserListDataImplCopyWithImpl<_$UserListDataImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserListDataImplToJson(
-      this,
-    );
+  String toString() {
+    return 'UserListData(id: $id, name: $name, phone: $phone)';
   }
 }
 
-abstract class _UserListData implements UserListData {
-  const factory _UserListData(
-      {@JsonKey(name: "_id") required final String id,
-      @JsonKey(name: "user_name") final String? name,
-      @JsonKey(name: "user_phone") final String? phone}) = _$UserListDataImpl;
-
-  factory _UserListData.fromJson(Map<String, dynamic> json) =
-      _$UserListDataImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$UserListDataCopyWith<$Res>
+    implements $UserListDataCopyWith<$Res> {
+  factory _$UserListDataCopyWith(
+          _UserListData value, $Res Function(_UserListData) _then) =
+      __$UserListDataCopyWithImpl;
   @override
-  @JsonKey(name: "_id")
-  String get id;
-  @override
-  @JsonKey(name: "user_name")
-  String? get name;
-  @override
-  @JsonKey(name: "user_phone")
-  String? get phone;
-  @override
-  @JsonKey(ignore: true)
-  _$$UserListDataImplCopyWith<_$UserListDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "_id") String id,
+      @JsonKey(name: "user_name") String? name,
+      @JsonKey(name: "user_phone") String? phone});
 }
+
+/// @nodoc
+class __$UserListDataCopyWithImpl<$Res>
+    implements _$UserListDataCopyWith<$Res> {
+  __$UserListDataCopyWithImpl(this._self, this._then);
+
+  final _UserListData _self;
+  final $Res Function(_UserListData) _then;
+
+  /// Create a copy of UserListData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = freezed,
+    Object? phone = freezed,
+  }) {
+    return _then(_UserListData(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _self.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

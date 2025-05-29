@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,152 +10,28 @@ part of 'amenity_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Amenity _$AmenityFromJson(Map<String, dynamic> json) {
-  return _Amenity.fromJson(json);
-}
-
 /// @nodoc
-mixin _$Amenity {
-  String get id => throw _privateConstructorUsedError;
-  String get amenity => throw _privateConstructorUsedError;
-  String? get icon => throw _privateConstructorUsedError;
-  String? get amenityCategoryId => throw _privateConstructorUsedError;
+mixin _$Amenity implements DiagnosticableTreeMixin {
+  String get id;
+  String get amenity;
+  String? get icon;
+  String? get amenityCategoryId;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $AmenityCopyWith<Amenity> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AmenityCopyWith<$Res> {
-  factory $AmenityCopyWith(Amenity value, $Res Function(Amenity) then) =
-      _$AmenityCopyWithImpl<$Res, Amenity>;
-  @useResult
-  $Res call(
-      {String id, String amenity, String? icon, String? amenityCategoryId});
-}
-
-/// @nodoc
-class _$AmenityCopyWithImpl<$Res, $Val extends Amenity>
-    implements $AmenityCopyWith<$Res> {
-  _$AmenityCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Amenity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? amenity = null,
-    Object? icon = freezed,
-    Object? amenityCategoryId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      amenity: null == amenity
-          ? _value.amenity
-          : amenity // ignore: cast_nullable_to_non_nullable
-              as String,
-      icon: freezed == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amenityCategoryId: freezed == amenityCategoryId
-          ? _value.amenityCategoryId
-          : amenityCategoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
+  $AmenityCopyWith<Amenity> get copyWith =>
+      _$AmenityCopyWithImpl<Amenity>(this as Amenity, _$identity);
 
-/// @nodoc
-abstract class _$$AmenityImplCopyWith<$Res> implements $AmenityCopyWith<$Res> {
-  factory _$$AmenityImplCopyWith(
-          _$AmenityImpl value, $Res Function(_$AmenityImpl) then) =
-      __$$AmenityImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id, String amenity, String? icon, String? amenityCategoryId});
-}
-
-/// @nodoc
-class __$$AmenityImplCopyWithImpl<$Res>
-    extends _$AmenityCopyWithImpl<$Res, _$AmenityImpl>
-    implements _$$AmenityImplCopyWith<$Res> {
-  __$$AmenityImplCopyWithImpl(
-      _$AmenityImpl _value, $Res Function(_$AmenityImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? amenity = null,
-    Object? icon = freezed,
-    Object? amenityCategoryId = freezed,
-  }) {
-    return _then(_$AmenityImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      amenity: null == amenity
-          ? _value.amenity
-          : amenity // ignore: cast_nullable_to_non_nullable
-              as String,
-      icon: freezed == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amenityCategoryId: freezed == amenityCategoryId
-          ? _value.amenityCategoryId
-          : amenityCategoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$AmenityImpl with DiagnosticableTreeMixin implements _Amenity {
-  const _$AmenityImpl(
-      {required this.id,
-      required this.amenity,
-      this.icon,
-      this.amenityCategoryId});
-
-  factory _$AmenityImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AmenityImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String amenity;
-  @override
-  final String? icon;
-  @override
-  final String? amenityCategoryId;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Amenity(id: $id, amenity: $amenity, icon: $icon, amenityCategoryId: $amenityCategoryId)';
-  }
+  /// Serializes this Amenity to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Amenity'))
       ..add(DiagnosticsProperty('id', id))
@@ -167,7 +44,7 @@ class _$AmenityImpl with DiagnosticableTreeMixin implements _Amenity {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AmenityImpl &&
+            other is Amenity &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.amenity, amenity) || other.amenity == amenity) &&
             (identical(other.icon, icon) || other.icon == icon) &&
@@ -175,44 +52,178 @@ class _$AmenityImpl with DiagnosticableTreeMixin implements _Amenity {
                 other.amenityCategoryId == amenityCategoryId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, amenity, icon, amenityCategoryId);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AmenityImplCopyWith<_$AmenityImpl> get copyWith =>
-      __$$AmenityImplCopyWithImpl<_$AmenityImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AmenityImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Amenity(id: $id, amenity: $amenity, icon: $icon, amenityCategoryId: $amenityCategoryId)';
   }
 }
 
-abstract class _Amenity implements Amenity {
-  const factory _Amenity(
-      {required final String id,
-      required final String amenity,
-      final String? icon,
-      final String? amenityCategoryId}) = _$AmenityImpl;
-
-  factory _Amenity.fromJson(Map<String, dynamic> json) = _$AmenityImpl.fromJson;
-
-  @override
-  String get id;
-  @override
-  String get amenity;
-  @override
-  String? get icon;
-  @override
-  String? get amenityCategoryId;
-  @override
-  @JsonKey(ignore: true)
-  _$$AmenityImplCopyWith<_$AmenityImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract mixin class $AmenityCopyWith<$Res> {
+  factory $AmenityCopyWith(Amenity value, $Res Function(Amenity) _then) =
+      _$AmenityCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id, String amenity, String? icon, String? amenityCategoryId});
 }
+
+/// @nodoc
+class _$AmenityCopyWithImpl<$Res> implements $AmenityCopyWith<$Res> {
+  _$AmenityCopyWithImpl(this._self, this._then);
+
+  final Amenity _self;
+  final $Res Function(Amenity) _then;
+
+  /// Create a copy of Amenity
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? amenity = null,
+    Object? icon = freezed,
+    Object? amenityCategoryId = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      amenity: null == amenity
+          ? _self.amenity
+          : amenity // ignore: cast_nullable_to_non_nullable
+              as String,
+      icon: freezed == icon
+          ? _self.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amenityCategoryId: freezed == amenityCategoryId
+          ? _self.amenityCategoryId
+          : amenityCategoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Amenity with DiagnosticableTreeMixin implements Amenity {
+  const _Amenity(
+      {required this.id,
+      required this.amenity,
+      this.icon,
+      this.amenityCategoryId});
+  factory _Amenity.fromJson(Map<String, dynamic> json) =>
+      _$AmenityFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String amenity;
+  @override
+  final String? icon;
+  @override
+  final String? amenityCategoryId;
+
+  /// Create a copy of Amenity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AmenityCopyWith<_Amenity> get copyWith =>
+      __$AmenityCopyWithImpl<_Amenity>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AmenityToJson(
+      this,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'Amenity'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('amenity', amenity))
+      ..add(DiagnosticsProperty('icon', icon))
+      ..add(DiagnosticsProperty('amenityCategoryId', amenityCategoryId));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Amenity &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.amenity, amenity) || other.amenity == amenity) &&
+            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.amenityCategoryId, amenityCategoryId) ||
+                other.amenityCategoryId == amenityCategoryId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, amenity, icon, amenityCategoryId);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Amenity(id: $id, amenity: $amenity, icon: $icon, amenityCategoryId: $amenityCategoryId)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AmenityCopyWith<$Res> implements $AmenityCopyWith<$Res> {
+  factory _$AmenityCopyWith(_Amenity value, $Res Function(_Amenity) _then) =
+      __$AmenityCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id, String amenity, String? icon, String? amenityCategoryId});
+}
+
+/// @nodoc
+class __$AmenityCopyWithImpl<$Res> implements _$AmenityCopyWith<$Res> {
+  __$AmenityCopyWithImpl(this._self, this._then);
+
+  final _Amenity _self;
+  final $Res Function(_Amenity) _then;
+
+  /// Create a copy of Amenity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? amenity = null,
+    Object? icon = freezed,
+    Object? amenityCategoryId = freezed,
+  }) {
+    return _then(_Amenity(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      amenity: null == amenity
+          ? _self.amenity
+          : amenity // ignore: cast_nullable_to_non_nullable
+              as String,
+      icon: freezed == icon
+          ? _self.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amenityCategoryId: freezed == amenityCategoryId
+          ? _self.amenityCategoryId
+          : amenityCategoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

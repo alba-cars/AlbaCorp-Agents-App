@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,54 +10,118 @@ part of 'deal_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DealResponse _$DealResponseFromJson(Map<String, dynamic> json) {
-  return _DealResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DealResponse {
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @JsonKey(name: 'reference_number')
-  String get referenceNumber => throw _privateConstructorUsedError;
+  String get referenceNumber;
   @JsonKey(name: 'creation_date')
-  DateTime get creationDate => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
-  List<String> get roleType => throw _privateConstructorUsedError;
+  DateTime get creationDate;
+  String get category;
+  List<String> get roleType;
   @JsonKey(name: 'agreedSalePrice')
-  double get agreedSalePrice => throw _privateConstructorUsedError;
-  double? get agreedCommission => throw _privateConstructorUsedError;
+  double get agreedSalePrice;
+  double? get agreedCommission;
   @JsonKey(name: 'assignedAgent')
-  String? get assignedAgent => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
-  List<String> get rejection => throw _privateConstructorUsedError;
+  String? get assignedAgent;
+  String get status;
+  List<String> get rejection;
   @JsonKey(name: 'user_id')
-  String? get userId => throw _privateConstructorUsedError;
-  bool get active => throw _privateConstructorUsedError;
+  String? get userId;
+  bool get active;
   @JsonKey(name: 'created_by')
-  User get createdBy => throw _privateConstructorUsedError;
+  User get createdBy;
   @JsonKey(name: 'user')
-  Lead? get client => throw _privateConstructorUsedError;
-  Lead? get sellerInternalUser => throw _privateConstructorUsedError;
-  Lead? get buyerInternalUser => throw _privateConstructorUsedError;
-  Agency? get buyerExternalUser => throw _privateConstructorUsedError;
-  Agency? get sellerExternalUser => throw _privateConstructorUsedError;
+  Lead? get client;
+  Lead? get sellerInternalUser;
+  Lead? get buyerInternalUser;
+  Agency? get buyerExternalUser;
+  Agency? get sellerExternalUser;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DealResponseCopyWith<DealResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$DealResponseCopyWithImpl<DealResponse>(
+          this as DealResponse, _$identity);
+
+  /// Serializes this DealResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DealResponse &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.referenceNumber, referenceNumber) ||
+                other.referenceNumber == referenceNumber) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            const DeepCollectionEquality().equals(other.roleType, roleType) &&
+            (identical(other.agreedSalePrice, agreedSalePrice) ||
+                other.agreedSalePrice == agreedSalePrice) &&
+            (identical(other.agreedCommission, agreedCommission) ||
+                other.agreedCommission == agreedCommission) &&
+            (identical(other.assignedAgent, assignedAgent) ||
+                other.assignedAgent == assignedAgent) &&
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other.rejection, rejection) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.active, active) || other.active == active) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.client, client) || other.client == client) &&
+            (identical(other.sellerInternalUser, sellerInternalUser) ||
+                other.sellerInternalUser == sellerInternalUser) &&
+            (identical(other.buyerInternalUser, buyerInternalUser) ||
+                other.buyerInternalUser == buyerInternalUser) &&
+            (identical(other.buyerExternalUser, buyerExternalUser) ||
+                other.buyerExternalUser == buyerExternalUser) &&
+            (identical(other.sellerExternalUser, sellerExternalUser) ||
+                other.sellerExternalUser == sellerExternalUser));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      referenceNumber,
+      creationDate,
+      category,
+      const DeepCollectionEquality().hash(roleType),
+      agreedSalePrice,
+      agreedCommission,
+      assignedAgent,
+      status,
+      const DeepCollectionEquality().hash(rejection),
+      userId,
+      active,
+      createdBy,
+      client,
+      sellerInternalUser,
+      buyerInternalUser,
+      buyerExternalUser,
+      sellerExternalUser);
+
+  @override
+  String toString() {
+    return 'DealResponse(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, status: $status, rejection: $rejection, userId: $userId, active: $active, createdBy: $createdBy, client: $client, sellerInternalUser: $sellerInternalUser, buyerInternalUser: $buyerInternalUser, buyerExternalUser: $buyerExternalUser, sellerExternalUser: $sellerExternalUser)';
+  }
 }
 
 /// @nodoc
-abstract class $DealResponseCopyWith<$Res> {
+abstract mixin class $DealResponseCopyWith<$Res> {
   factory $DealResponseCopyWith(
-          DealResponse value, $Res Function(DealResponse) then) =
-      _$DealResponseCopyWithImpl<$Res, DealResponse>;
+          DealResponse value, $Res Function(DealResponse) _then) =
+      _$DealResponseCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -87,15 +152,14 @@ abstract class $DealResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DealResponseCopyWithImpl<$Res, $Val extends DealResponse>
-    implements $DealResponseCopyWith<$Res> {
-  _$DealResponseCopyWithImpl(this._value, this._then);
+class _$DealResponseCopyWithImpl<$Res> implements $DealResponseCopyWith<$Res> {
+  _$DealResponseCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DealResponse _self;
+  final $Res Function(DealResponse) _then;
 
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,304 +182,167 @@ class _$DealResponseCopyWithImpl<$Res, $Val extends DealResponse>
     Object? buyerExternalUser = freezed,
     Object? sellerExternalUser = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       referenceNumber: null == referenceNumber
-          ? _value.referenceNumber
+          ? _self.referenceNumber
           : referenceNumber // ignore: cast_nullable_to_non_nullable
               as String,
       creationDate: null == creationDate
-          ? _value.creationDate
+          ? _self.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       category: null == category
-          ? _value.category
+          ? _self.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
       roleType: null == roleType
-          ? _value.roleType
+          ? _self.roleType
           : roleType // ignore: cast_nullable_to_non_nullable
               as List<String>,
       agreedSalePrice: null == agreedSalePrice
-          ? _value.agreedSalePrice
+          ? _self.agreedSalePrice
           : agreedSalePrice // ignore: cast_nullable_to_non_nullable
               as double,
       agreedCommission: freezed == agreedCommission
-          ? _value.agreedCommission
+          ? _self.agreedCommission
           : agreedCommission // ignore: cast_nullable_to_non_nullable
               as double?,
       assignedAgent: freezed == assignedAgent
-          ? _value.assignedAgent
+          ? _self.assignedAgent
           : assignedAgent // ignore: cast_nullable_to_non_nullable
               as String?,
       status: null == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
       rejection: null == rejection
-          ? _value.rejection
+          ? _self.rejection
           : rejection // ignore: cast_nullable_to_non_nullable
               as List<String>,
       userId: freezed == userId
-          ? _value.userId
+          ? _self.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       active: null == active
-          ? _value.active
+          ? _self.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
       createdBy: null == createdBy
-          ? _value.createdBy
+          ? _self.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as User,
       client: freezed == client
-          ? _value.client
+          ? _self.client
           : client // ignore: cast_nullable_to_non_nullable
               as Lead?,
       sellerInternalUser: freezed == sellerInternalUser
-          ? _value.sellerInternalUser
+          ? _self.sellerInternalUser
           : sellerInternalUser // ignore: cast_nullable_to_non_nullable
               as Lead?,
       buyerInternalUser: freezed == buyerInternalUser
-          ? _value.buyerInternalUser
+          ? _self.buyerInternalUser
           : buyerInternalUser // ignore: cast_nullable_to_non_nullable
               as Lead?,
       buyerExternalUser: freezed == buyerExternalUser
-          ? _value.buyerExternalUser
+          ? _self.buyerExternalUser
           : buyerExternalUser // ignore: cast_nullable_to_non_nullable
               as Agency?,
       sellerExternalUser: freezed == sellerExternalUser
-          ? _value.sellerExternalUser
-          : sellerExternalUser // ignore: cast_nullable_to_non_nullable
-              as Agency?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get createdBy {
-    return $UserCopyWith<$Res>(_value.createdBy, (value) {
-      return _then(_value.copyWith(createdBy: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LeadCopyWith<$Res>? get client {
-    if (_value.client == null) {
-      return null;
-    }
-
-    return $LeadCopyWith<$Res>(_value.client!, (value) {
-      return _then(_value.copyWith(client: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LeadCopyWith<$Res>? get sellerInternalUser {
-    if (_value.sellerInternalUser == null) {
-      return null;
-    }
-
-    return $LeadCopyWith<$Res>(_value.sellerInternalUser!, (value) {
-      return _then(_value.copyWith(sellerInternalUser: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LeadCopyWith<$Res>? get buyerInternalUser {
-    if (_value.buyerInternalUser == null) {
-      return null;
-    }
-
-    return $LeadCopyWith<$Res>(_value.buyerInternalUser!, (value) {
-      return _then(_value.copyWith(buyerInternalUser: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AgencyCopyWith<$Res>? get buyerExternalUser {
-    if (_value.buyerExternalUser == null) {
-      return null;
-    }
-
-    return $AgencyCopyWith<$Res>(_value.buyerExternalUser!, (value) {
-      return _then(_value.copyWith(buyerExternalUser: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AgencyCopyWith<$Res>? get sellerExternalUser {
-    if (_value.sellerExternalUser == null) {
-      return null;
-    }
-
-    return $AgencyCopyWith<$Res>(_value.sellerExternalUser!, (value) {
-      return _then(_value.copyWith(sellerExternalUser: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$DealResponseImplCopyWith<$Res>
-    implements $DealResponseCopyWith<$Res> {
-  factory _$$DealResponseImplCopyWith(
-          _$DealResponseImpl value, $Res Function(_$DealResponseImpl) then) =
-      __$$DealResponseImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      @JsonKey(name: 'reference_number') String referenceNumber,
-      @JsonKey(name: 'creation_date') DateTime creationDate,
-      String category,
-      List<String> roleType,
-      @JsonKey(name: 'agreedSalePrice') double agreedSalePrice,
-      double? agreedCommission,
-      @JsonKey(name: 'assignedAgent') String? assignedAgent,
-      String status,
-      List<String> rejection,
-      @JsonKey(name: 'user_id') String? userId,
-      bool active,
-      @JsonKey(name: 'created_by') User createdBy,
-      @JsonKey(name: 'user') Lead? client,
-      Lead? sellerInternalUser,
-      Lead? buyerInternalUser,
-      Agency? buyerExternalUser,
-      Agency? sellerExternalUser});
-
-  @override
-  $UserCopyWith<$Res> get createdBy;
-  @override
-  $LeadCopyWith<$Res>? get client;
-  @override
-  $LeadCopyWith<$Res>? get sellerInternalUser;
-  @override
-  $LeadCopyWith<$Res>? get buyerInternalUser;
-  @override
-  $AgencyCopyWith<$Res>? get buyerExternalUser;
-  @override
-  $AgencyCopyWith<$Res>? get sellerExternalUser;
-}
-
-/// @nodoc
-class __$$DealResponseImplCopyWithImpl<$Res>
-    extends _$DealResponseCopyWithImpl<$Res, _$DealResponseImpl>
-    implements _$$DealResponseImplCopyWith<$Res> {
-  __$$DealResponseImplCopyWithImpl(
-      _$DealResponseImpl _value, $Res Function(_$DealResponseImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? referenceNumber = null,
-    Object? creationDate = null,
-    Object? category = null,
-    Object? roleType = null,
-    Object? agreedSalePrice = null,
-    Object? agreedCommission = freezed,
-    Object? assignedAgent = freezed,
-    Object? status = null,
-    Object? rejection = null,
-    Object? userId = freezed,
-    Object? active = null,
-    Object? createdBy = null,
-    Object? client = freezed,
-    Object? sellerInternalUser = freezed,
-    Object? buyerInternalUser = freezed,
-    Object? buyerExternalUser = freezed,
-    Object? sellerExternalUser = freezed,
-  }) {
-    return _then(_$DealResponseImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      referenceNumber: null == referenceNumber
-          ? _value.referenceNumber
-          : referenceNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      creationDate: null == creationDate
-          ? _value.creationDate
-          : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-      roleType: null == roleType
-          ? _value._roleType
-          : roleType // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      agreedSalePrice: null == agreedSalePrice
-          ? _value.agreedSalePrice
-          : agreedSalePrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      agreedCommission: freezed == agreedCommission
-          ? _value.agreedCommission
-          : agreedCommission // ignore: cast_nullable_to_non_nullable
-              as double?,
-      assignedAgent: freezed == assignedAgent
-          ? _value.assignedAgent
-          : assignedAgent // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      rejection: null == rejection
-          ? _value._rejection
-          : rejection // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as User,
-      client: freezed == client
-          ? _value.client
-          : client // ignore: cast_nullable_to_non_nullable
-              as Lead?,
-      sellerInternalUser: freezed == sellerInternalUser
-          ? _value.sellerInternalUser
-          : sellerInternalUser // ignore: cast_nullable_to_non_nullable
-              as Lead?,
-      buyerInternalUser: freezed == buyerInternalUser
-          ? _value.buyerInternalUser
-          : buyerInternalUser // ignore: cast_nullable_to_non_nullable
-              as Lead?,
-      buyerExternalUser: freezed == buyerExternalUser
-          ? _value.buyerExternalUser
-          : buyerExternalUser // ignore: cast_nullable_to_non_nullable
-              as Agency?,
-      sellerExternalUser: freezed == sellerExternalUser
-          ? _value.sellerExternalUser
+          ? _self.sellerExternalUser
           : sellerExternalUser // ignore: cast_nullable_to_non_nullable
               as Agency?,
     ));
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get createdBy {
+    return $UserCopyWith<$Res>(_self.createdBy, (value) {
+      return _then(_self.copyWith(createdBy: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get client {
+    if (_self.client == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.client!, (value) {
+      return _then(_self.copyWith(client: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get sellerInternalUser {
+    if (_self.sellerInternalUser == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.sellerInternalUser!, (value) {
+      return _then(_self.copyWith(sellerInternalUser: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get buyerInternalUser {
+    if (_self.buyerInternalUser == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.buyerInternalUser!, (value) {
+      return _then(_self.copyWith(buyerInternalUser: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AgencyCopyWith<$Res>? get buyerExternalUser {
+    if (_self.buyerExternalUser == null) {
+      return null;
+    }
+
+    return $AgencyCopyWith<$Res>(_self.buyerExternalUser!, (value) {
+      return _then(_self.copyWith(buyerExternalUser: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AgencyCopyWith<$Res>? get sellerExternalUser {
+    if (_self.sellerExternalUser == null) {
+      return null;
+    }
+
+    return $AgencyCopyWith<$Res>(_self.sellerExternalUser!, (value) {
+      return _then(_self.copyWith(sellerExternalUser: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DealResponseImpl implements _DealResponse {
-  _$DealResponseImpl(
+class _DealResponse implements DealResponse {
+  _DealResponse(
       {required this.id,
       @JsonKey(name: 'reference_number') required this.referenceNumber,
       @JsonKey(name: 'creation_date') required this.creationDate,
@@ -436,9 +363,8 @@ class _$DealResponseImpl implements _DealResponse {
       this.sellerExternalUser})
       : _roleType = roleType,
         _rejection = rejection;
-
-  factory _$DealResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DealResponseImplFromJson(json);
+  factory _DealResponse.fromJson(Map<String, dynamic> json) =>
+      _$DealResponseFromJson(json);
 
   @override
   final String id;
@@ -498,16 +424,26 @@ class _$DealResponseImpl implements _DealResponse {
   @override
   final Agency? sellerExternalUser;
 
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DealResponse(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, status: $status, rejection: $rejection, userId: $userId, active: $active, createdBy: $createdBy, client: $client, sellerInternalUser: $sellerInternalUser, buyerInternalUser: $buyerInternalUser, buyerExternalUser: $buyerExternalUser, sellerExternalUser: $sellerExternalUser)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DealResponseCopyWith<_DealResponse> get copyWith =>
+      __$DealResponseCopyWithImpl<_DealResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DealResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DealResponseImpl &&
+            other is _DealResponse &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.referenceNumber, referenceNumber) ||
                 other.referenceNumber == referenceNumber) &&
@@ -540,7 +476,7 @@ class _$DealResponseImpl implements _DealResponse {
                 other.sellerExternalUser == sellerExternalUser));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -563,89 +499,241 @@ class _$DealResponseImpl implements _DealResponse {
       buyerExternalUser,
       sellerExternalUser);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DealResponseImplCopyWith<_$DealResponseImpl> get copyWith =>
-      __$$DealResponseImplCopyWithImpl<_$DealResponseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DealResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DealResponse(id: $id, referenceNumber: $referenceNumber, creationDate: $creationDate, category: $category, roleType: $roleType, agreedSalePrice: $agreedSalePrice, agreedCommission: $agreedCommission, assignedAgent: $assignedAgent, status: $status, rejection: $rejection, userId: $userId, active: $active, createdBy: $createdBy, client: $client, sellerInternalUser: $sellerInternalUser, buyerInternalUser: $buyerInternalUser, buyerExternalUser: $buyerExternalUser, sellerExternalUser: $sellerExternalUser)';
   }
 }
 
-abstract class _DealResponse implements DealResponse {
-  factory _DealResponse(
-      {required final String id,
-      @JsonKey(name: 'reference_number') required final String referenceNumber,
-      @JsonKey(name: 'creation_date') required final DateTime creationDate,
-      required final String category,
-      final List<String> roleType,
-      @JsonKey(name: 'agreedSalePrice') required final double agreedSalePrice,
-      final double? agreedCommission,
-      @JsonKey(name: 'assignedAgent') final String? assignedAgent,
-      required final String status,
-      final List<String> rejection,
-      @JsonKey(name: 'user_id') final String? userId,
-      required final bool active,
-      @JsonKey(name: 'created_by') required final User createdBy,
-      @JsonKey(name: 'user') final Lead? client,
-      final Lead? sellerInternalUser,
-      final Lead? buyerInternalUser,
-      final Agency? buyerExternalUser,
-      final Agency? sellerExternalUser}) = _$DealResponseImpl;
+/// @nodoc
+abstract mixin class _$DealResponseCopyWith<$Res>
+    implements $DealResponseCopyWith<$Res> {
+  factory _$DealResponseCopyWith(
+          _DealResponse value, $Res Function(_DealResponse) _then) =
+      __$DealResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @JsonKey(name: 'reference_number') String referenceNumber,
+      @JsonKey(name: 'creation_date') DateTime creationDate,
+      String category,
+      List<String> roleType,
+      @JsonKey(name: 'agreedSalePrice') double agreedSalePrice,
+      double? agreedCommission,
+      @JsonKey(name: 'assignedAgent') String? assignedAgent,
+      String status,
+      List<String> rejection,
+      @JsonKey(name: 'user_id') String? userId,
+      bool active,
+      @JsonKey(name: 'created_by') User createdBy,
+      @JsonKey(name: 'user') Lead? client,
+      Lead? sellerInternalUser,
+      Lead? buyerInternalUser,
+      Agency? buyerExternalUser,
+      Agency? sellerExternalUser});
 
-  factory _DealResponse.fromJson(Map<String, dynamic> json) =
-      _$DealResponseImpl.fromJson;
-
   @override
-  String get id;
+  $UserCopyWith<$Res> get createdBy;
   @override
-  @JsonKey(name: 'reference_number')
-  String get referenceNumber;
+  $LeadCopyWith<$Res>? get client;
   @override
-  @JsonKey(name: 'creation_date')
-  DateTime get creationDate;
+  $LeadCopyWith<$Res>? get sellerInternalUser;
   @override
-  String get category;
+  $LeadCopyWith<$Res>? get buyerInternalUser;
   @override
-  List<String> get roleType;
+  $AgencyCopyWith<$Res>? get buyerExternalUser;
   @override
-  @JsonKey(name: 'agreedSalePrice')
-  double get agreedSalePrice;
-  @override
-  double? get agreedCommission;
-  @override
-  @JsonKey(name: 'assignedAgent')
-  String? get assignedAgent;
-  @override
-  String get status;
-  @override
-  List<String> get rejection;
-  @override
-  @JsonKey(name: 'user_id')
-  String? get userId;
-  @override
-  bool get active;
-  @override
-  @JsonKey(name: 'created_by')
-  User get createdBy;
-  @override
-  @JsonKey(name: 'user')
-  Lead? get client;
-  @override
-  Lead? get sellerInternalUser;
-  @override
-  Lead? get buyerInternalUser;
-  @override
-  Agency? get buyerExternalUser;
-  @override
-  Agency? get sellerExternalUser;
-  @override
-  @JsonKey(ignore: true)
-  _$$DealResponseImplCopyWith<_$DealResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AgencyCopyWith<$Res>? get sellerExternalUser;
 }
+
+/// @nodoc
+class __$DealResponseCopyWithImpl<$Res>
+    implements _$DealResponseCopyWith<$Res> {
+  __$DealResponseCopyWithImpl(this._self, this._then);
+
+  final _DealResponse _self;
+  final $Res Function(_DealResponse) _then;
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? referenceNumber = null,
+    Object? creationDate = null,
+    Object? category = null,
+    Object? roleType = null,
+    Object? agreedSalePrice = null,
+    Object? agreedCommission = freezed,
+    Object? assignedAgent = freezed,
+    Object? status = null,
+    Object? rejection = null,
+    Object? userId = freezed,
+    Object? active = null,
+    Object? createdBy = null,
+    Object? client = freezed,
+    Object? sellerInternalUser = freezed,
+    Object? buyerInternalUser = freezed,
+    Object? buyerExternalUser = freezed,
+    Object? sellerExternalUser = freezed,
+  }) {
+    return _then(_DealResponse(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      referenceNumber: null == referenceNumber
+          ? _self.referenceNumber
+          : referenceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      creationDate: null == creationDate
+          ? _self.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      category: null == category
+          ? _self.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      roleType: null == roleType
+          ? _self._roleType
+          : roleType // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      agreedSalePrice: null == agreedSalePrice
+          ? _self.agreedSalePrice
+          : agreedSalePrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      agreedCommission: freezed == agreedCommission
+          ? _self.agreedCommission
+          : agreedCommission // ignore: cast_nullable_to_non_nullable
+              as double?,
+      assignedAgent: freezed == assignedAgent
+          ? _self.assignedAgent
+          : assignedAgent // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      rejection: null == rejection
+          ? _self._rejection
+          : rejection // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      userId: freezed == userId
+          ? _self.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      active: null == active
+          ? _self.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdBy: null == createdBy
+          ? _self.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as User,
+      client: freezed == client
+          ? _self.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      sellerInternalUser: freezed == sellerInternalUser
+          ? _self.sellerInternalUser
+          : sellerInternalUser // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      buyerInternalUser: freezed == buyerInternalUser
+          ? _self.buyerInternalUser
+          : buyerInternalUser // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      buyerExternalUser: freezed == buyerExternalUser
+          ? _self.buyerExternalUser
+          : buyerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
+      sellerExternalUser: freezed == sellerExternalUser
+          ? _self.sellerExternalUser
+          : sellerExternalUser // ignore: cast_nullable_to_non_nullable
+              as Agency?,
+    ));
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get createdBy {
+    return $UserCopyWith<$Res>(_self.createdBy, (value) {
+      return _then(_self.copyWith(createdBy: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get client {
+    if (_self.client == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.client!, (value) {
+      return _then(_self.copyWith(client: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get sellerInternalUser {
+    if (_self.sellerInternalUser == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.sellerInternalUser!, (value) {
+      return _then(_self.copyWith(sellerInternalUser: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get buyerInternalUser {
+    if (_self.buyerInternalUser == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.buyerInternalUser!, (value) {
+      return _then(_self.copyWith(buyerInternalUser: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AgencyCopyWith<$Res>? get buyerExternalUser {
+    if (_self.buyerExternalUser == null) {
+      return null;
+    }
+
+    return $AgencyCopyWith<$Res>(_self.buyerExternalUser!, (value) {
+      return _then(_self.copyWith(buyerExternalUser: value));
+    });
+  }
+
+  /// Create a copy of DealResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AgencyCopyWith<$Res>? get sellerExternalUser {
+    if (_self.sellerExternalUser == null) {
+      return null;
+    }
+
+    return $AgencyCopyWith<$Res>(_self.sellerExternalUser!, (value) {
+      return _then(_self.copyWith(sellerExternalUser: value));
+    });
+  }
+}
+
+// dart format on

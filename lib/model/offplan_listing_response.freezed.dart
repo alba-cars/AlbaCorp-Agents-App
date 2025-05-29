@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,249 +10,37 @@ part of 'offplan_listing_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DealListingResponse _$DealListingResponseFromJson(Map<String, dynamic> json) {
-  return _DealListingResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DealListingResponse {
-  String get id => throw _privateConstructorUsedError;
-  String get propertyType => throw _privateConstructorUsedError;
-  String get beds => throw _privateConstructorUsedError;
-  String get baths => throw _privateConstructorUsedError;
-  int? get size => throw _privateConstructorUsedError;
-  Community? get community => throw _privateConstructorUsedError;
-  double get agreedSalesPrice => throw _privateConstructorUsedError;
+  String get id;
+  String? get propertyType;
+  String? get beds;
+  String? get baths;
+  int? get size;
+  Community? get community;
+  double get agreedSalesPrice;
   @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
-  double get agreedCommission => throw _privateConstructorUsedError;
+  double get agreedCommission;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of DealListingResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DealListingResponseCopyWith<DealListingResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$DealListingResponseCopyWithImpl<DealListingResponse>(
+          this as DealListingResponse, _$identity);
 
-/// @nodoc
-abstract class $DealListingResponseCopyWith<$Res> {
-  factory $DealListingResponseCopyWith(
-          DealListingResponse value, $Res Function(DealListingResponse) then) =
-      _$DealListingResponseCopyWithImpl<$Res, DealListingResponse>;
-  @useResult
-  $Res call(
-      {String id,
-      String propertyType,
-      String beds,
-      String baths,
-      int? size,
-      Community? community,
-      double agreedSalesPrice,
-      @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
-      double agreedCommission});
-
-  $CommunityCopyWith<$Res>? get community;
-}
-
-/// @nodoc
-class _$DealListingResponseCopyWithImpl<$Res, $Val extends DealListingResponse>
-    implements $DealListingResponseCopyWith<$Res> {
-  _$DealListingResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? propertyType = null,
-    Object? beds = null,
-    Object? baths = null,
-    Object? size = freezed,
-    Object? community = freezed,
-    Object? agreedSalesPrice = null,
-    Object? agreedCommission = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      propertyType: null == propertyType
-          ? _value.propertyType
-          : propertyType // ignore: cast_nullable_to_non_nullable
-              as String,
-      beds: null == beds
-          ? _value.beds
-          : beds // ignore: cast_nullable_to_non_nullable
-              as String,
-      baths: null == baths
-          ? _value.baths
-          : baths // ignore: cast_nullable_to_non_nullable
-              as String,
-      size: freezed == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as int?,
-      community: freezed == community
-          ? _value.community
-          : community // ignore: cast_nullable_to_non_nullable
-              as Community?,
-      agreedSalesPrice: null == agreedSalesPrice
-          ? _value.agreedSalesPrice
-          : agreedSalesPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      agreedCommission: null == agreedCommission
-          ? _value.agreedCommission
-          : agreedCommission // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CommunityCopyWith<$Res>? get community {
-    if (_value.community == null) {
-      return null;
-    }
-
-    return $CommunityCopyWith<$Res>(_value.community!, (value) {
-      return _then(_value.copyWith(community: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$DealListingResponseImplCopyWith<$Res>
-    implements $DealListingResponseCopyWith<$Res> {
-  factory _$$DealListingResponseImplCopyWith(_$DealListingResponseImpl value,
-          $Res Function(_$DealListingResponseImpl) then) =
-      __$$DealListingResponseImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String propertyType,
-      String beds,
-      String baths,
-      int? size,
-      Community? community,
-      double agreedSalesPrice,
-      @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
-      double agreedCommission});
-
-  @override
-  $CommunityCopyWith<$Res>? get community;
-}
-
-/// @nodoc
-class __$$DealListingResponseImplCopyWithImpl<$Res>
-    extends _$DealListingResponseCopyWithImpl<$Res, _$DealListingResponseImpl>
-    implements _$$DealListingResponseImplCopyWith<$Res> {
-  __$$DealListingResponseImplCopyWithImpl(_$DealListingResponseImpl _value,
-      $Res Function(_$DealListingResponseImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? propertyType = null,
-    Object? beds = null,
-    Object? baths = null,
-    Object? size = freezed,
-    Object? community = freezed,
-    Object? agreedSalesPrice = null,
-    Object? agreedCommission = null,
-  }) {
-    return _then(_$DealListingResponseImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      propertyType: null == propertyType
-          ? _value.propertyType
-          : propertyType // ignore: cast_nullable_to_non_nullable
-              as String,
-      beds: null == beds
-          ? _value.beds
-          : beds // ignore: cast_nullable_to_non_nullable
-              as String,
-      baths: null == baths
-          ? _value.baths
-          : baths // ignore: cast_nullable_to_non_nullable
-              as String,
-      size: freezed == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as int?,
-      community: freezed == community
-          ? _value.community
-          : community // ignore: cast_nullable_to_non_nullable
-              as Community?,
-      agreedSalesPrice: null == agreedSalesPrice
-          ? _value.agreedSalesPrice
-          : agreedSalesPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      agreedCommission: null == agreedCommission
-          ? _value.agreedCommission
-          : agreedCommission // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$DealListingResponseImpl implements _DealListingResponse {
-  _$DealListingResponseImpl(
-      {required this.id,
-      required this.propertyType,
-      required this.beds,
-      required this.baths,
-      required this.size,
-      this.community,
-      required this.agreedSalesPrice,
-      @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
-      required this.agreedCommission});
-
-  factory _$DealListingResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DealListingResponseImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String propertyType;
-  @override
-  final String beds;
-  @override
-  final String baths;
-  @override
-  final int? size;
-  @override
-  final Community? community;
-  @override
-  final double agreedSalesPrice;
-  @override
-  @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
-  final double agreedCommission;
-
-  @override
-  String toString() {
-    return 'DealListingResponse(id: $id, propertyType: $propertyType, beds: $beds, baths: $baths, size: $size, community: $community, agreedSalesPrice: $agreedSalesPrice, agreedCommission: $agreedCommission)';
-  }
+  /// Serializes this DealListingResponse to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DealListingResponseImpl &&
+            other is DealListingResponse &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.propertyType, propertyType) ||
                 other.propertyType == propertyType) &&
@@ -266,60 +55,284 @@ class _$DealListingResponseImpl implements _DealListingResponse {
                 other.agreedCommission == agreedCommission));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, propertyType, beds, baths,
       size, community, agreedSalesPrice, agreedCommission);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'DealListingResponse(id: $id, propertyType: $propertyType, beds: $beds, baths: $baths, size: $size, community: $community, agreedSalesPrice: $agreedSalesPrice, agreedCommission: $agreedCommission)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DealListingResponseCopyWith<$Res> {
+  factory $DealListingResponseCopyWith(
+          DealListingResponse value, $Res Function(DealListingResponse) _then) =
+      _$DealListingResponseCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      String? propertyType,
+      String? beds,
+      String? baths,
+      int? size,
+      Community? community,
+      double agreedSalesPrice,
+      @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
+      double agreedCommission});
+
+  $CommunityCopyWith<$Res>? get community;
+}
+
+/// @nodoc
+class _$DealListingResponseCopyWithImpl<$Res>
+    implements $DealListingResponseCopyWith<$Res> {
+  _$DealListingResponseCopyWithImpl(this._self, this._then);
+
+  final DealListingResponse _self;
+  final $Res Function(DealListingResponse) _then;
+
+  /// Create a copy of DealListingResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? propertyType = freezed,
+    Object? beds = freezed,
+    Object? baths = freezed,
+    Object? size = freezed,
+    Object? community = freezed,
+    Object? agreedSalesPrice = null,
+    Object? agreedCommission = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      propertyType: freezed == propertyType
+          ? _self.propertyType
+          : propertyType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      beds: freezed == beds
+          ? _self.beds
+          : beds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      baths: freezed == baths
+          ? _self.baths
+          : baths // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _self.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      community: freezed == community
+          ? _self.community
+          : community // ignore: cast_nullable_to_non_nullable
+              as Community?,
+      agreedSalesPrice: null == agreedSalesPrice
+          ? _self.agreedSalesPrice
+          : agreedSalesPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      agreedCommission: null == agreedCommission
+          ? _self.agreedCommission
+          : agreedCommission // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+
+  /// Create a copy of DealListingResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$DealListingResponseImplCopyWith<_$DealListingResponseImpl> get copyWith =>
-      __$$DealListingResponseImplCopyWithImpl<_$DealListingResponseImpl>(
+  $CommunityCopyWith<$Res>? get community {
+    if (_self.community == null) {
+      return null;
+    }
+
+    return $CommunityCopyWith<$Res>(_self.community!, (value) {
+      return _then(_self.copyWith(community: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _DealListingResponse implements DealListingResponse {
+  _DealListingResponse(
+      {required this.id,
+      required this.propertyType,
+      required this.beds,
+      required this.baths,
+      required this.size,
+      this.community,
+      required this.agreedSalesPrice,
+      @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
+      required this.agreedCommission});
+  factory _DealListingResponse.fromJson(Map<String, dynamic> json) =>
+      _$DealListingResponseFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String? propertyType;
+  @override
+  final String? beds;
+  @override
+  final String? baths;
+  @override
+  final int? size;
+  @override
+  final Community? community;
+  @override
+  final double agreedSalesPrice;
+  @override
+  @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
+  final double agreedCommission;
+
+  /// Create a copy of DealListingResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DealListingResponseCopyWith<_DealListingResponse> get copyWith =>
+      __$DealListingResponseCopyWithImpl<_DealListingResponse>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DealListingResponseImplToJson(
+    return _$DealListingResponseToJson(
       this,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DealListingResponse &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.propertyType, propertyType) ||
+                other.propertyType == propertyType) &&
+            (identical(other.beds, beds) || other.beds == beds) &&
+            (identical(other.baths, baths) || other.baths == baths) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.community, community) ||
+                other.community == community) &&
+            (identical(other.agreedSalesPrice, agreedSalesPrice) ||
+                other.agreedSalesPrice == agreedSalesPrice) &&
+            (identical(other.agreedCommission, agreedCommission) ||
+                other.agreedCommission == agreedCommission));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, propertyType, beds, baths,
+      size, community, agreedSalesPrice, agreedCommission);
+
+  @override
+  String toString() {
+    return 'DealListingResponse(id: $id, propertyType: $propertyType, beds: $beds, baths: $baths, size: $size, community: $community, agreedSalesPrice: $agreedSalesPrice, agreedCommission: $agreedCommission)';
+  }
 }
 
-abstract class _DealListingResponse implements DealListingResponse {
-  factory _DealListingResponse(
-      {required final String id,
-      required final String propertyType,
-      required final String beds,
-      required final String baths,
-      required final int? size,
-      final Community? community,
-      required final double agreedSalesPrice,
+/// @nodoc
+abstract mixin class _$DealListingResponseCopyWith<$Res>
+    implements $DealListingResponseCopyWith<$Res> {
+  factory _$DealListingResponseCopyWith(_DealListingResponse value,
+          $Res Function(_DealListingResponse) _then) =
+      __$DealListingResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String? propertyType,
+      String? beds,
+      String? baths,
+      int? size,
+      Community? community,
+      double agreedSalesPrice,
       @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
-      required final double agreedCommission}) = _$DealListingResponseImpl;
-
-  factory _DealListingResponse.fromJson(Map<String, dynamic> json) =
-      _$DealListingResponseImpl.fromJson;
+      double agreedCommission});
 
   @override
-  String get id;
-  @override
-  String get propertyType;
-  @override
-  String get beds;
-  @override
-  String get baths;
-  @override
-  int? get size;
-  @override
-  Community? get community;
-  @override
-  double get agreedSalesPrice;
-  @override
-  @JsonKey(fromJson: _stringToDouble, toJson: _stringFromDouble)
-  double get agreedCommission;
-  @override
-  @JsonKey(ignore: true)
-  _$$DealListingResponseImplCopyWith<_$DealListingResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CommunityCopyWith<$Res>? get community;
 }
+
+/// @nodoc
+class __$DealListingResponseCopyWithImpl<$Res>
+    implements _$DealListingResponseCopyWith<$Res> {
+  __$DealListingResponseCopyWithImpl(this._self, this._then);
+
+  final _DealListingResponse _self;
+  final $Res Function(_DealListingResponse) _then;
+
+  /// Create a copy of DealListingResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? propertyType = freezed,
+    Object? beds = freezed,
+    Object? baths = freezed,
+    Object? size = freezed,
+    Object? community = freezed,
+    Object? agreedSalesPrice = null,
+    Object? agreedCommission = null,
+  }) {
+    return _then(_DealListingResponse(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      propertyType: freezed == propertyType
+          ? _self.propertyType
+          : propertyType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      beds: freezed == beds
+          ? _self.beds
+          : beds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      baths: freezed == baths
+          ? _self.baths
+          : baths // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _self.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      community: freezed == community
+          ? _self.community
+          : community // ignore: cast_nullable_to_non_nullable
+              as Community?,
+      agreedSalesPrice: null == agreedSalesPrice
+          ? _self.agreedSalesPrice
+          : agreedSalesPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      agreedCommission: null == agreedCommission
+          ? _self.agreedCommission
+          : agreedCommission // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+
+  /// Create a copy of DealListingResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CommunityCopyWith<$Res>? get community {
+    if (_self.community == null) {
+      return null;
+    }
+
+    return $CommunityCopyWith<$Res>(_self.community!, (value) {
+      return _then(_self.copyWith(community: value));
+    });
+  }
+}
+
+// dart format on

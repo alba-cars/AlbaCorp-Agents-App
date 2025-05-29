@@ -6,8 +6,7 @@ part of 'activity_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ActivityImpl _$$ActivityImplFromJson(Map<String, dynamic> json) =>
-    _$ActivityImpl(
+_Activity _$ActivityFromJson(Map<String, dynamic> json) => _Activity(
       id: json['id'] as String,
       userId: readUserId(json, 'userId') as String,
       propertyListId: readPropertyListId(json, 'propertyListId') as String?,
@@ -48,8 +47,7 @@ _$ActivityImpl _$$ActivityImplFromJson(Map<String, dynamic> json) =>
       transcript: json['transcript'] as String?,
     );
 
-Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ActivityToJson(_Activity instance) => <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
       'propertyListId': instance.propertyListId,

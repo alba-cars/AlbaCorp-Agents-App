@@ -9,7 +9,7 @@ enum DealPurpose { rent, sale }
 enum PageType { selection, fields }
 
 @freezed
-class AddDealState with _$AddDealState {
+abstract class AddDealState with _$AddDealState {
   const factory AddDealState({
     DealResponse? dealResponse,
     @Default(AppStatus.init) AppStatus addDealStatus,

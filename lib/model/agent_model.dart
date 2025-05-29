@@ -8,7 +8,7 @@ part 'agent_model.freezed.dart';
 part 'agent_model.g.dart';
 
 @freezed
-class Agent with _$Agent {
+abstract class Agent with _$Agent {
   const factory Agent({
     @JsonKey(readValue: readId) required String id,
     @JsonKey(readValue: userIdFromJson) required String userId,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,115 +10,72 @@ part of 'building_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Building _$BuildingFromJson(Map<String, dynamic> json) {
-  return _Building.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Building {
   @JsonKey(readValue: readId)
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get buildingNumber => throw _privateConstructorUsedError;
-  String? get communityId => throw _privateConstructorUsedError;
-  int? get floors => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
-  String? get createdBy => throw _privateConstructorUsedError;
-  List<dynamic>? get distances => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String? get buildingNumber;
+  String? get communityId;
+  int? get floors;
+  String? get type;
+  String? get createdBy;
+  List<dynamic>? get distances;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $BuildingCopyWith<Building> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $BuildingCopyWith<$Res> {
-  factory $BuildingCopyWith(Building value, $Res Function(Building) then) =
-      _$BuildingCopyWithImpl<$Res, Building>;
-  @useResult
-  $Res call(
-      {@JsonKey(readValue: readId) String id,
-      String name,
-      String? buildingNumber,
-      String? communityId,
-      int? floors,
-      String? type,
-      String? createdBy,
-      List<dynamic>? distances});
-}
-
-/// @nodoc
-class _$BuildingCopyWithImpl<$Res, $Val extends Building>
-    implements $BuildingCopyWith<$Res> {
-  _$BuildingCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Building
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $BuildingCopyWith<Building> get copyWith =>
+      _$BuildingCopyWithImpl<Building>(this as Building, _$identity);
+
+  /// Serializes this Building to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? buildingNumber = freezed,
-    Object? communityId = freezed,
-    Object? floors = freezed,
-    Object? type = freezed,
-    Object? createdBy = freezed,
-    Object? distances = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      buildingNumber: freezed == buildingNumber
-          ? _value.buildingNumber
-          : buildingNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      communityId: freezed == communityId
-          ? _value.communityId
-          : communityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      floors: freezed == floors
-          ? _value.floors
-          : floors // ignore: cast_nullable_to_non_nullable
-              as int?,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      distances: freezed == distances
-          ? _value.distances
-          : distances // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Building &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.buildingNumber, buildingNumber) ||
+                other.buildingNumber == buildingNumber) &&
+            (identical(other.communityId, communityId) ||
+                other.communityId == communityId) &&
+            (identical(other.floors, floors) || other.floors == floors) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            const DeepCollectionEquality().equals(other.distances, distances));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      buildingNumber,
+      communityId,
+      floors,
+      type,
+      createdBy,
+      const DeepCollectionEquality().hash(distances));
+
+  @override
+  String toString() {
+    return 'Building(id: $id, name: $name, buildingNumber: $buildingNumber, communityId: $communityId, floors: $floors, type: $type, createdBy: $createdBy, distances: $distances)';
   }
 }
 
 /// @nodoc
-abstract class _$$BuildingImplCopyWith<$Res>
-    implements $BuildingCopyWith<$Res> {
-  factory _$$BuildingImplCopyWith(
-          _$BuildingImpl value, $Res Function(_$BuildingImpl) then) =
-      __$$BuildingImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $BuildingCopyWith<$Res> {
+  factory $BuildingCopyWith(Building value, $Res Function(Building) _then) =
+      _$BuildingCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
@@ -131,13 +89,14 @@ abstract class _$$BuildingImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BuildingImplCopyWithImpl<$Res>
-    extends _$BuildingCopyWithImpl<$Res, _$BuildingImpl>
-    implements _$$BuildingImplCopyWith<$Res> {
-  __$$BuildingImplCopyWithImpl(
-      _$BuildingImpl _value, $Res Function(_$BuildingImpl) _then)
-      : super(_value, _then);
+class _$BuildingCopyWithImpl<$Res> implements $BuildingCopyWith<$Res> {
+  _$BuildingCopyWithImpl(this._self, this._then);
 
+  final Building _self;
+  final $Res Function(Building) _then;
+
+  /// Create a copy of Building
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,37 +109,37 @@ class __$$BuildingImplCopyWithImpl<$Res>
     Object? createdBy = freezed,
     Object? distances = freezed,
   }) {
-    return _then(_$BuildingImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       buildingNumber: freezed == buildingNumber
-          ? _value.buildingNumber
+          ? _self.buildingNumber
           : buildingNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       communityId: freezed == communityId
-          ? _value.communityId
+          ? _self.communityId
           : communityId // ignore: cast_nullable_to_non_nullable
               as String?,
       floors: freezed == floors
-          ? _value.floors
+          ? _self.floors
           : floors // ignore: cast_nullable_to_non_nullable
               as int?,
       type: freezed == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
       createdBy: freezed == createdBy
-          ? _value.createdBy
+          ? _self.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
       distances: freezed == distances
-          ? _value._distances
+          ? _self.distances
           : distances // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
     ));
@@ -189,8 +148,8 @@ class __$$BuildingImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BuildingImpl implements _Building {
-  const _$BuildingImpl(
+class _Building implements Building {
+  const _Building(
       {@JsonKey(readValue: readId) required this.id,
       required this.name,
       this.buildingNumber,
@@ -200,9 +159,8 @@ class _$BuildingImpl implements _Building {
       this.createdBy,
       final List<dynamic>? distances})
       : _distances = distances;
-
-  factory _$BuildingImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BuildingImplFromJson(json);
+  factory _Building.fromJson(Map<String, dynamic> json) =>
+      _$BuildingFromJson(json);
 
   @override
   @JsonKey(readValue: readId)
@@ -229,16 +187,26 @@ class _$BuildingImpl implements _Building {
     return EqualUnmodifiableListView(value);
   }
 
+  /// Create a copy of Building
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Building(id: $id, name: $name, buildingNumber: $buildingNumber, communityId: $communityId, floors: $floors, type: $type, createdBy: $createdBy, distances: $distances)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$BuildingCopyWith<_Building> get copyWith =>
+      __$BuildingCopyWithImpl<_Building>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$BuildingToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BuildingImpl &&
+            other is _Building &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.buildingNumber, buildingNumber) ||
@@ -253,7 +221,7 @@ class _$BuildingImpl implements _Building {
                 .equals(other._distances, _distances));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -266,53 +234,86 @@ class _$BuildingImpl implements _Building {
       createdBy,
       const DeepCollectionEquality().hash(_distances));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$BuildingImplCopyWith<_$BuildingImpl> get copyWith =>
-      __$$BuildingImplCopyWithImpl<_$BuildingImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BuildingImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Building(id: $id, name: $name, buildingNumber: $buildingNumber, communityId: $communityId, floors: $floors, type: $type, createdBy: $createdBy, distances: $distances)';
   }
 }
 
-abstract class _Building implements Building {
-  const factory _Building(
-      {@JsonKey(readValue: readId) required final String id,
-      required final String name,
-      final String? buildingNumber,
-      final String? communityId,
-      final int? floors,
-      final String? type,
-      final String? createdBy,
-      final List<dynamic>? distances}) = _$BuildingImpl;
-
-  factory _Building.fromJson(Map<String, dynamic> json) =
-      _$BuildingImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$BuildingCopyWith<$Res>
+    implements $BuildingCopyWith<$Res> {
+  factory _$BuildingCopyWith(_Building value, $Res Function(_Building) _then) =
+      __$BuildingCopyWithImpl;
   @override
-  @JsonKey(readValue: readId)
-  String get id;
-  @override
-  String get name;
-  @override
-  String? get buildingNumber;
-  @override
-  String? get communityId;
-  @override
-  int? get floors;
-  @override
-  String? get type;
-  @override
-  String? get createdBy;
-  @override
-  List<dynamic>? get distances;
-  @override
-  @JsonKey(ignore: true)
-  _$$BuildingImplCopyWith<_$BuildingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {@JsonKey(readValue: readId) String id,
+      String name,
+      String? buildingNumber,
+      String? communityId,
+      int? floors,
+      String? type,
+      String? createdBy,
+      List<dynamic>? distances});
 }
+
+/// @nodoc
+class __$BuildingCopyWithImpl<$Res> implements _$BuildingCopyWith<$Res> {
+  __$BuildingCopyWithImpl(this._self, this._then);
+
+  final _Building _self;
+  final $Res Function(_Building) _then;
+
+  /// Create a copy of Building
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? buildingNumber = freezed,
+    Object? communityId = freezed,
+    Object? floors = freezed,
+    Object? type = freezed,
+    Object? createdBy = freezed,
+    Object? distances = freezed,
+  }) {
+    return _then(_Building(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      buildingNumber: freezed == buildingNumber
+          ? _self.buildingNumber
+          : buildingNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      communityId: freezed == communityId
+          ? _self.communityId
+          : communityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      floors: freezed == floors
+          ? _self.floors
+          : floors // ignore: cast_nullable_to_non_nullable
+              as int?,
+      type: freezed == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdBy: freezed == createdBy
+          ? _self.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      distances: freezed == distances
+          ? _self._distances
+          : distances // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+    ));
+  }
+}
+
+// dart format on

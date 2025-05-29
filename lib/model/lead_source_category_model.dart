@@ -7,7 +7,7 @@ part 'lead_source_category_model.freezed.dart';
 part 'lead_source_category_model.g.dart';
 
 @freezed
-class LeadSourceCategory with _$LeadSourceCategory {
+abstract class LeadSourceCategory with _$LeadSourceCategory {
   const factory LeadSourceCategory({
     required List<LeadSourceItem> sources,
     required String category,
@@ -18,7 +18,7 @@ class LeadSourceCategory with _$LeadSourceCategory {
 }
 
 @freezed
-class LeadSourceItem with _$LeadSourceItem {
+abstract class LeadSourceItem with _$LeadSourceItem {
   const factory LeadSourceItem({
     @JsonKey(name: '_id', readValue: readId) required String id,
     required String name,

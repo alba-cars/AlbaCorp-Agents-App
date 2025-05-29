@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,89 +10,70 @@ part of 'expected_earnings_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ExpectedEarningsModel _$ExpectedEarningsModelFromJson(
-    Map<String, dynamic> json) {
-  return _ExpectedEarningsModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ExpectedEarningsModel {
-  double get expectedCommission => throw _privateConstructorUsedError;
+  double get expectedCommission;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ExpectedEarningsModelCopyWith<ExpectedEarningsModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ExpectedEarningsModelCopyWith<$Res> {
-  factory $ExpectedEarningsModelCopyWith(ExpectedEarningsModel value,
-          $Res Function(ExpectedEarningsModel) then) =
-      _$ExpectedEarningsModelCopyWithImpl<$Res, ExpectedEarningsModel>;
-  @useResult
-  $Res call({double expectedCommission});
-}
-
-/// @nodoc
-class _$ExpectedEarningsModelCopyWithImpl<$Res,
-        $Val extends ExpectedEarningsModel>
-    implements $ExpectedEarningsModelCopyWith<$Res> {
-  _$ExpectedEarningsModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of ExpectedEarningsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $ExpectedEarningsModelCopyWith<ExpectedEarningsModel> get copyWith =>
+      _$ExpectedEarningsModelCopyWithImpl<ExpectedEarningsModel>(
+          this as ExpectedEarningsModel, _$identity);
+
+  /// Serializes this ExpectedEarningsModel to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? expectedCommission = null,
-  }) {
-    return _then(_value.copyWith(
-      expectedCommission: null == expectedCommission
-          ? _value.expectedCommission
-          : expectedCommission // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ExpectedEarningsModel &&
+            (identical(other.expectedCommission, expectedCommission) ||
+                other.expectedCommission == expectedCommission));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, expectedCommission);
+
+  @override
+  String toString() {
+    return 'ExpectedEarningsModel(expectedCommission: $expectedCommission)';
   }
 }
 
 /// @nodoc
-abstract class _$$ExpectedEarningsModelImplCopyWith<$Res>
-    implements $ExpectedEarningsModelCopyWith<$Res> {
-  factory _$$ExpectedEarningsModelImplCopyWith(
-          _$ExpectedEarningsModelImpl value,
-          $Res Function(_$ExpectedEarningsModelImpl) then) =
-      __$$ExpectedEarningsModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ExpectedEarningsModelCopyWith<$Res> {
+  factory $ExpectedEarningsModelCopyWith(ExpectedEarningsModel value,
+          $Res Function(ExpectedEarningsModel) _then) =
+      _$ExpectedEarningsModelCopyWithImpl;
   @useResult
   $Res call({double expectedCommission});
 }
 
 /// @nodoc
-class __$$ExpectedEarningsModelImplCopyWithImpl<$Res>
-    extends _$ExpectedEarningsModelCopyWithImpl<$Res,
-        _$ExpectedEarningsModelImpl>
-    implements _$$ExpectedEarningsModelImplCopyWith<$Res> {
-  __$$ExpectedEarningsModelImplCopyWithImpl(_$ExpectedEarningsModelImpl _value,
-      $Res Function(_$ExpectedEarningsModelImpl) _then)
-      : super(_value, _then);
+class _$ExpectedEarningsModelCopyWithImpl<$Res>
+    implements $ExpectedEarningsModelCopyWith<$Res> {
+  _$ExpectedEarningsModelCopyWithImpl(this._self, this._then);
 
+  final ExpectedEarningsModel _self;
+  final $Res Function(ExpectedEarningsModel) _then;
+
+  /// Create a copy of ExpectedEarningsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? expectedCommission = null,
   }) {
-    return _then(_$ExpectedEarningsModelImpl(
+    return _then(_self.copyWith(
       expectedCommission: null == expectedCommission
-          ? _value.expectedCommission
+          ? _self.expectedCommission
           : expectedCommission // ignore: cast_nullable_to_non_nullable
               as double,
     ));
@@ -100,61 +82,83 @@ class __$$ExpectedEarningsModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ExpectedEarningsModelImpl extends _ExpectedEarningsModel {
-  const _$ExpectedEarningsModelImpl({this.expectedCommission = 0}) : super._();
-
-  factory _$ExpectedEarningsModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ExpectedEarningsModelImplFromJson(json);
+class _ExpectedEarningsModel extends ExpectedEarningsModel {
+  const _ExpectedEarningsModel({this.expectedCommission = 0}) : super._();
+  factory _ExpectedEarningsModel.fromJson(Map<String, dynamic> json) =>
+      _$ExpectedEarningsModelFromJson(json);
 
   @override
   @JsonKey()
   final double expectedCommission;
 
+  /// Create a copy of ExpectedEarningsModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ExpectedEarningsModel(expectedCommission: $expectedCommission)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ExpectedEarningsModelCopyWith<_ExpectedEarningsModel> get copyWith =>
+      __$ExpectedEarningsModelCopyWithImpl<_ExpectedEarningsModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ExpectedEarningsModelToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ExpectedEarningsModelImpl &&
+            other is _ExpectedEarningsModel &&
             (identical(other.expectedCommission, expectedCommission) ||
                 other.expectedCommission == expectedCommission));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, expectedCommission);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ExpectedEarningsModelImplCopyWith<_$ExpectedEarningsModelImpl>
-      get copyWith => __$$ExpectedEarningsModelImplCopyWithImpl<
-          _$ExpectedEarningsModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ExpectedEarningsModelImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ExpectedEarningsModel(expectedCommission: $expectedCommission)';
   }
 }
 
-abstract class _ExpectedEarningsModel extends ExpectedEarningsModel {
-  const factory _ExpectedEarningsModel({final double expectedCommission}) =
-      _$ExpectedEarningsModelImpl;
-  const _ExpectedEarningsModel._() : super._();
-
-  factory _ExpectedEarningsModel.fromJson(Map<String, dynamic> json) =
-      _$ExpectedEarningsModelImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ExpectedEarningsModelCopyWith<$Res>
+    implements $ExpectedEarningsModelCopyWith<$Res> {
+  factory _$ExpectedEarningsModelCopyWith(_ExpectedEarningsModel value,
+          $Res Function(_ExpectedEarningsModel) _then) =
+      __$ExpectedEarningsModelCopyWithImpl;
   @override
-  double get expectedCommission;
-  @override
-  @JsonKey(ignore: true)
-  _$$ExpectedEarningsModelImplCopyWith<_$ExpectedEarningsModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @useResult
+  $Res call({double expectedCommission});
 }
+
+/// @nodoc
+class __$ExpectedEarningsModelCopyWithImpl<$Res>
+    implements _$ExpectedEarningsModelCopyWith<$Res> {
+  __$ExpectedEarningsModelCopyWithImpl(this._self, this._then);
+
+  final _ExpectedEarningsModel _self;
+  final $Res Function(_ExpectedEarningsModel) _then;
+
+  /// Create a copy of ExpectedEarningsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? expectedCommission = null,
+  }) {
+    return _then(_ExpectedEarningsModel(
+      expectedCommission: null == expectedCommission
+          ? _self.expectedCommission
+          : expectedCommission // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+// dart format on

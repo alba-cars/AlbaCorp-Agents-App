@@ -6,9 +6,9 @@ part of 'property_card_details_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
+_PropertyCardDetailsModel _$PropertyCardDetailsModelFromJson(
         Map<String, dynamic> json) =>
-    _$PropertyCardDetailsModelImpl(
+    _PropertyCardDetailsModel(
       id: readId(json, 'id') as String,
       plCreationDate: json['plCreationDate'],
       building: json['building'] == null
@@ -53,8 +53,8 @@ _$PropertyCardDetailsModelImpl _$$PropertyCardDetailsModelImplFromJson(
       agentValutionPrice: json['agentValutionPrice'] as num?,
     );
 
-Map<String, dynamic> _$$PropertyCardDetailsModelImplToJson(
-        _$PropertyCardDetailsModelImpl instance) =>
+Map<String, dynamic> _$PropertyCardDetailsModelToJson(
+        _PropertyCardDetailsModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'plCreationDate': instance.plCreationDate,
@@ -84,15 +84,13 @@ Map<String, dynamic> _$$PropertyCardDetailsModelImplToJson(
       'agentValutionPrice': instance.agentValutionPrice,
     };
 
-_$PropertyCardPhotoImpl _$$PropertyCardPhotoImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PropertyCardPhotoImpl(
+_PropertyCardPhoto _$PropertyCardPhotoFromJson(Map<String, dynamic> json) =>
+    _PropertyCardPhoto(
       id: readId(json, 'id') as String,
       original: json['original'] as String,
     );
 
-Map<String, dynamic> _$$PropertyCardPhotoImplToJson(
-        _$PropertyCardPhotoImpl instance) =>
+Map<String, dynamic> _$PropertyCardPhotoToJson(_PropertyCardPhoto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'original': instance.original,

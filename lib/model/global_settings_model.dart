@@ -4,17 +4,17 @@ part 'global_settings_model.freezed.dart';
 part 'global_settings_model.g.dart';
 
 @freezed
-class GlobalSettings with _$GlobalSettings {
+abstract class GlobalSettings with _$GlobalSettings {
   const factory GlobalSettings({
     required String id,
     String? timeUntilTicketArchived,
     required CheckoutLimit checkoutLimit,
-     String? unAssignLeadAfter,
-     DateTime? createdAt,
-     DateTime? updatedAt,
-     String? blockLeadFor,
-     String? dealReminderAfter,
-     String? newLeadFlagDateLimit,
+    String? unAssignLeadAfter,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? blockLeadFor,
+    String? dealReminderAfter,
+    String? newLeadFlagDateLimit,
     @Default(false) enablePbx,
   }) = _GlobalSettings;
 
@@ -23,7 +23,7 @@ class GlobalSettings with _$GlobalSettings {
 }
 
 @freezed
-class CheckoutLimit with _$CheckoutLimit {
+abstract class CheckoutLimit with _$CheckoutLimit {
   const factory CheckoutLimit({
     required int limit,
     required int tolerance,

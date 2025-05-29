@@ -12,7 +12,7 @@ const categoryList = [
 ];
 
 @freezed
-class HomeState with _$HomeState {
+abstract class HomeState with _$HomeState {
   const factory HomeState({
     @Default({}) Map<int, List<Activity>> activities,
     @Default({}) Map<int, AppStatus?> getActivitiesStatus,

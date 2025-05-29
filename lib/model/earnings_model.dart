@@ -4,7 +4,7 @@ part 'earnings_model.freezed.dart';
 part 'earnings_model.g.dart';
 
 @freezed
-class EarningsModel with _$EarningsModel {
+abstract class EarningsModel with _$EarningsModel {
   const factory EarningsModel(
       {@Default(0) double totalEarnings,
       @Default(0) double thisMonthEarning,

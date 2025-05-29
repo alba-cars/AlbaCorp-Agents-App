@@ -1,7 +1,7 @@
 part of 'enquiries_cubit.dart';
 
 @freezed
-class EnquiriesState with _$EnquiriesState {
+abstract class EnquiriesState with _$EnquiriesState {
   const factory EnquiriesState({
     @Default(const {
       TaskFilterEnum.New: AppStatus.initial,

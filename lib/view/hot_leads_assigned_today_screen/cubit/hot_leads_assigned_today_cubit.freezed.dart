@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,29 +10,54 @@ part of 'hot_leads_assigned_today_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$HotLeadsAssignedTodayState {
-  AppStatus get fetchStatus => throw _privateConstructorUsedError;
-  Paginator? get paginator => throw _privateConstructorUsedError;
-  List<Activity> get activities => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  AppStatus get fetchStatus;
+  Paginator? get paginator;
+  List<Activity> get activities;
+  String? get error;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HotLeadsAssignedTodayState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $HotLeadsAssignedTodayStateCopyWith<HotLeadsAssignedTodayState>
-      get copyWith => throw _privateConstructorUsedError;
+      get copyWith =>
+          _$HotLeadsAssignedTodayStateCopyWithImpl<HotLeadsAssignedTodayState>(
+              this as HotLeadsAssignedTodayState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is HotLeadsAssignedTodayState &&
+            (identical(other.fetchStatus, fetchStatus) ||
+                other.fetchStatus == fetchStatus) &&
+            (identical(other.paginator, paginator) ||
+                other.paginator == paginator) &&
+            const DeepCollectionEquality()
+                .equals(other.activities, activities) &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fetchStatus, paginator,
+      const DeepCollectionEquality().hash(activities), error);
+
+  @override
+  String toString() {
+    return 'HotLeadsAssignedTodayState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error)';
+  }
 }
 
 /// @nodoc
-abstract class $HotLeadsAssignedTodayStateCopyWith<$Res> {
+abstract mixin class $HotLeadsAssignedTodayStateCopyWith<$Res> {
   factory $HotLeadsAssignedTodayStateCopyWith(HotLeadsAssignedTodayState value,
-          $Res Function(HotLeadsAssignedTodayState) then) =
-      _$HotLeadsAssignedTodayStateCopyWithImpl<$Res,
-          HotLeadsAssignedTodayState>;
+          $Res Function(HotLeadsAssignedTodayState) _then) =
+      _$HotLeadsAssignedTodayStateCopyWithImpl;
   @useResult
   $Res call(
       {AppStatus fetchStatus,
@@ -43,16 +69,15 @@ abstract class $HotLeadsAssignedTodayStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HotLeadsAssignedTodayStateCopyWithImpl<$Res,
-        $Val extends HotLeadsAssignedTodayState>
+class _$HotLeadsAssignedTodayStateCopyWithImpl<$Res>
     implements $HotLeadsAssignedTodayStateCopyWith<$Res> {
-  _$HotLeadsAssignedTodayStateCopyWithImpl(this._value, this._then);
+  _$HotLeadsAssignedTodayStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final HotLeadsAssignedTodayState _self;
+  final $Res Function(HotLeadsAssignedTodayState) _then;
 
+  /// Create a copy of HotLeadsAssignedTodayState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -61,101 +86,45 @@ class _$HotLeadsAssignedTodayStateCopyWithImpl<$Res,
     Object? activities = null,
     Object? error = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       fetchStatus: null == fetchStatus
-          ? _value.fetchStatus
+          ? _self.fetchStatus
           : fetchStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       paginator: freezed == paginator
-          ? _value.paginator
+          ? _self.paginator
           : paginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       activities: null == activities
-          ? _value.activities
+          ? _self.activities
           : activities // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       error: freezed == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of HotLeadsAssignedTodayState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginatorCopyWith<$Res>? get paginator {
-    if (_value.paginator == null) {
+    if (_self.paginator == null) {
       return null;
     }
 
-    return $PaginatorCopyWith<$Res>(_value.paginator!, (value) {
-      return _then(_value.copyWith(paginator: value) as $Val);
+    return $PaginatorCopyWith<$Res>(_self.paginator!, (value) {
+      return _then(_self.copyWith(paginator: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$HotLeadsAssignedTodayStateImplCopyWith<$Res>
-    implements $HotLeadsAssignedTodayStateCopyWith<$Res> {
-  factory _$$HotLeadsAssignedTodayStateImplCopyWith(
-          _$HotLeadsAssignedTodayStateImpl value,
-          $Res Function(_$HotLeadsAssignedTodayStateImpl) then) =
-      __$$HotLeadsAssignedTodayStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {AppStatus fetchStatus,
-      Paginator? paginator,
-      List<Activity> activities,
-      String? error});
 
-  @override
-  $PaginatorCopyWith<$Res>? get paginator;
-}
-
-/// @nodoc
-class __$$HotLeadsAssignedTodayStateImplCopyWithImpl<$Res>
-    extends _$HotLeadsAssignedTodayStateCopyWithImpl<$Res,
-        _$HotLeadsAssignedTodayStateImpl>
-    implements _$$HotLeadsAssignedTodayStateImplCopyWith<$Res> {
-  __$$HotLeadsAssignedTodayStateImplCopyWithImpl(
-      _$HotLeadsAssignedTodayStateImpl _value,
-      $Res Function(_$HotLeadsAssignedTodayStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fetchStatus = null,
-    Object? paginator = freezed,
-    Object? activities = null,
-    Object? error = freezed,
-  }) {
-    return _then(_$HotLeadsAssignedTodayStateImpl(
-      fetchStatus: null == fetchStatus
-          ? _value.fetchStatus
-          : fetchStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      paginator: freezed == paginator
-          ? _value.paginator
-          : paginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      activities: null == activities
-          ? _value._activities
-          : activities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$HotLeadsAssignedTodayStateImpl implements _HotLeadsAssignedTodayState {
-  const _$HotLeadsAssignedTodayStateImpl(
+class _HotLeadsAssignedTodayState implements HotLeadsAssignedTodayState {
+  const _HotLeadsAssignedTodayState(
       {this.fetchStatus = AppStatus.init,
       this.paginator,
       final List<Activity> activities = const [],
@@ -179,16 +148,20 @@ class _$HotLeadsAssignedTodayStateImpl implements _HotLeadsAssignedTodayState {
   @override
   final String? error;
 
+  /// Create a copy of HotLeadsAssignedTodayState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'HotLeadsAssignedTodayState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$HotLeadsAssignedTodayStateCopyWith<_HotLeadsAssignedTodayState>
+      get copyWith => __$HotLeadsAssignedTodayStateCopyWithImpl<
+          _HotLeadsAssignedTodayState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HotLeadsAssignedTodayStateImpl &&
+            other is _HotLeadsAssignedTodayState &&
             (identical(other.fetchStatus, fetchStatus) ||
                 other.fetchStatus == fetchStatus) &&
             (identical(other.paginator, paginator) ||
@@ -202,32 +175,82 @@ class _$HotLeadsAssignedTodayStateImpl implements _HotLeadsAssignedTodayState {
   int get hashCode => Object.hash(runtimeType, fetchStatus, paginator,
       const DeepCollectionEquality().hash(_activities), error);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'HotLeadsAssignedTodayState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$HotLeadsAssignedTodayStateCopyWith<$Res>
+    implements $HotLeadsAssignedTodayStateCopyWith<$Res> {
+  factory _$HotLeadsAssignedTodayStateCopyWith(
+          _HotLeadsAssignedTodayState value,
+          $Res Function(_HotLeadsAssignedTodayState) _then) =
+      __$HotLeadsAssignedTodayStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {AppStatus fetchStatus,
+      Paginator? paginator,
+      List<Activity> activities,
+      String? error});
+
+  @override
+  $PaginatorCopyWith<$Res>? get paginator;
+}
+
+/// @nodoc
+class __$HotLeadsAssignedTodayStateCopyWithImpl<$Res>
+    implements _$HotLeadsAssignedTodayStateCopyWith<$Res> {
+  __$HotLeadsAssignedTodayStateCopyWithImpl(this._self, this._then);
+
+  final _HotLeadsAssignedTodayState _self;
+  final $Res Function(_HotLeadsAssignedTodayState) _then;
+
+  /// Create a copy of HotLeadsAssignedTodayState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$HotLeadsAssignedTodayStateImplCopyWith<_$HotLeadsAssignedTodayStateImpl>
-      get copyWith => __$$HotLeadsAssignedTodayStateImplCopyWithImpl<
-          _$HotLeadsAssignedTodayStateImpl>(this, _$identity);
+  $Res call({
+    Object? fetchStatus = null,
+    Object? paginator = freezed,
+    Object? activities = null,
+    Object? error = freezed,
+  }) {
+    return _then(_HotLeadsAssignedTodayState(
+      fetchStatus: null == fetchStatus
+          ? _self.fetchStatus
+          : fetchStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      paginator: freezed == paginator
+          ? _self.paginator
+          : paginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      activities: null == activities
+          ? _self._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      error: freezed == error
+          ? _self.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of HotLeadsAssignedTodayState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get paginator {
+    if (_self.paginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.paginator!, (value) {
+      return _then(_self.copyWith(paginator: value));
+    });
+  }
 }
 
-abstract class _HotLeadsAssignedTodayState
-    implements HotLeadsAssignedTodayState {
-  const factory _HotLeadsAssignedTodayState(
-      {final AppStatus fetchStatus,
-      final Paginator? paginator,
-      final List<Activity> activities,
-      final String? error}) = _$HotLeadsAssignedTodayStateImpl;
-
-  @override
-  AppStatus get fetchStatus;
-  @override
-  Paginator? get paginator;
-  @override
-  List<Activity> get activities;
-  @override
-  String? get error;
-  @override
-  @JsonKey(ignore: true)
-  _$$HotLeadsAssignedTodayStateImplCopyWith<_$HotLeadsAssignedTodayStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

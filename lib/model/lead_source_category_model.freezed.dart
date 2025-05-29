@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,96 +10,78 @@ part of 'lead_source_category_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-LeadSourceCategory _$LeadSourceCategoryFromJson(Map<String, dynamic> json) {
-  return _LeadSourceCategory.fromJson(json);
-}
 
 /// @nodoc
 mixin _$LeadSourceCategory {
-  List<LeadSourceItem> get sources => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
+  List<LeadSourceItem> get sources;
+  String get category;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $LeadSourceCategoryCopyWith<LeadSourceCategory> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LeadSourceCategoryCopyWith<$Res> {
-  factory $LeadSourceCategoryCopyWith(
-          LeadSourceCategory value, $Res Function(LeadSourceCategory) then) =
-      _$LeadSourceCategoryCopyWithImpl<$Res, LeadSourceCategory>;
-  @useResult
-  $Res call({List<LeadSourceItem> sources, String category});
-}
-
-/// @nodoc
-class _$LeadSourceCategoryCopyWithImpl<$Res, $Val extends LeadSourceCategory>
-    implements $LeadSourceCategoryCopyWith<$Res> {
-  _$LeadSourceCategoryCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of LeadSourceCategory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $LeadSourceCategoryCopyWith<LeadSourceCategory> get copyWith =>
+      _$LeadSourceCategoryCopyWithImpl<LeadSourceCategory>(
+          this as LeadSourceCategory, _$identity);
+
+  /// Serializes this LeadSourceCategory to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? sources = null,
-    Object? category = null,
-  }) {
-    return _then(_value.copyWith(
-      sources: null == sources
-          ? _value.sources
-          : sources // ignore: cast_nullable_to_non_nullable
-              as List<LeadSourceItem>,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LeadSourceCategory &&
+            const DeepCollectionEquality().equals(other.sources, sources) &&
+            (identical(other.category, category) ||
+                other.category == category));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(sources), category);
+
+  @override
+  String toString() {
+    return 'LeadSourceCategory(sources: $sources, category: $category)';
   }
 }
 
 /// @nodoc
-abstract class _$$LeadSourceCategoryImplCopyWith<$Res>
-    implements $LeadSourceCategoryCopyWith<$Res> {
-  factory _$$LeadSourceCategoryImplCopyWith(_$LeadSourceCategoryImpl value,
-          $Res Function(_$LeadSourceCategoryImpl) then) =
-      __$$LeadSourceCategoryImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $LeadSourceCategoryCopyWith<$Res> {
+  factory $LeadSourceCategoryCopyWith(
+          LeadSourceCategory value, $Res Function(LeadSourceCategory) _then) =
+      _$LeadSourceCategoryCopyWithImpl;
   @useResult
   $Res call({List<LeadSourceItem> sources, String category});
 }
 
 /// @nodoc
-class __$$LeadSourceCategoryImplCopyWithImpl<$Res>
-    extends _$LeadSourceCategoryCopyWithImpl<$Res, _$LeadSourceCategoryImpl>
-    implements _$$LeadSourceCategoryImplCopyWith<$Res> {
-  __$$LeadSourceCategoryImplCopyWithImpl(_$LeadSourceCategoryImpl _value,
-      $Res Function(_$LeadSourceCategoryImpl) _then)
-      : super(_value, _then);
+class _$LeadSourceCategoryCopyWithImpl<$Res>
+    implements $LeadSourceCategoryCopyWith<$Res> {
+  _$LeadSourceCategoryCopyWithImpl(this._self, this._then);
 
+  final LeadSourceCategory _self;
+  final $Res Function(LeadSourceCategory) _then;
+
+  /// Create a copy of LeadSourceCategory
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? sources = null,
     Object? category = null,
   }) {
-    return _then(_$LeadSourceCategoryImpl(
+    return _then(_self.copyWith(
       sources: null == sources
-          ? _value._sources
+          ? _self.sources
           : sources // ignore: cast_nullable_to_non_nullable
               as List<LeadSourceItem>,
       category: null == category
-          ? _value.category
+          ? _self.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -107,13 +90,12 @@ class __$$LeadSourceCategoryImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LeadSourceCategoryImpl implements _LeadSourceCategory {
-  const _$LeadSourceCategoryImpl(
+class _LeadSourceCategory implements LeadSourceCategory {
+  const _LeadSourceCategory(
       {required final List<LeadSourceItem> sources, required this.category})
       : _sources = sources;
-
-  factory _$LeadSourceCategoryImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LeadSourceCategoryImplFromJson(json);
+  factory _LeadSourceCategory.fromJson(Map<String, dynamic> json) =>
+      _$LeadSourceCategoryFromJson(json);
 
   final List<LeadSourceItem> _sources;
   @override
@@ -126,137 +108,130 @@ class _$LeadSourceCategoryImpl implements _LeadSourceCategory {
   @override
   final String category;
 
+  /// Create a copy of LeadSourceCategory
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'LeadSourceCategory(sources: $sources, category: $category)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LeadSourceCategoryCopyWith<_LeadSourceCategory> get copyWith =>
+      __$LeadSourceCategoryCopyWithImpl<_LeadSourceCategory>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$LeadSourceCategoryToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LeadSourceCategoryImpl &&
+            other is _LeadSourceCategory &&
             const DeepCollectionEquality().equals(other._sources, _sources) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_sources), category);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$LeadSourceCategoryImplCopyWith<_$LeadSourceCategoryImpl> get copyWith =>
-      __$$LeadSourceCategoryImplCopyWithImpl<_$LeadSourceCategoryImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$LeadSourceCategoryImplToJson(
-      this,
-    );
+  String toString() {
+    return 'LeadSourceCategory(sources: $sources, category: $category)';
   }
 }
 
-abstract class _LeadSourceCategory implements LeadSourceCategory {
-  const factory _LeadSourceCategory(
-      {required final List<LeadSourceItem> sources,
-      required final String category}) = _$LeadSourceCategoryImpl;
-
-  factory _LeadSourceCategory.fromJson(Map<String, dynamic> json) =
-      _$LeadSourceCategoryImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$LeadSourceCategoryCopyWith<$Res>
+    implements $LeadSourceCategoryCopyWith<$Res> {
+  factory _$LeadSourceCategoryCopyWith(
+          _LeadSourceCategory value, $Res Function(_LeadSourceCategory) _then) =
+      __$LeadSourceCategoryCopyWithImpl;
   @override
-  List<LeadSourceItem> get sources;
-  @override
-  String get category;
-  @override
-  @JsonKey(ignore: true)
-  _$$LeadSourceCategoryImplCopyWith<_$LeadSourceCategoryImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({List<LeadSourceItem> sources, String category});
 }
 
-LeadSourceItem _$LeadSourceItemFromJson(Map<String, dynamic> json) {
-  return _LeadSourceItem.fromJson(json);
+/// @nodoc
+class __$LeadSourceCategoryCopyWithImpl<$Res>
+    implements _$LeadSourceCategoryCopyWith<$Res> {
+  __$LeadSourceCategoryCopyWithImpl(this._self, this._then);
+
+  final _LeadSourceCategory _self;
+  final $Res Function(_LeadSourceCategory) _then;
+
+  /// Create a copy of LeadSourceCategory
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? sources = null,
+    Object? category = null,
+  }) {
+    return _then(_LeadSourceCategory(
+      sources: null == sources
+          ? _self._sources
+          : sources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSourceItem>,
+      category: null == category
+          ? _self.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$LeadSourceItem {
   @JsonKey(name: '_id', readValue: readId)
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get leadSourceType => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String get leadSourceType;
   @JsonKey(readValue: readTags)
-  List<String>? get tags => throw _privateConstructorUsedError;
+  List<String>? get tags;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $LeadSourceItemCopyWith<LeadSourceItem> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LeadSourceItemCopyWith<$Res> {
-  factory $LeadSourceItemCopyWith(
-          LeadSourceItem value, $Res Function(LeadSourceItem) then) =
-      _$LeadSourceItemCopyWithImpl<$Res, LeadSourceItem>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id', readValue: readId) String id,
-      String name,
-      String leadSourceType,
-      @JsonKey(readValue: readTags) List<String>? tags});
-}
-
-/// @nodoc
-class _$LeadSourceItemCopyWithImpl<$Res, $Val extends LeadSourceItem>
-    implements $LeadSourceItemCopyWith<$Res> {
-  _$LeadSourceItemCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of LeadSourceItem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $LeadSourceItemCopyWith<LeadSourceItem> get copyWith =>
+      _$LeadSourceItemCopyWithImpl<LeadSourceItem>(
+          this as LeadSourceItem, _$identity);
+
+  /// Serializes this LeadSourceItem to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? leadSourceType = null,
-    Object? tags = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      leadSourceType: null == leadSourceType
-          ? _value.leadSourceType
-          : leadSourceType // ignore: cast_nullable_to_non_nullable
-              as String,
-      tags: freezed == tags
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LeadSourceItem &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.leadSourceType, leadSourceType) ||
+                other.leadSourceType == leadSourceType) &&
+            const DeepCollectionEquality().equals(other.tags, tags));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, leadSourceType,
+      const DeepCollectionEquality().hash(tags));
+
+  @override
+  String toString() {
+    return 'LeadSourceItem(id: $id, name: $name, leadSourceType: $leadSourceType, tags: $tags)';
   }
 }
 
 /// @nodoc
-abstract class _$$LeadSourceItemImplCopyWith<$Res>
-    implements $LeadSourceItemCopyWith<$Res> {
-  factory _$$LeadSourceItemImplCopyWith(_$LeadSourceItemImpl value,
-          $Res Function(_$LeadSourceItemImpl) then) =
-      __$$LeadSourceItemImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $LeadSourceItemCopyWith<$Res> {
+  factory $LeadSourceItemCopyWith(
+          LeadSourceItem value, $Res Function(LeadSourceItem) _then) =
+      _$LeadSourceItemCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: '_id', readValue: readId) String id,
@@ -266,13 +241,15 @@ abstract class _$$LeadSourceItemImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$LeadSourceItemImplCopyWithImpl<$Res>
-    extends _$LeadSourceItemCopyWithImpl<$Res, _$LeadSourceItemImpl>
-    implements _$$LeadSourceItemImplCopyWith<$Res> {
-  __$$LeadSourceItemImplCopyWithImpl(
-      _$LeadSourceItemImpl _value, $Res Function(_$LeadSourceItemImpl) _then)
-      : super(_value, _then);
+class _$LeadSourceItemCopyWithImpl<$Res>
+    implements $LeadSourceItemCopyWith<$Res> {
+  _$LeadSourceItemCopyWithImpl(this._self, this._then);
 
+  final LeadSourceItem _self;
+  final $Res Function(LeadSourceItem) _then;
+
+  /// Create a copy of LeadSourceItem
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -281,21 +258,21 @@ class __$$LeadSourceItemImplCopyWithImpl<$Res>
     Object? leadSourceType = null,
     Object? tags = freezed,
   }) {
-    return _then(_$LeadSourceItemImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       leadSourceType: null == leadSourceType
-          ? _value.leadSourceType
+          ? _self.leadSourceType
           : leadSourceType // ignore: cast_nullable_to_non_nullable
               as String,
       tags: freezed == tags
-          ? _value._tags
+          ? _self.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
     ));
@@ -304,16 +281,15 @@ class __$$LeadSourceItemImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LeadSourceItemImpl implements _LeadSourceItem {
-  const _$LeadSourceItemImpl(
+class _LeadSourceItem implements LeadSourceItem {
+  const _LeadSourceItem(
       {@JsonKey(name: '_id', readValue: readId) required this.id,
       required this.name,
       required this.leadSourceType,
       @JsonKey(readValue: readTags) final List<String>? tags})
       : _tags = tags;
-
-  factory _$LeadSourceItemImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LeadSourceItemImplFromJson(json);
+  factory _LeadSourceItem.fromJson(Map<String, dynamic> json) =>
+      _$LeadSourceItemFromJson(json);
 
   @override
   @JsonKey(name: '_id', readValue: readId)
@@ -333,16 +309,26 @@ class _$LeadSourceItemImpl implements _LeadSourceItem {
     return EqualUnmodifiableListView(value);
   }
 
+  /// Create a copy of LeadSourceItem
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'LeadSourceItem(id: $id, name: $name, leadSourceType: $leadSourceType, tags: $tags)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LeadSourceItemCopyWith<_LeadSourceItem> get copyWith =>
+      __$LeadSourceItemCopyWithImpl<_LeadSourceItem>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$LeadSourceItemToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LeadSourceItemImpl &&
+            other is _LeadSourceItem &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.leadSourceType, leadSourceType) ||
@@ -350,49 +336,69 @@ class _$LeadSourceItemImpl implements _LeadSourceItem {
             const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, leadSourceType,
       const DeepCollectionEquality().hash(_tags));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$LeadSourceItemImplCopyWith<_$LeadSourceItemImpl> get copyWith =>
-      __$$LeadSourceItemImplCopyWithImpl<_$LeadSourceItemImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$LeadSourceItemImplToJson(
-      this,
-    );
+  String toString() {
+    return 'LeadSourceItem(id: $id, name: $name, leadSourceType: $leadSourceType, tags: $tags)';
   }
 }
 
-abstract class _LeadSourceItem implements LeadSourceItem {
-  const factory _LeadSourceItem(
-          {@JsonKey(name: '_id', readValue: readId) required final String id,
-          required final String name,
-          required final String leadSourceType,
-          @JsonKey(readValue: readTags) final List<String>? tags}) =
-      _$LeadSourceItemImpl;
-
-  factory _LeadSourceItem.fromJson(Map<String, dynamic> json) =
-      _$LeadSourceItemImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$LeadSourceItemCopyWith<$Res>
+    implements $LeadSourceItemCopyWith<$Res> {
+  factory _$LeadSourceItemCopyWith(
+          _LeadSourceItem value, $Res Function(_LeadSourceItem) _then) =
+      __$LeadSourceItemCopyWithImpl;
   @override
-  @JsonKey(name: '_id', readValue: readId)
-  String get id;
-  @override
-  String get name;
-  @override
-  String get leadSourceType;
-  @override
-  @JsonKey(readValue: readTags)
-  List<String>? get tags;
-  @override
-  @JsonKey(ignore: true)
-  _$$LeadSourceItemImplCopyWith<_$LeadSourceItemImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id', readValue: readId) String id,
+      String name,
+      String leadSourceType,
+      @JsonKey(readValue: readTags) List<String>? tags});
 }
+
+/// @nodoc
+class __$LeadSourceItemCopyWithImpl<$Res>
+    implements _$LeadSourceItemCopyWith<$Res> {
+  __$LeadSourceItemCopyWithImpl(this._self, this._then);
+
+  final _LeadSourceItem _self;
+  final $Res Function(_LeadSourceItem) _then;
+
+  /// Create a copy of LeadSourceItem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? leadSourceType = null,
+    Object? tags = freezed,
+  }) {
+    return _then(_LeadSourceItem(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      leadSourceType: null == leadSourceType
+          ? _self.leadSourceType
+          : leadSourceType // ignore: cast_nullable_to_non_nullable
+              as String,
+      tags: freezed == tags
+          ? _self._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
+  }
+}
+
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,39 +10,85 @@ part of 'global_settings_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GlobalSettings _$GlobalSettingsFromJson(Map<String, dynamic> json) {
-  return _GlobalSettings.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GlobalSettings {
-  String get id => throw _privateConstructorUsedError;
-  String? get timeUntilTicketArchived => throw _privateConstructorUsedError;
-  CheckoutLimit get checkoutLimit => throw _privateConstructorUsedError;
-  String? get unAssignLeadAfter => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
-  String? get blockLeadFor => throw _privateConstructorUsedError;
-  String? get dealReminderAfter => throw _privateConstructorUsedError;
-  String? get newLeadFlagDateLimit => throw _privateConstructorUsedError;
-  dynamic get enablePbx => throw _privateConstructorUsedError;
+  String get id;
+  String? get timeUntilTicketArchived;
+  CheckoutLimit get checkoutLimit;
+  String? get unAssignLeadAfter;
+  DateTime? get createdAt;
+  DateTime? get updatedAt;
+  String? get blockLeadFor;
+  String? get dealReminderAfter;
+  String? get newLeadFlagDateLimit;
+  dynamic get enablePbx;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of GlobalSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $GlobalSettingsCopyWith<GlobalSettings> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$GlobalSettingsCopyWithImpl<GlobalSettings>(
+          this as GlobalSettings, _$identity);
+
+  /// Serializes this GlobalSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GlobalSettings &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(
+                    other.timeUntilTicketArchived, timeUntilTicketArchived) ||
+                other.timeUntilTicketArchived == timeUntilTicketArchived) &&
+            (identical(other.checkoutLimit, checkoutLimit) ||
+                other.checkoutLimit == checkoutLimit) &&
+            (identical(other.unAssignLeadAfter, unAssignLeadAfter) ||
+                other.unAssignLeadAfter == unAssignLeadAfter) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.blockLeadFor, blockLeadFor) ||
+                other.blockLeadFor == blockLeadFor) &&
+            (identical(other.dealReminderAfter, dealReminderAfter) ||
+                other.dealReminderAfter == dealReminderAfter) &&
+            (identical(other.newLeadFlagDateLimit, newLeadFlagDateLimit) ||
+                other.newLeadFlagDateLimit == newLeadFlagDateLimit) &&
+            const DeepCollectionEquality().equals(other.enablePbx, enablePbx));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      timeUntilTicketArchived,
+      checkoutLimit,
+      unAssignLeadAfter,
+      createdAt,
+      updatedAt,
+      blockLeadFor,
+      dealReminderAfter,
+      newLeadFlagDateLimit,
+      const DeepCollectionEquality().hash(enablePbx));
+
+  @override
+  String toString() {
+    return 'GlobalSettings(id: $id, timeUntilTicketArchived: $timeUntilTicketArchived, checkoutLimit: $checkoutLimit, unAssignLeadAfter: $unAssignLeadAfter, createdAt: $createdAt, updatedAt: $updatedAt, blockLeadFor: $blockLeadFor, dealReminderAfter: $dealReminderAfter, newLeadFlagDateLimit: $newLeadFlagDateLimit, enablePbx: $enablePbx)';
+  }
 }
 
 /// @nodoc
-abstract class $GlobalSettingsCopyWith<$Res> {
+abstract mixin class $GlobalSettingsCopyWith<$Res> {
   factory $GlobalSettingsCopyWith(
-          GlobalSettings value, $Res Function(GlobalSettings) then) =
-      _$GlobalSettingsCopyWithImpl<$Res, GlobalSettings>;
+          GlobalSettings value, $Res Function(GlobalSettings) _then) =
+      _$GlobalSettingsCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -59,15 +106,15 @@ abstract class $GlobalSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
+class _$GlobalSettingsCopyWithImpl<$Res>
     implements $GlobalSettingsCopyWith<$Res> {
-  _$GlobalSettingsCopyWithImpl(this._value, this._then);
+  _$GlobalSettingsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final GlobalSettings _self;
+  final $Res Function(GlobalSettings) _then;
 
+  /// Create a copy of GlobalSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,151 +129,65 @@ class _$GlobalSettingsCopyWithImpl<$Res, $Val extends GlobalSettings>
     Object? newLeadFlagDateLimit = freezed,
     Object? enablePbx = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       timeUntilTicketArchived: freezed == timeUntilTicketArchived
-          ? _value.timeUntilTicketArchived
+          ? _self.timeUntilTicketArchived
           : timeUntilTicketArchived // ignore: cast_nullable_to_non_nullable
               as String?,
       checkoutLimit: null == checkoutLimit
-          ? _value.checkoutLimit
+          ? _self.checkoutLimit
           : checkoutLimit // ignore: cast_nullable_to_non_nullable
               as CheckoutLimit,
       unAssignLeadAfter: freezed == unAssignLeadAfter
-          ? _value.unAssignLeadAfter
+          ? _self.unAssignLeadAfter
           : unAssignLeadAfter // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       blockLeadFor: freezed == blockLeadFor
-          ? _value.blockLeadFor
+          ? _self.blockLeadFor
           : blockLeadFor // ignore: cast_nullable_to_non_nullable
               as String?,
       dealReminderAfter: freezed == dealReminderAfter
-          ? _value.dealReminderAfter
+          ? _self.dealReminderAfter
           : dealReminderAfter // ignore: cast_nullable_to_non_nullable
               as String?,
       newLeadFlagDateLimit: freezed == newLeadFlagDateLimit
-          ? _value.newLeadFlagDateLimit
+          ? _self.newLeadFlagDateLimit
           : newLeadFlagDateLimit // ignore: cast_nullable_to_non_nullable
               as String?,
       enablePbx: freezed == enablePbx
-          ? _value.enablePbx
+          ? _self.enablePbx
           : enablePbx // ignore: cast_nullable_to_non_nullable
               as dynamic,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of GlobalSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CheckoutLimitCopyWith<$Res> get checkoutLimit {
-    return $CheckoutLimitCopyWith<$Res>(_value.checkoutLimit, (value) {
-      return _then(_value.copyWith(checkoutLimit: value) as $Val);
+    return $CheckoutLimitCopyWith<$Res>(_self.checkoutLimit, (value) {
+      return _then(_self.copyWith(checkoutLimit: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$GlobalSettingsImplCopyWith<$Res>
-    implements $GlobalSettingsCopyWith<$Res> {
-  factory _$$GlobalSettingsImplCopyWith(_$GlobalSettingsImpl value,
-          $Res Function(_$GlobalSettingsImpl) then) =
-      __$$GlobalSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String? timeUntilTicketArchived,
-      CheckoutLimit checkoutLimit,
-      String? unAssignLeadAfter,
-      DateTime? createdAt,
-      DateTime? updatedAt,
-      String? blockLeadFor,
-      String? dealReminderAfter,
-      String? newLeadFlagDateLimit,
-      dynamic enablePbx});
-
-  @override
-  $CheckoutLimitCopyWith<$Res> get checkoutLimit;
-}
-
-/// @nodoc
-class __$$GlobalSettingsImplCopyWithImpl<$Res>
-    extends _$GlobalSettingsCopyWithImpl<$Res, _$GlobalSettingsImpl>
-    implements _$$GlobalSettingsImplCopyWith<$Res> {
-  __$$GlobalSettingsImplCopyWithImpl(
-      _$GlobalSettingsImpl _value, $Res Function(_$GlobalSettingsImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? timeUntilTicketArchived = freezed,
-    Object? checkoutLimit = null,
-    Object? unAssignLeadAfter = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? blockLeadFor = freezed,
-    Object? dealReminderAfter = freezed,
-    Object? newLeadFlagDateLimit = freezed,
-    Object? enablePbx = freezed,
-  }) {
-    return _then(_$GlobalSettingsImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      timeUntilTicketArchived: freezed == timeUntilTicketArchived
-          ? _value.timeUntilTicketArchived
-          : timeUntilTicketArchived // ignore: cast_nullable_to_non_nullable
-              as String?,
-      checkoutLimit: null == checkoutLimit
-          ? _value.checkoutLimit
-          : checkoutLimit // ignore: cast_nullable_to_non_nullable
-              as CheckoutLimit,
-      unAssignLeadAfter: freezed == unAssignLeadAfter
-          ? _value.unAssignLeadAfter
-          : unAssignLeadAfter // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blockLeadFor: freezed == blockLeadFor
-          ? _value.blockLeadFor
-          : blockLeadFor // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dealReminderAfter: freezed == dealReminderAfter
-          ? _value.dealReminderAfter
-          : dealReminderAfter // ignore: cast_nullable_to_non_nullable
-              as String?,
-      newLeadFlagDateLimit: freezed == newLeadFlagDateLimit
-          ? _value.newLeadFlagDateLimit
-          : newLeadFlagDateLimit // ignore: cast_nullable_to_non_nullable
-              as String?,
-      enablePbx: freezed == enablePbx ? _value.enablePbx! : enablePbx,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$GlobalSettingsImpl implements _GlobalSettings {
-  const _$GlobalSettingsImpl(
+class _GlobalSettings implements GlobalSettings {
+  const _GlobalSettings(
       {required this.id,
       this.timeUntilTicketArchived,
       required this.checkoutLimit,
@@ -237,9 +198,8 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
       this.dealReminderAfter,
       this.newLeadFlagDateLimit,
       this.enablePbx = false});
-
-  factory _$GlobalSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GlobalSettingsImplFromJson(json);
+  factory _GlobalSettings.fromJson(Map<String, dynamic> json) =>
+      _$GlobalSettingsFromJson(json);
 
   @override
   final String id;
@@ -263,16 +223,26 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
   @JsonKey()
   final dynamic enablePbx;
 
+  /// Create a copy of GlobalSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GlobalSettings(id: $id, timeUntilTicketArchived: $timeUntilTicketArchived, checkoutLimit: $checkoutLimit, unAssignLeadAfter: $unAssignLeadAfter, createdAt: $createdAt, updatedAt: $updatedAt, blockLeadFor: $blockLeadFor, dealReminderAfter: $dealReminderAfter, newLeadFlagDateLimit: $newLeadFlagDateLimit, enablePbx: $enablePbx)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GlobalSettingsCopyWith<_GlobalSettings> get copyWith =>
+      __$GlobalSettingsCopyWithImpl<_GlobalSettings>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GlobalSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GlobalSettingsImpl &&
+            other is _GlobalSettings &&
             (identical(other.id, id) || other.id == id) &&
             (identical(
                     other.timeUntilTicketArchived, timeUntilTicketArchived) ||
@@ -294,7 +264,7 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
             const DeepCollectionEquality().equals(other.enablePbx, enablePbx));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -309,141 +279,173 @@ class _$GlobalSettingsImpl implements _GlobalSettings {
       newLeadFlagDateLimit,
       const DeepCollectionEquality().hash(enablePbx));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GlobalSettingsImplCopyWith<_$GlobalSettingsImpl> get copyWith =>
-      __$$GlobalSettingsImplCopyWithImpl<_$GlobalSettingsImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GlobalSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GlobalSettings(id: $id, timeUntilTicketArchived: $timeUntilTicketArchived, checkoutLimit: $checkoutLimit, unAssignLeadAfter: $unAssignLeadAfter, createdAt: $createdAt, updatedAt: $updatedAt, blockLeadFor: $blockLeadFor, dealReminderAfter: $dealReminderAfter, newLeadFlagDateLimit: $newLeadFlagDateLimit, enablePbx: $enablePbx)';
   }
 }
 
-abstract class _GlobalSettings implements GlobalSettings {
-  const factory _GlobalSettings(
-      {required final String id,
-      final String? timeUntilTicketArchived,
-      required final CheckoutLimit checkoutLimit,
-      final String? unAssignLeadAfter,
-      final DateTime? createdAt,
-      final DateTime? updatedAt,
-      final String? blockLeadFor,
-      final String? dealReminderAfter,
-      final String? newLeadFlagDateLimit,
-      final dynamic enablePbx}) = _$GlobalSettingsImpl;
+/// @nodoc
+abstract mixin class _$GlobalSettingsCopyWith<$Res>
+    implements $GlobalSettingsCopyWith<$Res> {
+  factory _$GlobalSettingsCopyWith(
+          _GlobalSettings value, $Res Function(_GlobalSettings) _then) =
+      __$GlobalSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String? timeUntilTicketArchived,
+      CheckoutLimit checkoutLimit,
+      String? unAssignLeadAfter,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      String? blockLeadFor,
+      String? dealReminderAfter,
+      String? newLeadFlagDateLimit,
+      dynamic enablePbx});
 
-  factory _GlobalSettings.fromJson(Map<String, dynamic> json) =
-      _$GlobalSettingsImpl.fromJson;
-
   @override
-  String get id;
-  @override
-  String? get timeUntilTicketArchived;
-  @override
-  CheckoutLimit get checkoutLimit;
-  @override
-  String? get unAssignLeadAfter;
-  @override
-  DateTime? get createdAt;
-  @override
-  DateTime? get updatedAt;
-  @override
-  String? get blockLeadFor;
-  @override
-  String? get dealReminderAfter;
-  @override
-  String? get newLeadFlagDateLimit;
-  @override
-  dynamic get enablePbx;
-  @override
-  @JsonKey(ignore: true)
-  _$$GlobalSettingsImplCopyWith<_$GlobalSettingsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CheckoutLimitCopyWith<$Res> get checkoutLimit;
 }
 
-CheckoutLimit _$CheckoutLimitFromJson(Map<String, dynamic> json) {
-  return _CheckoutLimit.fromJson(json);
+/// @nodoc
+class __$GlobalSettingsCopyWithImpl<$Res>
+    implements _$GlobalSettingsCopyWith<$Res> {
+  __$GlobalSettingsCopyWithImpl(this._self, this._then);
+
+  final _GlobalSettings _self;
+  final $Res Function(_GlobalSettings) _then;
+
+  /// Create a copy of GlobalSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? timeUntilTicketArchived = freezed,
+    Object? checkoutLimit = null,
+    Object? unAssignLeadAfter = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? blockLeadFor = freezed,
+    Object? dealReminderAfter = freezed,
+    Object? newLeadFlagDateLimit = freezed,
+    Object? enablePbx = freezed,
+  }) {
+    return _then(_GlobalSettings(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      timeUntilTicketArchived: freezed == timeUntilTicketArchived
+          ? _self.timeUntilTicketArchived
+          : timeUntilTicketArchived // ignore: cast_nullable_to_non_nullable
+              as String?,
+      checkoutLimit: null == checkoutLimit
+          ? _self.checkoutLimit
+          : checkoutLimit // ignore: cast_nullable_to_non_nullable
+              as CheckoutLimit,
+      unAssignLeadAfter: freezed == unAssignLeadAfter
+          ? _self.unAssignLeadAfter
+          : unAssignLeadAfter // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      blockLeadFor: freezed == blockLeadFor
+          ? _self.blockLeadFor
+          : blockLeadFor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealReminderAfter: freezed == dealReminderAfter
+          ? _self.dealReminderAfter
+          : dealReminderAfter // ignore: cast_nullable_to_non_nullable
+              as String?,
+      newLeadFlagDateLimit: freezed == newLeadFlagDateLimit
+          ? _self.newLeadFlagDateLimit
+          : newLeadFlagDateLimit // ignore: cast_nullable_to_non_nullable
+              as String?,
+      enablePbx: freezed == enablePbx
+          ? _self.enablePbx
+          : enablePbx // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+
+  /// Create a copy of GlobalSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CheckoutLimitCopyWith<$Res> get checkoutLimit {
+    return $CheckoutLimitCopyWith<$Res>(_self.checkoutLimit, (value) {
+      return _then(_self.copyWith(checkoutLimit: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$CheckoutLimit {
-  int get limit => throw _privateConstructorUsedError;
-  int get tolerance => throw _privateConstructorUsedError;
-  String get unassignAfter => throw _privateConstructorUsedError;
+  int get limit;
+  int get tolerance;
+  String get unassignAfter;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $CheckoutLimitCopyWith<CheckoutLimit> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CheckoutLimitCopyWith<$Res> {
-  factory $CheckoutLimitCopyWith(
-          CheckoutLimit value, $Res Function(CheckoutLimit) then) =
-      _$CheckoutLimitCopyWithImpl<$Res, CheckoutLimit>;
-  @useResult
-  $Res call({int limit, int tolerance, String unassignAfter});
-}
-
-/// @nodoc
-class _$CheckoutLimitCopyWithImpl<$Res, $Val extends CheckoutLimit>
-    implements $CheckoutLimitCopyWith<$Res> {
-  _$CheckoutLimitCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of CheckoutLimit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $CheckoutLimitCopyWith<CheckoutLimit> get copyWith =>
+      _$CheckoutLimitCopyWithImpl<CheckoutLimit>(
+          this as CheckoutLimit, _$identity);
+
+  /// Serializes this CheckoutLimit to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? limit = null,
-    Object? tolerance = null,
-    Object? unassignAfter = null,
-  }) {
-    return _then(_value.copyWith(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-      tolerance: null == tolerance
-          ? _value.tolerance
-          : tolerance // ignore: cast_nullable_to_non_nullable
-              as int,
-      unassignAfter: null == unassignAfter
-          ? _value.unassignAfter
-          : unassignAfter // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CheckoutLimit &&
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.tolerance, tolerance) ||
+                other.tolerance == tolerance) &&
+            (identical(other.unassignAfter, unassignAfter) ||
+                other.unassignAfter == unassignAfter));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, limit, tolerance, unassignAfter);
+
+  @override
+  String toString() {
+    return 'CheckoutLimit(limit: $limit, tolerance: $tolerance, unassignAfter: $unassignAfter)';
   }
 }
 
 /// @nodoc
-abstract class _$$CheckoutLimitImplCopyWith<$Res>
-    implements $CheckoutLimitCopyWith<$Res> {
-  factory _$$CheckoutLimitImplCopyWith(
-          _$CheckoutLimitImpl value, $Res Function(_$CheckoutLimitImpl) then) =
-      __$$CheckoutLimitImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CheckoutLimitCopyWith<$Res> {
+  factory $CheckoutLimitCopyWith(
+          CheckoutLimit value, $Res Function(CheckoutLimit) _then) =
+      _$CheckoutLimitCopyWithImpl;
   @useResult
   $Res call({int limit, int tolerance, String unassignAfter});
 }
 
 /// @nodoc
-class __$$CheckoutLimitImplCopyWithImpl<$Res>
-    extends _$CheckoutLimitCopyWithImpl<$Res, _$CheckoutLimitImpl>
-    implements _$$CheckoutLimitImplCopyWith<$Res> {
-  __$$CheckoutLimitImplCopyWithImpl(
-      _$CheckoutLimitImpl _value, $Res Function(_$CheckoutLimitImpl) _then)
-      : super(_value, _then);
+class _$CheckoutLimitCopyWithImpl<$Res>
+    implements $CheckoutLimitCopyWith<$Res> {
+  _$CheckoutLimitCopyWithImpl(this._self, this._then);
 
+  final CheckoutLimit _self;
+  final $Res Function(CheckoutLimit) _then;
+
+  /// Create a copy of CheckoutLimit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -451,17 +453,17 @@ class __$$CheckoutLimitImplCopyWithImpl<$Res>
     Object? tolerance = null,
     Object? unassignAfter = null,
   }) {
-    return _then(_$CheckoutLimitImpl(
+    return _then(_self.copyWith(
       limit: null == limit
-          ? _value.limit
+          ? _self.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
       tolerance: null == tolerance
-          ? _value.tolerance
+          ? _self.tolerance
           : tolerance // ignore: cast_nullable_to_non_nullable
               as int,
       unassignAfter: null == unassignAfter
-          ? _value.unassignAfter
+          ? _self.unassignAfter
           : unassignAfter // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -470,14 +472,13 @@ class __$$CheckoutLimitImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CheckoutLimitImpl implements _CheckoutLimit {
-  const _$CheckoutLimitImpl(
+class _CheckoutLimit implements CheckoutLimit {
+  const _CheckoutLimit(
       {required this.limit,
       required this.tolerance,
       required this.unassignAfter});
-
-  factory _$CheckoutLimitImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CheckoutLimitImplFromJson(json);
+  factory _CheckoutLimit.fromJson(Map<String, dynamic> json) =>
+      _$CheckoutLimitFromJson(json);
 
   @override
   final int limit;
@@ -486,16 +487,26 @@ class _$CheckoutLimitImpl implements _CheckoutLimit {
   @override
   final String unassignAfter;
 
+  /// Create a copy of CheckoutLimit
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CheckoutLimit(limit: $limit, tolerance: $tolerance, unassignAfter: $unassignAfter)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CheckoutLimitCopyWith<_CheckoutLimit> get copyWith =>
+      __$CheckoutLimitCopyWithImpl<_CheckoutLimit>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CheckoutLimitToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CheckoutLimitImpl &&
+            other is _CheckoutLimit &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.tolerance, tolerance) ||
                 other.tolerance == tolerance) &&
@@ -503,41 +514,59 @@ class _$CheckoutLimitImpl implements _CheckoutLimit {
                 other.unassignAfter == unassignAfter));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, limit, tolerance, unassignAfter);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CheckoutLimitImplCopyWith<_$CheckoutLimitImpl> get copyWith =>
-      __$$CheckoutLimitImplCopyWithImpl<_$CheckoutLimitImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CheckoutLimitImplToJson(
-      this,
-    );
+  String toString() {
+    return 'CheckoutLimit(limit: $limit, tolerance: $tolerance, unassignAfter: $unassignAfter)';
   }
 }
 
-abstract class _CheckoutLimit implements CheckoutLimit {
-  const factory _CheckoutLimit(
-      {required final int limit,
-      required final int tolerance,
-      required final String unassignAfter}) = _$CheckoutLimitImpl;
-
-  factory _CheckoutLimit.fromJson(Map<String, dynamic> json) =
-      _$CheckoutLimitImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$CheckoutLimitCopyWith<$Res>
+    implements $CheckoutLimitCopyWith<$Res> {
+  factory _$CheckoutLimitCopyWith(
+          _CheckoutLimit value, $Res Function(_CheckoutLimit) _then) =
+      __$CheckoutLimitCopyWithImpl;
   @override
-  int get limit;
-  @override
-  int get tolerance;
-  @override
-  String get unassignAfter;
-  @override
-  @JsonKey(ignore: true)
-  _$$CheckoutLimitImplCopyWith<_$CheckoutLimitImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({int limit, int tolerance, String unassignAfter});
 }
+
+/// @nodoc
+class __$CheckoutLimitCopyWithImpl<$Res>
+    implements _$CheckoutLimitCopyWith<$Res> {
+  __$CheckoutLimitCopyWithImpl(this._self, this._then);
+
+  final _CheckoutLimit _self;
+  final $Res Function(_CheckoutLimit) _then;
+
+  /// Create a copy of CheckoutLimit
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? limit = null,
+    Object? tolerance = null,
+    Object? unassignAfter = null,
+  }) {
+    return _then(_CheckoutLimit(
+      limit: null == limit
+          ? _self.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+      tolerance: null == tolerance
+          ? _self.tolerance
+          : tolerance // ignore: cast_nullable_to_non_nullable
+              as int,
+      unassignAfter: null == unassignAfter
+          ? _self.unassignAfter
+          : unassignAfter // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

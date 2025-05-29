@@ -4,7 +4,7 @@ part 'user_list_data.freezed.dart';
 part 'user_list_data.g.dart';
 
 @freezed
-class UserListData with _$UserListData {
+abstract class UserListData with _$UserListData {
   const factory UserListData(
       {@JsonKey(name: "_id") required String id,
       @JsonKey(name: "user_name") String? name,

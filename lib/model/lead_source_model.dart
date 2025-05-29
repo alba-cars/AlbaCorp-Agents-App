@@ -5,7 +5,7 @@ part 'lead_source_model.freezed.dart';
 part 'lead_source_model.g.dart';
 
 @freezed
-class LeadSource with _$LeadSource {
+abstract class LeadSource with _$LeadSource {
   const factory LeadSource({
     required String id,
     required String name,

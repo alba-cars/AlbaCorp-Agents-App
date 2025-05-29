@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,40 +10,71 @@ part of 'user.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
-}
 
 /// @nodoc
 mixin _$User {
   @JsonKey(readValue: readId)
-  String get id => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
-  String? get whatsapp => throw _privateConstructorUsedError;
+  String get id;
+  String? get email;
+  String get phone;
+  String? get whatsapp;
   @JsonKey(name: "first_name")
-  String get firstName => throw _privateConstructorUsedError;
+  String get firstName;
   @JsonKey(name: "last_name")
-  String get lastName => throw _privateConstructorUsedError;
-  String? get city => throw _privateConstructorUsedError;
-  String? get photo => throw _privateConstructorUsedError;
-  String? get role => throw _privateConstructorUsedError;
-  UserPBXNumbers? get userPBXNumbers => throw _privateConstructorUsedError;
+  String get lastName;
+  String? get city;
+  String? get photo;
+  String? get role;
+  UserPBXNumbers? get userPBXNumbers;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<User> get copyWith =>
+      _$UserCopyWithImpl<User>(this as User, _$identity);
+
+  /// Serializes this User to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is User &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.whatsapp, whatsapp) ||
+                other.whatsapp == whatsapp) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.photo, photo) || other.photo == photo) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.userPBXNumbers, userPBXNumbers) ||
+                other.userPBXNumbers == userPBXNumbers));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, email, phone, whatsapp,
+      firstName, lastName, city, photo, role, userPBXNumbers);
+
+  @override
+  String toString() {
+    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers)';
+  }
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+abstract mixin class $UserCopyWith<$Res> {
+  factory $UserCopyWith(User value, $Res Function(User) _then) =
+      _$UserCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
@@ -60,15 +92,14 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+  _$UserCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final User _self;
+  final $Res Function(User) _then;
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,156 +114,69 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? role = freezed,
     Object? userPBXNumbers = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       email: freezed == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
       phone: null == phone
-          ? _value.phone
+          ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
       whatsapp: freezed == whatsapp
-          ? _value.whatsapp
+          ? _self.whatsapp
           : whatsapp // ignore: cast_nullable_to_non_nullable
               as String?,
       firstName: null == firstName
-          ? _value.firstName
+          ? _self.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
       lastName: null == lastName
-          ? _value.lastName
+          ? _self.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
       city: freezed == city
-          ? _value.city
+          ? _self.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
       photo: freezed == photo
-          ? _value.photo
+          ? _self.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
-          ? _value.role
+          ? _self.role
           : role // ignore: cast_nullable_to_non_nullable
               as String?,
       userPBXNumbers: freezed == userPBXNumbers
-          ? _value.userPBXNumbers
+          ? _self.userPBXNumbers
           : userPBXNumbers // ignore: cast_nullable_to_non_nullable
               as UserPBXNumbers?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers {
-    if (_value.userPBXNumbers == null) {
+    if (_self.userPBXNumbers == null) {
       return null;
     }
 
-    return $UserPBXNumbersCopyWith<$Res>(_value.userPBXNumbers!, (value) {
-      return _then(_value.copyWith(userPBXNumbers: value) as $Val);
+    return $UserPBXNumbersCopyWith<$Res>(_self.userPBXNumbers!, (value) {
+      return _then(_self.copyWith(userPBXNumbers: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$UserImplCopyWith(
-          _$UserImpl value, $Res Function(_$UserImpl) then) =
-      __$$UserImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(readValue: readId) String id,
-      String? email,
-      String phone,
-      String? whatsapp,
-      @JsonKey(name: "first_name") String firstName,
-      @JsonKey(name: "last_name") String lastName,
-      String? city,
-      String? photo,
-      String? role,
-      UserPBXNumbers? userPBXNumbers});
-
-  @override
-  $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers;
-}
-
-/// @nodoc
-class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
-    implements _$$UserImplCopyWith<$Res> {
-  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? email = freezed,
-    Object? phone = null,
-    Object? whatsapp = freezed,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? city = freezed,
-    Object? photo = freezed,
-    Object? role = freezed,
-    Object? userPBXNumbers = freezed,
-  }) {
-    return _then(_$UserImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phone: null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      whatsapp: freezed == whatsapp
-          ? _value.whatsapp
-          : whatsapp // ignore: cast_nullable_to_non_nullable
-              as String?,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: freezed == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      photo: freezed == photo
-          ? _value.photo
-          : photo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      role: freezed == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userPBXNumbers: freezed == userPBXNumbers
-          ? _value.userPBXNumbers
-          : userPBXNumbers // ignore: cast_nullable_to_non_nullable
-              as UserPBXNumbers?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$UserImpl implements _User {
-  const _$UserImpl(
+class _User implements User {
+  const _User(
       {@JsonKey(readValue: readId) required this.id,
       required this.email,
       this.phone = '',
@@ -243,9 +187,7 @@ class _$UserImpl implements _User {
       this.photo,
       this.role,
       this.userPBXNumbers});
-
-  factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserImplFromJson(json);
+  factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   @override
   @JsonKey(readValue: readId)
@@ -272,16 +214,26 @@ class _$UserImpl implements _User {
   @override
   final UserPBXNumbers? userPBXNumbers;
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UserCopyWith<_User> get copyWith =>
+      __$UserCopyWithImpl<_User>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UserToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserImpl &&
+            other is _User &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -298,197 +250,143 @@ class _$UserImpl implements _User {
                 other.userPBXNumbers == userPBXNumbers));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, email, phone, whatsapp,
       firstName, lastName, city, photo, role, userPBXNumbers);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      __$$UserImplCopyWithImpl<_$UserImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(
-      this,
-    );
+  String toString() {
+    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers)';
   }
 }
 
-abstract class _User implements User {
-  const factory _User(
-      {@JsonKey(readValue: readId) required final String id,
-      required final String? email,
-      final String phone,
-      final String? whatsapp,
-      @JsonKey(name: "first_name") final String firstName,
-      @JsonKey(name: "last_name") final String lastName,
-      final String? city,
-      final String? photo,
-      final String? role,
-      final UserPBXNumbers? userPBXNumbers}) = _$UserImpl;
+/// @nodoc
+abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$UserCopyWith(_User value, $Res Function(_User) _then) =
+      __$UserCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(readValue: readId) String id,
+      String? email,
+      String phone,
+      String? whatsapp,
+      @JsonKey(name: "first_name") String firstName,
+      @JsonKey(name: "last_name") String lastName,
+      String? city,
+      String? photo,
+      String? role,
+      UserPBXNumbers? userPBXNumbers});
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
-
   @override
-  @JsonKey(readValue: readId)
-  String get id;
-  @override
-  String? get email;
-  @override
-  String get phone;
-  @override
-  String? get whatsapp;
-  @override
-  @JsonKey(name: "first_name")
-  String get firstName;
-  @override
-  @JsonKey(name: "last_name")
-  String get lastName;
-  @override
-  String? get city;
-  @override
-  String? get photo;
-  @override
-  String? get role;
-  @override
-  UserPBXNumbers? get userPBXNumbers;
-  @override
-  @JsonKey(ignore: true)
-  _$$UserImplCopyWith<_$UserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers;
 }
 
-UserPBXNumbers _$UserPBXNumbersFromJson(Map<String, dynamic> json) {
-  return _UserPBXNumbers.fromJson(json);
+/// @nodoc
+class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
+  __$UserCopyWithImpl(this._self, this._then);
+
+  final _User _self;
+  final $Res Function(_User) _then;
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? email = freezed,
+    Object? phone = null,
+    Object? whatsapp = freezed,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? city = freezed,
+    Object? photo = freezed,
+    Object? role = freezed,
+    Object? userPBXNumbers = freezed,
+  }) {
+    return _then(_User(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: freezed == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: null == phone
+          ? _self.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      whatsapp: freezed == whatsapp
+          ? _self.whatsapp
+          : whatsapp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstName: null == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      city: freezed == city
+          ? _self.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      photo: freezed == photo
+          ? _self.photo
+          : photo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _self.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userPBXNumbers: freezed == userPBXNumbers
+          ? _self.userPBXNumbers
+          : userPBXNumbers // ignore: cast_nullable_to_non_nullable
+              as UserPBXNumbers?,
+    ));
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers {
+    if (_self.userPBXNumbers == null) {
+      return null;
+    }
+
+    return $UserPBXNumbersCopyWith<$Res>(_self.userPBXNumbers!, (value) {
+      return _then(_self.copyWith(userPBXNumbers: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$UserPBXNumbers {
-  String get publicNumber => throw _privateConstructorUsedError;
-  String? get pfNumber => throw _privateConstructorUsedError;
-  String? get bayutNumber => throw _privateConstructorUsedError;
+  String get publicNumber;
+  String? get pfNumber;
+  String? get bayutNumber;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of UserPBXNumbers
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $UserPBXNumbersCopyWith<UserPBXNumbers> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$UserPBXNumbersCopyWithImpl<UserPBXNumbers>(
+          this as UserPBXNumbers, _$identity);
 
-/// @nodoc
-abstract class $UserPBXNumbersCopyWith<$Res> {
-  factory $UserPBXNumbersCopyWith(
-          UserPBXNumbers value, $Res Function(UserPBXNumbers) then) =
-      _$UserPBXNumbersCopyWithImpl<$Res, UserPBXNumbers>;
-  @useResult
-  $Res call({String publicNumber, String? pfNumber, String? bayutNumber});
-}
-
-/// @nodoc
-class _$UserPBXNumbersCopyWithImpl<$Res, $Val extends UserPBXNumbers>
-    implements $UserPBXNumbersCopyWith<$Res> {
-  _$UserPBXNumbersCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? publicNumber = null,
-    Object? pfNumber = freezed,
-    Object? bayutNumber = freezed,
-  }) {
-    return _then(_value.copyWith(
-      publicNumber: null == publicNumber
-          ? _value.publicNumber
-          : publicNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      pfNumber: freezed == pfNumber
-          ? _value.pfNumber
-          : pfNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bayutNumber: freezed == bayutNumber
-          ? _value.bayutNumber
-          : bayutNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$UserPBXNumbersImplCopyWith<$Res>
-    implements $UserPBXNumbersCopyWith<$Res> {
-  factory _$$UserPBXNumbersImplCopyWith(_$UserPBXNumbersImpl value,
-          $Res Function(_$UserPBXNumbersImpl) then) =
-      __$$UserPBXNumbersImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String publicNumber, String? pfNumber, String? bayutNumber});
-}
-
-/// @nodoc
-class __$$UserPBXNumbersImplCopyWithImpl<$Res>
-    extends _$UserPBXNumbersCopyWithImpl<$Res, _$UserPBXNumbersImpl>
-    implements _$$UserPBXNumbersImplCopyWith<$Res> {
-  __$$UserPBXNumbersImplCopyWithImpl(
-      _$UserPBXNumbersImpl _value, $Res Function(_$UserPBXNumbersImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? publicNumber = null,
-    Object? pfNumber = freezed,
-    Object? bayutNumber = freezed,
-  }) {
-    return _then(_$UserPBXNumbersImpl(
-      publicNumber: null == publicNumber
-          ? _value.publicNumber
-          : publicNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      pfNumber: freezed == pfNumber
-          ? _value.pfNumber
-          : pfNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bayutNumber: freezed == bayutNumber
-          ? _value.bayutNumber
-          : bayutNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$UserPBXNumbersImpl implements _UserPBXNumbers {
-  const _$UserPBXNumbersImpl(
-      {required this.publicNumber, this.pfNumber, this.bayutNumber});
-
-  factory _$UserPBXNumbersImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserPBXNumbersImplFromJson(json);
-
-  @override
-  final String publicNumber;
-  @override
-  final String? pfNumber;
-  @override
-  final String? bayutNumber;
-
-  @override
-  String toString() {
-    return 'UserPBXNumbers(publicNumber: $publicNumber, pfNumber: $pfNumber, bayutNumber: $bayutNumber)';
-  }
+  /// Serializes this UserPBXNumbers to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserPBXNumbersImpl &&
+            other is UserPBXNumbers &&
             (identical(other.publicNumber, publicNumber) ||
                 other.publicNumber == publicNumber) &&
             (identical(other.pfNumber, pfNumber) ||
@@ -497,43 +395,157 @@ class _$UserPBXNumbersImpl implements _UserPBXNumbers {
                 other.bayutNumber == bayutNumber));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, publicNumber, pfNumber, bayutNumber);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UserPBXNumbersImplCopyWith<_$UserPBXNumbersImpl> get copyWith =>
-      __$$UserPBXNumbersImplCopyWithImpl<_$UserPBXNumbersImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserPBXNumbersImplToJson(
-      this,
-    );
+  String toString() {
+    return 'UserPBXNumbers(publicNumber: $publicNumber, pfNumber: $pfNumber, bayutNumber: $bayutNumber)';
   }
 }
 
-abstract class _UserPBXNumbers implements UserPBXNumbers {
-  const factory _UserPBXNumbers(
-      {required final String publicNumber,
-      final String? pfNumber,
-      final String? bayutNumber}) = _$UserPBXNumbersImpl;
-
-  factory _UserPBXNumbers.fromJson(Map<String, dynamic> json) =
-      _$UserPBXNumbersImpl.fromJson;
-
-  @override
-  String get publicNumber;
-  @override
-  String? get pfNumber;
-  @override
-  String? get bayutNumber;
-  @override
-  @JsonKey(ignore: true)
-  _$$UserPBXNumbersImplCopyWith<_$UserPBXNumbersImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract mixin class $UserPBXNumbersCopyWith<$Res> {
+  factory $UserPBXNumbersCopyWith(
+          UserPBXNumbers value, $Res Function(UserPBXNumbers) _then) =
+      _$UserPBXNumbersCopyWithImpl;
+  @useResult
+  $Res call({String publicNumber, String? pfNumber, String? bayutNumber});
 }
+
+/// @nodoc
+class _$UserPBXNumbersCopyWithImpl<$Res>
+    implements $UserPBXNumbersCopyWith<$Res> {
+  _$UserPBXNumbersCopyWithImpl(this._self, this._then);
+
+  final UserPBXNumbers _self;
+  final $Res Function(UserPBXNumbers) _then;
+
+  /// Create a copy of UserPBXNumbers
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? publicNumber = null,
+    Object? pfNumber = freezed,
+    Object? bayutNumber = freezed,
+  }) {
+    return _then(_self.copyWith(
+      publicNumber: null == publicNumber
+          ? _self.publicNumber
+          : publicNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pfNumber: freezed == pfNumber
+          ? _self.pfNumber
+          : pfNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bayutNumber: freezed == bayutNumber
+          ? _self.bayutNumber
+          : bayutNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _UserPBXNumbers implements UserPBXNumbers {
+  const _UserPBXNumbers(
+      {required this.publicNumber, this.pfNumber, this.bayutNumber});
+  factory _UserPBXNumbers.fromJson(Map<String, dynamic> json) =>
+      _$UserPBXNumbersFromJson(json);
+
+  @override
+  final String publicNumber;
+  @override
+  final String? pfNumber;
+  @override
+  final String? bayutNumber;
+
+  /// Create a copy of UserPBXNumbers
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UserPBXNumbersCopyWith<_UserPBXNumbers> get copyWith =>
+      __$UserPBXNumbersCopyWithImpl<_UserPBXNumbers>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UserPBXNumbersToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UserPBXNumbers &&
+            (identical(other.publicNumber, publicNumber) ||
+                other.publicNumber == publicNumber) &&
+            (identical(other.pfNumber, pfNumber) ||
+                other.pfNumber == pfNumber) &&
+            (identical(other.bayutNumber, bayutNumber) ||
+                other.bayutNumber == bayutNumber));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, publicNumber, pfNumber, bayutNumber);
+
+  @override
+  String toString() {
+    return 'UserPBXNumbers(publicNumber: $publicNumber, pfNumber: $pfNumber, bayutNumber: $bayutNumber)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$UserPBXNumbersCopyWith<$Res>
+    implements $UserPBXNumbersCopyWith<$Res> {
+  factory _$UserPBXNumbersCopyWith(
+          _UserPBXNumbers value, $Res Function(_UserPBXNumbers) _then) =
+      __$UserPBXNumbersCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String publicNumber, String? pfNumber, String? bayutNumber});
+}
+
+/// @nodoc
+class __$UserPBXNumbersCopyWithImpl<$Res>
+    implements _$UserPBXNumbersCopyWith<$Res> {
+  __$UserPBXNumbersCopyWithImpl(this._self, this._then);
+
+  final _UserPBXNumbers _self;
+  final $Res Function(_UserPBXNumbers) _then;
+
+  /// Create a copy of UserPBXNumbers
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? publicNumber = null,
+    Object? pfNumber = freezed,
+    Object? bayutNumber = freezed,
+  }) {
+    return _then(_UserPBXNumbers(
+      publicNumber: null == publicNumber
+          ? _self.publicNumber
+          : publicNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pfNumber: freezed == pfNumber
+          ? _self.pfNumber
+          : pfNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bayutNumber: freezed == bayutNumber
+          ? _self.bayutNumber
+          : bayutNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

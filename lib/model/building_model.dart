@@ -6,7 +6,7 @@ part 'building_model.freezed.dart';
 part 'building_model.g.dart';
 
 @freezed
-class Building with _$Building {
+abstract class Building with _$Building {
   const factory Building({
     @JsonKey(readValue: readId) required String id,
     required String name,

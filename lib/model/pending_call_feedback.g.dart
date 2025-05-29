@@ -6,9 +6,8 @@ part of 'pending_call_feedback.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PendingCallFeedbackImpl _$$PendingCallFeedbackImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PendingCallFeedbackImpl(
+_PendingCallFeedback _$PendingCallFeedbackFromJson(Map<String, dynamic> json) =>
+    _PendingCallFeedback(
       id: (json['id'] as num).toInt(),
       number: json['number'] as String,
       callDirection: $enumDecode(_$CallDirectionEnumMap, json['callDirection']),
@@ -16,8 +15,8 @@ _$PendingCallFeedbackImpl _$$PendingCallFeedbackImplFromJson(
       isSynced: json['isSynced'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$PendingCallFeedbackImplToJson(
-        _$PendingCallFeedbackImpl instance) =>
+Map<String, dynamic> _$PendingCallFeedbackToJson(
+        _PendingCallFeedback instance) =>
     <String, dynamic>{
       'id': instance.id,
       'number': instance.number,

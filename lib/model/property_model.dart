@@ -7,7 +7,7 @@ part 'property_model.freezed.dart';
 part 'property_model.g.dart';
 
 @freezed
-class Property with _$Property {
+abstract class Property with _$Property {
   factory Property({
     String? id,
     required String listingType,
@@ -88,7 +88,7 @@ class Property with _$Property {
 }
 
 @freezed
-class PropertyImage with _$PropertyImage {
+abstract class PropertyImage with _$PropertyImage {
   const factory PropertyImage({
     required String thumbnail,
     required String original,

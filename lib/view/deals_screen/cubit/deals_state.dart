@@ -1,7 +1,7 @@
 part of 'deals_cubit.dart';
 
 @freezed
-class DealsState with _$DealsState {
+abstract class DealsState with _$DealsState {
   const factory DealsState({
     @Default([]) List<Deal> deals,
     @Default(AppStatus.init) AppStatus getDealsStatus,

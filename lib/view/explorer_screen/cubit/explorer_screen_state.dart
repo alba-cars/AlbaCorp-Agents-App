@@ -1,7 +1,7 @@
 part of 'explorer_screen_cubit.dart';
 
 @freezed
-class ExplorerScreenState with _$ExplorerScreenState {
+abstract class ExplorerScreenState with _$ExplorerScreenState {
   const factory ExplorerScreenState({
     @Default(AppStatus.init) AppStatus getExplorerListStatus,
     @Default([]) List<PropertyCard> explorerList,
@@ -26,7 +26,7 @@ class ExplorerScreenState with _$ExplorerScreenState {
     @Default(AppStatus.init) AppStatus getPropertyTypeListStatus,
     @Default([]) List<CommunityTeamModel> communityList,
     @Default(AppStatus.init) AppStatus getCommunityListStatus,
-     @Default([]) List<CommunityName> placesList,
+    @Default([]) List<CommunityName> placesList,
     @Default(AppStatus.init) AppStatus getPlacesListStatus,
     @Default([]) List<Building> buildingList,
     @Default(AppStatus.init) AppStatus getBuildingListStatus,

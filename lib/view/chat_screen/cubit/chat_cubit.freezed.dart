@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,34 +10,82 @@ part of 'chat_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChatState {
-  String get ticketId => throw _privateConstructorUsedError;
-  Ticket? get ticket => throw _privateConstructorUsedError;
-  AppStatus get getTicketStatus => throw _privateConstructorUsedError;
-  String? get getTicketError => throw _privateConstructorUsedError;
-  List<TicketMessage> get messages => throw _privateConstructorUsedError;
-  AppStatus get getMessagesStatus => throw _privateConstructorUsedError;
-  Paginator? get messagesPaginator => throw _privateConstructorUsedError;
-  String? get getMessagesError => throw _privateConstructorUsedError;
-  List<Message> get chatMessages => throw _privateConstructorUsedError;
-  AppStatus get addMessagesStatus => throw _privateConstructorUsedError;
-  String? get addMessagesError => throw _privateConstructorUsedError;
+  String get ticketId;
+  Ticket? get ticket;
+  AppStatus get getTicketStatus;
+  String? get getTicketError;
+  List<TicketMessage> get messages;
+  AppStatus get getMessagesStatus;
+  Paginator? get messagesPaginator;
+  String? get getMessagesError;
+  List<Message> get chatMessages;
+  AppStatus get addMessagesStatus;
+  String? get addMessagesError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ChatStateCopyWith<ChatState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ChatStateCopyWithImpl<ChatState>(this as ChatState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ChatState &&
+            (identical(other.ticketId, ticketId) ||
+                other.ticketId == ticketId) &&
+            (identical(other.ticket, ticket) || other.ticket == ticket) &&
+            (identical(other.getTicketStatus, getTicketStatus) ||
+                other.getTicketStatus == getTicketStatus) &&
+            (identical(other.getTicketError, getTicketError) ||
+                other.getTicketError == getTicketError) &&
+            const DeepCollectionEquality().equals(other.messages, messages) &&
+            (identical(other.getMessagesStatus, getMessagesStatus) ||
+                other.getMessagesStatus == getMessagesStatus) &&
+            (identical(other.messagesPaginator, messagesPaginator) ||
+                other.messagesPaginator == messagesPaginator) &&
+            (identical(other.getMessagesError, getMessagesError) ||
+                other.getMessagesError == getMessagesError) &&
+            const DeepCollectionEquality()
+                .equals(other.chatMessages, chatMessages) &&
+            (identical(other.addMessagesStatus, addMessagesStatus) ||
+                other.addMessagesStatus == addMessagesStatus) &&
+            (identical(other.addMessagesError, addMessagesError) ||
+                other.addMessagesError == addMessagesError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      ticketId,
+      ticket,
+      getTicketStatus,
+      getTicketError,
+      const DeepCollectionEquality().hash(messages),
+      getMessagesStatus,
+      messagesPaginator,
+      getMessagesError,
+      const DeepCollectionEquality().hash(chatMessages),
+      addMessagesStatus,
+      addMessagesError);
+
+  @override
+  String toString() {
+    return 'ChatState(ticketId: $ticketId, ticket: $ticket, getTicketStatus: $getTicketStatus, getTicketError: $getTicketError, messages: $messages, getMessagesStatus: $getMessagesStatus, messagesPaginator: $messagesPaginator, getMessagesError: $getMessagesError, chatMessages: $chatMessages, addMessagesStatus: $addMessagesStatus, addMessagesError: $addMessagesError)';
+  }
 }
 
 /// @nodoc
-abstract class $ChatStateCopyWith<$Res> {
-  factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) then) =
-      _$ChatStateCopyWithImpl<$Res, ChatState>;
+abstract mixin class $ChatStateCopyWith<$Res> {
+  factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) =
+      _$ChatStateCopyWithImpl;
   @useResult
   $Res call(
       {String ticketId,
@@ -56,15 +105,14 @@ abstract class $ChatStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
-    implements $ChatStateCopyWith<$Res> {
-  _$ChatStateCopyWithImpl(this._value, this._then);
+class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
+  _$ChatStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ChatState _self;
+  final $Res Function(ChatState) _then;
 
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,182 +128,87 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
     Object? addMessagesStatus = null,
     Object? addMessagesError = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       ticketId: null == ticketId
-          ? _value.ticketId
+          ? _self.ticketId
           : ticketId // ignore: cast_nullable_to_non_nullable
               as String,
       ticket: freezed == ticket
-          ? _value.ticket
+          ? _self.ticket
           : ticket // ignore: cast_nullable_to_non_nullable
               as Ticket?,
       getTicketStatus: null == getTicketStatus
-          ? _value.getTicketStatus
+          ? _self.getTicketStatus
           : getTicketStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getTicketError: freezed == getTicketError
-          ? _value.getTicketError
+          ? _self.getTicketError
           : getTicketError // ignore: cast_nullable_to_non_nullable
               as String?,
       messages: null == messages
-          ? _value.messages
+          ? _self.messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<TicketMessage>,
       getMessagesStatus: null == getMessagesStatus
-          ? _value.getMessagesStatus
+          ? _self.getMessagesStatus
           : getMessagesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       messagesPaginator: freezed == messagesPaginator
-          ? _value.messagesPaginator
+          ? _self.messagesPaginator
           : messagesPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       getMessagesError: freezed == getMessagesError
-          ? _value.getMessagesError
+          ? _self.getMessagesError
           : getMessagesError // ignore: cast_nullable_to_non_nullable
               as String?,
       chatMessages: null == chatMessages
-          ? _value.chatMessages
+          ? _self.chatMessages
           : chatMessages // ignore: cast_nullable_to_non_nullable
               as List<Message>,
       addMessagesStatus: null == addMessagesStatus
-          ? _value.addMessagesStatus
+          ? _self.addMessagesStatus
           : addMessagesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       addMessagesError: freezed == addMessagesError
-          ? _value.addMessagesError
-          : addMessagesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TicketCopyWith<$Res>? get ticket {
-    if (_value.ticket == null) {
-      return null;
-    }
-
-    return $TicketCopyWith<$Res>(_value.ticket!, (value) {
-      return _then(_value.copyWith(ticket: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get messagesPaginator {
-    if (_value.messagesPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.messagesPaginator!, (value) {
-      return _then(_value.copyWith(messagesPaginator: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$ChatStateImplCopyWith<$Res>
-    implements $ChatStateCopyWith<$Res> {
-  factory _$$ChatStateImplCopyWith(
-          _$ChatStateImpl value, $Res Function(_$ChatStateImpl) then) =
-      __$$ChatStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String ticketId,
-      Ticket? ticket,
-      AppStatus getTicketStatus,
-      String? getTicketError,
-      List<TicketMessage> messages,
-      AppStatus getMessagesStatus,
-      Paginator? messagesPaginator,
-      String? getMessagesError,
-      List<Message> chatMessages,
-      AppStatus addMessagesStatus,
-      String? addMessagesError});
-
-  @override
-  $TicketCopyWith<$Res>? get ticket;
-  @override
-  $PaginatorCopyWith<$Res>? get messagesPaginator;
-}
-
-/// @nodoc
-class __$$ChatStateImplCopyWithImpl<$Res>
-    extends _$ChatStateCopyWithImpl<$Res, _$ChatStateImpl>
-    implements _$$ChatStateImplCopyWith<$Res> {
-  __$$ChatStateImplCopyWithImpl(
-      _$ChatStateImpl _value, $Res Function(_$ChatStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? ticketId = null,
-    Object? ticket = freezed,
-    Object? getTicketStatus = null,
-    Object? getTicketError = freezed,
-    Object? messages = null,
-    Object? getMessagesStatus = null,
-    Object? messagesPaginator = freezed,
-    Object? getMessagesError = freezed,
-    Object? chatMessages = null,
-    Object? addMessagesStatus = null,
-    Object? addMessagesError = freezed,
-  }) {
-    return _then(_$ChatStateImpl(
-      ticketId: null == ticketId
-          ? _value.ticketId
-          : ticketId // ignore: cast_nullable_to_non_nullable
-              as String,
-      ticket: freezed == ticket
-          ? _value.ticket
-          : ticket // ignore: cast_nullable_to_non_nullable
-              as Ticket?,
-      getTicketStatus: null == getTicketStatus
-          ? _value.getTicketStatus
-          : getTicketStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getTicketError: freezed == getTicketError
-          ? _value.getTicketError
-          : getTicketError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      messages: null == messages
-          ? _value._messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<TicketMessage>,
-      getMessagesStatus: null == getMessagesStatus
-          ? _value.getMessagesStatus
-          : getMessagesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      messagesPaginator: freezed == messagesPaginator
-          ? _value.messagesPaginator
-          : messagesPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      getMessagesError: freezed == getMessagesError
-          ? _value.getMessagesError
-          : getMessagesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      chatMessages: null == chatMessages
-          ? _value._chatMessages
-          : chatMessages // ignore: cast_nullable_to_non_nullable
-              as List<Message>,
-      addMessagesStatus: null == addMessagesStatus
-          ? _value.addMessagesStatus
-          : addMessagesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      addMessagesError: freezed == addMessagesError
-          ? _value.addMessagesError
+          ? _self.addMessagesError
           : addMessagesError // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TicketCopyWith<$Res>? get ticket {
+    if (_self.ticket == null) {
+      return null;
+    }
+
+    return $TicketCopyWith<$Res>(_self.ticket!, (value) {
+      return _then(_self.copyWith(ticket: value));
+    });
+  }
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get messagesPaginator {
+    if (_self.messagesPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.messagesPaginator!, (value) {
+      return _then(_self.copyWith(messagesPaginator: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$ChatStateImpl implements _ChatState {
-  const _$ChatStateImpl(
+class _ChatState implements ChatState {
+  const _ChatState(
       {required this.ticketId,
       this.ticket,
       this.getTicketStatus = AppStatus.init,
@@ -310,16 +263,19 @@ class _$ChatStateImpl implements _ChatState {
   @override
   final String? addMessagesError;
 
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ChatState(ticketId: $ticketId, ticket: $ticket, getTicketStatus: $getTicketStatus, getTicketError: $getTicketError, messages: $messages, getMessagesStatus: $getMessagesStatus, messagesPaginator: $messagesPaginator, getMessagesError: $getMessagesError, chatMessages: $chatMessages, addMessagesStatus: $addMessagesStatus, addMessagesError: $addMessagesError)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ChatStateCopyWith<_ChatState> get copyWith =>
+      __$ChatStateCopyWithImpl<_ChatState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChatStateImpl &&
+            other is _ChatState &&
             (identical(other.ticketId, ticketId) ||
                 other.ticketId == ticketId) &&
             (identical(other.ticket, ticket) || other.ticket == ticket) &&
@@ -357,51 +313,138 @@ class _$ChatStateImpl implements _ChatState {
       addMessagesStatus,
       addMessagesError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'ChatState(ticketId: $ticketId, ticket: $ticket, getTicketStatus: $getTicketStatus, getTicketError: $getTicketError, messages: $messages, getMessagesStatus: $getMessagesStatus, messagesPaginator: $messagesPaginator, getMessagesError: $getMessagesError, chatMessages: $chatMessages, addMessagesStatus: $addMessagesStatus, addMessagesError: $addMessagesError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ChatStateCopyWith<$Res>
+    implements $ChatStateCopyWith<$Res> {
+  factory _$ChatStateCopyWith(
+          _ChatState value, $Res Function(_ChatState) _then) =
+      __$ChatStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String ticketId,
+      Ticket? ticket,
+      AppStatus getTicketStatus,
+      String? getTicketError,
+      List<TicketMessage> messages,
+      AppStatus getMessagesStatus,
+      Paginator? messagesPaginator,
+      String? getMessagesError,
+      List<Message> chatMessages,
+      AppStatus addMessagesStatus,
+      String? addMessagesError});
+
+  @override
+  $TicketCopyWith<$Res>? get ticket;
+  @override
+  $PaginatorCopyWith<$Res>? get messagesPaginator;
+}
+
+/// @nodoc
+class __$ChatStateCopyWithImpl<$Res> implements _$ChatStateCopyWith<$Res> {
+  __$ChatStateCopyWithImpl(this._self, this._then);
+
+  final _ChatState _self;
+  final $Res Function(_ChatState) _then;
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$ChatStateImplCopyWith<_$ChatStateImpl> get copyWith =>
-      __$$ChatStateImplCopyWithImpl<_$ChatStateImpl>(this, _$identity);
+  $Res call({
+    Object? ticketId = null,
+    Object? ticket = freezed,
+    Object? getTicketStatus = null,
+    Object? getTicketError = freezed,
+    Object? messages = null,
+    Object? getMessagesStatus = null,
+    Object? messagesPaginator = freezed,
+    Object? getMessagesError = freezed,
+    Object? chatMessages = null,
+    Object? addMessagesStatus = null,
+    Object? addMessagesError = freezed,
+  }) {
+    return _then(_ChatState(
+      ticketId: null == ticketId
+          ? _self.ticketId
+          : ticketId // ignore: cast_nullable_to_non_nullable
+              as String,
+      ticket: freezed == ticket
+          ? _self.ticket
+          : ticket // ignore: cast_nullable_to_non_nullable
+              as Ticket?,
+      getTicketStatus: null == getTicketStatus
+          ? _self.getTicketStatus
+          : getTicketStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getTicketError: freezed == getTicketError
+          ? _self.getTicketError
+          : getTicketError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      messages: null == messages
+          ? _self._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<TicketMessage>,
+      getMessagesStatus: null == getMessagesStatus
+          ? _self.getMessagesStatus
+          : getMessagesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      messagesPaginator: freezed == messagesPaginator
+          ? _self.messagesPaginator
+          : messagesPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      getMessagesError: freezed == getMessagesError
+          ? _self.getMessagesError
+          : getMessagesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      chatMessages: null == chatMessages
+          ? _self._chatMessages
+          : chatMessages // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+      addMessagesStatus: null == addMessagesStatus
+          ? _self.addMessagesStatus
+          : addMessagesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addMessagesError: freezed == addMessagesError
+          ? _self.addMessagesError
+          : addMessagesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TicketCopyWith<$Res>? get ticket {
+    if (_self.ticket == null) {
+      return null;
+    }
+
+    return $TicketCopyWith<$Res>(_self.ticket!, (value) {
+      return _then(_self.copyWith(ticket: value));
+    });
+  }
+
+  /// Create a copy of ChatState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get messagesPaginator {
+    if (_self.messagesPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.messagesPaginator!, (value) {
+      return _then(_self.copyWith(messagesPaginator: value));
+    });
+  }
 }
 
-abstract class _ChatState implements ChatState {
-  const factory _ChatState(
-      {required final String ticketId,
-      final Ticket? ticket,
-      final AppStatus getTicketStatus,
-      final String? getTicketError,
-      final List<TicketMessage> messages,
-      final AppStatus getMessagesStatus,
-      final Paginator? messagesPaginator,
-      final String? getMessagesError,
-      final List<Message> chatMessages,
-      final AppStatus addMessagesStatus,
-      final String? addMessagesError}) = _$ChatStateImpl;
-
-  @override
-  String get ticketId;
-  @override
-  Ticket? get ticket;
-  @override
-  AppStatus get getTicketStatus;
-  @override
-  String? get getTicketError;
-  @override
-  List<TicketMessage> get messages;
-  @override
-  AppStatus get getMessagesStatus;
-  @override
-  Paginator? get messagesPaginator;
-  @override
-  String? get getMessagesError;
-  @override
-  List<Message> get chatMessages;
-  @override
-  AppStatus get addMessagesStatus;
-  @override
-  String? get addMessagesError;
-  @override
-  @JsonKey(ignore: true)
-  _$$ChatStateImplCopyWith<_$ChatStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

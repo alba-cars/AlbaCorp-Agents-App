@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,419 +10,93 @@ part of 'call_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CallEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() callEnded,
-    required TResult Function(String note, String description, String feedback)
-        updateActivity,
-    required TResult Function(String phoneNumber, String activityId,
-            String leadId, String leadSource)
-        callStarted,
-    required TResult Function(String phoneNumber) clickToCall,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? callEnded,
-    TResult? Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult? Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult? Function(String phoneNumber)? clickToCall,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? callEnded,
-    TResult Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult Function(String phoneNumber)? clickToCall,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_CallEnded value) callEnded,
-    required TResult Function(_UpdateActivity value) updateActivity,
-    required TResult Function(_CallStarted value) callStarted,
-    required TResult Function(_ClickToCall value) clickToCall,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_CallEnded value)? callEnded,
-    TResult? Function(_UpdateActivity value)? updateActivity,
-    TResult? Function(_CallStarted value)? callStarted,
-    TResult? Function(_ClickToCall value)? clickToCall,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_CallEnded value)? callEnded,
-    TResult Function(_UpdateActivity value)? updateActivity,
-    TResult Function(_CallStarted value)? callStarted,
-    TResult Function(_ClickToCall value)? clickToCall,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is CallEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'CallEvent()';
+  }
 }
 
 /// @nodoc
-abstract class $CallEventCopyWith<$Res> {
-  factory $CallEventCopyWith(CallEvent value, $Res Function(CallEvent) then) =
-      _$CallEventCopyWithImpl<$Res, CallEvent>;
-}
-
-/// @nodoc
-class _$CallEventCopyWithImpl<$Res, $Val extends CallEvent>
-    implements $CallEventCopyWith<$Res> {
-  _$CallEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$CallEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
+class $CallEventCopyWith<$Res> {
+  $CallEventCopyWith(CallEvent _, $Res Function(CallEvent) __);
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
+class _Started implements CallEvent {
+  const _Started();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Started);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
     return 'CallEvent.started()';
   }
+}
+
+/// @nodoc
+
+class _CallEnded implements CallEvent {
+  const _CallEnded();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType && other is _CallEnded);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() callEnded,
-    required TResult Function(String note, String description, String feedback)
-        updateActivity,
-    required TResult Function(String phoneNumber, String activityId,
-            String leadId, String leadSource)
-        callStarted,
-    required TResult Function(String phoneNumber) clickToCall,
-  }) {
-    return started();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? callEnded,
-    TResult? Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult? Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult? Function(String phoneNumber)? clickToCall,
-  }) {
-    return started?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? callEnded,
-    TResult Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult Function(String phoneNumber)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_CallEnded value) callEnded,
-    required TResult Function(_UpdateActivity value) updateActivity,
-    required TResult Function(_CallStarted value) callStarted,
-    required TResult Function(_ClickToCall value) clickToCall,
-  }) {
-    return started(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_CallEnded value)? callEnded,
-    TResult? Function(_UpdateActivity value)? updateActivity,
-    TResult? Function(_CallStarted value)? callStarted,
-    TResult? Function(_ClickToCall value)? clickToCall,
-  }) {
-    return started?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_CallEnded value)? callEnded,
-    TResult Function(_UpdateActivity value)? updateActivity,
-    TResult Function(_CallStarted value)? callStarted,
-    TResult Function(_ClickToCall value)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (started != null) {
-      return started(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Started implements CallEvent {
-  const factory _Started() = _$StartedImpl;
-}
-
-/// @nodoc
-abstract class _$$CallEndedImplCopyWith<$Res> {
-  factory _$$CallEndedImplCopyWith(
-          _$CallEndedImpl value, $Res Function(_$CallEndedImpl) then) =
-      __$$CallEndedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CallEndedImplCopyWithImpl<$Res>
-    extends _$CallEventCopyWithImpl<$Res, _$CallEndedImpl>
-    implements _$$CallEndedImplCopyWith<$Res> {
-  __$$CallEndedImplCopyWithImpl(
-      _$CallEndedImpl _value, $Res Function(_$CallEndedImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$CallEndedImpl implements _CallEnded {
-  const _$CallEndedImpl();
 
   @override
   String toString() {
     return 'CallEvent.callEnded()';
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CallEndedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() callEnded,
-    required TResult Function(String note, String description, String feedback)
-        updateActivity,
-    required TResult Function(String phoneNumber, String activityId,
-            String leadId, String leadSource)
-        callStarted,
-    required TResult Function(String phoneNumber) clickToCall,
-  }) {
-    return callEnded();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? callEnded,
-    TResult? Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult? Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult? Function(String phoneNumber)? clickToCall,
-  }) {
-    return callEnded?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? callEnded,
-    TResult Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult Function(String phoneNumber)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (callEnded != null) {
-      return callEnded();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_CallEnded value) callEnded,
-    required TResult Function(_UpdateActivity value) updateActivity,
-    required TResult Function(_CallStarted value) callStarted,
-    required TResult Function(_ClickToCall value) clickToCall,
-  }) {
-    return callEnded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_CallEnded value)? callEnded,
-    TResult? Function(_UpdateActivity value)? updateActivity,
-    TResult? Function(_CallStarted value)? callStarted,
-    TResult? Function(_ClickToCall value)? clickToCall,
-  }) {
-    return callEnded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_CallEnded value)? callEnded,
-    TResult Function(_UpdateActivity value)? updateActivity,
-    TResult Function(_CallStarted value)? callStarted,
-    TResult Function(_ClickToCall value)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (callEnded != null) {
-      return callEnded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CallEnded implements CallEvent {
-  const factory _CallEnded() = _$CallEndedImpl;
-}
-
-/// @nodoc
-abstract class _$$UpdateActivityImplCopyWith<$Res> {
-  factory _$$UpdateActivityImplCopyWith(_$UpdateActivityImpl value,
-          $Res Function(_$UpdateActivityImpl) then) =
-      __$$UpdateActivityImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String note, String description, String feedback});
-}
-
-/// @nodoc
-class __$$UpdateActivityImplCopyWithImpl<$Res>
-    extends _$CallEventCopyWithImpl<$Res, _$UpdateActivityImpl>
-    implements _$$UpdateActivityImplCopyWith<$Res> {
-  __$$UpdateActivityImplCopyWithImpl(
-      _$UpdateActivityImpl _value, $Res Function(_$UpdateActivityImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? note = null,
-    Object? description = null,
-    Object? feedback = null,
-  }) {
-    return _then(_$UpdateActivityImpl(
-      note: null == note
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      feedback: null == feedback
-          ? _value.feedback
-          : feedback // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateActivityImpl implements _UpdateActivity {
-  const _$UpdateActivityImpl(
+class _UpdateActivity implements CallEvent {
+  const _UpdateActivity(
       {required this.note, required this.description, required this.feedback});
 
-  @override
   final String note;
-  @override
   final String description;
-  @override
   final String feedback;
 
-  @override
-  String toString() {
-    return 'CallEvent.updateActivity(note: $note, description: $description, feedback: $feedback)';
-  }
+  /// Create a copy of CallEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UpdateActivityCopyWith<_UpdateActivity> get copyWith =>
+      __$UpdateActivityCopyWithImpl<_UpdateActivity>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateActivityImpl &&
+            other is _UpdateActivity &&
             (identical(other.note, note) || other.note == note) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -432,162 +107,50 @@ class _$UpdateActivityImpl implements _UpdateActivity {
   @override
   int get hashCode => Object.hash(runtimeType, note, description, feedback);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateActivityImplCopyWith<_$UpdateActivityImpl> get copyWith =>
-      __$$UpdateActivityImplCopyWithImpl<_$UpdateActivityImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() callEnded,
-    required TResult Function(String note, String description, String feedback)
-        updateActivity,
-    required TResult Function(String phoneNumber, String activityId,
-            String leadId, String leadSource)
-        callStarted,
-    required TResult Function(String phoneNumber) clickToCall,
-  }) {
-    return updateActivity(note, description, feedback);
+  String toString() {
+    return 'CallEvent.updateActivity(note: $note, description: $description, feedback: $feedback)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? callEnded,
-    TResult? Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult? Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult? Function(String phoneNumber)? clickToCall,
-  }) {
-    return updateActivity?.call(note, description, feedback);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? callEnded,
-    TResult Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult Function(String phoneNumber)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (updateActivity != null) {
-      return updateActivity(note, description, feedback);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_CallEnded value) callEnded,
-    required TResult Function(_UpdateActivity value) updateActivity,
-    required TResult Function(_CallStarted value) callStarted,
-    required TResult Function(_ClickToCall value) clickToCall,
-  }) {
-    return updateActivity(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_CallEnded value)? callEnded,
-    TResult? Function(_UpdateActivity value)? updateActivity,
-    TResult? Function(_CallStarted value)? callStarted,
-    TResult? Function(_ClickToCall value)? clickToCall,
-  }) {
-    return updateActivity?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_CallEnded value)? callEnded,
-    TResult Function(_UpdateActivity value)? updateActivity,
-    TResult Function(_CallStarted value)? callStarted,
-    TResult Function(_ClickToCall value)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (updateActivity != null) {
-      return updateActivity(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateActivity implements CallEvent {
-  const factory _UpdateActivity(
-      {required final String note,
-      required final String description,
-      required final String feedback}) = _$UpdateActivityImpl;
-
-  String get note;
-  String get description;
-  String get feedback;
-  @JsonKey(ignore: true)
-  _$$UpdateActivityImplCopyWith<_$UpdateActivityImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CallStartedImplCopyWith<$Res> {
-  factory _$$CallStartedImplCopyWith(
-          _$CallStartedImpl value, $Res Function(_$CallStartedImpl) then) =
-      __$$CallStartedImplCopyWithImpl<$Res>;
+abstract mixin class _$UpdateActivityCopyWith<$Res>
+    implements $CallEventCopyWith<$Res> {
+  factory _$UpdateActivityCopyWith(
+          _UpdateActivity value, $Res Function(_UpdateActivity) _then) =
+      __$UpdateActivityCopyWithImpl;
   @useResult
-  $Res call(
-      {String phoneNumber,
-      String activityId,
-      String leadId,
-      String leadSource});
+  $Res call({String note, String description, String feedback});
 }
 
 /// @nodoc
-class __$$CallStartedImplCopyWithImpl<$Res>
-    extends _$CallEventCopyWithImpl<$Res, _$CallStartedImpl>
-    implements _$$CallStartedImplCopyWith<$Res> {
-  __$$CallStartedImplCopyWithImpl(
-      _$CallStartedImpl _value, $Res Function(_$CallStartedImpl) _then)
-      : super(_value, _then);
+class __$UpdateActivityCopyWithImpl<$Res>
+    implements _$UpdateActivityCopyWith<$Res> {
+  __$UpdateActivityCopyWithImpl(this._self, this._then);
 
+  final _UpdateActivity _self;
+  final $Res Function(_UpdateActivity) _then;
+
+  /// Create a copy of CallEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? phoneNumber = null,
-    Object? activityId = null,
-    Object? leadId = null,
-    Object? leadSource = null,
+    Object? note = null,
+    Object? description = null,
+    Object? feedback = null,
   }) {
-    return _then(_$CallStartedImpl(
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+    return _then(_UpdateActivity(
+      note: null == note
+          ? _self.note
+          : note // ignore: cast_nullable_to_non_nullable
               as String,
-      activityId: null == activityId
-          ? _value.activityId
-          : activityId // ignore: cast_nullable_to_non_nullable
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
-      leadId: null == leadId
-          ? _value.leadId
-          : leadId // ignore: cast_nullable_to_non_nullable
-              as String,
-      leadSource: null == leadSource
-          ? _value.leadSource
-          : leadSource // ignore: cast_nullable_to_non_nullable
+      feedback: null == feedback
+          ? _self.feedback
+          : feedback // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -595,32 +158,30 @@ class __$$CallStartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CallStartedImpl implements _CallStarted {
-  const _$CallStartedImpl(
+class _CallStarted implements CallEvent {
+  const _CallStarted(
       {required this.phoneNumber,
       required this.activityId,
       required this.leadId,
       required this.leadSource});
 
-  @override
   final String phoneNumber;
-  @override
   final String activityId;
-  @override
   final String leadId;
-  @override
   final String leadSource;
 
-  @override
-  String toString() {
-    return 'CallEvent.callStarted(phoneNumber: $phoneNumber, activityId: $activityId, leadId: $leadId, leadSource: $leadSource)';
-  }
+  /// Create a copy of CallEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CallStartedCopyWith<_CallStarted> get copyWith =>
+      __$CallStartedCopyWithImpl<_CallStarted>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CallStartedImpl &&
+            other is _CallStarted &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.activityId, activityId) ||
@@ -634,144 +195,58 @@ class _$CallStartedImpl implements _CallStarted {
   int get hashCode =>
       Object.hash(runtimeType, phoneNumber, activityId, leadId, leadSource);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CallStartedImplCopyWith<_$CallStartedImpl> get copyWith =>
-      __$$CallStartedImplCopyWithImpl<_$CallStartedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() callEnded,
-    required TResult Function(String note, String description, String feedback)
-        updateActivity,
-    required TResult Function(String phoneNumber, String activityId,
-            String leadId, String leadSource)
-        callStarted,
-    required TResult Function(String phoneNumber) clickToCall,
-  }) {
-    return callStarted(phoneNumber, activityId, leadId, leadSource);
+  String toString() {
+    return 'CallEvent.callStarted(phoneNumber: $phoneNumber, activityId: $activityId, leadId: $leadId, leadSource: $leadSource)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? callEnded,
-    TResult? Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult? Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult? Function(String phoneNumber)? clickToCall,
-  }) {
-    return callStarted?.call(phoneNumber, activityId, leadId, leadSource);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? callEnded,
-    TResult Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult Function(String phoneNumber)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (callStarted != null) {
-      return callStarted(phoneNumber, activityId, leadId, leadSource);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_CallEnded value) callEnded,
-    required TResult Function(_UpdateActivity value) updateActivity,
-    required TResult Function(_CallStarted value) callStarted,
-    required TResult Function(_ClickToCall value) clickToCall,
-  }) {
-    return callStarted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_CallEnded value)? callEnded,
-    TResult? Function(_UpdateActivity value)? updateActivity,
-    TResult? Function(_CallStarted value)? callStarted,
-    TResult? Function(_ClickToCall value)? clickToCall,
-  }) {
-    return callStarted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_CallEnded value)? callEnded,
-    TResult Function(_UpdateActivity value)? updateActivity,
-    TResult Function(_CallStarted value)? callStarted,
-    TResult Function(_ClickToCall value)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (callStarted != null) {
-      return callStarted(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _CallStarted implements CallEvent {
-  const factory _CallStarted(
-      {required final String phoneNumber,
-      required final String activityId,
-      required final String leadId,
-      required final String leadSource}) = _$CallStartedImpl;
-
-  String get phoneNumber;
-  String get activityId;
-  String get leadId;
-  String get leadSource;
-  @JsonKey(ignore: true)
-  _$$CallStartedImplCopyWith<_$CallStartedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ClickToCallImplCopyWith<$Res> {
-  factory _$$ClickToCallImplCopyWith(
-          _$ClickToCallImpl value, $Res Function(_$ClickToCallImpl) then) =
-      __$$ClickToCallImplCopyWithImpl<$Res>;
+abstract mixin class _$CallStartedCopyWith<$Res>
+    implements $CallEventCopyWith<$Res> {
+  factory _$CallStartedCopyWith(
+          _CallStarted value, $Res Function(_CallStarted) _then) =
+      __$CallStartedCopyWithImpl;
   @useResult
-  $Res call({String phoneNumber});
+  $Res call(
+      {String phoneNumber,
+      String activityId,
+      String leadId,
+      String leadSource});
 }
 
 /// @nodoc
-class __$$ClickToCallImplCopyWithImpl<$Res>
-    extends _$CallEventCopyWithImpl<$Res, _$ClickToCallImpl>
-    implements _$$ClickToCallImplCopyWith<$Res> {
-  __$$ClickToCallImplCopyWithImpl(
-      _$ClickToCallImpl _value, $Res Function(_$ClickToCallImpl) _then)
-      : super(_value, _then);
+class __$CallStartedCopyWithImpl<$Res> implements _$CallStartedCopyWith<$Res> {
+  __$CallStartedCopyWithImpl(this._self, this._then);
 
+  final _CallStarted _self;
+  final $Res Function(_CallStarted) _then;
+
+  /// Create a copy of CallEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? phoneNumber = null,
+    Object? activityId = null,
+    Object? leadId = null,
+    Object? leadSource = null,
   }) {
-    return _then(_$ClickToCallImpl(
+    return _then(_CallStarted(
       phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
+          ? _self.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      activityId: null == activityId
+          ? _self.activityId
+          : activityId // ignore: cast_nullable_to_non_nullable
+              as String,
+      leadId: null == leadId
+          ? _self.leadId
+          : leadId // ignore: cast_nullable_to_non_nullable
+              as String,
+      leadSource: null == leadSource
+          ? _self.leadSource
+          : leadSource // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -779,22 +254,23 @@ class __$$ClickToCallImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ClickToCallImpl implements _ClickToCall {
-  const _$ClickToCallImpl({required this.phoneNumber});
+class _ClickToCall implements CallEvent {
+  const _ClickToCall({required this.phoneNumber});
 
-  @override
   final String phoneNumber;
 
-  @override
-  String toString() {
-    return 'CallEvent.clickToCall(phoneNumber: $phoneNumber)';
-  }
+  /// Create a copy of CallEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ClickToCallCopyWith<_ClickToCall> get copyWith =>
+      __$ClickToCallCopyWithImpl<_ClickToCall>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ClickToCallImpl &&
+            other is _ClickToCall &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber));
   }
@@ -802,339 +278,68 @@ class _$ClickToCallImpl implements _ClickToCall {
   @override
   int get hashCode => Object.hash(runtimeType, phoneNumber);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ClickToCallImplCopyWith<_$ClickToCallImpl> get copyWith =>
-      __$$ClickToCallImplCopyWithImpl<_$ClickToCallImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() callEnded,
-    required TResult Function(String note, String description, String feedback)
-        updateActivity,
-    required TResult Function(String phoneNumber, String activityId,
-            String leadId, String leadSource)
-        callStarted,
-    required TResult Function(String phoneNumber) clickToCall,
-  }) {
-    return clickToCall(phoneNumber);
+  String toString() {
+    return 'CallEvent.clickToCall(phoneNumber: $phoneNumber)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? callEnded,
-    TResult? Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult? Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult? Function(String phoneNumber)? clickToCall,
-  }) {
-    return clickToCall?.call(phoneNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? callEnded,
-    TResult Function(String note, String description, String feedback)?
-        updateActivity,
-    TResult Function(String phoneNumber, String activityId, String leadId,
-            String leadSource)?
-        callStarted,
-    TResult Function(String phoneNumber)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (clickToCall != null) {
-      return clickToCall(phoneNumber);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_CallEnded value) callEnded,
-    required TResult Function(_UpdateActivity value) updateActivity,
-    required TResult Function(_CallStarted value) callStarted,
-    required TResult Function(_ClickToCall value) clickToCall,
-  }) {
-    return clickToCall(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_CallEnded value)? callEnded,
-    TResult? Function(_UpdateActivity value)? updateActivity,
-    TResult? Function(_CallStarted value)? callStarted,
-    TResult? Function(_ClickToCall value)? clickToCall,
-  }) {
-    return clickToCall?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_CallEnded value)? callEnded,
-    TResult Function(_UpdateActivity value)? updateActivity,
-    TResult Function(_CallStarted value)? callStarted,
-    TResult Function(_ClickToCall value)? clickToCall,
-    required TResult orElse(),
-  }) {
-    if (clickToCall != null) {
-      return clickToCall(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ClickToCall implements CallEvent {
-  const factory _ClickToCall({required final String phoneNumber}) =
-      _$ClickToCallImpl;
-
-  String get phoneNumber;
-  @JsonKey(ignore: true)
-  _$$ClickToCallImplCopyWith<_$ClickToCallImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$CallState {
-  String? get calledNumber => throw _privateConstructorUsedError;
-  String? get activityId => throw _privateConstructorUsedError;
-  String? get leadId => throw _privateConstructorUsedError;
-  DateTime? get callStartTime => throw _privateConstructorUsedError;
-  PhoneCallStatus get phoneCallStatus => throw _privateConstructorUsedError;
-  bool get feedbackRequestDialogOpen => throw _privateConstructorUsedError;
-  AppStatus get updateActivityStatus => throw _privateConstructorUsedError;
-  AppStatus get makeACallStatus => throw _privateConstructorUsedError;
-  String? get makeACallError => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $CallStateCopyWith<CallState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CallStateCopyWith<$Res> {
-  factory $CallStateCopyWith(CallState value, $Res Function(CallState) then) =
-      _$CallStateCopyWithImpl<$Res, CallState>;
+abstract mixin class _$ClickToCallCopyWith<$Res>
+    implements $CallEventCopyWith<$Res> {
+  factory _$ClickToCallCopyWith(
+          _ClickToCall value, $Res Function(_ClickToCall) _then) =
+      __$ClickToCallCopyWithImpl;
   @useResult
-  $Res call(
-      {String? calledNumber,
-      String? activityId,
-      String? leadId,
-      DateTime? callStartTime,
-      PhoneCallStatus phoneCallStatus,
-      bool feedbackRequestDialogOpen,
-      AppStatus updateActivityStatus,
-      AppStatus makeACallStatus,
-      String? makeACallError});
+  $Res call({String phoneNumber});
 }
 
 /// @nodoc
-class _$CallStateCopyWithImpl<$Res, $Val extends CallState>
-    implements $CallStateCopyWith<$Res> {
-  _$CallStateCopyWithImpl(this._value, this._then);
+class __$ClickToCallCopyWithImpl<$Res> implements _$ClickToCallCopyWith<$Res> {
+  __$ClickToCallCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final _ClickToCall _self;
+  final $Res Function(_ClickToCall) _then;
 
+  /// Create a copy of CallEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? calledNumber = freezed,
-    Object? activityId = freezed,
-    Object? leadId = freezed,
-    Object? callStartTime = freezed,
-    Object? phoneCallStatus = null,
-    Object? feedbackRequestDialogOpen = null,
-    Object? updateActivityStatus = null,
-    Object? makeACallStatus = null,
-    Object? makeACallError = freezed,
+    Object? phoneNumber = null,
   }) {
-    return _then(_value.copyWith(
-      calledNumber: freezed == calledNumber
-          ? _value.calledNumber
-          : calledNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      activityId: freezed == activityId
-          ? _value.activityId
-          : activityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      leadId: freezed == leadId
-          ? _value.leadId
-          : leadId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      callStartTime: freezed == callStartTime
-          ? _value.callStartTime
-          : callStartTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      phoneCallStatus: null == phoneCallStatus
-          ? _value.phoneCallStatus
-          : phoneCallStatus // ignore: cast_nullable_to_non_nullable
-              as PhoneCallStatus,
-      feedbackRequestDialogOpen: null == feedbackRequestDialogOpen
-          ? _value.feedbackRequestDialogOpen
-          : feedbackRequestDialogOpen // ignore: cast_nullable_to_non_nullable
-              as bool,
-      updateActivityStatus: null == updateActivityStatus
-          ? _value.updateActivityStatus
-          : updateActivityStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      makeACallStatus: null == makeACallStatus
-          ? _value.makeACallStatus
-          : makeACallStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      makeACallError: freezed == makeACallError
-          ? _value.makeACallError
-          : makeACallError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$CallStateImplCopyWith<$Res>
-    implements $CallStateCopyWith<$Res> {
-  factory _$$CallStateImplCopyWith(
-          _$CallStateImpl value, $Res Function(_$CallStateImpl) then) =
-      __$$CallStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? calledNumber,
-      String? activityId,
-      String? leadId,
-      DateTime? callStartTime,
-      PhoneCallStatus phoneCallStatus,
-      bool feedbackRequestDialogOpen,
-      AppStatus updateActivityStatus,
-      AppStatus makeACallStatus,
-      String? makeACallError});
-}
-
-/// @nodoc
-class __$$CallStateImplCopyWithImpl<$Res>
-    extends _$CallStateCopyWithImpl<$Res, _$CallStateImpl>
-    implements _$$CallStateImplCopyWith<$Res> {
-  __$$CallStateImplCopyWithImpl(
-      _$CallStateImpl _value, $Res Function(_$CallStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? calledNumber = freezed,
-    Object? activityId = freezed,
-    Object? leadId = freezed,
-    Object? callStartTime = freezed,
-    Object? phoneCallStatus = null,
-    Object? feedbackRequestDialogOpen = null,
-    Object? updateActivityStatus = null,
-    Object? makeACallStatus = null,
-    Object? makeACallError = freezed,
-  }) {
-    return _then(_$CallStateImpl(
-      calledNumber: freezed == calledNumber
-          ? _value.calledNumber
-          : calledNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      activityId: freezed == activityId
-          ? _value.activityId
-          : activityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      leadId: freezed == leadId
-          ? _value.leadId
-          : leadId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      callStartTime: freezed == callStartTime
-          ? _value.callStartTime
-          : callStartTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      phoneCallStatus: null == phoneCallStatus
-          ? _value.phoneCallStatus
-          : phoneCallStatus // ignore: cast_nullable_to_non_nullable
-              as PhoneCallStatus,
-      feedbackRequestDialogOpen: null == feedbackRequestDialogOpen
-          ? _value.feedbackRequestDialogOpen
-          : feedbackRequestDialogOpen // ignore: cast_nullable_to_non_nullable
-              as bool,
-      updateActivityStatus: null == updateActivityStatus
-          ? _value.updateActivityStatus
-          : updateActivityStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      makeACallStatus: null == makeACallStatus
-          ? _value.makeACallStatus
-          : makeACallStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      makeACallError: freezed == makeACallError
-          ? _value.makeACallError
-          : makeACallError // ignore: cast_nullable_to_non_nullable
-              as String?,
+    return _then(_ClickToCall(
+      phoneNumber: null == phoneNumber
+          ? _self.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
+mixin _$CallState {
+  String? get calledNumber;
+  String? get activityId;
+  String? get leadId;
+  DateTime? get callStartTime;
+  PhoneCallStatus get phoneCallStatus;
+  bool get feedbackRequestDialogOpen;
+  AppStatus get updateActivityStatus;
+  AppStatus get makeACallStatus;
+  String? get makeACallError;
 
-class _$CallStateImpl implements _CallState {
-  const _$CallStateImpl(
-      {this.calledNumber,
-      this.activityId,
-      this.leadId,
-      this.callStartTime,
-      this.phoneCallStatus = PhoneCallStatus.noCall,
-      this.feedbackRequestDialogOpen = false,
-      this.updateActivityStatus = AppStatus.init,
-      this.makeACallStatus = AppStatus.init,
-      this.makeACallError});
-
-  @override
-  final String? calledNumber;
-  @override
-  final String? activityId;
-  @override
-  final String? leadId;
-  @override
-  final DateTime? callStartTime;
-  @override
-  @JsonKey()
-  final PhoneCallStatus phoneCallStatus;
-  @override
-  @JsonKey()
-  final bool feedbackRequestDialogOpen;
-  @override
-  @JsonKey()
-  final AppStatus updateActivityStatus;
-  @override
-  @JsonKey()
-  final AppStatus makeACallStatus;
-  @override
-  final String? makeACallError;
-
-  @override
-  String toString() {
-    return 'CallState(calledNumber: $calledNumber, activityId: $activityId, leadId: $leadId, callStartTime: $callStartTime, phoneCallStatus: $phoneCallStatus, feedbackRequestDialogOpen: $feedbackRequestDialogOpen, updateActivityStatus: $updateActivityStatus, makeACallStatus: $makeACallStatus, makeACallError: $makeACallError)';
-  }
+  /// Create a copy of CallState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CallStateCopyWith<CallState> get copyWith =>
+      _$CallStateCopyWithImpl<CallState>(this as CallState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CallStateImpl &&
+            other is CallState &&
             (identical(other.calledNumber, calledNumber) ||
                 other.calledNumber == calledNumber) &&
             (identical(other.activityId, activityId) ||
@@ -1168,45 +373,262 @@ class _$CallStateImpl implements _CallState {
       makeACallStatus,
       makeACallError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'CallState(calledNumber: $calledNumber, activityId: $activityId, leadId: $leadId, callStartTime: $callStartTime, phoneCallStatus: $phoneCallStatus, feedbackRequestDialogOpen: $feedbackRequestDialogOpen, updateActivityStatus: $updateActivityStatus, makeACallStatus: $makeACallStatus, makeACallError: $makeACallError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $CallStateCopyWith<$Res> {
+  factory $CallStateCopyWith(CallState value, $Res Function(CallState) _then) =
+      _$CallStateCopyWithImpl;
+  @useResult
+  $Res call(
+      {String? calledNumber,
+      String? activityId,
+      String? leadId,
+      DateTime? callStartTime,
+      PhoneCallStatus phoneCallStatus,
+      bool feedbackRequestDialogOpen,
+      AppStatus updateActivityStatus,
+      AppStatus makeACallStatus,
+      String? makeACallError});
+}
+
+/// @nodoc
+class _$CallStateCopyWithImpl<$Res> implements $CallStateCopyWith<$Res> {
+  _$CallStateCopyWithImpl(this._self, this._then);
+
+  final CallState _self;
+  final $Res Function(CallState) _then;
+
+  /// Create a copy of CallState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? calledNumber = freezed,
+    Object? activityId = freezed,
+    Object? leadId = freezed,
+    Object? callStartTime = freezed,
+    Object? phoneCallStatus = null,
+    Object? feedbackRequestDialogOpen = null,
+    Object? updateActivityStatus = null,
+    Object? makeACallStatus = null,
+    Object? makeACallError = freezed,
+  }) {
+    return _then(_self.copyWith(
+      calledNumber: freezed == calledNumber
+          ? _self.calledNumber
+          : calledNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      activityId: freezed == activityId
+          ? _self.activityId
+          : activityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadId: freezed == leadId
+          ? _self.leadId
+          : leadId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      callStartTime: freezed == callStartTime
+          ? _self.callStartTime
+          : callStartTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      phoneCallStatus: null == phoneCallStatus
+          ? _self.phoneCallStatus
+          : phoneCallStatus // ignore: cast_nullable_to_non_nullable
+              as PhoneCallStatus,
+      feedbackRequestDialogOpen: null == feedbackRequestDialogOpen
+          ? _self.feedbackRequestDialogOpen
+          : feedbackRequestDialogOpen // ignore: cast_nullable_to_non_nullable
+              as bool,
+      updateActivityStatus: null == updateActivityStatus
+          ? _self.updateActivityStatus
+          : updateActivityStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      makeACallStatus: null == makeACallStatus
+          ? _self.makeACallStatus
+          : makeACallStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      makeACallError: freezed == makeACallError
+          ? _self.makeACallError
+          : makeACallError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _CallState implements CallState {
+  const _CallState(
+      {this.calledNumber,
+      this.activityId,
+      this.leadId,
+      this.callStartTime,
+      this.phoneCallStatus = PhoneCallStatus.noCall,
+      this.feedbackRequestDialogOpen = false,
+      this.updateActivityStatus = AppStatus.init,
+      this.makeACallStatus = AppStatus.init,
+      this.makeACallError});
+
+  @override
+  final String? calledNumber;
+  @override
+  final String? activityId;
+  @override
+  final String? leadId;
+  @override
+  final DateTime? callStartTime;
+  @override
+  @JsonKey()
+  final PhoneCallStatus phoneCallStatus;
+  @override
+  @JsonKey()
+  final bool feedbackRequestDialogOpen;
+  @override
+  @JsonKey()
+  final AppStatus updateActivityStatus;
+  @override
+  @JsonKey()
+  final AppStatus makeACallStatus;
+  @override
+  final String? makeACallError;
+
+  /// Create a copy of CallState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CallStateCopyWith<_CallState> get copyWith =>
+      __$CallStateCopyWithImpl<_CallState>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CallState &&
+            (identical(other.calledNumber, calledNumber) ||
+                other.calledNumber == calledNumber) &&
+            (identical(other.activityId, activityId) ||
+                other.activityId == activityId) &&
+            (identical(other.leadId, leadId) || other.leadId == leadId) &&
+            (identical(other.callStartTime, callStartTime) ||
+                other.callStartTime == callStartTime) &&
+            (identical(other.phoneCallStatus, phoneCallStatus) ||
+                other.phoneCallStatus == phoneCallStatus) &&
+            (identical(other.feedbackRequestDialogOpen,
+                    feedbackRequestDialogOpen) ||
+                other.feedbackRequestDialogOpen == feedbackRequestDialogOpen) &&
+            (identical(other.updateActivityStatus, updateActivityStatus) ||
+                other.updateActivityStatus == updateActivityStatus) &&
+            (identical(other.makeACallStatus, makeACallStatus) ||
+                other.makeACallStatus == makeACallStatus) &&
+            (identical(other.makeACallError, makeACallError) ||
+                other.makeACallError == makeACallError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      calledNumber,
+      activityId,
+      leadId,
+      callStartTime,
+      phoneCallStatus,
+      feedbackRequestDialogOpen,
+      updateActivityStatus,
+      makeACallStatus,
+      makeACallError);
+
+  @override
+  String toString() {
+    return 'CallState(calledNumber: $calledNumber, activityId: $activityId, leadId: $leadId, callStartTime: $callStartTime, phoneCallStatus: $phoneCallStatus, feedbackRequestDialogOpen: $feedbackRequestDialogOpen, updateActivityStatus: $updateActivityStatus, makeACallStatus: $makeACallStatus, makeACallError: $makeACallError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CallStateCopyWith<$Res>
+    implements $CallStateCopyWith<$Res> {
+  factory _$CallStateCopyWith(
+          _CallState value, $Res Function(_CallState) _then) =
+      __$CallStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? calledNumber,
+      String? activityId,
+      String? leadId,
+      DateTime? callStartTime,
+      PhoneCallStatus phoneCallStatus,
+      bool feedbackRequestDialogOpen,
+      AppStatus updateActivityStatus,
+      AppStatus makeACallStatus,
+      String? makeACallError});
+}
+
+/// @nodoc
+class __$CallStateCopyWithImpl<$Res> implements _$CallStateCopyWith<$Res> {
+  __$CallStateCopyWithImpl(this._self, this._then);
+
+  final _CallState _self;
+  final $Res Function(_CallState) _then;
+
+  /// Create a copy of CallState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$CallStateImplCopyWith<_$CallStateImpl> get copyWith =>
-      __$$CallStateImplCopyWithImpl<_$CallStateImpl>(this, _$identity);
+  $Res call({
+    Object? calledNumber = freezed,
+    Object? activityId = freezed,
+    Object? leadId = freezed,
+    Object? callStartTime = freezed,
+    Object? phoneCallStatus = null,
+    Object? feedbackRequestDialogOpen = null,
+    Object? updateActivityStatus = null,
+    Object? makeACallStatus = null,
+    Object? makeACallError = freezed,
+  }) {
+    return _then(_CallState(
+      calledNumber: freezed == calledNumber
+          ? _self.calledNumber
+          : calledNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      activityId: freezed == activityId
+          ? _self.activityId
+          : activityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadId: freezed == leadId
+          ? _self.leadId
+          : leadId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      callStartTime: freezed == callStartTime
+          ? _self.callStartTime
+          : callStartTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      phoneCallStatus: null == phoneCallStatus
+          ? _self.phoneCallStatus
+          : phoneCallStatus // ignore: cast_nullable_to_non_nullable
+              as PhoneCallStatus,
+      feedbackRequestDialogOpen: null == feedbackRequestDialogOpen
+          ? _self.feedbackRequestDialogOpen
+          : feedbackRequestDialogOpen // ignore: cast_nullable_to_non_nullable
+              as bool,
+      updateActivityStatus: null == updateActivityStatus
+          ? _self.updateActivityStatus
+          : updateActivityStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      makeACallStatus: null == makeACallStatus
+          ? _self.makeACallStatus
+          : makeACallStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      makeACallError: freezed == makeACallError
+          ? _self.makeACallError
+          : makeACallError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _CallState implements CallState {
-  const factory _CallState(
-      {final String? calledNumber,
-      final String? activityId,
-      final String? leadId,
-      final DateTime? callStartTime,
-      final PhoneCallStatus phoneCallStatus,
-      final bool feedbackRequestDialogOpen,
-      final AppStatus updateActivityStatus,
-      final AppStatus makeACallStatus,
-      final String? makeACallError}) = _$CallStateImpl;
-
-  @override
-  String? get calledNumber;
-  @override
-  String? get activityId;
-  @override
-  String? get leadId;
-  @override
-  DateTime? get callStartTime;
-  @override
-  PhoneCallStatus get phoneCallStatus;
-  @override
-  bool get feedbackRequestDialogOpen;
-  @override
-  AppStatus get updateActivityStatus;
-  @override
-  AppStatus get makeACallStatus;
-  @override
-  String? get makeACallError;
-  @override
-  @JsonKey(ignore: true)
-  _$$CallStateImplCopyWith<_$CallStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

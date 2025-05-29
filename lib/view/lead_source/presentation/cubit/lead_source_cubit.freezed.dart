@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,29 +10,59 @@ part of 'lead_source_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LeadSourceState {
-  AppStatus get status => throw _privateConstructorUsedError;
-  List<LeadSource>? get leadSources => throw _privateConstructorUsedError;
-  Paginator? get paginator => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
-  String? get search => throw _privateConstructorUsedError;
+  AppStatus get status;
+  List<LeadSource>? get leadSources;
+  Paginator? get paginator;
+  String? get error;
+  String? get search;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LeadSourceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $LeadSourceStateCopyWith<LeadSourceState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$LeadSourceStateCopyWithImpl<LeadSourceState>(
+          this as LeadSourceState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LeadSourceState &&
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other.leadSources, leadSources) &&
+            (identical(other.paginator, paginator) ||
+                other.paginator == paginator) &&
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.search, search) || other.search == search));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      const DeepCollectionEquality().hash(leadSources),
+      paginator,
+      error,
+      search);
+
+  @override
+  String toString() {
+    return 'LeadSourceState(status: $status, leadSources: $leadSources, paginator: $paginator, error: $error, search: $search)';
+  }
 }
 
 /// @nodoc
-abstract class $LeadSourceStateCopyWith<$Res> {
+abstract mixin class $LeadSourceStateCopyWith<$Res> {
   factory $LeadSourceStateCopyWith(
-          LeadSourceState value, $Res Function(LeadSourceState) then) =
-      _$LeadSourceStateCopyWithImpl<$Res, LeadSourceState>;
+          LeadSourceState value, $Res Function(LeadSourceState) _then) =
+      _$LeadSourceStateCopyWithImpl;
   @useResult
   $Res call(
       {AppStatus status,
@@ -44,15 +75,15 @@ abstract class $LeadSourceStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LeadSourceStateCopyWithImpl<$Res, $Val extends LeadSourceState>
+class _$LeadSourceStateCopyWithImpl<$Res>
     implements $LeadSourceStateCopyWith<$Res> {
-  _$LeadSourceStateCopyWithImpl(this._value, this._then);
+  _$LeadSourceStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final LeadSourceState _self;
+  final $Res Function(LeadSourceState) _then;
 
+  /// Create a copy of LeadSourceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -62,108 +93,49 @@ class _$LeadSourceStateCopyWithImpl<$Res, $Val extends LeadSourceState>
     Object? error = freezed,
     Object? search = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       status: null == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       leadSources: freezed == leadSources
-          ? _value.leadSources
+          ? _self.leadSources
           : leadSources // ignore: cast_nullable_to_non_nullable
               as List<LeadSource>?,
       paginator: freezed == paginator
-          ? _value.paginator
+          ? _self.paginator
           : paginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       error: freezed == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
       search: freezed == search
-          ? _value.search
+          ? _self.search
           : search // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of LeadSourceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginatorCopyWith<$Res>? get paginator {
-    if (_value.paginator == null) {
+    if (_self.paginator == null) {
       return null;
     }
 
-    return $PaginatorCopyWith<$Res>(_value.paginator!, (value) {
-      return _then(_value.copyWith(paginator: value) as $Val);
+    return $PaginatorCopyWith<$Res>(_self.paginator!, (value) {
+      return _then(_self.copyWith(paginator: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$LeadSourceStateImplCopyWith<$Res>
-    implements $LeadSourceStateCopyWith<$Res> {
-  factory _$$LeadSourceStateImplCopyWith(_$LeadSourceStateImpl value,
-          $Res Function(_$LeadSourceStateImpl) then) =
-      __$$LeadSourceStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {AppStatus status,
-      List<LeadSource>? leadSources,
-      Paginator? paginator,
-      String? error,
-      String? search});
 
-  @override
-  $PaginatorCopyWith<$Res>? get paginator;
-}
-
-/// @nodoc
-class __$$LeadSourceStateImplCopyWithImpl<$Res>
-    extends _$LeadSourceStateCopyWithImpl<$Res, _$LeadSourceStateImpl>
-    implements _$$LeadSourceStateImplCopyWith<$Res> {
-  __$$LeadSourceStateImplCopyWithImpl(
-      _$LeadSourceStateImpl _value, $Res Function(_$LeadSourceStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? status = null,
-    Object? leadSources = freezed,
-    Object? paginator = freezed,
-    Object? error = freezed,
-    Object? search = freezed,
-  }) {
-    return _then(_$LeadSourceStateImpl(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      leadSources: freezed == leadSources
-          ? _value._leadSources
-          : leadSources // ignore: cast_nullable_to_non_nullable
-              as List<LeadSource>?,
-      paginator: freezed == paginator
-          ? _value.paginator
-          : paginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-      search: freezed == search
-          ? _value.search
-          : search // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LeadSourceStateImpl implements _LeadSourceState {
-  const _$LeadSourceStateImpl(
+class _LeadSourceState implements LeadSourceState {
+  const _LeadSourceState(
       {this.status = AppStatus.init,
       final List<LeadSource>? leadSources = const [],
       this.paginator,
@@ -192,16 +164,19 @@ class _$LeadSourceStateImpl implements _LeadSourceState {
   @override
   final String? search;
 
+  /// Create a copy of LeadSourceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'LeadSourceState(status: $status, leadSources: $leadSources, paginator: $paginator, error: $error, search: $search)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LeadSourceStateCopyWith<_LeadSourceState> get copyWith =>
+      __$LeadSourceStateCopyWithImpl<_LeadSourceState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LeadSourceStateImpl &&
+            other is _LeadSourceState &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality()
                 .equals(other._leadSources, _leadSources) &&
@@ -220,34 +195,87 @@ class _$LeadSourceStateImpl implements _LeadSourceState {
       error,
       search);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'LeadSourceState(status: $status, leadSources: $leadSources, paginator: $paginator, error: $error, search: $search)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LeadSourceStateCopyWith<$Res>
+    implements $LeadSourceStateCopyWith<$Res> {
+  factory _$LeadSourceStateCopyWith(
+          _LeadSourceState value, $Res Function(_LeadSourceState) _then) =
+      __$LeadSourceStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {AppStatus status,
+      List<LeadSource>? leadSources,
+      Paginator? paginator,
+      String? error,
+      String? search});
+
+  @override
+  $PaginatorCopyWith<$Res>? get paginator;
+}
+
+/// @nodoc
+class __$LeadSourceStateCopyWithImpl<$Res>
+    implements _$LeadSourceStateCopyWith<$Res> {
+  __$LeadSourceStateCopyWithImpl(this._self, this._then);
+
+  final _LeadSourceState _self;
+  final $Res Function(_LeadSourceState) _then;
+
+  /// Create a copy of LeadSourceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$LeadSourceStateImplCopyWith<_$LeadSourceStateImpl> get copyWith =>
-      __$$LeadSourceStateImplCopyWithImpl<_$LeadSourceStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? status = null,
+    Object? leadSources = freezed,
+    Object? paginator = freezed,
+    Object? error = freezed,
+    Object? search = freezed,
+  }) {
+    return _then(_LeadSourceState(
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      leadSources: freezed == leadSources
+          ? _self._leadSources
+          : leadSources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSource>?,
+      paginator: freezed == paginator
+          ? _self.paginator
+          : paginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      error: freezed == error
+          ? _self.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      search: freezed == search
+          ? _self.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of LeadSourceState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get paginator {
+    if (_self.paginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.paginator!, (value) {
+      return _then(_self.copyWith(paginator: value));
+    });
+  }
 }
 
-abstract class _LeadSourceState implements LeadSourceState {
-  const factory _LeadSourceState(
-      {final AppStatus status,
-      final List<LeadSource>? leadSources,
-      final Paginator? paginator,
-      final String? error,
-      final String? search}) = _$LeadSourceStateImpl;
-
-  @override
-  AppStatus get status;
-  @override
-  List<LeadSource>? get leadSources;
-  @override
-  Paginator? get paginator;
-  @override
-  String? get error;
-  @override
-  String? get search;
-  @override
-  @JsonKey(ignore: true)
-  _$$LeadSourceStateImplCopyWith<_$LeadSourceStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

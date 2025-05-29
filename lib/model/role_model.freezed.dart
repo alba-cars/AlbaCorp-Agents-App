@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,100 +10,68 @@ part of 'role_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Role _$RoleFromJson(Map<String, dynamic> json) {
-  return _Role.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Role {
-  String? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  List<String>? get permissions => throw _privateConstructorUsedError;
-  bool? get isActive => throw _privateConstructorUsedError;
+  String? get id;
+  String? get name;
+  List<String>? get permissions;
+  bool? get isActive;
   @JsonKey(name: 'createdAt')
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
   @JsonKey(name: 'updatedAt')
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $RoleCopyWith<Role> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $RoleCopyWith<$Res> {
-  factory $RoleCopyWith(Role value, $Res Function(Role) then) =
-      _$RoleCopyWithImpl<$Res, Role>;
-  @useResult
-  $Res call(
-      {String? id,
-      String? name,
-      List<String>? permissions,
-      bool? isActive,
-      @JsonKey(name: 'createdAt') DateTime? createdAt,
-      @JsonKey(name: 'updatedAt') DateTime? updatedAt});
-}
-
-/// @nodoc
-class _$RoleCopyWithImpl<$Res, $Val extends Role>
-    implements $RoleCopyWith<$Res> {
-  _$RoleCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Role
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $RoleCopyWith<Role> get copyWith =>
+      _$RoleCopyWithImpl<Role>(this as Role, _$identity);
+
+  /// Serializes this Role to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? permissions = freezed,
-    Object? isActive = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      permissions: freezed == permissions
-          ? _value.permissions
-          : permissions // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Role &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other.permissions, permissions) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(permissions),
+      isActive,
+      createdAt,
+      updatedAt);
+
+  @override
+  String toString() {
+    return 'Role(id: $id, name: $name, permissions: $permissions, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
 /// @nodoc
-abstract class _$$RoleImplCopyWith<$Res> implements $RoleCopyWith<$Res> {
-  factory _$$RoleImplCopyWith(
-          _$RoleImpl value, $Res Function(_$RoleImpl) then) =
-      __$$RoleImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $RoleCopyWith<$Res> {
+  factory $RoleCopyWith(Role value, $Res Function(Role) _then) =
+      _$RoleCopyWithImpl;
   @useResult
   $Res call(
       {String? id,
@@ -114,12 +83,14 @@ abstract class _$$RoleImplCopyWith<$Res> implements $RoleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$RoleImplCopyWithImpl<$Res>
-    extends _$RoleCopyWithImpl<$Res, _$RoleImpl>
-    implements _$$RoleImplCopyWith<$Res> {
-  __$$RoleImplCopyWithImpl(_$RoleImpl _value, $Res Function(_$RoleImpl) _then)
-      : super(_value, _then);
+class _$RoleCopyWithImpl<$Res> implements $RoleCopyWith<$Res> {
+  _$RoleCopyWithImpl(this._self, this._then);
 
+  final Role _self;
+  final $Res Function(Role) _then;
+
+  /// Create a copy of Role
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,29 +101,29 @@ class __$$RoleImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$RoleImpl(
+    return _then(_self.copyWith(
       id: freezed == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
       permissions: freezed == permissions
-          ? _value._permissions
+          ? _self.permissions
           : permissions // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       isActive: freezed == isActive
-          ? _value.isActive
+          ? _self.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
@@ -161,8 +132,8 @@ class __$$RoleImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$RoleImpl implements _Role {
-  const _$RoleImpl(
+class _Role implements Role {
+  const _Role(
       {this.id,
       this.name,
       final List<String>? permissions,
@@ -170,9 +141,7 @@ class _$RoleImpl implements _Role {
       @JsonKey(name: 'createdAt') this.createdAt,
       @JsonKey(name: 'updatedAt') this.updatedAt})
       : _permissions = permissions;
-
-  factory _$RoleImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RoleImplFromJson(json);
+  factory _Role.fromJson(Map<String, dynamic> json) => _$RoleFromJson(json);
 
   @override
   final String? id;
@@ -197,16 +166,26 @@ class _$RoleImpl implements _Role {
   @JsonKey(name: 'updatedAt')
   final DateTime? updatedAt;
 
+  /// Create a copy of Role
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Role(id: $id, name: $name, permissions: $permissions, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RoleCopyWith<_Role> get copyWith =>
+      __$RoleCopyWithImpl<_Role>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$RoleToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RoleImpl &&
+            other is _Role &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
@@ -219,7 +198,7 @@ class _$RoleImpl implements _Role {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -230,47 +209,73 @@ class _$RoleImpl implements _Role {
       createdAt,
       updatedAt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$RoleImplCopyWith<_$RoleImpl> get copyWith =>
-      __$$RoleImplCopyWithImpl<_$RoleImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$RoleImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Role(id: $id, name: $name, permissions: $permissions, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _Role implements Role {
-  const factory _Role(
-      {final String? id,
-      final String? name,
-      final List<String>? permissions,
-      final bool? isActive,
-      @JsonKey(name: 'createdAt') final DateTime? createdAt,
-      @JsonKey(name: 'updatedAt') final DateTime? updatedAt}) = _$RoleImpl;
-
-  factory _Role.fromJson(Map<String, dynamic> json) = _$RoleImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
+  factory _$RoleCopyWith(_Role value, $Res Function(_Role) _then) =
+      __$RoleCopyWithImpl;
   @override
-  String? get id;
-  @override
-  String? get name;
-  @override
-  List<String>? get permissions;
-  @override
-  bool? get isActive;
-  @override
-  @JsonKey(name: 'createdAt')
-  DateTime? get createdAt;
-  @override
-  @JsonKey(name: 'updatedAt')
-  DateTime? get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$RoleImplCopyWith<_$RoleImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {String? id,
+      String? name,
+      List<String>? permissions,
+      bool? isActive,
+      @JsonKey(name: 'createdAt') DateTime? createdAt,
+      @JsonKey(name: 'updatedAt') DateTime? updatedAt});
 }
+
+/// @nodoc
+class __$RoleCopyWithImpl<$Res> implements _$RoleCopyWith<$Res> {
+  __$RoleCopyWithImpl(this._self, this._then);
+
+  final _Role _self;
+  final $Res Function(_Role) _then;
+
+  /// Create a copy of Role
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? permissions = freezed,
+    Object? isActive = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_Role(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      permissions: freezed == permissions
+          ? _self._permissions
+          : permissions // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      isActive: freezed == isActive
+          ? _self.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+// dart format on

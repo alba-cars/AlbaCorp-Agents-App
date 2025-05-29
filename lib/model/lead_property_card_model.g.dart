@@ -6,9 +6,9 @@ part of 'lead_property_card_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LeadPropertyCardModelImpl _$$LeadPropertyCardModelImplFromJson(
+_LeadPropertyCardModel _$LeadPropertyCardModelFromJson(
         Map<String, dynamic> json) =>
-    _$LeadPropertyCardModelImpl(
+    _LeadPropertyCardModel(
       id: readId(json, 'id') as String,
       lead: Lead.fromJson(json['lead'] as Map<String, dynamic>),
       propertyCard: PropertyCardDetailsModel.fromJson(
@@ -29,8 +29,8 @@ _$LeadPropertyCardModelImpl _$$LeadPropertyCardModelImplFromJson(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$LeadPropertyCardModelImplToJson(
-        _$LeadPropertyCardModelImpl instance) =>
+Map<String, dynamic> _$LeadPropertyCardModelToJson(
+        _LeadPropertyCardModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'lead': instance.lead,
@@ -44,29 +44,27 @@ Map<String, dynamic> _$$LeadPropertyCardModelImplToJson(
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };
 
-_$LeadPropertyCardModelNotPopulatedImpl
-    _$$LeadPropertyCardModelNotPopulatedImplFromJson(
-            Map<String, dynamic> json) =>
-        _$LeadPropertyCardModelNotPopulatedImpl(
-          id: readId(json, 'id') as String,
-          lead: json['lead'] as String,
-          propertyCard: PropertyCard.fromJson(
-              json['propertyCard'] as Map<String, dynamic>),
-          wasOwner: json['wasOwner'] as bool? ?? false,
-          date: json['date'] == null
-              ? null
-              : DateTime.parse(json['date'] as String),
-          amount: (json['amount'] as num?)?.toDouble(),
-          createdAt: json['createdAt'] == null
-              ? null
-              : DateTime.parse(json['createdAt'] as String),
-          updatedAt: json['updatedAt'] == null
-              ? null
-              : DateTime.parse(json['updatedAt'] as String),
-        );
+_LeadPropertyCardModelNotPopulated _$LeadPropertyCardModelNotPopulatedFromJson(
+        Map<String, dynamic> json) =>
+    _LeadPropertyCardModelNotPopulated(
+      id: readId(json, 'id') as String,
+      lead: json['lead'] as String,
+      propertyCard:
+          PropertyCard.fromJson(json['propertyCard'] as Map<String, dynamic>),
+      wasOwner: json['wasOwner'] as bool? ?? false,
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
+      amount: (json['amount'] as num?)?.toDouble(),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+    );
 
-Map<String, dynamic> _$$LeadPropertyCardModelNotPopulatedImplToJson(
-        _$LeadPropertyCardModelNotPopulatedImpl instance) =>
+Map<String, dynamic> _$LeadPropertyCardModelNotPopulatedToJson(
+        _LeadPropertyCardModelNotPopulated instance) =>
     <String, dynamic>{
       'id': instance.id,
       'lead': instance.lead,
@@ -78,9 +76,8 @@ Map<String, dynamic> _$$LeadPropertyCardModelNotPopulatedImplToJson(
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };
 
-_$LeadExplorerItemImpl _$$LeadExplorerItemImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LeadExplorerItemImpl(
+_LeadExplorerItem _$LeadExplorerItemFromJson(Map<String, dynamic> json) =>
+    _LeadExplorerItem(
       id: readId(json, 'id') as String,
       lead: Lead.fromJson(json['lead'] as Map<String, dynamic>),
       mappings: (json['mappings'] as List<dynamic>)
@@ -89,8 +86,7 @@ _$LeadExplorerItemImpl _$$LeadExplorerItemImplFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$LeadExplorerItemImplToJson(
-        _$LeadExplorerItemImpl instance) =>
+Map<String, dynamic> _$LeadExplorerItemToJson(_LeadExplorerItem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'lead': instance.lead,

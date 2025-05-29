@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,29 +10,56 @@ part of 'deal_add_document_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DealAddDocumentState {
-  AppStatus get addDealDocumentsStatus => throw _privateConstructorUsedError;
-  String? get addDealDocumentsError => throw _privateConstructorUsedError;
-  Deal? get deal => throw _privateConstructorUsedError;
-  AppStatus get getDealStatus => throw _privateConstructorUsedError;
-  String? get getDealError => throw _privateConstructorUsedError;
+  AppStatus get addDealDocumentsStatus;
+  String? get addDealDocumentsError;
+  Deal? get deal;
+  AppStatus get getDealStatus;
+  String? get getDealError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DealAddDocumentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DealAddDocumentStateCopyWith<DealAddDocumentState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$DealAddDocumentStateCopyWithImpl<DealAddDocumentState>(
+          this as DealAddDocumentState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DealAddDocumentState &&
+            (identical(other.addDealDocumentsStatus, addDealDocumentsStatus) ||
+                other.addDealDocumentsStatus == addDealDocumentsStatus) &&
+            (identical(other.addDealDocumentsError, addDealDocumentsError) ||
+                other.addDealDocumentsError == addDealDocumentsError) &&
+            (identical(other.deal, deal) || other.deal == deal) &&
+            (identical(other.getDealStatus, getDealStatus) ||
+                other.getDealStatus == getDealStatus) &&
+            (identical(other.getDealError, getDealError) ||
+                other.getDealError == getDealError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, addDealDocumentsStatus,
+      addDealDocumentsError, deal, getDealStatus, getDealError);
+
+  @override
+  String toString() {
+    return 'DealAddDocumentState(addDealDocumentsStatus: $addDealDocumentsStatus, addDealDocumentsError: $addDealDocumentsError, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError)';
+  }
 }
 
 /// @nodoc
-abstract class $DealAddDocumentStateCopyWith<$Res> {
+abstract mixin class $DealAddDocumentStateCopyWith<$Res> {
   factory $DealAddDocumentStateCopyWith(DealAddDocumentState value,
-          $Res Function(DealAddDocumentState) then) =
-      _$DealAddDocumentStateCopyWithImpl<$Res, DealAddDocumentState>;
+          $Res Function(DealAddDocumentState) _then) =
+      _$DealAddDocumentStateCopyWithImpl;
   @useResult
   $Res call(
       {AppStatus addDealDocumentsStatus,
@@ -44,16 +72,15 @@ abstract class $DealAddDocumentStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DealAddDocumentStateCopyWithImpl<$Res,
-        $Val extends DealAddDocumentState>
+class _$DealAddDocumentStateCopyWithImpl<$Res>
     implements $DealAddDocumentStateCopyWith<$Res> {
-  _$DealAddDocumentStateCopyWithImpl(this._value, this._then);
+  _$DealAddDocumentStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DealAddDocumentState _self;
+  final $Res Function(DealAddDocumentState) _then;
 
+  /// Create a copy of DealAddDocumentState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,108 +90,49 @@ class _$DealAddDocumentStateCopyWithImpl<$Res,
     Object? getDealStatus = null,
     Object? getDealError = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       addDealDocumentsStatus: null == addDealDocumentsStatus
-          ? _value.addDealDocumentsStatus
+          ? _self.addDealDocumentsStatus
           : addDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       addDealDocumentsError: freezed == addDealDocumentsError
-          ? _value.addDealDocumentsError
+          ? _self.addDealDocumentsError
           : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
               as String?,
       deal: freezed == deal
-          ? _value.deal
+          ? _self.deal
           : deal // ignore: cast_nullable_to_non_nullable
               as Deal?,
       getDealStatus: null == getDealStatus
-          ? _value.getDealStatus
+          ? _self.getDealStatus
           : getDealStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getDealError: freezed == getDealError
-          ? _value.getDealError
+          ? _self.getDealError
           : getDealError // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of DealAddDocumentState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DealCopyWith<$Res>? get deal {
-    if (_value.deal == null) {
+    if (_self.deal == null) {
       return null;
     }
 
-    return $DealCopyWith<$Res>(_value.deal!, (value) {
-      return _then(_value.copyWith(deal: value) as $Val);
+    return $DealCopyWith<$Res>(_self.deal!, (value) {
+      return _then(_self.copyWith(deal: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$DealAddDocumentStateImplCopyWith<$Res>
-    implements $DealAddDocumentStateCopyWith<$Res> {
-  factory _$$DealAddDocumentStateImplCopyWith(_$DealAddDocumentStateImpl value,
-          $Res Function(_$DealAddDocumentStateImpl) then) =
-      __$$DealAddDocumentStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {AppStatus addDealDocumentsStatus,
-      String? addDealDocumentsError,
-      Deal? deal,
-      AppStatus getDealStatus,
-      String? getDealError});
 
-  @override
-  $DealCopyWith<$Res>? get deal;
-}
-
-/// @nodoc
-class __$$DealAddDocumentStateImplCopyWithImpl<$Res>
-    extends _$DealAddDocumentStateCopyWithImpl<$Res, _$DealAddDocumentStateImpl>
-    implements _$$DealAddDocumentStateImplCopyWith<$Res> {
-  __$$DealAddDocumentStateImplCopyWithImpl(_$DealAddDocumentStateImpl _value,
-      $Res Function(_$DealAddDocumentStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? addDealDocumentsStatus = null,
-    Object? addDealDocumentsError = freezed,
-    Object? deal = freezed,
-    Object? getDealStatus = null,
-    Object? getDealError = freezed,
-  }) {
-    return _then(_$DealAddDocumentStateImpl(
-      addDealDocumentsStatus: null == addDealDocumentsStatus
-          ? _value.addDealDocumentsStatus
-          : addDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      addDealDocumentsError: freezed == addDealDocumentsError
-          ? _value.addDealDocumentsError
-          : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deal: freezed == deal
-          ? _value.deal
-          : deal // ignore: cast_nullable_to_non_nullable
-              as Deal?,
-      getDealStatus: null == getDealStatus
-          ? _value.getDealStatus
-          : getDealStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getDealError: freezed == getDealError
-          ? _value.getDealError
-          : getDealError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
-  const _$DealAddDocumentStateImpl(
+class _DealAddDocumentState implements DealAddDocumentState {
+  const _DealAddDocumentState(
       {this.addDealDocumentsStatus = AppStatus.init,
       this.addDealDocumentsError,
       this.deal,
@@ -184,16 +152,20 @@ class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
   @override
   final String? getDealError;
 
+  /// Create a copy of DealAddDocumentState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DealAddDocumentState(addDealDocumentsStatus: $addDealDocumentsStatus, addDealDocumentsError: $addDealDocumentsError, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DealAddDocumentStateCopyWith<_DealAddDocumentState> get copyWith =>
+      __$DealAddDocumentStateCopyWithImpl<_DealAddDocumentState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DealAddDocumentStateImpl &&
+            other is _DealAddDocumentState &&
             (identical(other.addDealDocumentsStatus, addDealDocumentsStatus) ||
                 other.addDealDocumentsStatus == addDealDocumentsStatus) &&
             (identical(other.addDealDocumentsError, addDealDocumentsError) ||
@@ -209,35 +181,87 @@ class _$DealAddDocumentStateImpl implements _DealAddDocumentState {
   int get hashCode => Object.hash(runtimeType, addDealDocumentsStatus,
       addDealDocumentsError, deal, getDealStatus, getDealError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'DealAddDocumentState(addDealDocumentsStatus: $addDealDocumentsStatus, addDealDocumentsError: $addDealDocumentsError, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DealAddDocumentStateCopyWith<$Res>
+    implements $DealAddDocumentStateCopyWith<$Res> {
+  factory _$DealAddDocumentStateCopyWith(_DealAddDocumentState value,
+          $Res Function(_DealAddDocumentState) _then) =
+      __$DealAddDocumentStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {AppStatus addDealDocumentsStatus,
+      String? addDealDocumentsError,
+      Deal? deal,
+      AppStatus getDealStatus,
+      String? getDealError});
+
+  @override
+  $DealCopyWith<$Res>? get deal;
+}
+
+/// @nodoc
+class __$DealAddDocumentStateCopyWithImpl<$Res>
+    implements _$DealAddDocumentStateCopyWith<$Res> {
+  __$DealAddDocumentStateCopyWithImpl(this._self, this._then);
+
+  final _DealAddDocumentState _self;
+  final $Res Function(_DealAddDocumentState) _then;
+
+  /// Create a copy of DealAddDocumentState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$DealAddDocumentStateImplCopyWith<_$DealAddDocumentStateImpl>
-      get copyWith =>
-          __$$DealAddDocumentStateImplCopyWithImpl<_$DealAddDocumentStateImpl>(
-              this, _$identity);
+  $Res call({
+    Object? addDealDocumentsStatus = null,
+    Object? addDealDocumentsError = freezed,
+    Object? deal = freezed,
+    Object? getDealStatus = null,
+    Object? getDealError = freezed,
+  }) {
+    return _then(_DealAddDocumentState(
+      addDealDocumentsStatus: null == addDealDocumentsStatus
+          ? _self.addDealDocumentsStatus
+          : addDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addDealDocumentsError: freezed == addDealDocumentsError
+          ? _self.addDealDocumentsError
+          : addDealDocumentsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deal: freezed == deal
+          ? _self.deal
+          : deal // ignore: cast_nullable_to_non_nullable
+              as Deal?,
+      getDealStatus: null == getDealStatus
+          ? _self.getDealStatus
+          : getDealStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getDealError: freezed == getDealError
+          ? _self.getDealError
+          : getDealError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of DealAddDocumentState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DealCopyWith<$Res>? get deal {
+    if (_self.deal == null) {
+      return null;
+    }
+
+    return $DealCopyWith<$Res>(_self.deal!, (value) {
+      return _then(_self.copyWith(deal: value));
+    });
+  }
 }
 
-abstract class _DealAddDocumentState implements DealAddDocumentState {
-  const factory _DealAddDocumentState(
-      {final AppStatus addDealDocumentsStatus,
-      final String? addDealDocumentsError,
-      final Deal? deal,
-      final AppStatus getDealStatus,
-      final String? getDealError}) = _$DealAddDocumentStateImpl;
-
-  @override
-  AppStatus get addDealDocumentsStatus;
-  @override
-  String? get addDealDocumentsError;
-  @override
-  Deal? get deal;
-  @override
-  AppStatus get getDealStatus;
-  @override
-  String? get getDealError;
-  @override
-  @JsonKey(ignore: true)
-  _$$DealAddDocumentStateImplCopyWith<_$DealAddDocumentStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

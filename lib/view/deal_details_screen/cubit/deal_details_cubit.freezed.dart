@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,52 +10,147 @@ part of 'deal_details_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DealDetailsState {
-  String get dealId => throw _privateConstructorUsedError;
-  Deal? get deal => throw _privateConstructorUsedError;
-  AppStatus get getDealStatus => throw _privateConstructorUsedError;
-  String? get getDealError => throw _privateConstructorUsedError;
-  List<DealDocument> get dealDocuments => throw _privateConstructorUsedError;
-  AppStatus get getDealDocumentsStatus => throw _privateConstructorUsedError;
-  List<DealDocument> get userDocuments => throw _privateConstructorUsedError;
-  AppStatus get getUserDocumentsStatus => throw _privateConstructorUsedError;
-  List<DealDocument> get sellerDocuments => throw _privateConstructorUsedError;
-  AppStatus get getSellerDocumentsStatus => throw _privateConstructorUsedError;
-  List<DealDocument> get buyerDocuments => throw _privateConstructorUsedError;
-  AppStatus get getBuyerDocumentsStatus => throw _privateConstructorUsedError;
-  List<DealDocument> get buyerExternalDocuments =>
-      throw _privateConstructorUsedError;
-  List<DealDocument> get sellerExternalDocuments =>
-      throw _privateConstructorUsedError;
-  List<Deal> get buyerDeals => throw _privateConstructorUsedError;
-  AppStatus get buyerDealsStatus => throw _privateConstructorUsedError;
-  List<Deal> get sellerDeals => throw _privateConstructorUsedError;
-  AppStatus get sellerDealsStatus => throw _privateConstructorUsedError;
-  List<Activity> get buyerActivities => throw _privateConstructorUsedError;
-  AppStatus get buyerActivitiesStatus => throw _privateConstructorUsedError;
-  List<Activity> get sellerActivities => throw _privateConstructorUsedError;
-  AppStatus get sellerActivitiesStatus => throw _privateConstructorUsedError;
-  List<Activity> get propertyActivities => throw _privateConstructorUsedError;
-  AppStatus get propertyActivitiesStatus => throw _privateConstructorUsedError;
-  List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
+  String get dealId;
+  Deal? get deal;
+  AppStatus get getDealStatus;
+  String? get getDealError;
+  List<DealDocument> get dealDocuments;
+  AppStatus get getDealDocumentsStatus;
+  List<DealDocument> get userDocuments;
+  AppStatus get getUserDocumentsStatus;
+  List<DealDocument> get sellerDocuments;
+  AppStatus get getSellerDocumentsStatus;
+  List<DealDocument> get buyerDocuments;
+  AppStatus get getBuyerDocumentsStatus;
+  List<DealDocument> get buyerExternalDocuments;
+  List<DealDocument> get sellerExternalDocuments;
+  List<Deal> get buyerDeals;
+  AppStatus get buyerDealsStatus;
+  List<Deal> get sellerDeals;
+  AppStatus get sellerDealsStatus;
+  List<Activity> get buyerActivities;
+  AppStatus get buyerActivitiesStatus;
+  List<Activity> get sellerActivities;
+  AppStatus get sellerActivitiesStatus;
+  List<Activity> get propertyActivities;
+  AppStatus get propertyActivitiesStatus;
+  List<PropertyType> get propertyTypeList;
+  AppStatus get getPropertyTypeListStatus;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DealDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DealDetailsStateCopyWith<DealDetailsState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$DealDetailsStateCopyWithImpl<DealDetailsState>(
+          this as DealDetailsState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DealDetailsState &&
+            (identical(other.dealId, dealId) || other.dealId == dealId) &&
+            (identical(other.deal, deal) || other.deal == deal) &&
+            (identical(other.getDealStatus, getDealStatus) ||
+                other.getDealStatus == getDealStatus) &&
+            (identical(other.getDealError, getDealError) ||
+                other.getDealError == getDealError) &&
+            const DeepCollectionEquality()
+                .equals(other.dealDocuments, dealDocuments) &&
+            (identical(other.getDealDocumentsStatus, getDealDocumentsStatus) ||
+                other.getDealDocumentsStatus == getDealDocumentsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.userDocuments, userDocuments) &&
+            (identical(other.getUserDocumentsStatus, getUserDocumentsStatus) ||
+                other.getUserDocumentsStatus == getUserDocumentsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.sellerDocuments, sellerDocuments) &&
+            (identical(other.getSellerDocumentsStatus, getSellerDocumentsStatus) ||
+                other.getSellerDocumentsStatus == getSellerDocumentsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.buyerDocuments, buyerDocuments) &&
+            (identical(other.getBuyerDocumentsStatus, getBuyerDocumentsStatus) ||
+                other.getBuyerDocumentsStatus == getBuyerDocumentsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.buyerExternalDocuments, buyerExternalDocuments) &&
+            const DeepCollectionEquality().equals(
+                other.sellerExternalDocuments, sellerExternalDocuments) &&
+            const DeepCollectionEquality()
+                .equals(other.buyerDeals, buyerDeals) &&
+            (identical(other.buyerDealsStatus, buyerDealsStatus) ||
+                other.buyerDealsStatus == buyerDealsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.sellerDeals, sellerDeals) &&
+            (identical(other.sellerDealsStatus, sellerDealsStatus) ||
+                other.sellerDealsStatus == sellerDealsStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.buyerActivities, buyerActivities) &&
+            (identical(other.buyerActivitiesStatus, buyerActivitiesStatus) ||
+                other.buyerActivitiesStatus == buyerActivitiesStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.sellerActivities, sellerActivities) &&
+            (identical(other.sellerActivitiesStatus, sellerActivitiesStatus) ||
+                other.sellerActivitiesStatus == sellerActivitiesStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyActivities, propertyActivities) &&
+            (identical(
+                    other.propertyActivitiesStatus, propertyActivitiesStatus) ||
+                other.propertyActivitiesStatus == propertyActivitiesStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyTypeList, propertyTypeList) &&
+            (identical(other.getPropertyTypeListStatus,
+                    getPropertyTypeListStatus) ||
+                other.getPropertyTypeListStatus == getPropertyTypeListStatus));
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        dealId,
+        deal,
+        getDealStatus,
+        getDealError,
+        const DeepCollectionEquality().hash(dealDocuments),
+        getDealDocumentsStatus,
+        const DeepCollectionEquality().hash(userDocuments),
+        getUserDocumentsStatus,
+        const DeepCollectionEquality().hash(sellerDocuments),
+        getSellerDocumentsStatus,
+        const DeepCollectionEquality().hash(buyerDocuments),
+        getBuyerDocumentsStatus,
+        const DeepCollectionEquality().hash(buyerExternalDocuments),
+        const DeepCollectionEquality().hash(sellerExternalDocuments),
+        const DeepCollectionEquality().hash(buyerDeals),
+        buyerDealsStatus,
+        const DeepCollectionEquality().hash(sellerDeals),
+        sellerDealsStatus,
+        const DeepCollectionEquality().hash(buyerActivities),
+        buyerActivitiesStatus,
+        const DeepCollectionEquality().hash(sellerActivities),
+        sellerActivitiesStatus,
+        const DeepCollectionEquality().hash(propertyActivities),
+        propertyActivitiesStatus,
+        const DeepCollectionEquality().hash(propertyTypeList),
+        getPropertyTypeListStatus
+      ]);
+
+  @override
+  String toString() {
+    return 'DealDetailsState(dealId: $dealId, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError, dealDocuments: $dealDocuments, getDealDocumentsStatus: $getDealDocumentsStatus, userDocuments: $userDocuments, getUserDocumentsStatus: $getUserDocumentsStatus, sellerDocuments: $sellerDocuments, getSellerDocumentsStatus: $getSellerDocumentsStatus, buyerDocuments: $buyerDocuments, getBuyerDocumentsStatus: $getBuyerDocumentsStatus, buyerExternalDocuments: $buyerExternalDocuments, sellerExternalDocuments: $sellerExternalDocuments, buyerDeals: $buyerDeals, buyerDealsStatus: $buyerDealsStatus, sellerDeals: $sellerDeals, sellerDealsStatus: $sellerDealsStatus, buyerActivities: $buyerActivities, buyerActivitiesStatus: $buyerActivitiesStatus, sellerActivities: $sellerActivities, sellerActivitiesStatus: $sellerActivitiesStatus, propertyActivities: $propertyActivities, propertyActivitiesStatus: $propertyActivitiesStatus, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus)';
+  }
 }
 
 /// @nodoc
-abstract class $DealDetailsStateCopyWith<$Res> {
+abstract mixin class $DealDetailsStateCopyWith<$Res> {
   factory $DealDetailsStateCopyWith(
-          DealDetailsState value, $Res Function(DealDetailsState) then) =
-      _$DealDetailsStateCopyWithImpl<$Res, DealDetailsState>;
+          DealDetailsState value, $Res Function(DealDetailsState) _then) =
+      _$DealDetailsStateCopyWithImpl;
   @useResult
   $Res call(
       {String dealId,
@@ -88,15 +184,15 @@ abstract class $DealDetailsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
+class _$DealDetailsStateCopyWithImpl<$Res>
     implements $DealDetailsStateCopyWith<$Res> {
-  _$DealDetailsStateCopyWithImpl(this._value, this._then);
+  _$DealDetailsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DealDetailsState _self;
+  final $Res Function(DealDetailsState) _then;
 
+  /// Create a copy of DealDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,318 +223,133 @@ class _$DealDetailsStateCopyWithImpl<$Res, $Val extends DealDetailsState>
     Object? propertyTypeList = null,
     Object? getPropertyTypeListStatus = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       dealId: null == dealId
-          ? _value.dealId
+          ? _self.dealId
           : dealId // ignore: cast_nullable_to_non_nullable
               as String,
       deal: freezed == deal
-          ? _value.deal
+          ? _self.deal
           : deal // ignore: cast_nullable_to_non_nullable
               as Deal?,
       getDealStatus: null == getDealStatus
-          ? _value.getDealStatus
+          ? _self.getDealStatus
           : getDealStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getDealError: freezed == getDealError
-          ? _value.getDealError
+          ? _self.getDealError
           : getDealError // ignore: cast_nullable_to_non_nullable
               as String?,
       dealDocuments: null == dealDocuments
-          ? _value.dealDocuments
+          ? _self.dealDocuments
           : dealDocuments // ignore: cast_nullable_to_non_nullable
               as List<DealDocument>,
       getDealDocumentsStatus: null == getDealDocumentsStatus
-          ? _value.getDealDocumentsStatus
+          ? _self.getDealDocumentsStatus
           : getDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       userDocuments: null == userDocuments
-          ? _value.userDocuments
+          ? _self.userDocuments
           : userDocuments // ignore: cast_nullable_to_non_nullable
               as List<DealDocument>,
       getUserDocumentsStatus: null == getUserDocumentsStatus
-          ? _value.getUserDocumentsStatus
+          ? _self.getUserDocumentsStatus
           : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       sellerDocuments: null == sellerDocuments
-          ? _value.sellerDocuments
+          ? _self.sellerDocuments
           : sellerDocuments // ignore: cast_nullable_to_non_nullable
               as List<DealDocument>,
       getSellerDocumentsStatus: null == getSellerDocumentsStatus
-          ? _value.getSellerDocumentsStatus
+          ? _self.getSellerDocumentsStatus
           : getSellerDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buyerDocuments: null == buyerDocuments
-          ? _value.buyerDocuments
+          ? _self.buyerDocuments
           : buyerDocuments // ignore: cast_nullable_to_non_nullable
               as List<DealDocument>,
       getBuyerDocumentsStatus: null == getBuyerDocumentsStatus
-          ? _value.getBuyerDocumentsStatus
+          ? _self.getBuyerDocumentsStatus
           : getBuyerDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buyerExternalDocuments: null == buyerExternalDocuments
-          ? _value.buyerExternalDocuments
+          ? _self.buyerExternalDocuments
           : buyerExternalDocuments // ignore: cast_nullable_to_non_nullable
               as List<DealDocument>,
       sellerExternalDocuments: null == sellerExternalDocuments
-          ? _value.sellerExternalDocuments
+          ? _self.sellerExternalDocuments
           : sellerExternalDocuments // ignore: cast_nullable_to_non_nullable
               as List<DealDocument>,
       buyerDeals: null == buyerDeals
-          ? _value.buyerDeals
+          ? _self.buyerDeals
           : buyerDeals // ignore: cast_nullable_to_non_nullable
               as List<Deal>,
       buyerDealsStatus: null == buyerDealsStatus
-          ? _value.buyerDealsStatus
+          ? _self.buyerDealsStatus
           : buyerDealsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       sellerDeals: null == sellerDeals
-          ? _value.sellerDeals
+          ? _self.sellerDeals
           : sellerDeals // ignore: cast_nullable_to_non_nullable
               as List<Deal>,
       sellerDealsStatus: null == sellerDealsStatus
-          ? _value.sellerDealsStatus
+          ? _self.sellerDealsStatus
           : sellerDealsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buyerActivities: null == buyerActivities
-          ? _value.buyerActivities
+          ? _self.buyerActivities
           : buyerActivities // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       buyerActivitiesStatus: null == buyerActivitiesStatus
-          ? _value.buyerActivitiesStatus
+          ? _self.buyerActivitiesStatus
           : buyerActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       sellerActivities: null == sellerActivities
-          ? _value.sellerActivities
+          ? _self.sellerActivities
           : sellerActivities // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       sellerActivitiesStatus: null == sellerActivitiesStatus
-          ? _value.sellerActivitiesStatus
+          ? _self.sellerActivitiesStatus
           : sellerActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       propertyActivities: null == propertyActivities
-          ? _value.propertyActivities
+          ? _self.propertyActivities
           : propertyActivities // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       propertyActivitiesStatus: null == propertyActivitiesStatus
-          ? _value.propertyActivitiesStatus
+          ? _self.propertyActivitiesStatus
           : propertyActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       propertyTypeList: null == propertyTypeList
-          ? _value.propertyTypeList
+          ? _self.propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
               as List<PropertyType>,
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of DealDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DealCopyWith<$Res>? get deal {
-    if (_value.deal == null) {
+    if (_self.deal == null) {
       return null;
     }
 
-    return $DealCopyWith<$Res>(_value.deal!, (value) {
-      return _then(_value.copyWith(deal: value) as $Val);
+    return $DealCopyWith<$Res>(_self.deal!, (value) {
+      return _then(_self.copyWith(deal: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$DealDetailsStateImplCopyWith<$Res>
-    implements $DealDetailsStateCopyWith<$Res> {
-  factory _$$DealDetailsStateImplCopyWith(_$DealDetailsStateImpl value,
-          $Res Function(_$DealDetailsStateImpl) then) =
-      __$$DealDetailsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String dealId,
-      Deal? deal,
-      AppStatus getDealStatus,
-      String? getDealError,
-      List<DealDocument> dealDocuments,
-      AppStatus getDealDocumentsStatus,
-      List<DealDocument> userDocuments,
-      AppStatus getUserDocumentsStatus,
-      List<DealDocument> sellerDocuments,
-      AppStatus getSellerDocumentsStatus,
-      List<DealDocument> buyerDocuments,
-      AppStatus getBuyerDocumentsStatus,
-      List<DealDocument> buyerExternalDocuments,
-      List<DealDocument> sellerExternalDocuments,
-      List<Deal> buyerDeals,
-      AppStatus buyerDealsStatus,
-      List<Deal> sellerDeals,
-      AppStatus sellerDealsStatus,
-      List<Activity> buyerActivities,
-      AppStatus buyerActivitiesStatus,
-      List<Activity> sellerActivities,
-      AppStatus sellerActivitiesStatus,
-      List<Activity> propertyActivities,
-      AppStatus propertyActivitiesStatus,
-      List<PropertyType> propertyTypeList,
-      AppStatus getPropertyTypeListStatus});
 
-  @override
-  $DealCopyWith<$Res>? get deal;
-}
-
-/// @nodoc
-class __$$DealDetailsStateImplCopyWithImpl<$Res>
-    extends _$DealDetailsStateCopyWithImpl<$Res, _$DealDetailsStateImpl>
-    implements _$$DealDetailsStateImplCopyWith<$Res> {
-  __$$DealDetailsStateImplCopyWithImpl(_$DealDetailsStateImpl _value,
-      $Res Function(_$DealDetailsStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? dealId = null,
-    Object? deal = freezed,
-    Object? getDealStatus = null,
-    Object? getDealError = freezed,
-    Object? dealDocuments = null,
-    Object? getDealDocumentsStatus = null,
-    Object? userDocuments = null,
-    Object? getUserDocumentsStatus = null,
-    Object? sellerDocuments = null,
-    Object? getSellerDocumentsStatus = null,
-    Object? buyerDocuments = null,
-    Object? getBuyerDocumentsStatus = null,
-    Object? buyerExternalDocuments = null,
-    Object? sellerExternalDocuments = null,
-    Object? buyerDeals = null,
-    Object? buyerDealsStatus = null,
-    Object? sellerDeals = null,
-    Object? sellerDealsStatus = null,
-    Object? buyerActivities = null,
-    Object? buyerActivitiesStatus = null,
-    Object? sellerActivities = null,
-    Object? sellerActivitiesStatus = null,
-    Object? propertyActivities = null,
-    Object? propertyActivitiesStatus = null,
-    Object? propertyTypeList = null,
-    Object? getPropertyTypeListStatus = null,
-  }) {
-    return _then(_$DealDetailsStateImpl(
-      dealId: null == dealId
-          ? _value.dealId
-          : dealId // ignore: cast_nullable_to_non_nullable
-              as String,
-      deal: freezed == deal
-          ? _value.deal
-          : deal // ignore: cast_nullable_to_non_nullable
-              as Deal?,
-      getDealStatus: null == getDealStatus
-          ? _value.getDealStatus
-          : getDealStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getDealError: freezed == getDealError
-          ? _value.getDealError
-          : getDealError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dealDocuments: null == dealDocuments
-          ? _value._dealDocuments
-          : dealDocuments // ignore: cast_nullable_to_non_nullable
-              as List<DealDocument>,
-      getDealDocumentsStatus: null == getDealDocumentsStatus
-          ? _value.getDealDocumentsStatus
-          : getDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      userDocuments: null == userDocuments
-          ? _value._userDocuments
-          : userDocuments // ignore: cast_nullable_to_non_nullable
-              as List<DealDocument>,
-      getUserDocumentsStatus: null == getUserDocumentsStatus
-          ? _value.getUserDocumentsStatus
-          : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      sellerDocuments: null == sellerDocuments
-          ? _value._sellerDocuments
-          : sellerDocuments // ignore: cast_nullable_to_non_nullable
-              as List<DealDocument>,
-      getSellerDocumentsStatus: null == getSellerDocumentsStatus
-          ? _value.getSellerDocumentsStatus
-          : getSellerDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buyerDocuments: null == buyerDocuments
-          ? _value._buyerDocuments
-          : buyerDocuments // ignore: cast_nullable_to_non_nullable
-              as List<DealDocument>,
-      getBuyerDocumentsStatus: null == getBuyerDocumentsStatus
-          ? _value.getBuyerDocumentsStatus
-          : getBuyerDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buyerExternalDocuments: null == buyerExternalDocuments
-          ? _value._buyerExternalDocuments
-          : buyerExternalDocuments // ignore: cast_nullable_to_non_nullable
-              as List<DealDocument>,
-      sellerExternalDocuments: null == sellerExternalDocuments
-          ? _value._sellerExternalDocuments
-          : sellerExternalDocuments // ignore: cast_nullable_to_non_nullable
-              as List<DealDocument>,
-      buyerDeals: null == buyerDeals
-          ? _value._buyerDeals
-          : buyerDeals // ignore: cast_nullable_to_non_nullable
-              as List<Deal>,
-      buyerDealsStatus: null == buyerDealsStatus
-          ? _value.buyerDealsStatus
-          : buyerDealsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      sellerDeals: null == sellerDeals
-          ? _value._sellerDeals
-          : sellerDeals // ignore: cast_nullable_to_non_nullable
-              as List<Deal>,
-      sellerDealsStatus: null == sellerDealsStatus
-          ? _value.sellerDealsStatus
-          : sellerDealsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buyerActivities: null == buyerActivities
-          ? _value._buyerActivities
-          : buyerActivities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      buyerActivitiesStatus: null == buyerActivitiesStatus
-          ? _value.buyerActivitiesStatus
-          : buyerActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      sellerActivities: null == sellerActivities
-          ? _value._sellerActivities
-          : sellerActivities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      sellerActivitiesStatus: null == sellerActivitiesStatus
-          ? _value.sellerActivitiesStatus
-          : sellerActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      propertyActivities: null == propertyActivities
-          ? _value._propertyActivities
-          : propertyActivities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      propertyActivitiesStatus: null == propertyActivitiesStatus
-          ? _value.propertyActivitiesStatus
-          : propertyActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      propertyTypeList: null == propertyTypeList
-          ? _value._propertyTypeList
-          : propertyTypeList // ignore: cast_nullable_to_non_nullable
-              as List<PropertyType>,
-      getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
-          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DealDetailsStateImpl implements _DealDetailsState {
-  const _$DealDetailsStateImpl(
+class _DealDetailsState implements DealDetailsState {
+  const _DealDetailsState(
       {required this.dealId,
       this.deal,
       this.getDealStatus = AppStatus.init,
@@ -631,16 +542,19 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
   @JsonKey()
   final AppStatus getPropertyTypeListStatus;
 
+  /// Create a copy of DealDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DealDetailsState(dealId: $dealId, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError, dealDocuments: $dealDocuments, getDealDocumentsStatus: $getDealDocumentsStatus, userDocuments: $userDocuments, getUserDocumentsStatus: $getUserDocumentsStatus, sellerDocuments: $sellerDocuments, getSellerDocumentsStatus: $getSellerDocumentsStatus, buyerDocuments: $buyerDocuments, getBuyerDocumentsStatus: $getBuyerDocumentsStatus, buyerExternalDocuments: $buyerExternalDocuments, sellerExternalDocuments: $sellerExternalDocuments, buyerDeals: $buyerDeals, buyerDealsStatus: $buyerDealsStatus, sellerDeals: $sellerDeals, sellerDealsStatus: $sellerDealsStatus, buyerActivities: $buyerActivities, buyerActivitiesStatus: $buyerActivitiesStatus, sellerActivities: $sellerActivities, sellerActivitiesStatus: $sellerActivitiesStatus, propertyActivities: $propertyActivities, propertyActivitiesStatus: $propertyActivitiesStatus, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DealDetailsStateCopyWith<_DealDetailsState> get copyWith =>
+      __$DealDetailsStateCopyWithImpl<_DealDetailsState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DealDetailsStateImpl &&
+            other is _DealDetailsState &&
             (identical(other.dealId, dealId) || other.dealId == dealId) &&
             (identical(other.deal, deal) || other.deal == deal) &&
             (identical(other.getDealStatus, getDealStatus) ||
@@ -726,97 +640,213 @@ class _$DealDetailsStateImpl implements _DealDetailsState {
         getPropertyTypeListStatus
       ]);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'DealDetailsState(dealId: $dealId, deal: $deal, getDealStatus: $getDealStatus, getDealError: $getDealError, dealDocuments: $dealDocuments, getDealDocumentsStatus: $getDealDocumentsStatus, userDocuments: $userDocuments, getUserDocumentsStatus: $getUserDocumentsStatus, sellerDocuments: $sellerDocuments, getSellerDocumentsStatus: $getSellerDocumentsStatus, buyerDocuments: $buyerDocuments, getBuyerDocumentsStatus: $getBuyerDocumentsStatus, buyerExternalDocuments: $buyerExternalDocuments, sellerExternalDocuments: $sellerExternalDocuments, buyerDeals: $buyerDeals, buyerDealsStatus: $buyerDealsStatus, sellerDeals: $sellerDeals, sellerDealsStatus: $sellerDealsStatus, buyerActivities: $buyerActivities, buyerActivitiesStatus: $buyerActivitiesStatus, sellerActivities: $sellerActivities, sellerActivitiesStatus: $sellerActivitiesStatus, propertyActivities: $propertyActivities, propertyActivitiesStatus: $propertyActivitiesStatus, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DealDetailsStateCopyWith<$Res>
+    implements $DealDetailsStateCopyWith<$Res> {
+  factory _$DealDetailsStateCopyWith(
+          _DealDetailsState value, $Res Function(_DealDetailsState) _then) =
+      __$DealDetailsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String dealId,
+      Deal? deal,
+      AppStatus getDealStatus,
+      String? getDealError,
+      List<DealDocument> dealDocuments,
+      AppStatus getDealDocumentsStatus,
+      List<DealDocument> userDocuments,
+      AppStatus getUserDocumentsStatus,
+      List<DealDocument> sellerDocuments,
+      AppStatus getSellerDocumentsStatus,
+      List<DealDocument> buyerDocuments,
+      AppStatus getBuyerDocumentsStatus,
+      List<DealDocument> buyerExternalDocuments,
+      List<DealDocument> sellerExternalDocuments,
+      List<Deal> buyerDeals,
+      AppStatus buyerDealsStatus,
+      List<Deal> sellerDeals,
+      AppStatus sellerDealsStatus,
+      List<Activity> buyerActivities,
+      AppStatus buyerActivitiesStatus,
+      List<Activity> sellerActivities,
+      AppStatus sellerActivitiesStatus,
+      List<Activity> propertyActivities,
+      AppStatus propertyActivitiesStatus,
+      List<PropertyType> propertyTypeList,
+      AppStatus getPropertyTypeListStatus});
+
+  @override
+  $DealCopyWith<$Res>? get deal;
+}
+
+/// @nodoc
+class __$DealDetailsStateCopyWithImpl<$Res>
+    implements _$DealDetailsStateCopyWith<$Res> {
+  __$DealDetailsStateCopyWithImpl(this._self, this._then);
+
+  final _DealDetailsState _self;
+  final $Res Function(_DealDetailsState) _then;
+
+  /// Create a copy of DealDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$DealDetailsStateImplCopyWith<_$DealDetailsStateImpl> get copyWith =>
-      __$$DealDetailsStateImplCopyWithImpl<_$DealDetailsStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? dealId = null,
+    Object? deal = freezed,
+    Object? getDealStatus = null,
+    Object? getDealError = freezed,
+    Object? dealDocuments = null,
+    Object? getDealDocumentsStatus = null,
+    Object? userDocuments = null,
+    Object? getUserDocumentsStatus = null,
+    Object? sellerDocuments = null,
+    Object? getSellerDocumentsStatus = null,
+    Object? buyerDocuments = null,
+    Object? getBuyerDocumentsStatus = null,
+    Object? buyerExternalDocuments = null,
+    Object? sellerExternalDocuments = null,
+    Object? buyerDeals = null,
+    Object? buyerDealsStatus = null,
+    Object? sellerDeals = null,
+    Object? sellerDealsStatus = null,
+    Object? buyerActivities = null,
+    Object? buyerActivitiesStatus = null,
+    Object? sellerActivities = null,
+    Object? sellerActivitiesStatus = null,
+    Object? propertyActivities = null,
+    Object? propertyActivitiesStatus = null,
+    Object? propertyTypeList = null,
+    Object? getPropertyTypeListStatus = null,
+  }) {
+    return _then(_DealDetailsState(
+      dealId: null == dealId
+          ? _self.dealId
+          : dealId // ignore: cast_nullable_to_non_nullable
+              as String,
+      deal: freezed == deal
+          ? _self.deal
+          : deal // ignore: cast_nullable_to_non_nullable
+              as Deal?,
+      getDealStatus: null == getDealStatus
+          ? _self.getDealStatus
+          : getDealStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getDealError: freezed == getDealError
+          ? _self.getDealError
+          : getDealError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealDocuments: null == dealDocuments
+          ? _self._dealDocuments
+          : dealDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getDealDocumentsStatus: null == getDealDocumentsStatus
+          ? _self.getDealDocumentsStatus
+          : getDealDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      userDocuments: null == userDocuments
+          ? _self._userDocuments
+          : userDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getUserDocumentsStatus: null == getUserDocumentsStatus
+          ? _self.getUserDocumentsStatus
+          : getUserDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      sellerDocuments: null == sellerDocuments
+          ? _self._sellerDocuments
+          : sellerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getSellerDocumentsStatus: null == getSellerDocumentsStatus
+          ? _self.getSellerDocumentsStatus
+          : getSellerDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buyerDocuments: null == buyerDocuments
+          ? _self._buyerDocuments
+          : buyerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      getBuyerDocumentsStatus: null == getBuyerDocumentsStatus
+          ? _self.getBuyerDocumentsStatus
+          : getBuyerDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buyerExternalDocuments: null == buyerExternalDocuments
+          ? _self._buyerExternalDocuments
+          : buyerExternalDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      sellerExternalDocuments: null == sellerExternalDocuments
+          ? _self._sellerExternalDocuments
+          : sellerExternalDocuments // ignore: cast_nullable_to_non_nullable
+              as List<DealDocument>,
+      buyerDeals: null == buyerDeals
+          ? _self._buyerDeals
+          : buyerDeals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      buyerDealsStatus: null == buyerDealsStatus
+          ? _self.buyerDealsStatus
+          : buyerDealsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      sellerDeals: null == sellerDeals
+          ? _self._sellerDeals
+          : sellerDeals // ignore: cast_nullable_to_non_nullable
+              as List<Deal>,
+      sellerDealsStatus: null == sellerDealsStatus
+          ? _self.sellerDealsStatus
+          : sellerDealsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buyerActivities: null == buyerActivities
+          ? _self._buyerActivities
+          : buyerActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      buyerActivitiesStatus: null == buyerActivitiesStatus
+          ? _self.buyerActivitiesStatus
+          : buyerActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      sellerActivities: null == sellerActivities
+          ? _self._sellerActivities
+          : sellerActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      sellerActivitiesStatus: null == sellerActivitiesStatus
+          ? _self.sellerActivitiesStatus
+          : sellerActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      propertyActivities: null == propertyActivities
+          ? _self._propertyActivities
+          : propertyActivities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      propertyActivitiesStatus: null == propertyActivitiesStatus
+          ? _self.propertyActivitiesStatus
+          : propertyActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      propertyTypeList: null == propertyTypeList
+          ? _self._propertyTypeList
+          : propertyTypeList // ignore: cast_nullable_to_non_nullable
+              as List<PropertyType>,
+      getPropertyTypeListStatus: null == getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
+          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+    ));
+  }
+
+  /// Create a copy of DealDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DealCopyWith<$Res>? get deal {
+    if (_self.deal == null) {
+      return null;
+    }
+
+    return $DealCopyWith<$Res>(_self.deal!, (value) {
+      return _then(_self.copyWith(deal: value));
+    });
+  }
 }
 
-abstract class _DealDetailsState implements DealDetailsState {
-  const factory _DealDetailsState(
-      {required final String dealId,
-      final Deal? deal,
-      final AppStatus getDealStatus,
-      final String? getDealError,
-      final List<DealDocument> dealDocuments,
-      final AppStatus getDealDocumentsStatus,
-      final List<DealDocument> userDocuments,
-      final AppStatus getUserDocumentsStatus,
-      final List<DealDocument> sellerDocuments,
-      final AppStatus getSellerDocumentsStatus,
-      final List<DealDocument> buyerDocuments,
-      final AppStatus getBuyerDocumentsStatus,
-      final List<DealDocument> buyerExternalDocuments,
-      final List<DealDocument> sellerExternalDocuments,
-      final List<Deal> buyerDeals,
-      final AppStatus buyerDealsStatus,
-      final List<Deal> sellerDeals,
-      final AppStatus sellerDealsStatus,
-      final List<Activity> buyerActivities,
-      final AppStatus buyerActivitiesStatus,
-      final List<Activity> sellerActivities,
-      final AppStatus sellerActivitiesStatus,
-      final List<Activity> propertyActivities,
-      final AppStatus propertyActivitiesStatus,
-      final List<PropertyType> propertyTypeList,
-      final AppStatus getPropertyTypeListStatus}) = _$DealDetailsStateImpl;
-
-  @override
-  String get dealId;
-  @override
-  Deal? get deal;
-  @override
-  AppStatus get getDealStatus;
-  @override
-  String? get getDealError;
-  @override
-  List<DealDocument> get dealDocuments;
-  @override
-  AppStatus get getDealDocumentsStatus;
-  @override
-  List<DealDocument> get userDocuments;
-  @override
-  AppStatus get getUserDocumentsStatus;
-  @override
-  List<DealDocument> get sellerDocuments;
-  @override
-  AppStatus get getSellerDocumentsStatus;
-  @override
-  List<DealDocument> get buyerDocuments;
-  @override
-  AppStatus get getBuyerDocumentsStatus;
-  @override
-  List<DealDocument> get buyerExternalDocuments;
-  @override
-  List<DealDocument> get sellerExternalDocuments;
-  @override
-  List<Deal> get buyerDeals;
-  @override
-  AppStatus get buyerDealsStatus;
-  @override
-  List<Deal> get sellerDeals;
-  @override
-  AppStatus get sellerDealsStatus;
-  @override
-  List<Activity> get buyerActivities;
-  @override
-  AppStatus get buyerActivitiesStatus;
-  @override
-  List<Activity> get sellerActivities;
-  @override
-  AppStatus get sellerActivitiesStatus;
-  @override
-  List<Activity> get propertyActivities;
-  @override
-  AppStatus get propertyActivitiesStatus;
-  @override
-  List<PropertyType> get propertyTypeList;
-  @override
-  AppStatus get getPropertyTypeListStatus;
-  @override
-  @JsonKey(ignore: true)
-  _$$DealDetailsStateImplCopyWith<_$DealDetailsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

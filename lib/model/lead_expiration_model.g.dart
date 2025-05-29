@@ -6,26 +6,24 @@ part of 'lead_expiration_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LeadExpirationModelImpl _$$LeadExpirationModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LeadExpirationModelImpl(
+_LeadExpirationModel _$LeadExpirationModelFromJson(Map<String, dynamic> json) =>
+    _LeadExpirationModel(
       numberOfExpirations: (json['numberOfExpirations'] as num).toInt(),
       lastExpirationRecord: ExpirationRecord.fromJson(
           json['lastExpirationRecord'] as Map<String, dynamic>),
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$LeadExpirationModelImplToJson(
-        _$LeadExpirationModelImpl instance) =>
+Map<String, dynamic> _$LeadExpirationModelToJson(
+        _LeadExpirationModel instance) =>
     <String, dynamic>{
       'numberOfExpirations': instance.numberOfExpirations,
       'lastExpirationRecord': instance.lastExpirationRecord,
       'id': instance.id,
     };
 
-_$ExpirationRecordImpl _$$ExpirationRecordImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ExpirationRecordImpl(
+_ExpirationRecord _$ExpirationRecordFromJson(Map<String, dynamic> json) =>
+    _ExpirationRecord(
       id: json['_id'] as String,
       agent: AgentModel.fromJson(json['agent'] as Map<String, dynamic>),
       lead: LeadModel.fromJson(json['lead'] as Map<String, dynamic>),
@@ -34,8 +32,7 @@ _$ExpirationRecordImpl _$$ExpirationRecordImplFromJson(
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$ExpirationRecordImplToJson(
-        _$ExpirationRecordImpl instance) =>
+Map<String, dynamic> _$ExpirationRecordToJson(_ExpirationRecord instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'agent': instance.agent,
@@ -45,8 +42,7 @@ Map<String, dynamic> _$$ExpirationRecordImplToJson(
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
-_$AgentModelImpl _$$AgentModelImplFromJson(Map<String, dynamic> json) =>
-    _$AgentModelImpl(
+_AgentModel _$AgentModelFromJson(Map<String, dynamic> json) => _AgentModel(
       id: json['id'] as String,
       userId: json['userId'] as String,
       name: json['name'] as String,
@@ -57,7 +53,7 @@ _$AgentModelImpl _$$AgentModelImplFromJson(Map<String, dynamic> json) =>
       recordId: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$AgentModelImplToJson(_$AgentModelImpl instance) =>
+Map<String, dynamic> _$AgentModelToJson(_AgentModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
@@ -69,8 +65,7 @@ Map<String, dynamic> _$$AgentModelImplToJson(_$AgentModelImpl instance) =>
       '_id': instance.recordId,
     };
 
-_$LeadModelImpl _$$LeadModelImplFromJson(Map<String, dynamic> json) =>
-    _$LeadModelImpl(
+_LeadModel _$LeadModelFromJson(Map<String, dynamic> json) => _LeadModel(
       id: json['id'] as String,
       name: json['name'] as String,
       phone: json['phone'] as String,
@@ -83,7 +78,7 @@ _$LeadModelImpl _$$LeadModelImplFromJson(Map<String, dynamic> json) =>
       recordId: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$LeadModelImplToJson(_$LeadModelImpl instance) =>
+Map<String, dynamic> _$LeadModelToJson(_LeadModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -96,9 +91,8 @@ Map<String, dynamic> _$$LeadModelImplToJson(_$LeadModelImpl instance) =>
       '_id': instance.recordId,
     };
 
-_$LeadSourceModelImpl _$$LeadSourceModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LeadSourceModelImpl(
+_LeadSourceModel _$LeadSourceModelFromJson(Map<String, dynamic> json) =>
+    _LeadSourceModel(
       id: json['id'] as String,
       name: json['name'] as String,
       leadSourceType: json['leadSourceType'] as String,
@@ -106,8 +100,7 @@ _$LeadSourceModelImpl _$$LeadSourceModelImplFromJson(
       recordId: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$LeadSourceModelImplToJson(
-        _$LeadSourceModelImpl instance) =>
+Map<String, dynamic> _$LeadSourceModelToJson(_LeadSourceModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

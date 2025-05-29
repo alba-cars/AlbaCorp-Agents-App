@@ -4,7 +4,7 @@ part 'expected_earnings_model.freezed.dart';
 part 'expected_earnings_model.g.dart';
 
 @freezed
-class ExpectedEarningsModel with _$ExpectedEarningsModel {
+abstract class ExpectedEarningsModel with _$ExpectedEarningsModel {
   const factory ExpectedEarningsModel({
     @Default(0) double expectedCommission,
   }) = _ExpectedEarningsModel;

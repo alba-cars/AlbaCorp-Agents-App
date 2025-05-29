@@ -3,7 +3,7 @@ part 'role_model.freezed.dart';
 part 'role_model.g.dart';
 
 @freezed
-class Role with _$Role {
+abstract class Role with _$Role {
   const factory Role({
     String? id,
     String? name,

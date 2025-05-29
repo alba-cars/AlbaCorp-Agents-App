@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,36 +10,87 @@ part of 'leads_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LeadsState {
-  List<Lead> get leads => throw _privateConstructorUsedError;
-  AppStatus get getLeadsStatus => throw _privateConstructorUsedError;
-  String? get getLeadsError => throw _privateConstructorUsedError;
-  Paginator? get leadsPaginator => throw _privateConstructorUsedError;
-  String? get leadsSearch => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get leadsFilter => throw _privateConstructorUsedError;
-  QuickFilter? get quickFilter => throw _privateConstructorUsedError;
-  int get sortDir => throw _privateConstructorUsedError;
-  bool get selectModeEnabled => throw _privateConstructorUsedError;
-  List<String> get selectedLeads => throw _privateConstructorUsedError;
-  AppStatus get returnLeadsStatus => throw _privateConstructorUsedError;
-  String? get returnLeadsError => throw _privateConstructorUsedError;
+  List<Lead> get leads;
+  AppStatus get getLeadsStatus;
+  String? get getLeadsError;
+  Paginator? get leadsPaginator;
+  String? get leadsSearch;
+  Map<String, dynamic>? get leadsFilter;
+  QuickFilter? get quickFilter;
+  int get sortDir;
+  bool get selectModeEnabled;
+  List<String> get selectedLeads;
+  AppStatus get returnLeadsStatus;
+  String? get returnLeadsError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LeadsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $LeadsStateCopyWith<LeadsState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$LeadsStateCopyWithImpl<LeadsState>(this as LeadsState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is LeadsState &&
+            const DeepCollectionEquality().equals(other.leads, leads) &&
+            (identical(other.getLeadsStatus, getLeadsStatus) ||
+                other.getLeadsStatus == getLeadsStatus) &&
+            (identical(other.getLeadsError, getLeadsError) ||
+                other.getLeadsError == getLeadsError) &&
+            (identical(other.leadsPaginator, leadsPaginator) ||
+                other.leadsPaginator == leadsPaginator) &&
+            (identical(other.leadsSearch, leadsSearch) ||
+                other.leadsSearch == leadsSearch) &&
+            const DeepCollectionEquality()
+                .equals(other.leadsFilter, leadsFilter) &&
+            (identical(other.quickFilter, quickFilter) ||
+                other.quickFilter == quickFilter) &&
+            (identical(other.sortDir, sortDir) || other.sortDir == sortDir) &&
+            (identical(other.selectModeEnabled, selectModeEnabled) ||
+                other.selectModeEnabled == selectModeEnabled) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedLeads, selectedLeads) &&
+            (identical(other.returnLeadsStatus, returnLeadsStatus) ||
+                other.returnLeadsStatus == returnLeadsStatus) &&
+            (identical(other.returnLeadsError, returnLeadsError) ||
+                other.returnLeadsError == returnLeadsError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(leads),
+      getLeadsStatus,
+      getLeadsError,
+      leadsPaginator,
+      leadsSearch,
+      const DeepCollectionEquality().hash(leadsFilter),
+      quickFilter,
+      sortDir,
+      selectModeEnabled,
+      const DeepCollectionEquality().hash(selectedLeads),
+      returnLeadsStatus,
+      returnLeadsError);
+
+  @override
+  String toString() {
+    return 'LeadsState(leads: $leads, getLeadsStatus: $getLeadsStatus, getLeadsError: $getLeadsError, leadsPaginator: $leadsPaginator, leadsSearch: $leadsSearch, leadsFilter: $leadsFilter, quickFilter: $quickFilter, sortDir: $sortDir, selectModeEnabled: $selectModeEnabled, selectedLeads: $selectedLeads, returnLeadsStatus: $returnLeadsStatus, returnLeadsError: $returnLeadsError)';
+  }
 }
 
 /// @nodoc
-abstract class $LeadsStateCopyWith<$Res> {
+abstract mixin class $LeadsStateCopyWith<$Res> {
   factory $LeadsStateCopyWith(
-          LeadsState value, $Res Function(LeadsState) then) =
-      _$LeadsStateCopyWithImpl<$Res, LeadsState>;
+          LeadsState value, $Res Function(LeadsState) _then) =
+      _$LeadsStateCopyWithImpl;
   @useResult
   $Res call(
       {List<Lead> leads,
@@ -58,15 +110,14 @@ abstract class $LeadsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LeadsStateCopyWithImpl<$Res, $Val extends LeadsState>
-    implements $LeadsStateCopyWith<$Res> {
-  _$LeadsStateCopyWithImpl(this._value, this._then);
+class _$LeadsStateCopyWithImpl<$Res> implements $LeadsStateCopyWith<$Res> {
+  _$LeadsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final LeadsState _self;
+  final $Res Function(LeadsState) _then;
 
+  /// Create a copy of LeadsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,178 +134,77 @@ class _$LeadsStateCopyWithImpl<$Res, $Val extends LeadsState>
     Object? returnLeadsStatus = null,
     Object? returnLeadsError = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       leads: null == leads
-          ? _value.leads
+          ? _self.leads
           : leads // ignore: cast_nullable_to_non_nullable
               as List<Lead>,
       getLeadsStatus: null == getLeadsStatus
-          ? _value.getLeadsStatus
+          ? _self.getLeadsStatus
           : getLeadsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getLeadsError: freezed == getLeadsError
-          ? _value.getLeadsError
+          ? _self.getLeadsError
           : getLeadsError // ignore: cast_nullable_to_non_nullable
               as String?,
       leadsPaginator: freezed == leadsPaginator
-          ? _value.leadsPaginator
+          ? _self.leadsPaginator
           : leadsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       leadsSearch: freezed == leadsSearch
-          ? _value.leadsSearch
+          ? _self.leadsSearch
           : leadsSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       leadsFilter: freezed == leadsFilter
-          ? _value.leadsFilter
+          ? _self.leadsFilter
           : leadsFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       quickFilter: freezed == quickFilter
-          ? _value.quickFilter
+          ? _self.quickFilter
           : quickFilter // ignore: cast_nullable_to_non_nullable
               as QuickFilter?,
       sortDir: null == sortDir
-          ? _value.sortDir
+          ? _self.sortDir
           : sortDir // ignore: cast_nullable_to_non_nullable
               as int,
       selectModeEnabled: null == selectModeEnabled
-          ? _value.selectModeEnabled
+          ? _self.selectModeEnabled
           : selectModeEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       selectedLeads: null == selectedLeads
-          ? _value.selectedLeads
+          ? _self.selectedLeads
           : selectedLeads // ignore: cast_nullable_to_non_nullable
               as List<String>,
       returnLeadsStatus: null == returnLeadsStatus
-          ? _value.returnLeadsStatus
+          ? _self.returnLeadsStatus
           : returnLeadsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       returnLeadsError: freezed == returnLeadsError
-          ? _value.returnLeadsError
+          ? _self.returnLeadsError
           : returnLeadsError // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of LeadsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginatorCopyWith<$Res>? get leadsPaginator {
-    if (_value.leadsPaginator == null) {
+    if (_self.leadsPaginator == null) {
       return null;
     }
 
-    return $PaginatorCopyWith<$Res>(_value.leadsPaginator!, (value) {
-      return _then(_value.copyWith(leadsPaginator: value) as $Val);
+    return $PaginatorCopyWith<$Res>(_self.leadsPaginator!, (value) {
+      return _then(_self.copyWith(leadsPaginator: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$LeadsStateImplCopyWith<$Res>
-    implements $LeadsStateCopyWith<$Res> {
-  factory _$$LeadsStateImplCopyWith(
-          _$LeadsStateImpl value, $Res Function(_$LeadsStateImpl) then) =
-      __$$LeadsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {List<Lead> leads,
-      AppStatus getLeadsStatus,
-      String? getLeadsError,
-      Paginator? leadsPaginator,
-      String? leadsSearch,
-      Map<String, dynamic>? leadsFilter,
-      QuickFilter? quickFilter,
-      int sortDir,
-      bool selectModeEnabled,
-      List<String> selectedLeads,
-      AppStatus returnLeadsStatus,
-      String? returnLeadsError});
 
-  @override
-  $PaginatorCopyWith<$Res>? get leadsPaginator;
-}
-
-/// @nodoc
-class __$$LeadsStateImplCopyWithImpl<$Res>
-    extends _$LeadsStateCopyWithImpl<$Res, _$LeadsStateImpl>
-    implements _$$LeadsStateImplCopyWith<$Res> {
-  __$$LeadsStateImplCopyWithImpl(
-      _$LeadsStateImpl _value, $Res Function(_$LeadsStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? leads = null,
-    Object? getLeadsStatus = null,
-    Object? getLeadsError = freezed,
-    Object? leadsPaginator = freezed,
-    Object? leadsSearch = freezed,
-    Object? leadsFilter = freezed,
-    Object? quickFilter = freezed,
-    Object? sortDir = null,
-    Object? selectModeEnabled = null,
-    Object? selectedLeads = null,
-    Object? returnLeadsStatus = null,
-    Object? returnLeadsError = freezed,
-  }) {
-    return _then(_$LeadsStateImpl(
-      leads: null == leads
-          ? _value._leads
-          : leads // ignore: cast_nullable_to_non_nullable
-              as List<Lead>,
-      getLeadsStatus: null == getLeadsStatus
-          ? _value.getLeadsStatus
-          : getLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getLeadsError: freezed == getLeadsError
-          ? _value.getLeadsError
-          : getLeadsError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      leadsPaginator: freezed == leadsPaginator
-          ? _value.leadsPaginator
-          : leadsPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      leadsSearch: freezed == leadsSearch
-          ? _value.leadsSearch
-          : leadsSearch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      leadsFilter: freezed == leadsFilter
-          ? _value._leadsFilter
-          : leadsFilter // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      quickFilter: freezed == quickFilter
-          ? _value.quickFilter
-          : quickFilter // ignore: cast_nullable_to_non_nullable
-              as QuickFilter?,
-      sortDir: null == sortDir
-          ? _value.sortDir
-          : sortDir // ignore: cast_nullable_to_non_nullable
-              as int,
-      selectModeEnabled: null == selectModeEnabled
-          ? _value.selectModeEnabled
-          : selectModeEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      selectedLeads: null == selectedLeads
-          ? _value._selectedLeads
-          : selectedLeads // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      returnLeadsStatus: null == returnLeadsStatus
-          ? _value.returnLeadsStatus
-          : returnLeadsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      returnLeadsError: freezed == returnLeadsError
-          ? _value.returnLeadsError
-          : returnLeadsError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$LeadsStateImpl implements _LeadsState {
-  const _$LeadsStateImpl(
+class _LeadsState implements LeadsState {
+  const _LeadsState(
       {final List<Lead> leads = const [],
       this.getLeadsStatus = AppStatus.init,
       this.getLeadsError,
@@ -322,16 +272,19 @@ class _$LeadsStateImpl implements _LeadsState {
   @override
   final String? returnLeadsError;
 
+  /// Create a copy of LeadsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'LeadsState(leads: $leads, getLeadsStatus: $getLeadsStatus, getLeadsError: $getLeadsError, leadsPaginator: $leadsPaginator, leadsSearch: $leadsSearch, leadsFilter: $leadsFilter, quickFilter: $quickFilter, sortDir: $sortDir, selectModeEnabled: $selectModeEnabled, selectedLeads: $selectedLeads, returnLeadsStatus: $returnLeadsStatus, returnLeadsError: $returnLeadsError)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LeadsStateCopyWith<_LeadsState> get copyWith =>
+      __$LeadsStateCopyWithImpl<_LeadsState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LeadsStateImpl &&
+            other is _LeadsState &&
             const DeepCollectionEquality().equals(other._leads, _leads) &&
             (identical(other.getLeadsStatus, getLeadsStatus) ||
                 other.getLeadsStatus == getLeadsStatus) &&
@@ -372,54 +325,128 @@ class _$LeadsStateImpl implements _LeadsState {
       returnLeadsStatus,
       returnLeadsError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'LeadsState(leads: $leads, getLeadsStatus: $getLeadsStatus, getLeadsError: $getLeadsError, leadsPaginator: $leadsPaginator, leadsSearch: $leadsSearch, leadsFilter: $leadsFilter, quickFilter: $quickFilter, sortDir: $sortDir, selectModeEnabled: $selectModeEnabled, selectedLeads: $selectedLeads, returnLeadsStatus: $returnLeadsStatus, returnLeadsError: $returnLeadsError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LeadsStateCopyWith<$Res>
+    implements $LeadsStateCopyWith<$Res> {
+  factory _$LeadsStateCopyWith(
+          _LeadsState value, $Res Function(_LeadsState) _then) =
+      __$LeadsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {List<Lead> leads,
+      AppStatus getLeadsStatus,
+      String? getLeadsError,
+      Paginator? leadsPaginator,
+      String? leadsSearch,
+      Map<String, dynamic>? leadsFilter,
+      QuickFilter? quickFilter,
+      int sortDir,
+      bool selectModeEnabled,
+      List<String> selectedLeads,
+      AppStatus returnLeadsStatus,
+      String? returnLeadsError});
+
+  @override
+  $PaginatorCopyWith<$Res>? get leadsPaginator;
+}
+
+/// @nodoc
+class __$LeadsStateCopyWithImpl<$Res> implements _$LeadsStateCopyWith<$Res> {
+  __$LeadsStateCopyWithImpl(this._self, this._then);
+
+  final _LeadsState _self;
+  final $Res Function(_LeadsState) _then;
+
+  /// Create a copy of LeadsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$LeadsStateImplCopyWith<_$LeadsStateImpl> get copyWith =>
-      __$$LeadsStateImplCopyWithImpl<_$LeadsStateImpl>(this, _$identity);
+  $Res call({
+    Object? leads = null,
+    Object? getLeadsStatus = null,
+    Object? getLeadsError = freezed,
+    Object? leadsPaginator = freezed,
+    Object? leadsSearch = freezed,
+    Object? leadsFilter = freezed,
+    Object? quickFilter = freezed,
+    Object? sortDir = null,
+    Object? selectModeEnabled = null,
+    Object? selectedLeads = null,
+    Object? returnLeadsStatus = null,
+    Object? returnLeadsError = freezed,
+  }) {
+    return _then(_LeadsState(
+      leads: null == leads
+          ? _self._leads
+          : leads // ignore: cast_nullable_to_non_nullable
+              as List<Lead>,
+      getLeadsStatus: null == getLeadsStatus
+          ? _self.getLeadsStatus
+          : getLeadsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getLeadsError: freezed == getLeadsError
+          ? _self.getLeadsError
+          : getLeadsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadsPaginator: freezed == leadsPaginator
+          ? _self.leadsPaginator
+          : leadsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      leadsSearch: freezed == leadsSearch
+          ? _self.leadsSearch
+          : leadsSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadsFilter: freezed == leadsFilter
+          ? _self._leadsFilter
+          : leadsFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      quickFilter: freezed == quickFilter
+          ? _self.quickFilter
+          : quickFilter // ignore: cast_nullable_to_non_nullable
+              as QuickFilter?,
+      sortDir: null == sortDir
+          ? _self.sortDir
+          : sortDir // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectModeEnabled: null == selectModeEnabled
+          ? _self.selectModeEnabled
+          : selectModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selectedLeads: null == selectedLeads
+          ? _self._selectedLeads
+          : selectedLeads // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      returnLeadsStatus: null == returnLeadsStatus
+          ? _self.returnLeadsStatus
+          : returnLeadsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      returnLeadsError: freezed == returnLeadsError
+          ? _self.returnLeadsError
+          : returnLeadsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of LeadsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get leadsPaginator {
+    if (_self.leadsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.leadsPaginator!, (value) {
+      return _then(_self.copyWith(leadsPaginator: value));
+    });
+  }
 }
 
-abstract class _LeadsState implements LeadsState {
-  const factory _LeadsState(
-      {final List<Lead> leads,
-      final AppStatus getLeadsStatus,
-      final String? getLeadsError,
-      final Paginator? leadsPaginator,
-      final String? leadsSearch,
-      final Map<String, dynamic>? leadsFilter,
-      final QuickFilter? quickFilter,
-      final int sortDir,
-      final bool selectModeEnabled,
-      final List<String> selectedLeads,
-      final AppStatus returnLeadsStatus,
-      final String? returnLeadsError}) = _$LeadsStateImpl;
-
-  @override
-  List<Lead> get leads;
-  @override
-  AppStatus get getLeadsStatus;
-  @override
-  String? get getLeadsError;
-  @override
-  Paginator? get leadsPaginator;
-  @override
-  String? get leadsSearch;
-  @override
-  Map<String, dynamic>? get leadsFilter;
-  @override
-  QuickFilter? get quickFilter;
-  @override
-  int get sortDir;
-  @override
-  bool get selectModeEnabled;
-  @override
-  List<String> get selectedLeads;
-  @override
-  AppStatus get returnLeadsStatus;
-  @override
-  String? get returnLeadsError;
-  @override
-  @JsonKey(ignore: true)
-  _$$LeadsStateImplCopyWith<_$LeadsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

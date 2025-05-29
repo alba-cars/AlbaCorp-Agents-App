@@ -6,7 +6,7 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
+_User _$UserFromJson(Map<String, dynamic> json) => _User(
       id: readId(json, 'id') as String,
       email: json['email'] as String?,
       phone: json['phone'] as String? ?? '',
@@ -22,8 +22,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
               json['userPBXNumbers'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
       'id': instance.id,
       'email': instance.email,
       'phone': instance.phone,
@@ -36,15 +35,14 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'userPBXNumbers': instance.userPBXNumbers,
     };
 
-_$UserPBXNumbersImpl _$$UserPBXNumbersImplFromJson(Map<String, dynamic> json) =>
-    _$UserPBXNumbersImpl(
+_UserPBXNumbers _$UserPBXNumbersFromJson(Map<String, dynamic> json) =>
+    _UserPBXNumbers(
       publicNumber: json['publicNumber'] as String,
       pfNumber: json['pfNumber'] as String?,
       bayutNumber: json['bayutNumber'] as String?,
     );
 
-Map<String, dynamic> _$$UserPBXNumbersImplToJson(
-        _$UserPBXNumbersImpl instance) =>
+Map<String, dynamic> _$UserPBXNumbersToJson(_UserPBXNumbers instance) =>
     <String, dynamic>{
       'publicNumber': instance.publicNumber,
       'pfNumber': instance.pfNumber,

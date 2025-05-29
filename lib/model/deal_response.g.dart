@@ -6,8 +6,8 @@ part of 'deal_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DealResponseImpl _$$DealResponseImplFromJson(Map<String, dynamic> json) =>
-    _$DealResponseImpl(
+_DealResponse _$DealResponseFromJson(Map<String, dynamic> json) =>
+    _DealResponse(
       id: json['id'] as String,
       referenceNumber: json['reference_number'] as String,
       creationDate: DateTime.parse(json['creation_date'] as String),
@@ -44,7 +44,7 @@ _$DealResponseImpl _$$DealResponseImplFromJson(Map<String, dynamic> json) =>
           : Agency.fromJson(json['sellerExternalUser'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DealResponseImplToJson(_$DealResponseImpl instance) =>
+Map<String, dynamic> _$DealResponseToJson(_DealResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'reference_number': instance.referenceNumber,

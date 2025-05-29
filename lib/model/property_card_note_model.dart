@@ -5,7 +5,7 @@ part 'property_card_note_model.freezed.dart';
 part 'property_card_note_model.g.dart';
 
 @freezed
-class PropertyCardNoteModel with _$PropertyCardNoteModel {
+abstract class PropertyCardNoteModel with _$PropertyCardNoteModel {
   const factory PropertyCardNoteModel({
     @JsonKey(name: 'propertyCard') String? propertyCard,
     @JsonKey(name: 'createdBy') User? createdBy,

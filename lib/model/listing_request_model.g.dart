@@ -6,9 +6,8 @@ part of 'listing_request_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NewListingRequestImpl _$$NewListingRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$NewListingRequestImpl(
+_NewListingRequest _$NewListingRequestFromJson(Map<String, dynamic> json) =>
+    _NewListingRequest(
       id: json['id'] as String,
       userId: json['user_id'] as String,
       propertyTypeId: json['property_type_id'] as String?,
@@ -40,8 +39,7 @@ _$NewListingRequestImpl _$$NewListingRequestImplFromJson(
       relatedInfo: json['relatedInfo'] as String?,
     );
 
-Map<String, dynamic> _$$NewListingRequestImplToJson(
-        _$NewListingRequestImpl instance) =>
+Map<String, dynamic> _$NewListingRequestToJson(_NewListingRequest instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,

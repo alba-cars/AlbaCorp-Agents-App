@@ -6,7 +6,7 @@ part 'off_plan_model.freezed.dart';
 part 'off_plan_model.g.dart';
 
 @freezed
-class OffPlanModel with _$OffPlanModel {
+abstract class OffPlanModel with _$OffPlanModel {
   factory OffPlanModel({
     @JsonKey(name: '_id') required String id,
     required String templateVersion,
@@ -41,7 +41,7 @@ class OffPlanModel with _$OffPlanModel {
 }
 
 @freezed
-class OffPlanCommunity with _$OffPlanCommunity {
+abstract class OffPlanCommunity with _$OffPlanCommunity {
   factory OffPlanCommunity({
     required String name,
     required Position position,
@@ -53,7 +53,7 @@ class OffPlanCommunity with _$OffPlanCommunity {
 }
 
 @freezed
-class Position with _$Position {
+abstract class Position with _$Position {
   factory Position({
     required double lat,
     required double lng,
@@ -65,7 +65,7 @@ class Position with _$Position {
 }
 
 @freezed
-class OffPlanAmenity with _$OffPlanAmenity {
+abstract class OffPlanAmenity with _$OffPlanAmenity {
   factory OffPlanAmenity({
     required String title,
     required String photo,
@@ -77,7 +77,7 @@ class OffPlanAmenity with _$OffPlanAmenity {
 }
 
 @freezed
-class Developer with _$Developer {
+abstract class Developer with _$Developer {
   factory Developer({
     @JsonKey(name: '_id') required String id,
     required String name,
@@ -94,7 +94,7 @@ class Developer with _$Developer {
 }
 
 @freezed
-class Footer with _$Footer {
+abstract class Footer with _$Footer {
   factory Footer({
     @JsonKey(name: '_id') required String id,
     required String name,
@@ -109,7 +109,7 @@ class Footer with _$Footer {
 }
 
 @freezed
-class DevelopmentPhoto with _$DevelopmentPhoto {
+abstract class DevelopmentPhoto with _$DevelopmentPhoto {
   factory DevelopmentPhoto({
     required String file,
     required String label,

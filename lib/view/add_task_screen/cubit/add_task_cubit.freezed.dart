@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,119 +10,27 @@ part of 'add_task_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddTaskState {
-  AppStatus get addLeadStatus => throw _privateConstructorUsedError;
-  String? get addLeadError => throw _privateConstructorUsedError;
+  AppStatus get addLeadStatus;
+  String? get addLeadError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddTaskState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $AddTaskStateCopyWith<AddTaskState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AddTaskStateCopyWith<$Res> {
-  factory $AddTaskStateCopyWith(
-          AddTaskState value, $Res Function(AddTaskState) then) =
-      _$AddTaskStateCopyWithImpl<$Res, AddTaskState>;
-  @useResult
-  $Res call({AppStatus addLeadStatus, String? addLeadError});
-}
-
-/// @nodoc
-class _$AddTaskStateCopyWithImpl<$Res, $Val extends AddTaskState>
-    implements $AddTaskStateCopyWith<$Res> {
-  _$AddTaskStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? addLeadStatus = null,
-    Object? addLeadError = freezed,
-  }) {
-    return _then(_value.copyWith(
-      addLeadStatus: null == addLeadStatus
-          ? _value.addLeadStatus
-          : addLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      addLeadError: freezed == addLeadError
-          ? _value.addLeadError
-          : addLeadError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$AddTaskStateImplCopyWith<$Res>
-    implements $AddTaskStateCopyWith<$Res> {
-  factory _$$AddTaskStateImplCopyWith(
-          _$AddTaskStateImpl value, $Res Function(_$AddTaskStateImpl) then) =
-      __$$AddTaskStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({AppStatus addLeadStatus, String? addLeadError});
-}
-
-/// @nodoc
-class __$$AddTaskStateImplCopyWithImpl<$Res>
-    extends _$AddTaskStateCopyWithImpl<$Res, _$AddTaskStateImpl>
-    implements _$$AddTaskStateImplCopyWith<$Res> {
-  __$$AddTaskStateImplCopyWithImpl(
-      _$AddTaskStateImpl _value, $Res Function(_$AddTaskStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? addLeadStatus = null,
-    Object? addLeadError = freezed,
-  }) {
-    return _then(_$AddTaskStateImpl(
-      addLeadStatus: null == addLeadStatus
-          ? _value.addLeadStatus
-          : addLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      addLeadError: freezed == addLeadError
-          ? _value.addLeadError
-          : addLeadError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddTaskStateImpl implements _AddTaskState {
-  const _$AddTaskStateImpl(
-      {this.addLeadStatus = AppStatus.init, this.addLeadError});
-
-  @override
-  @JsonKey()
-  final AppStatus addLeadStatus;
-  @override
-  final String? addLeadError;
-
-  @override
-  String toString() {
-    return 'AddTaskState(addLeadStatus: $addLeadStatus, addLeadError: $addLeadError)';
-  }
+      _$AddTaskStateCopyWithImpl<AddTaskState>(
+          this as AddTaskState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddTaskStateImpl &&
+            other is AddTaskState &&
             (identical(other.addLeadStatus, addLeadStatus) ||
                 other.addLeadStatus == addLeadStatus) &&
             (identical(other.addLeadError, addLeadError) ||
@@ -131,24 +40,126 @@ class _$AddTaskStateImpl implements _AddTaskState {
   @override
   int get hashCode => Object.hash(runtimeType, addLeadStatus, addLeadError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'AddTaskState(addLeadStatus: $addLeadStatus, addLeadError: $addLeadError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $AddTaskStateCopyWith<$Res> {
+  factory $AddTaskStateCopyWith(
+          AddTaskState value, $Res Function(AddTaskState) _then) =
+      _$AddTaskStateCopyWithImpl;
+  @useResult
+  $Res call({AppStatus addLeadStatus, String? addLeadError});
+}
+
+/// @nodoc
+class _$AddTaskStateCopyWithImpl<$Res> implements $AddTaskStateCopyWith<$Res> {
+  _$AddTaskStateCopyWithImpl(this._self, this._then);
+
+  final AddTaskState _self;
+  final $Res Function(AddTaskState) _then;
+
+  /// Create a copy of AddTaskState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? addLeadStatus = null,
+    Object? addLeadError = freezed,
+  }) {
+    return _then(_self.copyWith(
+      addLeadStatus: null == addLeadStatus
+          ? _self.addLeadStatus
+          : addLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addLeadError: freezed == addLeadError
+          ? _self.addLeadError
+          : addLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _AddTaskState implements AddTaskState {
+  const _AddTaskState({this.addLeadStatus = AppStatus.init, this.addLeadError});
+
+  @override
+  @JsonKey()
+  final AppStatus addLeadStatus;
+  @override
+  final String? addLeadError;
+
+  /// Create a copy of AddTaskState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AddTaskStateCopyWith<_AddTaskState> get copyWith =>
+      __$AddTaskStateCopyWithImpl<_AddTaskState>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _AddTaskState &&
+            (identical(other.addLeadStatus, addLeadStatus) ||
+                other.addLeadStatus == addLeadStatus) &&
+            (identical(other.addLeadError, addLeadError) ||
+                other.addLeadError == addLeadError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, addLeadStatus, addLeadError);
+
+  @override
+  String toString() {
+    return 'AddTaskState(addLeadStatus: $addLeadStatus, addLeadError: $addLeadError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AddTaskStateCopyWith<$Res>
+    implements $AddTaskStateCopyWith<$Res> {
+  factory _$AddTaskStateCopyWith(
+          _AddTaskState value, $Res Function(_AddTaskState) _then) =
+      __$AddTaskStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({AppStatus addLeadStatus, String? addLeadError});
+}
+
+/// @nodoc
+class __$AddTaskStateCopyWithImpl<$Res>
+    implements _$AddTaskStateCopyWith<$Res> {
+  __$AddTaskStateCopyWithImpl(this._self, this._then);
+
+  final _AddTaskState _self;
+  final $Res Function(_AddTaskState) _then;
+
+  /// Create a copy of AddTaskState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$AddTaskStateImplCopyWith<_$AddTaskStateImpl> get copyWith =>
-      __$$AddTaskStateImplCopyWithImpl<_$AddTaskStateImpl>(this, _$identity);
+  $Res call({
+    Object? addLeadStatus = null,
+    Object? addLeadError = freezed,
+  }) {
+    return _then(_AddTaskState(
+      addLeadStatus: null == addLeadStatus
+          ? _self.addLeadStatus
+          : addLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addLeadError: freezed == addLeadError
+          ? _self.addLeadError
+          : addLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _AddTaskState implements AddTaskState {
-  const factory _AddTaskState(
-      {final AppStatus addLeadStatus,
-      final String? addLeadError}) = _$AddTaskStateImpl;
-
-  @override
-  AppStatus get addLeadStatus;
-  @override
-  String? get addLeadError;
-  @override
-  @JsonKey(ignore: true)
-  _$$AddTaskStateImplCopyWith<_$AddTaskStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

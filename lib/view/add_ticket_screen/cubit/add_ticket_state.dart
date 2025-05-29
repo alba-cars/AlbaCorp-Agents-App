@@ -1,7 +1,7 @@
 part of 'add_ticket_cubit.dart';
 
 @freezed
-class AddTicketState with _$AddTicketState {
+abstract class AddTicketState with _$AddTicketState {
   const factory AddTicketState({
     @Default(AppStatus.init) AppStatus addTicketStatus,
     String? addTicketError,

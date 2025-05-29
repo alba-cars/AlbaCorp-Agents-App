@@ -8,7 +8,7 @@ part 'lead_property_card_model.freezed.dart';
 part 'lead_property_card_model.g.dart';
 
 @freezed
-class LeadPropertyCardModel with _$LeadPropertyCardModel {
+abstract class LeadPropertyCardModel with _$LeadPropertyCardModel {
   const factory LeadPropertyCardModel({
     @JsonKey(readValue: readId) required String id,
     required Lead lead,
@@ -27,7 +27,7 @@ class LeadPropertyCardModel with _$LeadPropertyCardModel {
 }
 
 @freezed
-class LeadPropertyCardModelNotPopulated
+abstract class LeadPropertyCardModelNotPopulated
     with _$LeadPropertyCardModelNotPopulated {
   const factory LeadPropertyCardModelNotPopulated({
     @JsonKey(readValue: readId) required String id,
@@ -46,7 +46,7 @@ class LeadPropertyCardModelNotPopulated
 }
 
 @freezed
-class LeadExplorerItem with _$LeadExplorerItem {
+abstract class LeadExplorerItem with _$LeadExplorerItem {
   const factory LeadExplorerItem(
           {@JsonKey(readValue: readId) required String id,
           required Lead lead,

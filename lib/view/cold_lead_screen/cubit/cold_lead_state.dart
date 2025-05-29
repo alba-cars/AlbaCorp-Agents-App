@@ -1,7 +1,7 @@
 part of 'cold_lead_cubit.dart';
 
 @freezed
-class ColdLeadState with _$ColdLeadState {
+abstract class ColdLeadState with _$ColdLeadState {
   const factory ColdLeadState({
     @Default(const {
       TaskFilterEnum.New: AppStatus.initial,

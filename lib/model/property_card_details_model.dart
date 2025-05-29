@@ -9,7 +9,7 @@ part 'property_card_details_model.freezed.dart';
 part 'property_card_details_model.g.dart';
 
 @freezed
-class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
+abstract class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
   const factory PropertyCardDetailsModel({
     @JsonKey(readValue: readId) required String id,
     @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
@@ -55,7 +55,7 @@ readCreatedBy(Map<dynamic, dynamic> json, String val) {
 }
 
 @freezed
-class PropertyCardPhoto with _$PropertyCardPhoto {
+abstract class PropertyCardPhoto with _$PropertyCardPhoto {
   const factory PropertyCardPhoto({
     @JsonKey(readValue: readId) required String id,
     required String original,

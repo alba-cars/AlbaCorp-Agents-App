@@ -1,7 +1,7 @@
 part of 'add_lead_cubit.dart';
 
 @freezed
-class AddLeadState with _$AddLeadState {
+abstract class AddLeadState with _$AddLeadState {
   const factory AddLeadState({
     @Default(AppStatus.init) AppStatus addLeadStatus,
     String? addLeadError,

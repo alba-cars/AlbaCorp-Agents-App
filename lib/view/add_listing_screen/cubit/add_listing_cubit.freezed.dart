@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,43 +10,116 @@ part of 'add_listing_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddListingState {
-  AppStatus get addListingStatus => throw _privateConstructorUsedError;
-  String? get addListingError => throw _privateConstructorUsedError;
-  NewListingRequest? get dealListingResponse =>
-      throw _privateConstructorUsedError;
-  DealResponse? get dealResponse => throw _privateConstructorUsedError;
-  AppStatus get addListingDocumentsStatus => throw _privateConstructorUsedError;
-  String? get addListingDocumentsError => throw _privateConstructorUsedError;
-  List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
-  List<Community> get communityList => throw _privateConstructorUsedError;
-  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
-  List<Building> get buildingList => throw _privateConstructorUsedError;
-  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
-  List<Amenity> get amenityList => throw _privateConstructorUsedError;
-  AppStatus get getAmenityListStatus => throw _privateConstructorUsedError;
-  List<Lead> get leadList => throw _privateConstructorUsedError;
-  AppStatus get getLeadListStatus => throw _privateConstructorUsedError;
-  int get currentTab => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get initialValues => throw _privateConstructorUsedError;
+  AppStatus get addListingStatus;
+  String? get addListingError;
+  NewListingRequest? get dealListingResponse;
+  DealResponse? get dealResponse;
+  AppStatus get addListingDocumentsStatus;
+  String? get addListingDocumentsError;
+  List<PropertyType> get propertyTypeList;
+  AppStatus get getPropertyTypeListStatus;
+  List<Community> get communityList;
+  AppStatus get getCommunityListStatus;
+  List<Building> get buildingList;
+  AppStatus get getBuildingListStatus;
+  List<Amenity> get amenityList;
+  AppStatus get getAmenityListStatus;
+  List<Lead> get leadList;
+  AppStatus get getLeadListStatus;
+  int get currentTab;
+  Map<String, dynamic>? get initialValues;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $AddListingStateCopyWith<AddListingState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$AddListingStateCopyWithImpl<AddListingState>(
+          this as AddListingState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AddListingState &&
+            (identical(other.addListingStatus, addListingStatus) ||
+                other.addListingStatus == addListingStatus) &&
+            (identical(other.addListingError, addListingError) ||
+                other.addListingError == addListingError) &&
+            (identical(other.dealListingResponse, dealListingResponse) ||
+                other.dealListingResponse == dealListingResponse) &&
+            (identical(other.dealResponse, dealResponse) ||
+                other.dealResponse == dealResponse) &&
+            (identical(other.addListingDocumentsStatus,
+                    addListingDocumentsStatus) ||
+                other.addListingDocumentsStatus == addListingDocumentsStatus) &&
+            (identical(
+                    other.addListingDocumentsError, addListingDocumentsError) ||
+                other.addListingDocumentsError == addListingDocumentsError) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyTypeList, propertyTypeList) &&
+            (identical(other.getPropertyTypeListStatus,
+                    getPropertyTypeListStatus) ||
+                other.getPropertyTypeListStatus == getPropertyTypeListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.communityList, communityList) &&
+            (identical(other.getCommunityListStatus, getCommunityListStatus) ||
+                other.getCommunityListStatus == getCommunityListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.buildingList, buildingList) &&
+            (identical(other.getBuildingListStatus, getBuildingListStatus) ||
+                other.getBuildingListStatus == getBuildingListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.amenityList, amenityList) &&
+            (identical(other.getAmenityListStatus, getAmenityListStatus) ||
+                other.getAmenityListStatus == getAmenityListStatus) &&
+            const DeepCollectionEquality().equals(other.leadList, leadList) &&
+            (identical(other.getLeadListStatus, getLeadListStatus) ||
+                other.getLeadListStatus == getLeadListStatus) &&
+            (identical(other.currentTab, currentTab) ||
+                other.currentTab == currentTab) &&
+            const DeepCollectionEquality()
+                .equals(other.initialValues, initialValues));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      addListingStatus,
+      addListingError,
+      dealListingResponse,
+      dealResponse,
+      addListingDocumentsStatus,
+      addListingDocumentsError,
+      const DeepCollectionEquality().hash(propertyTypeList),
+      getPropertyTypeListStatus,
+      const DeepCollectionEquality().hash(communityList),
+      getCommunityListStatus,
+      const DeepCollectionEquality().hash(buildingList),
+      getBuildingListStatus,
+      const DeepCollectionEquality().hash(amenityList),
+      getAmenityListStatus,
+      const DeepCollectionEquality().hash(leadList),
+      getLeadListStatus,
+      currentTab,
+      const DeepCollectionEquality().hash(initialValues));
+
+  @override
+  String toString() {
+    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, dealResponse: $dealResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab, initialValues: $initialValues)';
+  }
 }
 
 /// @nodoc
-abstract class $AddListingStateCopyWith<$Res> {
+abstract mixin class $AddListingStateCopyWith<$Res> {
   factory $AddListingStateCopyWith(
-          AddListingState value, $Res Function(AddListingState) then) =
-      _$AddListingStateCopyWithImpl<$Res, AddListingState>;
+          AddListingState value, $Res Function(AddListingState) _then) =
+      _$AddListingStateCopyWithImpl;
   @useResult
   $Res call(
       {AppStatus addListingStatus,
@@ -72,15 +146,15 @@ abstract class $AddListingStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
+class _$AddListingStateCopyWithImpl<$Res>
     implements $AddListingStateCopyWith<$Res> {
-  _$AddListingStateCopyWithImpl(this._value, this._then);
+  _$AddListingStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final AddListingState _self;
+  final $Res Function(AddListingState) _then;
 
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -103,253 +177,116 @@ class _$AddListingStateCopyWithImpl<$Res, $Val extends AddListingState>
     Object? currentTab = null,
     Object? initialValues = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       addListingStatus: null == addListingStatus
-          ? _value.addListingStatus
+          ? _self.addListingStatus
           : addListingStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       addListingError: freezed == addListingError
-          ? _value.addListingError
+          ? _self.addListingError
           : addListingError // ignore: cast_nullable_to_non_nullable
               as String?,
       dealListingResponse: freezed == dealListingResponse
-          ? _value.dealListingResponse
+          ? _self.dealListingResponse
           : dealListingResponse // ignore: cast_nullable_to_non_nullable
               as NewListingRequest?,
       dealResponse: freezed == dealResponse
-          ? _value.dealResponse
+          ? _self.dealResponse
           : dealResponse // ignore: cast_nullable_to_non_nullable
               as DealResponse?,
       addListingDocumentsStatus: null == addListingDocumentsStatus
-          ? _value.addListingDocumentsStatus
+          ? _self.addListingDocumentsStatus
           : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       addListingDocumentsError: freezed == addListingDocumentsError
-          ? _value.addListingDocumentsError
+          ? _self.addListingDocumentsError
           : addListingDocumentsError // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyTypeList: null == propertyTypeList
-          ? _value.propertyTypeList
+          ? _self.propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
               as List<PropertyType>,
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       communityList: null == communityList
-          ? _value.communityList
+          ? _self.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
               as List<Community>,
       getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
+          ? _self.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buildingList: null == buildingList
-          ? _value.buildingList
+          ? _self.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
               as List<Building>,
       getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
+          ? _self.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       amenityList: null == amenityList
-          ? _value.amenityList
+          ? _self.amenityList
           : amenityList // ignore: cast_nullable_to_non_nullable
               as List<Amenity>,
       getAmenityListStatus: null == getAmenityListStatus
-          ? _value.getAmenityListStatus
+          ? _self.getAmenityListStatus
           : getAmenityListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       leadList: null == leadList
-          ? _value.leadList
+          ? _self.leadList
           : leadList // ignore: cast_nullable_to_non_nullable
               as List<Lead>,
       getLeadListStatus: null == getLeadListStatus
-          ? _value.getLeadListStatus
+          ? _self.getLeadListStatus
           : getLeadListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       currentTab: null == currentTab
-          ? _value.currentTab
+          ? _self.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
               as int,
       initialValues: freezed == initialValues
-          ? _value.initialValues
-          : initialValues // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $NewListingRequestCopyWith<$Res>? get dealListingResponse {
-    if (_value.dealListingResponse == null) {
-      return null;
-    }
-
-    return $NewListingRequestCopyWith<$Res>(_value.dealListingResponse!,
-        (value) {
-      return _then(_value.copyWith(dealListingResponse: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DealResponseCopyWith<$Res>? get dealResponse {
-    if (_value.dealResponse == null) {
-      return null;
-    }
-
-    return $DealResponseCopyWith<$Res>(_value.dealResponse!, (value) {
-      return _then(_value.copyWith(dealResponse: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$AddListingStateImplCopyWith<$Res>
-    implements $AddListingStateCopyWith<$Res> {
-  factory _$$AddListingStateImplCopyWith(_$AddListingStateImpl value,
-          $Res Function(_$AddListingStateImpl) then) =
-      __$$AddListingStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {AppStatus addListingStatus,
-      String? addListingError,
-      NewListingRequest? dealListingResponse,
-      DealResponse? dealResponse,
-      AppStatus addListingDocumentsStatus,
-      String? addListingDocumentsError,
-      List<PropertyType> propertyTypeList,
-      AppStatus getPropertyTypeListStatus,
-      List<Community> communityList,
-      AppStatus getCommunityListStatus,
-      List<Building> buildingList,
-      AppStatus getBuildingListStatus,
-      List<Amenity> amenityList,
-      AppStatus getAmenityListStatus,
-      List<Lead> leadList,
-      AppStatus getLeadListStatus,
-      int currentTab,
-      Map<String, dynamic>? initialValues});
-
-  @override
-  $NewListingRequestCopyWith<$Res>? get dealListingResponse;
-  @override
-  $DealResponseCopyWith<$Res>? get dealResponse;
-}
-
-/// @nodoc
-class __$$AddListingStateImplCopyWithImpl<$Res>
-    extends _$AddListingStateCopyWithImpl<$Res, _$AddListingStateImpl>
-    implements _$$AddListingStateImplCopyWith<$Res> {
-  __$$AddListingStateImplCopyWithImpl(
-      _$AddListingStateImpl _value, $Res Function(_$AddListingStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? addListingStatus = null,
-    Object? addListingError = freezed,
-    Object? dealListingResponse = freezed,
-    Object? dealResponse = freezed,
-    Object? addListingDocumentsStatus = null,
-    Object? addListingDocumentsError = freezed,
-    Object? propertyTypeList = null,
-    Object? getPropertyTypeListStatus = null,
-    Object? communityList = null,
-    Object? getCommunityListStatus = null,
-    Object? buildingList = null,
-    Object? getBuildingListStatus = null,
-    Object? amenityList = null,
-    Object? getAmenityListStatus = null,
-    Object? leadList = null,
-    Object? getLeadListStatus = null,
-    Object? currentTab = null,
-    Object? initialValues = freezed,
-  }) {
-    return _then(_$AddListingStateImpl(
-      addListingStatus: null == addListingStatus
-          ? _value.addListingStatus
-          : addListingStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      addListingError: freezed == addListingError
-          ? _value.addListingError
-          : addListingError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dealListingResponse: freezed == dealListingResponse
-          ? _value.dealListingResponse
-          : dealListingResponse // ignore: cast_nullable_to_non_nullable
-              as NewListingRequest?,
-      dealResponse: freezed == dealResponse
-          ? _value.dealResponse
-          : dealResponse // ignore: cast_nullable_to_non_nullable
-              as DealResponse?,
-      addListingDocumentsStatus: null == addListingDocumentsStatus
-          ? _value.addListingDocumentsStatus
-          : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      addListingDocumentsError: freezed == addListingDocumentsError
-          ? _value.addListingDocumentsError
-          : addListingDocumentsError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyTypeList: null == propertyTypeList
-          ? _value._propertyTypeList
-          : propertyTypeList // ignore: cast_nullable_to_non_nullable
-              as List<PropertyType>,
-      getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
-          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      communityList: null == communityList
-          ? _value._communityList
-          : communityList // ignore: cast_nullable_to_non_nullable
-              as List<Community>,
-      getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
-          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buildingList: null == buildingList
-          ? _value._buildingList
-          : buildingList // ignore: cast_nullable_to_non_nullable
-              as List<Building>,
-      getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
-          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      amenityList: null == amenityList
-          ? _value._amenityList
-          : amenityList // ignore: cast_nullable_to_non_nullable
-              as List<Amenity>,
-      getAmenityListStatus: null == getAmenityListStatus
-          ? _value.getAmenityListStatus
-          : getAmenityListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      leadList: null == leadList
-          ? _value._leadList
-          : leadList // ignore: cast_nullable_to_non_nullable
-              as List<Lead>,
-      getLeadListStatus: null == getLeadListStatus
-          ? _value.getLeadListStatus
-          : getLeadListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      currentTab: null == currentTab
-          ? _value.currentTab
-          : currentTab // ignore: cast_nullable_to_non_nullable
-              as int,
-      initialValues: freezed == initialValues
-          ? _value._initialValues
+          ? _self.initialValues
           : initialValues // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
     ));
   }
+
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NewListingRequestCopyWith<$Res>? get dealListingResponse {
+    if (_self.dealListingResponse == null) {
+      return null;
+    }
+
+    return $NewListingRequestCopyWith<$Res>(_self.dealListingResponse!,
+        (value) {
+      return _then(_self.copyWith(dealListingResponse: value));
+    });
+  }
+
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DealResponseCopyWith<$Res>? get dealResponse {
+    if (_self.dealResponse == null) {
+      return null;
+    }
+
+    return $DealResponseCopyWith<$Res>(_self.dealResponse!, (value) {
+      return _then(_self.copyWith(dealResponse: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$AddListingStateImpl implements _AddListingState {
-  const _$AddListingStateImpl(
+class _AddListingState implements AddListingState {
+  const _AddListingState(
       {this.addListingStatus = AppStatus.init,
       this.addListingError,
       this.dealListingResponse,
@@ -463,16 +400,19 @@ class _$AddListingStateImpl implements _AddListingState {
     return EqualUnmodifiableMapView(value);
   }
 
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, dealResponse: $dealResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab, initialValues: $initialValues)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AddListingStateCopyWith<_AddListingState> get copyWith =>
+      __$AddListingStateCopyWithImpl<_AddListingState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddListingStateImpl &&
+            other is _AddListingState &&
             (identical(other.addListingStatus, addListingStatus) ||
                 other.addListingStatus == addListingStatus) &&
             (identical(other.addListingError, addListingError) ||
@@ -535,73 +475,182 @@ class _$AddListingStateImpl implements _AddListingState {
       currentTab,
       const DeepCollectionEquality().hash(_initialValues));
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'AddListingState(addListingStatus: $addListingStatus, addListingError: $addListingError, dealListingResponse: $dealListingResponse, dealResponse: $dealResponse, addListingDocumentsStatus: $addListingDocumentsStatus, addListingDocumentsError: $addListingDocumentsError, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, amenityList: $amenityList, getAmenityListStatus: $getAmenityListStatus, leadList: $leadList, getLeadListStatus: $getLeadListStatus, currentTab: $currentTab, initialValues: $initialValues)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AddListingStateCopyWith<$Res>
+    implements $AddListingStateCopyWith<$Res> {
+  factory _$AddListingStateCopyWith(
+          _AddListingState value, $Res Function(_AddListingState) _then) =
+      __$AddListingStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {AppStatus addListingStatus,
+      String? addListingError,
+      NewListingRequest? dealListingResponse,
+      DealResponse? dealResponse,
+      AppStatus addListingDocumentsStatus,
+      String? addListingDocumentsError,
+      List<PropertyType> propertyTypeList,
+      AppStatus getPropertyTypeListStatus,
+      List<Community> communityList,
+      AppStatus getCommunityListStatus,
+      List<Building> buildingList,
+      AppStatus getBuildingListStatus,
+      List<Amenity> amenityList,
+      AppStatus getAmenityListStatus,
+      List<Lead> leadList,
+      AppStatus getLeadListStatus,
+      int currentTab,
+      Map<String, dynamic>? initialValues});
+
+  @override
+  $NewListingRequestCopyWith<$Res>? get dealListingResponse;
+  @override
+  $DealResponseCopyWith<$Res>? get dealResponse;
+}
+
+/// @nodoc
+class __$AddListingStateCopyWithImpl<$Res>
+    implements _$AddListingStateCopyWith<$Res> {
+  __$AddListingStateCopyWithImpl(this._self, this._then);
+
+  final _AddListingState _self;
+  final $Res Function(_AddListingState) _then;
+
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$AddListingStateImplCopyWith<_$AddListingStateImpl> get copyWith =>
-      __$$AddListingStateImplCopyWithImpl<_$AddListingStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? addListingStatus = null,
+    Object? addListingError = freezed,
+    Object? dealListingResponse = freezed,
+    Object? dealResponse = freezed,
+    Object? addListingDocumentsStatus = null,
+    Object? addListingDocumentsError = freezed,
+    Object? propertyTypeList = null,
+    Object? getPropertyTypeListStatus = null,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
+    Object? amenityList = null,
+    Object? getAmenityListStatus = null,
+    Object? leadList = null,
+    Object? getLeadListStatus = null,
+    Object? currentTab = null,
+    Object? initialValues = freezed,
+  }) {
+    return _then(_AddListingState(
+      addListingStatus: null == addListingStatus
+          ? _self.addListingStatus
+          : addListingStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addListingError: freezed == addListingError
+          ? _self.addListingError
+          : addListingError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealListingResponse: freezed == dealListingResponse
+          ? _self.dealListingResponse
+          : dealListingResponse // ignore: cast_nullable_to_non_nullable
+              as NewListingRequest?,
+      dealResponse: freezed == dealResponse
+          ? _self.dealResponse
+          : dealResponse // ignore: cast_nullable_to_non_nullable
+              as DealResponse?,
+      addListingDocumentsStatus: null == addListingDocumentsStatus
+          ? _self.addListingDocumentsStatus
+          : addListingDocumentsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addListingDocumentsError: freezed == addListingDocumentsError
+          ? _self.addListingDocumentsError
+          : addListingDocumentsError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyTypeList: null == propertyTypeList
+          ? _self._propertyTypeList
+          : propertyTypeList // ignore: cast_nullable_to_non_nullable
+              as List<PropertyType>,
+      getPropertyTypeListStatus: null == getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
+          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      communityList: null == communityList
+          ? _self._communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<Community>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _self.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingList: null == buildingList
+          ? _self._buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _self.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      amenityList: null == amenityList
+          ? _self._amenityList
+          : amenityList // ignore: cast_nullable_to_non_nullable
+              as List<Amenity>,
+      getAmenityListStatus: null == getAmenityListStatus
+          ? _self.getAmenityListStatus
+          : getAmenityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      leadList: null == leadList
+          ? _self._leadList
+          : leadList // ignore: cast_nullable_to_non_nullable
+              as List<Lead>,
+      getLeadListStatus: null == getLeadListStatus
+          ? _self.getLeadListStatus
+          : getLeadListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      currentTab: null == currentTab
+          ? _self.currentTab
+          : currentTab // ignore: cast_nullable_to_non_nullable
+              as int,
+      initialValues: freezed == initialValues
+          ? _self._initialValues
+          : initialValues // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
+  }
+
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NewListingRequestCopyWith<$Res>? get dealListingResponse {
+    if (_self.dealListingResponse == null) {
+      return null;
+    }
+
+    return $NewListingRequestCopyWith<$Res>(_self.dealListingResponse!,
+        (value) {
+      return _then(_self.copyWith(dealListingResponse: value));
+    });
+  }
+
+  /// Create a copy of AddListingState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DealResponseCopyWith<$Res>? get dealResponse {
+    if (_self.dealResponse == null) {
+      return null;
+    }
+
+    return $DealResponseCopyWith<$Res>(_self.dealResponse!, (value) {
+      return _then(_self.copyWith(dealResponse: value));
+    });
+  }
 }
 
-abstract class _AddListingState implements AddListingState {
-  const factory _AddListingState(
-      {final AppStatus addListingStatus,
-      final String? addListingError,
-      final NewListingRequest? dealListingResponse,
-      final DealResponse? dealResponse,
-      final AppStatus addListingDocumentsStatus,
-      final String? addListingDocumentsError,
-      final List<PropertyType> propertyTypeList,
-      final AppStatus getPropertyTypeListStatus,
-      final List<Community> communityList,
-      final AppStatus getCommunityListStatus,
-      final List<Building> buildingList,
-      final AppStatus getBuildingListStatus,
-      final List<Amenity> amenityList,
-      final AppStatus getAmenityListStatus,
-      final List<Lead> leadList,
-      final AppStatus getLeadListStatus,
-      final int currentTab,
-      final Map<String, dynamic>? initialValues}) = _$AddListingStateImpl;
-
-  @override
-  AppStatus get addListingStatus;
-  @override
-  String? get addListingError;
-  @override
-  NewListingRequest? get dealListingResponse;
-  @override
-  DealResponse? get dealResponse;
-  @override
-  AppStatus get addListingDocumentsStatus;
-  @override
-  String? get addListingDocumentsError;
-  @override
-  List<PropertyType> get propertyTypeList;
-  @override
-  AppStatus get getPropertyTypeListStatus;
-  @override
-  List<Community> get communityList;
-  @override
-  AppStatus get getCommunityListStatus;
-  @override
-  List<Building> get buildingList;
-  @override
-  AppStatus get getBuildingListStatus;
-  @override
-  List<Amenity> get amenityList;
-  @override
-  AppStatus get getAmenityListStatus;
-  @override
-  List<Lead> get leadList;
-  @override
-  AppStatus get getLeadListStatus;
-  @override
-  int get currentTab;
-  @override
-  Map<String, dynamic>? get initialValues;
-  @override
-  @JsonKey(ignore: true)
-  _$$AddListingStateImplCopyWith<_$AddListingStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

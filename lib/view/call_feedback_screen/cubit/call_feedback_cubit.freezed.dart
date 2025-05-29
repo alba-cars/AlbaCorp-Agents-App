@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,42 +10,109 @@ part of 'call_feedback_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CallFeedbackState {
-  AppStatus get checkLeadStatus => throw _privateConstructorUsedError;
-  Lead? get lead => throw _privateConstructorUsedError;
-  String? get feedback => throw _privateConstructorUsedError;
-  AppStatus get addActivityStatus => throw _privateConstructorUsedError;
-  bool get requestNumber => throw _privateConstructorUsedError;
-  String? get number => throw _privateConstructorUsedError;
-  AppStatus get addLeadStatus => throw _privateConstructorUsedError;
-  String? get addLeadError => throw _privateConstructorUsedError;
-  List<LeadSource> get leadSources => throw _privateConstructorUsedError;
-  AppStatus get getLeadSourceStatus => throw _privateConstructorUsedError;
-  Map<String, dynamic> get val => throw _privateConstructorUsedError;
-  List<Activity> get activities => throw _privateConstructorUsedError;
-  AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
-  String? get getActivitiesError => throw _privateConstructorUsedError;
-  String? get attachLastPendingActivityToTheCall =>
-      throw _privateConstructorUsedError;
-  bool get requestFollowUpTask => throw _privateConstructorUsedError;
-  bool get leadIsReAssignable => throw _privateConstructorUsedError;
+  AppStatus get checkLeadStatus;
+  Lead? get lead;
+  String? get feedback;
+  AppStatus get addActivityStatus;
+  bool get requestNumber;
+  String? get number;
+  AppStatus get addLeadStatus;
+  String? get addLeadError;
+  List<LeadSource> get leadSources;
+  AppStatus get getLeadSourceStatus;
+  Map<String, dynamic> get val;
+  List<Activity> get activities;
+  AppStatus get getActivitiesStatus;
+  String? get getActivitiesError;
+  String? get attachLastPendingActivityToTheCall;
+  bool get requestFollowUpTask;
+  bool get leadIsReAssignable;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CallFeedbackState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $CallFeedbackStateCopyWith<CallFeedbackState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$CallFeedbackStateCopyWithImpl<CallFeedbackState>(
+          this as CallFeedbackState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CallFeedbackState &&
+            (identical(other.checkLeadStatus, checkLeadStatus) ||
+                other.checkLeadStatus == checkLeadStatus) &&
+            (identical(other.lead, lead) || other.lead == lead) &&
+            (identical(other.feedback, feedback) ||
+                other.feedback == feedback) &&
+            (identical(other.addActivityStatus, addActivityStatus) ||
+                other.addActivityStatus == addActivityStatus) &&
+            (identical(other.requestNumber, requestNumber) ||
+                other.requestNumber == requestNumber) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.addLeadStatus, addLeadStatus) ||
+                other.addLeadStatus == addLeadStatus) &&
+            (identical(other.addLeadError, addLeadError) ||
+                other.addLeadError == addLeadError) &&
+            const DeepCollectionEquality()
+                .equals(other.leadSources, leadSources) &&
+            (identical(other.getLeadSourceStatus, getLeadSourceStatus) ||
+                other.getLeadSourceStatus == getLeadSourceStatus) &&
+            const DeepCollectionEquality().equals(other.val, val) &&
+            const DeepCollectionEquality()
+                .equals(other.activities, activities) &&
+            (identical(other.getActivitiesStatus, getActivitiesStatus) ||
+                other.getActivitiesStatus == getActivitiesStatus) &&
+            (identical(other.getActivitiesError, getActivitiesError) ||
+                other.getActivitiesError == getActivitiesError) &&
+            (identical(other.attachLastPendingActivityToTheCall,
+                    attachLastPendingActivityToTheCall) ||
+                other.attachLastPendingActivityToTheCall ==
+                    attachLastPendingActivityToTheCall) &&
+            (identical(other.requestFollowUpTask, requestFollowUpTask) ||
+                other.requestFollowUpTask == requestFollowUpTask) &&
+            (identical(other.leadIsReAssignable, leadIsReAssignable) ||
+                other.leadIsReAssignable == leadIsReAssignable));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      checkLeadStatus,
+      lead,
+      feedback,
+      addActivityStatus,
+      requestNumber,
+      number,
+      addLeadStatus,
+      addLeadError,
+      const DeepCollectionEquality().hash(leadSources),
+      getLeadSourceStatus,
+      const DeepCollectionEquality().hash(val),
+      const DeepCollectionEquality().hash(activities),
+      getActivitiesStatus,
+      getActivitiesError,
+      attachLastPendingActivityToTheCall,
+      requestFollowUpTask,
+      leadIsReAssignable);
+
+  @override
+  String toString() {
+    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, attachLastPendingActivityToTheCall: $attachLastPendingActivityToTheCall, requestFollowUpTask: $requestFollowUpTask, leadIsReAssignable: $leadIsReAssignable)';
+  }
 }
 
 /// @nodoc
-abstract class $CallFeedbackStateCopyWith<$Res> {
+abstract mixin class $CallFeedbackStateCopyWith<$Res> {
   factory $CallFeedbackStateCopyWith(
-          CallFeedbackState value, $Res Function(CallFeedbackState) then) =
-      _$CallFeedbackStateCopyWithImpl<$Res, CallFeedbackState>;
+          CallFeedbackState value, $Res Function(CallFeedbackState) _then) =
+      _$CallFeedbackStateCopyWithImpl;
   @useResult
   $Res call(
       {AppStatus checkLeadStatus,
@@ -69,15 +137,15 @@ abstract class $CallFeedbackStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
+class _$CallFeedbackStateCopyWithImpl<$Res>
     implements $CallFeedbackStateCopyWith<$Res> {
-  _$CallFeedbackStateCopyWithImpl(this._value, this._then);
+  _$CallFeedbackStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final CallFeedbackState _self;
+  final $Res Function(CallFeedbackState) _then;
 
+  /// Create a copy of CallFeedbackState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,230 +167,98 @@ class _$CallFeedbackStateCopyWithImpl<$Res, $Val extends CallFeedbackState>
     Object? requestFollowUpTask = null,
     Object? leadIsReAssignable = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       checkLeadStatus: null == checkLeadStatus
-          ? _value.checkLeadStatus
+          ? _self.checkLeadStatus
           : checkLeadStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       lead: freezed == lead
-          ? _value.lead
+          ? _self.lead
           : lead // ignore: cast_nullable_to_non_nullable
               as Lead?,
       feedback: freezed == feedback
-          ? _value.feedback
+          ? _self.feedback
           : feedback // ignore: cast_nullable_to_non_nullable
               as String?,
       addActivityStatus: null == addActivityStatus
-          ? _value.addActivityStatus
+          ? _self.addActivityStatus
           : addActivityStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       requestNumber: null == requestNumber
-          ? _value.requestNumber
+          ? _self.requestNumber
           : requestNumber // ignore: cast_nullable_to_non_nullable
               as bool,
       number: freezed == number
-          ? _value.number
+          ? _self.number
           : number // ignore: cast_nullable_to_non_nullable
               as String?,
       addLeadStatus: null == addLeadStatus
-          ? _value.addLeadStatus
+          ? _self.addLeadStatus
           : addLeadStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       addLeadError: freezed == addLeadError
-          ? _value.addLeadError
+          ? _self.addLeadError
           : addLeadError // ignore: cast_nullable_to_non_nullable
               as String?,
       leadSources: null == leadSources
-          ? _value.leadSources
+          ? _self.leadSources
           : leadSources // ignore: cast_nullable_to_non_nullable
               as List<LeadSource>,
       getLeadSourceStatus: null == getLeadSourceStatus
-          ? _value.getLeadSourceStatus
+          ? _self.getLeadSourceStatus
           : getLeadSourceStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       val: null == val
-          ? _value.val
+          ? _self.val
           : val // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       activities: null == activities
-          ? _value.activities
+          ? _self.activities
           : activities // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
+          ? _self.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getActivitiesError: freezed == getActivitiesError
-          ? _value.getActivitiesError
+          ? _self.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
               as String?,
       attachLastPendingActivityToTheCall: freezed ==
               attachLastPendingActivityToTheCall
-          ? _value.attachLastPendingActivityToTheCall
+          ? _self.attachLastPendingActivityToTheCall
           : attachLastPendingActivityToTheCall // ignore: cast_nullable_to_non_nullable
               as String?,
       requestFollowUpTask: null == requestFollowUpTask
-          ? _value.requestFollowUpTask
+          ? _self.requestFollowUpTask
           : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
               as bool,
       leadIsReAssignable: null == leadIsReAssignable
-          ? _value.leadIsReAssignable
+          ? _self.leadIsReAssignable
           : leadIsReAssignable // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of CallFeedbackState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LeadCopyWith<$Res>? get lead {
-    if (_value.lead == null) {
+    if (_self.lead == null) {
       return null;
     }
 
-    return $LeadCopyWith<$Res>(_value.lead!, (value) {
-      return _then(_value.copyWith(lead: value) as $Val);
+    return $LeadCopyWith<$Res>(_self.lead!, (value) {
+      return _then(_self.copyWith(lead: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$CallFeedbackStateImplCopyWith<$Res>
-    implements $CallFeedbackStateCopyWith<$Res> {
-  factory _$$CallFeedbackStateImplCopyWith(_$CallFeedbackStateImpl value,
-          $Res Function(_$CallFeedbackStateImpl) then) =
-      __$$CallFeedbackStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {AppStatus checkLeadStatus,
-      Lead? lead,
-      String? feedback,
-      AppStatus addActivityStatus,
-      bool requestNumber,
-      String? number,
-      AppStatus addLeadStatus,
-      String? addLeadError,
-      List<LeadSource> leadSources,
-      AppStatus getLeadSourceStatus,
-      Map<String, dynamic> val,
-      List<Activity> activities,
-      AppStatus getActivitiesStatus,
-      String? getActivitiesError,
-      String? attachLastPendingActivityToTheCall,
-      bool requestFollowUpTask,
-      bool leadIsReAssignable});
 
-  @override
-  $LeadCopyWith<$Res>? get lead;
-}
-
-/// @nodoc
-class __$$CallFeedbackStateImplCopyWithImpl<$Res>
-    extends _$CallFeedbackStateCopyWithImpl<$Res, _$CallFeedbackStateImpl>
-    implements _$$CallFeedbackStateImplCopyWith<$Res> {
-  __$$CallFeedbackStateImplCopyWithImpl(_$CallFeedbackStateImpl _value,
-      $Res Function(_$CallFeedbackStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? checkLeadStatus = null,
-    Object? lead = freezed,
-    Object? feedback = freezed,
-    Object? addActivityStatus = null,
-    Object? requestNumber = null,
-    Object? number = freezed,
-    Object? addLeadStatus = null,
-    Object? addLeadError = freezed,
-    Object? leadSources = null,
-    Object? getLeadSourceStatus = null,
-    Object? val = null,
-    Object? activities = null,
-    Object? getActivitiesStatus = null,
-    Object? getActivitiesError = freezed,
-    Object? attachLastPendingActivityToTheCall = freezed,
-    Object? requestFollowUpTask = null,
-    Object? leadIsReAssignable = null,
-  }) {
-    return _then(_$CallFeedbackStateImpl(
-      checkLeadStatus: null == checkLeadStatus
-          ? _value.checkLeadStatus
-          : checkLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      lead: freezed == lead
-          ? _value.lead
-          : lead // ignore: cast_nullable_to_non_nullable
-              as Lead?,
-      feedback: freezed == feedback
-          ? _value.feedback
-          : feedback // ignore: cast_nullable_to_non_nullable
-              as String?,
-      addActivityStatus: null == addActivityStatus
-          ? _value.addActivityStatus
-          : addActivityStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      requestNumber: null == requestNumber
-          ? _value.requestNumber
-          : requestNumber // ignore: cast_nullable_to_non_nullable
-              as bool,
-      number: freezed == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as String?,
-      addLeadStatus: null == addLeadStatus
-          ? _value.addLeadStatus
-          : addLeadStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      addLeadError: freezed == addLeadError
-          ? _value.addLeadError
-          : addLeadError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      leadSources: null == leadSources
-          ? _value._leadSources
-          : leadSources // ignore: cast_nullable_to_non_nullable
-              as List<LeadSource>,
-      getLeadSourceStatus: null == getLeadSourceStatus
-          ? _value.getLeadSourceStatus
-          : getLeadSourceStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      val: null == val
-          ? _value._val
-          : val // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      activities: null == activities
-          ? _value._activities
-          : activities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
-          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getActivitiesError: freezed == getActivitiesError
-          ? _value.getActivitiesError
-          : getActivitiesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      attachLastPendingActivityToTheCall: freezed ==
-              attachLastPendingActivityToTheCall
-          ? _value.attachLastPendingActivityToTheCall
-          : attachLastPendingActivityToTheCall // ignore: cast_nullable_to_non_nullable
-              as String?,
-      requestFollowUpTask: null == requestFollowUpTask
-          ? _value.requestFollowUpTask
-          : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
-              as bool,
-      leadIsReAssignable: null == leadIsReAssignable
-          ? _value.leadIsReAssignable
-          : leadIsReAssignable // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$CallFeedbackStateImpl implements _CallFeedbackState {
-  const _$CallFeedbackStateImpl(
+class _CallFeedbackState implements CallFeedbackState {
+  const _CallFeedbackState(
       {this.checkLeadStatus = AppStatus.init,
       this.lead,
       this.feedback,
@@ -408,16 +344,19 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
   @JsonKey()
   final bool leadIsReAssignable;
 
+  /// Create a copy of CallFeedbackState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, attachLastPendingActivityToTheCall: $attachLastPendingActivityToTheCall, requestFollowUpTask: $requestFollowUpTask, leadIsReAssignable: $leadIsReAssignable)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CallFeedbackStateCopyWith<_CallFeedbackState> get copyWith =>
+      __$CallFeedbackStateCopyWithImpl<_CallFeedbackState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CallFeedbackStateImpl &&
+            other is _CallFeedbackState &&
             (identical(other.checkLeadStatus, checkLeadStatus) ||
                 other.checkLeadStatus == checkLeadStatus) &&
             (identical(other.lead, lead) || other.lead == lead) &&
@@ -474,70 +413,160 @@ class _$CallFeedbackStateImpl implements _CallFeedbackState {
       requestFollowUpTask,
       leadIsReAssignable);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'CallFeedbackState(checkLeadStatus: $checkLeadStatus, lead: $lead, feedback: $feedback, addActivityStatus: $addActivityStatus, requestNumber: $requestNumber, number: $number, addLeadStatus: $addLeadStatus, addLeadError: $addLeadError, leadSources: $leadSources, getLeadSourceStatus: $getLeadSourceStatus, val: $val, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, attachLastPendingActivityToTheCall: $attachLastPendingActivityToTheCall, requestFollowUpTask: $requestFollowUpTask, leadIsReAssignable: $leadIsReAssignable)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CallFeedbackStateCopyWith<$Res>
+    implements $CallFeedbackStateCopyWith<$Res> {
+  factory _$CallFeedbackStateCopyWith(
+          _CallFeedbackState value, $Res Function(_CallFeedbackState) _then) =
+      __$CallFeedbackStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {AppStatus checkLeadStatus,
+      Lead? lead,
+      String? feedback,
+      AppStatus addActivityStatus,
+      bool requestNumber,
+      String? number,
+      AppStatus addLeadStatus,
+      String? addLeadError,
+      List<LeadSource> leadSources,
+      AppStatus getLeadSourceStatus,
+      Map<String, dynamic> val,
+      List<Activity> activities,
+      AppStatus getActivitiesStatus,
+      String? getActivitiesError,
+      String? attachLastPendingActivityToTheCall,
+      bool requestFollowUpTask,
+      bool leadIsReAssignable});
+
+  @override
+  $LeadCopyWith<$Res>? get lead;
+}
+
+/// @nodoc
+class __$CallFeedbackStateCopyWithImpl<$Res>
+    implements _$CallFeedbackStateCopyWith<$Res> {
+  __$CallFeedbackStateCopyWithImpl(this._self, this._then);
+
+  final _CallFeedbackState _self;
+  final $Res Function(_CallFeedbackState) _then;
+
+  /// Create a copy of CallFeedbackState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$CallFeedbackStateImplCopyWith<_$CallFeedbackStateImpl> get copyWith =>
-      __$$CallFeedbackStateImplCopyWithImpl<_$CallFeedbackStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? checkLeadStatus = null,
+    Object? lead = freezed,
+    Object? feedback = freezed,
+    Object? addActivityStatus = null,
+    Object? requestNumber = null,
+    Object? number = freezed,
+    Object? addLeadStatus = null,
+    Object? addLeadError = freezed,
+    Object? leadSources = null,
+    Object? getLeadSourceStatus = null,
+    Object? val = null,
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = freezed,
+    Object? attachLastPendingActivityToTheCall = freezed,
+    Object? requestFollowUpTask = null,
+    Object? leadIsReAssignable = null,
+  }) {
+    return _then(_CallFeedbackState(
+      checkLeadStatus: null == checkLeadStatus
+          ? _self.checkLeadStatus
+          : checkLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      lead: freezed == lead
+          ? _self.lead
+          : lead // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      feedback: freezed == feedback
+          ? _self.feedback
+          : feedback // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addActivityStatus: null == addActivityStatus
+          ? _self.addActivityStatus
+          : addActivityStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      requestNumber: null == requestNumber
+          ? _self.requestNumber
+          : requestNumber // ignore: cast_nullable_to_non_nullable
+              as bool,
+      number: freezed == number
+          ? _self.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addLeadStatus: null == addLeadStatus
+          ? _self.addLeadStatus
+          : addLeadStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      addLeadError: freezed == addLeadError
+          ? _self.addLeadError
+          : addLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadSources: null == leadSources
+          ? _self._leadSources
+          : leadSources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSource>,
+      getLeadSourceStatus: null == getLeadSourceStatus
+          ? _self.getLeadSourceStatus
+          : getLeadSourceStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      val: null == val
+          ? _self._val
+          : val // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      activities: null == activities
+          ? _self._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _self.getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getActivitiesError: freezed == getActivitiesError
+          ? _self.getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attachLastPendingActivityToTheCall: freezed ==
+              attachLastPendingActivityToTheCall
+          ? _self.attachLastPendingActivityToTheCall
+          : attachLastPendingActivityToTheCall // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requestFollowUpTask: null == requestFollowUpTask
+          ? _self.requestFollowUpTask
+          : requestFollowUpTask // ignore: cast_nullable_to_non_nullable
+              as bool,
+      leadIsReAssignable: null == leadIsReAssignable
+          ? _self.leadIsReAssignable
+          : leadIsReAssignable // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  /// Create a copy of CallFeedbackState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get lead {
+    if (_self.lead == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.lead!, (value) {
+      return _then(_self.copyWith(lead: value));
+    });
+  }
 }
 
-abstract class _CallFeedbackState implements CallFeedbackState {
-  const factory _CallFeedbackState(
-      {final AppStatus checkLeadStatus,
-      final Lead? lead,
-      final String? feedback,
-      final AppStatus addActivityStatus,
-      final bool requestNumber,
-      final String? number,
-      final AppStatus addLeadStatus,
-      final String? addLeadError,
-      final List<LeadSource> leadSources,
-      final AppStatus getLeadSourceStatus,
-      final Map<String, dynamic> val,
-      final List<Activity> activities,
-      final AppStatus getActivitiesStatus,
-      final String? getActivitiesError,
-      final String? attachLastPendingActivityToTheCall,
-      final bool requestFollowUpTask,
-      final bool leadIsReAssignable}) = _$CallFeedbackStateImpl;
-
-  @override
-  AppStatus get checkLeadStatus;
-  @override
-  Lead? get lead;
-  @override
-  String? get feedback;
-  @override
-  AppStatus get addActivityStatus;
-  @override
-  bool get requestNumber;
-  @override
-  String? get number;
-  @override
-  AppStatus get addLeadStatus;
-  @override
-  String? get addLeadError;
-  @override
-  List<LeadSource> get leadSources;
-  @override
-  AppStatus get getLeadSourceStatus;
-  @override
-  Map<String, dynamic> get val;
-  @override
-  List<Activity> get activities;
-  @override
-  AppStatus get getActivitiesStatus;
-  @override
-  String? get getActivitiesError;
-  @override
-  String? get attachLastPendingActivityToTheCall;
-  @override
-  bool get requestFollowUpTask;
-  @override
-  bool get leadIsReAssignable;
-  @override
-  @JsonKey(ignore: true)
-  _$$CallFeedbackStateImplCopyWith<_$CallFeedbackStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

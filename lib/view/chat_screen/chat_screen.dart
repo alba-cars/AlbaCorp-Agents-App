@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_core/flutter_chat_core.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/chat_screen/cubit/chat_cubit.dart'
     as cubit;
-import 'package:real_estate_app/view/pdf_view_screen/pdf_view_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   static const routeName = '/chatScreen';
@@ -32,6 +31,20 @@ class _ChatScreenLayout extends StatefulWidget {
 }
 
 class _ChatScreenLayoutState extends State<_ChatScreenLayout> {
+  late final InMemoryChatController _chatController;
+
+  @override
+  void initState() {
+    super.initState();
+    _chatController = InMemoryChatController();
+  }
+
+  @override
+  void dispose() {
+    _chatController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,71 +55,18 @@ class _ChatScreenLayoutState extends State<_ChatScreenLayout> {
       body: BlocBuilder<cubit.ChatCubit, cubit.ChatState>(
         builder: (context, state) {
           return Chat(
-            messages: state.chatMessages,
-            onSendPressed: context.read<cubit.ChatCubit>().handleSendPressed,
-            onMessageTap: (context, message) {
-              if (message is types.FileMessage) {
-                if (message.uri.split('.').last == 'pdf') {
-                  context.pushNamed(PdfViewScreen.routeName,
-                      pathParameters: {"url": message.uri});
-                }
-              }
+            chatController: _chatController,
+            currentUserId: getIt<AuthBloc>().state.user?.id ?? '',
+            onMessageSend: (text) {
+              context.read<cubit.ChatCubit>().handleSendPressed(
+                    types.PartialText(text: text),
+                  );
             },
-            onAttachmentPressed:
-                // context.read<cubit.ChatCubit>().handleFileSelection,
-                () => _handleAttachmentPressed(
-                    context, context.read<cubit.ChatCubit>()),
-            user: types.User(id: getIt<AuthBloc>().state.user?.id ?? ''),
+            resolveUser: (String id) async {
+              return User(id: id);
+            },
           );
         },
-      ),
-    );
-  }
-
-  void _handleAttachmentPressed(BuildContext context, cubit.ChatCubit bloc) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) => BlocProvider.value(
-        value: bloc,
-        child: Builder(builder: (context) {
-          return SafeArea(
-            child: SizedBox(
-              height: 144,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      context.read<cubit.ChatCubit>().handleImageSelection();
-                      Navigator.pop(context);
-                    },
-                    child: const Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: Text('Photo'),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.read<cubit.ChatCubit>().handleFileSelection();
-                      Navigator.pop(context);
-                    },
-                    child: const Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: Text('File'),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: Text('Cancel'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }),
       ),
     );
   }

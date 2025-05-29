@@ -6,7 +6,7 @@ part 'deal_document_model.freezed.dart';
 part 'deal_document_model.g.dart';
 
 @freezed
-class DealDocument with _$DealDocument {
+abstract class DealDocument with _$DealDocument {
   factory DealDocument({
     required String id,
     @JsonKey(name: 'user_id') required String userId,

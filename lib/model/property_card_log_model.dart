@@ -6,7 +6,7 @@ part 'property_card_log_model.freezed.dart';
 part 'property_card_log_model.g.dart';
 
 @freezed
-class PropertyCardLog with _$PropertyCardLog {
+abstract class PropertyCardLog with _$PropertyCardLog {
   const factory PropertyCardLog({
     required String message,
     required CreatedBy? createdBy,

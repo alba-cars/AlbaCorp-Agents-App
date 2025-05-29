@@ -6,8 +6,7 @@ part of 'building_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$BuildingImpl _$$BuildingImplFromJson(Map<String, dynamic> json) =>
-    _$BuildingImpl(
+_Building _$BuildingFromJson(Map<String, dynamic> json) => _Building(
       id: readId(json, 'id') as String,
       name: json['name'] as String,
       buildingNumber: json['buildingNumber'] as String?,
@@ -18,8 +17,7 @@ _$BuildingImpl _$$BuildingImplFromJson(Map<String, dynamic> json) =>
       distances: json['distances'] as List<dynamic>?,
     );
 
-Map<String, dynamic> _$$BuildingImplToJson(_$BuildingImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$BuildingToJson(_Building instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'buildingNumber': instance.buildingNumber,

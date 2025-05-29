@@ -4,7 +4,7 @@ part 'activity_feedback_model.freezed.dart';
 part 'activity_feedback_model.g.dart';
 
 @freezed
-class ActivityFeedback with _$ActivityFeedback {
+abstract class ActivityFeedback with _$ActivityFeedback {
   factory ActivityFeedback({
     bool? isInterested,
     String? notes,

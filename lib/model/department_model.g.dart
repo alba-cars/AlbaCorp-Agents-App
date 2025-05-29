@@ -6,8 +6,7 @@ part of 'department_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DepartmentImpl _$$DepartmentImplFromJson(Map<String, dynamic> json) =>
-    _$DepartmentImpl(
+_Department _$DepartmentFromJson(Map<String, dynamic> json) => _Department(
       id: json['_id'] as String,
       departmentName: json['departmentName'] as String,
       description: json['description'] as String,
@@ -15,7 +14,7 @@ _$DepartmentImpl _$$DepartmentImplFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$DepartmentImplToJson(_$DepartmentImpl instance) =>
+Map<String, dynamic> _$DepartmentToJson(_Department instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'departmentName': instance.departmentName,

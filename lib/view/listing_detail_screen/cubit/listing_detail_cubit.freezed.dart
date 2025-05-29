@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,31 +10,70 @@ part of 'listing_detail_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ListingDetailState {
-  String get listingId => throw _privateConstructorUsedError;
-  AppStatus get getListingDetailsStatus => throw _privateConstructorUsedError;
-  Property? get listing => throw _privateConstructorUsedError;
-  String? get getListingError => throw _privateConstructorUsedError;
-  List<Activity> get activities => throw _privateConstructorUsedError;
-  AppStatus get getActivitiesStatus => throw _privateConstructorUsedError;
-  String? get getActivitiesError => throw _privateConstructorUsedError;
+  String get listingId;
+  AppStatus get getListingDetailsStatus;
+  Property? get listing;
+  String? get getListingError;
+  List<Activity> get activities;
+  AppStatus get getActivitiesStatus;
+  String? get getActivitiesError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListingDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ListingDetailStateCopyWith<ListingDetailState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ListingDetailStateCopyWithImpl<ListingDetailState>(
+          this as ListingDetailState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ListingDetailState &&
+            (identical(other.listingId, listingId) ||
+                other.listingId == listingId) &&
+            (identical(
+                    other.getListingDetailsStatus, getListingDetailsStatus) ||
+                other.getListingDetailsStatus == getListingDetailsStatus) &&
+            (identical(other.listing, listing) || other.listing == listing) &&
+            (identical(other.getListingError, getListingError) ||
+                other.getListingError == getListingError) &&
+            const DeepCollectionEquality()
+                .equals(other.activities, activities) &&
+            (identical(other.getActivitiesStatus, getActivitiesStatus) ||
+                other.getActivitiesStatus == getActivitiesStatus) &&
+            (identical(other.getActivitiesError, getActivitiesError) ||
+                other.getActivitiesError == getActivitiesError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      listingId,
+      getListingDetailsStatus,
+      listing,
+      getListingError,
+      const DeepCollectionEquality().hash(activities),
+      getActivitiesStatus,
+      getActivitiesError);
+
+  @override
+  String toString() {
+    return 'ListingDetailState(listingId: $listingId, getListingDetailsStatus: $getListingDetailsStatus, listing: $listing, getListingError: $getListingError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError)';
+  }
 }
 
 /// @nodoc
-abstract class $ListingDetailStateCopyWith<$Res> {
+abstract mixin class $ListingDetailStateCopyWith<$Res> {
   factory $ListingDetailStateCopyWith(
-          ListingDetailState value, $Res Function(ListingDetailState) then) =
-      _$ListingDetailStateCopyWithImpl<$Res, ListingDetailState>;
+          ListingDetailState value, $Res Function(ListingDetailState) _then) =
+      _$ListingDetailStateCopyWithImpl;
   @useResult
   $Res call(
       {String listingId,
@@ -48,15 +88,15 @@ abstract class $ListingDetailStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ListingDetailStateCopyWithImpl<$Res, $Val extends ListingDetailState>
+class _$ListingDetailStateCopyWithImpl<$Res>
     implements $ListingDetailStateCopyWith<$Res> {
-  _$ListingDetailStateCopyWithImpl(this._value, this._then);
+  _$ListingDetailStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ListingDetailState _self;
+  final $Res Function(ListingDetailState) _then;
 
+  /// Create a copy of ListingDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -68,128 +108,57 @@ class _$ListingDetailStateCopyWithImpl<$Res, $Val extends ListingDetailState>
     Object? getActivitiesStatus = null,
     Object? getActivitiesError = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       listingId: null == listingId
-          ? _value.listingId
+          ? _self.listingId
           : listingId // ignore: cast_nullable_to_non_nullable
               as String,
       getListingDetailsStatus: null == getListingDetailsStatus
-          ? _value.getListingDetailsStatus
+          ? _self.getListingDetailsStatus
           : getListingDetailsStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       listing: freezed == listing
-          ? _value.listing
+          ? _self.listing
           : listing // ignore: cast_nullable_to_non_nullable
               as Property?,
       getListingError: freezed == getListingError
-          ? _value.getListingError
+          ? _self.getListingError
           : getListingError // ignore: cast_nullable_to_non_nullable
               as String?,
       activities: null == activities
-          ? _value.activities
+          ? _self.activities
           : activities // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
+          ? _self.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getActivitiesError: freezed == getActivitiesError
-          ? _value.getActivitiesError
+          ? _self.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of ListingDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PropertyCopyWith<$Res>? get listing {
-    if (_value.listing == null) {
+    if (_self.listing == null) {
       return null;
     }
 
-    return $PropertyCopyWith<$Res>(_value.listing!, (value) {
-      return _then(_value.copyWith(listing: value) as $Val);
+    return $PropertyCopyWith<$Res>(_self.listing!, (value) {
+      return _then(_self.copyWith(listing: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$ListingDetailStateImplCopyWith<$Res>
-    implements $ListingDetailStateCopyWith<$Res> {
-  factory _$$ListingDetailStateImplCopyWith(_$ListingDetailStateImpl value,
-          $Res Function(_$ListingDetailStateImpl) then) =
-      __$$ListingDetailStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String listingId,
-      AppStatus getListingDetailsStatus,
-      Property? listing,
-      String? getListingError,
-      List<Activity> activities,
-      AppStatus getActivitiesStatus,
-      String? getActivitiesError});
 
-  @override
-  $PropertyCopyWith<$Res>? get listing;
-}
-
-/// @nodoc
-class __$$ListingDetailStateImplCopyWithImpl<$Res>
-    extends _$ListingDetailStateCopyWithImpl<$Res, _$ListingDetailStateImpl>
-    implements _$$ListingDetailStateImplCopyWith<$Res> {
-  __$$ListingDetailStateImplCopyWithImpl(_$ListingDetailStateImpl _value,
-      $Res Function(_$ListingDetailStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? listingId = null,
-    Object? getListingDetailsStatus = null,
-    Object? listing = freezed,
-    Object? getListingError = freezed,
-    Object? activities = null,
-    Object? getActivitiesStatus = null,
-    Object? getActivitiesError = freezed,
-  }) {
-    return _then(_$ListingDetailStateImpl(
-      listingId: null == listingId
-          ? _value.listingId
-          : listingId // ignore: cast_nullable_to_non_nullable
-              as String,
-      getListingDetailsStatus: null == getListingDetailsStatus
-          ? _value.getListingDetailsStatus
-          : getListingDetailsStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      listing: freezed == listing
-          ? _value.listing
-          : listing // ignore: cast_nullable_to_non_nullable
-              as Property?,
-      getListingError: freezed == getListingError
-          ? _value.getListingError
-          : getListingError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      activities: null == activities
-          ? _value._activities
-          : activities // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
-          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getActivitiesError: freezed == getActivitiesError
-          ? _value.getActivitiesError
-          : getActivitiesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ListingDetailStateImpl implements _ListingDetailState {
-  const _$ListingDetailStateImpl(
+class _ListingDetailState implements ListingDetailState {
+  const _ListingDetailState(
       {required this.listingId,
       this.getListingDetailsStatus = AppStatus.init,
       this.listing,
@@ -223,16 +192,19 @@ class _$ListingDetailStateImpl implements _ListingDetailState {
   @override
   final String? getActivitiesError;
 
+  /// Create a copy of ListingDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ListingDetailState(listingId: $listingId, getListingDetailsStatus: $getListingDetailsStatus, listing: $listing, getListingError: $getListingError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ListingDetailStateCopyWith<_ListingDetailState> get copyWith =>
+      __$ListingDetailStateCopyWithImpl<_ListingDetailState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ListingDetailStateImpl &&
+            other is _ListingDetailState &&
             (identical(other.listingId, listingId) ||
                 other.listingId == listingId) &&
             (identical(
@@ -260,40 +232,99 @@ class _$ListingDetailStateImpl implements _ListingDetailState {
       getActivitiesStatus,
       getActivitiesError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'ListingDetailState(listingId: $listingId, getListingDetailsStatus: $getListingDetailsStatus, listing: $listing, getListingError: $getListingError, activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ListingDetailStateCopyWith<$Res>
+    implements $ListingDetailStateCopyWith<$Res> {
+  factory _$ListingDetailStateCopyWith(
+          _ListingDetailState value, $Res Function(_ListingDetailState) _then) =
+      __$ListingDetailStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String listingId,
+      AppStatus getListingDetailsStatus,
+      Property? listing,
+      String? getListingError,
+      List<Activity> activities,
+      AppStatus getActivitiesStatus,
+      String? getActivitiesError});
+
+  @override
+  $PropertyCopyWith<$Res>? get listing;
+}
+
+/// @nodoc
+class __$ListingDetailStateCopyWithImpl<$Res>
+    implements _$ListingDetailStateCopyWith<$Res> {
+  __$ListingDetailStateCopyWithImpl(this._self, this._then);
+
+  final _ListingDetailState _self;
+  final $Res Function(_ListingDetailState) _then;
+
+  /// Create a copy of ListingDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$ListingDetailStateImplCopyWith<_$ListingDetailStateImpl> get copyWith =>
-      __$$ListingDetailStateImplCopyWithImpl<_$ListingDetailStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? listingId = null,
+    Object? getListingDetailsStatus = null,
+    Object? listing = freezed,
+    Object? getListingError = freezed,
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = freezed,
+  }) {
+    return _then(_ListingDetailState(
+      listingId: null == listingId
+          ? _self.listingId
+          : listingId // ignore: cast_nullable_to_non_nullable
+              as String,
+      getListingDetailsStatus: null == getListingDetailsStatus
+          ? _self.getListingDetailsStatus
+          : getListingDetailsStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      listing: freezed == listing
+          ? _self.listing
+          : listing // ignore: cast_nullable_to_non_nullable
+              as Property?,
+      getListingError: freezed == getListingError
+          ? _self.getListingError
+          : getListingError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      activities: null == activities
+          ? _self._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _self.getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getActivitiesError: freezed == getActivitiesError
+          ? _self.getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of ListingDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PropertyCopyWith<$Res>? get listing {
+    if (_self.listing == null) {
+      return null;
+    }
+
+    return $PropertyCopyWith<$Res>(_self.listing!, (value) {
+      return _then(_self.copyWith(listing: value));
+    });
+  }
 }
 
-abstract class _ListingDetailState implements ListingDetailState {
-  const factory _ListingDetailState(
-      {required final String listingId,
-      final AppStatus getListingDetailsStatus,
-      final Property? listing,
-      final String? getListingError,
-      final List<Activity> activities,
-      final AppStatus getActivitiesStatus,
-      final String? getActivitiesError}) = _$ListingDetailStateImpl;
-
-  @override
-  String get listingId;
-  @override
-  AppStatus get getListingDetailsStatus;
-  @override
-  Property? get listing;
-  @override
-  String? get getListingError;
-  @override
-  List<Activity> get activities;
-  @override
-  AppStatus get getActivitiesStatus;
-  @override
-  String? get getActivitiesError;
-  @override
-  @JsonKey(ignore: true)
-  _$$ListingDetailStateImplCopyWith<_$ListingDetailStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

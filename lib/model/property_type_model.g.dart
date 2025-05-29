@@ -6,8 +6,8 @@ part of 'property_type_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PropertyTypeImpl _$$PropertyTypeImplFromJson(Map<String, dynamic> json) =>
-    _$PropertyTypeImpl(
+_PropertyType _$PropertyTypeFromJson(Map<String, dynamic> json) =>
+    _PropertyType(
       id: readId(json, 'id') as String,
       propertyType: json['propertyType'] as String,
       icon: json['icon'] as String?,
@@ -18,7 +18,7 @@ _$PropertyTypeImpl _$$PropertyTypeImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$PropertyTypeImplToJson(_$PropertyTypeImpl instance) =>
+Map<String, dynamic> _$PropertyTypeToJson(_PropertyType instance) =>
     <String, dynamic>{
       'id': instance.id,
       'propertyType': instance.propertyType,
@@ -27,13 +27,13 @@ Map<String, dynamic> _$$PropertyTypeImplToJson(_$PropertyTypeImpl instance) =>
       'beds': instance.beds,
     };
 
-_$BedImpl _$$BedImplFromJson(Map<String, dynamic> json) => _$BedImpl(
+_Bed _$BedFromJson(Map<String, dynamic> json) => _Bed(
       name: json['name'] as String,
       startingPrice: (json['startingPrice'] as num).toInt(),
       id: json['_id'] as String,
     );
 
-Map<String, dynamic> _$$BedImplToJson(_$BedImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$BedToJson(_Bed instance) => <String, dynamic>{
       'name': instance.name,
       'startingPrice': instance.startingPrice,
       '_id': instance.id,

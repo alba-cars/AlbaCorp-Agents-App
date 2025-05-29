@@ -4,7 +4,7 @@ part 'property_type_model.freezed.dart';
 part 'property_type_model.g.dart';
 
 @freezed
-class PropertyType with _$PropertyType {
+abstract class PropertyType with _$PropertyType {
   const factory PropertyType({
     @JsonKey(readValue: readId) required String id,
     required String propertyType,
@@ -22,7 +22,7 @@ readId(Map<dynamic, dynamic> json, String val) {
 }
 
 @freezed
-class Bed with _$Bed {
+abstract class Bed with _$Bed {
   factory Bed({
     required String name,
     required int startingPrice,

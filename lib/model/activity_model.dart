@@ -7,33 +7,34 @@ part 'activity_model.freezed.dart';
 part 'activity_model.g.dart'; // Generated file for JSON serialization
 
 @freezed
-class Activity with _$Activity {
-  factory Activity({
-    required String id,
-    @JsonKey( readValue: readUserId) required String userId,
-    @JsonKey(readValue: readPropertyListId) String? propertyListId,
-    @JsonKey( readValue: readLead) Lead? lead,
-    @JsonKey( readValue: readActivityWeight) @Default(0) double activityWeight,
-    required String type,
-    String? description,
-    @JsonKey(readValue: readDate) required DateTime date,
-    @JsonKey( readValue: readCompletedDate) DateTime? completedDate,
-    @JsonKey( readValue: readIsScheduled) bool? isScheduled,
-    @Default('Pending') String status,
-    @JsonKey( readValue: readPreferredLanguages) List<String>? preferredLanguages,
-    String? notes,
-    List<String>? tags,
-    @JsonKey( readValue: readIsInterested) bool? isInterested,
-    @JsonKey( readValue: readOffplanId) String? offplanId,
-    @JsonKey( readValue: readPropertyType) String? propertyType,
-    @JsonKey( readValue: readOverdueAt) DateTime? overdueAt,
-    Property? property_list,
-    @JsonKey( readValue: readCreatedAt) DateTime? createdAt,
-    @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
-    String? transcript
-  }) = _Activity;
+abstract class Activity with _$Activity {
+  factory Activity(
+      {required String id,
+      @JsonKey(readValue: readUserId) required String userId,
+      @JsonKey(readValue: readPropertyListId) String? propertyListId,
+      @JsonKey(readValue: readLead) Lead? lead,
+      @JsonKey(readValue: readActivityWeight) @Default(0) double activityWeight,
+      required String type,
+      String? description,
+      @JsonKey(readValue: readDate) required DateTime date,
+      @JsonKey(readValue: readCompletedDate) DateTime? completedDate,
+      @JsonKey(readValue: readIsScheduled) bool? isScheduled,
+      @Default('Pending') String status,
+      @JsonKey(readValue: readPreferredLanguages)
+      List<String>? preferredLanguages,
+      String? notes,
+      List<String>? tags,
+      @JsonKey(readValue: readIsInterested) bool? isInterested,
+      @JsonKey(readValue: readOffplanId) String? offplanId,
+      @JsonKey(readValue: readPropertyType) String? propertyType,
+      @JsonKey(readValue: readOverdueAt) DateTime? overdueAt,
+      Property? property_list,
+      @JsonKey(readValue: readCreatedAt) DateTime? createdAt,
+      @JsonKey(readValue: readUpdatedAt) DateTime? updatedAt,
+      String? transcript}) = _Activity;
 
-  factory Activity.fromJson(Map<String, dynamic> json) => _$ActivityFromJson(json);
+  factory Activity.fromJson(Map<String, dynamic> json) =>
+      _$ActivityFromJson(json);
 }
 
 // Read value helpers

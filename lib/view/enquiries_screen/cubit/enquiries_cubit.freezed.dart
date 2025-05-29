@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,93 +10,60 @@ part of 'enquiries_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EnquiriesState {
-  Map<TaskFilterEnum, AppStatus> get fetchStatus =>
-      throw _privateConstructorUsedError;
-  Map<TaskFilterEnum, Paginator?> get paginator =>
-      throw _privateConstructorUsedError;
-  Map<TaskFilterEnum, List<Activity>> get activities =>
-      throw _privateConstructorUsedError;
-  Map<TaskFilterEnum, String> get error => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get activityFilter =>
-      throw _privateConstructorUsedError;
+  Map<TaskFilterEnum, AppStatus> get fetchStatus;
+  Map<TaskFilterEnum, Paginator?> get paginator;
+  Map<TaskFilterEnum, List<Activity>> get activities;
+  Map<TaskFilterEnum, String> get error;
+  Map<String, dynamic>? get activityFilter;
 
-  @JsonKey(ignore: true)
-  $EnquiriesStateCopyWith<EnquiriesState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $EnquiriesStateCopyWith<$Res> {
-  factory $EnquiriesStateCopyWith(
-          EnquiriesState value, $Res Function(EnquiriesState) then) =
-      _$EnquiriesStateCopyWithImpl<$Res, EnquiriesState>;
-  @useResult
-  $Res call(
-      {Map<TaskFilterEnum, AppStatus> fetchStatus,
-      Map<TaskFilterEnum, Paginator?> paginator,
-      Map<TaskFilterEnum, List<Activity>> activities,
-      Map<TaskFilterEnum, String> error,
-      Map<String, dynamic>? activityFilter});
-}
-
-/// @nodoc
-class _$EnquiriesStateCopyWithImpl<$Res, $Val extends EnquiriesState>
-    implements $EnquiriesStateCopyWith<$Res> {
-  _$EnquiriesStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of EnquiriesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $EnquiriesStateCopyWith<EnquiriesState> get copyWith =>
+      _$EnquiriesStateCopyWithImpl<EnquiriesState>(
+          this as EnquiriesState, _$identity);
+
   @override
-  $Res call({
-    Object? fetchStatus = null,
-    Object? paginator = null,
-    Object? activities = null,
-    Object? error = null,
-    Object? activityFilter = freezed,
-  }) {
-    return _then(_value.copyWith(
-      fetchStatus: null == fetchStatus
-          ? _value.fetchStatus
-          : fetchStatus // ignore: cast_nullable_to_non_nullable
-              as Map<TaskFilterEnum, AppStatus>,
-      paginator: null == paginator
-          ? _value.paginator
-          : paginator // ignore: cast_nullable_to_non_nullable
-              as Map<TaskFilterEnum, Paginator?>,
-      activities: null == activities
-          ? _value.activities
-          : activities // ignore: cast_nullable_to_non_nullable
-              as Map<TaskFilterEnum, List<Activity>>,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as Map<TaskFilterEnum, String>,
-      activityFilter: freezed == activityFilter
-          ? _value.activityFilter
-          : activityFilter // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is EnquiriesState &&
+            const DeepCollectionEquality()
+                .equals(other.fetchStatus, fetchStatus) &&
+            const DeepCollectionEquality().equals(other.paginator, paginator) &&
+            const DeepCollectionEquality()
+                .equals(other.activities, activities) &&
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality()
+                .equals(other.activityFilter, activityFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(fetchStatus),
+      const DeepCollectionEquality().hash(paginator),
+      const DeepCollectionEquality().hash(activities),
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(activityFilter));
+
+  @override
+  String toString() {
+    return 'EnquiriesState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter)';
   }
 }
 
 /// @nodoc
-abstract class _$$EnquiriesStateImplCopyWith<$Res>
-    implements $EnquiriesStateCopyWith<$Res> {
-  factory _$$EnquiriesStateImplCopyWith(_$EnquiriesStateImpl value,
-          $Res Function(_$EnquiriesStateImpl) then) =
-      __$$EnquiriesStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $EnquiriesStateCopyWith<$Res> {
+  factory $EnquiriesStateCopyWith(
+          EnquiriesState value, $Res Function(EnquiriesState) _then) =
+      _$EnquiriesStateCopyWithImpl;
   @useResult
   $Res call(
       {Map<TaskFilterEnum, AppStatus> fetchStatus,
@@ -106,13 +74,15 @@ abstract class _$$EnquiriesStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$EnquiriesStateImplCopyWithImpl<$Res>
-    extends _$EnquiriesStateCopyWithImpl<$Res, _$EnquiriesStateImpl>
-    implements _$$EnquiriesStateImplCopyWith<$Res> {
-  __$$EnquiriesStateImplCopyWithImpl(
-      _$EnquiriesStateImpl _value, $Res Function(_$EnquiriesStateImpl) _then)
-      : super(_value, _then);
+class _$EnquiriesStateCopyWithImpl<$Res>
+    implements $EnquiriesStateCopyWith<$Res> {
+  _$EnquiriesStateCopyWithImpl(this._self, this._then);
 
+  final EnquiriesState _self;
+  final $Res Function(EnquiriesState) _then;
+
+  /// Create a copy of EnquiriesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,25 +92,25 @@ class __$$EnquiriesStateImplCopyWithImpl<$Res>
     Object? error = null,
     Object? activityFilter = freezed,
   }) {
-    return _then(_$EnquiriesStateImpl(
+    return _then(_self.copyWith(
       fetchStatus: null == fetchStatus
-          ? _value._fetchStatus
+          ? _self.fetchStatus
           : fetchStatus // ignore: cast_nullable_to_non_nullable
               as Map<TaskFilterEnum, AppStatus>,
       paginator: null == paginator
-          ? _value._paginator
+          ? _self.paginator
           : paginator // ignore: cast_nullable_to_non_nullable
               as Map<TaskFilterEnum, Paginator?>,
       activities: null == activities
-          ? _value._activities
+          ? _self.activities
           : activities // ignore: cast_nullable_to_non_nullable
               as Map<TaskFilterEnum, List<Activity>>,
       error: null == error
-          ? _value._error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as Map<TaskFilterEnum, String>,
       activityFilter: freezed == activityFilter
-          ? _value._activityFilter
+          ? _self.activityFilter
           : activityFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
     ));
@@ -149,8 +119,8 @@ class __$$EnquiriesStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EnquiriesStateImpl implements _EnquiriesState {
-  const _$EnquiriesStateImpl(
+class _EnquiriesState implements EnquiriesState {
+  const _EnquiriesState(
       {final Map<TaskFilterEnum, AppStatus> fetchStatus = const {
         TaskFilterEnum.New: AppStatus.initial,
         TaskFilterEnum.FollowUp: AppStatus.initial,
@@ -212,16 +182,19 @@ class _$EnquiriesStateImpl implements _EnquiriesState {
     return EqualUnmodifiableMapView(value);
   }
 
+  /// Create a copy of EnquiriesState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'EnquiriesState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$EnquiriesStateCopyWith<_EnquiriesState> get copyWith =>
+      __$EnquiriesStateCopyWithImpl<_EnquiriesState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EnquiriesStateImpl &&
+            other is _EnquiriesState &&
             const DeepCollectionEquality()
                 .equals(other._fetchStatus, _fetchStatus) &&
             const DeepCollectionEquality()
@@ -242,34 +215,70 @@ class _$EnquiriesStateImpl implements _EnquiriesState {
       const DeepCollectionEquality().hash(_error),
       const DeepCollectionEquality().hash(_activityFilter));
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'EnquiriesState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$EnquiriesStateCopyWith<$Res>
+    implements $EnquiriesStateCopyWith<$Res> {
+  factory _$EnquiriesStateCopyWith(
+          _EnquiriesState value, $Res Function(_EnquiriesState) _then) =
+      __$EnquiriesStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Map<TaskFilterEnum, AppStatus> fetchStatus,
+      Map<TaskFilterEnum, Paginator?> paginator,
+      Map<TaskFilterEnum, List<Activity>> activities,
+      Map<TaskFilterEnum, String> error,
+      Map<String, dynamic>? activityFilter});
+}
+
+/// @nodoc
+class __$EnquiriesStateCopyWithImpl<$Res>
+    implements _$EnquiriesStateCopyWith<$Res> {
+  __$EnquiriesStateCopyWithImpl(this._self, this._then);
+
+  final _EnquiriesState _self;
+  final $Res Function(_EnquiriesState) _then;
+
+  /// Create a copy of EnquiriesState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$EnquiriesStateImplCopyWith<_$EnquiriesStateImpl> get copyWith =>
-      __$$EnquiriesStateImplCopyWithImpl<_$EnquiriesStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? fetchStatus = null,
+    Object? paginator = null,
+    Object? activities = null,
+    Object? error = null,
+    Object? activityFilter = freezed,
+  }) {
+    return _then(_EnquiriesState(
+      fetchStatus: null == fetchStatus
+          ? _self._fetchStatus
+          : fetchStatus // ignore: cast_nullable_to_non_nullable
+              as Map<TaskFilterEnum, AppStatus>,
+      paginator: null == paginator
+          ? _self._paginator
+          : paginator // ignore: cast_nullable_to_non_nullable
+              as Map<TaskFilterEnum, Paginator?>,
+      activities: null == activities
+          ? _self._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as Map<TaskFilterEnum, List<Activity>>,
+      error: null == error
+          ? _self._error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Map<TaskFilterEnum, String>,
+      activityFilter: freezed == activityFilter
+          ? _self._activityFilter
+          : activityFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
+  }
 }
 
-abstract class _EnquiriesState implements EnquiriesState {
-  const factory _EnquiriesState(
-      {final Map<TaskFilterEnum, AppStatus> fetchStatus,
-      final Map<TaskFilterEnum, Paginator?> paginator,
-      final Map<TaskFilterEnum, List<Activity>> activities,
-      final Map<TaskFilterEnum, String> error,
-      final Map<String, dynamic>? activityFilter}) = _$EnquiriesStateImpl;
-
-  @override
-  Map<TaskFilterEnum, AppStatus> get fetchStatus;
-  @override
-  Map<TaskFilterEnum, Paginator?> get paginator;
-  @override
-  Map<TaskFilterEnum, List<Activity>> get activities;
-  @override
-  Map<TaskFilterEnum, String> get error;
-  @override
-  Map<String, dynamic>? get activityFilter;
-  @override
-  @JsonKey(ignore: true)
-  _$$EnquiriesStateImplCopyWith<_$EnquiriesStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

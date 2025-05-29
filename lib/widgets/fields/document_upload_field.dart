@@ -156,13 +156,12 @@ class _DocumentSelectionFieldState<T> extends State<DocumentSelectionField<T>> {
                         : InkWell(
                             onTap: () => chooseFile(context, state),
                             child: DottedBorder(
-                              color: borderColor,
-                              strokeWidth: 1,
-                              radius: const Radius.circular(12),
-                              dashPattern: const [
-                                7,
-                                7,
-                              ],
+                              options: RoundedRectDottedBorderOptions(
+                                color: borderColor,
+                                strokeWidth: 1,
+                                radius: const Radius.circular(12),
+                                dashPattern: const [7, 7],
+                              ),
                               child: Container(
                                 child: Padding(
                                   padding: const EdgeInsets.all(2.0),
@@ -436,13 +435,12 @@ Widget getImageByFileType(BuildContext context, File file,
   switch (fileType) {
     case FType.PDF:
       return DottedBorder(
-        color: borderColor,
-        strokeWidth: 1,
-        radius: const Radius.circular(12),
-        dashPattern: const [
-          7,
-          7,
-        ],
+        options: RoundedRectDottedBorderOptions(
+          color: borderColor,
+          strokeWidth: 1,
+          radius: const Radius.circular(12),
+          dashPattern: const [7, 7],
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

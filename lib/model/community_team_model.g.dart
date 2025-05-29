@@ -6,9 +6,8 @@ part of 'community_team_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CommunityTeamModelImpl _$$CommunityTeamModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CommunityTeamModelImpl(
+_CommunityTeamModel _$CommunityTeamModelFromJson(Map<String, dynamic> json) =>
+    _CommunityTeamModel(
       id: json['id'] as String,
       teamName: json['teamName'] as String,
       members: (json['members'] as List<dynamic>)
@@ -20,8 +19,7 @@ _$CommunityTeamModelImpl _$$CommunityTeamModelImplFromJson(
       nextAssigned: json['nextAssigned'] as String,
     );
 
-Map<String, dynamic> _$$CommunityTeamModelImplToJson(
-        _$CommunityTeamModelImpl instance) =>
+Map<String, dynamic> _$CommunityTeamModelToJson(_CommunityTeamModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'teamName': instance.teamName,
@@ -30,14 +28,14 @@ Map<String, dynamic> _$$CommunityTeamModelImplToJson(
       'nextAssigned': instance.nextAssigned,
     };
 
-_$CommunityNameImpl _$$CommunityNameImplFromJson(Map<String, dynamic> json) =>
-    _$CommunityNameImpl(
+_CommunityName _$CommunityNameFromJson(Map<String, dynamic> json) =>
+    _CommunityName(
       id: json['_id'] as String,
       community: json['community'] as String,
       teamId: json['team_id'] as String,
     );
 
-Map<String, dynamic> _$$CommunityNameImplToJson(_$CommunityNameImpl instance) =>
+Map<String, dynamic> _$CommunityNameToJson(_CommunityName instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'community': instance.community,

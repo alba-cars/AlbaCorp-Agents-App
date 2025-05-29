@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,27 +10,49 @@ part of 'earnings_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EarningsState {
-  AppStatus get fetchStatus => throw _privateConstructorUsedError;
-  EarningsModel get earnings => throw _privateConstructorUsedError;
-  String get error => throw _privateConstructorUsedError;
+  AppStatus get fetchStatus;
+  EarningsModel get earnings;
+  String get error;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EarningsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $EarningsStateCopyWith<EarningsState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$EarningsStateCopyWithImpl<EarningsState>(
+          this as EarningsState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is EarningsState &&
+            (identical(other.fetchStatus, fetchStatus) ||
+                other.fetchStatus == fetchStatus) &&
+            (identical(other.earnings, earnings) ||
+                other.earnings == earnings) &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fetchStatus, earnings, error);
+
+  @override
+  String toString() {
+    return 'EarningsState(fetchStatus: $fetchStatus, earnings: $earnings, error: $error)';
+  }
 }
 
 /// @nodoc
-abstract class $EarningsStateCopyWith<$Res> {
+abstract mixin class $EarningsStateCopyWith<$Res> {
   factory $EarningsStateCopyWith(
-          EarningsState value, $Res Function(EarningsState) then) =
-      _$EarningsStateCopyWithImpl<$Res, EarningsState>;
+          EarningsState value, $Res Function(EarningsState) _then) =
+      _$EarningsStateCopyWithImpl;
   @useResult
   $Res call({AppStatus fetchStatus, EarningsModel earnings, String error});
 
@@ -37,15 +60,15 @@ abstract class $EarningsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EarningsStateCopyWithImpl<$Res, $Val extends EarningsState>
+class _$EarningsStateCopyWithImpl<$Res>
     implements $EarningsStateCopyWith<$Res> {
-  _$EarningsStateCopyWithImpl(this._value, this._then);
+  _$EarningsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final EarningsState _self;
+  final $Res Function(EarningsState) _then;
 
+  /// Create a copy of EarningsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -53,81 +76,37 @@ class _$EarningsStateCopyWithImpl<$Res, $Val extends EarningsState>
     Object? earnings = null,
     Object? error = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       fetchStatus: null == fetchStatus
-          ? _value.fetchStatus
+          ? _self.fetchStatus
           : fetchStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       earnings: null == earnings
-          ? _value.earnings
+          ? _self.earnings
           : earnings // ignore: cast_nullable_to_non_nullable
               as EarningsModel,
       error: null == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of EarningsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $EarningsModelCopyWith<$Res> get earnings {
-    return $EarningsModelCopyWith<$Res>(_value.earnings, (value) {
-      return _then(_value.copyWith(earnings: value) as $Val);
+    return $EarningsModelCopyWith<$Res>(_self.earnings, (value) {
+      return _then(_self.copyWith(earnings: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$EarningsStateImplCopyWith<$Res>
-    implements $EarningsStateCopyWith<$Res> {
-  factory _$$EarningsStateImplCopyWith(
-          _$EarningsStateImpl value, $Res Function(_$EarningsStateImpl) then) =
-      __$$EarningsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({AppStatus fetchStatus, EarningsModel earnings, String error});
 
-  @override
-  $EarningsModelCopyWith<$Res> get earnings;
-}
-
-/// @nodoc
-class __$$EarningsStateImplCopyWithImpl<$Res>
-    extends _$EarningsStateCopyWithImpl<$Res, _$EarningsStateImpl>
-    implements _$$EarningsStateImplCopyWith<$Res> {
-  __$$EarningsStateImplCopyWithImpl(
-      _$EarningsStateImpl _value, $Res Function(_$EarningsStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fetchStatus = null,
-    Object? earnings = null,
-    Object? error = null,
-  }) {
-    return _then(_$EarningsStateImpl(
-      fetchStatus: null == fetchStatus
-          ? _value.fetchStatus
-          : fetchStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      earnings: null == earnings
-          ? _value.earnings
-          : earnings // ignore: cast_nullable_to_non_nullable
-              as EarningsModel,
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$EarningsStateImpl implements _EarningsState {
-  const _$EarningsStateImpl(
+class _EarningsState implements EarningsState {
+  const _EarningsState(
       {this.fetchStatus = AppStatus.initial,
       this.earnings = const EarningsModel(),
       this.error = ""});
@@ -142,16 +121,19 @@ class _$EarningsStateImpl implements _EarningsState {
   @JsonKey()
   final String error;
 
+  /// Create a copy of EarningsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'EarningsState(fetchStatus: $fetchStatus, earnings: $earnings, error: $error)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$EarningsStateCopyWith<_EarningsState> get copyWith =>
+      __$EarningsStateCopyWithImpl<_EarningsState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EarningsStateImpl &&
+            other is _EarningsState &&
             (identical(other.fetchStatus, fetchStatus) ||
                 other.fetchStatus == fetchStatus) &&
             (identical(other.earnings, earnings) ||
@@ -162,27 +144,68 @@ class _$EarningsStateImpl implements _EarningsState {
   @override
   int get hashCode => Object.hash(runtimeType, fetchStatus, earnings, error);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'EarningsState(fetchStatus: $fetchStatus, earnings: $earnings, error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$EarningsStateCopyWith<$Res>
+    implements $EarningsStateCopyWith<$Res> {
+  factory _$EarningsStateCopyWith(
+          _EarningsState value, $Res Function(_EarningsState) _then) =
+      __$EarningsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({AppStatus fetchStatus, EarningsModel earnings, String error});
+
+  @override
+  $EarningsModelCopyWith<$Res> get earnings;
+}
+
+/// @nodoc
+class __$EarningsStateCopyWithImpl<$Res>
+    implements _$EarningsStateCopyWith<$Res> {
+  __$EarningsStateCopyWithImpl(this._self, this._then);
+
+  final _EarningsState _self;
+  final $Res Function(_EarningsState) _then;
+
+  /// Create a copy of EarningsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$EarningsStateImplCopyWith<_$EarningsStateImpl> get copyWith =>
-      __$$EarningsStateImplCopyWithImpl<_$EarningsStateImpl>(this, _$identity);
+  $Res call({
+    Object? fetchStatus = null,
+    Object? earnings = null,
+    Object? error = null,
+  }) {
+    return _then(_EarningsState(
+      fetchStatus: null == fetchStatus
+          ? _self.fetchStatus
+          : fetchStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      earnings: null == earnings
+          ? _self.earnings
+          : earnings // ignore: cast_nullable_to_non_nullable
+              as EarningsModel,
+      error: null == error
+          ? _self.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  /// Create a copy of EarningsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $EarningsModelCopyWith<$Res> get earnings {
+    return $EarningsModelCopyWith<$Res>(_self.earnings, (value) {
+      return _then(_self.copyWith(earnings: value));
+    });
+  }
 }
 
-abstract class _EarningsState implements EarningsState {
-  const factory _EarningsState(
-      {final AppStatus fetchStatus,
-      final EarningsModel earnings,
-      final String error}) = _$EarningsStateImpl;
-
-  @override
-  AppStatus get fetchStatus;
-  @override
-  EarningsModel get earnings;
-  @override
-  String get error;
-  @override
-  @JsonKey(ignore: true)
-  _$$EarningsStateImplCopyWith<_$EarningsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

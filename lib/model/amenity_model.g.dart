@@ -6,16 +6,14 @@ part of 'amenity_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AmenityImpl _$$AmenityImplFromJson(Map<String, dynamic> json) =>
-    _$AmenityImpl(
+_Amenity _$AmenityFromJson(Map<String, dynamic> json) => _Amenity(
       id: json['id'] as String,
       amenity: json['amenity'] as String,
       icon: json['icon'] as String?,
       amenityCategoryId: json['amenityCategoryId'] as String?,
     );
 
-Map<String, dynamic> _$$AmenityImplToJson(_$AmenityImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AmenityToJson(_Amenity instance) => <String, dynamic>{
       'id': instance.id,
       'amenity': instance.amenity,
       'icon': instance.icon,

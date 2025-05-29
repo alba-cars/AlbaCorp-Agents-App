@@ -119,10 +119,12 @@ class _MultiDocumentUploadFieldState<T>
                 ]);
               },
               child: DottedBorder(
-                color: borderColor,
-                strokeWidth: 1,
-                radius: const Radius.circular(12),
-                dashPattern: const [7, 7],
+                options: RoundedRectDottedBorderOptions(
+                  color: borderColor,
+                  strokeWidth: 1,
+                  radius: const Radius.circular(12),
+                  dashPattern: const [7, 7],
+                ),
                 child: selectedImages.isNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.all(8.0),

@@ -1,7 +1,7 @@
 part of 'tickets_screen_cubit.dart';
 
 @freezed
-class TicketsScreenState with _$TicketsScreenState {
+abstract class TicketsScreenState with _$TicketsScreenState {
   const factory TicketsScreenState({
     @Default([]) List<Ticket> ticketsList,
     @Default(AppStatus.init) AppStatus getTicketsListStatus,

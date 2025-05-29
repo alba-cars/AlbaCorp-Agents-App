@@ -6,7 +6,7 @@ part 'community_model.freezed.dart';
 part 'community_model.g.dart';
 
 @freezed
-class Community with _$Community {
+abstract class Community with _$Community {
   const factory Community({
     @JsonKey(readValue: readId) required String id,
     required String community,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,85 +10,67 @@ part of 'notification_screen_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NotificationScreenState {
-  List<NotificationModel> get notifications =>
-      throw _privateConstructorUsedError;
+  List<NotificationModel> get notifications;
 
-  @JsonKey(ignore: true)
-  $NotificationScreenStateCopyWith<NotificationScreenState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NotificationScreenStateCopyWith<$Res> {
-  factory $NotificationScreenStateCopyWith(NotificationScreenState value,
-          $Res Function(NotificationScreenState) then) =
-      _$NotificationScreenStateCopyWithImpl<$Res, NotificationScreenState>;
-  @useResult
-  $Res call({List<NotificationModel> notifications});
-}
-
-/// @nodoc
-class _$NotificationScreenStateCopyWithImpl<$Res,
-        $Val extends NotificationScreenState>
-    implements $NotificationScreenStateCopyWith<$Res> {
-  _$NotificationScreenStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of NotificationScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $NotificationScreenStateCopyWith<NotificationScreenState> get copyWith =>
+      _$NotificationScreenStateCopyWithImpl<NotificationScreenState>(
+          this as NotificationScreenState, _$identity);
+
   @override
-  $Res call({
-    Object? notifications = null,
-  }) {
-    return _then(_value.copyWith(
-      notifications: null == notifications
-          ? _value.notifications
-          : notifications // ignore: cast_nullable_to_non_nullable
-              as List<NotificationModel>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NotificationScreenState &&
+            const DeepCollectionEquality()
+                .equals(other.notifications, notifications));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(notifications));
+
+  @override
+  String toString() {
+    return 'NotificationScreenState(notifications: $notifications)';
   }
 }
 
 /// @nodoc
-abstract class _$$NotificationScreenStateImplCopyWith<$Res>
-    implements $NotificationScreenStateCopyWith<$Res> {
-  factory _$$NotificationScreenStateImplCopyWith(
-          _$NotificationScreenStateImpl value,
-          $Res Function(_$NotificationScreenStateImpl) then) =
-      __$$NotificationScreenStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $NotificationScreenStateCopyWith<$Res> {
+  factory $NotificationScreenStateCopyWith(NotificationScreenState value,
+          $Res Function(NotificationScreenState) _then) =
+      _$NotificationScreenStateCopyWithImpl;
   @useResult
   $Res call({List<NotificationModel> notifications});
 }
 
 /// @nodoc
-class __$$NotificationScreenStateImplCopyWithImpl<$Res>
-    extends _$NotificationScreenStateCopyWithImpl<$Res,
-        _$NotificationScreenStateImpl>
-    implements _$$NotificationScreenStateImplCopyWith<$Res> {
-  __$$NotificationScreenStateImplCopyWithImpl(
-      _$NotificationScreenStateImpl _value,
-      $Res Function(_$NotificationScreenStateImpl) _then)
-      : super(_value, _then);
+class _$NotificationScreenStateCopyWithImpl<$Res>
+    implements $NotificationScreenStateCopyWith<$Res> {
+  _$NotificationScreenStateCopyWithImpl(this._self, this._then);
 
+  final NotificationScreenState _self;
+  final $Res Function(NotificationScreenState) _then;
+
+  /// Create a copy of NotificationScreenState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? notifications = null,
   }) {
-    return _then(_$NotificationScreenStateImpl(
+    return _then(_self.copyWith(
       notifications: null == notifications
-          ? _value._notifications
+          ? _self.notifications
           : notifications // ignore: cast_nullable_to_non_nullable
               as List<NotificationModel>,
     ));
@@ -96,8 +79,8 @@ class __$$NotificationScreenStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotificationScreenStateImpl implements _NotificationScreenState {
-  const _$NotificationScreenStateImpl(
+class _NotificationScreenState implements NotificationScreenState {
+  const _NotificationScreenState(
       {final List<NotificationModel> notifications = const []})
       : _notifications = notifications;
 
@@ -110,16 +93,20 @@ class _$NotificationScreenStateImpl implements _NotificationScreenState {
     return EqualUnmodifiableListView(_notifications);
   }
 
+  /// Create a copy of NotificationScreenState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'NotificationScreenState(notifications: $notifications)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$NotificationScreenStateCopyWith<_NotificationScreenState> get copyWith =>
+      __$NotificationScreenStateCopyWithImpl<_NotificationScreenState>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NotificationScreenStateImpl &&
+            other is _NotificationScreenState &&
             const DeepCollectionEquality()
                 .equals(other._notifications, _notifications));
   }
@@ -128,23 +115,45 @@ class _$NotificationScreenStateImpl implements _NotificationScreenState {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_notifications));
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'NotificationScreenState(notifications: $notifications)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$NotificationScreenStateCopyWith<$Res>
+    implements $NotificationScreenStateCopyWith<$Res> {
+  factory _$NotificationScreenStateCopyWith(_NotificationScreenState value,
+          $Res Function(_NotificationScreenState) _then) =
+      __$NotificationScreenStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<NotificationModel> notifications});
+}
+
+/// @nodoc
+class __$NotificationScreenStateCopyWithImpl<$Res>
+    implements _$NotificationScreenStateCopyWith<$Res> {
+  __$NotificationScreenStateCopyWithImpl(this._self, this._then);
+
+  final _NotificationScreenState _self;
+  final $Res Function(_NotificationScreenState) _then;
+
+  /// Create a copy of NotificationScreenState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$NotificationScreenStateImplCopyWith<_$NotificationScreenStateImpl>
-      get copyWith => __$$NotificationScreenStateImplCopyWithImpl<
-          _$NotificationScreenStateImpl>(this, _$identity);
+  $Res call({
+    Object? notifications = null,
+  }) {
+    return _then(_NotificationScreenState(
+      notifications: null == notifications
+          ? _self._notifications
+          : notifications // ignore: cast_nullable_to_non_nullable
+              as List<NotificationModel>,
+    ));
+  }
 }
 
-abstract class _NotificationScreenState implements NotificationScreenState {
-  const factory _NotificationScreenState(
-          {final List<NotificationModel> notifications}) =
-      _$NotificationScreenStateImpl;
-
-  @override
-  List<NotificationModel> get notifications;
-  @override
-  @JsonKey(ignore: true)
-  _$$NotificationScreenStateImplCopyWith<_$NotificationScreenStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

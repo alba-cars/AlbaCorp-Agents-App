@@ -1,7 +1,7 @@
 part of 'property_card_details_cubit.dart';
 
 @freezed
-class PropertyCardDetailsState with _$PropertyCardDetailsState {
+abstract class PropertyCardDetailsState with _$PropertyCardDetailsState {
   const factory PropertyCardDetailsState({
     required String propertyCardId,
     @Default([]) List<LeadPropertyCardModel> propertyCardLeads,

@@ -22,132 +22,155 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(1, 5795122159064061020),
-      name: 'NotificationEntity',
-      lastPropertyId: const obx_int.IdUid(9, 4826859756871750736),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 2957280728844294631),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 81941689401433012),
-            name: 'title',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 8984158101847328840),
-            name: 'subTitle',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 5946653610197968049),
-            name: 'isRead',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 3668146916538278613),
-            name: 'createdAt',
-            type: 10,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 3017629158783680701),
-            name: 'notificationId',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 3435081018230525370),
-            name: 'type',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 3846285077600869935),
-            name: 'requiresAction',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 4826859756871750736),
-            name: 'leadId',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(1, 5795122159064061020),
+    name: 'NotificationEntity',
+    lastPropertyId: const obx_int.IdUid(9, 4826859756871750736),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 2957280728844294631),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 81941689401433012),
+        name: 'title',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 8984158101847328840),
+        name: 'subTitle',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 5946653610197968049),
+        name: 'isRead',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 3668146916538278613),
+        name: 'createdAt',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 3017629158783680701),
+        name: 'notificationId',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 3435081018230525370),
+        name: 'type',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 3846285077600869935),
+        name: 'requiresAction',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 4826859756871750736),
+        name: 'leadId',
+        type: 9,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(3, 7049694244653760523),
-      name: 'PendingCallFeedbackEntity',
-      lastPropertyId: const obx_int.IdUid(5, 8161508637393570831),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 9826608743018263),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 4820043944492960187),
-            name: 'number',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 1362298140004410048),
-            name: 'feedback',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 2873496119375944348),
-            name: 'isSynced',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 8161508637393570831),
-            name: 'callDirection',
-            type: 6,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(3, 7049694244653760523),
+    name: 'PendingCallFeedbackEntity',
+    lastPropertyId: const obx_int.IdUid(5, 8161508637393570831),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 9826608743018263),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 4820043944492960187),
+        name: 'number',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 1362298140004410048),
+        name: 'feedback',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 2873496119375944348),
+        name: 'isSynced',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 8161508637393570831),
+        name: 'callDirection',
+        type: 6,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(4, 1208503366736226862),
-      name: 'CallProcessingEntity',
-      lastPropertyId: const obx_int.IdUid(6, 2128252149180248977),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 5081670185257514151),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 1854805436785469817),
-            name: 'activityId',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 8404441264755814850),
-            name: 'status',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 1022977080298713095),
-            name: 'summary',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 1878887552391388850),
-            name: 'error',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 2128252149180248977),
-            name: 'timestamp',
-            type: 10,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[])
+    id: const obx_int.IdUid(4, 1208503366736226862),
+    name: 'CallProcessingEntity',
+    lastPropertyId: const obx_int.IdUid(6, 2128252149180248977),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 5081670185257514151),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 1854805436785469817),
+        name: 'activityId',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 8404441264755814850),
+        name: 'status',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 1022977080298713095),
+        name: 'summary',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 1878887552391388850),
+        name: 'error',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 2128252149180248977),
+        name: 'timestamp',
+        type: 10,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
 ];
 
 /// Shortcut for [obx.Store.new] that passes [getObjectBoxModel] and for Flutter
@@ -161,214 +184,264 @@ final _entities = <obx_int.ModelEntity>[
 /// For Flutter apps, also calls `loadObjectBoxLibraryAndroidCompat()` from
 /// the ObjectBox Flutter library to fix loading the native ObjectBox library
 /// on Android 6 and older.
-Future<obx.Store> openStore(
-    {String? directory,
-    int? maxDBSizeInKB,
-    int? maxDataSizeInKB,
-    int? fileMode,
-    int? maxReaders,
-    bool queriesCaseSensitiveDefault = true,
-    String? macosApplicationGroup}) async {
+Future<obx.Store> openStore({
+  String? directory,
+  int? maxDBSizeInKB,
+  int? maxDataSizeInKB,
+  int? fileMode,
+  int? maxReaders,
+  bool queriesCaseSensitiveDefault = true,
+  String? macosApplicationGroup,
+}) async {
   await loadObjectBoxLibraryAndroidCompat();
-  return obx.Store(getObjectBoxModel(),
-      directory: directory ?? (await defaultStoreDirectory()).path,
-      maxDBSizeInKB: maxDBSizeInKB,
-      maxDataSizeInKB: maxDataSizeInKB,
-      fileMode: fileMode,
-      maxReaders: maxReaders,
-      queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
-      macosApplicationGroup: macosApplicationGroup);
+  return obx.Store(
+    getObjectBoxModel(),
+    directory: directory ?? (await defaultStoreDirectory()).path,
+    maxDBSizeInKB: maxDBSizeInKB,
+    maxDataSizeInKB: maxDataSizeInKB,
+    fileMode: fileMode,
+    maxReaders: maxReaders,
+    queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
+    macosApplicationGroup: macosApplicationGroup,
+  );
 }
 
 /// Returns the ObjectBox model definition for this project for use with
 /// [obx.Store.new].
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
-      entities: _entities,
-      lastEntityId: const obx_int.IdUid(4, 1208503366736226862),
-      lastIndexId: const obx_int.IdUid(0, 0),
-      lastRelationId: const obx_int.IdUid(0, 0),
-      lastSequenceId: const obx_int.IdUid(0, 0),
-      retiredEntityUids: const [6363046916056047050],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [
-        1979810741703805588,
-        272374996687882852,
-        4471211523630168431,
-        4717547009146856455,
-        6538964272779489073
-      ],
-      retiredRelationUids: const [],
-      modelVersion: 5,
-      modelVersionParserMinimum: 5,
-      version: 1);
+    entities: _entities,
+    lastEntityId: const obx_int.IdUid(4, 1208503366736226862),
+    lastIndexId: const obx_int.IdUid(0, 0),
+    lastRelationId: const obx_int.IdUid(0, 0),
+    lastSequenceId: const obx_int.IdUid(0, 0),
+    retiredEntityUids: const [6363046916056047050],
+    retiredIndexUids: const [],
+    retiredPropertyUids: const [
+      1979810741703805588,
+      272374996687882852,
+      4471211523630168431,
+      4717547009146856455,
+      6538964272779489073,
+    ],
+    retiredRelationUids: const [],
+    modelVersion: 5,
+    modelVersionParserMinimum: 5,
+    version: 1,
+  );
 
   final bindings = <Type, obx_int.EntityDefinition>{
     NotificationEntity: obx_int.EntityDefinition<NotificationEntity>(
-        model: _entities[0],
-        toOneRelations: (NotificationEntity object) => [],
-        toManyRelations: (NotificationEntity object) => {},
-        getId: (NotificationEntity object) => object.id,
-        setId: (NotificationEntity object, int id) {
-          object.id = id;
-        },
-        objectToFB: (NotificationEntity object, fb.Builder fbb) {
-          final titleOffset = fbb.writeString(object.title);
-          final subTitleOffset = object.subTitle == null
-              ? null
-              : fbb.writeString(object.subTitle!);
-          final notificationIdOffset = object.notificationId == null
-              ? null
-              : fbb.writeString(object.notificationId!);
-          final typeOffset =
-              object.type == null ? null : fbb.writeString(object.type!);
-          final leadIdOffset =
-              object.leadId == null ? null : fbb.writeString(object.leadId!);
-          fbb.startTable(10);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, titleOffset);
-          fbb.addOffset(2, subTitleOffset);
-          fbb.addBool(3, object.isRead);
-          fbb.addInt64(4, object.createdAt?.millisecondsSinceEpoch);
-          fbb.addOffset(5, notificationIdOffset);
-          fbb.addOffset(6, typeOffset);
-          fbb.addBool(7, object.requiresAction);
-          fbb.addOffset(8, leadIdOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final createdAtValue =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final notificationIdParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 14);
-          final titleParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final subTitleParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 8);
-          final isReadParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
-          final createdAtParam = createdAtValue == null
-              ? null
-              : DateTime.fromMillisecondsSinceEpoch(createdAtValue);
-          final typeParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 16);
-          final requiresActionParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 18, false);
-          final leadIdParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 20);
-          final object = NotificationEntity(
-              id: idParam,
-              notificationId: notificationIdParam,
-              title: titleParam,
-              subTitle: subTitleParam,
-              isRead: isReadParam,
-              createdAt: createdAtParam,
-              type: typeParam,
-              requiresAction: requiresActionParam,
-              leadId: leadIdParam);
+      model: _entities[0],
+      toOneRelations: (NotificationEntity object) => [],
+      toManyRelations: (NotificationEntity object) => {},
+      getId: (NotificationEntity object) => object.id,
+      setId: (NotificationEntity object, int id) {
+        object.id = id;
+      },
+      objectToFB: (NotificationEntity object, fb.Builder fbb) {
+        final titleOffset = fbb.writeString(object.title);
+        final subTitleOffset = object.subTitle == null
+            ? null
+            : fbb.writeString(object.subTitle!);
+        final notificationIdOffset = object.notificationId == null
+            ? null
+            : fbb.writeString(object.notificationId!);
+        final typeOffset = object.type == null
+            ? null
+            : fbb.writeString(object.type!);
+        final leadIdOffset = object.leadId == null
+            ? null
+            : fbb.writeString(object.leadId!);
+        fbb.startTable(10);
+        fbb.addInt64(0, object.id);
+        fbb.addOffset(1, titleOffset);
+        fbb.addOffset(2, subTitleOffset);
+        fbb.addBool(3, object.isRead);
+        fbb.addInt64(4, object.createdAt?.millisecondsSinceEpoch);
+        fbb.addOffset(5, notificationIdOffset);
+        fbb.addOffset(6, typeOffset);
+        fbb.addBool(7, object.requiresAction);
+        fbb.addOffset(8, leadIdOffset);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final createdAtValue = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          12,
+        );
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final notificationIdParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 14);
+        final titleParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final subTitleParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 8);
+        final isReadParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          false,
+        );
+        final createdAtParam = createdAtValue == null
+            ? null
+            : DateTime.fromMillisecondsSinceEpoch(createdAtValue);
+        final typeParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 16);
+        final requiresActionParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          18,
+          false,
+        );
+        final leadIdParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 20);
+        final object = NotificationEntity(
+          id: idParam,
+          notificationId: notificationIdParam,
+          title: titleParam,
+          subTitle: subTitleParam,
+          isRead: isReadParam,
+          createdAt: createdAtParam,
+          type: typeParam,
+          requiresAction: requiresActionParam,
+          leadId: leadIdParam,
+        );
 
-          return object;
-        }),
+        return object;
+      },
+    ),
     PendingCallFeedbackEntity:
         obx_int.EntityDefinition<PendingCallFeedbackEntity>(
-            model: _entities[1],
-            toOneRelations: (PendingCallFeedbackEntity object) => [],
-            toManyRelations: (PendingCallFeedbackEntity object) => {},
-            getId: (PendingCallFeedbackEntity object) => object.id,
-            setId: (PendingCallFeedbackEntity object, int id) {
-              object.id = id;
-            },
-            objectToFB: (PendingCallFeedbackEntity object, fb.Builder fbb) {
-              final numberOffset = fbb.writeString(object.number);
-              final feedbackOffset = object.feedback == null
-                  ? null
-                  : fbb.writeString(object.feedback!);
-              fbb.startTable(6);
-              fbb.addInt64(0, object.id);
-              fbb.addOffset(1, numberOffset);
-              fbb.addOffset(2, feedbackOffset);
-              fbb.addBool(3, object.isSynced);
-              fbb.addInt64(4, object.callDirection);
-              fbb.finish(fbb.endTable());
-              return object.id;
-            },
-            objectFromFB: (obx.Store store, ByteData fbData) {
-              final buffer = fb.BufferContext(fbData);
-              final rootOffset = buffer.derefObject(0);
-              final idParam =
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-              final numberParam = const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 6, '');
-              final callDirectionParam =
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
-              final feedbackParam =
-                  const fb.StringReader(asciiOptimization: true)
-                      .vTableGetNullable(buffer, rootOffset, 8);
-              final isSyncedParam = const fb.BoolReader()
-                  .vTableGet(buffer, rootOffset, 10, false);
-              final object = PendingCallFeedbackEntity(
-                  id: idParam,
-                  number: numberParam,
-                  callDirection: callDirectionParam,
-                  feedback: feedbackParam,
-                  isSynced: isSyncedParam);
+          model: _entities[1],
+          toOneRelations: (PendingCallFeedbackEntity object) => [],
+          toManyRelations: (PendingCallFeedbackEntity object) => {},
+          getId: (PendingCallFeedbackEntity object) => object.id,
+          setId: (PendingCallFeedbackEntity object, int id) {
+            object.id = id;
+          },
+          objectToFB: (PendingCallFeedbackEntity object, fb.Builder fbb) {
+            final numberOffset = fbb.writeString(object.number);
+            final feedbackOffset = object.feedback == null
+                ? null
+                : fbb.writeString(object.feedback!);
+            fbb.startTable(6);
+            fbb.addInt64(0, object.id);
+            fbb.addOffset(1, numberOffset);
+            fbb.addOffset(2, feedbackOffset);
+            fbb.addBool(3, object.isSynced);
+            fbb.addInt64(4, object.callDirection);
+            fbb.finish(fbb.endTable());
+            return object.id;
+          },
+          objectFromFB: (obx.Store store, ByteData fbData) {
+            final buffer = fb.BufferContext(fbData);
+            final rootOffset = buffer.derefObject(0);
+            final idParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              4,
+              0,
+            );
+            final numberParam = const fb.StringReader(
+              asciiOptimization: true,
+            ).vTableGet(buffer, rootOffset, 6, '');
+            final callDirectionParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              12,
+              0,
+            );
+            final feedbackParam = const fb.StringReader(
+              asciiOptimization: true,
+            ).vTableGetNullable(buffer, rootOffset, 8);
+            final isSyncedParam = const fb.BoolReader().vTableGet(
+              buffer,
+              rootOffset,
+              10,
+              false,
+            );
+            final object = PendingCallFeedbackEntity(
+              id: idParam,
+              number: numberParam,
+              callDirection: callDirectionParam,
+              feedback: feedbackParam,
+              isSynced: isSyncedParam,
+            );
 
-              return object;
-            }),
+            return object;
+          },
+        ),
     CallProcessingEntity: obx_int.EntityDefinition<CallProcessingEntity>(
-        model: _entities[2],
-        toOneRelations: (CallProcessingEntity object) => [],
-        toManyRelations: (CallProcessingEntity object) => {},
-        getId: (CallProcessingEntity object) => object.id,
-        setId: (CallProcessingEntity object, int id) {
-          object.id = id;
-        },
-        objectToFB: (CallProcessingEntity object, fb.Builder fbb) {
-          final activityIdOffset = fbb.writeString(object.activityId);
-          final statusOffset = fbb.writeString(object.status);
-          final summaryOffset =
-              object.summary == null ? null : fbb.writeString(object.summary!);
-          final errorOffset =
-              object.error == null ? null : fbb.writeString(object.error!);
-          fbb.startTable(7);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, activityIdOffset);
-          fbb.addOffset(2, statusOffset);
-          fbb.addOffset(3, summaryOffset);
-          fbb.addOffset(4, errorOffset);
-          fbb.addInt64(5, object.timestamp.millisecondsSinceEpoch);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final activityIdParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final statusParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final summaryParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 10);
-          final errorParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 12);
-          final timestampParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0));
-          final object = CallProcessingEntity(
-              activityId: activityIdParam,
-              status: statusParam,
-              summary: summaryParam,
-              error: errorParam,
-              timestamp: timestampParam)
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+      model: _entities[2],
+      toOneRelations: (CallProcessingEntity object) => [],
+      toManyRelations: (CallProcessingEntity object) => {},
+      getId: (CallProcessingEntity object) => object.id,
+      setId: (CallProcessingEntity object, int id) {
+        object.id = id;
+      },
+      objectToFB: (CallProcessingEntity object, fb.Builder fbb) {
+        final activityIdOffset = fbb.writeString(object.activityId);
+        final statusOffset = fbb.writeString(object.status);
+        final summaryOffset = object.summary == null
+            ? null
+            : fbb.writeString(object.summary!);
+        final errorOffset = object.error == null
+            ? null
+            : fbb.writeString(object.error!);
+        fbb.startTable(7);
+        fbb.addInt64(0, object.id);
+        fbb.addOffset(1, activityIdOffset);
+        fbb.addOffset(2, statusOffset);
+        fbb.addOffset(3, summaryOffset);
+        fbb.addOffset(4, errorOffset);
+        fbb.addInt64(5, object.timestamp.millisecondsSinceEpoch);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final activityIdParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final statusParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final summaryParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 10);
+        final errorParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 12);
+        final timestampParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0),
+        );
+        final object = CallProcessingEntity(
+          activityId: activityIdParam,
+          status: statusParam,
+          summary: summaryParam,
+          error: errorParam,
+          timestamp: timestampParam,
+        )..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
-          return object;
-        })
+        return object;
+      },
+    ),
   };
 
   return obx_int.ModelDefinition(model, bindings);
@@ -377,89 +450,109 @@ obx_int.ModelDefinition getObjectBoxModel() {
 /// [NotificationEntity] entity fields to define ObjectBox queries.
 class NotificationEntity_ {
   /// See [NotificationEntity.id].
-  static final id =
-      obx.QueryIntegerProperty<NotificationEntity>(_entities[0].properties[0]);
+  static final id = obx.QueryIntegerProperty<NotificationEntity>(
+    _entities[0].properties[0],
+  );
 
   /// See [NotificationEntity.title].
-  static final title =
-      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[1]);
+  static final title = obx.QueryStringProperty<NotificationEntity>(
+    _entities[0].properties[1],
+  );
 
   /// See [NotificationEntity.subTitle].
-  static final subTitle =
-      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[2]);
+  static final subTitle = obx.QueryStringProperty<NotificationEntity>(
+    _entities[0].properties[2],
+  );
 
   /// See [NotificationEntity.isRead].
-  static final isRead =
-      obx.QueryBooleanProperty<NotificationEntity>(_entities[0].properties[3]);
+  static final isRead = obx.QueryBooleanProperty<NotificationEntity>(
+    _entities[0].properties[3],
+  );
 
   /// See [NotificationEntity.createdAt].
-  static final createdAt =
-      obx.QueryDateProperty<NotificationEntity>(_entities[0].properties[4]);
+  static final createdAt = obx.QueryDateProperty<NotificationEntity>(
+    _entities[0].properties[4],
+  );
 
   /// See [NotificationEntity.notificationId].
-  static final notificationId =
-      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[5]);
+  static final notificationId = obx.QueryStringProperty<NotificationEntity>(
+    _entities[0].properties[5],
+  );
 
   /// See [NotificationEntity.type].
-  static final type =
-      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[6]);
+  static final type = obx.QueryStringProperty<NotificationEntity>(
+    _entities[0].properties[6],
+  );
 
   /// See [NotificationEntity.requiresAction].
-  static final requiresAction =
-      obx.QueryBooleanProperty<NotificationEntity>(_entities[0].properties[7]);
+  static final requiresAction = obx.QueryBooleanProperty<NotificationEntity>(
+    _entities[0].properties[7],
+  );
 
   /// See [NotificationEntity.leadId].
-  static final leadId =
-      obx.QueryStringProperty<NotificationEntity>(_entities[0].properties[8]);
+  static final leadId = obx.QueryStringProperty<NotificationEntity>(
+    _entities[0].properties[8],
+  );
 }
 
 /// [PendingCallFeedbackEntity] entity fields to define ObjectBox queries.
 class PendingCallFeedbackEntity_ {
   /// See [PendingCallFeedbackEntity.id].
   static final id = obx.QueryIntegerProperty<PendingCallFeedbackEntity>(
-      _entities[1].properties[0]);
+    _entities[1].properties[0],
+  );
 
   /// See [PendingCallFeedbackEntity.number].
   static final number = obx.QueryStringProperty<PendingCallFeedbackEntity>(
-      _entities[1].properties[1]);
+    _entities[1].properties[1],
+  );
 
   /// See [PendingCallFeedbackEntity.feedback].
   static final feedback = obx.QueryStringProperty<PendingCallFeedbackEntity>(
-      _entities[1].properties[2]);
+    _entities[1].properties[2],
+  );
 
   /// See [PendingCallFeedbackEntity.isSynced].
   static final isSynced = obx.QueryBooleanProperty<PendingCallFeedbackEntity>(
-      _entities[1].properties[3]);
+    _entities[1].properties[3],
+  );
 
   /// See [PendingCallFeedbackEntity.callDirection].
   static final callDirection =
       obx.QueryIntegerProperty<PendingCallFeedbackEntity>(
-          _entities[1].properties[4]);
+        _entities[1].properties[4],
+      );
 }
 
 /// [CallProcessingEntity] entity fields to define ObjectBox queries.
 class CallProcessingEntity_ {
   /// See [CallProcessingEntity.id].
   static final id = obx.QueryIntegerProperty<CallProcessingEntity>(
-      _entities[2].properties[0]);
+    _entities[2].properties[0],
+  );
 
   /// See [CallProcessingEntity.activityId].
-  static final activityId =
-      obx.QueryStringProperty<CallProcessingEntity>(_entities[2].properties[1]);
+  static final activityId = obx.QueryStringProperty<CallProcessingEntity>(
+    _entities[2].properties[1],
+  );
 
   /// See [CallProcessingEntity.status].
-  static final status =
-      obx.QueryStringProperty<CallProcessingEntity>(_entities[2].properties[2]);
+  static final status = obx.QueryStringProperty<CallProcessingEntity>(
+    _entities[2].properties[2],
+  );
 
   /// See [CallProcessingEntity.summary].
-  static final summary =
-      obx.QueryStringProperty<CallProcessingEntity>(_entities[2].properties[3]);
+  static final summary = obx.QueryStringProperty<CallProcessingEntity>(
+    _entities[2].properties[3],
+  );
 
   /// See [CallProcessingEntity.error].
-  static final error =
-      obx.QueryStringProperty<CallProcessingEntity>(_entities[2].properties[4]);
+  static final error = obx.QueryStringProperty<CallProcessingEntity>(
+    _entities[2].properties[4],
+  );
 
   /// See [CallProcessingEntity.timestamp].
-  static final timestamp =
-      obx.QueryDateProperty<CallProcessingEntity>(_entities[2].properties[5]);
+  static final timestamp = obx.QueryDateProperty<CallProcessingEntity>(
+    _entities[2].properties[5],
+  );
 }

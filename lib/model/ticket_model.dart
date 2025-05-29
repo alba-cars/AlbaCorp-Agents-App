@@ -12,7 +12,7 @@ part 'ticket_model.freezed.dart';
 part 'ticket_model.g.dart';
 
 @freezed
-class Ticket with _$Ticket {
+abstract class Ticket with _$Ticket {
   const factory Ticket({
     @JsonKey(readValue: readId) required String id,
     required String agentId,
@@ -46,7 +46,7 @@ class Ticket with _$Ticket {
 }
 
 @freezed
-class TicketMessage with _$TicketMessage {
+abstract class TicketMessage with _$TicketMessage {
   const factory TicketMessage({
     @JsonKey(name: '_id') required String id,
     required String ticketId,

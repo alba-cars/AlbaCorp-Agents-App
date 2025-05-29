@@ -30,7 +30,7 @@ enum LeadStatus {
 }
 
 @freezed
-class Lead with _$Lead {
+abstract class Lead with _$Lead {
   const factory Lead({
     @JsonKey(readValue: readId) required String id,
     @JsonKey(readValue: readFirstName) required String firstName,
@@ -166,7 +166,7 @@ int readCompletedActivityCount(Map p1, String p2) {
 }
 
 @freezed
-class Preference with _$Preference {
+abstract class Preference with _$Preference {
   const factory Preference({
     @JsonKey(name: 'plotNumber') dynamic plotNumber,
     dynamic rooms,

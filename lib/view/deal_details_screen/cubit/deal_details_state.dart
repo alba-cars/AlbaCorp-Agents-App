@@ -1,7 +1,7 @@
 part of 'deal_details_cubit.dart';
 
 @freezed
-class DealDetailsState with _$DealDetailsState {
+abstract class DealDetailsState with _$DealDetailsState {
   const factory DealDetailsState({
     required String dealId,
     Deal? deal,

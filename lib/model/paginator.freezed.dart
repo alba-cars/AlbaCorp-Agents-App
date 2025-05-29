@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,88 +10,64 @@ part of 'paginator.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Paginator _$PaginatorFromJson(Map<String, dynamic> json) {
-  return _Paginator.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Paginator {
-  int get itemCount => throw _privateConstructorUsedError;
-  int get perPage => throw _privateConstructorUsedError;
-  int get currentPage => throw _privateConstructorUsedError;
+  int get itemCount;
+  int get perPage;
+  int get currentPage;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PaginatorCopyWith<Paginator> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PaginatorCopyWith<$Res> {
-  factory $PaginatorCopyWith(Paginator value, $Res Function(Paginator) then) =
-      _$PaginatorCopyWithImpl<$Res, Paginator>;
-  @useResult
-  $Res call({int itemCount, int perPage, int currentPage});
-}
-
-/// @nodoc
-class _$PaginatorCopyWithImpl<$Res, $Val extends Paginator>
-    implements $PaginatorCopyWith<$Res> {
-  _$PaginatorCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Paginator
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<Paginator> get copyWith =>
+      _$PaginatorCopyWithImpl<Paginator>(this as Paginator, _$identity);
+
+  /// Serializes this Paginator to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? itemCount = null,
-    Object? perPage = null,
-    Object? currentPage = null,
-  }) {
-    return _then(_value.copyWith(
-      itemCount: null == itemCount
-          ? _value.itemCount
-          : itemCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      perPage: null == perPage
-          ? _value.perPage
-          : perPage // ignore: cast_nullable_to_non_nullable
-              as int,
-      currentPage: null == currentPage
-          ? _value.currentPage
-          : currentPage // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Paginator &&
+            (identical(other.itemCount, itemCount) ||
+                other.itemCount == itemCount) &&
+            (identical(other.perPage, perPage) || other.perPage == perPage) &&
+            (identical(other.currentPage, currentPage) ||
+                other.currentPage == currentPage));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, itemCount, perPage, currentPage);
+
+  @override
+  String toString() {
+    return 'Paginator(itemCount: $itemCount, perPage: $perPage, currentPage: $currentPage)';
   }
 }
 
 /// @nodoc
-abstract class _$$PaginatorImplCopyWith<$Res>
-    implements $PaginatorCopyWith<$Res> {
-  factory _$$PaginatorImplCopyWith(
-          _$PaginatorImpl value, $Res Function(_$PaginatorImpl) then) =
-      __$$PaginatorImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PaginatorCopyWith<$Res> {
+  factory $PaginatorCopyWith(Paginator value, $Res Function(Paginator) _then) =
+      _$PaginatorCopyWithImpl;
   @useResult
   $Res call({int itemCount, int perPage, int currentPage});
 }
 
 /// @nodoc
-class __$$PaginatorImplCopyWithImpl<$Res>
-    extends _$PaginatorCopyWithImpl<$Res, _$PaginatorImpl>
-    implements _$$PaginatorImplCopyWith<$Res> {
-  __$$PaginatorImplCopyWithImpl(
-      _$PaginatorImpl _value, $Res Function(_$PaginatorImpl) _then)
-      : super(_value, _then);
+class _$PaginatorCopyWithImpl<$Res> implements $PaginatorCopyWith<$Res> {
+  _$PaginatorCopyWithImpl(this._self, this._then);
 
+  final Paginator _self;
+  final $Res Function(Paginator) _then;
+
+  /// Create a copy of Paginator
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,17 +75,17 @@ class __$$PaginatorImplCopyWithImpl<$Res>
     Object? perPage = null,
     Object? currentPage = null,
   }) {
-    return _then(_$PaginatorImpl(
+    return _then(_self.copyWith(
       itemCount: null == itemCount
-          ? _value.itemCount
+          ? _self.itemCount
           : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
       perPage: null == perPage
-          ? _value.perPage
+          ? _self.perPage
           : perPage // ignore: cast_nullable_to_non_nullable
               as int,
       currentPage: null == currentPage
-          ? _value.currentPage
+          ? _self.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
     ));
@@ -117,14 +94,13 @@ class __$$PaginatorImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PaginatorImpl implements _Paginator {
-  const _$PaginatorImpl(
+class _Paginator implements Paginator {
+  const _Paginator(
       {required this.itemCount,
       required this.perPage,
       required this.currentPage});
-
-  factory _$PaginatorImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PaginatorImplFromJson(json);
+  factory _Paginator.fromJson(Map<String, dynamic> json) =>
+      _$PaginatorFromJson(json);
 
   @override
   final int itemCount;
@@ -133,16 +109,26 @@ class _$PaginatorImpl implements _Paginator {
   @override
   final int currentPage;
 
+  /// Create a copy of Paginator
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Paginator(itemCount: $itemCount, perPage: $perPage, currentPage: $currentPage)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PaginatorCopyWith<_Paginator> get copyWith =>
+      __$PaginatorCopyWithImpl<_Paginator>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PaginatorToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PaginatorImpl &&
+            other is _Paginator &&
             (identical(other.itemCount, itemCount) ||
                 other.itemCount == itemCount) &&
             (identical(other.perPage, perPage) || other.perPage == perPage) &&
@@ -150,41 +136,58 @@ class _$PaginatorImpl implements _Paginator {
                 other.currentPage == currentPage));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, itemCount, perPage, currentPage);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PaginatorImplCopyWith<_$PaginatorImpl> get copyWith =>
-      __$$PaginatorImplCopyWithImpl<_$PaginatorImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PaginatorImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Paginator(itemCount: $itemCount, perPage: $perPage, currentPage: $currentPage)';
   }
 }
 
-abstract class _Paginator implements Paginator {
-  const factory _Paginator(
-      {required final int itemCount,
-      required final int perPage,
-      required final int currentPage}) = _$PaginatorImpl;
-
-  factory _Paginator.fromJson(Map<String, dynamic> json) =
-      _$PaginatorImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$PaginatorCopyWith<$Res>
+    implements $PaginatorCopyWith<$Res> {
+  factory _$PaginatorCopyWith(
+          _Paginator value, $Res Function(_Paginator) _then) =
+      __$PaginatorCopyWithImpl;
   @override
-  int get itemCount;
-  @override
-  int get perPage;
-  @override
-  int get currentPage;
-  @override
-  @JsonKey(ignore: true)
-  _$$PaginatorImplCopyWith<_$PaginatorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({int itemCount, int perPage, int currentPage});
 }
+
+/// @nodoc
+class __$PaginatorCopyWithImpl<$Res> implements _$PaginatorCopyWith<$Res> {
+  __$PaginatorCopyWithImpl(this._self, this._then);
+
+  final _Paginator _self;
+  final $Res Function(_Paginator) _then;
+
+  /// Create a copy of Paginator
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? itemCount = null,
+    Object? perPage = null,
+    Object? currentPage = null,
+  }) {
+    return _then(_Paginator(
+      itemCount: null == itemCount
+          ? _self.itemCount
+          : itemCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      perPage: null == perPage
+          ? _self.perPage
+          : perPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentPage: null == currentPage
+          ? _self.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,50 +10,131 @@ part of 'home_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$HomeState {
-  Map<int, List<Activity>> get activities => throw _privateConstructorUsedError;
-  Map<int, AppStatus?> get getActivitiesStatus =>
-      throw _privateConstructorUsedError;
-  Map<int, String?> get getActivitiesError =>
-      throw _privateConstructorUsedError;
-  Map<int, Paginator?> get activityPaginator =>
-      throw _privateConstructorUsedError;
-  ModelCategory get selectedCategory => throw _privateConstructorUsedError;
-  List<ModelCategory> get categories => throw _privateConstructorUsedError;
-  int get completedTasksCount => throw _privateConstructorUsedError;
-  int get pendingTasksCount => throw _privateConstructorUsedError;
-  int get viewingTasksCount => throw _privateConstructorUsedError;
-  Set<ListType> get listType => throw _privateConstructorUsedError;
-  List<Activity> get sortedActivity => throw _privateConstructorUsedError;
-  AppStatus? get getSortedActivitiesStatus =>
-      throw _privateConstructorUsedError;
-  String? get getSortedActivitiesError => throw _privateConstructorUsedError;
-  Paginator? get sortedActivityPaginator => throw _privateConstructorUsedError;
-  AppStatus get updateTaskStatus => throw _privateConstructorUsedError;
-  String? get updateTaskError => throw _privateConstructorUsedError;
-  String? get nameSearch => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get activityFilter =>
-      throw _privateConstructorUsedError;
-  List<Community> get communityList => throw _privateConstructorUsedError;
-  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
-  List<Building> get buildingList => throw _privateConstructorUsedError;
-  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
+  Map<int, List<Activity>> get activities;
+  Map<int, AppStatus?> get getActivitiesStatus;
+  Map<int, String?> get getActivitiesError;
+  Map<int, Paginator?> get activityPaginator;
+  ModelCategory get selectedCategory;
+  List<ModelCategory> get categories;
+  int get completedTasksCount;
+  int get pendingTasksCount;
+  int get viewingTasksCount;
+  Set<ListType> get listType;
+  List<Activity> get sortedActivity;
+  AppStatus? get getSortedActivitiesStatus;
+  String? get getSortedActivitiesError;
+  Paginator? get sortedActivityPaginator;
+  AppStatus get updateTaskStatus;
+  String? get updateTaskError;
+  String? get nameSearch;
+  Map<String, dynamic>? get activityFilter;
+  List<Community> get communityList;
+  AppStatus get getCommunityListStatus;
+  List<Building> get buildingList;
+  AppStatus get getBuildingListStatus;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $HomeStateCopyWith<HomeState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$HomeStateCopyWithImpl<HomeState>(this as HomeState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is HomeState &&
+            const DeepCollectionEquality()
+                .equals(other.activities, activities) &&
+            const DeepCollectionEquality()
+                .equals(other.getActivitiesStatus, getActivitiesStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.getActivitiesError, getActivitiesError) &&
+            const DeepCollectionEquality()
+                .equals(other.activityPaginator, activityPaginator) &&
+            (identical(other.selectedCategory, selectedCategory) ||
+                other.selectedCategory == selectedCategory) &&
+            const DeepCollectionEquality()
+                .equals(other.categories, categories) &&
+            (identical(other.completedTasksCount, completedTasksCount) ||
+                other.completedTasksCount == completedTasksCount) &&
+            (identical(other.pendingTasksCount, pendingTasksCount) ||
+                other.pendingTasksCount == pendingTasksCount) &&
+            (identical(other.viewingTasksCount, viewingTasksCount) ||
+                other.viewingTasksCount == viewingTasksCount) &&
+            const DeepCollectionEquality().equals(other.listType, listType) &&
+            const DeepCollectionEquality()
+                .equals(other.sortedActivity, sortedActivity) &&
+            (identical(other.getSortedActivitiesStatus,
+                    getSortedActivitiesStatus) ||
+                other.getSortedActivitiesStatus == getSortedActivitiesStatus) &&
+            (identical(
+                    other.getSortedActivitiesError, getSortedActivitiesError) ||
+                other.getSortedActivitiesError == getSortedActivitiesError) &&
+            (identical(
+                    other.sortedActivityPaginator, sortedActivityPaginator) ||
+                other.sortedActivityPaginator == sortedActivityPaginator) &&
+            (identical(other.updateTaskStatus, updateTaskStatus) ||
+                other.updateTaskStatus == updateTaskStatus) &&
+            (identical(other.updateTaskError, updateTaskError) ||
+                other.updateTaskError == updateTaskError) &&
+            (identical(other.nameSearch, nameSearch) ||
+                other.nameSearch == nameSearch) &&
+            const DeepCollectionEquality()
+                .equals(other.activityFilter, activityFilter) &&
+            const DeepCollectionEquality()
+                .equals(other.communityList, communityList) &&
+            (identical(other.getCommunityListStatus, getCommunityListStatus) ||
+                other.getCommunityListStatus == getCommunityListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.buildingList, buildingList) &&
+            (identical(other.getBuildingListStatus, getBuildingListStatus) ||
+                other.getBuildingListStatus == getBuildingListStatus));
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(activities),
+        const DeepCollectionEquality().hash(getActivitiesStatus),
+        const DeepCollectionEquality().hash(getActivitiesError),
+        const DeepCollectionEquality().hash(activityPaginator),
+        selectedCategory,
+        const DeepCollectionEquality().hash(categories),
+        completedTasksCount,
+        pendingTasksCount,
+        viewingTasksCount,
+        const DeepCollectionEquality().hash(listType),
+        const DeepCollectionEquality().hash(sortedActivity),
+        getSortedActivitiesStatus,
+        getSortedActivitiesError,
+        sortedActivityPaginator,
+        updateTaskStatus,
+        updateTaskError,
+        nameSearch,
+        const DeepCollectionEquality().hash(activityFilter),
+        const DeepCollectionEquality().hash(communityList),
+        getCommunityListStatus,
+        const DeepCollectionEquality().hash(buildingList),
+        getBuildingListStatus
+      ]);
+
+  @override
+  String toString() {
+    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount, listType: $listType, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, nameSearch: $nameSearch, activityFilter: $activityFilter, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus)';
+  }
 }
 
 /// @nodoc
-abstract class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res, HomeState>;
+abstract mixin class $HomeStateCopyWith<$Res> {
+  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) =
+      _$HomeStateCopyWithImpl;
   @useResult
   $Res call(
       {Map<int, List<Activity>> activities,
@@ -83,15 +165,14 @@ abstract class $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
-    implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._value, this._then);
+class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
+  _$HomeStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final HomeState _self;
+  final $Res Function(HomeState) _then;
 
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,288 +199,127 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? buildingList = null,
     Object? getBuildingListStatus = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       activities: null == activities
-          ? _value.activities
+          ? _self.activities
           : activities // ignore: cast_nullable_to_non_nullable
               as Map<int, List<Activity>>,
       getActivitiesStatus: null == getActivitiesStatus
-          ? _value.getActivitiesStatus
+          ? _self.getActivitiesStatus
           : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as Map<int, AppStatus?>,
       getActivitiesError: null == getActivitiesError
-          ? _value.getActivitiesError
+          ? _self.getActivitiesError
           : getActivitiesError // ignore: cast_nullable_to_non_nullable
               as Map<int, String?>,
       activityPaginator: null == activityPaginator
-          ? _value.activityPaginator
+          ? _self.activityPaginator
           : activityPaginator // ignore: cast_nullable_to_non_nullable
               as Map<int, Paginator?>,
       selectedCategory: null == selectedCategory
-          ? _value.selectedCategory
+          ? _self.selectedCategory
           : selectedCategory // ignore: cast_nullable_to_non_nullable
               as ModelCategory,
       categories: null == categories
-          ? _value.categories
+          ? _self.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<ModelCategory>,
       completedTasksCount: null == completedTasksCount
-          ? _value.completedTasksCount
+          ? _self.completedTasksCount
           : completedTasksCount // ignore: cast_nullable_to_non_nullable
               as int,
       pendingTasksCount: null == pendingTasksCount
-          ? _value.pendingTasksCount
+          ? _self.pendingTasksCount
           : pendingTasksCount // ignore: cast_nullable_to_non_nullable
               as int,
       viewingTasksCount: null == viewingTasksCount
-          ? _value.viewingTasksCount
+          ? _self.viewingTasksCount
           : viewingTasksCount // ignore: cast_nullable_to_non_nullable
               as int,
       listType: null == listType
-          ? _value.listType
+          ? _self.listType
           : listType // ignore: cast_nullable_to_non_nullable
               as Set<ListType>,
       sortedActivity: null == sortedActivity
-          ? _value.sortedActivity
+          ? _self.sortedActivity
           : sortedActivity // ignore: cast_nullable_to_non_nullable
               as List<Activity>,
       getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
-          ? _value.getSortedActivitiesStatus
+          ? _self.getSortedActivitiesStatus
           : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus?,
       getSortedActivitiesError: freezed == getSortedActivitiesError
-          ? _value.getSortedActivitiesError
+          ? _self.getSortedActivitiesError
           : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
               as String?,
       sortedActivityPaginator: freezed == sortedActivityPaginator
-          ? _value.sortedActivityPaginator
+          ? _self.sortedActivityPaginator
           : sortedActivityPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       updateTaskStatus: null == updateTaskStatus
-          ? _value.updateTaskStatus
+          ? _self.updateTaskStatus
           : updateTaskStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       updateTaskError: freezed == updateTaskError
-          ? _value.updateTaskError
+          ? _self.updateTaskError
           : updateTaskError // ignore: cast_nullable_to_non_nullable
               as String?,
       nameSearch: freezed == nameSearch
-          ? _value.nameSearch
+          ? _self.nameSearch
           : nameSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       activityFilter: freezed == activityFilter
-          ? _value.activityFilter
+          ? _self.activityFilter
           : activityFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       communityList: null == communityList
-          ? _value.communityList
+          ? _self.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
               as List<Community>,
       getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
+          ? _self.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buildingList: null == buildingList
-          ? _value.buildingList
+          ? _self.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
               as List<Building>,
       getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
-          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ModelCategoryCopyWith<$Res> get selectedCategory {
-    return $ModelCategoryCopyWith<$Res>(_value.selectedCategory, (value) {
-      return _then(_value.copyWith(selectedCategory: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get sortedActivityPaginator {
-    if (_value.sortedActivityPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.sortedActivityPaginator!, (value) {
-      return _then(_value.copyWith(sortedActivityPaginator: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$HomeStateImplCopyWith<$Res>
-    implements $HomeStateCopyWith<$Res> {
-  factory _$$HomeStateImplCopyWith(
-          _$HomeStateImpl value, $Res Function(_$HomeStateImpl) then) =
-      __$$HomeStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {Map<int, List<Activity>> activities,
-      Map<int, AppStatus?> getActivitiesStatus,
-      Map<int, String?> getActivitiesError,
-      Map<int, Paginator?> activityPaginator,
-      ModelCategory selectedCategory,
-      List<ModelCategory> categories,
-      int completedTasksCount,
-      int pendingTasksCount,
-      int viewingTasksCount,
-      Set<ListType> listType,
-      List<Activity> sortedActivity,
-      AppStatus? getSortedActivitiesStatus,
-      String? getSortedActivitiesError,
-      Paginator? sortedActivityPaginator,
-      AppStatus updateTaskStatus,
-      String? updateTaskError,
-      String? nameSearch,
-      Map<String, dynamic>? activityFilter,
-      List<Community> communityList,
-      AppStatus getCommunityListStatus,
-      List<Building> buildingList,
-      AppStatus getBuildingListStatus});
-
-  @override
-  $ModelCategoryCopyWith<$Res> get selectedCategory;
-  @override
-  $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
-}
-
-/// @nodoc
-class __$$HomeStateImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$HomeStateImpl>
-    implements _$$HomeStateImplCopyWith<$Res> {
-  __$$HomeStateImplCopyWithImpl(
-      _$HomeStateImpl _value, $Res Function(_$HomeStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activities = null,
-    Object? getActivitiesStatus = null,
-    Object? getActivitiesError = null,
-    Object? activityPaginator = null,
-    Object? selectedCategory = null,
-    Object? categories = null,
-    Object? completedTasksCount = null,
-    Object? pendingTasksCount = null,
-    Object? viewingTasksCount = null,
-    Object? listType = null,
-    Object? sortedActivity = null,
-    Object? getSortedActivitiesStatus = freezed,
-    Object? getSortedActivitiesError = freezed,
-    Object? sortedActivityPaginator = freezed,
-    Object? updateTaskStatus = null,
-    Object? updateTaskError = freezed,
-    Object? nameSearch = freezed,
-    Object? activityFilter = freezed,
-    Object? communityList = null,
-    Object? getCommunityListStatus = null,
-    Object? buildingList = null,
-    Object? getBuildingListStatus = null,
-  }) {
-    return _then(_$HomeStateImpl(
-      activities: null == activities
-          ? _value._activities
-          : activities // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<Activity>>,
-      getActivitiesStatus: null == getActivitiesStatus
-          ? _value._getActivitiesStatus
-          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as Map<int, AppStatus?>,
-      getActivitiesError: null == getActivitiesError
-          ? _value._getActivitiesError
-          : getActivitiesError // ignore: cast_nullable_to_non_nullable
-              as Map<int, String?>,
-      activityPaginator: null == activityPaginator
-          ? _value._activityPaginator
-          : activityPaginator // ignore: cast_nullable_to_non_nullable
-              as Map<int, Paginator?>,
-      selectedCategory: null == selectedCategory
-          ? _value.selectedCategory
-          : selectedCategory // ignore: cast_nullable_to_non_nullable
-              as ModelCategory,
-      categories: null == categories
-          ? _value._categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<ModelCategory>,
-      completedTasksCount: null == completedTasksCount
-          ? _value.completedTasksCount
-          : completedTasksCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      pendingTasksCount: null == pendingTasksCount
-          ? _value.pendingTasksCount
-          : pendingTasksCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      viewingTasksCount: null == viewingTasksCount
-          ? _value.viewingTasksCount
-          : viewingTasksCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      listType: null == listType
-          ? _value._listType
-          : listType // ignore: cast_nullable_to_non_nullable
-              as Set<ListType>,
-      sortedActivity: null == sortedActivity
-          ? _value._sortedActivity
-          : sortedActivity // ignore: cast_nullable_to_non_nullable
-              as List<Activity>,
-      getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
-          ? _value.getSortedActivitiesStatus
-          : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus?,
-      getSortedActivitiesError: freezed == getSortedActivitiesError
-          ? _value.getSortedActivitiesError
-          : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sortedActivityPaginator: freezed == sortedActivityPaginator
-          ? _value.sortedActivityPaginator
-          : sortedActivityPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      updateTaskStatus: null == updateTaskStatus
-          ? _value.updateTaskStatus
-          : updateTaskStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      updateTaskError: freezed == updateTaskError
-          ? _value.updateTaskError
-          : updateTaskError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      nameSearch: freezed == nameSearch
-          ? _value.nameSearch
-          : nameSearch // ignore: cast_nullable_to_non_nullable
-              as String?,
-      activityFilter: freezed == activityFilter
-          ? _value._activityFilter
-          : activityFilter // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      communityList: null == communityList
-          ? _value._communityList
-          : communityList // ignore: cast_nullable_to_non_nullable
-              as List<Community>,
-      getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
-          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buildingList: null == buildingList
-          ? _value._buildingList
-          : buildingList // ignore: cast_nullable_to_non_nullable
-              as List<Building>,
-      getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
+          ? _self.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
     ));
   }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ModelCategoryCopyWith<$Res> get selectedCategory {
+    return $ModelCategoryCopyWith<$Res>(_self.selectedCategory, (value) {
+      return _then(_self.copyWith(selectedCategory: value));
+    });
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get sortedActivityPaginator {
+    if (_self.sortedActivityPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.sortedActivityPaginator!, (value) {
+      return _then(_self.copyWith(sortedActivityPaginator: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$HomeStateImpl implements _HomeState {
-  const _$HomeStateImpl(
+class _HomeState implements HomeState {
+  const _HomeState(
       {final Map<int, List<Activity>> activities = const {},
       final Map<int, AppStatus?> getActivitiesStatus = const {},
       final Map<int, String?> getActivitiesError = const {},
@@ -560,16 +480,19 @@ class _$HomeStateImpl implements _HomeState {
   @JsonKey()
   final AppStatus getBuildingListStatus;
 
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount, listType: $listType, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, nameSearch: $nameSearch, activityFilter: $activityFilter, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$HomeStateCopyWith<_HomeState> get copyWith =>
+      __$HomeStateCopyWithImpl<_HomeState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeStateImpl &&
+            other is _HomeState &&
             const DeepCollectionEquality()
                 .equals(other._activities, _activities) &&
             const DeepCollectionEquality()
@@ -645,84 +568,200 @@ class _$HomeStateImpl implements _HomeState {
         getBuildingListStatus
       ]);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'HomeState(activities: $activities, getActivitiesStatus: $getActivitiesStatus, getActivitiesError: $getActivitiesError, activityPaginator: $activityPaginator, selectedCategory: $selectedCategory, categories: $categories, completedTasksCount: $completedTasksCount, pendingTasksCount: $pendingTasksCount, viewingTasksCount: $viewingTasksCount, listType: $listType, sortedActivity: $sortedActivity, getSortedActivitiesStatus: $getSortedActivitiesStatus, getSortedActivitiesError: $getSortedActivitiesError, sortedActivityPaginator: $sortedActivityPaginator, updateTaskStatus: $updateTaskStatus, updateTaskError: $updateTaskError, nameSearch: $nameSearch, activityFilter: $activityFilter, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$HomeStateCopyWith<$Res>
+    implements $HomeStateCopyWith<$Res> {
+  factory _$HomeStateCopyWith(
+          _HomeState value, $Res Function(_HomeState) _then) =
+      __$HomeStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Map<int, List<Activity>> activities,
+      Map<int, AppStatus?> getActivitiesStatus,
+      Map<int, String?> getActivitiesError,
+      Map<int, Paginator?> activityPaginator,
+      ModelCategory selectedCategory,
+      List<ModelCategory> categories,
+      int completedTasksCount,
+      int pendingTasksCount,
+      int viewingTasksCount,
+      Set<ListType> listType,
+      List<Activity> sortedActivity,
+      AppStatus? getSortedActivitiesStatus,
+      String? getSortedActivitiesError,
+      Paginator? sortedActivityPaginator,
+      AppStatus updateTaskStatus,
+      String? updateTaskError,
+      String? nameSearch,
+      Map<String, dynamic>? activityFilter,
+      List<Community> communityList,
+      AppStatus getCommunityListStatus,
+      List<Building> buildingList,
+      AppStatus getBuildingListStatus});
+
+  @override
+  $ModelCategoryCopyWith<$Res> get selectedCategory;
+  @override
+  $PaginatorCopyWith<$Res>? get sortedActivityPaginator;
+}
+
+/// @nodoc
+class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
+  __$HomeStateCopyWithImpl(this._self, this._then);
+
+  final _HomeState _self;
+  final $Res Function(_HomeState) _then;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
-      __$$HomeStateImplCopyWithImpl<_$HomeStateImpl>(this, _$identity);
+  $Res call({
+    Object? activities = null,
+    Object? getActivitiesStatus = null,
+    Object? getActivitiesError = null,
+    Object? activityPaginator = null,
+    Object? selectedCategory = null,
+    Object? categories = null,
+    Object? completedTasksCount = null,
+    Object? pendingTasksCount = null,
+    Object? viewingTasksCount = null,
+    Object? listType = null,
+    Object? sortedActivity = null,
+    Object? getSortedActivitiesStatus = freezed,
+    Object? getSortedActivitiesError = freezed,
+    Object? sortedActivityPaginator = freezed,
+    Object? updateTaskStatus = null,
+    Object? updateTaskError = freezed,
+    Object? nameSearch = freezed,
+    Object? activityFilter = freezed,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
+  }) {
+    return _then(_HomeState(
+      activities: null == activities
+          ? _self._activities
+          : activities // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Activity>>,
+      getActivitiesStatus: null == getActivitiesStatus
+          ? _self._getActivitiesStatus
+          : getActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as Map<int, AppStatus?>,
+      getActivitiesError: null == getActivitiesError
+          ? _self._getActivitiesError
+          : getActivitiesError // ignore: cast_nullable_to_non_nullable
+              as Map<int, String?>,
+      activityPaginator: null == activityPaginator
+          ? _self._activityPaginator
+          : activityPaginator // ignore: cast_nullable_to_non_nullable
+              as Map<int, Paginator?>,
+      selectedCategory: null == selectedCategory
+          ? _self.selectedCategory
+          : selectedCategory // ignore: cast_nullable_to_non_nullable
+              as ModelCategory,
+      categories: null == categories
+          ? _self._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<ModelCategory>,
+      completedTasksCount: null == completedTasksCount
+          ? _self.completedTasksCount
+          : completedTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      pendingTasksCount: null == pendingTasksCount
+          ? _self.pendingTasksCount
+          : pendingTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      viewingTasksCount: null == viewingTasksCount
+          ? _self.viewingTasksCount
+          : viewingTasksCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      listType: null == listType
+          ? _self._listType
+          : listType // ignore: cast_nullable_to_non_nullable
+              as Set<ListType>,
+      sortedActivity: null == sortedActivity
+          ? _self._sortedActivity
+          : sortedActivity // ignore: cast_nullable_to_non_nullable
+              as List<Activity>,
+      getSortedActivitiesStatus: freezed == getSortedActivitiesStatus
+          ? _self.getSortedActivitiesStatus
+          : getSortedActivitiesStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus?,
+      getSortedActivitiesError: freezed == getSortedActivitiesError
+          ? _self.getSortedActivitiesError
+          : getSortedActivitiesError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sortedActivityPaginator: freezed == sortedActivityPaginator
+          ? _self.sortedActivityPaginator
+          : sortedActivityPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      updateTaskStatus: null == updateTaskStatus
+          ? _self.updateTaskStatus
+          : updateTaskStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      updateTaskError: freezed == updateTaskError
+          ? _self.updateTaskError
+          : updateTaskError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nameSearch: freezed == nameSearch
+          ? _self.nameSearch
+          : nameSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      activityFilter: freezed == activityFilter
+          ? _self._activityFilter
+          : activityFilter // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      communityList: null == communityList
+          ? _self._communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<Community>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _self.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingList: null == buildingList
+          ? _self._buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _self.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+    ));
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ModelCategoryCopyWith<$Res> get selectedCategory {
+    return $ModelCategoryCopyWith<$Res>(_self.selectedCategory, (value) {
+      return _then(_self.copyWith(selectedCategory: value));
+    });
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get sortedActivityPaginator {
+    if (_self.sortedActivityPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.sortedActivityPaginator!, (value) {
+      return _then(_self.copyWith(sortedActivityPaginator: value));
+    });
+  }
 }
 
-abstract class _HomeState implements HomeState {
-  const factory _HomeState(
-      {final Map<int, List<Activity>> activities,
-      final Map<int, AppStatus?> getActivitiesStatus,
-      final Map<int, String?> getActivitiesError,
-      final Map<int, Paginator?> activityPaginator,
-      final ModelCategory selectedCategory,
-      final List<ModelCategory> categories,
-      final int completedTasksCount,
-      final int pendingTasksCount,
-      final int viewingTasksCount,
-      final Set<ListType> listType,
-      final List<Activity> sortedActivity,
-      final AppStatus? getSortedActivitiesStatus,
-      final String? getSortedActivitiesError,
-      final Paginator? sortedActivityPaginator,
-      final AppStatus updateTaskStatus,
-      final String? updateTaskError,
-      final String? nameSearch,
-      final Map<String, dynamic>? activityFilter,
-      final List<Community> communityList,
-      final AppStatus getCommunityListStatus,
-      final List<Building> buildingList,
-      final AppStatus getBuildingListStatus}) = _$HomeStateImpl;
-
-  @override
-  Map<int, List<Activity>> get activities;
-  @override
-  Map<int, AppStatus?> get getActivitiesStatus;
-  @override
-  Map<int, String?> get getActivitiesError;
-  @override
-  Map<int, Paginator?> get activityPaginator;
-  @override
-  ModelCategory get selectedCategory;
-  @override
-  List<ModelCategory> get categories;
-  @override
-  int get completedTasksCount;
-  @override
-  int get pendingTasksCount;
-  @override
-  int get viewingTasksCount;
-  @override
-  Set<ListType> get listType;
-  @override
-  List<Activity> get sortedActivity;
-  @override
-  AppStatus? get getSortedActivitiesStatus;
-  @override
-  String? get getSortedActivitiesError;
-  @override
-  Paginator? get sortedActivityPaginator;
-  @override
-  AppStatus get updateTaskStatus;
-  @override
-  String? get updateTaskError;
-  @override
-  String? get nameSearch;
-  @override
-  Map<String, dynamic>? get activityFilter;
-  @override
-  List<Community> get communityList;
-  @override
-  AppStatus get getCommunityListStatus;
-  @override
-  List<Building> get buildingList;
-  @override
-  AppStatus get getBuildingListStatus;
-  @override
-  @JsonKey(ignore: true)
-  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,57 +10,144 @@ part of 'off_plan_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-OffPlanModel _$OffPlanModelFromJson(Map<String, dynamic> json) {
-  return _OffPlanModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$OffPlanModel {
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  String get templateVersion => throw _privateConstructorUsedError;
-  String get developmentName => throw _privateConstructorUsedError;
-  String get emirate => throw _privateConstructorUsedError;
-  OffPlanCommunity get community => throw _privateConstructorUsedError;
-  String get slug => throw _privateConstructorUsedError;
-  int get downpayment => throw _privateConstructorUsedError;
-  DateTime get completionDate => throw _privateConstructorUsedError;
-  String get developmentDescription => throw _privateConstructorUsedError;
-  String get developmentLogo => throw _privateConstructorUsedError;
-  List<PropertyType> get propertyTypes => throw _privateConstructorUsedError;
-  int get startingPrice => throw _privateConstructorUsedError;
-  List<OffPlanAmenity> get amenities => throw _privateConstructorUsedError;
-  Developer get developer => throw _privateConstructorUsedError;
-  Footer get footer => throw _privateConstructorUsedError;
-  List<DevelopmentPhoto> get developmentPhotos =>
-      throw _privateConstructorUsedError;
-  String get video => throw _privateConstructorUsedError;
-  String get brochure => throw _privateConstructorUsedError;
-  String get headerImage => throw _privateConstructorUsedError;
-  String get priceImage => throw _privateConstructorUsedError;
-  List<String>? get keywords => throw _privateConstructorUsedError;
-  String get metaDescription => throw _privateConstructorUsedError;
-  String get metaTitle => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
+  String get id;
+  String get templateVersion;
+  String get developmentName;
+  String get emirate;
+  OffPlanCommunity get community;
+  String get slug;
+  int get downpayment;
+  DateTime get completionDate;
+  String get developmentDescription;
+  String get developmentLogo;
+  List<PropertyType> get propertyTypes;
+  int get startingPrice;
+  List<OffPlanAmenity> get amenities;
+  Developer get developer;
+  Footer get footer;
+  List<DevelopmentPhoto> get developmentPhotos;
+  String get video;
+  String get brochure;
+  String get headerImage;
+  String get priceImage;
+  List<String>? get keywords;
+  String get metaDescription;
+  String get metaTitle;
+  DateTime get createdAt;
+  DateTime get updatedAt;
+  String? get status;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $OffPlanModelCopyWith<OffPlanModel> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$OffPlanModelCopyWithImpl<OffPlanModel>(
+          this as OffPlanModel, _$identity);
+
+  /// Serializes this OffPlanModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OffPlanModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.templateVersion, templateVersion) ||
+                other.templateVersion == templateVersion) &&
+            (identical(other.developmentName, developmentName) ||
+                other.developmentName == developmentName) &&
+            (identical(other.emirate, emirate) || other.emirate == emirate) &&
+            (identical(other.community, community) ||
+                other.community == community) &&
+            (identical(other.slug, slug) || other.slug == slug) &&
+            (identical(other.downpayment, downpayment) ||
+                other.downpayment == downpayment) &&
+            (identical(other.completionDate, completionDate) ||
+                other.completionDate == completionDate) &&
+            (identical(other.developmentDescription, developmentDescription) ||
+                other.developmentDescription == developmentDescription) &&
+            (identical(other.developmentLogo, developmentLogo) ||
+                other.developmentLogo == developmentLogo) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyTypes, propertyTypes) &&
+            (identical(other.startingPrice, startingPrice) ||
+                other.startingPrice == startingPrice) &&
+            const DeepCollectionEquality().equals(other.amenities, amenities) &&
+            (identical(other.developer, developer) ||
+                other.developer == developer) &&
+            (identical(other.footer, footer) || other.footer == footer) &&
+            const DeepCollectionEquality()
+                .equals(other.developmentPhotos, developmentPhotos) &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.brochure, brochure) ||
+                other.brochure == brochure) &&
+            (identical(other.headerImage, headerImage) ||
+                other.headerImage == headerImage) &&
+            (identical(other.priceImage, priceImage) ||
+                other.priceImage == priceImage) &&
+            const DeepCollectionEquality().equals(other.keywords, keywords) &&
+            (identical(other.metaDescription, metaDescription) ||
+                other.metaDescription == metaDescription) &&
+            (identical(other.metaTitle, metaTitle) ||
+                other.metaTitle == metaTitle) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        templateVersion,
+        developmentName,
+        emirate,
+        community,
+        slug,
+        downpayment,
+        completionDate,
+        developmentDescription,
+        developmentLogo,
+        const DeepCollectionEquality().hash(propertyTypes),
+        startingPrice,
+        const DeepCollectionEquality().hash(amenities),
+        developer,
+        footer,
+        const DeepCollectionEquality().hash(developmentPhotos),
+        video,
+        brochure,
+        headerImage,
+        priceImage,
+        const DeepCollectionEquality().hash(keywords),
+        metaDescription,
+        metaTitle,
+        createdAt,
+        updatedAt,
+        status
+      ]);
+
+  @override
+  String toString() {
+    return 'OffPlanModel(id: $id, templateVersion: $templateVersion, developmentName: $developmentName, emirate: $emirate, community: $community, slug: $slug, downpayment: $downpayment, completionDate: $completionDate, developmentDescription: $developmentDescription, developmentLogo: $developmentLogo, propertyTypes: $propertyTypes, startingPrice: $startingPrice, amenities: $amenities, developer: $developer, footer: $footer, developmentPhotos: $developmentPhotos, video: $video, brochure: $brochure, headerImage: $headerImage, priceImage: $priceImage, keywords: $keywords, metaDescription: $metaDescription, metaTitle: $metaTitle, createdAt: $createdAt, updatedAt: $updatedAt, status: $status)';
+  }
 }
 
 /// @nodoc
-abstract class $OffPlanModelCopyWith<$Res> {
+abstract mixin class $OffPlanModelCopyWith<$Res> {
   factory $OffPlanModelCopyWith(
-          OffPlanModel value, $Res Function(OffPlanModel) then) =
-      _$OffPlanModelCopyWithImpl<$Res, OffPlanModel>;
+          OffPlanModel value, $Res Function(OffPlanModel) _then) =
+      _$OffPlanModelCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
@@ -95,15 +183,14 @@ abstract class $OffPlanModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OffPlanModelCopyWithImpl<$Res, $Val extends OffPlanModel>
-    implements $OffPlanModelCopyWith<$Res> {
-  _$OffPlanModelCopyWithImpl(this._value, this._then);
+class _$OffPlanModelCopyWithImpl<$Res> implements $OffPlanModelCopyWith<$Res> {
+  _$OffPlanModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final OffPlanModel _self;
+  final $Res Function(OffPlanModel) _then;
 
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,334 +221,149 @@ class _$OffPlanModelCopyWithImpl<$Res, $Val extends OffPlanModel>
     Object? updatedAt = null,
     Object? status = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       templateVersion: null == templateVersion
-          ? _value.templateVersion
+          ? _self.templateVersion
           : templateVersion // ignore: cast_nullable_to_non_nullable
               as String,
       developmentName: null == developmentName
-          ? _value.developmentName
+          ? _self.developmentName
           : developmentName // ignore: cast_nullable_to_non_nullable
               as String,
       emirate: null == emirate
-          ? _value.emirate
+          ? _self.emirate
           : emirate // ignore: cast_nullable_to_non_nullable
               as String,
       community: null == community
-          ? _value.community
+          ? _self.community
           : community // ignore: cast_nullable_to_non_nullable
               as OffPlanCommunity,
       slug: null == slug
-          ? _value.slug
+          ? _self.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String,
       downpayment: null == downpayment
-          ? _value.downpayment
+          ? _self.downpayment
           : downpayment // ignore: cast_nullable_to_non_nullable
               as int,
       completionDate: null == completionDate
-          ? _value.completionDate
+          ? _self.completionDate
           : completionDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       developmentDescription: null == developmentDescription
-          ? _value.developmentDescription
+          ? _self.developmentDescription
           : developmentDescription // ignore: cast_nullable_to_non_nullable
               as String,
       developmentLogo: null == developmentLogo
-          ? _value.developmentLogo
+          ? _self.developmentLogo
           : developmentLogo // ignore: cast_nullable_to_non_nullable
               as String,
       propertyTypes: null == propertyTypes
-          ? _value.propertyTypes
+          ? _self.propertyTypes
           : propertyTypes // ignore: cast_nullable_to_non_nullable
               as List<PropertyType>,
       startingPrice: null == startingPrice
-          ? _value.startingPrice
+          ? _self.startingPrice
           : startingPrice // ignore: cast_nullable_to_non_nullable
               as int,
       amenities: null == amenities
-          ? _value.amenities
+          ? _self.amenities
           : amenities // ignore: cast_nullable_to_non_nullable
               as List<OffPlanAmenity>,
       developer: null == developer
-          ? _value.developer
+          ? _self.developer
           : developer // ignore: cast_nullable_to_non_nullable
               as Developer,
       footer: null == footer
-          ? _value.footer
+          ? _self.footer
           : footer // ignore: cast_nullable_to_non_nullable
               as Footer,
       developmentPhotos: null == developmentPhotos
-          ? _value.developmentPhotos
+          ? _self.developmentPhotos
           : developmentPhotos // ignore: cast_nullable_to_non_nullable
               as List<DevelopmentPhoto>,
       video: null == video
-          ? _value.video
+          ? _self.video
           : video // ignore: cast_nullable_to_non_nullable
               as String,
       brochure: null == brochure
-          ? _value.brochure
+          ? _self.brochure
           : brochure // ignore: cast_nullable_to_non_nullable
               as String,
       headerImage: null == headerImage
-          ? _value.headerImage
+          ? _self.headerImage
           : headerImage // ignore: cast_nullable_to_non_nullable
               as String,
       priceImage: null == priceImage
-          ? _value.priceImage
+          ? _self.priceImage
           : priceImage // ignore: cast_nullable_to_non_nullable
               as String,
       keywords: freezed == keywords
-          ? _value.keywords
+          ? _self.keywords
           : keywords // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       metaDescription: null == metaDescription
-          ? _value.metaDescription
+          ? _self.metaDescription
           : metaDescription // ignore: cast_nullable_to_non_nullable
               as String,
       metaTitle: null == metaTitle
-          ? _value.metaTitle
+          ? _self.metaTitle
           : metaTitle // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OffPlanCommunityCopyWith<$Res> get community {
-    return $OffPlanCommunityCopyWith<$Res>(_value.community, (value) {
-      return _then(_value.copyWith(community: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DeveloperCopyWith<$Res> get developer {
-    return $DeveloperCopyWith<$Res>(_value.developer, (value) {
-      return _then(_value.copyWith(developer: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $FooterCopyWith<$Res> get footer {
-    return $FooterCopyWith<$Res>(_value.footer, (value) {
-      return _then(_value.copyWith(footer: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$OffPlanModelImplCopyWith<$Res>
-    implements $OffPlanModelCopyWith<$Res> {
-  factory _$$OffPlanModelImplCopyWith(
-          _$OffPlanModelImpl value, $Res Function(_$OffPlanModelImpl) then) =
-      __$$OffPlanModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      String templateVersion,
-      String developmentName,
-      String emirate,
-      OffPlanCommunity community,
-      String slug,
-      int downpayment,
-      DateTime completionDate,
-      String developmentDescription,
-      String developmentLogo,
-      List<PropertyType> propertyTypes,
-      int startingPrice,
-      List<OffPlanAmenity> amenities,
-      Developer developer,
-      Footer footer,
-      List<DevelopmentPhoto> developmentPhotos,
-      String video,
-      String brochure,
-      String headerImage,
-      String priceImage,
-      List<String>? keywords,
-      String metaDescription,
-      String metaTitle,
-      DateTime createdAt,
-      DateTime updatedAt,
-      String? status});
-
-  @override
-  $OffPlanCommunityCopyWith<$Res> get community;
-  @override
-  $DeveloperCopyWith<$Res> get developer;
-  @override
-  $FooterCopyWith<$Res> get footer;
-}
-
-/// @nodoc
-class __$$OffPlanModelImplCopyWithImpl<$Res>
-    extends _$OffPlanModelCopyWithImpl<$Res, _$OffPlanModelImpl>
-    implements _$$OffPlanModelImplCopyWith<$Res> {
-  __$$OffPlanModelImplCopyWithImpl(
-      _$OffPlanModelImpl _value, $Res Function(_$OffPlanModelImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? templateVersion = null,
-    Object? developmentName = null,
-    Object? emirate = null,
-    Object? community = null,
-    Object? slug = null,
-    Object? downpayment = null,
-    Object? completionDate = null,
-    Object? developmentDescription = null,
-    Object? developmentLogo = null,
-    Object? propertyTypes = null,
-    Object? startingPrice = null,
-    Object? amenities = null,
-    Object? developer = null,
-    Object? footer = null,
-    Object? developmentPhotos = null,
-    Object? video = null,
-    Object? brochure = null,
-    Object? headerImage = null,
-    Object? priceImage = null,
-    Object? keywords = freezed,
-    Object? metaDescription = null,
-    Object? metaTitle = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? status = freezed,
-  }) {
-    return _then(_$OffPlanModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      templateVersion: null == templateVersion
-          ? _value.templateVersion
-          : templateVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      developmentName: null == developmentName
-          ? _value.developmentName
-          : developmentName // ignore: cast_nullable_to_non_nullable
-              as String,
-      emirate: null == emirate
-          ? _value.emirate
-          : emirate // ignore: cast_nullable_to_non_nullable
-              as String,
-      community: null == community
-          ? _value.community
-          : community // ignore: cast_nullable_to_non_nullable
-              as OffPlanCommunity,
-      slug: null == slug
-          ? _value.slug
-          : slug // ignore: cast_nullable_to_non_nullable
-              as String,
-      downpayment: null == downpayment
-          ? _value.downpayment
-          : downpayment // ignore: cast_nullable_to_non_nullable
-              as int,
-      completionDate: null == completionDate
-          ? _value.completionDate
-          : completionDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      developmentDescription: null == developmentDescription
-          ? _value.developmentDescription
-          : developmentDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-      developmentLogo: null == developmentLogo
-          ? _value.developmentLogo
-          : developmentLogo // ignore: cast_nullable_to_non_nullable
-              as String,
-      propertyTypes: null == propertyTypes
-          ? _value._propertyTypes
-          : propertyTypes // ignore: cast_nullable_to_non_nullable
-              as List<PropertyType>,
-      startingPrice: null == startingPrice
-          ? _value.startingPrice
-          : startingPrice // ignore: cast_nullable_to_non_nullable
-              as int,
-      amenities: null == amenities
-          ? _value._amenities
-          : amenities // ignore: cast_nullable_to_non_nullable
-              as List<OffPlanAmenity>,
-      developer: null == developer
-          ? _value.developer
-          : developer // ignore: cast_nullable_to_non_nullable
-              as Developer,
-      footer: null == footer
-          ? _value.footer
-          : footer // ignore: cast_nullable_to_non_nullable
-              as Footer,
-      developmentPhotos: null == developmentPhotos
-          ? _value._developmentPhotos
-          : developmentPhotos // ignore: cast_nullable_to_non_nullable
-              as List<DevelopmentPhoto>,
-      video: null == video
-          ? _value.video
-          : video // ignore: cast_nullable_to_non_nullable
-              as String,
-      brochure: null == brochure
-          ? _value.brochure
-          : brochure // ignore: cast_nullable_to_non_nullable
-              as String,
-      headerImage: null == headerImage
-          ? _value.headerImage
-          : headerImage // ignore: cast_nullable_to_non_nullable
-              as String,
-      priceImage: null == priceImage
-          ? _value.priceImage
-          : priceImage // ignore: cast_nullable_to_non_nullable
-              as String,
-      keywords: freezed == keywords
-          ? _value._keywords
-          : keywords // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      metaDescription: null == metaDescription
-          ? _value.metaDescription
-          : metaDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-      metaTitle: null == metaTitle
-          ? _value.metaTitle
-          : metaTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      status: freezed == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
+  }
+
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $OffPlanCommunityCopyWith<$Res> get community {
+    return $OffPlanCommunityCopyWith<$Res>(_self.community, (value) {
+      return _then(_self.copyWith(community: value));
+    });
+  }
+
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DeveloperCopyWith<$Res> get developer {
+    return $DeveloperCopyWith<$Res>(_self.developer, (value) {
+      return _then(_self.copyWith(developer: value));
+    });
+  }
+
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FooterCopyWith<$Res> get footer {
+    return $FooterCopyWith<$Res>(_self.footer, (value) {
+      return _then(_self.copyWith(footer: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$OffPlanModelImpl implements _OffPlanModel {
-  _$OffPlanModelImpl(
+class _OffPlanModel implements OffPlanModel {
+  _OffPlanModel(
       {@JsonKey(name: '_id') required this.id,
       required this.templateVersion,
       required this.developmentName,
@@ -492,9 +394,8 @@ class _$OffPlanModelImpl implements _OffPlanModel {
         _amenities = amenities,
         _developmentPhotos = developmentPhotos,
         _keywords = keywords;
-
-  factory _$OffPlanModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OffPlanModelImplFromJson(json);
+  factory _OffPlanModel.fromJson(Map<String, dynamic> json) =>
+      _$OffPlanModelFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -577,16 +478,26 @@ class _$OffPlanModelImpl implements _OffPlanModel {
   @override
   final String? status;
 
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OffPlanModel(id: $id, templateVersion: $templateVersion, developmentName: $developmentName, emirate: $emirate, community: $community, slug: $slug, downpayment: $downpayment, completionDate: $completionDate, developmentDescription: $developmentDescription, developmentLogo: $developmentLogo, propertyTypes: $propertyTypes, startingPrice: $startingPrice, amenities: $amenities, developer: $developer, footer: $footer, developmentPhotos: $developmentPhotos, video: $video, brochure: $brochure, headerImage: $headerImage, priceImage: $priceImage, keywords: $keywords, metaDescription: $metaDescription, metaTitle: $metaTitle, createdAt: $createdAt, updatedAt: $updatedAt, status: $status)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OffPlanModelCopyWith<_OffPlanModel> get copyWith =>
+      __$OffPlanModelCopyWithImpl<_OffPlanModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$OffPlanModelToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OffPlanModelImpl &&
+            other is _OffPlanModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.templateVersion, templateVersion) ||
                 other.templateVersion == templateVersion) &&
@@ -634,7 +545,7 @@ class _$OffPlanModelImpl implements _OffPlanModel {
             (identical(other.status, status) || other.status == status));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -666,203 +577,295 @@ class _$OffPlanModelImpl implements _OffPlanModel {
         status
       ]);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$OffPlanModelImplCopyWith<_$OffPlanModelImpl> get copyWith =>
-      __$$OffPlanModelImplCopyWithImpl<_$OffPlanModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OffPlanModelImplToJson(
-      this,
-    );
+  String toString() {
+    return 'OffPlanModel(id: $id, templateVersion: $templateVersion, developmentName: $developmentName, emirate: $emirate, community: $community, slug: $slug, downpayment: $downpayment, completionDate: $completionDate, developmentDescription: $developmentDescription, developmentLogo: $developmentLogo, propertyTypes: $propertyTypes, startingPrice: $startingPrice, amenities: $amenities, developer: $developer, footer: $footer, developmentPhotos: $developmentPhotos, video: $video, brochure: $brochure, headerImage: $headerImage, priceImage: $priceImage, keywords: $keywords, metaDescription: $metaDescription, metaTitle: $metaTitle, createdAt: $createdAt, updatedAt: $updatedAt, status: $status)';
   }
 }
 
-abstract class _OffPlanModel implements OffPlanModel {
-  factory _OffPlanModel(
-      {@JsonKey(name: '_id') required final String id,
-      required final String templateVersion,
-      required final String developmentName,
-      required final String emirate,
-      required final OffPlanCommunity community,
-      required final String slug,
-      required final int downpayment,
-      required final DateTime completionDate,
-      required final String developmentDescription,
-      required final String developmentLogo,
-      required final List<PropertyType> propertyTypes,
-      required final int startingPrice,
-      required final List<OffPlanAmenity> amenities,
-      required final Developer developer,
-      required final Footer footer,
-      required final List<DevelopmentPhoto> developmentPhotos,
-      required final String video,
-      required final String brochure,
-      required final String headerImage,
-      required final String priceImage,
-      final List<String>? keywords,
-      required final String metaDescription,
-      required final String metaTitle,
-      required final DateTime createdAt,
-      required final DateTime updatedAt,
-      final String? status}) = _$OffPlanModelImpl;
-
-  factory _OffPlanModel.fromJson(Map<String, dynamic> json) =
-      _$OffPlanModelImpl.fromJson;
-
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  String get templateVersion;
-  @override
-  String get developmentName;
-  @override
-  String get emirate;
-  @override
-  OffPlanCommunity get community;
-  @override
-  String get slug;
-  @override
-  int get downpayment;
-  @override
-  DateTime get completionDate;
-  @override
-  String get developmentDescription;
-  @override
-  String get developmentLogo;
-  @override
-  List<PropertyType> get propertyTypes;
-  @override
-  int get startingPrice;
-  @override
-  List<OffPlanAmenity> get amenities;
-  @override
-  Developer get developer;
-  @override
-  Footer get footer;
-  @override
-  List<DevelopmentPhoto> get developmentPhotos;
-  @override
-  String get video;
-  @override
-  String get brochure;
-  @override
-  String get headerImage;
-  @override
-  String get priceImage;
-  @override
-  List<String>? get keywords;
-  @override
-  String get metaDescription;
-  @override
-  String get metaTitle;
-  @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
-  @override
-  String? get status;
-  @override
-  @JsonKey(ignore: true)
-  _$$OffPlanModelImplCopyWith<_$OffPlanModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-OffPlanCommunity _$OffPlanCommunityFromJson(Map<String, dynamic> json) {
-  return _OffPlanCommunity.fromJson(json);
-}
-
 /// @nodoc
-mixin _$OffPlanCommunity {
-  String get name => throw _privateConstructorUsedError;
-  Position get position => throw _privateConstructorUsedError;
-  @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $OffPlanCommunityCopyWith<OffPlanCommunity> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OffPlanCommunityCopyWith<$Res> {
-  factory $OffPlanCommunityCopyWith(
-          OffPlanCommunity value, $Res Function(OffPlanCommunity) then) =
-      _$OffPlanCommunityCopyWithImpl<$Res, OffPlanCommunity>;
+abstract mixin class _$OffPlanModelCopyWith<$Res>
+    implements $OffPlanModelCopyWith<$Res> {
+  factory _$OffPlanModelCopyWith(
+          _OffPlanModel value, $Res Function(_OffPlanModel) _then) =
+      __$OffPlanModelCopyWithImpl;
+  @override
   @useResult
-  $Res call({String name, Position position, @JsonKey(name: '_id') String id});
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      String templateVersion,
+      String developmentName,
+      String emirate,
+      OffPlanCommunity community,
+      String slug,
+      int downpayment,
+      DateTime completionDate,
+      String developmentDescription,
+      String developmentLogo,
+      List<PropertyType> propertyTypes,
+      int startingPrice,
+      List<OffPlanAmenity> amenities,
+      Developer developer,
+      Footer footer,
+      List<DevelopmentPhoto> developmentPhotos,
+      String video,
+      String brochure,
+      String headerImage,
+      String priceImage,
+      List<String>? keywords,
+      String metaDescription,
+      String metaTitle,
+      DateTime createdAt,
+      DateTime updatedAt,
+      String? status});
 
-  $PositionCopyWith<$Res> get position;
+  @override
+  $OffPlanCommunityCopyWith<$Res> get community;
+  @override
+  $DeveloperCopyWith<$Res> get developer;
+  @override
+  $FooterCopyWith<$Res> get footer;
 }
 
 /// @nodoc
-class _$OffPlanCommunityCopyWithImpl<$Res, $Val extends OffPlanCommunity>
-    implements $OffPlanCommunityCopyWith<$Res> {
-  _$OffPlanCommunityCopyWithImpl(this._value, this._then);
+class __$OffPlanModelCopyWithImpl<$Res>
+    implements _$OffPlanModelCopyWith<$Res> {
+  __$OffPlanModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final _OffPlanModel _self;
+  final $Res Function(_OffPlanModel) _then;
 
-  @pragma('vm:prefer-inline')
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
-    Object? name = null,
-    Object? position = null,
     Object? id = null,
+    Object? templateVersion = null,
+    Object? developmentName = null,
+    Object? emirate = null,
+    Object? community = null,
+    Object? slug = null,
+    Object? downpayment = null,
+    Object? completionDate = null,
+    Object? developmentDescription = null,
+    Object? developmentLogo = null,
+    Object? propertyTypes = null,
+    Object? startingPrice = null,
+    Object? amenities = null,
+    Object? developer = null,
+    Object? footer = null,
+    Object? developmentPhotos = null,
+    Object? video = null,
+    Object? brochure = null,
+    Object? headerImage = null,
+    Object? priceImage = null,
+    Object? keywords = freezed,
+    Object? metaDescription = null,
+    Object? metaTitle = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? status = freezed,
   }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as Position,
+    return _then(_OffPlanModel(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
+      templateVersion: null == templateVersion
+          ? _self.templateVersion
+          : templateVersion // ignore: cast_nullable_to_non_nullable
+              as String,
+      developmentName: null == developmentName
+          ? _self.developmentName
+          : developmentName // ignore: cast_nullable_to_non_nullable
+              as String,
+      emirate: null == emirate
+          ? _self.emirate
+          : emirate // ignore: cast_nullable_to_non_nullable
+              as String,
+      community: null == community
+          ? _self.community
+          : community // ignore: cast_nullable_to_non_nullable
+              as OffPlanCommunity,
+      slug: null == slug
+          ? _self.slug
+          : slug // ignore: cast_nullable_to_non_nullable
+              as String,
+      downpayment: null == downpayment
+          ? _self.downpayment
+          : downpayment // ignore: cast_nullable_to_non_nullable
+              as int,
+      completionDate: null == completionDate
+          ? _self.completionDate
+          : completionDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      developmentDescription: null == developmentDescription
+          ? _self.developmentDescription
+          : developmentDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      developmentLogo: null == developmentLogo
+          ? _self.developmentLogo
+          : developmentLogo // ignore: cast_nullable_to_non_nullable
+              as String,
+      propertyTypes: null == propertyTypes
+          ? _self._propertyTypes
+          : propertyTypes // ignore: cast_nullable_to_non_nullable
+              as List<PropertyType>,
+      startingPrice: null == startingPrice
+          ? _self.startingPrice
+          : startingPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      amenities: null == amenities
+          ? _self._amenities
+          : amenities // ignore: cast_nullable_to_non_nullable
+              as List<OffPlanAmenity>,
+      developer: null == developer
+          ? _self.developer
+          : developer // ignore: cast_nullable_to_non_nullable
+              as Developer,
+      footer: null == footer
+          ? _self.footer
+          : footer // ignore: cast_nullable_to_non_nullable
+              as Footer,
+      developmentPhotos: null == developmentPhotos
+          ? _self._developmentPhotos
+          : developmentPhotos // ignore: cast_nullable_to_non_nullable
+              as List<DevelopmentPhoto>,
+      video: null == video
+          ? _self.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as String,
+      brochure: null == brochure
+          ? _self.brochure
+          : brochure // ignore: cast_nullable_to_non_nullable
+              as String,
+      headerImage: null == headerImage
+          ? _self.headerImage
+          : headerImage // ignore: cast_nullable_to_non_nullable
+              as String,
+      priceImage: null == priceImage
+          ? _self.priceImage
+          : priceImage // ignore: cast_nullable_to_non_nullable
+              as String,
+      keywords: freezed == keywords
+          ? _self._keywords
+          : keywords // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      metaDescription: null == metaDescription
+          ? _self.metaDescription
+          : metaDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      metaTitle: null == metaTitle
+          ? _self.metaTitle
+          : metaTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      status: freezed == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PositionCopyWith<$Res> get position {
-    return $PositionCopyWith<$Res>(_value.position, (value) {
-      return _then(_value.copyWith(position: value) as $Val);
+  $OffPlanCommunityCopyWith<$Res> get community {
+    return $OffPlanCommunityCopyWith<$Res>(_self.community, (value) {
+      return _then(_self.copyWith(community: value));
+    });
+  }
+
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DeveloperCopyWith<$Res> get developer {
+    return $DeveloperCopyWith<$Res>(_self.developer, (value) {
+      return _then(_self.copyWith(developer: value));
+    });
+  }
+
+  /// Create a copy of OffPlanModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FooterCopyWith<$Res> get footer {
+    return $FooterCopyWith<$Res>(_self.footer, (value) {
+      return _then(_self.copyWith(footer: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$OffPlanCommunityImplCopyWith<$Res>
-    implements $OffPlanCommunityCopyWith<$Res> {
-  factory _$$OffPlanCommunityImplCopyWith(_$OffPlanCommunityImpl value,
-          $Res Function(_$OffPlanCommunityImpl) then) =
-      __$$OffPlanCommunityImplCopyWithImpl<$Res>;
+mixin _$OffPlanCommunity {
+  String get name;
+  Position get position;
+  @JsonKey(name: '_id')
+  String get id;
+
+  /// Create a copy of OffPlanCommunity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $OffPlanCommunityCopyWith<OffPlanCommunity> get copyWith =>
+      _$OffPlanCommunityCopyWithImpl<OffPlanCommunity>(
+          this as OffPlanCommunity, _$identity);
+
+  /// Serializes this OffPlanCommunity to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OffPlanCommunity &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, position, id);
+
+  @override
+  String toString() {
+    return 'OffPlanCommunity(name: $name, position: $position, id: $id)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $OffPlanCommunityCopyWith<$Res> {
+  factory $OffPlanCommunityCopyWith(
+          OffPlanCommunity value, $Res Function(OffPlanCommunity) _then) =
+      _$OffPlanCommunityCopyWithImpl;
   @useResult
   $Res call({String name, Position position, @JsonKey(name: '_id') String id});
 
-  @override
   $PositionCopyWith<$Res> get position;
 }
 
 /// @nodoc
-class __$$OffPlanCommunityImplCopyWithImpl<$Res>
-    extends _$OffPlanCommunityCopyWithImpl<$Res, _$OffPlanCommunityImpl>
-    implements _$$OffPlanCommunityImplCopyWith<$Res> {
-  __$$OffPlanCommunityImplCopyWithImpl(_$OffPlanCommunityImpl _value,
-      $Res Function(_$OffPlanCommunityImpl) _then)
-      : super(_value, _then);
+class _$OffPlanCommunityCopyWithImpl<$Res>
+    implements $OffPlanCommunityCopyWith<$Res> {
+  _$OffPlanCommunityCopyWithImpl(this._self, this._then);
 
+  final OffPlanCommunity _self;
+  final $Res Function(OffPlanCommunity) _then;
+
+  /// Create a copy of OffPlanCommunity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -870,33 +873,42 @@ class __$$OffPlanCommunityImplCopyWithImpl<$Res>
     Object? position = null,
     Object? id = null,
   }) {
-    return _then(_$OffPlanCommunityImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       position: null == position
-          ? _value.position
+          ? _self.position
           : position // ignore: cast_nullable_to_non_nullable
               as Position,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
+  }
+
+  /// Create a copy of OffPlanCommunity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PositionCopyWith<$Res> get position {
+    return $PositionCopyWith<$Res>(_self.position, (value) {
+      return _then(_self.copyWith(position: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$OffPlanCommunityImpl implements _OffPlanCommunity {
-  _$OffPlanCommunityImpl(
+class _OffPlanCommunity implements OffPlanCommunity {
+  _OffPlanCommunity(
       {required this.name,
       required this.position,
       @JsonKey(name: '_id') required this.id});
-
-  factory _$OffPlanCommunityImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OffPlanCommunityImplFromJson(json);
+  factory _OffPlanCommunity.fromJson(Map<String, dynamic> json) =>
+      _$OffPlanCommunityFromJson(json);
 
   @override
   final String name;
@@ -906,141 +918,154 @@ class _$OffPlanCommunityImpl implements _OffPlanCommunity {
   @JsonKey(name: '_id')
   final String id;
 
+  /// Create a copy of OffPlanCommunity
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OffPlanCommunity(name: $name, position: $position, id: $id)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$OffPlanCommunityCopyWith<_OffPlanCommunity> get copyWith =>
+      __$OffPlanCommunityCopyWithImpl<_OffPlanCommunity>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$OffPlanCommunityToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OffPlanCommunityImpl &&
+            other is _OffPlanCommunity &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.position, position) ||
                 other.position == position) &&
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, position, id);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$OffPlanCommunityImplCopyWith<_$OffPlanCommunityImpl> get copyWith =>
-      __$$OffPlanCommunityImplCopyWithImpl<_$OffPlanCommunityImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$OffPlanCommunityImplToJson(
-      this,
-    );
+  String toString() {
+    return 'OffPlanCommunity(name: $name, position: $position, id: $id)';
   }
 }
 
-abstract class _OffPlanCommunity implements OffPlanCommunity {
-  factory _OffPlanCommunity(
-      {required final String name,
-      required final Position position,
-      @JsonKey(name: '_id') required final String id}) = _$OffPlanCommunityImpl;
+/// @nodoc
+abstract mixin class _$OffPlanCommunityCopyWith<$Res>
+    implements $OffPlanCommunityCopyWith<$Res> {
+  factory _$OffPlanCommunityCopyWith(
+          _OffPlanCommunity value, $Res Function(_OffPlanCommunity) _then) =
+      __$OffPlanCommunityCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String name, Position position, @JsonKey(name: '_id') String id});
 
-  factory _OffPlanCommunity.fromJson(Map<String, dynamic> json) =
-      _$OffPlanCommunityImpl.fromJson;
-
   @override
-  String get name;
-  @override
-  Position get position;
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$OffPlanCommunityImplCopyWith<_$OffPlanCommunityImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  $PositionCopyWith<$Res> get position;
 }
 
-Position _$PositionFromJson(Map<String, dynamic> json) {
-  return _Position.fromJson(json);
+/// @nodoc
+class __$OffPlanCommunityCopyWithImpl<$Res>
+    implements _$OffPlanCommunityCopyWith<$Res> {
+  __$OffPlanCommunityCopyWithImpl(this._self, this._then);
+
+  final _OffPlanCommunity _self;
+  final $Res Function(_OffPlanCommunity) _then;
+
+  /// Create a copy of OffPlanCommunity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? name = null,
+    Object? position = null,
+    Object? id = null,
+  }) {
+    return _then(_OffPlanCommunity(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      position: null == position
+          ? _self.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Position,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  /// Create a copy of OffPlanCommunity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PositionCopyWith<$Res> get position {
+    return $PositionCopyWith<$Res>(_self.position, (value) {
+      return _then(_self.copyWith(position: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$Position {
-  double get lat => throw _privateConstructorUsedError;
-  double get lng => throw _privateConstructorUsedError;
+  double get lat;
+  double get lng;
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
+  String get id;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PositionCopyWith<Position> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PositionCopyWith<$Res> {
-  factory $PositionCopyWith(Position value, $Res Function(Position) then) =
-      _$PositionCopyWithImpl<$Res, Position>;
-  @useResult
-  $Res call({double lat, double lng, @JsonKey(name: '_id') String id});
-}
-
-/// @nodoc
-class _$PositionCopyWithImpl<$Res, $Val extends Position>
-    implements $PositionCopyWith<$Res> {
-  _$PositionCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Position
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $PositionCopyWith<Position> get copyWith =>
+      _$PositionCopyWithImpl<Position>(this as Position, _$identity);
+
+  /// Serializes this Position to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? lat = null,
-    Object? lng = null,
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      lat: null == lat
-          ? _value.lat
-          : lat // ignore: cast_nullable_to_non_nullable
-              as double,
-      lng: null == lng
-          ? _value.lng
-          : lng // ignore: cast_nullable_to_non_nullable
-              as double,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Position &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.lng, lng) || other.lng == lng) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, lat, lng, id);
+
+  @override
+  String toString() {
+    return 'Position(lat: $lat, lng: $lng, id: $id)';
   }
 }
 
 /// @nodoc
-abstract class _$$PositionImplCopyWith<$Res>
-    implements $PositionCopyWith<$Res> {
-  factory _$$PositionImplCopyWith(
-          _$PositionImpl value, $Res Function(_$PositionImpl) then) =
-      __$$PositionImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PositionCopyWith<$Res> {
+  factory $PositionCopyWith(Position value, $Res Function(Position) _then) =
+      _$PositionCopyWithImpl;
   @useResult
   $Res call({double lat, double lng, @JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
-class __$$PositionImplCopyWithImpl<$Res>
-    extends _$PositionCopyWithImpl<$Res, _$PositionImpl>
-    implements _$$PositionImplCopyWith<$Res> {
-  __$$PositionImplCopyWithImpl(
-      _$PositionImpl _value, $Res Function(_$PositionImpl) _then)
-      : super(_value, _then);
+class _$PositionCopyWithImpl<$Res> implements $PositionCopyWith<$Res> {
+  _$PositionCopyWithImpl(this._self, this._then);
 
+  final Position _self;
+  final $Res Function(Position) _then;
+
+  /// Create a copy of Position
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1048,17 +1073,17 @@ class __$$PositionImplCopyWithImpl<$Res>
     Object? lng = null,
     Object? id = null,
   }) {
-    return _then(_$PositionImpl(
+    return _then(_self.copyWith(
       lat: null == lat
-          ? _value.lat
+          ? _self.lat
           : lat // ignore: cast_nullable_to_non_nullable
               as double,
       lng: null == lng
-          ? _value.lng
+          ? _self.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -1067,14 +1092,13 @@ class __$$PositionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PositionImpl implements _Position {
-  _$PositionImpl(
+class _Position implements Position {
+  _Position(
       {required this.lat,
       required this.lng,
       @JsonKey(name: '_id') required this.id});
-
-  factory _$PositionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PositionImplFromJson(json);
+  factory _Position.fromJson(Map<String, dynamic> json) =>
+      _$PositionFromJson(json);
 
   @override
   final double lat;
@@ -1084,59 +1108,82 @@ class _$PositionImpl implements _Position {
   @JsonKey(name: '_id')
   final String id;
 
+  /// Create a copy of Position
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Position(lat: $lat, lng: $lng, id: $id)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PositionCopyWith<_Position> get copyWith =>
+      __$PositionCopyWithImpl<_Position>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PositionToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PositionImpl &&
+            other is _Position &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng) &&
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, lat, lng, id);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PositionImplCopyWith<_$PositionImpl> get copyWith =>
-      __$$PositionImplCopyWithImpl<_$PositionImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PositionImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Position(lat: $lat, lng: $lng, id: $id)';
   }
 }
 
-abstract class _Position implements Position {
-  factory _Position(
-      {required final double lat,
-      required final double lng,
-      @JsonKey(name: '_id') required final String id}) = _$PositionImpl;
+/// @nodoc
+abstract mixin class _$PositionCopyWith<$Res>
+    implements $PositionCopyWith<$Res> {
+  factory _$PositionCopyWith(_Position value, $Res Function(_Position) _then) =
+      __$PositionCopyWithImpl;
+  @override
+  @useResult
+  $Res call({double lat, double lng, @JsonKey(name: '_id') String id});
+}
 
-  factory _Position.fromJson(Map<String, dynamic> json) =
-      _$PositionImpl.fromJson;
+/// @nodoc
+class __$PositionCopyWithImpl<$Res> implements _$PositionCopyWith<$Res> {
+  __$PositionCopyWithImpl(this._self, this._then);
 
+  final _Position _self;
+  final $Res Function(_Position) _then;
+
+  /// Create a copy of Position
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  double get lat;
-  @override
-  double get lng;
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$PositionImplCopyWith<_$PositionImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? lat = null,
+    Object? lng = null,
+    Object? id = null,
+  }) {
+    return _then(_Position(
+      lat: null == lat
+          ? _self.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as double,
+      lng: null == lng
+          ? _self.lng
+          : lng // ignore: cast_nullable_to_non_nullable
+              as double,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 OffPlanAmenity _$OffPlanAmenityFromJson(Map<String, dynamic> json) {
@@ -1145,79 +1192,61 @@ OffPlanAmenity _$OffPlanAmenityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OffPlanAmenity {
-  String get title => throw _privateConstructorUsedError;
-  String get photo => throw _privateConstructorUsedError;
+  String get title;
+  String get photo;
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
+  String get id;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $OffPlanAmenityCopyWith<OffPlanAmenity> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OffPlanAmenityCopyWith<$Res> {
-  factory $OffPlanAmenityCopyWith(
-          OffPlanAmenity value, $Res Function(OffPlanAmenity) then) =
-      _$OffPlanAmenityCopyWithImpl<$Res, OffPlanAmenity>;
-  @useResult
-  $Res call({String title, String photo, @JsonKey(name: '_id') String id});
-}
-
-/// @nodoc
-class _$OffPlanAmenityCopyWithImpl<$Res, $Val extends OffPlanAmenity>
-    implements $OffPlanAmenityCopyWith<$Res> {
-  _$OffPlanAmenityCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of OffPlanAmenity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $OffPlanAmenityCopyWith<OffPlanAmenity> get copyWith =>
+      _$OffPlanAmenityCopyWithImpl<OffPlanAmenity>(
+          this as OffPlanAmenity, _$identity);
+
+  /// Serializes this OffPlanAmenity to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? title = null,
-    Object? photo = null,
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      photo: null == photo
-          ? _value.photo
-          : photo // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is OffPlanAmenity &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.photo, photo) || other.photo == photo) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, title, photo, id);
+
+  @override
+  String toString() {
+    return 'OffPlanAmenity(title: $title, photo: $photo, id: $id)';
   }
 }
 
 /// @nodoc
-abstract class _$$AmenityImplCopyWith<$Res>
-    implements $OffPlanAmenityCopyWith<$Res> {
-  factory _$$AmenityImplCopyWith(
-          _$AmenityImpl value, $Res Function(_$AmenityImpl) then) =
-      __$$AmenityImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $OffPlanAmenityCopyWith<$Res> {
+  factory $OffPlanAmenityCopyWith(
+          OffPlanAmenity value, $Res Function(OffPlanAmenity) _then) =
+      _$OffPlanAmenityCopyWithImpl;
   @useResult
   $Res call({String title, String photo, @JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
-class __$$AmenityImplCopyWithImpl<$Res>
-    extends _$OffPlanAmenityCopyWithImpl<$Res, _$AmenityImpl>
-    implements _$$AmenityImplCopyWith<$Res> {
-  __$$AmenityImplCopyWithImpl(
-      _$AmenityImpl _value, $Res Function(_$AmenityImpl) _then)
-      : super(_value, _then);
+class _$OffPlanAmenityCopyWithImpl<$Res>
+    implements $OffPlanAmenityCopyWith<$Res> {
+  _$OffPlanAmenityCopyWithImpl(this._self, this._then);
 
+  final OffPlanAmenity _self;
+  final $Res Function(OffPlanAmenity) _then;
+
+  /// Create a copy of OffPlanAmenity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1225,17 +1254,17 @@ class __$$AmenityImplCopyWithImpl<$Res>
     Object? photo = null,
     Object? id = null,
   }) {
-    return _then(_$AmenityImpl(
+    return _then(_self.copyWith(
       title: null == title
-          ? _value.title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       photo: null == photo
-          ? _value.photo
+          ? _self.photo
           : photo // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -1244,14 +1273,13 @@ class __$$AmenityImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AmenityImpl implements _Amenity {
-  _$AmenityImpl(
+class _Amenity implements OffPlanAmenity {
+  _Amenity(
       {required this.title,
       required this.photo,
       @JsonKey(name: '_id') required this.id});
-
-  factory _$AmenityImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AmenityImplFromJson(json);
+  factory _Amenity.fromJson(Map<String, dynamic> json) =>
+      _$AmenityFromJson(json);
 
   @override
   final String title;
@@ -1261,164 +1289,141 @@ class _$AmenityImpl implements _Amenity {
   @JsonKey(name: '_id')
   final String id;
 
+  /// Create a copy of OffPlanAmenity
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'OffPlanAmenity(title: $title, photo: $photo, id: $id)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AmenityCopyWith<_Amenity> get copyWith =>
+      __$AmenityCopyWithImpl<_Amenity>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AmenityToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AmenityImpl &&
+            other is _Amenity &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, title, photo, id);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AmenityImplCopyWith<_$AmenityImpl> get copyWith =>
-      __$$AmenityImplCopyWithImpl<_$AmenityImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AmenityImplToJson(
-      this,
-    );
+  String toString() {
+    return 'OffPlanAmenity(title: $title, photo: $photo, id: $id)';
   }
 }
 
-abstract class _Amenity implements OffPlanAmenity {
-  factory _Amenity(
-      {required final String title,
-      required final String photo,
-      @JsonKey(name: '_id') required final String id}) = _$AmenityImpl;
-
-  factory _Amenity.fromJson(Map<String, dynamic> json) = _$AmenityImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$AmenityCopyWith<$Res>
+    implements $OffPlanAmenityCopyWith<$Res> {
+  factory _$AmenityCopyWith(_Amenity value, $Res Function(_Amenity) _then) =
+      __$AmenityCopyWithImpl;
   @override
-  String get title;
-  @override
-  String get photo;
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$AmenityImplCopyWith<_$AmenityImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({String title, String photo, @JsonKey(name: '_id') String id});
 }
 
-Developer _$DeveloperFromJson(Map<String, dynamic> json) {
-  return _Developer.fromJson(json);
+/// @nodoc
+class __$AmenityCopyWithImpl<$Res> implements _$AmenityCopyWith<$Res> {
+  __$AmenityCopyWithImpl(this._self, this._then);
+
+  final _Amenity _self;
+  final $Res Function(_Amenity) _then;
+
+  /// Create a copy of OffPlanAmenity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? title = null,
+    Object? photo = null,
+    Object? id = null,
+  }) {
+    return _then(_Amenity(
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      photo: null == photo
+          ? _self.photo
+          : photo // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$Developer {
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  String get logo => throw _privateConstructorUsedError;
-  String get backgroundImage => throw _privateConstructorUsedError;
-  String get headerTitle => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String? get description;
+  String get logo;
+  String get backgroundImage;
+  String get headerTitle;
+  DateTime get createdAt;
+  DateTime get updatedAt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $DeveloperCopyWith<Developer> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DeveloperCopyWith<$Res> {
-  factory $DeveloperCopyWith(Developer value, $Res Function(Developer) then) =
-      _$DeveloperCopyWithImpl<$Res, Developer>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      String name,
-      String? description,
-      String logo,
-      String backgroundImage,
-      String headerTitle,
-      DateTime createdAt,
-      DateTime updatedAt});
-}
-
-/// @nodoc
-class _$DeveloperCopyWithImpl<$Res, $Val extends Developer>
-    implements $DeveloperCopyWith<$Res> {
-  _$DeveloperCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Developer
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $DeveloperCopyWith<Developer> get copyWith =>
+      _$DeveloperCopyWithImpl<Developer>(this as Developer, _$identity);
+
+  /// Serializes this Developer to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = freezed,
-    Object? logo = null,
-    Object? backgroundImage = null,
-    Object? headerTitle = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      logo: null == logo
-          ? _value.logo
-          : logo // ignore: cast_nullable_to_non_nullable
-              as String,
-      backgroundImage: null == backgroundImage
-          ? _value.backgroundImage
-          : backgroundImage // ignore: cast_nullable_to_non_nullable
-              as String,
-      headerTitle: null == headerTitle
-          ? _value.headerTitle
-          : headerTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Developer &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.logo, logo) || other.logo == logo) &&
+            (identical(other.backgroundImage, backgroundImage) ||
+                other.backgroundImage == backgroundImage) &&
+            (identical(other.headerTitle, headerTitle) ||
+                other.headerTitle == headerTitle) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, description, logo,
+      backgroundImage, headerTitle, createdAt, updatedAt);
+
+  @override
+  String toString() {
+    return 'Developer(id: $id, name: $name, description: $description, logo: $logo, backgroundImage: $backgroundImage, headerTitle: $headerTitle, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
 /// @nodoc
-abstract class _$$DeveloperImplCopyWith<$Res>
-    implements $DeveloperCopyWith<$Res> {
-  factory _$$DeveloperImplCopyWith(
-          _$DeveloperImpl value, $Res Function(_$DeveloperImpl) then) =
-      __$$DeveloperImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DeveloperCopyWith<$Res> {
+  factory $DeveloperCopyWith(Developer value, $Res Function(Developer) _then) =
+      _$DeveloperCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
@@ -1432,13 +1437,14 @@ abstract class _$$DeveloperImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DeveloperImplCopyWithImpl<$Res>
-    extends _$DeveloperCopyWithImpl<$Res, _$DeveloperImpl>
-    implements _$$DeveloperImplCopyWith<$Res> {
-  __$$DeveloperImplCopyWithImpl(
-      _$DeveloperImpl _value, $Res Function(_$DeveloperImpl) _then)
-      : super(_value, _then);
+class _$DeveloperCopyWithImpl<$Res> implements $DeveloperCopyWith<$Res> {
+  _$DeveloperCopyWithImpl(this._self, this._then);
 
+  final Developer _self;
+  final $Res Function(Developer) _then;
+
+  /// Create a copy of Developer
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1451,37 +1457,37 @@ class __$$DeveloperImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$DeveloperImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
       logo: null == logo
-          ? _value.logo
+          ? _self.logo
           : logo // ignore: cast_nullable_to_non_nullable
               as String,
       backgroundImage: null == backgroundImage
-          ? _value.backgroundImage
+          ? _self.backgroundImage
           : backgroundImage // ignore: cast_nullable_to_non_nullable
               as String,
       headerTitle: null == headerTitle
-          ? _value.headerTitle
+          ? _self.headerTitle
           : headerTitle // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
@@ -1490,8 +1496,8 @@ class __$$DeveloperImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DeveloperImpl implements _Developer {
-  _$DeveloperImpl(
+class _Developer implements Developer {
+  _Developer(
       {@JsonKey(name: '_id') required this.id,
       required this.name,
       this.description,
@@ -1500,9 +1506,8 @@ class _$DeveloperImpl implements _Developer {
       required this.headerTitle,
       required this.createdAt,
       required this.updatedAt});
-
-  factory _$DeveloperImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DeveloperImplFromJson(json);
+  factory _Developer.fromJson(Map<String, dynamic> json) =>
+      _$DeveloperFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -1522,16 +1527,26 @@ class _$DeveloperImpl implements _Developer {
   @override
   final DateTime updatedAt;
 
+  /// Create a copy of Developer
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Developer(id: $id, name: $name, description: $description, logo: $logo, backgroundImage: $backgroundImage, headerTitle: $headerTitle, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DeveloperCopyWith<_Developer> get copyWith =>
+      __$DeveloperCopyWithImpl<_Developer>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DeveloperToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DeveloperImpl &&
+            other is _Developer &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -1547,157 +1562,147 @@ class _$DeveloperImpl implements _Developer {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, description, logo,
       backgroundImage, headerTitle, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DeveloperImplCopyWith<_$DeveloperImpl> get copyWith =>
-      __$$DeveloperImplCopyWithImpl<_$DeveloperImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DeveloperImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Developer(id: $id, name: $name, description: $description, logo: $logo, backgroundImage: $backgroundImage, headerTitle: $headerTitle, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _Developer implements Developer {
-  factory _Developer(
-      {@JsonKey(name: '_id') required final String id,
-      required final String name,
-      final String? description,
-      required final String logo,
-      required final String backgroundImage,
-      required final String headerTitle,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$DeveloperImpl;
-
-  factory _Developer.fromJson(Map<String, dynamic> json) =
-      _$DeveloperImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$DeveloperCopyWith<$Res>
+    implements $DeveloperCopyWith<$Res> {
+  factory _$DeveloperCopyWith(
+          _Developer value, $Res Function(_Developer) _then) =
+      __$DeveloperCopyWithImpl;
   @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  String get name;
-  @override
-  String? get description;
-  @override
-  String get logo;
-  @override
-  String get backgroundImage;
-  @override
-  String get headerTitle;
-  @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$DeveloperImplCopyWith<_$DeveloperImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      String name,
+      String? description,
+      String logo,
+      String backgroundImage,
+      String headerTitle,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
-Footer _$FooterFromJson(Map<String, dynamic> json) {
-  return _Footer.fromJson(json);
+/// @nodoc
+class __$DeveloperCopyWithImpl<$Res> implements _$DeveloperCopyWith<$Res> {
+  __$DeveloperCopyWithImpl(this._self, this._then);
+
+  final _Developer _self;
+  final $Res Function(_Developer) _then;
+
+  /// Create a copy of Developer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? logo = null,
+    Object? backgroundImage = null,
+    Object? headerTitle = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+  }) {
+    return _then(_Developer(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      logo: null == logo
+          ? _self.logo
+          : logo // ignore: cast_nullable_to_non_nullable
+              as String,
+      backgroundImage: null == backgroundImage
+          ? _self.backgroundImage
+          : backgroundImage // ignore: cast_nullable_to_non_nullable
+              as String,
+      headerTitle: null == headerTitle
+          ? _self.headerTitle
+          : headerTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$Footer {
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  String get logo => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String get description;
+  String get logo;
+  String get type;
+  DateTime get createdAt;
+  DateTime get updatedAt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $FooterCopyWith<Footer> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FooterCopyWith<$Res> {
-  factory $FooterCopyWith(Footer value, $Res Function(Footer) then) =
-      _$FooterCopyWithImpl<$Res, Footer>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      String name,
-      String description,
-      String logo,
-      String type,
-      DateTime createdAt,
-      DateTime updatedAt});
-}
-
-/// @nodoc
-class _$FooterCopyWithImpl<$Res, $Val extends Footer>
-    implements $FooterCopyWith<$Res> {
-  _$FooterCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Footer
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $FooterCopyWith<Footer> get copyWith =>
+      _$FooterCopyWithImpl<Footer>(this as Footer, _$identity);
+
+  /// Serializes this Footer to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? logo = null,
-    Object? type = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      logo: null == logo
-          ? _value.logo
-          : logo // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Footer &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.logo, logo) || other.logo == logo) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, name, description, logo, type, createdAt, updatedAt);
+
+  @override
+  String toString() {
+    return 'Footer(id: $id, name: $name, description: $description, logo: $logo, type: $type, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
 /// @nodoc
-abstract class _$$FooterImplCopyWith<$Res> implements $FooterCopyWith<$Res> {
-  factory _$$FooterImplCopyWith(
-          _$FooterImpl value, $Res Function(_$FooterImpl) then) =
-      __$$FooterImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $FooterCopyWith<$Res> {
+  factory $FooterCopyWith(Footer value, $Res Function(Footer) _then) =
+      _$FooterCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
@@ -1710,13 +1715,14 @@ abstract class _$$FooterImplCopyWith<$Res> implements $FooterCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$FooterImplCopyWithImpl<$Res>
-    extends _$FooterCopyWithImpl<$Res, _$FooterImpl>
-    implements _$$FooterImplCopyWith<$Res> {
-  __$$FooterImplCopyWithImpl(
-      _$FooterImpl _value, $Res Function(_$FooterImpl) _then)
-      : super(_value, _then);
+class _$FooterCopyWithImpl<$Res> implements $FooterCopyWith<$Res> {
+  _$FooterCopyWithImpl(this._self, this._then);
 
+  final Footer _self;
+  final $Res Function(Footer) _then;
+
+  /// Create a copy of Footer
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1728,33 +1734,33 @@ class __$$FooterImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$FooterImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       logo: null == logo
-          ? _value.logo
+          ? _self.logo
           : logo // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
@@ -1763,8 +1769,8 @@ class __$$FooterImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FooterImpl implements _Footer {
-  _$FooterImpl(
+class _Footer implements Footer {
+  _Footer(
       {@JsonKey(name: '_id') required this.id,
       required this.name,
       required this.description,
@@ -1772,9 +1778,7 @@ class _$FooterImpl implements _Footer {
       required this.type,
       required this.createdAt,
       required this.updatedAt});
-
-  factory _$FooterImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FooterImplFromJson(json);
+  factory _Footer.fromJson(Map<String, dynamic> json) => _$FooterFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -1792,16 +1796,26 @@ class _$FooterImpl implements _Footer {
   @override
   final DateTime updatedAt;
 
+  /// Create a copy of Footer
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Footer(id: $id, name: $name, description: $description, logo: $logo, type: $type, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$FooterCopyWith<_Footer> get copyWith =>
+      __$FooterCopyWithImpl<_Footer>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FooterToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FooterImpl &&
+            other is _Footer &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -1814,137 +1828,143 @@ class _$FooterImpl implements _Footer {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, name, description, logo, type, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FooterImplCopyWith<_$FooterImpl> get copyWith =>
-      __$$FooterImplCopyWithImpl<_$FooterImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FooterImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Footer(id: $id, name: $name, description: $description, logo: $logo, type: $type, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _Footer implements Footer {
-  factory _Footer(
-      {@JsonKey(name: '_id') required final String id,
-      required final String name,
-      required final String description,
-      required final String logo,
-      required final String type,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$FooterImpl;
-
-  factory _Footer.fromJson(Map<String, dynamic> json) = _$FooterImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$FooterCopyWith<$Res> implements $FooterCopyWith<$Res> {
+  factory _$FooterCopyWith(_Footer value, $Res Function(_Footer) _then) =
+      __$FooterCopyWithImpl;
   @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  String get name;
-  @override
-  String get description;
-  @override
-  String get logo;
-  @override
-  String get type;
-  @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$FooterImplCopyWith<_$FooterImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      String name,
+      String description,
+      String logo,
+      String type,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
-DevelopmentPhoto _$DevelopmentPhotoFromJson(Map<String, dynamic> json) {
-  return _DevelopmentPhoto.fromJson(json);
+/// @nodoc
+class __$FooterCopyWithImpl<$Res> implements _$FooterCopyWith<$Res> {
+  __$FooterCopyWithImpl(this._self, this._then);
+
+  final _Footer _self;
+  final $Res Function(_Footer) _then;
+
+  /// Create a copy of Footer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
+    Object? logo = null,
+    Object? type = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+  }) {
+    return _then(_Footer(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      logo: null == logo
+          ? _self.logo
+          : logo // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$DevelopmentPhoto {
-  String get file => throw _privateConstructorUsedError;
-  String get label => throw _privateConstructorUsedError;
+  String get file;
+  String get label;
   @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
+  String get id;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $DevelopmentPhotoCopyWith<DevelopmentPhoto> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DevelopmentPhotoCopyWith<$Res> {
-  factory $DevelopmentPhotoCopyWith(
-          DevelopmentPhoto value, $Res Function(DevelopmentPhoto) then) =
-      _$DevelopmentPhotoCopyWithImpl<$Res, DevelopmentPhoto>;
-  @useResult
-  $Res call({String file, String label, @JsonKey(name: '_id') String id});
-}
-
-/// @nodoc
-class _$DevelopmentPhotoCopyWithImpl<$Res, $Val extends DevelopmentPhoto>
-    implements $DevelopmentPhotoCopyWith<$Res> {
-  _$DevelopmentPhotoCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of DevelopmentPhoto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $DevelopmentPhotoCopyWith<DevelopmentPhoto> get copyWith =>
+      _$DevelopmentPhotoCopyWithImpl<DevelopmentPhoto>(
+          this as DevelopmentPhoto, _$identity);
+
+  /// Serializes this DevelopmentPhoto to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? file = null,
-    Object? label = null,
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      file: null == file
-          ? _value.file
-          : file // ignore: cast_nullable_to_non_nullable
-              as String,
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DevelopmentPhoto &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, file, label, id);
+
+  @override
+  String toString() {
+    return 'DevelopmentPhoto(file: $file, label: $label, id: $id)';
   }
 }
 
 /// @nodoc
-abstract class _$$DevelopmentPhotoImplCopyWith<$Res>
-    implements $DevelopmentPhotoCopyWith<$Res> {
-  factory _$$DevelopmentPhotoImplCopyWith(_$DevelopmentPhotoImpl value,
-          $Res Function(_$DevelopmentPhotoImpl) then) =
-      __$$DevelopmentPhotoImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DevelopmentPhotoCopyWith<$Res> {
+  factory $DevelopmentPhotoCopyWith(
+          DevelopmentPhoto value, $Res Function(DevelopmentPhoto) _then) =
+      _$DevelopmentPhotoCopyWithImpl;
   @useResult
   $Res call({String file, String label, @JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
-class __$$DevelopmentPhotoImplCopyWithImpl<$Res>
-    extends _$DevelopmentPhotoCopyWithImpl<$Res, _$DevelopmentPhotoImpl>
-    implements _$$DevelopmentPhotoImplCopyWith<$Res> {
-  __$$DevelopmentPhotoImplCopyWithImpl(_$DevelopmentPhotoImpl _value,
-      $Res Function(_$DevelopmentPhotoImpl) _then)
-      : super(_value, _then);
+class _$DevelopmentPhotoCopyWithImpl<$Res>
+    implements $DevelopmentPhotoCopyWith<$Res> {
+  _$DevelopmentPhotoCopyWithImpl(this._self, this._then);
 
+  final DevelopmentPhoto _self;
+  final $Res Function(DevelopmentPhoto) _then;
+
+  /// Create a copy of DevelopmentPhoto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1952,17 +1972,17 @@ class __$$DevelopmentPhotoImplCopyWithImpl<$Res>
     Object? label = null,
     Object? id = null,
   }) {
-    return _then(_$DevelopmentPhotoImpl(
+    return _then(_self.copyWith(
       file: null == file
-          ? _value.file
+          ? _self.file
           : file // ignore: cast_nullable_to_non_nullable
               as String,
       label: null == label
-          ? _value.label
+          ? _self.label
           : label // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -1971,14 +1991,13 @@ class __$$DevelopmentPhotoImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DevelopmentPhotoImpl implements _DevelopmentPhoto {
-  _$DevelopmentPhotoImpl(
+class _DevelopmentPhoto implements DevelopmentPhoto {
+  _DevelopmentPhoto(
       {required this.file,
       required this.label,
       @JsonKey(name: '_id') required this.id});
-
-  factory _$DevelopmentPhotoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DevelopmentPhotoImplFromJson(json);
+  factory _DevelopmentPhoto.fromJson(Map<String, dynamic> json) =>
+      _$DevelopmentPhotoFromJson(json);
 
   @override
   final String file;
@@ -1988,58 +2007,84 @@ class _$DevelopmentPhotoImpl implements _DevelopmentPhoto {
   @JsonKey(name: '_id')
   final String id;
 
+  /// Create a copy of DevelopmentPhoto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DevelopmentPhoto(file: $file, label: $label, id: $id)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DevelopmentPhotoCopyWith<_DevelopmentPhoto> get copyWith =>
+      __$DevelopmentPhotoCopyWithImpl<_DevelopmentPhoto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DevelopmentPhotoToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DevelopmentPhotoImpl &&
+            other is _DevelopmentPhoto &&
             (identical(other.file, file) || other.file == file) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, file, label, id);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DevelopmentPhotoImplCopyWith<_$DevelopmentPhotoImpl> get copyWith =>
-      __$$DevelopmentPhotoImplCopyWithImpl<_$DevelopmentPhotoImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DevelopmentPhotoImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DevelopmentPhoto(file: $file, label: $label, id: $id)';
   }
 }
 
-abstract class _DevelopmentPhoto implements DevelopmentPhoto {
-  factory _DevelopmentPhoto(
-      {required final String file,
-      required final String label,
-      @JsonKey(name: '_id') required final String id}) = _$DevelopmentPhotoImpl;
-
-  factory _DevelopmentPhoto.fromJson(Map<String, dynamic> json) =
-      _$DevelopmentPhotoImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$DevelopmentPhotoCopyWith<$Res>
+    implements $DevelopmentPhotoCopyWith<$Res> {
+  factory _$DevelopmentPhotoCopyWith(
+          _DevelopmentPhoto value, $Res Function(_DevelopmentPhoto) _then) =
+      __$DevelopmentPhotoCopyWithImpl;
   @override
-  String get file;
-  @override
-  String get label;
-  @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$DevelopmentPhotoImplCopyWith<_$DevelopmentPhotoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({String file, String label, @JsonKey(name: '_id') String id});
 }
+
+/// @nodoc
+class __$DevelopmentPhotoCopyWithImpl<$Res>
+    implements _$DevelopmentPhotoCopyWith<$Res> {
+  __$DevelopmentPhotoCopyWithImpl(this._self, this._then);
+
+  final _DevelopmentPhoto _self;
+  final $Res Function(_DevelopmentPhoto) _then;
+
+  /// Create a copy of DevelopmentPhoto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? file = null,
+    Object? label = null,
+    Object? id = null,
+  }) {
+    return _then(_DevelopmentPhoto(
+      file: null == file
+          ? _self.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String,
+      label: null == label
+          ? _self.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

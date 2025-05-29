@@ -1,7 +1,7 @@
 part of 'check_in_cubit.dart';
 
 @freezed
-class CheckInState with _$CheckInState {
+abstract class CheckInState with _$CheckInState {
   const factory CheckInState({
     @Default(false) bool isLoading,
     @Default(false) bool isInOffice,

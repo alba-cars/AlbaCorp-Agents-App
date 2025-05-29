@@ -5,7 +5,7 @@ part 'community_team_model.freezed.dart';
 part 'community_team_model.g.dart';
 
 @freezed
-class CommunityTeamModel with _$CommunityTeamModel {
+abstract class CommunityTeamModel with _$CommunityTeamModel {
   const factory CommunityTeamModel({
     required String id,
     required String teamName,
@@ -19,7 +19,7 @@ class CommunityTeamModel with _$CommunityTeamModel {
 }
 
 @freezed
-class CommunityName with _$CommunityName {
+abstract class CommunityName with _$CommunityName {
   const factory CommunityName({
     @JsonKey(name: '_id') required String id,
     required String community,

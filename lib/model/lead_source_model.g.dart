@@ -6,13 +6,12 @@ part of 'lead_source_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LeadSourceImpl _$$LeadSourceImplFromJson(Map<String, dynamic> json) =>
-    _$LeadSourceImpl(
+_LeadSource _$LeadSourceFromJson(Map<String, dynamic> json) => _LeadSource(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$LeadSourceImplToJson(_$LeadSourceImpl instance) =>
+Map<String, dynamic> _$LeadSourceToJson(_LeadSource instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

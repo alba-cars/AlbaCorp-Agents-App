@@ -1,7 +1,7 @@
 part of 'add_pocket_listing_cubit.dart';
 
 @freezed
-class AddPocketListingState with _$AddPocketListingState {
+abstract class AddPocketListingState with _$AddPocketListingState {
   const factory AddPocketListingState(
       {@Default(AppStatus.init) AppStatus addPocketListingStatus,
       String? addPocketListingError,

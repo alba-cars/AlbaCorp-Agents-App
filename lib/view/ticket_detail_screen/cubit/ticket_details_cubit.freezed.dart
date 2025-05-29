@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,28 +10,53 @@ part of 'ticket_details_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TicketDetailsState {
-  Ticket? get ticket => throw _privateConstructorUsedError;
-  String get ticketId => throw _privateConstructorUsedError;
-  AppStatus get getTicketStatus => throw _privateConstructorUsedError;
-  String? get getTicketError => throw _privateConstructorUsedError;
+  Ticket? get ticket;
+  String get ticketId;
+  AppStatus get getTicketStatus;
+  String? get getTicketError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TicketDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $TicketDetailsStateCopyWith<TicketDetailsState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$TicketDetailsStateCopyWithImpl<TicketDetailsState>(
+          this as TicketDetailsState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TicketDetailsState &&
+            (identical(other.ticket, ticket) || other.ticket == ticket) &&
+            (identical(other.ticketId, ticketId) ||
+                other.ticketId == ticketId) &&
+            (identical(other.getTicketStatus, getTicketStatus) ||
+                other.getTicketStatus == getTicketStatus) &&
+            (identical(other.getTicketError, getTicketError) ||
+                other.getTicketError == getTicketError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, ticket, ticketId, getTicketStatus, getTicketError);
+
+  @override
+  String toString() {
+    return 'TicketDetailsState(ticket: $ticket, ticketId: $ticketId, getTicketStatus: $getTicketStatus, getTicketError: $getTicketError)';
+  }
 }
 
 /// @nodoc
-abstract class $TicketDetailsStateCopyWith<$Res> {
+abstract mixin class $TicketDetailsStateCopyWith<$Res> {
   factory $TicketDetailsStateCopyWith(
-          TicketDetailsState value, $Res Function(TicketDetailsState) then) =
-      _$TicketDetailsStateCopyWithImpl<$Res, TicketDetailsState>;
+          TicketDetailsState value, $Res Function(TicketDetailsState) _then) =
+      _$TicketDetailsStateCopyWithImpl;
   @useResult
   $Res call(
       {Ticket? ticket,
@@ -42,15 +68,15 @@ abstract class $TicketDetailsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TicketDetailsStateCopyWithImpl<$Res, $Val extends TicketDetailsState>
+class _$TicketDetailsStateCopyWithImpl<$Res>
     implements $TicketDetailsStateCopyWith<$Res> {
-  _$TicketDetailsStateCopyWithImpl(this._value, this._then);
+  _$TicketDetailsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final TicketDetailsState _self;
+  final $Res Function(TicketDetailsState) _then;
 
+  /// Create a copy of TicketDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -59,98 +85,45 @@ class _$TicketDetailsStateCopyWithImpl<$Res, $Val extends TicketDetailsState>
     Object? getTicketStatus = null,
     Object? getTicketError = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       ticket: freezed == ticket
-          ? _value.ticket
+          ? _self.ticket
           : ticket // ignore: cast_nullable_to_non_nullable
               as Ticket?,
       ticketId: null == ticketId
-          ? _value.ticketId
+          ? _self.ticketId
           : ticketId // ignore: cast_nullable_to_non_nullable
               as String,
       getTicketStatus: null == getTicketStatus
-          ? _value.getTicketStatus
+          ? _self.getTicketStatus
           : getTicketStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       getTicketError: freezed == getTicketError
-          ? _value.getTicketError
+          ? _self.getTicketError
           : getTicketError // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of TicketDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TicketCopyWith<$Res>? get ticket {
-    if (_value.ticket == null) {
+    if (_self.ticket == null) {
       return null;
     }
 
-    return $TicketCopyWith<$Res>(_value.ticket!, (value) {
-      return _then(_value.copyWith(ticket: value) as $Val);
+    return $TicketCopyWith<$Res>(_self.ticket!, (value) {
+      return _then(_self.copyWith(ticket: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$TicketDetailsStateImplCopyWith<$Res>
-    implements $TicketDetailsStateCopyWith<$Res> {
-  factory _$$TicketDetailsStateImplCopyWith(_$TicketDetailsStateImpl value,
-          $Res Function(_$TicketDetailsStateImpl) then) =
-      __$$TicketDetailsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {Ticket? ticket,
-      String ticketId,
-      AppStatus getTicketStatus,
-      String? getTicketError});
 
-  @override
-  $TicketCopyWith<$Res>? get ticket;
-}
-
-/// @nodoc
-class __$$TicketDetailsStateImplCopyWithImpl<$Res>
-    extends _$TicketDetailsStateCopyWithImpl<$Res, _$TicketDetailsStateImpl>
-    implements _$$TicketDetailsStateImplCopyWith<$Res> {
-  __$$TicketDetailsStateImplCopyWithImpl(_$TicketDetailsStateImpl _value,
-      $Res Function(_$TicketDetailsStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? ticket = freezed,
-    Object? ticketId = null,
-    Object? getTicketStatus = null,
-    Object? getTicketError = freezed,
-  }) {
-    return _then(_$TicketDetailsStateImpl(
-      ticket: freezed == ticket
-          ? _value.ticket
-          : ticket // ignore: cast_nullable_to_non_nullable
-              as Ticket?,
-      ticketId: null == ticketId
-          ? _value.ticketId
-          : ticketId // ignore: cast_nullable_to_non_nullable
-              as String,
-      getTicketStatus: null == getTicketStatus
-          ? _value.getTicketStatus
-          : getTicketStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      getTicketError: freezed == getTicketError
-          ? _value.getTicketError
-          : getTicketError // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TicketDetailsStateImpl implements _TicketDetailsState {
-  const _$TicketDetailsStateImpl(
+class _TicketDetailsState implements TicketDetailsState {
+  const _TicketDetailsState(
       {this.ticket,
       required this.ticketId,
       this.getTicketStatus = AppStatus.init,
@@ -166,16 +139,19 @@ class _$TicketDetailsStateImpl implements _TicketDetailsState {
   @override
   final String? getTicketError;
 
+  /// Create a copy of TicketDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TicketDetailsState(ticket: $ticket, ticketId: $ticketId, getTicketStatus: $getTicketStatus, getTicketError: $getTicketError)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TicketDetailsStateCopyWith<_TicketDetailsState> get copyWith =>
+      __$TicketDetailsStateCopyWithImpl<_TicketDetailsState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TicketDetailsStateImpl &&
+            other is _TicketDetailsState &&
             (identical(other.ticket, ticket) || other.ticket == ticket) &&
             (identical(other.ticketId, ticketId) ||
                 other.ticketId == ticketId) &&
@@ -189,31 +165,81 @@ class _$TicketDetailsStateImpl implements _TicketDetailsState {
   int get hashCode => Object.hash(
       runtimeType, ticket, ticketId, getTicketStatus, getTicketError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'TicketDetailsState(ticket: $ticket, ticketId: $ticketId, getTicketStatus: $getTicketStatus, getTicketError: $getTicketError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TicketDetailsStateCopyWith<$Res>
+    implements $TicketDetailsStateCopyWith<$Res> {
+  factory _$TicketDetailsStateCopyWith(
+          _TicketDetailsState value, $Res Function(_TicketDetailsState) _then) =
+      __$TicketDetailsStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Ticket? ticket,
+      String ticketId,
+      AppStatus getTicketStatus,
+      String? getTicketError});
+
+  @override
+  $TicketCopyWith<$Res>? get ticket;
+}
+
+/// @nodoc
+class __$TicketDetailsStateCopyWithImpl<$Res>
+    implements _$TicketDetailsStateCopyWith<$Res> {
+  __$TicketDetailsStateCopyWithImpl(this._self, this._then);
+
+  final _TicketDetailsState _self;
+  final $Res Function(_TicketDetailsState) _then;
+
+  /// Create a copy of TicketDetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$TicketDetailsStateImplCopyWith<_$TicketDetailsStateImpl> get copyWith =>
-      __$$TicketDetailsStateImplCopyWithImpl<_$TicketDetailsStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? ticket = freezed,
+    Object? ticketId = null,
+    Object? getTicketStatus = null,
+    Object? getTicketError = freezed,
+  }) {
+    return _then(_TicketDetailsState(
+      ticket: freezed == ticket
+          ? _self.ticket
+          : ticket // ignore: cast_nullable_to_non_nullable
+              as Ticket?,
+      ticketId: null == ticketId
+          ? _self.ticketId
+          : ticketId // ignore: cast_nullable_to_non_nullable
+              as String,
+      getTicketStatus: null == getTicketStatus
+          ? _self.getTicketStatus
+          : getTicketStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      getTicketError: freezed == getTicketError
+          ? _self.getTicketError
+          : getTicketError // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of TicketDetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TicketCopyWith<$Res>? get ticket {
+    if (_self.ticket == null) {
+      return null;
+    }
+
+    return $TicketCopyWith<$Res>(_self.ticket!, (value) {
+      return _then(_self.copyWith(ticket: value));
+    });
+  }
 }
 
-abstract class _TicketDetailsState implements TicketDetailsState {
-  const factory _TicketDetailsState(
-      {final Ticket? ticket,
-      required final String ticketId,
-      final AppStatus getTicketStatus,
-      final String? getTicketError}) = _$TicketDetailsStateImpl;
-
-  @override
-  Ticket? get ticket;
-  @override
-  String get ticketId;
-  @override
-  AppStatus get getTicketStatus;
-  @override
-  String? get getTicketError;
-  @override
-  @JsonKey(ignore: true)
-  _$$TicketDetailsStateImplCopyWith<_$TicketDetailsStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

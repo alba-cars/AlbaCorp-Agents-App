@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,121 +10,80 @@ part of 'AppConfig.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-AppConfig _$AppConfigFromJson(Map<String, dynamic> json) {
-  return _AppConfig.fromJson(json);
-}
 
 /// @nodoc
 mixin _$AppConfig {
-  bool get underMaintenance => throw _privateConstructorUsedError;
-  String get minVersion => throw _privateConstructorUsedError;
-  String get latestVersion => throw _privateConstructorUsedError;
-  String get currentVersion => throw _privateConstructorUsedError;
-  String? get playStoreUrl => throw _privateConstructorUsedError;
-  String? get companyPortfolioUrl => throw _privateConstructorUsedError;
-  String? get internetAccessPortal => throw _privateConstructorUsedError;
-  String? get appStoreUrl => throw _privateConstructorUsedError;
-  String? get huaweiUrl => throw _privateConstructorUsedError;
+  bool get underMaintenance;
+  String get minVersion;
+  String get latestVersion;
+  String get currentVersion;
+  String? get playStoreUrl;
+  String? get companyPortfolioUrl;
+  String? get internetAccessPortal;
+  String? get appStoreUrl;
+  String? get huaweiUrl;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $AppConfigCopyWith<AppConfig> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppConfigCopyWith<$Res> {
-  factory $AppConfigCopyWith(AppConfig value, $Res Function(AppConfig) then) =
-      _$AppConfigCopyWithImpl<$Res, AppConfig>;
-  @useResult
-  $Res call(
-      {bool underMaintenance,
-      String minVersion,
-      String latestVersion,
-      String currentVersion,
-      String? playStoreUrl,
-      String? companyPortfolioUrl,
-      String? internetAccessPortal,
-      String? appStoreUrl,
-      String? huaweiUrl});
-}
-
-/// @nodoc
-class _$AppConfigCopyWithImpl<$Res, $Val extends AppConfig>
-    implements $AppConfigCopyWith<$Res> {
-  _$AppConfigCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of AppConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $AppConfigCopyWith<AppConfig> get copyWith =>
+      _$AppConfigCopyWithImpl<AppConfig>(this as AppConfig, _$identity);
+
+  /// Serializes this AppConfig to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? underMaintenance = null,
-    Object? minVersion = null,
-    Object? latestVersion = null,
-    Object? currentVersion = null,
-    Object? playStoreUrl = freezed,
-    Object? companyPortfolioUrl = freezed,
-    Object? internetAccessPortal = freezed,
-    Object? appStoreUrl = freezed,
-    Object? huaweiUrl = freezed,
-  }) {
-    return _then(_value.copyWith(
-      underMaintenance: null == underMaintenance
-          ? _value.underMaintenance
-          : underMaintenance // ignore: cast_nullable_to_non_nullable
-              as bool,
-      minVersion: null == minVersion
-          ? _value.minVersion
-          : minVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      latestVersion: null == latestVersion
-          ? _value.latestVersion
-          : latestVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      currentVersion: null == currentVersion
-          ? _value.currentVersion
-          : currentVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      playStoreUrl: freezed == playStoreUrl
-          ? _value.playStoreUrl
-          : playStoreUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyPortfolioUrl: freezed == companyPortfolioUrl
-          ? _value.companyPortfolioUrl
-          : companyPortfolioUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      internetAccessPortal: freezed == internetAccessPortal
-          ? _value.internetAccessPortal
-          : internetAccessPortal // ignore: cast_nullable_to_non_nullable
-              as String?,
-      appStoreUrl: freezed == appStoreUrl
-          ? _value.appStoreUrl
-          : appStoreUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      huaweiUrl: freezed == huaweiUrl
-          ? _value.huaweiUrl
-          : huaweiUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AppConfig &&
+            (identical(other.underMaintenance, underMaintenance) ||
+                other.underMaintenance == underMaintenance) &&
+            (identical(other.minVersion, minVersion) ||
+                other.minVersion == minVersion) &&
+            (identical(other.latestVersion, latestVersion) ||
+                other.latestVersion == latestVersion) &&
+            (identical(other.currentVersion, currentVersion) ||
+                other.currentVersion == currentVersion) &&
+            (identical(other.playStoreUrl, playStoreUrl) ||
+                other.playStoreUrl == playStoreUrl) &&
+            (identical(other.companyPortfolioUrl, companyPortfolioUrl) ||
+                other.companyPortfolioUrl == companyPortfolioUrl) &&
+            (identical(other.internetAccessPortal, internetAccessPortal) ||
+                other.internetAccessPortal == internetAccessPortal) &&
+            (identical(other.appStoreUrl, appStoreUrl) ||
+                other.appStoreUrl == appStoreUrl) &&
+            (identical(other.huaweiUrl, huaweiUrl) ||
+                other.huaweiUrl == huaweiUrl));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      underMaintenance,
+      minVersion,
+      latestVersion,
+      currentVersion,
+      playStoreUrl,
+      companyPortfolioUrl,
+      internetAccessPortal,
+      appStoreUrl,
+      huaweiUrl);
+
+  @override
+  String toString() {
+    return 'AppConfig(underMaintenance: $underMaintenance, minVersion: $minVersion, latestVersion: $latestVersion, currentVersion: $currentVersion, playStoreUrl: $playStoreUrl, companyPortfolioUrl: $companyPortfolioUrl, internetAccessPortal: $internetAccessPortal, appStoreUrl: $appStoreUrl, huaweiUrl: $huaweiUrl)';
   }
 }
 
 /// @nodoc
-abstract class _$$AppConfigImplCopyWith<$Res>
-    implements $AppConfigCopyWith<$Res> {
-  factory _$$AppConfigImplCopyWith(
-          _$AppConfigImpl value, $Res Function(_$AppConfigImpl) then) =
-      __$$AppConfigImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AppConfigCopyWith<$Res> {
+  factory $AppConfigCopyWith(AppConfig value, $Res Function(AppConfig) _then) =
+      _$AppConfigCopyWithImpl;
   @useResult
   $Res call(
       {bool underMaintenance,
@@ -138,13 +98,14 @@ abstract class _$$AppConfigImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AppConfigImplCopyWithImpl<$Res>
-    extends _$AppConfigCopyWithImpl<$Res, _$AppConfigImpl>
-    implements _$$AppConfigImplCopyWith<$Res> {
-  __$$AppConfigImplCopyWithImpl(
-      _$AppConfigImpl _value, $Res Function(_$AppConfigImpl) _then)
-      : super(_value, _then);
+class _$AppConfigCopyWithImpl<$Res> implements $AppConfigCopyWith<$Res> {
+  _$AppConfigCopyWithImpl(this._self, this._then);
 
+  final AppConfig _self;
+  final $Res Function(AppConfig) _then;
+
+  /// Create a copy of AppConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,41 +119,41 @@ class __$$AppConfigImplCopyWithImpl<$Res>
     Object? appStoreUrl = freezed,
     Object? huaweiUrl = freezed,
   }) {
-    return _then(_$AppConfigImpl(
+    return _then(_self.copyWith(
       underMaintenance: null == underMaintenance
-          ? _value.underMaintenance
+          ? _self.underMaintenance
           : underMaintenance // ignore: cast_nullable_to_non_nullable
               as bool,
       minVersion: null == minVersion
-          ? _value.minVersion
+          ? _self.minVersion
           : minVersion // ignore: cast_nullable_to_non_nullable
               as String,
       latestVersion: null == latestVersion
-          ? _value.latestVersion
+          ? _self.latestVersion
           : latestVersion // ignore: cast_nullable_to_non_nullable
               as String,
       currentVersion: null == currentVersion
-          ? _value.currentVersion
+          ? _self.currentVersion
           : currentVersion // ignore: cast_nullable_to_non_nullable
               as String,
       playStoreUrl: freezed == playStoreUrl
-          ? _value.playStoreUrl
+          ? _self.playStoreUrl
           : playStoreUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       companyPortfolioUrl: freezed == companyPortfolioUrl
-          ? _value.companyPortfolioUrl
+          ? _self.companyPortfolioUrl
           : companyPortfolioUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       internetAccessPortal: freezed == internetAccessPortal
-          ? _value.internetAccessPortal
+          ? _self.internetAccessPortal
           : internetAccessPortal // ignore: cast_nullable_to_non_nullable
               as String?,
       appStoreUrl: freezed == appStoreUrl
-          ? _value.appStoreUrl
+          ? _self.appStoreUrl
           : appStoreUrl // ignore: cast_nullable_to_non_nullable
               as String?,
       huaweiUrl: freezed == huaweiUrl
-          ? _value.huaweiUrl
+          ? _self.huaweiUrl
           : huaweiUrl // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -201,8 +162,8 @@ class __$$AppConfigImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AppConfigImpl extends _AppConfig {
-  const _$AppConfigImpl(
+class _AppConfig extends AppConfig {
+  const _AppConfig(
       {required this.underMaintenance,
       required this.minVersion,
       required this.latestVersion,
@@ -213,9 +174,8 @@ class _$AppConfigImpl extends _AppConfig {
       this.appStoreUrl,
       this.huaweiUrl})
       : super._();
-
-  factory _$AppConfigImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AppConfigImplFromJson(json);
+  factory _AppConfig.fromJson(Map<String, dynamic> json) =>
+      _$AppConfigFromJson(json);
 
   @override
   final bool underMaintenance;
@@ -237,16 +197,26 @@ class _$AppConfigImpl extends _AppConfig {
   @override
   final String? huaweiUrl;
 
+  /// Create a copy of AppConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AppConfig(underMaintenance: $underMaintenance, minVersion: $minVersion, latestVersion: $latestVersion, currentVersion: $currentVersion, playStoreUrl: $playStoreUrl, companyPortfolioUrl: $companyPortfolioUrl, internetAccessPortal: $internetAccessPortal, appStoreUrl: $appStoreUrl, huaweiUrl: $huaweiUrl)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AppConfigCopyWith<_AppConfig> get copyWith =>
+      __$AppConfigCopyWithImpl<_AppConfig>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AppConfigToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AppConfigImpl &&
+            other is _AppConfig &&
             (identical(other.underMaintenance, underMaintenance) ||
                 other.underMaintenance == underMaintenance) &&
             (identical(other.minVersion, minVersion) ||
@@ -267,7 +237,7 @@ class _$AppConfigImpl extends _AppConfig {
                 other.huaweiUrl == huaweiUrl));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -281,56 +251,93 @@ class _$AppConfigImpl extends _AppConfig {
       appStoreUrl,
       huaweiUrl);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AppConfigImplCopyWith<_$AppConfigImpl> get copyWith =>
-      __$$AppConfigImplCopyWithImpl<_$AppConfigImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AppConfigImplToJson(
-      this,
-    );
+  String toString() {
+    return 'AppConfig(underMaintenance: $underMaintenance, minVersion: $minVersion, latestVersion: $latestVersion, currentVersion: $currentVersion, playStoreUrl: $playStoreUrl, companyPortfolioUrl: $companyPortfolioUrl, internetAccessPortal: $internetAccessPortal, appStoreUrl: $appStoreUrl, huaweiUrl: $huaweiUrl)';
   }
 }
 
-abstract class _AppConfig extends AppConfig {
-  const factory _AppConfig(
-      {required final bool underMaintenance,
-      required final String minVersion,
-      required final String latestVersion,
-      final String currentVersion,
-      final String? playStoreUrl,
-      final String? companyPortfolioUrl,
-      final String? internetAccessPortal,
-      final String? appStoreUrl,
-      final String? huaweiUrl}) = _$AppConfigImpl;
-  const _AppConfig._() : super._();
-
-  factory _AppConfig.fromJson(Map<String, dynamic> json) =
-      _$AppConfigImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$AppConfigCopyWith<$Res>
+    implements $AppConfigCopyWith<$Res> {
+  factory _$AppConfigCopyWith(
+          _AppConfig value, $Res Function(_AppConfig) _then) =
+      __$AppConfigCopyWithImpl;
   @override
-  bool get underMaintenance;
-  @override
-  String get minVersion;
-  @override
-  String get latestVersion;
-  @override
-  String get currentVersion;
-  @override
-  String? get playStoreUrl;
-  @override
-  String? get companyPortfolioUrl;
-  @override
-  String? get internetAccessPortal;
-  @override
-  String? get appStoreUrl;
-  @override
-  String? get huaweiUrl;
-  @override
-  @JsonKey(ignore: true)
-  _$$AppConfigImplCopyWith<_$AppConfigImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {bool underMaintenance,
+      String minVersion,
+      String latestVersion,
+      String currentVersion,
+      String? playStoreUrl,
+      String? companyPortfolioUrl,
+      String? internetAccessPortal,
+      String? appStoreUrl,
+      String? huaweiUrl});
 }
+
+/// @nodoc
+class __$AppConfigCopyWithImpl<$Res> implements _$AppConfigCopyWith<$Res> {
+  __$AppConfigCopyWithImpl(this._self, this._then);
+
+  final _AppConfig _self;
+  final $Res Function(_AppConfig) _then;
+
+  /// Create a copy of AppConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? underMaintenance = null,
+    Object? minVersion = null,
+    Object? latestVersion = null,
+    Object? currentVersion = null,
+    Object? playStoreUrl = freezed,
+    Object? companyPortfolioUrl = freezed,
+    Object? internetAccessPortal = freezed,
+    Object? appStoreUrl = freezed,
+    Object? huaweiUrl = freezed,
+  }) {
+    return _then(_AppConfig(
+      underMaintenance: null == underMaintenance
+          ? _self.underMaintenance
+          : underMaintenance // ignore: cast_nullable_to_non_nullable
+              as bool,
+      minVersion: null == minVersion
+          ? _self.minVersion
+          : minVersion // ignore: cast_nullable_to_non_nullable
+              as String,
+      latestVersion: null == latestVersion
+          ? _self.latestVersion
+          : latestVersion // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentVersion: null == currentVersion
+          ? _self.currentVersion
+          : currentVersion // ignore: cast_nullable_to_non_nullable
+              as String,
+      playStoreUrl: freezed == playStoreUrl
+          ? _self.playStoreUrl
+          : playStoreUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyPortfolioUrl: freezed == companyPortfolioUrl
+          ? _self.companyPortfolioUrl
+          : companyPortfolioUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      internetAccessPortal: freezed == internetAccessPortal
+          ? _self.internetAccessPortal
+          : internetAccessPortal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      appStoreUrl: freezed == appStoreUrl
+          ? _self.appStoreUrl
+          : appStoreUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      huaweiUrl: freezed == huaweiUrl
+          ? _self.huaweiUrl
+          : huaweiUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

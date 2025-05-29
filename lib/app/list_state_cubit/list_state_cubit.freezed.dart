@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,46 +10,128 @@ part of 'list_state_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ListStateState {
-  String? get tasksCategorizedView => throw _privateConstructorUsedError;
-  String? get taskSortedView => throw _privateConstructorUsedError;
-  String? get leadsView => throw _privateConstructorUsedError;
-  String? get listingsView => throw _privateConstructorUsedError;
-  String? get pocketListingsView => throw _privateConstructorUsedError;
-  String? get dealsView => throw _privateConstructorUsedError;
-  String? get listingAcquiredView => throw _privateConstructorUsedError;
-  List<PropertyType> get propertyTypeList => throw _privateConstructorUsedError;
-  AppStatus get getPropertyTypeListStatus => throw _privateConstructorUsedError;
-  List<CommunityTeamModel> get communityList =>
-      throw _privateConstructorUsedError;
-  AppStatus get getCommunityListStatus => throw _privateConstructorUsedError;
-  List<CommunityName> get placesList => throw _privateConstructorUsedError;
-  AppStatus get getPlacesListStatus => throw _privateConstructorUsedError;
-  List<Building> get buildingList => throw _privateConstructorUsedError;
-  AppStatus get getBuildingListStatus => throw _privateConstructorUsedError;
-  Paginator? get buildingsPaginator => throw _privateConstructorUsedError;
-  AppStatus get getLeadSourcestatus => throw _privateConstructorUsedError;
-  List<LeadSource>? get leadSources => throw _privateConstructorUsedError;
-  Paginator? get leadSourcePaginator => throw _privateConstructorUsedError;
-  String? get leadSourceError => throw _privateConstructorUsedError;
-  String? get leadSourceSearch => throw _privateConstructorUsedError;
+  String? get tasksCategorizedView;
+  String? get taskSortedView;
+  String? get leadsView;
+  String? get listingsView;
+  String? get pocketListingsView;
+  String? get dealsView;
+  String? get listingAcquiredView;
+  List<PropertyType> get propertyTypeList;
+  AppStatus get getPropertyTypeListStatus;
+  List<CommunityTeamModel> get communityList;
+  AppStatus get getCommunityListStatus;
+  List<CommunityName> get placesList;
+  AppStatus get getPlacesListStatus;
+  List<Building> get buildingList;
+  AppStatus get getBuildingListStatus;
+  Paginator? get buildingsPaginator;
+  AppStatus get getLeadSourcestatus;
+  List<LeadSource>? get leadSources;
+  Paginator? get leadSourcePaginator;
+  String? get leadSourceError;
+  String? get leadSourceSearch;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ListStateStateCopyWith<ListStateState> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ListStateStateCopyWithImpl<ListStateState>(
+          this as ListStateState, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ListStateState &&
+            (identical(other.tasksCategorizedView, tasksCategorizedView) ||
+                other.tasksCategorizedView == tasksCategorizedView) &&
+            (identical(other.taskSortedView, taskSortedView) ||
+                other.taskSortedView == taskSortedView) &&
+            (identical(other.leadsView, leadsView) ||
+                other.leadsView == leadsView) &&
+            (identical(other.listingsView, listingsView) ||
+                other.listingsView == listingsView) &&
+            (identical(other.pocketListingsView, pocketListingsView) ||
+                other.pocketListingsView == pocketListingsView) &&
+            (identical(other.dealsView, dealsView) ||
+                other.dealsView == dealsView) &&
+            (identical(other.listingAcquiredView, listingAcquiredView) ||
+                other.listingAcquiredView == listingAcquiredView) &&
+            const DeepCollectionEquality()
+                .equals(other.propertyTypeList, propertyTypeList) &&
+            (identical(other.getPropertyTypeListStatus,
+                    getPropertyTypeListStatus) ||
+                other.getPropertyTypeListStatus == getPropertyTypeListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.communityList, communityList) &&
+            (identical(other.getCommunityListStatus, getCommunityListStatus) ||
+                other.getCommunityListStatus == getCommunityListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.placesList, placesList) &&
+            (identical(other.getPlacesListStatus, getPlacesListStatus) ||
+                other.getPlacesListStatus == getPlacesListStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.buildingList, buildingList) &&
+            (identical(other.getBuildingListStatus, getBuildingListStatus) ||
+                other.getBuildingListStatus == getBuildingListStatus) &&
+            (identical(other.buildingsPaginator, buildingsPaginator) ||
+                other.buildingsPaginator == buildingsPaginator) &&
+            (identical(other.getLeadSourcestatus, getLeadSourcestatus) ||
+                other.getLeadSourcestatus == getLeadSourcestatus) &&
+            const DeepCollectionEquality()
+                .equals(other.leadSources, leadSources) &&
+            (identical(other.leadSourcePaginator, leadSourcePaginator) ||
+                other.leadSourcePaginator == leadSourcePaginator) &&
+            (identical(other.leadSourceError, leadSourceError) ||
+                other.leadSourceError == leadSourceError) &&
+            (identical(other.leadSourceSearch, leadSourceSearch) ||
+                other.leadSourceSearch == leadSourceSearch));
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        tasksCategorizedView,
+        taskSortedView,
+        leadsView,
+        listingsView,
+        pocketListingsView,
+        dealsView,
+        listingAcquiredView,
+        const DeepCollectionEquality().hash(propertyTypeList),
+        getPropertyTypeListStatus,
+        const DeepCollectionEquality().hash(communityList),
+        getCommunityListStatus,
+        const DeepCollectionEquality().hash(placesList),
+        getPlacesListStatus,
+        const DeepCollectionEquality().hash(buildingList),
+        getBuildingListStatus,
+        buildingsPaginator,
+        getLeadSourcestatus,
+        const DeepCollectionEquality().hash(leadSources),
+        leadSourcePaginator,
+        leadSourceError,
+        leadSourceSearch
+      ]);
+
+  @override
+  String toString() {
+    return 'ListStateState(tasksCategorizedView: $tasksCategorizedView, taskSortedView: $taskSortedView, leadsView: $leadsView, listingsView: $listingsView, pocketListingsView: $pocketListingsView, dealsView: $dealsView, listingAcquiredView: $listingAcquiredView, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, getLeadSourcestatus: $getLeadSourcestatus, leadSources: $leadSources, leadSourcePaginator: $leadSourcePaginator, leadSourceError: $leadSourceError, leadSourceSearch: $leadSourceSearch)';
+  }
 }
 
 /// @nodoc
-abstract class $ListStateStateCopyWith<$Res> {
+abstract mixin class $ListStateStateCopyWith<$Res> {
   factory $ListStateStateCopyWith(
-          ListStateState value, $Res Function(ListStateState) then) =
-      _$ListStateStateCopyWithImpl<$Res, ListStateState>;
+          ListStateState value, $Res Function(ListStateState) _then) =
+      _$ListStateStateCopyWithImpl;
   @useResult
   $Res call(
       {String? tasksCategorizedView,
@@ -78,15 +161,15 @@ abstract class $ListStateStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ListStateStateCopyWithImpl<$Res, $Val extends ListStateState>
+class _$ListStateStateCopyWithImpl<$Res>
     implements $ListStateStateCopyWith<$Res> {
-  _$ListStateStateCopyWithImpl(this._value, this._then);
+  _$ListStateStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ListStateState _self;
+  final $Res Function(ListStateState) _then;
 
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -112,282 +195,127 @@ class _$ListStateStateCopyWithImpl<$Res, $Val extends ListStateState>
     Object? leadSourceError = freezed,
     Object? leadSourceSearch = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       tasksCategorizedView: freezed == tasksCategorizedView
-          ? _value.tasksCategorizedView
+          ? _self.tasksCategorizedView
           : tasksCategorizedView // ignore: cast_nullable_to_non_nullable
               as String?,
       taskSortedView: freezed == taskSortedView
-          ? _value.taskSortedView
+          ? _self.taskSortedView
           : taskSortedView // ignore: cast_nullable_to_non_nullable
               as String?,
       leadsView: freezed == leadsView
-          ? _value.leadsView
+          ? _self.leadsView
           : leadsView // ignore: cast_nullable_to_non_nullable
               as String?,
       listingsView: freezed == listingsView
-          ? _value.listingsView
+          ? _self.listingsView
           : listingsView // ignore: cast_nullable_to_non_nullable
               as String?,
       pocketListingsView: freezed == pocketListingsView
-          ? _value.pocketListingsView
+          ? _self.pocketListingsView
           : pocketListingsView // ignore: cast_nullable_to_non_nullable
               as String?,
       dealsView: freezed == dealsView
-          ? _value.dealsView
+          ? _self.dealsView
           : dealsView // ignore: cast_nullable_to_non_nullable
               as String?,
       listingAcquiredView: freezed == listingAcquiredView
-          ? _value.listingAcquiredView
+          ? _self.listingAcquiredView
           : listingAcquiredView // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyTypeList: null == propertyTypeList
-          ? _value.propertyTypeList
+          ? _self.propertyTypeList
           : propertyTypeList // ignore: cast_nullable_to_non_nullable
               as List<PropertyType>,
       getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
           : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       communityList: null == communityList
-          ? _value.communityList
+          ? _self.communityList
           : communityList // ignore: cast_nullable_to_non_nullable
               as List<CommunityTeamModel>,
       getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
+          ? _self.getCommunityListStatus
           : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       placesList: null == placesList
-          ? _value.placesList
+          ? _self.placesList
           : placesList // ignore: cast_nullable_to_non_nullable
               as List<CommunityName>,
       getPlacesListStatus: null == getPlacesListStatus
-          ? _value.getPlacesListStatus
+          ? _self.getPlacesListStatus
           : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buildingList: null == buildingList
-          ? _value.buildingList
+          ? _self.buildingList
           : buildingList // ignore: cast_nullable_to_non_nullable
               as List<Building>,
       getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
+          ? _self.getBuildingListStatus
           : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       buildingsPaginator: freezed == buildingsPaginator
-          ? _value.buildingsPaginator
+          ? _self.buildingsPaginator
           : buildingsPaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       getLeadSourcestatus: null == getLeadSourcestatus
-          ? _value.getLeadSourcestatus
+          ? _self.getLeadSourcestatus
           : getLeadSourcestatus // ignore: cast_nullable_to_non_nullable
               as AppStatus,
       leadSources: freezed == leadSources
-          ? _value.leadSources
+          ? _self.leadSources
           : leadSources // ignore: cast_nullable_to_non_nullable
               as List<LeadSource>?,
       leadSourcePaginator: freezed == leadSourcePaginator
-          ? _value.leadSourcePaginator
+          ? _self.leadSourcePaginator
           : leadSourcePaginator // ignore: cast_nullable_to_non_nullable
               as Paginator?,
       leadSourceError: freezed == leadSourceError
-          ? _value.leadSourceError
+          ? _self.leadSourceError
           : leadSourceError // ignore: cast_nullable_to_non_nullable
               as String?,
       leadSourceSearch: freezed == leadSourceSearch
-          ? _value.leadSourceSearch
-          : leadSourceSearch // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get buildingsPaginator {
-    if (_value.buildingsPaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.buildingsPaginator!, (value) {
-      return _then(_value.copyWith(buildingsPaginator: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PaginatorCopyWith<$Res>? get leadSourcePaginator {
-    if (_value.leadSourcePaginator == null) {
-      return null;
-    }
-
-    return $PaginatorCopyWith<$Res>(_value.leadSourcePaginator!, (value) {
-      return _then(_value.copyWith(leadSourcePaginator: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$ListStateStateImplCopyWith<$Res>
-    implements $ListStateStateCopyWith<$Res> {
-  factory _$$ListStateStateImplCopyWith(_$ListStateStateImpl value,
-          $Res Function(_$ListStateStateImpl) then) =
-      __$$ListStateStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? tasksCategorizedView,
-      String? taskSortedView,
-      String? leadsView,
-      String? listingsView,
-      String? pocketListingsView,
-      String? dealsView,
-      String? listingAcquiredView,
-      List<PropertyType> propertyTypeList,
-      AppStatus getPropertyTypeListStatus,
-      List<CommunityTeamModel> communityList,
-      AppStatus getCommunityListStatus,
-      List<CommunityName> placesList,
-      AppStatus getPlacesListStatus,
-      List<Building> buildingList,
-      AppStatus getBuildingListStatus,
-      Paginator? buildingsPaginator,
-      AppStatus getLeadSourcestatus,
-      List<LeadSource>? leadSources,
-      Paginator? leadSourcePaginator,
-      String? leadSourceError,
-      String? leadSourceSearch});
-
-  @override
-  $PaginatorCopyWith<$Res>? get buildingsPaginator;
-  @override
-  $PaginatorCopyWith<$Res>? get leadSourcePaginator;
-}
-
-/// @nodoc
-class __$$ListStateStateImplCopyWithImpl<$Res>
-    extends _$ListStateStateCopyWithImpl<$Res, _$ListStateStateImpl>
-    implements _$$ListStateStateImplCopyWith<$Res> {
-  __$$ListStateStateImplCopyWithImpl(
-      _$ListStateStateImpl _value, $Res Function(_$ListStateStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tasksCategorizedView = freezed,
-    Object? taskSortedView = freezed,
-    Object? leadsView = freezed,
-    Object? listingsView = freezed,
-    Object? pocketListingsView = freezed,
-    Object? dealsView = freezed,
-    Object? listingAcquiredView = freezed,
-    Object? propertyTypeList = null,
-    Object? getPropertyTypeListStatus = null,
-    Object? communityList = null,
-    Object? getCommunityListStatus = null,
-    Object? placesList = null,
-    Object? getPlacesListStatus = null,
-    Object? buildingList = null,
-    Object? getBuildingListStatus = null,
-    Object? buildingsPaginator = freezed,
-    Object? getLeadSourcestatus = null,
-    Object? leadSources = freezed,
-    Object? leadSourcePaginator = freezed,
-    Object? leadSourceError = freezed,
-    Object? leadSourceSearch = freezed,
-  }) {
-    return _then(_$ListStateStateImpl(
-      tasksCategorizedView: freezed == tasksCategorizedView
-          ? _value.tasksCategorizedView
-          : tasksCategorizedView // ignore: cast_nullable_to_non_nullable
-              as String?,
-      taskSortedView: freezed == taskSortedView
-          ? _value.taskSortedView
-          : taskSortedView // ignore: cast_nullable_to_non_nullable
-              as String?,
-      leadsView: freezed == leadsView
-          ? _value.leadsView
-          : leadsView // ignore: cast_nullable_to_non_nullable
-              as String?,
-      listingsView: freezed == listingsView
-          ? _value.listingsView
-          : listingsView // ignore: cast_nullable_to_non_nullable
-              as String?,
-      pocketListingsView: freezed == pocketListingsView
-          ? _value.pocketListingsView
-          : pocketListingsView // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dealsView: freezed == dealsView
-          ? _value.dealsView
-          : dealsView // ignore: cast_nullable_to_non_nullable
-              as String?,
-      listingAcquiredView: freezed == listingAcquiredView
-          ? _value.listingAcquiredView
-          : listingAcquiredView // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyTypeList: null == propertyTypeList
-          ? _value._propertyTypeList
-          : propertyTypeList // ignore: cast_nullable_to_non_nullable
-              as List<PropertyType>,
-      getPropertyTypeListStatus: null == getPropertyTypeListStatus
-          ? _value.getPropertyTypeListStatus
-          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      communityList: null == communityList
-          ? _value._communityList
-          : communityList // ignore: cast_nullable_to_non_nullable
-              as List<CommunityTeamModel>,
-      getCommunityListStatus: null == getCommunityListStatus
-          ? _value.getCommunityListStatus
-          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      placesList: null == placesList
-          ? _value._placesList
-          : placesList // ignore: cast_nullable_to_non_nullable
-              as List<CommunityName>,
-      getPlacesListStatus: null == getPlacesListStatus
-          ? _value.getPlacesListStatus
-          : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buildingList: null == buildingList
-          ? _value._buildingList
-          : buildingList // ignore: cast_nullable_to_non_nullable
-              as List<Building>,
-      getBuildingListStatus: null == getBuildingListStatus
-          ? _value.getBuildingListStatus
-          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      buildingsPaginator: freezed == buildingsPaginator
-          ? _value.buildingsPaginator
-          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      getLeadSourcestatus: null == getLeadSourcestatus
-          ? _value.getLeadSourcestatus
-          : getLeadSourcestatus // ignore: cast_nullable_to_non_nullable
-              as AppStatus,
-      leadSources: freezed == leadSources
-          ? _value._leadSources
-          : leadSources // ignore: cast_nullable_to_non_nullable
-              as List<LeadSource>?,
-      leadSourcePaginator: freezed == leadSourcePaginator
-          ? _value.leadSourcePaginator
-          : leadSourcePaginator // ignore: cast_nullable_to_non_nullable
-              as Paginator?,
-      leadSourceError: freezed == leadSourceError
-          ? _value.leadSourceError
-          : leadSourceError // ignore: cast_nullable_to_non_nullable
-              as String?,
-      leadSourceSearch: freezed == leadSourceSearch
-          ? _value.leadSourceSearch
+          ? _self.leadSourceSearch
           : leadSourceSearch // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
+
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get buildingsPaginator {
+    if (_self.buildingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.buildingsPaginator!, (value) {
+      return _then(_self.copyWith(buildingsPaginator: value));
+    });
+  }
+
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get leadSourcePaginator {
+    if (_self.leadSourcePaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.leadSourcePaginator!, (value) {
+      return _then(_self.copyWith(leadSourcePaginator: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$ListStateStateImpl implements _ListStateState {
-  const _$ListStateStateImpl(
+class _ListStateState implements ListStateState {
+  const _ListStateState(
       {this.tasksCategorizedView,
       this.taskSortedView,
       this.leadsView,
@@ -501,16 +429,19 @@ class _$ListStateStateImpl implements _ListStateState {
   @override
   final String? leadSourceSearch;
 
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ListStateState(tasksCategorizedView: $tasksCategorizedView, taskSortedView: $taskSortedView, leadsView: $leadsView, listingsView: $listingsView, pocketListingsView: $pocketListingsView, dealsView: $dealsView, listingAcquiredView: $listingAcquiredView, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, getLeadSourcestatus: $getLeadSourcestatus, leadSources: $leadSources, leadSourcePaginator: $leadSourcePaginator, leadSourceError: $leadSourceError, leadSourceSearch: $leadSourceSearch)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ListStateStateCopyWith<_ListStateState> get copyWith =>
+      __$ListStateStateCopyWithImpl<_ListStateState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ListStateStateImpl &&
+            other is _ListStateState &&
             (identical(other.tasksCategorizedView, tasksCategorizedView) ||
                 other.tasksCategorizedView == tasksCategorizedView) &&
             (identical(other.taskSortedView, taskSortedView) ||
@@ -582,82 +513,199 @@ class _$ListStateStateImpl implements _ListStateState {
         leadSourceSearch
       ]);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'ListStateState(tasksCategorizedView: $tasksCategorizedView, taskSortedView: $taskSortedView, leadsView: $leadsView, listingsView: $listingsView, pocketListingsView: $pocketListingsView, dealsView: $dealsView, listingAcquiredView: $listingAcquiredView, propertyTypeList: $propertyTypeList, getPropertyTypeListStatus: $getPropertyTypeListStatus, communityList: $communityList, getCommunityListStatus: $getCommunityListStatus, placesList: $placesList, getPlacesListStatus: $getPlacesListStatus, buildingList: $buildingList, getBuildingListStatus: $getBuildingListStatus, buildingsPaginator: $buildingsPaginator, getLeadSourcestatus: $getLeadSourcestatus, leadSources: $leadSources, leadSourcePaginator: $leadSourcePaginator, leadSourceError: $leadSourceError, leadSourceSearch: $leadSourceSearch)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ListStateStateCopyWith<$Res>
+    implements $ListStateStateCopyWith<$Res> {
+  factory _$ListStateStateCopyWith(
+          _ListStateState value, $Res Function(_ListStateState) _then) =
+      __$ListStateStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? tasksCategorizedView,
+      String? taskSortedView,
+      String? leadsView,
+      String? listingsView,
+      String? pocketListingsView,
+      String? dealsView,
+      String? listingAcquiredView,
+      List<PropertyType> propertyTypeList,
+      AppStatus getPropertyTypeListStatus,
+      List<CommunityTeamModel> communityList,
+      AppStatus getCommunityListStatus,
+      List<CommunityName> placesList,
+      AppStatus getPlacesListStatus,
+      List<Building> buildingList,
+      AppStatus getBuildingListStatus,
+      Paginator? buildingsPaginator,
+      AppStatus getLeadSourcestatus,
+      List<LeadSource>? leadSources,
+      Paginator? leadSourcePaginator,
+      String? leadSourceError,
+      String? leadSourceSearch});
+
+  @override
+  $PaginatorCopyWith<$Res>? get buildingsPaginator;
+  @override
+  $PaginatorCopyWith<$Res>? get leadSourcePaginator;
+}
+
+/// @nodoc
+class __$ListStateStateCopyWithImpl<$Res>
+    implements _$ListStateStateCopyWith<$Res> {
+  __$ListStateStateCopyWithImpl(this._self, this._then);
+
+  final _ListStateState _self;
+  final $Res Function(_ListStateState) _then;
+
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$ListStateStateImplCopyWith<_$ListStateStateImpl> get copyWith =>
-      __$$ListStateStateImplCopyWithImpl<_$ListStateStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? tasksCategorizedView = freezed,
+    Object? taskSortedView = freezed,
+    Object? leadsView = freezed,
+    Object? listingsView = freezed,
+    Object? pocketListingsView = freezed,
+    Object? dealsView = freezed,
+    Object? listingAcquiredView = freezed,
+    Object? propertyTypeList = null,
+    Object? getPropertyTypeListStatus = null,
+    Object? communityList = null,
+    Object? getCommunityListStatus = null,
+    Object? placesList = null,
+    Object? getPlacesListStatus = null,
+    Object? buildingList = null,
+    Object? getBuildingListStatus = null,
+    Object? buildingsPaginator = freezed,
+    Object? getLeadSourcestatus = null,
+    Object? leadSources = freezed,
+    Object? leadSourcePaginator = freezed,
+    Object? leadSourceError = freezed,
+    Object? leadSourceSearch = freezed,
+  }) {
+    return _then(_ListStateState(
+      tasksCategorizedView: freezed == tasksCategorizedView
+          ? _self.tasksCategorizedView
+          : tasksCategorizedView // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taskSortedView: freezed == taskSortedView
+          ? _self.taskSortedView
+          : taskSortedView // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadsView: freezed == leadsView
+          ? _self.leadsView
+          : leadsView // ignore: cast_nullable_to_non_nullable
+              as String?,
+      listingsView: freezed == listingsView
+          ? _self.listingsView
+          : listingsView // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pocketListingsView: freezed == pocketListingsView
+          ? _self.pocketListingsView
+          : pocketListingsView // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dealsView: freezed == dealsView
+          ? _self.dealsView
+          : dealsView // ignore: cast_nullable_to_non_nullable
+              as String?,
+      listingAcquiredView: freezed == listingAcquiredView
+          ? _self.listingAcquiredView
+          : listingAcquiredView // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyTypeList: null == propertyTypeList
+          ? _self._propertyTypeList
+          : propertyTypeList // ignore: cast_nullable_to_non_nullable
+              as List<PropertyType>,
+      getPropertyTypeListStatus: null == getPropertyTypeListStatus
+          ? _self.getPropertyTypeListStatus
+          : getPropertyTypeListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      communityList: null == communityList
+          ? _self._communityList
+          : communityList // ignore: cast_nullable_to_non_nullable
+              as List<CommunityTeamModel>,
+      getCommunityListStatus: null == getCommunityListStatus
+          ? _self.getCommunityListStatus
+          : getCommunityListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      placesList: null == placesList
+          ? _self._placesList
+          : placesList // ignore: cast_nullable_to_non_nullable
+              as List<CommunityName>,
+      getPlacesListStatus: null == getPlacesListStatus
+          ? _self.getPlacesListStatus
+          : getPlacesListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingList: null == buildingList
+          ? _self._buildingList
+          : buildingList // ignore: cast_nullable_to_non_nullable
+              as List<Building>,
+      getBuildingListStatus: null == getBuildingListStatus
+          ? _self.getBuildingListStatus
+          : getBuildingListStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      buildingsPaginator: freezed == buildingsPaginator
+          ? _self.buildingsPaginator
+          : buildingsPaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      getLeadSourcestatus: null == getLeadSourcestatus
+          ? _self.getLeadSourcestatus
+          : getLeadSourcestatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus,
+      leadSources: freezed == leadSources
+          ? _self._leadSources
+          : leadSources // ignore: cast_nullable_to_non_nullable
+              as List<LeadSource>?,
+      leadSourcePaginator: freezed == leadSourcePaginator
+          ? _self.leadSourcePaginator
+          : leadSourcePaginator // ignore: cast_nullable_to_non_nullable
+              as Paginator?,
+      leadSourceError: freezed == leadSourceError
+          ? _self.leadSourceError
+          : leadSourceError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      leadSourceSearch: freezed == leadSourceSearch
+          ? _self.leadSourceSearch
+          : leadSourceSearch // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get buildingsPaginator {
+    if (_self.buildingsPaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.buildingsPaginator!, (value) {
+      return _then(_self.copyWith(buildingsPaginator: value));
+    });
+  }
+
+  /// Create a copy of ListStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginatorCopyWith<$Res>? get leadSourcePaginator {
+    if (_self.leadSourcePaginator == null) {
+      return null;
+    }
+
+    return $PaginatorCopyWith<$Res>(_self.leadSourcePaginator!, (value) {
+      return _then(_self.copyWith(leadSourcePaginator: value));
+    });
+  }
 }
 
-abstract class _ListStateState implements ListStateState {
-  const factory _ListStateState(
-      {final String? tasksCategorizedView,
-      final String? taskSortedView,
-      final String? leadsView,
-      final String? listingsView,
-      final String? pocketListingsView,
-      final String? dealsView,
-      final String? listingAcquiredView,
-      final List<PropertyType> propertyTypeList,
-      final AppStatus getPropertyTypeListStatus,
-      final List<CommunityTeamModel> communityList,
-      final AppStatus getCommunityListStatus,
-      final List<CommunityName> placesList,
-      final AppStatus getPlacesListStatus,
-      final List<Building> buildingList,
-      final AppStatus getBuildingListStatus,
-      final Paginator? buildingsPaginator,
-      final AppStatus getLeadSourcestatus,
-      final List<LeadSource>? leadSources,
-      final Paginator? leadSourcePaginator,
-      final String? leadSourceError,
-      final String? leadSourceSearch}) = _$ListStateStateImpl;
-
-  @override
-  String? get tasksCategorizedView;
-  @override
-  String? get taskSortedView;
-  @override
-  String? get leadsView;
-  @override
-  String? get listingsView;
-  @override
-  String? get pocketListingsView;
-  @override
-  String? get dealsView;
-  @override
-  String? get listingAcquiredView;
-  @override
-  List<PropertyType> get propertyTypeList;
-  @override
-  AppStatus get getPropertyTypeListStatus;
-  @override
-  List<CommunityTeamModel> get communityList;
-  @override
-  AppStatus get getCommunityListStatus;
-  @override
-  List<CommunityName> get placesList;
-  @override
-  AppStatus get getPlacesListStatus;
-  @override
-  List<Building> get buildingList;
-  @override
-  AppStatus get getBuildingListStatus;
-  @override
-  Paginator? get buildingsPaginator;
-  @override
-  AppStatus get getLeadSourcestatus;
-  @override
-  List<LeadSource>? get leadSources;
-  @override
-  Paginator? get leadSourcePaginator;
-  @override
-  String? get leadSourceError;
-  @override
-  String? get leadSourceSearch;
-  @override
-  @JsonKey(ignore: true)
-  _$$ListStateStateImplCopyWith<_$ListStateStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

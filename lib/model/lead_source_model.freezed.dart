@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,123 +10,26 @@ part of 'lead_source_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-LeadSource _$LeadSourceFromJson(Map<String, dynamic> json) {
-  return _LeadSource.fromJson(json);
-}
-
 /// @nodoc
-mixin _$LeadSource {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+mixin _$LeadSource implements DiagnosticableTreeMixin {
+  String get id;
+  String get name;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of LeadSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $LeadSourceCopyWith<LeadSource> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$LeadSourceCopyWithImpl<LeadSource>(this as LeadSource, _$identity);
 
-/// @nodoc
-abstract class $LeadSourceCopyWith<$Res> {
-  factory $LeadSourceCopyWith(
-          LeadSource value, $Res Function(LeadSource) then) =
-      _$LeadSourceCopyWithImpl<$Res, LeadSource>;
-  @useResult
-  $Res call({String id, String name});
-}
-
-/// @nodoc
-class _$LeadSourceCopyWithImpl<$Res, $Val extends LeadSource>
-    implements $LeadSourceCopyWith<$Res> {
-  _$LeadSourceCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$LeadSourceImplCopyWith<$Res>
-    implements $LeadSourceCopyWith<$Res> {
-  factory _$$LeadSourceImplCopyWith(
-          _$LeadSourceImpl value, $Res Function(_$LeadSourceImpl) then) =
-      __$$LeadSourceImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String id, String name});
-}
-
-/// @nodoc
-class __$$LeadSourceImplCopyWithImpl<$Res>
-    extends _$LeadSourceCopyWithImpl<$Res, _$LeadSourceImpl>
-    implements _$$LeadSourceImplCopyWith<$Res> {
-  __$$LeadSourceImplCopyWithImpl(
-      _$LeadSourceImpl _value, $Res Function(_$LeadSourceImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(_$LeadSourceImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$LeadSourceImpl with DiagnosticableTreeMixin implements _LeadSource {
-  const _$LeadSourceImpl({required this.id, required this.name});
-
-  factory _$LeadSourceImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LeadSourceImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LeadSource(id: $id, name: $name)';
-  }
+  /// Serializes this LeadSource to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'LeadSource'))
       ..add(DiagnosticsProperty('id', id))
@@ -136,43 +40,149 @@ class _$LeadSourceImpl with DiagnosticableTreeMixin implements _LeadSource {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LeadSourceImpl &&
+            other is LeadSource &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$LeadSourceImplCopyWith<_$LeadSourceImpl> get copyWith =>
-      __$$LeadSourceImplCopyWithImpl<_$LeadSourceImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$LeadSourceImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LeadSource(id: $id, name: $name)';
   }
 }
 
-abstract class _LeadSource implements LeadSource {
-  const factory _LeadSource(
-      {required final String id,
-      required final String name}) = _$LeadSourceImpl;
-
-  factory _LeadSource.fromJson(Map<String, dynamic> json) =
-      _$LeadSourceImpl.fromJson;
-
-  @override
-  String get id;
-  @override
-  String get name;
-  @override
-  @JsonKey(ignore: true)
-  _$$LeadSourceImplCopyWith<_$LeadSourceImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract mixin class $LeadSourceCopyWith<$Res> {
+  factory $LeadSourceCopyWith(
+          LeadSource value, $Res Function(LeadSource) _then) =
+      _$LeadSourceCopyWithImpl;
+  @useResult
+  $Res call({String id, String name});
 }
+
+/// @nodoc
+class _$LeadSourceCopyWithImpl<$Res> implements $LeadSourceCopyWith<$Res> {
+  _$LeadSourceCopyWithImpl(this._self, this._then);
+
+  final LeadSource _self;
+  final $Res Function(LeadSource) _then;
+
+  /// Create a copy of LeadSource
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _LeadSource with DiagnosticableTreeMixin implements LeadSource {
+  const _LeadSource({required this.id, required this.name});
+  factory _LeadSource.fromJson(Map<String, dynamic> json) =>
+      _$LeadSourceFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String name;
+
+  /// Create a copy of LeadSource
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$LeadSourceCopyWith<_LeadSource> get copyWith =>
+      __$LeadSourceCopyWithImpl<_LeadSource>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$LeadSourceToJson(
+      this,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'LeadSource'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('name', name));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LeadSource &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LeadSource(id: $id, name: $name)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$LeadSourceCopyWith<$Res>
+    implements $LeadSourceCopyWith<$Res> {
+  factory _$LeadSourceCopyWith(
+          _LeadSource value, $Res Function(_LeadSource) _then) =
+      __$LeadSourceCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, String name});
+}
+
+/// @nodoc
+class __$LeadSourceCopyWithImpl<$Res> implements _$LeadSourceCopyWith<$Res> {
+  __$LeadSourceCopyWithImpl(this._self, this._then);
+
+  final _LeadSource _self;
+  final $Res Function(_LeadSource) _then;
+
+  /// Create a copy of LeadSource
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+  }) {
+    return _then(_LeadSource(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

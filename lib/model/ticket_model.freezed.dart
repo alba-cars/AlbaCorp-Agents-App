@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,54 +10,161 @@ part of 'ticket_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Ticket _$TicketFromJson(Map<String, dynamic> json) {
-  return _Ticket.fromJson(json);
-}
-
 /// @nodoc
-mixin _$Ticket {
+mixin _$Ticket implements DiagnosticableTreeMixin {
   @JsonKey(readValue: readId)
-  String get id => throw _privateConstructorUsedError;
-  String get agentId => throw _privateConstructorUsedError;
-  dynamic get assignedUser => throw _privateConstructorUsedError;
-  Department? get department => throw _privateConstructorUsedError;
+  String get id;
+  String get agentId;
+  dynamic get assignedUser;
+  Department? get department;
   @JsonKey(
       unknownEnumValue: TicketType.Unknown, defaultValue: TicketType.Unknown)
-  TicketType get type => throw _privateConstructorUsedError;
-  String? get message => throw _privateConstructorUsedError;
+  TicketType get type;
+  String? get message;
   @JsonKey(unknownEnumValue: RequestType.other)
-  RequestType get requestType => throw _privateConstructorUsedError;
-  TicketPriority get priority => throw _privateConstructorUsedError;
-  CreatedBy get createdBy => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  List<String>? get attachments => throw _privateConstructorUsedError;
-  TicketStatus get status => throw _privateConstructorUsedError;
-  String? get dealI => throw _privateConstructorUsedError;
-  TicketMessage? get latestMessage => throw _privateConstructorUsedError;
-  String get serialNumber => throw _privateConstructorUsedError;
-  Property? get property => throw _privateConstructorUsedError;
-  Lead? get lead => throw _privateConstructorUsedError;
-  Deal? get deal => throw _privateConstructorUsedError;
-  String? get listingAcquiredId => throw _privateConstructorUsedError;
-  String? get masterTickictetId => throw _privateConstructorUsedError;
-  User? get admin => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  RequestType get requestType;
+  TicketPriority get priority;
+  CreatedBy get createdBy;
+  String get description;
+  List<String>? get attachments;
+  TicketStatus get status;
+  String? get dealI;
+  TicketMessage? get latestMessage;
+  String get serialNumber;
+  Property? get property;
+  Lead? get lead;
+  Deal? get deal;
+  String? get listingAcquiredId;
+  String? get masterTickictetId;
+  User? get admin;
+  DateTime? get createdAt;
+  DateTime? get updatedAt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $TicketCopyWith<Ticket> get copyWith => throw _privateConstructorUsedError;
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TicketCopyWith<Ticket> get copyWith =>
+      _$TicketCopyWithImpl<Ticket>(this as Ticket, _$identity);
+
+  /// Serializes this Ticket to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'Ticket'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('agentId', agentId))
+      ..add(DiagnosticsProperty('assignedUser', assignedUser))
+      ..add(DiagnosticsProperty('department', department))
+      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('requestType', requestType))
+      ..add(DiagnosticsProperty('priority', priority))
+      ..add(DiagnosticsProperty('createdBy', createdBy))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('attachments', attachments))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('dealI', dealI))
+      ..add(DiagnosticsProperty('latestMessage', latestMessage))
+      ..add(DiagnosticsProperty('serialNumber', serialNumber))
+      ..add(DiagnosticsProperty('property', property))
+      ..add(DiagnosticsProperty('lead', lead))
+      ..add(DiagnosticsProperty('deal', deal))
+      ..add(DiagnosticsProperty('listingAcquiredId', listingAcquiredId))
+      ..add(DiagnosticsProperty('masterTickictetId', masterTickictetId))
+      ..add(DiagnosticsProperty('admin', admin))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Ticket &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.agentId, agentId) || other.agentId == agentId) &&
+            const DeepCollectionEquality()
+                .equals(other.assignedUser, assignedUser) &&
+            (identical(other.department, department) ||
+                other.department == department) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.requestType, requestType) ||
+                other.requestType == requestType) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other.attachments, attachments) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.dealI, dealI) || other.dealI == dealI) &&
+            (identical(other.latestMessage, latestMessage) ||
+                other.latestMessage == latestMessage) &&
+            (identical(other.serialNumber, serialNumber) ||
+                other.serialNumber == serialNumber) &&
+            (identical(other.property, property) ||
+                other.property == property) &&
+            (identical(other.lead, lead) || other.lead == lead) &&
+            (identical(other.deal, deal) || other.deal == deal) &&
+            (identical(other.listingAcquiredId, listingAcquiredId) ||
+                other.listingAcquiredId == listingAcquiredId) &&
+            (identical(other.masterTickictetId, masterTickictetId) ||
+                other.masterTickictetId == masterTickictetId) &&
+            (identical(other.admin, admin) || other.admin == admin) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        agentId,
+        const DeepCollectionEquality().hash(assignedUser),
+        department,
+        type,
+        message,
+        requestType,
+        priority,
+        createdBy,
+        description,
+        const DeepCollectionEquality().hash(attachments),
+        status,
+        dealI,
+        latestMessage,
+        serialNumber,
+        property,
+        lead,
+        deal,
+        listingAcquiredId,
+        masterTickictetId,
+        admin,
+        createdAt,
+        updatedAt
+      ]);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Ticket(id: $id, agentId: $agentId, assignedUser: $assignedUser, department: $department, type: $type, message: $message, requestType: $requestType, priority: $priority, createdBy: $createdBy, description: $description, attachments: $attachments, status: $status, dealI: $dealI, latestMessage: $latestMessage, serialNumber: $serialNumber, property: $property, lead: $lead, deal: $deal, listingAcquiredId: $listingAcquiredId, masterTickictetId: $masterTickictetId, admin: $admin, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
 }
 
 /// @nodoc
-abstract class $TicketCopyWith<$Res> {
-  factory $TicketCopyWith(Ticket value, $Res Function(Ticket) then) =
-      _$TicketCopyWithImpl<$Res, Ticket>;
+abstract mixin class $TicketCopyWith<$Res> {
+  factory $TicketCopyWith(Ticket value, $Res Function(Ticket) _then) =
+      _$TicketCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(readValue: readId) String id,
@@ -95,15 +203,14 @@ abstract class $TicketCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TicketCopyWithImpl<$Res, $Val extends Ticket>
-    implements $TicketCopyWith<$Res> {
-  _$TicketCopyWithImpl(this._value, this._then);
+class _$TicketCopyWithImpl<$Res> implements $TicketCopyWith<$Res> {
+  _$TicketCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Ticket _self;
+  final $Res Function(Ticket) _then;
 
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,360 +238,191 @@ class _$TicketCopyWithImpl<$Res, $Val extends Ticket>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       agentId: null == agentId
-          ? _value.agentId
+          ? _self.agentId
           : agentId // ignore: cast_nullable_to_non_nullable
               as String,
       assignedUser: freezed == assignedUser
-          ? _value.assignedUser
+          ? _self.assignedUser
           : assignedUser // ignore: cast_nullable_to_non_nullable
               as dynamic,
       department: freezed == department
-          ? _value.department
+          ? _self.department
           : department // ignore: cast_nullable_to_non_nullable
               as Department?,
       type: null == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as TicketType,
       message: freezed == message
-          ? _value.message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
       requestType: null == requestType
-          ? _value.requestType
+          ? _self.requestType
           : requestType // ignore: cast_nullable_to_non_nullable
               as RequestType,
       priority: null == priority
-          ? _value.priority
+          ? _self.priority
           : priority // ignore: cast_nullable_to_non_nullable
               as TicketPriority,
       createdBy: null == createdBy
-          ? _value.createdBy
+          ? _self.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as CreatedBy,
       description: null == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       attachments: freezed == attachments
-          ? _value.attachments
+          ? _self.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       status: null == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as TicketStatus,
       dealI: freezed == dealI
-          ? _value.dealI
+          ? _self.dealI
           : dealI // ignore: cast_nullable_to_non_nullable
               as String?,
       latestMessage: freezed == latestMessage
-          ? _value.latestMessage
+          ? _self.latestMessage
           : latestMessage // ignore: cast_nullable_to_non_nullable
               as TicketMessage?,
       serialNumber: null == serialNumber
-          ? _value.serialNumber
+          ? _self.serialNumber
           : serialNumber // ignore: cast_nullable_to_non_nullable
               as String,
       property: freezed == property
-          ? _value.property
+          ? _self.property
           : property // ignore: cast_nullable_to_non_nullable
               as Property?,
       lead: freezed == lead
-          ? _value.lead
+          ? _self.lead
           : lead // ignore: cast_nullable_to_non_nullable
               as Lead?,
       deal: freezed == deal
-          ? _value.deal
+          ? _self.deal
           : deal // ignore: cast_nullable_to_non_nullable
               as Deal?,
       listingAcquiredId: freezed == listingAcquiredId
-          ? _value.listingAcquiredId
+          ? _self.listingAcquiredId
           : listingAcquiredId // ignore: cast_nullable_to_non_nullable
               as String?,
       masterTickictetId: freezed == masterTickictetId
-          ? _value.masterTickictetId
+          ? _self.masterTickictetId
           : masterTickictetId // ignore: cast_nullable_to_non_nullable
               as String?,
       admin: freezed == admin
-          ? _value.admin
+          ? _self.admin
           : admin // ignore: cast_nullable_to_non_nullable
               as User?,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DepartmentCopyWith<$Res>? get department {
-    if (_value.department == null) {
-      return null;
-    }
-
-    return $DepartmentCopyWith<$Res>(_value.department!, (value) {
-      return _then(_value.copyWith(department: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TicketMessageCopyWith<$Res>? get latestMessage {
-    if (_value.latestMessage == null) {
-      return null;
-    }
-
-    return $TicketMessageCopyWith<$Res>(_value.latestMessage!, (value) {
-      return _then(_value.copyWith(latestMessage: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PropertyCopyWith<$Res>? get property {
-    if (_value.property == null) {
-      return null;
-    }
-
-    return $PropertyCopyWith<$Res>(_value.property!, (value) {
-      return _then(_value.copyWith(property: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LeadCopyWith<$Res>? get lead {
-    if (_value.lead == null) {
-      return null;
-    }
-
-    return $LeadCopyWith<$Res>(_value.lead!, (value) {
-      return _then(_value.copyWith(lead: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DealCopyWith<$Res>? get deal {
-    if (_value.deal == null) {
-      return null;
-    }
-
-    return $DealCopyWith<$Res>(_value.deal!, (value) {
-      return _then(_value.copyWith(deal: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get admin {
-    if (_value.admin == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.admin!, (value) {
-      return _then(_value.copyWith(admin: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$TicketImplCopyWith<$Res> implements $TicketCopyWith<$Res> {
-  factory _$$TicketImplCopyWith(
-          _$TicketImpl value, $Res Function(_$TicketImpl) then) =
-      __$$TicketImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(readValue: readId) String id,
-      String agentId,
-      dynamic assignedUser,
-      Department? department,
-      @JsonKey(
-          unknownEnumValue: TicketType.Unknown,
-          defaultValue: TicketType.Unknown)
-      TicketType type,
-      String? message,
-      @JsonKey(unknownEnumValue: RequestType.other) RequestType requestType,
-      TicketPriority priority,
-      CreatedBy createdBy,
-      String description,
-      List<String>? attachments,
-      TicketStatus status,
-      String? dealI,
-      TicketMessage? latestMessage,
-      String serialNumber,
-      Property? property,
-      Lead? lead,
-      Deal? deal,
-      String? listingAcquiredId,
-      String? masterTickictetId,
-      User? admin,
-      DateTime? createdAt,
-      DateTime? updatedAt});
-
-  @override
-  $DepartmentCopyWith<$Res>? get department;
-  @override
-  $TicketMessageCopyWith<$Res>? get latestMessage;
-  @override
-  $PropertyCopyWith<$Res>? get property;
-  @override
-  $LeadCopyWith<$Res>? get lead;
-  @override
-  $DealCopyWith<$Res>? get deal;
-  @override
-  $UserCopyWith<$Res>? get admin;
-}
-
-/// @nodoc
-class __$$TicketImplCopyWithImpl<$Res>
-    extends _$TicketCopyWithImpl<$Res, _$TicketImpl>
-    implements _$$TicketImplCopyWith<$Res> {
-  __$$TicketImplCopyWithImpl(
-      _$TicketImpl _value, $Res Function(_$TicketImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? agentId = null,
-    Object? assignedUser = freezed,
-    Object? department = freezed,
-    Object? type = null,
-    Object? message = freezed,
-    Object? requestType = null,
-    Object? priority = null,
-    Object? createdBy = null,
-    Object? description = null,
-    Object? attachments = freezed,
-    Object? status = null,
-    Object? dealI = freezed,
-    Object? latestMessage = freezed,
-    Object? serialNumber = null,
-    Object? property = freezed,
-    Object? lead = freezed,
-    Object? deal = freezed,
-    Object? listingAcquiredId = freezed,
-    Object? masterTickictetId = freezed,
-    Object? admin = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(_$TicketImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      agentId: null == agentId
-          ? _value.agentId
-          : agentId // ignore: cast_nullable_to_non_nullable
-              as String,
-      assignedUser: freezed == assignedUser
-          ? _value.assignedUser
-          : assignedUser // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      department: freezed == department
-          ? _value.department
-          : department // ignore: cast_nullable_to_non_nullable
-              as Department?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TicketType,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-      requestType: null == requestType
-          ? _value.requestType
-          : requestType // ignore: cast_nullable_to_non_nullable
-              as RequestType,
-      priority: null == priority
-          ? _value.priority
-          : priority // ignore: cast_nullable_to_non_nullable
-              as TicketPriority,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as CreatedBy,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      attachments: freezed == attachments
-          ? _value._attachments
-          : attachments // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as TicketStatus,
-      dealI: freezed == dealI
-          ? _value.dealI
-          : dealI // ignore: cast_nullable_to_non_nullable
-              as String?,
-      latestMessage: freezed == latestMessage
-          ? _value.latestMessage
-          : latestMessage // ignore: cast_nullable_to_non_nullable
-              as TicketMessage?,
-      serialNumber: null == serialNumber
-          ? _value.serialNumber
-          : serialNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      property: freezed == property
-          ? _value.property
-          : property // ignore: cast_nullable_to_non_nullable
-              as Property?,
-      lead: freezed == lead
-          ? _value.lead
-          : lead // ignore: cast_nullable_to_non_nullable
-              as Lead?,
-      deal: freezed == deal
-          ? _value.deal
-          : deal // ignore: cast_nullable_to_non_nullable
-              as Deal?,
-      listingAcquiredId: freezed == listingAcquiredId
-          ? _value.listingAcquiredId
-          : listingAcquiredId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      masterTickictetId: freezed == masterTickictetId
-          ? _value.masterTickictetId
-          : masterTickictetId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      admin: freezed == admin
-          ? _value.admin
-          : admin // ignore: cast_nullable_to_non_nullable
-              as User?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DepartmentCopyWith<$Res>? get department {
+    if (_self.department == null) {
+      return null;
+    }
+
+    return $DepartmentCopyWith<$Res>(_self.department!, (value) {
+      return _then(_self.copyWith(department: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TicketMessageCopyWith<$Res>? get latestMessage {
+    if (_self.latestMessage == null) {
+      return null;
+    }
+
+    return $TicketMessageCopyWith<$Res>(_self.latestMessage!, (value) {
+      return _then(_self.copyWith(latestMessage: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PropertyCopyWith<$Res>? get property {
+    if (_self.property == null) {
+      return null;
+    }
+
+    return $PropertyCopyWith<$Res>(_self.property!, (value) {
+      return _then(_self.copyWith(property: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get lead {
+    if (_self.lead == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.lead!, (value) {
+      return _then(_self.copyWith(lead: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DealCopyWith<$Res>? get deal {
+    if (_self.deal == null) {
+      return null;
+    }
+
+    return $DealCopyWith<$Res>(_self.deal!, (value) {
+      return _then(_self.copyWith(deal: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get admin {
+    if (_self.admin == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.admin!, (value) {
+      return _then(_self.copyWith(admin: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$TicketImpl with DiagnosticableTreeMixin implements _Ticket {
-  const _$TicketImpl(
+class _Ticket with DiagnosticableTreeMixin implements Ticket {
+  const _Ticket(
       {@JsonKey(readValue: readId) required this.id,
       required this.agentId,
       this.assignedUser,
@@ -512,9 +450,7 @@ class _$TicketImpl with DiagnosticableTreeMixin implements _Ticket {
       this.createdAt,
       this.updatedAt})
       : _attachments = attachments;
-
-  factory _$TicketImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TicketImplFromJson(json);
+  factory _Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
 
   @override
   @JsonKey(readValue: readId)
@@ -578,14 +514,23 @@ class _$TicketImpl with DiagnosticableTreeMixin implements _Ticket {
   @override
   final DateTime? updatedAt;
 
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Ticket(id: $id, agentId: $agentId, assignedUser: $assignedUser, department: $department, type: $type, message: $message, requestType: $requestType, priority: $priority, createdBy: $createdBy, description: $description, attachments: $attachments, status: $status, dealI: $dealI, latestMessage: $latestMessage, serialNumber: $serialNumber, property: $property, lead: $lead, deal: $deal, listingAcquiredId: $listingAcquiredId, masterTickictetId: $masterTickictetId, admin: $admin, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TicketCopyWith<_Ticket> get copyWith =>
+      __$TicketCopyWithImpl<_Ticket>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TicketToJson(
+      this,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Ticket'))
       ..add(DiagnosticsProperty('id', id))
@@ -617,7 +562,7 @@ class _$TicketImpl with DiagnosticableTreeMixin implements _Ticket {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TicketImpl &&
+            other is _Ticket &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.agentId, agentId) || other.agentId == agentId) &&
             const DeepCollectionEquality()
@@ -657,7 +602,7 @@ class _$TicketImpl with DiagnosticableTreeMixin implements _Ticket {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -686,208 +631,349 @@ class _$TicketImpl with DiagnosticableTreeMixin implements _Ticket {
         updatedAt
       ]);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TicketImplCopyWith<_$TicketImpl> get copyWith =>
-      __$$TicketImplCopyWithImpl<_$TicketImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TicketImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Ticket(id: $id, agentId: $agentId, assignedUser: $assignedUser, department: $department, type: $type, message: $message, requestType: $requestType, priority: $priority, createdBy: $createdBy, description: $description, attachments: $attachments, status: $status, dealI: $dealI, latestMessage: $latestMessage, serialNumber: $serialNumber, property: $property, lead: $lead, deal: $deal, listingAcquiredId: $listingAcquiredId, masterTickictetId: $masterTickictetId, admin: $admin, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _Ticket implements Ticket {
-  const factory _Ticket(
-      {@JsonKey(readValue: readId) required final String id,
-      required final String agentId,
-      final dynamic assignedUser,
-      final Department? department,
+/// @nodoc
+abstract mixin class _$TicketCopyWith<$Res> implements $TicketCopyWith<$Res> {
+  factory _$TicketCopyWith(_Ticket value, $Res Function(_Ticket) _then) =
+      __$TicketCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(readValue: readId) String id,
+      String agentId,
+      dynamic assignedUser,
+      Department? department,
       @JsonKey(
           unknownEnumValue: TicketType.Unknown,
           defaultValue: TicketType.Unknown)
-      required final TicketType type,
-      final String? message,
-      @JsonKey(unknownEnumValue: RequestType.other)
-      required final RequestType requestType,
-      final TicketPriority priority,
-      final CreatedBy createdBy,
-      required final String description,
-      final List<String>? attachments,
-      final TicketStatus status,
-      final String? dealI,
-      final TicketMessage? latestMessage,
-      required final String serialNumber,
-      final Property? property,
-      final Lead? lead,
-      final Deal? deal,
-      final String? listingAcquiredId,
-      final String? masterTickictetId,
-      final User? admin,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$TicketImpl;
-
-  factory _Ticket.fromJson(Map<String, dynamic> json) = _$TicketImpl.fromJson;
+      TicketType type,
+      String? message,
+      @JsonKey(unknownEnumValue: RequestType.other) RequestType requestType,
+      TicketPriority priority,
+      CreatedBy createdBy,
+      String description,
+      List<String>? attachments,
+      TicketStatus status,
+      String? dealI,
+      TicketMessage? latestMessage,
+      String serialNumber,
+      Property? property,
+      Lead? lead,
+      Deal? deal,
+      String? listingAcquiredId,
+      String? masterTickictetId,
+      User? admin,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 
   @override
-  @JsonKey(readValue: readId)
-  String get id;
+  $DepartmentCopyWith<$Res>? get department;
   @override
-  String get agentId;
+  $TicketMessageCopyWith<$Res>? get latestMessage;
   @override
-  dynamic get assignedUser;
+  $PropertyCopyWith<$Res>? get property;
   @override
-  Department? get department;
+  $LeadCopyWith<$Res>? get lead;
   @override
-  @JsonKey(
-      unknownEnumValue: TicketType.Unknown, defaultValue: TicketType.Unknown)
-  TicketType get type;
+  $DealCopyWith<$Res>? get deal;
   @override
-  String? get message;
-  @override
-  @JsonKey(unknownEnumValue: RequestType.other)
-  RequestType get requestType;
-  @override
-  TicketPriority get priority;
-  @override
-  CreatedBy get createdBy;
-  @override
-  String get description;
-  @override
-  List<String>? get attachments;
-  @override
-  TicketStatus get status;
-  @override
-  String? get dealI;
-  @override
-  TicketMessage? get latestMessage;
-  @override
-  String get serialNumber;
-  @override
-  Property? get property;
-  @override
-  Lead? get lead;
-  @override
-  Deal? get deal;
-  @override
-  String? get listingAcquiredId;
-  @override
-  String? get masterTickictetId;
-  @override
-  User? get admin;
-  @override
-  DateTime? get createdAt;
-  @override
-  DateTime? get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$TicketImplCopyWith<_$TicketImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-TicketMessage _$TicketMessageFromJson(Map<String, dynamic> json) {
-  return _TicketMessage.fromJson(json);
+  $UserCopyWith<$Res>? get admin;
 }
 
 /// @nodoc
-mixin _$TicketMessage {
-  @JsonKey(name: '_id')
-  String get id => throw _privateConstructorUsedError;
-  String get ticketId => throw _privateConstructorUsedError;
-  String get senderId => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
-  List<String?>? get attachments => throw _privateConstructorUsedError;
-  @JsonKey(name: 'createdAt')
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updatedAt')
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+class __$TicketCopyWithImpl<$Res> implements _$TicketCopyWith<$Res> {
+  __$TicketCopyWithImpl(this._self, this._then);
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $TicketMessageCopyWith<TicketMessage> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+  final _Ticket _self;
+  final $Res Function(_Ticket) _then;
 
-/// @nodoc
-abstract class $TicketMessageCopyWith<$Res> {
-  factory $TicketMessageCopyWith(
-          TicketMessage value, $Res Function(TicketMessage) then) =
-      _$TicketMessageCopyWithImpl<$Res, TicketMessage>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: '_id') String id,
-      String ticketId,
-      String senderId,
-      String message,
-      List<String?>? attachments,
-      @JsonKey(name: 'createdAt') DateTime createdAt,
-      @JsonKey(name: 'updatedAt') DateTime updatedAt});
-}
-
-/// @nodoc
-class _$TicketMessageCopyWithImpl<$Res, $Val extends TicketMessage>
-    implements $TicketMessageCopyWith<$Res> {
-  _$TicketMessageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? id = null,
-    Object? ticketId = null,
-    Object? senderId = null,
-    Object? message = null,
+    Object? agentId = null,
+    Object? assignedUser = freezed,
+    Object? department = freezed,
+    Object? type = null,
+    Object? message = freezed,
+    Object? requestType = null,
+    Object? priority = null,
+    Object? createdBy = null,
+    Object? description = null,
     Object? attachments = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? status = null,
+    Object? dealI = freezed,
+    Object? latestMessage = freezed,
+    Object? serialNumber = null,
+    Object? property = freezed,
+    Object? lead = freezed,
+    Object? deal = freezed,
+    Object? listingAcquiredId = freezed,
+    Object? masterTickictetId = freezed,
+    Object? admin = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_Ticket(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      ticketId: null == ticketId
-          ? _value.ticketId
-          : ticketId // ignore: cast_nullable_to_non_nullable
+      agentId: null == agentId
+          ? _self.agentId
+          : agentId // ignore: cast_nullable_to_non_nullable
               as String,
-      senderId: null == senderId
-          ? _value.senderId
-          : senderId // ignore: cast_nullable_to_non_nullable
-              as String,
-      message: null == message
-          ? _value.message
+      assignedUser: freezed == assignedUser
+          ? _self.assignedUser
+          : assignedUser // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      department: freezed == department
+          ? _self.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as Department?,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TicketType,
+      message: freezed == message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      requestType: null == requestType
+          ? _self.requestType
+          : requestType // ignore: cast_nullable_to_non_nullable
+              as RequestType,
+      priority: null == priority
+          ? _self.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as TicketPriority,
+      createdBy: null == createdBy
+          ? _self.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as CreatedBy,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
       attachments: freezed == attachments
-          ? _value.attachments
+          ? _self._attachments
           : attachments // ignore: cast_nullable_to_non_nullable
-              as List<String?>?,
-      createdAt: null == createdAt
-          ? _value.createdAt
+              as List<String>?,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as TicketStatus,
+      dealI: freezed == dealI
+          ? _self.dealI
+          : dealI // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latestMessage: freezed == latestMessage
+          ? _self.latestMessage
+          : latestMessage // ignore: cast_nullable_to_non_nullable
+              as TicketMessage?,
+      serialNumber: null == serialNumber
+          ? _self.serialNumber
+          : serialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      property: freezed == property
+          ? _self.property
+          : property // ignore: cast_nullable_to_non_nullable
+              as Property?,
+      lead: freezed == lead
+          ? _self.lead
+          : lead // ignore: cast_nullable_to_non_nullable
+              as Lead?,
+      deal: freezed == deal
+          ? _self.deal
+          : deal // ignore: cast_nullable_to_non_nullable
+              as Deal?,
+      listingAcquiredId: freezed == listingAcquiredId
+          ? _self.listingAcquiredId
+          : listingAcquiredId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      masterTickictetId: freezed == masterTickictetId
+          ? _self.masterTickictetId
+          : masterTickictetId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      admin: freezed == admin
+          ? _self.admin
+          : admin // ignore: cast_nullable_to_non_nullable
+              as User?,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+              as DateTime?,
+    ));
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DepartmentCopyWith<$Res>? get department {
+    if (_self.department == null) {
+      return null;
+    }
+
+    return $DepartmentCopyWith<$Res>(_self.department!, (value) {
+      return _then(_self.copyWith(department: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TicketMessageCopyWith<$Res>? get latestMessage {
+    if (_self.latestMessage == null) {
+      return null;
+    }
+
+    return $TicketMessageCopyWith<$Res>(_self.latestMessage!, (value) {
+      return _then(_self.copyWith(latestMessage: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PropertyCopyWith<$Res>? get property {
+    if (_self.property == null) {
+      return null;
+    }
+
+    return $PropertyCopyWith<$Res>(_self.property!, (value) {
+      return _then(_self.copyWith(property: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LeadCopyWith<$Res>? get lead {
+    if (_self.lead == null) {
+      return null;
+    }
+
+    return $LeadCopyWith<$Res>(_self.lead!, (value) {
+      return _then(_self.copyWith(lead: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DealCopyWith<$Res>? get deal {
+    if (_self.deal == null) {
+      return null;
+    }
+
+    return $DealCopyWith<$Res>(_self.deal!, (value) {
+      return _then(_self.copyWith(deal: value));
+    });
+  }
+
+  /// Create a copy of Ticket
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get admin {
+    if (_self.admin == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.admin!, (value) {
+      return _then(_self.copyWith(admin: value));
+    });
   }
 }
 
 /// @nodoc
-abstract class _$$TicketMessageImplCopyWith<$Res>
-    implements $TicketMessageCopyWith<$Res> {
-  factory _$$TicketMessageImplCopyWith(
-          _$TicketMessageImpl value, $Res Function(_$TicketMessageImpl) then) =
-      __$$TicketMessageImplCopyWithImpl<$Res>;
+mixin _$TicketMessage implements DiagnosticableTreeMixin {
+  @JsonKey(name: '_id')
+  String get id;
+  String get ticketId;
+  String get senderId;
+  String get message;
+  List<String?>? get attachments;
+  @JsonKey(name: 'createdAt')
+  DateTime get createdAt;
+  @JsonKey(name: 'updatedAt')
+  DateTime get updatedAt;
+
+  /// Create a copy of TicketMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TicketMessageCopyWith<TicketMessage> get copyWith =>
+      _$TicketMessageCopyWithImpl<TicketMessage>(
+          this as TicketMessage, _$identity);
+
+  /// Serializes this TicketMessage to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'TicketMessage'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('ticketId', ticketId))
+      ..add(DiagnosticsProperty('senderId', senderId))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('attachments', attachments))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TicketMessage &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.ticketId, ticketId) ||
+                other.ticketId == ticketId) &&
+            (identical(other.senderId, senderId) ||
+                other.senderId == senderId) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality()
+                .equals(other.attachments, attachments) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, ticketId, senderId, message,
+      const DeepCollectionEquality().hash(attachments), createdAt, updatedAt);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TicketMessage(id: $id, ticketId: $ticketId, senderId: $senderId, message: $message, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TicketMessageCopyWith<$Res> {
+  factory $TicketMessageCopyWith(
+          TicketMessage value, $Res Function(TicketMessage) _then) =
+      _$TicketMessageCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
@@ -900,13 +986,15 @@ abstract class _$$TicketMessageImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TicketMessageImplCopyWithImpl<$Res>
-    extends _$TicketMessageCopyWithImpl<$Res, _$TicketMessageImpl>
-    implements _$$TicketMessageImplCopyWith<$Res> {
-  __$$TicketMessageImplCopyWithImpl(
-      _$TicketMessageImpl _value, $Res Function(_$TicketMessageImpl) _then)
-      : super(_value, _then);
+class _$TicketMessageCopyWithImpl<$Res>
+    implements $TicketMessageCopyWith<$Res> {
+  _$TicketMessageCopyWithImpl(this._self, this._then);
 
+  final TicketMessage _self;
+  final $Res Function(TicketMessage) _then;
+
+  /// Create a copy of TicketMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -918,33 +1006,33 @@ class __$$TicketMessageImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$TicketMessageImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       ticketId: null == ticketId
-          ? _value.ticketId
+          ? _self.ticketId
           : ticketId // ignore: cast_nullable_to_non_nullable
               as String,
       senderId: null == senderId
-          ? _value.senderId
+          ? _self.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
               as String,
       message: null == message
-          ? _value.message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
       attachments: freezed == attachments
-          ? _value._attachments
+          ? _self.attachments
           : attachments // ignore: cast_nullable_to_non_nullable
               as List<String?>?,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
@@ -953,10 +1041,8 @@ class __$$TicketMessageImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TicketMessageImpl
-    with DiagnosticableTreeMixin
-    implements _TicketMessage {
-  const _$TicketMessageImpl(
+class _TicketMessage with DiagnosticableTreeMixin implements TicketMessage {
+  const _TicketMessage(
       {@JsonKey(name: '_id') required this.id,
       required this.ticketId,
       required this.senderId,
@@ -965,9 +1051,8 @@ class _$TicketMessageImpl
       @JsonKey(name: 'createdAt') required this.createdAt,
       @JsonKey(name: 'updatedAt') required this.updatedAt})
       : _attachments = attachments;
-
-  factory _$TicketMessageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TicketMessageImplFromJson(json);
+  factory _TicketMessage.fromJson(Map<String, dynamic> json) =>
+      _$TicketMessageFromJson(json);
 
   @override
   @JsonKey(name: '_id')
@@ -995,14 +1080,23 @@ class _$TicketMessageImpl
   @JsonKey(name: 'updatedAt')
   final DateTime updatedAt;
 
+  /// Create a copy of TicketMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TicketMessage(id: $id, ticketId: $ticketId, senderId: $senderId, message: $message, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TicketMessageCopyWith<_TicketMessage> get copyWith =>
+      __$TicketMessageCopyWithImpl<_TicketMessage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TicketMessageToJson(
+      this,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TicketMessage'))
       ..add(DiagnosticsProperty('id', id))
@@ -1018,7 +1112,7 @@ class _$TicketMessageImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TicketMessageImpl &&
+            other is _TicketMessage &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.ticketId, ticketId) ||
                 other.ticketId == ticketId) &&
@@ -1033,58 +1127,87 @@ class _$TicketMessageImpl
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, ticketId, senderId, message,
       const DeepCollectionEquality().hash(_attachments), createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TicketMessageImplCopyWith<_$TicketMessageImpl> get copyWith =>
-      __$$TicketMessageImplCopyWithImpl<_$TicketMessageImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TicketMessageImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TicketMessage(id: $id, ticketId: $ticketId, senderId: $senderId, message: $message, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _TicketMessage implements TicketMessage {
-  const factory _TicketMessage(
-          {@JsonKey(name: '_id') required final String id,
-          required final String ticketId,
-          required final String senderId,
-          required final String message,
-          final List<String?>? attachments,
-          @JsonKey(name: 'createdAt') required final DateTime createdAt,
-          @JsonKey(name: 'updatedAt') required final DateTime updatedAt}) =
-      _$TicketMessageImpl;
-
-  factory _TicketMessage.fromJson(Map<String, dynamic> json) =
-      _$TicketMessageImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$TicketMessageCopyWith<$Res>
+    implements $TicketMessageCopyWith<$Res> {
+  factory _$TicketMessageCopyWith(
+          _TicketMessage value, $Res Function(_TicketMessage) _then) =
+      __$TicketMessageCopyWithImpl;
   @override
-  @JsonKey(name: '_id')
-  String get id;
-  @override
-  String get ticketId;
-  @override
-  String get senderId;
-  @override
-  String get message;
-  @override
-  List<String?>? get attachments;
-  @override
-  @JsonKey(name: 'createdAt')
-  DateTime get createdAt;
-  @override
-  @JsonKey(name: 'updatedAt')
-  DateTime get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$TicketMessageImplCopyWith<_$TicketMessageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      String ticketId,
+      String senderId,
+      String message,
+      List<String?>? attachments,
+      @JsonKey(name: 'createdAt') DateTime createdAt,
+      @JsonKey(name: 'updatedAt') DateTime updatedAt});
 }
+
+/// @nodoc
+class __$TicketMessageCopyWithImpl<$Res>
+    implements _$TicketMessageCopyWith<$Res> {
+  __$TicketMessageCopyWithImpl(this._self, this._then);
+
+  final _TicketMessage _self;
+  final $Res Function(_TicketMessage) _then;
+
+  /// Create a copy of TicketMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? ticketId = null,
+    Object? senderId = null,
+    Object? message = null,
+    Object? attachments = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+  }) {
+    return _then(_TicketMessage(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      ticketId: null == ticketId
+          ? _self.ticketId
+          : ticketId // ignore: cast_nullable_to_non_nullable
+              as String,
+      senderId: null == senderId
+          ? _self.senderId
+          : senderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      attachments: freezed == attachments
+          ? _self._attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as List<String?>?,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+// dart format on

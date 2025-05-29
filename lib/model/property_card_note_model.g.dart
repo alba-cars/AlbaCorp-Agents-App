@@ -6,9 +6,9 @@ part of 'property_card_note_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PropertyCardNoteModelImpl _$$PropertyCardNoteModelImplFromJson(
+_PropertyCardNoteModel _$PropertyCardNoteModelFromJson(
         Map<String, dynamic> json) =>
-    _$PropertyCardNoteModelImpl(
+    _PropertyCardNoteModel(
       propertyCard: json['propertyCard'] as String?,
       createdBy: json['createdBy'] == null
           ? null
@@ -23,8 +23,8 @@ _$PropertyCardNoteModelImpl _$$PropertyCardNoteModelImplFromJson(
       id: json['id'] as String?,
     );
 
-Map<String, dynamic> _$$PropertyCardNoteModelImplToJson(
-        _$PropertyCardNoteModelImpl instance) =>
+Map<String, dynamic> _$PropertyCardNoteModelToJson(
+        _PropertyCardNoteModel instance) =>
     <String, dynamic>{
       'propertyCard': instance.propertyCard,
       'createdBy': instance.createdBy,

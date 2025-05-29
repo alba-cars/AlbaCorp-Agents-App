@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,96 +10,76 @@ part of 'category_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ModelCategory _$ModelCategoryFromJson(Map<String, dynamic> json) {
-  return _ModelCategory.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ModelCategory {
-  String? get image => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get image;
+  String get name;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ModelCategoryCopyWith<ModelCategory> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ModelCategoryCopyWith<$Res> {
-  factory $ModelCategoryCopyWith(
-          ModelCategory value, $Res Function(ModelCategory) then) =
-      _$ModelCategoryCopyWithImpl<$Res, ModelCategory>;
-  @useResult
-  $Res call({String? image, String name});
-}
-
-/// @nodoc
-class _$ModelCategoryCopyWithImpl<$Res, $Val extends ModelCategory>
-    implements $ModelCategoryCopyWith<$Res> {
-  _$ModelCategoryCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of ModelCategory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $ModelCategoryCopyWith<ModelCategory> get copyWith =>
+      _$ModelCategoryCopyWithImpl<ModelCategory>(
+          this as ModelCategory, _$identity);
+
+  /// Serializes this ModelCategory to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? image = freezed,
-    Object? name = null,
-  }) {
-    return _then(_value.copyWith(
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ModelCategory &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, image, name);
+
+  @override
+  String toString() {
+    return 'ModelCategory(image: $image, name: $name)';
   }
 }
 
 /// @nodoc
-abstract class _$$ModelCategoryImplCopyWith<$Res>
-    implements $ModelCategoryCopyWith<$Res> {
-  factory _$$ModelCategoryImplCopyWith(
-          _$ModelCategoryImpl value, $Res Function(_$ModelCategoryImpl) then) =
-      __$$ModelCategoryImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ModelCategoryCopyWith<$Res> {
+  factory $ModelCategoryCopyWith(
+          ModelCategory value, $Res Function(ModelCategory) _then) =
+      _$ModelCategoryCopyWithImpl;
   @useResult
   $Res call({String? image, String name});
 }
 
 /// @nodoc
-class __$$ModelCategoryImplCopyWithImpl<$Res>
-    extends _$ModelCategoryCopyWithImpl<$Res, _$ModelCategoryImpl>
-    implements _$$ModelCategoryImplCopyWith<$Res> {
-  __$$ModelCategoryImplCopyWithImpl(
-      _$ModelCategoryImpl _value, $Res Function(_$ModelCategoryImpl) _then)
-      : super(_value, _then);
+class _$ModelCategoryCopyWithImpl<$Res>
+    implements $ModelCategoryCopyWith<$Res> {
+  _$ModelCategoryCopyWithImpl(this._self, this._then);
 
+  final ModelCategory _self;
+  final $Res Function(ModelCategory) _then;
+
+  /// Create a copy of ModelCategory
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? image = freezed,
     Object? name = null,
   }) {
-    return _then(_$ModelCategoryImpl(
+    return _then(_self.copyWith(
       image: freezed == image
-          ? _value.image
+          ? _self.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -107,62 +88,88 @@ class __$$ModelCategoryImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ModelCategoryImpl implements _ModelCategory {
-  const _$ModelCategoryImpl({this.image, required this.name});
-
-  factory _$ModelCategoryImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ModelCategoryImplFromJson(json);
+class _ModelCategory implements ModelCategory {
+  const _ModelCategory({this.image, required this.name});
+  factory _ModelCategory.fromJson(Map<String, dynamic> json) =>
+      _$ModelCategoryFromJson(json);
 
   @override
   final String? image;
   @override
   final String name;
 
+  /// Create a copy of ModelCategory
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ModelCategory(image: $image, name: $name)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ModelCategoryCopyWith<_ModelCategory> get copyWith =>
+      __$ModelCategoryCopyWithImpl<_ModelCategory>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ModelCategoryToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ModelCategoryImpl &&
+            other is _ModelCategory &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, image, name);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ModelCategoryImplCopyWith<_$ModelCategoryImpl> get copyWith =>
-      __$$ModelCategoryImplCopyWithImpl<_$ModelCategoryImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ModelCategoryImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ModelCategory(image: $image, name: $name)';
   }
 }
 
-abstract class _ModelCategory implements ModelCategory {
-  const factory _ModelCategory(
-      {final String? image, required final String name}) = _$ModelCategoryImpl;
-
-  factory _ModelCategory.fromJson(Map<String, dynamic> json) =
-      _$ModelCategoryImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ModelCategoryCopyWith<$Res>
+    implements $ModelCategoryCopyWith<$Res> {
+  factory _$ModelCategoryCopyWith(
+          _ModelCategory value, $Res Function(_ModelCategory) _then) =
+      __$ModelCategoryCopyWithImpl;
   @override
-  String? get image;
-  @override
-  String get name;
-  @override
-  @JsonKey(ignore: true)
-  _$$ModelCategoryImplCopyWith<_$ModelCategoryImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({String? image, String name});
 }
+
+/// @nodoc
+class __$ModelCategoryCopyWithImpl<$Res>
+    implements _$ModelCategoryCopyWith<$Res> {
+  __$ModelCategoryCopyWithImpl(this._self, this._then);
+
+  final _ModelCategory _self;
+  final $Res Function(_ModelCategory) _then;
+
+  /// Create a copy of ModelCategory
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? image = freezed,
+    Object? name = null,
+  }) {
+    return _then(_ModelCategory(
+      image: freezed == image
+          ? _self.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

@@ -1,7 +1,7 @@
 part of 'add_listing_cubit.dart';
 
 @freezed
-class AddListingState with _$AddListingState {
+abstract class AddListingState with _$AddListingState {
   const factory AddListingState({
     @Default(AppStatus.init) AppStatus addListingStatus,
     String? addListingError,

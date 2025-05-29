@@ -6,7 +6,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-class User with _$User {
+abstract class User with _$User {
   const factory User(
       {@JsonKey(readValue: readId) required String id,
       required String? email,
@@ -23,7 +23,7 @@ class User with _$User {
 }
 
 @freezed
-class UserPBXNumbers with _$UserPBXNumbers {
+abstract class UserPBXNumbers with _$UserPBXNumbers {
   const factory UserPBXNumbers({
     required String publicNumber,
     String? pfNumber,

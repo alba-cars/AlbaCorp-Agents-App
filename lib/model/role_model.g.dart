@@ -6,7 +6,7 @@ part of 'role_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RoleImpl _$$RoleImplFromJson(Map<String, dynamic> json) => _$RoleImpl(
+_Role _$RoleFromJson(Map<String, dynamic> json) => _Role(
       id: json['id'] as String?,
       name: json['name'] as String?,
       permissions: (json['permissions'] as List<dynamic>?)
@@ -21,8 +21,7 @@ _$RoleImpl _$$RoleImplFromJson(Map<String, dynamic> json) => _$RoleImpl(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$RoleImplToJson(_$RoleImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$RoleToJson(_Role instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'permissions': instance.permissions,

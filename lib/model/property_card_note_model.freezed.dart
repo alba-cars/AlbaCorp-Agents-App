@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,42 +10,68 @@ part of 'property_card_note_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PropertyCardNoteModel _$PropertyCardNoteModelFromJson(
-    Map<String, dynamic> json) {
-  return _PropertyCardNoteModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PropertyCardNoteModel {
   @JsonKey(name: 'propertyCard')
-  String? get propertyCard => throw _privateConstructorUsedError;
+  String? get propertyCard;
   @JsonKey(name: 'createdBy')
-  User? get createdBy => throw _privateConstructorUsedError;
+  User? get createdBy;
   @JsonKey(name: 'message')
-  String? get message => throw _privateConstructorUsedError;
+  String? get message;
   @JsonKey(name: 'createdAt')
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
   @JsonKey(name: 'updatedAt')
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt;
   @JsonKey(name: 'id')
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of PropertyCardNoteModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $PropertyCardNoteModelCopyWith<PropertyCardNoteModel> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$PropertyCardNoteModelCopyWithImpl<PropertyCardNoteModel>(
+          this as PropertyCardNoteModel, _$identity);
+
+  /// Serializes this PropertyCardNoteModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PropertyCardNoteModel &&
+            (identical(other.propertyCard, propertyCard) ||
+                other.propertyCard == propertyCard) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, propertyCard, createdBy, message, createdAt, updatedAt, id);
+
+  @override
+  String toString() {
+    return 'PropertyCardNoteModel(propertyCard: $propertyCard, createdBy: $createdBy, message: $message, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
+  }
 }
 
 /// @nodoc
-abstract class $PropertyCardNoteModelCopyWith<$Res> {
+abstract mixin class $PropertyCardNoteModelCopyWith<$Res> {
   factory $PropertyCardNoteModelCopyWith(PropertyCardNoteModel value,
-          $Res Function(PropertyCardNoteModel) then) =
-      _$PropertyCardNoteModelCopyWithImpl<$Res, PropertyCardNoteModel>;
+          $Res Function(PropertyCardNoteModel) _then) =
+      _$PropertyCardNoteModelCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(name: 'propertyCard') String? propertyCard,
@@ -58,16 +85,15 @@ abstract class $PropertyCardNoteModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PropertyCardNoteModelCopyWithImpl<$Res,
-        $Val extends PropertyCardNoteModel>
+class _$PropertyCardNoteModelCopyWithImpl<$Res>
     implements $PropertyCardNoteModelCopyWith<$Res> {
-  _$PropertyCardNoteModelCopyWithImpl(this._value, this._then);
+  _$PropertyCardNoteModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PropertyCardNoteModel _self;
+  final $Res Function(PropertyCardNoteModel) _then;
 
+  /// Create a copy of PropertyCardNoteModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,129 +104,61 @@ class _$PropertyCardNoteModelCopyWithImpl<$Res,
     Object? updatedAt = freezed,
     Object? id = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       propertyCard: freezed == propertyCard
-          ? _value.propertyCard
+          ? _self.propertyCard
           : propertyCard // ignore: cast_nullable_to_non_nullable
               as String?,
       createdBy: freezed == createdBy
-          ? _value.createdBy
+          ? _self.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as User?,
       message: freezed == message
-          ? _value.message
+          ? _self.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       id: freezed == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of PropertyCardNoteModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res>? get createdBy {
-    if (_value.createdBy == null) {
+    if (_self.createdBy == null) {
       return null;
     }
 
-    return $UserCopyWith<$Res>(_value.createdBy!, (value) {
-      return _then(_value.copyWith(createdBy: value) as $Val);
+    return $UserCopyWith<$Res>(_self.createdBy!, (value) {
+      return _then(_self.copyWith(createdBy: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$PropertyCardNoteModelImplCopyWith<$Res>
-    implements $PropertyCardNoteModelCopyWith<$Res> {
-  factory _$$PropertyCardNoteModelImplCopyWith(
-          _$PropertyCardNoteModelImpl value,
-          $Res Function(_$PropertyCardNoteModelImpl) then) =
-      __$$PropertyCardNoteModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'propertyCard') String? propertyCard,
-      @JsonKey(name: 'createdBy') User? createdBy,
-      @JsonKey(name: 'message') String? message,
-      @JsonKey(name: 'createdAt') DateTime? createdAt,
-      @JsonKey(name: 'updatedAt') DateTime? updatedAt,
-      @JsonKey(name: 'id') String? id});
-
-  @override
-  $UserCopyWith<$Res>? get createdBy;
-}
-
-/// @nodoc
-class __$$PropertyCardNoteModelImplCopyWithImpl<$Res>
-    extends _$PropertyCardNoteModelCopyWithImpl<$Res,
-        _$PropertyCardNoteModelImpl>
-    implements _$$PropertyCardNoteModelImplCopyWith<$Res> {
-  __$$PropertyCardNoteModelImplCopyWithImpl(_$PropertyCardNoteModelImpl _value,
-      $Res Function(_$PropertyCardNoteModelImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? propertyCard = freezed,
-    Object? createdBy = freezed,
-    Object? message = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? id = freezed,
-  }) {
-    return _then(_$PropertyCardNoteModelImpl(
-      propertyCard: freezed == propertyCard
-          ? _value.propertyCard
-          : propertyCard // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as User?,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$PropertyCardNoteModelImpl implements _PropertyCardNoteModel {
-  const _$PropertyCardNoteModelImpl(
+class _PropertyCardNoteModel implements PropertyCardNoteModel {
+  const _PropertyCardNoteModel(
       {@JsonKey(name: 'propertyCard') this.propertyCard,
       @JsonKey(name: 'createdBy') this.createdBy,
       @JsonKey(name: 'message') this.message,
       @JsonKey(name: 'createdAt') this.createdAt,
       @JsonKey(name: 'updatedAt') this.updatedAt,
       @JsonKey(name: 'id') this.id});
-
-  factory _$PropertyCardNoteModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PropertyCardNoteModelImplFromJson(json);
+  factory _PropertyCardNoteModel.fromJson(Map<String, dynamic> json) =>
+      _$PropertyCardNoteModelFromJson(json);
 
   @override
   @JsonKey(name: 'propertyCard')
@@ -221,16 +179,27 @@ class _$PropertyCardNoteModelImpl implements _PropertyCardNoteModel {
   @JsonKey(name: 'id')
   final String? id;
 
+  /// Create a copy of PropertyCardNoteModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PropertyCardNoteModel(propertyCard: $propertyCard, createdBy: $createdBy, message: $message, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PropertyCardNoteModelCopyWith<_PropertyCardNoteModel> get copyWith =>
+      __$PropertyCardNoteModelCopyWithImpl<_PropertyCardNoteModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PropertyCardNoteModelToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PropertyCardNoteModelImpl &&
+            other is _PropertyCardNoteModel &&
             (identical(other.propertyCard, propertyCard) ||
                 other.propertyCard == propertyCard) &&
             (identical(other.createdBy, createdBy) ||
@@ -243,58 +212,98 @@ class _$PropertyCardNoteModelImpl implements _PropertyCardNoteModel {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, propertyCard, createdBy, message, createdAt, updatedAt, id);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PropertyCardNoteModelImplCopyWith<_$PropertyCardNoteModelImpl>
-      get copyWith => __$$PropertyCardNoteModelImplCopyWithImpl<
-          _$PropertyCardNoteModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PropertyCardNoteModelImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PropertyCardNoteModel(propertyCard: $propertyCard, createdBy: $createdBy, message: $message, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
   }
 }
 
-abstract class _PropertyCardNoteModel implements PropertyCardNoteModel {
-  const factory _PropertyCardNoteModel(
-      {@JsonKey(name: 'propertyCard') final String? propertyCard,
-      @JsonKey(name: 'createdBy') final User? createdBy,
-      @JsonKey(name: 'message') final String? message,
-      @JsonKey(name: 'createdAt') final DateTime? createdAt,
-      @JsonKey(name: 'updatedAt') final DateTime? updatedAt,
-      @JsonKey(name: 'id') final String? id}) = _$PropertyCardNoteModelImpl;
+/// @nodoc
+abstract mixin class _$PropertyCardNoteModelCopyWith<$Res>
+    implements $PropertyCardNoteModelCopyWith<$Res> {
+  factory _$PropertyCardNoteModelCopyWith(_PropertyCardNoteModel value,
+          $Res Function(_PropertyCardNoteModel) _then) =
+      __$PropertyCardNoteModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'propertyCard') String? propertyCard,
+      @JsonKey(name: 'createdBy') User? createdBy,
+      @JsonKey(name: 'message') String? message,
+      @JsonKey(name: 'createdAt') DateTime? createdAt,
+      @JsonKey(name: 'updatedAt') DateTime? updatedAt,
+      @JsonKey(name: 'id') String? id});
 
-  factory _PropertyCardNoteModel.fromJson(Map<String, dynamic> json) =
-      _$PropertyCardNoteModelImpl.fromJson;
-
   @override
-  @JsonKey(name: 'propertyCard')
-  String? get propertyCard;
-  @override
-  @JsonKey(name: 'createdBy')
-  User? get createdBy;
-  @override
-  @JsonKey(name: 'message')
-  String? get message;
-  @override
-  @JsonKey(name: 'createdAt')
-  DateTime? get createdAt;
-  @override
-  @JsonKey(name: 'updatedAt')
-  DateTime? get updatedAt;
-  @override
-  @JsonKey(name: 'id')
-  String? get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$PropertyCardNoteModelImplCopyWith<_$PropertyCardNoteModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  $UserCopyWith<$Res>? get createdBy;
 }
+
+/// @nodoc
+class __$PropertyCardNoteModelCopyWithImpl<$Res>
+    implements _$PropertyCardNoteModelCopyWith<$Res> {
+  __$PropertyCardNoteModelCopyWithImpl(this._self, this._then);
+
+  final _PropertyCardNoteModel _self;
+  final $Res Function(_PropertyCardNoteModel) _then;
+
+  /// Create a copy of PropertyCardNoteModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? propertyCard = freezed,
+    Object? createdBy = freezed,
+    Object? message = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_PropertyCardNoteModel(
+      propertyCard: freezed == propertyCard
+          ? _self.propertyCard
+          : propertyCard // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdBy: freezed == createdBy
+          ? _self.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as User?,
+      message: freezed == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of PropertyCardNoteModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get createdBy {
+    if (_self.createdBy == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_self.createdBy!, (value) {
+      return _then(_self.copyWith(createdBy: value));
+    });
+  }
+}
+
+// dart format on

@@ -9,7 +9,7 @@ part 'listing_request_model.freezed.dart';
 part 'listing_request_model.g.dart';
 
 @freezed
-class NewListingRequest with _$NewListingRequest {
+abstract class NewListingRequest with _$NewListingRequest {
   const factory NewListingRequest({
     required String id,
     @JsonKey(name: 'user_id') required String userId,

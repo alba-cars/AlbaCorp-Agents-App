@@ -3,7 +3,7 @@ part of 'call_bloc.dart';
 enum PhoneCallStatus { noCall, inCall, callEnded }
 
 @freezed
-class CallState with _$CallState {
+abstract class CallState with _$CallState {
   const factory CallState({
     String? calledNumber,
     String? activityId,

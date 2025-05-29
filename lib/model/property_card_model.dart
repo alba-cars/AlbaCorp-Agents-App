@@ -10,7 +10,7 @@ part 'property_card_model.freezed.dart';
 part 'property_card_model.g.dart';
 
 @freezed
-class PropertyCard with _$PropertyCard {
+abstract class PropertyCard with _$PropertyCard {
   const factory PropertyCard({
     @JsonKey(readValue: readId) required String id,
     @JsonKey(name: 'plCreationDate') dynamic plCreationDate,
@@ -46,7 +46,7 @@ class PropertyCard with _$PropertyCard {
 }
 
 @freezed
-class CreatedBy with _$CreatedBy {
+abstract class CreatedBy with _$CreatedBy {
   const factory CreatedBy({
     @JsonKey(name: '_id') required String id,
     @JsonKey(name: 'first_name') required String firstName,
@@ -59,7 +59,7 @@ class CreatedBy with _$CreatedBy {
 }
 
 @freezed
-class PropertyCardAgent with _$PropertyCardAgent {
+abstract class PropertyCardAgent with _$PropertyCardAgent {
   const factory PropertyCardAgent({
     required String id,
     required User userId,

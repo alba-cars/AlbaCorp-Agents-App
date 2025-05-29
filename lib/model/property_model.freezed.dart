@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,101 +10,383 @@ part of 'property_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Property _$PropertyFromJson(Map<String, dynamic> json) {
-  return _Property.fromJson(json);
-}
-
 /// @nodoc
-mixin _$Property {
-  String? get id => throw _privateConstructorUsedError;
-  String get listingType => throw _privateConstructorUsedError;
-  String? get categoryId => throw _privateConstructorUsedError;
-  String? get propertyTypeId => throw _privateConstructorUsedError;
-  String get propertyTitle => throw _privateConstructorUsedError;
-  String? get propertyDesc => throw _privateConstructorUsedError;
-  bool get featured => throw _privateConstructorUsedError;
-  bool? get dealOfWeek => throw _privateConstructorUsedError;
-  Agent? get agent => throw _privateConstructorUsedError;
-  bool? get premium => throw _privateConstructorUsedError;
-  bool? get exclusive => throw _privateConstructorUsedError;
-  String? get completionStatus => throw _privateConstructorUsedError;
-  String? get completionDate => throw _privateConstructorUsedError;
-  List<String>? get metaTags => throw _privateConstructorUsedError;
-  String? get metaDesc => throw _privateConstructorUsedError;
-  String get commission => throw _privateConstructorUsedError;
-  String? get securityDeposit => throw _privateConstructorUsedError;
-  String get referNo => throw _privateConstructorUsedError;
-  String? get permitNo => throw _privateConstructorUsedError;
-  String? get permitNoDTCM => throw _privateConstructorUsedError;
-  String? get buildingId => throw _privateConstructorUsedError;
-  String? get buildingName => throw _privateConstructorUsedError;
-  List<dynamic>? get buildingDistances => throw _privateConstructorUsedError;
-  String? get street => throw _privateConstructorUsedError;
-  String? get communityId => throw _privateConstructorUsedError;
-  String? get communityName => throw _privateConstructorUsedError;
-  String? get subCommunity => throw _privateConstructorUsedError;
-  String? get emirate => throw _privateConstructorUsedError;
-  String? get pinlocation => throw _privateConstructorUsedError;
-  double? get size => throw _privateConstructorUsedError;
-  String? get villaSize => throw _privateConstructorUsedError;
-  String? get beds => throw _privateConstructorUsedError;
-  String? get baths => throw _privateConstructorUsedError;
-  String? get lat => throw _privateConstructorUsedError;
-  String? get lng => throw _privateConstructorUsedError;
-  List<dynamic>? get priceHistory => throw _privateConstructorUsedError;
-  String? get zipCode => throw _privateConstructorUsedError;
-  String? get emi => throw _privateConstructorUsedError;
-  List<String> get amenities => throw _privateConstructorUsedError;
-  List<dynamic>? get amenityIds => throw _privateConstructorUsedError;
-  List<dynamic>? get amenityObjs => throw _privateConstructorUsedError;
-  List<dynamic>? get customField => throw _privateConstructorUsedError;
-  String? get rentalPeriod => throw _privateConstructorUsedError;
-  String? get rentFinance => throw _privateConstructorUsedError;
-  double? get askingPrice => throw _privateConstructorUsedError;
-  String? get pricedrop => throw _privateConstructorUsedError;
-  double? get oneCheqPrice => throw _privateConstructorUsedError;
-  double? get twoCheqPrice => throw _privateConstructorUsedError;
-  double? get fourCheqPrice => throw _privateConstructorUsedError;
-  double? get sixCheqPrice => throw _privateConstructorUsedError;
-  double? get twelveCheqPrice => throw _privateConstructorUsedError;
-  List<dynamic>? get fees => throw _privateConstructorUsedError;
-  String? get unitStatus => throw _privateConstructorUsedError;
-  String? get unitReraNo => throw _privateConstructorUsedError;
-  String? get makaniNo => throw _privateConstructorUsedError;
-  String? get dewaNo => throw _privateConstructorUsedError;
+mixin _$Property implements DiagnosticableTreeMixin {
+  String? get id;
+  String get listingType;
+  String? get categoryId;
+  String? get propertyTypeId;
+  String get propertyTitle;
+  String? get propertyDesc;
+  bool get featured;
+  bool? get dealOfWeek;
+  Agent? get agent;
+  bool? get premium;
+  bool? get exclusive;
+  String? get completionStatus;
+  String? get completionDate;
+  List<String>? get metaTags;
+  String? get metaDesc;
+  String get commission;
+  String? get securityDeposit;
+  String get referNo;
+  String? get permitNo;
+  String? get permitNoDTCM;
+  String? get buildingId;
+  String? get buildingName;
+  List<dynamic>? get buildingDistances;
+  String? get street;
+  String? get communityId;
+  String? get communityName;
+  String? get subCommunity;
+  String? get emirate;
+  String? get pinlocation;
+  double? get size;
+  String? get villaSize;
+  String? get beds;
+  String? get baths;
+  String? get lat;
+  String? get lng;
+  List<dynamic>? get priceHistory;
+  String? get zipCode;
+  String? get emi;
+  List<String> get amenities;
+  List<dynamic>? get amenityIds;
+  List<dynamic>? get amenityObjs;
+  List<dynamic>? get customField;
+  String? get rentalPeriod;
+  String? get rentFinance;
+  double? get askingPrice;
+  String? get pricedrop;
+  double? get oneCheqPrice;
+  double? get twoCheqPrice;
+  double? get fourCheqPrice;
+  double? get sixCheqPrice;
+  double? get twelveCheqPrice;
+  List<dynamic>? get fees;
+  String? get unitStatus;
+  String? get unitReraNo;
+  String? get makaniNo;
+  String? get dewaNo;
   @JsonKey(name: "property_owner_id")
-  String? get propertyOwnerId => throw _privateConstructorUsedError;
-  String? get propertyListId => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
-  List<dynamic>? get images => throw _privateConstructorUsedError;
-  List<String>? get floorPlans => throw _privateConstructorUsedError;
-  List<String>? get videos => throw _privateConstructorUsedError;
-  List<String>? get matterportLink => throw _privateConstructorUsedError;
-  String? get agentStatus => throw _privateConstructorUsedError;
-  String? get agentId => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
-  bool? get propertyStatus => throw _privateConstructorUsedError;
-  String? get soldOrReserved => throw _privateConstructorUsedError;
-  DateTime? get soldDate => throw _privateConstructorUsedError;
-  DateTime? get reservedDate => throw _privateConstructorUsedError;
-  List<String>? get statusArray => throw _privateConstructorUsedError;
-  String? get createdBy => throw _privateConstructorUsedError;
+  String? get propertyOwnerId;
+  String? get propertyListId;
+  String? get image;
+  List<dynamic>? get images;
+  List<String>? get floorPlans;
+  List<String>? get videos;
+  List<String>? get matterportLink;
+  String? get agentStatus;
+  String? get agentId;
+  String? get status;
+  bool? get propertyStatus;
+  String? get soldOrReserved;
+  DateTime? get soldDate;
+  DateTime? get reservedDate;
+  List<String>? get statusArray;
+  String? get createdBy;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  /// Create a copy of Property
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $PropertyCopyWith<Property> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$PropertyCopyWithImpl<Property>(this as Property, _$identity);
+
+  /// Serializes this Property to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'Property'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('listingType', listingType))
+      ..add(DiagnosticsProperty('categoryId', categoryId))
+      ..add(DiagnosticsProperty('propertyTypeId', propertyTypeId))
+      ..add(DiagnosticsProperty('propertyTitle', propertyTitle))
+      ..add(DiagnosticsProperty('propertyDesc', propertyDesc))
+      ..add(DiagnosticsProperty('featured', featured))
+      ..add(DiagnosticsProperty('dealOfWeek', dealOfWeek))
+      ..add(DiagnosticsProperty('agent', agent))
+      ..add(DiagnosticsProperty('premium', premium))
+      ..add(DiagnosticsProperty('exclusive', exclusive))
+      ..add(DiagnosticsProperty('completionStatus', completionStatus))
+      ..add(DiagnosticsProperty('completionDate', completionDate))
+      ..add(DiagnosticsProperty('metaTags', metaTags))
+      ..add(DiagnosticsProperty('metaDesc', metaDesc))
+      ..add(DiagnosticsProperty('commission', commission))
+      ..add(DiagnosticsProperty('securityDeposit', securityDeposit))
+      ..add(DiagnosticsProperty('referNo', referNo))
+      ..add(DiagnosticsProperty('permitNo', permitNo))
+      ..add(DiagnosticsProperty('permitNoDTCM', permitNoDTCM))
+      ..add(DiagnosticsProperty('buildingId', buildingId))
+      ..add(DiagnosticsProperty('buildingName', buildingName))
+      ..add(DiagnosticsProperty('buildingDistances', buildingDistances))
+      ..add(DiagnosticsProperty('street', street))
+      ..add(DiagnosticsProperty('communityId', communityId))
+      ..add(DiagnosticsProperty('communityName', communityName))
+      ..add(DiagnosticsProperty('subCommunity', subCommunity))
+      ..add(DiagnosticsProperty('emirate', emirate))
+      ..add(DiagnosticsProperty('pinlocation', pinlocation))
+      ..add(DiagnosticsProperty('size', size))
+      ..add(DiagnosticsProperty('villaSize', villaSize))
+      ..add(DiagnosticsProperty('beds', beds))
+      ..add(DiagnosticsProperty('baths', baths))
+      ..add(DiagnosticsProperty('lat', lat))
+      ..add(DiagnosticsProperty('lng', lng))
+      ..add(DiagnosticsProperty('priceHistory', priceHistory))
+      ..add(DiagnosticsProperty('zipCode', zipCode))
+      ..add(DiagnosticsProperty('emi', emi))
+      ..add(DiagnosticsProperty('amenities', amenities))
+      ..add(DiagnosticsProperty('amenityIds', amenityIds))
+      ..add(DiagnosticsProperty('amenityObjs', amenityObjs))
+      ..add(DiagnosticsProperty('customField', customField))
+      ..add(DiagnosticsProperty('rentalPeriod', rentalPeriod))
+      ..add(DiagnosticsProperty('rentFinance', rentFinance))
+      ..add(DiagnosticsProperty('askingPrice', askingPrice))
+      ..add(DiagnosticsProperty('pricedrop', pricedrop))
+      ..add(DiagnosticsProperty('oneCheqPrice', oneCheqPrice))
+      ..add(DiagnosticsProperty('twoCheqPrice', twoCheqPrice))
+      ..add(DiagnosticsProperty('fourCheqPrice', fourCheqPrice))
+      ..add(DiagnosticsProperty('sixCheqPrice', sixCheqPrice))
+      ..add(DiagnosticsProperty('twelveCheqPrice', twelveCheqPrice))
+      ..add(DiagnosticsProperty('fees', fees))
+      ..add(DiagnosticsProperty('unitStatus', unitStatus))
+      ..add(DiagnosticsProperty('unitReraNo', unitReraNo))
+      ..add(DiagnosticsProperty('makaniNo', makaniNo))
+      ..add(DiagnosticsProperty('dewaNo', dewaNo))
+      ..add(DiagnosticsProperty('propertyOwnerId', propertyOwnerId))
+      ..add(DiagnosticsProperty('propertyListId', propertyListId))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('images', images))
+      ..add(DiagnosticsProperty('floorPlans', floorPlans))
+      ..add(DiagnosticsProperty('videos', videos))
+      ..add(DiagnosticsProperty('matterportLink', matterportLink))
+      ..add(DiagnosticsProperty('agentStatus', agentStatus))
+      ..add(DiagnosticsProperty('agentId', agentId))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('propertyStatus', propertyStatus))
+      ..add(DiagnosticsProperty('soldOrReserved', soldOrReserved))
+      ..add(DiagnosticsProperty('soldDate', soldDate))
+      ..add(DiagnosticsProperty('reservedDate', reservedDate))
+      ..add(DiagnosticsProperty('statusArray', statusArray))
+      ..add(DiagnosticsProperty('createdBy', createdBy));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Property &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.listingType, listingType) ||
+                other.listingType == listingType) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
+            (identical(other.propertyTypeId, propertyTypeId) ||
+                other.propertyTypeId == propertyTypeId) &&
+            (identical(other.propertyTitle, propertyTitle) ||
+                other.propertyTitle == propertyTitle) &&
+            (identical(other.propertyDesc, propertyDesc) ||
+                other.propertyDesc == propertyDesc) &&
+            (identical(other.featured, featured) ||
+                other.featured == featured) &&
+            (identical(other.dealOfWeek, dealOfWeek) ||
+                other.dealOfWeek == dealOfWeek) &&
+            (identical(other.agent, agent) || other.agent == agent) &&
+            (identical(other.premium, premium) || other.premium == premium) &&
+            (identical(other.exclusive, exclusive) ||
+                other.exclusive == exclusive) &&
+            (identical(other.completionStatus, completionStatus) ||
+                other.completionStatus == completionStatus) &&
+            (identical(other.completionDate, completionDate) ||
+                other.completionDate == completionDate) &&
+            const DeepCollectionEquality().equals(other.metaTags, metaTags) &&
+            (identical(other.metaDesc, metaDesc) ||
+                other.metaDesc == metaDesc) &&
+            (identical(other.commission, commission) ||
+                other.commission == commission) &&
+            (identical(other.securityDeposit, securityDeposit) ||
+                other.securityDeposit == securityDeposit) &&
+            (identical(other.referNo, referNo) || other.referNo == referNo) &&
+            (identical(other.permitNo, permitNo) ||
+                other.permitNo == permitNo) &&
+            (identical(other.permitNoDTCM, permitNoDTCM) ||
+                other.permitNoDTCM == permitNoDTCM) &&
+            (identical(other.buildingId, buildingId) ||
+                other.buildingId == buildingId) &&
+            (identical(other.buildingName, buildingName) ||
+                other.buildingName == buildingName) &&
+            const DeepCollectionEquality()
+                .equals(other.buildingDistances, buildingDistances) &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.communityId, communityId) ||
+                other.communityId == communityId) &&
+            (identical(other.communityName, communityName) ||
+                other.communityName == communityName) &&
+            (identical(other.subCommunity, subCommunity) ||
+                other.subCommunity == subCommunity) &&
+            (identical(other.emirate, emirate) || other.emirate == emirate) &&
+            (identical(other.pinlocation, pinlocation) ||
+                other.pinlocation == pinlocation) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.villaSize, villaSize) ||
+                other.villaSize == villaSize) &&
+            (identical(other.beds, beds) || other.beds == beds) &&
+            (identical(other.baths, baths) || other.baths == baths) &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.lng, lng) || other.lng == lng) &&
+            const DeepCollectionEquality()
+                .equals(other.priceHistory, priceHistory) &&
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode) &&
+            (identical(other.emi, emi) || other.emi == emi) &&
+            const DeepCollectionEquality().equals(other.amenities, amenities) &&
+            const DeepCollectionEquality()
+                .equals(other.amenityIds, amenityIds) &&
+            const DeepCollectionEquality()
+                .equals(other.amenityObjs, amenityObjs) &&
+            const DeepCollectionEquality()
+                .equals(other.customField, customField) &&
+            (identical(other.rentalPeriod, rentalPeriod) ||
+                other.rentalPeriod == rentalPeriod) &&
+            (identical(other.rentFinance, rentFinance) ||
+                other.rentFinance == rentFinance) &&
+            (identical(other.askingPrice, askingPrice) ||
+                other.askingPrice == askingPrice) &&
+            (identical(other.pricedrop, pricedrop) ||
+                other.pricedrop == pricedrop) &&
+            (identical(other.oneCheqPrice, oneCheqPrice) ||
+                other.oneCheqPrice == oneCheqPrice) &&
+            (identical(other.twoCheqPrice, twoCheqPrice) ||
+                other.twoCheqPrice == twoCheqPrice) &&
+            (identical(other.fourCheqPrice, fourCheqPrice) ||
+                other.fourCheqPrice == fourCheqPrice) &&
+            (identical(other.sixCheqPrice, sixCheqPrice) ||
+                other.sixCheqPrice == sixCheqPrice) &&
+            (identical(other.twelveCheqPrice, twelveCheqPrice) ||
+                other.twelveCheqPrice == twelveCheqPrice) &&
+            const DeepCollectionEquality().equals(other.fees, fees) &&
+            (identical(other.unitStatus, unitStatus) ||
+                other.unitStatus == unitStatus) &&
+            (identical(other.unitReraNo, unitReraNo) ||
+                other.unitReraNo == unitReraNo) &&
+            (identical(other.makaniNo, makaniNo) ||
+                other.makaniNo == makaniNo) &&
+            (identical(other.dewaNo, dewaNo) || other.dewaNo == dewaNo) &&
+            (identical(other.propertyOwnerId, propertyOwnerId) ||
+                other.propertyOwnerId == propertyOwnerId) &&
+            (identical(other.propertyListId, propertyListId) ||
+                other.propertyListId == propertyListId) &&
+            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other.images, images) &&
+            const DeepCollectionEquality()
+                .equals(other.floorPlans, floorPlans) &&
+            const DeepCollectionEquality().equals(other.videos, videos) &&
+            const DeepCollectionEquality()
+                .equals(other.matterportLink, matterportLink) &&
+            (identical(other.agentStatus, agentStatus) || other.agentStatus == agentStatus) &&
+            (identical(other.agentId, agentId) || other.agentId == agentId) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.propertyStatus, propertyStatus) || other.propertyStatus == propertyStatus) &&
+            (identical(other.soldOrReserved, soldOrReserved) || other.soldOrReserved == soldOrReserved) &&
+            (identical(other.soldDate, soldDate) || other.soldDate == soldDate) &&
+            (identical(other.reservedDate, reservedDate) || other.reservedDate == reservedDate) &&
+            const DeepCollectionEquality().equals(other.statusArray, statusArray) &&
+            (identical(other.createdBy, createdBy) || other.createdBy == createdBy));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        listingType,
+        categoryId,
+        propertyTypeId,
+        propertyTitle,
+        propertyDesc,
+        featured,
+        dealOfWeek,
+        agent,
+        premium,
+        exclusive,
+        completionStatus,
+        completionDate,
+        const DeepCollectionEquality().hash(metaTags),
+        metaDesc,
+        commission,
+        securityDeposit,
+        referNo,
+        permitNo,
+        permitNoDTCM,
+        buildingId,
+        buildingName,
+        const DeepCollectionEquality().hash(buildingDistances),
+        street,
+        communityId,
+        communityName,
+        subCommunity,
+        emirate,
+        pinlocation,
+        size,
+        villaSize,
+        beds,
+        baths,
+        lat,
+        lng,
+        const DeepCollectionEquality().hash(priceHistory),
+        zipCode,
+        emi,
+        const DeepCollectionEquality().hash(amenities),
+        const DeepCollectionEquality().hash(amenityIds),
+        const DeepCollectionEquality().hash(amenityObjs),
+        const DeepCollectionEquality().hash(customField),
+        rentalPeriod,
+        rentFinance,
+        askingPrice,
+        pricedrop,
+        oneCheqPrice,
+        twoCheqPrice,
+        fourCheqPrice,
+        sixCheqPrice,
+        twelveCheqPrice,
+        const DeepCollectionEquality().hash(fees),
+        unitStatus,
+        unitReraNo,
+        makaniNo,
+        dewaNo,
+        propertyOwnerId,
+        propertyListId,
+        image,
+        const DeepCollectionEquality().hash(images),
+        const DeepCollectionEquality().hash(floorPlans),
+        const DeepCollectionEquality().hash(videos),
+        const DeepCollectionEquality().hash(matterportLink),
+        agentStatus,
+        agentId,
+        status,
+        propertyStatus,
+        soldOrReserved,
+        soldDate,
+        reservedDate,
+        const DeepCollectionEquality().hash(statusArray),
+        createdBy
+      ]);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Property(id: $id, listingType: $listingType, categoryId: $categoryId, propertyTypeId: $propertyTypeId, propertyTitle: $propertyTitle, propertyDesc: $propertyDesc, featured: $featured, dealOfWeek: $dealOfWeek, agent: $agent, premium: $premium, exclusive: $exclusive, completionStatus: $completionStatus, completionDate: $completionDate, metaTags: $metaTags, metaDesc: $metaDesc, commission: $commission, securityDeposit: $securityDeposit, referNo: $referNo, permitNo: $permitNo, permitNoDTCM: $permitNoDTCM, buildingId: $buildingId, buildingName: $buildingName, buildingDistances: $buildingDistances, street: $street, communityId: $communityId, communityName: $communityName, subCommunity: $subCommunity, emirate: $emirate, pinlocation: $pinlocation, size: $size, villaSize: $villaSize, beds: $beds, baths: $baths, lat: $lat, lng: $lng, priceHistory: $priceHistory, zipCode: $zipCode, emi: $emi, amenities: $amenities, amenityIds: $amenityIds, amenityObjs: $amenityObjs, customField: $customField, rentalPeriod: $rentalPeriod, rentFinance: $rentFinance, askingPrice: $askingPrice, pricedrop: $pricedrop, oneCheqPrice: $oneCheqPrice, twoCheqPrice: $twoCheqPrice, fourCheqPrice: $fourCheqPrice, sixCheqPrice: $sixCheqPrice, twelveCheqPrice: $twelveCheqPrice, fees: $fees, unitStatus: $unitStatus, unitReraNo: $unitReraNo, makaniNo: $makaniNo, dewaNo: $dewaNo, propertyOwnerId: $propertyOwnerId, propertyListId: $propertyListId, image: $image, images: $images, floorPlans: $floorPlans, videos: $videos, matterportLink: $matterportLink, agentStatus: $agentStatus, agentId: $agentId, status: $status, propertyStatus: $propertyStatus, soldOrReserved: $soldOrReserved, soldDate: $soldDate, reservedDate: $reservedDate, statusArray: $statusArray, createdBy: $createdBy)';
+  }
 }
 
 /// @nodoc
-abstract class $PropertyCopyWith<$Res> {
-  factory $PropertyCopyWith(Property value, $Res Function(Property) then) =
-      _$PropertyCopyWithImpl<$Res, Property>;
+abstract mixin class $PropertyCopyWith<$Res> {
+  factory $PropertyCopyWith(Property value, $Res Function(Property) _then) =
+      _$PropertyCopyWithImpl;
   @useResult
   $Res call(
       {String? id,
@@ -183,15 +466,14 @@ abstract class $PropertyCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PropertyCopyWithImpl<$Res, $Val extends Property>
-    implements $PropertyCopyWith<$Res> {
-  _$PropertyCopyWithImpl(this._value, this._then);
+class _$PropertyCopyWithImpl<$Res> implements $PropertyCopyWith<$Res> {
+  _$PropertyCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Property _self;
+  final $Res Function(Property) _then;
 
+  /// Create a copy of Property
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -268,778 +550,317 @@ class _$PropertyCopyWithImpl<$Res, $Val extends Property>
     Object? statusArray = freezed,
     Object? createdBy = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: freezed == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
       listingType: null == listingType
-          ? _value.listingType
+          ? _self.listingType
           : listingType // ignore: cast_nullable_to_non_nullable
               as String,
       categoryId: freezed == categoryId
-          ? _value.categoryId
+          ? _self.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyTypeId: freezed == propertyTypeId
-          ? _value.propertyTypeId
+          ? _self.propertyTypeId
           : propertyTypeId // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyTitle: null == propertyTitle
-          ? _value.propertyTitle
+          ? _self.propertyTitle
           : propertyTitle // ignore: cast_nullable_to_non_nullable
               as String,
       propertyDesc: freezed == propertyDesc
-          ? _value.propertyDesc
+          ? _self.propertyDesc
           : propertyDesc // ignore: cast_nullable_to_non_nullable
               as String?,
       featured: null == featured
-          ? _value.featured
+          ? _self.featured
           : featured // ignore: cast_nullable_to_non_nullable
               as bool,
       dealOfWeek: freezed == dealOfWeek
-          ? _value.dealOfWeek
+          ? _self.dealOfWeek
           : dealOfWeek // ignore: cast_nullable_to_non_nullable
               as bool?,
       agent: freezed == agent
-          ? _value.agent
+          ? _self.agent
           : agent // ignore: cast_nullable_to_non_nullable
               as Agent?,
       premium: freezed == premium
-          ? _value.premium
+          ? _self.premium
           : premium // ignore: cast_nullable_to_non_nullable
               as bool?,
       exclusive: freezed == exclusive
-          ? _value.exclusive
+          ? _self.exclusive
           : exclusive // ignore: cast_nullable_to_non_nullable
               as bool?,
       completionStatus: freezed == completionStatus
-          ? _value.completionStatus
+          ? _self.completionStatus
           : completionStatus // ignore: cast_nullable_to_non_nullable
               as String?,
       completionDate: freezed == completionDate
-          ? _value.completionDate
+          ? _self.completionDate
           : completionDate // ignore: cast_nullable_to_non_nullable
               as String?,
       metaTags: freezed == metaTags
-          ? _value.metaTags
+          ? _self.metaTags
           : metaTags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       metaDesc: freezed == metaDesc
-          ? _value.metaDesc
+          ? _self.metaDesc
           : metaDesc // ignore: cast_nullable_to_non_nullable
               as String?,
       commission: null == commission
-          ? _value.commission
+          ? _self.commission
           : commission // ignore: cast_nullable_to_non_nullable
               as String,
       securityDeposit: freezed == securityDeposit
-          ? _value.securityDeposit
+          ? _self.securityDeposit
           : securityDeposit // ignore: cast_nullable_to_non_nullable
               as String?,
       referNo: null == referNo
-          ? _value.referNo
+          ? _self.referNo
           : referNo // ignore: cast_nullable_to_non_nullable
               as String,
       permitNo: freezed == permitNo
-          ? _value.permitNo
+          ? _self.permitNo
           : permitNo // ignore: cast_nullable_to_non_nullable
               as String?,
       permitNoDTCM: freezed == permitNoDTCM
-          ? _value.permitNoDTCM
+          ? _self.permitNoDTCM
           : permitNoDTCM // ignore: cast_nullable_to_non_nullable
               as String?,
       buildingId: freezed == buildingId
-          ? _value.buildingId
+          ? _self.buildingId
           : buildingId // ignore: cast_nullable_to_non_nullable
               as String?,
       buildingName: freezed == buildingName
-          ? _value.buildingName
+          ? _self.buildingName
           : buildingName // ignore: cast_nullable_to_non_nullable
               as String?,
       buildingDistances: freezed == buildingDistances
-          ? _value.buildingDistances
+          ? _self.buildingDistances
           : buildingDistances // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       street: freezed == street
-          ? _value.street
+          ? _self.street
           : street // ignore: cast_nullable_to_non_nullable
               as String?,
       communityId: freezed == communityId
-          ? _value.communityId
+          ? _self.communityId
           : communityId // ignore: cast_nullable_to_non_nullable
               as String?,
       communityName: freezed == communityName
-          ? _value.communityName
+          ? _self.communityName
           : communityName // ignore: cast_nullable_to_non_nullable
               as String?,
       subCommunity: freezed == subCommunity
-          ? _value.subCommunity
+          ? _self.subCommunity
           : subCommunity // ignore: cast_nullable_to_non_nullable
               as String?,
       emirate: freezed == emirate
-          ? _value.emirate
+          ? _self.emirate
           : emirate // ignore: cast_nullable_to_non_nullable
               as String?,
       pinlocation: freezed == pinlocation
-          ? _value.pinlocation
+          ? _self.pinlocation
           : pinlocation // ignore: cast_nullable_to_non_nullable
               as String?,
       size: freezed == size
-          ? _value.size
+          ? _self.size
           : size // ignore: cast_nullable_to_non_nullable
               as double?,
       villaSize: freezed == villaSize
-          ? _value.villaSize
+          ? _self.villaSize
           : villaSize // ignore: cast_nullable_to_non_nullable
               as String?,
       beds: freezed == beds
-          ? _value.beds
+          ? _self.beds
           : beds // ignore: cast_nullable_to_non_nullable
               as String?,
       baths: freezed == baths
-          ? _value.baths
+          ? _self.baths
           : baths // ignore: cast_nullable_to_non_nullable
               as String?,
       lat: freezed == lat
-          ? _value.lat
+          ? _self.lat
           : lat // ignore: cast_nullable_to_non_nullable
               as String?,
       lng: freezed == lng
-          ? _value.lng
+          ? _self.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as String?,
       priceHistory: freezed == priceHistory
-          ? _value.priceHistory
+          ? _self.priceHistory
           : priceHistory // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       zipCode: freezed == zipCode
-          ? _value.zipCode
+          ? _self.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
       emi: freezed == emi
-          ? _value.emi
+          ? _self.emi
           : emi // ignore: cast_nullable_to_non_nullable
               as String?,
       amenities: null == amenities
-          ? _value.amenities
+          ? _self.amenities
           : amenities // ignore: cast_nullable_to_non_nullable
               as List<String>,
       amenityIds: freezed == amenityIds
-          ? _value.amenityIds
+          ? _self.amenityIds
           : amenityIds // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       amenityObjs: freezed == amenityObjs
-          ? _value.amenityObjs
+          ? _self.amenityObjs
           : amenityObjs // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       customField: freezed == customField
-          ? _value.customField
+          ? _self.customField
           : customField // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       rentalPeriod: freezed == rentalPeriod
-          ? _value.rentalPeriod
+          ? _self.rentalPeriod
           : rentalPeriod // ignore: cast_nullable_to_non_nullable
               as String?,
       rentFinance: freezed == rentFinance
-          ? _value.rentFinance
+          ? _self.rentFinance
           : rentFinance // ignore: cast_nullable_to_non_nullable
               as String?,
       askingPrice: freezed == askingPrice
-          ? _value.askingPrice
+          ? _self.askingPrice
           : askingPrice // ignore: cast_nullable_to_non_nullable
               as double?,
       pricedrop: freezed == pricedrop
-          ? _value.pricedrop
+          ? _self.pricedrop
           : pricedrop // ignore: cast_nullable_to_non_nullable
               as String?,
       oneCheqPrice: freezed == oneCheqPrice
-          ? _value.oneCheqPrice
+          ? _self.oneCheqPrice
           : oneCheqPrice // ignore: cast_nullable_to_non_nullable
               as double?,
       twoCheqPrice: freezed == twoCheqPrice
-          ? _value.twoCheqPrice
+          ? _self.twoCheqPrice
           : twoCheqPrice // ignore: cast_nullable_to_non_nullable
               as double?,
       fourCheqPrice: freezed == fourCheqPrice
-          ? _value.fourCheqPrice
+          ? _self.fourCheqPrice
           : fourCheqPrice // ignore: cast_nullable_to_non_nullable
               as double?,
       sixCheqPrice: freezed == sixCheqPrice
-          ? _value.sixCheqPrice
+          ? _self.sixCheqPrice
           : sixCheqPrice // ignore: cast_nullable_to_non_nullable
               as double?,
       twelveCheqPrice: freezed == twelveCheqPrice
-          ? _value.twelveCheqPrice
+          ? _self.twelveCheqPrice
           : twelveCheqPrice // ignore: cast_nullable_to_non_nullable
               as double?,
       fees: freezed == fees
-          ? _value.fees
+          ? _self.fees
           : fees // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       unitStatus: freezed == unitStatus
-          ? _value.unitStatus
+          ? _self.unitStatus
           : unitStatus // ignore: cast_nullable_to_non_nullable
               as String?,
       unitReraNo: freezed == unitReraNo
-          ? _value.unitReraNo
+          ? _self.unitReraNo
           : unitReraNo // ignore: cast_nullable_to_non_nullable
               as String?,
       makaniNo: freezed == makaniNo
-          ? _value.makaniNo
+          ? _self.makaniNo
           : makaniNo // ignore: cast_nullable_to_non_nullable
               as String?,
       dewaNo: freezed == dewaNo
-          ? _value.dewaNo
+          ? _self.dewaNo
           : dewaNo // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyOwnerId: freezed == propertyOwnerId
-          ? _value.propertyOwnerId
+          ? _self.propertyOwnerId
           : propertyOwnerId // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyListId: freezed == propertyListId
-          ? _value.propertyListId
+          ? _self.propertyListId
           : propertyListId // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
-          ? _value.image
+          ? _self.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
       images: freezed == images
-          ? _value.images
+          ? _self.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
       floorPlans: freezed == floorPlans
-          ? _value.floorPlans
+          ? _self.floorPlans
           : floorPlans // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       videos: freezed == videos
-          ? _value.videos
+          ? _self.videos
           : videos // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       matterportLink: freezed == matterportLink
-          ? _value.matterportLink
+          ? _self.matterportLink
           : matterportLink // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       agentStatus: freezed == agentStatus
-          ? _value.agentStatus
+          ? _self.agentStatus
           : agentStatus // ignore: cast_nullable_to_non_nullable
               as String?,
       agentId: freezed == agentId
-          ? _value.agentId
+          ? _self.agentId
           : agentId // ignore: cast_nullable_to_non_nullable
               as String?,
       status: freezed == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
       propertyStatus: freezed == propertyStatus
-          ? _value.propertyStatus
+          ? _self.propertyStatus
           : propertyStatus // ignore: cast_nullable_to_non_nullable
               as bool?,
       soldOrReserved: freezed == soldOrReserved
-          ? _value.soldOrReserved
+          ? _self.soldOrReserved
           : soldOrReserved // ignore: cast_nullable_to_non_nullable
               as String?,
       soldDate: freezed == soldDate
-          ? _value.soldDate
+          ? _self.soldDate
           : soldDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       reservedDate: freezed == reservedDate
-          ? _value.reservedDate
+          ? _self.reservedDate
           : reservedDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       statusArray: freezed == statusArray
-          ? _value.statusArray
+          ? _self.statusArray
           : statusArray // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       createdBy: freezed == createdBy
-          ? _value.createdBy
+          ? _self.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
+  /// Create a copy of Property
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AgentCopyWith<$Res>? get agent {
-    if (_value.agent == null) {
+    if (_self.agent == null) {
       return null;
     }
 
-    return $AgentCopyWith<$Res>(_value.agent!, (value) {
-      return _then(_value.copyWith(agent: value) as $Val);
+    return $AgentCopyWith<$Res>(_self.agent!, (value) {
+      return _then(_self.copyWith(agent: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$PropertyImplCopyWith<$Res>
-    implements $PropertyCopyWith<$Res> {
-  factory _$$PropertyImplCopyWith(
-          _$PropertyImpl value, $Res Function(_$PropertyImpl) then) =
-      __$$PropertyImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? id,
-      String listingType,
-      String? categoryId,
-      String? propertyTypeId,
-      String propertyTitle,
-      String? propertyDesc,
-      bool featured,
-      bool? dealOfWeek,
-      Agent? agent,
-      bool? premium,
-      bool? exclusive,
-      String? completionStatus,
-      String? completionDate,
-      List<String>? metaTags,
-      String? metaDesc,
-      String commission,
-      String? securityDeposit,
-      String referNo,
-      String? permitNo,
-      String? permitNoDTCM,
-      String? buildingId,
-      String? buildingName,
-      List<dynamic>? buildingDistances,
-      String? street,
-      String? communityId,
-      String? communityName,
-      String? subCommunity,
-      String? emirate,
-      String? pinlocation,
-      double? size,
-      String? villaSize,
-      String? beds,
-      String? baths,
-      String? lat,
-      String? lng,
-      List<dynamic>? priceHistory,
-      String? zipCode,
-      String? emi,
-      List<String> amenities,
-      List<dynamic>? amenityIds,
-      List<dynamic>? amenityObjs,
-      List<dynamic>? customField,
-      String? rentalPeriod,
-      String? rentFinance,
-      double? askingPrice,
-      String? pricedrop,
-      double? oneCheqPrice,
-      double? twoCheqPrice,
-      double? fourCheqPrice,
-      double? sixCheqPrice,
-      double? twelveCheqPrice,
-      List<dynamic>? fees,
-      String? unitStatus,
-      String? unitReraNo,
-      String? makaniNo,
-      String? dewaNo,
-      @JsonKey(name: "property_owner_id") String? propertyOwnerId,
-      String? propertyListId,
-      String? image,
-      List<dynamic>? images,
-      List<String>? floorPlans,
-      List<String>? videos,
-      List<String>? matterportLink,
-      String? agentStatus,
-      String? agentId,
-      String? status,
-      bool? propertyStatus,
-      String? soldOrReserved,
-      DateTime? soldDate,
-      DateTime? reservedDate,
-      List<String>? statusArray,
-      String? createdBy});
-
-  @override
-  $AgentCopyWith<$Res>? get agent;
-}
-
-/// @nodoc
-class __$$PropertyImplCopyWithImpl<$Res>
-    extends _$PropertyCopyWithImpl<$Res, _$PropertyImpl>
-    implements _$$PropertyImplCopyWith<$Res> {
-  __$$PropertyImplCopyWithImpl(
-      _$PropertyImpl _value, $Res Function(_$PropertyImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? listingType = null,
-    Object? categoryId = freezed,
-    Object? propertyTypeId = freezed,
-    Object? propertyTitle = null,
-    Object? propertyDesc = freezed,
-    Object? featured = null,
-    Object? dealOfWeek = freezed,
-    Object? agent = freezed,
-    Object? premium = freezed,
-    Object? exclusive = freezed,
-    Object? completionStatus = freezed,
-    Object? completionDate = freezed,
-    Object? metaTags = freezed,
-    Object? metaDesc = freezed,
-    Object? commission = null,
-    Object? securityDeposit = freezed,
-    Object? referNo = null,
-    Object? permitNo = freezed,
-    Object? permitNoDTCM = freezed,
-    Object? buildingId = freezed,
-    Object? buildingName = freezed,
-    Object? buildingDistances = freezed,
-    Object? street = freezed,
-    Object? communityId = freezed,
-    Object? communityName = freezed,
-    Object? subCommunity = freezed,
-    Object? emirate = freezed,
-    Object? pinlocation = freezed,
-    Object? size = freezed,
-    Object? villaSize = freezed,
-    Object? beds = freezed,
-    Object? baths = freezed,
-    Object? lat = freezed,
-    Object? lng = freezed,
-    Object? priceHistory = freezed,
-    Object? zipCode = freezed,
-    Object? emi = freezed,
-    Object? amenities = null,
-    Object? amenityIds = freezed,
-    Object? amenityObjs = freezed,
-    Object? customField = freezed,
-    Object? rentalPeriod = freezed,
-    Object? rentFinance = freezed,
-    Object? askingPrice = freezed,
-    Object? pricedrop = freezed,
-    Object? oneCheqPrice = freezed,
-    Object? twoCheqPrice = freezed,
-    Object? fourCheqPrice = freezed,
-    Object? sixCheqPrice = freezed,
-    Object? twelveCheqPrice = freezed,
-    Object? fees = freezed,
-    Object? unitStatus = freezed,
-    Object? unitReraNo = freezed,
-    Object? makaniNo = freezed,
-    Object? dewaNo = freezed,
-    Object? propertyOwnerId = freezed,
-    Object? propertyListId = freezed,
-    Object? image = freezed,
-    Object? images = freezed,
-    Object? floorPlans = freezed,
-    Object? videos = freezed,
-    Object? matterportLink = freezed,
-    Object? agentStatus = freezed,
-    Object? agentId = freezed,
-    Object? status = freezed,
-    Object? propertyStatus = freezed,
-    Object? soldOrReserved = freezed,
-    Object? soldDate = freezed,
-    Object? reservedDate = freezed,
-    Object? statusArray = freezed,
-    Object? createdBy = freezed,
-  }) {
-    return _then(_$PropertyImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      listingType: null == listingType
-          ? _value.listingType
-          : listingType // ignore: cast_nullable_to_non_nullable
-              as String,
-      categoryId: freezed == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyTypeId: freezed == propertyTypeId
-          ? _value.propertyTypeId
-          : propertyTypeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyTitle: null == propertyTitle
-          ? _value.propertyTitle
-          : propertyTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      propertyDesc: freezed == propertyDesc
-          ? _value.propertyDesc
-          : propertyDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      featured: null == featured
-          ? _value.featured
-          : featured // ignore: cast_nullable_to_non_nullable
-              as bool,
-      dealOfWeek: freezed == dealOfWeek
-          ? _value.dealOfWeek
-          : dealOfWeek // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      agent: freezed == agent
-          ? _value.agent
-          : agent // ignore: cast_nullable_to_non_nullable
-              as Agent?,
-      premium: freezed == premium
-          ? _value.premium
-          : premium // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      exclusive: freezed == exclusive
-          ? _value.exclusive
-          : exclusive // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      completionStatus: freezed == completionStatus
-          ? _value.completionStatus
-          : completionStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
-      completionDate: freezed == completionDate
-          ? _value.completionDate
-          : completionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      metaTags: freezed == metaTags
-          ? _value._metaTags
-          : metaTags // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      metaDesc: freezed == metaDesc
-          ? _value.metaDesc
-          : metaDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      commission: null == commission
-          ? _value.commission
-          : commission // ignore: cast_nullable_to_non_nullable
-              as String,
-      securityDeposit: freezed == securityDeposit
-          ? _value.securityDeposit
-          : securityDeposit // ignore: cast_nullable_to_non_nullable
-              as String?,
-      referNo: null == referNo
-          ? _value.referNo
-          : referNo // ignore: cast_nullable_to_non_nullable
-              as String,
-      permitNo: freezed == permitNo
-          ? _value.permitNo
-          : permitNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      permitNoDTCM: freezed == permitNoDTCM
-          ? _value.permitNoDTCM
-          : permitNoDTCM // ignore: cast_nullable_to_non_nullable
-              as String?,
-      buildingId: freezed == buildingId
-          ? _value.buildingId
-          : buildingId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      buildingName: freezed == buildingName
-          ? _value.buildingName
-          : buildingName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      buildingDistances: freezed == buildingDistances
-          ? _value._buildingDistances
-          : buildingDistances // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      street: freezed == street
-          ? _value.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as String?,
-      communityId: freezed == communityId
-          ? _value.communityId
-          : communityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      communityName: freezed == communityName
-          ? _value.communityName
-          : communityName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subCommunity: freezed == subCommunity
-          ? _value.subCommunity
-          : subCommunity // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emirate: freezed == emirate
-          ? _value.emirate
-          : emirate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      pinlocation: freezed == pinlocation
-          ? _value.pinlocation
-          : pinlocation // ignore: cast_nullable_to_non_nullable
-              as String?,
-      size: freezed == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as double?,
-      villaSize: freezed == villaSize
-          ? _value.villaSize
-          : villaSize // ignore: cast_nullable_to_non_nullable
-              as String?,
-      beds: freezed == beds
-          ? _value.beds
-          : beds // ignore: cast_nullable_to_non_nullable
-              as String?,
-      baths: freezed == baths
-          ? _value.baths
-          : baths // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lat: freezed == lat
-          ? _value.lat
-          : lat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lng: freezed == lng
-          ? _value.lng
-          : lng // ignore: cast_nullable_to_non_nullable
-              as String?,
-      priceHistory: freezed == priceHistory
-          ? _value._priceHistory
-          : priceHistory // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      zipCode: freezed == zipCode
-          ? _value.zipCode
-          : zipCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      emi: freezed == emi
-          ? _value.emi
-          : emi // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amenities: null == amenities
-          ? _value._amenities
-          : amenities // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      amenityIds: freezed == amenityIds
-          ? _value._amenityIds
-          : amenityIds // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      amenityObjs: freezed == amenityObjs
-          ? _value._amenityObjs
-          : amenityObjs // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      customField: freezed == customField
-          ? _value._customField
-          : customField // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      rentalPeriod: freezed == rentalPeriod
-          ? _value.rentalPeriod
-          : rentalPeriod // ignore: cast_nullable_to_non_nullable
-              as String?,
-      rentFinance: freezed == rentFinance
-          ? _value.rentFinance
-          : rentFinance // ignore: cast_nullable_to_non_nullable
-              as String?,
-      askingPrice: freezed == askingPrice
-          ? _value.askingPrice
-          : askingPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      pricedrop: freezed == pricedrop
-          ? _value.pricedrop
-          : pricedrop // ignore: cast_nullable_to_non_nullable
-              as String?,
-      oneCheqPrice: freezed == oneCheqPrice
-          ? _value.oneCheqPrice
-          : oneCheqPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      twoCheqPrice: freezed == twoCheqPrice
-          ? _value.twoCheqPrice
-          : twoCheqPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      fourCheqPrice: freezed == fourCheqPrice
-          ? _value.fourCheqPrice
-          : fourCheqPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      sixCheqPrice: freezed == sixCheqPrice
-          ? _value.sixCheqPrice
-          : sixCheqPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      twelveCheqPrice: freezed == twelveCheqPrice
-          ? _value.twelveCheqPrice
-          : twelveCheqPrice // ignore: cast_nullable_to_non_nullable
-              as double?,
-      fees: freezed == fees
-          ? _value._fees
-          : fees // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      unitStatus: freezed == unitStatus
-          ? _value.unitStatus
-          : unitStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
-      unitReraNo: freezed == unitReraNo
-          ? _value.unitReraNo
-          : unitReraNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      makaniNo: freezed == makaniNo
-          ? _value.makaniNo
-          : makaniNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dewaNo: freezed == dewaNo
-          ? _value.dewaNo
-          : dewaNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyOwnerId: freezed == propertyOwnerId
-          ? _value.propertyOwnerId
-          : propertyOwnerId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyListId: freezed == propertyListId
-          ? _value.propertyListId
-          : propertyListId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      images: freezed == images
-          ? _value._images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      floorPlans: freezed == floorPlans
-          ? _value._floorPlans
-          : floorPlans // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      videos: freezed == videos
-          ? _value._videos
-          : videos // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      matterportLink: freezed == matterportLink
-          ? _value._matterportLink
-          : matterportLink // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      agentStatus: freezed == agentStatus
-          ? _value.agentStatus
-          : agentStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
-      agentId: freezed == agentId
-          ? _value.agentId
-          : agentId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      propertyStatus: freezed == propertyStatus
-          ? _value.propertyStatus
-          : propertyStatus // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      soldOrReserved: freezed == soldOrReserved
-          ? _value.soldOrReserved
-          : soldOrReserved // ignore: cast_nullable_to_non_nullable
-              as String?,
-      soldDate: freezed == soldDate
-          ? _value.soldDate
-          : soldDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      reservedDate: freezed == reservedDate
-          ? _value.reservedDate
-          : reservedDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      statusArray: freezed == statusArray
-          ? _value._statusArray
-          : statusArray // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
-  _$PropertyImpl(
+class _Property with DiagnosticableTreeMixin implements Property {
+  _Property(
       {this.id,
       required this.listingType,
       this.categoryId,
@@ -1125,9 +946,8 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
         _videos = videos,
         _matterportLink = matterportLink,
         _statusArray = statusArray;
-
-  factory _$PropertyImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PropertyImplFromJson(json);
+  factory _Property.fromJson(Map<String, dynamic> json) =>
+      _$PropertyFromJson(json);
 
   @override
   final String? id;
@@ -1383,14 +1203,23 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
   @override
   final String? createdBy;
 
+  /// Create a copy of Property
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Property(id: $id, listingType: $listingType, categoryId: $categoryId, propertyTypeId: $propertyTypeId, propertyTitle: $propertyTitle, propertyDesc: $propertyDesc, featured: $featured, dealOfWeek: $dealOfWeek, agent: $agent, premium: $premium, exclusive: $exclusive, completionStatus: $completionStatus, completionDate: $completionDate, metaTags: $metaTags, metaDesc: $metaDesc, commission: $commission, securityDeposit: $securityDeposit, referNo: $referNo, permitNo: $permitNo, permitNoDTCM: $permitNoDTCM, buildingId: $buildingId, buildingName: $buildingName, buildingDistances: $buildingDistances, street: $street, communityId: $communityId, communityName: $communityName, subCommunity: $subCommunity, emirate: $emirate, pinlocation: $pinlocation, size: $size, villaSize: $villaSize, beds: $beds, baths: $baths, lat: $lat, lng: $lng, priceHistory: $priceHistory, zipCode: $zipCode, emi: $emi, amenities: $amenities, amenityIds: $amenityIds, amenityObjs: $amenityObjs, customField: $customField, rentalPeriod: $rentalPeriod, rentFinance: $rentFinance, askingPrice: $askingPrice, pricedrop: $pricedrop, oneCheqPrice: $oneCheqPrice, twoCheqPrice: $twoCheqPrice, fourCheqPrice: $fourCheqPrice, sixCheqPrice: $sixCheqPrice, twelveCheqPrice: $twelveCheqPrice, fees: $fees, unitStatus: $unitStatus, unitReraNo: $unitReraNo, makaniNo: $makaniNo, dewaNo: $dewaNo, propertyOwnerId: $propertyOwnerId, propertyListId: $propertyListId, image: $image, images: $images, floorPlans: $floorPlans, videos: $videos, matterportLink: $matterportLink, agentStatus: $agentStatus, agentId: $agentId, status: $status, propertyStatus: $propertyStatus, soldOrReserved: $soldOrReserved, soldDate: $soldDate, reservedDate: $reservedDate, statusArray: $statusArray, createdBy: $createdBy)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PropertyCopyWith<_Property> get copyWith =>
+      __$PropertyCopyWithImpl<_Property>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PropertyToJson(
+      this,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Property'))
       ..add(DiagnosticsProperty('id', id))
@@ -1471,7 +1300,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PropertyImpl &&
+            other is _Property &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.listingType, listingType) ||
                 other.listingType == listingType) &&
@@ -1589,7 +1418,7 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
             (identical(other.createdBy, createdBy) || other.createdBy == createdBy));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1667,363 +1496,507 @@ class _$PropertyImpl with DiagnosticableTreeMixin implements _Property {
         createdBy
       ]);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PropertyImplCopyWith<_$PropertyImpl> get copyWith =>
-      __$$PropertyImplCopyWithImpl<_$PropertyImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PropertyImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Property implements Property {
-  factory _Property(
-      {final String? id,
-      required final String listingType,
-      final String? categoryId,
-      final String? propertyTypeId,
-      final String propertyTitle,
-      final String? propertyDesc,
-      final bool featured,
-      final bool? dealOfWeek,
-      final Agent? agent,
-      final bool? premium,
-      final bool? exclusive,
-      final String? completionStatus,
-      final String? completionDate,
-      final List<String>? metaTags,
-      final String? metaDesc,
-      final String commission,
-      final String? securityDeposit,
-      required final String referNo,
-      final String? permitNo,
-      final String? permitNoDTCM,
-      final String? buildingId,
-      final String? buildingName,
-      final List<dynamic>? buildingDistances,
-      final String? street,
-      final String? communityId,
-      final String? communityName,
-      final String? subCommunity,
-      final String? emirate,
-      final String? pinlocation,
-      final double? size,
-      final String? villaSize,
-      final String? beds,
-      final String? baths,
-      final String? lat,
-      final String? lng,
-      final List<dynamic>? priceHistory,
-      final String? zipCode,
-      final String? emi,
-      final List<String> amenities,
-      final List<dynamic>? amenityIds,
-      final List<dynamic>? amenityObjs,
-      final List<dynamic>? customField,
-      final String? rentalPeriod,
-      final String? rentFinance,
-      final double? askingPrice,
-      final String? pricedrop,
-      final double? oneCheqPrice,
-      final double? twoCheqPrice,
-      final double? fourCheqPrice,
-      final double? sixCheqPrice,
-      final double? twelveCheqPrice,
-      final List<dynamic>? fees,
-      final String? unitStatus,
-      final String? unitReraNo,
-      final String? makaniNo,
-      final String? dewaNo,
-      @JsonKey(name: "property_owner_id") final String? propertyOwnerId,
-      final String? propertyListId,
-      final String? image,
-      final List<dynamic>? images,
-      final List<String>? floorPlans,
-      final List<String>? videos,
-      final List<String>? matterportLink,
-      final String? agentStatus,
-      final String? agentId,
-      final String? status,
-      final bool? propertyStatus,
-      final String? soldOrReserved,
-      final DateTime? soldDate,
-      final DateTime? reservedDate,
-      final List<String>? statusArray,
-      final String? createdBy}) = _$PropertyImpl;
-
-  factory _Property.fromJson(Map<String, dynamic> json) =
-      _$PropertyImpl.fromJson;
-
-  @override
-  String? get id;
-  @override
-  String get listingType;
-  @override
-  String? get categoryId;
-  @override
-  String? get propertyTypeId;
-  @override
-  String get propertyTitle;
-  @override
-  String? get propertyDesc;
-  @override
-  bool get featured;
-  @override
-  bool? get dealOfWeek;
-  @override
-  Agent? get agent;
-  @override
-  bool? get premium;
-  @override
-  bool? get exclusive;
-  @override
-  String? get completionStatus;
-  @override
-  String? get completionDate;
-  @override
-  List<String>? get metaTags;
-  @override
-  String? get metaDesc;
-  @override
-  String get commission;
-  @override
-  String? get securityDeposit;
-  @override
-  String get referNo;
-  @override
-  String? get permitNo;
-  @override
-  String? get permitNoDTCM;
-  @override
-  String? get buildingId;
-  @override
-  String? get buildingName;
-  @override
-  List<dynamic>? get buildingDistances;
-  @override
-  String? get street;
-  @override
-  String? get communityId;
-  @override
-  String? get communityName;
-  @override
-  String? get subCommunity;
-  @override
-  String? get emirate;
-  @override
-  String? get pinlocation;
-  @override
-  double? get size;
-  @override
-  String? get villaSize;
-  @override
-  String? get beds;
-  @override
-  String? get baths;
-  @override
-  String? get lat;
-  @override
-  String? get lng;
-  @override
-  List<dynamic>? get priceHistory;
-  @override
-  String? get zipCode;
-  @override
-  String? get emi;
-  @override
-  List<String> get amenities;
-  @override
-  List<dynamic>? get amenityIds;
-  @override
-  List<dynamic>? get amenityObjs;
-  @override
-  List<dynamic>? get customField;
-  @override
-  String? get rentalPeriod;
-  @override
-  String? get rentFinance;
-  @override
-  double? get askingPrice;
-  @override
-  String? get pricedrop;
-  @override
-  double? get oneCheqPrice;
-  @override
-  double? get twoCheqPrice;
-  @override
-  double? get fourCheqPrice;
-  @override
-  double? get sixCheqPrice;
-  @override
-  double? get twelveCheqPrice;
-  @override
-  List<dynamic>? get fees;
-  @override
-  String? get unitStatus;
-  @override
-  String? get unitReraNo;
-  @override
-  String? get makaniNo;
-  @override
-  String? get dewaNo;
-  @override
-  @JsonKey(name: "property_owner_id")
-  String? get propertyOwnerId;
-  @override
-  String? get propertyListId;
-  @override
-  String? get image;
-  @override
-  List<dynamic>? get images;
-  @override
-  List<String>? get floorPlans;
-  @override
-  List<String>? get videos;
-  @override
-  List<String>? get matterportLink;
-  @override
-  String? get agentStatus;
-  @override
-  String? get agentId;
-  @override
-  String? get status;
-  @override
-  bool? get propertyStatus;
-  @override
-  String? get soldOrReserved;
-  @override
-  DateTime? get soldDate;
-  @override
-  DateTime? get reservedDate;
-  @override
-  List<String>? get statusArray;
-  @override
-  String? get createdBy;
-  @override
-  @JsonKey(ignore: true)
-  _$$PropertyImplCopyWith<_$PropertyImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-PropertyImage _$PropertyImageFromJson(Map<String, dynamic> json) {
-  return _PropertyImage.fromJson(json);
-}
-
-/// @nodoc
-mixin _$PropertyImage {
-  String get thumbnail => throw _privateConstructorUsedError;
-  String get original => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PropertyImageCopyWith<PropertyImage> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PropertyImageCopyWith<$Res> {
-  factory $PropertyImageCopyWith(
-          PropertyImage value, $Res Function(PropertyImage) then) =
-      _$PropertyImageCopyWithImpl<$Res, PropertyImage>;
-  @useResult
-  $Res call({String thumbnail, String original});
-}
-
-/// @nodoc
-class _$PropertyImageCopyWithImpl<$Res, $Val extends PropertyImage>
-    implements $PropertyImageCopyWith<$Res> {
-  _$PropertyImageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? thumbnail = null,
-    Object? original = null,
-  }) {
-    return _then(_value.copyWith(
-      thumbnail: null == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      original: null == original
-          ? _value.original
-          : original // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$PropertyImageImplCopyWith<$Res>
-    implements $PropertyImageCopyWith<$Res> {
-  factory _$$PropertyImageImplCopyWith(
-          _$PropertyImageImpl value, $Res Function(_$PropertyImageImpl) then) =
-      __$$PropertyImageImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String thumbnail, String original});
-}
-
-/// @nodoc
-class __$$PropertyImageImplCopyWithImpl<$Res>
-    extends _$PropertyImageCopyWithImpl<$Res, _$PropertyImageImpl>
-    implements _$$PropertyImageImplCopyWith<$Res> {
-  __$$PropertyImageImplCopyWithImpl(
-      _$PropertyImageImpl _value, $Res Function(_$PropertyImageImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? thumbnail = null,
-    Object? original = null,
-  }) {
-    return _then(_$PropertyImageImpl(
-      thumbnail: null == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      original: null == original
-          ? _value.original
-          : original // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$PropertyImageImpl
-    with DiagnosticableTreeMixin
-    implements _PropertyImage {
-  const _$PropertyImageImpl({required this.thumbnail, required this.original});
-
-  factory _$PropertyImageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PropertyImageImplFromJson(json);
-
-  @override
-  final String thumbnail;
-  @override
-  final String original;
-
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PropertyImage(thumbnail: $thumbnail, original: $original)';
+    return 'Property(id: $id, listingType: $listingType, categoryId: $categoryId, propertyTypeId: $propertyTypeId, propertyTitle: $propertyTitle, propertyDesc: $propertyDesc, featured: $featured, dealOfWeek: $dealOfWeek, agent: $agent, premium: $premium, exclusive: $exclusive, completionStatus: $completionStatus, completionDate: $completionDate, metaTags: $metaTags, metaDesc: $metaDesc, commission: $commission, securityDeposit: $securityDeposit, referNo: $referNo, permitNo: $permitNo, permitNoDTCM: $permitNoDTCM, buildingId: $buildingId, buildingName: $buildingName, buildingDistances: $buildingDistances, street: $street, communityId: $communityId, communityName: $communityName, subCommunity: $subCommunity, emirate: $emirate, pinlocation: $pinlocation, size: $size, villaSize: $villaSize, beds: $beds, baths: $baths, lat: $lat, lng: $lng, priceHistory: $priceHistory, zipCode: $zipCode, emi: $emi, amenities: $amenities, amenityIds: $amenityIds, amenityObjs: $amenityObjs, customField: $customField, rentalPeriod: $rentalPeriod, rentFinance: $rentFinance, askingPrice: $askingPrice, pricedrop: $pricedrop, oneCheqPrice: $oneCheqPrice, twoCheqPrice: $twoCheqPrice, fourCheqPrice: $fourCheqPrice, sixCheqPrice: $sixCheqPrice, twelveCheqPrice: $twelveCheqPrice, fees: $fees, unitStatus: $unitStatus, unitReraNo: $unitReraNo, makaniNo: $makaniNo, dewaNo: $dewaNo, propertyOwnerId: $propertyOwnerId, propertyListId: $propertyListId, image: $image, images: $images, floorPlans: $floorPlans, videos: $videos, matterportLink: $matterportLink, agentStatus: $agentStatus, agentId: $agentId, status: $status, propertyStatus: $propertyStatus, soldOrReserved: $soldOrReserved, soldDate: $soldDate, reservedDate: $reservedDate, statusArray: $statusArray, createdBy: $createdBy)';
   }
+}
+
+/// @nodoc
+abstract mixin class _$PropertyCopyWith<$Res>
+    implements $PropertyCopyWith<$Res> {
+  factory _$PropertyCopyWith(_Property value, $Res Function(_Property) _then) =
+      __$PropertyCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? id,
+      String listingType,
+      String? categoryId,
+      String? propertyTypeId,
+      String propertyTitle,
+      String? propertyDesc,
+      bool featured,
+      bool? dealOfWeek,
+      Agent? agent,
+      bool? premium,
+      bool? exclusive,
+      String? completionStatus,
+      String? completionDate,
+      List<String>? metaTags,
+      String? metaDesc,
+      String commission,
+      String? securityDeposit,
+      String referNo,
+      String? permitNo,
+      String? permitNoDTCM,
+      String? buildingId,
+      String? buildingName,
+      List<dynamic>? buildingDistances,
+      String? street,
+      String? communityId,
+      String? communityName,
+      String? subCommunity,
+      String? emirate,
+      String? pinlocation,
+      double? size,
+      String? villaSize,
+      String? beds,
+      String? baths,
+      String? lat,
+      String? lng,
+      List<dynamic>? priceHistory,
+      String? zipCode,
+      String? emi,
+      List<String> amenities,
+      List<dynamic>? amenityIds,
+      List<dynamic>? amenityObjs,
+      List<dynamic>? customField,
+      String? rentalPeriod,
+      String? rentFinance,
+      double? askingPrice,
+      String? pricedrop,
+      double? oneCheqPrice,
+      double? twoCheqPrice,
+      double? fourCheqPrice,
+      double? sixCheqPrice,
+      double? twelveCheqPrice,
+      List<dynamic>? fees,
+      String? unitStatus,
+      String? unitReraNo,
+      String? makaniNo,
+      String? dewaNo,
+      @JsonKey(name: "property_owner_id") String? propertyOwnerId,
+      String? propertyListId,
+      String? image,
+      List<dynamic>? images,
+      List<String>? floorPlans,
+      List<String>? videos,
+      List<String>? matterportLink,
+      String? agentStatus,
+      String? agentId,
+      String? status,
+      bool? propertyStatus,
+      String? soldOrReserved,
+      DateTime? soldDate,
+      DateTime? reservedDate,
+      List<String>? statusArray,
+      String? createdBy});
+
+  @override
+  $AgentCopyWith<$Res>? get agent;
+}
+
+/// @nodoc
+class __$PropertyCopyWithImpl<$Res> implements _$PropertyCopyWith<$Res> {
+  __$PropertyCopyWithImpl(this._self, this._then);
+
+  final _Property _self;
+  final $Res Function(_Property) _then;
+
+  /// Create a copy of Property
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = freezed,
+    Object? listingType = null,
+    Object? categoryId = freezed,
+    Object? propertyTypeId = freezed,
+    Object? propertyTitle = null,
+    Object? propertyDesc = freezed,
+    Object? featured = null,
+    Object? dealOfWeek = freezed,
+    Object? agent = freezed,
+    Object? premium = freezed,
+    Object? exclusive = freezed,
+    Object? completionStatus = freezed,
+    Object? completionDate = freezed,
+    Object? metaTags = freezed,
+    Object? metaDesc = freezed,
+    Object? commission = null,
+    Object? securityDeposit = freezed,
+    Object? referNo = null,
+    Object? permitNo = freezed,
+    Object? permitNoDTCM = freezed,
+    Object? buildingId = freezed,
+    Object? buildingName = freezed,
+    Object? buildingDistances = freezed,
+    Object? street = freezed,
+    Object? communityId = freezed,
+    Object? communityName = freezed,
+    Object? subCommunity = freezed,
+    Object? emirate = freezed,
+    Object? pinlocation = freezed,
+    Object? size = freezed,
+    Object? villaSize = freezed,
+    Object? beds = freezed,
+    Object? baths = freezed,
+    Object? lat = freezed,
+    Object? lng = freezed,
+    Object? priceHistory = freezed,
+    Object? zipCode = freezed,
+    Object? emi = freezed,
+    Object? amenities = null,
+    Object? amenityIds = freezed,
+    Object? amenityObjs = freezed,
+    Object? customField = freezed,
+    Object? rentalPeriod = freezed,
+    Object? rentFinance = freezed,
+    Object? askingPrice = freezed,
+    Object? pricedrop = freezed,
+    Object? oneCheqPrice = freezed,
+    Object? twoCheqPrice = freezed,
+    Object? fourCheqPrice = freezed,
+    Object? sixCheqPrice = freezed,
+    Object? twelveCheqPrice = freezed,
+    Object? fees = freezed,
+    Object? unitStatus = freezed,
+    Object? unitReraNo = freezed,
+    Object? makaniNo = freezed,
+    Object? dewaNo = freezed,
+    Object? propertyOwnerId = freezed,
+    Object? propertyListId = freezed,
+    Object? image = freezed,
+    Object? images = freezed,
+    Object? floorPlans = freezed,
+    Object? videos = freezed,
+    Object? matterportLink = freezed,
+    Object? agentStatus = freezed,
+    Object? agentId = freezed,
+    Object? status = freezed,
+    Object? propertyStatus = freezed,
+    Object? soldOrReserved = freezed,
+    Object? soldDate = freezed,
+    Object? reservedDate = freezed,
+    Object? statusArray = freezed,
+    Object? createdBy = freezed,
+  }) {
+    return _then(_Property(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      listingType: null == listingType
+          ? _self.listingType
+          : listingType // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryId: freezed == categoryId
+          ? _self.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyTypeId: freezed == propertyTypeId
+          ? _self.propertyTypeId
+          : propertyTypeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyTitle: null == propertyTitle
+          ? _self.propertyTitle
+          : propertyTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      propertyDesc: freezed == propertyDesc
+          ? _self.propertyDesc
+          : propertyDesc // ignore: cast_nullable_to_non_nullable
+              as String?,
+      featured: null == featured
+          ? _self.featured
+          : featured // ignore: cast_nullable_to_non_nullable
+              as bool,
+      dealOfWeek: freezed == dealOfWeek
+          ? _self.dealOfWeek
+          : dealOfWeek // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      agent: freezed == agent
+          ? _self.agent
+          : agent // ignore: cast_nullable_to_non_nullable
+              as Agent?,
+      premium: freezed == premium
+          ? _self.premium
+          : premium // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      exclusive: freezed == exclusive
+          ? _self.exclusive
+          : exclusive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      completionStatus: freezed == completionStatus
+          ? _self.completionStatus
+          : completionStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      completionDate: freezed == completionDate
+          ? _self.completionDate
+          : completionDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metaTags: freezed == metaTags
+          ? _self._metaTags
+          : metaTags // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      metaDesc: freezed == metaDesc
+          ? _self.metaDesc
+          : metaDesc // ignore: cast_nullable_to_non_nullable
+              as String?,
+      commission: null == commission
+          ? _self.commission
+          : commission // ignore: cast_nullable_to_non_nullable
+              as String,
+      securityDeposit: freezed == securityDeposit
+          ? _self.securityDeposit
+          : securityDeposit // ignore: cast_nullable_to_non_nullable
+              as String?,
+      referNo: null == referNo
+          ? _self.referNo
+          : referNo // ignore: cast_nullable_to_non_nullable
+              as String,
+      permitNo: freezed == permitNo
+          ? _self.permitNo
+          : permitNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      permitNoDTCM: freezed == permitNoDTCM
+          ? _self.permitNoDTCM
+          : permitNoDTCM // ignore: cast_nullable_to_non_nullable
+              as String?,
+      buildingId: freezed == buildingId
+          ? _self.buildingId
+          : buildingId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      buildingName: freezed == buildingName
+          ? _self.buildingName
+          : buildingName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      buildingDistances: freezed == buildingDistances
+          ? _self._buildingDistances
+          : buildingDistances // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      street: freezed == street
+          ? _self.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      communityId: freezed == communityId
+          ? _self.communityId
+          : communityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      communityName: freezed == communityName
+          ? _self.communityName
+          : communityName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subCommunity: freezed == subCommunity
+          ? _self.subCommunity
+          : subCommunity // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emirate: freezed == emirate
+          ? _self.emirate
+          : emirate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pinlocation: freezed == pinlocation
+          ? _self.pinlocation
+          : pinlocation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      size: freezed == size
+          ? _self.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as double?,
+      villaSize: freezed == villaSize
+          ? _self.villaSize
+          : villaSize // ignore: cast_nullable_to_non_nullable
+              as String?,
+      beds: freezed == beds
+          ? _self.beds
+          : beds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      baths: freezed == baths
+          ? _self.baths
+          : baths // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lat: freezed == lat
+          ? _self.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lng: freezed == lng
+          ? _self.lng
+          : lng // ignore: cast_nullable_to_non_nullable
+              as String?,
+      priceHistory: freezed == priceHistory
+          ? _self._priceHistory
+          : priceHistory // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      zipCode: freezed == zipCode
+          ? _self.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emi: freezed == emi
+          ? _self.emi
+          : emi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      amenities: null == amenities
+          ? _self._amenities
+          : amenities // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      amenityIds: freezed == amenityIds
+          ? _self._amenityIds
+          : amenityIds // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      amenityObjs: freezed == amenityObjs
+          ? _self._amenityObjs
+          : amenityObjs // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      customField: freezed == customField
+          ? _self._customField
+          : customField // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      rentalPeriod: freezed == rentalPeriod
+          ? _self.rentalPeriod
+          : rentalPeriod // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rentFinance: freezed == rentFinance
+          ? _self.rentFinance
+          : rentFinance // ignore: cast_nullable_to_non_nullable
+              as String?,
+      askingPrice: freezed == askingPrice
+          ? _self.askingPrice
+          : askingPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
+      pricedrop: freezed == pricedrop
+          ? _self.pricedrop
+          : pricedrop // ignore: cast_nullable_to_non_nullable
+              as String?,
+      oneCheqPrice: freezed == oneCheqPrice
+          ? _self.oneCheqPrice
+          : oneCheqPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
+      twoCheqPrice: freezed == twoCheqPrice
+          ? _self.twoCheqPrice
+          : twoCheqPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
+      fourCheqPrice: freezed == fourCheqPrice
+          ? _self.fourCheqPrice
+          : fourCheqPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
+      sixCheqPrice: freezed == sixCheqPrice
+          ? _self.sixCheqPrice
+          : sixCheqPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
+      twelveCheqPrice: freezed == twelveCheqPrice
+          ? _self.twelveCheqPrice
+          : twelveCheqPrice // ignore: cast_nullable_to_non_nullable
+              as double?,
+      fees: freezed == fees
+          ? _self._fees
+          : fees // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      unitStatus: freezed == unitStatus
+          ? _self.unitStatus
+          : unitStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      unitReraNo: freezed == unitReraNo
+          ? _self.unitReraNo
+          : unitReraNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      makaniNo: freezed == makaniNo
+          ? _self.makaniNo
+          : makaniNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dewaNo: freezed == dewaNo
+          ? _self.dewaNo
+          : dewaNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyOwnerId: freezed == propertyOwnerId
+          ? _self.propertyOwnerId
+          : propertyOwnerId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyListId: freezed == propertyListId
+          ? _self.propertyListId
+          : propertyListId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _self.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      images: freezed == images
+          ? _self._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      floorPlans: freezed == floorPlans
+          ? _self._floorPlans
+          : floorPlans // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      videos: freezed == videos
+          ? _self._videos
+          : videos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      matterportLink: freezed == matterportLink
+          ? _self._matterportLink
+          : matterportLink // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      agentStatus: freezed == agentStatus
+          ? _self.agentStatus
+          : agentStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      agentId: freezed == agentId
+          ? _self.agentId
+          : agentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      propertyStatus: freezed == propertyStatus
+          ? _self.propertyStatus
+          : propertyStatus // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      soldOrReserved: freezed == soldOrReserved
+          ? _self.soldOrReserved
+          : soldOrReserved // ignore: cast_nullable_to_non_nullable
+              as String?,
+      soldDate: freezed == soldDate
+          ? _self.soldDate
+          : soldDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      reservedDate: freezed == reservedDate
+          ? _self.reservedDate
+          : reservedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      statusArray: freezed == statusArray
+          ? _self._statusArray
+          : statusArray // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      createdBy: freezed == createdBy
+          ? _self.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of Property
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AgentCopyWith<$Res>? get agent {
+    if (_self.agent == null) {
+      return null;
+    }
+
+    return $AgentCopyWith<$Res>(_self.agent!, (value) {
+      return _then(_self.copyWith(agent: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$PropertyImage implements DiagnosticableTreeMixin {
+  String get thumbnail;
+  String get original;
+
+  /// Create a copy of PropertyImage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $PropertyImageCopyWith<PropertyImage> get copyWith =>
+      _$PropertyImageCopyWithImpl<PropertyImage>(
+          this as PropertyImage, _$identity);
+
+  /// Serializes this PropertyImage to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PropertyImage'))
       ..add(DiagnosticsProperty('thumbnail', thumbnail))
@@ -2034,45 +2007,155 @@ class _$PropertyImageImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PropertyImageImpl &&
+            other is PropertyImage &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.original, original) ||
                 other.original == original));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, thumbnail, original);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PropertyImageImplCopyWith<_$PropertyImageImpl> get copyWith =>
-      __$$PropertyImageImplCopyWithImpl<_$PropertyImageImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PropertyImageImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PropertyImage(thumbnail: $thumbnail, original: $original)';
   }
 }
 
-abstract class _PropertyImage implements PropertyImage {
-  const factory _PropertyImage(
-      {required final String thumbnail,
-      required final String original}) = _$PropertyImageImpl;
-
-  factory _PropertyImage.fromJson(Map<String, dynamic> json) =
-      _$PropertyImageImpl.fromJson;
-
-  @override
-  String get thumbnail;
-  @override
-  String get original;
-  @override
-  @JsonKey(ignore: true)
-  _$$PropertyImageImplCopyWith<_$PropertyImageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract mixin class $PropertyImageCopyWith<$Res> {
+  factory $PropertyImageCopyWith(
+          PropertyImage value, $Res Function(PropertyImage) _then) =
+      _$PropertyImageCopyWithImpl;
+  @useResult
+  $Res call({String thumbnail, String original});
 }
+
+/// @nodoc
+class _$PropertyImageCopyWithImpl<$Res>
+    implements $PropertyImageCopyWith<$Res> {
+  _$PropertyImageCopyWithImpl(this._self, this._then);
+
+  final PropertyImage _self;
+  final $Res Function(PropertyImage) _then;
+
+  /// Create a copy of PropertyImage
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? thumbnail = null,
+    Object? original = null,
+  }) {
+    return _then(_self.copyWith(
+      thumbnail: null == thumbnail
+          ? _self.thumbnail
+          : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      original: null == original
+          ? _self.original
+          : original // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _PropertyImage with DiagnosticableTreeMixin implements PropertyImage {
+  const _PropertyImage({required this.thumbnail, required this.original});
+  factory _PropertyImage.fromJson(Map<String, dynamic> json) =>
+      _$PropertyImageFromJson(json);
+
+  @override
+  final String thumbnail;
+  @override
+  final String original;
+
+  /// Create a copy of PropertyImage
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PropertyImageCopyWith<_PropertyImage> get copyWith =>
+      __$PropertyImageCopyWithImpl<_PropertyImage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PropertyImageToJson(
+      this,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'PropertyImage'))
+      ..add(DiagnosticsProperty('thumbnail', thumbnail))
+      ..add(DiagnosticsProperty('original', original));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _PropertyImage &&
+            (identical(other.thumbnail, thumbnail) ||
+                other.thumbnail == thumbnail) &&
+            (identical(other.original, original) ||
+                other.original == original));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, thumbnail, original);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PropertyImage(thumbnail: $thumbnail, original: $original)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$PropertyImageCopyWith<$Res>
+    implements $PropertyImageCopyWith<$Res> {
+  factory _$PropertyImageCopyWith(
+          _PropertyImage value, $Res Function(_PropertyImage) _then) =
+      __$PropertyImageCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String thumbnail, String original});
+}
+
+/// @nodoc
+class __$PropertyImageCopyWithImpl<$Res>
+    implements _$PropertyImageCopyWith<$Res> {
+  __$PropertyImageCopyWithImpl(this._self, this._then);
+
+  final _PropertyImage _self;
+  final $Res Function(_PropertyImage) _then;
+
+  /// Create a copy of PropertyImage
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? thumbnail = null,
+    Object? original = null,
+  }) {
+    return _then(_PropertyImage(
+      thumbnail: null == thumbnail
+          ? _self.thumbnail
+          : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      original: null == original
+          ? _self.original
+          : original // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

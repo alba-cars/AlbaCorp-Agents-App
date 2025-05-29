@@ -4,7 +4,7 @@ part 'AppConfig.freezed.dart';
 part 'AppConfig.g.dart';
 
 @freezed
-class AppConfig with _$AppConfig {
+abstract class AppConfig with _$AppConfig {
   const AppConfig._();
   const factory AppConfig(
       {required bool underMaintenance,

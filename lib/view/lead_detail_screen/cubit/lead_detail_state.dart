@@ -1,7 +1,7 @@
 part of 'lead_detail_cubit.dart';
 
 @freezed
-class LeadDetailState with _$LeadDetailState {
+abstract class LeadDetailState with _$LeadDetailState {
   const factory LeadDetailState({
     required String leadId,
     Lead? lead,

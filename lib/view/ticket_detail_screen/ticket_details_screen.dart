@@ -236,15 +236,15 @@ class _TicketDetailScreenLayoutState extends State<_TicketDetailScreenLayout> {
                                                         .getFileType(e)) ==
                                                     FType.PDF
                                                 ? DottedBorder(
-                                                    color: borderColor,
-                                                    strokeWidth: 1,
-                                                    radius:
-                                                        const Radius.circular(
-                                                            12),
-                                                    dashPattern: const [
-                                                      7,
-                                                      7,
-                                                    ],
+                                                    options:
+                                                        RoundedRectDottedBorderOptions(
+                                                      color: borderColor,
+                                                      strokeWidth: 1,
+                                                      radius:
+                                                          const Radius.circular(
+                                                              12),
+                                                      dashPattern: const [7, 7],
+                                                    ),
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(

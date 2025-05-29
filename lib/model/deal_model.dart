@@ -14,7 +14,7 @@ part 'deal_model.freezed.dart';
 part 'deal_model.g.dart';
 
 @freezed
-class Deal with _$Deal {
+abstract class Deal with _$Deal {
   const factory Deal({
     @JsonKey(readValue: readId) required String id,
     @JsonKey(name: 'reference_number') required String referenceNumber,
@@ -92,11 +92,10 @@ extension EditDeal on Deal {
       "contractValidity": newListingRequest?.contractValidity,
       "furnishing": newListingRequest?.furnishing,
       "type": newListingRequest?.type,
-      "isOffPlanResale":newListingRequest?.isOffPlanResale ?? false ? 
-                    {"label": 'Yes', "value": true}:
-                    {"label": 'No', "value": false},
-                    "relatedInfo":newListingRequest?.relatedInfo
-                  
+      "isOffPlanResale": newListingRequest?.isOffPlanResale ?? false
+          ? {"label": 'Yes', "value": true}
+          : {"label": 'No', "value": false},
+      "relatedInfo": newListingRequest?.relatedInfo
     };
   }
 }

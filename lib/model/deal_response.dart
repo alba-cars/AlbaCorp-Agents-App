@@ -8,7 +8,7 @@ part 'deal_response.freezed.dart';
 part 'deal_response.g.dart';
 
 @freezed
-class DealResponse with _$DealResponse {
+abstract class DealResponse with _$DealResponse {
   factory DealResponse({
     required String id,
     @JsonKey(name: 'reference_number') required String referenceNumber,

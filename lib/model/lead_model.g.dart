@@ -6,7 +6,7 @@ part of 'lead_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
+_Lead _$LeadFromJson(Map<String, dynamic> json) => _Lead(
       id: readId(json, 'id') as String,
       firstName: readFirstName(json, 'firstName') as String,
       lastName: readLastName(json, 'lastName') as String? ?? '',
@@ -68,8 +68,7 @@ _$LeadImpl _$$LeadImplFromJson(Map<String, dynamic> json) => _$LeadImpl(
       rating: (json['rating'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$LeadImplToJson(_$LeadImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$LeadToJson(_Lead instance) => <String, dynamic>{
       'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
@@ -120,15 +119,14 @@ const _$LeadStatusEnumMap = {
   LeadStatus.Negotiating: 'Negotiating',
 };
 
-_$PreferenceImpl _$$PreferenceImplFromJson(Map<String, dynamic> json) =>
-    _$PreferenceImpl(
+_Preference _$PreferenceFromJson(Map<String, dynamic> json) => _Preference(
       plotNumber: json['plotNumber'],
       rooms: json['rooms'],
       area: json['area'] as String?,
       location: json['location'] as String?,
     );
 
-Map<String, dynamic> _$$PreferenceImplToJson(_$PreferenceImpl instance) =>
+Map<String, dynamic> _$PreferenceToJson(_Preference instance) =>
     <String, dynamic>{
       'plotNumber': instance.plotNumber,
       'rooms': instance.rooms,

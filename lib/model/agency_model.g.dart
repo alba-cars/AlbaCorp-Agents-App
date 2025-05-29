@@ -6,7 +6,7 @@ part of 'agency_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AgencyImpl _$$AgencyImplFromJson(Map<String, dynamic> json) => _$AgencyImpl(
+_Agency _$AgencyFromJson(Map<String, dynamic> json) => _Agency(
       id: json['id'] as String,
       type: json['type'] as String,
       agencyName: json['agency_name'] as String? ?? '',
@@ -23,8 +23,7 @@ _$AgencyImpl _$$AgencyImplFromJson(Map<String, dynamic> json) => _$AgencyImpl(
       createdBy: json['created_by'] as String,
     );
 
-Map<String, dynamic> _$$AgencyImplToJson(_$AgencyImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AgencyToJson(_Agency instance) => <String, dynamic>{
       'id': instance.id,
       'type': instance.type,
       'agency_name': instance.agencyName,

@@ -6,8 +6,7 @@ part of 'property_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PropertyImpl _$$PropertyImplFromJson(Map<String, dynamic> json) =>
-    _$PropertyImpl(
+_Property _$PropertyFromJson(Map<String, dynamic> json) => _Property(
       id: json['id'] as String?,
       listingType: json['listingType'] as String,
       categoryId: json['categoryId'] as String?,
@@ -100,8 +99,7 @@ _$PropertyImpl _$$PropertyImplFromJson(Map<String, dynamic> json) =>
       createdBy: json['createdBy'] as String?,
     );
 
-Map<String, dynamic> _$$PropertyImplToJson(_$PropertyImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PropertyToJson(_Property instance) => <String, dynamic>{
       'id': instance.id,
       'listingType': instance.listingType,
       'categoryId': instance.categoryId,
@@ -176,13 +174,13 @@ Map<String, dynamic> _$$PropertyImplToJson(_$PropertyImpl instance) =>
       'createdBy': instance.createdBy,
     };
 
-_$PropertyImageImpl _$$PropertyImageImplFromJson(Map<String, dynamic> json) =>
-    _$PropertyImageImpl(
+_PropertyImage _$PropertyImageFromJson(Map<String, dynamic> json) =>
+    _PropertyImage(
       thumbnail: json['thumbnail'] as String,
       original: json['original'] as String,
     );
 
-Map<String, dynamic> _$$PropertyImageImplToJson(_$PropertyImageImpl instance) =>
+Map<String, dynamic> _$PropertyImageToJson(_PropertyImage instance) =>
     <String, dynamic>{
       'thumbnail': instance.thumbnail,
       'original': instance.original,

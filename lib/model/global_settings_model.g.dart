@@ -6,8 +6,8 @@ part of 'global_settings_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GlobalSettingsImpl _$$GlobalSettingsImplFromJson(Map<String, dynamic> json) =>
-    _$GlobalSettingsImpl(
+_GlobalSettings _$GlobalSettingsFromJson(Map<String, dynamic> json) =>
+    _GlobalSettings(
       id: json['id'] as String,
       timeUntilTicketArchived: json['timeUntilTicketArchived'] as String?,
       checkoutLimit:
@@ -25,8 +25,7 @@ _$GlobalSettingsImpl _$$GlobalSettingsImplFromJson(Map<String, dynamic> json) =>
       enablePbx: json['enablePbx'] ?? false,
     );
 
-Map<String, dynamic> _$$GlobalSettingsImplToJson(
-        _$GlobalSettingsImpl instance) =>
+Map<String, dynamic> _$GlobalSettingsToJson(_GlobalSettings instance) =>
     <String, dynamic>{
       'id': instance.id,
       'timeUntilTicketArchived': instance.timeUntilTicketArchived,
@@ -40,14 +39,14 @@ Map<String, dynamic> _$$GlobalSettingsImplToJson(
       'enablePbx': instance.enablePbx,
     };
 
-_$CheckoutLimitImpl _$$CheckoutLimitImplFromJson(Map<String, dynamic> json) =>
-    _$CheckoutLimitImpl(
+_CheckoutLimit _$CheckoutLimitFromJson(Map<String, dynamic> json) =>
+    _CheckoutLimit(
       limit: (json['limit'] as num).toInt(),
       tolerance: (json['tolerance'] as num).toInt(),
       unassignAfter: json['unassignAfter'] as String,
     );
 
-Map<String, dynamic> _$$CheckoutLimitImplToJson(_$CheckoutLimitImpl instance) =>
+Map<String, dynamic> _$CheckoutLimitToJson(_CheckoutLimit instance) =>
     <String, dynamic>{
       'limit': instance.limit,
       'tolerance': instance.tolerance,
