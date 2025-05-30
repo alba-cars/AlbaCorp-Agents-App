@@ -224,7 +224,7 @@ class NormalText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SelectableText(
       text,
       textAlign: textAlign,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(

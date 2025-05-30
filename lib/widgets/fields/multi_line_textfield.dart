@@ -62,10 +62,14 @@ class _MultiLineFieldState extends State<MultiLineField> {
     controller = widget.controller ?? TextEditingController();
     _focusNode.addListener(_onFocusChanged);
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      if (controller.text.isNotEmpty) {
+        _fieldKey.currentState?.setValue(controller.text);
+      }
       if (_fieldKey.currentState?.value != null) {
         controller.text = _fieldKey.currentState?.value ?? '';
       }
     });
+
     super.initState();
   }
 
