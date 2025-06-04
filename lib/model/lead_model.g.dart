@@ -66,6 +66,7 @@ _Lead _$LeadFromJson(Map<String, dynamic> json) => _Lead(
               readLeadSourceObject(json, 'leadSourceObject')
                   as Map<String, dynamic>),
       rating: (json['rating'] as num?)?.toDouble(),
+      isProspect: json['isProspect'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$LeadToJson(_Lead instance) => <String, dynamic>{
@@ -101,6 +102,7 @@ Map<String, dynamic> _$LeadToJson(_Lead instance) => <String, dynamic>{
       'completedActivityCount': instance.completedActivityCount,
       'leadSourceObject': instance.leadSourceObject,
       'rating': instance.rating,
+      'isProspect': instance.isProspect,
     };
 
 const _$LeadStatusEnumMap = {

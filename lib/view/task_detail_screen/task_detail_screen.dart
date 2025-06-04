@@ -447,14 +447,9 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                   if (!value) return const SizedBox();
 
                   return BlocBuilder<LeadDetailCubit, LeadDetailState>(
-                    builder: (context, state) => IconButton(
-                      onPressed: () => _handleProspectToggle(context, task),
-                      icon: Icon(
-                        value
-                            ? CupertinoIcons.heart_fill
-                            : CupertinoIcons.heart,
-                        color: Colors.red,
-                      ),
+                    builder: (context, state) => Icon(
+                      value ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
+                      color: Colors.red,
                     ),
                   );
                 },
@@ -464,44 +459,6 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
         ),
       ],
     );
-  }
-
-  Future<void> _handleProspectToggle(
-      BuildContext context, Activity task) async {
-    if (task.lead?.leadStatus == LeadStatus.Prospect) {
-      final result = await context.read<LeadDetailCubit>().removeProspect();
-
-      if (result) {
-        isProspect.value = false;
-        if (mounted) {
-          showSnackbar(context, 'Successfully removed prospect tag',
-              SnackBarType.success);
-        }
-      } else {
-        final error = context.read<LeadDetailCubit>().state.updateLeadError;
-        if (mounted) {
-          showSnackbar(context, error ?? 'Failed to remove prospect tag',
-              SnackBarType.failure);
-        }
-      }
-    } else {
-      final result = await context
-          .read<LeadDetailCubit>()
-          .updateLead({"lead_status": "Prospect"});
-
-      if (result) {
-        if (mounted) {
-          showSnackbar(
-              context, 'Successfully marked as prospect', SnackBarType.success);
-        }
-      } else {
-        final error = context.read<LeadDetailCubit>().state.updateLeadError;
-        if (mounted) {
-          showSnackbar(context, error ?? 'Failed to mark as prospect',
-              SnackBarType.failure);
-        }
-      }
-    }
   }
 
   Widget _buildLeadInfo(Activity task) {

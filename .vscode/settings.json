@@ -1,3 +1,5 @@
 {
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.transport" : "stdio",
+  "jdk.jdkhome": "C:\\Program Files\\Java\\jdk-23",
 }

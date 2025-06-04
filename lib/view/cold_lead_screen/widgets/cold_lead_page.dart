@@ -6,6 +6,7 @@ import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
 import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
+import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
@@ -37,6 +38,16 @@ class _ColdLeadPageState extends State<ColdLeadPage>
   List<Widget> filterFields(
       BuildContext context, Map<String, dynamic>? values) {
     return [
+      WrapSelectField(
+        name: 'sortBy',
+        label: "Sort By",
+        values: [
+          {"label": "Latest", "value": 'latest'},
+          {"label": "Oldest", "value": 'oldest'}
+        ],
+        displayOption: (option) => option['label'] ?? '',
+      ),
+      LeadSourceFilterWidget(),
       MultiSelectAutoCompleteField(
           label: 'Community',
           optionsBuilder: (v, refresh) async {
@@ -87,7 +98,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
               .read<ListStateCubit>()
               .state
               .propertyTypeList
-              .map((e) => {'value': e.id, 'label': e.propertyType})
+              .map((e) => {'value': e.propertyType, 'label': e.propertyType})
               .toList(),
           displayOption: (option) => option['label'] ?? '',
           isRequired: true),

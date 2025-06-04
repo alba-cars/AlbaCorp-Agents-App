@@ -64,6 +64,7 @@ mixin _$Lead implements DiagnosticableTreeMixin {
   @JsonKey(readValue: readLeadSourceObject)
   LeadSourceItem? get leadSourceObject;
   double? get rating;
+  bool get isProspect;
 
   /// Create a copy of Lead
   /// with the given fields replaced by the non-null parameter values.
@@ -112,7 +113,8 @@ mixin _$Lead implements DiagnosticableTreeMixin {
       ..add(
           DiagnosticsProperty('completedActivityCount', completedActivityCount))
       ..add(DiagnosticsProperty('leadSourceObject', leadSourceObject))
-      ..add(DiagnosticsProperty('rating', rating));
+      ..add(DiagnosticsProperty('rating', rating))
+      ..add(DiagnosticsProperty('isProspect', isProspect));
   }
 
   @override
@@ -170,7 +172,9 @@ mixin _$Lead implements DiagnosticableTreeMixin {
                 other.completedActivityCount == completedActivityCount) &&
             (identical(other.leadSourceObject, leadSourceObject) ||
                 other.leadSourceObject == leadSourceObject) &&
-            (identical(other.rating, rating) || other.rating == rating));
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.isProspect, isProspect) ||
+                other.isProspect == isProspect));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -208,12 +212,13 @@ mixin _$Lead implements DiagnosticableTreeMixin {
         dndStatus,
         completedActivityCount,
         leadSourceObject,
-        rating
+        rating,
+        isProspect
       ]);
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount, leadSourceObject: $leadSourceObject, rating: $rating)';
+    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount, leadSourceObject: $leadSourceObject, rating: $rating, isProspect: $isProspect)';
   }
 }
 
@@ -258,7 +263,8 @@ abstract mixin class $LeadCopyWith<$Res> {
       int completedActivityCount,
       @JsonKey(readValue: readLeadSourceObject)
       LeadSourceItem? leadSourceObject,
-      double? rating});
+      double? rating,
+      bool isProspect});
 
   $PreferenceCopyWith<$Res>? get preference;
   $AgentCopyWith<$Res>? get currentAgent;
@@ -309,6 +315,7 @@ class _$LeadCopyWithImpl<$Res> implements $LeadCopyWith<$Res> {
     Object? completedActivityCount = null,
     Object? leadSourceObject = freezed,
     Object? rating = freezed,
+    Object? isProspect = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -439,6 +446,10 @@ class _$LeadCopyWithImpl<$Res> implements $LeadCopyWith<$Res> {
           ? _self.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
+      isProspect: null == isProspect
+          ? _self.isProspect
+          : isProspect // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -523,7 +534,8 @@ class _Lead extends Lead with DiagnosticableTreeMixin {
       @JsonKey(readValue: readCompletedActivityCount)
       this.completedActivityCount = 0,
       @JsonKey(readValue: readLeadSourceObject) this.leadSourceObject,
-      this.rating})
+      this.rating,
+      this.isProspect = false})
       : _languages = languages,
         _preferredLanguages = preferredLanguages,
         _tags = tags,
@@ -633,6 +645,9 @@ class _Lead extends Lead with DiagnosticableTreeMixin {
   final LeadSourceItem? leadSourceObject;
   @override
   final double? rating;
+  @override
+  @JsonKey()
+  final bool isProspect;
 
   /// Create a copy of Lead
   /// with the given fields replaced by the non-null parameter values.
@@ -686,7 +701,8 @@ class _Lead extends Lead with DiagnosticableTreeMixin {
       ..add(
           DiagnosticsProperty('completedActivityCount', completedActivityCount))
       ..add(DiagnosticsProperty('leadSourceObject', leadSourceObject))
-      ..add(DiagnosticsProperty('rating', rating));
+      ..add(DiagnosticsProperty('rating', rating))
+      ..add(DiagnosticsProperty('isProspect', isProspect));
   }
 
   @override
@@ -745,7 +761,9 @@ class _Lead extends Lead with DiagnosticableTreeMixin {
                 other.completedActivityCount == completedActivityCount) &&
             (identical(other.leadSourceObject, leadSourceObject) ||
                 other.leadSourceObject == leadSourceObject) &&
-            (identical(other.rating, rating) || other.rating == rating));
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.isProspect, isProspect) ||
+                other.isProspect == isProspect));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -783,12 +801,13 @@ class _Lead extends Lead with DiagnosticableTreeMixin {
         dndStatus,
         completedActivityCount,
         leadSourceObject,
-        rating
+        rating,
+        isProspect
       ]);
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount, leadSourceObject: $leadSourceObject, rating: $rating)';
+    return 'Lead(id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, country: $country, city: $city, address: $address, nationality: $nationality, photo: $photo, role: $role, providerId: $providerId, provider: $provider, active: $active, leadSource: $leadSource, leadStatus: $leadStatus, languages: $languages, lastActivityType: $lastActivityType, lastActivityDate: $lastActivityDate, lastActivityIsComplete: $lastActivityIsComplete, createdAt: $createdAt, updatedAt: $updatedAt, createdBy: $createdBy, preference: $preference, preferredLanguages: $preferredLanguages, currentAgent: $currentAgent, notes: $notes, tags: $tags, dndStatus: $dndStatus, completedActivityCount: $completedActivityCount, leadSourceObject: $leadSourceObject, rating: $rating, isProspect: $isProspect)';
   }
 }
 
@@ -834,7 +853,8 @@ abstract mixin class _$LeadCopyWith<$Res> implements $LeadCopyWith<$Res> {
       int completedActivityCount,
       @JsonKey(readValue: readLeadSourceObject)
       LeadSourceItem? leadSourceObject,
-      double? rating});
+      double? rating,
+      bool isProspect});
 
   @override
   $PreferenceCopyWith<$Res>? get preference;
@@ -888,6 +908,7 @@ class __$LeadCopyWithImpl<$Res> implements _$LeadCopyWith<$Res> {
     Object? completedActivityCount = null,
     Object? leadSourceObject = freezed,
     Object? rating = freezed,
+    Object? isProspect = null,
   }) {
     return _then(_Lead(
       id: null == id
@@ -1018,6 +1039,10 @@ class __$LeadCopyWithImpl<$Res> implements _$LeadCopyWith<$Res> {
           ? _self.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as double?,
+      isProspect: null == isProspect
+          ? _self.isProspect
+          : isProspect // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
