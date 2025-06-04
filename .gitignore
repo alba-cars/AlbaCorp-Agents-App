@@ -52,3 +52,6 @@ app.*.map.json
 .env
 
 ios_backup
+linkus_sdk
+yeastar
+twilio_voice_flutter
