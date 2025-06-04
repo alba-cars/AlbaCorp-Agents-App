@@ -70,6 +70,7 @@ abstract class Lead with _$Lead {
     int completedActivityCount,
     @JsonKey(readValue: readLeadSourceObject) LeadSourceItem? leadSourceObject,
     double? rating,
+    @Default(false) bool isProspect,
   }) = _Lead;
 
   const Lead._();

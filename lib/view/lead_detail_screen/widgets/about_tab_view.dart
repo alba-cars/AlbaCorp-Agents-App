@@ -87,7 +87,7 @@ class AboutTabView extends StatelessWidget {
                               // style: IconButton.styleFrom(
                               //     backgroundColor: Colors.red[100]),
                               onPressed: () async {
-                                if (lead.leadStatus == LeadStatus.Prospect) {
+                                if (lead.isProspect) {
                                   final result = await context
                                       .read<LeadDetailCubit>()
                                       .removeProspect();
@@ -110,7 +110,7 @@ class AboutTabView extends StatelessWidget {
                                 } else {
                                   final result = await context
                                       .read<LeadDetailCubit>()
-                                      .updateLead({"lead_status": "Prospect"});
+                                      .updateLead({"isProspect": true});
                                   if (result) {
                                     showSnackbar(
                                         context,
@@ -129,7 +129,7 @@ class AboutTabView extends StatelessWidget {
                                 }
                               },
                               icon: Icon(
-                                lead.leadStatus == LeadStatus.Prospect
+                                lead.isProspect
                                     ? CupertinoIcons.heart_fill
                                     : CupertinoIcons.heart,
                                 color: Colors.red,

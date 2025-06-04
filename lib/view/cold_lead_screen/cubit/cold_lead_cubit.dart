@@ -60,12 +60,13 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
   }
 
   Map<String, dynamic> getPayload(TaskFilterEnum filterType) {
+    final sortby = state.activityFilter?['sortBy']?['value'];
     switch (filterType) {
       case TaskFilterEnum.New:
         return {
           "leadSourceType": "cold",
           "leadStatus": "Fresh",
-          "sortBy": 'latest'
+          "sortBy": sortby ?? 'latest'
         };
       case TaskFilterEnum.FollowUp:
         DateTime d = DateTime.now().toUtc();
@@ -74,9 +75,10 @@ class ColdLeadCubit extends Cubit<ColdLeadState> {
           "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
           "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}',
+          "sortBy": sortby ?? 'rating'
         };
       case TaskFilterEnum.Favourites:
-        return {"leadSourceType": "cold", "leadStatus": "Prospect"};
+        return {"leadSourceType": "cold", "isProspect": true};
       case TaskFilterEnum.Expiring:
         return {"leadSourceType": "cold", "expiring": true};
     }
