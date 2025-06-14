@@ -8,6 +8,7 @@ import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/app/call_bloc/call_bloc.dart';
 import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
+import 'package:real_estate_app/app/notification_badge_cubit/notification_badge_cubit.dart'; // Added import
 import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/services/twilio_service.dart';
@@ -26,20 +27,16 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> with WidgetsBindingObserver {
-  // final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     NotificationService.initializeNotification();
     AwesomeFcm.initializeRemoteNotifications(debug: true);
-    // FirebaseMessagingService.initialize();
     requestPermission();
-    // firebaseMessaging.requestPermission();
+
     checkPreference();
-    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    // getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
     getIt<AuthBloc>().add(AuthEvent.checkForImportantActivity());
-    CallManager.initialize(AppRouter.router);
 
     super.initState();
   }
@@ -76,7 +73,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+      // getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
       getIt<AuthBloc>().add(AuthEvent.checkForImportantActivity());
     }
     super.didChangeAppLifecycleState(state);
@@ -102,6 +99,11 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           ),
           BlocProvider<ListStateCubit>(
             create: (BuildContext context) => getIt<ListStateCubit>(),
+          ),
+          BlocProvider<NotificationBadgeCubit>(
+            // Added NotificationBadgeCubit provider
+            create: (BuildContext context) => getIt<NotificationBadgeCubit>(),
+            lazy: false,
           ),
         ],
         child: ScreenUtilInit(

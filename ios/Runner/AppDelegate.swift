@@ -8,7 +8,6 @@ import awesome_notifications_fcm
 @main
 @objc class AppDelegate: FlutterAppDelegate {
     
-    let callObserver = CallObserver();
     
   override func application(
     _ application: UIApplication,

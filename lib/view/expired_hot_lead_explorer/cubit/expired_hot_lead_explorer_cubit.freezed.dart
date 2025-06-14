@@ -21,6 +21,7 @@ mixin _$ExpiredHotLeadExplorerState {
   Paginator? get expiredHotLeadsPaginator;
   AppStatus get assignLeadStatus;
   String? get assignLeadError;
+  String? get assigningLeadId; // Added for in-card loading
   List<LeadSourceCategory> get leadSourceCategories;
   AppStatus get getLeadSourceCategories;
   List<LeadSourceItem> get selectedLeadSources;
@@ -53,6 +54,8 @@ mixin _$ExpiredHotLeadExplorerState {
                 other.assignLeadStatus == assignLeadStatus) &&
             (identical(other.assignLeadError, assignLeadError) ||
                 other.assignLeadError == assignLeadError) &&
+            (identical(other.assigningLeadId, assigningLeadId) ||
+                other.assigningLeadId == assigningLeadId) &&
             const DeepCollectionEquality()
                 .equals(other.leadSourceCategories, leadSourceCategories) &&
             (identical(
@@ -71,13 +74,14 @@ mixin _$ExpiredHotLeadExplorerState {
       expiredHotLeadsPaginator,
       assignLeadStatus,
       assignLeadError,
+      assigningLeadId,
       const DeepCollectionEquality().hash(leadSourceCategories),
       getLeadSourceCategories,
       const DeepCollectionEquality().hash(selectedLeadSources));
 
   @override
   String toString() {
-    return 'ExpiredHotLeadExplorerState(expiredHotLeads: $expiredHotLeads, getExpiredHotLeadStatus: $getExpiredHotLeadStatus, getExpiredHotLeadError: $getExpiredHotLeadError, expiredHotLeadsPaginator: $expiredHotLeadsPaginator, assignLeadStatus: $assignLeadStatus, assignLeadError: $assignLeadError, leadSourceCategories: $leadSourceCategories, getLeadSourceCategories: $getLeadSourceCategories, selectedLeadSources: $selectedLeadSources)';
+    return 'ExpiredHotLeadExplorerState(expiredHotLeads: $expiredHotLeads, getExpiredHotLeadStatus: $getExpiredHotLeadStatus, getExpiredHotLeadError: $getExpiredHotLeadError, expiredHotLeadsPaginator: $expiredHotLeadsPaginator, assignLeadStatus: $assignLeadStatus, assignLeadError: $assignLeadError, assigningLeadId: $assigningLeadId, leadSourceCategories: $leadSourceCategories, getLeadSourceCategories: $getLeadSourceCategories, selectedLeadSources: $selectedLeadSources)';
   }
 }
 
@@ -95,6 +99,7 @@ abstract mixin class $ExpiredHotLeadExplorerStateCopyWith<$Res> {
       Paginator? expiredHotLeadsPaginator,
       AppStatus assignLeadStatus,
       String? assignLeadError,
+      String? assigningLeadId,
       List<LeadSourceCategory> leadSourceCategories,
       AppStatus getLeadSourceCategories,
       List<LeadSourceItem> selectedLeadSources});
@@ -121,6 +126,7 @@ class _$ExpiredHotLeadExplorerStateCopyWithImpl<$Res>
     Object? expiredHotLeadsPaginator = freezed,
     Object? assignLeadStatus = null,
     Object? assignLeadError = freezed,
+    Object? assigningLeadId = freezed,
     Object? leadSourceCategories = null,
     Object? getLeadSourceCategories = null,
     Object? selectedLeadSources = null,
@@ -149,6 +155,10 @@ class _$ExpiredHotLeadExplorerStateCopyWithImpl<$Res>
       assignLeadError: freezed == assignLeadError
           ? _self.assignLeadError
           : assignLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      assigningLeadId: freezed == assigningLeadId
+          ? _self.assigningLeadId
+          : assigningLeadId // ignore: cast_nullable_to_non_nullable
               as String?,
       leadSourceCategories: null == leadSourceCategories
           ? _self.leadSourceCategories
@@ -190,6 +200,7 @@ class _ExpiredHotLeadExplorerState implements ExpiredHotLeadExplorerState {
       this.expiredHotLeadsPaginator,
       this.assignLeadStatus = AppStatus.init,
       this.assignLeadError,
+      this.assigningLeadId,
       final List<LeadSourceCategory> leadSourceCategories = const [],
       this.getLeadSourceCategories = AppStatus.init,
       final List<LeadSourceItem> selectedLeadSources = const []})
@@ -218,7 +229,11 @@ class _ExpiredHotLeadExplorerState implements ExpiredHotLeadExplorerState {
   final AppStatus assignLeadStatus;
   @override
   final String? assignLeadError;
+  @override
+  final String? assigningLeadId;
+// Added for in-card loading
   final List<LeadSourceCategory> _leadSourceCategories;
+// Added for in-card loading
   @override
   @JsonKey()
   List<LeadSourceCategory> get leadSourceCategories {
@@ -269,6 +284,8 @@ class _ExpiredHotLeadExplorerState implements ExpiredHotLeadExplorerState {
                 other.assignLeadStatus == assignLeadStatus) &&
             (identical(other.assignLeadError, assignLeadError) ||
                 other.assignLeadError == assignLeadError) &&
+            (identical(other.assigningLeadId, assigningLeadId) ||
+                other.assigningLeadId == assigningLeadId) &&
             const DeepCollectionEquality()
                 .equals(other._leadSourceCategories, _leadSourceCategories) &&
             (identical(
@@ -287,13 +304,14 @@ class _ExpiredHotLeadExplorerState implements ExpiredHotLeadExplorerState {
       expiredHotLeadsPaginator,
       assignLeadStatus,
       assignLeadError,
+      assigningLeadId,
       const DeepCollectionEquality().hash(_leadSourceCategories),
       getLeadSourceCategories,
       const DeepCollectionEquality().hash(_selectedLeadSources));
 
   @override
   String toString() {
-    return 'ExpiredHotLeadExplorerState(expiredHotLeads: $expiredHotLeads, getExpiredHotLeadStatus: $getExpiredHotLeadStatus, getExpiredHotLeadError: $getExpiredHotLeadError, expiredHotLeadsPaginator: $expiredHotLeadsPaginator, assignLeadStatus: $assignLeadStatus, assignLeadError: $assignLeadError, leadSourceCategories: $leadSourceCategories, getLeadSourceCategories: $getLeadSourceCategories, selectedLeadSources: $selectedLeadSources)';
+    return 'ExpiredHotLeadExplorerState(expiredHotLeads: $expiredHotLeads, getExpiredHotLeadStatus: $getExpiredHotLeadStatus, getExpiredHotLeadError: $getExpiredHotLeadError, expiredHotLeadsPaginator: $expiredHotLeadsPaginator, assignLeadStatus: $assignLeadStatus, assignLeadError: $assignLeadError, assigningLeadId: $assigningLeadId, leadSourceCategories: $leadSourceCategories, getLeadSourceCategories: $getLeadSourceCategories, selectedLeadSources: $selectedLeadSources)';
   }
 }
 
@@ -313,6 +331,7 @@ abstract mixin class _$ExpiredHotLeadExplorerStateCopyWith<$Res>
       Paginator? expiredHotLeadsPaginator,
       AppStatus assignLeadStatus,
       String? assignLeadError,
+      String? assigningLeadId,
       List<LeadSourceCategory> leadSourceCategories,
       AppStatus getLeadSourceCategories,
       List<LeadSourceItem> selectedLeadSources});
@@ -340,6 +359,7 @@ class __$ExpiredHotLeadExplorerStateCopyWithImpl<$Res>
     Object? expiredHotLeadsPaginator = freezed,
     Object? assignLeadStatus = null,
     Object? assignLeadError = freezed,
+    Object? assigningLeadId = freezed,
     Object? leadSourceCategories = null,
     Object? getLeadSourceCategories = null,
     Object? selectedLeadSources = null,
@@ -368,6 +388,10 @@ class __$ExpiredHotLeadExplorerStateCopyWithImpl<$Res>
       assignLeadError: freezed == assignLeadError
           ? _self.assignLeadError
           : assignLeadError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      assigningLeadId: freezed == assigningLeadId
+          ? _self.assigningLeadId
+          : assigningLeadId // ignore: cast_nullable_to_non_nullable
               as String?,
       leadSourceCategories: null == leadSourceCategories
           ? _self._leadSourceCategories

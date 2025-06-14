@@ -3,7 +3,7 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/result.dart';
-import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
+import 'package:real_estate_app/view/new_leads_screen/widget/leadsource_filter_widget.dart';
 
 import '../../model/deal_document_model.dart';
 import '../../model/deal_model.dart';

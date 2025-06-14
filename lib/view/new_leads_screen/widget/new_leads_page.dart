@@ -2,38 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
+import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
-import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
-import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
+import 'package:real_estate_app/view/new_leads_screen/cubit/new_leads_cubit.dart';
+import 'package:real_estate_app/view/new_leads_screen/widget/leadsource_filter_widget.dart';
+import 'package:real_estate_app/view/expired_hot_lead_explorer/expired_hot_lead_explorer.dart';
+import 'package:real_estate_app/widgets/button.dart';
+import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
+import 'package:real_estate_app/widgets/search_bar.dart';
 import 'package:real_estate_app/widgets/space.dart';
-import 'package:real_estate_app/widgets/text.dart';
-
-import '../../../app/auth_bloc/auth_bloc.dart';
-import '../../../app/list_state_cubit/list_state_cubit.dart';
-import '../../../model/activity_model.dart';
-import '../../../service_locator/injectable.dart';
-import '../../../widgets/button.dart';
 import '../../../widgets/fields/multi_select_autocomplete_field.dart';
-import '../../../widgets/fields/wrap_select_field.dart';
-import '../../../widgets/search_bar.dart';
 import '../../../widgets/tab_bar.dart';
+import '../../../widgets/text.dart';
+import '../../followups_screen/cubit/followups_cubit.dart'; // Updated import
 import '../../home_screen/home_screen.dart';
-import '../../leads_list_explorer/leads_list_explorer.dart';
 
-class ColdLeadPage extends StatefulWidget {
-  const ColdLeadPage({super.key});
+class NewLeadsPage extends StatefulWidget {
+  const NewLeadsPage({super.key});
 
   @override
-  State<ColdLeadPage> createState() => _ColdLeadPageState();
+  State<NewLeadsPage> createState() => _EnquiriesPageState();
 }
 
-class _ColdLeadPageState extends State<ColdLeadPage>
+enum NewLeadTaskFilterEnum {
+  Enquiry,
+  Cold, // Renamed from Cold
+  Partner,
+  ;
+
+  String getName() {
+    switch (this) {
+      case NewLeadTaskFilterEnum.Enquiry:
+        return "Enquiry";
+      case NewLeadTaskFilterEnum.Partner:
+        return "Partner";
+      case NewLeadTaskFilterEnum.Cold: // Renamed from Cold
+        return "Cold"; // Updated name
+    }
+  }
+}
+
+class _EnquiriesPageState extends State<NewLeadsPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController =
-      TabController(length: TaskFilterEnum.values.length, vsync: this);
-  int tabIndex = 0;
+      TabController(length: NewLeadTaskFilterEnum.values.length, vsync: this);
+  // tabIndex is already managed by _tabController.index, so we can rely on that.
+  // int tabIndex = 0; // This can be removed or managed via _tabController.index
 
   List<Widget> filterFields(
       BuildContext context, Map<String, dynamic>? values) {
@@ -111,66 +130,14 @@ class _ColdLeadPageState extends State<ColdLeadPage>
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(vertical: 4),
-          //   child: ListTile(
-          //     title: HeadingText(text: "Explorer Leads"),
-          //     // trailing: SizedBox(
-          //     //   width: 160,
-          //     //   child: OutlinedButton(
-          //     //     style: OutlinedButton.styleFrom(padding: EdgeInsets.all(2)),
-          //     //     onPressed: () {
-          //     //       context.pushNamed(LeadsExplorerScreen.routeName);
-          //     //     },
-          //     //     child: Text('Go to explorer'),
-          //     //   ),
-          //     // ),
-          //     trailing: InkWell(
-          //       onTap: () {
-          //         context.pushNamed(LeadsExplorerScreen.routeName);
-          //       },
-          //       child: SizedBox(
-          //         height: 40,
-          //         width: 150,
-          //         child: Container(
-          //           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          //           decoration: BoxDecoration(
-          //               borderRadius: BorderRadius.circular(6),
-          //               color: Theme.of(context).colorScheme.secondary),
-          //           child: Row(
-          //             mainAxisSize: MainAxisSize.min,
-          //             children: [
-          //               Icon(
-          //                 Icons.explore,
-          //                 color: Colors.white,
-          //               ),
-          //               HorizontalSmallGap(),
-          //               Text(
-          //                 "Go to explorer",
-          //                 style: Theme.of(context)
-          //                     .textTheme
-          //                     .labelLarge
-          //                     ?.copyWith(
-          //                         color: Theme.of(context)
-          //                             .colorScheme
-          //                             .onSecondary),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //     contentPadding: EdgeInsets.zero,
-          //   ),
-          // ),
           AppSearchBar(
             filterFields: filterFields,
-            filter: context.select<ColdLeadCubit, Map<String, dynamic>?>(
+            filter: context.select<NewLeadsCubit, Map<String, dynamic>?>(
                 (state) => state.state.activityFilter),
             leadWidgets: [
               Expanded(
                 child: ListTile(
-                  title: HeadingText(text: "Explorer Leads"),
+                  title: HeadingText(text: "Enquiries"),
                   contentPadding: EdgeInsets.zero,
                 ),
               ),
@@ -178,7 +145,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
               if (getIt<AuthBloc>().state.user?.role != 'AnonymousAgent')
                 InkWell(
                   onTap: () {
-                    context.pushNamed(LeadsExplorerScreen.routeName);
+                    context.pushNamed(ExpiredHotLeadExplorer.routeName);
                   },
                   child: SizedBox(
                     height: 40,
@@ -197,7 +164,7 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                           ),
                           HorizontalSmallGap(),
                           Text(
-                            "Go to explorer",
+                            "Hot explorer",
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge
@@ -213,49 +180,60 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                 )
             ],
             showSearch: false,
+            skipDisplayFilterKeys: ['sortBy'],
             onChanged: (v) {},
             onFilterApplied: (filter) {
-              context
-                  .read<ColdLeadCubit>()
-                  .setActivityFilters(filter, TaskFilterEnum.values[tabIndex]);
+              context.read<NewLeadsCubit>().setActivityFilters(
+                  filter, NewLeadTaskFilterEnum.values[_tabController.index]);
             },
           ),
           VerticalSmallGap(),
-          AppTabBar(
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-            selectedColor: Theme.of(context).primaryColor,
-            tabController: _tabController,
-            tabs: TaskFilterEnum.values.map((e) => e.getName()).toList(),
-            onTap: (index) {
-              tabIndex = index;
-              loadData(context);
-              if (mounted) setState(() {});
+          BlocSelector<NewLeadsCubit, NewLeadsState,
+              Map<NewLeadTaskFilterEnum, int>>(
+            selector: (state) => state.tabCounts,
+            builder: (context, tabCounts) {
+              return AppTabBar(
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                selectedColor: Theme.of(context).primaryColor,
+                tabController: _tabController,
+                tabs: NewLeadTaskFilterEnum.values.map((e) {
+                  final count = tabCounts[e] ?? 0;
+                  return "${e.getName()} ($count)";
+                }).toList(),
+                onTap: (index) {
+                  // tabIndex = index; // Use _tabController.index directly
+                  // When a tab is tapped, fetch its full data.
+                  // The cubit's fetchHoteads will also trigger fetching counts for other tabs if needed.
+                  context.read<NewLeadsCubit>().fetchHoteads(
+                      NewLeadTaskFilterEnum.values[index],
+                      fetchOnlyCount: false);
+                  // No need to call setState here if UI updates are driven by BlocBuilder/Selector
+                },
+              );
             },
           ),
           SizedBox(
             height: 12,
           ),
-          if (tabIndex == 3)
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: Colors.blueGrey.withOpacity(.4)),
-              height: 56,
-              child: ListTile(
-                  leading: Icon(Icons.info_outline),
-                  title: Text(
-                      "These leads will get unassigned from you after 24 hrs",
-                      style: TextStyle(fontSize: 12))),
-            ),
+          // The condition for tabIndex == 3 was specific to a previous "Expiring" tab.
+          // Review if a similar message is needed for any of the NewLeadTaskFilterEnum tabs.
+          // For now, removing it as it might not be relevant.
+          // if (_tabController.index == X) // Check specific tab if needed
+          //   Container( ... )
           SizedBox(
-            height: 24,
+            height:
+                24, // This SizedBox might have been related to the conditional container above.
+            // Adjust if layout needs change.
           ),
-          BlocBuilder<ColdLeadCubit, ColdLeadState>(
+          BlocBuilder<NewLeadsCubit, NewLeadsState>(
             builder: (context, state) {
-              TaskFilterEnum taskFilterEnum = TaskFilterEnum.values[tabIndex];
+              NewLeadTaskFilterEnum taskFilterEnum =
+                  NewLeadTaskFilterEnum.values[_tabController.index];
               AppStatus? appStatus = state.fetchStatus[taskFilterEnum];
               Paginator? currentPaginator = state.paginator[taskFilterEnum];
-              if (currentPaginator == null) {
+              if (currentPaginator == null &&
+                  state.fetchStatus[taskFilterEnum] != AppStatus.loading &&
+                  (state.activities[taskFilterEnum]?.isEmpty ?? true)) {
                 // First load with  out pagination
                 switch (appStatus) {
                   case AppStatus.success:
@@ -294,9 +272,39 @@ class _ColdLeadPageState extends State<ColdLeadPage>
   loadData(
     BuildContext context,
   ) {
-    context
-        .read<ColdLeadCubit>()
-        .fetchColdLeads(TaskFilterEnum.values[tabIndex], paginator: null);
+    // Fetch full data for the current tab, not just count
+    context.read<NewLeadsCubit>().fetchHoteads(
+        NewLeadTaskFilterEnum.values[_tabController.index],
+        paginator: null,
+        fetchOnlyCount: false);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // The initial data load (full for first tab, counts for others)
+    // is now handled in NewLeadsScreen's BlocProvider.create.
+    // So, no explicit call needed here for the very first load.
+
+    _tabController.addListener(() {
+      // Important: only react to user-initiated tab changes.
+      if (_tabController.indexIsChanging) {
+        // setState is called by AppTabBar's onTap or if _tabController itself drives state.
+        // If BlocBuilder/Selector handles UI updates based on cubit state, direct setState might not be needed here
+        // unless other local UI elements depend on _tabController.index directly outside of Bloc.
+        if (mounted) {
+          setState(
+              () {}); // To rebuild parts of the UI that depend on tabIndex directly, if any.
+        }
+        // Fetch full data for the newly selected tab.
+        // The cubit will handle not re-fetching if data is already present or loading,
+        // and will also manage fetching counts for other tabs if necessary.
+        context.read<NewLeadsCubit>().fetchHoteads(
+            NewLeadTaskFilterEnum.values[_tabController.index],
+            paginator: null,
+            fetchOnlyCount: false);
+      }
+    });
   }
 
   Widget showActivities(
@@ -304,17 +312,19 @@ class _ColdLeadPageState extends State<ColdLeadPage>
       List<Activity> activities,
       Paginator? paginator,
       AppStatus? appStatus,
-      TaskFilterEnum taskFilterEnum) {
+      NewLeadTaskFilterEnum taskFilter) {
     return Expanded(
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollInfo) {
           bool isScrollEnd = scrollInfo.metrics.pixels >=
               0.9 * scrollInfo.metrics.maxScrollExtent;
           if (isScrollEnd && (paginator?.hasNextPage ?? false)) {
-            Logger().d("Paginator is executing $paginator");
-            context.read<ColdLeadCubit>().fetchColdLeads(
-                TaskFilterEnum.values[tabIndex],
-                paginator: paginator);
+            Logger().d(
+                "Paginator is executing for ${_tabController.index} with $paginator");
+            context.read<NewLeadsCubit>().fetchHoteads(
+                NewLeadTaskFilterEnum.values[_tabController.index],
+                paginator: paginator,
+                fetchOnlyCount: false); // Ensure pagination fetches full data
           }
           return true;
         },
@@ -359,8 +369,8 @@ class _ColdLeadPageState extends State<ColdLeadPage>
                       loadData(
                           context); // Reloading data after a call has performed or page pop event
                     },
-                    taskFiler: taskFilterEnum,
-                    taskType: TaskType.Cold,
+                    taskFiler: taskFilter.name,
+                    taskType: TaskType.Hot,
                   );
                 },
                 separatorBuilder: (_, __) => SizedBox(

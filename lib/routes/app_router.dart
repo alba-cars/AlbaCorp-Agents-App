@@ -19,11 +19,11 @@ import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/call_feedback_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/check_in_page/check_in_page.dart';
-import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
+import 'package:real_estate_app/view/followups_screen/followups_screen.dart'; // Updated import
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
-import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
+import 'package:real_estate_app/view/new_leads_screen/new_leads_screen.dart';
 import 'package:real_estate_app/view/expired_hot_lead_explorer/expired_hot_lead_explorer.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
@@ -145,10 +145,10 @@ class AppRouter {
                           AppTransition(child: EnquiriesScreen()),
                     ),
                     GoRoute(
-                      path: ColdLeadScreen.routeName,
-                      name: ColdLeadScreen.routeName,
-                      pageBuilder: (context, state) =>
-                          AppTransition(child: ColdLeadScreen()),
+                      path: FollowupsScreen.routeName, // Updated routeName
+                      name: FollowupsScreen.routeName, // Updated routeName
+                      pageBuilder: (context, state) => AppTransition(
+                          child: FollowupsScreen()), // Updated child
                     ),
                     GoRoute(
                       path: HomePage.routeName,
@@ -467,18 +467,18 @@ class AppRouter {
                   return CupertinoPage(child: NotificationsScreen());
                 },
               ),
-              GoRoute(
-                path: TwilioCallPage.routeName,
-                name: TwilioCallPage.routeName,
-                pageBuilder: (context, state) {
-                  final extras = state.extra as Map<String, dynamic>?;
-                  return CupertinoPage(
-                      child: TwilioCallPage(
-                    callSid: extras?['callSid'] ?? '',
-                    from: extras?['from'] ?? '',
-                  ));
-                },
-              ),
+              // GoRoute(
+              //   path: TwilioCallPage.routeName,
+              //   name: TwilioCallPage.routeName,
+              //   pageBuilder: (context, state) {
+              //     final extras = state.extra as Map<String, dynamic>?;
+              //     return CupertinoPage(
+              //         child: TwilioCallPage(
+              //       callSid: extras?['callSid'] ?? '',
+              //       from: extras?['from'] ?? '',
+              //     ));
+              //   },
+              // ),
               GoRoute(
                 path: CallFeedbackScreen.routeName,
                 name: CallFeedbackScreen.routeName,

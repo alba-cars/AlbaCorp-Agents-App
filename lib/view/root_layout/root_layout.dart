@@ -1,19 +1,21 @@
 import 'package:awesome_notifications/awesome_notifications.dart' as an;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:real_estate_app/data/repository/notification_repo.dart';
-import 'package:real_estate_app/service_locator/injectable.dart';
+// import 'package:real_estate_app/data/repository/notification_repo.dart'; // Removed
+import 'package:real_estate_app/service_locator/injectable.dart'; // Restored import
 import 'package:real_estate_app/util/color_category.dart';
-import 'package:real_estate_app/util/result.dart';
-import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart';
+// import 'package:real_estate_app/util/result.dart'; // Removed
+// import 'package:real_estate_app/view/add_followup_screen/add_followup_screen.dart'; // Removed
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
+import 'package:real_estate_app/app/notification_badge_cubit/notification_badge_cubit.dart';
 
 import '../../app/call_bloc/call_bloc.dart';
-import '../../model/notification_model.dart';
+// import '../../model/notification_model.dart'; // Removed
 
 class RootLayout extends StatefulWidget {
   const RootLayout({super.key, required this.child});
@@ -24,15 +26,33 @@ class RootLayout extends StatefulWidget {
   State<RootLayout> createState() => _RootLayoutState();
 }
 
-class _RootLayoutState extends State<RootLayout> {
+class _RootLayoutState extends State<RootLayout> with WidgetsBindingObserver {
   final ValueNotifier<String> feedBackValue = ValueNotifier('Interested');
   final TextEditingController _controller = TextEditingController();
   bool _notificationsEnabled = false;
   @override
   void initState() {
-    getPendingActions();
+    // getPendingActions(); // Removed
     checkPushNotificationPermission();
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _controller.dispose();
+    feedBackValue.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      // Refresh notification count when app comes to foreground
+      context.read<NotificationBadgeCubit>().refreshNotifications();
+    }
   }
 
   // Function to check notification permissions
@@ -117,39 +137,39 @@ class _RootLayoutState extends State<RootLayout> {
 
   @override
   void didUpdateWidget(covariant RootLayout oldWidget) {
-    getPendingActions();
+    // getPendingActions(); // Removed
     super.didUpdateWidget(oldWidget);
   }
 
-  void getPendingActions() async {
-    final notificationsResult =
-        await getIt<NotificationRepo>().getNotificationsWithActionsPending();
-
-    if (notificationsResult is Success) {
-      final notifications =
-          (notificationsResult as Success<List<NotificationModel>>).value;
-      if (notifications.isNotEmpty) {
-        ScaffoldMessenger.of(context).showMaterialBanner(
-          MaterialBanner(
-            content: Text('You have a follow-up task to schedule'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // Navigate to the AddFollowUpScreen with the appropriate query parameters
-                  context.pushNamed(
-                    AddFollowUpScreen.routeName,
-                    queryParameters: {'leadId': notifications.first.leadId},
-                  );
-                },
-                child: Text('Schedule'),
-              ),
-            ],
-            backgroundColor: Colors.amber, // Optional: set the background color
-          ),
-        );
-      }
-    }
-  }
+  // void getPendingActions() async { // Removed entire method
+  //   final notificationsResult =
+  //       await getIt<NotificationRepo>().getNotificationsWithActionsPending();
+  //
+  //   if (notificationsResult is Success) {
+  //     final notifications =
+  //         (notificationsResult as Success<List<NotificationModel>>).value;
+  //     if (notifications.isNotEmpty) {
+  //       ScaffoldMessenger.of(context).showMaterialBanner(
+  //         MaterialBanner(
+  //           content: Text('You have a follow-up task to schedule'),
+  //           actions: [
+  //             TextButton(
+  //               onPressed: () {
+  //                 // Navigate to the AddFollowUpScreen with the appropriate query parameters
+  //                 context.pushNamed(
+  //                   AddFollowUpScreen.routeName,
+  //                   queryParameters: {'leadId': notifications.first.leadId},
+  //                 );
+  //               },
+  //               child: Text('Schedule'),
+  //             ),
+  //           ],
+  //           backgroundColor: Colors.amber, // Optional: set the background color
+  //         ),
+  //       );
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

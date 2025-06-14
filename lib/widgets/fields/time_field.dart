@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:intl/intl.dart';
 
 import 'field_color.dart';
 
@@ -57,8 +58,23 @@ class _TimeFieldState extends State<TimeField> {
               InkWell(
                   onTap: () async {
                     final time = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.fromDateTime(DateTime.now()));
+                      context: context,
+                      initialTime: state.value ??
+                          TimeOfDay.fromDateTime(
+                              widget.initialDate ?? DateTime.now()),
+                      builder: (BuildContext context, Widget? child) {
+                        return Theme(
+                            data: ThemeData.from(
+                                colorScheme: ColorScheme.fromSeed(
+                                    seedColor: Color(0xff004B85))),
+                            child: MediaQuery(
+                              data: MediaQuery.of(context).copyWith(
+                                alwaysUse24HourFormat: false,
+                              ),
+                              child: child!,
+                            ));
+                      },
+                    );
                     state.didChange(time);
                   },
                   child: Container(
@@ -79,24 +95,29 @@ class _TimeFieldState extends State<TimeField> {
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
-                                child:
-                                    (widget.hint != null && state.value == null)
-                                        ? Text(
-                                            widget.hint!,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge
-                                                ?.copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.grey,
-                                                  fontSize: 12,
-                                                ),
-                                          )
-                                        : Text(
-                                            state.value == null
-                                                ? ''
-                                                : state.value!.format(context),
-                                          ),
+                                child: (widget.hint != null &&
+                                        state.value == null)
+                                    ? Text(
+                                        widget.hint!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.grey,
+                                              fontSize: 12,
+                                            ),
+                                      )
+                                    : Text(
+                                        state.value == null
+                                            ? ''
+                                            : DateFormat.jm().format(DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day,
+                                                state.value!.hour,
+                                                state.value!.minute)),
+                                      ),
                               ),
                             ),
                             const SizedBox(

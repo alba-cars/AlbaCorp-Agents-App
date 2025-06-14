@@ -10,7 +10,8 @@ import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/paginator.dart';
 import 'package:real_estate_app/util/status.dart';
-import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
+
+import 'package:real_estate_app/view/new_leads_screen/widget/new_leads_page.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/widgets/call_button.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
@@ -487,8 +488,8 @@ class CategorizedView extends StatelessWidget {
                               2 => 'Hot Confidential Pending:',
                               3 => 'Active Prospects:',
                               4 => 'Follow Up Hot Leads:',
-                              5 => 'Follow Up Cold Leads:',
-                              6 => 'Fresh Cold Leads:',
+                              5 => 'Follow Up Leads:', // Updated label
+                              6 => 'Fresh Follow Ups:', // Updated label
                               _ => ''
                             },
                           ),
@@ -582,14 +583,14 @@ class CategorizedView extends StatelessWidget {
   }
 }
 
-enum TaskType { Hot, Cold }
+enum TaskType { Hot, Cold } // Renamed Cold to FollowUp
 
 extension TaskTypeTo on String {
   TaskType? toTaskType() {
     switch (this) {
       case "Hot":
         return TaskType.Hot;
-      case "Cold":
+      case "Cold": // Renamed Cold to FollowUp
         return TaskType.Cold;
       default:
         return null;
@@ -598,10 +599,20 @@ extension TaskTypeTo on String {
 
   TaskFilterEnum? toTaskFilter() {
     switch (this) {
-      case "New":
-        return TaskFilterEnum.New;
-      case "FollowUp":
-        return TaskFilterEnum.FollowUp;
+      case "Enquiry":
+        return TaskFilterEnum.Enquiry;
+      case "Cold": // Renamed Cold to FollowUp
+        return TaskFilterEnum.Cold; // Updated to use FollowUp
+      case "Partner":
+        return TaskFilterEnum.Partner;
+      case "FollowUpToday":
+        return TaskFilterEnum.FollowUpToday;
+      case "FollowUpTomorrow":
+        return TaskFilterEnum.FollowUpTomorrow;
+      case "FollowUpOverDue":
+        return TaskFilterEnum.FollowUpOverDue;
+      case "FollowUpAll":
+        return TaskFilterEnum.FollowUpAll;
       case "Favourites":
         return TaskFilterEnum.Favourites;
       case "Expiring":
@@ -627,7 +638,7 @@ class ActivityListItem extends StatelessWidget {
   final int? taskSection;
   final VoidCallback? onActionPerformed;
   final TaskType? taskType;
-  final TaskFilterEnum? taskFiler;
+  final String? taskFiler;
 
   @override
   Widget build(BuildContext context) {
@@ -650,7 +661,7 @@ class ActivityListItem extends StatelessWidget {
                     },
                     queryParameters: {
                       "taskType": taskType?.name ?? '',
-                      "taskFilter": taskFiler?.name ?? ''
+                      "taskFilter": taskFiler ?? ''
                     },
                     extra: activity)
                 .then((_) {

@@ -25,6 +25,7 @@ mixin _$NotificationModel {
   @JsonKey(name: 'createdAt')
   DateTime? get createdAt;
   String? get leadId;
+  String? get taskId;
 
   /// Create a copy of NotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -54,17 +55,18 @@ mixin _$NotificationModel {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.leadId, leadId) || other.leadId == leadId));
+            (identical(other.leadId, leadId) || other.leadId == leadId) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, subTitle,
-      notificationId, isRead, requiresAction, type, createdAt, leadId);
+      notificationId, isRead, requiresAction, type, createdAt, leadId, taskId);
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, title: $title, subTitle: $subTitle, notificationId: $notificationId, isRead: $isRead, requiresAction: $requiresAction, type: $type, createdAt: $createdAt, leadId: $leadId)';
+    return 'NotificationModel(id: $id, title: $title, subTitle: $subTitle, notificationId: $notificationId, isRead: $isRead, requiresAction: $requiresAction, type: $type, createdAt: $createdAt, leadId: $leadId, taskId: $taskId)';
   }
 }
 
@@ -83,7 +85,8 @@ abstract mixin class $NotificationModelCopyWith<$Res> {
       bool requiresAction,
       String type,
       @JsonKey(name: 'createdAt') DateTime? createdAt,
-      String? leadId});
+      String? leadId,
+      String? taskId});
 }
 
 /// @nodoc
@@ -108,6 +111,7 @@ class _$NotificationModelCopyWithImpl<$Res>
     Object? type = null,
     Object? createdAt = freezed,
     Object? leadId = freezed,
+    Object? taskId = freezed,
   }) {
     return _then(_self.copyWith(
       id: freezed == id
@@ -146,6 +150,10 @@ class _$NotificationModelCopyWithImpl<$Res>
           ? _self.leadId
           : leadId // ignore: cast_nullable_to_non_nullable
               as String?,
+      taskId: freezed == taskId
+          ? _self.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -162,7 +170,8 @@ class _NotificationModel implements NotificationModel {
       this.requiresAction = false,
       this.type = 'Normal',
       @JsonKey(name: 'createdAt') this.createdAt,
-      this.leadId});
+      this.leadId,
+      this.taskId});
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =>
       _$NotificationModelFromJson(json);
 
@@ -188,6 +197,8 @@ class _NotificationModel implements NotificationModel {
   final DateTime? createdAt;
   @override
   final String? leadId;
+  @override
+  final String? taskId;
 
   /// Create a copy of NotificationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -221,17 +232,18 @@ class _NotificationModel implements NotificationModel {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.leadId, leadId) || other.leadId == leadId));
+            (identical(other.leadId, leadId) || other.leadId == leadId) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, subTitle,
-      notificationId, isRead, requiresAction, type, createdAt, leadId);
+      notificationId, isRead, requiresAction, type, createdAt, leadId, taskId);
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, title: $title, subTitle: $subTitle, notificationId: $notificationId, isRead: $isRead, requiresAction: $requiresAction, type: $type, createdAt: $createdAt, leadId: $leadId)';
+    return 'NotificationModel(id: $id, title: $title, subTitle: $subTitle, notificationId: $notificationId, isRead: $isRead, requiresAction: $requiresAction, type: $type, createdAt: $createdAt, leadId: $leadId, taskId: $taskId)';
   }
 }
 
@@ -252,7 +264,8 @@ abstract mixin class _$NotificationModelCopyWith<$Res>
       bool requiresAction,
       String type,
       @JsonKey(name: 'createdAt') DateTime? createdAt,
-      String? leadId});
+      String? leadId,
+      String? taskId});
 }
 
 /// @nodoc
@@ -277,6 +290,7 @@ class __$NotificationModelCopyWithImpl<$Res>
     Object? type = null,
     Object? createdAt = freezed,
     Object? leadId = freezed,
+    Object? taskId = freezed,
   }) {
     return _then(_NotificationModel(
       id: freezed == id
@@ -314,6 +328,10 @@ class __$NotificationModelCopyWithImpl<$Res>
       leadId: freezed == leadId
           ? _self.leadId
           : leadId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taskId: freezed == taskId
+          ? _self.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }

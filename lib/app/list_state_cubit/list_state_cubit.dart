@@ -16,7 +16,7 @@ import '../../service_locator/injectable.dart';
 import '../../util/property_price.dart';
 import '../../util/result.dart';
 import '../../util/status.dart';
-import '../../view/enquiries_screen/widget/leadsource_filter_widget.dart';
+import '../../view/new_leads_screen/widget/leadsource_filter_widget.dart';
 import '../auth_bloc/auth_bloc.dart';
 
 part 'list_state_state.dart';

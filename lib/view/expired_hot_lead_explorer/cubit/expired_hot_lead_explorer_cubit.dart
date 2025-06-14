@@ -62,7 +62,10 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
   Future<void> checkOutLead(
       {required BuildContext context,
       required LeadExpirationModel card}) async {
-    emit(state.copyWith(assignLeadStatus: AppStatus.loading));
+    emit(state.copyWith(
+      assignLeadStatus: AppStatus.loading,
+      assigningLeadId: card.lastExpirationRecord.lead.id, // Set assigningLeadId
+    ));
     final result = await _explorerRepo.checkOutLead(
         leadIds: [card.lastExpirationRecord.lead.id],
         source: "hot-leads-explorer");
@@ -71,7 +74,10 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
         final newList = List<LeadExpirationModel>.from(state.expiredHotLeads);
         newList.remove(card);
         emit(state.copyWith(
-            assignLeadStatus: AppStatus.success, expiredHotLeads: newList));
+          assignLeadStatus: AppStatus.success,
+          expiredHotLeads: newList,
+          assigningLeadId: null, // Clear assigningLeadId
+        ));
         if (context.mounted) {
           showSnackbar(
               context, 'Lead assignrd Successfully', SnackBarType.success);
@@ -80,7 +86,10 @@ class ExpiredHotLeadExplorerCubit extends Cubit<ExpiredHotLeadExplorerState> {
         break;
       case (Error e):
         emit(state.copyWith(
-            assignLeadStatus: AppStatus.failure, assignLeadError: e.exception));
+          assignLeadStatus: AppStatus.failure,
+          assignLeadError: e.exception,
+          assigningLeadId: null, // Clear assigningLeadId on error
+        ));
         if (context.mounted) {
           showSnackbar(context, e.exception, SnackBarType.failure);
         }

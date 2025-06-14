@@ -48,14 +48,40 @@ class _CountdownTimerState extends State<CountdownTimer> {
     final isOverdue = _timeLeft.isNegative;
     String displayText;
 
-    displayText =
-        (_timeLeft.inDays > 0 ? _timeLeft.inDays.toString() + " days, " : "") +
-            (_timeLeft.inHours % 24).toString() +
-            " hrs, " +
-            (_timeLeft.inMinutes % 60).toString() +
-            " mins " +
-            (_timeLeft.inSeconds % 60).toString() +
-            " secs";
+    if (isOverdue) {
+      final overdueDuration = _timeLeft.abs();
+      final days = overdueDuration.inDays;
+      final hours = overdueDuration.inHours % 24;
+      final minutes = overdueDuration.inMinutes % 60;
+      final seconds = overdueDuration.inSeconds % 60;
+
+      String formatTwoDigits(int n) => n.toString().padLeft(2, '0');
+      final timePart =
+          "${formatTwoDigits(hours)}:${formatTwoDigits(minutes)}:${formatTwoDigits(seconds)}";
+
+      if (days > 0) {
+        displayText = "$days day${days == 1 ? '' : 's'}, $timePart";
+      } else {
+        displayText = timePart;
+      }
+    } else {
+      // Existing logic for non-overdue (future times)
+      // _timeLeft is positive or zero here.
+      final days = _timeLeft.inDays;
+      final hours = _timeLeft.inHours % 24;
+      final minutes = _timeLeft.inMinutes % 60;
+      final seconds = _timeLeft.inSeconds % 60;
+
+      // Reconstruct exactly as original to ensure "remains unchanged"
+      // This includes using "days" for the pluralization even for 1 day, as in the original.
+      displayText = (days > 0 ? days.toString() + " days, " : "") +
+          (hours).toString() +
+          " hrs, " +
+          (minutes).toString() +
+          " mins " +
+          (seconds).toString() +
+          " secs";
+    }
 
     return Text(
       (!isOverdue ? 'Due In : ' : 'Overdue By : ') + displayText,

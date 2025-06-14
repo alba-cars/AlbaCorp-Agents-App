@@ -15,9 +15,10 @@ import 'package:real_estate_app/util/color_category.dart';
 import 'package:real_estate_app/util/launch_whatsapp.dart';
 import 'package:real_estate_app/util/share_company_profile.dart';
 import 'package:real_estate_app/util/status.dart';
-import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
-import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
-import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
+import 'package:real_estate_app/view/followups_screen/followups_screen.dart';
+import 'package:real_estate_app/view/followups_screen/cubit/followups_cubit.dart';
+import 'package:real_estate_app/view/new_leads_screen/new_leads_screen.dart';
+import 'package:real_estate_app/view/new_leads_screen/widget/new_leads_page.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart' as home;
 import 'package:real_estate_app/view/lead_detail_screen/cubit/lead_detail_cubit.dart';
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
@@ -37,6 +38,18 @@ import 'widgets/feedback_dialog.dart';
 
 /// Enum for card actions when swiping
 enum CardAction { ManuelSwipe, Heart, Charge, Star, Skip, Negative }
+
+enum TaskFilterEnum {
+  Enquiry,
+  Cold, // Changed from Cold
+  Partner,
+  FollowUpToday,
+  FollowUpOverDue,
+  FollowUpTomorrow,
+  FollowUpAll,
+  Favourites,
+  Expiring
+}
 
 class TaskDetailScreen extends StatefulWidget {
   static const routeName = '/taskDetailScreen';
@@ -141,7 +154,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text(widget.isEnquiry ? 'Enquiry' : "Cold Lead"),
+      title: Text(widget.isEnquiry ? 'Enquiry' : "Follow-up"),
       centerTitle: true,
       automaticallyImplyLeading: false,
       leading: BlocSelector<AuthBloc, AuthState, Set<String>?>(
@@ -228,7 +241,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                   if (context.canPop()) {
                     context.pop();
                   } else {
-                    context.goNamed(ColdLeadScreen.routeName);
+                    context.goNamed(FollowupsScreen.routeName);
                   }
                 })
           ],
@@ -319,7 +332,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
 
   Widget _buildTaskCard(Activity task) {
     final isBlockingActivity = task.activityWeight >= 0.8;
-    isProspect.value = task.lead?.leadStatus == LeadStatus.Prospect;
+    isProspect.value = task.lead?.isProspect == true;
 
     return SizedBox(
       key: ValueKey(task.id),

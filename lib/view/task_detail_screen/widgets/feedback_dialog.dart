@@ -16,6 +16,7 @@ import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart'
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/card_picker_field.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
+import 'package:real_estate_app/widgets/fields/range_slider_field.dart';
 import 'package:real_estate_app/widgets/fields/time_field.dart';
 import 'package:real_estate_app/widgets/fields/wrap_select_field.dart';
 import 'package:real_estate_app/widgets/s3_image.dart';
@@ -72,6 +73,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   late final ValueNotifier<CallLaterValue> callLaterValue;
   late final TextEditingController _controller;
   final GlobalKey<FormBuilderState> _formKey = GlobalKey();
+  late final ValueNotifier<double?> _ratingValueNotifier;
 
   @override
   void initState() {
@@ -79,43 +81,42 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     _initializeFeedbackValue();
     _initializeController();
     callLaterValue = ValueNotifier(CallLaterValue.ONE_DAY);
+    _ratingValueNotifier = ValueNotifier<double?>(null); // No default rating
   }
 
   Duration getFollowUpDateLimit() {
-    if ([
-          LeadStatus.Prospect,
-          LeadStatus.Appointment,
-          LeadStatus.Negotiating,
-          LeadStatus.Viewing,
-          LeadStatus.ForListing
-        ].contains(widget.activity.lead?.leadStatus) ||
-        ([FeedbackType.veryInterested].contains(feedbackValue.value))) {
-      return Duration(days: 2 * 30);
-    }
-    print("Feedback Value");
-    print(feedbackValue.value);
-    if ([
-      FeedbackType.interested,
-      FeedbackType.deal,
-      FeedbackType.veryInterested,
-      FeedbackType.listing,
-      FeedbackType.pocketListing,
-      FeedbackType.interested,
-    ].contains(feedbackValue.value)) {
-      print("Inside loop");
-      return Duration(days: 2 * 30);
-    }
-    if (widget.activity.lead?.leadStatus ==
-            [
-              LeadStatus.Deal,
-              LeadStatus.Won,
-            ] ||
-        ([FeedbackType.listing, FeedbackType.deal]
-            .contains(feedbackValue.value))) {
-      return Duration(days: 2 * 30);
+    final lead = widget.activity.lead;
+    final currentFeedback = feedbackValue.value;
+
+    if (lead != null) {
+      const positiveLeadStatuses = [
+        LeadStatus.Prospect,
+        LeadStatus.Appointment,
+        LeadStatus.Negotiating,
+        LeadStatus.Viewing,
+        LeadStatus.ForListing,
+        LeadStatus.Deal,
+        LeadStatus.Won,
+      ];
+      if (positiveLeadStatuses.contains(lead.leadStatus)) {
+        return const Duration(days: 60);
+      }
     }
 
-    return Duration(days: 15);
+    if (currentFeedback != null) {
+      const positiveFeedbackTypes = [
+        FeedbackType.interested,
+        FeedbackType.veryInterested,
+        FeedbackType.deal,
+        FeedbackType.listing,
+        FeedbackType.pocketListing,
+      ];
+      if (positiveFeedbackTypes.contains(currentFeedback)) {
+        return const Duration(days: 60);
+      }
+    }
+
+    return const Duration(days: 15);
   }
 
   void _initializeFeedbackValue() {
@@ -139,6 +140,8 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
   void dispose() {
     _controller.dispose();
     feedbackValue.dispose();
+    _ratingValueNotifier.dispose();
+    callLaterValue.dispose();
     super.dispose();
   }
 
@@ -301,10 +304,6 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
               return PropertyCardPickerItem(listing: listing);
             },
           ),
-        MultiLineField(
-          label: 'Add a note for next activity',
-          name: 'description',
-        ),
         VerticalSmallGap(),
       ],
     );
@@ -364,27 +363,10 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
       onTap: () async {
         FocusScope.of(context).unfocus();
         if (!_formKey.currentState!.saveAndValidate()) return;
-        final ratingValue = context.read<TaskDetailCubit>().state.ratingValue;
-        if (shouldShowRating(feedbackValue.value) &&
-            (ratingValue == null || ratingValue == 0)) {
-          // Show a more noticeable error for missing rating
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Rating Required'),
-              content: Text('Please provide a lead rating before proceeding.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('OK'),
-                ),
-              ],
-            ),
-          );
-          return;
-        }
-
         final val = _formKey.currentState!.value;
+        // The rating value will be part of `val` map as `val['rating']`
+        // if the FormBuilderSlider is correctly named 'rating'.
+        // No need to fetch it separately from cubit anymore.
         await context.read<TaskDetailCubit>().completeAndAddFollowUp(
               context: context,
               task: widget.activity,
@@ -392,6 +374,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
               currentActivityNotes: val['notes'],
               markAsProspect:
                   feedbackValue.value == FeedbackType.veryInterested,
+              // rating: val['rating'] as double?, // Pass rating if your cubit method expects it
             );
       },
       text: 'Add Followup',
@@ -573,53 +556,6 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
     );
   }
 
-  _buildRatingBar(BuildContext context) {
-    final value = context.select(
-      (TaskDetailCubit value) => value.state.ratingValue,
-    );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Divider(),
-        SizedBox(
-          height: 4,
-        ),
-        Text("Lead Rating"),
-        SizedBox(
-          height: 4,
-        ),
-        Slider(
-            value: value ?? 5.0,
-            min: 0,
-            max: 10,
-            label: value.toString(),
-            divisions: 20,
-            onChanged: (v) {
-              context.read<TaskDetailCubit>().onRAtingChanged(v);
-            }),
-        Center(
-            child: Text(
-          "Your rating is $value out of 10",
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary),
-        ))
-        // Padding(
-        //   padding:  EdgeInsets.zero,
-        //   child: SfSlider(
-
-        //     stepSize: 0.05,
-        //       value: value ?? 0.5,
-        //       interval: 20,
-        //       onChanged: (v) {
-        //         context.read<TaskDetailCubit>().onRAtingChanged(v);
-        //       }),
-        // ),
-      ],
-    );
-  }
-
   _buildScheduleTimeForNoAnswer(BuildContext context) {
     return ValueListenableBuilder(
         valueListenable: callLaterValue,
@@ -689,15 +625,74 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                             _buildFeedbackOptions(),
                             _buildNoteField(),
                             Visibility(
-                              visible: shouldShowRating(feedbackValue.value),
-                              child: _buildRatingBar(context),
-                            ),
-                            Visibility(
                               visible: feedbackValue.value ==
                                   FeedbackType.notAnswered,
                               child: _buildScheduleTimeForNoAnswer(context),
                             ),
                             _buildFollowUpForm(),
+                            ValueListenableBuilder<FeedbackType?>(
+                              valueListenable: feedbackValue,
+                              builder: (context, currentFeedbackValue, _) {
+                                if (shouldShowRating(currentFeedbackValue)) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 8.0),
+                                      ValueListenableBuilder(
+                                          valueListenable: _ratingValueNotifier,
+                                          builder: (context, rating, _) {
+                                            return FormBuilderSlider(
+                                              name: 'rating',
+                                              decoration: InputDecoration(
+                                                label: Text(
+                                                  "Lead Rating",
+                                                ),
+                                                helperText: rating != null
+                                                    ? "Your lead rating is ${rating}"
+                                                    : 'Select a rating',
+                                                labelStyle: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall
+                                                    ?.copyWith(fontSize: 16),
+                                                border: InputBorder.none,
+                                                contentPadding: EdgeInsets.zero,
+                                                isDense: true,
+                                                maintainHintHeight: false,
+                                              ),
+                                              validator: (sliderWidgetValue) {
+                                                if (shouldShowRating(
+                                                        feedbackValue.value) &&
+                                                    _ratingValueNotifier
+                                                            .value ==
+                                                        null) {
+                                                  return 'Please provide a lead rating.';
+                                                }
+                                                return null;
+                                              },
+                                              min: 0.0,
+                                              max: 10.0,
+                                              initialValue:
+                                                  _ratingValueNotifier.value ??
+                                                      0.0,
+                                              divisions: 20, // For 0.5 steps
+                                              displayValues: DisplayValues.none,
+                                              onChanged: (val) {
+                                                if (val != null) {
+                                                  _ratingValueNotifier.value =
+                                                      val;
+                                                }
+                                              },
+                                              valueWidget: (value) =>
+                                                  SizedBox(),
+                                            );
+                                          }),
+                                    ],
+                                  );
+                                }
+                                return SizedBox.shrink();
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -718,11 +713,12 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
 
 bool shouldShowRating(FeedbackType? selectedFeedbackType) {
   if (selectedFeedbackType == null) return false;
+  // Assuming FeedbackType.doNotCall covers the intent of FeedbackTypeEnum.doNotDial
+  // for the purpose of this dialog's logic, as selectedFeedbackType is FeedbackType.
   const ratingBypassStatus = [
     FeedbackType.doNotCall,
     FeedbackType.invalidNumber,
     FeedbackType.notAnswered,
-    FeedbackTypeEnum.doNotDial
   ];
 
   return !ratingBypassStatus.contains(selectedFeedbackType);
@@ -977,23 +973,5 @@ class PropertyCardPickerItem extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
-  const CustomSliderTrackShape();
-  @override
-  Rect getPreferredRect({
-    required RenderBox parentBox,
-    Offset offset = Offset.zero,
-    required SliderThemeData sliderTheme,
-    bool isEnabled = false,
-    bool isDiscrete = false,
-  }) {
-    final trackHeight = sliderTheme.trackHeight;
-    final trackLeft = offset.dx;
-    final trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
-    final trackWidth = parentBox.size.width;
-    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

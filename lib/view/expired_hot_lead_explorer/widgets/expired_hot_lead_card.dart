@@ -36,6 +36,7 @@ class ExpiredHotLeadCard extends StatelessWidget {
   final Future<void> Function() onAssign;
   final String agentInitials;
   final LeadExpirationCardTheme theme;
+  final bool isLoading; // Added for loading state
 
   const ExpiredHotLeadCard({
     Key? key,
@@ -48,12 +49,13 @@ class ExpiredHotLeadCard extends StatelessWidget {
     required this.onAssign,
     required this.agentInitials,
     this.theme = const LeadExpirationCardTheme(),
+    required this.isLoading, // Added
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation:0,
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
         side: BorderSide(
@@ -71,7 +73,8 @@ class ExpiredHotLeadCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: theme.chipBackgroundColor,
                     borderRadius: BorderRadius.circular(12),
@@ -99,7 +102,7 @@ class ExpiredHotLeadCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            
+
             // Agent Info Row
             DefaultTextStyle(
               style: TextStyle(
@@ -150,17 +153,29 @@ class ExpiredHotLeadCard extends StatelessWidget {
                     color: theme.secondaryTextColor,
                   ),
                   const SizedBox(width: 4),
-                  Text('$expirationCount ${expirationCount == 1 ? 'time' : 'times'}'),
+                  Text(
+                      '$expirationCount ${expirationCount == 1 ? 'time' : 'times'}'),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: AppPrimaryButton(
-                      height: 30,
-                      onTap: onAssign,
-                     
-                      text: 
-                        'Assign to me',
-                      
-                    ),
+                    child: isLoading
+                        ? Center(
+                            // Center the loader
+                            child: SizedBox(
+                              width: 24, // Standard size for small loaders
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                                valueColor: AlwaysStoppedAnimation<Color>(theme
+                                    .primaryColor), // Use theme's primary color
+                              ),
+                            ),
+                          )
+                        : AppPrimaryButton(
+                            height: 30,
+                            onTap:
+                                onAssign, // onTap is handled by isLoading in the parent or button disabled state
+                            text: 'Assign to me',
+                          ),
                   ),
                 ],
               ),

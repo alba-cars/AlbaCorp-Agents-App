@@ -10,4 +10,6 @@ abstract class NotificationRepo {
   Future<Result<bool>> isNotificationReceived({required String notificationId});
   Future<Result<bool>> updateNotification(
       {required NotificationModel notificationModel});
+  Future<void> markNotificationsAsRead({String? taskId, String? leadId});
+  Future<void> markAllPastNotificationsAsRead();
 }

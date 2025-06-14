@@ -6,7 +6,7 @@ import 'package:real_estate_app/model/lead_source_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
-import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
+import 'package:real_estate_app/view/new_leads_screen/widget/leadsource_filter_widget.dart';
 
 part 'lead_source_cubit.freezed.dart';
 part 'lead_source_state.dart';

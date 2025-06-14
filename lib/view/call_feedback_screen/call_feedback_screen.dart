@@ -15,7 +15,7 @@ import 'package:real_estate_app/view/call_feedback_screen/widgets/add_lead_widge
 import 'package:real_estate_app/view/call_feedback_screen/widgets/followup_task.dart';
 import 'package:real_estate_app/view/call_feedback_screen/widgets/last_pending_activity.dart';
 import 'package:real_estate_app/view/call_feedback_screen/widgets/reassign_lead.dart';
-import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
+import 'package:real_estate_app/view/new_leads_screen/new_leads_screen.dart';
 import 'package:real_estate_app/widgets/button.dart';
 import 'package:real_estate_app/widgets/fields/multi_line_textfield.dart';
 import 'package:real_estate_app/widgets/fields/phone_number_field.dart';

@@ -9,6 +9,7 @@ abstract class ExpiredHotLeadExplorerState with _$ExpiredHotLeadExplorerState {
     Paginator? expiredHotLeadsPaginator,
     @Default(AppStatus.init) AppStatus assignLeadStatus,
     String? assignLeadError,
+    String? assigningLeadId, // Added for in-card loading
     @Default([]) List<LeadSourceCategory> leadSourceCategories,
     @Default(AppStatus.init) AppStatus getLeadSourceCategories,
     @Default([]) List<LeadSourceItem> selectedLeadSources,

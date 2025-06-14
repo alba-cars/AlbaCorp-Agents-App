@@ -57,7 +57,7 @@
         </activity>
 
         <!-- Add NotificationProxyActivity -->
-        <activity
+        <!-- <activity
             android:name="com.twilio.voice.flutter.NotificationProxyActivity"
             android:exported="true"
             android:launchMode="singleTop"
@@ -66,30 +66,30 @@
             android:excludeFromRecents="true"
             android:taskAffinity=""
             android:turnScreenOn="true">
-        </activity>
+        </activity> -->
 
         <!-- Existing services and receivers -->
-        <receiver android:name=".services.PhoneStateReceiver" android:exported="true">
+        <!-- <receiver android:name=".services.PhoneStateReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
-        </receiver>
+        </receiver> -->
 
-        <service
+        <!-- <service
             android:name="com.twilio.voice.flutter.fcm.VoiceFirebaseMessagingService"
             android:exported="false"
             android:stopWithTask="false">
             <intent-filter> 
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter> 
-        </service>
+        </service> -->
 
-        <service
+        <!-- <service
             android:name="com.twilio.voice.flutter.IncomingCallNotificationService"
             android:enabled="true"
             android:foregroundServiceType="phoneCall"
-            android:exported="true" />
+            android:exported="true" /> -->
 
         <!-- Existing meta-data -->
 

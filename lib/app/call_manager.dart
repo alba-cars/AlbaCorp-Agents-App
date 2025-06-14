@@ -18,13 +18,13 @@ class CallManager {
             final from = args['from'] as String?;
 
             // Navigate using GoRouter
-            router.goNamed(
-              TwilioCallPage.routeName,
-              extra: {
-                'callSid': callSid,
-                'from': from,
-              },
-            );
+            // router.goNamed(
+            //   TwilioCallPage.routeName,
+            //   extra: {
+            //     'callSid': callSid,
+            //     'from': from,
+            //   },
+            // );
           } catch (e) {
             Logger().e(e);
           }

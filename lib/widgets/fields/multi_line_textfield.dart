@@ -62,10 +62,14 @@ class _MultiLineFieldState extends State<MultiLineField> {
     controller = widget.controller ?? TextEditingController();
     _focusNode.addListener(_onFocusChanged);
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      if (controller.text.isNotEmpty) {
+        _fieldKey.currentState?.setValue(controller.text);
+      }
       if (_fieldKey.currentState?.value != null) {
         controller.text = _fieldKey.currentState?.value ?? '';
       }
     });
+
     super.initState();
   }
 
@@ -81,24 +85,39 @@ class _MultiLineFieldState extends State<MultiLineField> {
     if (widget.focusNode == null) {
       _focusNode.dispose();
     }
+    // Dispose the controller only if it was created internally by this widget.
+    if (widget.controller == null) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
   @override
   void didUpdateWidget(covariant MultiLineField oldWidget) {
-    if (oldWidget.value != widget.value && widget.value != null) {
-      controller.text = widget.value ?? '';
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-        _fieldKey.currentState?.didChange(widget.value);
-      });
+    super.didUpdateWidget(oldWidget); // Call super first
+    if (oldWidget.value != widget.value) {
+      // If an external controller isn't provided and the 'value' property changes,
+      // update the internal controller's text and the FormBuilderField's state.
+      if (widget.controller == null) {
+        controller.text = widget.value ?? ''; // Handle null widget.value
+        // Ensure FormBuilderField is also updated with the new value.
+        // Using addPostFrameCallback to avoid calling setState during build/update.
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          if (mounted && _fieldKey.currentState?.value != widget.value) {
+            _fieldKey.currentState?.didChange(widget.value);
+          }
+        });
+      }
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderField<String>(
         key: _fieldKey,
+        // Set the initialValue of the FormBuilderField from the controller's text.
+        // The controller's text is correctly initialized in initState.
+        initialValue: controller.text,
         validator: widget.validator,
         name: widget.name,
         enabled: !widget.disabled,

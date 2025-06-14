@@ -11,7 +11,7 @@ import 'package:real_estate_app/model/lead_source_category_model.dart';
 import 'package:real_estate_app/model/paginator.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/result.dart';
-import 'package:real_estate_app/view/enquiries_screen/widget/leadsource_filter_widget.dart';
+import 'package:real_estate_app/view/new_leads_screen/widget/leadsource_filter_widget.dart';
 
 import '../../model/lead_source_model.dart';
 import '../../util/api_error.dart';
