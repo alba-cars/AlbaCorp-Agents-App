@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'enquiries_cubit.dart';
+part of 'followups_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,26 +14,28 @@ part of 'enquiries_cubit.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$EnquiriesState {
+mixin _$FollowupsState {
   Map<TaskFilterEnum, AppStatus> get fetchStatus;
   Map<TaskFilterEnum, Paginator?> get paginator;
   Map<TaskFilterEnum, List<Activity>> get activities;
   Map<TaskFilterEnum, String> get error;
   Map<String, dynamic>? get activityFilter;
+  Map<TaskFilterEnum, int> get tabCounts;
+  String? get leadSourceType;
 
-  /// Create a copy of EnquiriesState
+  /// Create a copy of FollowupsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $EnquiriesStateCopyWith<EnquiriesState> get copyWith =>
-      _$EnquiriesStateCopyWithImpl<EnquiriesState>(
-          this as EnquiriesState, _$identity);
+  $FollowupsStateCopyWith<FollowupsState> get copyWith =>
+      _$FollowupsStateCopyWithImpl<FollowupsState>(
+          this as FollowupsState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is EnquiriesState &&
+            other is FollowupsState &&
             const DeepCollectionEquality()
                 .equals(other.fetchStatus, fetchStatus) &&
             const DeepCollectionEquality().equals(other.paginator, paginator) &&
@@ -41,7 +43,10 @@ mixin _$EnquiriesState {
                 .equals(other.activities, activities) &&
             const DeepCollectionEquality().equals(other.error, error) &&
             const DeepCollectionEquality()
-                .equals(other.activityFilter, activityFilter));
+                .equals(other.activityFilter, activityFilter) &&
+            const DeepCollectionEquality().equals(other.tabCounts, tabCounts) &&
+            (identical(other.leadSourceType, leadSourceType) ||
+                other.leadSourceType == leadSourceType));
   }
 
   @override
@@ -51,37 +56,41 @@ mixin _$EnquiriesState {
       const DeepCollectionEquality().hash(paginator),
       const DeepCollectionEquality().hash(activities),
       const DeepCollectionEquality().hash(error),
-      const DeepCollectionEquality().hash(activityFilter));
+      const DeepCollectionEquality().hash(activityFilter),
+      const DeepCollectionEquality().hash(tabCounts),
+      leadSourceType);
 
   @override
   String toString() {
-    return 'EnquiriesState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter)';
+    return 'FollowupsState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter, tabCounts: $tabCounts, leadSourceType: $leadSourceType)';
   }
 }
 
 /// @nodoc
-abstract mixin class $EnquiriesStateCopyWith<$Res> {
-  factory $EnquiriesStateCopyWith(
-          EnquiriesState value, $Res Function(EnquiriesState) _then) =
-      _$EnquiriesStateCopyWithImpl;
+abstract mixin class $FollowupsStateCopyWith<$Res> {
+  factory $FollowupsStateCopyWith(
+          FollowupsState value, $Res Function(FollowupsState) _then) =
+      _$FollowupsStateCopyWithImpl;
   @useResult
   $Res call(
       {Map<TaskFilterEnum, AppStatus> fetchStatus,
       Map<TaskFilterEnum, Paginator?> paginator,
       Map<TaskFilterEnum, List<Activity>> activities,
       Map<TaskFilterEnum, String> error,
-      Map<String, dynamic>? activityFilter});
+      Map<String, dynamic>? activityFilter,
+      Map<TaskFilterEnum, int> tabCounts,
+      String? leadSourceType});
 }
 
 /// @nodoc
-class _$EnquiriesStateCopyWithImpl<$Res>
-    implements $EnquiriesStateCopyWith<$Res> {
-  _$EnquiriesStateCopyWithImpl(this._self, this._then);
+class _$FollowupsStateCopyWithImpl<$Res>
+    implements $FollowupsStateCopyWith<$Res> {
+  _$FollowupsStateCopyWithImpl(this._self, this._then);
 
-  final EnquiriesState _self;
-  final $Res Function(EnquiriesState) _then;
+  final FollowupsState _self;
+  final $Res Function(FollowupsState) _then;
 
-  /// Create a copy of EnquiriesState
+  /// Create a copy of FollowupsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -91,6 +100,8 @@ class _$EnquiriesStateCopyWithImpl<$Res>
     Object? activities = null,
     Object? error = null,
     Object? activityFilter = freezed,
+    Object? tabCounts = null,
+    Object? leadSourceType = freezed,
   }) {
     return _then(_self.copyWith(
       fetchStatus: null == fetchStatus
@@ -113,28 +124,40 @@ class _$EnquiriesStateCopyWithImpl<$Res>
           ? _self.activityFilter
           : activityFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      tabCounts: null == tabCounts
+          ? _self.tabCounts
+          : tabCounts // ignore: cast_nullable_to_non_nullable
+              as Map<TaskFilterEnum, int>,
+      leadSourceType: freezed == leadSourceType
+          ? _self.leadSourceType
+          : leadSourceType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _EnquiriesState implements EnquiriesState {
-  const _EnquiriesState(
+class _FollowupsState implements FollowupsState {
+  const _FollowupsState(
       {final Map<TaskFilterEnum, AppStatus> fetchStatus = const {
-        TaskFilterEnum.New: AppStatus.initial,
-        TaskFilterEnum.FollowUp: AppStatus.initial,
-        TaskFilterEnum.Favourites: AppStatus.initial
+        TaskFilterEnum.FollowUpToday: AppStatus.initial,
+        TaskFilterEnum.FollowUpTomorrow: AppStatus.initial,
+        TaskFilterEnum.FollowUpOverDue: AppStatus.initial,
+        TaskFilterEnum.FollowUpAll: AppStatus.initial
       },
       final Map<TaskFilterEnum, Paginator?> paginator = const {},
       final Map<TaskFilterEnum, List<Activity>> activities = const {},
       final Map<TaskFilterEnum, String> error = const {},
-      final Map<String, dynamic>? activityFilter})
+      final Map<String, dynamic>? activityFilter,
+      final Map<TaskFilterEnum, int> tabCounts = const {},
+      this.leadSourceType = 'hot'})
       : _fetchStatus = fetchStatus,
         _paginator = paginator,
         _activities = activities,
         _error = error,
-        _activityFilter = activityFilter;
+        _activityFilter = activityFilter,
+        _tabCounts = tabCounts;
 
   final Map<TaskFilterEnum, AppStatus> _fetchStatus;
   @override
@@ -182,19 +205,32 @@ class _EnquiriesState implements EnquiriesState {
     return EqualUnmodifiableMapView(value);
   }
 
-  /// Create a copy of EnquiriesState
+  final Map<TaskFilterEnum, int> _tabCounts;
+  @override
+  @JsonKey()
+  Map<TaskFilterEnum, int> get tabCounts {
+    if (_tabCounts is EqualUnmodifiableMapView) return _tabCounts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_tabCounts);
+  }
+
+  @override
+  @JsonKey()
+  final String? leadSourceType;
+
+  /// Create a copy of FollowupsState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$EnquiriesStateCopyWith<_EnquiriesState> get copyWith =>
-      __$EnquiriesStateCopyWithImpl<_EnquiriesState>(this, _$identity);
+  _$FollowupsStateCopyWith<_FollowupsState> get copyWith =>
+      __$FollowupsStateCopyWithImpl<_FollowupsState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EnquiriesState &&
+            other is _FollowupsState &&
             const DeepCollectionEquality()
                 .equals(other._fetchStatus, _fetchStatus) &&
             const DeepCollectionEquality()
@@ -203,7 +239,11 @@ class _EnquiriesState implements EnquiriesState {
                 .equals(other._activities, _activities) &&
             const DeepCollectionEquality().equals(other._error, _error) &&
             const DeepCollectionEquality()
-                .equals(other._activityFilter, _activityFilter));
+                .equals(other._activityFilter, _activityFilter) &&
+            const DeepCollectionEquality()
+                .equals(other._tabCounts, _tabCounts) &&
+            (identical(other.leadSourceType, leadSourceType) ||
+                other.leadSourceType == leadSourceType));
   }
 
   @override
@@ -213,20 +253,22 @@ class _EnquiriesState implements EnquiriesState {
       const DeepCollectionEquality().hash(_paginator),
       const DeepCollectionEquality().hash(_activities),
       const DeepCollectionEquality().hash(_error),
-      const DeepCollectionEquality().hash(_activityFilter));
+      const DeepCollectionEquality().hash(_activityFilter),
+      const DeepCollectionEquality().hash(_tabCounts),
+      leadSourceType);
 
   @override
   String toString() {
-    return 'EnquiriesState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter)';
+    return 'FollowupsState(fetchStatus: $fetchStatus, paginator: $paginator, activities: $activities, error: $error, activityFilter: $activityFilter, tabCounts: $tabCounts, leadSourceType: $leadSourceType)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$EnquiriesStateCopyWith<$Res>
-    implements $EnquiriesStateCopyWith<$Res> {
-  factory _$EnquiriesStateCopyWith(
-          _EnquiriesState value, $Res Function(_EnquiriesState) _then) =
-      __$EnquiriesStateCopyWithImpl;
+abstract mixin class _$FollowupsStateCopyWith<$Res>
+    implements $FollowupsStateCopyWith<$Res> {
+  factory _$FollowupsStateCopyWith(
+          _FollowupsState value, $Res Function(_FollowupsState) _then) =
+      __$FollowupsStateCopyWithImpl;
   @override
   @useResult
   $Res call(
@@ -234,18 +276,20 @@ abstract mixin class _$EnquiriesStateCopyWith<$Res>
       Map<TaskFilterEnum, Paginator?> paginator,
       Map<TaskFilterEnum, List<Activity>> activities,
       Map<TaskFilterEnum, String> error,
-      Map<String, dynamic>? activityFilter});
+      Map<String, dynamic>? activityFilter,
+      Map<TaskFilterEnum, int> tabCounts,
+      String? leadSourceType});
 }
 
 /// @nodoc
-class __$EnquiriesStateCopyWithImpl<$Res>
-    implements _$EnquiriesStateCopyWith<$Res> {
-  __$EnquiriesStateCopyWithImpl(this._self, this._then);
+class __$FollowupsStateCopyWithImpl<$Res>
+    implements _$FollowupsStateCopyWith<$Res> {
+  __$FollowupsStateCopyWithImpl(this._self, this._then);
 
-  final _EnquiriesState _self;
-  final $Res Function(_EnquiriesState) _then;
+  final _FollowupsState _self;
+  final $Res Function(_FollowupsState) _then;
 
-  /// Create a copy of EnquiriesState
+  /// Create a copy of FollowupsState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -255,8 +299,10 @@ class __$EnquiriesStateCopyWithImpl<$Res>
     Object? activities = null,
     Object? error = null,
     Object? activityFilter = freezed,
+    Object? tabCounts = null,
+    Object? leadSourceType = freezed,
   }) {
-    return _then(_EnquiriesState(
+    return _then(_FollowupsState(
       fetchStatus: null == fetchStatus
           ? _self._fetchStatus
           : fetchStatus // ignore: cast_nullable_to_non_nullable
@@ -277,6 +323,14 @@ class __$EnquiriesStateCopyWithImpl<$Res>
           ? _self._activityFilter
           : activityFilter // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      tabCounts: null == tabCounts
+          ? _self._tabCounts
+          : tabCounts // ignore: cast_nullable_to_non_nullable
+              as Map<TaskFilterEnum, int>,
+      leadSourceType: freezed == leadSourceType
+          ? _self.leadSourceType
+          : leadSourceType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

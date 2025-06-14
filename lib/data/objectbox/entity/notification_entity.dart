@@ -14,6 +14,7 @@ class NotificationEntity {
   String? type;
   bool requiresAction;
   String? leadId;
+  String? taskId; // Added taskId
 
   NotificationEntity(
       {this.id = 0,
@@ -24,7 +25,8 @@ class NotificationEntity {
       this.createdAt,
       this.type,
       this.requiresAction = false,
-      this.leadId});
+      this.leadId,
+      this.taskId}); // Added taskId to constructor
 
   NotificationModel toModel() {
     return NotificationModel(
@@ -36,7 +38,8 @@ class NotificationEntity {
         createdAt: createdAt,
         type: this.type ?? 'Normal',
         requiresAction: this.requiresAction,
-        leadId: this.leadId);
+        leadId: this.leadId,
+        taskId: this.taskId); // Added taskId to toModel
   }
 
   factory NotificationEntity.fromModel(NotificationModel model) {
@@ -49,6 +52,7 @@ class NotificationEntity {
         createdAt: model.createdAt,
         requiresAction: model.requiresAction,
         type: model.type,
-        leadId: model.leadId);
+        leadId: model.leadId,
+        taskId: model.taskId); // Added taskId to fromModel
   }
 }

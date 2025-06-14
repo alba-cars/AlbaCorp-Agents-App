@@ -90,4 +90,49 @@ class NotificationData implements NotificationRepo {
       return Error(e.toString());
     }
   }
+
+  @override
+  Future<void> markNotificationsAsRead({String? taskId, String? leadId}) async {
+    try {
+      final condition = NotificationEntity_.isRead.equals(false);
+
+      if (taskId != null && taskId.isNotEmpty) {
+        condition.and(NotificationEntity_.taskId.equals(taskId));
+      }
+      if (leadId != null && leadId.isNotEmpty) {
+        condition.and(NotificationEntity_.leadId.equals(leadId));
+      }
+
+      final notificationsToUpdate =
+          await _notificationBox.query(condition).build().findAsync();
+
+      if (notificationsToUpdate.isNotEmpty) {
+        for (var notification in notificationsToUpdate) {
+          notification.isRead = true;
+        }
+        await _notificationBox.putManyAsync(notificationsToUpdate);
+      }
+    } catch (e) {
+      log.e("Error marking notifications as read: $e");
+    }
+  }
+
+  @override
+  Future<void> markAllPastNotificationsAsRead() async {
+    try {
+      final allNotifications = await _notificationBox.getAllAsync();
+      if (allNotifications.isNotEmpty) {
+        for (var notification in allNotifications) {
+          notification.isRead = true;
+        }
+        await _notificationBox.putManyAsync(allNotifications);
+        log.i("Marked ${allNotifications.length} past notifications as read.");
+      } else {
+        log.i("No past notifications found to mark as read.");
+      }
+    } catch (e) {
+      log.e("Error marking all past notifications as read: $e");
+      // Optionally, rethrow or handle more gracefully
+    }
+  }
 }

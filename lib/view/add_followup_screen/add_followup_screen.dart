@@ -21,7 +21,7 @@ import '../../model/property_model.dart';
 import '../../service_locator/injectable.dart';
 import '../../widgets/fields/wrap_select_field.dart';
 import '../../widgets/space.dart';
-import '../enquiries_screen/enquiries_screen.dart';
+import '../new_leads_screen/new_leads_screen.dart';
 import 'widgets/lead_item.dart';
 
 class AddFollowUpScreen extends StatelessWidget {

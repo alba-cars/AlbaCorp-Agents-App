@@ -18,6 +18,7 @@ import '../app/activity_cubit/activity_cubit.dart' as _i497;
 import '../app/auth_bloc/auth_bloc.dart' as _i584;
 import '../app/call_bloc/call_bloc.dart' as _i942;
 import '../app/list_state_cubit/list_state_cubit.dart' as _i1005;
+import '../app/notification_badge_cubit/notification_badge_cubit.dart' as _i320;
 import '../data/objectbox/repo_impl/notification_data.dart' as _i995;
 import '../data/objectbox/repo_impl/pending_call_feedback_data.dart' as _i233;
 import '../data/remote_data/activity_data.dart' as _i299;
@@ -61,16 +62,15 @@ import '../view/add_ticket_screen/cubit/add_ticket_cubit.dart' as _i426;
 import '../view/call_feedback_screen/cubit/call_feedback_cubit.dart' as _i331;
 import '../view/chat_screen/cubit/chat_cubit.dart' as _i732;
 import '../view/check_in_page/cubit/check_in_cubit.dart' as _i850;
-import '../view/cold_lead_screen/cubit/cold_lead_cubit.dart' as _i446;
 import '../view/deal_add_document_screen/cubit/deal_add_document_cubit.dart'
     as _i825;
 import '../view/deal_details_screen/cubit/deal_details_cubit.dart' as _i771;
 import '../view/deals_screen/cubit/deals_cubit.dart' as _i37;
 import '../view/earnings/cubit/earnings_cubit.dart' as _i88;
-import '../view/enquiries_screen/cubit/enquiries_cubit.dart' as _i896;
 import '../view/expired_hot_lead_explorer/cubit/expired_hot_lead_explorer_cubit.dart'
     as _i787;
 import '../view/explorer_screen/cubit/explorer_screen_cubit.dart' as _i774;
+import '../view/followups_screen/cubit/followups_cubit.dart' as _i13;
 import '../view/home_screen/cubit/home_cubit.dart' as _i52;
 import '../view/hot_leads_assigned_today_screen/cubit/hot_leads_assigned_today_cubit.dart'
     as _i405;
@@ -83,6 +83,7 @@ import '../view/listing_detail_screen/cubit/listing_detail_cubit.dart' as _i302;
 import '../view/listings_screen/cubit/listings_cubit.dart' as _i1060;
 import '../view/login/cubit/login_cubit.dart' as _i658;
 import '../view/my_activities/cubit/my_activities_cubit.dart' as _i194;
+import '../view/new_leads_screen/cubit/new_leads_cubit.dart' as _i330;
 import '../view/notifications_screen/cubit/notification_screen_cubit.dart'
     as _i60;
 import '../view/property_card_details/cubit/property_card_details_cubit.dart'
@@ -180,10 +181,10 @@ extension GetItInjectableX on _i174.GetIt {
           tab,
         ));
     gh.factory<_i127.TicketRepo>(() => _i50.TicketData(dio: gh<_i361.Dio>()));
-    gh.factory<_i446.ColdLeadCubit>(
-        () => _i446.ColdLeadCubit(activityRepo: gh<_i316.ActivityRepo>()));
-    gh.factory<_i896.EnquiriesCubit>(
-        () => _i896.EnquiriesCubit(activityRepo: gh<_i316.ActivityRepo>()));
+    gh.factory<_i330.NewLeadsCubit>(
+        () => _i330.NewLeadsCubit(activityRepo: gh<_i316.ActivityRepo>()));
+    gh.factory<_i13.FollowupsCubit>(
+        () => _i13.FollowupsCubit(activityRepo: gh<_i316.ActivityRepo>()));
     gh.factory<_i383.AttendanceRepo>(
         () => _i448.AttendanceData(dio: gh<_i361.Dio>()));
     gh.factory<_i88.EarningsCubit>(
@@ -208,15 +209,6 @@ extension GetItInjectableX on _i174.GetIt {
         _i273.TicketDetailsCubit(
           gh<_i127.TicketRepo>(),
           ticketId,
-        ));
-    gh.factoryParam<_i825.LeadDetailCubit, String, dynamic>((
-      leadId,
-      _,
-    ) =>
-        _i825.LeadDetailCubit(
-          gh<_i242.LeadRepo>(),
-          leadId,
-          gh<_i372.ExplorerRepo>(),
         ));
     gh.factory<_i787.ExpiredHotLeadExplorerCubit>(
         () => _i787.ExpiredHotLeadExplorerCubit(
@@ -301,6 +293,11 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i669.LocationService>(),
           gh<_i383.AttendanceRepo>(),
         ));
+    gh.factory<_i320.NotificationBadgeCubit>(() => _i320.NotificationBadgeCubit(
+          gh<_i165.NotificationRepo>(),
+          gh<_i242.LeadRepo>(),
+          gh<_i584.AuthBloc>(),
+        ));
     gh.factory<_i194.MyActivitiesCubit>(
         () => _i194.MyActivitiesCubit(gh<_i316.ActivityRepo>()));
     gh.factoryParam<_i140.TaskDetailCubit, String, _i161.Activity?>((
@@ -315,6 +312,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i829.AgentRepo>(),
           gh<_i372.ExplorerRepo>(),
           gh<_i854.ListingsRepo>(),
+          gh<_i165.NotificationRepo>(),
+          gh<_i320.NotificationBadgeCubit>(),
         ));
     gh.lazySingleton<_i1005.ListStateCubit>(() => _i1005.ListStateCubit(
           gh<_i372.ExplorerRepo>(),
@@ -381,6 +380,17 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i222.LeadSourceCubit>(
         () => _i222.LeadSourceCubit(leadData: gh<_i242.LeadRepo>()));
+    gh.factoryParam<_i825.LeadDetailCubit, String, dynamic>((
+      leadId,
+      _,
+    ) =>
+        _i825.LeadDetailCubit(
+          gh<_i242.LeadRepo>(),
+          leadId,
+          gh<_i372.ExplorerRepo>(),
+          gh<_i165.NotificationRepo>(),
+          gh<_i320.NotificationBadgeCubit>(),
+        ));
     return this;
   }
 }

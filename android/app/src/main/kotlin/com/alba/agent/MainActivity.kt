@@ -10,7 +10,7 @@ import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import com.alba.agent.MyApplication
-import com.twilio.voice.flutter.Utils.TwilioConstants
+
 
 @RequiresApi(Build.VERSION_CODES.Q)
 class MainActivity: FlutterFragmentActivity() {
@@ -37,35 +37,9 @@ class MainActivity: FlutterFragmentActivity() {
             result.success(null)
         }
         
-        // Handle intent if activity was launched with one
-        handleIntent(intent)
     }
 
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        handleIntent(intent)
-    }
 
-    private fun handleIntent(intent: Intent?) {
-        if (intent?.action == TwilioConstants.ACTION_ACCEPT) {
-            val callSid = intent.getStringExtra("callSid")
-            val from = intent.getStringExtra("from")
-            
-            methodChannel.invokeMethod("navigateToCallingScreen", 
-                mapOf(
-                    "callSid" to callSid,
-                    "from" to from
-                )
-            )
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.Q)
-    private fun requestRole() {
-        val intent = roleManager.createRequestRoleIntent(ROLE_CALL_SCREENING)
-        @Suppress("DEPRECATION")
-        startActivityForResult(intent, REQUEST_ID_BECOME_CALL_SCREENER)
-    }
 
     override fun onResume() {
         super.onResume()

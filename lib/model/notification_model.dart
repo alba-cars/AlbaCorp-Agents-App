@@ -15,6 +15,7 @@ abstract class NotificationModel with _$NotificationModel {
     @Default('Normal') String type,
     @JsonKey(name: 'createdAt') DateTime? createdAt,
     String? leadId,
+    String? taskId, // Added taskId
   }) = _NotificationModel;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>

@@ -4,6 +4,8 @@ import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
+import 'package:real_estate_app/data/repository/notification_repo.dart'; // Added
+import 'package:real_estate_app/app/notification_badge_cubit/notification_badge_cubit.dart'; // Added
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/lead_property_card_model.dart';
@@ -19,11 +21,17 @@ part 'lead_detail_cubit.freezed.dart';
 @injectable
 class LeadDetailCubit extends Cubit<LeadDetailState> {
   LeadDetailCubit(
-      this._leadRepo, @factoryParam String leadId, this._explorerRepo)
-      : super(LeadDetailState(leadId: leadId));
+    this._leadRepo,
+    @factoryParam String leadId,
+    this._explorerRepo,
+    this._notificationRepo, // Added
+    this._notificationBadgeCubit, // Added
+  ) : super(LeadDetailState(leadId: leadId));
 
   final LeadRepo _leadRepo;
   final ExplorerRepo _explorerRepo;
+  final NotificationRepo _notificationRepo; // Added
+  final NotificationBadgeCubit _notificationBadgeCubit; // Added
 
   Future<void> getLeadDetails() async {
     emit(state.copyWith(getLeadStatus: AppStatus.loading));
@@ -32,6 +40,7 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
       case (Success<Lead> s):
         Logger().d(s.value.toJson());
         emit(state.copyWith(getLeadStatus: AppStatus.success, lead: s.value));
+        _markLeadNotificationsAsRead(state.leadId);
         Future.wait([getLeadActivities(), getLeadPropertyCards()]);
         break;
       case (Error e):
@@ -164,6 +173,13 @@ class LeadDetailCubit extends Cubit<LeadDetailState> {
         emit(state.copyWith(
             updatePropertyCardStatus: AppStatus.failure,
             updatePropertyCardError: e.exception));
+    }
+  }
+
+  Future<void> _markLeadNotificationsAsRead(String leadId) async {
+    if (leadId.isNotEmpty) {
+      await _notificationRepo.markNotificationsAsRead(leadId: leadId);
+      _notificationBadgeCubit.refreshNotifications();
     }
   }
 }

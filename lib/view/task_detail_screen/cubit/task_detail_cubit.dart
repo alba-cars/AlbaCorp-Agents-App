@@ -10,12 +10,15 @@ import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
 import 'package:real_estate_app/data/repository/lead_repo.dart';
 import 'package:real_estate_app/data/repository/listings_repo.dart';
+import 'package:real_estate_app/data/repository/notification_repo.dart'; // Added
+import 'package:real_estate_app/app/notification_badge_cubit/notification_badge_cubit.dart'; // Added
 import 'package:real_estate_app/model/activity_model.dart';
 import 'package:real_estate_app/objectbox.g.dart' as obj;
 import 'package:real_estate_app/util/date_formatter.dart';
 import 'package:real_estate_app/util/result.dart';
 import 'package:real_estate_app/util/status.dart';
-import 'package:real_estate_app/view/cold_lead_screen/cubit/cold_lead_cubit.dart';
+
+import 'package:real_estate_app/view/new_leads_screen/widget/new_leads_page.dart';
 import 'package:real_estate_app/view/home_screen/home_screen.dart';
 import 'package:real_estate_app/widgets/snackbar.dart';
 
@@ -26,6 +29,7 @@ import '../../../model/paginator.dart';
 import '../../../model/property_model.dart';
 import '../../../service_locator/injectable.dart';
 import '../../../service_locator/objectbox.dart' as ob;
+import '../task_detail_screen.dart';
 
 part 'task_detail_state.dart';
 part 'task_detail_cubit.freezed.dart';
@@ -40,13 +44,16 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       this._leadRepo,
       this._agentRepo,
       this._explorerRepo,
-      this._listingsRepo)
+      this._listingsRepo,
+      this._notificationRepo, // Added
+      this._notificationBadgeCubit // Added
+      )
       : super(TaskDetailState(
           taskId: activity?.id ?? taskId,
           task: activity,
         )) {
     _instance = this;
-
+    _markTaskNotificationsAsRead(activity?.id ?? taskId);
     _loadProcessingStatus();
     // Listen for updates
     _subscribeToProcessingUpdates();
@@ -58,6 +65,16 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   final AgentRepo _agentRepo;
   final ListingsRepo _listingsRepo;
   final ExplorerRepo _explorerRepo;
+  final NotificationRepo _notificationRepo; // Added
+  final NotificationBadgeCubit _notificationBadgeCubit; // Added
+
+  Future<void> _markTaskNotificationsAsRead(String taskId) async {
+    if (taskId.isNotEmpty) {
+      await _notificationRepo.markNotificationsAsRead(taskId: taskId);
+      _notificationBadgeCubit.refreshNotifications();
+    }
+  }
+
   TaskType? taskType;
   TaskFilterEnum? taskFilter;
 
@@ -110,7 +127,10 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           followUpData = {
             "date": date.toUtc().toIso8601String(),
             "type": values['type'],
-            "description": values['description'],
+            "description":
+                (values['description']?.toString().isNotEmpty ?? false)
+                    ? values['description']
+                    : notes,
             "property": values["property"]
           };
         }
@@ -312,19 +332,56 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   Map<String, dynamic> getPayload(
       TaskFilterEnum? filterType, TaskType? taskType) {
     switch (filterType) {
-      case TaskFilterEnum.New:
+      case TaskFilterEnum.Enquiry:
         return {
           if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
           "leadStatus": "Fresh",
           "sortBy": 'latest'
         };
-      case TaskFilterEnum.FollowUp:
+      case TaskFilterEnum.Cold:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": "Fresh",
+          "sortBy": 'latest'
+        };
+      case TaskFilterEnum.Partner:
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "partnersOnly": true,
+          "sortBy": 'latest'
+        };
+      case TaskFilterEnum.FollowUpToday:
         DateTime d = DateTime.now().toUtc();
         return {
           if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
           "leadStatus": ["Follow up", "Viewing", "Won", "Deal", 'Prospect'],
           "status": ["Pending", "Overdue"],
           "toDate": '${d.year}-${d.month}-${d.day}',
+        };
+      case TaskFilterEnum.FollowUpTomorrow:
+        DateTime d = DateUtils.addDaysToDate(DateTime.now(), 1).toUtc();
+        DateTime v = DateTime.now().toUtc();
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal", 'Prospect'],
+          "status": ["Pending", "Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}',
+          "fromDate": '${v.year}-${v.month}-${v.day}'
+        };
+      case TaskFilterEnum.FollowUpOverDue:
+        DateTime d = DateTime.now().toUtc();
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal", 'Prospect'],
+          "status": ["Overdue"],
+          "toDate": '${d.year}-${d.month}-${d.day}',
+        };
+      case TaskFilterEnum.FollowUpAll:
+        DateTime d = DateTime.now().toUtc();
+        return {
+          if (taskType != null) "leadSourceType": taskType.name.toLowerCase(),
+          "leadStatus": ["Follow up", "Viewing", "Won", "Deal", 'Prospect'],
+          "status": ["Pending", "Overdue"],
         };
       case TaskFilterEnum.Favourites:
         return {
@@ -387,14 +444,16 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         await _leadRepo.getLeadActivities(leadId: state.task!.lead!.id);
     switch (result) {
       case (Success s):
-        emit(state.copyWith(
-            getActivitiesStatus: AppStatus.success, activities: s.value));
+        if (!isClosed)
+          emit(state.copyWith(
+              getActivitiesStatus: AppStatus.success, activities: s.value));
 
         break;
       case (Error e):
-        emit(state.copyWith(
-            getActivitiesStatus: AppStatus.failure,
-            getActivitiesError: e.exception));
+        if (!isClosed)
+          emit(state.copyWith(
+              getActivitiesStatus: AppStatus.failure,
+              getActivitiesError: e.exception));
 
         break;
     }

@@ -52,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_GetSettings>(_getSettings);
     on<_GetAppConfig>(_getAppConfigData);
     on<_SetShowFollowup>(_setShowFollowUp);
-    on<_InitializeTwilio>(_initializeTwilio);
+    // on<_InitializeTwilio>(_initializeTwilio);
 
     awesome.AwesomeNotifications().getInitialNotificationAction().then((v) {
       if (v == null) {
@@ -111,8 +111,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         notification: NotificationModel(
             notificationId: data['id'],
             title: data["title"] ?? '',
-            subTitle: data["body"],
-            type: data["type"],
+            subTitle: data["body"] ?? '',
+            type: data["type"] ?? 'Unknown',
             requiresAction: data['requiresAction'] ?? false,
             leadId: data['leadId']));
   }
@@ -162,7 +162,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         state.copyWith(authStatus: AuthStatus.Authenticated, user: event.user));
     add(AuthEvent.checkForImportantActivity());
     add(_GetSettings());
-    add(AuthEvent.initializeTwilio());
+    // add(AuthEvent.initializeTwilio());
 
     await getAgentData(emit);
   }
@@ -183,7 +183,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await getAgentData(emit);
         add(AuthEvent.checkForImportantActivity());
         add(_GetSettings());
-        add(AuthEvent.initializeTwilio());
+        // add(AuthEvent.initializeTwilio());
         break;
       case (Error _):
         emit(state.copyWith(
@@ -322,24 +322,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(veryImportantActivities: {}));
   }
 
-  FutureOr<void> _initializeTwilio(
-      _InitializeTwilio event, Emitter<AuthState> emit) async {
-    try {
-      final twilioResult =
-          await _twilioRepo.getToken(identity: state.user?.id ?? '');
-      switch (twilioResult) {
-        case (Success s):
-          await TwilioVoiceServices.initialize(
-            accessToken: s.value,
-            identity: state.user?.id ?? '', // Using user ID as identity
-          );
-          break;
-        case (Error e):
-          Logger().e('Failed to initialize Twilio: ${e}');
-          break;
-      }
-    } catch (e) {
-      Logger().e('Error initializing Twilio: $e');
-    }
-  }
+  // FutureOr<void> _initializeTwilio(
+  //     _InitializeTwilio event, Emitter<AuthState> emit) async {
+  //   try {
+  //     final twilioResult =
+  //         await _twilioRepo.getToken(identity: state.user?.id ?? '');
+  //     switch (twilioResult) {
+  //       case (Success s):
+  //         await TwilioVoiceServices.initialize(
+  //           accessToken: s.value,
+  //           identity: state.user?.id ?? '', // Using user ID as identity
+  //         );
+  //         break;
+  //       case (Error e):
+  //         Logger().e('Failed to initialize Twilio: ${e}');
+  //         break;
+  //     }
+  //   } catch (e) {
+  //     Logger().e('Error initializing Twilio: $e');
+  //   }
+  // }
 }

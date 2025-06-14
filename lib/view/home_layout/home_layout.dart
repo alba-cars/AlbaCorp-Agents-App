@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/app/notification_badge_cubit/notification_badge_cubit.dart'; // Added import
 import 'package:real_estate_app/core/helpers/app_config_helper.dart';
 import 'package:real_estate_app/core/models/enums/quick_access_list_enum.dart';
 import 'package:real_estate_app/model/agent_model.dart';
@@ -11,9 +12,9 @@ import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
 import 'package:real_estate_app/view/add_lead_screen/add_lead_screen.dart';
 import 'package:real_estate_app/view/add_listing_screen/add_listing_screen.dart';
 import 'package:real_estate_app/view/add_pocket_listing_screen/add_pocket_listing_screen.dart';
-import 'package:real_estate_app/view/cold_lead_screen/cold_lead_screen.dart';
+import 'package:real_estate_app/view/followups_screen/followups_screen.dart'; // Updated import
 import 'package:real_estate_app/view/deals_screen/deals_screen.dart';
-import 'package:real_estate_app/view/enquiries_screen/enquiries_screen.dart';
+import 'package:real_estate_app/view/new_leads_screen/new_leads_screen.dart';
 import 'package:real_estate_app/view/explorer_screen/explorer_screen.dart';
 import 'package:real_estate_app/view/home_layout/quick_access_button.dart';
 import 'package:real_estate_app/view/hot_leads_assigned_today_screen/hot_leads_assigned_today_screen.dart';
@@ -54,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
+    // getIt<AuthBloc>().add(AuthEvent.checkForCallFeedback());
     super.initState();
   }
 
@@ -486,11 +487,51 @@ class _HomeScreenState extends State<HomeScreen>
         // ),
         leadingWidth: 60,
         actions: [
-          IconButton(
-              onPressed: () {
-                context.pushNamed(NotificationsScreen.routeName);
-              },
-              icon: Icon(Icons.notifications)),
+          BlocBuilder<NotificationBadgeCubit, NotificationBadgeState>(
+            builder: (context, state) {
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        context
+                            .pushNamed(NotificationsScreen.routeName)
+                            .then((_) {
+                          // Refresh badge after returning from notifications screen
+                          context
+                              .read<NotificationBadgeCubit>()
+                              .refreshNotifications();
+                        });
+                      },
+                      icon: Icon(Icons.notifications)),
+                  if (state.unreadCount > 0)
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        constraints: BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        child: Text(
+                          '${state.unreadCount}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
         ],
       ),
       body: SafeArea(
@@ -595,7 +636,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget bottomBar(String matchedLocation) {
     final currentindex = switch (matchedLocation) {
       EnquiriesScreen.routeName => 0,
-      ColdLeadScreen.routeName => 1,
+      FollowupsScreen.routeName => 1, // Updated routeName
       ListingsScreen.routeName => 2,
       DealsScreen.routeName => 3,
       _ => 0
@@ -606,7 +647,7 @@ class _HomeScreenState extends State<HomeScreen>
           context.goNamed(EnquiriesScreen.routeName);
           return;
         case 1:
-          context.goNamed(ColdLeadScreen.routeName);
+          context.goNamed(FollowupsScreen.routeName); // Updated routeName
           return;
         case 2:
           context.goNamed(ListingsScreen.routeName);
@@ -627,14 +668,14 @@ class _HomeScreenState extends State<HomeScreen>
       child: Row(
         children: [
           BottomNavBarItem(
-            text: 'Enquiries',
+            text: 'New',
             iconPath: 'assets/images/task.png',
             index: 0,
             onTap: onTap,
             selectedIndex: currentindex,
           ),
           BottomNavBarItem(
-            text: 'Explorer',
+            text: 'Follow Ups',
             iconPath: 'assets/images/leads.png',
             index: 1,
             onTap: onTap,
