@@ -63,8 +63,11 @@ dependencies:
   recase: ^4.1.0
   country_state_city: ^0.1.6
   # flutter_local_notifications: ^16.3.2
-  awesome_notifications: ^0.10.1
-  awesome_notifications_fcm: ^0.10.1
+  # awesome_notifications: ^0.10.1
+  # awesome_notifications_fcm: ^0.10.1
+  # ios
+  awesome_notifications: ^0.9.3+1
+  awesome_notifications_fcm: ^0.9.3+1
   # flutter_libphonenumber: ^2.2.1
   easy_debounce: ^2.0.3
   sliver_tools: ^0.2.12

@@ -1188,16 +1188,16 @@ PODS:
     - abseil/meta/type_traits
     - abseil/xcprivacy
   - abseil/xcprivacy (1.20240722.0)
-  - awesome_notifications (0.10.0):
+  - awesome_notifications (0.9.3):
     - Flutter
-    - IosAwnCore (~> 0.10.0)
-  - awesome_notifications_fcm (0.10.0):
+    - IosAwnCore (~> 0.9.3)
+  - awesome_notifications_fcm (0.9.3):
     - awesome_notifications
     - Firebase/Messaging
     - FirebaseCore
     - Flutter
-    - IosAwnCore (~> 0.10.0)
-    - IosAwnFcmCore (~> 0.10.1)
+    - IosAwnCore (~> 0.9.3)
+    - IosAwnFcmDist (~> 0.9.3)
   - BoringSSL-GRPC (0.0.37):
     - BoringSSL-GRPC/Implementation (= 0.0.37)
     - BoringSSL-GRPC/Interface (= 0.0.37)
@@ -1264,7 +1264,7 @@ PODS:
     - Firebase/Messaging (= 11.10.0)
     - firebase_core
     - Flutter
-  - FirebaseAppCheckInterop (11.13.0)
+  - FirebaseAppCheckInterop (11.14.0)
   - FirebaseCore (11.10.0):
     - FirebaseCoreInternal (~> 11.10.0)
     - GoogleUtilities/Environment (~> 8.0)
@@ -1316,7 +1316,7 @@ PODS:
     - GoogleUtilities/Reachability (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
-  - FirebaseRemoteConfigInterop (11.13.0)
+  - FirebaseRemoteConfigInterop (11.14.0)
   - FirebaseSessions (11.10.0):
     - FirebaseCore (~> 11.10.0)
     - FirebaseCoreExtension (~> 11.10.0)
@@ -1326,7 +1326,7 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 8.0)
     - nanopb (~> 3.30910.0)
     - PromisesSwift (~> 2.1)
-  - FirebaseSharedSwift (11.13.0)
+  - FirebaseSharedSwift (11.14.0)
   - Flutter (1.0.0)
   - flutter_native_splash (2.4.3):
     - Flutter
@@ -1358,17 +1358,6 @@ PODS:
   - GoogleMaps/Base (8.4.0)
   - GoogleMaps/Maps (8.4.0):
     - GoogleMaps/Base
-  - GoogleUtilities (8.1.0):
-    - GoogleUtilities/AppDelegateSwizzler (= 8.1.0)
-    - GoogleUtilities/Environment (= 8.1.0)
-    - GoogleUtilities/Logger (= 8.1.0)
-    - GoogleUtilities/MethodSwizzler (= 8.1.0)
-    - GoogleUtilities/Network (= 8.1.0)
-    - "GoogleUtilities/NSData+zlib (= 8.1.0)"
-    - GoogleUtilities/Privacy (= 8.1.0)
-    - GoogleUtilities/Reachability (= 8.1.0)
-    - GoogleUtilities/SwizzlerTestHelpers (= 8.1.0)
-    - GoogleUtilities/UserDefaults (= 8.1.0)
   - GoogleUtilities/AppDelegateSwizzler (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -1378,9 +1367,6 @@ PODS:
     - GoogleUtilities/Privacy
   - GoogleUtilities/Logger (8.1.0):
     - GoogleUtilities/Environment
-    - GoogleUtilities/Privacy
-  - GoogleUtilities/MethodSwizzler (8.1.0):
-    - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - GoogleUtilities/Network (8.1.0):
     - GoogleUtilities/Logger
@@ -1393,8 +1379,6 @@ PODS:
   - GoogleUtilities/Reachability (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GoogleUtilities/SwizzlerTestHelpers (8.1.0):
-    - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
@@ -1492,12 +1476,11 @@ PODS:
   - gRPC-Core/Privacy (1.69.0)
   - image_picker_ios (0.0.1):
     - Flutter
-  - IosAwnCore (0.10.0)
-  - IosAwnFcmCore (0.10.1):
-    - Firebase/Messaging (~> 11.0)
-    - FirebaseCore (~> 11.0)
-    - GoogleUtilities (~> 8.0)
-    - IosAwnCore (~> 0.10.0)
+  - IosAwnCore (0.9.3)
+  - IosAwnFcmDist (0.9.3):
+    - FirebaseCore
+    - FirebaseMessaging
+    - IosAwnCore (~> 0.9.3)
   - leveldb-library (1.22.6)
   - nanopb (3.30910.0):
     - nanopb/decode (= 3.30910.0)
@@ -1591,7 +1574,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - IosAwnCore
-    - IosAwnFcmCore
+    - IosAwnFcmDist
     - leveldb-library
     - nanopb
     - ObjectBox
@@ -1657,8 +1640,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
-  awesome_notifications: 0f432b28098d193920b11a44cfa9d2d9313a3888
-  awesome_notifications_fcm: ad14f584c81e2488ae4310ab96331327dcbb5368
+  awesome_notifications: ad14ba38749441a7d193d08875fa18b4484917ae
+  awesome_notifications_fcm: 80c57c871aefe7c1caa11fae4cc26ac655261b69
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
   cloud_firestore: 18eb885c872cd34af2a59c2a7cdc7aa576d8c315
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
@@ -1668,7 +1651,7 @@ SPEC CHECKSUMS:
   firebase_core: ba71b44041571da878cb624ce0d80250bcbe58ad
   firebase_crashlytics: 9301f26be1edba849e9a3a00b1d817ca1ae012b5
   firebase_messaging: 13129fe2ca166d1ed2d095062d76cee88943d067
-  FirebaseAppCheckInterop: 72066489c209823649a997132bcd9269bc33a4bb
+  FirebaseAppCheckInterop: a92ba81d0ee3c4cddb1a2e52c668ea51dc63c3ae
   FirebaseCore: 8344daef5e2661eb004b177488d6f9f0f24251b7
   FirebaseCoreExtension: 6f357679327f3614e995dc7cf3f2d600bdc774ac
   FirebaseCoreInternal: ef4505d2afb1d0ebbc33162cb3795382904b5679
@@ -1677,9 +1660,9 @@ SPEC CHECKSUMS:
   FirebaseFirestoreInternal: 97a2bb5f16951c77753c860d3519379702ab6f8a
   FirebaseInstallations: 9980995bdd06ec8081dfb6ab364162bdd64245c3
   FirebaseMessaging: 2b9f56aa4ed286e1f0ce2ee1d413aabb8f9f5cb9
-  FirebaseRemoteConfigInterop: 7915cec47731a806cda541f90898ad0fab8f9f86
+  FirebaseRemoteConfigInterop: 7b74ceaa54e28863ed17fa39da8951692725eced
   FirebaseSessions: 9b3b30947b97a15370e0902ee7a90f50ef60ead6
-  FirebaseSharedSwift: aca73668bc95e8efccb618e0167eab05d19d3a75
+  FirebaseSharedSwift: bdd5c8674c4712a98e70287c936bc5cca5d640f6
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: c32d145d68aeda5502d5f543ee38c192065986cf
   flutter_pdfview: 32bf27bda6fd85b9dd2c09628a824df5081246cf
@@ -1696,8 +1679,8 @@ SPEC CHECKSUMS:
   "gRPC-C++": cc207623316fb041a7a3e774c252cf68a058b9e8
   gRPC-Core: 860978b7db482de8b4f5e10677216309b5ff6330
   image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
-  IosAwnCore: 653786a911089012092ce831f2945cd339855a89
-  IosAwnFcmCore: 1bdb9054b2e00187d00f1ffcfbb1855949a7b82f
+  IosAwnCore: b8601fbb37f7b3560f31b84ebf55a72f65812e05
+  IosAwnFcmDist: 2f780910237ad5c6ba2633376982d30d5fafe447
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   ObjectBox: 2b4c925852ea99f070492f21328bf4002165cbd9

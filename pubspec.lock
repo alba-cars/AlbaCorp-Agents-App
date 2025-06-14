@@ -77,18 +77,18 @@ packages:
     dependency: "direct main"
     description:
       name: awesome_notifications
-      sha256: "0d5fa4457f2ba4e536adc3ef6af709cdcecf4a05a1f3035981e9afa2f899b2a8"
+      sha256: d9e46ce7f5171ee1e9b1c5bc6dc40bd77528561f592842ce97ce3a0a9ae155ef
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.1"
+    version: "0.9.3+1"
   awesome_notifications_fcm:
     dependency: "direct main"
     description:
       name: awesome_notifications_fcm
-      sha256: "77c23d452bb40eae06c1bf00ca259a8b9d88f1c6a1e8433fdc3fd94100289b7d"
+      sha256: "1b116e7069f61c10ec25de15cd8f67912db3fc8bd7a5e2e9ed8013cb95633c59"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.1"
+    version: "0.9.3+1"
   barcode:
     dependency: transitive
     description:
