@@ -1188,6 +1188,8 @@ PODS:
     - abseil/meta/type_traits
     - abseil/xcprivacy
   - abseil/xcprivacy (1.20240722.0)
+  - app_badge_plus (1.2.3):
+    - Flutter
   - awesome_notifications (0.9.3):
     - Flutter
     - IosAwnCore (~> 0.9.3)
@@ -1499,9 +1501,9 @@ PODS:
   - PromisesObjC (2.4.0)
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
-  - SDWebImage (5.21.0):
-    - SDWebImage/Core (= 5.21.0)
-  - SDWebImage/Core (5.21.0)
+  - SDWebImage (5.21.1):
+    - SDWebImage/Core (= 5.21.1)
+  - SDWebImage/Core (5.21.1)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -1513,14 +1515,11 @@ PODS:
   - store_redirect (0.0.1):
     - Flutter
   - SwiftyGif (5.4.5)
-  - twilio_voice_flutter (0.0.4):
-    - Flutter
-    - TwilioVoice (~> 6.11.1)
-  - TwilioVoice (6.11.3)
   - url_launcher_ios (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - app_badge_plus (from `.symlinks/plugins/app_badge_plus/ios`)
   - awesome_notifications (from `.symlinks/plugins/awesome_notifications/ios`)
   - awesome_notifications_fcm (from `.symlinks/plugins/awesome_notifications_fcm/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -1545,7 +1544,6 @@ DEPENDENCIES:
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - store_redirect (from `.symlinks/plugins/store_redirect/ios`)
-  - twilio_voice_flutter (from `.symlinks/plugins/twilio_voice_flutter/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -1582,9 +1580,10 @@ SPEC REPOS:
     - PromisesSwift
     - SDWebImage
     - SwiftyGif
-    - TwilioVoice
 
 EXTERNAL SOURCES:
+  app_badge_plus:
+    :path: ".symlinks/plugins/app_badge_plus/ios"
   awesome_notifications:
     :path: ".symlinks/plugins/awesome_notifications/ios"
   awesome_notifications_fcm:
@@ -1633,13 +1632,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite_darwin/darwin"
   store_redirect:
     :path: ".symlinks/plugins/store_redirect/ios"
-  twilio_voice_flutter:
-    :path: ".symlinks/plugins/twilio_voice_flutter/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
+  app_badge_plus: 0e3470f993dd08094e16463f57a7e0db04c6b587
   awesome_notifications: ad14ba38749441a7d193d08875fa18b4484917ae
   awesome_notifications_fcm: 80c57c871aefe7c1caa11fae4cc26ac655261b69
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
@@ -1689,14 +1687,12 @@ SPEC CHECKSUMS:
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
-  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  SDWebImage: f29024626962457f3470184232766516dee8dfea
   share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
   sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
   store_redirect: 55fd455802ceab09803b2df6e68f19a58815266a
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
-  twilio_voice_flutter: 2a880b3eb2ee698bf09b877f7587b56041f828d7
-  TwilioVoice: a907e76544411b7cfee49020181f31645a07a898
   url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
 
 PODFILE CHECKSUM: e3a4b42805348fb3c650d58bc365d822a8b6c911

@@ -150,7 +150,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                         )),
                         shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))))),
-                dialogTheme: DialogTheme(
+                dialogTheme: DialogThemeData(
                     backgroundColor: Colors.white,
                     surfaceTintColor: Colors.white)),
           ),
