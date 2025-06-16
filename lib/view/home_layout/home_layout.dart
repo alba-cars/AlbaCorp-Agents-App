@@ -675,7 +675,7 @@ class _HomeScreenState extends State<HomeScreen>
             selectedIndex: currentindex,
           ),
           BottomNavBarItem(
-            text: 'Follow Ups',
+            text: 'Followup',
             iconPath: 'assets/images/leads.png',
             index: 1,
             onTap: onTap,

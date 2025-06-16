@@ -109,7 +109,8 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
             //     backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             //     selectedColor: Theme.of(context).primaryColor,
             //     tabController: _tabController,
-            //     tabs: ['In Progress', 'Completed', 'Cancelled'],
+            //     tabLabels: ['In Progress', 'Completed', 'Cancelled'],
+            //     tabCounts: null,
             //     onTap: (index) {},
             //   ),
             // )),
@@ -128,7 +129,8 @@ class _DealsScreenLayoutState extends State<DealsScreenLayout>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: ['Deals', 'Listings Acquired'],
+                tabLabels: ['Deals', 'Listings Acquired'],
+                tabCounts: null, // Or pass an empty list: []
                 onTap: (index) {
                   context.read<DealsCubit>().setSelectedTab(index);
                   setState(() {

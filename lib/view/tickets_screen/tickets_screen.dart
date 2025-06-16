@@ -126,7 +126,8 @@ class _TicketsScreenLayoutState extends State<_TicketsScreenLayout>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: ['Created By Me', 'Assigned To Me'],
+                tabLabels: ['Created By Me', 'Assigned To Me'],
+                tabCounts: null, // Or pass an empty list: []
                 onTap: (index) {
                   context.read<TicketsScreenCubit>().setSelectedTab(index);
                 },

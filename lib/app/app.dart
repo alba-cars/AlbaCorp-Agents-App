@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:real_estate_app/app/activity_cubit/activity_cubit.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
@@ -11,13 +10,11 @@ import 'package:real_estate_app/app/list_state_cubit/list_state_cubit.dart';
 import 'package:real_estate_app/app/notification_badge_cubit/notification_badge_cubit.dart'; // Added import
 import 'package:real_estate_app/routes/app_router.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
-import 'package:real_estate_app/services/twilio_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
 import '../services/firebase_messaging_service.dart';
 import '../services/notification_service.dart';
-import 'call_manager.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -55,7 +52,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       Permission.bluetooth,
       Permission.bluetoothConnect,
       Permission.bluetoothScan,
-      Permission.phone,
       Permission.microphone
     ].request();
 
