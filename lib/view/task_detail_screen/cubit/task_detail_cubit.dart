@@ -104,15 +104,15 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     emit(state.copyWith(ratingValue: value));
   }
 
-  Future<void> updateAndCompleteActivity({
-    required BuildContext context,
-    required Activity task,
-    String? notes,
-    required bool addFollowUp,
-    bool refresh = false,
-    Map<String, dynamic>? values,
-    FeedbackTypeEnum? feedbackType,
-  }) async {
+  Future<void> updateAndCompleteActivity(
+      {required BuildContext context,
+      required Activity task,
+      String? notes,
+      required bool addFollowUp,
+      bool refresh = false,
+      Map<String, dynamic>? values,
+      FeedbackTypeEnum? feedbackType,
+      double? rating}) async {
     try {
       // Prepare follow up data if needed
       Map<String, dynamic>? followUpData;
@@ -141,7 +141,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
         activityId: task.id,
         type: feedbackType?.value ?? 'interested',
         feedback: notes,
-        leadRating: state.ratingValue,
+        leadRating: rating ?? state.ratingValue,
         followUp: followUpData,
       );
 
@@ -239,7 +239,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       required Activity task,
       String? currentActivityNotes,
       required bool markAsProspect,
-      required Map<String, dynamic> values}) async {
+      required Map<String, dynamic> values,
+      double? rating}) async {
     DateTime? date = (values["date"] as DateTime?);
     if (values['time'] != null && date != null) {
       date = date.addTime(
@@ -258,6 +259,7 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
       addFollowUp: true,
       values: values,
       notes: currentActivityNotes,
+      rating: rating,
       feedbackType: markAsProspect
           ? FeedbackTypeEnum.veryInterested
           : FeedbackTypeEnum.interested,

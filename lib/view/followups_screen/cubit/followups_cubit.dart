@@ -116,7 +116,10 @@ class FollowupsCubit extends Cubit<FollowupsState> {
       case TaskFilterEnum.FollowUpToday:
         payload = {
           "leadStatus": ["Follow up", "Viewing", "Won", "Deal"],
-          "status": ["Pending"], // Or whatever status means "due today"
+          "status": [
+            "Pending",
+            "Overdue"
+          ], // Or whatever status means "due today"
           "fromDate": today,
           "toDate": today,
           "sortBy": sortby ?? 'rating', // Example sort

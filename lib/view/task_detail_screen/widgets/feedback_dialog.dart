@@ -374,7 +374,8 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
               currentActivityNotes: val['notes'],
               markAsProspect:
                   feedbackValue.value == FeedbackType.veryInterested,
-              // rating: val['rating'] as double?, // Pass rating if your cubit method expects it
+              rating: val['rating']
+                  as double?, // Pass rating if your cubit method expects it
             );
       },
       text: 'Add Followup',
@@ -517,6 +518,7 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
           task: widget.activity,
           currentActivityNotes: "Not Answered",
           markAsProspect: false,
+          rating: _formKey.currentState?.value['rating'],
           values: {
             ...context.read<TaskDetailCubit>().state.task?.toJson() ?? {},
             "date": scheduledDate,

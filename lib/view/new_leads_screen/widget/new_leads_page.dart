@@ -372,7 +372,9 @@ class _EnquiriesPageState extends State<NewLeadsPage>
                           context); // Reloading data after a call has performed or page pop event
                     },
                     taskFiler: taskFilter.name,
-                    taskType: TaskType.Hot,
+                    taskType: taskFilter == NewLeadTaskFilterEnum.Cold
+                        ? TaskType.Cold
+                        : TaskType.Hot,
                   );
                 },
                 separatorBuilder: (_, __) => SizedBox(
