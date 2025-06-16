@@ -137,7 +137,7 @@ class _EnquiriesPageState extends State<NewLeadsPage>
             leadWidgets: [
               Expanded(
                 child: ListTile(
-                  title: HeadingText(text: "Enquiries"),
+                  title: HeadingText(text: "New Leads"),
                   contentPadding: EdgeInsets.zero,
                 ),
               ),
@@ -196,10 +196,12 @@ class _EnquiriesPageState extends State<NewLeadsPage>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: NewLeadTaskFilterEnum.values.map((e) {
-                  final count = tabCounts[e] ?? 0;
-                  return "${e.getName()} ($count)";
-                }).toList(),
+                tabLabels: NewLeadTaskFilterEnum.values
+                    .map((e) => e.getName())
+                    .toList(),
+                tabCounts: NewLeadTaskFilterEnum.values
+                    .map((e) => tabCounts[e] ?? 0)
+                    .toList(),
                 onTap: (index) {
                   // tabIndex = index; // Use _tabController.index directly
                   // When a tab is tapped, fetch its full data.

@@ -204,10 +204,11 @@ class _FollowupsPageState extends State<FollowupsPage>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: TaskFilterEnum.values.map((e) {
-                  final count = tabCounts[e] ?? 0;
-                  return "${e.getName()} ($count)";
-                }).toList(),
+                tabLabels:
+                    TaskFilterEnum.values.map((e) => e.getName()).toList(),
+                tabCounts: TaskFilterEnum.values
+                    .map((e) => tabCounts[e] ?? 0)
+                    .toList(),
                 onTap: (index) {
                   tabIndex = index;
                   // Check if data for this tab is already loaded or primarily loading

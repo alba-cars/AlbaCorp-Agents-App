@@ -56,7 +56,8 @@ class _MyListingsTabState extends State<MyListingsTab>
                       Theme.of(context).colorScheme.tertiaryContainer,
                   selectedColor: Theme.of(context).colorScheme.tertiary,
                   tabController: _tabController,
-                  tabs: ['Public', 'Pocket'],
+                  tabLabels: ['Public', 'Pocket'],
+                  tabCounts: null, // Or pass an empty list: []
                   onTap: (index) {
                     if (index == 0) {
                       context

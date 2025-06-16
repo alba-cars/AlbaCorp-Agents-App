@@ -89,7 +89,8 @@ class _ListingScreenLayoutState extends State<ListingScreenLayout>
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 selectedColor: Theme.of(context).primaryColor,
                 tabController: _tabController,
-                tabs: ['Listings', 'Pocket Listings', "My Listings"],
+                tabLabels: ['Listings', 'Pocket Listings', "My Listings"],
+                tabCounts: null, // Or pass an empty list: []
                 onTap: (index) {
                   context.read<ListingsCubit>().setSelectedTab(index);
                 },
