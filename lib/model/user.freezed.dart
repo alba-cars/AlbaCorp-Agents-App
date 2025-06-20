@@ -28,6 +28,8 @@ mixin _$User {
   String? get photo;
   String? get role;
   UserPBXNumbers? get userPBXNumbers;
+  @JsonKey(name: "notificationToken")
+  String? get notification_token;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -57,17 +59,30 @@ mixin _$User {
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.userPBXNumbers, userPBXNumbers) ||
-                other.userPBXNumbers == userPBXNumbers));
+                other.userPBXNumbers == userPBXNumbers) &&
+            (identical(other.notification_token, notification_token) ||
+                other.notification_token == notification_token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, phone, whatsapp,
-      firstName, lastName, city, photo, role, userPBXNumbers);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      email,
+      phone,
+      whatsapp,
+      firstName,
+      lastName,
+      city,
+      photo,
+      role,
+      userPBXNumbers,
+      notification_token);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers)';
+    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers, notification_token: $notification_token)';
   }
 }
 
@@ -86,7 +101,8 @@ abstract mixin class $UserCopyWith<$Res> {
       String? city,
       String? photo,
       String? role,
-      UserPBXNumbers? userPBXNumbers});
+      UserPBXNumbers? userPBXNumbers,
+      @JsonKey(name: "notificationToken") String? notification_token});
 
   $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers;
 }
@@ -113,6 +129,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? photo = freezed,
     Object? role = freezed,
     Object? userPBXNumbers = freezed,
+    Object? notification_token = freezed,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -155,6 +172,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _self.userPBXNumbers
           : userPBXNumbers // ignore: cast_nullable_to_non_nullable
               as UserPBXNumbers?,
+      notification_token: freezed == notification_token
+          ? _self.notification_token
+          : notification_token // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -186,7 +207,8 @@ class _User implements User {
       this.city,
       this.photo,
       this.role,
-      this.userPBXNumbers});
+      this.userPBXNumbers,
+      @JsonKey(name: "notificationToken") this.notification_token});
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   @override
@@ -213,6 +235,9 @@ class _User implements User {
   final String? role;
   @override
   final UserPBXNumbers? userPBXNumbers;
+  @override
+  @JsonKey(name: "notificationToken")
+  final String? notification_token;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -247,17 +272,30 @@ class _User implements User {
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.userPBXNumbers, userPBXNumbers) ||
-                other.userPBXNumbers == userPBXNumbers));
+                other.userPBXNumbers == userPBXNumbers) &&
+            (identical(other.notification_token, notification_token) ||
+                other.notification_token == notification_token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, phone, whatsapp,
-      firstName, lastName, city, photo, role, userPBXNumbers);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      email,
+      phone,
+      whatsapp,
+      firstName,
+      lastName,
+      city,
+      photo,
+      role,
+      userPBXNumbers,
+      notification_token);
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers)';
+    return 'User(id: $id, email: $email, phone: $phone, whatsapp: $whatsapp, firstName: $firstName, lastName: $lastName, city: $city, photo: $photo, role: $role, userPBXNumbers: $userPBXNumbers, notification_token: $notification_token)';
   }
 }
 
@@ -277,7 +315,8 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? city,
       String? photo,
       String? role,
-      UserPBXNumbers? userPBXNumbers});
+      UserPBXNumbers? userPBXNumbers,
+      @JsonKey(name: "notificationToken") String? notification_token});
 
   @override
   $UserPBXNumbersCopyWith<$Res>? get userPBXNumbers;
@@ -305,6 +344,7 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
     Object? photo = freezed,
     Object? role = freezed,
     Object? userPBXNumbers = freezed,
+    Object? notification_token = freezed,
   }) {
     return _then(_User(
       id: null == id
@@ -347,6 +387,10 @@ class __$UserCopyWithImpl<$Res> implements _$UserCopyWith<$Res> {
           ? _self.userPBXNumbers
           : userPBXNumbers // ignore: cast_nullable_to_non_nullable
               as UserPBXNumbers?,
+      notification_token: freezed == notification_token
+          ? _self.notification_token
+          : notification_token // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 

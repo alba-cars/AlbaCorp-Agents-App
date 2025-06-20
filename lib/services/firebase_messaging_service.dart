@@ -1,6 +1,7 @@
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
+import 'package:real_estate_app/data/repository/auth_repo.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 
 import '../data/objectbox/entity/call_processing_entity.dart';
@@ -81,6 +82,12 @@ class AwesomeFcm {
   static Future<void> myFcmTokenHandle(String token) async {
     debugPrint('FCM Token:"$token"');
     fcmToken = token;
+    try {
+      final authRepo = getIt<AuthRepo>();
+      authRepo.updateNotificationToken(token);
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 
   /// Use this method to detect when a new native token is received

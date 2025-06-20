@@ -20,6 +20,7 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
           ? null
           : UserPBXNumbers.fromJson(
               json['userPBXNumbers'] as Map<String, dynamic>),
+      notification_token: json['notificationToken'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
@@ -33,6 +34,7 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
       'photo': instance.photo,
       'role': instance.role,
       'userPBXNumbers': instance.userPBXNumbers,
+      'notificationToken': instance.notification_token,
     };
 
 _UserPBXNumbers _$UserPBXNumbersFromJson(Map<String, dynamic> json) =>
