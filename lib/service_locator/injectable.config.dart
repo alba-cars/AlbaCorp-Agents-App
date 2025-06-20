@@ -181,10 +181,10 @@ extension GetItInjectableX on _i174.GetIt {
           tab,
         ));
     gh.factory<_i127.TicketRepo>(() => _i50.TicketData(dio: gh<_i361.Dio>()));
-    gh.factory<_i330.NewLeadsCubit>(
-        () => _i330.NewLeadsCubit(activityRepo: gh<_i316.ActivityRepo>()));
     gh.factory<_i13.FollowupsCubit>(
         () => _i13.FollowupsCubit(activityRepo: gh<_i316.ActivityRepo>()));
+    gh.factory<_i330.NewLeadsCubit>(
+        () => _i330.NewLeadsCubit(activityRepo: gh<_i316.ActivityRepo>()));
     gh.factory<_i383.AttendanceRepo>(
         () => _i448.AttendanceData(dio: gh<_i361.Dio>()));
     gh.factory<_i88.EarningsCubit>(

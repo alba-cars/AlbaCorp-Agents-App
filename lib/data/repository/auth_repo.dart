@@ -11,4 +11,5 @@ abstract class AuthRepo {
   Future<Result<GlobalSettings>> getSettings();
   Future<Result<User>> getLoggedInUser();
   Future<Result<void>> logout();
+  Future<Result<void>> updateNotificationToken(String token);
 }

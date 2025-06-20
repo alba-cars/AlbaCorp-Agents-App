@@ -668,6 +668,16 @@ class _ActivityFeedbackDialogState extends State<ActivityFeedbackDialog> {
                                                     _ratingValueNotifier
                                                             .value ==
                                                         null) {
+                                                  if (feedbackValue.value ==
+                                                          FeedbackType
+                                                              .disqualify ||
+                                                      feedbackValue.value ==
+                                                          FeedbackType
+                                                              .notInterested) {
+                                                    _ratingValueNotifier.value =
+                                                        0;
+                                                    return null;
+                                                  }
                                                   return 'Please provide a lead rating.';
                                                 }
                                                 return null;

@@ -17,7 +17,8 @@ abstract class User with _$User {
       String? city,
       String? photo,
       String? role,
-      UserPBXNumbers? userPBXNumbers}) = _User;
+      UserPBXNumbers? userPBXNumbers,
+      @JsonKey(name: "notificationToken") String? notification_token}) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

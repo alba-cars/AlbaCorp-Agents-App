@@ -62,6 +62,10 @@ class AuthData implements AuthRepo {
       Map<String, dynamic> data = loginResponse.data;
       log.d(data);
       User user = User.fromJson(data);
+      final token = await AwesomeFcm.getFirebaseMessagingToken();
+      if (token != user.notification_token) {
+        updateNotificationToken(token);
+      }
       return Success(user);
     } catch (e, stack) {
       return onError(e, stack, log);
@@ -84,6 +88,19 @@ class AuthData implements AuthRepo {
 
       GlobalSettings agent = GlobalSettings.fromJson(data);
       return Success(agent);
+    } catch (e, stack) {
+      return onError(e, stack, log);
+    }
+  }
+
+  @override
+  Future<Result<void>> updateNotificationToken(String token) async {
+    try {
+      await _dio.post(
+        '/v1/user/update-notification-token',
+        data: {"notification_token": token},
+      );
+      return Success(null);
     } catch (e, stack) {
       return onError(e, stack, log);
     }
