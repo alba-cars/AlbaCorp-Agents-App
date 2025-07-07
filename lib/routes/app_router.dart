@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/model/deal_document_model.dart';
 import 'package:real_estate_app/model/deal_model.dart';
 import 'package:real_estate_app/model/lead_model.dart';
+import 'package:real_estate_app/model/property_card_details_model.dart';
 import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/view/add_deal_screen/add_deal_screen.dart';
@@ -19,6 +20,7 @@ import 'package:real_estate_app/view/add_ticket_screen/add_ticket_screen.dart';
 import 'package:real_estate_app/view/call_feedback_screen/call_feedback_screen.dart';
 import 'package:real_estate_app/view/chat_screen/chat_screen.dart';
 import 'package:real_estate_app/view/check_in_page/check_in_page.dart';
+import 'package:real_estate_app/view/edit_pocket_listing_screen/edit_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/followups_screen/followups_screen.dart'; // Updated import
 import 'package:real_estate_app/view/deal_add_document_screen/deal_add_document_screen.dart';
 import 'package:real_estate_app/view/deal_details_screen/deal_deatils_screen.dart';
@@ -506,6 +508,18 @@ class AppRouter {
                     userId: userId,
                     isEdit: isEdit,
                     dealDocuments: dealDocuments,
+                  ));
+                },
+              ),
+              GoRoute(
+                path: EditPocketListingScreen.routeName,
+                name: EditPocketListingScreen.routeName,
+                pageBuilder: (context, state) {
+                  final propertyCard = state.extra as PropertyCardDetailsModel;
+
+                  return CupertinoPage(
+                      child: EditPocketListingScreen(
+                    pocketlisting: propertyCard,
                   ));
                 },
               ),

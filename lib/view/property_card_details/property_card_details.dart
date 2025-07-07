@@ -7,9 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/property_card_details_model.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
 import 'package:real_estate_app/util/status.dart';
+import 'package:real_estate_app/view/edit_pocket_listing_screen/edit_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/image_viewer_screen/image_viewer.dart';
 import 'package:real_estate_app/view/lead_detail_screen/lead_detail_screen.dart';
 import 'package:real_estate_app/view/property_card_details/cubit/property_card_details_cubit.dart';
@@ -392,11 +394,43 @@ class _PropertyCardDetailsScreenLayout extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         BlockTitleText(
                           color: Theme.of(context).colorScheme.onPrimary,
                           text: 'Property Info',
                         ),
+                        if (propertyCard?.currentAgent?['_id'] ==
+                            getIt<AuthBloc>().state.agent?.id)
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  padding: EdgeInsets.symmetric(vertical: 0)),
+                              onPressed: () async {
+                                if (propertyCard != null) {
+                                  final pocketListing = propertyCard;
+                                  final shouldRefresh =
+                                      await context.pushNamed<bool>(
+                                          EditPocketListingScreen.routeName,
+                                          extra: pocketListing);
+                                  if (shouldRefresh == true) {
+                                    context
+                                        .read<PropertyCardDetailsCubit>()
+                                        .getPropertyCard();
+                                  }
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  BlockTitleText(
+                                    text: 'Edit',
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer,
+                                  ),
+                                ],
+                              ))
                       ],
                     ),
                   ),

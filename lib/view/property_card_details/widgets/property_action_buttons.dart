@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
 import 'package:real_estate_app/model/property_card_details_model.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
 import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/edit_pocket_listing_screen/edit_pocket_listing_screen.dart';
 import 'package:real_estate_app/view/property_card_details/cubit/property_card_details_cubit.dart';
 import 'package:real_estate_app/view/property_card_details/widgets/convert_propertycard.dart';
 import 'package:real_estate_app/widgets/button.dart';

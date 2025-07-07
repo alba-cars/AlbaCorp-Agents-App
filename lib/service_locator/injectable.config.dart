@@ -50,6 +50,7 @@ import '../data/repository/twilio_repo.dart' as _i752;
 import '../model/activity_model.dart' as _i161;
 import '../model/deal_model.dart' as _i15;
 import '../model/lead_model.dart' as _i815;
+import '../model/property_card_details_model.dart' as _i761;
 import '../services/location_service.dart' as _i669;
 import '../view/add_deal_screen/cubit/add_deal_cubit.dart' as _i461;
 import '../view/add_followup_screen/cubit/add_followup_cubit.dart' as _i258;
@@ -67,6 +68,8 @@ import '../view/deal_add_document_screen/cubit/deal_add_document_cubit.dart'
 import '../view/deal_details_screen/cubit/deal_details_cubit.dart' as _i771;
 import '../view/deals_screen/cubit/deals_cubit.dart' as _i37;
 import '../view/earnings/cubit/earnings_cubit.dart' as _i88;
+import '../view/edit_pocket_listing_screen/cubit/edit_pocket_listing_cubit.dart'
+    as _i831;
 import '../view/expired_hot_lead_explorer/cubit/expired_hot_lead_explorer_cubit.dart'
     as _i787;
 import '../view/explorer_screen/cubit/explorer_screen_cubit.dart' as _i774;
@@ -328,6 +331,17 @@ extension GetItInjectableX on _i174.GetIt {
         _i161.AddLeadCubit(
           gh<_i242.LeadRepo>(),
           data,
+        ));
+    gh.factoryParam<_i831.EditPocketListingCubit,
+        _i761.PropertyCardDetailsModel?, dynamic>((
+      propertyCard,
+      _,
+    ) =>
+        _i831.EditPocketListingCubit(
+          gh<_i242.LeadRepo>(),
+          gh<_i854.ListingsRepo>(),
+          gh<_i372.ExplorerRepo>(),
+          propertyCard,
         ));
     gh.factory<_i426.AddTicketCubit>(() => _i426.AddTicketCubit(
           gh<_i127.TicketRepo>(),
