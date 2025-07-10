@@ -33,6 +33,7 @@ import 'package:real_estate_app/widgets/snackbar.dart';
 import 'package:real_estate_app/widgets/space.dart';
 import 'package:real_estate_app/widgets/text.dart';
 import 'package:real_estate_app/widgets/url_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'widgets/feedback_dialog.dart';
 
@@ -390,11 +391,10 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
         _buildLeadSource(task),
         const VerticalSmallGap(),
         _buildPhoneInfo(task),
-        const VerticalSmallGap(),
-        _buildTaskDueDate(task),
-        const VerticalSmallGap(),
-        if (task.type == "Viewing" && task.property_list != null)
-          _buildPropertyViewing(task),
+        if (task.type == "Viewing" && task.property_list != null) ...[
+          const VerticalSmallGap(),
+          _buildPropertyViewing(task)
+        ],
         const VerticalSmallGap(),
         const CallProcessing(),
         const VerticalSmallGap(),
@@ -503,8 +503,18 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
         const ContainerIcon(icon: CupertinoIcons.search),
         const HorizontalSmallGap(),
         Expanded(
-          child:
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               NormalText(text: 'Lead Source: ${task.lead?.leadSource ?? ''}'),
+              VerticalSmallGap(
+                adjustment: 0.3,
+              ),
+              NormalText(
+                  text:
+                      'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date.toLocal())}'),
+            ],
+          ),
         )
       ],
     );
@@ -515,7 +525,20 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
       children: [
         const ContainerIcon(icon: CupertinoIcons.check_mark),
         const HorizontalSmallGap(),
-        Expanded(child: NormalText(text: 'Phone: ${task.lead?.phone ?? ''}')),
+        Expanded(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            NormalText(text: 'Phone: ${task.lead?.phone ?? ''}'),
+            if (task.lead?.email != null &&
+                task.lead?.email?.contains('generated') == false) ...[
+              VerticalSmallGap(
+                adjustment: 0.3,
+              ),
+              NormalText(text: 'Email: ${task.lead?.email ?? ''}'),
+            ]
+          ],
+        )),
         if (task.lead?.dndStatus ?? false)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
@@ -524,20 +547,6 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 color: Theme.of(context).colorScheme.errorContainer),
             child: const SmallText(text: 'DND'),
           ),
-      ],
-    );
-  }
-
-  Widget _buildTaskDueDate(Activity task) {
-    return Row(
-      children: [
-        const ContainerIcon(icon: CupertinoIcons.calendar),
-        const HorizontalSmallGap(),
-        Expanded(
-          child: NormalText(
-              text:
-                  'Due on : ${DateFormat.yMMMMd().add_jmv().format(task.date.toLocal())}'),
-        )
       ],
     );
   }
@@ -635,7 +644,36 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                 shareCompanyProfile();
               },
               child: const Icon(Icons.share)),
-        )
+        ),
+        if (task.lead?.email != null &&
+            task.lead?.email?.contains('generated') == false) ...[
+          const HorizontalSmallGap(),
+          Expanded(
+            child: OutlinedButton(
+              onPressed: () async {
+                final leadEmailAddress = task.lead?.email;
+                if (leadEmailAddress == null || leadEmailAddress.isEmpty) {
+                  showSnackbar(context, 'Lead has no email address',
+                      SnackBarType.failure);
+                  return;
+                }
+                final Uri emailLaunchUri = Uri(
+                  scheme: 'mailto',
+                  path: leadEmailAddress,
+                );
+                if (!mounted) return; // Check if widget is still in the tree
+                if (await canLaunchUrl(emailLaunchUri)) {
+                  await launchUrl(emailLaunchUri);
+                } else {
+                  if (!mounted) return; // Check again before showing snackbar
+                  showSnackbar(context, 'Could not open email app',
+                      SnackBarType.failure);
+                }
+              },
+              child: const Icon(Icons.email_outlined),
+            ),
+          )
+        ]
       ],
     );
   }
