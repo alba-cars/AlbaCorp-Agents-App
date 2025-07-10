@@ -746,6 +746,19 @@ class CallProcessing extends StatelessWidget {
         if (state.callProcessingState?.activityId != state.task?.id) {
           return SizedBox();
         }
+        if (state.callProcessingState?.status ==
+            CallProcessingStatus.autoCompletedByWhatsApp) {
+          return Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.fromBorderSide(
+                    BorderSide(color: Theme.of(context).colorScheme.error))),
+            child: const Text(
+                'This activity is completed and lead is moved to FollowUp. You can still continue to complete this task to update notes and FollowUp task'),
+          );
+        }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

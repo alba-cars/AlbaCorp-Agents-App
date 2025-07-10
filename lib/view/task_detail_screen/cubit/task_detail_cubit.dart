@@ -581,6 +581,14 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
           error: error,
         )));
         break;
+      case 'AUTOCOMPLETED_BY_WHATSAPP':
+        emit(state.copyWith(
+            callProcessingState: CallProcessingState(
+          activityId: activityId,
+          isProcessing: false,
+          status: CallProcessingStatus.autoCompletedByWhatsApp,
+        )));
+        break;
     }
   }
 

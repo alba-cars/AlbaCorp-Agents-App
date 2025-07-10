@@ -239,8 +239,8 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
     return FormBuilder(
       key: widget._formKey,
       onChanged: () {
-        val = widget.pocketlisting.toJson();
-        setState(() {});
+        val = widget._formKey.currentState?.instantValue ?? {};
+        if (mounted) setState(() {});
       },
       initialValue: widget.pocketlisting.toJson(),
       child: ScrollShadow(

@@ -32,15 +32,15 @@ class NewLeadsPage extends StatefulWidget {
 enum NewLeadTaskFilterEnum {
   Enquiry,
   Cold, // Renamed from Cold
-  Partner,
+  // Partner,
   ;
 
   String getName() {
     switch (this) {
       case NewLeadTaskFilterEnum.Enquiry:
         return "Enquiry";
-      case NewLeadTaskFilterEnum.Partner:
-        return "Partner";
+      // case NewLeadTaskFilterEnum.Partner:
+      //   return "Partner";
       case NewLeadTaskFilterEnum.Cold: // Renamed from Cold
         return "Cold"; // Updated name
     }

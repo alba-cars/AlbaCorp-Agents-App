@@ -68,6 +68,7 @@ class ListingItem extends StatelessWidget {
                                     child: S3Image(
                                       url: image,
                                       fit: BoxFit.cover,
+                                      publicImage: true,
                                     ),
                                   ),
                                   Positioned(

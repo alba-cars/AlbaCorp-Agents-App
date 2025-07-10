@@ -100,6 +100,7 @@ class _AddListingScreenLayoutState extends State<_AddPocketListingScreenLayout>
               centerTitle: true,
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
+              pinned: true,
             ),
             SliverToBoxAdapter(
               child: Padding(
@@ -256,7 +257,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
       key: widget._formKey,
       onChanged: () {
         val = widget._formKey.currentState?.instantValue ?? {};
-        setState(() {});
+        if (mounted) setState(() {});
       },
       initialValue: context.read<AddPocketListingCubit>().state.rawValues,
       child: ScrollShadow(
@@ -357,11 +358,7 @@ class _BasicInfoTabState extends State<BasicInfoTab> {
                         .toLowerCase()
                         .contains(v.text.toLowerCase()));
                   }),
-              if (widget.propertyTypeList
-                      .firstWhereOrNull(
-                          (element) => element.id == val['property_type_id'])
-                      ?.propertyType
-                      .contains(RegExp('Apartment|Flat')) ??
+              if (val['propertyType']?.contains(RegExp('Apartment|Flat')) ??
                   false)
                 AppAutoComplete<Building>(
                     onSelected: (v) {},

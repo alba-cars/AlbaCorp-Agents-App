@@ -6,7 +6,8 @@ enum CallProcessingStatus {
   recordingFound,
   generatingSummary,
   completed,
-  failed
+  failed,
+  autoCompletedByWhatsApp
 }
 
 @freezed

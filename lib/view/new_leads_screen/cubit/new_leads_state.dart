@@ -6,7 +6,7 @@ abstract class NewLeadsState with _$NewLeadsState {
     @Default(const {
       NewLeadTaskFilterEnum.Enquiry: AppStatus.initial,
       NewLeadTaskFilterEnum.Cold: AppStatus.initial,
-      NewLeadTaskFilterEnum.Partner: AppStatus.initial,
+      // NewLeadTaskFilterEnum.Partner: AppStatus.initial,
     })
     Map<NewLeadTaskFilterEnum, AppStatus> fetchStatus,
     @Default({}) Map<NewLeadTaskFilterEnum, Paginator?> paginator,

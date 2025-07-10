@@ -132,8 +132,7 @@ class _NewLeadsState implements NewLeadsState {
   const _NewLeadsState(
       {final Map<NewLeadTaskFilterEnum, AppStatus> fetchStatus = const {
         NewLeadTaskFilterEnum.Enquiry: AppStatus.initial,
-        NewLeadTaskFilterEnum.Cold: AppStatus.initial,
-        NewLeadTaskFilterEnum.Partner: AppStatus.initial
+        NewLeadTaskFilterEnum.Cold: AppStatus.initial
       },
       final Map<NewLeadTaskFilterEnum, Paginator?> paginator = const {},
       final Map<NewLeadTaskFilterEnum, List<Activity>> activities = const {},

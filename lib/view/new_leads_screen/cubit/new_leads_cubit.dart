@@ -108,12 +108,12 @@ class NewLeadsCubit extends Cubit<NewLeadsState> {
           "leadStatus": "Fresh",
           "sortBy": sortby ?? 'latest'
         };
-      case NewLeadTaskFilterEnum.Partner:
-        return {
-          "leadSourceType": "hot",
-          "partnersOnly": true,
-          "sortBy": sortby ?? 'latest'
-        };
+      // case NewLeadTaskFilterEnum.Partner:
+      //   return {
+      //     "leadSourceType": "hot",
+      //     "partnersOnly": true,
+      //     "sortBy": sortby ?? 'latest'
+      //   };
       case NewLeadTaskFilterEnum.Cold: // Renamed from Cold
         return {
           "leadSourceType":

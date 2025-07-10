@@ -38,6 +38,10 @@ class ListingsCubit extends Cubit<ListingsState> {
   Future<void> getListings({
     bool refresh = false,
   }) async {
+    if (state.getListingsStatus == AppStatus.loading ||
+        state.getListingsStatus == AppStatus.loadingMore) {
+      return;
+    }
     if (refresh || state.listingsPaginator == null) {
       emit(state.copyWith(
           getListingsStatus: AppStatus.loading,
@@ -69,6 +73,10 @@ class ListingsCubit extends Cubit<ListingsState> {
   Future<void> getMyListings({
     bool refresh = false,
   }) async {
+    if (state.getMyListingsStatus == AppStatus.loading ||
+        state.getMyListingsStatus == AppStatus.loadingMore) {
+      return;
+    }
     if (refresh || state.myListingsPaginator == null) {
       emit(state.copyWith(
           getMyListingsStatus: AppStatus.loading,
@@ -82,7 +90,6 @@ class ListingsCubit extends Cubit<ListingsState> {
         await _listingsRepo.getMyListings(paginator: state.myListingsPaginator);
     switch (result) {
       case (Success s):
-
         emit(state.copyWith(
             myListings: [...state.myListings, ...s.value],
             myListingsPaginator: s.paginator,
@@ -99,7 +106,10 @@ class ListingsCubit extends Cubit<ListingsState> {
   Future<void> getPocketListings({
     bool refresh = false,
   }) async {
-
+    if (state.getPocketListingsStatus == AppStatus.loading ||
+        state.getPocketListingsStatus == AppStatus.loadingMore) {
+      return;
+    }
 
     if (refresh || state.pocketListingsPaginator == null) {
       emit(state.copyWith(
@@ -109,13 +119,13 @@ class ListingsCubit extends Cubit<ListingsState> {
     } else {
       emit(state.copyWith(getPocketListingsStatus: AppStatus.loadingMore));
     }
-    
+
     final result = await _explorerRepo.getPocketListings(
         filter: state.pocketListingsFilter,
         paginator: state.pocketListingsPaginator);
     switch (result) {
       case (Success s):
-      Logger().d(s.paginator);
+        Logger().d(s.paginator);
         emit(state.copyWith(
             pocketListings: [...state.pocketListings, ...s.value],
             pocketListingsPaginator: s.paginator,
@@ -132,6 +142,10 @@ class ListingsCubit extends Cubit<ListingsState> {
   Future<void> getMyPocketListings({
     bool refresh = false,
   }) async {
+    if (state.getMyPocketListingsStatus == AppStatus.loading ||
+        state.getMyPocketListingsStatus == AppStatus.loadingMore) {
+      return;
+    }
     if (refresh || state.myPocketListingsPaginator == null) {
       emit(state.copyWith(
           getMyPocketListingsStatus: AppStatus.loading,
