@@ -27,7 +27,9 @@ abstract class Agent with _$Agent {
 }
 
 Object userIdFromJson(Map p1, String p2) {
-  return p1[p2] is Map ? p1[p2]['id'] : p1[p2];
+  return p1[p2] is Map
+      ? p1[p2]['id'] ?? p1[p2]['_id']
+      : p1[p2] ?? p1['user_id'] ?? '';
 }
 
 Map<String, dynamic> userFromJson(Map p1, String p2) {
