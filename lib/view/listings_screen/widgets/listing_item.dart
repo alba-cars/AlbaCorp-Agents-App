@@ -214,6 +214,7 @@ class ListingItem extends StatelessWidget {
                         url: listing.agent?.user.photo ?? '',
                         errorWidget: Image.asset(
                             'assets/images/person_placeholder.jpeg'),
+                        publicImage: true,
                       ),
                     ),
                     HorizontalSmallGap(),

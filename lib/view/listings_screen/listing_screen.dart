@@ -782,6 +782,7 @@ class _PocketListingsTabState extends State<PocketListingsTab> {
                                               url: propertyCard.currentAgent[
                                                       "userId"]?["photo"] ??
                                                   '',
+                                              publicImage: true,
                                             ),
                                           ),
                                           HorizontalSmallGap(),
