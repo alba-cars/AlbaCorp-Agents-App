@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:real_estate_app/app/auth_bloc/auth_bloc.dart';
+import 'package:real_estate_app/model/property_card_model.dart';
+import 'package:real_estate_app/service_locator/injectable.dart';
+import 'package:real_estate_app/view/edit_pocket_listing_screen/edit_pocket_listing_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:real_estate_app/model/property_card_details_model.dart';
 import 'package:real_estate_app/util/currency_formatter.dart';
@@ -11,6 +16,16 @@ class PropertyInfoCard extends StatelessWidget {
     Key? key,
     required this.propertyCard,
   }) : super(key: key);
+
+  bool get isMyPropertyCard {
+    if (propertyCard == null) return false;
+
+    return (propertyCard?.currentAgent is String &&
+            getIt<AuthBloc>().state.agent?.id == propertyCard?.currentAgent) ||
+        (propertyCard?.currentAgent is Map &&
+            getIt<AuthBloc>().state.agent?.id ==
+                propertyCard?.currentAgent['id']);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +101,18 @@ class PropertyInfoCard extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
+            if (isMyPropertyCard)
+              IconButton(
+                onPressed: () {
+                  if (propertyCard != null) {
+                    final pocketListing =
+                        PropertyCard.fromJson(propertyCard!.toJson());
+                    context.push(EditPocketListingScreen.routeName,
+                        extra: pocketListing);
+                  }
+                },
+                icon: Icon(Icons.edit),
+              )
           ],
         ),
 

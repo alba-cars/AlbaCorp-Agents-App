@@ -24,6 +24,7 @@ mixin _$PropertyCardDetailsModel {
   Community? get community;
   String? get beds;
   int? get baths;
+  String? get unitId;
   double? get size;
   @JsonKey(name: 'propertyType')
   String? get propertyType;
@@ -82,6 +83,7 @@ mixin _$PropertyCardDetailsModel {
                 other.community == community) &&
             (identical(other.beds, beds) || other.beds == beds) &&
             (identical(other.baths, baths) || other.baths == baths) &&
+            (identical(other.unitId, unitId) || other.unitId == unitId) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.propertyType, propertyType) ||
                 other.propertyType == propertyType) &&
@@ -127,6 +129,7 @@ mixin _$PropertyCardDetailsModel {
         community,
         beds,
         baths,
+        unitId,
         size,
         propertyType,
         const DeepCollectionEquality().hash(createdBy),
@@ -151,7 +154,7 @@ mixin _$PropertyCardDetailsModel {
 
   @override
   String toString() {
-    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, cluster: $cluster, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
+    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, unitId: $unitId, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, cluster: $cluster, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
   }
 }
 
@@ -168,6 +171,7 @@ abstract mixin class $PropertyCardDetailsModelCopyWith<$Res> {
       @JsonKey(name: 'community') Community? community,
       String? beds,
       int? baths,
+      String? unitId,
       double? size,
       @JsonKey(name: 'propertyType') String? propertyType,
       @JsonKey(readValue: readCreatedBy) dynamic createdBy,
@@ -213,6 +217,7 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res>
     Object? community = freezed,
     Object? beds = freezed,
     Object? baths = freezed,
+    Object? unitId = freezed,
     Object? size = freezed,
     Object? propertyType = freezed,
     Object? createdBy = freezed,
@@ -259,6 +264,10 @@ class _$PropertyCardDetailsModelCopyWithImpl<$Res>
           ? _self.baths
           : baths // ignore: cast_nullable_to_non_nullable
               as int?,
+      unitId: freezed == unitId
+          ? _self.unitId
+          : unitId // ignore: cast_nullable_to_non_nullable
+              as String?,
       size: freezed == size
           ? _self.size
           : size // ignore: cast_nullable_to_non_nullable
@@ -381,6 +390,7 @@ class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
       @JsonKey(name: 'community') this.community,
       this.beds,
       this.baths,
+      this.unitId,
       this.size,
       @JsonKey(name: 'propertyType') this.propertyType,
       @JsonKey(readValue: readCreatedBy) this.createdBy,
@@ -422,6 +432,8 @@ class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
   final String? beds;
   @override
   final int? baths;
+  @override
+  final String? unitId;
   @override
   final double? size;
   @override
@@ -520,6 +532,7 @@ class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
                 other.community == community) &&
             (identical(other.beds, beds) || other.beds == beds) &&
             (identical(other.baths, baths) || other.baths == baths) &&
+            (identical(other.unitId, unitId) || other.unitId == unitId) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.propertyType, propertyType) ||
                 other.propertyType == propertyType) &&
@@ -566,6 +579,7 @@ class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
         community,
         beds,
         baths,
+        unitId,
         size,
         propertyType,
         const DeepCollectionEquality().hash(createdBy),
@@ -590,7 +604,7 @@ class _PropertyCardDetailsModel implements PropertyCardDetailsModel {
 
   @override
   String toString() {
-    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, cluster: $cluster, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
+    return 'PropertyCardDetailsModel(id: $id, plCreationDate: $plCreationDate, building: $building, community: $community, beds: $beds, baths: $baths, unitId: $unitId, size: $size, propertyType: $propertyType, createdBy: $createdBy, partyType: $partyType, cluster: $cluster, status: $status, purpose: $purpose, amenities: $amenities, createdAt: $createdAt, updatedAt: $updatedAt, checkedOutDate: $checkedOutDate, currentAgent: $currentAgent, currentOwner: $currentOwner, referenceNumber: $referenceNumber, expirationDate: $expirationDate, availableForCheckout: $availableForCheckout, photos: $photos, leadsCount: $leadsCount, askingPrice: $askingPrice, agentValutionPrice: $agentValutionPrice)';
   }
 }
 
@@ -609,6 +623,7 @@ abstract mixin class _$PropertyCardDetailsModelCopyWith<$Res>
       @JsonKey(name: 'community') Community? community,
       String? beds,
       int? baths,
+      String? unitId,
       double? size,
       @JsonKey(name: 'propertyType') String? propertyType,
       @JsonKey(readValue: readCreatedBy) dynamic createdBy,
@@ -656,6 +671,7 @@ class __$PropertyCardDetailsModelCopyWithImpl<$Res>
     Object? community = freezed,
     Object? beds = freezed,
     Object? baths = freezed,
+    Object? unitId = freezed,
     Object? size = freezed,
     Object? propertyType = freezed,
     Object? createdBy = freezed,
@@ -702,6 +718,10 @@ class __$PropertyCardDetailsModelCopyWithImpl<$Res>
           ? _self.baths
           : baths // ignore: cast_nullable_to_non_nullable
               as int?,
+      unitId: freezed == unitId
+          ? _self.unitId
+          : unitId // ignore: cast_nullable_to_non_nullable
+              as String?,
       size: freezed == size
           ? _self.size
           : size // ignore: cast_nullable_to_non_nullable

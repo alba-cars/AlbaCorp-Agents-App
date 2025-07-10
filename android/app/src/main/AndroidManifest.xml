@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -48,43 +47,6 @@
             </intent-filter>
             <!-- Your existing intent filters -->
         </activity>
-
-        <!-- Add NotificationProxyActivity -->
-        <!-- <activity
-            android:name="com.twilio.voice.flutter.NotificationProxyActivity"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:showWhenLocked="true"
-            android:excludeFromRecents="true"
-            android:taskAffinity=""
-            android:turnScreenOn="true">
-        </activity> -->
-
-        <!-- Existing services and receivers -->
-        <!-- <receiver android:name=".services.PhoneStateReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE" />
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-            </intent-filter>
-        </receiver> -->
-
-        <!-- <service
-            android:name="com.twilio.voice.flutter.fcm.VoiceFirebaseMessagingService"
-            android:exported="false"
-            android:stopWithTask="false">
-            <intent-filter> 
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter> 
-        </service> -->
-
-        <!-- <service
-            android:name="com.twilio.voice.flutter.IncomingCallNotificationService"
-            android:enabled="true"
-            android:foregroundServiceType="phoneCall"
-            android:exported="true" /> -->
-
-        <!-- Existing meta-data -->
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

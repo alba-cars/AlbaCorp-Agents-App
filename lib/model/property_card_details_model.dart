@@ -17,6 +17,7 @@ abstract class PropertyCardDetailsModel with _$PropertyCardDetailsModel {
     @JsonKey(name: 'community') Community? community,
     String? beds,
     int? baths,
+    String? unitId,
     double? size,
     @JsonKey(name: 'propertyType') String? propertyType,
     @JsonKey(readValue: readCreatedBy) dynamic createdBy,

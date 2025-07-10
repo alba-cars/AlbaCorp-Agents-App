@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
+import 'package:logger/web.dart';
 import 'package:real_estate_app/widgets/text.dart';
 
 import 'error_text.dart';
@@ -47,20 +48,72 @@ class _WrapSelectFieldState<T extends Object>
     extends State<WrapSelectField<T>> {
   late final _fieldKey = GlobalKey<FormBuilderFieldState>();
   late final _focusNode = FocusScopeNode();
+  late final _scrollController = ScrollController();
+  late final List<GlobalKey> _itemKeys =
+      widget.values.map((e) => GlobalKey()).toList();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Schedule scroll to initial value after build
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (widget.values.isNotEmpty) _scrollToInitialValue();
+    });
+  }
 
   @override
   void didUpdateWidget(covariant WrapSelectField<T> oldWidget) {
     if (widget.defaultValue != oldWidget.defaultValue) {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         _fieldKey.currentState?.didChange(widget.defaultValue);
+        _scrollToInitialValue();
+      });
+    }
+    if (widget.values.length != oldWidget.values.length) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _scrollToInitialValue();
       });
     }
     super.didUpdateWidget(oldWidget);
   }
 
+  void _scrollToInitialValue() {
+    // Check if the field state has a non-null value
+    final fieldState = _fieldKey.currentState;
+    if (fieldState?.value == null) return;
+
+    final initialIndex = widget.values.indexWhere((value) {
+      return widget._displayOption(value).toLowerCase() ==
+          widget._displayOption(fieldState!.value!).toLowerCase();
+    });
+
+    if (initialIndex != -1 && initialIndex < _itemKeys.length) {
+      final key = _itemKeys[initialIndex];
+      final context = key.currentContext;
+
+      if (context != null) {
+        final RenderBox renderBox = context.findRenderObject() as RenderBox;
+        final position = renderBox.localToGlobal(Offset.zero);
+
+        // Calculate scroll position to center the item
+        final scrollPosition = position.dx -
+            (MediaQuery.of(context).size.width / 2) +
+            (renderBox.size.width / 2);
+
+        _scrollController.animateTo(
+          scrollPosition.clamp(0.0, _scrollController.position.maxScrollExtent),
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      }
+    }
+  }
+
   @override
   void dispose() {
     _focusNode.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -111,6 +164,7 @@ class _WrapSelectFieldState<T extends Object>
                 size: 16,
                 color: Colors.blueGrey[100]!,
                 child: SingleChildScrollView(
+                  controller: _scrollController,
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     // d
@@ -123,6 +177,7 @@ class _WrapSelectFieldState<T extends Object>
                             left: i == 0 ? 0 : 4,
                             right: i == length - 1 ? 0 : 4),
                         child: InkWell(
+                          key: _itemKeys[i],
                           onTap: widget.disabled
                               ? null
                               : () {

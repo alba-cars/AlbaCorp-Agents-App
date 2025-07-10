@@ -45,8 +45,9 @@ class _CurrencyFieldState extends State<CurrencyField> {
         _controller.text = val;
       }
       if (_fieldKey.currentState?.value != null) {
+        final val = _fieldKey.currentState!.value;
         _controller.text = CurrencyTextInputFormatter()
-            .formatDouble(_fieldKey.currentState!.value);
+            .formatDouble(val is num ? val.toDouble() : null);
       }
     });
 
