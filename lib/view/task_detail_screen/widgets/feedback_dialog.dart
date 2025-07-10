@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:real_estate_app/constants/activity_types.dart';
 import 'package:real_estate_app/model/lead_model.dart';
 import 'package:real_estate_app/model/property_model.dart';
@@ -748,6 +749,7 @@ class CallProcessing extends StatelessWidget {
         }
         if (state.callProcessingState?.status ==
             CallProcessingStatus.autoCompletedByWhatsApp) {
+          Logger().d(state.callProcessingState);
           return Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(

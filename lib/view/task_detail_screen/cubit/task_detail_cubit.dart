@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:objectbox/objectbox.dart' as objBox;
 import 'package:real_estate_app/data/repository/activity_repo.dart';
 import 'package:real_estate_app/data/repository/agent_repo.dart';
 import 'package:real_estate_app/data/repository/explorer_repo.dart';
@@ -59,7 +60,8 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     _subscribeToProcessingUpdates();
   }
 
-  StreamSubscription<List<CallProcessingEntity>>? _processingSubscription;
+  StreamSubscription<objBox.Query<CallProcessingEntity>>?
+      _processingSubscription;
   final ActivityRepo _activityRepo;
   final LeadRepo _leadRepo;
   final AgentRepo _agentRepo;
@@ -614,20 +616,33 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   }
 
   void _subscribeToProcessingUpdates() {
+    Logger().d("Listening to notifications");
+    _processingSubscription?.cancel();
     final store = getIt<ob.ObjectBox>().store;
-
     final box = store.box<CallProcessingEntity>();
 
-    final query = box.query(
-        obj.CallProcessingEntity_.activityId.equals(state.task?.id ?? 'sss'))
+    final query = box.query()
       ..order(obj.CallProcessingEntity_.timestamp, flags: obj.Order.descending);
 
-    _processingSubscription =
-        query.watch().map((query) => query.find()).listen((updates) {
-      if (updates.isNotEmpty) {
-        handleMessage(updates.first);
+    _processingSubscription = query.watch().listen((updates) {
+      final tasks = box
+          .query(obj.CallProcessingEntity_.activityId.equals(state.taskId))
+          .build()
+          .find();
+      Logger().d(tasks);
+
+      if (tasks.isNotEmpty) {
+        handleMessage(tasks.first);
       }
     });
+  }
+
+  @override
+  void onChange(Change<TaskDetailState> change) {
+    super.onChange(change);
+    if (change.currentState.taskId != change.nextState.taskId) {
+      _subscribeToProcessingUpdates();
+    }
   }
 
   @override

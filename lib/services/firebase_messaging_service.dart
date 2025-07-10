@@ -7,6 +7,7 @@ import 'package:real_estate_app/service_locator/injectable.dart';
 import '../data/objectbox/entity/call_processing_entity.dart';
 import '../service_locator/objectbox.dart';
 
+@pragma('vm:entry-point')
 class AwesomeFcm {
   static String? fcmToken;
   static Future<void> initializeRemoteNotifications(

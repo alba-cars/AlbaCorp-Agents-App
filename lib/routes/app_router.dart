@@ -84,7 +84,7 @@ class AppRouter {
               state.uri.path.startsWith(AddListingScreen.routeName) == false &&
               state.uri.path.startsWith(AddPocketListingScreen.routeName) ==
                   false) {
-            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}?taskType=Hot&taskFilter=New';
+            return '${TaskDetailScreen.routeName}/${authState.veryImportantActivities!.first}?taskType=Hot&taskFilter=Enquiry';
           } else if (authState.showFeedbackScreen &&
               state.uri.path.contains(CallFeedbackScreen.routeName) == false &&
               state.uri.path.contains(TaskDetailScreen.routeName) == false) {

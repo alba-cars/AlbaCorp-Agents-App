@@ -100,7 +100,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void saveNotificationToDb(Map<String, dynamic> data) async {
-    Logger().d(data);
     final notificationId = data['id'] as String? ?? '';
     final existResult = await _notificationRepo.isNotificationReceived(
         notificationId: notificationId);

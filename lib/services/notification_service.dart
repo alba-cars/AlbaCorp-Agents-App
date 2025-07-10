@@ -139,7 +139,6 @@ class NotificationService {
   @pragma('vm:entry-point')
   static Future<void> onNotificationReceivedMethod(
       ReceivedNotification receivedAction) async {
-    Logger().d("received noyification ${receivedAction.toMap()}");
     if (receivedAction.displayedLifeCycle == NotificationLifeCycle.Foreground &&
         receivedAction.payload != null) {
       getIt<AuthBloc>().onNotificationData(receivedAction.payload!);

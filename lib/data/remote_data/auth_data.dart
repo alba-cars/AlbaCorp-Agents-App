@@ -60,7 +60,6 @@ class AuthData implements AuthRepo {
         '/v1/auth/get-logged-in-user',
       );
       Map<String, dynamic> data = loginResponse.data;
-      log.d(data);
       User user = User.fromJson(data);
       final token = await AwesomeFcm.getFirebaseMessagingToken();
       if (token != user.notification_token) {
