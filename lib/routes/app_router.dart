@@ -61,11 +61,8 @@ import '../view/twilio_screen/twilio_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
-  static final RouteObserver<ModalRoute> routerObserver =
-      RouteObserver<ModalRoute>();
   static final GoRouter router = GoRouter(
       refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
-      // observers: [routerObserver],
       redirect: (context, state) {
         final authState = getIt<AuthBloc>().state;
         if ([AuthStatus.Maintenance, AuthStatus.Update]
@@ -131,7 +128,6 @@ class AppRouter {
                         : null;
                   },
                   pageBuilder: (context, state, widget) {
-                    print(state.matchedLocation);
                     return AppTransition(
                       child: HomeScreen(
                         child: widget,

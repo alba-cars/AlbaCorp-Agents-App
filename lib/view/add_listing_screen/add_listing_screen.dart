@@ -96,6 +96,7 @@ class _AddListingScreenLayoutState extends State<AddListingScreenLayout>
               centerTitle: true,
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
+              pinned: true,
             ),
             SliverToBoxAdapter(
               child: Padding(

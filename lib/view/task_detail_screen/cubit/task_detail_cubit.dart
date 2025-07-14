@@ -616,7 +616,6 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
   }
 
   void _subscribeToProcessingUpdates() {
-    Logger().d("Listening to notifications");
     _processingSubscription?.cancel();
     final store = getIt<ob.ObjectBox>().store;
     final box = store.box<CallProcessingEntity>();
@@ -627,9 +626,10 @@ class TaskDetailCubit extends Cubit<TaskDetailState> {
     _processingSubscription = query.watch().listen((updates) {
       final tasks = box
           .query(obj.CallProcessingEntity_.activityId.equals(state.taskId))
+          .order(obj.CallProcessingEntity_.timestamp,
+              flags: obj.Order.descending)
           .build()
           .find();
-      Logger().d(tasks);
 
       if (tasks.isNotEmpty) {
         handleMessage(tasks.first);

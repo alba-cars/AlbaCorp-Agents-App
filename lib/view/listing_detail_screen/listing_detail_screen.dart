@@ -81,7 +81,7 @@ class _ListingDetailScreenLayoutState extends State<ListingDetailScreenLayout> {
                     InkWell(
                       onTap: () {
                         launchUrlString(
-                            "https://alba.homes/download/${listing.referNo}?source=agentApp");
+                            "https://alba.homes/download/${listing.id}?source=agentApp");
                       },
                       child: SizedBox(
                         height: 30,

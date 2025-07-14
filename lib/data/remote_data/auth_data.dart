@@ -62,7 +62,7 @@ class AuthData implements AuthRepo {
       Map<String, dynamic> data = loginResponse.data;
       User user = User.fromJson(data);
       final token = await AwesomeFcm.getFirebaseMessagingToken();
-      if (token != user.notification_token) {
+      if (token.isNotEmpty && token != user.notification_token) {
         updateNotificationToken(token);
       }
       return Success(user);
@@ -96,7 +96,7 @@ class AuthData implements AuthRepo {
   Future<Result<void>> updateNotificationToken(String token) async {
     try {
       await _dio.post(
-        '/v1/user/update-notification-token',
+        '/v1/auth/update-notification-token',
         data: {"notification_token": token},
       );
       return Success(null);

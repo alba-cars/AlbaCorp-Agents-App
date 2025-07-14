@@ -295,81 +295,87 @@ class _AppSearchBarState extends State<AppSearchBar> {
 
   Future<dynamic> showFilterBottonSheet(BuildContext pcontext) {
     return showModalBottomSheet(
-        context: context,
+        context: pcontext,
         showDragHandle: true,
         // useRootNavigator: true,
         isScrollControlled: true,
         enableDrag: false,
-        builder: (context) => DraggableScrollableSheet(
-              maxChildSize: 0.85,
-              minChildSize: 0.85,
-              initialChildSize: 0.85,
-              expand: false,
-              builder: (context, scrollController) {
-                return GestureDetector(
-                  onTap: () => FocusScope.of(context).unfocus(),
-                  child: Scaffold(
-                    body: Container(
-                      color: Colors.white,
-                      width: double.maxFinite,
-                      child: FormBuilder(
-                          key: _formKey,
-                          initialValue: filter ?? {},
-                          onChanged: () {
-                            final val = _formKey.currentState?.instantValue;
-                            if (val != valueNotifier.value) {
-                              valueNotifier.value = val ?? {};
-                            }
-                          },
-                          child: Column(
-                            children: [
-                              VerticalSmallGap(),
-                              if (widget.filterFields != null)
-                                Expanded(
-                                    child: ScrollShadow(
-                                  size: 10,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer
-                                      .withOpacity(0.5),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: SingleChildScrollView(
-                                      controller: scrollController,
-                                      child: ValueListenableBuilder(
-                                          valueListenable: valueNotifier,
-                                          builder: (context, values, _) {
-                                            return Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: widget.filterFields!(
-                                                  pcontext, values),
-                                            );
-                                          }),
-                                    ),
+        builder: (context) {
+          BottomSheetManager.registerBottomSheet(pcontext);
+          return DraggableScrollableSheet(
+            maxChildSize: 0.85,
+            minChildSize: 0.85,
+            initialChildSize: 0.85,
+            expand: false,
+            builder: (context, scrollController) {
+              return GestureDetector(
+                onTap: () => FocusScope.of(context).unfocus(),
+                child: Scaffold(
+                  body: Container(
+                    color: Colors.white,
+                    width: double.maxFinite,
+                    child: FormBuilder(
+                        key: _formKey,
+                        initialValue: filter ?? {},
+                        onChanged: () {
+                          final val = _formKey.currentState?.instantValue;
+                          if (val != valueNotifier.value) {
+                            valueNotifier.value = val ?? {};
+                          }
+                        },
+                        child: Column(
+                          children: [
+                            VerticalSmallGap(),
+                            if (widget.filterFields != null)
+                              Expanded(
+                                  child: ScrollShadow(
+                                size: 10,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer
+                                    .withOpacity(0.5),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: SingleChildScrollView(
+                                    controller: scrollController,
+                                    child: ValueListenableBuilder(
+                                        valueListenable: valueNotifier,
+                                        builder: (context, values, _) {
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: widget.filterFields!(
+                                                pcontext, values),
+                                          );
+                                        }),
                                   ),
-                                )),
-                              VerticalSmallGap(),
-                              AppPrimaryButton(
-                                  text: 'Filter',
-                                  onTap: () {
-                                    _formKey.currentState?.save();
-                                    final val = _formKey.currentState?.value;
-                                    if (val != null) {
-                                      widget.onFilterApplied?.call(val);
-                                      Navigator.of(context).pop();
-                                    }
-                                  }),
-                              VerticalSmallGap(
-                                adjustment: 2,
-                              ),
-                            ],
-                          )),
-                    ),
+                                ),
+                              )),
+                            VerticalSmallGap(),
+                            AppPrimaryButton(
+                                text: 'Filter',
+                                onTap: () {
+                                  _formKey.currentState?.save();
+                                  final val = _formKey.currentState?.value;
+                                  if (val != null) {
+                                    widget.onFilterApplied?.call(val);
+                                    Navigator.of(context).pop();
+                                  }
+                                }),
+                            VerticalSmallGap(
+                              adjustment: 2,
+                            ),
+                          ],
+                        )),
                   ),
-                );
-              },
-            ));
+                ),
+              );
+            },
+          );
+        }).then((_) {
+      // Unregister when closed
+      BottomSheetManager.unregisterBottomSheet(pcontext);
+    });
   }
 
   String getFilterValue(dynamic value) {
@@ -400,5 +406,26 @@ class _AppSearchBarState extends State<AppSearchBar> {
       }
     }
     return arrFilter;
+  }
+}
+
+class BottomSheetManager {
+  static final List<BuildContext> _openBottomSheets = [];
+
+  static void registerBottomSheet(BuildContext context) {
+    _openBottomSheets.add(context);
+  }
+
+  static void unregisterBottomSheet(BuildContext context) {
+    _openBottomSheets.remove(context);
+  }
+
+  static void closeAll() {
+    for (final context in List.from(_openBottomSheets)) {
+      if (context.mounted) {
+        Navigator.of(context).pop();
+      }
+    }
+    _openBottomSheets.clear();
   }
 }

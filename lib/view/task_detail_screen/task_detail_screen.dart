@@ -242,7 +242,7 @@ class _TaskDetailScreenLayoutState extends State<_TaskDetailScreenLayout> {
                   if (context.canPop()) {
                     context.pop();
                   } else {
-                    context.goNamed(FollowupsScreen.routeName);
+                    context.goNamed(EnquiriesScreen.routeName);
                   }
                 })
           ],
