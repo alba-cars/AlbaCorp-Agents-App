@@ -265,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   .getIcon(),
                                               action: () {
                                                 QuickAccessEnumList.values[pos]
-                                                    .performAction();
+                                                    .performAction(context);
                                               }),
                                         ),
                                       ))

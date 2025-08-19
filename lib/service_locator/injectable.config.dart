@@ -32,6 +32,7 @@ import '../data/remote_data/lead_data.dart' as _i964;
 import '../data/remote_data/linkus_data.dart' as _i643;
 import '../data/remote_data/listings_data.dart' as _i311;
 import '../data/remote_data/pending_call_feedback_repo.dart' as _i911;
+import '../data/remote_data/quick_access_data.dart' as _i865;
 import '../data/remote_data/ticket_data.dart' as _i50;
 import '../data/remote_data/twilio_data.dart' as _i339;
 import '../data/repository/activity_repo.dart' as _i316;
@@ -45,6 +46,7 @@ import '../data/repository/lead_repo.dart' as _i242;
 import '../data/repository/linkus_repo.dart' as _i527;
 import '../data/repository/listings_repo.dart' as _i854;
 import '../data/repository/notification_repo.dart' as _i165;
+import '../data/repository/quick_access_repo.dart' as _i165;
 import '../data/repository/ticket_repo.dart' as _i127;
 import '../data/repository/twilio_repo.dart' as _i752;
 import '../model/activity_model.dart' as _i161;
@@ -91,6 +93,7 @@ import '../view/notifications_screen/cubit/notification_screen_cubit.dart'
     as _i60;
 import '../view/property_card_details/cubit/property_card_details_cubit.dart'
     as _i178;
+import '../view/quick_access_screen/cubit/quick_access_cubit.dart' as _i784;
 import '../view/task_detail_screen/cubit/task_detail_cubit.dart' as _i140;
 import '../view/ticket_detail_screen/cubit/ticket_details_cubit.dart' as _i273;
 import '../view/tickets_screen/cubit/tickets_screen_cubit.dart' as _i96;
@@ -149,6 +152,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => registerModules.getDio(gh<String>(instanceName: 'BaseUrl')));
     gh.factory<_i60.NotificationScreenCubit>(
         () => _i60.NotificationScreenCubit(gh<_i165.NotificationRepo>()));
+    gh.factory<_i165.QuickAccessRepo>(
+        () => _i865.QuickAccessData(gh<_i361.Dio>()));
     gh.factory<_i539.AuthRepo>(() => _i307.AuthData(gh<_i361.Dio>()));
     gh.factory<_i579.FinanceRepo>(
         () => _i262.FinanceData(dio: gh<_i361.Dio>()));
@@ -190,6 +195,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i330.NewLeadsCubit(activityRepo: gh<_i316.ActivityRepo>()));
     gh.factory<_i383.AttendanceRepo>(
         () => _i448.AttendanceData(dio: gh<_i361.Dio>()));
+    gh.factory<_i784.QuickAccessCubit>(
+        () => _i784.QuickAccessCubit(gh<_i165.QuickAccessRepo>()));
     gh.factory<_i88.EarningsCubit>(
         () => _i88.EarningsCubit(financeRepo: gh<_i579.FinanceRepo>()));
     gh.factory<_i338.LeadsCubit>(() => _i338.LeadsCubit(

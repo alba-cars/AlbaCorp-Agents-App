@@ -44,6 +44,7 @@ import 'package:real_estate_app/view/property_card_details/property_card_details
 import 'package:real_estate_app/view/root_layout/root_layout.dart';
 import 'package:real_estate_app/view/task_detail_screen/task_detail_screen.dart';
 import 'package:real_estate_app/view/ticket_detail_screen/ticket_details_screen.dart';
+import 'package:real_estate_app/view/quick_access_screen/quick_access_screen.dart';
 import 'package:real_estate_app/view/tickets_screen/tickets_screen.dart';
 
 import '../app/auth_bloc/auth_bloc.dart';
@@ -517,6 +518,13 @@ class AppRouter {
                       child: EditPocketListingScreen(
                     pocketlisting: propertyCard,
                   ));
+                },
+              ),
+              GoRoute(
+                path: QuickAccessScreen.routeName,
+                name: QuickAccessScreen.routeName,
+                pageBuilder: (context, state) {
+                  return CupertinoPage(child: QuickAccessScreen());
                 },
               ),
             ]),

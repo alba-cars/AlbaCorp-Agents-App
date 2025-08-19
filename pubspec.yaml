@@ -101,6 +101,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_chat_types: ^3.6.2
   app_badge_plus: ^1.2.3 # Added app_badge_plus
+  json_annotation: ^4.9.0
+  youtube_player_flutter: ^9.1.2
 
 dependency_overrides:
   firebase_core: ^3.13.0
